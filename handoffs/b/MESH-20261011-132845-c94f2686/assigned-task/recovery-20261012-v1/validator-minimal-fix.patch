@@ -1,0 +1,47 @@
+--- a/canonical_json.py
++++ b/recovery-20261012-v1/canonical_json.py
+@@ -46,6 +46,7 @@
+ from __future__ import annotations
+ 
+ import json
++import math
+ import sys
+ 
+ E_IO = "E_IO"
+@@ -88,6 +89,13 @@
+ 
+ def _parse_constant(name):
+     raise _NonFiniteError(name)
++
++
++def _parse_float(text):
++    value = float(text)
++    if not math.isfinite(value):
++        raise _NonFiniteError(text)
++    return value
+ 
+ 
+ def canonical_body_bytes(value):
+@@ -141,7 +149,10 @@
+             text,
+             object_pairs_hook=_object_pairs_hook,
+             parse_constant=_parse_constant,
++            parse_float=_parse_float,
+         )
++    except RecursionError:
++        return (E_JSON, "json nesting exceeds interpreter limit")
+     except _DuplicateKeyError as exc:
+         return (E_DUPKEY, "duplicate object key %r" % (exc.args[0],))
+     except _NonFiniteError as exc:
+@@ -159,7 +170,10 @@
+     if surrogate is not None:
+         return (E_SURROGATE, "unpaired surrogate code point U+%04X" % ord(surrogate))
+ 
+-    body = canonical_body_bytes(value)
++    try:
++        body = canonical_body_bytes(value)
++    except RecursionError:
++        return (E_JSON, "json nesting exceeds interpreter limit")
+     expected = body + LF
+     if data == expected:
+         return None

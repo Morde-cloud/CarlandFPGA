@@ -1,0 +1,81 @@
+Node B quality-main review and software acceptance, 2026-10-12
+
+Owner: B/Astra-B; official route: openai/gpt-6-astra/ultra.
+Current work: B-canonical-json-test-recovery-20261012-v1.
+No new execution child was needed for this short correction. The completed
+packaging job child-b4fed6bcfdf644f78e265fe54b7669a1 is reused, never replayed.
+Its two inert overlay patches and metadata were independently hash-checked.
+The old child-f4e0390133294b608aeca32a0dc5d521 remains failed. The predecessor
+recovery main remains interrupted. Neither is reported as successful.
+
+Baseline: 49 original files plus 23 predecessor recovery files. All 72 files
+are byte-preserved; baseline-inventory.json records their sizes and SHA256.
+No human pause record, active overlapping job, related task subprocess, or
+worktree index lock was observed before this recovery began.
+
+Root cause of the predecessor's single failed test:
+The original README defines canonical bytes using Python JSON encoding. It
+does not impose a fixed 2000-level maximum. validate_bytes returns None for
+valid input. The predecessor test indexed that None as though an E_JSON
+error were guaranteed, producing TypeError. This was a test assumption,
+not evidence that the validator violated its documented depth contract.
+On actual Python 3.12.9, sys.getrecursionlimit()=1000, both json.loads and
+json.dumps successfully processed the preserved 4002-byte deep_2000.json.
+Its SHA256 is d085a5de3d40ac478a5425dc05bc5eb372e5495d1d9e04ec24804af603d36d9e;
+canonical output was identical. root-cause-observation.json records this.
+
+Correction:
+The new test retains real deep input and derives the expected result from
+the documented stdlib operation. Success requires identical bytes and a
+None verdict; an actual interpreter RecursionError requires E_JSON.
+Additional controlled decode/encode RecursionError tests check error
+mapping, and a CLI subprocess checks that such an error has no traceback.
+These tests supplement real fixtures and the real 2000-level CLI case.
+No fixed depth threshold was added. No validator implementation changed
+in this recovery. test-minimal-fix.patch records the precise test changes.
+
+Active validator:
+../recovery-20261012-v1/canonical_json.py is the reviewed minimal variant
+of the preserved original. It rejects exponent overflow (1e999) as
+E_NONFINITE and maps interpreter recursion errors to E_JSON. The original
+validator remains historical evidence, including its unhandled exponent
+overflow defect. The latest tests and manifest identify the active file.
+
+Runner review:
+The preserved original run_evidence.py regenerates fixtures and overwrites
+old logs, so it was not executed during either recovery. The latest
+validate_once.py creates a new validation directory exclusively, disables
+pycache, captures full raw subprocess stdout/stderr and exit codes, and
+checks all 72 preserved file hashes before and after. It refuses a rerun
+over existing evidence. Tests themselves and the validator CLI are read-only.
+
+Acceptance:
+One new capture run: 34 unit tests passed; 8 valid fixtures accepted;
+17 invalid fixtures rejected with exit 1; real 2000-level CLI accepted;
+overflow plus valid input produced FAIL followed by PASS with exit 1.
+The quality main checked actual output content and every recorded log hash.
+All 72 baseline files remained unchanged. Historical failure logs remain.
+
+Reproduction (from this directory; no existing evidence is overwritten):
+  python -B test_recovery.py -v
+  python -B ../recovery-20261012-v1/canonical_json.py deep_2000.json
+  python -B ../recovery-20261012-v1/canonical_json.py ../fixtures/ok_unicode_keys.json ../fixtures/bad_crlf_terminal.json
+The mixed command must exit 1 with one PASS and one FAIL. Use
+PYTHONDONTWRITEBYTECODE=1 and PYTHONUTF8=1 when reproducing.
+The original README's logs/tool_version.txt refers to the historical
+logs/tool_version.stdout.txt and stderr.txt pair; no original text was rewritten.
+
+Preserving checkout bytes:
+Use a fresh checkout with core.autocrlf=false for raw-file manifest checks.
+The inherited old attributes protect fixtures/logs, and new subdirectories
+protect all their files. Do not regenerate fixtures or rerun historical runners.
+
+Delivery structure:
+Source and logs are committed first; immutable manifests are committed
+afterward and identify that source SHA. manifest.json retains the original
+assignment hash, the predecessor recovery hash, and this recovery hash.
+evidence-manifest.json uses the client skill's independent evidence-request
+hash and file SHA256 values. This is a software handoff, not a board request.
+Simulation, synthesis, implementation and hardware stages are not_run.
+The SDK patches are inert review material, not applied to production files.
+A must independently review the same PR head before overall acceptance.

@@ -1,0 +1,77 @@
+{
+  "schema": "b-sdk-overlay-recovery-packaging/v1",
+  "generated_at_utc": "2026-10-12T07:44:44Z",
+  "recovery_work_id": "B-canonical-json-recovery-20261012-v1",
+  "operation_id": "MESH-20261011-132845-c94f2686:A:B-git-recovery-20261012-v1",
+  "recovery_request_hash": "4e9b6f717b306f3c4f55c846c1e52fae7af69fff6a0b5d847c77eab5796de5dd",
+  "parent_original_work_id": "B-canonical-json-fixtures-v1",
+  "parent_original_operation_id": "MESH-20261011-132845-c94f2686:B:git-handoff-v1",
+  "parent_original_request_hash": "d48ba6f3c27522978a8a93716b967ab93f7a0820b37657481f7d380dda047d0f",
+  "task_id": "MESH-20261011-132845-c94f2686-B-git-handoff",
+  "task_version": 1,
+  "owner": "B/Astra-B",
+  "branch": "codex/b/mesh-c94f2686-assigned-task",
+  "upstream_manifest": {
+    "revision": "920ab357ee77f96b8751a593407eb329affc3dcb",
+    "raw_sha256": "84960ed1f9e5a6af12a48ee3cc76d958c515c2acc1d95b398d07763ae643a0cb",
+    "role": "upstream source tree manifest (hash and revision source)"
+  },
+  "normalization": {
+    "decode": "UTF-8 strict",
+    "lines": "text.splitlines(), then LF appended to each source line",
+    "diff": "difflib.unified_diff(a_lines, b_lines, fromfile='a/<target>', tofile='b/<target>')",
+    "output": "UTF-8, LF line endings only",
+    "no_other_transformation": true
+  },
+  "patch_direction": "fromfile a/ = upstream original raw file; tofile b/ = preserved local B SDK overlay member of the same name",
+  "description": "Inert review-only text patches: line endings normalized to LF for review; they are not the original raw file bytes; they have not been applied, tested or integrated; provided for human review only. Contains no private filesystem paths and no credentials, configuration or database content.",
+  "inputs_validated": [
+    {
+      "name": "overlay-preserving-package.json",
+      "raw_sha256": "051085e4c36abda459ec254f672eac7ad134c4136e0d27a8574e6d77b2e1c7a8",
+      "role": "public source metadata (hash expectations)"
+    },
+    {
+      "name": "B-preserve-sdk-overlay-920ab35.zip",
+      "raw_sha256": "78a71fe2313c19b6db00760b3d592d3b71b2c66c4928477ce0c348cc97b9e25d",
+      "role": "local derived package; only the two named source members were read"
+    },
+    {
+      "name": "upstream MANIFEST.json at revision 920ab357ee77f96b8751a593407eb329affc3dcb",
+      "raw_sha256": "84960ed1f9e5a6af12a48ee3cc76d958c515c2acc1d95b398d07763ae643a0cb",
+      "role": "upstream revision and raw per-file hash source"
+    }
+  ],
+  "patches": [
+    {
+      "patch_filename": "fpga_mesh-feishu_channel.patch",
+      "sha256": "5fdc63adbf7e729d005764eb12c6d77faacbc6cd3cdcc641492e25d05ea45f7f",
+      "byte_size": 2169,
+      "upstream_target_filename": "fpga_mesh/feishu_channel.py",
+      "upstream_original_raw_sha256": "3b2c6473b24670588d6c9d7389c1bcf9d88674d41a693ab4dca4bbc3d8f007a3",
+      "upstream_original_raw_bytes": 15037,
+      "preserved_raw_sha256": "674d51b6a2a41aca321920f61b4f7520eb870786e6a8f70807a3a40a7e6a3892",
+      "preserved_raw_bytes": 15632,
+      "upstream_manifest_revision": "920ab357ee77f96b8751a593407eb329affc3dcb",
+      "upstream_raw_hash_verified_against_package_metadata": true,
+      "preserved_raw_hash_verified_against_package_metadata": true,
+      "expected_sha256_from_main_precalculation": "5fdc63adbf7e729d005764eb12c6d77faacbc6cd3cdcc641492e25d05ea45f7f",
+      "matches_main_expected_sha256": true
+    },
+    {
+      "patch_filename": "tests-test_feishu_channel.patch",
+      "sha256": "40ae63e857477e6e5756fc8c566af9ac313fb26fff2f0343a4276dc99e0fcd34",
+      "byte_size": 5181,
+      "upstream_target_filename": "tests/test_feishu_channel.py",
+      "upstream_original_raw_sha256": "f02e14e93db07224d0d5ee1b31ea64f439c9aa05ee2f4f2c6747559bf7885c24",
+      "upstream_original_raw_bytes": 16704,
+      "preserved_raw_sha256": "55426ef79009355724b561aa16004ac47e1dbd708920143d757d81a61e3e07e0",
+      "preserved_raw_bytes": 21630,
+      "upstream_manifest_revision": "920ab357ee77f96b8751a593407eb329affc3dcb",
+      "upstream_raw_hash_verified_against_package_metadata": true,
+      "preserved_raw_hash_verified_against_package_metadata": true,
+      "expected_sha256_from_main_precalculation": "40ae63e857477e6e5756fc8c566af9ac313fb26fff2f0343a4276dc99e0fcd34",
+      "matches_main_expected_sha256": true
+    }
+  ]
+}

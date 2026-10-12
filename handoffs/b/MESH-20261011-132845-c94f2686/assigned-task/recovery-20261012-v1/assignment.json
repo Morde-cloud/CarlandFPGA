@@ -1,0 +1,14 @@
+{
+  "branch": "codex/b/mesh-c94f2686-assigned-task",
+  "operation_id": "MESH-20261011-132845-c94f2686:B:git-handoff-v1",
+  "owner": "B/Astra-B",
+  "ownership": [
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/"
+  ],
+  "request_hash": "d48ba6f3c27522978a8a93716b967ab93f7a0820b37657481f7d380dda047d0f",
+  "supplemental_evidence": "Include the two preserved local SDK overlay diffs as inert .patch files inside the owned assigned-task directory with per-file SHA256, upstream MANIFEST revision and exact filenames; do not alter production source or include config/credentials. A will review integration separately.",
+  "task_id": "MESH-20261011-132845-c94f2686-B-git-handoff",
+  "task_version": 1,
+  "text": "Create a small standard-library Python canonical UTF-8 JSON fixture validator, test non-ASCII JSON key order and newline handling with actual pass/fail cases, capture exact command and raw output as tracked txt, produce immutable manifest with request hash and source commit. No production source edits, credentials, platform permission changes or board operations. Use Flash/max for bounded execution, quality main for decisions. Preserve existing workspace changes; isolate directory/branch; real push and PR to existing upstream. Submit exact PR URL/head, operation/request_hash and hashes via fpga_peer_send to A. Read A feedback on same head in same PR and return durable receipt. Do not start before A-to-B delivery probe has a completed receipt. Never replay a failed side effect automatically.",
+  "work_id": "B-canonical-json-fixtures-v1"
+}

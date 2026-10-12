@@ -1,0 +1,17 @@
+FAIL fixtures/bad_bom.json E_BOM utf-8 byte order mark at offset 0
+FAIL fixtures/bad_invalid_utf8.json E_UTF8 invalid utf-8 byte at offset 6
+FAIL fixtures/bad_duplicate_key.json E_DUPKEY duplicate object key 'a'
+FAIL fixtures/bad_duplicate_key_nested.json E_DUPKEY duplicate object key 'k'
+FAIL fixtures/bad_nan.json E_NONFINITE non-finite number NaN
+FAIL fixtures/bad_negative_infinity.json E_NONFINITE non-finite number -Infinity
+FAIL fixtures/bad_surrogate_value.json E_SURROGATE unpaired surrogate code point U+D800
+FAIL fixtures/bad_surrogate_key.json E_SURROGATE unpaired surrogate code point U+DFFF
+FAIL fixtures/bad_not_json.json E_JSON invalid json at line 2 column 1: Expecting ',' delimiter
+FAIL fixtures/bad_raw_newline_in_string.json E_JSON invalid json at line 1 column 8: Invalid control character at
+FAIL fixtures/bad_whitespace_space.json E_CANONICAL not canonical: first difference at byte offset 5 (got 9 bytes, expected 8)
+FAIL fixtures/bad_whitespace_pretty.json E_CANONICAL not canonical: first difference at byte offset 1 (got 13 bytes, expected 8)
+FAIL fixtures/bad_missing_terminal_lf.json E_NEWLINE missing terminal lf
+FAIL fixtures/bad_doubled_terminal_lf.json E_NEWLINE doubled terminal lf
+FAIL fixtures/bad_crlf_terminal.json E_NEWLINE crlf terminal line ending
+FAIL fixtures/bad_key_order_utf16.json E_CANONICAL not canonical: first difference at byte offset 23 (got 49 bytes, expected 49)
+FAIL fixtures/bad_escaped_unicode.json E_CANONICAL not canonical: first difference at byte offset 6 (got 15 bytes, expected 10)

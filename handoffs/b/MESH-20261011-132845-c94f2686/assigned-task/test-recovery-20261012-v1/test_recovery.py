@@ -1,0 +1,89 @@
+"""Reuse the preserved 28 tests against the minimally corrected validator."""
+import importlib.util
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import unittest
+from unittest.mock import patch
+
+HERE = Path(__file__).resolve().parent
+ORIGINAL = HERE.parent
+PREVIOUS = ORIGINAL / "recovery-20261012-v1"
+sys.path.insert(0, str(PREVIOUS))
+import canonical_json as corrected
+
+spec = importlib.util.spec_from_file_location(
+    "preserved_tests", ORIGINAL / "test_canonical_json.py")
+legacy = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(legacy)
+legacy.cj = corrected
+FixtureFilesTest = legacy.FixtureFilesTest
+ValidateBytesTest = legacy.ValidateBytesTest
+
+
+class CliTest(legacy.CliTest):
+    def run_cli(self, *args):
+        env = dict(os.environ, PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1")
+        return subprocess.run(
+            [sys.executable, "-B", str(PREVIOUS / "canonical_json.py"), *args],
+            cwd=ORIGINAL, env=env, capture_output=True, timeout=30)
+
+
+class RecoveryRegressionTest(unittest.TestCase):
+    def test_exponent_overflow_is_rejected(self):
+        for data in (b"1e999\n", b"-1e999\n", b'{"a":[1e999]}\n'):
+            with self.subTest(data=data):
+                self.assertEqual(corrected.validate_bytes(data)[0], "E_NONFINITE")
+
+    def test_deep_json_follows_documented_runtime_contract(self):
+        data = (HERE / "deep_2000.json").read_bytes()
+        try:
+            value = json.loads(data.decode("utf-8"))
+            expected = json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                  separators=(",", ":"), allow_nan=False).encode("utf-8") + b"\n"
+        except RecursionError:
+            self.assertEqual(corrected.validate_bytes(data),
+                             ("E_JSON", "json nesting exceeds interpreter limit"))
+        else:
+            self.assertEqual(data, expected)
+            self.assertIsNone(corrected.validate_bytes(data))
+
+    def test_decoder_recursion_error_maps_to_e_json(self):
+        with patch.object(corrected.json, "loads", side_effect=RecursionError):
+            self.assertEqual(corrected.validate_bytes(b"[]\n"),
+                             ("E_JSON", "json nesting exceeds interpreter limit"))
+
+    def test_encoder_recursion_error_maps_to_e_json(self):
+        with patch.object(corrected, "canonical_body_bytes", side_effect=RecursionError):
+            self.assertEqual(corrected.validate_bytes(b"[]\n"),
+                             ("E_JSON", "json nesting exceeds interpreter limit"))
+
+    def test_cli_recursion_error_has_no_traceback(self):
+        code = ("from unittest.mock import patch; import canonical_json as c; "
+                "p=patch.object(c.json, 'loads', side_effect=RecursionError); p.start(); "
+                "raise SystemExit(c.main(['validator', '../fixtures/ok_basic.json']))")
+        result = subprocess.run([sys.executable, "-B", "-c", code], cwd=PREVIOUS,
+                                env=dict(os.environ, PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1"),
+                                capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stderr, b"")
+        self.assertEqual(result.stdout,
+                         b"FAIL ../fixtures/ok_basic.json E_JSON json nesting exceeds interpreter limit\n")
+
+    def test_cli_continues_after_overflow(self):
+        result = subprocess.run(
+            [sys.executable, "-B", "canonical_json.py", "overflow.json",
+             "../fixtures/ok_basic.json"], cwd=PREVIOUS,
+            env=dict(os.environ, PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1"),
+            capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stderr, b"")
+        self.assertEqual(result.stdout,
+                         b"FAIL overflow.json E_NONFINITE non-finite number 1e999\n"
+                         b"PASS ../fixtures/ok_basic.json\n")
+
+
+if __name__ == "__main__":
+    unittest.main()

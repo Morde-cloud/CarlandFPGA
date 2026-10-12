@@ -1,0 +1,136 @@
+{
+  "PYTHONDONTWRITEBYTECODE": "1",
+  "PYTHONUTF8": "1",
+  "passed": false,
+  "preserved_files_checked": 49,
+  "preserved_files_checked_after": 49,
+  "records": [
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "--version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\mesh-c94f2686-assigned-task\\handoffs\\b\\MESH-20261011-132845-c94f2686\\assigned-task\\recovery-20261012-v1",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "version",
+      "started_at": "2026-10-12T07:43:50.278833+00:00",
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "stdout": {
+        "sha256": "6c97caccbe99f4c9b58bbb36f8671df4a6641c004316fd81e2331aa6b63178ad",
+        "size": 15
+      }
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "test_recovery.py",
+        "-v"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\mesh-c94f2686-assigned-task\\handoffs\\b\\MESH-20261011-132845-c94f2686\\assigned-task\\recovery-20261012-v1",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "name": "unittest",
+      "started_at": "2026-10-12T07:43:50.319949+00:00",
+      "stderr": {
+        "sha256": "46d7b099c5134be2b09d21a73297f539c4e1dc12f3758fc6edf95fcbd4be0b18",
+        "size": 4100
+      },
+      "stdout": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      }
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "canonical_json.py",
+        "../fixtures/ok_basic.json",
+        "../fixtures/ok_empty_object.json",
+        "../fixtures/ok_escaped_newline.json",
+        "../fixtures/ok_nested.json",
+        "../fixtures/ok_no_normalization.json",
+        "../fixtures/ok_numbers.json",
+        "../fixtures/ok_top_level_array.json",
+        "../fixtures/ok_unicode_keys.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\mesh-c94f2686-assigned-task\\handoffs\\b\\MESH-20261011-132845-c94f2686\\assigned-task\\recovery-20261012-v1",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "valid",
+      "started_at": "2026-10-12T07:43:50.997793+00:00",
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "stdout": {
+        "sha256": "cf9e9bea0cd27e78df22bde0237a11cb1aedc6fb5b63935a7773b28fe0c02ea2",
+        "size": 296
+      }
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "canonical_json.py",
+        "../fixtures/bad_bom.json",
+        "../fixtures/bad_crlf_terminal.json",
+        "../fixtures/bad_doubled_terminal_lf.json",
+        "../fixtures/bad_duplicate_key.json",
+        "../fixtures/bad_duplicate_key_nested.json",
+        "../fixtures/bad_escaped_unicode.json",
+        "../fixtures/bad_invalid_utf8.json",
+        "../fixtures/bad_key_order_utf16.json",
+        "../fixtures/bad_missing_terminal_lf.json",
+        "../fixtures/bad_nan.json",
+        "../fixtures/bad_negative_infinity.json",
+        "../fixtures/bad_not_json.json",
+        "../fixtures/bad_raw_newline_in_string.json",
+        "../fixtures/bad_surrogate_key.json",
+        "../fixtures/bad_surrogate_value.json",
+        "../fixtures/bad_whitespace_pretty.json",
+        "../fixtures/bad_whitespace_space.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\mesh-c94f2686-assigned-task\\handoffs\\b\\MESH-20261011-132845-c94f2686\\assigned-task\\recovery-20261012-v1",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "name": "invalid",
+      "started_at": "2026-10-12T07:43:51.080186+00:00",
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "stdout": {
+        "sha256": "f3091ffd3135eae709bfec9e246f74dd74e71926848e0af767ba1f64dc941bca",
+        "size": 1599
+      }
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "canonical_json.py",
+        "overflow.json",
+        "../fixtures/ok_basic.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\mesh-c94f2686-assigned-task\\handoffs\\b\\MESH-20261011-132845-c94f2686\\assigned-task\\recovery-20261012-v1",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "name": "overflow_mixed",
+      "started_at": "2026-10-12T07:43:51.158332+00:00",
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "stdout": {
+        "sha256": "b7f04e03ddd888b7876f88050110a6b601bff2cb78b17635318470777f5bf164",
+        "size": 86
+      }
+    }
+  ]
+}

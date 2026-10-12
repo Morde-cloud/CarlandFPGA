@@ -1,0 +1,519 @@
+{
+  "artifacts": [
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/.gitattributes",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/.gitignore",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/README.md",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/canonical_json.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_bom.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_crlf_terminal.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_doubled_terminal_lf.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_duplicate_key.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_duplicate_key_nested.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_escaped_unicode.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_invalid_utf8.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_key_order_utf16.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_missing_terminal_lf.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_nan.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_negative_infinity.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_not_json.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_raw_newline_in_string.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_surrogate_key.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_surrogate_value.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_whitespace_pretty.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_whitespace_space.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/generate_fixtures.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_basic.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_empty_object.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_escaped_newline.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_nested.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_no_normalization.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_numbers.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_top_level_array.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_unicode_keys.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_invalid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_invalid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_valid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_valid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_missing_file.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_missing_file.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_mixed.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_mixed.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_no_args.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_no_args.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/evidence_summary.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/generate_fixtures.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/generate_fixtures.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/tool_version.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/tool_version.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/unittest.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/unittest.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/.gitattributes",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/assignment.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/canonical_json.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overflow.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overlays/fpga_mesh-feishu_channel.patch",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overlays/metadata.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overlays/tests-test_feishu_channel.patch",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/preserved-inventory.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/recovery-request.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/test_recovery.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validate_once.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/invalid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/invalid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/overflow_mixed.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/overflow_mixed.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/summary.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/unittest.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/unittest.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/valid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/valid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/version.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/version.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validator-minimal-fix.patch",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/run_evidence.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/.gitattributes",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/REVIEW.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/baseline-inventory.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/deep_2000.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/request.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/root-cause-observation.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/test-minimal-fix.patch",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/test_recovery.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validate_once.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/deep_valid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/deep_valid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/invalid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/invalid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/overflow_mixed.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/overflow_mixed.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/summary.json",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/unittest.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/unittest.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/valid.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/valid.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/version.stderr.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/version.stdout.txt",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/verify_handoff.py",
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test_canonical_json.py"
+  ],
+  "files": {
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/.gitattributes": {
+      "sha256": "4580d2b5cebd79f8aac6f24990072990cde62d857ef200cffe65d1a4ba6fd945",
+      "size": 183
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/.gitignore": {
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "size": 19
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/README.md": {
+      "sha256": "588e386d444c20b8f867e8a66f5433a18cbd481141acfcd680e0c56f97bbf9ef",
+      "size": 6568
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/canonical_json.py": {
+      "sha256": "d20fa48cb8fc8ab72588902303a650ad01e8b243cc79e1de1fe621aca9b23d8b",
+      "size": 6493
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_bom.json": {
+      "sha256": "13a615e862dc6b1ddd9a3f3d601905d804c45a3688ea2aa34dd07b46295ae1bc",
+      "size": 11
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_crlf_terminal.json": {
+      "sha256": "34ca028eb53bbc3ba8f2391662e32c658b6aeb2fb3b47c583cb845c70e01f47e",
+      "size": 9
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_doubled_terminal_lf.json": {
+      "sha256": "ff57d51972c56df657d32f3901f226728943f67e0716df1de53a11ce240bd2ba",
+      "size": 9
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_duplicate_key.json": {
+      "sha256": "d8e3ca834eb476cf1c6b23a2da362bc58d053e0c4e96edf8db122b5ae5814009",
+      "size": 14
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_duplicate_key_nested.json": {
+      "sha256": "3fe2f717d22a4f05ce16122536d5a2279b2bc28d92a1931417857926c25cb454",
+      "size": 20
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_escaped_unicode.json": {
+      "sha256": "2d94759c6afaaacf6300c885329b12cc22c3b8039ef8bc3d302b184d87e08268",
+      "size": 15
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_invalid_utf8.json": {
+      "sha256": "329638978db76ec4e6fe95216f6332b5aefadb2cb5a296cd9f7ebb5f3197db45",
+      "size": 10
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_key_order_utf16.json": {
+      "sha256": "2bb3596c856b86d37cb8a83c474c1a3e06b4d863ffc1488bbcaa109a90bc7210",
+      "size": 49
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_missing_terminal_lf.json": {
+      "sha256": "015abd7f5cc57a2dd94b7590f04ad8084273905ee33ec5cebeae62276a97f862",
+      "size": 7
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_nan.json": {
+      "sha256": "c94e6ba0ad71368ac8cbaf44c652bced6f2c3e2f0f2b2d4fb56bf1e850363294",
+      "size": 10
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_negative_infinity.json": {
+      "sha256": "00f26d4509442d7a487fdb74710f0d1221086ea2227d2cd24cf8a0c6424a5d59",
+      "size": 12
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_not_json.json": {
+      "sha256": "39ad37a9ca0506df7fd7b58b2fbf6a255186dda73ce1b67c8b4f92390b45cf6f",
+      "size": 7
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_raw_newline_in_string.json": {
+      "sha256": "8705e23ea135c1ded5b225dee91aa3a0d8b40b9459f1bdc51782544d31f7b6b5",
+      "size": 12
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_surrogate_key.json": {
+      "sha256": "34404117e89bf3c74252d93a91be93994836d336d17c181fe262e4fda9bd835c",
+      "size": 13
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_surrogate_value.json": {
+      "sha256": "dd9aca334557c7329c2846518699fef475853c9b4e0067a7f4af75cfdeedb753",
+      "size": 15
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_whitespace_pretty.json": {
+      "sha256": "5e36b6560513586ced65eca0e8b025fe88edbcab82ba2cb67a5fcb2d7b202383",
+      "size": 13
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/bad_whitespace_space.json": {
+      "sha256": "e8c628edc9968ef0c668f54e0ba2636b35503357eb1aca0ddc828aeace432f67",
+      "size": 9
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/generate_fixtures.py": {
+      "sha256": "ff8df1a65ca04a4a020db4760aa24a62042af012622f555c4f345caba5835157",
+      "size": 2211
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_basic.json": {
+      "sha256": "d52c7ed78604495300ea23a9ee0532b072e21c3faf8fd69aaea453f00d690f5e",
+      "size": 24
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_empty_object.json": {
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "size": 3
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_escaped_newline.json": {
+      "sha256": "6d347f89baa601338809339d56326dd4d8f7dc30dce10691489d3f5744529fe8",
+      "size": 13
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_nested.json": {
+      "sha256": "083de83b91a88efdf67aca155718c154896588c6c875f76d5b942f5a5a10a95a",
+      "size": 35
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_no_normalization.json": {
+      "sha256": "92387bb6da4ff2b764f13bb63b4b36530c4b8131f812ed18b9bfef853a69f4c5",
+      "size": 21
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_numbers.json": {
+      "sha256": "a630d182bbc97ccdaec5446351cb96b25f6ff5432fa867ed5cb7c72748c4879b",
+      "size": 54
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_top_level_array.json": {
+      "sha256": "9c6bc7ac937d2daffe5ecdbe7eb3a59aba4f43e96a58a99f08838d4ce48c92ba",
+      "size": 8
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/fixtures/ok_unicode_keys.json": {
+      "sha256": "d40da1318cf31b11a8aecfaddb62c363defec7b0384d0c9269da36ffeee19834",
+      "size": 49
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_invalid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_invalid.stdout.txt": {
+      "sha256": "7a81fb967993b3c0459adfbf56ad5bf0a23db8f7ac24a684b9c2d2569529c7d3",
+      "size": 1548
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_valid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_all_valid.stdout.txt": {
+      "sha256": "d888dfb7eda70323cd3ff504feff24488463964b1052baf9681765eda2772791",
+      "size": 272
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_missing_file.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_missing_file.stdout.txt": {
+      "sha256": "92e44794a7f7b6131815d992538719673028e3fb8330b3b8634900e4f435b0b2",
+      "size": 83
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_mixed.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_mixed.stdout.txt": {
+      "sha256": "4bce7b6441d7e765000f01ceb72b2d47ce70fb04a5e1b18fcf33003f2fb20aa6",
+      "size": 179
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_no_args.stderr.txt": {
+      "sha256": "c303ff4ac9092cfd0d2b4c25da313dcd6ce0962573ee0a9e5405b70424ec37f5",
+      "size": 41
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/cli_no_args.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/evidence_summary.txt": {
+      "sha256": "972b24c1d89289fdb430cea9445902f0d99e3d2b3eaeba31a343be31136a5632",
+      "size": 12307
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/generate_fixtures.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/generate_fixtures.stdout.txt": {
+      "sha256": "6b4129d5d3fa0c1f589989ffcad125e2de97705cb3e58114de34f69cb0965344",
+      "size": 812
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/tool_version.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/tool_version.stdout.txt": {
+      "sha256": "5882dda927747c5513927a7353f2cf15ef6c75410db3c7864567e5908bb0a6ca",
+      "size": 237
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/unittest.stderr.txt": {
+      "sha256": "255a82d1c9681c134ddf63ba7d901e39389d8dc7cc99a5a4173c56d977708dde",
+      "size": 3168
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/logs/unittest.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/.gitattributes": {
+      "sha256": "3e5e82fc72e044ea9af807a2030b73dbb94800d2cd1775302063b2eee761ba1e",
+      "size": 19
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/assignment.json": {
+      "sha256": "b27c7211542d5513ed3045997daaf9af50a731efe32a9d6d676934424e068078",
+      "size": 1570
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/canonical_json.py": {
+      "sha256": "e0a71375a6c7a80c21d9fea8006e30988aace0068a96b12c2dca8ddc70a15714",
+      "size": 6878
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overflow.json": {
+      "sha256": "d6e697345ff6b1bac620c8fbeb54ac73f7cb3df67e87b628b7479f51d527ab5d",
+      "size": 6
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overlays/fpga_mesh-feishu_channel.patch": {
+      "sha256": "5fdc63adbf7e729d005764eb12c6d77faacbc6cd3cdcc641492e25d05ea45f7f",
+      "size": 2169
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overlays/metadata.json": {
+      "sha256": "dca1eca18a81c52dd3fd3034d904071bf95093a1e69224deedc2664272360280",
+      "size": 4298
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/overlays/tests-test_feishu_channel.patch": {
+      "sha256": "40ae63e857477e6e5756fc8c566af9ac313fb26fff2f0343a4276dc99e0fcd34",
+      "size": 5181
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/preserved-inventory.json": {
+      "sha256": "c82c7f97f4ebc1e4afe39410dcb4a4e963a15d410e31f40b94a6b96e2a16b1cd",
+      "size": 8271
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/recovery-request.json": {
+      "sha256": "212ff3b4b38934574addf61a9e71397bde74ed125d76db0b4f2f535db591fbff",
+      "size": 7411
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/test_recovery.py": {
+      "sha256": "bc9498ad4965c72fee0eb1a279f5689c2d31c13b8d2948f717f9ecf867582fb9",
+      "size": 2030
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validate_once.py": {
+      "sha256": "1f8eed32ee13cad9cf716fee667aab16c5200c240a88023cc624bd9ee5098202",
+      "size": 2938
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/invalid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/invalid.stdout.txt": {
+      "sha256": "f3091ffd3135eae709bfec9e246f74dd74e71926848e0af767ba1f64dc941bca",
+      "size": 1599
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/overflow_mixed.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/overflow_mixed.stdout.txt": {
+      "sha256": "b7f04e03ddd888b7876f88050110a6b601bff2cb78b17635318470777f5bf164",
+      "size": 86
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/summary.json": {
+      "sha256": "fa79cc6cb0ffeb1ac5406e480f39b9bc02116e11711ef5de2dc988bb1a14ec43",
+      "size": 4931
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/unittest.stderr.txt": {
+      "sha256": "46d7b099c5134be2b09d21a73297f539c4e1dc12f3758fc6edf95fcbd4be0b18",
+      "size": 4100
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/unittest.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/valid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/valid.stdout.txt": {
+      "sha256": "cf9e9bea0cd27e78df22bde0237a11cb1aedc6fb5b63935a7773b28fe0c02ea2",
+      "size": 296
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/version.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/version.stdout.txt": {
+      "sha256": "6c97caccbe99f4c9b58bbb36f8671df4a6641c004316fd81e2331aa6b63178ad",
+      "size": 15
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validator-minimal-fix.patch": {
+      "sha256": "0cd142d3f38e97ee01e85b2cce56ec8ab652742a905fa6f5a51825f5117c4147",
+      "size": 1273
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/run_evidence.py": {
+      "sha256": "475b6999ef67081b1ca4e9e9fc309d629b7d49e3f848378cbc786c6042142db2",
+      "size": 6645
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/.gitattributes": {
+      "sha256": "3e5e82fc72e044ea9af807a2030b73dbb94800d2cd1775302063b2eee761ba1e",
+      "size": 19
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/REVIEW.txt": {
+      "sha256": "d2951276bc8e28a878b9d5dd4cae1a09e7ceb754bc73a21d5021ba067af7d77e",
+      "size": 4816
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/baseline-inventory.json": {
+      "sha256": "9e96cd1c3ae6600ead18a84afb2f5d23e9d72e779679dd2df7142f5c7c26d1c9",
+      "size": 12252
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/deep_2000.json": {
+      "sha256": "d085a5de3d40ac478a5425dc05bc5eb372e5495d1d9e04ec24804af603d36d9e",
+      "size": 4002
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/request.json": {
+      "sha256": "9dedefd061e5f47140f3c6abe5fe8aabd1a214f8d9752ec7d02e14dfb7885bf6",
+      "size": 8127
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/root-cause-observation.json": {
+      "sha256": "a2a2d5a11ed5b2295a1a63f7f4db7198c34ec33e31b021c2d505e8afcaa5af05",
+      "size": 430
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/test-minimal-fix.patch": {
+      "sha256": "5389790d111b2ce7f4fac3d5064f1d2b846330d06d290eaf3e196e0df5f3c969",
+      "size": 3828
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/test_recovery.py": {
+      "sha256": "a3fdf4c95666fa537a746925fad70d3621cf782ea62655c08a8da9787233eac2",
+      "size": 4019
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validate_once.py": {
+      "sha256": "75521ae33eb89c0f2f046754eda33f41fa6169fd128a4d0b31118a4e2ba62f93",
+      "size": 3070
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/deep_valid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/deep_valid.stdout.txt": {
+      "sha256": "78405844cd1d31e96e73d3ceb70057c8a149ded08a2b94b556147c71e176d12b",
+      "size": 20
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/invalid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/invalid.stdout.txt": {
+      "sha256": "f3091ffd3135eae709bfec9e246f74dd74e71926848e0af767ba1f64dc941bca",
+      "size": 1599
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/overflow_mixed.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/overflow_mixed.stdout.txt": {
+      "sha256": "51e7c6246652aa88866c4071e287162d50ae4022c4f3a6e57ed676fb0ff61eae",
+      "size": 110
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/summary.json": {
+      "sha256": "a37aa558cb01008f245d4e01319056a1e40429d7205263ff6255d2e8d20fc86a",
+      "size": 5933
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/unittest.stderr.txt": {
+      "sha256": "1ef082a656b85b6f07f8b7c8d3c46f6d9e40466be80635c5fe804fe65cb67488",
+      "size": 3766
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/unittest.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/valid.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/valid.stdout.txt": {
+      "sha256": "cf9e9bea0cd27e78df22bde0237a11cb1aedc6fb5b63935a7773b28fe0c02ea2",
+      "size": 296
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/version.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/version.stdout.txt": {
+      "sha256": "96992aedf6b10d622d0d75db649acc5f0c3a080601ddeeb7aec77c8798d448e4",
+      "size": 104
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/verify_handoff.py": {
+      "sha256": "97f83f4741bee791a6926299717964e8c2ca47ccf89b4c8fa94abd626c64d785",
+      "size": 3053
+    },
+    "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test_canonical_json.py": {
+      "sha256": "4a1cc445b9d31bbd1b2ee95fdd64eb4e50156cd6105c0dffbcb503b0cc967313",
+      "size": 11451
+    }
+  },
+  "request": {
+    "code_commit": "388f2d826cb2aba33519c0c221a7cb4fb7277d8a",
+    "expected_result": "34 tests pass; real deep JSON is accepted on measured CPython 3.12.9; mixed CLI gives PASS/FAIL and exit 1; 72 preserved files unchanged; all evidence hashes match. No hardware execution.",
+    "operation_id": "MESH-20261011-132845-c94f2686:A:B-git-test-recovery-20261012-v1",
+    "requester": "node-b",
+    "task_id": "MESH-20261011-132845-c94f2686-B-git-handoff",
+    "task_version": 1,
+    "test_steps": [
+      "Use checkout with core.autocrlf=false; verify_handoff.py checks source blob and raw file hashes.",
+      "From handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1: python -B test_recovery.py -v",
+      "From handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1: python -B ../recovery-20261012-v1/canonical_json.py deep_2000.json",
+      "From handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1: python -B ../recovery-20261012-v1/canonical_json.py ../fixtures/ok_unicode_keys.json ../fixtures/bad_crlf_terminal.json"
+    ]
+  },
+  "request_hash": "e2f9dd8c78e017c247d18f413f04f1a731f2b5c1b601d1e273fd7a84e05e35bf",
+  "schema_version": 1,
+  "stages": {
+    "hardware": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "predecessor_validation": {
+      "log": "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/recovery-20261012-v1/validation/unittest.stderr.txt",
+      "status": "failed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "software_validation": {
+      "log": "handoffs/b/MESH-20261011-132845-c94f2686/assigned-task/test-recovery-20261012-v1/validation/unittest.stderr.txt",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

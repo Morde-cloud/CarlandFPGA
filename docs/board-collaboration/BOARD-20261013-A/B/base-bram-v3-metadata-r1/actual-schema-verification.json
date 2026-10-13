@@ -1,0 +1,56 @@
+{
+  "A_evidence_commit": "b395767272909229dd3acb289bd71a82ab8c4211",
+  "commands": [
+    {
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "docs\\board-collaboration\\BOARD-20261013-A\\B\\base-bram-v3-metadata-r1\\replay-actual-schema.py",
+        "--source-commit",
+        "bb0d302331785defb59fc8d47eeea5d27fb33e81"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "name": "red-actual",
+      "stderr_sha256": "a4895e2da02984b6cd96143b3aadfeb8947b65735d314bdb2aa86e29f59f2591",
+      "stdout_sha256": "ff693703f6f49f6514b474d87de864a950d662d253362764a2540572beb7429e"
+    },
+    {
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "docs\\board-collaboration\\BOARD-20261013-A\\B\\base-bram-v3-metadata-r1\\replay-actual-schema.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "green-actual",
+      "stderr_sha256": "3d5cb533113191ea1a5e6ec76d817da929aac2680d8d9b0ce542414bacf22511",
+      "stdout_sha256": "c0c74f63b325b3336f584de7dda1ba30d158981e6f8743589401a10c35af8008"
+    },
+    {
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_base_bram_board_test.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "green-final",
+      "stderr_sha256": "b82aed0aa079438971fa71679645379fed9f7cd77a0a0910df76144ad7496687",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "evidence_kind": "host_mock",
+  "file_sha256": {
+    "docs\\board-collaboration\\BOARD-20261013-A\\B\\base-bram-v3-metadata-r1\\replay-actual-schema.py": "7be5a8c77a3a3c9eda036fd489122dab5c508aa6379e41f7381354b72bc6a00e",
+    "examples/board_collaboration/base_bram_board_test.py": "b0b6eef6064812deb34639306143972e740ed1e4dc38bfeb979ff31cdfd90eda",
+    "tests/test_base_bram_board_test.py": "e1707d53722e6bec1a44a7475fd94a034447ad07c3abbd91d2f95e975ef1dee9"
+  },
+  "full_suite_tests": 28,
+  "python": "3.12.9",
+  "python_3_10_syntax": "passed"
+}

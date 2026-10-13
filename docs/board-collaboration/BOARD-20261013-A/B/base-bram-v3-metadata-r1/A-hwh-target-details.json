@@ -1,0 +1,83 @@
+{
+  "target_instance": "iop_pmoda_mb_bram_ctrl",
+  "matching_memranges_by_parent": [
+    {
+      "parent_module": {
+        "CONFIGURABLE": "TRUE",
+        "COREREVISION": "6",
+        "FULLNAME": "/ps7_0",
+        "HWVERSION": "5.5",
+        "INSTANCE": "ps7_0",
+        "IPTYPE": "PERIPHERAL",
+        "IS_ENABLE": "1",
+        "IS_PL": "FALSE",
+        "MODTYPE": "processing_system7",
+        "VLNV": "xilinx.com:ip:processing_system7:5.5"
+      },
+      "memrange": {
+        "ADDRESSBLOCK": "Mem0",
+        "BASENAME": "C_S_AXI_BASEADDR",
+        "BASEVALUE": "0x40000000",
+        "HIGHNAME": "C_S_AXI_HIGHADDR",
+        "HIGHVALUE": "0x4000FFFF",
+        "INSTANCE": "iop_pmoda_mb_bram_ctrl",
+        "IS_DATA": "TRUE",
+        "IS_INSTRUCTION": "TRUE",
+        "MASTERBUSINTERFACE": "M_AXI_GP0",
+        "MEMTYPE": "MEMORY",
+        "SLAVEBUSINTERFACE": "S_AXI"
+      }
+    }
+  ],
+  "reset_slice_modules": [
+    {
+      "attributes": {
+        "COREREVISION": "2",
+        "FULLNAME": "/mb_iop_pmoda_reset",
+        "HWVERSION": "1.0",
+        "INSTANCE": "mb_iop_pmoda_reset",
+        "IPTYPE": "PERIPHERAL",
+        "IS_ENABLE": "1",
+        "MODCLASS": "PERIPHERAL",
+        "MODTYPE": "xlslice",
+        "VLNV": "xilinx.com:ip:xlslice:1.0"
+      },
+      "parameters": [
+        {
+          "NAME": "DIN_WIDTH",
+          "VALUE": "10"
+        },
+        {
+          "NAME": "DIN_FROM",
+          "VALUE": "0"
+        },
+        {
+          "NAME": "DIN_TO",
+          "VALUE": "0"
+        },
+        {
+          "NAME": "DOUT_WIDTH",
+          "VALUE": "1"
+        }
+      ],
+      "ports": [
+        {
+          "DIR": "I",
+          "LEFT": "9",
+          "NAME": "Din",
+          "RIGHT": "0",
+          "SIGIS": "undef",
+          "SIGNAME": "ps7_0_GPIO_O"
+        },
+        {
+          "DIR": "O",
+          "LEFT": "0",
+          "NAME": "Dout",
+          "RIGHT": "0",
+          "SIGIS": "undef",
+          "SIGNAME": "mb_iop_pmoda_reset_Dout"
+        }
+      ]
+    }
+  ]
+}

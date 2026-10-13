@@ -89,12 +89,47 @@ result JSON, stdout/stderr, exit code and SHA-256 evidence against this
 operation, request hash and tested head; never overwrite or auto-rerun.
 `red-stderr.txt` records the old head failing the memory-only regression
 with metadata KeyError and zero reset/MMIO/BRAM access; `red-test.patch`
-reconstructs that test from the old head. `green-stderr.txt` records 27 passing
-tests after the fix, with commands/source hashes in the companion JSON files.
-These use a synthetic HWH fixture and the upstream runtime schema model;
-A's v3 exported schema is still pending at this source checkpoint. Python
-3.10 syntax passed on host Python 3.12.9. Host evidence is not a board test.
+reconstructs that test from the old head. `green-stderr.txt` records the earlier
+27-test checkpoint using a synthetic HWH and the upstream schema model.
+
+A subsequently exported the actual PYNQ 3.0.1 schema and complete HWH in
+PR #7 commit `b395767272909229dd3acb289bd71a82ab8c4211`, directory
+`docs/board-collaboration/BOARD-20261013-A/A/metadata-v3-readonly-preflight/`.
+`A-metadata.json` and `A-hwh-target-details.json` here are byte-identical Git
+blobs from that commit. `A-evidence-binding.json` records every source blob
+hash and the successful full-HWH identity parse (`/ps7_0`, underscore INSTANCE
+linkage). The older `A-existing-hwh-evidence.json` is a historical receipt;
+its pending state is superseded by this actual export.
+
+`red-actual-r1-stderr.txt` reproduces the old source's metadata KeyError with
+one mocked Overlay load, zero MMIO/reset calls and zero samples, using that
+actual schema and all 4,558,197 HWH bytes. `green-actual-r1-stderr.txt` passes
+the identical replay with v3. `green-final-stderr.txt` records all **28 tests
+passing**, including the actual memory-only schema regression and rejection
+of missing/conflicting mappings, wrong ranges, wrong HWH and reset metadata.
+The actual-schema replay checks 384 matching samples, 16 restored words,
+restored reset and 416 reads/400 writes in the mock backend. A's JSON probe
+used `default=str` for the GPIO pins set; only the fixture is reconstructed
+with `ast.literal_eval`. Runtime board code still receives its native set.
+
+Reproduce from the repository root (Python 3.10 or later):
+
+```sh
+git fetch upstream b395767272909229dd3acb289bd71a82ab8c4211
+python docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/replay-actual-schema.py --source-commit bb0d302331785defb59fc8d47eeea5d27fb33e81
+python docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/replay-actual-schema.py
+python -m unittest discover -s tests -p test_base_bram_board_test.py -v
+```
+
+The old-source command must exit 1; the next two must exit 0. Command and hash
+records are in `actual-schema-replay-r1.json` and
+`actual-schema-verification.json`. The first replay-harness attempt lacked
+`__file__` and failed early; its raw logs are retained but are not the accepted
+metadata regression. The corrected r1 replay supplies an exact temporary
+old-source file. Production code did not change during this correction.
+Python 3.10 syntax passed on host Python 3.12.9. Host evidence is not a board test.
 Hardware, simulation,
 synthesis and implementation stay `not_run` until A reports against this
-exact operation/hash/head. JSON and regression logs use LF; preflight output
-retains its native raw bytes. Git text conversion is disabled (`* -text`).
+exact operation/hash/head. JSON uses LF; subprocess logs retain their original
+captured bytes, including host line endings. Git text conversion is disabled
+for this directory (`* -text`).

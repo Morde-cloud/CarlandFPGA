@@ -1,0 +1,41 @@
+{
+  "evidence_kind": "A-reported previously downloaded HWH and saved logs; not a new runtime diagnostic",
+  "historical_board_report": {
+    "commit": "0757235a288a1ec7ee657429f0d701a4f8e7102c",
+    "contains_runtime_ip_mem_dicts": false,
+    "path": "docs/board-collaboration/BOARD-20261013-A/A/B-base-bram-v2-reset-origin-r1/board-report.json",
+    "sha256": "04ec4a09b95c7a68127c399e973ffeb5fdb69241b9eadb5b8f4a82ec98a62103"
+  },
+  "historical_reset_metadata": {
+    "index": 0,
+    "is_current_state": false,
+    "pins": [
+      "mb_iop_pmoda_reset/Dout",
+      "iop_pmoda/rst_clk_wiz_1_100M/aux_reset_in"
+    ],
+    "state": null,
+    "sysfs_direction": null,
+    "sysfs_exported": false,
+    "sysfs_value": null
+  },
+  "hwh": {
+    "A_local_path": "artifacts/board-collaboration/BOARD-20261013-A/board-base.hwh",
+    "A_recomputed_sha256": "cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f",
+    "B_fragment_checks": "module/fullpath/VLNV, instance linkage, GP0/S_AXI/MEMORY/Mem0, physical base and inclusive range match current implementation",
+    "full_file_available_to_B": false,
+    "ps_memrange_line": 56405,
+    "ps_memrange_xml": "<MEMRANGE ADDRESSBLOCK=\"Mem0\" BASENAME=\"C_S_AXI_BASEADDR\" BASEVALUE=\"0x40000000\" HIGHNAME=\"C_S_AXI_HIGHADDR\" HIGHVALUE=\"0x4000FFFF\" INSTANCE=\"iop_pmoda_mb_bram_ctrl\" IS_DATA=\"TRUE\" IS_INSTRUCTION=\"TRUE\" MASTERBUSINTERFACE=\"M_AXI_GP0\" MEMTYPE=\"MEMORY\" SLAVEBUSINTERFACE=\"S_AXI\"/>",
+    "public_full_file_url": null,
+    "target_module_line": 26651,
+    "target_module_opening_xml": "<MODULE COREREVISION=\"6\" FULLNAME=\"/iop_pmoda/mb_bram_ctrl\" HWVERSION=\"4.1\" INSTANCE=\"iop_pmoda_mb_bram_ctrl\" IPTYPE=\"PERIPHERAL\" IS_ENABLE=\"1\" MODCLASS=\"MEMORY_CNTLR\" MODTYPE=\"axi_bram_ctrl\" VLNV=\"xilinx.com:ip:axi_bram_ctrl:4.1\">"
+  },
+  "remaining_static_fragment_request": [
+    "PS parent MODULE opening tag/MODTYPE",
+    "target C_S_AXI_BASEADDR/C_S_AXI_HIGHADDR PARAMETER lines"
+  ],
+  "source_node": "A",
+  "source_peer_message_id": "B:BOARD-20261013-A:B:metadata-v3-existing-evidence-reply",
+  "task_id": "BOARD-20261013-A-B",
+  "task_version": 3,
+  "v3_actual_runtime_schema": "pending A existing Desktop plan; no field values invented"
+}

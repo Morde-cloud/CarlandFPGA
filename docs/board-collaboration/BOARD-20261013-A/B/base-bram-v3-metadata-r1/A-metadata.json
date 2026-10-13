@@ -1,0 +1,354 @@
+{
+  "task_id": "BOARD-20261013-A",
+  "phase": "metadata-v3-readonly-preflight",
+  "board_utc": "2022-10-22T02:19:25.244614+00:00",
+  "runtime": {
+    "python": "3.10.4",
+    "pynq": "3.0.1",
+    "machine": "armv7l"
+  },
+  "hashes": {
+    "bit": "ecabdcb5d483c75335ab6f043824a2386971c7b0ffd6e3315f24860bf5088eb6",
+    "hwh": "cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f"
+  },
+  "pre_PL": {
+    "bitfile_name": "/usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit",
+    "timestamp": "2022/10/22 1:15:10 +903469"
+  },
+  "post_PL": {
+    "bitfile_name": "/usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit",
+    "timestamp": "2022/10/22 1:15:10 +903469"
+  },
+  "overlay_download": false,
+  "mmio_created": false,
+  "gpio_writes": false,
+  "parser": "pynq.metadata.runtime_metadata_parser.RuntimeMetadataParser",
+  "target": "iop_pmoda/mb_bram_ctrl",
+  "ip_dict_target": null,
+  "mem_dict_target": {
+    "fullpath": "iop_pmoda/mb_bram_ctrl",
+    "type": "DDR4",
+    "bdtype": null,
+    "state": null,
+    "addr_range": 65536,
+    "phys_addr": 1073741824,
+    "mem_id": "S_AXI",
+    "memtype": "MEMORY",
+    "gpio": {},
+    "interrupts": {},
+    "parameters": {
+      "C_BRAM_INST_MODE": "EXTERNAL",
+      "C_MEMORY_DEPTH": "16384",
+      "C_BRAM_ADDR_WIDTH": "14",
+      "C_S_AXI_ADDR_WIDTH": "16",
+      "C_S_AXI_DATA_WIDTH": "32",
+      "C_S_AXI_ID_WIDTH": "12",
+      "C_S_AXI_PROTOCOL": "AXI4",
+      "C_S_AXI_SUPPORTS_NARROW_BURST": "0",
+      "C_SINGLE_PORT_BRAM": "1",
+      "C_FAMILY": "zynq",
+      "C_READ_LATENCY": "1",
+      "C_RD_CMD_OPTIMIZATION": "0",
+      "C_S_AXI_CTRL_ADDR_WIDTH": "32",
+      "C_S_AXI_CTRL_DATA_WIDTH": "32",
+      "C_ECC": "0",
+      "C_ECC_TYPE": "0",
+      "C_FAULT_INJECT": "0",
+      "C_ECC_ONOFF_RESET_VALUE": "0",
+      "DATA_WIDTH": "32",
+      "ID_WIDTH": "12",
+      "PROTOCOL": "AXI4",
+      "SUPPORTS_NARROW_BURST": "0",
+      "SINGLE_PORT_BRAM": "1",
+      "ECC_TYPE": "0",
+      "USE_ECC": "0",
+      "FAULT_INJECT": "0",
+      "ECC_ONOFF_RESET_VALUE": "0",
+      "Component_Name": "base_mb_bram_ctrl_1",
+      "BMG_INSTANCE": "EXTERNAL",
+      "MEM_DEPTH": "16384",
+      "READ_LATENCY": "1",
+      "RD_CMD_OPTIMIZATION": "0",
+      "EDK_IPTYPE": "PERIPHERAL",
+      "EDK_SPECIAL": "BRAM_CTRL",
+      "C_S_AXI_BASEADDR": "0x40000000",
+      "C_S_AXI_HIGHADDR": "0x4000FFFF",
+      "FREQ_HZ": "100000000",
+      "ADDR_WIDTH": "16",
+      "AWUSER_WIDTH": "0",
+      "ARUSER_WIDTH": "0",
+      "WUSER_WIDTH": "0",
+      "RUSER_WIDTH": "0",
+      "BUSER_WIDTH": "0",
+      "READ_WRITE_MODE": "READ_WRITE",
+      "HAS_BURST": "1",
+      "HAS_LOCK": "1",
+      "HAS_PROT": "1",
+      "HAS_CACHE": "1",
+      "HAS_QOS": "0",
+      "HAS_REGION": "0",
+      "HAS_WSTRB": "1",
+      "HAS_BRESP": "1",
+      "HAS_RRESP": "1",
+      "NUM_READ_OUTSTANDING": "8",
+      "NUM_WRITE_OUTSTANDING": "8",
+      "MAX_BURST_LENGTH": "16",
+      "PHASE": "0.0",
+      "CLK_DOMAIN": "base_ps7_0_0_FCLK_CLK0",
+      "NUM_READ_THREADS": "1",
+      "NUM_WRITE_THREADS": "1",
+      "RUSER_BITS_PER_BYTE": "0",
+      "WUSER_BITS_PER_BYTE": "0",
+      "INSERT_VIP": "0",
+      "MASTER_TYPE": "BRAM_CTRL",
+      "MEM_SIZE": "65536",
+      "MEM_WIDTH": "32",
+      "MEM_ECC": "NONE"
+    },
+    "registers": {
+      "ECC_STATUS": {
+        "address_offset": 0,
+        "size": 1,
+        "access": "read-write",
+        "description": "ECC Status Register",
+        "fields": {
+          "UE_STATUS": {
+            "bit_offset": 0,
+            "bit_width": 1,
+            "description": "If 1 an uncorrectable error has occurred. Cleared when 1 is written to this bit position\n",
+            "access": "read-write"
+          },
+          "CE_STATUS": {
+            "bit_offset": 1,
+            "bit_width": 1,
+            "description": "If 1 a correctable error has occurred. Cleared when 1 is written to this bit position\n",
+            "access": "read-write"
+          }
+        }
+      },
+      "ECC_EN_IRQ": {
+        "address_offset": 4,
+        "size": 1,
+        "access": "read-write",
+        "description": "ECC Enable Interrupt Register",
+        "fields": {
+          "UE_EN_IRQ": {
+            "bit_offset": 0,
+            "bit_width": 1,
+            "description": "1 - The value of the UE_STATUS bit of the ECC Status Register is propagated to the Interrupt signal.\n0 - The value of the UE_STATUS bit of the ECC Status Register is not propagated to the Interrupt signal.\n",
+            "access": "read-write"
+          },
+          "CE_EN_IRQ": {
+            "bit_offset": 1,
+            "bit_width": 1,
+            "description": "1 - The value of the CE_STATUS bit of the ECC Status Register is propagated to the Interrupt signal.\n0 - The value of the CE_STATUS bit of the ECC Status Register is not propagated to the Interrupt signal.\n",
+            "access": "read-write"
+          }
+        }
+      },
+      "ECC_ON_OFF": {
+        "address_offset": 8,
+        "size": 1,
+        "access": "read-write",
+        "description": "ECC On/Off Register",
+        "fields": {
+          "ECC_ON_OFF": {
+            "bit_offset": 0,
+            "bit_width": 1,
+            "description": "0 - ECC checking is disabled on read operations. (ECC generation is enabled on write operations when C_ECC = 1).\n1 - ECC checking is enabled on read operations. All correctable and uncorrectable error conditions are captured and status updated.\n",
+            "access": "read-write"
+          }
+        }
+      },
+      "CE_CNT": {
+        "address_offset": 12,
+        "size": 1,
+        "access": "read-write",
+        "description": "Correctable Error Counter Register",
+        "fields": {
+          "CE_CNT": {
+            "bit_offset": 0,
+            "bit_width": 8,
+            "description": "Registers holds number of correctable errors encountered\n",
+            "access": "read-write"
+          }
+        }
+      },
+      "CE_FFA0": {
+        "address_offset": 448,
+        "size": 1,
+        "access": "read-only",
+        "description": "Correctable Error First Failing Address Register, bits [31:0]",
+        "fields": {
+          "CE_FFA0": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Address (bits [31:0]) of the first occurrence of a correctable error\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "CE_FFA1": {
+        "address_offset": 452,
+        "size": 1,
+        "access": "read-only",
+        "description": "Correctable Error First Failing Address Register, bits [63:32]",
+        "fields": {
+          "CE_FFA1": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Address (bits [63:32]) of the first occurrence of a correctable error\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "UE_FFD1": {
+        "address_offset": 516,
+        "size": 1,
+        "access": "read-only",
+        "description": "Uncorrectable Error First Failing Data Register , bits [63:32]",
+        "fields": {
+          "UE_FFD": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Data (bits [63:32) of the first occurrence of an uncorrectable error\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "UE_FFD2": {
+        "address_offset": 520,
+        "size": 1,
+        "access": "read-only",
+        "description": "Uncorrectable Error First Failing Data Register , bits [95:64]",
+        "fields": {
+          "UE_FFD": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Data (bits [95:64]) of the first occurrence of an uncorrectable error\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "UE_FFD3": {
+        "address_offset": 524,
+        "size": 1,
+        "access": "read-only",
+        "description": "Uncorrectable Error First Failing Data Register , bits [127:96]",
+        "fields": {
+          "UE_FFD": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Data (bits [127:96]) of the first occurrence of an uncorrectable error\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "FI_D0": {
+        "address_offset": 768,
+        "size": 1,
+        "access": "write-only",
+        "description": "Fault Inject Data Register, bits[31:0]",
+        "fields": {
+          "FI_D0": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Bit positions set to 1 toggle the corresponding bits [31:0] of the next data word written to the block RAM.\nThe register is automatically cleared after the fault has been injected.\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "FI_D1": {
+        "address_offset": 772,
+        "size": 1,
+        "access": "write-only",
+        "description": "Fault Inject Data Register, bits[63:32]",
+        "fields": {
+          "FI_D1": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Bit positions set to 1 toggle the corresponding bits [63:32] of the next data word written to the block RAM.\nThe register is automatically cleared after the fault has been injected.\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "FI_D2": {
+        "address_offset": 776,
+        "size": 1,
+        "access": "write-only",
+        "description": "Fault Inject Data Register, bits[95:64]",
+        "fields": {
+          "FI_D2": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Bit positions set to 1 toggle the corresponding bits [95:64] of the next data word written to the block RAM.\nThe register is automatically cleared after the fault has been injected.\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "FI_D3": {
+        "address_offset": 780,
+        "size": 1,
+        "access": "write-only",
+        "description": "Fault Inject Data Register, bits[127:96]",
+        "fields": {
+          "FI_D3": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Bit positions set to 1 toggle the corresponding bits [127:96] of the next data word written to the block RAM.\nThe register is automatically cleared after the fault has been injected.\n",
+            "access": "read-only"
+          }
+        }
+      },
+      "FI_ECC": {
+        "address_offset": 896,
+        "size": 1,
+        "access": "write-only",
+        "description": "Fault Inject ECC Register",
+        "fields": {
+          "FI_ECC": {
+            "bit_offset": 0,
+            "bit_width": 32,
+            "description": "Bit positions set to 1 toggle the corresponding bit of the next ECC written to the block RAM.\nThe register is automatically cleared after the fault has been injected.\n",
+            "access": "read-only"
+          }
+        }
+      }
+    },
+    "used": 1,
+    "xrt_mem_idx": 1,
+    "raw_type": 1,
+    "base_address": 1073741824,
+    "size": 65536,
+    "streaming": false,
+    "idx": 1,
+    "tag": "MIG1"
+  },
+  "reset_gpio": {
+    "state": null,
+    "pins": "{'iop_pmoda/rst_clk_wiz_1_100M/aux_reset_in', 'mb_iop_pmoda_reset/Dout'}",
+    "index": 0
+  },
+  "hwh_target_modules": [
+    {
+      "COREREVISION": "6",
+      "FULLNAME": "/iop_pmoda/mb_bram_ctrl",
+      "HWVERSION": "4.1",
+      "INSTANCE": "iop_pmoda_mb_bram_ctrl",
+      "IPTYPE": "PERIPHERAL",
+      "IS_ENABLE": "1",
+      "MODCLASS": "MEMORY_CNTLR",
+      "MODTYPE": "axi_bram_ctrl",
+      "VLNV": "xilinx.com:ip:axi_bram_ctrl:4.1"
+    }
+  ],
+  "hwh_target_memranges": [],
+  "mem_dict_view_source": {
+    "path": "/usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/metadata/mem_dict_view.py",
+    "sha256": "032839c06cdd1c7fe10d92fa2bf0fd778215b1ccdbe73b4c71ee5ac7ae6ca165"
+  },
+  "overlay_source": {
+    "path": "/usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlay.py",
+    "sha256": "949bbd3a1d296b487702f4c49013de24c3d6eb44da9fb2ebe1ada70d054237d7"
+  }
+}

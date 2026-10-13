@@ -1,6 +1,7 @@
 """Host-only, fault-injected tests; no PYNQ installation or board access."""
 
 from contextlib import redirect_stdout
+import ast
 import hashlib
 import importlib.util
 import io
@@ -188,6 +189,38 @@ class BramTests(unittest.TestCase):
         self.assertEqual(result["source"]["vlnv"], "xilinx.com:ip:axi_bram_ctrl:4.1")
         self.assertEqual(result["source"]["identity_source"], "hash_checked_hwh")
         self.assertEqual(result["source"]["runtime_entries"][0]["runtime_type"], "DDR4")
+
+    def test_A_actual_memory_only_schema(self):
+        fixture = SOURCE.parents[2] / "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/A-metadata.json"
+        raw = fixture.read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(),
+                         "205453db99bc22a9651ad541c5302a8bc59105bf7e856304002ebc6f5aa52d68")
+        observed = json.loads(raw)
+        self.assertIsNone(observed["ip_dict_target"])
+        self.hw.ip_dict = {}
+        self.hw.mem_dict = {probe.IP_NAME: observed["mem_dict_target"]}
+        reset = observed["reset_gpio"]
+        # A's json.dumps(default=str) serializes the live Python set as its repr.
+        # Reconstruct only the exported fixture; the board script receives a set.
+        reset["pins"] = ast.literal_eval(reset["pins"])
+        self.assertIsInstance(reset["pins"], set)
+        self.hw.gpio_dict = {probe.RESET_NAME: reset}
+        result = self.run_probe()
+        diagnostic = {"errors": result["errors"], "samples": len(result["samples"]),
+                      "overlay_calls": self.hw.module.Overlay.call_count,
+                      "mmio_calls": self.hw.module.MMIO.call_count,
+                      "bram_reads": self.hw.reads, "bram_writes": self.hw.writes,
+                      "reset_events": [e for e in self.hw.events if e[0].startswith("reset")
+                                       or e[0] in ("hold", "release_export")]}
+        self.assertEqual(result["status"], "passed", json.dumps(diagnostic))
+        self.assertEqual(result["matching_samples"], 384)
+        self.assertEqual(len(result["restoration"]["words"]), 16)
+        self.assertTrue(result["restoration"]["bram_restored"])
+        self.assertTrue(result["restoration"]["reset_restored"])
+        self.assertEqual(self.hw.memory, self.hw.original)
+        self.assertEqual((self.hw.reads, self.hw.writes), (416, 400))
+        self.hw.module.Overlay.assert_called_once_with(str(self.bit))
+        self.hw.module.MMIO.assert_called_once_with(0x40000000, 0x10000)
 
     def test_memory_xrt_address_pair_and_matching_duplicate_tables(self):
         for xrt_only in (False, True):

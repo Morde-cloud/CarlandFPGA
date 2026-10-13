@@ -1,0 +1,54 @@
+{
+  "extraction": "git show commit:path raw stdout bytes; no archive or checkout conversion",
+  "files": {
+    "base.hwh": {
+      "git_blob": "22d3086ac449d9f02fa2ee1d3ab46f04c989173a",
+      "sha256": "cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f",
+      "size": 4558197
+    },
+    "execution.json": {
+      "git_blob": "390c6265a6dbfa019a9d77ee0a2c4d0baf39d7dc",
+      "sha256": "f4535936df9070ff4ef91cad65e727d0e549dd9eeee3502ad2d4e76cc1573036",
+      "size": 676
+    },
+    "hwh-target-details.json": {
+      "git_blob": "e6f989fced676b00608131f266e498380830a8b0",
+      "sha256": "5de9db7cf18725863a5969c93114e0d60f5ad8ffe5e14ab6cd9c838c6d782e34",
+      "size": 1996
+    },
+    "metadata.json": {
+      "git_blob": "88580fadc1b9db4943cc3c205ce558e37ddd1629",
+      "sha256": "205453db99bc22a9651ad541c5302a8bc59105bf7e856304002ebc6f5aa52d68",
+      "size": 12028
+    },
+    "probe.py": {
+      "git_blob": "dde1d004b71dfa59a730b5861f6ce55eb28bc384",
+      "sha256": "be9ced949dbf9ea03a99a0b0ab7c406caf35095b0d3afa3a0c43f8434b4ebe12",
+      "size": 2381
+    },
+    "stderr.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "stdout.log": {
+      "git_blob": "88580fadc1b9db4943cc3c205ce558e37ddd1629",
+      "sha256": "205453db99bc22a9651ad541c5302a8bc59105bf7e856304002ebc6f5aa52d68",
+      "size": 12028
+    }
+  },
+  "full_hwh_identity_result": {
+    "addr_range": 65536,
+    "fullpath": "iop_pmoda/mb_bram_ctrl",
+    "identity_source": "hash_checked_hwh",
+    "instance": "iop_pmoda_mb_bram_ctrl",
+    "phys_addr": 1073741824,
+    "ps_fullpath": "/ps7_0",
+    "vlnv": "xilinx.com:ip:axi_bram_ctrl:4.1"
+  },
+  "gpio_pins_normalization": "A probe uses json default=str on a Python set; host replay uses ast.literal_eval to reconstruct that set; no board API change",
+  "probe_empty_memranges_note": "probe compared INSTANCE to slash path; hwh-target-details.json and B full-HWH parser match the underscore MODULE.INSTANCE",
+  "runtime_fixture": "A-metadata.json copied byte-for-byte",
+  "source_commit": "b395767272909229dd3acb289bd71a82ab8c4211",
+  "source_directory": "docs/board-collaboration/BOARD-20261013-A/A/metadata-v3-readonly-preflight/"
+}

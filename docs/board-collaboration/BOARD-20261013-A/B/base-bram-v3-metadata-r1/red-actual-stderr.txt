@@ -1,0 +1,17 @@
+test_A_actual_memory_only_schema (__main__.main.<locals>.ActualHwhTests.test_A_actual_memory_only_schema) ... FAIL
+
+======================================================================
+FAIL: test_A_actual_memory_only_schema (__main__.main.<locals>.ActualHwhTests.test_A_actual_memory_only_schema)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\board-20261013\tests\test_base_bram_board_test.py", line 215, in test_A_actual_memory_only_schema
+    self.assertEqual(result["status"], "passed", json.dumps(diagnostic))
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+ : {"errors": [{"phase": "input_validation", "type": "NameError", "message": "name '__file__' is not defined"}], "samples": 0, "overlay_calls": 0, "mmio_calls": 0, "bram_reads": 0, "bram_writes": 0, "reset_events": []}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.119s
+
+FAILED (failures=1)

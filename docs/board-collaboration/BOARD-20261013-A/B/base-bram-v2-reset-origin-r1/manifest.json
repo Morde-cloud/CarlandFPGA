@@ -1,0 +1,104 @@
+{
+  "artifacts": [
+    "docs/board-collaboration/BOARD-20261013-A/B/.gitattributes",
+    "docs/board-collaboration/BOARD-20261013-A/B/README.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/api-reference.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-environment.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-reset-origin-r1-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-reset-origin-r1.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-verification-reset-origin-r1.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-gpio-design.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-superseded.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/v2-api-reference.txt",
+    "examples/board_collaboration/base_bram_board_test.py",
+    "tests/test_base_bram_board_test.py"
+  ],
+  "files": {
+    "docs/board-collaboration/BOARD-20261013-A/B/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/README.md": {
+      "sha256": "e2c9a46cac546bd7c6be2a65128f5e9a9d920ec1080890f270d85bdfc4178b19",
+      "size": 8500
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/api-reference.txt": {
+      "sha256": "48e3686bb4f63eaad8e23008a5554915d6fef7696f01a8ab6d049da831328ca9",
+      "size": 580
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-environment.txt": {
+      "sha256": "70f3d3ac619b94d7eb7e62fd5eddaa41053283413f553acfaf64f73301c0d63e",
+      "size": 408
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-reset-origin-r1-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-reset-origin-r1.txt": {
+      "sha256": "8f94ff7e21246bdefbac836b33e4bac45d6c5f495a77cecc3724b8b5e58c5429",
+      "size": 3432
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-verification-reset-origin-r1.json": {
+      "sha256": "3f31ece85ca746c5224204177fc698be5a238e5dd3e107a4f38178fef5fe9ab6",
+      "size": 1197
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-gpio-design.md": {
+      "sha256": "5a4bd83a431080b4cd333407e9de0fce261f86ff9a8aeb8665c11c5e09eafa17",
+      "size": 5870
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-superseded.json": {
+      "sha256": "1053bd6dc1032c4f2dbe6de081f7a3160c70b351a2a73f700c38347f2038e4eb",
+      "size": 1000
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/v2-api-reference.txt": {
+      "sha256": "2f95ba980cd24e474145e6caf246b9d8a25c5daa3432a325c9bb4d94cd15bad7",
+      "size": 855
+    },
+    "examples/board_collaboration/base_bram_board_test.py": {
+      "sha256": "fde7bc99aca19ef32ff0137c5045e4262fa5a3eac1b080465f964105a7c6384f",
+      "size": 15100
+    },
+    "tests/test_base_bram_board_test.py": {
+      "sha256": "c5c6bfcfa98fb152e4dec022de632a04a61f16f08e11db48f2624346c0d90872",
+      "size": 19430
+    }
+  },
+  "request": {
+    "code_commit": "3f9e9a52c950c0bbac24675e7fb49c8fe46a50c7",
+    "expected_result": "Exit 0 and status passed only with exactly 384 real MMIO comparisons all equal, 16 original BRAM words fully restored and read back equal, observed reset direction/value and prior export state restored, and no errors. On an initially unexported GPIO, initial reset means the observation after this run exports it; pre-export output latch remains unknown. Any missing evidence, mismatch, exception or unverified cleanup yields nonzero exit and failed status. No optical GPIO, synthesis or prior-overlay restoration claim.",
+    "operation_id": "BOARD-20261013-A:B:base-bram-v2-reset-origin-r1",
+    "requester": "B",
+    "task_id": "BOARD-20261013-A-B",
+    "task_version": 2,
+    "test_steps": [
+      "Only A current Desktop board owner: check out the exact PR head, verify this manifest and source/evidence hashes, and serialize use of the base overlay and iop_pmoda BRAM. No background board dispatch and no GPIO v1 execution. This revision supersedes the earlier base-bram-v2 handoff for future execution; do not run both. Preserve any actual earlier result under its original identity.",
+      "Use A already-authorized root login shell with BOARD=Pynq-Z2, XILINX_XRT=/usr and cwd=/tmp; interpreter /usr/local/share/pynq-venv/bin/python3, imported PYNQ from its venv. Transfer the exact reviewed examples/board_collaboration/base_bram_board_test.py bytes.",
+      "Run once: /usr/local/share/pynq-venv/bin/python3 base_bram_board_test.py --bitstream /usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit --output base-bram-v2-reset-origin-r1-result.json --operation-id BOARD-20261013-A:B:base-bram-v2-reset-origin-r1 --request-hash <this manifest request_hash> --code-commit 3f9e9a52c950c0bbac24675e7fb49c8fe46a50c7 --tested-commit <exact PR head SHA>. Output must not exist. Preserve stdout, stderr and exit code.",
+      "Before one Overlay load, verify bit SHA256 ecabdcb5d483c75335ab6f043824a2386971c7b0ffd6e3315f24860bf5088eb6 and hwh SHA256 cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f. Record PL identity before/after; unknown pre-load identity is not a restored prior configuration.",
+      "Validate overlay.ip_dict iop_pmoda/mb_bram_ctrl as xilinx.com:ip:axi_bram_ctrl:4.1, base 0x40000000 and range 0x10000; derive MMIO from that metadata. Validate mb_iop_pmoda_reset GPIO index 0 and derive Linux GPIO via GPIO.get_gpio_pin (A observed 960). If absent, export only this resolved GPIO. Record direction/value observed after export, with observation_point=post_load_post_export_sysfs_observation and pre_export_output_latch_known=false; no pre-export invisible latch claim. For an existing export, record post_load_existing_export_sysfs_observation. Set direction=high and confirm reset high via fresh sysfs reads.",
+      "Snapshot all 16 uint32 words at offsets 0xFC00..0xFC3C. For each of 3 rounds, write all 16 before reading all 16 for each batch: 0, FFFFFFFF, 55555555, AAAAAAAA, A5A50000|index, its uint32 inverse, 1<<index, and 16 getrandbits(32) values from Random(0x20261013), same vector each round. Record all 384 expected/observed values and physical sources.",
+      "Finally, hold reset high and restore every captured word, attempting all writes and all readbacks. Only after all 16 are verified, restore the reset value/direction observed during snapshot preparation; then unexport only if this run exported the GPIO. If BRAM restoration is unverified, retain reset high, report failure and request A recovery; do not silently release or automatically rerun.",
+      "A posts operation_id, request_hash, actual tested_commit, runtime versions, command, exit code and public JSON/stdout/stderr paths with SHA256 on this PR. A decides hardware acceptance against these measured results."
+    ]
+  },
+  "request_hash": "ee52a9f5330b8a5a8a04367a5bd1f18b233d739b1b865941850846fef53dc28d",
+  "schema_version": 1,
+  "stages": {
+    "hardware": {
+      "status": "not_run"
+    },
+    "host_mock": {
+      "log": "docs/board-collaboration/BOARD-20261013-A/B/host-tests-reset-origin-r1.txt",
+      "status": "passed"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

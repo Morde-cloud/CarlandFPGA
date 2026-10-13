@@ -1,0 +1,111 @@
+{
+  "artifacts": [
+    "docs/project-plan/B/2026-10-13/.gitattributes",
+    "docs/project-plan/B/2026-10-13/B_FIVE_CANDIDATES.md",
+    "docs/project-plan/B/2026-10-13/PROJECT_TASKBOOK_DRAFT.md",
+    "docs/project-plan/B/2026-10-13/REVIEW_DECISION.md",
+    "docs/project-plan/B/2026-10-13/SOURCES.md",
+    "docs/project-plan/B/2026-10-13/TASK_SCOPE.json",
+    "docs/project-plan/B/2026-10-13/budget_check.py",
+    "docs/project-plan/B/2026-10-13/evidence/alternatives-review.txt",
+    "docs/project-plan/B/2026-10-13/evidence/budget-result.json",
+    "docs/project-plan/B/2026-10-13/evidence/budget-stderr.txt",
+    "docs/project-plan/B/2026-10-13/evidence/document-check.json",
+    "docs/project-plan/B/2026-10-13/evidence/execution.json",
+    "docs/project-plan/B/2026-10-13/evidence/source-review.txt"
+  ],
+  "files": {
+    "docs/project-plan/B/2026-10-13/.gitattributes": {
+      "sha256": "40f0e6dc36dcbad9f5e6f0350406df192ee1f7342965ab445ae9b16ce2f777c7",
+      "size": 26
+    },
+    "docs/project-plan/B/2026-10-13/B_FIVE_CANDIDATES.md": {
+      "sha256": "d46305f652f94d061ca58a665c156846e0952be4dd3e97b0f3f6f2294b7c54a5",
+      "size": 7328
+    },
+    "docs/project-plan/B/2026-10-13/PROJECT_TASKBOOK_DRAFT.md": {
+      "sha256": "aa250b25ae6e76053fd8504ac010bbc3adaf4900fa3356bf70362295094d424c",
+      "size": 32141
+    },
+    "docs/project-plan/B/2026-10-13/REVIEW_DECISION.md": {
+      "sha256": "82650e081d341a9c16ab66025d96c431d33e8be26681c90eaeba91aa8d938d4d",
+      "size": 2509
+    },
+    "docs/project-plan/B/2026-10-13/SOURCES.md": {
+      "sha256": "0b62e173582d345fc7c6b3948246e0a89854e6d56f859bb93b56cf952b4d8413",
+      "size": 5535
+    },
+    "docs/project-plan/B/2026-10-13/TASK_SCOPE.json": {
+      "sha256": "edb489c5e2a943c50880089fba8ef72a6ada3d3e1c305d9a82d022ba96cb1f97",
+      "size": 1270
+    },
+    "docs/project-plan/B/2026-10-13/budget_check.py": {
+      "sha256": "41c4166dd37f2f5a3675a56ddcb135a54965f4f0191401afec694ec72463680c",
+      "size": 3848
+    },
+    "docs/project-plan/B/2026-10-13/evidence/alternatives-review.txt": {
+      "sha256": "1cc28b75a583c60bdd5cf010d2a91d126569dade434faf073d551c7462347a4b",
+      "size": 8393
+    },
+    "docs/project-plan/B/2026-10-13/evidence/budget-result.json": {
+      "sha256": "1bb76e3282199d82649c6b09592373ce99831b511268b9c166154931407c6217",
+      "size": 3792
+    },
+    "docs/project-plan/B/2026-10-13/evidence/budget-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/project-plan/B/2026-10-13/evidence/document-check.json": {
+      "sha256": "503582c946fa3251ac09c187a0d2cac14609c6cba269a05dfda4f6ccabf30393",
+      "size": 369
+    },
+    "docs/project-plan/B/2026-10-13/evidence/execution.json": {
+      "sha256": "f0f3e3b66a0bbe05f8e27584b849bc3f7e140524ea85c1fc19ad2d3dd36b0355",
+      "size": 494
+    },
+    "docs/project-plan/B/2026-10-13/evidence/source-review.txt": {
+      "sha256": "85246b3a6295052994198c3d5f5b1fd679a0f673aca7d023a696cde6fd48b030",
+      "size": 4869
+    }
+  },
+  "request": {
+    "code_commit": "131ec14e964336507322793b66a2ad9b8b254059",
+    "expected_result": "B independent five-plan fusion and planning arithmetic are reviewable; latest user constraints PYNQ-Z2, materials to be prepared and November 4 deadline are present. A/C final fusion and implementation stages remain pending; no physical board execution authorized by this handoff.",
+    "operation_id": "PLAN-20261013-B:independent-v1",
+    "requester": "node-b",
+    "task_id": "PLAN-20261013-B",
+    "task_version": 1,
+    "test_steps": [
+      "Read B_FIVE_CANDIDATES.md, PROJECT_TASKBOOK_DRAFT.md, SOURCES.md and REVIEW_DECISION.md; preserve pending three-node selection status.",
+      "Run python -X utf8 docs/project-plan/B/2026-10-13/budget_check.py and compare semantic JSON to evidence/budget-result.json.",
+      "Verify the handoff manifest and raw Git blob hashes. This is a planning review, not a request to operate hardware."
+    ]
+  },
+  "request_hash": "a728f5f9bab68edbdb5c487b10877e34896752290d436cdebcc12effe31aaae1",
+  "schema_version": 1,
+  "stages": {
+    "external_three_node_selection": {
+      "status": "blocked"
+    },
+    "hardware": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "independent_evidence_review": {
+      "log": "docs/project-plan/B/2026-10-13/evidence/alternatives-review.txt",
+      "status": "passed"
+    },
+    "planning_arithmetic": {
+      "log": "docs/project-plan/B/2026-10-13/evidence/budget-result.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

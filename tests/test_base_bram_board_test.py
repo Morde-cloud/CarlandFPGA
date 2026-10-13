@@ -153,6 +153,13 @@ class BramTests(unittest.TestCase):
         self.assertEqual(self.run_probe()["status"], "passed")
         self.assertEqual(self.hw.value, 1)
 
+    def test_linux_gpio_is_resolved_dynamically_for_A_pin_960(self):
+        self.hw.module.GPIO.get_gpio_pin.return_value = 960
+        result = self.run_probe()
+        self.assertEqual(result["status"], "passed")
+        self.assertEqual(result["source"]["reset_linux_gpio"], 960)
+        self.assertIn(("reset_resolve", 960), self.hw.events)
+
     def test_initial_input_direction_is_restored(self):
         self.hw.direction = "in"
         self.assertEqual(self.run_probe()["status"], "passed")
@@ -330,6 +337,9 @@ class SysfsTests(unittest.TestCase):
                     reset._write = write
                     initial = reset.snapshot()
                     self.assertEqual(writes, [])
+                    self.assertEqual(initial["observation_point"],
+                                     "post_load_existing_export_sysfs_observation")
+                    self.assertFalse(initial["pre_export_output_latch_known"])
                     reset.hold()
                     self.assertEqual(writes[0], ("direction", "high"))
                     reset.restore()
@@ -338,6 +348,40 @@ class SysfsTests(unittest.TestCase):
                     self.assertTrue(initial["exported"])
                     reset.release_export()
                     self.assertFalse((root / "unexport").exists())
+
+    def test_unexported_gpio_initial_state_is_observed_only_after_export(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            original_write = Path.write_text
+            calls = []
+
+            def write(path, value, *args, **kwargs):
+                calls.append((path.name, str(value)))
+                if path == root / "export":
+                    gpio = root / "gpio960"
+                    gpio.mkdir()
+                    for name, data in (("direction", "out"), ("value", "1"), ("active_low", "0")):
+                        original_write(gpio / name, data)
+                elif path.name == "direction" and value in ("high", "low"):
+                    original_write(path.parent / "value", "1" if value == "high" else "0")
+                    value = "out"
+                return original_write(path, value, *args, **kwargs)
+
+            reset = probe.SysfsReset(960, root)
+            with patch.object(Path, "write_text", write):
+                initial = reset.snapshot()
+                self.assertEqual(calls, [("export", "960")])
+                self.assertEqual(initial["observation_point"],
+                                 "post_load_post_export_sysfs_observation")
+                self.assertFalse(initial["pre_export_output_latch_known"])
+                self.assertFalse(initial["exported"])
+                self.assertEqual(initial["value"], 1)
+                self.assertEqual(initial["value_source"], str(root / "gpio960/value"))
+                reset.hold()
+                reset.restore()
+                reset.release_export()
+            self.assertEqual(calls[-1], ("unexport", "960"))
+            self.assertEqual((root / "gpio960/value").read_text(), "1")
 
     def test_new_export_is_released_and_active_low_fails_before_direction_write(self):
         with tempfile.TemporaryDirectory() as directory:

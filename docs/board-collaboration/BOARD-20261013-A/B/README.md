@@ -2,7 +2,12 @@
 
 Task `BOARD-20261013-A-B`, version `2`; work
 `B-base-overlay-bramtest-v2`; hardware operation
-`BOARD-20261013-A:B:base-bram-v2`; requester `B`.
+`BOARD-20261013-A:B:base-bram-v2-reset-origin-r1`; requester `B`.
+
+This revision clarifies reset observation provenance. The earlier
+`base-bram-v2` operation and manifest are retained at PR head
+`748ede5c0844c5c8a1dc4d251ff29de52c9bb07f` as history. Use the new
+`base-bram-v2-reset-origin-r1/manifest.json` and its accompanying PR head.
 
 This is the sole current test. A explicitly replaced GPIO readback acceptance
 with AXI BRAM testing. `v1-superseded.json`, `v1-gpio-design.md` and
@@ -28,6 +33,17 @@ high, and verifies it before accessing BRAM. It avoids `GPIO(..., "out")`
 initialization and `.read()` because the PYNQ constructor changes direction
 and the output API forbids reads. If the GPIO was not exported, only that
 resolved line is exported and its export state is restored afterward.
+
+A's read-only check mapped index `0` to Linux GPIO `960` and found it not
+exported. The script still resolves the pin through the library at runtime;
+`960` is not a guessed address. In that case `initial_reset` records the value
+and direction observed **after this run exports the GPIO**, identified by
+`observation_point=post_load_post_export_sysfs_observation`. It explicitly
+sets `pre_export_output_latch_known=false`: the previously unexported output
+latch value was not visible. Cleanup restores this observed value/direction,
+then unexports the line. For an already exported line, the observation point
+is `post_load_existing_export_sysfs_observation`. The `exported` field records
+whether the line was exported before snapshot preparation.
 
 With MicroBlaze held in reset, all 16 original words are read before any test
 write. Each batch writes all 16 words, then reads all 16 through MMIO. These
@@ -97,8 +113,8 @@ the snapshot taken after overlay loading. B performs host mock testing only.
    cd /tmp
    /usr/local/share/pynq-venv/bin/python3 base_bram_board_test.py \
      --bitstream /usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit \
-     --output base-bram-v2-result.json \
-     --operation-id BOARD-20261013-A:B:base-bram-v2 \
+     --output base-bram-v2-reset-origin-r1-result.json \
+     --operation-id BOARD-20261013-A:B:base-bram-v2-reset-origin-r1 \
      --request-hash REQUEST_HASH \
      --code-commit SOURCE_COMMIT \
      --tested-commit PR_HEAD_COMMIT
@@ -119,8 +135,12 @@ the snapshot taken after overlay loading. B performs host mock testing only.
 python -B -m unittest discover -s tests -p test_base_bram_board_test.py -v
 ```
 
-The committed host test log records the actual command and results. Local
-success means mock software behavior only. The handoff records host mock,
+The current revision passed 22 host tests. `host-tests-reset-origin-r1.txt`
+preserves the raw output; `host-verification-reset-origin-r1.json` records the
+actual command, runtime and tested source hashes. The test process configured
+LF output before execution, and this directory's `.gitattributes` disables
+Git text conversion. Earlier logs and manifests retain their original bytes.
+Local success means mock software behavior only. The handoff records host mock,
 simulation, synthesis, implementation and hardware as separate stages, with
 `hardware=not_run` until A provides evidence for this precise request/head.
 The manifest is generated after committing source and evidence; modifying

@@ -19,7 +19,7 @@ import re
 import sys
 
 TASK_ID = "BOARD-20261013-A-B"
-OPERATION_ID = "BOARD-20261013-A:B:base-bram-v2"
+OPERATION_ID = "BOARD-20261013-A:B:base-bram-v2-reset-origin-r1"
 IP_NAME = "iop_pmoda/mb_bram_ctrl"
 RESET_NAME = "mb_iop_pmoda_reset"
 OFFSET, WORDS, ROUNDS = 0xFC00, 16, 3
@@ -103,6 +103,10 @@ class SysfsReset:
             raise ValueError("Reset GPIO direction is unavailable")
         self.initial = {"value": self.value(), "direction": direction,
                         "exported": not self.newly_exported,
+                        "observation_point": (
+                            "post_load_post_export_sysfs_observation" if self.newly_exported
+                            else "post_load_existing_export_sysfs_observation"),
+                        "pre_export_output_latch_known": False,
                         "value_source": str(self.path / "value")}
         return dict(self.initial)
 

@@ -1,0 +1,72 @@
+{
+  "artifacts": [
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/.gitattributes",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/A-evidence-binding.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/A-existing-hwh-evidence.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/A-hwh-target-details.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/A-metadata.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/README.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/actual-schema-replay-r1.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/actual-schema-verification.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/final-source-review.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-actual-r1-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-actual-r1-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-actual-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-actual-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-command.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-final-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-final-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/host-preflight.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/implementation-review.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-actual-r1-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-actual-r1-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-actual-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-actual-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-command.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-stderr.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/red-test.patch",
+    "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/replay-actual-schema.py",
+    "examples/board_collaboration/base_bram_board_test.py",
+    "tests/test_base_bram_board_test.py"
+  ],
+  "request": {
+    "code_commit": "9b618204473c8fda1bffbaf436080d77a34db5fc",
+    "expected_result": "Exit 0/status passed only with exactly 384 real MMIO sample comparisons equal, all 16 original BRAM words restored and independently read back equal, observed reset direction/value and prior export state restored, and no errors. Report target runtime provenance and HWH identity. Any missing evidence, mismatch, exception or unverified cleanup is failed/nonzero. Host mocks and A read-only schema export are not a BRAM hardware PASS; the scope is only the assigned 64-byte window, not all 64KiB, MicroBlaze software, LEDs, new synthesis or prior-overlay restoration.",
+    "operation_id": "BOARD-20261013-A:B:base-bram-v3-metadata-r1",
+    "requester": "B",
+    "task_id": "BOARD-20261013-A-B",
+    "task_version": 3,
+    "test_steps": [
+      "Only A/root current Desktop board owner: review this exact PR9 head and new manifest; verify every artifact against source commit 9b618204473c8fda1bffbaf436080d77a34db5fc using raw Git blobs, not Windows git archive or converted checkout bytes. Serialize base overlay/iop_pmoda BRAM ownership. This is the v3 metadata fix; preserve the v2 failed result and never replay its old request.",
+      "Use the authorized root login-shell environment BOARD=Pynq-Z2, XILINX_XRT=/usr, cwd=/tmp and /usr/local/share/pynq-venv/bin/python3. Verify transferred script SHA256 b0b6eef6064812deb34639306143972e740ed1e4dc38bfeb979ff31cdfd90eda. No credential handling in the script.",
+      "Run once: /usr/local/share/pynq-venv/bin/python3 /tmp/base_bram_board_test.py --bitstream /usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit --output /tmp/base-bram-v3-metadata-r1-result.json --operation-id BOARD-20261013-A:B:base-bram-v3-metadata-r1 --request-hash <this manifest request_hash> --code-commit 9b618204473c8fda1bffbaf436080d77a34db5fc --tested-commit <exact final PR9 head SHA>. Output must not exist. Preserve command, stdout, stderr, exit code and timeout status; do not automatically retry.",
+      "Before loading once, the script verifies bit SHA256 ecabdcb5d483c75335ab6f043824a2386971c7b0ffd6e3315f24860bf5088eb6 and HWH SHA256 cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f. HWH must identify exactly one /iop_pmoda/mb_bram_ctrl AXI BRAM xilinx.com:ip:axi_bram_ctrl:4.1, with C_S_AXI_BASEADDR 0x40000000 and HIGHADDR 0x4000FFFF, and exactly one matching PS GP0/S_AXI MEMORY/Mem0 mapping via module INSTANCE. Record pre/post PL identity; do not claim prior-overlay restoration.",
+      "Cross-check runtime ip_dict and/or mem_dict against that HWH before reset/MMIO. DDR4 in mem_dict is only a synthetic label. Every present phys_addr/addr_range and base_address/size pair must be complete and agree at 0x40000000/65536; missing, conflicting or wrong mappings must fail closed. Validate the reset GPIO metadata index 0 and its two target pins, then derive the Linux GPIO with GPIO.get_gpio_pin. This compatibility was replayed locally against A evidence commit b395767272909229dd3acb289bd71a82ab8c4211.",
+      "If the dynamically resolved reset GPIO is unexported, export only that GPIO and record observed direction/value with post_load_post_export_sysfs_observation and pre_export_output_latch_known=false. Existing exports use post_load_existing_export_sysfs_observation. Set direction=high and verify fresh sysfs value/direction. Do not construct GPIO(out), infer null as zero, or claim knowledge of the invisible pre-export output latch.",
+      "While reset remains high, snapshot 16 uint32 words at offsets 0xFC00..0xFC3C. For each of 3 rounds, write all 16 before reading all 16 for each batch: zero, FFFFFFFF, 55555555, AAAAAAAA, A5A50000|index, its uint32 inverse, 1<<index, and 16 getrandbits(32) values from Random(0x20261013) generated once and reused each round. Record 384 expected/observed values and physical MMIO sources.",
+      "Finally keep reset high, attempt all 16 original-word restore writes and all 16 readback checks. Only after successful full restoration restore the observed reset value/direction and verify them, then unexport only if this run exported it. Failed restoration yields nonzero exit, reset_restore_withheld=true and attempted reset-high retention; preserve snapshots/errors for A recovery. Never reload the overlay or rerun automatically.",
+      "A reports the same operation_id/request_hash/code_commit/tested_commit, actual runtime, command, exit/timeout, JSON/stdout/stderr paths and SHA256 on PR9 and the evidence PR. Board clock and A host clock remain separately recorded. A alone determines measured hardware acceptance."
+    ]
+  },
+  "stages": {
+    "hardware": {
+      "status": "not_run"
+    },
+    "host_mock": {
+      "log": "docs/board-collaboration/BOARD-20261013-A/B/base-bram-v3-metadata-r1/green-final-stderr.txt",
+      "status": "passed"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

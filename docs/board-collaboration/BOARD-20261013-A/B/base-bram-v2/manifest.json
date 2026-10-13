@@ -1,0 +1,104 @@
+{
+  "artifacts": [
+    "docs/board-collaboration/BOARD-20261013-A/B/.gitattributes",
+    "docs/board-collaboration/BOARD-20261013-A/B/README.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/api-reference.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-environment.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-verification.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-gpio-design.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-superseded.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/v2-api-reference.txt",
+    "examples/board_collaboration/base_bram_board_test.py",
+    "tests/test_base_bram_board_test.py"
+  ],
+  "files": {
+    "docs/board-collaboration/BOARD-20261013-A/B/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/README.md": {
+      "sha256": "cb46d7ed6c3822b9c3ac01cf8f80b407f6acdf569e2e38a865bfaeb596d7712f",
+      "size": 7116
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/api-reference.txt": {
+      "sha256": "48e3686bb4f63eaad8e23008a5554915d6fef7696f01a8ab6d049da831328ca9",
+      "size": 580
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-environment.txt": {
+      "sha256": "70f3d3ac619b94d7eb7e62fd5eddaa41053283413f553acfaf64f73301c0d63e",
+      "size": 408
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests.txt": {
+      "sha256": "7ed1f46d9884a4b81a9f6417f481a2c358064987fdc5360a5a2f7d8f986b20ad",
+      "size": 3128
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/host-verification.json": {
+      "sha256": "ec3f67769d52391c65b3e65d1ce6028cf61d46ce426dd830560861f27df32455",
+      "size": 1111
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-gpio-design.md": {
+      "sha256": "5a4bd83a431080b4cd333407e9de0fce261f86ff9a8aeb8665c11c5e09eafa17",
+      "size": 5870
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-superseded.json": {
+      "sha256": "1053bd6dc1032c4f2dbe6de081f7a3160c70b351a2a73f700c38347f2038e4eb",
+      "size": 1000
+    },
+    "docs/board-collaboration/BOARD-20261013-A/B/v2-api-reference.txt": {
+      "sha256": "2f95ba980cd24e474145e6caf246b9d8a25c5daa3432a325c9bb4d94cd15bad7",
+      "size": 855
+    },
+    "examples/board_collaboration/base_bram_board_test.py": {
+      "sha256": "8d3340ef4e95054a588074975b332b075aa608fe656fc0326e4eca00ba606082",
+      "size": 14799
+    },
+    "tests/test_base_bram_board_test.py": {
+      "sha256": "5e429214d54b257f64dc79f8f271b2b628590ffcd50d1120c4924de62a072485",
+      "size": 17104
+    }
+  },
+  "request": {
+    "code_commit": "29729fca83bfe4f3ef623164bbfa9d7e8b2d315c",
+    "expected_result": "Exit 0 and status passed only with exactly 384 real MMIO comparisons all equal, 16 original BRAM words fully restored and read back equal, initial reset and export state restored, and no errors. Any missing evidence, mismatch, exception or unverified cleanup yields nonzero exit and failed status. No optical GPIO, synthesis or prior-overlay restoration claim.",
+    "operation_id": "BOARD-20261013-A:B:base-bram-v2",
+    "requester": "B",
+    "task_id": "BOARD-20261013-A-B",
+    "task_version": 2,
+    "test_steps": [
+      "Only A current Desktop board owner: check out the exact PR head, verify this manifest and source/evidence hashes, and serialize use of the base overlay and iop_pmoda BRAM. No background board dispatch and no GPIO v1 execution.",
+      "Use A already-authorized root login shell with BOARD=Pynq-Z2, XILINX_XRT=/usr and cwd=/tmp; interpreter /usr/local/share/pynq-venv/bin/python3, imported PYNQ from its venv. Transfer the exact reviewed examples/board_collaboration/base_bram_board_test.py bytes.",
+      "Run once: /usr/local/share/pynq-venv/bin/python3 base_bram_board_test.py --bitstream /usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit --output base-bram-v2-result.json --operation-id BOARD-20261013-A:B:base-bram-v2 --request-hash <this manifest request_hash> --code-commit 29729fca83bfe4f3ef623164bbfa9d7e8b2d315c --tested-commit <exact PR head SHA>. Output must not exist. Preserve stdout, stderr and exit code.",
+      "Before one Overlay load, verify bit SHA256 ecabdcb5d483c75335ab6f043824a2386971c7b0ffd6e3315f24860bf5088eb6 and hwh SHA256 cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f. Record PL identity before/after; unknown pre-load identity is not a restored prior configuration.",
+      "Validate overlay.ip_dict iop_pmoda/mb_bram_ctrl as xilinx.com:ip:axi_bram_ctrl:4.1, base 0x40000000 and range 0x10000; derive MMIO from that metadata. Validate mb_iop_pmoda_reset GPIO index 0 and derive Linux GPIO via GPIO.get_gpio_pin. Capture reset and hold output high, confirmed by sysfs.",
+      "Snapshot all 16 uint32 words at offsets 0xFC00..0xFC3C. For each of 3 rounds, write all 16 before reading all 16 for each batch: 0, FFFFFFFF, 55555555, AAAAAAAA, A5A50000|index, its uint32 inverse, 1<<index, and 16 getrandbits(32) values from Random(0x20261013), same vector each round. Record all 384 expected/observed values and physical sources.",
+      "Finally, hold reset high and restore every captured word, attempting all writes and all readbacks. Only after all 16 are verified, restore the initial reset state. If BRAM restoration is unverified, retain reset high, report failure and request A recovery; do not silently release or automatically rerun.",
+      "A posts operation_id, request_hash, actual tested_commit, runtime versions, command, exit code and public JSON/stdout/stderr paths with SHA256 on this PR. A decides hardware acceptance against these measured results."
+    ]
+  },
+  "request_hash": "ea439df00a913116966d95c067cde89049d01caacdd8e6c0b2048bb2d4acdf15",
+  "schema_version": 1,
+  "stages": {
+    "hardware": {
+      "status": "not_run"
+    },
+    "host_mock": {
+      "log": "docs/board-collaboration/BOARD-20261013-A/B/host-tests.txt",
+      "status": "passed"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    "docs/board-collaboration/BOARD-20261013-A/B/.gitattributes",
+    "docs/board-collaboration/BOARD-20261013-A/B/README.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/api-reference.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-environment.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests-stdout.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-tests.txt",
+    "docs/board-collaboration/BOARD-20261013-A/B/host-verification.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-gpio-design.md",
+    "docs/board-collaboration/BOARD-20261013-A/B/v1-superseded.json",
+    "docs/board-collaboration/BOARD-20261013-A/B/v2-api-reference.txt",
+    "examples/board_collaboration/base_bram_board_test.py",
+    "tests/test_base_bram_board_test.py"
+  ],
+  "request": {
+    "code_commit": "29729fca83bfe4f3ef623164bbfa9d7e8b2d315c",
+    "expected_result": "Exit 0 and status passed only with exactly 384 real MMIO comparisons all equal, 16 original BRAM words fully restored and read back equal, initial reset and export state restored, and no errors. Any missing evidence, mismatch, exception or unverified cleanup yields nonzero exit and failed status. No optical GPIO, synthesis or prior-overlay restoration claim.",
+    "operation_id": "BOARD-20261013-A:B:base-bram-v2",
+    "requester": "B",
+    "task_id": "BOARD-20261013-A-B",
+    "task_version": 2,
+    "test_steps": [
+      "Only A current Desktop board owner: check out the exact PR head, verify this manifest and source/evidence hashes, and serialize use of the base overlay and iop_pmoda BRAM. No background board dispatch and no GPIO v1 execution.",
+      "Use A already-authorized root login shell with BOARD=Pynq-Z2, XILINX_XRT=/usr and cwd=/tmp; interpreter /usr/local/share/pynq-venv/bin/python3, imported PYNQ from its venv. Transfer the exact reviewed examples/board_collaboration/base_bram_board_test.py bytes.",
+      "Run once: /usr/local/share/pynq-venv/bin/python3 base_bram_board_test.py --bitstream /usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/overlays/base/base.bit --output base-bram-v2-result.json --operation-id BOARD-20261013-A:B:base-bram-v2 --request-hash <this manifest request_hash> --code-commit 29729fca83bfe4f3ef623164bbfa9d7e8b2d315c --tested-commit <exact PR head SHA>. Output must not exist. Preserve stdout, stderr and exit code.",
+      "Before one Overlay load, verify bit SHA256 ecabdcb5d483c75335ab6f043824a2386971c7b0ffd6e3315f24860bf5088eb6 and hwh SHA256 cbd90c84f3a46d1eba95dff7ba7d0079812f7e46641a08e2318c9928cd36ce8f. Record PL identity before/after; unknown pre-load identity is not a restored prior configuration.",
+      "Validate overlay.ip_dict iop_pmoda/mb_bram_ctrl as xilinx.com:ip:axi_bram_ctrl:4.1, base 0x40000000 and range 0x10000; derive MMIO from that metadata. Validate mb_iop_pmoda_reset GPIO index 0 and derive Linux GPIO via GPIO.get_gpio_pin. Capture reset and hold output high, confirmed by sysfs.",
+      "Snapshot all 16 uint32 words at offsets 0xFC00..0xFC3C. For each of 3 rounds, write all 16 before reading all 16 for each batch: 0, FFFFFFFF, 55555555, AAAAAAAA, A5A50000|index, its uint32 inverse, 1<<index, and 16 getrandbits(32) values from Random(0x20261013), same vector each round. Record all 384 expected/observed values and physical sources.",
+      "Finally, hold reset high and restore every captured word, attempting all writes and all readbacks. Only after all 16 are verified, restore the initial reset state. If BRAM restoration is unverified, retain reset high, report failure and request A recovery; do not silently release or automatically rerun.",
+      "A posts operation_id, request_hash, actual tested_commit, runtime versions, command, exit code and public JSON/stdout/stderr paths with SHA256 on this PR. A decides hardware acceptance against these measured results."
+    ]
+  },
+  "stages": {
+    "hardware": {
+      "status": "not_run"
+    },
+    "host_mock": {
+      "log": "docs/board-collaboration/BOARD-20261013-A/B/host-tests.txt",
+      "status": "passed"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

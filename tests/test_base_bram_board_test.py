@@ -11,6 +11,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
+import xml.etree.ElementTree as ET
 
 SOURCE = Path(__file__).resolve().parents[1] / "examples/board_collaboration/base_bram_board_test.py"
 spec = importlib.util.spec_from_file_location("base_bram_board_test", SOURCE)
@@ -18,6 +19,17 @@ probe = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(probe)
 IDENTITY = {"operation_id": probe.OPERATION_ID, "request_hash": "a" * 64,
             "code_commit": "b" * 40, "tested_commit": "c" * 40}
+HWH = """<SYSTEM><MODULES>
+<MODULE FULLNAME="/iop_pmoda/mb_bram_ctrl" INSTANCE="iop_pmoda_mb_bram_ctrl"
+ VLNV="xilinx.com:ip:axi_bram_ctrl:4.1"><PARAMETERS>
+ <PARAMETER NAME="C_S_AXI_BASEADDR" VALUE="0x40000000"/>
+ <PARAMETER NAME="C_S_AXI_HIGHADDR" VALUE="0x4000FFFF"/>
+</PARAMETERS></MODULE>
+<MODULE FULLNAME="/processing_system7_0" MODTYPE="processing_system7">
+<MEMRANGES><MEMRANGE INSTANCE="iop_pmoda_mb_bram_ctrl" MASTERBUSINTERFACE="M_AXI_GP0"
+ SLAVEBUSINTERFACE="S_AXI" MEMTYPE="MEMORY" ADDRESSBLOCK="Mem0"
+ BASEVALUE="0x40000000" HIGHVALUE="0x4000FFFF"/></MEMRANGES>
+</MODULE></MODULES></SYSTEM>"""
 
 
 class FakeHardware:
@@ -36,7 +48,9 @@ class FakeHardware:
         self.ip_dict = {probe.IP_NAME: {"type": "xilinx.com:ip:axi_bram_ctrl:4.1",
                         "phys_addr": 0x40000000, "addr_range": 0x10000,
                         "fullpath": probe.IP_NAME}}
-        self.gpio_dict = {probe.RESET_NAME: {"index": 0}}
+        self.gpio_dict = {probe.RESET_NAME: {"index": 0, "pins": {
+            "mb_iop_pmoda_reset/Dout", "iop_pmoda/rst_clk_wiz_1_100M/aux_reset_in"}}}
+        self.mem_dict = {}
         self.module = SimpleNamespace(
             __version__="3.0.1", __file__="host_mock/pynq/__init__.py",
             PL=SimpleNamespace(bitfile_name=None, timestamp=None),
@@ -109,7 +123,7 @@ class BramTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.bit = Path(self.temp.name) / "base.bit"
         self.bit.write_bytes(b"host fake bit")
-        self.bit.with_suffix(".hwh").write_bytes(b"host fake hwh")
+        self.bit.with_suffix(".hwh").write_bytes(HWH.encode("ascii"))
         self.hashes = {k: hashlib.sha256(p.read_bytes()).hexdigest()
                        for k, p in (("bit", self.bit), ("hwh", self.bit.with_suffix(".hwh")))}
         self.hw = FakeHardware()
@@ -124,6 +138,9 @@ class BramTests(unittest.TestCase):
         self.assertEqual(result["status"], "passed")
         self.assertEqual(result["matching_samples"], 384)
         self.assertEqual(result["evidence_kind"], "host_mock")
+        self.assertEqual(result["task_version"], 3)
+        self.assertEqual(result["work_id"], "B-metadata-compat-v3")
+        self.assertEqual(result["operation_id"], "BOARD-20261013-A:B:base-bram-v3-metadata-r1")
         self.assertEqual(result["pre_load_overlay"]["identity_status"], "unknown")
         self.assertFalse(result["original_configuration_restored"])
         self.hw.module.Overlay.assert_called_once_with(str(self.bit))
@@ -152,6 +169,111 @@ class BramTests(unittest.TestCase):
         self.hw.value = 1
         self.assertEqual(self.run_probe()["status"], "passed")
         self.assertEqual(self.hw.value, 1)
+
+    def test_memory_only_runtime_schema_is_supported(self):
+        memory = self.hw.ip_dict.pop(probe.IP_NAME)
+        memory.update(type="DDR4", memtype="MEMORY", base_address=0x40000000,
+                      size=0x10000, mem_id="S_AXI", streaming=False)
+        self.hw.mem_dict[probe.IP_NAME] = memory
+        result = self.run_probe()
+        diagnostic = {"errors": result["errors"], "samples": len(result["samples"]),
+                      "mmio_calls": self.hw.module.MMIO.call_count,
+                      "bram_reads": self.hw.reads, "bram_writes": self.hw.writes,
+                      "reset_events": [e for e in self.hw.events if e[0].startswith("reset")
+                                       or e[0] in ("hold", "release_export")]}
+        self.assertEqual(result["status"], "passed", json.dumps(diagnostic))
+        self.assertEqual(result["matching_samples"], 384)
+        self.assertTrue(result["restoration"]["bram_restored"])
+        self.assertEqual((self.hw.reads, self.hw.writes), (416, 400))
+        self.assertEqual(result["source"]["vlnv"], "xilinx.com:ip:axi_bram_ctrl:4.1")
+        self.assertEqual(result["source"]["identity_source"], "hash_checked_hwh")
+        self.assertEqual(result["source"]["runtime_entries"][0]["runtime_type"], "DDR4")
+
+    def test_memory_xrt_address_pair_and_matching_duplicate_tables(self):
+        for xrt_only in (False, True):
+            with self.subTest(xrt_only=xrt_only):
+                self.hw = FakeHardware()
+                entry = dict(self.hw.ip_dict[probe.IP_NAME], type="DDR4",
+                             base_address=0x40000000, size=0x10000)
+                if xrt_only:
+                    self.hw.ip_dict.clear()
+                    del entry["phys_addr"], entry["addr_range"]
+                self.hw.mem_dict[probe.IP_NAME] = entry
+                result = self.run_probe()
+                self.assertEqual(result["status"], "passed")
+                self.assertEqual(len(result["source"]["runtime_entries"]), 1 if xrt_only else 2)
+                self.hw.module.MMIO.assert_called_once_with(0x40000000, 0x10000)
+
+    def test_runtime_memory_conflicts_fail_before_reset_or_mmio(self):
+        cases = [({"base_address": 0x40010000}, ()), ({"size": 0x1000}, ()),
+                 ({"addr_range": 0x1000}, ()), ({"phys_addr": True}, ()),
+                 ({"fullpath": "another/bram"}, ()), ({"type": "axi_gpio"}, ()),
+                 ({"streaming": True}, ()), ({"memtype": "STREAM"}, ()),
+                 ({"memtype": "REGISTER"}, ()), ({"mem_id": "OTHER"}, ()),
+                 ({}, ("size",)), ({}, ("phys_addr",)), ({}, ("fullpath",)),
+                 ({}, ("phys_addr", "addr_range", "base_address", "size"))]
+        for updates, missing in cases:
+            with self.subTest(updates=updates, missing=missing):
+                self.hw = FakeHardware()
+                # Even a valid ip_dict entry must not hide a conflicting memory entry.
+                entry = dict(self.hw.ip_dict[probe.IP_NAME], type="DDR4",
+                             base_address=0x40000000, size=0x10000)
+                entry.update(updates)
+                for key in missing:
+                    del entry[key]
+                self.hw.mem_dict[probe.IP_NAME] = entry
+                result = self.run_probe()
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(result["errors"][0]["phase"], "metadata")
+                self.hw.module.MMIO.assert_not_called()
+                self.assertFalse(any(e[0] == "reset_resolve" for e in self.hw.events))
+                self.assertEqual(self.hw.writes, 0)
+
+    def test_runtime_alias_and_wrong_reset_net_are_rejected(self):
+        for fault in ("alias", "reset_pins"):
+            self.hw = FakeHardware()
+            if fault == "alias":
+                self.hw.mem_dict["alias"] = dict(self.hw.ip_dict[probe.IP_NAME])
+            else:
+                self.hw.gpio_dict[probe.RESET_NAME]["pins"] = {"other/reset"}
+            self.assertEqual(self.run_probe()["status"], "failed")
+            self.hw.module.MMIO.assert_not_called()
+            self.assertFalse(any(e[0] == "reset_resolve" for e in self.hw.events))
+
+    def test_hwh_identity_and_ps_mapping_reject_wrong_or_ambiguous_hardware(self):
+        faults = ("vlnv", "path", "duplicate", "range", "missing_parameter",
+                  "duplicate_parameter", "ps_missing", "ps_range", "ps_instance",
+                  "ps_master", "ps_duplicate", "ps_memtype")
+        for fault in faults:
+            with self.subTest(fault=fault):
+                self.hw = FakeHardware()
+                root = ET.fromstring(HWH)
+                modules = root.find("MODULES")
+                target, ps = list(modules)
+                mapping = ps.find(".//MEMRANGE")
+                if fault == "vlnv": target.set("VLNV", "xilinx.com:ip:axi_gpio:2.0")
+                elif fault == "path": target.set("FULLNAME", "/another/mb_bram_ctrl")
+                elif fault == "duplicate": modules.append(ET.fromstring(ET.tostring(target)))
+                elif fault == "range": target.find("./PARAMETERS/PARAMETER").set("VALUE", "0x40010000")
+                elif fault == "missing_parameter": target.find("PARAMETERS").clear()
+                elif fault == "duplicate_parameter":
+                    target.find("PARAMETERS").append(ET.fromstring(ET.tostring(target.find("./PARAMETERS/PARAMETER"))))
+                elif fault == "ps_missing": modules.remove(ps)
+                elif fault == "ps_range": mapping.set("HIGHVALUE", "0x4001FFFF")
+                elif fault == "ps_instance": mapping.set("INSTANCE", "other_bram")
+                elif fault == "ps_master": mapping.set("MASTERBUSINTERFACE", "M_AXI_GP1")
+                elif fault == "ps_duplicate": ps.find("MEMRANGES").append(ET.fromstring(ET.tostring(mapping)))
+                elif fault == "ps_memtype": mapping.set("MEMTYPE", "REGISTER")
+                data = ET.tostring(root)
+                self.bit.with_suffix(".hwh").write_bytes(data)
+                # Rebind the synthetic fixture hash to exercise structural checks.
+                self.hashes["hwh"] = hashlib.sha256(data).hexdigest()
+                result = self.run_probe()
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(result["errors"][0]["phase"], "hwh_metadata")
+                self.hw.module.Overlay.assert_not_called()
+                self.hw.module.MMIO.assert_not_called()
+                self.assertEqual(self.hw.events, [])
 
     def test_linux_gpio_is_resolved_dynamically_for_A_pin_960(self):
         self.hw.module.GPIO.get_gpio_pin.return_value = 960

@@ -1,0 +1,25 @@
+{
+  "baseline_head": "bb0d302331785defb59fc8d47eeea5d27fb33e81",
+  "sources": [
+    {
+      "fact": "mem_dict entries are removed from ip_dict",
+      "raw_sha256": "944d96b4be347555c26e2e9b38f4ef8bedf78800c2d6b3e34fec0782b36c4e02",
+      "url": "https://github.com/Xilinx/PYNQ/blob/v3.0.1/pynq/metadata/runtime_metadata_parser.py"
+    },
+    {
+      "fact": "PS memory entries have a synthetic DDR4 label and physical address/range",
+      "raw_sha256": "032839c06cdd1c7fe10d92fa2bf0fd778215b1ccdbe73b4c71ee5ac7ae6ca165",
+      "url": "https://github.com/Xilinx/PYNQ/blob/v3.0.1/pynq/metadata/mem_dict_view.py"
+    },
+    {
+      "fact": "ordinary HWH parsing uses RuntimeMetadataParser, then merges XRT fields",
+      "url": "https://github.com/Xilinx/PYNQ/blob/v3.0.1/pynq/pl_server/embedded_device.py"
+    }
+  ],
+  "unchanged_contract": [
+    "SysfsReset",
+    "patterns",
+    "main",
+    "execute from resolved reset pin through all BRAM operations and cleanup"
+  ]
+}

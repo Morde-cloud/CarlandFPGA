@@ -1,0 +1,35 @@
+diff --git a/tests/test_base_bram_board_test.py b/tests/test_base_bram_board_test.py
+index ebe5760..bbc27d1 100644
+--- a/tests/test_base_bram_board_test.py
++++ b/tests/test_base_bram_board_test.py
+@@ -37,6 +37,7 @@ class FakeHardware:
+                         "phys_addr": 0x40000000, "addr_range": 0x10000,
+                         "fullpath": probe.IP_NAME}}
+         self.gpio_dict = {probe.RESET_NAME: {"index": 0}}
++        self.mem_dict = {}
+         self.module = SimpleNamespace(
+             __version__="3.0.1", __file__="host_mock/pynq/__init__.py",
+             PL=SimpleNamespace(bitfile_name=None, timestamp=None),
+@@ -153,6 +154,22 @@ class BramTests(unittest.TestCase):
+         self.assertEqual(self.run_probe()["status"], "passed")
+         self.assertEqual(self.hw.value, 1)
+ 
++    def test_memory_only_runtime_schema_is_supported(self):
++        memory = self.hw.ip_dict.pop(probe.IP_NAME)
++        memory.update(type="DDR4", memtype="MEMORY", base_address=0x40000000,
++                      size=0x10000, mem_id="S_AXI", streaming=False)
++        self.hw.mem_dict[probe.IP_NAME] = memory
++        result = self.run_probe()
++        diagnostic = {"errors": result["errors"], "samples": len(result["samples"]),
++                      "mmio_calls": self.hw.module.MMIO.call_count,
++                      "bram_reads": self.hw.reads, "bram_writes": self.hw.writes,
++                      "reset_events": [e for e in self.hw.events if e[0].startswith("reset")
++                                       or e[0] in ("hold", "release_export")]}
++        self.assertEqual(result["status"], "passed", json.dumps(diagnostic))
++        self.assertEqual(result["matching_samples"], 384)
++        self.assertTrue(result["restoration"]["bram_restored"])
++        self.assertEqual((self.hw.reads, self.hw.writes), (416, 400))
++
+     def test_linux_gpio_is_resolved_dynamically_for_A_pin_960(self):
+         self.hw.module.GPIO.get_gpio_pin.return_value = 960
+         result = self.run_probe()

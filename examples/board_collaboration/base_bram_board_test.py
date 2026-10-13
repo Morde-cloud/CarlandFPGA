@@ -7,6 +7,7 @@ configuration is recorded, not restored. SIGKILL/power loss can prevent cleanup.
 """
 
 import argparse
+from collections.abc import Mapping
 from contextlib import redirect_stdout
 from datetime import datetime, timezone
 import hashlib
@@ -17,11 +18,14 @@ import platform
 import random
 import re
 import sys
+import xml.etree.ElementTree as ET
 
 TASK_ID = "BOARD-20261013-A-B"
-OPERATION_ID = "BOARD-20261013-A:B:base-bram-v2-reset-origin-r1"
+OPERATION_ID = "BOARD-20261013-A:B:base-bram-v3-metadata-r1"
 IP_NAME = "iop_pmoda/mb_bram_ctrl"
 RESET_NAME = "mb_iop_pmoda_reset"
+BRAM_VLNV = "xilinx.com:ip:axi_bram_ctrl:4.1"
+RESET_PINS = {"mb_iop_pmoda_reset/Dout", "iop_pmoda/rst_clk_wiz_1_100M/aux_reset_in"}
 OFFSET, WORDS, ROUNDS = 0xFC00, 16, 3
 EXPECTED_HASHES = {
     "bit": "ecabdcb5d483c75335ab6f043824a2386971c7b0ffd6e3315f24860bf5088eb6",
@@ -54,18 +58,89 @@ def patterns():
     ]
 
 
-def metadata(overlay):
-    ip = overlay.ip_dict[IP_NAME]
-    if (ip.get("type") != "xilinx.com:ip:axi_bram_ctrl:4.1"
-            or type(ip.get("phys_addr")) is not int or ip["phys_addr"] != 0x40000000
-            or type(ip.get("addr_range")) is not int or ip["addr_range"] != 0x10000
-            or ip.get("fullpath", IP_NAME) != IP_NAME):
-        raise ValueError("BRAM metadata does not match the authorized 64 KiB AXI BRAM")
-    index = overlay.gpio_dict[RESET_NAME]["index"]
+def hwh_identity(path):
+    """Bind identity to the already hash-checked HWH, including the PS mapping."""
+    modules = ET.parse(path).getroot().findall(".//MODULE")
+    targets = [m for m in modules if m.get("FULLNAME") == "/" + IP_NAME]
+    if len(targets) != 1 or targets[0].get("VLNV") != BRAM_VLNV:
+        raise ValueError("HWH requires one authorized BRAM module and VLNV")
+    target = targets[0]
+
+    def parameter(name):
+        values = [p.get("VALUE") for p in target.findall("./PARAMETERS/PARAMETER")
+                  if p.get("NAME") == name]
+        if len(values) != 1:
+            raise ValueError("Missing or duplicate HWH parameter: " + name)
+        return int(values[0], 0)
+
+    base, high = parameter("C_S_AXI_BASEADDR"), parameter("C_S_AXI_HIGHADDR")
+    if base != 0x40000000 or high != 0x4000FFFF:
+        raise ValueError("HWH BRAM address window differs from the authorized mapping")
+    ps = [m for m in modules if m.get("MODTYPE") == "processing_system7"]
+    instance = target.get("INSTANCE")
+    if len(ps) != 1 or not instance:
+        raise ValueError("HWH PS/module instance is missing or ambiguous")
+    ranges = [r for r in ps[0].findall(".//MEMRANGE") if r.get("INSTANCE") == instance]
+    if len(ranges) != 1:
+        raise ValueError("HWH requires one PS MEMRANGE for the selected BRAM")
+    mapping = ranges[0]
+    required = {"MASTERBUSINTERFACE": "M_AXI_GP0", "SLAVEBUSINTERFACE": "S_AXI",
+                "MEMTYPE": "MEMORY", "ADDRESSBLOCK": "Mem0"}
+    if (any(mapping.get(k) != v for k, v in required.items())
+            or int(mapping.get("BASEVALUE", ""), 0) != base
+            or int(mapping.get("HIGHVALUE", ""), 0) != high):
+        raise ValueError("HWH PS MEMRANGE disagrees with the authorized BRAM")
+    return {"fullpath": IP_NAME, "vlnv": target.get("VLNV"), "instance": instance,
+            "phys_addr": base, "addr_range": high - base + 1,
+            "ps_fullpath": ps[0].get("FULLNAME"), "identity_source": "hash_checked_hwh"}
+
+
+def metadata(overlay, hardware):
+    entries = []
+    for table_name in ("ip_dict", "mem_dict"):
+        table = getattr(overlay, table_name)
+        if not isinstance(table, Mapping):
+            raise ValueError("Invalid runtime metadata dictionary: " + table_name)
+        if any(k != IP_NAME and isinstance(v, Mapping) and v.get("fullpath") == IP_NAME
+               for k, v in table.items()):
+            raise ValueError("Ambiguous runtime BRAM path")
+        if IP_NAME not in table:
+            continue
+        entry = table[IP_NAME]
+        if not isinstance(entry, Mapping) or entry.get("fullpath") != IP_NAME:
+            raise ValueError("Runtime BRAM fullpath is missing or inconsistent")
+        # mem_dict's DDR4 is a synthetic PYNQ/XRT label, never the core identity.
+        types = (BRAM_VLNV,) if table_name == "ip_dict" else ("DDR4", BRAM_VLNV)
+        if entry.get("type") not in types:
+            raise ValueError("Unexpected runtime BRAM type label")
+        pairs = []
+        for address_key, size_key in (("phys_addr", "addr_range"), ("base_address", "size")):
+            if address_key in entry or size_key in entry:
+                address, size = entry.get(address_key), entry.get(size_key)
+                if (type(address) is not int or type(size) is not int
+                        or address != hardware["phys_addr"] or size != hardware["addr_range"]):
+                    raise ValueError("Runtime BRAM address/size conflicts with HWH")
+                pairs.append((address, size))
+        kinds = ("MEMORY",) if table_name == "mem_dict" else ("MEMORY", "REGISTER")
+        if not pairs or ("memtype" in entry and entry["memtype"] not in kinds):
+            raise ValueError("Missing runtime BRAM mapping or wrong memory kind")
+        if "mem_id" in entry and entry["mem_id"] != "S_AXI":
+            raise ValueError("Runtime BRAM interface conflicts with HWH")
+        if "streaming" in entry and entry["streaming"] is not False:
+            raise ValueError("Streaming memory is not the authorized BRAM")
+        entries.append({"dictionary": table_name, "runtime_type": entry["type"],
+                        "phys_addr": pairs[0][0], "addr_range": pairs[0][1]})
+    if not entries:
+        raise ValueError("Authorized BRAM missing from runtime ip_dict and mem_dict")
+    reset = overlay.gpio_dict[RESET_NAME]
+    index = reset["index"]
     if type(index) is not int or index != 0:
         raise ValueError("Reset GPIO metadata differs from A's confirmed index 0")
-    return {"ip": IP_NAME, "vlnv": ip["type"], "phys_addr": ip["phys_addr"],
-            "addr_range": ip["addr_range"], "reset_name": RESET_NAME,
+    if set(reset.get("pins", [])) != RESET_PINS:
+        raise ValueError("Reset GPIO net does not match the selected MicroBlaze reset")
+    return {"ip": IP_NAME, "vlnv": hardware["vlnv"], "phys_addr": entries[0]["phys_addr"],
+            "addr_range": entries[0]["addr_range"], "runtime_entries": entries,
+            "identity_source": hardware["identity_source"], "reset_name": RESET_NAME,
             "reset_index": index, "read_api": "pynq.MMIO.read"}
 
 
@@ -138,8 +213,8 @@ def execute(bitstream, identity, *, pynq_module=None, reset_factory=SysfsReset,
             expected_hashes=EXPECTED_HASHES, evidence_kind="hardware"):
     """Return a JSON-safe report; dependencies are injectable for host mocks."""
     report = {
-        "schema_version": 2, "task_id": TASK_ID, "task_version": 2,
-        "work_id": "B-base-overlay-bramtest-v2", **identity,
+        "schema_version": 2, "task_id": TASK_ID, "task_version": 3,
+        "work_id": "B-metadata-compat-v3", **identity,
         "started_utc": utc(), "evidence_kind": evidence_kind, "status": "failed",
         "runtime": {"python": platform.python_version(), "system": platform.system(),
                     "machine": platform.machine()},
@@ -172,6 +247,8 @@ def execute(bitstream, identity, *, pynq_module=None, reset_factory=SysfsReset,
             if observed != expected_hashes[kind]:
                 raise ValueError(kind + " SHA-256 does not match the authorized file")
         report["script_sha256"] = sha256(__file__)
+        phase = "hwh_metadata"
+        hardware = report["hwh_identity"] = hwh_identity(bit.with_suffix(".hwh"))
         phase = "pynq_import"
         pynq = pynq_module or importlib.import_module("pynq")
         report["runtime"]["pynq"] = str(pynq.__version__)
@@ -189,7 +266,7 @@ def execute(bitstream, identity, *, pynq_module=None, reset_factory=SysfsReset,
         if not overlay.is_loaded():
             raise RuntimeError("Requested overlay is not loaded")
         phase = "metadata"
-        source = report["source"] = metadata(overlay)
+        source = report["source"] = metadata(overlay, hardware)
         pin = pynq.GPIO.get_gpio_pin(source["reset_index"])
         source["reset_linux_gpio"] = pin
         phase = "reset_snapshot"

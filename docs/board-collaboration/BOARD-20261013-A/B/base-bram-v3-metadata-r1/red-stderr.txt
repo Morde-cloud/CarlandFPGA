@@ -1,0 +1,17 @@
+test_memory_only_runtime_schema_is_supported (test_base_bram_board_test.BramTests.test_memory_only_runtime_schema_is_supported) ... FAIL
+
+======================================================================
+FAIL: test_memory_only_runtime_schema_is_supported (test_base_bram_board_test.BramTests.test_memory_only_runtime_schema_is_supported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\board-20261013\tests\test_base_bram_board_test.py", line 168, in test_memory_only_runtime_schema_is_supported
+    self.assertEqual(result["status"], "passed", json.dumps(diagnostic))
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+ : {"errors": [{"phase": "metadata", "type": "KeyError", "message": "'iop_pmoda/mb_bram_ctrl'"}], "samples": 0, "mmio_calls": 0, "bram_reads": 0, "bram_writes": 0, "reset_events": []}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.116s
+
+FAILED (failures=1)

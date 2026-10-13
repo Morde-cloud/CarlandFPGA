@@ -1,0 +1,46 @@
+{
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 3,
+  "work_id": "b-pr17-v3-r1-two-p0-closure",
+  "owner": "B quality main gpt-6-astra/ultra",
+  "reviewed_at_utc": "2026-10-13T18:41:07.386248+00:00",
+  "input_commit": "2c424a9780d69b01fc0e5ea9db963ed86cfb9dde",
+  "input_path": "docs/competition/deepeye-2026/taskbook_v3.md",
+  "input_bytes": 50751,
+  "input_sha256": "735a3b9a3f2b9c7c3ad6a53b15eb0d70f90a7aa3b0d205d1532c3b8fc210e14e",
+  "comparison_commit": "1d4374fcc0f5ba1bf07b80d5e7f3487816af0143",
+  "previous_b_review_commit": "b4e9706b9d2e06190c9619218620b8fc79f79c77",
+  "scope": "Read exact new Markdown and diff; only close B two protocol documentation P0s. No PDF/package QA or implementation acceptance.",
+  "findings": [
+    {
+      "id": "B-P0-1-cached-ack-ttl",
+      "status": "closed_in_specification",
+      "evidence": "Section 7 now caches transaction result only, dynamically samples current phase/capture/fault/remaining TTL and regenerates transmit tick/CRC. Host deadline is capped by first_send_monotonic + original_ttl and retries never reset this cap. B05/C05 explicitly cover lost first ACK with delayed retry and absent STATE/EVENT.",
+      "remaining_validation": "R03/B05/C05 must implement and execute these contract vectors; not_run."
+    },
+    {
+      "id": "B-P0-2-retry-grant",
+      "status": "closed_in_specification",
+      "evidence": "TELEM bit13 with bit15 and without bit14 preauthorizes exactly one same-key retry slot plus response. BOOT hash binds response_slot/retry_offset/timeouts independently of a lost ACK. No bit13 means next legal slot; no normal latency promise. Byte and idle slot occupancy must both be checked.",
+      "remaining_validation": "R03/B04 must freeze numeric slot boundaries and prove sliding-window/guard/idle occupancy; not_run."
+    }
+  ],
+  "unchanged_boundaries": [
+    "ROCm project execution remains unverified.",
+    "PGA physical-task eligibility and actual measured performance remain unverified.",
+    "No joint whole-package approval is claimed.",
+    "Previously sealed B v1/v2/v3 reports are not edited."
+  ],
+  "result": "B two document P0s closed for exact input; bounded research review complete",
+  "not_run": [
+    "rtl_simulation",
+    "model_training",
+    "inference",
+    "synthesis",
+    "implementation",
+    "board",
+    "system",
+    "purchase",
+    "service_change"
+  ]
+}

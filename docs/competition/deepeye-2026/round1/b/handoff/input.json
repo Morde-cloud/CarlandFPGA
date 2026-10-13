@@ -1,0 +1,59 @@
+{
+  "request": {
+    "operation_id": "COMP-20261013-DEEPEYE:B:round1-frozen-desktop-v1",
+    "task_id": "COMP-20261013-DEEPEYE",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "e06c1fc42db82dab53418aad6584cc49f2da4eb9",
+    "test_steps": [
+      "Read docs/competition/deepeye-2026/round1/b/CANDIDATES_FULL.md and PROJECT_TASKBOOK_DRAFT.md; verify five complete alternatives, research weights, fusion and current human constraints.",
+      "Run python -X utf8 docs/competition/deepeye-2026/round1/b/budget_check.py and compare the JSON to recorded planning evidence.",
+      "Verify manifest hashes and source Git blobs. Do not run hardware; this is isolated round1 research only."
+    ],
+    "expected_result": "Reviewable frozen B five-candidate independent study and fused taskbook proposal; A alone receives round1 result. Only arithmetic and evidence review passed; no implementation or board claims."
+  },
+  "artifacts": [
+    "docs/competition/deepeye-2026/round1/b/.gitattributes",
+    "docs/competition/deepeye-2026/round1/b/B_FIVE_CANDIDATES.md",
+    "docs/competition/deepeye-2026/round1/b/CANDIDATES_FULL.md",
+    "docs/competition/deepeye-2026/round1/b/PROJECT_TASKBOOK_DRAFT.md",
+    "docs/competition/deepeye-2026/round1/b/README.md",
+    "docs/competition/deepeye-2026/round1/b/REVIEW_DECISION.md",
+    "docs/competition/deepeye-2026/round1/b/SOURCES.md",
+    "docs/competition/deepeye-2026/round1/b/TASK_SCOPE.json",
+    "docs/competition/deepeye-2026/round1/b/budget_check.py",
+    "docs/competition/deepeye-2026/round1/b/evidence/alternatives-review.txt",
+    "docs/competition/deepeye-2026/round1/b/evidence/budget-result.json",
+    "docs/competition/deepeye-2026/round1/b/evidence/budget-stderr.txt",
+    "docs/competition/deepeye-2026/round1/b/evidence/document-check.json",
+    "docs/competition/deepeye-2026/round1/b/evidence/execution.json",
+    "docs/competition/deepeye-2026/round1/b/evidence/round1-validation.json",
+    "docs/competition/deepeye-2026/round1/b/evidence/source-review.txt",
+    "docs/competition/deepeye-2026/round1/b/handoff/seal.json"
+  ],
+  "stages": {
+    "planning_validation": {
+      "status": "passed",
+      "log": "docs/competition/deepeye-2026/round1/b/evidence/round1-validation.json"
+    },
+    "source_and_alternatives_review": {
+      "status": "passed",
+      "log": "docs/competition/deepeye-2026/round1/b/evidence/alternatives-review.txt"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "hardware": {
+      "status": "not_run"
+    },
+    "round2_selection": {
+      "status": "not_run"
+    }
+  }
+}

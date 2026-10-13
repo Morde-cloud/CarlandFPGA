@@ -1,0 +1,46 @@
+{
+  "operation_id": "B-stop-presence-20261013-guard-v1",
+  "task_id": "task-e204f9f5357a1e6b9dc5a8d5",
+  "task_version": 1791874858245,
+  "node": "B",
+  "applied_at": "2026-10-13T07:03:51.467628+00:00",
+  "trigger": "b_cancel_automatic_presence_20261013",
+  "cancelled_pending": 0,
+  "pending_automatic_presence": 0,
+  "blocked_probe": true,
+  "ordinary_report_unchanged": true,
+  "probe_rows_rolled_back": true,
+  "controller_restarted": false,
+  "note": "Already submitted network requests cannot be recalled; source fix remains necessary.",
+  "verification": {
+    "real_post_guard_presence_cancelled": 5,
+    "real_post_guard_presence_sent": 0,
+    "pending_presence": 0,
+    "controller_started": true,
+    "controller_restarted": false,
+    "skill_validator": "quick_validate.py: Skill is valid!",
+    "installed_client_skill_sha256": "30ebc858c6726e084a46de342ba278ccb280259485c7624956b30d2289960dc7"
+  },
+  "ownership": {
+    "B": "local queue guard and installed B client skill",
+    "A": "shared source and distributable skill fixes; physical board execution"
+  },
+  "board_handoff": {
+    "task_id": "BOARD-20261013-A-B",
+    "task_version": 2,
+    "work_id": "B-base-overlay-bramtest-v2",
+    "status": "existing authoritative v2 events pending in resident queue; no duplicate executor launched",
+    "hardware": "not_run by B"
+  },
+  "canonical_fence": {
+    "trigger": "suppress_automatic_peer_presence_v1",
+    "installed": true,
+    "cancelled_pending": 0,
+    "pending_legacy_presence": 0,
+    "applied_at": "2026-10-13T07:12:25.618715+00:00",
+    "source_commit": "ba2725890179be264c261d315012f4acf8718732",
+    "temporary_b_trigger_replaced": true,
+    "controller_restarted": false,
+    "validation": "python -m unittest tests.test_presence_policy tests.test_runtime -q: 13 passed"
+  }
+}

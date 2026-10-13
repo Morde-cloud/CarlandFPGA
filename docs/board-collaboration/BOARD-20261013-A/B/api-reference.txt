@@ -1,0 +1,8 @@
+Read-only source inspection; not board evidence.
+URL: https://raw.githubusercontent.com/Xilinx/PYNQ/v3.0.1/pynq/lib/axigpio.py
+SHA256: bb386977825c5c36ee4e5ed814331c1f3105858135fc581362d01e9955d21f27
+PYNQ v3.0.1 Channel.write(val, mask) reaches parent.write(channel*8, cached val).
+Channel.read rejects Output; Output.read uses the software _val cache.
+setdirection changes the software slice type only.
+AMD source: https://docs.amd.com/r/en-US/pg144-axi-gpio/AXI-GPIO-Data-Register-GPIOx_DATA
+Output-configured DATA bits read zero; a cache comparison cannot prove MMIO readback.

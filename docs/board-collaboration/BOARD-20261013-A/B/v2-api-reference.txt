@@ -1,0 +1,10 @@
+Read-only PYNQ v3.0.1 source inspection; not board evidence.
+URL: https://raw.githubusercontent.com/Xilinx/PYNQ/v3.0.1/pynq/gpio.py
+SHA256: 7958f660120facb49701c8ce9eeb9684014feba9fb9c0d1a09be36fb029f5063
+URL: https://raw.githubusercontent.com/Xilinx/PYNQ/v3.0.1/pynq/mmio.py
+SHA256: f7eaac4c84d7a8cb4eb6a26bc18a0a78d24961547c0b56d5df9931c8812ae099
+URL: https://raw.githubusercontent.com/Xilinx/PYNQ/v3.0.1/boards/Pynq-Z2/base/base.tcl
+SHA256: e88b88b4b3e2a9c4d0856c37a26ef8550303a3f9ccddfd5c521e3f9d5d8bc8ff
+gpio.py: GPIO.get_gpio_pin maps metadata index to Linux GPIO; GPIO output read is prohibited. Constructor writes direction.
+mmio.py: MMIO accepts a physical base and length, read/write addresses are byte offsets.
+base.tcl: mb_bram_ctrl instances use xilinx.com:ip:axi_bram_ctrl:4.1. The script still validates the actual loaded overlay metadata.

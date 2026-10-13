@@ -1,0 +1,28 @@
+{
+  "hardware": "not_run",
+  "local_preserved_sources": {
+    "examples/board_collaboration/base_gpio_board_test.py": {
+      "bytes": 17333,
+      "included_in_v2_handoff": false,
+      "sha256": "27de6701018f7bab4fa09bf445f58de175cf1ee21cb84701b0be9ed1a07755c1"
+    },
+    "tests/test_base_gpio_board_test.py": {
+      "bytes": 33454,
+      "included_in_v2_handoff": false,
+      "sha256": "b266144163b91f6100db3bbbf0a89ae28579710f463a46c9724c0b8a5071eaf8"
+    }
+  },
+  "operation_id": "BOARD-20261013-A:B:base-gpio-v1",
+  "reason": "PG144 output DATA bits read zero; PYNQ Output.read is a software cache, not MMIO evidence.",
+  "replacement_operation_id": "BOARD-20261013-A:B:base-bram-v2",
+  "status": "superseded_by_A_v2_before_hardware",
+  "task_id": "BOARD-20261013-A-B",
+  "task_version": 1,
+  "worker": {
+    "host_tests_reported_by_child": 23,
+    "job_id": "child-3f1dbe2b6c084d2b979352321c998a06",
+    "parent_reran_v1_tests": false,
+    "status": "completed",
+    "terminal": true
+  }
+}

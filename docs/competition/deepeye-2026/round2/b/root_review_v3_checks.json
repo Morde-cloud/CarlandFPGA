@@ -1,0 +1,104 @@
+{
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 3,
+  "scope": "document arithmetic and protocol counterexample; no product implementation or testing",
+  "input_commit": "1d4374fcc0f5ba1bf07b80d5e7f3487816af0143",
+  "input_bytes": 48500,
+  "input_sha256": "a9ea6bd2b61ac5be804f0a0a0f889be3dbad4b4a5d08082497e7070803ce14b8",
+  "task_cards": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "B01",
+    "C01",
+    "A01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "A02",
+    "A05",
+    "A03",
+    "A04"
+  ],
+  "frame_lengths": {
+    "telem": 32,
+    "event": 20,
+    "control": 28,
+    "ack": 32,
+    "config": 24,
+    "hello": 18,
+    "state": 32,
+    "config_ack": 32,
+    "gain": 24,
+    "gain_ack": 32,
+    "boot": 41,
+    "boot_ack": 41
+  },
+  "windows": {
+    "control": {
+      "bytes": 144,
+      "seconds_including_guard": 5.0,
+      "occupancy_percent": 62.5
+    },
+    "gain": {
+      "bytes": 140,
+      "seconds_including_guard": 4.866666666666667,
+      "occupancy_percent": 60.83333333333334
+    },
+    "config": {
+      "bytes": 200,
+      "seconds_including_guard": 6.866666666666667,
+      "occupancy_percent": 85.83333333333334
+    },
+    "retry_arithmetic_only": {
+      "bytes": 204,
+      "seconds_including_guard": 7.0,
+      "occupancy_percent": 87.5
+    }
+  },
+  "crc_check": "0x29b1",
+  "ttl_counterexample": {
+    "board_apply_s": 0,
+    "ttl_s": 12,
+    "first_ack_tx_s": 0.1,
+    "cached_remaining_s": 11.9,
+    "retry_ack_tx_s": 8.1,
+    "wire_s": 1.0666666666666667,
+    "host_receive_s": 9.166666666666666,
+    "usb_clock_bound_s": 0.1,
+    "computed_host_deadline_s": 19.9,
+    "actual_board_deadline_s": 12,
+    "overrun_s": 7.899999999999999
+  },
+  "retry_grants": {
+    "primary_grants_per_window": 1,
+    "new_request_plus_same_window_retry_requires": 2,
+    "same_window_retry_authorization_defined": false
+  },
+  "original_frozen_files_unchanged": 15,
+  "prior_commit_files_unchanged": 18,
+  "a_feedback_readback": {
+    "comment_id": 6151725754,
+    "url": "https://github.com/carolwjade/CarlandFPGA/pull/16#issuecomment-6151725754",
+    "scope": "v1/v2 research only"
+  },
+  "status": "review_completed_two_p0_open",
+  "not_run": [
+    "rtl_simulation",
+    "training",
+    "inference",
+    "synthesis",
+    "implementation",
+    "board",
+    "system",
+    "purchase",
+    "service_change"
+  ]
+}

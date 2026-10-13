@@ -1,0 +1,13 @@
+{
+  "initial_check": "failed_before_freeze",
+  "reason": "CRLF in newly authored JSON and gitattributes",
+  "affected_files": [
+    ".gitattributes",
+    "b_inventory.json",
+    "b_round1_hash_audit.json",
+    "c_round1_hash_audit.json",
+    "sources.json"
+  ],
+  "correction": "Normalize only owned round2 text to LF; do not change any round1 input",
+  "hardware_actions": "not_run"
+}

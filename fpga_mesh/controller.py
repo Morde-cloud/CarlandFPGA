@@ -45,12 +45,15 @@ class Controller:
         self._stop = asyncio.Event()
         self._serve_task: asyncio.Task[None] | None = None
         self._active_dispatch: asyncio.Task[ActionResult] | None = None
+        self._active_message: Envelope | None = None
 
     async def offer(self, message: Envelope) -> bool:
         accepted = self.store.accept_inbound(message)
         if not accepted:
             return False
         self._wakeup.set()
+        if self._is_expired(message):
+            return True
         if (message.source == SourceKind.HUMAN and
                 message.kind == MessageKind.HUMAN_INSTRUCTION and
                 self.on_human_instruction is not None):
@@ -63,11 +66,40 @@ class Controller:
                 )
                 raise
         self._apply_control(message)
-        if (message.source == SourceKind.HUMAN
-                and self._active_dispatch is not None
-                and not self._active_dispatch.done()):
-            self._active_dispatch.cancel()
+        reason = self._preemption_reason(message)
+        if reason is not None:
+            self._active_dispatch.cancel(reason)
+            self.store.append_event(
+                f"dispatch-preempt:{self._active_message.message_id}:{message.message_id}",
+                "dispatch_preempted",
+                {
+                    "reason": reason,
+                    "active_message_id": self._active_message.message_id,
+                    "active_task_id": self._active_message.task_id,
+                    "active_task_version": self._active_message.task_version,
+                    "trigger_message_id": message.message_id,
+                    "trigger_task_version": message.task_version,
+                },
+            )
         return True
+
+    def _preemption_reason(self, message: Envelope) -> str | None:
+        """Human priority orders the next turn; only explicit control supersedes work."""
+        if (message.source != SourceKind.HUMAN
+                or self._active_dispatch is None
+                or self._active_dispatch.done()
+                or self._active_message is None):
+            return None
+        if (message.kind == MessageKind.STOP_REQUEST
+                and self.dispatch_blocked
+                and self._last_control_at == message.sent_at):
+            return "human_stop"
+        if (message.kind == MessageKind.HUMAN_INSTRUCTION
+                and message.task_id == self._active_message.task_id
+                and message.task_version > self._active_message.task_version):
+            # The active task has already passed any local ownership gate.
+            return "newer_human_task_version"
+        return None
 
     async def run_until_idle(self) -> None:
         observed: set[str] = set()
@@ -94,9 +126,7 @@ class Controller:
                     self._apply_control(message)
                     self.store.mark_inbound_processed(message.message_id)
                     continue
-                if (message.source == SourceKind.HUMAN
-                        and message.kind == MessageKind.HUMAN_INSTRUCTION
-                        and (self.store.latest_human_task_version(message.task_id) or 0)
+                if ((self.store.latest_human_task_version(message.task_id) or 0)
                         > message.task_version):
                     self.store.mark_inbound_processed(message.message_id)
                     continue
@@ -145,6 +175,7 @@ class Controller:
                     ):
                         continue
                 try:
+                    self._active_message = message
                     self._active_dispatch = asyncio.create_task(
                         self.gateway.handle(message),
                         name=f"fpga-dispatch-{message.message_id}",
@@ -157,8 +188,8 @@ class Controller:
                 except asyncio.CancelledError:
                     if asyncio.current_task().cancelling():
                         raise
-                    # A newly accepted human instruction interrupted this turn.
-                    # It stays in the inbox and will be retried after that instruction.
+                    # Preserve interrupted work for the gateway's recovery audit;
+                    # never turn an explicit stop into a blind side-effect replay.
                     break
                 except Exception as exc:  # noqa: BLE001 - persisted as recovery state
                     self.store.mark_inbound_failed(
@@ -166,10 +197,14 @@ class Controller:
                         f"{type(exc).__name__}: {exc}",
                         retry_at=self._retry_at(stored.attempts),
                     )
-                    continue
+                    break
                 finally:
                     self._active_dispatch = None
+                    self._active_message = None
                 self.store.mark_inbound_processed(message.message_id)
+                # Re-read priorities at the turn boundary. A human followup may
+                # have arrived while this old snapshot still contained peers.
+                break
 
     async def wait_for_work(self, timeout: float | None = None) -> bool:
         if self.store.pending_inbound():

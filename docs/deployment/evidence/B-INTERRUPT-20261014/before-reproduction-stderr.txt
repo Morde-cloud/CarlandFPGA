@@ -1,0 +1,20 @@
+test_project_resource_followup_does_not_cancel_peer_research (tests.test_controller_continuity.ContinuityTests.test_project_resource_followup_does_not_cancel_peer_research) ... FAIL
+
+======================================================================
+FAIL: test_project_resource_followup_does_not_cancel_peer_research (tests.test_controller_continuity.ContinuityTests.test_project_resource_followup_does_not_cancel_peer_research)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\interruption-20261014\candidate-runtime\tests\test_controller_continuity.py", line 83, in test_project_resource_followup_does_not_cancel_peer_research
+    self.assertFalse(self.gateway.cancelled.is_set())
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 0.081s
+
+FAILED (failures=1)

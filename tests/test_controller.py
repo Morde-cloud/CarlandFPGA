@@ -113,7 +113,7 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         await self.controller.run_until_idle()
         self.assertEqual(self.gateway.calls, ["human-second", "peer-first"])
 
-    async def test_new_human_instruction_interrupts_active_peer_turn(self):
+    async def test_newer_human_task_revision_interrupts_active_peer_turn(self):
         started = asyncio.Event()
         cancelled = asyncio.Event()
 
@@ -143,7 +143,7 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         await controller.start()
         try:
             await asyncio.wait_for(started.wait(), 1)
-            await controller.offer(instruction("human-urgent"))
+            await controller.offer(replace(instruction("human-urgent"), task_version=2))
             await asyncio.wait_for(cancelled.wait(), 1)
             async def human_processed():
                 while "human-urgent" not in gateway.calls:

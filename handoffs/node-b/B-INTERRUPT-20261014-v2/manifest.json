@@ -1,0 +1,126 @@
+{
+  "artifacts": [
+    "fpga_mesh/controller.py",
+    "tests/test_controller.py",
+    "tests/test_controller_continuity.py",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/before-reproduction-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/before-reproduction-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/candidate-regression-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/candidate-regression-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/deployment-v1.json",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/README.md",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/before-reproduction-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/before-reproduction-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/validation.json",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/validation.json"
+  ],
+  "files": {
+    "docs/deployment/evidence/B-INTERRUPT-20261014/README.md": {
+      "sha256": "d65fe18711a2995dfdae91c0c283c9ebb80695383de134bbba6d7318f4475142",
+      "size": 4986
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/before-reproduction-stderr.txt": {
+      "sha256": "af11e2272075530b803cde1fbbce334f58fac95d3a08973fcbe003bb48c953d1",
+      "size": 1260
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/before-reproduction-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/candidate-regression-stderr.txt": {
+      "sha256": "33f74d4f8fed544466f0b80b471d4151aed989d71d6c3abf4a756c3f47bce4fd",
+      "size": 16400
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/candidate-regression-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/deployment-v1.json": {
+      "sha256": "2fe14a707d59dfc889d11960bf2585fb98c118a75be8fe040f1e330405cd5564",
+      "size": 2644
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/before-reproduction-stderr.txt": {
+      "sha256": "4287881dc505655741499f3defef3327ee37081b80415ec185dcf033cf2a2a40",
+      "size": 2701
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/before-reproduction-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stderr.txt": {
+      "sha256": "7fc47db36015e015268f381efe21356132f5816adcad342b3c8a7c3f4f3630c3",
+      "size": 17563
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json": {
+      "sha256": "05f6b6d2b346e5c6ef455e931bc4f05370e9e53f7ee76c6a23566259297a654a",
+      "size": 2640
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/validation.json": {
+      "sha256": "d8078f66d38249ef083458bdfd0a14befbb53b90928f93d2e11884d63d73578f",
+      "size": 7443
+    },
+    "docs/deployment/evidence/B-INTERRUPT-20261014/validation.json": {
+      "sha256": "a35cec81763bdcecbcdbbed37644ce641ed04bbc3135bd2a716816520781fe7c",
+      "size": 7308
+    },
+    "fpga_mesh/controller.py": {
+      "sha256": "c6ce5faad664a2736f372a319fc9be410981ad88a1f4bc721c8aec7db66e75ce",
+      "size": 12417
+    },
+    "tests/test_controller.py": {
+      "sha256": "19e5b078549c908971717aa8d26d88912dae401405b35742bdfc9fafc3fec334",
+      "size": 12793
+    },
+    "tests/test_controller_continuity.py": {
+      "sha256": "31b7271027f2cd7528bc56b6607a34c50a0ea01e6bcb6c9d44f4c38c64753dfb",
+      "size": 12104
+    }
+  },
+  "request": {
+    "code_commit": "fea98eefed3a1c6d085d492f6dd6ba155d95e3de",
+    "expected_result": "Ordinary group information, work assignments and same-task revisions queue without cancelling active work; child task version updates wait until the current main turn finishes. Explicit valid STOP still interrupts. 98 tests pass on actual B runtime copy; B service loaded exact tested controller bytes and original ledgers/config/credentials remained intact. No hardware stage claimed.",
+    "operation_id": "B-INTERRUPT-20261014:group-continuity-v2",
+    "requester": "node-b",
+    "task_id": "B-INTERRUPT-20261014",
+    "task_version": 2,
+    "test_steps": [
+      "Read docs/deployment/evidence/B-INTERRUPT-20261014/README.md and verify manifest/file hashes.",
+      "python -X utf8 -m unittest tests.test_controller tests.test_controller_continuity tests.test_app_gateway tests.test_sessions tests.test_runtime tests.test_feishu_channel tests.test_store -v",
+      "Review B idle-fenced deployment evidence in docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json. A/C reload only on their own idle nodes after review; do not replay old interrupted work."
+    ]
+  },
+  "request_hash": "d855848bdaafc76fb4d3bc0f0662ed5dc2672120d089ea7621f8f986ab40abb0",
+  "schema_version": 1,
+  "stages": {
+    "a_c_deployment": {
+      "status": "not_run"
+    },
+    "b_idle_reload": {
+      "log": "docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json",
+      "status": "passed"
+    },
+    "hardware": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "software_regression": {
+      "log": "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stderr.txt",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

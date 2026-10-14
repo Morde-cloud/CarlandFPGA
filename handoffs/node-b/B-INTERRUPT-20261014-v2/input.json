@@ -1,0 +1,58 @@
+{
+  "request": {
+    "operation_id": "B-INTERRUPT-20261014:group-continuity-v2",
+    "task_id": "B-INTERRUPT-20261014",
+    "task_version": 2,
+    "requester": "node-b",
+    "code_commit": "fea98eefed3a1c6d085d492f6dd6ba155d95e3de",
+    "test_steps": [
+      "Read docs/deployment/evidence/B-INTERRUPT-20261014/README.md and verify manifest/file hashes.",
+      "python -X utf8 -m unittest tests.test_controller tests.test_controller_continuity tests.test_app_gateway tests.test_sessions tests.test_runtime tests.test_feishu_channel tests.test_store -v",
+      "Review B idle-fenced deployment evidence in docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json. A/C reload only on their own idle nodes after review; do not replay old interrupted work."
+    ],
+    "expected_result": "Ordinary group information, work assignments and same-task revisions queue without cancelling active work; child task version updates wait until the current main turn finishes. Explicit valid STOP still interrupts. 98 tests pass on actual B runtime copy; B service loaded exact tested controller bytes and original ledgers/config/credentials remained intact. No hardware stage claimed."
+  },
+  "artifacts": [
+    "fpga_mesh/controller.py",
+    "tests/test_controller.py",
+    "tests/test_controller_continuity.py",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/before-reproduction-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/before-reproduction-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/candidate-regression-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/candidate-regression-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/deployment-v1.json",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/README.md",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/before-reproduction-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/before-reproduction-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stderr.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stdout.txt",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/v2/validation.json",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/validation.json"
+  ],
+  "stages": {
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/B-INTERRUPT-20261014/v2/candidate-regression-stderr.txt"
+    },
+    "b_idle_reload": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/B-INTERRUPT-20261014/v2/deployment.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "hardware": {
+      "status": "not_run"
+    },
+    "a_c_deployment": {
+      "status": "not_run"
+    }
+  }
+}

@@ -7,7 +7,10 @@ from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from fpga_mesh.child_control import ChildCoordinator
+from fpga_mesh.codex import CodexHomeFactory
 from fpga_mesh.controller import ActionResult, Controller
+from fpga_mesh.pool import InstancePool
 from fpga_mesh.protocol import Envelope, MessageKind, SourceKind
 from fpga_mesh.store import SQLiteStore
 
@@ -119,14 +122,16 @@ class ContinuityTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(evidence['trigger_message_id'], 'pause')
         self.assertEqual(evidence['active_message_id'], 'active')
 
-    async def test_newer_same_task_human_revision_interrupts_and_supersedes_peer(self):
+    async def test_newer_same_task_human_revision_waits_for_peer_completion(self):
         await self.start()
         await self.controller.offer(event('revision', task='active', version=2))
-        await asyncio.wait_for(self.gateway.cancelled.wait(), 1)
-        await asyncio.wait_for(self.runner, 1)
+        await asyncio.sleep(0)
+        self.assertFalse(self.gateway.cancelled.is_set())
+        self.assertEqual(self.gateway.calls, ['active'])
+        await self.finish()
         await self.controller.run_until_idle()
         self.assertEqual(self.gateway.calls, ['active', 'revision'])
-        self.assertEqual(self.gateway.completed, ['revision'])
+        self.assertEqual(self.gateway.completed, ['active', 'revision'])
         self.assertEqual(self.store.pending_inbound(), [])
 
     async def test_same_version_same_task_followup_queues(self):
@@ -137,7 +142,7 @@ class ContinuityTests(unittest.IsolatedAsyncioTestCase):
         await self.finish()
         self.assertEqual(self.gateway.completed, ['active', 'same-task-note'])
 
-    async def test_claimed_shared_task_revision_still_supersedes_active_version(self):
+    async def test_claimed_shared_task_revision_waits_for_active_version(self):
         self.controller.claim_ownership = lambda _: True
         self.active = event('active', ownership_required=True)
         await self.controller.offer(self.active)
@@ -145,10 +150,65 @@ class ContinuityTests(unittest.IsolatedAsyncioTestCase):
         await asyncio.wait_for(self.gateway.started.wait(), 1)
         await self.controller.offer(event('revision', task='active', version=2,
                                           ownership_required=True))
-        await asyncio.wait_for(self.gateway.cancelled.wait(), 1)
-        await asyncio.wait_for(self.runner, 1)
+        await asyncio.sleep(0)
+        self.assertFalse(self.gateway.cancelled.is_set())
+        await self.finish()
         await self.controller.run_until_idle()
         self.assertEqual(self.gateway.calls, ['active', 'revision'])
+        self.assertEqual(self.gateway.completed, ['active', 'revision'])
+
+    async def test_task_revision_defers_child_version_change_until_current_turn_finishes(self):
+        versions = []
+        self.controller.on_human_instruction = lambda msg: versions.append(msg.task_version)
+        await self.start(SourceKind.HUMAN)
+        self.assertEqual(versions, [1, 1])
+        await self.controller.offer(event('revision', task='active', version=2))
+        await asyncio.sleep(0)
+        self.assertEqual(versions, [1, 1], 'running children must retain their valid version')
+        self.assertFalse(self.gateway.cancelled.is_set())
+        await self.finish()
+        self.assertEqual(versions, [1, 1, 2])
+        self.assertEqual(self.gateway.completed, ['active', 'revision'])
+
+    async def test_new_group_work_assignment_is_saved_and_runs_after_current_work(self):
+        await self.start(SourceKind.HUMAN)
+        await self.controller.offer(event('assignment', text='请 B 接着完成接口设计'))
+        await asyncio.sleep(0)
+        self.assertFalse(self.gateway.cancelled.is_set())
+        self.assertEqual(self.gateway.calls, ['active'])
+        self.assertIn('assignment', [row.message.message_id for row in self.store.pending_inbound()])
+        await self.finish()
+        self.assertEqual(self.gateway.completed, ['active', 'assignment'])
+
+    async def test_native_child_can_complete_before_queued_revision_takes_effect(self):
+        root = Path(self.tmp.name)
+        pool = InstancePool(node_id='B', gateway=self.gateway,
+                            home_factory=CodexHomeFactory(root / 'homes'),
+                            state_path=root / 'pool.json')
+        children = ChildCoordinator(node_id='B', project_id='fpga-main', pool=pool,
+                                    state_path=root / 'children.sqlite')
+        self.controller.on_human_instruction = lambda msg: children.update_task_version(
+            msg.task_id, msg.task_version)
+        try:
+            await self.start(SourceKind.HUMAN)
+            child = children.native_reserve(task_id='active', task_version=1,
+                                            text='isolated regression child', work_id='part-1',
+                                            ownership=[], reason='offline lease regression')
+            lease = {'job_id': child['job_id'], 'lease_token': child['lease_token']}
+            children.native_validate(**lease, agent_id='regression-agent')
+            await self.controller.offer(event('revision', task='active', version=2))
+            await asyncio.sleep(0)
+            self.assertFalse(self.gateway.cancelled.is_set())
+            self.assertTrue(children.native_validate(**lease)['execution_allowed'])
+            result = children.native_complete(**lease, text='original child finished')
+            self.assertEqual(result['status'], 'completed')
+            self.assertFalse(result['stale'])
+            await self.finish()
+            self.assertEqual(self.gateway.completed, ['active', 'revision'])
+            self.assertTrue(children.job(child['job_id'])['stale'])
+        finally:
+            await children.close()
+            await pool.close()
 
     async def test_expired_stop_has_no_effect_on_active_work(self):
         await self.start()

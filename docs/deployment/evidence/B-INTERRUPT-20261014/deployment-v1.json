@@ -1,0 +1,86 @@
+{
+  "task_id": "B-INTERRUPT-20261014",
+  "task_version": 1,
+  "source_commit": "42f4f49acecd1c400fed0a853273e68b1d3ac778",
+  "started_at": "2026-10-14T14:50:33.198873+00:00",
+  "package_sha256": "8341ee8496187aac1c2a8bc1af4db6802b1481c1584083aa0fb3cd53ee536fc5",
+  "controller_sha256": "bd59b39029748b28d55d44942ca1f9c85136951f6da6b5edbe58e3372138c5fc",
+  "before_health": {
+    "node_id": "B",
+    "mode": "app_server",
+    "pid": 47972,
+    "started": true,
+    "identities": {
+      "main": "Astra-B",
+      "deepseek": "DeepSeek-B"
+    },
+    "pending_inbound": 0,
+    "pending_outbox": 1,
+    "network_enabled": true,
+    "feishu_enabled": true,
+    "feishu_connected": true,
+    "hardware_enabled": false
+  },
+  "admission_fenced_until_stopped": true,
+  "update": {
+    "revision": "42f4f49acecd1c400fed0a853273e68b1d3ac778",
+    "changed": [
+      "fpga_mesh/controller.py"
+    ],
+    "deleted": [],
+    "conflicts": [],
+    "retained": 0,
+    "backup": "D:\\pynq\\CarlandFPGA\\.local\\update-backups\\83c78ed8c59847c89713d988a79a6ab3"
+  },
+  "after_health": {
+    "node_id": "B",
+    "mode": "app_server",
+    "pid": 49224,
+    "started": true,
+    "identities": {
+      "main": "Astra-B",
+      "deepseek": "DeepSeek-B"
+    },
+    "pending_inbound": 0,
+    "pending_outbox": 1,
+    "network_enabled": true,
+    "feishu_enabled": true,
+    "feishu_connected": true,
+    "hardware_enabled": false
+  },
+  "preserved": {
+    "scheduled_task_definition": true,
+    "config_launcher_and_credentials": true,
+    "other_runtime_modules": true,
+    "ledger_rows": {
+      "state.sqlite/inbound": {
+        "before_count": 197,
+        "after_count": 197,
+        "all_original_ids_present": true
+      },
+      "state.sqlite/outbox": {
+        "before_count": 120,
+        "after_count": 120,
+        "all_original_ids_present": true
+      },
+      "state.sqlite/group_outbox": {
+        "before_count": 1366,
+        "after_count": 1366,
+        "all_original_ids_present": true
+      },
+      "main_sessions.sqlite/main_runs": {
+        "before_count": 165,
+        "after_count": 165,
+        "all_original_ids_present": true
+      },
+      "child_jobs.sqlite/child_jobs": {
+        "before_count": 29,
+        "after_count": 29,
+        "all_original_ids_present": true
+      }
+    }
+  },
+  "completed_at": "2026-10-14T14:50:49.606373+00:00",
+  "status": "passed",
+  "scope": "Idle-fenced one-file reload; no injected live task or real model/board call. New PID plus exact installed bytes verified; 95-test runtime compatibility is separate evidence."
+}

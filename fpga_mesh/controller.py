@@ -56,6 +56,7 @@ class Controller:
             return True
         if (message.source == SourceKind.HUMAN and
                 message.kind == MessageKind.HUMAN_INSTRUCTION and
+                self._active_message is None and
                 self.on_human_instruction is not None):
             try:
                 self.on_human_instruction(message)
@@ -84,7 +85,7 @@ class Controller:
         return True
 
     def _preemption_reason(self, message: Envelope) -> str | None:
-        """Human priority orders the next turn; only explicit control supersedes work."""
+        """Human work queues at turn boundaries; only an explicit stop interrupts."""
         if (message.source != SourceKind.HUMAN
                 or self._active_dispatch is None
                 or self._active_dispatch.done()
@@ -94,11 +95,6 @@ class Controller:
                 and self.dispatch_blocked
                 and self._last_control_at == message.sent_at):
             return "human_stop"
-        if (message.kind == MessageKind.HUMAN_INSTRUCTION
-                and message.task_id == self._active_message.task_id
-                and message.task_version > self._active_message.task_version):
-            # The active task has already passed any local ownership gate.
-            return "newer_human_task_version"
         return None
 
     async def run_until_idle(self) -> None:
@@ -126,7 +122,9 @@ class Controller:
                     self._apply_control(message)
                     self.store.mark_inbound_processed(message.message_id)
                     continue
-                if ((self.store.latest_human_task_version(message.task_id) or 0)
+                if (message.source == SourceKind.HUMAN
+                        and message.kind == MessageKind.HUMAN_INSTRUCTION
+                        and (self.store.latest_human_task_version(message.task_id) or 0)
                         > message.task_version):
                     self.store.mark_inbound_processed(message.message_id)
                     continue

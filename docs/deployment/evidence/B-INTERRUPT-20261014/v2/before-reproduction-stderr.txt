@@ -1,0 +1,44 @@
+test_newer_same_task_human_revision_waits_for_peer_completion (tests.test_controller_continuity.ContinuityTests.test_newer_same_task_human_revision_waits_for_peer_completion) ... FAIL
+test_task_revision_defers_child_version_change_until_current_turn_finishes (tests.test_controller_continuity.ContinuityTests.test_task_revision_defers_child_version_change_until_current_turn_finishes) ... FAIL
+
+======================================================================
+FAIL: test_newer_same_task_human_revision_waits_for_peer_completion (tests.test_controller_continuity.ContinuityTests.test_newer_same_task_human_revision_waits_for_peer_completion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\interruption-20261014\candidate-runtime-v2\tests\test_controller_continuity.py", line 129, in test_newer_same_task_human_revision_waits_for_peer_completion
+    self.assertFalse(self.gateway.cancelled.is_set())
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_task_revision_defers_child_version_change_until_current_turn_finishes (tests.test_controller_continuity.ContinuityTests.test_task_revision_defers_child_version_change_until_current_turn_finishes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\interruption-20261014\candidate-runtime-v2\tests\test_controller_continuity.py", line 167, in test_task_revision_defers_child_version_change_until_current_turn_finishes
+    self.assertEqual(versions, [1, 1], 'running children must retain their valid version')
+AssertionError: Lists differ: [1, 1, 2] != [1, 1]
+
+First list contains 1 additional elements.
+First extra element 2:
+2
+
+- [1, 1, 2]
+?      ---
+
++ [1, 1] : running children must retain their valid version
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.155s
+
+FAILED (failures=2)

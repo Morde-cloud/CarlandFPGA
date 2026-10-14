@@ -113,9 +113,10 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         await self.controller.run_until_idle()
         self.assertEqual(self.gateway.calls, ["human-second", "peer-first"])
 
-    async def test_newer_human_task_revision_interrupts_active_peer_turn(self):
+    async def test_newer_human_task_revision_waits_for_active_peer_turn(self):
         started = asyncio.Event()
         cancelled = asyncio.Event()
+        release = asyncio.Event()
 
         class BlockingGateway:
             def __init__(self):
@@ -126,7 +127,7 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
                 if message.message_id == "peer-active":
                     started.set()
                     try:
-                        await asyncio.Event().wait()
+                        await release.wait()
                     except asyncio.CancelledError:
                         cancelled.set()
                         raise
@@ -144,13 +145,17 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         try:
             await asyncio.wait_for(started.wait(), 1)
             await controller.offer(replace(instruction("human-urgent"), task_version=2))
-            await asyncio.wait_for(cancelled.wait(), 1)
+            await asyncio.sleep(0)
+            self.assertFalse(cancelled.is_set())
+            self.assertEqual(gateway.calls, ["peer-active"])
+            release.set()
             async def human_processed():
                 while "human-urgent" not in gateway.calls:
                     await asyncio.sleep(0.01)
             await asyncio.wait_for(human_processed(), 1)
             self.assertEqual(gateway.calls[:2], ["peer-active", "human-urgent"])
         finally:
+            release.set()
             await controller.stop()
 
     async def test_idle_wait_makes_no_model_calls(self):

@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 5,
+  "work_id": "B-round3-human-lock-append-v1",
+  "owner": "B/Astra-B quality main",
+  "at_utc": "2026-10-14T16:10:05.382904+00:00",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "source_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "source_url": "https://github.com/carolwjade/CarlandFPGA/blob/f5989cd5defce561f9ba98e6b18fc2682945f0a2/docs/competition/deepeye-2026/immutable_scope.json",
+  "requirements_sha256_expected": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_sha256_actual": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "canonical_bytes": 4680,
+  "canonicalization": "json.dumps(requirements, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')",
+  "source_files": {
+    "immutable_scope.md": {
+      "bytes": 6139,
+      "sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd",
+      "url": "https://github.com/carolwjade/CarlandFPGA/blob/f5989cd5defce561f9ba98e6b18fc2682945f0a2/docs/competition/deepeye-2026/immutable_scope.md"
+    },
+    "immutable_scope.json": {
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+      "url": "https://github.com/carolwjade/CarlandFPGA/blob/f5989cd5defce561f9ba98e6b18fc2682945f0a2/docs/competition/deepeye-2026/immutable_scope.json"
+    },
+    "verify_immutable_scope.py": {
+      "bytes": 2287,
+      "sha256": "cb91a864a5b5f5a6bf014bbbd32b9656ee588075d9b115586df544c96cebc2eb",
+      "url": "https://github.com/carolwjade/CarlandFPGA/blob/f5989cd5defce561f9ba98e6b18fc2682945f0a2/docs/competition/deepeye-2026/verify_immutable_scope.py"
+    }
+  },
+  "requirements": [
+    {
+      "id": "H01",
+      "title": "游戏级三维品质",
+      "accepted": true,
+      "acceptance_cards": [
+        "G01",
+        "G02",
+        "G07",
+        "G08"
+      ]
+    },
+    {
+      "id": "H02",
+      "title": "中央边框立方体",
+      "accepted": true,
+      "acceptance_cards": [
+        "G01",
+        "G02"
+      ]
+    },
+    {
+      "id": "H03",
+      "title": "实体钻头和体积碰撞",
+      "accepted": true,
+      "acceptance_cards": [
+        "G01",
+        "G06"
+      ]
+    },
+    {
+      "id": "H04",
+      "title": "可交互自由视角",
+      "accepted": true,
+      "acceptance_cards": [
+        "G02",
+        "G07"
+      ]
+    },
+    {
+      "id": "H05",
+      "title": "自由摆放与随机场景",
+      "accepted": true,
+      "acceptance_cards": [
+        "G01",
+        "G02",
+        "G03"
+      ]
+    },
+    {
+      "id": "H06",
+      "title": "自由选择进入和离开面",
+      "accepted": true,
+      "acceptance_cards": [
+        "G02",
+        "G06"
+      ]
+    },
+    {
+      "id": "H07",
+      "title": "蓝红等径门和完整穿越",
+      "accepted": true,
+      "acceptance_cards": [
+        "G02",
+        "G06",
+        "G07"
+      ]
+    },
+    {
+      "id": "H08",
+      "title": "布局对控制系统先隐藏",
+      "accepted": true,
+      "acceptance_cards": [
+        "G03",
+        "G04",
+        "G07"
+      ]
+    },
+    {
+      "id": "H09",
+      "title": "因果传感和真实参数依据",
+      "accepted": true,
+      "acceptance_cards": [
+        "G03",
+        "G09",
+        "G07"
+      ]
+    },
+    {
+      "id": "H10",
+      "title": "三维在线共同决策",
+      "accepted": true,
+      "acceptance_cards": [
+        "G04",
+        "G05",
+        "G06",
+        "G07"
+      ]
+    },
+    {
+      "id": "H11",
+      "title": "PC AI实质参与",
+      "accepted": true,
+      "acceptance_cards": [
+        "C02",
+        "C03",
+        "C04",
+        "G04",
+        "G07"
+      ]
+    },
+    {
+      "id": "H12",
+      "title": "PC直控与经板执行合法",
+      "accepted": true,
+      "acceptance_cards": [
+        "C05",
+        "G05",
+        "G06",
+        "G07"
+      ]
+    },
+    {
+      "id": "H13",
+      "title": "最终验收硬门",
+      "accepted": true,
+      "acceptance_cards": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09"
+      ]
+    },
+    {
+      "id": "H14",
+      "title": "跨机跨会话最高优先",
+      "accepted": true,
+      "acceptance_cards": [
+        "R01",
+        "R03",
+        "A04"
+      ]
+    },
+    {
+      "id": "H15",
+      "title": "仅明确人类指令可改",
+      "accepted": true,
+      "acceptance_cards": [
+        "R01",
+        "R03",
+        "A04"
+      ]
+    }
+  ],
+  "identity_and_card_coverage": "passed",
+  "local_AGENTS_append": "completed; previous bytes retained; not included in public commit",
+  "product_acceptance": "not_run",
+  "successor_main_created": false,
+  "worker_launched": false,
+  "start_authorized_by_this_receipt": false,
+  "A_final_writer_thread": "01a135f1-5a8f-7d71-b036-01b1f683499b",
+  "previous_review_head": "a5fd908656f57c5db8226dede8647a4dce56195f",
+  "previous_freeze_sha256": "e61fd84ec41e38dce5eb13e11f7ead8bfee3be70fa8537cf24535b2c8b940e9c"
+}

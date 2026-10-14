@@ -1,0 +1,127 @@
+{
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 5,
+  "status": "planning_arithmetic_passed_product_not_run",
+  "at_utc": "2026-10-14T15:31:19.367398+00:00",
+  "frame_overhead": 36,
+  "streams": [
+    {
+      "name": "obs_in",
+      "payload": 276,
+      "raw": 312,
+      "cobs_bound": 315,
+      "ethernet_wire": 378,
+      "hz": 10,
+      "scope": "to_board",
+      "ethernet_Bps": 3780,
+      "cobs_Bps": 3150
+    },
+    {
+      "name": "obs_out",
+      "payload": 276,
+      "raw": 312,
+      "cobs_bound": 315,
+      "ethernet_wire": 378,
+      "hz": 10,
+      "scope": "from_board",
+      "ethernet_Bps": 3780,
+      "cobs_Bps": 3150
+    },
+    {
+      "name": "cmd",
+      "payload": 28,
+      "raw": 64,
+      "cobs_bound": 66,
+      "ethernet_wire": 130,
+      "hz": 20,
+      "scope": "to_board",
+      "ethernet_Bps": 2600,
+      "cobs_Bps": 1320
+    },
+    {
+      "name": "ack",
+      "payload": 32,
+      "raw": 68,
+      "cobs_bound": 70,
+      "ethernet_wire": 134,
+      "hz": 20,
+      "scope": "from_board",
+      "ethernet_Bps": 2680,
+      "cobs_Bps": 1400
+    },
+    {
+      "name": "heartbeat",
+      "payload": 32,
+      "raw": 68,
+      "cobs_bound": 70,
+      "ethernet_wire": 134,
+      "hz": 2,
+      "scope": "from_board",
+      "ethernet_Bps": 268,
+      "cobs_Bps": 140
+    },
+    {
+      "name": "world_apply",
+      "payload": 28,
+      "raw": 64,
+      "cobs_bound": 66,
+      "ethernet_wire": 130,
+      "hz": 20,
+      "scope": "world",
+      "ethernet_Bps": 2600,
+      "cobs_Bps": 1320
+    },
+    {
+      "name": "self_pose",
+      "payload": 64,
+      "raw": 100,
+      "cobs_bound": 102,
+      "ethernet_wire": 166,
+      "hz": 20,
+      "scope": "world",
+      "ethernet_Bps": 3320,
+      "cobs_Bps": 2040
+    },
+    {
+      "name": "plan_view",
+      "payload": 256,
+      "raw": 292,
+      "cobs_bound": 295,
+      "ethernet_wire": 358,
+      "hz": 5,
+      "scope": "world",
+      "ethernet_Bps": 1790,
+      "cobs_Bps": 1475
+    }
+  ],
+  "board_ethernet_Bps": 13108,
+  "all_ethernet_Bps": 20818,
+  "all_packets_per_second": 107,
+  "all_ethernet_bps": 166544,
+  "all_plus_20_percent_retry_bps": 199852.8,
+  "one_Mbps_percent": 19.98528,
+  "uart_board_segment_only": {
+    "300": {
+      "half_duplex_nominal_percent": 30533.333333333332,
+      "half_duplex_retry_and_guard_percent": 36655.35999999999,
+      "obs_packet_ms": 10500.0
+    },
+    "9600": {
+      "half_duplex_nominal_percent": 954.1666666666666,
+      "half_duplex_retry_and_guard_percent": 1160.3600000000001,
+      "obs_packet_ms": 328.125
+    },
+    "115200": {
+      "half_duplex_nominal_percent": 79.51388888888889,
+      "half_duplex_retry_and_guard_percent": 110.77666666666669,
+      "obs_packet_ms": 27.34375
+    },
+    "230400": {
+      "half_duplex_nominal_percent": 39.75694444444444,
+      "half_duplex_retry_and_guard_percent": 63.068333333333335,
+      "obs_packet_ms": 13.671875
+    }
+  },
+  "independent_review_correction": "DeepSeek child-0e50aa88ada246029d867cdc82d27aa0 Ethernet result omitted the 36-byte application overhead per packet: add 62*36=2232 B/s; correct board-only 13108 B/s, not child 10876 B/s. Main then added full distributed-world legs, total20818 B/s. Main independently recalculated all numbers.",
+  "limits": "Capacity arithmetic only. Timing, buffer bounds, physics, assets, models, and board measurements not_run."
+}

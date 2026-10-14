@@ -1,0 +1,13 @@
+# B本轮实际工作与判断边界
+
+B主会话在运行控制器中核到COMP-20261013-DEEPEYE/v5路由为gpt-6-astra/ultra；方案选择、P0反例、接口融合及验收取舍由本质量主会话完成。使用本机客机版fpga-multi-node和pynq-z2-single-node规则，A唯一板操作。
+
+实际读到A GitHub完整head和完整正文，原始86841字节SHA256匹配A提供值；另读取同head的simulation_contract_v4.json、execution_plan_v4.json、research_v4.md。PDF不是本次技术复核输入，未作PDF排版验收。不以另一分支的更新或摘要替代精确输入。
+
+B第一轮PROJECT_TASKBOOK_DRAFT.md在ec0675dfb2f1f86c6201b2d1e2ea27d3f5a04ff8的Git blob哈希实核为6088bb2de9e220f751f0623774f0cba91c0b88ba3fdcfcd0abf179ad483439c8。B当前PR20最佳在1f85095b1f54598956ff3c2c24eb7876d879fe1a，主稿d973d3371e851ac7a9b1955d2978ea19bd216b1c59c52edaf2475082eb41063d。未重写五案或其旧原件，PR20中“等待v4”的历史检查点不回改；本新PR完成该依赖。
+
+本轮只读DeepSeek Flash/max执行任务child-874c828987d348d0a01ad84f1bc78eb3（work_id=b-round3-v4-abi-arithmetic）已实际completed、stale=false并由child_wait读取。它提取帧字段和算术；主会话另写纯研究复算器并逐项核对。主会话不采纳其以下“矛盾”判断：同键重试不等于第二逻辑事务；已预置且hash一致的槽表不必全表经BOOT发送；STRESS的12秒反例不要求FAST采用12秒TTL；不同小数位显示不是预算错误；100次板模块和1000次系统时延可以是不同测试层级。子报告把三个20Hz样本简单称150ms，主会话区分第一至第三100ms与最坏相位等待另加50ms。捕获周期未在34B帧中承载的实际口径问题予以保留。
+
+主会话独立发现并复算R3-B01的低速角速度量化冲突；未将它冒称产品已运行失败。A原字节长度和预算均吻合；B先前64点方案的115200超额结论不适用于A四通道摘要方案。官方Godot发布表显示4.6受支持，故不强制采B原4.7.2选型。
+
+已完成范围是技术文档读取、官方来源读取、主会话融合及规划算术。代码仅位于docs/competition/deepeye-2026/round3/b/，为研究复算器。模型、RTL、安装、资产制作、系统软件、仿真、综合、实现、板测、采购、服务和正式提交均not_run。新实施主会话尚未创建；先等A最终冻结＋START，保留人类要求及唯一继任创建约束。

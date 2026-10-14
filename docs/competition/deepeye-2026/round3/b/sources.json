@@ -1,0 +1,83 @@
+{
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 5,
+  "at_utc": "2026-10-14T15:57:07.632807+00:00",
+  "a_inputs": [
+    {
+      "file": "taskbook_v4.md",
+      "head": "74c854d74baf817beafcbd1d4d52a8dd4450bbca",
+      "url": "https://raw.githubusercontent.com/carolwjade/CarlandFPGA/74c854d74baf817beafcbd1d4d52a8dd4450bbca/docs/competition/deepeye-2026/taskbook_v4.md",
+      "bytes": 86841,
+      "sha256": "1b71bb268c140c6cab526c239f5bba28f702668e4c9d8c4e561ef03c39aceb30",
+      "status": "downloaded_and_read"
+    },
+    {
+      "file": "simulation_contract_v4.json",
+      "head": "74c854d74baf817beafcbd1d4d52a8dd4450bbca",
+      "url": "https://raw.githubusercontent.com/carolwjade/CarlandFPGA/74c854d74baf817beafcbd1d4d52a8dd4450bbca/docs/competition/deepeye-2026/simulation_contract_v4.json",
+      "bytes": 5209,
+      "sha256": "75645fc47c0aed477bf7abdf132721071ad221f876133a1b4a41ab7236ed7ca9",
+      "status": "downloaded_and_read"
+    },
+    {
+      "file": "execution_plan_v4.json",
+      "head": "74c854d74baf817beafcbd1d4d52a8dd4450bbca",
+      "url": "https://raw.githubusercontent.com/carolwjade/CarlandFPGA/74c854d74baf817beafcbd1d4d52a8dd4450bbca/docs/competition/deepeye-2026/execution_plan_v4.json",
+      "bytes": 6110,
+      "sha256": "6500d90dc0c5fff826a2f5565847a0264ebb23bb9311af0b2f6dd37dc45949ad",
+      "status": "downloaded_and_read"
+    },
+    {
+      "file": "research_v4.md",
+      "head": "74c854d74baf817beafcbd1d4d52a8dd4450bbca",
+      "url": "https://raw.githubusercontent.com/carolwjade/CarlandFPGA/74c854d74baf817beafcbd1d4d52a8dd4450bbca/docs/competition/deepeye-2026/research_v4.md",
+      "bytes": 5341,
+      "sha256": "8719d8c4617f1fd38391f7e1ecb01452b1850baf10da704c92d83c04d8910cc8",
+      "status": "downloaded_and_read"
+    }
+  ],
+  "b_inputs": [
+    {
+      "head": "ec0675dfb2f1f86c6201b2d1e2ea27d3f5a04ff8",
+      "file": "docs/competition/deepeye-2026/round1/b/PROJECT_TASKBOOK_DRAFT.md",
+      "sha256": "6088bb2de9e220f751f0623774f0cba91c0b88ba3fdcfcd0abf179ad483439c8",
+      "bytes": 32186,
+      "status": "git_blob_verified"
+    },
+    {
+      "head": "1f85095b1f54598956ff3c2c24eb7876d879fe1a",
+      "file": "docs/competition/deepeye-2026/reviews/v5/b/review.md",
+      "sha256": "d973d3371e851ac7a9b1955d2978ea19bd216b1c59c52edaf2475082eb41063d",
+      "bytes": 6783,
+      "status": "git_blob_verified"
+    }
+  ],
+  "external_primary_sources": [
+    {
+      "url": "https://docs.godotengine.org/en/stable/about/release_policy.html",
+      "supports": "4.6 and4.7 currently supported; patch/build must be pinned; physics not guaranteed deterministic across versions",
+      "does_not_support": "project performance, collision correctness, or installing anything",
+      "status": "primary_web_read; raw_vendor_bytes_not_hashed_this_round"
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.6/classes/class_physicsdirectspacestate3d.html",
+      "supports": "cast_motion ignores existing overlap; overlap query and translation query have distinct contracts",
+      "does_not_support": "angular sweep guarantee or project geometry accuracy",
+      "status": "primary_web_read; raw_vendor_bytes_not_hashed_this_round"
+    },
+    {
+      "url": "https://www.halliburton.com/en/about-us/press-release/halliburton-launches-earthstar-3dx-horizontal-look-ahead-resistivity-service",
+      "supports": "commercial forward resistivity service, up to50ft before bit penetration",
+      "does_not_support": "8m/20Hz/noise/beam profile of this project or all-material detection",
+      "status": "primary_web_read; raw_vendor_bytes_not_hashed_this_round"
+    },
+    {
+      "url": "https://www.slb.com/resource-library/interview/drl/irisphere-see-ahead-bit",
+      "supports": "EM formation sensing and importance of pre-job modeling, sensitivity and transmitter-receiver spacing",
+      "does_not_support": "cheap compact sensor equivalence or this simulator physics accuracy",
+      "status": "primary_web_read; raw_vendor_bytes_not_hashed_this_round"
+    }
+  ],
+  "pdf_review": "not_performed; not an input to technical review",
+  "canonical_human_lock_raw_hash_verification": "pending exact original; standing-order reference retained, not claimed verified"
+}

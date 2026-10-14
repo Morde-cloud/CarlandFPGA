@@ -1,0 +1,179 @@
+{
+  "scope": "research arithmetic only; product_not_run",
+  "a_source_head": "74c854d74baf817beafcbd1d4d52a8dd4450bbca",
+  "frame_bytes": {
+    "telem": 32,
+    "event": 20,
+    "control3d": 30,
+    "ack3d": 34,
+    "state3d": 34,
+    "config": 24,
+    "config_ack": 32,
+    "boot": 41
+  },
+  "budget": {
+    "normal_hil": {
+      "bytes": 150,
+      "profiles": {
+        "stress_300": {
+          "wire_seconds": 5.0,
+          "wire_plus_guard_seconds": 5.2,
+          "occupied_percent": 65.0
+        },
+        "fast_9600": {
+          "wire_seconds": 0.15625,
+          "wire_plus_guard_seconds": 0.19625,
+          "occupied_percent": 39.25
+        }
+      }
+    },
+    "config_hil": {
+      "bytes": 206,
+      "profiles": {
+        "stress_300": {
+          "wire_seconds": 6.866666666666666,
+          "wire_plus_guard_seconds": 7.066666666666666,
+          "occupied_percent": 88.33333333333333
+        },
+        "fast_9600": {
+          "wire_seconds": 0.21458333333333332,
+          "wire_plus_guard_seconds": 0.25458333333333333,
+          "occupied_percent": 50.916666666666664
+        }
+      }
+    },
+    "control_retry_hil": {
+      "bytes": 214,
+      "profiles": {
+        "stress_300": {
+          "wire_seconds": 7.133333333333334,
+          "wire_plus_guard_seconds": 7.333333333333333,
+          "occupied_percent": 91.66666666666667
+        },
+        "fast_9600": {
+          "wire_seconds": 0.22291666666666668,
+          "wire_plus_guard_seconds": 0.2629166666666667,
+          "occupied_percent": 52.583333333333336
+        }
+      }
+    },
+    "event_retry_hil": {
+      "bytes": 170,
+      "profiles": {
+        "stress_300": {
+          "wire_seconds": 5.666666666666667,
+          "wire_plus_guard_seconds": 5.866666666666666,
+          "occupied_percent": 73.33333333333333
+        },
+        "fast_9600": {
+          "wire_seconds": 0.17708333333333334,
+          "wire_plus_guard_seconds": 0.21708333333333332,
+          "occupied_percent": 43.416666666666664
+        }
+      }
+    },
+    "gain_normal": {
+      "bytes": 140,
+      "profiles": {
+        "stress_300": {
+          "wire_seconds": 4.666666666666667,
+          "wire_plus_guard_seconds": 4.866666666666666,
+          "occupied_percent": 60.833333333333336
+        }
+      }
+    },
+    "pc_direct_normal": {
+      "bytes": 84,
+      "profiles": {
+        "stress_300": {
+          "wire_seconds": 2.8,
+          "wire_plus_guard_seconds": 3.0,
+          "occupied_percent": 37.5
+        },
+        "fast_9600": {
+          "wire_seconds": 0.0875,
+          "wire_plus_guard_seconds": 0.1275,
+          "occupied_percent": 25.5
+        }
+      }
+    }
+  },
+  "fast_telem_end_ms": 68.33333333333333,
+  "fast_telem_to_primary_gap_ms": 141.66666666666666,
+  "compute_150ms_lateness_before_other_overheads_ms": 8.333333333333334,
+  "compute_250ms_lateness_before_other_overheads_ms": 108.33333333333333,
+  "next_window_ack_end_ms_ignoring_other_overheads": 790.4166666666666,
+  "old_stress_min_nonzero_curvature_per_m": 0.8726646259971648,
+  "old_stress_max_turn_radius_m": 1.1459155902616465,
+  "stress_permitted_rate_at_max_speed_deg_s": 0.05729577951308232,
+  "proposed_rate_unit_deg_s": 0.001,
+  "quantized_boundary_vectors": [
+    {
+      "speed_m_s": 0.002,
+      "yaw_code": 57,
+      "pitch_code": 0,
+      "curvature_per_m": 0.4974188368183839,
+      "allowed": true
+    },
+    {
+      "speed_m_s": 0.002,
+      "yaw_code": 58,
+      "pitch_code": 0,
+      "curvature_per_m": 0.5061454830783556,
+      "allowed": false
+    },
+    {
+      "speed_m_s": 0.002,
+      "yaw_code": 40,
+      "pitch_code": 40,
+      "curvature_per_m": 0.49365365979537407,
+      "allowed": true
+    },
+    {
+      "speed_m_s": 0.002,
+      "yaw_code": 41,
+      "pitch_code": 41,
+      "curvature_per_m": 0.5059950012902583,
+      "allowed": false
+    },
+    {
+      "speed_m_s": 0.0001,
+      "yaw_code": 2,
+      "pitch_code": 0,
+      "curvature_per_m": 0.3490658503988659,
+      "allowed": true
+    },
+    {
+      "speed_m_s": 0.0001,
+      "yaw_code": 3,
+      "pitch_code": 0,
+      "curvature_per_m": 0.5235987755982988,
+      "allowed": false
+    },
+    {
+      "speed_m_s": 0.0001,
+      "yaw_code": 2,
+      "pitch_code": 2,
+      "curvature_per_m": 0.493653659795374,
+      "allowed": true
+    },
+    {
+      "speed_m_s": 0.25,
+      "yaw_code": 5064,
+      "pitch_code": 5064,
+      "curvature_per_m": 0.4999724266407548,
+      "allowed": true
+    },
+    {
+      "speed_m_s": 0.25,
+      "yaw_code": 5065,
+      "pitch_code": 5065,
+      "curvature_per_m": 0.5000711573727139,
+      "allowed": false
+    }
+  ],
+  "rotation_point_displacement_bound_mm_at_r081_angle025": 3.534288931625567,
+  "ring_radial_clearance_mm": 30.0,
+  "three_20Hz_samples_first_to_third_ms": 100.0,
+  "three_20Hz_samples_phase_wait_upper_ms": 150.0
+}

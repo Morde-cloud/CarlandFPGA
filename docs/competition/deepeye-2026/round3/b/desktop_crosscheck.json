@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 5,
+  "work_id": "B-round3-desktop-evidence-crosscheck-v1",
+  "owner": "B existing COMP quality main",
+  "at_utc": "2026-10-14T16:19:20.108496+00:00",
+  "input_commit": "74c854d74baf817beafcbd1d4d52a8dd4450bbca",
+  "source_artifacts": {
+    "stress-curvature-counterexample.json": {
+      "original_bytes": 1730,
+      "original_sha256": "fa27657d8bd240e12826789fa70079407b702da6a96314cdfab32ca2e8bf7195",
+      "raw_newline_note": "Source contains CRCRLF; original byte hash is not a normalized JSON hash. Source was not edited."
+    },
+    "DESKTOP_FUSION_AUDIT.json": {
+      "original_bytes": 3009,
+      "original_sha256": "5ab6aa17a45dec465b14ec616c27823cd2e4bb2da0c049f896290a514fea0079"
+    },
+    "execution_plan_v4.json": {
+      "bytes": 6110,
+      "sha256": "6500d90dc0c5fff826a2f5565847a0264ebb23bb9311af0b2f6dd37dc45949ad"
+    }
+  },
+  "independent_main_recalculation": [
+    {
+      "unit_deg_per_s": 0.1,
+      "omega_rad_per_s": 0.0017453292519943296,
+      "speed_m_per_s": 0.002,
+      "curvature_per_m": 0.8726646259971648,
+      "maximum_curvature_per_m": 0.5,
+      "minimum_speed_for_nonzero_turn_m_per_s": 0.003490658503988659,
+      "nonzero_turn_representable": false
+    },
+    {
+      "unit_deg_per_s": 0.001,
+      "omega_rad_per_s": 1.7453292519943296e-05,
+      "speed_m_per_s": 0.002,
+      "curvature_per_m": 0.008726646259971648,
+      "maximum_curvature_per_m": 0.5,
+      "minimum_speed_for_nonzero_turn_m_per_s": 3.490658503988659e-05,
+      "nonzero_turn_representable": true
+    }
+  ],
+  "int16_bounds_fit": true,
+  "field_width_bytes_unchanged": 2,
+  "combined_curvature_rule": "hypot(yaw_code,pitch_code)*0.001*pi/180 <= actual_speed_m_s*0.5; at zero speed both codes zero",
+  "recheck_per_step": "After quantization and during acceleration/deceleration, using actual speed; capture/PWM resolution and profile hash need matching implementation evidence.",
+  "dag": {
+    "cards": 29,
+    "unknown_dependencies": [],
+    "acyclic": true,
+    "topological_order": [
+      "G01",
+      "R01",
+      "R02",
+      "R03",
+      "A01",
+      "B01",
+      "C01",
+      "G02",
+      "G03",
+      "R04",
+      "B02",
+      "C02",
+      "B03",
+      "C03",
+      "C04",
+      "G04",
+      "G09",
+      "B04",
+      "B05",
+      "B06",
+      "C05",
+      "A05",
+      "G05",
+      "G06",
+      "A02",
+      "G07",
+      "A03",
+      "G08",
+      "A04"
+    ],
+    "G01_dependencies": [],
+    "G05_dependencies": [
+      "R03",
+      "B05",
+      "B06"
+    ]
+  },
+  "review_result": "Desktop curvature confirms existing R3-B01; bootstrap/test ownership and G05 new-source build gates retained as explicit integration recommendations. No repair measured.",
+  "successor_owner_reconciliation": {
+    "latest_desktop_record": "existing_B_COMP_resident_main_after_final_freeze",
+    "latest_human_standing_order_agrees": true,
+    "late_message_desktop_creator_claim": "superseded by existing later desktop update; no change to current AGENTS/prompts",
+    "successor_created": false,
+    "required_gate": "A final source commit/hash and explicit START; actual receipt/start proof"
+  },
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "contract_revision": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "product_stages": "not_run"
+}

@@ -1,0 +1,55 @@
+{
+  "request": {
+    "operation_id": "COMP-20261013-DEEPEYE:B:group-followup-20261014-v1",
+    "task_id": "COMP-20261013-DEEPEYE",
+    "task_version": 3,
+    "requester": "node-b",
+    "code_commit": "1bd5d1cab39bf20aa7cb81d0151a440c0574c1e8",
+    "test_steps": [
+      "Read final/README.md and final/B_TASKBOOK.md within B round2; compare A 2c424a9 and C exact sources in source_audit.json.",
+      "Run python -X utf8 docs/competition/deepeye-2026/round2/b/final/verify_plan.py; expect six B cards matching A 20-card acyclic DAG and 22 prior B files unchanged.",
+      "Verify standard manifest and source Git blobs. Planning only; do not operate board or infer implementation completion."
+    ],
+    "expected_result": "B planning supplement reconciled with A/C published plans; explicit R03 entry dependencies and B01-B06 acceptance. Documentation checks pass; all product execution stages not_run."
+  },
+  "artifacts": [
+    "docs/competition/deepeye-2026/round2/b/final/.gitattributes",
+    "docs/competition/deepeye-2026/round2/b/final/a_execution_baseline.json",
+    "docs/competition/deepeye-2026/round2/b/final/B_TASKBOOK.md",
+    "docs/competition/deepeye-2026/round2/b/final/b_tasks.json",
+    "docs/competition/deepeye-2026/round2/b/final/history_preserved.json",
+    "docs/competition/deepeye-2026/round2/b/final/README.md",
+    "docs/competition/deepeye-2026/round2/b/final/source_audit.json",
+    "docs/competition/deepeye-2026/round2/b/final/validation.json",
+    "docs/competition/deepeye-2026/round2/b/final/validation_history.json",
+    "docs/competition/deepeye-2026/round2/b/final/verify_plan.py"
+  ],
+  "stages": {
+    "planning_validation": {
+      "status": "passed",
+      "log": "docs/competition/deepeye-2026/round2/b/final/validation.json"
+    },
+    "source_byte_audit": {
+      "status": "passed",
+      "log": "docs/competition/deepeye-2026/round2/b/final/source_audit.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "hardware": {
+      "status": "not_run"
+    },
+    "model": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    }
+  }
+}

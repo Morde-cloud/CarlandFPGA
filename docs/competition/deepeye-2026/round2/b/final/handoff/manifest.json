@@ -1,0 +1,99 @@
+{
+  "artifacts": [
+    "docs/competition/deepeye-2026/round2/b/final/.gitattributes",
+    "docs/competition/deepeye-2026/round2/b/final/a_execution_baseline.json",
+    "docs/competition/deepeye-2026/round2/b/final/B_TASKBOOK.md",
+    "docs/competition/deepeye-2026/round2/b/final/b_tasks.json",
+    "docs/competition/deepeye-2026/round2/b/final/history_preserved.json",
+    "docs/competition/deepeye-2026/round2/b/final/README.md",
+    "docs/competition/deepeye-2026/round2/b/final/source_audit.json",
+    "docs/competition/deepeye-2026/round2/b/final/validation.json",
+    "docs/competition/deepeye-2026/round2/b/final/validation_history.json",
+    "docs/competition/deepeye-2026/round2/b/final/verify_plan.py"
+  ],
+  "files": {
+    "docs/competition/deepeye-2026/round2/b/final/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "docs/competition/deepeye-2026/round2/b/final/B_TASKBOOK.md": {
+      "sha256": "8c2d9da8ec6bb118b6d2fdc2843f4c7076a40f32d2166d17cf78b85ef25d0985",
+      "size": 11893
+    },
+    "docs/competition/deepeye-2026/round2/b/final/README.md": {
+      "sha256": "962c3b35ff1247d76238fd2f2f068256b4afb16927a8f6a3c3b09519daf66fdc",
+      "size": 1559
+    },
+    "docs/competition/deepeye-2026/round2/b/final/a_execution_baseline.json": {
+      "sha256": "de1df0a14d00362e00b6691d26b6ac884730fc600f9aee19a40ac3cd442b73ee",
+      "size": 3644
+    },
+    "docs/competition/deepeye-2026/round2/b/final/b_tasks.json": {
+      "sha256": "cfecd1953984dfb8b4bb8087477d8cbc8319cc53352f806693ac393ac6c3f9ff",
+      "size": 5931
+    },
+    "docs/competition/deepeye-2026/round2/b/final/history_preserved.json": {
+      "sha256": "46714ac456ec60851cc51a6e68ece97b244421713b72a37117311088cf4d48b2",
+      "size": 5744
+    },
+    "docs/competition/deepeye-2026/round2/b/final/source_audit.json": {
+      "sha256": "9be0933c2ef00c0412603b36f60a6204c1aba4404030646b278bb4080abf8fdb",
+      "size": 9283
+    },
+    "docs/competition/deepeye-2026/round2/b/final/validation.json": {
+      "sha256": "55f0d7eb5c83c4e53cae01ab490d85b35a46d7cbd7f46e684f8d1ca87271bfa5",
+      "size": 608
+    },
+    "docs/competition/deepeye-2026/round2/b/final/validation_history.json": {
+      "sha256": "ac3ced8d5ed141101edd791cb22d205d6554396300d881077e4c398bb6ba1b70",
+      "size": 536
+    },
+    "docs/competition/deepeye-2026/round2/b/final/verify_plan.py": {
+      "sha256": "5836531c1170932e0268cec6f1719b70148f46b5e5047523c2e6c0c92fbc05c2",
+      "size": 3511
+    }
+  },
+  "request": {
+    "code_commit": "1bd5d1cab39bf20aa7cb81d0151a440c0574c1e8",
+    "expected_result": "B planning supplement reconciled with A/C published plans; explicit R03 entry dependencies and B01-B06 acceptance. Documentation checks pass; all product execution stages not_run.",
+    "operation_id": "COMP-20261013-DEEPEYE:B:group-followup-20261014-v1",
+    "requester": "node-b",
+    "task_id": "COMP-20261013-DEEPEYE",
+    "task_version": 3,
+    "test_steps": [
+      "Read final/README.md and final/B_TASKBOOK.md within B round2; compare A 2c424a9 and C exact sources in source_audit.json.",
+      "Run python -X utf8 docs/competition/deepeye-2026/round2/b/final/verify_plan.py; expect six B cards matching A 20-card acyclic DAG and 22 prior B files unchanged.",
+      "Verify standard manifest and source Git blobs. Planning only; do not operate board or infer implementation completion."
+    ]
+  },
+  "request_hash": "86a358d4863022f3de64522d6e3a93e2220e82daca55238083b13e919425aa45",
+  "schema_version": 1,
+  "stages": {
+    "hardware": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "model": {
+      "status": "not_run"
+    },
+    "planning_validation": {
+      "log": "docs/competition/deepeye-2026/round2/b/final/validation.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "source_byte_audit": {
+      "log": "docs/competition/deepeye-2026/round2/b/final/source_audit.json",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    }
+  }
+}

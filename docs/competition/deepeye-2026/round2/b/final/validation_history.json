@@ -1,0 +1,19 @@
+{
+  "scope": "Followup documentation verifier only",
+  "attempts": [
+    {
+      "attempt": 1,
+      "exit_code": 1,
+      "status": "failed",
+      "error": "FileNotFoundError while checking prior .gitattributes: repository root derived one parent too high",
+      "correction": "Changed ROOT.parents[6] to ROOT.parents[5]; no historical artifact or product file changed"
+    },
+    {
+      "attempt": 2,
+      "exit_code": 0,
+      "status": "passed",
+      "evidence": "validation.json"
+    }
+  ],
+  "product_execution": "not_run"
+}

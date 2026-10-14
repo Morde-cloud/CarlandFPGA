@@ -1,0 +1,209 @@
+{
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 3,
+  "task_revision": 1,
+  "work_id": "B-group-followup-20261014",
+  "scope": "planning_followup_only",
+  "baseline_commit": "2c424a9780d69b01fc0e5ea9db963ed86cfb9dde",
+  "baseline_taskbook_sha256": "735a3b9a3f2b9c7c3ad6a53b15eb0d70f90a7aa3b0d205d1532c3b8fc210e14e",
+  "path_root": "competition/deepeye/",
+  "hardware_owner": "A",
+  "toolchain_target": "Vivado 2026.1",
+  "implementation_entry_gate": "R03 passed with numeric slots, frozen interface/registers/vectors and exact work ownership; planning JSON alone is not an execution grant.",
+  "tasks": {
+    "B01": {
+      "owner": "B",
+      "stage": "s1",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "not_run",
+      "deadline": "2026-10-17",
+      "owned_paths": [
+        "golden/codec/",
+        "tools/verify_codec.py"
+      ],
+      "commands_to_implement": [
+        "python tools/verify_codec.py --samples 1000000 --seed 20261014"
+      ],
+      "acceptance": "Independent C decoder; 1000000 samples, E=0 bit-exact, E=1/2/4/8 bounded on encoded received points; extreme/RAW/unary/restart failures retained.",
+      "evidence_required": [
+        "source_commit",
+        "input_sha256",
+        "command",
+        "tool_version",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "failing_vectors"
+      ],
+      "repair_limit": 3,
+      "board_operator": "A",
+      "execution_performed_this_followup": false
+    },
+    "B02": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "A01",
+        "B01"
+      ],
+      "status": "not_run",
+      "deadline": "2026-10-21",
+      "owned_paths": [
+        "fpga/",
+        "tests/rtl/",
+        "tools/run_rtl.py"
+      ],
+      "commands_to_implement": [
+        "python tools/run_rtl.py --suite acquisition"
+      ],
+      "acceptance": "Channel order and sample/tick identity, invalid/saturation/reset/TLAST; A separately measures 600 seconds with zero silent loss, duplicates or channel mismatch.",
+      "evidence_required": [
+        "source_commit",
+        "input_sha256",
+        "command",
+        "tool_version",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "failing_vectors"
+      ],
+      "repair_limit": 3,
+      "board_operator": "A",
+      "execution_performed_this_followup": false
+    },
+    "B03": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "B01",
+        "B02"
+      ],
+      "status": "not_run",
+      "deadline": "2026-10-21",
+      "owned_paths": [
+        "fpga/",
+        "tests/rtl/",
+        "evidence/rtl/"
+      ],
+      "commands_to_implement": [
+        "python tools/run_rtl.py --suite stream_reset --seed 20261014"
+      ],
+      "acceptance": "Full/empty, backpressure, stopped clocks and half-frame/reset orders; unique sample disposition, bounded overflow and actual CDC/RDC reports.",
+      "evidence_required": [
+        "source_commit",
+        "input_sha256",
+        "command",
+        "tool_version",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "failing_vectors"
+      ],
+      "repair_limit": 3,
+      "board_operator": "A",
+      "execution_performed_this_followup": false
+    },
+    "B04": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "R03",
+        "B03"
+      ],
+      "status": "not_run",
+      "deadline": "2026-10-21",
+      "owned_paths": [
+        "fpga/",
+        "tests/rtl/",
+        "tools/verify_link.py"
+      ],
+      "commands_to_implement": [
+        "python tools/verify_link.py --baud 300 --duration 1800"
+      ],
+      "acceptance": "300 baud 8N1 shared half-duplex, 1800 seconds; fixed and sliding 8-second accounting including guard/idle; bounded queues and explicit fault envelope.",
+      "evidence_required": [
+        "source_commit",
+        "input_sha256",
+        "command",
+        "tool_version",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "failing_vectors"
+      ],
+      "repair_limit": 3,
+      "board_operator": "A",
+      "execution_performed_this_followup": false
+    },
+    "B05": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "R03",
+        "B04",
+        "R04"
+      ],
+      "status": "not_run",
+      "deadline": "2026-10-21",
+      "owned_paths": [
+        "fpga/",
+        "tests/rtl/",
+        "evidence/rtl/"
+      ],
+      "commands_to_implement": [
+        "python tools/run_rtl.py --suite control_state"
+      ],
+      "acceptance": "No duplicate application or TTL renewal; lost first ACK plus delayed retry and missing STATE/EVENT; config block boundary and real capture/gain semantics.",
+      "evidence_required": [
+        "source_commit",
+        "input_sha256",
+        "command",
+        "tool_version",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "failing_vectors"
+      ],
+      "repair_limit": 3,
+      "board_operator": "A",
+      "execution_performed_this_followup": false
+    },
+    "B06": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "B02",
+        "B03",
+        "B04",
+        "B05"
+      ],
+      "status": "not_run",
+      "deadline": "2026-10-21",
+      "owned_paths": [
+        "fpga/",
+        "tools/check_build.py",
+        "evidence/rtl/"
+      ],
+      "commands_to_implement": [
+        "vivado -mode batch -source fpga/build.tcl",
+        "python tools/check_build.py"
+      ],
+      "acceptance": "Vivado 2026.1, xc7z020clg400-1, 100MHz; post-route WNS>=0/TNS=0, no critical unconstrained paths or DRC errors; paired bit/hwh; A-only board measurements.",
+      "evidence_required": [
+        "source_commit",
+        "input_sha256",
+        "command",
+        "tool_version",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "failing_vectors"
+      ],
+      "repair_limit": 3,
+      "board_operator": "A",
+      "execution_performed_this_followup": false
+    }
+  }
+}

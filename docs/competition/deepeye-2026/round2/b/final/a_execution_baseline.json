@@ -1,0 +1,195 @@
+{
+  "task_id": "COMP-20261013-DEEPEYE",
+  "task_version": 3,
+  "normative_source": "taskbook_v3.md",
+  "entrypoint": "tools/pipeline.py (to be implemented by R03)",
+  "hardware_owner": "A",
+  "tasks": {
+    "R01": {
+      "owner": "A",
+      "stage": "s0",
+      "dependencies": [],
+      "status": "not_run"
+    },
+    "R02": {
+      "owner": "A",
+      "stage": "s0",
+      "dependencies": [],
+      "status": "not_run"
+    },
+    "R03": {
+      "owner": "A",
+      "stage": "s0",
+      "dependencies": [],
+      "status": "not_run"
+    },
+    "R04": {
+      "owner": "A",
+      "stage": "s1",
+      "dependencies": [
+        "R02",
+        "R03"
+      ],
+      "status": "not_run"
+    },
+    "B01": {
+      "owner": "B",
+      "stage": "s1",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "not_run"
+    },
+    "C01": {
+      "owner": "C",
+      "stage": "s1",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "not_run"
+    },
+    "A01": {
+      "owner": "A",
+      "stage": "s1",
+      "dependencies": [
+        "R02",
+        "R03"
+      ],
+      "status": "not_run"
+    },
+    "B02": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "A01",
+        "B01"
+      ],
+      "status": "not_run"
+    },
+    "B03": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "B01",
+        "B02"
+      ],
+      "status": "not_run"
+    },
+    "B04": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "R03",
+        "B03"
+      ],
+      "status": "not_run"
+    },
+    "B05": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "R03",
+        "B04",
+        "R04"
+      ],
+      "status": "not_run"
+    },
+    "B06": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "B02",
+        "B03",
+        "B04",
+        "B05"
+      ],
+      "status": "not_run"
+    },
+    "C02": {
+      "owner": "C",
+      "stage": "s3",
+      "dependencies": [
+        "C01",
+        "B01"
+      ],
+      "status": "not_run"
+    },
+    "C03": {
+      "owner": "C",
+      "stage": "s3",
+      "dependencies": [
+        "R02",
+        "C02"
+      ],
+      "status": "not_run"
+    },
+    "C04": {
+      "owner": "C",
+      "stage": "s3",
+      "dependencies": [
+        "R03",
+        "C02"
+      ],
+      "status": "not_run"
+    },
+    "C05": {
+      "owner": "C",
+      "stage": "s3",
+      "dependencies": [
+        "R03",
+        "B05",
+        "C04"
+      ],
+      "status": "not_run"
+    },
+    "A02": {
+      "owner": "A",
+      "stage": "s4",
+      "dependencies": [
+        "B06",
+        "C03",
+        "C04",
+        "C05"
+      ],
+      "status": "not_run"
+    },
+    "A05": {
+      "owner": "A",
+      "stage": "s4",
+      "dependencies": [
+        "R04",
+        "B06",
+        "C03",
+        "C04"
+      ],
+      "status": "not_run"
+    },
+    "A03": {
+      "owner": "A",
+      "stage": "s5",
+      "dependencies": [
+        "A02",
+        "A05"
+      ],
+      "status": "not_run"
+    },
+    "A04": {
+      "owner": "A",
+      "stage": "s6",
+      "dependencies": [
+        "R01",
+        "A03"
+      ],
+      "status": "not_run"
+    }
+  },
+  "development_rule": "R01规则资料收集与资格认定分开；资格未确定时可继续无依赖开发，不声称标准层完成。",
+  "standard_release_gates": [
+    "R01真实物理任务适用依据",
+    "R02/C03 ROCm>=7.14项目实际运行",
+    "R04/A05真实前端调节与独立测量",
+    "A04完整复现"
+  ],
+  "authorization": "No hardware queue, installer, purchase or official submission is executed by this planning file.",
+  "task_revision": 1
+}

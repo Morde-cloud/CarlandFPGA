@@ -9,7 +9,7 @@ import logging
 from dataclasses import dataclass
 from typing import Awaitable, Callable, Literal
 
-from .app_server import AppServerClient
+from .app_server import AppServerClient, RuntimeIntegrityError
 from .codex import RouteGuard
 from .controller import ActionResult
 from .effort import EFFORTS, AstraEffortSelector
@@ -365,6 +365,11 @@ class AppServerGateway:
                     await asyncio.shield(client.close())
                 except Exception:
                     pass
+            if isinstance(exc, RuntimeIntegrityError):
+                # Immutable-cache validation happens before any work request.
+                # Keep untouched inbox work pending under the controller's
+                # durable node-wide cooldown; never replace a corrupt cache.
+                raise GatewayNotStartedError('runtime_integrity', str(exc)) from exc
             if isinstance(exc, (ConnectionError, OSError)) and not isinstance(exc, RequestNotSentError):
                 # initialize has not created or resumed any work thread. A
                 # missing binary/dead child must not terminalize the inbox.

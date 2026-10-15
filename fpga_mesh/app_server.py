@@ -14,6 +14,10 @@ from typing import Any, Protocol
 from .rpc import JsonRpcSession, StdioTransport
 
 
+class RuntimeIntegrityError(RuntimeError):
+    """The immutable executable snapshot failed validation before launch."""
+
+
 def resolve_codex_command(
     *, platform: str | None = None, local_appdata: str | Path | None = None,
     explicit: str | Path | None = None,
@@ -72,7 +76,7 @@ def pin_codex_bundle(binary: Path, cache: Path) -> Path:
         for name, expected in manifest.items():
             path = directory / name
             if not path.is_file() or path.is_symlink() or digest(path) != expected:
-                raise RuntimeError(f"Pinned Codex runtime is incomplete or changed: {path}")
+                raise RuntimeIntegrityError(f"Pinned Codex runtime is incomplete or changed: {path}")
     if not destination.exists():
         temporary = Path(tempfile.mkdtemp(prefix="preparing-", dir=cache))
         for path in files:

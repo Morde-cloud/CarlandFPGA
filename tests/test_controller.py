@@ -90,6 +90,65 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         self.store.close()
         self.tmp.cleanup()
 
+    async def test_backend_deferral_preserves_other_jobs_and_survives_restart(self):
+        class BeforeExecution(RuntimeError):
+            safe_to_retry = True
+            retry_after_seconds = 30
+            reason = 'server_overloaded'
+        class BusyGateway:
+            def __init__(self):
+                self.calls = []
+            async def handle(self, message):
+                self.calls.append(message.message_id)
+                raise BeforeExecution('capacity rejected before a work turn')
+        gateway = BusyGateway()
+        controller = Controller(self.store, gateway)
+        await controller.offer(instruction('first'))
+        await controller.offer(replace(instruction('second'), platform_message_id='om_second'))
+        await controller.run_until_idle()
+        self.assertEqual(gateway.calls, ['first'])
+        all_pending = self.store.pending_inbound(now=datetime.now(timezone.utc) + timedelta(hours=1))
+        self.assertEqual({row.message.message_id for row in all_pending}, {'first', 'second'})
+        self.assertEqual(next(row for row in all_pending if row.message.message_id == 'second').attempts, 0)
+        recovered = Controller(self.store, gateway)
+        await recovered.run_until_idle()
+        self.assertEqual(gateway.calls, ['first'])
+        await recovered.offer(stop_instruction())
+        await recovered.run_until_idle()
+        self.assertTrue(recovered.dispatch_blocked)
+        self.assertEqual(gateway.calls, ['first'])
+
+    async def test_backend_recovery_continues_original_envelopes_after_backoff(self):
+        self.store.accept_inbound(instruction('pending'))
+        self.store.save_gateway_retry(datetime.now(timezone.utc) - timedelta(seconds=1))
+        recovered = Controller(self.store, self.gateway)
+        await recovered.run_until_idle()
+        self.assertEqual(self.gateway.calls, ['pending'])
+        self.assertEqual(self.store.pending_inbound(), [])
+        self.assertIsNone(self.store.load_gateway_retry())
+
+    async def test_capacity_after_turn_start_does_not_consume_remaining_queue(self):
+        class ActiveTurnFailed(RuntimeError):
+            reason = 'server_overloaded'
+            safe_to_retry = False
+            retry_after_seconds = 30
+        class CapacityGateway:
+            def __init__(self):
+                self.calls = []
+            async def handle(self, message):
+                self.calls.append(message.message_id)
+                raise ActiveTurnFailed('capacity lost after tool work')
+        gateway = CapacityGateway()
+        controller = Controller(self.store, gateway)
+        await controller.offer(instruction('active'))
+        await controller.offer(replace(instruction('untouched'), platform_message_id='om_untouched'))
+        await controller.run_until_idle()
+        self.assertEqual(gateway.calls, ['active'])
+        self.assertIsNotNone(self.store.load_gateway_retry())
+        untouched = next(row for row in self.store.pending_inbound() if row.message.message_id == 'untouched')
+        self.assertEqual(untouched.attempts, 0)
+        self.assertIsNone(untouched.last_error)
+
     async def test_duplicate_platform_event_causes_one_model_call(self):
         first = instruction("internal-1")
         duplicate = replace(
@@ -113,7 +172,7 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         await self.controller.run_until_idle()
         self.assertEqual(self.gateway.calls, ["human-second", "peer-first"])
 
-    async def test_newer_human_task_revision_waits_for_active_peer_turn(self):
+    async def test_new_human_instruction_queues_without_interrupting_active_peer_turn(self):
         started = asyncio.Event()
         cancelled = asyncio.Event()
         release = asyncio.Event()
@@ -144,7 +203,7 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
         await controller.start()
         try:
             await asyncio.wait_for(started.wait(), 1)
-            await controller.offer(replace(instruction("human-urgent"), task_version=2))
+            await controller.offer(instruction("human-urgent"))
             await asyncio.sleep(0)
             self.assertFalse(cancelled.is_set())
             self.assertEqual(gateway.calls, ["peer-active"])
@@ -154,8 +213,8 @@ class ControllerTests(unittest.IsolatedAsyncioTestCase):
                     await asyncio.sleep(0.01)
             await asyncio.wait_for(human_processed(), 1)
             self.assertEqual(gateway.calls[:2], ["peer-active", "human-urgent"])
+            self.assertFalse(cancelled.is_set())
         finally:
-            release.set()
             await controller.stop()
 
     async def test_idle_wait_makes_no_model_calls(self):

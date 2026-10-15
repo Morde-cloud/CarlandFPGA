@@ -4,6 +4,10 @@ from __future__ import annotations
 
 import sys
 import os
+import hashlib
+import json
+import shutil
+import tempfile
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -13,6 +17,7 @@ from .rpc import JsonRpcSession, StdioTransport
 def resolve_codex_command(
     *, platform: str | None = None, local_appdata: str | Path | None = None,
     explicit: str | Path | None = None,
+    runtime_cache_dir: str | Path | None = None,
 ) -> list[str]:
     """Prefer the Desktop bundle with its matching Code Mode host on Windows."""
     platform = sys.platform if platform is None else platform
@@ -23,6 +28,8 @@ def resolve_codex_command(
             raise FileNotFoundError(f"Codex binary is missing: {binary}")
         if platform == "win32" and not (binary.parent / "codex-code-mode-host.exe").is_file():
             raise FileNotFoundError(f"Codex Code Mode host is missing beside: {binary}")
+        if platform == "win32" and runtime_cache_dir is not None:
+            binary = pin_codex_bundle(binary, Path(runtime_cache_dir))
         return [str(binary), "app-server", "--stdio"]
     if platform == "win32":
         base = Path(local_appdata or os.environ.get("LOCALAPPDATA", ""))
@@ -31,9 +38,60 @@ def resolve_codex_command(
                       if (path.parent / "codex-code-mode-host.exe").is_file()]
         if candidates:
             binary = max(candidates, key=lambda item: item.stat().st_mtime)
+            if runtime_cache_dir is not None:
+                binary = pin_codex_bundle(binary, Path(runtime_cache_dir))
             return [str(binary), "app-server", "--stdio"]
         return ["cmd.exe", "/d", "/c", "codex", "app-server", "--stdio"]
     return ["codex", "app-server", "--stdio"]
+
+
+def pin_codex_bundle(binary: Path, cache: Path) -> Path:
+    """Keep a byte-verified official runtime independent of Desktop cleanup.
+
+    Only the executable bundle is copied, never the user's Codex home/auth.
+    Existing snapshots are immutable; corruption fails closed rather than
+    replacing files beneath a running app-server.
+    """
+    binary = binary.resolve()
+    source = binary.parent
+    required = (binary.name, "codex-code-mode-host.exe")
+    if any(not (source / name).is_file() for name in required):
+        raise FileNotFoundError("The selected Codex bundle is incomplete")
+    files = sorted(path for path in source.rglob("*") if path.is_file())
+    if any(path.is_symlink() for path in files):
+        raise ValueError("Codex runtime bundle must not contain symlinks")
+    def digest(path: Path) -> str:
+        with path.open("rb") as stream:
+            return hashlib.file_digest(stream, "sha256").hexdigest()
+    manifest = {path.relative_to(source).as_posix(): digest(path) for path in files}
+    key = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()
+    cache = cache.resolve()
+    cache.mkdir(parents=True, exist_ok=True)
+    destination = cache / key
+    def verify(directory: Path) -> None:
+        for name, expected in manifest.items():
+            path = directory / name
+            if not path.is_file() or path.is_symlink() or digest(path) != expected:
+                raise RuntimeError(f"Pinned Codex runtime is incomplete or changed: {path}")
+    if not destination.exists():
+        temporary = Path(tempfile.mkdtemp(prefix="preparing-", dir=cache))
+        for path in files:
+            target = temporary / path.relative_to(source)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(path, target)
+        verify(temporary)
+        (temporary / "mesh-runtime-manifest.json").write_text(
+            json.dumps({"source": str(source), "files": manifest}, indent=2),
+            encoding="utf-8",
+        )
+        try:
+            temporary.rename(destination)
+        except FileExistsError:
+            # Another launcher published the same immutable content. Retain
+            # the temporary copy for inspection; never delete a running tree.
+            pass
+    verify(destination)
+    return destination / binary.name
 
 
 class RpcSession(Protocol):
@@ -158,8 +216,9 @@ class AppServerClient:
         client_version: str,
         role: str = "deepseek_child",
         extra_env: dict[str, str] | None = None,
+        runtime_cache_dir: str | Path | None = None,
     ) -> "AppServerClient":
-        command = codex_command or resolve_codex_command()
+        command = codex_command or resolve_codex_command(runtime_cache_dir=runtime_cache_dir)
         if sys.platform == "win32" and command[0].lower() == "codex":
             command = ["cmd.exe", "/d", "/c", *command]
         env = build_codex_env(codex_home, role=role, extra=extra_env)

@@ -13,7 +13,13 @@ class JsonRpcError(RuntimeError):
         self.method = method
         self.code = error.get("code")
         self.message = error.get("message", "JSON-RPC error")
+        self.data = error.get("data")
+        self.codex_error_info = error.get("codex_error_info", error.get("codexErrorInfo"))
         super().__init__(f"{method}: [{self.code}] {self.message}")
+
+
+class RequestNotSentError(ConnectionError):
+    """The request was rejected locally before any transport write occurred."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -69,7 +75,13 @@ class JsonRpcSession:
         self._closed = False
         self._reader = asyncio.create_task(self._read_loop())
 
+    @property
+    def is_alive(self) -> bool:
+        return not self._closed and self._reader is not None and not self._reader.done()
+
     async def request(self, method: str, params: dict[str, Any] | None = None) -> Any:
+        if not self.is_alive:
+            raise RequestNotSentError(f"{method}: Codex connection is closed; request not sent")
         request_id = self._next_id
         self._next_id += 1
         future: asyncio.Future[Any] = asyncio.get_running_loop().create_future()
@@ -80,11 +92,13 @@ class JsonRpcSession:
             "method": method,
             "params": params or {},
         }
-        await self.transport.send(json.dumps(payload, ensure_ascii=False))
         try:
+            await self.transport.send(json.dumps(payload, ensure_ascii=False))
             return await future
         finally:
             self._pending.pop(request_id, None)
+            if not future.done():
+                future.cancel()
 
     async def notify(self, method: str, params: dict[str, Any] | None = None) -> None:
         await self.transport.send(
@@ -101,6 +115,13 @@ class JsonRpcSession:
     async def respond(self, request_id: int | str, result: Any) -> None:
         await self.transport.send(json.dumps({
             "jsonrpc": "2.0", "id": request_id, "result": result,
+        }, ensure_ascii=False))
+
+    async def reject(self, request_id: int | str, *, code: int = -32601,
+                     message: str = "Unsupported server request") -> None:
+        await self.transport.send(json.dumps({
+            "jsonrpc": "2.0", "id": request_id,
+            "error": {"code": code, "message": message},
         }, ensure_ascii=False))
 
     async def next_notification(self) -> JsonRpcNotification:
@@ -134,6 +155,8 @@ class JsonRpcSession:
                     if entry is None:
                         continue
                     method, future = entry
+                    if future.done():
+                        continue
                     if "error" in data:
                         future.set_exception(JsonRpcError(method, data["error"]))
                     else:

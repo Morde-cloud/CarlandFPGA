@@ -361,7 +361,11 @@ class NodeRuntime:
         if self.child_control.port is None:
             raise RuntimeError("child control is not started")
         project_root = Path(__file__).resolve().parent.parent
-        return {"mcp_servers": {"fpga_children": {
+        # The resident has no interactive approval UI. Match this node's
+        # authorized local execution profile instead of inheriting a desktop
+        # on-request setting and silently waiting for an absent approver.
+        return {"approval_policy": "never", "sandbox_mode": "danger-full-access",
+                "mcp_servers": {"fpga_children": {
             "command": sys.executable,
             "args": ["-m", "fpga_mesh.mcp_children"],
             "env": {
@@ -393,6 +397,7 @@ class NodeRuntime:
                 codex_home=Path.home() / ".codex",
                 client_version="0.159.0",
                 role="astra",
+                runtime_cache_dir=self.config.state_dir / "codex-runtime",
             ),
             thread_config_factory=self.astra_tool_config,
             dynamic_tools=self.dynamic_children.specs(),
@@ -418,6 +423,7 @@ class NodeRuntime:
                 client_version="0.159.0",
                 role="deepseek_child",
                 extra_env=self._child_secret_env(),
+                runtime_cache_dir=self.config.state_dir / "codex-runtime",
             ),
             developer_instructions=child_instructions(self.config.node_id),
             # This Windows host's managed executor rejects shell creation in

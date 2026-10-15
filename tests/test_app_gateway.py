@@ -4,9 +4,9 @@ import unittest
 from pathlib import Path
 
 from fpga_mesh.app_server import AppServerClient
-from fpga_mesh.gateway import AppServerGateway, GatewayConfig
+from fpga_mesh.gateway import AppServerGateway, GatewayConfig, GatewayNotStartedError, GatewayTurnFailure
 from fpga_mesh.protocol import Envelope, MessageKind, SourceKind
-from fpga_mesh.rpc import JsonRpcNotification
+from fpga_mesh.rpc import JsonRpcNotification, JsonRpcError, RequestNotSentError
 from datetime import datetime, timezone
 
 
@@ -14,6 +14,7 @@ class FakeSession:
     def __init__(self):
         self.requests = []
         self.notifications = []
+        self.is_alive = True
 
     async def request(self, method, params=None):
         self.requests.append((method, params or {}))
@@ -29,11 +30,43 @@ class FakeSession:
     async def respond(self, request_id, result):
         self.requests.append(("response", {"id": request_id, "result": result}))
 
+    async def reject(self, request_id, *, code=-32601, message="Method not supported"):
+        self.requests.append(("rejection", {"id": request_id,
+                                            "error": {"code": code, "message": message}}))
+
     async def next_notification(self):
         return self.notifications.pop(0)
 
     async def close(self):
+        self.is_alive = False
         self.requests.append(("close", {}))
+
+
+class RecordingRouter:
+    """A persistent-run interface stub: execution is exercised through the wire."""
+
+    def __init__(self):
+        self.runs = {}
+
+    def result(self, message_id):
+        return self.runs.get(message_id)
+
+    def record(self, message_id, task_id, status, *, result=None, error=None):
+        self.runs[message_id] = {'status': status, 'result': result, 'error': error}
+
+    async def prepare(self, client, message, **kwargs):
+        return {'thread_id': 'thread-1', 'model': 'gpt-6-astra', 'effort': 'max'}
+
+    def reset_connection(self):
+        pass
+
+
+def completed():
+    return JsonRpcNotification(method='turn/completed', params={
+        'threadId': 'thread-1', 'turn': {
+            'id': 'turn-1', 'status': 'completed', 'items': [],
+        },
+    })
 
 
 def message() -> Envelope:
@@ -73,6 +106,64 @@ class AppServerGatewayTests(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self):
         await self.gateway.close()
         self.tmp.cleanup()
+
+    async def test_crash_after_turn_send_cannot_replay_on_restart(self):
+        from fpga_mesh.sessions import MainSessionRouter
+        import sqlite3
+        class ProcessCrash(BaseException):
+            pass
+        path = Path(self.tmp.name) / 'crash-ledger.sqlite'
+        router = MainSessionRouter(path)
+        async def prepare(*args, **kwargs):
+            return {'thread_id': 'thread-1', 'model': 'gpt-6-astra', 'effort': 'max'}
+        router.prepare = prepare
+        original = self.session.request
+        observed = []
+        async def crash_after_send(method, params=None):
+            if method == 'turn/start':
+                # A separate connection sees only committed durable state.
+                db = sqlite3.connect(path)
+                try:
+                    row = db.execute('SELECT status FROM main_runs WHERE message_id=?', ('msg-1',)).fetchone()
+                    observed.append(row[0] if row else None)
+                finally:
+                    db.close()
+                raise ProcessCrash()
+            return await original(method, params)
+        self.session.request = crash_after_send
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   session_router=router)
+        with self.assertRaises(ProcessCrash):
+            await gateway.handle(message())
+        router.db.close()
+        restarted = MainSessionRouter(path)
+        try:
+            self.assertEqual(observed, ['running'])
+            self.assertEqual(restarted.result('msg-1')['status'], 'interrupted')
+            no_replay = AppServerGateway(self.config, session_router=restarted,
+                client_factory=lambda: self.fail('ambiguous work must not restart'))
+            result = await no_replay.handle(message())
+            self.assertFalse(result.accepted)
+            self.assertTrue(result.output['recovery_required'])
+        finally:
+            restarted.db.close()
+
+    async def test_stalled_quota_read_releases_serial_gateway(self):
+        class StalledQuotaSession(FakeSession):
+            async def request(self, method, params=None):
+                if method == 'account/rateLimits/read':
+                    await asyncio.Event().wait()
+                return await super().request(method, params)
+        session = StalledQuotaSession()
+        gateway = AppServerGateway(
+            self.config, client_factory=lambda: AppServerClient(session, client_version='test'),
+            startup_timeout_seconds=0.01,
+        )
+        with self.assertRaises(asyncio.TimeoutError):
+            await asyncio.wait_for(gateway.read_rate_limits(), 1)
+        self.assertFalse(gateway._lock.locked())
+        self.assertIsNone(gateway._client)
+        self.assertFalse(session.is_alive)
 
     async def test_no_model_call_until_a_message_is_handled(self):
         self.assertEqual(self.session.requests, [])
@@ -488,6 +579,330 @@ class AppServerGatewayTests(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(asyncio.TimeoutError):
             await asyncio.wait_for(gateway.handle(message()), 1)
         self.assertIn(("close", {}), self.session.requests)
+
+
+    async def test_closed_cached_connection_is_replaced_before_next_work(self):
+        replacement = FakeSession()
+        replacement.notifications.append(completed())
+        clients = iter([self.client, AppServerClient(replacement, client_version='test')])
+        gateway = AppServerGateway(self.config, client_factory=lambda: next(clients))
+        await gateway._ensure_client()
+        self.session.is_alive = False
+        result = await gateway.handle(message())
+        self.assertTrue(result.accepted)
+        self.assertNotIn('turn/start', [m for m, _ in self.session.requests])
+        self.assertEqual([m for m, _ in replacement.requests].count('turn/start'), 1)
+        await gateway.close()
+
+    async def test_proven_unsent_start_reconnects_and_retries_only_once(self):
+        original = self.session.request
+
+        async def rejected_start(method, params=None):
+            if method == 'turn/start':
+                raise RequestNotSentError('connection already closed; request not sent')
+            return await original(method, params)
+
+        self.session.request = rejected_start
+        healthy = FakeSession()
+        healthy.notifications.append(completed())
+        clients = iter([self.client, AppServerClient(healthy, client_version='test')])
+        gateway = AppServerGateway(self.config, client_factory=lambda: next(clients),
+                                   startup_retry_delays=(0,))
+        self.assertTrue((await gateway.handle(message())).accepted)
+        self.assertNotIn('turn/start', [m for m, _ in self.session.requests])
+        self.assertEqual([m for m, _ in healthy.requests].count('turn/start'), 1)
+        await gateway.close()
+
+    async def test_unsent_exhaustion_retains_queued_run_for_controller_backoff(self):
+        async def not_sent(method, params=None):
+            raise RequestNotSentError('not sent')
+
+        self.session.request = not_sent
+        router = RecordingRouter()
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   session_router=router, startup_retry_delays=(0,))
+        with self.assertRaises(GatewayNotStartedError) as raised:
+            await gateway.handle(message())
+        self.assertTrue(raised.exception.safe_to_retry)
+        self.assertEqual(raised.exception.reason, 'transport_unavailable')
+        self.assertGreater(raised.exception.retry_after_seconds, 0)
+        self.assertEqual(router.result('msg-1')['status'], 'queued')
+        self.assertIn('not started', router.result('msg-1')['error'])
+        self.assertIsNone(gateway._client)
+
+    async def test_ambiguous_sent_start_is_never_retried(self):
+        original = self.session.request
+
+        async def response_lost(method, params=None):
+            if method == 'turn/start':
+                self.session.requests.append((method, params or {}))
+                raise ConnectionError('response lost after sending')
+            return await original(method, params)
+
+        self.session.request = response_lost
+        router = RecordingRouter()
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   session_router=router, startup_retry_delays=(0, 0))
+        with self.assertRaisesRegex(ConnectionError, 'response lost'):
+            await gateway.handle(message())
+        self.assertEqual([m for m, _ in self.session.requests].count('turn/start'), 1)
+        self.assertEqual(router.result('msg-1')['status'], 'failed')
+        duplicate = await gateway.handle(message())
+        self.assertFalse(duplicate.accepted)
+        self.assertTrue(duplicate.output['recovery_required'])
+        self.assertIsNone(gateway._client)
+
+    async def test_ambiguous_thread_creation_is_not_repeated(self):
+        original = self.session.request
+
+        async def response_lost(method, params=None):
+            if method == 'thread/start':
+                self.session.requests.append((method, params or {}))
+                raise ConnectionError('thread may have been created')
+            return await original(method, params)
+
+        self.session.request = response_lost
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   startup_retry_delays=(0, 0))
+        with self.assertRaisesRegex(ConnectionError, 'may have been created'):
+            await gateway.handle(message())
+        methods = [m for m, _ in self.session.requests]
+        self.assertEqual(methods.count('thread/start'), 1)
+        self.assertNotIn('turn/start', methods)
+
+    async def test_explicit_capacity_rejection_retries_same_model(self):
+        original = self.session.request
+
+        async def at_capacity(method, params=None):
+            if method == 'turn/start':
+                self.session.requests.append((method, params or {}))
+                raise JsonRpcError(method, {'code': -32000,
+                    'message': 'Selected model is at capacity. Please try a different model.'})
+            return await original(method, params)
+
+        self.session.request = at_capacity
+        healthy = FakeSession()
+        healthy.notifications.append(completed())
+        clients = iter([self.client, AppServerClient(healthy, client_version='test')])
+        gateway = AppServerGateway(self.config, client_factory=lambda: next(clients),
+                                   startup_retry_delays=(0,))
+        self.assertTrue((await gateway.handle(message())).accepted)
+        first = next(p for m, p in self.session.requests if m == 'turn/start')
+        second = next(p for m, p in healthy.requests if m == 'turn/start')
+        self.assertEqual((first['model'], first['effort']), (second['model'], second['effort']))
+        await gateway.close()
+
+    async def test_capacity_exhaustion_is_deferred_but_quota_rejection_is_not(self):
+        for detail, expected in [
+            ('server_overloaded', GatewayNotStartedError),
+            ('account quota exhausted', JsonRpcError),
+        ]:
+            with self.subTest(detail=detail):
+                session = FakeSession()
+                original = session.request
+
+                async def rejected(method, params=None):
+                    if method == 'turn/start':
+                        session.requests.append((method, params or {}))
+                        raise JsonRpcError(method, {'code': -32000, 'message': detail})
+                    return await original(method, params)
+
+                session.request = rejected
+                router = RecordingRouter()
+                gateway = AppServerGateway(self.config,
+                    client_factory=lambda: AppServerClient(session, client_version='test'),
+                    session_router=router, startup_retry_delays=())
+                with self.assertRaises(expected):
+                    await gateway.handle(message())
+                self.assertEqual(router.result('msg-1')['status'],
+                                 'queued' if expected is GatewayNotStartedError else 'failed')
+                self.assertEqual([m for m, _ in session.requests].count('turn/start'), 1)
+
+    async def test_capacity_error_after_tool_execution_never_replays(self):
+        calls = []
+        router = RecordingRouter()
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+            session_router=router, startup_retry_delays=(0, 0),
+            dynamic_tool_handler=lambda name, args: calls.append(name) or {'done': True})
+        self.session.notifications.extend([
+            JsonRpcNotification(method='item/tool/call', request_id=9, params={
+                'threadId': 'thread-1', 'turnId': 'turn-1', 'tool': 'write_output', 'arguments': {},
+            }),
+            JsonRpcNotification(method='error', params={
+                'threadId': 'thread-1', 'turnId': 'turn-1', 'willRetry': False,
+                'error': {'message': 'Selected model is at capacity'},
+            }),
+        ])
+        with self.assertRaisesRegex(GatewayTurnFailure, 'at capacity') as raised:
+            await gateway.handle(message())
+        self.assertEqual(raised.exception.reason, 'server_overloaded')
+        self.assertFalse(raised.exception.safe_to_retry)
+        self.assertEqual(raised.exception.retry_after_seconds, 30)
+        self.assertEqual(calls, ['write_output'])
+        self.assertEqual([m for m, _ in self.session.requests].count('turn/start'), 1)
+        self.assertEqual(router.result('msg-1')['status'], 'failed')
+        self.assertIn('server_overloaded', router.result('msg-1')['error'])
+        self.assertIn('not account quota', router.result('msg-1')['error'])
+        self.assertIsNone(gateway._client)
+        self.assertFalse((await gateway.handle(message())).accepted)
+        self.assertEqual(calls, ['write_output'])
+
+    async def test_unknown_approval_request_is_rejected_without_hour_long_wait(self):
+        self.session.notifications.append(JsonRpcNotification(
+            method='item/commandExecution/requestApproval', request_id=77,
+            params={'threadId': 'thread-1', 'turnId': 'turn-1', 'secret': 'must-not-log'},
+        ))
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   timeout_seconds=3600)
+        with self.assertLogs('fpga_mesh.gateway', level='WARNING') as logs:
+            with self.assertRaisesRegex(RuntimeError, 'Unsupported app-server request'):
+                await asyncio.wait_for(gateway.handle(message()), .5)
+        self.assertIn('requestApproval', logs.output[0])
+        self.assertIn('thread-1', logs.output[0])
+        self.assertNotIn('must-not-log', logs.output[0])
+        rejection = next(p for m, p in self.session.requests if m == 'rejection')
+        self.assertEqual(rejection['id'], 77)
+        self.assertEqual(rejection['error']['code'], -32601)
+        self.assertIn('turn/interrupt', [m for m, _ in self.session.requests])
+        self.assertIsNone(gateway._client)
+
+    async def test_total_timeout_keeps_interrupted_status_and_nonempty_reason(self):
+        async def stall():
+            await asyncio.Event().wait()
+
+        self.session.next_notification = stall
+        router = RecordingRouter()
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   session_router=router, timeout_seconds=.01)
+        with self.assertRaisesRegex(asyncio.TimeoutError, 'turn-1 exceeded'):
+            await gateway.handle(message())
+        record = router.result('msg-1')
+        self.assertEqual(record['status'], 'interrupted')
+        self.assertIn('no automatic replay', record['error'])
+        self.assertFalse((await gateway.handle(message())).accepted)
+
+    async def test_startup_timeout_is_independent_of_long_work_timeout(self):
+        original = self.session.request
+
+        async def stall_start(method, params=None):
+            if method == 'turn/start':
+                self.session.requests.append((method, params or {}))
+                await asyncio.Event().wait()
+            return await original(method, params)
+
+        self.session.request = stall_start
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   timeout_seconds=3600, startup_timeout_seconds=.01)
+        with self.assertRaises(asyncio.TimeoutError):
+            await asyncio.wait_for(gateway.handle(message()), .5)
+        self.assertEqual([m for m, _ in self.session.requests].count('turn/start'), 1)
+        self.assertIsNone(gateway._client)
+
+    async def test_active_transport_failure_does_not_poison_next_message(self):
+        self.session.notifications.append(JsonRpcNotification(
+            method='error', params={'message': 'app-server connection closed'},
+        ))
+        healthy = FakeSession()
+        healthy.notifications.append(completed())
+        clients = iter([self.client, AppServerClient(healthy, client_version='test')])
+        gateway = AppServerGateway(self.config, client_factory=lambda: next(clients))
+        with self.assertRaisesRegex(RuntimeError, 'connection closed'):
+            await gateway.handle(message())
+        self.assertIsNone(gateway._client)
+        self.assertTrue((await gateway.handle(message())).accepted)
+        self.assertEqual([m for m, _ in healthy.requests].count('turn/start'), 1)
+        await gateway.close()
+
+
+    async def test_backend_creation_failure_is_deferred_without_starting_work(self):
+        def unavailable():
+            raise FileNotFoundError('verified Codex executable missing')
+
+        router = RecordingRouter()
+        gateway = AppServerGateway(self.config, client_factory=unavailable,
+                                   session_router=router, startup_retry_delays=())
+        with self.assertRaises(GatewayNotStartedError) as raised:
+            await gateway.handle(message())
+        self.assertEqual(raised.exception.reason, 'transport_unavailable')
+        self.assertEqual(router.result('msg-1')['status'], 'queued')
+        self.assertIsNone(gateway._client)
+
+    async def test_initialize_connection_loss_defers_and_closes_failed_client(self):
+        async def initialize_lost(method, params=None):
+            self.session.requests.append((method, params or {}))
+            raise ConnectionError('initialize response lost')
+
+        self.session.request = initialize_lost
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   startup_retry_delays=())
+        with self.assertRaises(GatewayNotStartedError):
+            await gateway.handle(message())
+        methods = [m for m, _ in self.session.requests]
+        self.assertNotIn('thread/start', methods)
+        self.assertNotIn('turn/start', methods)
+        self.assertIn('close', methods)
+        self.assertIsNone(gateway._client)
+
+    async def test_structured_capacity_notification_is_not_quota_or_retry_permission(self):
+        self.session.notifications.append(JsonRpcNotification(method='error', params={
+            'threadId': 'thread-1', 'turnId': 'turn-1', 'willRetry': False,
+            'error': {'message': 'try again later', 'codexErrorInfo': 'serverOverloaded'},
+        }))
+        with self.assertRaises(GatewayTurnFailure) as raised:
+            await self.gateway.handle(message())
+        self.assertEqual(raised.exception.reason, 'server_overloaded')
+        self.assertFalse(raised.exception.safe_to_retry)
+        self.assertEqual([m for m, _ in self.session.requests].count('turn/start'), 1)
+
+    async def test_capacity_word_in_other_error_does_not_enable_replay(self):
+        original = self.session.request
+
+        async def other_error(method, params=None):
+            if method == 'turn/start':
+                self.session.requests.append((method, params or {}))
+                raise JsonRpcError(method, {'code': -32000,
+                    'message': 'invalid value: server_overloaded is not a model'})
+            return await original(method, params)
+
+        self.session.request = other_error
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   startup_retry_delays=(0, 0))
+        with self.assertRaises(JsonRpcError):
+            await gateway.handle(message())
+        self.assertEqual([m for m, _ in self.session.requests].count('turn/start'), 1)
+
+    async def test_structured_capacity_start_rejection_is_deferred(self):
+        original = self.session.request
+
+        async def rejected(method, params=None):
+            if method == 'turn/start':
+                raise JsonRpcError(method, {'code': -32000, 'message': 'retry later',
+                    'data': {'codexErrorInfo': 'serverOverloaded'}})
+            return await original(method, params)
+
+        self.session.request = rejected
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+                                   startup_retry_delays=())
+        with self.assertRaises(GatewayNotStartedError) as raised:
+            await gateway.handle(message())
+        self.assertEqual(raised.exception.reason, 'server_overloaded')
+
+
+    async def test_initialize_timeout_retains_unstarted_work_for_backoff(self):
+        async def initialize_stalled(method, params=None):
+            self.session.requests.append((method, params or {}))
+            await asyncio.Event().wait()
+
+        self.session.request = initialize_stalled
+        router = RecordingRouter()
+        gateway = AppServerGateway(self.config, client_factory=lambda: self.client,
+            session_router=router, timeout_seconds=3600, startup_timeout_seconds=.01)
+        with self.assertRaisesRegex(GatewayNotStartedError, 'initialization timed out'):
+            await asyncio.wait_for(gateway.handle(message()), .5)
+        self.assertEqual(router.result('msg-1')['status'], 'queued')
+        methods = [m for m, _ in self.session.requests]
+        self.assertNotIn('thread/start', methods)
+        self.assertIn('close', methods)
 
 
 if __name__ == "__main__":

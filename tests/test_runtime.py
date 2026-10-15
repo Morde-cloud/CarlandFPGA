@@ -77,7 +77,10 @@ class NodeRuntimeTests(unittest.IsolatedAsyncioTestCase):
         runtime = NodeRuntime(config)
         await runtime.start()
         try:
-            mcp = runtime.astra_tool_config()["mcp_servers"]["fpga_children"]
+            config_values = runtime.astra_tool_config()
+            self.assertEqual(config_values["approval_policy"], "never")
+            self.assertEqual(config_values["sandbox_mode"], "danger-full-access")
+            mcp = config_values["mcp_servers"]["fpga_children"]
             self.assertEqual(mcp["command"], sys.executable)
             self.assertEqual(mcp["args"], ["-m", "fpga_mesh.mcp_children"])
             self.assertEqual(mcp["env"]["FPGA_CHILD_CONTROL_FILE"],

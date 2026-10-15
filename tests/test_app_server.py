@@ -2,7 +2,8 @@ import unittest
 import tempfile
 from pathlib import Path
 
-from fpga_mesh.app_server import AppServerClient, build_codex_env, resolve_codex_command
+from fpga_mesh.app_server import (AppServerClient, build_codex_env,
+                                 resolve_codex_command, pin_codex_bundle)
 
 
 class FakeSession:
@@ -137,6 +138,32 @@ class AppServerClientTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertEqual(command, [str(bundle / "codex.exe"),
                                        "app-server", "--stdio"])
+
+    async def test_pinned_runtime_survives_desktop_bundle_cleanup(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "desktop"
+            source.mkdir()
+            (source / "codex.exe").write_bytes(b"official-codex")
+            (source / "codex-code-mode-host.exe").write_bytes(b"matching-host")
+            (source / "codex-command-runner.exe").write_bytes(b"runner")
+            pinned = pin_codex_bundle(source / "codex.exe", Path(tmp) / "state")
+            (source / "codex-code-mode-host.exe").unlink()
+            self.assertEqual(pinned.read_bytes(), b"official-codex")
+            self.assertEqual((pinned.parent / "codex-code-mode-host.exe").read_bytes(), b"matching-host")
+            self.assertEqual((pinned.parent / "codex-command-runner.exe").read_bytes(), b"runner")
+
+    async def test_changed_cached_runtime_is_rejected_without_overwriting(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "desktop"
+            source.mkdir()
+            (source / "codex.exe").write_bytes(b"official")
+            (source / "codex-code-mode-host.exe").write_bytes(b"host")
+            pinned = pin_codex_bundle(source / "codex.exe", Path(tmp) / "state")
+            host = pinned.parent / "codex-code-mode-host.exe"
+            host.write_bytes(b"damaged")
+            with self.assertRaisesRegex(RuntimeError, "incomplete or changed"):
+                pin_codex_bundle(source / "codex.exe", Path(tmp) / "state")
+            self.assertEqual(host.read_bytes(), b"damaged")
 
 
 if __name__ == "__main__":

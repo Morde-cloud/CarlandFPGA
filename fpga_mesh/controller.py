@@ -41,6 +41,7 @@ class Controller:
             self.store.load_control_state()
         )
         self.dispatch_blocked = self._paused_at is not None
+        self._gateway_retry_at = self.store.load_gateway_retry()
         self._wakeup = asyncio.Event()
         self._stop = asyncio.Event()
         self._serve_task: asyncio.Task[None] | None = None
@@ -144,6 +145,11 @@ class Controller:
                         continue
                 if self.dispatch_blocked:
                     continue
+                # A dead backend is node-wide, not a failure of every queued
+                # task. Controls above still apply immediately during backoff.
+                if (self._gateway_retry_at is not None
+                        and self._gateway_retry_at > datetime.now(timezone.utc)):
+                    continue
                 if (message.source == SourceKind.HUMAN
                         and message.kind == MessageKind.HUMAN_INSTRUCTION
                         and message.payload.get("ownership_required")):
@@ -179,6 +185,9 @@ class Controller:
                         name=f"fpga-dispatch-{message.message_id}",
                     )
                     result = await self._active_dispatch
+                    if self._gateway_retry_at is not None:
+                        self._gateway_retry_at = None
+                        self.store.save_gateway_retry(None)
                     if self.on_result is not None:
                         callback_result = self.on_result(message, result)
                         if inspect.isawaitable(callback_result):
@@ -190,6 +199,43 @@ class Controller:
                     # never turn an explicit stop into a blind side-effect replay.
                     break
                 except Exception as exc:  # noqa: BLE001 - persisted as recovery state
+                    if getattr(exc, 'safe_to_retry', False):
+                        retry_at = max(
+                            self._retry_at(stored.attempts),
+                            datetime.now(timezone.utc) + timedelta(seconds=max(
+                                1.0, float(getattr(exc, 'retry_after_seconds', 30)),
+                            )),
+                        )
+                        self._gateway_retry_at = retry_at
+                        self.store.save_gateway_retry(retry_at)
+                        self.store.mark_inbound_failed(
+                            message.message_id, f'deferred before execution: {exc}',
+                            retry_at=retry_at,
+                        )
+                        self.store.append_event(
+                            f'gateway-deferred:{message.message_id}:{stored.attempts}',
+                            'gateway_deferred',
+                            {'message_id': message.message_id,
+                             'reason': getattr(exc, 'reason', 'backend_unavailable'),
+                             'retry_at': retry_at.isoformat(),
+                             'execution_started': False},
+                        )
+                        break
+                    if getattr(exc, 'reason', None) == 'server_overloaded':
+                        # This turn may have run tools: it must stay terminal
+                        # for reconciliation, while untouched work waits for
+                        # provider capacity without being failed in a cascade.
+                        self._gateway_retry_at = datetime.now(timezone.utc) + timedelta(
+                            seconds=max(1.0, float(getattr(exc, 'retry_after_seconds', 30))),
+                        )
+                        self.store.save_gateway_retry(self._gateway_retry_at)
+                        self.store.append_event(
+                            f'gateway-capacity:{message.message_id}:{stored.attempts}',
+                            'gateway_capacity_interrupted',
+                            {'message_id': message.message_id,
+                             'retry_at': self._gateway_retry_at.isoformat(),
+                             'execution_started': True, 'automatic_replay': False},
+                        )
                     self.store.mark_inbound_failed(
                         message.message_id,
                         f"{type(exc).__name__}: {exc}",

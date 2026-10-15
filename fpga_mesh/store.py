@@ -291,6 +291,20 @@ class SQLiteStore:
         ).fetchall()
         return [self._stored_message(row) for row in rows]
 
+    def load_gateway_retry(self) -> datetime | None:
+        row = self._connection.execute(
+            "SELECT payload FROM controller_state WHERE key='gateway_retry'"
+        ).fetchone()
+        return _parse_datetime(json.loads(row['payload']).get('retry_at')) if row else None
+
+    def save_gateway_retry(self, retry_at: datetime | None) -> None:
+        with self._connection:
+            self._connection.execute(
+                "INSERT INTO controller_state(key,payload) VALUES('gateway_retry',?) "
+                "ON CONFLICT(key) DO UPDATE SET payload=excluded.payload",
+                (json.dumps({'retry_at': _format_datetime(retry_at)}),),
+            )
+
     def mark_inbound_processed(self, message_id: str) -> None:
         with self._connection:
             self._connection.execute(

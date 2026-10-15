@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import inspect
 import json
+import logging
 from dataclasses import dataclass
 from typing import Awaitable, Callable, Literal
 
@@ -14,6 +15,69 @@ from .controller import ActionResult
 from .effort import EFFORTS, AstraEffortSelector
 from .notifications import notification_matches_turn, terminal_error_message
 from .protocol import Envelope
+from .rpc import JsonRpcError, RequestNotSentError
+
+
+LOG = logging.getLogger(__name__)
+
+
+class GatewayNotStartedError(RuntimeError):
+    """A rejected/unsent work request can wait without replaying side effects."""
+
+    safe_to_retry = True
+    retry_after_seconds = 30.0
+
+    def __init__(self, reason: str, detail: str):
+        self.reason = reason
+        super().__init__(f"{reason}: work turn was not started; {detail}")
+
+
+class GatewayTurnFailure(RuntimeError):
+    """A started turn failed: backend cooldown is not permission to replay it."""
+
+    safe_to_retry = False
+    retry_after_seconds = 30.0
+
+    def __init__(self, detail: str, *, reason: str = 'turn_failed'):
+        self.reason = reason
+        super().__init__(detail)
+
+
+def _is_capacity_error(error) -> bool:
+    if isinstance(error, JsonRpcError):
+        return (_is_capacity_error(getattr(error, 'codex_error_info', None)) or
+                _is_capacity_error(getattr(error, 'data', None)) or
+                _is_capacity_error(error.message))
+    if isinstance(error, dict):
+        info = error.get('codexErrorInfo') or error.get('codex_error_info')
+        return info in ('server_overloaded', 'serverOverloaded') or _is_capacity_error(error.get('message'))
+    if isinstance(error, str):
+        return error.strip().lower().rstrip('.') in {
+            'server_overloaded', 'serveroverloaded', 'selected model is at capacity',
+            'selected model is at capacity. please try a different model',
+        }
+    return False
+
+
+def _capacity_rejection(error: Exception) -> bool:
+    # A JSON-RPC error response to turn/start rejects the request. Do not use
+    # this rule for a lost response or an error notification after turn start.
+    return (isinstance(error, JsonRpcError) and error.method == "turn/start" and
+            _is_capacity_error(error))
+
+
+def _turn_failure(detail: str, error) -> GatewayTurnFailure:
+    if _is_capacity_error(error):
+        return GatewayTurnFailure(
+            "server_overloaded (model capacity, not account quota); "
+            f"reconcile the started turn before continuation: {detail}",
+            reason='server_overloaded',
+        )
+    return GatewayTurnFailure(detail)
+
+
+def _failure_detail(error: Exception) -> str:
+    return str(error) or type(error).__name__
 
 
 @dataclass(frozen=True, slots=True)
@@ -44,6 +108,8 @@ class AppServerGateway:
         effort_selector: AstraEffortSelector | None = None,
         session_router=None,
         timeout_seconds: float | None = 300.0,
+        startup_timeout_seconds: float = 60.0,
+        startup_retry_delays: tuple[float, ...] = (1.0, 3.0),
     ):
         self.config = config
         self.client_factory = client_factory
@@ -54,6 +120,10 @@ class AppServerGateway:
         self.effort_selector = effort_selector
         self.session_router = session_router
         self.timeout_seconds = timeout_seconds
+        if startup_timeout_seconds <= 0 or any(d < 0 for d in startup_retry_delays):
+            raise ValueError("startup timeout must be positive and retry delays nonnegative")
+        self.startup_timeout_seconds = startup_timeout_seconds
+        self.startup_retry_delays = startup_retry_delays
         self._client: AppServerClient | None = None
         self._thread_id: str | None = None
         self._lock = asyncio.Lock()
@@ -73,9 +143,18 @@ class AppServerGateway:
             if self.session_router is not None:
                 self.session_router.record(message.message_id, message.task_id, 'interrupted', error='turn cancelled')
             raise
+        except GatewayNotStartedError as exc:
+            if self.session_router is not None:
+                self.session_router.record(message.message_id, message.task_id, 'queued', error=str(exc))
+            raise
+        except asyncio.TimeoutError as exc:
+            if self.session_router is not None:
+                self.session_router.record(message.message_id, message.task_id, 'interrupted',
+                                           error=str(exc) or 'turn timed out; reconciliation required')
+            raise
         except Exception as exc:
             if self.session_router is not None:
-                self.session_router.record(message.message_id, message.task_id, 'failed', error=str(exc))
+                self.session_router.record(message.message_id, message.task_id, 'failed', error=_failure_detail(exc))
             raise
 
     async def _handle(self, message: Envelope) -> ActionResult:
@@ -90,7 +169,6 @@ class AppServerGateway:
                         'error': prior['error'], 'recovery_required': True,
                         'text': '该任务已失败或中断，已保留原始证据。请由质量主模型检查后创建新的显式任务版本或工作分配；不自动重放。',
                     })
-            client = await self._ensure_client()
             event_text = str(message.payload.get("text", message.message_id))
             prompt = event_text
             if self.config.role == "astra":
@@ -107,78 +185,35 @@ class AppServerGateway:
                     "Event text:\n"
                     f"{event_text}"
                 )
-            model = self.config.model
-            effort = self.config.reasoning_effort
-            if self.config.role == "astra" and self.session_router is not None:
-                route = await self._start_request(self.session_router.prepare(
-                    client, message, cwd=self.config.cwd,
-                    config=(self.thread_config_factory() if self.thread_config_factory else None),
-                    dynamic_tools=self.dynamic_tools,
-                    developer_instructions=self.developer_instructions,
-                ))
-                self._thread_id = route['thread_id']
-                model, effort = route['model'], route['effort']
-                self.session_router.record(message.message_id, message.task_id, 'running')
-            elif self.config.role == "astra" and self.effort_selector is not None:
-                try:
-                    chosen = await self.effort_selector.choose(
-                        client, cwd=self.config.cwd, model=self.config.model,
-                        text=event_text,
-                    )
-                except (Exception, asyncio.CancelledError):
-                    try:
-                        await asyncio.shield(self.close())
-                    except Exception:  # noqa: BLE001 - retain selector failure
-                        pass
-                    raise
-                effort = chosen if chosen in EFFORTS else "max"
-            if self._thread_id is None:
-                response = await self._start_request(client.thread_start(
-                    cwd=self.config.cwd,
-                    model=self.config.model,
-                    model_provider=self.config.provider,
-                    config=(self.thread_config_factory()
-                            if self.thread_config_factory is not None else None),
-                    dynamic_tools=self.dynamic_tools,
-                    developer_instructions=self.developer_instructions,
-                ))
-                self._thread_id = response["thread"]["id"]
-            started = await self._start_request(client.turn_start(
-                thread_id=self._thread_id,
-                text=prompt,
-                model=model,
-                effort=effort,
-            ))
+            client, started, model, effort = await self._begin_turn(message, event_text, prompt)
             turn_id = started["turn"]["id"]
             try:
                 completed = await asyncio.wait_for(
                     self._wait_for_completion(turn_id),
                     timeout=self.timeout_seconds,
                 )
-            except (asyncio.CancelledError, asyncio.TimeoutError):
-                if self.session_router is not None:
-                    self.session_router.record(message.message_id, message.task_id, 'interrupted', error='turn cancelled or timed out')
-                try:
-                    await asyncio.wait_for(client.turn_interrupt(
-                        thread_id=self._thread_id, turn_id=turn_id,
-                    ), timeout=min(5.0, self.timeout_seconds or 5.0))
-                except (Exception, asyncio.CancelledError):
-                    pass
-                try:
-                    await self.close()
-                except Exception:  # noqa: BLE001 - keep the original failure
-                    pass
+            except asyncio.CancelledError:
+                await self._abort_turn(client, turn_id)
                 raise
-            except Exception as exc:
-                if self.session_router is not None:
-                    self.session_router.record(message.message_id, message.task_id, 'failed', error=str(exc))
+            except asyncio.TimeoutError as exc:
+                await self._abort_turn(client, turn_id)
+                raise asyncio.TimeoutError(
+                    f"Codex turn {turn_id} exceeded {self.timeout_seconds}s; "
+                    "interrupted and closed; reconciliation required, no automatic replay"
+                ) from exc
+            except Exception:
+                # The work request was accepted. Even transport/capacity errors
+                # may follow tool side effects: release this dead connection,
+                # but never restart this turn automatically.
+                await self._abort_turn(client, turn_id)
                 raise
             turn = completed.params.get("turn", {})
             if turn.get("status") != "completed":
                 error = turn.get("error") or {}
                 detail = (error.get("message") if isinstance(error, dict)
                           else str(error)) or turn.get("status", "unknown")
-                raise RuntimeError(f"Codex turn did not complete: {detail}")
+                await self._discard_client()
+                raise _turn_failure(f"Codex turn did not complete: {detail}", error)
             result = ActionResult(
                 accepted=True,
                 output={
@@ -194,6 +229,87 @@ class AppServerGateway:
                 self.session_router.record(message.message_id, message.task_id, 'completed', result=result.output)
             return result
 
+    async def _begin_turn(self, message: Envelope, event_text: str, prompt: str):
+        """Retry only proven unsent requests or an explicit capacity rejection."""
+        for attempt in range(len(self.startup_retry_delays) + 1):
+            try:
+                try:
+                    client = await self._start_request(self._ensure_client())
+                except asyncio.TimeoutError as exc:
+                    # No thread/turn request has been made at initialization.
+                    raise GatewayNotStartedError(
+                        'transport_unavailable', 'app-server initialization timed out',
+                    ) from exc
+                model, effort = self.config.model, self.config.reasoning_effort
+                if self.config.role == "astra" and self.session_router is not None:
+                    route = await self._start_request(self.session_router.prepare(
+                        client, message, cwd=self.config.cwd,
+                        config=(self.thread_config_factory() if self.thread_config_factory else None),
+                        dynamic_tools=self.dynamic_tools,
+                        developer_instructions=self.developer_instructions,
+                    ))
+                    self._thread_id = route['thread_id']
+                    model, effort = route['model'], route['effort']
+                elif self.config.role == "astra" and self.effort_selector is not None:
+                    # A selector may itself start a model turn. Its failures are
+                    # not eligible for work-request replay.
+                    try:
+                        chosen = await self.effort_selector.choose(
+                            client, cwd=self.config.cwd, model=self.config.model,
+                            text=event_text,
+                        )
+                    except Exception as exc:
+                        await self._discard_client()
+                        raise RuntimeError(f"effort selector failed: {exc}") from exc
+                    effort = chosen if chosen in EFFORTS else "max"
+                if self._thread_id is None:
+                    response = await self._start_request(client.thread_start(
+                        cwd=self.config.cwd,
+                        model=self.config.model,
+                        model_provider=self.config.provider,
+                        config=(self.thread_config_factory() if self.thread_config_factory else None),
+                        dynamic_tools=self.dynamic_tools,
+                        developer_instructions=self.developer_instructions,
+                    ))
+                    self._thread_id = response["thread"]["id"]
+                # Fence possible side effects durably before the first write.
+                # A crash/lost response after send must recover as interrupted,
+                # not queued. Only proven unsent/rejected work returns to queued.
+                if self.session_router is not None:
+                    self.session_router.record(message.message_id, message.task_id, 'running')
+                started = await self._start_request(client.turn_start(
+                    thread_id=self._thread_id, text=prompt, model=model, effort=effort,
+                ))
+                return client, started, model, effort
+            except (RequestNotSentError, JsonRpcError) as exc:
+                await self._discard_client()
+                if not isinstance(exc, RequestNotSentError) and not _capacity_rejection(exc):
+                    raise
+                reason = ('transport_unavailable' if isinstance(exc, RequestNotSentError)
+                          else 'server_overloaded')
+                if attempt == len(self.startup_retry_delays):
+                    raise GatewayNotStartedError(reason, str(exc)) from exc
+                await asyncio.sleep(self.startup_retry_delays[attempt])
+            except BaseException:
+                await self._discard_client()
+                raise
+        raise AssertionError("startup retry loop exhausted without outcome")
+
+    async def _discard_client(self) -> None:
+        try:
+            await asyncio.shield(self.close())
+        except Exception:  # noqa: BLE001 - retain the original failure
+            pass
+
+    async def _abort_turn(self, client: AppServerClient, turn_id: str) -> None:
+        try:
+            await asyncio.wait_for(client.turn_interrupt(
+                thread_id=self._thread_id, turn_id=turn_id,
+            ), timeout=min(5.0, self.timeout_seconds or 5.0))
+        except (Exception, asyncio.CancelledError):
+            pass
+        await self._discard_client()
+
     async def close(self) -> None:
         client = self._client
         self._client = None
@@ -206,12 +322,15 @@ class AppServerGateway:
     async def read_rate_limits(self) -> dict:
         """Read account quota through app-server without starting a model turn."""
         async with self._lock:
-            client = await self._ensure_client()
-            return await client.account_rate_limits()
+            client = await self._start_request(self._ensure_client())
+            return await self._start_request(client.account_rate_limits())
 
     async def _start_request(self, request: Awaitable[dict]) -> dict:
         try:
-            return await asyncio.wait_for(request, timeout=self.timeout_seconds)
+            return await asyncio.wait_for(request, timeout=min(
+                self.startup_timeout_seconds,
+                self.timeout_seconds if self.timeout_seconds is not None else float('inf'),
+            ))
         except (Exception, asyncio.CancelledError):
             try:
                 await asyncio.shield(self.close())
@@ -225,18 +344,32 @@ class AppServerGateway:
 
     async def _initialize_client(self) -> AppServerClient:
         if self._client is not None:
-            return self._client
-        if self.client_factory is not None:
-            candidate = self.client_factory()
-            client = await candidate if inspect.isawaitable(candidate) else candidate
+            if getattr(self._client.session, "is_alive", True):
+                return self._client
+            await self._discard_client()
+        client = None
+        try:
+            if self.client_factory is not None:
+                candidate = self.client_factory()
+                client = await candidate if inspect.isawaitable(candidate) else candidate
+            else:
+                client = await AppServerClient.start_stdio(
+                    codex_home=self.config.codex_home,
+                    client_version=self.config.client_version,
+                    role=self.config.role,
+                )
             await client.initialize()
-            self._client = client
-            return client
-        client = await AppServerClient.start_stdio(
-            codex_home=self.config.codex_home,
-            client_version=self.config.client_version,
-        )
-        await client.initialize()
+        except BaseException as exc:
+            if client is not None:
+                try:
+                    await asyncio.shield(client.close())
+                except Exception:
+                    pass
+            if isinstance(exc, (ConnectionError, OSError)) and not isinstance(exc, RequestNotSentError):
+                # initialize has not created or resumed any work thread. A
+                # missing binary/dead child must not terminalize the inbox.
+                raise GatewayNotStartedError('transport_unavailable', str(exc)) from exc
+            raise
         self._client = client
         return client
 
@@ -246,12 +379,26 @@ class AppServerGateway:
             if notification.method == "item/tool/call":
                 await self._handle_dynamic_tool(notification, turn_id)
                 continue
+            if notification.request_id is not None:
+                # Approval/elicitation requests need an explicit response. This
+                # unattended gateway never approves operations on a user's behalf.
+                detail = f"Unsupported app-server request: {notification.method}"
+                LOG.warning("unsupported_app_server_request %s", json.dumps({
+                    "request_id": notification.request_id,
+                    "method": notification.method,
+                    "thread_id": notification.params.get("threadId"),
+                    "turn_id": notification.params.get("turnId"),
+                }, ensure_ascii=True))
+                await self._client.session.reject(
+                    notification.request_id, code=-32601, message=detail,
+                )
+                raise RuntimeError(f"{detail}; request rejected, reconciliation required")
             if notification.method == "error":
                 error = terminal_error_message(
                     notification.params, thread_id=self._thread_id, turn_id=turn_id,
                 )
                 if error is not None:
-                    raise RuntimeError(error)
+                    raise _turn_failure(error, notification.params.get("error", notification.params))
                 continue
             if (notification.method == "turn/completed" and
                     notification_matches_turn(

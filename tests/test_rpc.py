@@ -3,7 +3,8 @@ import json
 import sys
 import unittest
 
-from fpga_mesh.rpc import InMemoryTransport, JsonRpcError, JsonRpcSession, StdioTransport
+from fpga_mesh.rpc import (InMemoryTransport, JsonRpcError, JsonRpcSession,
+                           RequestNotSentError, StdioTransport)
 
 
 class JsonRpcSessionTests(unittest.IsolatedAsyncioTestCase):
@@ -73,6 +74,44 @@ class JsonRpcSessionTests(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(ConnectionError):
             await asyncio.wait_for(pending, 1)
         await session.close()
+
+    async def test_request_after_eof_is_not_sent_and_is_distinguishable(self):
+        transport = InMemoryTransport()
+        session = JsonRpcSession(transport)
+        await transport.inject_server_message("")
+        await session._reader
+        self.assertFalse(session.is_alive)
+        with self.assertRaises(RequestNotSentError):
+            await session.request("turn/start", {})
+        self.assertTrue(transport._client_writes.empty())
+        self.assertFalse(session._pending)
+        await session.close()
+
+    async def test_partial_send_error_is_not_mislabeled_safe_to_retry(self):
+        class PartialWrite(InMemoryTransport):
+            async def send(self, payload):
+                await super().send(payload)
+                raise ConnectionError("reply may be lost after write")
+        session = JsonRpcSession(PartialWrite())
+        try:
+            with self.assertRaises(ConnectionError) as error:
+                await session.request("turn/start", {})
+            self.assertNotIsInstance(error.exception, RequestNotSentError)
+            self.assertFalse(session._pending)
+        finally:
+            await session.close()
+
+    async def test_unknown_server_request_has_explicit_error_reply(self):
+        transport = InMemoryTransport()
+        session = JsonRpcSession(transport)
+        try:
+            await session.reject(7, message="No interactive approval handler")
+            reply = json.loads(await transport.next_client_message())
+            self.assertEqual(reply["id"], 7)
+            self.assertEqual(reply["error"]["code"], -32601)
+            self.assertNotIn("result", reply)
+        finally:
+            await session.close()
 
     async def test_server_dynamic_tool_request_can_be_answered(self):
         transport = InMemoryTransport()

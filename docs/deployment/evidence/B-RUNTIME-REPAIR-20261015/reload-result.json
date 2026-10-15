@@ -1,0 +1,67 @@
+{
+  "task_id": "B-RUNTIME-REPAIR-20261015",
+  "task_version": 1,
+  "started_at": "2026-10-15T15:31:32.266088+00:00",
+  "before_health": {
+    "node_id": "B",
+    "pid": 3600,
+    "started": true,
+    "identities": {
+      "main": "Astra-B",
+      "deepseek": "DeepSeek-B"
+    },
+    "pending_inbound": 0,
+    "pending_outbox": 0,
+    "feishu_connected": true,
+    "hardware_enabled": false
+  },
+  "status": "passed",
+  "admission_fenced_until_stopped": true,
+  "start_original_task_called": true,
+  "after_health": {
+    "node_id": "B",
+    "pid": 42680,
+    "started": true,
+    "identities": {
+      "main": "Astra-B",
+      "deepseek": "DeepSeek-B"
+    },
+    "pending_inbound": 0,
+    "pending_outbox": 0,
+    "feishu_connected": true,
+    "hardware_enabled": false
+  },
+  "preserved": {
+    "scheduled_task_definition": true,
+    "config_launcher_credentials": true,
+    "source_bytes": true,
+    "ledger_rows": {
+      "state.sqlite/inbound": {
+        "before": 248,
+        "after": 248,
+        "all_original_ids_present": true
+      },
+      "state.sqlite/outbox": {
+        "before": 171,
+        "after": 171,
+        "all_original_ids_present": true
+      },
+      "state.sqlite/group_outbox": {
+        "before": 1372,
+        "after": 1372,
+        "all_original_ids_present": true
+      },
+      "main_sessions.sqlite/main_runs": {
+        "before": 214,
+        "after": 214,
+        "all_original_ids_present": true
+      },
+      "child_jobs.sqlite/child_jobs": {
+        "before": 43,
+        "after": 43,
+        "all_original_ids_present": true
+      }
+    }
+  },
+  "finished_at": "2026-10-15T15:31:44.731328+00:00"
+}

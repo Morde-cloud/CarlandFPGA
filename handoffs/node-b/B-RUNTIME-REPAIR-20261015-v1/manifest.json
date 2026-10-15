@@ -1,0 +1,142 @@
+{
+  "artifacts": [
+    "fpga_mesh/app_server.py",
+    "fpga_mesh/controller.py",
+    "fpga_mesh/gateway.py",
+    "fpga_mesh/rpc.py",
+    "fpga_mesh/runtime.py",
+    "fpga_mesh/store.py",
+    "tests/test_app_gateway.py",
+    "tests/test_app_server.py",
+    "tests/test_controller.py",
+    "tests/test_rpc.py",
+    "tests/test_runtime.py",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/director-tool-proof.txt",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stderr.txt",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stdout.txt",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-validation.json",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/README.md",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/reload-result.json",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/REPAIR_REVIEW.json",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/tool-smoke-observed.json"
+  ],
+  "files": {
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/README.md": {
+      "sha256": "4bf20313b8289716fa28ba42a2c4b27dd8f23072a280dc1f025772bfaf6504e8",
+      "size": 3540
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/REPAIR_REVIEW.json": {
+      "sha256": "083f7ce88bae5b51de394036da9f271aef4142941193182c3410e44ff62f00f1",
+      "size": 7001
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/director-tool-proof.txt": {
+      "sha256": "5c29f783fd5963dee2af5650c91f024c34a27d0c11f67cf76addde3eadd7e94c",
+      "size": 576
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stderr.txt": {
+      "sha256": "8c28c470675a6ff7d80a8deb43fb44c0c64f01c6b9e5f33709d1063b3332778c",
+      "size": 103
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-validation.json": {
+      "sha256": "f6f8a181214daceaada8ef0c634f13c28931483e602f5b2d94d5b6aa135db158",
+      "size": 1860
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/reload-result.json": {
+      "sha256": "6607b33699746fa33e4361237460f2b13f8b7a8864c48f42efa7d0b5db69c45e",
+      "size": 1707
+    },
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/tool-smoke-observed.json": {
+      "sha256": "b7986f1527c67e681a7b8c445d5d7e176fd8915f0ae5fd4991b614da44ca82f8",
+      "size": 7581
+    },
+    "fpga_mesh/app_server.py": {
+      "sha256": "c3bdc35115c975b2f814add6ee02f6430ef6a28c85141c5b6a93f250dfd324aa",
+      "size": 8832
+    },
+    "fpga_mesh/controller.py": {
+      "sha256": "cce2dd316bdff666849d564470ce7c9a55694a82c43a4dc640828ab2fb1a3193",
+      "size": 15253
+    },
+    "fpga_mesh/gateway.py": {
+      "sha256": "59eb6c7b6a8b7e0c1e1bd35b5eb7e545e3e3b8f4ae097a7cebdd2e70097f6ad6",
+      "size": 20916
+    },
+    "fpga_mesh/rpc.py": {
+      "sha256": "0d4e7e88cd67405db37542426adfbdf207677b565a247d563b6cbdd5c79546e2",
+      "size": 8892
+    },
+    "fpga_mesh/runtime.py": {
+      "sha256": "329faf41da4af36f0409caf8014efc0085447efac722c4a56eda28335ae983c6",
+      "size": 25010
+    },
+    "fpga_mesh/store.py": {
+      "sha256": "26ce8986b55ea4f4ad0197a3faa479d73af69ab6094c89f5d1284b5d387a9d84",
+      "size": 21501
+    },
+    "tests/test_app_gateway.py": {
+      "sha256": "a64a9e1dbc5a2ce6e5efc78741cd8ea881cf9d8ccd74009806934ab9935cf1db",
+      "size": 41820
+    },
+    "tests/test_app_server.py": {
+      "sha256": "3a1eee4630741150305eb59f9cb933568fe92662db8f88feba63dd6846b121d7",
+      "size": 7918
+    },
+    "tests/test_controller.py": {
+      "sha256": "542885601726b1b4dfd435cc71f4d4be2436d9569b802244088ab5048ab7b7f7",
+      "size": 15912
+    },
+    "tests/test_rpc.py": {
+      "sha256": "ac96d8e7a918319b739341f657f0bc436cf57f8decfdbdbd87e8aa9a94c6b17d",
+      "size": 6746
+    },
+    "tests/test_runtime.py": {
+      "sha256": "5cc3ea8e5841d5a0c7d6f080d50465507e503a4c621f36cefb1f9364c240d6c6",
+      "size": 13971
+    }
+  },
+  "request": {
+    "code_commit": "4de6736d9726fe80f4eec8d6d9749785d740fddf",
+    "expected_result": "161 software regression tests pass; preserve failed/ambiguous work, retain queues, bound unsupported RPC/startup/quota waits. No hardware/system acceptance. Review exact source and incremental scope above PR18.",
+    "operation_id": "B-RUNTIME-REPAIR-20261015-v1",
+    "requester": "node-b",
+    "task_id": "B-RUNTIME-REPAIR-20261015",
+    "task_version": 1,
+    "test_steps": [
+      "python -X utf8 -m unittest tests.test_rpc tests.test_rpc_frames tests.test_app_server tests.test_app_gateway tests.test_controller tests.test_controller_continuity tests.test_store tests.test_runtime tests.test_sessions tests.test_routing_hardening tests.test_project_control tests.test_work_leases -q"
+    ]
+  },
+  "request_hash": "1bb259466270cbcc6a5e6cb2f55366a24bb0945fb4b2c2caff3e4d23541a221e",
+  "schema_version": 1,
+  "stages": {
+    "board": {
+      "status": "not_run"
+    },
+    "final_service_reload": {
+      "status": "blocked"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "native_tool_smoke_before_final_crash_fence": {
+      "log": "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/tool-smoke-observed.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "software_regression": {
+      "log": "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stderr.txt",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    }
+  }
+}

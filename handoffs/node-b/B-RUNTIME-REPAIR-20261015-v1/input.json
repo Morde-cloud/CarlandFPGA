@@ -1,0 +1,62 @@
+{
+  "request": {
+    "operation_id": "B-RUNTIME-REPAIR-20261015-v1",
+    "task_id": "B-RUNTIME-REPAIR-20261015",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "4de6736d9726fe80f4eec8d6d9749785d740fddf",
+    "test_steps": [
+      "python -X utf8 -m unittest tests.test_rpc tests.test_rpc_frames tests.test_app_server tests.test_app_gateway tests.test_controller tests.test_controller_continuity tests.test_store tests.test_runtime tests.test_sessions tests.test_routing_hardening tests.test_project_control tests.test_work_leases -q"
+    ],
+    "expected_result": "161 software regression tests pass; preserve failed/ambiguous work, retain queues, bound unsupported RPC/startup/quota waits. No hardware/system acceptance. Review exact source and incremental scope above PR18."
+  },
+  "artifacts": [
+    "fpga_mesh/app_server.py",
+    "fpga_mesh/controller.py",
+    "fpga_mesh/gateway.py",
+    "fpga_mesh/rpc.py",
+    "fpga_mesh/runtime.py",
+    "fpga_mesh/store.py",
+    "tests/test_app_gateway.py",
+    "tests/test_app_server.py",
+    "tests/test_controller.py",
+    "tests/test_rpc.py",
+    "tests/test_runtime.py",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/director-tool-proof.txt",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stderr.txt",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stdout.txt",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-validation.json",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/README.md",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/reload-result.json",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/REPAIR_REVIEW.json",
+    "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/tool-smoke-observed.json"
+  ],
+  "stages": {
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/handoff-regression-stderr.txt"
+    },
+    "native_tool_smoke_before_final_crash_fence": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/B-RUNTIME-REPAIR-20261015/tool-smoke-observed.json"
+    },
+    "final_service_reload": {
+      "status": "blocked"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    }
+  }
+}

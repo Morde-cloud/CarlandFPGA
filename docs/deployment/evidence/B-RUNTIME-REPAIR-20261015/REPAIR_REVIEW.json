@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "task_id": "B-RUNTIME-REPAIR-20261015",
+  "task_version": 1,
+  "work_id": "repair-independent-review",
+  "reviewer": "/root/handoff_audit",
+  "recorded_at_utc": "2026-10-15T15:37:54.283050+00:00",
+  "scope": "Bounded independent read-only before/current review of six repair files plus adjacent session ledger and relevant test sources. No source/service/queue/config mutation, test execution, inference or peer traffic.",
+  "result": "One P1 found in initial repair, accepted and corrected by parent during review; source closure observed. No additional blocking defect identified within reviewed paths. Runtime/test acceptance remains parent-owned.",
+  "finding": {
+    "id": "RUNTIME-REVIEW-P1-01",
+    "title": "Persist ambiguous-turn recovery marker before sending turn/start",
+    "initial_location": "gateway.py initial repair lines275-279",
+    "severity": "P1",
+    "trigger": "Controller process terminates after turn/start can reach server but before its response returns; tools may already have side effects.",
+    "failure": "Initial repair persisted running only after response. A queued/missing main_runs record survives restart without conversion to interrupted, enabling same inbox message to start again. Old source recorded running before turn/start.",
+    "evidence": "sessions.py:41 converts only running to interrupted; gateway.py:164-171 only rejects failed/interrupted; controller reconsiders pending messages.",
+    "fix_observed": "Current gateway.py:275-282 comments and writes running durably before awaiting client.turn_start. Proven unsent/explicit rejection still reaches the existing GatewayNotStartedError path and queued status.",
+    "status": "source_fix_observed; parent regression execution and deployment verification required",
+    "regression": "tests/test_app_gateway.py:110 test_crash_after_turn_send_cannot_replay_on_restart uses independent SQLite read before response, simulates BaseException, reconstructs MainSessionRouter and asserts interrupted plus no replay. Test design reviewed, not run by this reviewer."
+  },
+  "supported_checks": [
+    {
+      "area": "safe retry",
+      "assessment": "RequestNotSentError is raised before transport.send when reader is closed. Ordinary send/response loss is not converted to proven-unsent. Explicit turn/start JSON-RPC capacity rejection is eligible; after-start errors remain nonretriable and ledger-fenced.",
+      "source": "rpc.py:82-104; gateway.py:62-66,146-158,160-171,232-295"
+    },
+    {
+      "area": "capacity versus quota",
+      "assessment": "Classifier uses structured codexErrorInfo/data or strict capacity messages, rather than arbitrary substring. Quota/general errors are not granted retry permission. Started capacity failures set cooldown but do not replay the started work.",
+      "source": "gateway.py:46-76; controller.py:202-244"
+    },
+    {
+      "area": "quota read timeout and serial lock",
+      "assessment": "Quota initialization/read runs inside async-with serial lock, each RPC uses bounded startup timeout, closes failed client and propagates. Lock releases during exception unwinding. Lock acquisition itself intentionally waits for current work; this review does not claim quota reads interrupt active work.",
+      "source": "gateway.py:319-339 (line numbers may shift after P1 fix); tests/test_app_gateway.py test_stalled_quota_read_releases_serial_gateway"
+    },
+    {
+      "area": "server request rejection",
+      "assessment": "Unknown requests carrying an id are explicitly rejected with JSON-RPC -32601, with method/id/thread/turn-only log, then started turn is interrupted/closed and requires reconciliation. No blanket approval or permissions grant.",
+      "source": "rpc.py reject; gateway.py _wait_for_completion and _abort_turn"
+    },
+    {
+      "area": "queue/backoff preservation",
+      "assessment": "GatewayNotStartedError retains queued ledger status and persisted node cooldown; controls remain handled before cooldown. Failed/interrupted main messages return recovery_required without launching a model when retried by inbox scheduler.",
+      "source": "controller.py:122-152,202-244; gateway.py:146-171; store.py:294-306"
+    },
+    {
+      "area": "official runtime pin",
+      "assessment": "Runtime starts from content-hashed byte-verified bundle copies under local state, retaining paired Code Mode host independent of Desktop deletion. Copy scope excludes Codex home/auth. Existing hash snapshots are verified rather than overwritten.",
+      "source": "app_server.py pin_codex_bundle/resolve_codex_command; runtime.py Astra and child client factories"
+    },
+    {
+      "area": "explicit unattended policy",
+      "assessment": "Astra tool config now explicitly specifies never/danger-full-access; session prepare passes config on thread/start and thread/resume. Existing initialized process/config activation is a runtime verification matter.",
+      "source": "runtime.py:363-382; sessions.py:148-151,178-184"
+    }
+  ],
+  "validation_limits": [
+    "Parent reported prior147 checks passed; this reviewer did not rerun them.",
+    "New P1 regression source reviewed only.",
+    "Actual service reload/smoke was in progress in parent scope. This report does not certify live process imports include the later P1 source fix.",
+    "Review covers repair delta and directly relevant boundaries; it does not establish the exact unretained cause of historical Code Mode stalls or promise interruption-free operation."
+  ],
+  "file_hashes": {
+    "rpc.py": {
+      "before_sha256": "4fa4aaa2fbcf5b4e3d768c08157fbe5f3da418be6908a8266c083a4d06ffdf9d",
+      "reviewed_current_sha256": "0d4e7e88cd67405db37542426adfbdf207677b565a247d563b6cbdd5c79546e2"
+    },
+    "gateway.py": {
+      "before_sha256": "20133f788a6c1e9a5a47789928c2af0318cd5c3729349f28adf30c5d0cee93b0",
+      "reviewed_current_sha256": "59eb6c7b6a8b7e0c1e1bd35b5eb7e545e3e3b8f4ae097a7cebdd2e70097f6ad6"
+    },
+    "controller.py": {
+      "before_sha256": "c6ce5faad664a2736f372a319fc9be410981ad88a1f4bc721c8aec7db66e75ce",
+      "reviewed_current_sha256": "cce2dd316bdff666849d564470ce7c9a55694a82c43a4dc640828ab2fb1a3193"
+    },
+    "app_server.py": {
+      "before_sha256": "b9629410b04fe872d29879eded058bc50856f861dd280d42aa35b9304c094622",
+      "reviewed_current_sha256": "c3bdc35115c975b2f814add6ee02f6430ef6a28c85141c5b6a93f250dfd324aa"
+    },
+    "runtime.py": {
+      "before_sha256": "561adf560fbcc2ff95e2f6812e295eb36b347854d7a6b66f5f231aefb2e6b9d5",
+      "reviewed_current_sha256": "5189c8c480f565abad3e4d3fa7c0f0407645bd1497b3749af3d3e7684d52e280"
+    },
+    "store.py": {
+      "before_sha256": "4ee984ccaca4803f2d7738319c0a1edfaf1d40f2051e506bc352c704778998ca",
+      "reviewed_current_sha256": "387c98e499c59c05d8d23a2929698307f9bf18173b38e2e6dfa790c9d4b10863"
+    }
+  },
+  "test_source_sha256": "a64a9e1dbc5a2ce6e5efc78741cd8ea881cf9d8ccd74009806934ab9935cf1db",
+  "mutations": [
+    "This owned report and lease completion only."
+  ]
+}

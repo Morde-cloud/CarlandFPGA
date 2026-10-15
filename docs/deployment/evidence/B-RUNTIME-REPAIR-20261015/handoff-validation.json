@@ -1,0 +1,39 @@
+{
+  "source_commit": "4de6736d9726fe80f4eec8d6d9749785d740fddf",
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_rpc",
+    "tests.test_rpc_frames",
+    "tests.test_app_server",
+    "tests.test_app_gateway",
+    "tests.test_controller",
+    "tests.test_controller_continuity",
+    "tests.test_store",
+    "tests.test_runtime",
+    "tests.test_sessions",
+    "tests.test_routing_hardening",
+    "tests.test_project_control",
+    "tests.test_work_leases",
+    "-q"
+  ],
+  "exit_code": 0,
+  "source_sha256": {
+    "fpga_mesh/app_server.py": "c3bdc35115c975b2f814add6ee02f6430ef6a28c85141c5b6a93f250dfd324aa",
+    "fpga_mesh/controller.py": "cce2dd316bdff666849d564470ce7c9a55694a82c43a4dc640828ab2fb1a3193",
+    "fpga_mesh/gateway.py": "59eb6c7b6a8b7e0c1e1bd35b5eb7e545e3e3b8f4ae097a7cebdd2e70097f6ad6",
+    "fpga_mesh/rpc.py": "0d4e7e88cd67405db37542426adfbdf207677b565a247d563b6cbdd5c79546e2",
+    "fpga_mesh/runtime.py": "329faf41da4af36f0409caf8014efc0085447efac722c4a56eda28335ae983c6",
+    "fpga_mesh/store.py": "26ce8986b55ea4f4ad0197a3faa479d73af69ab6094c89f5d1284b5d387a9d84",
+    "tests/test_app_gateway.py": "a64a9e1dbc5a2ce6e5efc78741cd8ea881cf9d8ccd74009806934ab9935cf1db",
+    "tests/test_app_server.py": "3a1eee4630741150305eb59f9cb933568fe92662db8f88feba63dd6846b121d7",
+    "tests/test_controller.py": "542885601726b1b4dfd435cc71f4d4be2436d9569b802244088ab5048ab7b7f7",
+    "tests/test_rpc.py": "ac96d8e7a918319b739341f657f0bc436cf57f8decfdbdbd87e8aa9a94c6b17d",
+    "tests/test_runtime.py": "5cc3ea8e5841d5a0c7d6f080d50465507e503a4c621f36cefb1f9364c240d6c6"
+  },
+  "git_blob_bytes_match": true,
+  "scope": "isolated repair branch based on PR18 continuity work; no pre-existing quiet-presence changes included"
+}

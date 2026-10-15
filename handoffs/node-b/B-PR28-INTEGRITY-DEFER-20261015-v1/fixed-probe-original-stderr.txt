@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\main-handoff-20261015\continuation-01a1403c\pr28-integrity\probe_cache_failure.py", line 43, in <module>
+    asyncio.run(main())
+  File "D:\python\one\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\main-handoff-20261015\continuation-01a1403c\pr28-integrity\probe_cache_failure.py", line 41, in main
+    assert len(observations)==2 and all(x['ledger_status']=='failed' and not x['safe_to_retry'] for x in observations)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,71 @@
+{
+  "request": {
+    "operation_id": "B-PR28-INTEGRITY-DEFER-20261015-v1",
+    "task_id": "B-RUNTIME-REPAIR-20261015",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "359304b20f43b516ae20aafeb7c24ca6f6bb58e2",
+    "test_steps": [
+      "python -B -X utf8 -m unittest tests.test_rpc tests.test_rpc_frames tests.test_app_server tests.test_app_gateway tests.test_controller tests.test_controller_continuity tests.test_store tests.test_runtime tests.test_sessions tests.test_routing_hardening tests.test_project_control tests.test_work_leases tests.test_runtime_integrity -q"
+    ],
+    "expected_result": "168 offline software tests pass; corrupt runtime validation remains fail-closed and untouched messages persist as queued with node cooldown; historical failed/ambiguous work is not replayed. No service deployment or board/product acceptance."
+  },
+  "artifacts": [
+    "fpga_mesh/app_server.py",
+    "fpga_mesh/gateway.py",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/README.md",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/baseline-probe-result.json",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/baseline-probe-stderr.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/baseline-probe-stdout.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/fixed-probe-original-stderr.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/fixed-probe-original-stdout.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/fixed-probe-result.json",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/main-review.json",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/probe_cache_failure.py",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/regression-result.json",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/regression-stderr.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/regression-stdout.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/source-validation.json",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/worker-final/test_run.stderr.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/worker-final/test_run.stdout.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/worker-final/test_run_meta.json",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/worker-initial-failure/test_run.stderr.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/worker-initial-failure/test_run.stdout.txt",
+    "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/worker-initial-failure/test_run_meta.json",
+    "tests/test_runtime_integrity.py"
+  ],
+  "stages": {
+    "software_regression": {
+      "status": "passed",
+      "log": "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/regression-stderr.txt"
+    },
+    "main_evidence_review": {
+      "status": "passed",
+      "log": "handoffs/node-b/B-PR28-INTEGRITY-DEFER-20261015-v1/main-review.json"
+    },
+    "final_service_reload": {
+      "status": "blocked"
+    },
+    "new_live_tool_operation": {
+      "status": "not_run"
+    },
+    "A_exact_head_review": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "product_system_acceptance": {
+      "status": "not_run"
+    }
+  }
+}

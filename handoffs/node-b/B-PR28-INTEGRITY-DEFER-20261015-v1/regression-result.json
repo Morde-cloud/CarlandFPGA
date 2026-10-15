@@ -1,0 +1,39 @@
+{
+  "started_at": "2026-10-15T16:21:09.454907+00:00",
+  "finished_at": "2026-10-15T16:21:20.110962+00:00",
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_rpc",
+    "tests.test_rpc_frames",
+    "tests.test_app_server",
+    "tests.test_app_gateway",
+    "tests.test_controller",
+    "tests.test_controller_continuity",
+    "tests.test_store",
+    "tests.test_runtime",
+    "tests.test_sessions",
+    "tests.test_routing_hardening",
+    "tests.test_project_control",
+    "tests.test_work_leases",
+    "tests.test_runtime_integrity",
+    "-q"
+  ],
+  "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-repair-20261015",
+  "exit_code": 0,
+  "source_base": "30de232e66b984d13acdcbf7788631ed49be2151",
+  "main_added_check": "reopen both MainSessionRouter and SQLiteStore in restart/recovery scenarios after child stopped; queued survives",
+  "source_sha256": {
+    "fpga_mesh/app_server.py": "bebdfc51d9e8be53a6e454b4b57d42ab7d64700c2e9db719c9d8a94a6057d27a",
+    "fpga_mesh/gateway.py": "4130e6a8a2a7b8c170295ebbc2fc9332f14ed0524d3d9eb814fa787ec148529f",
+    "tests/test_runtime_integrity.py": "ff525d05ca3e575d2fc77fc4016e0d782b64b0efb6da5b38978a06984e74b2b4"
+  },
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "bfee212dee5f45e6d83c9bb64f2d89562251365ee2a80cdcbb72261ec2fa94ad",
+  "reason_for_final_rerun": "new test normalized CRLF to repository LF before committing exact tested bytes; earlier run retained"
+}

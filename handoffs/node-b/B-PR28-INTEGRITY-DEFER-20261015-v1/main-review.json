@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-10-15T16:21:50.751077+00:00",
+  "reviewer_thread": "01a1403c-f38c-7a22-84f0-3a8f7103652c",
+  "mode": "criterion-and-execution-evidence review; no probabilistic score",
+  "work_id": "B-PR28-INTEGRITY-DEFER-20261015-v1",
+  "child_job": "child-aa4a71b299be40f480a0f49ba2279ccd",
+  "child_actual_thread": "01a1404a-acde-7de1-a4e8-a7eced4dba95",
+  "child_actual_turn": "01a14053-dc5a-77e1-b3d9-624223a58b38",
+  "child_actual_model": "deepseek-flash/max",
+  "child_stopped": "completed terminal persisted result and subprocess exit0; no spawned service/background process reported",
+  "ownership_transfer": "new test file returned to main after actual child completion; main reopened router in two tests and normalized LF",
+  "raw_log_hashes_verified": {
+    "stdout_sha256": true,
+    "stderr_sha256": true
+  },
+  "review_findings": [
+    "Typed RuntimeIntegrityError is raised only by immutable-cache verification; existing RuntimeError callers remain compatible.",
+    "Only initialization maps the typed error to pre-turn deferral; error at turn/start remains ambiguous and terminal, no auto replay.",
+    "Existing controller persists queued run, per-message retry and node cooldown, preventing cascade failures; controls still use unchanged dispatch rules.",
+    "Real temporary SQLite stores and reopened MainSessionRouter verify queued persistence, independent inbox remains untouched, fake runtime repair resumes remaining work once.",
+    "Prior failed/interrupted main IDs retain evidence and reject reexecution.",
+    "No cache repair/deletion, runtime deployment, credentials or product changes added."
+  ],
+  "limitations": [
+    "Offline fake runtime bytes; no new live backend smoke or service reload.",
+    "Existing 54-second smoke predates final crash fence and this P2 fix.",
+    "Current desktop permanent wakeup and pre-login reboot recovery remain unverified."
+  ],
+  "child_original_failure": "First test run failed a test-side request-recording assertion. Raw run1 and correction preserved; final child ran7/7. Parent reviewed and ran168-suite.",
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

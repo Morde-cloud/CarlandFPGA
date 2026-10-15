@@ -1,0 +1,19 @@
+....F..
+======================================================================
+FAIL: test_post_start_integrity_error_stays_terminal_without_retry (__main__.RuntimeIntegrityTests.test_post_start_integrity_error_stays_terminal_without_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-repair-20261015\tests\test_runtime_integrity.py", line 449, in test_post_start_integrity_error_stays_terminal_without_retry
+    self.assertEqual(turn_starts, 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.220s
+
+FAILED (failures=1)

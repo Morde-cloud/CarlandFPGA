@@ -1,0 +1,35 @@
+{
+  "recorded_at": "2026-10-15T16:15:56.968249+00:00",
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-c",
+    "import runpy; runpy.run_path('D:\\\\pynq\\\\CarlandFPGA\\\\.local\\\\deployment\\\\node-b\\\\main-handoff-20261015\\\\continuation-01a1403c\\\\pr28-integrity\\\\probe_cache_failure.py', run_name=\"__main__\")"
+  ],
+  "exit_code": 1,
+  "probe_expected_failure": true,
+  "meaning": "Unmodified A probe still asserts old failed behavior; its AssertionError is expected after fix. Parent independently parsed actual result and verified both queued, retryable, zero turn requests.",
+  "parent_assertions_passed": true,
+  "raw_stdout_sha256": "b4644a3aeeb13446d1a467cc20b9c7dd3d7d4ed69b1e06e22f4e8016aab1ae77",
+  "raw_stderr_sha256": "e7e89b2f37c6dfaf86d07099e90c81d3bc0aae17524163869de47fc0614a440b",
+  "observation": {
+    "scope": "offline fake bundle; no executable/model/service invoked",
+    "client_factory_attempts": 2,
+    "turn_requests_sent": 0,
+    "observations": [
+      {
+        "message_id": "offline-cache-1",
+        "error_class": "GatewayNotStartedError",
+        "safe_to_retry": true,
+        "ledger_status": "queued"
+      },
+      {
+        "message_id": "offline-cache-2",
+        "error_class": "GatewayNotStartedError",
+        "safe_to_retry": true,
+        "ledger_status": "queued"
+      }
+    ]
+  }
+}

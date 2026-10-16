@@ -9,6 +9,59 @@ from fpga_mesh.distribution import build_archive, select_package_paths
 
 
 class DistributionTests(unittest.TestCase):
+    def test_task_identifiers_and_historical_evidence_remain_packageable(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            # Construct the identifier so this regression file also remains
+            # packageable with the old scanner while reproducing its failure.
+            content = ("task-" + "a1" * 12 + "\n").encode("ascii")
+            (root / "receipt.txt").write_bytes(content)
+            output = root / "receipt.zip"
+            build_archive(root, ["receipt.txt"], output)
+            with zipfile.ZipFile(output) as archive:
+                self.assertEqual(archive.read("receipt.txt"), content)
+            repository = Path(__file__).resolve().parents[1]
+            historical = "docs/deployment/evidence/B-INTERRUPT-20261014/README.md"
+            build_archive(repository, [historical], root / "historical.zip")
+            with zipfile.ZipFile(root / "historical.zip") as archive:
+                self.assertEqual(archive.read(historical),
+                                 (repository / historical).read_bytes())
+
+    def test_standalone_keys_and_separator_prefixed_keys_are_rejected(self):
+        key = "sk-" + "a" * 40
+        prefixes = ("", " ", "\n", '"', "'", "=", ":", "/", "\\", "-", "(", "中文")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for prefix in prefixes:
+                with self.subTest(prefix=prefix):
+                    (root / "receipt.txt").write_text(prefix + key, encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "key-like"):
+                        build_archive(root, ["receipt.txt"], root / "bad.zip")
+
+    def test_task_identifier_does_not_exempt_real_key_in_same_file(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "receipt.txt").write_text(
+                "task-" + "a1" * 12 + "\napi_key=" + "sk-" + "b" * 40,
+                encoding="ascii",
+            )
+            with self.assertRaisesRegex(ValueError, "key-like"):
+                build_archive(root, ["receipt.txt"], root / "bad.zip")
+
+    def test_all_supported_private_key_headers_remain_rejected(self):
+        kinds = ("", "OPENSSH ", "RSA ", "EC ", "DSA ", "ENCRYPTED ", "PGP ")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for kind in kinds:
+                with self.subTest(kind=kind):
+                    suffix = "KEY BLOCK-----" if kind == "PGP " else "KEY-----"
+                    # A neighboring identifier must not scope the PEM/PGP
+                    # alternatives under the new sk-token boundary.
+                    content = "identifier-----BEGIN " + kind + "PRIVATE " + suffix
+                    (root / "receipt.txt").write_text(content, encoding="ascii")
+                    with self.assertRaisesRegex(ValueError, "key-like"):
+                        build_archive(root, ["receipt.txt"], root / "bad.zip")
+
     def test_mesh_archive_can_include_its_own_distribution_module(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(__file__).resolve().parents[1]

@@ -1,0 +1,987 @@
+{
+  "schema": 1,
+  "abi_version": 3,
+  "layout_revision": 1,
+  "owner": "A-main",
+  "status": "wire_layout_and_host_contract_frozen_full_R03_not_run",
+  "implementation_task": {
+    "id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "version": 1
+  },
+  "design": {
+    "commit": "1011259415a0916054eb580687612580bc1e5f09",
+    "version": 5,
+    "technical_revision": 1
+  },
+  "immutable_scope_id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "immutable_scope_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "byte_order": "little",
+  "magic_hex": "a55a",
+  "header_format": "<2sBBBBHI",
+  "header_bytes": 12,
+  "crc_bytes": 2,
+  "max_payload_bytes": 32,
+  "header_fields": [
+    "magic",
+    "version",
+    "type",
+    "payload_len",
+    "config_epoch",
+    "seq",
+    "tick_ms"
+  ],
+  "crc": {
+    "name": "CRC16/CCITT-FALSE",
+    "polynomial": 4129,
+    "initial": 65535,
+    "reflect_input": false,
+    "reflect_output": false,
+    "xorout": 0,
+    "coverage": "version byte through final payload byte; excludes magic and CRC",
+    "wire_byte_order": "little",
+    "check_ascii_123456789": 10673
+  },
+  "frames": {
+    "TELEM": {
+      "type": 1,
+      "payload_bytes": 18,
+      "frame_bytes": 32,
+      "fields": [
+        {
+          "name": "mean",
+          "type": "u16x4",
+          "payload_offset": 0,
+          "bytes": 8
+        },
+        {
+          "name": "range",
+          "type": "u16x4",
+          "payload_offset": 8,
+          "bytes": 8
+        },
+        {
+          "name": "quality_flags",
+          "type": "u16",
+          "payload_offset": 16,
+          "bytes": 2
+        }
+      ]
+    },
+    "EVENT": {
+      "type": 2,
+      "payload_bytes": 6,
+      "frame_bytes": 20,
+      "fields": [
+        {
+          "name": "bitmap",
+          "type": "u16",
+          "payload_offset": 0,
+          "bytes": 2
+        },
+        {
+          "name": "channel",
+          "type": "u8",
+          "payload_offset": 2,
+          "bytes": 1
+        },
+        {
+          "name": "severity",
+          "type": "u8",
+          "payload_offset": 3,
+          "bytes": 1
+        },
+        {
+          "name": "peak",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        }
+      ]
+    },
+    "CONTROL": {
+      "type": 3,
+      "payload_bytes": 14,
+      "frame_bytes": 28,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "cmd_id",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "action",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "yaw_q",
+          "type": "i16",
+          "payload_offset": 7,
+          "bytes": 2
+        },
+        {
+          "name": "speed_code",
+          "type": "u8",
+          "payload_offset": 9,
+          "bytes": 1
+        },
+        {
+          "name": "ttl_ms",
+          "type": "u16",
+          "payload_offset": 10,
+          "bytes": 2
+        },
+        {
+          "name": "observed_seq",
+          "type": "u16",
+          "payload_offset": 12,
+          "bytes": 2
+        }
+      ]
+    },
+    "ACK": {
+      "type": 4,
+      "payload_bytes": 18,
+      "frame_bytes": 32,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "request_seq",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "request_type",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "phase",
+          "type": "u8",
+          "payload_offset": 7,
+          "bytes": 1
+        },
+        {
+          "name": "captured_yaw",
+          "type": "i16",
+          "payload_offset": 8,
+          "bytes": 2
+        },
+        {
+          "name": "captured_speed",
+          "type": "u8",
+          "payload_offset": 10,
+          "bytes": 1
+        },
+        {
+          "name": "remaining_ttl_ms",
+          "type": "u16",
+          "payload_offset": 11,
+          "bytes": 2
+        },
+        {
+          "name": "fault_flags",
+          "type": "u8",
+          "payload_offset": 13,
+          "bytes": 1
+        },
+        {
+          "name": "capture_seq",
+          "type": "u16",
+          "payload_offset": 14,
+          "bytes": 2
+        },
+        {
+          "name": "control_epoch",
+          "type": "u8",
+          "payload_offset": 16,
+          "bytes": 1
+        },
+        {
+          "name": "capture_quality",
+          "type": "u8",
+          "payload_offset": 17,
+          "bytes": 1
+        }
+      ]
+    },
+    "CONFIG": {
+      "type": 5,
+      "payload_bytes": 10,
+      "frame_bytes": 24,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "profile",
+          "type": "u8",
+          "payload_offset": 4,
+          "bytes": 1
+        },
+        {
+          "name": "error_bound",
+          "type": "u8",
+          "payload_offset": 5,
+          "bytes": 1
+        },
+        {
+          "name": "rate",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "threshold",
+          "type": "u16",
+          "payload_offset": 7,
+          "bytes": 2
+        },
+        {
+          "name": "apply_block",
+          "type": "u8",
+          "payload_offset": 9,
+          "bytes": 1
+        }
+      ]
+    },
+    "HELLO": {
+      "type": 6,
+      "payload_bytes": 4,
+      "frame_bytes": 18,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        }
+      ]
+    },
+    "STATE": {
+      "type": 8,
+      "payload_bytes": 18,
+      "frame_bytes": 32,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "last_control_seq",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "captured_yaw",
+          "type": "i16",
+          "payload_offset": 6,
+          "bytes": 2
+        },
+        {
+          "name": "captured_speed",
+          "type": "u8",
+          "payload_offset": 8,
+          "bytes": 1
+        },
+        {
+          "name": "phase",
+          "type": "u8",
+          "payload_offset": 9,
+          "bytes": 1
+        },
+        {
+          "name": "remaining_ttl_ms",
+          "type": "u16",
+          "payload_offset": 10,
+          "bytes": 2
+        },
+        {
+          "name": "fault_flags",
+          "type": "u16",
+          "payload_offset": 12,
+          "bytes": 2
+        },
+        {
+          "name": "capture_seq",
+          "type": "u16",
+          "payload_offset": 14,
+          "bytes": 2
+        },
+        {
+          "name": "control_epoch",
+          "type": "u8",
+          "payload_offset": 16,
+          "bytes": 1
+        },
+        {
+          "name": "capture_quality",
+          "type": "u8",
+          "payload_offset": 17,
+          "bytes": 1
+        }
+      ]
+    },
+    "CONFIG_ACK": {
+      "type": 9,
+      "payload_bytes": 18,
+      "frame_bytes": 32,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "request_seq",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "request_type",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "phase",
+          "type": "u8",
+          "payload_offset": 7,
+          "bytes": 1
+        },
+        {
+          "name": "profile",
+          "type": "u8",
+          "payload_offset": 8,
+          "bytes": 1
+        },
+        {
+          "name": "error_bound",
+          "type": "u8",
+          "payload_offset": 9,
+          "bytes": 1
+        },
+        {
+          "name": "rate",
+          "type": "u8",
+          "payload_offset": 10,
+          "bytes": 1
+        },
+        {
+          "name": "threshold",
+          "type": "u16",
+          "payload_offset": 11,
+          "bytes": 2
+        },
+        {
+          "name": "apply_block",
+          "type": "u8",
+          "payload_offset": 13,
+          "bytes": 1
+        },
+        {
+          "name": "quality",
+          "type": "u8",
+          "payload_offset": 14,
+          "bytes": 1
+        },
+        {
+          "name": "applied_epoch",
+          "type": "u8",
+          "payload_offset": 15,
+          "bytes": 1
+        },
+        {
+          "name": "first_sample_index_low",
+          "type": "u16",
+          "payload_offset": 16,
+          "bytes": 2
+        }
+      ]
+    },
+    "GAIN": {
+      "type": 10,
+      "payload_bytes": 10,
+      "frame_bytes": 24,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "gain_code",
+          "type": "u8",
+          "payload_offset": 4,
+          "bytes": 1
+        },
+        {
+          "name": "channel",
+          "type": "u8",
+          "payload_offset": 5,
+          "bytes": 1
+        },
+        {
+          "name": "ttl_ms",
+          "type": "u16",
+          "payload_offset": 6,
+          "bytes": 2
+        },
+        {
+          "name": "observed_seq",
+          "type": "u16",
+          "payload_offset": 8,
+          "bytes": 2
+        }
+      ]
+    },
+    "GAIN_ACK": {
+      "type": 11,
+      "payload_bytes": 18,
+      "frame_bytes": 32,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "request_seq",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "request_type",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "phase",
+          "type": "u8",
+          "payload_offset": 7,
+          "bytes": 1
+        },
+        {
+          "name": "gain_code",
+          "type": "u8",
+          "payload_offset": 8,
+          "bytes": 1
+        },
+        {
+          "name": "measured_ratio_q8_8",
+          "type": "u16",
+          "payload_offset": 9,
+          "bytes": 2
+        },
+        {
+          "name": "remaining_ttl_ms",
+          "type": "u16",
+          "payload_offset": 11,
+          "bytes": 2
+        },
+        {
+          "name": "fault_flags",
+          "type": "u16",
+          "payload_offset": 13,
+          "bytes": 2
+        },
+        {
+          "name": "capture_seq",
+          "type": "u16",
+          "payload_offset": 15,
+          "bytes": 2
+        },
+        {
+          "name": "quality",
+          "type": "u8",
+          "payload_offset": 17,
+          "bytes": 1
+        }
+      ]
+    },
+    "BOOT": {
+      "type": 12,
+      "payload_bytes": 27,
+      "frame_bytes": 41,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "mode",
+          "type": "u8",
+          "payload_offset": 4,
+          "bytes": 1
+        },
+        {
+          "name": "slot_profile_sha128",
+          "type": "bytes16",
+          "payload_offset": 5,
+          "bytes": 16
+        },
+        {
+          "name": "guard_total_ms",
+          "type": "u16",
+          "payload_offset": 21,
+          "bytes": 2
+        },
+        {
+          "name": "primary_slot_ms",
+          "type": "u16",
+          "payload_offset": 23,
+          "bytes": 2
+        },
+        {
+          "name": "config_slot_ms",
+          "type": "u16",
+          "payload_offset": 25,
+          "bytes": 2
+        }
+      ]
+    },
+    "BOOT_ACK": {
+      "type": 13,
+      "payload_bytes": 27,
+      "frame_bytes": 41,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "mode",
+          "type": "u8",
+          "payload_offset": 4,
+          "bytes": 1
+        },
+        {
+          "name": "slot_profile_sha128",
+          "type": "bytes16",
+          "payload_offset": 5,
+          "bytes": 16
+        },
+        {
+          "name": "guard_total_ms",
+          "type": "u16",
+          "payload_offset": 21,
+          "bytes": 2
+        },
+        {
+          "name": "primary_slot_ms",
+          "type": "u16",
+          "payload_offset": 23,
+          "bytes": 2
+        },
+        {
+          "name": "config_slot_ms",
+          "type": "u16",
+          "payload_offset": 25,
+          "bytes": 2
+        }
+      ]
+    },
+    "CONTROL3D": {
+      "type": 14,
+      "payload_bytes": 16,
+      "frame_bytes": 30,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "cmd_id",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "action",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "yaw_q",
+          "type": "i16",
+          "payload_offset": 7,
+          "bytes": 2
+        },
+        {
+          "name": "pitch_q",
+          "type": "i16",
+          "payload_offset": 9,
+          "bytes": 2
+        },
+        {
+          "name": "speed_code",
+          "type": "u8",
+          "payload_offset": 11,
+          "bytes": 1
+        },
+        {
+          "name": "ttl_ms",
+          "type": "u16",
+          "payload_offset": 12,
+          "bytes": 2
+        },
+        {
+          "name": "observed_seq",
+          "type": "u16",
+          "payload_offset": 14,
+          "bytes": 2
+        }
+      ]
+    },
+    "ACK3D": {
+      "type": 15,
+      "payload_bytes": 20,
+      "frame_bytes": 34,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "request_seq",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "request_type",
+          "type": "u8",
+          "payload_offset": 6,
+          "bytes": 1
+        },
+        {
+          "name": "phase",
+          "type": "u8",
+          "payload_offset": 7,
+          "bytes": 1
+        },
+        {
+          "name": "captured_yaw",
+          "type": "i16",
+          "payload_offset": 8,
+          "bytes": 2
+        },
+        {
+          "name": "captured_pitch",
+          "type": "i16",
+          "payload_offset": 10,
+          "bytes": 2
+        },
+        {
+          "name": "captured_speed",
+          "type": "u8",
+          "payload_offset": 12,
+          "bytes": 1
+        },
+        {
+          "name": "remaining_ttl_ms",
+          "type": "u16",
+          "payload_offset": 13,
+          "bytes": 2
+        },
+        {
+          "name": "fault_flags",
+          "type": "u8",
+          "payload_offset": 15,
+          "bytes": 1
+        },
+        {
+          "name": "capture_seq",
+          "type": "u16",
+          "payload_offset": 16,
+          "bytes": 2
+        },
+        {
+          "name": "control_epoch",
+          "type": "u8",
+          "payload_offset": 18,
+          "bytes": 1
+        },
+        {
+          "name": "capture_quality",
+          "type": "u8",
+          "payload_offset": 19,
+          "bytes": 1
+        }
+      ]
+    },
+    "STATE3D": {
+      "type": 16,
+      "payload_bytes": 20,
+      "frame_bytes": 34,
+      "fields": [
+        {
+          "name": "session",
+          "type": "u32",
+          "payload_offset": 0,
+          "bytes": 4
+        },
+        {
+          "name": "last_control_seq",
+          "type": "u16",
+          "payload_offset": 4,
+          "bytes": 2
+        },
+        {
+          "name": "captured_yaw",
+          "type": "i16",
+          "payload_offset": 6,
+          "bytes": 2
+        },
+        {
+          "name": "captured_pitch",
+          "type": "i16",
+          "payload_offset": 8,
+          "bytes": 2
+        },
+        {
+          "name": "captured_speed",
+          "type": "u8",
+          "payload_offset": 10,
+          "bytes": 1
+        },
+        {
+          "name": "phase",
+          "type": "u8",
+          "payload_offset": 11,
+          "bytes": 1
+        },
+        {
+          "name": "remaining_ttl_ms",
+          "type": "u16",
+          "payload_offset": 12,
+          "bytes": 2
+        },
+        {
+          "name": "fault_flags",
+          "type": "u16",
+          "payload_offset": 14,
+          "bytes": 2
+        },
+        {
+          "name": "capture_seq",
+          "type": "u16",
+          "payload_offset": 16,
+          "bytes": 2
+        },
+        {
+          "name": "control_epoch",
+          "type": "u8",
+          "payload_offset": 18,
+          "bytes": 1
+        },
+        {
+          "name": "capture_quality",
+          "type": "u8",
+          "payload_offset": 19,
+          "bytes": 1
+        }
+      ]
+    }
+  },
+  "trace": {
+    "type": 7,
+    "max_payload_bytes": 32,
+    "status": "codec payload must be supplied by B and accepted by A; cannot ENABLE TRACE until frozen"
+  },
+  "legacy_diagnostic_only_types": [
+    3,
+    4
+  ],
+  "phase_codes": {
+    "stopped": 0,
+    "accepted": 1,
+    "applied": 2,
+    "captured": 3,
+    "rejected": 4
+  },
+  "phase_meaning": "accepted/applied are not physical capture; stopped/rejected cannot authorize motion",
+  "request_key": [
+    "session",
+    "request_type",
+    "header.seq"
+  ],
+  "cmd_id_equals_header_seq": true,
+  "duplicate_policy": "same key+payload retains first application/deadline; rebuild current response tick/remaining TTL/CRC, never cache a stale full frame; different payload rejects",
+  "wrap_policy": "stop and establish new session before seq or epoch wraps",
+  "summary_samples": {
+    "fast_9600": 50,
+    "stress_300": 800
+  },
+  "quality_bits": {
+    "valid": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "saturated": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "held": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "source_fault": 12,
+    "grants": [
+      13,
+      14,
+      15
+    ]
+  },
+  "timing_semantics": {
+    "TELEM": "last included sample acquisition tick",
+    "EVENT": "trigger sample acquisition tick",
+    "ACK_STATE": "first byte transmit tick; remaining TTL sampled for this response"
+  },
+  "motion_wire": {
+    "angular_rate_quantum_deg_s": 0.001,
+    "q_min": -15000,
+    "q_max": 15000,
+    "curvature_limit_per_m": 0.5,
+    "meaning": "target-speed angular-rate reference; applied omega(t)=actual_speed(t)*kappa_cmd",
+    "zero_speed_requires_zero_q": true,
+    "postquantization_vector_check": "qyaw^2+qpitch^2<=floor((v_target*180000/(2*pi))^2) conservative ROM; reject not clip",
+    "intermediate_bits": 64,
+    "candidate_pwm": {
+      "period_ticks": 2000000,
+      "clock_hz": 100000000,
+      "angle_high_ticks": "10000+16*(q+15000)",
+      "speed_high_ticks": "50000+1000*speed_code",
+      "capture_tolerance_ticks": "<=2 ticks, < half-code 8 ticks; actual HIL validation required"
+    }
+  },
+  "runtime_gates": {
+    "pc_direct_observation_age_limit_ms": {
+      "fast_9600": 1500,
+      "stress_300": 12000
+    },
+    "sensor_source_heartbeat_timeout_ms": 100,
+    "telem_tick_semantics": "last included sample acquisition tick, not frame transmission time",
+    "only_past_sensor_samples_may_be_injected": true,
+    "summary_samples": {
+      "fast_9600": 50,
+      "stress_300": 800
+    },
+    "pose_assignment": "historical odometry over acquisition window; never receipt current pose",
+    "quality_bits": {
+      "valid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "saturated": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "held": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "source_fault": 12,
+      "grants": [
+        13,
+        14,
+        15
+      ]
+    },
+    "event_tick_semantics": "trigger sample acquisition tick",
+    "candidate_mailbox": "latest completed bounded mailbox; defer to next legal slot while fresh, no old-result overwrite",
+    "fpga_observation_history": 4,
+    "hil_observation_age_limit_ms": {
+      "fast_9600": 1500,
+      "stress_300": 12000
+    },
+    "hil_deadline": "min(first_send+originalTTL, current_remainingTTL conservative limit, referenced_sample_tick+observation_age_limit)",
+    "capture_raw_counts": "local PL registers/evidence only, not additional online frame bytes"
+  },
+  "source_mode_required_in_host_evidence": true,
+  "source_modes": [
+    "sensor_live",
+    "geo_replay",
+    "twin_fixture",
+    "software_fixture"
+  ],
+  "gain_code_to_multiplier": {
+    "0": 1,
+    "1": 2,
+    "2": 4,
+    "4": 8
+  },
+  "gain_ratio_source": "independent calibrated before/after ADC; MCP6S21 has no SPI SO readback",
+  "remaining_R03_gates": [
+    "TRACE payload/codec finalization and independent vectors",
+    "register bitfields, reset semantics and matched HWH integration",
+    "stateful observation history/latest-completed mailbox/request replay and seq/epoch rollover integration",
+    "B/C independent byte interoperability on the published exact candidate",
+    "host process ACL isolation and mode-specific end-to-end runtime",
+    "measured USB/clock/holdover/channel calibration and actual IO capture before ENABLE"
+  ],
+  "hardware_status": "not_run",
+  "contract_revision": 3,
+  "enumerations": "enums.json",
+  "host_pipe_schema": "host_contract.json",
+  "host_time_mapping": "host_timing_contract.md",
+  "hardware_enable_eligible": false,
+  "local_reference_components": [
+    "15 fixed ABI3 frame layouts with saved independent framing vectors",
+    "strict host-envelope validation including STATE8 authority-only PC_DIRECT heartbeat",
+    "bounded clock arithmetic and non-renewing deadline reference",
+    "BOOT actual protocol-file digest binding and exact request-sequence/epoch echo",
+    "all six mode schedules, nominal half-duplex/guard checks and 216 mixed three-window cases per profile including partial frames",
+    "local pipeline terminal/provenance/ownership self-tests"
+  ],
+  "boot_ack_correlation": "BOOT_ACK header.sequence echoes BOOT header.sequence; epoch must match the proposed stopped-state epoch; session,mode,sha128,guard and slot fields exactly echo. Requires new session on mode/profile change.",
+  "pc_direct_heartbeat": "STATE 0x08 32B through board_response is authority-only clock/health diagnostic; never movement capture, observation freshness or deadline renewal."
+}

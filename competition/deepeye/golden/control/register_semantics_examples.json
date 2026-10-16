@@ -1,0 +1,263 @@
+{
+  "candidate_only": true,
+  "examples": [
+    {
+      "little_endian_bytes_hex": "68c5ffff",
+      "name": "signed_yaw_min",
+      "offset": "0x30",
+      "value": -15000,
+      "word_hex": "0xffffc568"
+    },
+    {
+      "little_endian_bytes_hex": "983a0000",
+      "name": "signed_yaw_max",
+      "offset": "0x30",
+      "value": 15000,
+      "word_hex": "0x00003a98"
+    },
+    {
+      "little_endian_bytes_hex": "ffffffff",
+      "name": "signed_pitch_minus_one",
+      "offset": "0x60",
+      "value": -1,
+      "word_hex": "0xffffffff"
+    },
+    {
+      "name": "speed_max",
+      "offset": "0x34",
+      "value": 20,
+      "word_hex": "0x00000014"
+    },
+    {
+      "fields": {
+        "apply_block": 86,
+        "threshold": 4660
+      },
+      "name": "config_shadow_pair",
+      "offset": "0x10",
+      "word_hex": "0x00561234"
+    },
+    {
+      "fields": {
+        "control_epoch": 171,
+        "request_seq": 4660,
+        "request_type": 14
+      },
+      "name": "motion_stamp",
+      "offset": "0x38",
+      "word_hex": "0x0eab1234"
+    },
+    {
+      "name": "sample_tick_pair",
+      "synthetic_counter_only": true,
+      "value_hex": "0x0123456789abcdef",
+      "words": {
+        "0x40": "0x89abcdef",
+        "0x44": "0x01234567"
+      }
+    },
+    {
+      "name": "candidate_yaw_period_pair",
+      "not_measured": true,
+      "value": 2000000,
+      "words": {
+        "0x48": "0x001e8480",
+        "0x4c": "0x00000000"
+      }
+    },
+    {
+      "name": "capture_wire_max",
+      "offset": "0x50",
+      "value": 65535,
+      "word_hex": "0x0000ffff"
+    },
+    {
+      "expected": "reject projection; new wire session/explicit A mapping required",
+      "name": "capture_local_batch_no_truncation",
+      "offset": "0x50",
+      "value": 65536
+    },
+    {
+      "expected": "reject projection",
+      "name": "last_observation_no_truncation",
+      "offset": "0x70",
+      "value": 65536
+    },
+    {
+      "name": "capture_quality_all4",
+      "offset": "0x54",
+      "requires": "coherent/current authenticated context and independent physical evidence",
+      "word_hex": "0x0000000f"
+    },
+    {
+      "expected": "reject reserved bit4",
+      "name": "capture_quality_reserved",
+      "offset": "0x54",
+      "word_hex": "0x0000001f"
+    },
+    {
+      "multiplier": 8,
+      "name": "gain_code_8x",
+      "not_physical_readback": true,
+      "offset": "0x58",
+      "value": 4,
+      "word_hex": "0x00000004"
+    },
+    {
+      "expected": "reject undefined gain code",
+      "name": "gain_code_invalid",
+      "offset": "0x58",
+      "value": 3
+    },
+    {
+      "name": "ratio_one_and_half",
+      "not_measured": true,
+      "offset": "0x5c",
+      "ratio_denominator": 2,
+      "ratio_numerator": 3,
+      "word_hex": "0x00000180"
+    },
+    {
+      "gain_ratio_valid": false,
+      "name": "ratio_invalid_reset",
+      "offset": "0x5c",
+      "word_hex": "0x00000000"
+    },
+    {
+      "fields": {
+        "capacity_entries": 256,
+        "used_entries": 3
+      },
+      "name": "queue_example",
+      "not_implemented_capacity": true,
+      "offset": "0x24",
+      "word_hex": "0x01000003"
+    },
+    {
+      "fields": {
+        "merged_events": 9,
+        "overflow_events": 7
+      },
+      "name": "overflow_merge_example",
+      "offset": "0x28",
+      "word_hex": "0x00090007"
+    },
+    {
+      "expected": 65535,
+      "increments": 2,
+      "initial": 65534,
+      "name": "counter_saturates"
+    },
+    {
+      "hardware_enable_eligible": false,
+      "name": "reset_status",
+      "offset": "0x0c",
+      "word_hex": "0x00000001"
+    },
+    {
+      "hardware_enable_eligible": false,
+      "name": "encoded_active_snapshot",
+      "offset": "0x0c",
+      "set_bits": [
+        2,
+        3,
+        4,
+        6,
+        10
+      ],
+      "word_hex": "0x0000045c"
+    },
+    {
+      "hardware_enable_eligible": false,
+      "name": "encoded_capture_fault_stop",
+      "offset": "0x0c",
+      "set_bits": [
+        0,
+        1,
+        20
+      ],
+      "word_hex": "0x00100003"
+    },
+    {
+      "data_hex": "0x00000005",
+      "expected": "STOP only; no enable",
+      "name": "stop_wins_enable",
+      "offset": "0x08",
+      "wstrb": 15
+    },
+    {
+      "data_hex": "0xffffff05",
+      "expected": "STOP only; unstrobed upper bytes ignored",
+      "name": "stop_low_byte",
+      "offset": "0x08",
+      "wstrb": 1
+    },
+    {
+      "data_hex": "0x00000021",
+      "expected": "STOP executes; reserved strobed bit5 produces error after revocation",
+      "name": "stop_reserved_error",
+      "offset": "0x08",
+      "wstrb": 1
+    },
+    {
+      "data_hex": "0x00000006",
+      "expected": "reject; neither clear nor enable",
+      "name": "clear_and_enable_rejected",
+      "offset": "0x08",
+      "wstrb": 15
+    },
+    {
+      "data_hex": "0x00000004",
+      "expected": "reject partial command",
+      "name": "partial_enable_rejected",
+      "offset": "0x08",
+      "wstrb": 1
+    },
+    {
+      "data_hex": "0x00000001",
+      "expected": "no-op",
+      "name": "zero_strobe_control",
+      "offset": "0x08",
+      "wstrb": 0
+    },
+    {
+      "data_hex": "0x00000000",
+      "expected": "no_access error",
+      "name": "reserved_even_zero_strobe",
+      "offset": "0x2c",
+      "wstrb": 0
+    },
+    {
+      "data_hex": "0xffffff02",
+      "name": "shadow_byte_mask",
+      "new_word_hex": "0x00000002",
+      "offset": "0x1c",
+      "old_word_hex": "0x00000000",
+      "wstrb": 1
+    },
+    {
+      "data_hex": "0x00000003",
+      "expected": "reject; shadow remains2",
+      "name": "shadow_invalid_E_atomic",
+      "offset": "0x1c",
+      "old_word_hex": "0x00000002",
+      "wstrb": 1
+    },
+    {
+      "data_hex": "0x00000000",
+      "expected": "CONFIG request sequence0 if external A context permits; not no-op",
+      "name": "config_sequence_zero",
+      "offset": "0x14",
+      "wstrb": 15
+    },
+    {
+      "expected": "reject retired generation; cannot restore coherence",
+      "name": "post_stop_delayed_cdc"
+    },
+    {
+      "expected": "reject while latch outstanding; no bank replacement",
+      "name": "second_latch"
+    }
+  ],
+  "examples_are": "hand-derived encoding/design expectations, not executed hardware/runtime vectors"
+}

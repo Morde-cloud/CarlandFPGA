@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "owner": "A-main",
+  "status": "software_contract_frozen_runtime_not_run",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "immutable_scope_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "transport_profile_id": {
+    "fast_9600": 1,
+    "stress_300": 2
+  },
+  "source_id": {
+    "sensor_live": 1,
+    "geo_replay": 2,
+    "twin_fixture": 3,
+    "software_fixture": 4
+  },
+  "topology_id": {
+    "hil_pc_fpga": 1,
+    "pc_direct": 2,
+    "fpga_local": 3
+  },
+  "acquisition_profile_id": {
+    "em_surrogate_v2": 1,
+    "force_lithology_v1": 2,
+    "pga_voltage_v1": 3
+  },
+  "acquisition_profile_note": "CONFIG.profile refers to this table, not transport speed. Channel physical-to-ADC conversion/calibration is not implied by a profile name. Different profile/model domains remain separate.",
+  "boot_mode": {
+    "formula": "transport_profile_id | (source_id << 2) | (topology_id << 5)",
+    "transport_bits": [
+      0,
+      1
+    ],
+    "source_bits": [
+      2,
+      3,
+      4
+    ],
+    "topology_bits": [
+      5,
+      6
+    ],
+    "reserved_zero_bits": [
+      7
+    ],
+    "zero_or_unknown_field": "reject",
+    "configuration_change": "stop, new session, new complete canonical BOOT hash and matching BOOT_ACK before ENABLE; mode alone is insufficient"
+  },
+  "action": {
+    "STOP": 0,
+    "SET_TARGET": 1
+  },
+  "action_rules": {
+    "STOP": "same valid session/CRC; yaw_q=pitch_q=speed_code=ttl_ms=0; observed_seq ignored; no fresh observation required; never enables motion",
+    "SET_TARGET": "only after all ENABLE gates; same-session recent observed_seq; positive bounded TTL; validate quantized combined curvature before applying; duplicate does not renew TTL",
+    "unknown": "reject; no implicit enable/clear-fault action"
+  },
+  "fault_bits": {
+    "session_or_profile_mismatch": 0,
+    "invalid_request": 1,
+    "observation_stale_or_unknown": 2,
+    "ttl_expired": 3,
+    "capture_invalid": 4,
+    "sensor_source_fault": 5,
+    "transport_or_schedule_fault": 6,
+    "internal_or_clock_fault": 7
+  },
+  "fault_rules": "ACK3D uses 8 bits; STATE3D uses the identical low 8 and zero high 8. No fault means zero. Any fault prevents a new nonzero motion grant. Unknown/reserved nonzero flags are rejected, not ignored. Clearing faults and enabling remain separate stopped-state operations.",
+  "capture_quality_bits": {
+    "yaw_valid": 0,
+    "pitch_valid": 1,
+    "speed_valid": 2,
+    "all_periods_valid": 3
+  },
+  "capture_quality_reserved_zero_bits": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "capture_quality_rules": "HIL requires low mask15 plus independent physical validation for current BOOT profile. Encoded quality bits alone do not establish hardware evidence. PC_DIRECT never fabricates these bits as board motion capture.",
+  "phase": {
+    "stopped": 0,
+    "accepted": 1,
+    "applied": 2,
+    "captured": 3,
+    "rejected": 4
+  },
+  "unknown_enum_policy": "reject",
+  "hardware_enable_eligible": false,
+  "remaining_gates": [
+    "complete BOOT timing/profile canonical hash",
+    "channel scaling and calibration",
+    "measured USB/clock/holdover bounds",
+    "physical capture validation",
+    "cross-node byte interoperability"
+  ]
+}

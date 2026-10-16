@@ -1,0 +1,71 @@
+{
+  "status": "PASS_STATIC_DESCRIPTOR_REVIEW",
+  "register_rows": 29,
+  "fields": 51,
+  "hand_derived_examples": 35,
+  "arithmetic_examples_checked": 19,
+  "arithmetic_example_names": [
+    "signed_yaw_min",
+    "signed_yaw_max",
+    "signed_pitch_minus_one",
+    "speed_max",
+    "config_shadow_pair",
+    "motion_stamp",
+    "sample_tick_pair",
+    "candidate_yaw_period_pair",
+    "capture_wire_max",
+    "gain_code_8x",
+    "queue_example",
+    "overflow_merge_example",
+    "encoded_active_snapshot",
+    "encoded_capture_fault_stop",
+    "ratio_one_and_half",
+    "counter_saturates",
+    "capture_quality_all4",
+    "reset_status",
+    "ratio_invalid_reset"
+  ],
+  "rejected_field_encodings": 4,
+  "rejected_field_names": [
+    "capture_local_batch_no_truncation",
+    "last_observation_no_truncation",
+    "gain_code_invalid",
+    "capture_quality_reserved"
+  ],
+  "proposed_transition_examples_not_executed": true,
+  "external_domains_not_frozen": [
+    {
+      "offset": 12,
+      "field": "fault_flags",
+      "reference": "A enums.json fault_bits"
+    },
+    {
+      "offset": 24,
+      "field": "rate_code",
+      "reference": "A-approved CONFIG rate domain"
+    },
+    {
+      "offset": 32,
+      "field": "sensor_profile_id",
+      "reference": "A-approved sensor profile domain"
+    },
+    {
+      "offset": 108,
+      "field": "motion_profile_id",
+      "reference": "A-approved motion profile domain"
+    }
+  ],
+  "hashes": {
+    "descriptor": "73e288e65cb4116292cc81f8e623321b83836de6659d8607296b6ac70c815466",
+    "examples": "25ea5ad889f3ea6b3b8a521aa4b45f4a337589209633615126aa53a3bd9394af",
+    "register_source": "fd3d69509776829a4e33ea4f1a6ce8b39679bd101080b33dc2ff1df38c0a4f33",
+    "interface": "0577cba5bfeda43171483abc73545e45806c44ea5546d1bcb1d581cd49b450cb",
+    "enums": "a52f3631d94d396c7da769f82a09e70d55c765b0c2651de27476e644c486573e"
+  },
+  "runtime": false,
+  "simulation": false,
+  "synthesis": false,
+  "implementation": false,
+  "board": false,
+  "system": false
+}

@@ -1,0 +1,1032 @@
+{
+  "candidate_only": true,
+  "contract": {
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "revision": 1
+  },
+  "hardware_enable_eligible": false,
+  "input_commit": "66aa291d7f01cc3cfefb8c30c4e8ad3aec6547bd",
+  "numeric_word_order": "proposed little-endian byte lanes; paired u64 low word first under frozen latch",
+  "operation_id": "B-DEEPEYE-REGISTER-PROPOSAL-20261017-07",
+  "public_abi_frozen": false,
+  "register_csv_sha256": "fd3d69509776829a4e33ea4f1a6ce8b39679bd101080b33dc2ff1df38c0a4f33",
+  "registers": [
+    {
+      "offset": 0,
+      "proposal": {
+        "access": "RO_OWNER",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "identification",
+            "width": 32
+          }
+        ],
+        "meaning": "A-assigned identity requires matched new HWH/RTL; unknown reset.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "unknown",
+        "reset_value": null
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "identification",
+        "offset_hex": "0x00",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 4,
+      "proposal": {
+        "access": "RO_OWNER",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "abi_version",
+            "width": 32
+          }
+        ],
+        "meaning": "Proposed ABI3 constant; no claim of actual device readback.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 3
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "abi_version",
+        "offset_hex": "0x04",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 8,
+      "proposal": {
+        "access": "WO_CONTROL_COMMAND",
+        "defined_mask_hex": "0x0000001f",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "STOP",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 1,
+            "name": "CLEAR_FAULT",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 2,
+            "name": "ENABLE",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 3,
+            "name": "SNAPSHOT_LATCH",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 4,
+            "name": "SNAPSHOT_RELEASE",
+            "width": 1
+          }
+        ],
+        "meaning": "STOP priority and separated commands; zero readback is not an ACK.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffffe0",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "control",
+        "offset_hex": "0x08",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 12,
+      "proposal": {
+        "access": "RO_LIVE",
+        "defined_mask_hex": "0x00ff07ff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "stopped",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 1,
+            "name": "fault_latched",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 2,
+            "name": "snapshot_latched",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 3,
+            "name": "snapshot_coherent",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 4,
+            "name": "snapshot_available",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 5,
+            "name": "cdc_busy",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 6,
+            "name": "cdc_online",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 7,
+            "name": "config_dirty",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 8,
+            "name": "config_pending",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 9,
+            "name": "gain_ratio_valid",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 10,
+            "name": "enabled",
+            "width": 1
+          },
+          {
+            "domain": {
+              "kind": "A_owned_domain",
+              "reference": "A enums.json fault_bits"
+            },
+            "encoding": "unsigned",
+            "lsb": 16,
+            "name": "fault_flags",
+            "width": 8
+          }
+        ],
+        "meaning": "Live state/coherence of latched bank; fault meanings from A, no authority inferred from bits.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xff00f800",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 1
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "status",
+        "offset_hex": "0x0c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 16,
+      "proposal": {
+        "access": "RW_SHADOW",
+        "defined_mask_hex": "0x00ffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "threshold",
+            "width": 16
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 16,
+            "name": "apply_block",
+            "width": 8
+          }
+        ],
+        "meaning": "CONFIG threshold/apply_block proposal; meaning/domain need A approval.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xff000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "shadow_configuration",
+        "offset_hex": "0x10",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 20,
+      "proposal": {
+        "access": "WO_CONFIG_APPLY",
+        "defined_mask_hex": "0x0000ffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "request_seq",
+            "width": 16
+          }
+        ],
+        "meaning": "Full-strobe write triggers CONFIG staging, including value0/sequence0; no caller-authored epoch; A validates immutable context.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffff0000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "apply_request",
+        "offset_hex": "0x14",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 24,
+      "proposal": {
+        "access": "RW_SHADOW",
+        "defined_mask_hex": "0x000000ff",
+        "fields": [
+          {
+            "domain": {
+              "kind": "A_owned_domain",
+              "reference": "A-approved CONFIG rate domain"
+            },
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "rate_code",
+            "width": 8
+          }
+        ],
+        "meaning": "Code meaning/rate set pending A; reset0 unconfigured.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffff00",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "sample_rate",
+        "offset_hex": "0x18",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 28,
+      "proposal": {
+        "access": "RW_SHADOW",
+        "defined_mask_hex": "0x000000ff",
+        "fields": [
+          {
+            "domain": {
+              "kind": "enumeration",
+              "values": [
+                0,
+                1,
+                2,
+                4,
+                8
+              ]
+            },
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "E",
+            "width": 8
+          }
+        ],
+        "meaning": "Actual E, not index into E table; reset lossless0.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffff00",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "error_bound",
+        "offset_hex": "0x1c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 32,
+      "proposal": {
+        "access": "RW_SHADOW",
+        "defined_mask_hex": "0x000000ff",
+        "fields": [
+          {
+            "domain": {
+              "kind": "A_owned_domain",
+              "reference": "A-approved sensor profile domain"
+            },
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "sensor_profile_id",
+            "width": 8
+          }
+        ],
+        "meaning": "Reset0 is unconfigured; no validity from numeric0.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffff00",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "enum_pending_A_freeze",
+        "name": "profile",
+        "offset_hex": "0x20",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 36,
+      "proposal": {
+        "access": "RO_LIVE",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "used_entries",
+            "width": 16
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 16,
+            "name": "capacity_entries",
+            "width": 16
+          }
+        ],
+        "meaning": "Require0<=used<=capacity<=65535; A binds queue/unit; wider queues require another approved encoding.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "queue_status",
+        "offset_hex": "0x24",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 40,
+      "proposal": {
+        "access": "RO_LIVE",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "overflow_events",
+            "width": 16
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 16,
+            "name": "merged_events",
+            "width": 16
+          }
+        ],
+        "meaning": "Independent saturating16 counters; A defines attribution; never wrap.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "overflow_merge",
+        "offset_hex": "0x28",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 44,
+      "proposal": {
+        "access": "NO_ACCESS",
+        "defined_mask_hex": "0x00000000",
+        "fields": [],
+        "meaning": "No read/write/probe, including WSTRB0.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffffff",
+        "reset_validity": "unknown",
+        "reset_value": null
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "no_access",
+        "name": "reserved",
+        "offset_hex": "0x2c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 48,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "canonical_sign_extension_from_bits": 16,
+            "domain": {
+              "kind": "integer_range",
+              "maximum": 15000,
+              "minimum": -15000
+            },
+            "encoding": "twos_complement",
+            "lsb": 0,
+            "name": "captured_yaw_q",
+            "width": 32
+          }
+        ],
+        "meaning": "Canonical int16 sign extension to32; physical captured reference, not instantaneous angular motion.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "applied_yaw",
+        "offset_hex": "0x30",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 52,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x000000ff",
+        "fields": [
+          {
+            "domain": {
+              "kind": "integer_range",
+              "maximum": 20,
+              "minimum": 0
+            },
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "captured_speed_code",
+            "width": 8
+          }
+        ],
+        "meaning": "A motion profile supplies physical speed mapping; PC_DIRECT cannot fabricate physical capture.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffff00",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "applied_speed",
+        "offset_hex": "0x34",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 56,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "request_seq",
+            "width": 16
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 16,
+            "name": "control_epoch",
+            "width": 8
+          },
+          {
+            "domain": {
+              "kind": "enumeration",
+              "values": [
+                14
+              ]
+            },
+            "encoding": "unsigned",
+            "lsb": 24,
+            "name": "request_type",
+            "width": 8
+          }
+        ],
+        "meaning": "Valid motion stamp type0x0e only; reset0 invalid. CONFIG/GAIN do not fabricate a motion stamp.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "applied_request",
+        "offset_hex": "0x38",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 60,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "snapshot_session",
+            "width": 32
+          }
+        ],
+        "meaning": "Must match separately authenticated active A session.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "session",
+        "offset_hex": "0x3c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 64,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "sample_tick_low32",
+            "width": 32
+          }
+        ],
+        "meaning": "Low word of proposed u64 observation/acquisition counter; source/units/binding pending A.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "semantics_pending_A_freeze",
+        "name": "sample_tick_word0",
+        "offset_hex": "0x40",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 68,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "sample_tick_high32",
+            "width": 32
+          }
+        ],
+        "meaning": "High word of same latched u64 counter, not host receive/send time.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "semantics_pending_A_freeze",
+        "name": "sample_tick_word1",
+        "offset_hex": "0x44",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 72,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "yaw_capture_period_low32",
+            "width": 32
+          }
+        ],
+        "meaning": "B proposal for low word of yaw period u64; not existing A semantics.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "semantics_pending_A_freeze",
+        "name": "capture_period0",
+        "offset_hex": "0x48",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 76,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "yaw_capture_period_high32",
+            "width": 32
+          }
+        ],
+        "meaning": "B proposal for high word of yaw period u64; A must approve width/asymmetry; not a high-count alias.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "semantics_pending_A_freeze",
+        "name": "capture_period1",
+        "offset_hex": "0x4c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 80,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x0000ffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "wire_capture_seq",
+            "width": 16
+          }
+        ],
+        "meaning": "Wire16 counter; values>65535 reject, no truncation of local batch_seq32, new session before wrap.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffff0000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "capture_sequence",
+        "offset_hex": "0x50",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 84,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x0000000f",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "yaw_valid",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 1,
+            "name": "pitch_valid",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 2,
+            "name": "speed_valid",
+            "width": 1
+          },
+          {
+            "encoding": "unsigned",
+            "lsb": 3,
+            "name": "all_periods_valid",
+            "width": 1
+          }
+        ],
+        "meaning": "Mirrors A low4 meanings; additionally require current coherent/session/profile gates.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xfffffff0",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "bitfields_pending_A_freeze",
+        "name": "capture_quality",
+        "offset_hex": "0x54",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 88,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x000000ff",
+        "fields": [
+          {
+            "domain": {
+              "kind": "enumeration",
+              "values": [
+                0,
+                1,
+                2,
+                4
+              ]
+            },
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "applied_gain_code",
+            "width": 8
+          }
+        ],
+        "meaning": "Gain multipliers1/2/4/8 from A; code is not fictitious SPI SO readback.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffff00",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "gain",
+        "offset_hex": "0x58",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 92,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x0000ffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "measured_ratio_q8_8",
+            "width": 16
+          }
+        ],
+        "meaning": "Independent before/after ADC calibration ratio; near-zero/invalid/stale source invalidates ratio flag; zero reset invalid.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffff0000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "measured_ratio",
+        "offset_hex": "0x5c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 96,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "canonical_sign_extension_from_bits": 16,
+            "domain": {
+              "kind": "integer_range",
+              "maximum": 15000,
+              "minimum": -15000
+            },
+            "encoding": "twos_complement",
+            "lsb": 0,
+            "name": "captured_pitch_q",
+            "width": 32
+          }
+        ],
+        "meaning": "Canonical signed32 extension of int16, same scale as yaw.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "applied_pitch",
+        "offset_hex": "0x60",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 100,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "pitch_capture_period",
+            "width": 32
+          }
+        ],
+        "meaning": "Proposed32bit capture-clock count, actual clock/calibration pending A.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "pitch_capture_period",
+        "offset_hex": "0x64",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 104,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0xffffffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "speed_capture_period",
+            "width": 32
+          }
+        ],
+        "meaning": "Proposed32bit capture-clock count, actual clock/calibration pending A.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0x00000000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "speed_capture_period",
+        "offset_hex": "0x68",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 108,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x000000ff",
+        "fields": [
+          {
+            "domain": {
+              "kind": "A_owned_domain",
+              "reference": "A-approved motion profile domain"
+            },
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "motion_profile_id",
+            "width": 8
+          }
+        ],
+        "meaning": "Reset0 unconfigured; do not confuse motion and sensor profiles.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffffff00",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "enum_pending_A_freeze",
+        "name": "motion_profile_id",
+        "offset_hex": "0x6c",
+        "width_bits": "32"
+      }
+    },
+    {
+      "offset": 112,
+      "proposal": {
+        "access": "RO_SNAPSHOT",
+        "defined_mask_hex": "0x0000ffff",
+        "fields": [
+          {
+            "encoding": "unsigned",
+            "lsb": 0,
+            "name": "last_observed_sequence",
+            "width": 16
+          }
+        ],
+        "meaning": "Exact wire16 observation sequence with authenticated source context, no truncation or fabricated association.",
+        "origin": "B candidate requiring explicit A approval",
+        "reserved_zero_mask_hex": "0xffff0000",
+        "reset_validity": "proposed storage reset only; no hardware/source validity",
+        "reset_value": 0
+      },
+      "source_row": {
+        "authority": "matched_new_overlay_hwh_only",
+        "implementation_status": "not_run",
+        "name": "last_observed_sequence",
+        "offset_hex": "0x70",
+        "width_bits": "32"
+      }
+    }
+  ],
+  "required_A_decisions": [
+    "identity/reset implementation and matched HWH",
+    "all proposed access/bit/reset assignments",
+    "queue selection/accounting units/capacity",
+    "CONFIG rate/profile/apply domains and immutable context validation",
+    "sample/capture tick source/units/widths",
+    "wire16 capture/observation association with local batch32",
+    "gain calibration/quality gates",
+    "CDC revocation generation and atomic read integration",
+    "additional local raw high-count/edge-tick diagnostic interface without using reserved0x2c or AI side-channel"
+  ],
+  "schema": 1,
+  "semantics_document": "REGISTER_SEMANTICS_CANDIDATE.md",
+  "stages": {
+    "B05": "not_run",
+    "R03": "not_run",
+    "board": "not_run",
+    "implementation": "not_run",
+    "runtime": "not_run",
+    "simulation": "not_run",
+    "synthesis": "not_run",
+    "system": "not_run"
+  },
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-REGISTER-SEMANTICS-CANDIDATE-20261017-07-v1"
+}

@@ -218,6 +218,9 @@ class LedgerCollectionTests(unittest.TestCase):
             self.assertEqual(detected['external_deliveries'][0]['recipient_thread_id'], 'real-app-thread')
             self.assertEqual(detected['external_deliveries'][0]['reason'], 'App recipient required')
             self.assertEqual(router.db.total_changes, before)
+            with router.db:
+                router.db.execute('ALTER TABLE external_deliveries DROP COLUMN resolution_json')
+            self.assertIsNone(collect(self.base)['external_deliveries'][0]['resolution'])
             # Simulate a legacy schema in this isolated fixture only.
             with router.db:
                 router.db.execute('DROP TABLE external_deliveries')
@@ -262,6 +265,21 @@ class ObserveAndIncidentTests(unittest.TestCase):
         self.journal.observe(current)
         self.assertFalse(self.incidents()[incident['incident_id']]['active'])
         self.assertEqual(self.journal.get_watch('external-watch')['state'], 'waiting')
+
+    def test_explicit_unconsumed_closure_resolves_incident_without_claiming_completion(self):
+        delivery = {'message_id': 'withdrawn', 'task_id': 't', 'task_version': 2,
+                    'recipient_thread_id': None, 'reason': 'bad declaration', 'status': 'pending',
+                    'resolution': None}
+        current = snapshot(self.now, external_deliveries=[delivery])
+        self.journal.observe(current)
+        self.assertTrue(self.incidents()['external_delivery_pending:withdrawn']['active'])
+        for status in ('withdrawn_unconsumed', 'superseded_unconsumed'):
+            delivery['status'] = status
+            delivery['resolution'] = {'reviewer_thread_id': 'main', 'followup_work_id': 'next-work',
+                                      'reason': 'confirmed never sent', 'evidence': 'actual review'}
+            self.journal.observe(current)
+            self.assertFalse(self.incidents()['external_delivery_pending:withdrawn']['active'])
+            self.assertEqual(self.journal.status()['watches'], [])
 
     def test_monitor_failure_survives_recovery_without_repeated_incidents(self):
         self.journal.monitor_result('OperationalError: database unavailable')

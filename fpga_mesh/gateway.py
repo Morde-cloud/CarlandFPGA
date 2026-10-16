@@ -169,7 +169,8 @@ class AppServerGateway:
                 prior = self.session_router.result(message.message_id)
                 if prior and prior['status'] == 'completed':
                     return ActionResult(accepted=True, output=prior['result'])
-                if prior and prior['status'] in {'failed', 'interrupted', 'running', 'external_consumed'}:
+                if prior and prior['status'] in {'failed', 'interrupted', 'running', 'external_consumed',
+                        'external_withdrawn_unconsumed', 'external_superseded_unconsumed'}:
                     return ActionResult(accepted=False, output={
                         'message_id': message.message_id, 'status': prior['status'],
                         'error': prior['error'], 'recovery_required': True,
@@ -179,6 +180,10 @@ class AppServerGateway:
                 delivery = delivery_reader(message.message_id) if delivery_reader else None
                 if delivery is not None:
                     raise ExternalDeliveryPending(delivery)
+                if prior and prior['status'] in {'delivery_pending', 'delivery_unknown'}:
+                    return ActionResult(False, {'recovery_required': True,
+                        'message_id': message.message_id, 'status': prior['status'],
+                        'reason': 'external delivery record missing; no automatic replay'})
                 self._assert_mesh_owned(message)
             event_text = str(message.payload.get("text", message.message_id))
             prompt = event_text

@@ -77,6 +77,19 @@ no new App send/wake mechanism, model polling or inference router here. If a
 send's outcome is unknown, inspect actual App history; this ledger does not
 authorize retrying a potentially delivered message.
 
+Before any App send, the authorized caller must use `fpga_external_transition`
+(local action `external_transition`) with `action=attempt`, a stable operation ID,
+the saved message/task/version/recipient, the registered main's thread ID and
+review evidence/reason. The transaction saves `delivery_unknown` before sending
+could occur. Only the first call returns `execute=true`; an identical repeated
+call returns false, a different payload under the same operation ID conflicts,
+and a second attempt is forbidden. This is bookkeeping under existing authority,
+not new permission to send. Recheck STOP and actual App activity before acting.
+The local front door also rejects an attempt superseded by a newer persisted
+human task version, even while the original session version is still unchanged.
+The tool itself never sends or wakes a chat. A crash after the claim is an unknown
+outcome even if the caller believes it probably did not send.
+
 After actual consumption, `fpga_external_receipt` (local action
 `external_receipt`) accepts `message_id`, `task_id`, `task_version`, `thread_id`,
 `turn_id` and `evidence`. It requires the saved exact task/version/recipient and
@@ -85,10 +98,48 @@ The state becomes `external_consumed`, not a fabricated mesh turn completion.
 The receipt is the caller's reported evidence; the API cannot authenticate an
 App turn or prove a product result. Main review still checks the actual history.
 
+## Explicit reconciliation of never-delivered obligations
+
+The published v1 source `f26caaeea99fde4378f9a8d12e38aa97ef15eac7` had a P2
+recovery dead end: a corrupt declaration saved null recipient/hash, or a mismatched
+version saved incompatible identity, and correcting the declaration could never
+satisfy receipt matching. The v1 manifest and 130-test logs remain historical
+evidence, not acceptance of that defect. The v2 operation adds this explicit path.
+
+For a `pending` record with no recorded delivery attempt or receipt and a matching
+`delivery_pending` main result, the quality main may call the same transition
+API with `action=withdraw` or `supersede`. It must supply a unique operation ID,
+the **original saved** task/version/recipient (including null when originally
+unknown), `confirmed_not_sent=true`, actual review `evidence`, a specific `reason`,
+and a `followup_work_id`. The reviewer thread must match the registered task main.
+An erroneously held task that has no registered session requires an explicitly
+identified existing registered reviewing main; this never creates or assigns a
+new main. The reviewer and followup work are retained as the responsibility for
+the decision and remaining work. The authenticated caller is still responsible
+for checking human authority and actual App history; these strings are reported
+evidence, not independently authenticated proof that no App tool was used.
+
+Withdrawal records `withdrawn_unconsumed`. Supersession additionally requires a
+distinct, complete `external_delivery` successor that is still pending and has
+never been attempted, under the same task at the same or a newer version. Its
+saved envelope must match its record; an orphan queued `main_runs` row is
+insufficient. The result is `superseded_unconsumed`. Both retain the original envelope,
+recipient, bad declaration hash/reason and complete resolution record. Neither
+can be receipted as consumed or replayed by mesh, and neither sends the successor.
+The same operation/payload is idempotent; altered payloads, STOP, wrong identity,
+missing review/responsibility, failed/ambiguous/executed work and any prior delivery
+attempt are rejected. Fixing/removing a declaration is not itself reconciliation.
+
+Self-check shows the explicit closure and retained responsibility, without
+reporting model completion or scheduling a notification. The closed obligation
+ceases to block the ledger idle check; a pending successor, unknown attempt or
+still-declared external writer continues to block. Withdrawal is never a shortcut
+around actual App writer inspection or a way to discard unfinished responsibility.
+
 ## Safe deployment boundary
 
 `assert_idle` and `stop_idle_node` reject any nonempty/invalid external-owner
-declaration and any pending external delivery, including with empty `main_runs`.
+declaration and any pending/unknown external delivery, including with empty `main_runs`.
 The latter check is inside the existing SQLite admission fence; the declaration
 is checked again after the fence is acquired. A consumed receipt does not release
 a still-declared external writer.

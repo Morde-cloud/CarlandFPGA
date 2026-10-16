@@ -14,6 +14,7 @@ import sqlite3
 from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
+from .sessions import EXTERNAL_CLOSED
 
 
 TERMINAL = {'completed', 'failed', 'cancelled', 'interrupted'}
@@ -52,15 +53,22 @@ def collect(state):
         item['task_version'] = versions.get(item['message_id'])
     pause = rows(state / 'state.sqlite', "SELECT payload FROM controller_state WHERE key='human_pause'")
     retry = rows(state / 'state.sqlite', "SELECT payload FROM controller_state WHERE key='gateway_retry'")
+    external_columns = {r['name'] for r in rows(state / 'main_sessions.sqlite',
+                                              'PRAGMA table_info(external_deliveries)')}
+    resolution = 'resolution_json' if 'resolution_json' in external_columns else 'NULL AS resolution_json'
+    deliveries = rows(state / 'main_sessions.sqlite',
+        'SELECT message_id,task_id,task_version,recipient_thread_id,declaration_hash,reason,status,created_at,'
+        + resolution + ' FROM external_deliveries', optional_table='external_deliveries')
+    for delivery in deliveries:
+        value = delivery.pop('resolution_json')
+        delivery['resolution'] = json.loads(value) if value else None
     return {
         'observed_at': utcnow(), 'pending': pending,
         'pause': json.loads(pause[0]['payload']) if pause else {},
         'retry': json.loads(retry[0]['payload']) if retry else {},
         'sessions': rows(state / 'main_sessions.sqlite', 'SELECT task_id,task_version,thread_id FROM main_sessions'),
         'runs': runs,
-        'external_deliveries': rows(state / 'main_sessions.sqlite',
-            'SELECT message_id,task_id,task_version,recipient_thread_id,declaration_hash,reason,status,created_at '
-            'FROM external_deliveries', optional_table='external_deliveries'),
+        'external_deliveries': deliveries,
         'jobs': rows(state / 'child_jobs.sqlite', 'SELECT job_id,task_id,task_version,work_id,status,route,error,native_agent_id,ownership_json,created_at,updated_at FROM child_jobs'),
     }
 
@@ -147,9 +155,10 @@ class ContinuityJournal:
             found.append((kind + ':' + key, kind, evidence))
 
         for delivery in snapshot.get('external_deliveries', []):
-            if delivery['status'] != 'consumed':
+            if delivery['status'] not in EXTERNAL_CLOSED:
                 add('external_delivery_pending', delivery['message_id'], **delivery,
-                    disposition='human_paused' if paused else 'app_delivery_required')
+                    disposition='human_paused' if paused else 'app_delivery_unknown'
+                    if delivery['status'] == 'delivery_unknown' else 'app_delivery_required')
 
         for item in snapshot['pending']:
             if age(item['received_at'], now) >= threshold:
@@ -249,7 +258,7 @@ class ContinuityJournal:
                 if prior:
                     return {**prior, 'execute': False}
                 disposition = json.loads(row['evidence']).get('disposition')
-                if paused or not row['active'] or disposition in {'human_paused', 'normal_active_wait', 'scheduled_backoff', 'app_delivery_required'}:
+                if paused or not row['active'] or disposition in {'human_paused', 'normal_active_wait', 'scheduled_backoff', 'app_delivery_required', 'app_delivery_unknown'}:
                     raise ValueError('paused, resolved or normal wait; repair creation forbidden')
                 value = {'phase': 'claimed', 'owner_thread_id': owner_thread_id, 'claimed_at': utcnow()}
             else:
@@ -277,7 +286,7 @@ class ContinuityJournal:
             spec = watch['spec']; session = sessions.get(spec['task_id'])
             event = sources[spec['source_kind']].get(spec['source_id'])
             owner_check = getattr(getattr(runtime, 'main_sessions', None), 'external_owner', None)
-            if (any(d['task_id'] == spec['task_id'] and d['status'] != 'consumed'
+            if (any(d['task_id'] == spec['task_id'] and d['status'] not in EXTERNAL_CLOSED
                     for d in snapshot.get('external_deliveries', [])) or
                     owner_check and owner_check(spec['task_id'], spec['task_version']) is not None):
                 continue  # An App obligation is not permission to enqueue another mesh notification.

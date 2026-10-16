@@ -162,7 +162,7 @@ def _state_directory(config: Path, node: str) -> Path:
 def _has_pending_work(db, table: str, condition: str) -> bool:
     if table == 'main_runs' and db.execute(
             "SELECT 1 FROM sqlite_master WHERE type='table' AND name='external_deliveries'").fetchone():
-        if db.execute("SELECT 1 FROM external_deliveries WHERE status!='consumed' LIMIT 1").fetchone():
+        if db.execute("SELECT 1 FROM external_deliveries WHERE status NOT IN ('consumed','withdrawn_unconsumed','superseded_unconsumed') LIMIT 1").fetchone():
             return True
     exists = db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
                         (table,)).fetchone()

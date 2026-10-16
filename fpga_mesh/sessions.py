@@ -12,6 +12,7 @@ from pathlib import Path
 EFFORT_ORDER = ('none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max', 'ultra')
 CRITICAL = frozenset({'decision', 'acceptance', 'difficult', 'optimization', 'evaluation'})
 KINDS = CRITICAL | {'execution', 'routine'}
+EXTERNAL_CLOSED = frozenset({'consumed', 'withdrawn_unconsumed', 'superseded_unconsumed'})
 IMPORTANT = re.compile(r'决策|验收|重难|关键|评估|优化|设计|架构|(?:\b)(?:decision|acceptance|difficult|critical|optimization|evaluate|review|architecture|cdc|rdc)(?:\b)', re.I)
 ROUTINE = re.compile(r'^\s*(?:Reply (?:with )?(?:exactly|only) [\w. -]+\.?|只回复\s*\S+|仅回复\s*\S+)\s*$', re.I)
 
@@ -62,7 +63,15 @@ class MainSessionRouter:
                 envelope_json TEXT NOT NULL, status TEXT NOT NULL,
                 receipt_json TEXT, created_at TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS external_actions (
+                operation_id TEXT PRIMARY KEY, message_id TEXT NOT NULL,
+                action TEXT NOT NULL, payload_json TEXT NOT NULL, created_at TEXT NOT NULL
+            );
         ''')
+        columns = {row[1] for row in self.db.execute('PRAGMA table_info(external_deliveries)')}
+        for name in ('dispatch_json', 'resolution_json'):
+            if name not in columns:
+                self.db.execute(f'ALTER TABLE external_deliveries ADD COLUMN {name} TEXT')
         self.db.execute("UPDATE main_runs SET status='interrupted' WHERE status='running'")
         self.db.commit()
         self.quality_model = quality_model
@@ -126,6 +135,9 @@ class MainSessionRouter:
         result['envelope'] = json.loads(result.pop('envelope_json'))
         receipt = result.pop('receipt_json')
         result['receipt'] = json.loads(receipt) if receipt else None
+        for name in ('dispatch', 'resolution'):
+            value = result.pop(name + '_json')
+            result[name] = json.loads(value) if value else None
         return result
 
     def external_deliveries(self) -> list[dict]:
@@ -143,7 +155,9 @@ class MainSessionRouter:
         if prior and prior['status'] != 'queued':
             raise ValueError('cannot defer previously executed or ambiguous work')
         with self.db:
-            self.db.execute('INSERT INTO external_deliveries VALUES (?,?,?,?,?,?,?,?,?,?)', (
+            self.db.execute('INSERT INTO external_deliveries '
+                            '(message_id,task_id,task_version,recipient_thread_id,declaration_hash,reason,'
+                            'envelope_json,status,receipt_json,created_at) VALUES (?,?,?,?,?,?,?,?,?,?)', (
                 message.message_id, message.task_id, message.task_version,
                 owner['recipient_thread_id'], owner['declaration_hash'], owner['reason'],
                 message.to_json(), 'pending', None, now()))
@@ -155,6 +169,87 @@ class MainSessionRouter:
                             'reason': owner['reason'], 'execution_started': False}), None, now()))
         self.changed.set()
         return self.external_delivery(message.message_id)
+
+    def external_transition(self, *, operation_id: str, action: str, message_id: str,
+                            task_id: str, task_version: int, recipient_thread_id: str | None,
+                            reviewer_thread_id: str, evidence: str, reason: str,
+                            followup_work_id: str | None = None,
+                            successor_message_id: str | None = None,
+                            confirmed_not_sent: bool = False) -> dict:
+        """Record a one-shot attempt or explicit never-delivered closure; never send."""
+        if action not in {'attempt', 'withdraw', 'supersede'}:
+            raise ValueError('unknown external transition')
+        if (type(task_version) is not int or task_version < 1 or
+                not all(isinstance(v, str) and v.strip() for v in
+                        (operation_id, message_id, task_id, reviewer_thread_id, evidence, reason))):
+            raise ValueError('stable IDs, positive version, review evidence and reason required')
+        payload = dict(operation_id=operation_id, action=action, message_id=message_id,
+            task_id=task_id, task_version=task_version, recipient_thread_id=recipient_thread_id,
+            reviewer_thread_id=reviewer_thread_id, evidence=evidence, reason=reason,
+            followup_work_id=followup_work_id, successor_message_id=successor_message_id,
+            confirmed_not_sent=confirmed_not_sent)
+        encoded = json.dumps(payload, sort_keys=True)
+        with self.db:
+            self.db.execute('BEGIN IMMEDIATE')
+            prior = self.db.execute('SELECT payload_json FROM external_actions WHERE operation_id=?',
+                                    (operation_id,)).fetchone()
+            if prior:
+                if prior[0] != encoded:
+                    raise ValueError('external operation ID conflict')
+                return {'execute': False, 'delivery': self.external_delivery(message_id)}
+            delivery = self.external_delivery(message_id)
+            if delivery is None or (delivery['task_id'], delivery['task_version'], delivery['recipient_thread_id']) != (
+                    task_id, task_version, recipient_thread_id):
+                raise ValueError('transition must match the saved task/version/recipient')
+            registered = self.session(task_id)
+            if registered:
+                if registered['thread_id'] != reviewer_thread_id:
+                    raise ValueError('reviewer must be the registered task main')
+            elif not self.db.execute('SELECT 1 FROM main_sessions WHERE thread_id=?', (reviewer_thread_id,)).fetchone():
+                raise ValueError('unregistered erroneous task requires an existing reviewing main')
+            run = self.result(message_id)
+            if (delivery['status'] != 'pending' or delivery['dispatch'] is not None or
+                    delivery['receipt'] is not None or not run or run['status'] != 'delivery_pending'):
+                raise ValueError('attempted, unknown, executed or closed work cannot transition as unsent')
+            if action == 'attempt':
+                owner = self.external_owner(task_id, task_version)
+                if (not owner or not owner['valid'] or
+                        owner['declaration_hash'] != delivery['declaration_hash']):
+                    raise ValueError('App attempt requires unchanged valid owner/version')
+                status, column = 'delivery_unknown', 'dispatch_json'
+            else:
+                if confirmed_not_sent is not True or not isinstance(followup_work_id, str) or not followup_work_id.strip():
+                    raise ValueError('explicit not-sent review and retained followup responsibility required')
+                if action == 'supersede':
+                    successor = self.result(successor_message_id or '')
+                    successor_delivery = self.external_delivery(successor_message_id or '')
+                    if (successor_message_id == message_id or not successor or successor['task_id'] != task_id
+                            or successor['status'] != 'delivery_pending' or not successor_delivery
+                            or successor_delivery['status'] != 'pending'
+                            or successor_delivery['dispatch'] is not None or successor_delivery['receipt'] is not None
+                            or successor_delivery['task_id'] != task_id
+                            or successor_delivery['task_version'] < task_version):
+                        raise ValueError('supersession requires a complete never-attempted successor at the same or newer version')
+                    from .protocol import Envelope
+                    envelope = Envelope.from_json(json.dumps(successor_delivery['envelope']))
+                    if (envelope.message_id != successor_message_id or envelope.task_id != task_id
+                            or envelope.task_version != successor_delivery['task_version']):
+                        raise ValueError('successor envelope does not match its saved identity')
+                elif successor_message_id is not None:
+                    raise ValueError('withdrawal cannot silently claim a successor')
+                status = 'withdrawn_unconsumed' if action == 'withdraw' else 'superseded_unconsumed'
+                column = 'resolution_json'
+            self.db.execute('INSERT INTO external_actions VALUES (?,?,?,?,?)',
+                            (operation_id, message_id, action, encoded, now()))
+            self.db.execute(f'UPDATE external_deliveries SET status=?,{column}=? WHERE message_id=?',
+                            (status, encoded, message_id))
+            self.db.execute('UPDATE main_runs SET status=?,result_json=?,updated_at=? WHERE message_id=?',
+                            ('delivery_unknown' if action == 'attempt' else 'external_' + status,
+                             json.dumps({'mesh_execution_started': False, 'external_state': status,
+                                         'reviewer_thread_id': reviewer_thread_id,
+                                         'operation_id': operation_id}), now(), message_id))
+        self.changed.set()
+        return {'execute': action == 'attempt', 'delivery': self.external_delivery(message_id)}
 
     def external_receipt(self, *, message_id: str, task_id: str, task_version: int,
                          thread_id: str, turn_id: str, evidence: str) -> dict:
@@ -173,13 +268,15 @@ class MainSessionRouter:
             if delivery['receipt'] != receipt:
                 raise ValueError('external receipt is immutable')
             return delivery
+        if delivery['status'] not in {'pending', 'delivery_unknown'}:
+            raise ValueError('explicitly closed unconsumed work cannot be marked consumed')
         owner = self.external_owner(task_id, task_version)
         if not owner or not owner['valid'] or owner['declaration_hash'] != delivery['declaration_hash']:
             raise ValueError('ownership changed; explicitly reconcile the saved delivery')
         with self.db:
             self.db.execute("UPDATE external_deliveries SET status='consumed',receipt_json=? WHERE message_id=?",
                             (json.dumps(receipt), message_id))
-            self.db.execute("UPDATE main_runs SET status='external_consumed',result_json=?,updated_at=? WHERE message_id=? AND status='delivery_pending'",
+            self.db.execute("UPDATE main_runs SET status='external_consumed',result_json=?,updated_at=? WHERE message_id=? AND status IN ('delivery_pending','delivery_unknown')",
                             (json.dumps(receipt), now(), message_id))
         self.changed.set()
         return self.external_delivery(message_id)

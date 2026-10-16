@@ -67,6 +67,152 @@ class ExternalOwnerTests(unittest.IsolatedAsyncioTestCase):
         return dict(message_id=message.message_id, task_id='app-task', task_version=1,
                     thread_id='original-director', turn_id='actual-app-turn', evidence='actual consumed receipt path')
 
+    def transition_args(self, message, delivery, action='withdraw'):
+        return dict(operation_id='resolve:' + message.message_id, action=action,
+            message_id=message.message_id, task_id=message.task_id, task_version=message.task_version,
+            recipient_thread_id=delivery['recipient_thread_id'], reviewer_thread_id='original-director',
+            evidence='main reviewed actual App history and original unsent envelope',
+            reason='bad declaration reconciled; original message was never delivered',
+            followup_work_id='explicit-recovery-work-2', confirmed_not_sent=True)
+
+    async def test_bad_declaration_can_be_withdrawn_without_consumption_or_history_loss(self):
+        self.router.external_owners_path.write_text('{', encoding='utf-8')
+        message, before = await self.defer()
+        self.assertIsNone(before['recipient_thread_id'])
+        self.declare()
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_receipt', self.receipt_args(message))
+        args = self.transition_args(message, before)
+        result = await self.actions.call('external_transition', args)
+        saved = result['delivery']
+        self.assertFalse(result['execute'])
+        self.assertEqual(saved['status'], 'withdrawn_unconsumed')
+        self.assertEqual(saved['envelope'], before['envelope'])
+        self.assertEqual(saved['declaration_hash'], before['declaration_hash'])
+        self.assertIsNone(saved['receipt'])
+        self.assertEqual(saved['resolution']['followup_work_id'], 'explicit-recovery-work-2')
+        self.assertEqual(saved['resolution']['reviewer_thread_id'], 'original-director')
+        self.assertEqual(await self.actions.call('external_transition', args), result)
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_receipt', self.receipt_args(message))
+        self.router.external_owners_path.unlink()
+        self.assertEqual(assert_idle(self.config(), node='B'), 'B')
+        await self.gateway.handle(message)
+        self.assertEqual(self.wire.requests, [])
+        independent = event('independent-after-closure')
+        await self.controller.offer(independent)
+        await self.controller.run_until_idle()
+        self.assertEqual(self.router.result(independent.message_id)['status'], 'completed')
+        self.assertEqual(self.router.external_delivery(message.message_id), saved)
+        await self.gateway.close()
+        self.router.close()
+        self.router = MainSessionRouter(self.root / 'main_sessions.sqlite')
+        self.gateway.session_router = self.router
+        self.runtime.main_sessions = self.router
+        self.actions = ProjectActions(self.runtime)
+        calls = list(self.wire.requests)
+        self.assertEqual(await self.actions.call('external_transition', args), result)
+        await self.gateway.handle(message)
+        self.assertEqual(self.wire.requests, calls)
+
+    async def test_mismatched_revision_can_be_closed_with_exact_original_identity(self):
+        message, delivery = await self.defer(replace(event('app-task'), task_version=2))
+        self.declare(task_version=2)
+        args = self.transition_args(message, delivery)
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', {**args, 'task_version': 1})
+        result = await self.actions.call('external_transition', args)
+        self.assertEqual(result['delivery']['status'], 'withdrawn_unconsumed')
+        self.assertEqual(self.router.session('app-task')['task_version'], 1)
+
+    async def test_supersession_requires_a_real_pending_successor_and_keeps_both_envelopes(self):
+        self.router.external_owners_path.write_text('{', encoding='utf-8')
+        old, original = await self.defer(event('app-task', 'bad original'))
+        self.declare()
+        args = {**self.transition_args(old, original, 'supersede'), 'successor_message_id': 'missing'}
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', args)
+        self.router.record('orphan-queued', old.task_id, 'queued')
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', {**args, 'successor_message_id': 'orphan-queued'})
+        successor, replacement = await self.defer(event('app-task', 'explicit replacement'))
+        result = await self.actions.call('external_transition', {**args, 'successor_message_id': successor.message_id})
+        self.assertEqual(result['delivery']['status'], 'superseded_unconsumed')
+        self.assertEqual(result['delivery']['envelope'], original['envelope'])
+        self.assertEqual(self.router.external_delivery(successor.message_id), replacement)
+        self.router.external_owners_path.unlink()
+        with self.assertRaises(ValueError):
+            assert_idle(self.config(), node='B')
+        await self.gateway.handle(old)
+        self.assertEqual(self.wire.requests, [])
+
+    async def test_supersession_rejects_lower_version_and_attempted_successor(self):
+        successor, saved = await self.defer(event('app-task', 'v1 candidate'))
+        same, same_saved = await self.defer(event('app-task', 'same version original'))
+        attempted, attempt_saved = await self.defer(event('app-task', 'attempted candidate'))
+        await self.actions.call('external_transition', self.transition_args(attempted, attempt_saved, 'attempt'))
+        old, original = await self.defer(replace(event('app-task', 'v2 original'), task_version=2))
+        args = {**self.transition_args(old, original, 'supersede'), 'successor_message_id': successor.message_id}
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', args)
+        with self.assertRaisesRegex(ValueError, 'newer human task version'):
+            await self.actions.call('external_transition', self.transition_args(successor, saved, 'attempt'))
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', {**self.transition_args(same, same_saved, 'supersede'),
+                                                         'successor_message_id': attempted.message_id})
+        self.assertEqual(self.router.external_delivery(old.message_id)['status'], 'pending')
+        self.assertEqual(self.router.external_delivery(same.message_id)['status'], 'pending')
+
+    async def test_attempt_is_one_shot_and_unknown_state_cannot_be_withdrawn(self):
+        message, delivery = await self.defer()
+        args = self.transition_args(message, delivery, 'attempt')
+        first = await self.actions.call('external_transition', args)
+        self.assertTrue(first['execute'])
+        self.assertEqual(first['delivery']['status'], 'delivery_unknown')
+        self.assertFalse((await self.actions.call('external_transition', args))['execute'])
+        for action in ('attempt', 'withdraw', 'supersede'):
+            with self.assertRaises(ValueError):
+                await self.actions.call('external_transition', {**args, 'operation_id': 'second-' + action, 'action': action})
+        with self.assertRaises(ExternalDeliveryPending):
+            await self.gateway.handle(message)
+        with self.assertRaises(ValueError):
+            assert_idle(self.config(), node='B')
+        self.assertEqual(self.wire.requests, [])
+        receipt = await self.actions.call('external_receipt', self.receipt_args(message))
+        self.assertEqual(receipt['status'], 'consumed')
+        self.assertEqual(self.router.result(message.message_id)['status'], 'external_consumed')
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', {**args, 'action': 'withdraw', 'operation_id': 'after-consumption'})
+
+    async def test_closure_rejects_stop_identity_conflicts_missing_review_and_reuse(self):
+        message, delivery = await self.defer()
+        args = self.transition_args(message, delivery)
+        self.controller.dispatch_blocked = True
+        with self.assertRaisesRegex(ValueError, 'STOP'):
+            await self.actions.call('external_transition', args)
+        self.controller.dispatch_blocked = False
+        for changes in ({'reviewer_thread_id': 'not-the-main'}, {'recipient_thread_id': None},
+                        {'confirmed_not_sent': False}, {'evidence': ''}, {'followup_work_id': ''}):
+            with self.assertRaises(ValueError):
+                await self.actions.call('external_transition', {**args, **changes})
+        await self.actions.call('external_transition', args)
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', {**args, 'reason': 'changed story'})
+        with self.assertRaises(ValueError):
+            await self.actions.call('external_transition', {**args, 'operation_id': 'new-op'})
+        before = self.router.result(message.message_id)
+        await self.gateway.handle(message)
+        self.assertEqual(self.router.result(message.message_id), before)
+
+    async def test_unregistered_erroneous_task_needs_a_registered_reviewing_main(self):
+        self.router.external_owners_path.write_text('{', encoding='utf-8')
+        message, delivery = await self.defer(event('unregistered-task'))
+        args = self.transition_args(message, delivery)
+        result = await self.actions.call('external_transition', args)
+        self.assertEqual(result['delivery']['status'], 'withdrawn_unconsumed')
+        self.assertIsNone(self.router.session('unregistered-task'))
+        self.assertEqual(self.wire.requests, [])
+
     async def test_declared_owner_prevents_any_client_or_work_request(self):
         with patch.object(self.gateway, '_ensure_client', side_effect=AssertionError('client forbidden')):
             message, delivery = await self.defer()

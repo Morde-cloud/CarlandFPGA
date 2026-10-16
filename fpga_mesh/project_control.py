@@ -38,6 +38,15 @@ CONTINUITY_TOOLS = [
         ['incident_id', 'phase', 'owner_thread_id']),
 ]
 SESSION_TOOLS = CONTINUITY_TOOLS + [
+    tool('fpga_external_transition', 'Record one App delivery attempt before sending, or explicitly close a reviewed never-sent pending obligation without claiming consumption. First attempt returns execute=true once; unknown/attempted work cannot be withdrawn. Requires existing human authority, exact saved identity, main review evidence and followup responsibility. Does not send or grant authority.', {
+        'operation_id': {'type': 'string'}, 'action': {'type': 'string', 'enum': ['attempt', 'withdraw', 'supersede']},
+        'message_id': {'type': 'string'}, 'task_id': {'type': 'string'},
+        'task_version': {'type': 'integer', 'minimum': 1}, 'recipient_thread_id': {'type': ['string', 'null']},
+        'reviewer_thread_id': {'type': 'string'}, 'evidence': {'type': 'string'}, 'reason': {'type': 'string'},
+        'followup_work_id': {'type': 'string'}, 'successor_message_id': {'type': 'string'},
+        'confirmed_not_sent': {'type': 'boolean'}},
+        ['operation_id', 'action', 'message_id', 'task_id', 'task_version', 'recipient_thread_id',
+         'reviewer_thread_id', 'evidence', 'reason']),
     tool('fpga_external_deliveries', 'Read durable unsent App delivery obligations and reported consumption receipts. Does not send or wake a chat.', {}, []),
     tool('fpga_external_receipt', 'Record actual consumption by the exact saved App recipient and version. Requires turn/evidence and current matching declaration; STOP wins. This is a reported receipt, not automatic delivery proof.', {
         'message_id': {'type': 'string'}, 'task_id': {'type': 'string'},
@@ -73,6 +82,13 @@ class ProjectActions:
         r = self.runtime
         if action in {'fpga_external_deliveries', 'external_deliveries'}:
             return r.main_sessions.external_deliveries()
+        if action in {'fpga_external_transition', 'external_transition'}:
+            if r.controller.dispatch_blocked:
+                raise ValueError('human STOP prevents external transition')
+            if (args.get('action') == 'attempt' and
+                    (r.controller.store.latest_human_task_version(args['task_id']) or 0) > args['task_version']):
+                raise ValueError('newer human task version prevents the old delivery attempt')
+            return r.main_sessions.external_transition(**args)
         if action in {'fpga_external_receipt', 'external_receipt'}:
             if r.controller.dispatch_blocked:
                 raise ValueError('human STOP prevents external receipt advancement')
@@ -180,7 +196,9 @@ class ProjectActions:
                     result = r.main_sessions.result(str(args['message_id']))
                     if result is None:
                         raise KeyError('unknown main message')
-                    if result['status'] in {'completed', 'failed', 'interrupted', 'delivery_pending', 'external_consumed'}:
+                    if result['status'] in {'completed', 'failed', 'interrupted', 'delivery_pending',
+                            'delivery_unknown', 'external_consumed', 'external_withdrawn_unconsumed',
+                            'external_superseded_unconsumed'}:
                         return result
                     await self.changed.wait()
             try:

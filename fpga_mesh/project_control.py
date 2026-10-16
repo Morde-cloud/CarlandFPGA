@@ -21,7 +21,22 @@ def tool(name, description, properties, required):
 TASK_FIELDS = {'task_id': {'type': 'string'}, 'task_version': {'type': 'integer', 'minimum': 1},
                'text': {'type': 'string'}, 'model': {'type': 'string'}, 'effort': {'type': 'string'},
                'category': {'type': 'string', 'enum': ['routine', 'execution', 'decision', 'acceptance', 'difficult', 'optimization', 'evaluation']}}
-SESSION_TOOLS = [
+CONTINUITY_TOOLS = [
+    tool('fpga_self_check', 'Read persistent continuity incidents, actual watches/receipts and loaded-source fingerprints. No inference, repair creation or message dispatch.', {}, []),
+    tool('fpga_continuity_watch', 'Explicitly watch one existing child/main result for one actual recipient. auto_resume opts into one STOP-aware continuation to an existing registered main only; App proxies require their App tools. Does not transfer ownership.', {
+        'watch_id': {'type': 'string'}, 'task_id': {'type': 'string'}, 'task_version': {'type': 'integer', 'minimum': 1},
+        'source_kind': {'type': 'string', 'enum': ['child', 'main']}, 'source_id': {'type': 'string'},
+        'recipient_thread_id': {'type': 'string'}, 'auto_resume': {'type': 'boolean'}},
+        ['watch_id', 'task_id', 'task_version', 'source_kind', 'source_id', 'recipient_thread_id']),
+    tool('fpga_continuity_receipt', 'Record actual recipient processing of a watched result. Queued or transport ACK is insufficient.', {
+        'watch_id': {'type': 'string'}, 'thread_id': {'type': 'string'}, 'turn_id': {'type': 'string'}, 'evidence': {'type': 'string'}},
+        ['watch_id', 'thread_id', 'turn_id', 'evidence']),
+    tool('fpga_continuity_repair', 'Claim a single bounded repair before authorized App creation, then record created/started/unknown outcome. Requires existing human authorization and actual App capability; this is not a native lease or product appointment. Never repeat execute=false or unknown.', {
+        'incident_id': {'type': 'string'}, 'phase': {'type': 'string', 'enum': ['claim', 'created', 'started', 'unknown']},
+        'owner_thread_id': {'type': 'string'}, 'thread_id': {'type': 'string'}, 'turn_id': {'type': 'string'}},
+        ['incident_id', 'phase', 'owner_thread_id']),
+]
+SESSION_TOOLS = CONTINUITY_TOOLS + [
     tool('fpga_models_refresh', 'Refresh the official Codex model/effort catalog and native roles. Preserves current tasks, credentials and both execution entrances; makes no inference call. New role definitions apply to newly loaded conversations.', {}, []),
     tool('fpga_session_list', 'Read your project main sessions, allowed models/efforts and quality route without a model call.', {}, []),
     tool('fpga_session_open', 'Create a separate task conversation and queue its work. Choose optional allowed model/effort; critical work requires the quality main route. Repeated same work does not enqueue twice.', TASK_FIELDS, ['task_id', 'task_version', 'text']),
@@ -49,6 +64,31 @@ class ProjectActions:
         action = {'fpga_session_list': 'session_list', 'fpga_session_open': 'main_submit',
                   'fpga_session_route': 'session_route', 'fpga_models_refresh': 'models_refresh'}.get(name, name)
         r = self.runtime
+        if action in {'fpga_self_check', 'self_check', 'fpga_continuity_watch', 'continuity_watch',
+                      'fpga_continuity_receipt', 'continuity_receipt', 'fpga_continuity_repair', 'continuity_repair'}:
+            monitor = r.continuity
+            snapshot = monitor.check()
+            operation = action.removeprefix('fpga_')
+            if operation == 'self_check':
+                return {**monitor.journal.status(), 'observed_at': snapshot['observed_at'],
+                        'loaded_source_hashes': monitor.loaded_hashes, 'monitor_error': monitor.error}
+            if operation == 'continuity_watch':
+                sources = snapshot['jobs'] if args['source_kind'] == 'child' else snapshot['runs']
+                key = 'job_id' if args['source_kind'] == 'child' else 'message_id'
+                if not any(x[key] == args['source_id'] and x['task_id'] == args['task_id'] and
+                           x.get('task_version') == args['task_version'] for x in sources):
+                    raise ValueError('watch requires an existing source belonging to this task')
+                if args.get('auto_resume') and not any(x['task_id'] == args['task_id'] and
+                        x['task_version'] == args['task_version'] and x['thread_id'] == args['recipient_thread_id']
+                        for x in snapshot['sessions']):
+                    raise ValueError('automatic continuation requires exact existing main route/version')
+                result = monitor.journal.watch(**args)
+            elif operation == 'continuity_receipt':
+                result = monitor.journal.receipt(**args)
+            else:
+                result = monitor.journal.repair(**args, paused=r.controller.dispatch_blocked)
+            monitor.notify()
+            return result
         if action == 'models_list':
             return self.models.snapshot()
         if action == 'models_refresh':

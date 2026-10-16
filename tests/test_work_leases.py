@@ -747,6 +747,10 @@ class WorkLeaseTests(unittest.IsolatedAsyncioTestCase):
             base + ["native-validate", "--job-id", "j", "--lease-token", "L"]
         )
         self.assertIsNone(validated.agent_id)
+        leading_dash = cli_parser().parse_args(
+            base + ["native-validate", "--job-id", "j", "--lease-token=-synthetic"]
+        )
+        self.assertEqual(leading_dash.lease_token, "-synthetic")
         bound = cli_parser().parse_args(
             base + ["native-validate", "--job-id", "j", "--lease-token", "L",
                     "--agent-id", "agent-1"]
@@ -791,12 +795,12 @@ class WorkLeaseTests(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(reserved["lease_token"])
             await self._cli(
                 "native-validate", "--job-id", reserved["job_id"],
-                "--lease-token", reserved["lease_token"],
+                "--lease-token=" + reserved["lease_token"],
                 "--agent-id", "cli-agent",
             )
             completed = await self._cli(
                 "native-complete", "--job-id", reserved["job_id"],
-                "--lease-token", reserved["lease_token"],
+                "--lease-token=" + reserved["lease_token"],
                 "--text", "cli native result",
             )
             self.assertEqual(completed["result"]["text"], "cli native result")

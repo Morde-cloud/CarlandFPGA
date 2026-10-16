@@ -47,6 +47,7 @@ class Controller:
         self._serve_task: asyncio.Task[None] | None = None
         self._active_dispatch: asyncio.Task[ActionResult] | None = None
         self._active_message: Envelope | None = None
+        self.on_activity = lambda: None
 
     async def offer(self, message: Envelope) -> bool:
         accepted = self.store.accept_inbound(message)
@@ -68,6 +69,7 @@ class Controller:
                 )
                 raise
         self._apply_control(message)
+        self.on_activity()
         reason = self._preemption_reason(message)
         if reason is not None:
             self._active_dispatch.cancel(reason)
@@ -180,6 +182,7 @@ class Controller:
                         continue
                 try:
                     self._active_message = message
+                    self.on_activity()
                     self._active_dispatch = asyncio.create_task(
                         self.gateway.handle(message),
                         name=f"fpga-dispatch-{message.message_id}",
@@ -245,6 +248,7 @@ class Controller:
                 finally:
                     self._active_dispatch = None
                     self._active_message = None
+                    self.on_activity()
                 self.store.mark_inbound_processed(message.message_id)
                 # Re-read priorities at the turn boundary. A human followup may
                 # have arrived while this old snapshot still contained peers.

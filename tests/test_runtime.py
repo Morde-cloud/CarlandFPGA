@@ -264,7 +264,7 @@ class NodeRuntimeTests(unittest.IsolatedAsyncioTestCase):
         finally:
             await runtime.stop()
 
-    async def test_peer_presence_changes_queue_human_status_without_model_turn(self):
+    async def test_peer_presence_changes_stay_internal_without_model_turn(self):
         secret_file = self.root / "astra-secret.txt"
         secret_file.write_text("test-secret", encoding="utf-8")
         config = replace(
@@ -281,9 +281,10 @@ class NodeRuntimeTests(unittest.IsolatedAsyncioTestCase):
             runtime._note_peer_status("B", False)
             self.assertEqual(runtime.snapshot()["peer_presence"]["B"], False)
             reports = runtime.store.pending_group_reports()
-            self.assertEqual(len(reports), 2)
-            self.assertIn("上线", reports[0][1])
-            self.assertIn("离线", reports[1][1])
+            self.assertEqual(reports, [])
+            runtime._note_peer_status("B", True)
+            self.assertTrue(runtime.snapshot()["peer_presence"]["B"])
+            self.assertEqual(runtime.store.pending_group_reports(), [])
             self.assertEqual(runtime.snapshot()["idle_model_calls"], 0)
         finally:
             await runtime.stop()

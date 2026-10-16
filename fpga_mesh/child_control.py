@@ -98,7 +98,12 @@ class ChildCoordinator:
         self._db.commit()
         self._running: dict[str, asyncio.Task[None]] = {}
         self._changed = asyncio.Event()
+        self.on_activity = lambda: None
         self._allocation_lock = asyncio.Lock()
+
+    def _notify_changed(self):
+        self._changed.set()
+        self.on_activity()
 
     def _migrate(self) -> None:
         present = {row["name"] for row in
@@ -340,7 +345,7 @@ class ChildCoordinator:
                 "ON CONFLICT(task_id) DO UPDATE SET version=max(version, excluded.version)",
                 (task_id, version),
             )
-        self._changed.set()
+        self._notify_changed()
 
     def job(self, job_id: str) -> dict:
         row = self._db.execute(
@@ -445,7 +450,7 @@ class ChildCoordinator:
         finally:
             await self.pool.return_to_standby(instance_id)
             self._running.pop(job_id, None)
-            self._changed.set()
+            self._notify_changed()
 
     def _record(
         self, job_id: str, status: str, *, result: dict | None = None,
@@ -458,7 +463,7 @@ class ChildCoordinator:
                 (status, json.dumps(result, ensure_ascii=False) if result is not None
                  else None, error, _now(), job_id),
             )
-        self._changed.set()
+        self._notify_changed()
 
     # -- GPT native leases --------------------------------------------------
 
@@ -520,7 +525,7 @@ class ChildCoordinator:
                 duplicate["lease_token"] = None
                 return duplicate
             raise
-        self._changed.set()
+        self._notify_changed()
         return {**self.job(job_id), "duplicate": False,
                 "lease_token": lease_token}
 
@@ -546,7 +551,7 @@ class ChildCoordinator:
                     "updated_at=? WHERE job_id=?",
                     (new_agent, _now(), job_id),
                 )
-            self._changed.set()
+            self._notify_changed()
             row = self._db.execute(
                 "SELECT * FROM child_jobs WHERE job_id=?", (job_id,),
             ).fetchone()

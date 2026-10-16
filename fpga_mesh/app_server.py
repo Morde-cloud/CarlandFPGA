@@ -8,7 +8,7 @@ import hashlib
 import json
 import shutil
 import tempfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Protocol
 
 from .rpc import JsonRpcSession, StdioTransport
@@ -16,6 +16,143 @@ from .rpc import JsonRpcSession, StdioTransport
 
 class RuntimeIntegrityError(RuntimeError):
     """The immutable executable snapshot failed validation before launch."""
+
+
+_MANIFEST = "mesh-runtime-manifest.json"
+
+
+def _digest(path: Path) -> str:
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def _content_key(files: dict[str, str]) -> str:
+    # Preserve the key format of snapshots produced before durable bindings.
+    return hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()
+
+
+def _is_digest(value: Any) -> bool:
+    return isinstance(value, str) and len(value) == 64 and all(
+        char in "0123456789abcdef" for char in value)
+
+
+def _reject_links(path: Path) -> None:
+    for item in (path, *path.parents):
+        if item.is_symlink() or getattr(item, "is_junction", lambda: False)():
+            raise RuntimeIntegrityError(f"Runtime path contains a link: {item}")
+
+
+def _valid_relative(name: Any) -> bool:
+    if not isinstance(name, str) or name in ("", ".") or "\\" in name or ":" in name:
+        return False
+    path = PurePosixPath(name)
+    return (not path.is_absolute() and path.as_posix() == name
+            and all(part not in (".", "..") and not part.endswith((".", " "))
+                    for part in path.parts))
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    # Duplicate keys must not silently change the interpretation of a binding.
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("Duplicate JSON key")
+            result[key] = value
+        return result
+    _reject_links(path)
+    value = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique)
+    if not isinstance(value, dict):
+        raise ValueError("Expected a JSON object")
+    return value
+
+
+def _verify_snapshot(directory: Path, key: str, binary_name: str,
+                     manifest_sha256: str | None = None) -> Path:
+    """Validate only this exact snapshot; never discover a replacement cache."""
+    try:
+        _reject_links(directory)
+        manifest_path = directory / _MANIFEST
+        _reject_links(manifest_path)
+        if manifest_sha256 is not None and _digest(manifest_path) != manifest_sha256:
+            raise ValueError("Manifest no longer matches the saved selection")
+        manifest = _read_json(manifest_path)
+        files = manifest.get("files")
+        if (set(manifest) != {"source", "files"}
+                or not isinstance(manifest["source"], str)
+                or not isinstance(files, dict) or not files
+                or not _valid_relative(binary_name) or "/" in binary_name
+                or any(not _valid_relative(name) or not _is_digest(value)
+                       or name.casefold() == _MANIFEST.casefold()
+                       for name, value in files.items())
+                or len({name.casefold() for name in files}) != len(files)
+                or binary_name not in files or "codex-code-mode-host.exe" not in files
+                or _content_key(files) != key):
+            raise ValueError("Invalid runtime manifest")
+        actual = set()
+        for path in directory.rglob("*"):
+            _reject_links(path)
+            if path.is_file():
+                actual.add(path.relative_to(directory).as_posix())
+        if actual != set(files) | {_MANIFEST}:
+            raise ValueError("Runtime file inventory changed")
+        for name, expected in files.items():
+            path = directory / name
+            if not path.is_file() or _digest(path) != expected:
+                raise ValueError(f"Runtime file changed: {name}")
+        return directory / binary_name
+    except (OSError, ValueError, TypeError) as exc:
+        raise RuntimeIntegrityError(
+            f"Pinned Codex runtime is incomplete or changed: {directory}: {exc}") from exc
+
+
+def _binding_path(cache: Path, selector: dict[str, str]) -> Path:
+    key = hashlib.sha256(json.dumps(selector, sort_keys=True).encode()).hexdigest()
+    return cache / f"selection-{key}.json"
+
+
+def _bound_runtime(cache: Path, selector: dict[str, str]) -> Path | None:
+    binding = _binding_path(cache, selector)
+    try:
+        _reject_links(binding)
+        if not binding.exists():
+            return None
+        value = _read_json(binding)
+        if (set(value) != {"version", "selector", "cache_key", "binary", "manifest_sha256"}
+                or type(value["version"]) is not int or value["version"] != 1
+                or value["selector"] != selector
+                or not _is_digest(value["cache_key"])
+                or not _is_digest(value["manifest_sha256"])):
+            raise ValueError("Invalid runtime selection binding")
+        return _verify_snapshot(cache / value["cache_key"], value["cache_key"],
+                                value["binary"], value["manifest_sha256"])
+    except (OSError, ValueError, TypeError) as exc:
+        raise RuntimeIntegrityError(f"Invalid pinned runtime binding: {binding}: {exc}") from exc
+
+
+def _bind_runtime(binary: Path, cache: Path, selector: dict[str, str]) -> Path:
+    pinned = pin_codex_bundle(binary, cache)
+    value = {"version": 1, "selector": selector, "cache_key": pinned.parent.name,
+             "binary": pinned.name, "manifest_sha256": _digest(pinned.parent / _MANIFEST)}
+    # Publish a complete binding exactly once. A concurrent winner is verified,
+    # never overwritten; a crash before publication leaves only an unused cache.
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=cache,
+                                     prefix="selection-pending-", delete=False) as stream:
+        temporary = Path(stream.name)
+        json.dump(value, stream, sort_keys=True)
+        stream.flush()
+        os.fsync(stream.fileno())
+    try:
+        try:
+            os.link(temporary, _binding_path(cache, selector))
+        except FileExistsError:
+            pass
+    finally:
+        temporary.unlink()
+    result = _bound_runtime(cache, selector)
+    if result is None:
+        raise RuntimeIntegrityError("Runtime selection disappeared during publication")
+    return result
 
 
 def resolve_codex_command(
@@ -26,24 +163,32 @@ def resolve_codex_command(
     """Prefer the Desktop bundle with its matching Code Mode host on Windows."""
     platform = sys.platform if platform is None else platform
     explicit = explicit or os.environ.get("FPGA_MESH_CODEX_BINARY")
+    base = Path(local_appdata or os.environ.get("LOCALAPPDATA", ""))
+    bundle_root = base / "OpenAI" / "Codex" / "bin"
+    cache = None
+    if platform == "win32" and runtime_cache_dir is not None:
+        cache = Path(os.path.abspath(runtime_cache_dir))
+        selector = {"mode": "explicit" if explicit else "desktop",
+                    "path": os.path.normcase(os.path.abspath(explicit or bundle_root))}
+        bound = _bound_runtime(cache, selector)
+        if bound is not None:
+            return [str(bound), "app-server", "--stdio"]
     if explicit:
         binary = Path(explicit)
         if not binary.is_file():
             raise FileNotFoundError(f"Codex binary is missing: {binary}")
         if platform == "win32" and not (binary.parent / "codex-code-mode-host.exe").is_file():
             raise FileNotFoundError(f"Codex Code Mode host is missing beside: {binary}")
-        if platform == "win32" and runtime_cache_dir is not None:
-            binary = pin_codex_bundle(binary, Path(runtime_cache_dir))
+        if cache is not None:
+            binary = _bind_runtime(binary, cache, selector)
         return [str(binary), "app-server", "--stdio"]
     if platform == "win32":
-        base = Path(local_appdata or os.environ.get("LOCALAPPDATA", ""))
-        bundle_root = base / "OpenAI" / "Codex" / "bin"
         candidates = [path for path in bundle_root.glob("*/codex.exe")
                       if (path.parent / "codex-code-mode-host.exe").is_file()]
         if candidates:
             binary = max(candidates, key=lambda item: item.stat().st_mtime)
-            if runtime_cache_dir is not None:
-                binary = pin_codex_bundle(binary, Path(runtime_cache_dir))
+            if cache is not None:
+                binary = _bind_runtime(binary, cache, selector)
             return [str(binary), "app-server", "--stdio"]
         return ["cmd.exe", "/d", "/c", "codex", "app-server", "--stdio"]
     return ["codex", "app-server", "--stdio"]
@@ -56,46 +201,41 @@ def pin_codex_bundle(binary: Path, cache: Path) -> Path:
     Existing snapshots are immutable; corruption fails closed rather than
     replacing files beneath a running app-server.
     """
+    _reject_links(binary)
     binary = binary.resolve()
     source = binary.parent
     required = (binary.name, "codex-code-mode-host.exe")
     if any(not (source / name).is_file() for name in required):
         raise FileNotFoundError("The selected Codex bundle is incomplete")
-    files = sorted(path for path in source.rglob("*") if path.is_file())
-    if any(path.is_symlink() for path in files):
-        raise ValueError("Codex runtime bundle must not contain symlinks")
-    def digest(path: Path) -> str:
-        with path.open("rb") as stream:
-            return hashlib.file_digest(stream, "sha256").hexdigest()
-    manifest = {path.relative_to(source).as_posix(): digest(path) for path in files}
-    key = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()
+    paths = sorted(source.rglob("*"))
+    for path in paths:
+        _reject_links(path)
+    files = [path for path in paths if path.is_file()]
+    manifest = {path.relative_to(source).as_posix(): _digest(path) for path in files}
+    key = _content_key(manifest)
+    _reject_links(cache)
     cache = cache.resolve()
     cache.mkdir(parents=True, exist_ok=True)
     destination = cache / key
-    def verify(directory: Path) -> None:
-        for name, expected in manifest.items():
-            path = directory / name
-            if not path.is_file() or path.is_symlink() or digest(path) != expected:
-                raise RuntimeIntegrityError(f"Pinned Codex runtime is incomplete or changed: {path}")
+    _reject_links(destination)
     if not destination.exists():
         temporary = Path(tempfile.mkdtemp(prefix="preparing-", dir=cache))
         for path in files:
             target = temporary / path.relative_to(source)
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, target)
-        verify(temporary)
-        (temporary / "mesh-runtime-manifest.json").write_text(
+        (temporary / _MANIFEST).write_text(
             json.dumps({"source": str(source), "files": manifest}, indent=2),
             encoding="utf-8",
         )
+        _verify_snapshot(temporary, key, binary.name)
         try:
             temporary.rename(destination)
         except FileExistsError:
             # Another launcher published the same immutable content. Retain
             # the temporary copy for inspection; never delete a running tree.
             pass
-    verify(destination)
-    return destination / binary.name
+    return _verify_snapshot(destination, key, binary.name)
 
 
 class RpcSession(Protocol):

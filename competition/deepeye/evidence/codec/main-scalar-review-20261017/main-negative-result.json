@@ -1,0 +1,1215 @@
+{
+  "source_sha256": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+  "original_sha256": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+  "vectors_sha256": "c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99",
+  "negative_numeric_cases": 108,
+  "negative_results": [
+    {
+      "case": "check_samples",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_samples",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_samples",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "check_samples",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_sequence",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_sequence",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_sequence",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "check_sequence",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "check_e",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "zigzag",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "zigzag",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "zigzag",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "zigzag",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "unzigzag",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "unzigzag",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "unzigzag",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "unzigzag",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_x",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_x",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_x",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_x",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_previous",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_previous",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_previous",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_previous",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_e",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "select_z",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "select_z",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "select_z",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "select_z",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_anchor",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_anchor",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_anchor",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "encode_anchor",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_body",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_body",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_body",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "encode_body",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "encode_e",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "split_size",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "split_size",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "split_size",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "split_size",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_size",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_size",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_size",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "stream_size",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "stream_e",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_sample",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_sample",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_sample",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "stream_sample",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_e",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_k",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_k",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_k",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_k",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "bool",
+      "status": "rejected",
+      "operator_calls": 0
+    }
+  ],
+  "operator_calls": [
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap",
+    "Trap"
+  ],
+  "failures": [
+    {
+      "case": "check_samples",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_samples",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_samples",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "check_sequence",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_sequence",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_sequence",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "check_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "check_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "zigzag",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "zigzag",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "zigzag",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "unzigzag",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "unzigzag",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "unzigzag",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_x",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_x",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_x",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_x",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_previous",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_previous",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_previous",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_previous",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "quantize_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "quantize_e",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "reconstruct_previous",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "reconstruct_q",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "reconstruct_e",
+      "type": "bool",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "select_z",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "select_z",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "select_z",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "encode_anchor",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_anchor",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_anchor",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "encode_body",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_body",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_body",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "encode_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "encode_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "split_size",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "split_size",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "split_size",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "stream_size",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_size",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_size",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "stream_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "stream_sample",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_sample",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "stream_sample",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_e",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_k",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_k",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_k",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_k",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_sample_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_sample_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_valid_bit_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "passive",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "enum",
+      "status": "accepted",
+      "operator_calls": 0
+    },
+    {
+      "case": "decode_stream_valid_bit_count",
+      "type": "operator_trap",
+      "status": "wrong_exception:AssertionError",
+      "operator_calls": 1
+    }
+  ],
+  "ordinary_blocks": 1000,
+  "ordinary_helper_cases": 250,
+  "ordinary_fixture_digest": "3783c7e56687e287c087e62fbfc7dfe6e06ca1dd7a6555feae6ab1f175fc624a",
+  "max_error_seen": 8,
+  "status": "rejected",
+  "scope": "Exact built-in integer API boundary and preserved ordinary candidate bytes only; not public TRACE ABI, B01/R03, security isolation or hardware acceptance."
+}

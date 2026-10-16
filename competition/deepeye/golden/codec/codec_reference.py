@@ -2,6 +2,8 @@
 
 Task: DEEPEYE-IMPLEMENTATION-20261014/v1
 Work: B-CODEC-INTEGER-FOUNDATION-20261015-01-v1
+Correction: B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 (numeric API
+inputs accept exact built-in int only; no formula, layout or fallback change).
 Contract: DEEPEYE-HUMAN-LOCK-20261014/revision1 (H01-H15),
 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
 
@@ -12,11 +14,16 @@ saturation or 32-byte total accounting rule, and carries no acceptance
 claim.  R03 and B01 remain not_run; A alone operates the physical board.
 
 Implemented candidate rules:
-  * uint16 scalar samples; bool/non-int/out-of-range rejected; block length
-    1..128; every block starts with the exact absolute uint16 anchor; the
-    predictor resets at every block start.
+  * uint16 scalar samples; every numeric API input must be an exact built-in
+    int: bool, IntEnum and int subclasses are rejected by type before any
+    overloaded operator of the value can run; out-of-range rejected; block
+    length 1..128; every block starts with the exact absolute uint16 anchor;
+    the predictor resets at every block start.
   * E in {0,1,2,4,8}; D = 2E+1; q = (x - p + E) // D with mathematical
     floor; y = min(65535, max(0, p + q*D)); p = y.  E=0 is exact.
+  * quantize/reconstruct validate x/previous/q/E as exact built-in ints (E
+    must be one of 0,1,2,4,8) before arithmetic; the numeric domain and
+    clamping for valid built-in ints are unchanged.
   * ZigZag: z = 2q if q >= 0 else -2q-1.
   * Per-block Rice, single k in 0..15, MSB-first: quotient zero bits then a
     one terminator, then k remainder bits MSB-first; quotient > 31 is
@@ -49,8 +56,14 @@ class CodecError(ValueError):
 
 
 def _require_int(value, what):
-    if isinstance(value, bool) or not isinstance(value, int):
-        raise CodecError('%s must be an int, got %s' % (what, type(value).__name__))
+    '''Accept only exact built-in ints; bool and int subclasses are rejected.
+
+    Rejection happens on the type alone, before any overloaded operator of
+    the value could run.
+    '''
+    if type(value) is not int:
+        raise CodecError('%s must be an int (exact built-in int required), got %s'
+                         % (what, type(value).__name__))
     return value
 
 
@@ -59,9 +72,7 @@ def _check_sample_values(samples):
         raise CodecError('samples must be a list or tuple of ints')
     values = []
     for index, value in enumerate(samples):
-        if isinstance(value, bool) or not isinstance(value, int):
-            raise CodecError('sample[%d] must be an int, got %s'
-                             % (index, type(value).__name__))
+        _require_int(value, 'sample[%d]' % index)
         if value < SAMPLE_MIN or value > SAMPLE_MAX:
             raise CodecError('sample[%d]=%d outside uint16 range' % (index, value))
         values.append(value)
@@ -88,7 +99,7 @@ def check_sample_sequence(samples):
 
 
 def check_e(e):
-    '''E must be exactly one of 0, 1, 2, 4, 8 (bool is rejected).'''
+    '''E must be exactly one of 0, 1, 2, 4, 8 (bool/int subclasses rejected).'''
     _require_int(e, 'E')
     if e not in E_VALUES:
         raise CodecError('E=%d not in %s' % (e, (E_VALUES,)))
@@ -110,13 +121,27 @@ def unzigzag(z):
 
 
 def quantize(x, previous, e):
-    '''Candidate residual q = (x - previous + E) // (2E+1), floor division.'''
+    '''Candidate residual q = (x - previous + E) // (2E+1), floor division.
+
+    x, previous and E must be exact built-in ints and are validated before any
+    arithmetic; E must be one of 0, 1, 2, 4, 8.
+    '''
+    _require_int(x, 'x')
+    _require_int(previous, 'previous')
+    e = check_e(e)
     d = 2 * e + 1
     return (x - previous + e) // d
 
 
 def reconstruct(previous, q, e):
-    '''Candidate reconstruction y = clamp(previous + q*(2E+1)).'''
+    '''Candidate reconstruction y = clamp(previous + q*(2E+1)).
+
+    previous, q and E must be exact built-in ints and are validated before any
+    arithmetic; E must be one of 0, 1, 2, 4, 8.
+    '''
+    _require_int(previous, 'previous')
+    _require_int(q, 'q')
+    e = check_e(e)
     y = previous + q * (2 * e + 1)
     if y > SAMPLE_MAX:
         return SAMPLE_MAX

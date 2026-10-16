@@ -1,0 +1,259 @@
+{
+ "schema": 1,
+ "work_id": "B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1",
+ "title": "Exact built-in int numeric boundary correction (E0 correctness)",
+ "task": {
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1
+ },
+ "job_id": "child-35a7172ead2f42e78b73ca9cc83c36c8",
+ "parent_thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+ "instance_id": "deepseek-b-24",
+ "recovery_operation": "B-PRODUCT-RESTART-CONTINUE-20261017-v1",
+ "route": "deepseek Flash/max (ordinary execution)",
+ "generated_utc": "2026-10-16T16:20:36.935001+00:00",
+ "contract": {
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "requirements_ids": [
+   "H01",
+   "H02",
+   "H03",
+   "H04",
+   "H05",
+   "H06",
+   "H07",
+   "H08",
+   "H09",
+   "H10",
+   "H11",
+   "H12",
+   "H13",
+   "H14",
+   "H15"
+  ],
+  "requirements_sha256_expected": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_sha256_computed": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_hash_method": "sha256 of UTF-8 json.dumps(requirements, ensure_ascii=False, sort_keys=True, separators=(chr(44), chr(58)))",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "pinned_local_source": ".local/deployment/node-b/evidence/product-restart-20261017/contract-pinned.json"
+ },
+ "worktree": {
+  "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+  "head": "3ffbe08abafd0a23e7660b55ffa689d7e9d4c1c3",
+  "head_verified": true,
+  "dirty_input_preserved": "handoffs/b/B-DEEPEYE-CODEC-20261016-01/input.json (present, not reset, not staged)",
+  "git_commit": "none by this job (no commit/push)"
+ },
+ "python": {
+  "executable": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+  "version": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "implementation": "CPython"
+ },
+ "pinned_inputs_before_change": {
+  "competition/deepeye/golden/codec/codec_reference.py": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+  "competition/deepeye/golden/codec/known_vectors.json": "c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99",
+  "competition/deepeye/golden/codec/integer_candidate_rules.json": "aa556d13eccda4dbf20c4e00a09703ea7aed8dd49a94b67d48f9763b6ec76fa5",
+  "competition/deepeye/golden/codec/README.md": "8e0658ed60130be6bfc9ae7d2afe1dbe21eb9a31cf7355f63b73ecf659521cbe",
+  "competition/deepeye/tests/codec/test_codec_reference.py": "13abaa6327fc5b614e2e60fe2e8845d93942acfea1ebb509680a94596cb21cf6"
+ },
+ "outputs_final": {
+  "competition/deepeye/golden/codec/codec_reference.py": {
+   "sha256": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5",
+   "bytes": 14830
+  },
+  "competition/deepeye/golden/codec/known_vectors.json": {
+   "sha256": "c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99",
+   "bytes": 25132
+  },
+  "competition/deepeye/golden/codec/integer_candidate_rules.json": {
+   "sha256": "275525f2cf951d196d333171cb777c41aaeeedd5239689fe096f40055b7dbeb8",
+   "bytes": 8445
+  },
+  "competition/deepeye/golden/codec/README.md": {
+   "sha256": "bbc2241c1ad89080c4993afe4acf08f24b168dc633d7b9dcddd8eae6a2263c7c",
+   "bytes": 8529
+  },
+  "competition/deepeye/tests/codec/test_codec_reference.py": {
+   "sha256": "13abaa6327fc5b614e2e60fe2e8845d93942acfea1ebb509680a94596cb21cf6",
+   "bytes": 24107
+  },
+  "competition/deepeye/tests/codec/test_scalar_boundary.py": {
+   "sha256": "b1798ac51ff19cd63b36a02c06f3c5d32756bf2132c677b7a608825301b39f00",
+   "bytes": 16556
+  }
+ },
+ "old_source_sha256": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+ "new_source_sha256": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5",
+ "red_old_source": {
+  "phase": "before the fix, pinned original codec_reference.py",
+  "probe": {
+   "status": "reproduced_E0_corruption",
+   "cases": [
+    {
+     "name": "residual_operator",
+     "outcome": "encoded",
+     "decoded": [
+      100,
+      100
+     ],
+     "E0_exact": false
+    },
+    {
+     "name": "anchor_operator",
+     "outcome": "encoded",
+     "decoded": [
+      0
+     ],
+     "E0_exact": false
+    }
+   ]
+  },
+  "new_safety_tests": {
+   "command_label": "red-new-tests-old-source",
+   "exit_code": 1,
+   "tests": 18,
+   "verdict": "FAILED (failures=78)",
+   "status": "RED: failures expected before the fix; not a pass"
+  },
+  "existing_tests": {
+   "command_label": "red-existing-tests-old-source",
+   "exit_code": 0,
+   "tests": 49,
+   "verdict": "OK",
+   "status": "pass"
+  },
+  "frozen_vectors": {
+   "command_label": "red-vectors-old-source",
+   "exit_code": 0,
+   "entries_checked": 61,
+   "passed": true,
+   "status": "pass"
+  }
+ },
+ "green_new_source": {
+  "phase": "after the fix, corrected codec_reference.py",
+  "probe": {
+   "status": "rejected_before_operator_by_type_check",
+   "cases": [
+    {
+     "name": "residual_operator",
+     "outcome": "rejected",
+     "error_type": "CodecError",
+     "error_message": "sample[1] must be an int (exact built-in int required), got ForgedDifference"
+    },
+    {
+     "name": "anchor_operator",
+     "outcome": "rejected",
+     "error_type": "CodecError",
+     "error_message": "sample[0] must be an int (exact built-in int required), got ForgedAnchor"
+    }
+   ]
+  },
+  "new_safety_tests": {
+   "command_label": "green-new-tests-new-source",
+   "exit_code": 0,
+   "tests": 18,
+   "verdict": "OK",
+   "status": "pass"
+  },
+  "existing_tests": {
+   "command_label": "green-existing-tests-new-source",
+   "exit_code": 0,
+   "tests": 49,
+   "verdict": "OK",
+   "status": "pass"
+  },
+  "frozen_vectors": {
+   "command_label": "green-vectors-new-source",
+   "exit_code": 0,
+   "entries_checked": 61,
+   "passed": true,
+   "status": "pass"
+  },
+  "combined_tests": {
+   "command_label": "green-combined-tests-new-source",
+   "exit_code": 0,
+   "tests": 67,
+   "verdict": "OK",
+   "status": "pass"
+  },
+  "final_state_smoke": {
+   "combined_tests": {
+    "exit_code": 0,
+    "tests": 67,
+    "verdict": "OK"
+   },
+   "frozen_vectors": {
+    "exit_code": 0,
+    "entries_checked": 61,
+    "passed": true
+   },
+   "note": "re-run after README/rules language updates"
+  }
+ },
+ "coverage": {
+  "rejected_non_exact_int_everywhere": [
+   "check_samples",
+   "check_sample_sequence",
+   "check_e",
+   "zigzag",
+   "unzigzag",
+   "quantize",
+   "reconstruct",
+   "select_body_encoding",
+   "encode_block",
+   "encode_blocks",
+   "decode_block",
+   "decode_blocks",
+   "split_blocks"
+  ],
+  "rejected_fixture_numeric_fields": [
+   "e",
+   "k",
+   "sample_count",
+   "valid_bit_count"
+  ],
+  "rejected_value_class": "E, k, sample_count, valid_bit_count, block_len",
+  "reproductions_included": [
+   "ForgedDifference(__sub__)",
+   "ForgedAnchor(__rshift__)"
+  ],
+  "operator_traps": {
+   "arithmetic": "int subclass whose arithmetic/index dunders raise; proves type rejection happens before any operator runs",
+   "comparison": "int subclass whose comparison/truth dunders raise; proves type rejection happens before any operator runs"
+  },
+  "valid_builtin_controls": [
+   "uint16 sample boundaries 0/65535 and length 1..128",
+   "E in {0,1,2,4,8}; zigzag/unzigzag known values",
+   "quantize/reconstruct values and clamping",
+   "k=0 and k=15 fixtures, sample_count=1, valid_bit_count=16",
+   "encode_blocks/decode_blocks round trip",
+   "ordinary [100, 100] E0 bytes pinned at payload_hex 006480"
+  ]
+ },
+ "status_boundaries": {
+  "candidate_software_tests": "run: RED on pinned original source, GREEN on corrected source",
+  "existing_49_unit_tests": "pass (test file unchanged, hash pinned)",
+  "frozen_61_vectors": "pass, bytes unchanged (hash pinned)",
+  "trace_layout": "not_run (R03 blocked)",
+  "b01": "not_run",
+  "r03": "not_run",
+  "simulation": "not_run",
+  "synthesis": "not_run",
+  "implementation": "not_run",
+  "cdc": "not_run",
+  "board": "not_run; A alone operates the physical board; no board claim",
+  "software_integration": "none claimed",
+  "system_acceptance": "none claimed",
+  "scope": "B01 precursor under R03; not B01/R03/software integration/full TRACE/CDC/simulation/synthesis/implementation/board/system acceptance"
+ },
+ "remaining_issues": [
+  "RED run shape: 18 test methods with 78 subTest-level failures on the original source; no pre-fix pass is claimed.",
+  "Container types (list/tuple subclasses overriding __iter__ or __len__) and non-numeric fields (mode, payload_hex) were out of scope for this assignment and keep their isinstance/str checks.",
+  "Downstream callers that pass IntEnum or int-subclass scalars (for example enum-based configuration) are now rejected by design; they must pass exact built-in ints.",
+  "Parent (B main) must independently reproduce ordinary encoded bytes and error boundaries per the assignment; this job did not run the million-sample run or the full historical suite.",
+  "No git commit/push was performed; the four owned files remain uncommitted in the worktree, and the dirty CODEC01 handoff input was preserved untouched."
+ ]
+}

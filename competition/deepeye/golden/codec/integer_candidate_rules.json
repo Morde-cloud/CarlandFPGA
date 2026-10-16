@@ -3,7 +3,9 @@
     "codec_reference": "golden/codec/codec_reference.py",
     "evidence": "evidence/codec/integer-foundation-01/",
     "evidence_byte_accounting_correction_02": "evidence/codec/byte-accounting-correction-02/",
+    "evidence_scalar_boundary_01": "evidence/codec/scalar-boundary-20261017-01/",
     "tests": "tests/codec/test_codec_reference.py",
+    "tests_scalar_boundary": "tests/codec/test_scalar_boundary.py",
     "vectors": "golden/codec/known_vectors.json",
     "verifier": "tools/verify_codec_candidate.py"
   },
@@ -41,6 +43,10 @@
     {
       "summary": "aggregate byte accounting corrected to the sum of independently padded block payload lengths; the per-block ceiling formula is unchanged",
       "work_id": "B-CODEC-BYTE-ACCOUNTING-CORRECTION-20261016-02-v1"
+    },
+    {
+      "summary": "numeric API inputs accept only exact built-in int; bool, IntEnum and every int subclass are rejected by a centralized type check before any overloaded operator of the value can run; formulas, domains, clamping and all fixture values are unchanged",
+      "work_id": "B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1"
     }
   ],
   "counting": {
@@ -62,6 +68,13 @@
     "valid_bit_count": "exact number of significant payload bits (>= 16)"
   },
   "name": "deepeye-integer-inner-codec-candidate-rules",
+  "numeric_inputs": {
+    "block_len": "exact built-in int in 1..128",
+    "evidence": "evidence/codec/scalar-boundary-20261017-01/",
+    "helpers": "zigzag, unzigzag, quantize, reconstruct, select_body_encoding and split_blocks validate their numeric arguments (sample values, x, previous, q, z, E, k, block_len) as exact built-in ints before arithmetic; quantize and reconstruct use the existing E rule (0, 1, 2, 4, 8)",
+    "rule": "every numeric API input (sample values, E, k, sample_count, valid_bit_count, block_len) must be an exact built-in int; bool, IntEnum and every int subclass are rejected by type before any overloaded operator of the value can run",
+    "unchanged": "numeric domain, floor-division formula, clamping and all fixture values are unchanged"
+  },
   "proof_states": {
     "b01": "not_run",
     "board": "not_run",
@@ -94,20 +107,21 @@
     "property": "a RAW block reproduces its input exactly (lossless bypass)"
   },
   "rejections": [
-    "bool, non-int or out-of-range scalar samples",
+    "scalar samples that are not exact built-in int (bool, IntEnum, every int subclass, non-int) or are out-of-range",
     "block length outside 1..128",
-    "E not in {0,1,2,4,8} (bool E rejected)",
+    "E that is not an exact built-in int in {0,1,2,4,8} (bool, IntEnum and int subclasses rejected)",
     "fixture not a dict",
     "mode not rice or raw",
-    "rice fixture without an int k, k outside 0..15, raw fixture with k not null",
-    "sample_count not an int in 1..128 (bool rejected)",
-    "valid_bit_count not an int, below the 16-bit anchor, above the payload, or leaving excess payload bytes",
+    "rice fixture without an exact built-in int k, k outside 0..15, raw fixture with k not null",
+    "sample_count not an exact built-in int in 1..128 (bool, IntEnum and int subclasses rejected)",
+    "valid_bit_count not an exact built-in int, below the 16-bit anchor, above the payload, or leaving excess payload bytes",
     "payload_hex not a hex string, odd length, or non-hex characters",
     "nonzero padding bits after valid_bit_count",
     "truncated bitstream before the declared sample count",
     "unary run longer than 31 zeroes (overlong unary)",
     "extra valid bits remaining after the declared sample count",
-    "raw body shorter than 16*(sample_count-1) bits"
+    "raw body shorter than 16*(sample_count-1) bits",
+    "any numeric argument that is not an exact built-in int: rejected by the centralized type check before any overloaded operator of the value can run"
   ],
   "rice": {
     "bit_order": "MSB-first for every field",
@@ -123,6 +137,7 @@
     "rejects": [
       "bool",
       "non-int",
+      "int subclass (including IntEnum); only exact built-in int is accepted",
       "out-of-range",
       "empty sequence"
     ],

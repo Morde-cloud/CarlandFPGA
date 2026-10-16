@@ -1,0 +1,49 @@
+{
+  "at_utc": "2026-10-16T16:11:37.631374+00:00",
+  "work_id": "B-PRODUCT-RESTART-CONTINUE-20261017-v1",
+  "source_sha256": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+  "status": "reproduced_E0_correctness_failure",
+  "cases": [
+    {
+      "name": "residual_operator",
+      "input_integer_values": [
+        100,
+        200
+      ],
+      "fixture": {
+        "mode": "rice",
+        "e": 0,
+        "k": 0,
+        "sample_count": 2,
+        "valid_bit_count": 17,
+        "payload_hex": "006480"
+      },
+      "decoded": [
+        100,
+        100
+      ],
+      "E0_exact": false,
+      "expected_safe_behavior": "Reject non-exact built-in int before executing its numeric operators."
+    },
+    {
+      "name": "anchor_operator",
+      "input_integer_values": [
+        1234
+      ],
+      "fixture": {
+        "mode": "raw",
+        "e": 0,
+        "k": null,
+        "sample_count": 1,
+        "valid_bit_count": 16,
+        "payload_hex": "0000"
+      },
+      "decoded": [
+        0
+      ],
+      "E0_exact": false,
+      "expected_safe_behavior": "Reject non-exact built-in int before executing its numeric operators."
+    }
+  ],
+  "security_scope": "Python API numeric correctness; not a wire exploit or arbitrary in-process security boundary."
+}

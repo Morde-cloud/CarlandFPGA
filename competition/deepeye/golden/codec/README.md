@@ -4,6 +4,8 @@ Task: `DEEPEYE-IMPLEMENTATION-20261014/v1`
 Work: `B-CODEC-INTEGER-FOUNDATION-20261015-01-v1`
 Correction: `B-CODEC-BYTE-ACCOUNTING-CORRECTION-20261016-02-v1` (aggregate byte
 accounting only; see "Byte accounting").
+Correction: `B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1` (numeric API inputs
+accept exact built-in `int` only; see "Numeric input types").
 Contract: `DEEPEYE-HUMAN-LOCK-20261014/revision1` (H01-H15), requirements SHA256
 `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`.
 Design commit `1011259415a0916054eb580687612580bc1e5f09`; lock commit
@@ -24,6 +26,9 @@ Nothing here is an acceptance claim.
   RAW examples, malformed fixtures, next-block recovery; reproducible from the
   verifier tool.
 - `../../tests/codec/test_codec_reference.py` - unittest suite.
+- `../../tests/codec/test_scalar_boundary.py` - boundary suite: exact-int
+  rejection of bool/IntEnum/int subclasses on every numeric API input, the two
+  reproduced forged-operator cases and valid built-in controls.
 - `../../tools/verify_codec_candidate.py` - deterministic vector builder,
   vector checker and the 1,000,000-sample run.
 - `../../evidence/codec/integer-foundation-01/` - raw commands, exit codes,
@@ -32,12 +37,18 @@ Nothing here is an acceptance claim.
   byte-accounting evidence for
   `B-CODEC-BYTE-ACCOUNTING-CORRECTION-20261016-02-v1` (commands, captures,
   result).
+- `../../evidence/codec/scalar-boundary-20261017-01/` - RED (original source)
+  and GREEN (corrected source) evidence for
+  `B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1` (commands, captures, result).
 
 ## Candidate rules (summary)
 
-1. Samples are uint16 scalars; bool/non-int/out-of-range values are rejected.
-   A block has 1..128 samples and starts with the exact absolute uint16 anchor
-   of its first sample; the predictor resets at every block start.
+1. Samples are uint16 scalars; every numeric API input must be an exact
+   built-in `int`: bool, IntEnum and int subclasses are rejected by type
+   before any overloaded operator can run, and out-of-range values are
+   rejected.  A block has 1..128 samples and starts with the exact absolute
+   uint16 anchor of its first sample; the predictor resets at every block
+   start.
 2. `D = 2E+1` with `E` in {0,1,2,4,8}; `q = (x - p + E) // D` uses
    mathematical floor division; `y = min(65535, max(0, p + q*D))`; `p = y`.
    E=0 is exact.
@@ -54,6 +65,23 @@ Nothing here is an acceptance claim.
 
 `codec_reference.py` is the executable definition; `integer_candidate_rules.json`
 is the reviewable mirror.
+
+## Numeric input types
+
+All numeric API inputs (sample values, `E`, `k`, `sample_count`,
+`valid_bit_count`, `block_len` and the `zigzag`, `unzigzag`, `quantize`,
+`reconstruct`, `select_body_encoding`, `split_blocks` arguments) must be exact
+built-in `int` values.  `bool`, `IntEnum` and every `int` subclass are rejected
+by a centralized type check before any overloaded operator of the value can
+run, so caller-provided arithmetic can no longer alter the declared `E` or the
+decoded samples.  `quantize` and `reconstruct` validate `x`/`previous`/`q`/`E`
+before arithmetic and keep the existing E rule (0, 1, 2, 4, 8); the numeric
+domain, floor division, clamping and all fixture values are unchanged.
+The rejected cases include the two reproduced forged-operator samples
+(`codec-scalar-reproduction.json`: a forged `__sub__` decoded
+`encode_block([100, ForgedDifference(200)], 0)` to `[100, 100]`, and a forged
+`__rshift__` decoded the anchor 1234 to 0 on the original source); details and
+raw logs are in `../../evidence/codec/scalar-boundary-20261017-01/`.
 
 ## Candidate fixture (candidate-internal, not a TRACE layout)
 
@@ -84,6 +112,7 @@ TRACE byte layout, block framing or 32-byte accounting rule is defined here.
 
 - Unit tests (software only), from the worktree root:
   `python -B -m unittest discover -s competition/deepeye/tests/codec -v`
+  runs the foundation suite plus the `test_scalar_boundary.py` boundary suite.
 - Vector check:
   `python -B competition/deepeye/tools/verify_codec_candidate.py check-vectors
   --vectors competition/deepeye/golden/codec/known_vectors.json`
@@ -122,7 +151,8 @@ the outer format; channel multiplexing. R03 remains blocked.
 
 ## Proof states
 
-software candidate tests: run (this work) | TRACE layout: not_run (R03) |
+software candidate tests: run (this work; exact-int boundary correction
+re-ran the unit suites and the 61 frozen vectors) | TRACE layout: not_run (R03) |
 B01: not_run | simulation: not_run | synthesis: not_run | implementation:
 not_run | board: not_run | system: not_run | compression ratio: not_claimed |
 latency: not_claimed.

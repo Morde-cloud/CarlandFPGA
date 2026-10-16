@@ -1,0 +1,172 @@
+===== [red 01] red-probe-old-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\product-restart-20261017\scalar-worker-scratch\repro_probe.py --codec D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\golden\codec\codec_reference.py
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+{
+  "at_utc": "2026-10-16T16:19:15.375652+00:00",
+  "cases": [
+    {
+      "E0_exact": false,
+      "decoded": [
+        100,
+        100
+      ],
+      "display_integer_values": [
+        100,
+        200
+      ],
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "006480",
+        "sample_count": 2,
+        "valid_bit_count": 17
+      },
+      "name": "residual_operator",
+      "outcome": "encoded"
+    },
+    {
+      "E0_exact": false,
+      "decoded": [
+        0
+      ],
+      "display_integer_values": [
+        1234
+      ],
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000",
+        "sample_count": 1,
+        "valid_bit_count": 16
+      },
+      "name": "anchor_operator",
+      "outcome": "encoded"
+    }
+  ],
+  "probe_source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\codec\\codec_reference.py",
+  "probe_source_sha256": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "status": "reproduced_E0_corruption",
+  "work_id": "B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1"
+}
+
+===== [red 02] red-new-tests-old-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=1 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -p test_scalar_boundary.py -v
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+
+===== [red 03] red-existing-tests-old-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -p test_codec_reference.py -v
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+
+===== [red 04] red-vectors-old-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B competition/deepeye/tools/verify_codec_candidate.py check-vectors --vectors competition/deepeye/golden/codec/known_vectors.json
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+vector file: competition\deepeye\golden\codec\known_vectors.json
+vector file sha256: c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99
+entries checked: 61
+hand_vectors=15 raw_step_examples=10 raw_noisy_examples=5 malformed=25 recovery_blocks=3
+vector check passed: fresh-build identity, decode/oracle agreement, all rejections, block recovery
+
+===== [red 05] red-git-head | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: git -C D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014 rev-parse HEAD
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+3ffbe08abafd0a23e7660b55ffa689d7e9d4c1c3
+
+===== [red 06] red-git-status | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: git -C D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014 status --porcelain=v1
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+ M handoffs/b/B-DEEPEYE-CODEC-20261016-01/input.json
+?? competition/deepeye/tests/codec/test_scalar_boundary.py
+
+===== [green 01] green-probe-new-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\product-restart-20261017\scalar-worker-scratch\repro_probe.py --codec D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\golden\codec\codec_reference.py
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+{
+  "at_utc": "2026-10-16T16:19:27.861652+00:00",
+  "cases": [
+    {
+      "E0_exact": null,
+      "display_integer_values": [
+        100,
+        200
+      ],
+      "error_message": "sample[1] must be an int (exact built-in int required), got ForgedDifference",
+      "error_type": "CodecError",
+      "name": "residual_operator",
+      "outcome": "rejected"
+    },
+    {
+      "E0_exact": null,
+      "display_integer_values": [
+        1234
+      ],
+      "error_message": "sample[0] must be an int (exact built-in int required), got ForgedAnchor",
+      "error_type": "CodecError",
+      "name": "anchor_operator",
+      "outcome": "rejected"
+    }
+  ],
+  "probe_source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\codec\\codec_reference.py",
+  "probe_source_sha256": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5",
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "status": "rejected_before_operator_by_type_check",
+  "work_id": "B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1"
+}
+
+===== [green 02] green-new-tests-new-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -p test_scalar_boundary.py -v
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+
+===== [green 03] green-existing-tests-new-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -p test_codec_reference.py -v
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+
+===== [green 04] green-vectors-new-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B competition/deepeye/tools/verify_codec_candidate.py check-vectors --vectors competition/deepeye/golden/codec/known_vectors.json
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+vector file: competition\deepeye\golden\codec\known_vectors.json
+vector file sha256: c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99
+entries checked: 61
+hand_vectors=15 raw_step_examples=10 raw_noisy_examples=5 malformed=25 recovery_blocks=3
+vector check passed: fresh-build identity, decode/oracle agreement, all rejections, block recovery
+
+===== [green 05] green-combined-tests-new-source | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -v
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+
+===== [green 06] green-git-head | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: git -C D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014 rev-parse HEAD
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+3ffbe08abafd0a23e7660b55ffa689d7e9d4c1c3
+
+===== [green 07] green-git-status | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: git -C D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014 status --porcelain=v1
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+ M competition/deepeye/golden/codec/codec_reference.py
+ M handoffs/b/B-DEEPEYE-CODEC-20261016-01/input.json
+?? competition/deepeye/tests/codec/test_scalar_boundary.py
+
+===== [smoke 01] smoke-combined-tests-final | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -v
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+
+===== [smoke 02] smoke-vectors-final | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B competition/deepeye/tools/verify_codec_candidate.py check-vectors --vectors competition/deepeye/golden/codec/known_vectors.json
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+vector file: competition\deepeye\golden\codec\known_vectors.json
+vector file sha256: c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99
+entries checked: 61
+hand_vectors=15 raw_step_examples=10 raw_noisy_examples=5 malformed=25 recovery_blocks=3
+vector check passed: fresh-build identity, decode/oracle agreement, all rejections, block recovery
+
+===== [smoke 03] smoke-git-status | work_id=B-CODEC-EXACT-INTEGER-BOUNDARY-20261017-01-v1 | job=child-35a7172ead2f42e78b73ca9cc83c36c8 | exit=0 =====
+argv: git -C D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014 status --porcelain=v1
+cwd: D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014
+ M competition/deepeye/golden/codec/README.md
+ M competition/deepeye/golden/codec/codec_reference.py
+ M competition/deepeye/golden/codec/integer_candidate_rules.json
+ M handoffs/b/B-DEEPEYE-CODEC-20261016-01/input.json
+?? competition/deepeye/tests/codec/test_scalar_boundary.py
+

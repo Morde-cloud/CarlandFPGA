@@ -1,0 +1,1304 @@
+{
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "revision": 1
+  },
+  "hand_vectors": [
+    {
+      "decoded": [
+        0,
+        1,
+        2
+      ],
+      "e": 0,
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "hv01_zero_one_two-e0",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        0,
+        3
+      ],
+      "e": 1,
+      "fixture": {
+        "e": 1,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000090",
+        "sample_count": 3,
+        "valid_bit_count": 20
+      },
+      "id": "hv01_zero_one_two-e1",
+      "max_abs_error": 1,
+      "samples": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        0,
+        0
+      ],
+      "e": 2,
+      "fixture": {
+        "e": 2,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0000c0",
+        "sample_count": 3,
+        "valid_bit_count": 18
+      },
+      "id": "hv01_zero_one_two-e2",
+      "max_abs_error": 2,
+      "samples": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        0,
+        0
+      ],
+      "e": 4,
+      "fixture": {
+        "e": 4,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0000c0",
+        "sample_count": 3,
+        "valid_bit_count": 18
+      },
+      "id": "hv01_zero_one_two-e4",
+      "max_abs_error": 2,
+      "samples": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        0,
+        0
+      ],
+      "e": 8,
+      "fixture": {
+        "e": 8,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0000c0",
+        "sample_count": 3,
+        "valid_bit_count": 18
+      },
+      "id": "hv01_zero_one_two-e8",
+      "max_abs_error": 2,
+      "samples": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "decoded": [
+        65535,
+        65534,
+        0,
+        65535
+      ],
+      "e": 0,
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "fffffffe0000ffff",
+        "sample_count": 4,
+        "valid_bit_count": 64
+      },
+      "id": "hv02_top_top_minus_one_zero_top-e0",
+      "max_abs_error": 0,
+      "samples": [
+        65535,
+        65534,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        65535,
+        65534,
+        0,
+        65535
+      ],
+      "e": 1,
+      "fixture": {
+        "e": 1,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "fffffffe0000ffff",
+        "sample_count": 4,
+        "valid_bit_count": 64
+      },
+      "id": "hv02_top_top_minus_one_zero_top-e1",
+      "max_abs_error": 0,
+      "samples": [
+        65535,
+        65534,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        65535,
+        65535,
+        0,
+        65535
+      ],
+      "e": 2,
+      "fixture": {
+        "e": 2,
+        "k": 14,
+        "mode": "rice",
+        "payload_hex": "ffff8000cccacccc",
+        "sample_count": 4,
+        "valid_bit_count": 63
+      },
+      "id": "hv02_top_top_minus_one_zero_top-e2",
+      "max_abs_error": 1,
+      "samples": [
+        65535,
+        65534,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        65535,
+        65535,
+        0,
+        65535
+      ],
+      "e": 4,
+      "fixture": {
+        "e": 4,
+        "k": 13,
+        "mode": "rice",
+        "payload_hex": "ffff8001c71b8e40",
+        "sample_count": 4,
+        "valid_bit_count": 60
+      },
+      "id": "hv02_top_top_minus_one_zero_top-e4",
+      "max_abs_error": 1,
+      "samples": [
+        65535,
+        65534,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        65535,
+        65535,
+        0,
+        65535
+      ],
+      "e": 8,
+      "fixture": {
+        "e": 8,
+        "k": 12,
+        "mode": "rice",
+        "payload_hex": "ffff8003c3af0f00",
+        "sample_count": 4,
+        "valid_bit_count": 57
+      },
+      "id": "hv02_top_top_minus_one_zero_top-e8",
+      "max_abs_error": 1,
+      "samples": [
+        65535,
+        65534,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        100,
+        101,
+        100,
+        99
+      ],
+      "e": 0,
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "00642a",
+        "sample_count": 4,
+        "valid_bit_count": 23
+      },
+      "id": "hv03_plateau-e0",
+      "max_abs_error": 0,
+      "samples": [
+        100,
+        101,
+        100,
+        99
+      ]
+    },
+    {
+      "decoded": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "e": 1,
+      "fixture": {
+        "e": 1,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0064e0",
+        "sample_count": 4,
+        "valid_bit_count": 19
+      },
+      "id": "hv03_plateau-e1",
+      "max_abs_error": 1,
+      "samples": [
+        100,
+        101,
+        100,
+        99
+      ]
+    },
+    {
+      "decoded": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "e": 2,
+      "fixture": {
+        "e": 2,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0064e0",
+        "sample_count": 4,
+        "valid_bit_count": 19
+      },
+      "id": "hv03_plateau-e2",
+      "max_abs_error": 1,
+      "samples": [
+        100,
+        101,
+        100,
+        99
+      ]
+    },
+    {
+      "decoded": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "e": 4,
+      "fixture": {
+        "e": 4,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0064e0",
+        "sample_count": 4,
+        "valid_bit_count": 19
+      },
+      "id": "hv03_plateau-e4",
+      "max_abs_error": 1,
+      "samples": [
+        100,
+        101,
+        100,
+        99
+      ]
+    },
+    {
+      "decoded": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "e": 8,
+      "fixture": {
+        "e": 8,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "0064e0",
+        "sample_count": 4,
+        "valid_bit_count": 19
+      },
+      "id": "hv03_plateau-e8",
+      "max_abs_error": 1,
+      "samples": [
+        100,
+        101,
+        100,
+        99
+      ]
+    }
+  ],
+  "malformed": [
+    {
+      "expected_error_contains": "truncated",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000020",
+        "sample_count": 3,
+        "valid_bit_count": 19
+      },
+      "id": "m01_truncated_before_second_residual"
+    },
+    {
+      "expected_error_contains": "extra bits",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 23
+      },
+      "id": "m02_extra_bits_after_final_sample"
+    },
+    {
+      "expected_error_contains": "extra bits",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 2,
+        "valid_bit_count": 22
+      },
+      "id": "m03_declared_count_too_small"
+    },
+    {
+      "expected_error_contains": "nonzero padding",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000025",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m04_nonzero_padding_bit"
+    },
+    {
+      "expected_error_contains": "excess bytes",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "00002400",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m05_excess_payload_bytes"
+    },
+    {
+      "expected_error_contains": "outside 0..15",
+      "fixture": {
+        "e": 0,
+        "k": 16,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m06_illegal_k_16"
+    },
+    {
+      "expected_error_contains": "k must be an int",
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m07_rice_k_null"
+    },
+    {
+      "expected_error_contains": "not in",
+      "fixture": {
+        "e": 3,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m08_illegal_e_3"
+    },
+    {
+      "expected_error_contains": "must be an int",
+      "fixture": {
+        "e": true,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m09_e_bool_true"
+    },
+    {
+      "expected_error_contains": "outside 1..",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 0,
+        "valid_bit_count": 22
+      },
+      "id": "m10_sample_count_zero"
+    },
+    {
+      "expected_error_contains": "outside 1..",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 129,
+        "valid_bit_count": 22
+      },
+      "id": "m11_sample_count_129"
+    },
+    {
+      "expected_error_contains": "must be an int",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": true,
+        "valid_bit_count": 22
+      },
+      "id": "m12_sample_count_bool"
+    },
+    {
+      "expected_error_contains": "anchor",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "00",
+        "sample_count": 3,
+        "valid_bit_count": 8
+      },
+      "id": "m13_valid_bits_below_anchor"
+    },
+    {
+      "expected_error_contains": "exceeds",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 25
+      },
+      "id": "m14_valid_bits_above_payload"
+    },
+    {
+      "expected_error_contains": "exceeds",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "",
+        "sample_count": 3,
+        "valid_bit_count": 16
+      },
+      "id": "m15_empty_payload"
+    },
+    {
+      "expected_error_contains": "even number of digits",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "00002",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m16_odd_payload_hex_length"
+    },
+    {
+      "expected_error_contains": "non-hex",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "00002g",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m17_non_hex_payload_digit"
+    },
+    {
+      "expected_error_contains": "mode must be",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "ricee",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m18_bad_mode"
+    },
+    {
+      "expected_error_contains": "must be an int",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": true
+      },
+      "id": "m19_valid_bit_count_bool"
+    },
+    {
+      "expected_error_contains": "must be an int",
+      "fixture": {
+        "e": 0,
+        "k": true,
+        "mode": "rice",
+        "payload_hex": "000024",
+        "sample_count": 3,
+        "valid_bit_count": 22
+      },
+      "id": "m20_k_bool"
+    },
+    {
+      "expected_error_contains": "overlong unary",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "00000000000080",
+        "sample_count": 2,
+        "valid_bit_count": 49
+      },
+      "id": "m21_overlong_unary_32_zeroes"
+    },
+    {
+      "expected_error_contains": "truncated",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "rice",
+        "payload_hex": "000000",
+        "sample_count": 2,
+        "valid_bit_count": 21
+      },
+      "id": "m22_truncated_mid_unary"
+    },
+    {
+      "expected_error_contains": "k=null",
+      "fixture": {
+        "e": 0,
+        "k": 0,
+        "mode": "raw",
+        "payload_hex": "00000000",
+        "sample_count": 2,
+        "valid_bit_count": 32
+      },
+      "id": "m23_raw_with_k_zero"
+    },
+    {
+      "expected_error_contains": "truncated",
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "00000001",
+        "sample_count": 3,
+        "valid_bit_count": 32
+      },
+      "id": "m24_raw_truncated"
+    },
+    {
+      "expected_error_contains": "extra bits",
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "000100",
+        "sample_count": 1,
+        "valid_bit_count": 24
+      },
+      "id": "m25_raw_extra_bits_declared_one"
+    }
+  ],
+  "name": "deepeye-integer-inner-codec-candidate-v1",
+  "next_block_recovery": {
+    "blocks": [
+      {
+        "decoded": [
+          0,
+          1,
+          2
+        ],
+        "e": 0,
+        "fixture": {
+          "e": 0,
+          "k": 0,
+          "mode": "rice",
+          "payload_hex": "000024",
+          "sample_count": 3,
+          "valid_bit_count": 22
+        },
+        "id": "rb1_plateau_zero_start",
+        "samples": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "decoded": [
+          65535,
+          0,
+          30000
+        ],
+        "e": 2,
+        "fixture": {
+          "e": 2,
+          "k": 14,
+          "mode": "rice",
+          "payload_hex": "ffff6665ddc0",
+          "sample_count": 3,
+          "valid_bit_count": 47
+        },
+        "id": "rb2_absolute_top_anchor",
+        "samples": [
+          65535,
+          0,
+          30000
+        ]
+      },
+      {
+        "decoded": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "e": 8,
+        "fixture": {
+          "e": 8,
+          "k": 0,
+          "mode": "rice",
+          "payload_hex": "0005e0",
+          "sample_count": 4,
+          "valid_bit_count": 19
+        },
+        "id": "rb3_flat_after_step",
+        "samples": [
+          5,
+          5,
+          5,
+          5
+        ]
+      }
+    ],
+    "interleaved": {
+      "decoded": [
+        [
+          0,
+          1,
+          2
+        ],
+        null,
+        [
+          65535,
+          0,
+          30000
+        ]
+      ],
+      "description": "valid, malformed, valid; the last block must still decode",
+      "expected": [
+        "ok",
+        "reject",
+        "ok"
+      ],
+      "sequence": [
+        {
+          "e": 0,
+          "k": 0,
+          "mode": "rice",
+          "payload_hex": "000024",
+          "sample_count": 3,
+          "valid_bit_count": 22
+        },
+        {
+          "e": 0,
+          "k": 0,
+          "mode": "rice",
+          "payload_hex": "00002400",
+          "sample_count": 3,
+          "valid_bit_count": 22
+        },
+        {
+          "e": 2,
+          "k": 14,
+          "mode": "rice",
+          "payload_hex": "ffff6665ddc0",
+          "sample_count": 3,
+          "valid_bit_count": 47
+        }
+      ]
+    },
+    "note": "Blocks are independent: every block starts with an absolute uint16 anchor and resets the predictor, so a later block never needs any earlier block state, even after a rejected block."
+  },
+  "oracle_note": "RICE blocks decode to the independent scalar oracle re-implemented in this tool from the candidate rules; RAW blocks must reproduce the original samples exactly.  The unit tests re-implement the same expectation separately.",
+  "raw_noisy_examples": [
+    {
+      "decoded": [
+        1068,
+        65528,
+        42497,
+        37688,
+        5490,
+        34448,
+        60879,
+        53428,
+        60039,
+        40003,
+        51841,
+        22441,
+        21125,
+        63485,
+        1683,
+        9955
+      ],
+      "e": 0,
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "042cfff8a601933815728690edcfd0b4ea879c43ca8157a95285f7fd069326e3",
+        "sample_count": 16,
+        "valid_bit_count": 256
+      },
+      "id": "raw_noisy_lcg-e0",
+      "max_abs_error": 0,
+      "samples": [
+        1068,
+        65528,
+        42497,
+        37688,
+        5490,
+        34448,
+        60879,
+        53428,
+        60039,
+        40003,
+        51841,
+        22441,
+        21125,
+        63485,
+        1683,
+        9955
+      ]
+    },
+    {
+      "decoded": [
+        1068,
+        65529,
+        42498,
+        37689,
+        5490,
+        34449,
+        60879,
+        53427,
+        60039,
+        40002,
+        51840,
+        22440,
+        21126,
+        63486,
+        1683,
+        9954
+      ],
+      "e": 1,
+      "fixture": {
+        "e": 1,
+        "k": 13,
+        "mode": "rice",
+        "payload_hex": "042c04fbcefe6c8533d92b6a24d4cd9f138685bf6a1647c6d62e50041e3ac500",
+        "sample_count": 16,
+        "valid_bit_count": 249
+      },
+      "id": "raw_noisy_lcg-e1",
+      "max_abs_error": 1,
+      "samples": [
+        1068,
+        65528,
+        42497,
+        37688,
+        5490,
+        34448,
+        60879,
+        53428,
+        60039,
+        40003,
+        51841,
+        22441,
+        21125,
+        63485,
+        1683,
+        9955
+      ]
+    },
+    {
+      "decoded": [
+        1068,
+        65528,
+        42498,
+        37688,
+        5488,
+        34448,
+        60878,
+        53428,
+        60038,
+        40003,
+        51843,
+        22443,
+        21123,
+        63483,
+        1683,
+        9953
+      ],
+      "e": 2,
+      "fixture": {
+        "e": 2,
+        "k": 13,
+        "mode": "rice",
+        "payload_hex": "042c125c23fb9e0d927ad4052995d1d4a9fa6e500b7be20f22301047d9d8",
+        "sample_count": 16,
+        "valid_bit_count": 239
+      },
+      "id": "raw_noisy_lcg-e2",
+      "max_abs_error": 2,
+      "samples": [
+        1068,
+        65528,
+        42497,
+        37688,
+        5490,
+        34448,
+        60879,
+        53428,
+        60039,
+        40003,
+        51841,
+        22441,
+        21125,
+        63485,
+        1683,
+        9955
+      ]
+    },
+    {
+      "decoded": [
+        1068,
+        65526,
+        42495,
+        37689,
+        5487,
+        34449,
+        60882,
+        53430,
+        60036,
+        40002,
+        51837,
+        22443,
+        21129,
+        63483,
+        1680,
+        9951
+      ],
+      "e": 4,
+      "fixture": {
+        "e": 4,
+        "k": 12,
+        "mode": "rice",
+        "payload_hex": "042c17f44ff6856df9b248b7959deb788b1e91998389194c415a5b9700",
+        "sample_count": 16,
+        "valid_bit_count": 225
+      },
+      "id": "raw_noisy_lcg-e4",
+      "max_abs_error": 4,
+      "samples": [
+        1068,
+        65528,
+        42497,
+        37688,
+        5490,
+        34448,
+        60879,
+        53428,
+        60039,
+        40003,
+        51841,
+        22441,
+        21125,
+        63485,
+        1683,
+        9955
+      ]
+    },
+    {
+      "decoded": [
+        1068,
+        65532,
+        42497,
+        37686,
+        5488,
+        34456,
+        60874,
+        53428,
+        60041,
+        39998,
+        51847,
+        22437,
+        21128,
+        63492,
+        1680,
+        9959
+      ],
+      "e": 8,
+      "fixture": {
+        "e": 8,
+        "k": 11,
+        "mode": "rice",
+        "payload_hex": "042c1b40a95a35765b5418496d7614935d726c1c4c96f0319ef380",
+        "sample_count": 16,
+        "valid_bit_count": 210
+      },
+      "id": "raw_noisy_lcg-e8",
+      "max_abs_error": 8,
+      "samples": [
+        1068,
+        65528,
+        42497,
+        37688,
+        5490,
+        34448,
+        60879,
+        53428,
+        60039,
+        40003,
+        51841,
+        22441,
+        21125,
+        63485,
+        1683,
+        9955
+      ]
+    }
+  ],
+  "raw_step_examples": [
+    {
+      "decoded": [
+        0,
+        65535
+      ],
+      "e": 0,
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000ffff",
+        "sample_count": 2,
+        "valid_bit_count": 32
+      },
+      "id": "raw_step_0_to_max-e0",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535
+      ],
+      "e": 1,
+      "fixture": {
+        "e": 1,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000ffff",
+        "sample_count": 2,
+        "valid_bit_count": 32
+      },
+      "id": "raw_step_0_to_max-e1",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535
+      ],
+      "e": 2,
+      "fixture": {
+        "e": 2,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000ffff",
+        "sample_count": 2,
+        "valid_bit_count": 32
+      },
+      "id": "raw_step_0_to_max-e2",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535
+      ],
+      "e": 4,
+      "fixture": {
+        "e": 4,
+        "k": 13,
+        "mode": "rice",
+        "payload_hex": "000071c8",
+        "sample_count": 2,
+        "valid_bit_count": 31
+      },
+      "id": "raw_step_0_to_max-e4",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535
+      ],
+      "e": 8,
+      "fixture": {
+        "e": 8,
+        "k": 12,
+        "mode": "rice",
+        "payload_hex": "00007878",
+        "sample_count": 2,
+        "valid_bit_count": 30
+      },
+      "id": "raw_step_0_to_max-e8",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535,
+        0,
+        65535
+      ],
+      "e": 0,
+      "fixture": {
+        "e": 0,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000ffff0000ffff",
+        "sample_count": 4,
+        "valid_bit_count": 64
+      },
+      "id": "raw_alternating_0_max-e0",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535,
+        0,
+        65535
+      ],
+      "e": 1,
+      "fixture": {
+        "e": 1,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000ffff0000ffff",
+        "sample_count": 4,
+        "valid_bit_count": 64
+      },
+      "id": "raw_alternating_0_max-e1",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535,
+        0,
+        65535
+      ],
+      "e": 2,
+      "fixture": {
+        "e": 2,
+        "k": null,
+        "mode": "raw",
+        "payload_hex": "0000ffff0000ffff",
+        "sample_count": 4,
+        "valid_bit_count": 64
+      },
+      "id": "raw_alternating_0_max-e2",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535,
+        0,
+        65535
+      ],
+      "e": 4,
+      "fixture": {
+        "e": 4,
+        "k": 13,
+        "mode": "rice",
+        "payload_hex": "000071c8e38dc720",
+        "sample_count": 4,
+        "valid_bit_count": 61
+      },
+      "id": "raw_alternating_0_max-e4",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535,
+        0,
+        65535
+      ]
+    },
+    {
+      "decoded": [
+        0,
+        65535,
+        0,
+        65535
+      ],
+      "e": 8,
+      "fixture": {
+        "e": 8,
+        "k": 12,
+        "mode": "rice",
+        "payload_hex": "00007879e1d78780",
+        "sample_count": 4,
+        "valid_bit_count": 58
+      },
+      "id": "raw_alternating_0_max-e8",
+      "max_abs_error": 0,
+      "samples": [
+        0,
+        65535,
+        0,
+        65535
+      ]
+    }
+  ],
+  "schema": 1,
+  "scope_note": "Inner codec block body only.  This is not the TRACE byte layout; no production encoder, public schema, payload offset, tick, mask, block id, saturation or 32-byte total accounting rule is defined here and no acceptance is claimed.",
+  "status": "candidate-only",
+  "task": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1
+  },
+  "work_id": "B-CODEC-INTEGER-FOUNDATION-20261015-01-v1"
+}

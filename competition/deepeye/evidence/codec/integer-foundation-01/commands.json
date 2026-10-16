@@ -1,0 +1,118 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "competition/deepeye/tools/verify_codec_candidate.py",
+        "emit-vectors",
+        "--out",
+        "competition/deepeye/golden/codec/known_vectors.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 0.281,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:36:28.217824Z",
+      "label": "emit-vectors",
+      "seq": 1,
+      "started_utc": "2026-10-16T03:36:27.934899Z",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 221,
+      "stdout_sha256": "a720f40d0ddad0f868a6e9292d65b7f8d630944931a871c7e22cdeee3c53470d"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "competition/deepeye/tools/verify_codec_candidate.py",
+        "check-vectors",
+        "--vectors",
+        "competition/deepeye/golden/codec/known_vectors.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 0.239,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:36:28.456990Z",
+      "label": "check-vectors",
+      "seq": 2,
+      "started_utc": "2026-10-16T03:36:27.934899Z",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 363,
+      "stdout_sha256": "114c820ed7933bf90b51a3a3fda7e20039abcf2e31003f48c705c94e42a58c23"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "competition/deepeye/tests/codec",
+        "-v"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 0.77,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:36:29.227322Z",
+      "label": "unittest-verbose",
+      "seq": 3,
+      "started_utc": "2026-10-16T03:36:27.934899Z",
+      "stderr_bytes": 5775,
+      "stderr_sha256": "b1f92ed9916de756ab9a54435877b8ac9e2bae2c885fe14f3fc7f95556745699",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "competition/deepeye/tests/codec"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 0.738,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:36:29.965557Z",
+      "label": "unittest-plain",
+      "seq": 4,
+      "started_utc": "2026-10-16T03:36:27.934899Z",
+      "stderr_bytes": 146,
+      "stderr_sha256": "37163ac63e73a354a1b8ec2be728831e41d0758647440f8a36b347dcee2738d9",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "competition/deepeye/tools/verify_codec_candidate.py",
+        "run-million",
+        "--samples",
+        "1000000",
+        "--seed",
+        "20261014",
+        "--block-len",
+        "128",
+        "--json-out",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\implementation-app-bridge\\flash\\codec\\scratch\\run_1m.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 44.07,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:37:14.035921Z",
+      "label": "run-million",
+      "seq": 5,
+      "started_utc": "2026-10-16T03:36:27.934899Z",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1192,
+      "stdout_sha256": "344e1cb63e3e6bbae69efbe484d9c8445ec633dfcbc81c72118e19e42e5cdcf7"
+    }
+  ]
+}

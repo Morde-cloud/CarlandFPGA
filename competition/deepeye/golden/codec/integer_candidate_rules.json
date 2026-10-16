@@ -1,0 +1,180 @@
+{
+  "artifacts": {
+    "codec_reference": "golden/codec/codec_reference.py",
+    "evidence": "evidence/codec/integer-foundation-01/",
+    "evidence_byte_accounting_correction_02": "evidence/codec/byte-accounting-correction-02/",
+    "tests": "tests/codec/test_codec_reference.py",
+    "vectors": "golden/codec/known_vectors.json",
+    "verifier": "tools/verify_codec_candidate.py"
+  },
+  "block": {
+    "anchor": "exact absolute uint16 of the original first sample, 16 bits MSB-first",
+    "max_samples": 128,
+    "min_samples": 1,
+    "predictor": "previous reconstructed sample; reset to the anchor at each block start"
+  },
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "revision": 1
+  },
+  "corrections": [
+    {
+      "summary": "aggregate byte accounting corrected to the sum of independently padded block payload lengths; the per-block ceiling formula is unchanged",
+      "work_id": "B-CODEC-BYTE-ACCOUNTING-CORRECTION-20261016-02-v1"
+    }
+  ],
+  "counting": {
+    "aggregate_stored_bytes": "sum over independent blocks of the per-block stored bytes; NOT ceil(sum(valid_bit_count) / 8), which would describe one continuous bitstream",
+    "inner_codec_body_bits": "exact significant payload bits (16 anchor bits + chosen body bits) per block; an aggregate over blocks is their sum",
+    "inner_codec_padding_bits": "8 * stored_bytes - body_bits, the summed zero padding of each block final byte",
+    "inner_codec_stored_bytes": "per block ceil(valid_bit_count / 8) including final-byte zero padding; an aggregate is the sum of the block payload lengths",
+    "original_sample_bytes": "2 * n per block",
+    "per_block_ceiling_formula": "stored bytes of one block = ceil(valid_bit_count / 8); valid per block only",
+    "trace_total_bytes": "unavailable pending an accepted layout"
+  },
+  "fixture_fields": {
+    "e": "0, 1, 2, 4, 8",
+    "k": "0..15 for rice, null for raw",
+    "mode": "rice or raw",
+    "note": "candidate fixture only; not a TRACE layout field set",
+    "payload_hex": "payload bytes as hex; unused low bits of the final byte must be zero",
+    "sample_count": "1..128",
+    "valid_bit_count": "exact number of significant payload bits (>= 16)"
+  },
+  "name": "deepeye-integer-inner-codec-candidate-rules",
+  "proof_states": {
+    "b01": "not_run",
+    "board": "not_run",
+    "candidate_software_tests": "run (this work)",
+    "compression_ratio": "not_claimed",
+    "implementation": "not_run",
+    "latency": "not_claimed",
+    "simulation": "not_run",
+    "synthesis": "not_run",
+    "system": "not_run",
+    "trace_layout": "not_run (R03 blocked)"
+  },
+  "quantization": {
+    "d_formula": "D = 2*E + 1",
+    "e0_property": "exact (lossless) reconstruction",
+    "e_values": [
+      0,
+      1,
+      2,
+      4,
+      8
+    ],
+    "error_bound_observation": "abs(x - y) <= E per sample in seeded tests; RAW blocks are exact",
+    "q_formula": "q = (x - p + E) // D with mathematical floor division",
+    "reconstruct_formula": "y = min(65535, max(0, p + q*D)); p = y"
+  },
+  "raw": {
+    "anchor": "the original first sample is always the anchor",
+    "body": "original remaining uint16 samples, 16 bits each, MSB-first",
+    "property": "a RAW block reproduces its input exactly (lossless bypass)"
+  },
+  "rejections": [
+    "bool, non-int or out-of-range scalar samples",
+    "block length outside 1..128",
+    "E not in {0,1,2,4,8} (bool E rejected)",
+    "fixture not a dict",
+    "mode not rice or raw",
+    "rice fixture without an int k, k outside 0..15, raw fixture with k not null",
+    "sample_count not an int in 1..128 (bool rejected)",
+    "valid_bit_count not an int, below the 16-bit anchor, above the payload, or leaving excess payload bytes",
+    "payload_hex not a hex string, odd length, or non-hex characters",
+    "nonzero padding bits after valid_bit_count",
+    "truncated bitstream before the declared sample count",
+    "unary run longer than 31 zeroes (overlong unary)",
+    "extra valid bits remaining after the declared sample count",
+    "raw body shorter than 16*(sample_count-1) bits"
+  ],
+  "rice": {
+    "bit_order": "MSB-first for every field",
+    "k_values": "0..15",
+    "quotient_cap": 31,
+    "quotient_cap_rule": "quotient > 31 is illegal for that k; there is no escape code",
+    "remainder": "k low bits of z, MSB-first",
+    "unary": "quotient zero bits followed by a one terminator"
+  },
+  "sample_container": {
+    "max": 65535,
+    "min": 0,
+    "rejects": [
+      "bool",
+      "non-int",
+      "out-of-range",
+      "empty sequence"
+    ],
+    "type": "uint16"
+  },
+  "schema": 1,
+  "scope": {
+    "acceptance": "none; R03 stays blocked, B01 stays not_run, A alone operates the board",
+    "implementation": "inner codec block body only (candidate foundation)",
+    "not_defined_here": [
+      "TRACE byte layout",
+      "public schema",
+      "payload offset",
+      "tick semantics and bit order",
+      "mask semantics",
+      "block id",
+      "saturation rules",
+      "32-byte total accounting",
+      "layout version",
+      "seq mapping",
+      "channel multiplexing",
+      "E/k signalling in the outer format"
+    ]
+  },
+  "selection": {
+    "choice": "minimum encoded bit count; ties choose the lowest k",
+    "granularity": "one k for the whole block",
+    "legal_k": "every residual quotient (z >> k) <= 31",
+    "metric": "total Rice body bits = sum(z_i >> k) + (n-1)*(k+1)",
+    "no_legal_k_note": "for uint16 inputs the k=15 candidate is always legal; the no-legal-k branch is reachable through the selection helper API",
+    "raw_rule": "RAW when no k is legal or when the best Rice body bits >= 16*(n-1); RAW wins ties"
+  },
+  "status": "candidate-only",
+  "task": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1
+  },
+  "unresolved_public_fields_to_report": [
+    "TRACE tick semantics",
+    "tick/mask bit order and granularity",
+    "sparse selection point ordinal vs acquisition index",
+    "block id",
+    "saturation semantics",
+    "32-byte total accounting",
+    "payload offset and layout version encoding",
+    "seq mapping",
+    "E/k signalling in the outer format",
+    "channel multiplexing"
+  ],
+  "work_id": "B-CODEC-INTEGER-FOUNDATION-20261015-01-v1",
+  "zigzag": {
+    "q_ge_0": "z = 2*q",
+    "q_lt_0": "z = -2*q - 1"
+  }
+}

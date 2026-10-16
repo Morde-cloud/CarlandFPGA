@@ -1,0 +1,21 @@
+===== [1] unittest-verbose exit=0 argv=D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec -v =====
+===== [2] unittest-plain exit=0 argv=D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B -m unittest discover -s competition/deepeye/tests/codec =====
+===== [3] check-vectors exit=0 argv=D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B competition/deepeye/tools/verify_codec_candidate.py check-vectors --vectors competition/deepeye/golden/codec/known_vectors.json =====
+vector file: competition\deepeye\golden\codec\known_vectors.json
+vector file sha256: c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99
+entries checked: 61
+hand_vectors=15 raw_step_examples=10 raw_noisy_examples=5 malformed=25 recovery_blocks=3
+vector check passed: fresh-build identity, decode/oracle agreement, all rejections, block recovery
+===== [4] run-million exit=0 argv=D:\pynq\CarlandFPGA\.local\venv\Scripts\python.exe -B competition/deepeye/tools/verify_codec_candidate.py run-million --samples 1000000 --seed 20261014 --block-len 128 --json-out D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\codec-accounting-correction-02\scratch\captures\run_1m_corrected.json =====
+python: 3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]
+platform: Windows-11-10.0.26200-SP0
+generator: random.Random(seed).getrandbits(16); samples=1000000 seed=20261014 block_len=128
+blocks: 7813 (last block 64 sample(s))
+samples sha256 (big-endian uint16 stream): ea578f2760d7e3a5975641da309bc33f6c2890a63518f8b470ca6d2aeec2d66f
+E=0 raw_blocks=7813 rice_blocks=0 error_samples=0 max_abs_error=0 max_unary=n/a valid_bits=16000000 stored_bytes=2000000 padding_bits=0
+E=1 raw_blocks=0 rice_blocks=7813 error_samples=661791 max_abs_error=1 max_unary=5 valid_bits=15313371 stored_bytes=1917593 padding_bits=27373
+E=2 raw_blocks=0 rice_blocks=7813 error_samples=793805 max_abs_error=2 max_unary=6 valid_bits=14613173 stored_bytes=1830103 padding_bits=27651
+E=4 raw_blocks=0 rice_blocks=7813 error_samples=882269 max_abs_error=4 max_unary=7 valid_bits=13749368 stored_bytes=1722097 padding_bits=27408
+E=8 raw_blocks=0 rice_blocks=7813 error_samples=934123 max_abs_error=8 max_unary=7 valid_bits=12825195 stored_bytes=1606532 padding_bits=27061
+json written: D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\codec-accounting-correction-02\scratch\captures\run_1m_corrected.json (3957 bytes, sha256 ae765b37c010da8f143b5324c1f7d4cb275b5ebee1f96bc9952a47874bcabfa7)
+no compression-ratio, latency, interoperability or acceptance claim is made

@@ -1,0 +1,69 @@
+{
+  "finding_id": "B-CODEC-COUNT01",
+  "severity": "P2",
+  "decision": "REJECT aggregate byte-count evidence until corrected; arithmetic/individual-block bytes remain separately verified",
+  "source_sha256": "5f6ccc4fb8fe9cd4c71bd78dbf9cdf6b47f79a58f0dbac3247de44f4ddb9a284",
+  "line": 445,
+  "cause": "cmd_run_million rounds the sum of all valid bits once, omitting independent per-block zero padding. Sum actual payload lengths instead. Keep valid bits, per-block padding bits, stored bytes and unavailable complete TRACE bytes distinct.",
+  "cases": {
+    "two_independent_two_sample_blocks": {
+      "fixtures": [
+        {
+          "mode": "rice",
+          "e": 0,
+          "k": 0,
+          "sample_count": 2,
+          "valid_bit_count": 17,
+          "payload_hex": "006480"
+        },
+        {
+          "mode": "rice",
+          "e": 0,
+          "k": 0,
+          "sample_count": 2,
+          "valid_bit_count": 17,
+          "payload_hex": "006480"
+        }
+      ],
+      "reported_aggregate_roundup_bytes": 5,
+      "actual_sum_payload_bytes": 6
+    },
+    "0": {
+      "reported_bytes": 2000000,
+      "actual_sum_payload_bytes": 2000000,
+      "under_count_bytes": 0,
+      "valid_bits": 16000000,
+      "padding_bits": 0
+    },
+    "1": {
+      "reported_bytes": 1914172,
+      "actual_sum_payload_bytes": 1917593,
+      "under_count_bytes": 3421,
+      "valid_bits": 15313371,
+      "padding_bits": 27373
+    },
+    "2": {
+      "reported_bytes": 1826647,
+      "actual_sum_payload_bytes": 1830103,
+      "under_count_bytes": 3456,
+      "valid_bits": 14613173,
+      "padding_bits": 27651
+    },
+    "4": {
+      "reported_bytes": 1718671,
+      "actual_sum_payload_bytes": 1722097,
+      "under_count_bytes": 3426,
+      "valid_bits": 13749368,
+      "padding_bits": 27408
+    },
+    "8": {
+      "reported_bytes": 1603150,
+      "actual_sum_payload_bytes": 1606532,
+      "under_count_bytes": 3382,
+      "valid_bits": 12825195,
+      "padding_bits": 27061
+    }
+  },
+  "original_child_result_sha256": "d1904d7ca3e816215220e8363fa56cf267c2c649a9b92f152d520cccde2b1131",
+  "main_harness_correction": "Initial witness [0,1,2] had a mistaken expected byte length and assertion failed before product verdict/output; replaced by two independently padded 17-bit constant blocks. Original tool failure retained."
+}

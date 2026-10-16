@@ -1,0 +1,30 @@
+{
+  "work_id": "B-CODEC-MAIN-REVIEW-20261016-01",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "source_sha256": {
+    "competition/deepeye/golden/codec/README.md": "8e0658ed60130be6bfc9ae7d2afe1dbe21eb9a31cf7355f63b73ecf659521cbe",
+    "competition/deepeye/golden/codec/codec_reference.py": "59cc99786f95f3c3db8ade4a557a7d3762eed84caa422db52d8bfffd82d527ed",
+    "competition/deepeye/golden/codec/integer_candidate_rules.json": "aa556d13eccda4dbf20c4e00a09703ea7aed8dd49a94b67d48f9763b6ec76fa5",
+    "competition/deepeye/golden/codec/known_vectors.json": "c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99",
+    "competition/deepeye/tests/codec/test_codec_reference.py": "13abaa6327fc5b614e2e60fe2e8845d93942acfea1ebb509680a94596cb21cf6",
+    "competition/deepeye/tools/verify_codec_candidate.py": "b0e48c17c328ffecf19a7753bef0a398acac9c98b3c76e9ea5dacaba9a73ffc4"
+  },
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "metrics": {
+    "exhaustive_scalar_cases": 983040,
+    "encoded_blocks": 4540,
+    "samples_across_E": 291160,
+    "raw_blocks": 560,
+    "rice_blocks": 3980,
+    "malformed_rejections": 48,
+    "known_source_cases": 12,
+    "block_restarts": 48,
+    "aggregate_checks": 6,
+    "main_precomputed_million_profiles_checked": 5
+  },
+  "scope": "pure integer inner codec candidate only; no TRACE framing/ticks/masks or B01/R03/product/board acceptance",
+  "finding": "Inner arithmetic and encoded-byte checks pass. B-CODEC-COUNT01 corrected and independently checked against actual per-block lengths and precomputed million-profile totals. No full TRACE or card acceptance.",
+  "baseline": "49 tests exit0",
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]"
+}

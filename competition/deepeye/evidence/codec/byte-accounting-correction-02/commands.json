@@ -1,0 +1,97 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "competition/deepeye/tests/codec",
+        "-v"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 1.016,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:59:24.371581Z",
+      "label": "unittest-verbose",
+      "seq": 1,
+      "started_utc": "2026-10-16T03:59:23.358085Z",
+      "stderr_bytes": 6895,
+      "stderr_sha256": "1fd4edea31ae5390557f01143fc44faf2fdafaecfaec3bab366a901ab7baec41",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "competition/deepeye/tests/codec"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 0.984,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:59:25.369308Z",
+      "label": "unittest-plain",
+      "seq": 2,
+      "started_utc": "2026-10-16T03:59:24.372634Z",
+      "stderr_bytes": 153,
+      "stderr_sha256": "70e432af6ffdbcf2409ab37a13fea6fc2a0f0e63eefa8db3ce5231c743076b59",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "competition/deepeye/tools/verify_codec_candidate.py",
+        "check-vectors",
+        "--vectors",
+        "competition/deepeye/golden/codec/known_vectors.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 0.204,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:59:25.566932Z",
+      "label": "check-vectors",
+      "seq": 3,
+      "started_utc": "2026-10-16T03:59:25.370309Z",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 363,
+      "stdout_sha256": "114c820ed7933bf90b51a3a3fda7e20039abcf2e31003f48c705c94e42a58c23"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "competition/deepeye/tools/verify_codec_candidate.py",
+        "run-million",
+        "--samples",
+        "1000000",
+        "--seed",
+        "20261014",
+        "--block-len",
+        "128",
+        "--json-out",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\codec-accounting-correction-02\\scratch\\captures\\run_1m_corrected.json"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+      "duration_s": 32.343,
+      "exit_code": 0,
+      "finished_utc": "2026-10-16T03:59:57.903246Z",
+      "label": "run-million",
+      "seq": 4,
+      "started_utc": "2026-10-16T03:59:25.567496Z",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1415,
+      "stdout_sha256": "e18fac6ddc82781fe25dd89fe553cc30c08460d5b653f74b73e4c6285cfbcbc3"
+    }
+  ]
+}

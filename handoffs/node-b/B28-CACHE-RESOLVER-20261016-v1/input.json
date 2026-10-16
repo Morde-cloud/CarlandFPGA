@@ -1,0 +1,52 @@
+{
+  "request": {
+    "operation_id": "B28-CACHE-RESOLVER-20261016-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "3d92c8c4afd5174dda15330deb9f8931a41b9fd7",
+    "test_steps": [
+      "python -X utf8 -m unittest tests.test_runtime_cache_reuse tests.test_app_server tests.test_runtime_integrity tests.test_app_gateway",
+      "Verify exact-source hashes and preserve the existing continuity evidence checkpoint; do not deploy or replay jobs while idle/admission is blocked."
+    ],
+    "expected_result": "77 relevant software tests pass, including explicit/automatic second resolution after complete source cleanup in a fresh process, strict bound-cache revalidation, no arbitrary-cache fallback, and unchanged gateway failure classification. Preserve DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804."
+  },
+  "artifacts": [
+    "fpga_mesh/app_server.py",
+    "tests/test_runtime_cache_reuse.py",
+    "tests/test_app_server.py",
+    "tests/test_runtime_integrity.py",
+    "tests/test_app_gateway.py",
+    "fpga_mesh/gateway.py",
+    "docs/deployment/RUNTIME_CACHE_REUSE.md",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/baseline-regression.stderr.txt",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stderr.txt",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stdout.txt",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/source-validation.json"
+  ],
+  "stages": {
+    "baseline_reproduction": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/runtime-cache-reuse-20261016/baseline-regression.stderr.txt"
+    },
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stderr.txt"
+    },
+    "deployment": {
+      "status": "blocked"
+    },
+    "live_runtime_reconnection": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    }
+  }
+}

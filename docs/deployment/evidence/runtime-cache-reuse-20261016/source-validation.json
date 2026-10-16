@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-16T03:24:44.382188+00:00",
+  "task_id": "B-RUNTIME-CONTINUITY-20261016",
+  "task_version": 1,
+  "work_id": "B28-CACHE-RESOLVER-20261016-v1",
+  "operation_id": "B28-CACHE-RESOLVER-20261016-v1",
+  "source_commit": "3d92c8c4afd5174dda15330deb9f8931a41b9fd7",
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_runtime_cache_reuse",
+    "tests.test_app_server",
+    "tests.test_runtime_integrity",
+    "tests.test_app_gateway"
+  ],
+  "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016",
+  "exit_code": 0,
+  "test_count": 77,
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "git": "git version 2.53.0.windows.1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "46c01288783587f7994365891def5ec9e590039cb7a5729604fe37757ddee3a5",
+  "source_sha256": {
+    "fpga_mesh/app_server.py": "52acf398134c6490c4b567a0e9a54b122dd1b74db1488957afb9f79061190cf9",
+    "tests/test_runtime_cache_reuse.py": "320dfbb7617eab7b288d5cc764000a82b76c0b39438585c612c921630462705d",
+    "tests/test_app_server.py": "3a1eee4630741150305eb59f9cb933568fe92662db8f88feba63dd6846b121d7",
+    "tests/test_runtime_integrity.py": "ff525d05ca3e575d2fc77fc4016e0d782b64b0efb6da5b38978a06984e74b2b4",
+    "tests/test_app_gateway.py": "a64a9e1dbc5a2ce6e5efc78741cd8ea881cf9d8ccd74009806934ab9935cf1db",
+    "fpga_mesh/gateway.py": "4130e6a8a2a7b8c170295ebbc2fc9332f14ed0524d3d9eb814fa787ec148529f",
+    "docs/deployment/RUNTIME_CACHE_REUSE.md": "db1b5da011bd078fbd24c1eebc41a5bcd16ec1f1a021afbcaa1e26b78e0212d9"
+  },
+  "source_unchanged_during_tests": true,
+  "git_blob_and_worktree_match": {
+    "fpga_mesh/app_server.py": true,
+    "tests/test_runtime_cache_reuse.py": true,
+    "tests/test_app_server.py": true,
+    "tests/test_runtime_integrity.py": true,
+    "tests/test_app_gateway.py": true,
+    "fpga_mesh/gateway.py": true,
+    "docs/deployment/RUNTIME_CACHE_REUSE.md": true
+  },
+  "baseline_regression": "2 tests: explicit cleanup yielded 2 errors; auto cleanup yielded 2 failures; preserved in private baseline-regression.stderr.txt",
+  "fixture_correction": "Fresh process test originally cleared Windows required environment; repaired fixture preserves SystemRoot and uses UTF-8. Product code was unchanged for that correction.",
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "deployment": "not performed; running original jobs retained",
+  "limits": "Non-executable resolver fixtures only; no live reconnect, reboot, power policy, board or product acceptance."
+}

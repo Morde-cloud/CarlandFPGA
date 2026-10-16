@@ -1,0 +1,100 @@
+{
+  "artifacts": [
+    "fpga_mesh/app_server.py",
+    "tests/test_runtime_cache_reuse.py",
+    "tests/test_app_server.py",
+    "tests/test_runtime_integrity.py",
+    "tests/test_app_gateway.py",
+    "fpga_mesh/gateway.py",
+    "docs/deployment/RUNTIME_CACHE_REUSE.md",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/baseline-regression.stderr.txt",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stderr.txt",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stdout.txt",
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/source-validation.json"
+  ],
+  "files": {
+    "docs/deployment/RUNTIME_CACHE_REUSE.md": {
+      "sha256": "db1b5da011bd078fbd24c1eebc41a5bcd16ec1f1a021afbcaa1e26b78e0212d9",
+      "size": 1922
+    },
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/baseline-regression.stderr.txt": {
+      "sha256": "98ef40508c38e49c3c5124996f7aa4611ac509176a036994d22eeeefa97676f0",
+      "size": 4696
+    },
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stderr.txt": {
+      "sha256": "46c01288783587f7994365891def5ec9e590039cb7a5729604fe37757ddee3a5",
+      "size": 2492
+    },
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/runtime-cache-reuse-20261016/source-validation.json": {
+      "sha256": "628edc0a459fa92b48f6721957f340a81132287614ce12912aebe1bd3422f42d",
+      "size": 2793
+    },
+    "fpga_mesh/app_server.py": {
+      "sha256": "52acf398134c6490c4b567a0e9a54b122dd1b74db1488957afb9f79061190cf9",
+      "size": 14862
+    },
+    "fpga_mesh/gateway.py": {
+      "sha256": "4130e6a8a2a7b8c170295ebbc2fc9332f14ed0524d3d9eb814fa787ec148529f",
+      "size": 21309
+    },
+    "tests/test_app_gateway.py": {
+      "sha256": "a64a9e1dbc5a2ce6e5efc78741cd8ea881cf9d8ccd74009806934ab9935cf1db",
+      "size": 41820
+    },
+    "tests/test_app_server.py": {
+      "sha256": "3a1eee4630741150305eb59f9cb933568fe92662db8f88feba63dd6846b121d7",
+      "size": 7918
+    },
+    "tests/test_runtime_cache_reuse.py": {
+      "sha256": "320dfbb7617eab7b288d5cc764000a82b76c0b39438585c612c921630462705d",
+      "size": 11802
+    },
+    "tests/test_runtime_integrity.py": {
+      "sha256": "ff525d05ca3e575d2fc77fc4016e0d782b64b0efb6da5b38978a06984e74b2b4",
+      "size": 23640
+    }
+  },
+  "request": {
+    "code_commit": "3d92c8c4afd5174dda15330deb9f8931a41b9fd7",
+    "expected_result": "77 relevant software tests pass, including explicit/automatic second resolution after complete source cleanup in a fresh process, strict bound-cache revalidation, no arbitrary-cache fallback, and unchanged gateway failure classification. Preserve DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.",
+    "operation_id": "B28-CACHE-RESOLVER-20261016-v1",
+    "requester": "node-b",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "test_steps": [
+      "python -X utf8 -m unittest tests.test_runtime_cache_reuse tests.test_app_server tests.test_runtime_integrity tests.test_app_gateway",
+      "Verify exact-source hashes and preserve the existing continuity evidence checkpoint; do not deploy or replay jobs while idle/admission is blocked."
+    ]
+  },
+  "request_hash": "143acc3923a92f1e950ca30d3a2b9af8be038adcf9c9f98bb9366611cdc469fa",
+  "schema_version": 1,
+  "stages": {
+    "baseline_reproduction": {
+      "log": "docs/deployment/evidence/runtime-cache-reuse-20261016/baseline-regression.stderr.txt",
+      "status": "failed"
+    },
+    "deployment": {
+      "status": "blocked"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "live_runtime_reconnection": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "software_regression": {
+      "log": "docs/deployment/evidence/runtime-cache-reuse-20261016/regression-stderr.txt",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

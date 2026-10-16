@@ -1,0 +1,75 @@
+EFEF
+======================================================================
+ERROR: test_second_resolve_after_entire_source_cleanup (tests.test_runtime_cache_reuse.RuntimeCacheReuseTests.test_second_resolve_after_entire_source_cleanup) (mode='explicit')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_runtime_cache_reuse.py", line 47, in test_second_resolve_after_entire_source_cleanup
+    self.assertEqual(self.resolve(mode), command)
+                     ^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_runtime_cache_reuse.py", line 28, in resolve
+    return resolve_codex_command(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\app_server.py", line 32, in resolve_codex_command
+    raise FileNotFoundError(f"Codex binary is missing: {binary}")
+FileNotFoundError: Codex binary is missing: C:\Users\15378\AppData\Local\Temp\tmp__p63abz\OpenAI\Codex\bin\release\codex.exe
+
+======================================================================
+ERROR: test_second_resolve_after_host_cleanup (tests.test_runtime_cache_reuse.RuntimeCacheReuseTests.test_second_resolve_after_host_cleanup) (mode='explicit')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_runtime_cache_reuse.py", line 40, in test_second_resolve_after_host_cleanup
+    self.assertEqual(self.resolve(mode), first)
+                     ^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_runtime_cache_reuse.py", line 28, in resolve
+    return resolve_codex_command(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\app_server.py", line 34, in resolve_codex_command
+    raise FileNotFoundError(f"Codex Code Mode host is missing beside: {binary}")
+FileNotFoundError: Codex Code Mode host is missing beside: C:\Users\15378\AppData\Local\Temp\tmpb7fkonfs\OpenAI\Codex\bin\release\codex.exe
+
+======================================================================
+FAIL: test_second_resolve_after_entire_source_cleanup (tests.test_runtime_cache_reuse.RuntimeCacheReuseTests.test_second_resolve_after_entire_source_cleanup) (mode='auto')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_runtime_cache_reuse.py", line 47, in test_second_resolve_after_entire_source_cleanup
+    self.assertEqual(self.resolve(mode), command)
+AssertionError: Lists differ: ['cmd.exe', '/d', '/c', 'codex', 'app-server', '--stdio'] != ['C:\\Users\\15378\\AppData\\Local\\Temp\\t[116 chars]dio']
+
+First differing element 0:
+'cmd.exe'
+'C:\\Users\\15378\\AppData\\Local\\Temp\\t[90 chars].exe'
+
+First list contains 3 additional elements.
+First extra element 3:
+'codex'
+
+- ['cmd.exe', '/d', '/c', 'codex', 'app-server', '--stdio']
++ ['C:\\Users\\15378\\AppData\\Local\\Temp\\tmp__p63abz\\cache\\462b483f755ed88c182e7f52a814bac92abf5d5fcb9ca8cecac70824a96b4ae4\\codex.exe',
++  'app-server',
++  '--stdio']
+
+======================================================================
+FAIL: test_second_resolve_after_host_cleanup (tests.test_runtime_cache_reuse.RuntimeCacheReuseTests.test_second_resolve_after_host_cleanup) (mode='auto')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_runtime_cache_reuse.py", line 40, in test_second_resolve_after_host_cleanup
+    self.assertEqual(self.resolve(mode), first)
+AssertionError: Lists differ: ['cmd.exe', '/d', '/c', 'codex', 'app-server', '--stdio'] != ['C:\\Users\\15378\\AppData\\Local\\Temp\\t[116 chars]dio']
+
+First differing element 0:
+'cmd.exe'
+'C:\\Users\\15378\\AppData\\Local\\Temp\\t[90 chars].exe'
+
+First list contains 3 additional elements.
+First extra element 3:
+'codex'
+
+- ['cmd.exe', '/d', '/c', 'codex', 'app-server', '--stdio']
++ ['C:\\Users\\15378\\AppData\\Local\\Temp\\tmpb7fkonfs\\cache\\462b483f755ed88c182e7f52a814bac92abf5d5fcb9ca8cecac70824a96b4ae4\\codex.exe',
++  'app-server',
++  '--stdio']
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.057s
+
+FAILED (failures=2, errors=2)

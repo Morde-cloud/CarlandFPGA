@@ -1,0 +1,71 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-CODEC-20261016-01",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "6246ad61dc089b6ed4838991bfc244c3d16e8626",
+    "test_steps": [
+      "Read DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15; verify canonical requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and frozen design1011259415a0916054eb580687612580bc1e5f09. Scope diff design..head is codec only.",
+      "Python3.12.9 stdlib: python -B -X utf8 -m unittest discover -s competition/deepeye/tests/codec -v (49 tests).",
+      "Run python -B -X utf8 competition/deepeye/tools/verify_codec_candidate.py check-vectors --vectors competition/deepeye/golden/codec/known_vectors.json (61 entries).",
+      "Run python -B -X utf8 competition/deepeye/evidence/codec/main-review-20261016/independent_review.py --output-root YOUR_EMPTY_EVIDENCE_DIRECTORY (983040 scalar cases,4540 blocks,48 malformed/restarts,aggregate byte-count checks).",
+      "Optional actual million reproduction: python -B -X utf8 competition/deepeye/tools/verify_codec_candidate.py run-million --samples 1000000 --seed 20261014 --block-len 128. Stored bytes E0/E1/E2/E4/E8=2000000/1917593/1830103/1722097/1606532. Full TRACE bytes remain unavailable.",
+      "A/C independently review candidate integer rules and raw vectors on this exact head and leave same-PR operation/request_hash/tested_commit/log-hash feedback. No hardware request and do not enable TRACE."
+    ],
+    "expected_result": "Pure inner-codec arithmetic/vector and corrected byte-count checks pass. Original integer-foundation-01 aggregate byte count is rejected and preserved; correction02 supersedes it. Complete TRACE payload/tick/mask/index/seq/channel metadata<=32B, cross-node acceptance, B01/R03 and all product/hardware/system gates remain incomplete. A owns final public ABI; this handoff requests bounded software review only."
+  },
+  "artifacts": [
+    "competition/deepeye/evidence/codec/byte-accounting-correction-02/commands.json",
+    "competition/deepeye/evidence/codec/byte-accounting-correction-02/result.json",
+    "competition/deepeye/evidence/codec/byte-accounting-correction-02/stderr.txt",
+    "competition/deepeye/evidence/codec/byte-accounting-correction-02/stdout.txt",
+    "competition/deepeye/evidence/codec/integer-foundation-01/commands.json",
+    "competition/deepeye/evidence/codec/integer-foundation-01/result.json",
+    "competition/deepeye/evidence/codec/integer-foundation-01/stderr.txt",
+    "competition/deepeye/evidence/codec/integer-foundation-01/stdout.txt",
+    "competition/deepeye/evidence/codec/main-review-20261016/README.md",
+    "competition/deepeye/evidence/codec/main-review-20261016/baseline-command.json",
+    "competition/deepeye/evidence/codec/main-review-20261016/baseline.stderr.txt",
+    "competition/deepeye/evidence/codec/main-review-20261016/baseline.stdout.txt",
+    "competition/deepeye/evidence/codec/main-review-20261016/corpus/codec-inputs.json",
+    "competition/deepeye/evidence/codec/main-review-20261016/corpus/codec-inputs.u16le",
+    "competition/deepeye/evidence/codec/main-review-20261016/independent-command.json",
+    "competition/deepeye/evidence/codec/main-review-20261016/independent_review.py",
+    "competition/deepeye/evidence/codec/main-review-20261016/rejected-byte-accounting.json",
+    "competition/deepeye/evidence/codec/main-review-20261016/result.json",
+    "competition/deepeye/evidence/codec/main-review-20261016/source-manifest.json",
+    "competition/deepeye/golden/codec/README.md",
+    "competition/deepeye/golden/codec/codec_reference.py",
+    "competition/deepeye/golden/codec/integer_candidate_rules.json",
+    "competition/deepeye/golden/codec/known_vectors.json",
+    "competition/deepeye/tests/codec/test_codec_reference.py",
+    "competition/deepeye/tools/verify_codec_candidate.py",
+    "competition/deepeye/evidence/codec/.gitattributes"
+  ],
+  "stages": {
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "inner_codec_software": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/main-review-20261016/baseline.stderr.txt"
+    },
+    "aggregate_byte_accounting": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/byte-accounting-correction-02/stdout.txt"
+    }
+  }
+}

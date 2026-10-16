@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\distribution.py", line 207, in <module>
+    main()
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\distribution.py", line 196, in main
+    path = build_archive(root, paths, args.output, revision=revision,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\distribution.py", line 76, in build_archive
+    raise ValueError(f"key-like material found in: {raw}")
+ValueError: key-like material found in: docs/deployment/evidence/B-INTERRUPT-20261014/README.md

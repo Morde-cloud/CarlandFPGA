@@ -1,0 +1,15 @@
+E
+======================================================================
+ERROR: test_task_identifiers_and_historical_evidence_remain_packageable (tests.test_distribution.DistributionTests.test_task_identifiers_and_historical_evidence_remain_packageable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_distribution.py", line 20, in test_task_identifiers_and_historical_evidence_remain_packageable
+    build_archive(root, ["receipt.txt"], output)
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\distribution.py", line 76, in build_archive
+    raise ValueError(f"key-like material found in: {raw}")
+ValueError: key-like material found in: receipt.txt
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (errors=1)

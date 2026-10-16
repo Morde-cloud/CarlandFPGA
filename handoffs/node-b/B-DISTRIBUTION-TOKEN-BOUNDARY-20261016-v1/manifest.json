@@ -1,0 +1,114 @@
+{
+  "artifacts": [
+    "fpga_mesh/distribution.py",
+    "fpga_mesh/update.py",
+    "tests/test_distribution.py",
+    "tests/test_mesh_update.py",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/README.md",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline-and-preservation.json",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stderr.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stdout.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/original-build-command.json",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/original-build.stderr.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/README.md",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stderr.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stdout.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/source-validation.json"
+  ],
+  "files": {
+    "docs/deployment/evidence/B-INTERRUPT-20261014/README.md": {
+      "sha256": "d65fe18711a2995dfdae91c0c283c9ebb80695383de134bbba6d7318f4475142",
+      "size": 4986
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/README.md": {
+      "sha256": "508fe98a7a73a8af464a66495c8ca58f220a20c07b42df0183209ff2561d3b16",
+      "size": 1555
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline-and-preservation.json": {
+      "sha256": "94ebb27602f9e8cfde601ed043599f0cc768d7ca3bee2f4d062258e160728db9",
+      "size": 844
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stderr.txt": {
+      "sha256": "6aaa727f6989c0199d305170e5bfcc77a51c3c0821bd2084eab93fb771292ebc",
+      "size": 953
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/original-build-command.json": {
+      "sha256": "2c1a60233d9903b3a49cefd9d87d1d6f57b0bdc855c568b826865e1892482ed9",
+      "size": 698
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/original-build.stderr.txt": {
+      "sha256": "7ea04c620e3144e0f901f75d0e0924247805e7f7cf52b337ba34fa9c98619207",
+      "size": 826
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stderr.txt": {
+      "sha256": "7ce932c30b46b6f5131b78e52845ff1f6571f16bce8576d81016362f78536b27",
+      "size": 118
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/distribution-token-boundary-20261016/source-validation.json": {
+      "sha256": "48970884fa2fd6293ac217977216a89b8287914bf19b6ff66ee11d888ac0a334",
+      "size": 2432
+    },
+    "fpga_mesh/distribution.py": {
+      "sha256": "f5be5b4f90a466f8eaef5e072fbb25db72f24936be10b82e7537ece4e23a7d55",
+      "size": 9461
+    },
+    "fpga_mesh/update.py": {
+      "sha256": "e701d9c4fb72841e54f35783d8f051c6a760bac438131de7ef22fc9923d75ae6",
+      "size": 15937
+    },
+    "tests/test_distribution.py": {
+      "sha256": "cafcc59a1c0e654983971c84b90b0b79c513b670932fa62e981a931c9b0b824f",
+      "size": 7441
+    },
+    "tests/test_mesh_update.py": {
+      "sha256": "de7241fc020ac2bcb6cca2b44ff1168a352168df1c4ef0d51f2a6d640021f83e",
+      "size": 12762
+    }
+  },
+  "request": {
+    "code_commit": "a9895f1a42cfe65fe2b50cfa178983a56f2b7b5b",
+    "expected_result": "14 focused tests exit 0. Only token identifier boundary changes; same-file secrets and private keys still block. No evidence exclusion, live source write, service change, App send or board operation. H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 remains fixed.",
+    "operation_id": "B-DISTRIBUTION-TOKEN-BOUNDARY-20261016-v1",
+    "requester": "node-b",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "test_steps": [
+      "Run the exact 14-test command recorded in source-validation.json against a9895f1 Git bytes.",
+      "Verify original task identifier evidence and old published manifests stay unchanged; genuine standalone/separator keys and every supported PEM/PGP header must reject.",
+      "Build a mesh candidate from final committed tracked files with fpga_mesh.distribution and the documented known base; record the candidate head and ZIP hash separately. Do not deploy or overwrite local conflicts."
+    ]
+  },
+  "request_hash": "8313d9744bd825bba5487f4b649b9d8a8bc2b2102c31b60a4737888d7539d802",
+  "schema_version": 1,
+  "stages": {
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "original_packaging_failure": {
+      "log": "docs/deployment/evidence/distribution-token-boundary-20261016/original-build.stderr.txt",
+      "status": "failed"
+    },
+    "original_task_identifier_regression": {
+      "log": "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stderr.txt",
+      "status": "failed"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "software_regression": {
+      "log": "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stderr.txt",
+      "status": "passed"
+    }
+  }
+}

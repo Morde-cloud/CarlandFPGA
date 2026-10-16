@@ -1,0 +1,54 @@
+{
+  "request": {
+    "operation_id": "B-DISTRIBUTION-TOKEN-BOUNDARY-20261016-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "a9895f1a42cfe65fe2b50cfa178983a56f2b7b5b",
+    "test_steps": [
+      "Run the exact 14-test command recorded in source-validation.json against a9895f1 Git bytes.",
+      "Verify original task identifier evidence and old published manifests stay unchanged; genuine standalone/separator keys and every supported PEM/PGP header must reject.",
+      "Build a mesh candidate from final committed tracked files with fpga_mesh.distribution and the documented known base; record the candidate head and ZIP hash separately. Do not deploy or overwrite local conflicts."
+    ],
+    "expected_result": "14 focused tests exit 0. Only token identifier boundary changes; same-file secrets and private keys still block. No evidence exclusion, live source write, service change, App send or board operation. H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 remains fixed."
+  },
+  "artifacts": [
+    "fpga_mesh/distribution.py",
+    "fpga_mesh/update.py",
+    "tests/test_distribution.py",
+    "tests/test_mesh_update.py",
+    "docs/deployment/evidence/B-INTERRUPT-20261014/README.md",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline-and-preservation.json",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stderr.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stdout.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/original-build-command.json",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/original-build.stderr.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/README.md",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stderr.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stdout.txt",
+    "docs/deployment/evidence/distribution-token-boundary-20261016/source-validation.json"
+  ],
+  "stages": {
+    "original_packaging_failure": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/distribution-token-boundary-20261016/original-build.stderr.txt"
+    },
+    "original_task_identifier_regression": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/distribution-token-boundary-20261016/baseline.stderr.txt"
+    },
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/distribution-token-boundary-20261016/regression.stderr.txt"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    }
+  }
+}

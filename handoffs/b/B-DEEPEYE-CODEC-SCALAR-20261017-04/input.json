@@ -1,0 +1,77 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-CODEC-SCALAR-20261017-04",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "95705fc04bc08ccb8c1c8d7f3d3cd3b32c5d5fee",
+    "test_steps": [
+      "Read H01-H15 DEEPEYE-HUMAN-LOCK-20261014/r1; canonical requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804, design1011259415a0916054eb580687612580bc1e5f09.",
+      "Run python -B -X utf8 -m unittest discover -s competition/deepeye/tests/codec -v (67 tests). Original49 test source and61 vector bytes remain unchanged.",
+      "Run python -B -X utf8 competition/deepeye/evidence/codec/main-scalar-review-20261017/independent_scalar_review.py --source competition/deepeye/golden/codec/codec_reference.py --original competition/deepeye/evidence/codec/main-scalar-review-20261017/codec-original.py --vectors competition/deepeye/golden/codec/known_vectors.json --output-root YOUR_NEW_DIRECTORY (108 strict numeric cases,1000 ordinary blocks,250 helper controls).",
+      "Inspect preserved original-source negative result:87 failing numeric safety cases of108, exit1. This RED is not acceptance. Candidate rejects all108 before overloaded operators; ordinary bytes match old source.",
+      "Review minimal source diff/type contract. No A/C file, TRACE wire layout, hidden truth/source path, board or existing asset/control change requested. Return samePR operation/request_hash/tested_commit/raw-log hashes."
+    ],
+    "expected_result": "Only Python numeric API correctness fix accepted: exact built-in int inputs, unchanged valid integer codec bytes, existing vectors retained. IntEnum/int subclasses/bool rejected before arithmetic. B01/R03/full TRACE/public register/CDC and simulation/synthesis/implementation/board/system remain unaccepted."
+  },
+  "artifacts": [
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/codec-input-pins.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/codec-original.py",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/codec-scalar-reproduction.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/independent_scalar_review.py",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-fixed-command.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-fixed-result.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-fixed.stderr.txt",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-fixed.stdout.txt",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-negative-command.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-negative-result.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-negative.stderr.txt",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-negative.stdout.txt",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-unit-command.json",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-unit.stderr.txt",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-unit.stdout.txt",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/README.md",
+    "competition/deepeye/evidence/codec/main-scalar-review-20261017/source-binding.json",
+    "competition/deepeye/evidence/codec/scalar-boundary-20261017-01/commands.json",
+    "competition/deepeye/evidence/codec/scalar-boundary-20261017-01/result.json",
+    "competition/deepeye/evidence/codec/scalar-boundary-20261017-01/stderr.txt",
+    "competition/deepeye/evidence/codec/scalar-boundary-20261017-01/stdout.txt",
+    "competition/deepeye/golden/codec/codec_reference.py",
+    "competition/deepeye/golden/codec/integer_candidate_rules.json",
+    "competition/deepeye/golden/codec/known_vectors.json",
+    "competition/deepeye/golden/codec/README.md",
+    "competition/deepeye/tests/codec/test_codec_reference.py",
+    "competition/deepeye/tests/codec/test_scalar_boundary.py"
+  ],
+  "stages": {
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "B01": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "codec_numeric_software": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-unit.stderr.txt"
+    },
+    "main_independent_numeric_review": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/main-scalar-review-20261017/main-fixed-result.json"
+    }
+  }
+}

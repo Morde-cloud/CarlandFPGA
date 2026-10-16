@@ -1,0 +1,79 @@
+===== [before] import | baseline_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | pristine worktree sources, private scratch harness =====
+
+
+===== [before] test | baseline_test.stderr.txt | sha256=7c54bea89b60463a115512be27756a53df1784176f5944037c2526daa319c3ec | PARSE01 reproduced: GDScript parse errors at lines 154/159 =====
+SCRIPT ERROR: Parse Error: Cannot infer the type of "mesh" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://tests/test_asset_contract.gd:154)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "aabb" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://tests/test_asset_contract.gd:159)
+ERROR: Failed to load script "res://tests/test_asset_contract.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+
+===== [before] diag_radius | diag_radius.stderr.txt | sha256=808b366cb2754b6edf7f0091b4c434d60caed2320b987460ac686ed0be0f78a5 | GEOM02 diagnosis: HeadPDC node + bare cone probe + envelope push_error =====
+ERROR: DeepEyeAssetLibrary: drill_pdc_v1 exceeds its declared envelope: { "min": (-0.12, -0.12, -0.4), "max": (0.12, 0.12, 0.4), "size": (0.24, 0.24, 0.8), "center": (0.0, 0.0, 0.0), "pivot_bound_radius_m": 0.40447494387627, "max_radius_about_z_m": 0.1200667355843, "vertex_count": 6648, "mesh_count": 28 }
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _finalize_asset (res://world/asset_library.gd:103)
+       [1] create_drill (res://world/asset_library.gd:30)
+       [2] _initialize (res://tools/diag_radius.gd:9)
+
+===== [before] diag_winding | diag_winding.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | WIND03 diagnosis: star meshes counter-clockwise front vs engine clockwise =====
+
+
+===== [iter1] import | iter1_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | payload sources, fix iteration 1 =====
+
+
+===== [iter1] test | iter1_test.stderr.txt | sha256=e4db551485a60d9138acad1b9e17be83977834e49b30ac7b213506292ac8e1dd | fix iteration 1 full contract test =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:41)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:164)
+       [3] _initialize (res://tests/test_asset_contract.gd:63)
+
+===== [iter1] diag_radius_postfix | diag_radius_postfix.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | head radius after fix =====
+
+
+===== [iter1] diag_winding_postfix | diag_winding_postfix.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | winding after fix =====
+
+
+===== [iter2] import | iter2_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | payload sources including refreshed catalog =====
+
+
+===== [iter2] test | iter2_test.stderr.txt | sha256=e4db551485a60d9138acad1b9e17be83977834e49b30ac7b213506292ac8e1dd | fix iteration 2 full contract test =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:41)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:164)
+       [3] _initialize (res://tests/test_asset_contract.gd:63)
+
+===== [iter2] diag_meta_iter2 | diag_meta_iter2.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | factory envelope self-checks and measured vertex counts =====
+
+
+===== [final] import | final_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | fresh harness project built strictly from the worktree files =====
+
+
+===== [final] test | final_test.stderr.txt | sha256=e4db551485a60d9138acad1b9e17be83977834e49b30ac7b213506292ac8e1dd | authoritative headless contract run =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:41)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:164)
+       [3] _initialize (res://tests/test_asset_contract.gd:63)
+
+===== [final] diag_final_radius | diag_final_radius.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | final per-node radius verification =====
+
+
+===== [final] diag_final_winding | diag_final_winding.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | final per-kind winding and normal verification =====
+
+
+===== [final] diag_final_meta | diag_final_meta.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | final envelope_ok and measured vertex counts =====
+
+
+===== [final] engine version | version.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | 4.7.2.stable.official.ed1daf0bf exit=0 =====
+(empty)
+

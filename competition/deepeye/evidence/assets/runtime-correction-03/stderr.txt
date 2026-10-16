@@ -1,0 +1,396 @@
+===== baseline_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | pre-fix baseline sources with the NEW correction-03 tests (payload tests only) =====
+
+
+===== baseline_test.stderr.txt | sha256=f21439b991673d239ec5e33f299c08cb31d692902658d18828084e8997ee0a26 | NEW transformed-face checks FAIL on the rejected sources: 60 failures (18 det=-1, 18 negative volume, 18 not-outward studs, casing containment + margin + diameter) =====
+FAIL: drill part right-handed basis det>0: CutterStud_0_0 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_0_0 volume=-0.00000182399829
+FAIL: drill part transformed faces stay outward: CutterStud_0_0
+FAIL: drill part right-handed basis det>0: CutterStud_0_1 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_0_1 volume=-0.00000182399829
+FAIL: drill part transformed faces stay outward: CutterStud_0_1
+FAIL: drill part right-handed basis det>0: CutterStud_0_2 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_0_2 volume=-0.00000182398981
+FAIL: drill part transformed faces stay outward: CutterStud_0_2
+FAIL: drill part right-handed basis det>0: CutterStud_1_0 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_1_0 volume=-0.00000182383458
+FAIL: drill part transformed faces stay outward: CutterStud_1_0
+FAIL: drill part right-handed basis det>0: CutterStud_1_1 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_1_1 volume=-0.00000182404134
+FAIL: drill part transformed faces stay outward: CutterStud_1_1
+FAIL: drill part right-handed basis det>0: CutterStud_1_2 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_1_2 volume=-0.00000182402073
+FAIL: drill part transformed faces stay outward: CutterStud_1_2
+FAIL: drill part right-handed basis det>0: CutterStud_2_0 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_2_0 volume=-0.00000182394676
+FAIL: drill part transformed faces stay outward: CutterStud_2_0
+FAIL: drill part right-handed basis det>0: CutterStud_2_1 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_2_1 volume=-0.00000182397889
+FAIL: drill part transformed faces stay outward: CutterStud_2_1
+FAIL: drill part right-handed basis det>0: CutterStud_2_2 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_2_2 volume=-0.00000182403043
+FAIL: drill part transformed faces stay outward: CutterStud_2_2
+FAIL: drill part right-handed basis det>0: CutterStud_3_0 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_3_0 volume=-0.00000182399829
+FAIL: drill part transformed faces stay outward: CutterStud_3_0
+FAIL: drill part right-handed basis det>0: CutterStud_3_1 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_3_1 volume=-0.00000182399829
+FAIL: drill part transformed faces stay outward: CutterStud_3_1
+FAIL: drill part right-handed basis det>0: CutterStud_3_2 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_3_2 volume=-0.00000182398981
+FAIL: drill part transformed faces stay outward: CutterStud_3_2
+FAIL: drill part right-handed basis det>0: CutterStud_4_0 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_4_0 volume=-0.00000182383458
+FAIL: drill part transformed faces stay outward: CutterStud_4_0
+FAIL: drill part right-handed basis det>0: CutterStud_4_1 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_4_1 volume=-0.00000182404134
+FAIL: drill part transformed faces stay outward: CutterStud_4_1
+FAIL: drill part right-handed basis det>0: CutterStud_4_2 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_4_2 volume=-0.00000182402073
+FAIL: drill part transformed faces stay outward: CutterStud_4_2
+FAIL: drill part right-handed basis det>0: CutterStud_5_0 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_5_0 volume=-0.00000182394676
+FAIL: drill part transformed faces stay outward: CutterStud_5_0
+FAIL: drill part right-handed basis det>0: CutterStud_5_1 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_5_1 volume=-0.00000182397889
+FAIL: drill part transformed faces stay outward: CutterStud_5_1
+FAIL: drill part right-handed basis det>0: CutterStud_5_2 det=-1.0
+FAIL: drill part positive clockwise volume after transform: CutterStud_5_2 volume=-0.00000182403043
+FAIL: drill part transformed faces stay outward: CutterStud_5_2
+FAIL: mirrored stud negative control fails det>0 (rejected left-handed frame reproduced)
+FAIL: mirrored stud negative control fails positive clockwise volume
+FAIL: mirrored stud negative control fails outward orientation on every transformed face
+FAIL: casing every transformed triangle is inside a disabled convex shape (worst=0.00005470050088 m at SolidMesh)
+FAIL: casing encoded visual radius stays >= 1e-4 m inside the disabled collision radius 0.4 m actual=0.40005487166283
+FAIL: casing encoded visual diameter is 0.7996 m (0.4 mm inside the nominal 0.8 m), actual=0.79999995231628
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:41)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:271)
+       [3] _initialize (res://tests/test_asset_contract.gd:89)
+
+===== baseline_export.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | pre-fix export for the mirrored review self-check =====
+
+
+===== prefix_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | frozen pre-fix sources in a separate harness (iterations/baseline/sources) =====
+
+
+===== prefix_export.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | pre-fix export of the frozen baseline sources with the B-main export script =====
+
+
+===== final_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | fresh harness project built strictly from the worktree files =====
+
+
+===== final_test.stderr.txt | sha256=f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf | authoritative headless contract run from the worktree files: RESULT checks=622 failures=0 =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:56)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:274)
+       [3] _initialize (res://tests/test_asset_contract.gd:91)
+
+===== final_export.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | B-main export script over the fixed worktree sources =====
+
+
+===== iter1_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | payload iteration 1 (tests + drill + obstacle fixes) =====
+
+
+===== iter1_test.stderr.txt | sha256=2261a1987ba38953bf7ca6333b363db09e95e218ae45ee79af93223177b87c26 | payload iteration 1 full contract test =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:56)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:271)
+       [3] _initialize (res://tests/test_asset_contract.gd:89)
+
+===== iter2_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | payload iteration 2 (same three payloads, encoded-radius MEASURE line added) =====
+
+
+===== iter2_test.stderr.txt | sha256=f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf | payload iteration 2 full contract test =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:56)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:274)
+       [3] _initialize (res://tests/test_asset_contract.gd:91)
+
+===== iter3_import.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | payload iteration 3 (all four owned files incl. refreshed catalog) =====
+
+
+===== iter3_test.stderr.txt | sha256=f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf | payload iteration 3 full contract test =====
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:56)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:274)
+       [3] _initialize (res://tests/test_asset_contract.gd:91)
+
+===== iter3_export.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | payload iteration 3 export for the mirrored review self-check =====
+
+
+===== selfcheck_prefix.console.txt | sha256=65920ecaee6003f04c834cea7304feeb5c60510b8a6f40f952186e7d823aa50a | mirrored B-main review math over the PRE-FIX export: 19 findings (18 studs det=-1 / negative volume; casing 384 vertices outside, worst 5.470416716468751e-05 m) =====
+ÿþ{  
+     " l a b e l " :   " p r e f i x " ,  
+     " a s s e t _ c o u n t " :   7 ,  
+     " f i n d i n g s " :   [  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 0 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 6 5 9 7 8 8 5 2 1 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 0 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 7 1 0 1 0 3 3 9 7 1 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 0 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 2 1 2 2 4 7 2 2 1 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 1 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 2 9 1 5 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 1 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 8 9 5 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 1 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 5 1 1 6 0 8 2 5 9 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 2 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 1 2 3 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 2 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 7 8 2 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 2 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 4 9 9 8 8 3 0 5 2 9 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 3 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 6 5 9 7 8 8 4 9 2 5 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 3 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 7 1 0 1 0 3 3 7 2 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 3 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 2 1 2 2 4 7 2 1 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 4 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 2 9 1 5 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 4 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 8 9 5 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 4 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 5 1 1 6 0 8 2 5 9 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 5 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 1 2 3 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 5 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 7 8 2 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 5 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 4 9 9 8 8 3 0 5 2 9 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " c a s i n g " ,  
+             " f i n d i n g " :   " c o l l i s i o n _ e n v e l o p e " ,  
+             " o u t s i d e _ f a c e _ v e r t i c e s " :   3 8 4 ,  
+             " w o r s t " :   [  
+                 5 . 4 7 0 4 1 6 7 1 6 4 6 8 7 5 1 e - 0 5 ,  
+                 " V i s u a l / S o l i d M e s h " ,  
+                 [  
+                     0 . 1 5 3 0 9 9 9 9 8 8 3 1 7 4 9 ,  
+                     - 0 . 3 6 9 6 0 0 1 7 6 8 1 1 2 1 8 ,  
+                     4 . 0  
+                 ]  
+             ]  
+         }  
+     ] ,  
+     " s t a t u s " :   " i n d e p e n d e n t _ f i n d i n g s _ p e n d i n g _ d i s p o s i t i o n "  
+ }  
+ 
+
+===== selfcheck_iter3.console.txt | sha256=ce6f06db1e74e9fd43676d197b65573d9958555ebee34a987d47a0ba90fdeffe | mirrored B-main review math over the iter3 export: zero findings =====
+ÿþ{  
+     " l a b e l " :   " i t e r 3 " ,  
+     " a s s e t _ c o u n t " :   7 ,  
+     " f i n d i n g s " :   [ ] ,  
+     " s t a t u s " :   " g e o m e t r y _ c h e c k s _ p a s s "  
+ }  
+ 
+
+===== selfcheck_final.console.txt | sha256=779b261281d1094efcf94d270c266d0a12804c4e8b108b65e689775404c57e19 | mirrored B-main review math over the final worktree export: zero findings =====
+ÿþ{  
+     " l a b e l " :   " f i n a l " ,  
+     " a s s e t _ c o u n t " :   7 ,  
+     " f i n d i n g s " :   [ ] ,  
+     " s t a t u s " :   " g e o m e t r y _ c h e c k s _ p a s s "  
+ }  
+ 
+
+===== engine --version | version.stderr.txt | sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 | 4.7.2.stable.official.ed1daf0bf exit=0 =====
+(empty)
+

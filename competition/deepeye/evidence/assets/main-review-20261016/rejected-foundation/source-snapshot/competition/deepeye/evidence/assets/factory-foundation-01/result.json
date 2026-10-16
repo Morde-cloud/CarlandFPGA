@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ASSETS-FACTORY-FOUNDATION-20261015-01-v1",
+  "worker": "node B DeepSeek V4.1 Flash execution child (assets slot), route deepseek-flash/max",
+  "observed_at_utc": "2026-10-16T03:49:36Z",
+  "status": "source_preparation_completed_runtime_validation_blocked",
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+    "commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "verification": "canonical JSON (ensure_ascii=False, sort_keys=True, separators=(',',':')) SHA256 recomputed this session and matched"
+  },
+  "requirements_scope_preserved": [
+    "game-grade 3D/UI, hollow edge-only cube, solid-volume collisions, free camera and editable/random layouts, free entry/exit faces, equal blue/red gates and complete passage, hidden obstacle truth, device-bounded causal observations, online 3D decision-making, substantive PC AI, PC_DIRECT and FPGA-output control paths",
+    "this work delivers presentation geometry and metadata only; it does not weaken or decide any requirement; equal 0.30 m blue/red gate compatibility is kept (A-owned gate geometry untouched, no route chosen)"
+  ],
+  "inputs_verified": {
+    "input_manifest_sha256": "c641f9f105d766efe8eac5aafd2e7a884d3e0bca845c8736ef13ae8a57e9c0f1",
+    "resource_contract_sha256": "852a686a0ee261773dbc233350a6ab1d540edae0b2c3889d928caefdfc629ff4",
+    "manifest_sources_verified": "20/20",
+    "immutable_scope_json_sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+    "design_freeze": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "files": [
+    {
+      "path": "competition/deepeye/simulator/world/drill_geometry.gd",
+      "sha256": "e105ee050b75b9979f33c5fcf3dd5fcde5960fbd4d010452f33553df33779a25",
+      "bytes": 7713
+    },
+    {
+      "path": "competition/deepeye/simulator/world/drill_geometry.gd.uid",
+      "sha256": "7cf1f58d56903dee992e7880c2e4243285b4a6b451004e9cd83626a6f61099a1",
+      "bytes": 20
+    },
+    {
+      "path": "competition/deepeye/simulator/world/obstacle_geometry.gd",
+      "sha256": "fa34a7a923b03b56a9759ff59ddc32c407ce9fd41e5b74db1c9cf37826b49745",
+      "bytes": 10270
+    },
+    {
+      "path": "competition/deepeye/simulator/world/obstacle_geometry.gd.uid",
+      "sha256": "359ae06087402995ff8b26c942555a6762b0df3d2970939adb349e3a13919512",
+      "bytes": 20
+    },
+    {
+      "path": "competition/deepeye/simulator/world/frame_geometry.gd",
+      "sha256": "acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5",
+      "bytes": 3516
+    },
+    {
+      "path": "competition/deepeye/simulator/world/frame_geometry.gd.uid",
+      "sha256": "6058ac651912e1387ab7a319c70627fddfb0d571be5d089e2a0f057ba6f7d0f4",
+      "bytes": 20
+    },
+    {
+      "path": "competition/deepeye/simulator/world/asset_library.gd",
+      "sha256": "9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce",
+      "bytes": 5762
+    },
+    {
+      "path": "competition/deepeye/simulator/world/asset_library.gd.uid",
+      "sha256": "0bb3d1ed877ef62e32c1bad57ad01d9a90772a4a22073aff030bd9db3d6eef4d",
+      "bytes": 20
+    },
+    {
+      "path": "competition/deepeye/simulator/assets/scene_catalog.json",
+      "sha256": "4e6a112a5a92c6b31ae86abe1542fa44f185538e81ad080335efbf67f553561e",
+      "bytes": 10169
+    },
+    {
+      "path": "competition/deepeye/simulator/assets/LICENSES.md",
+      "sha256": "f0b9ffe3daa2a168eaa510efa8c92d698e39260833aafa8161231f6168ba9959",
+      "bytes": 3722
+    },
+    {
+      "path": "competition/deepeye/simulator/tests/test_asset_contract.gd",
+      "sha256": "14f1507bdb47ce23cf2eba2c6dff9221fd35c356a312b0f72f1bb643b44d3485",
+      "bytes": 19176
+    },
+    {
+      "path": "competition/deepeye/simulator/tests/test_asset_contract.gd.uid",
+      "sha256": "14efc743fd8a5a90c19e0596c8065a1cd789335b3c37bb5d6a329f73da6cbf50",
+      "bytes": 20
+    }
+  ],
+  "evidence_files": [
+    {
+      "path": "competition/deepeye/evidence/assets/factory-foundation-01/commands.json",
+      "sha256": "d2650e7708a69eae47a9fedcfd41ad715c1bbf2374af88b59480bc21002296c2",
+      "bytes": 5659
+    },
+    {
+      "path": "competition/deepeye/evidence/assets/factory-foundation-01/stdout.txt",
+      "sha256": "8993b790938462478ebca2ad195c98b5bf8bb2ada03514a290884dfbef4457c4",
+      "bytes": 7686
+    },
+    {
+      "path": "competition/deepeye/evidence/assets/factory-foundation-01/stderr.txt",
+      "sha256": "f35a49b8e126baf2c70c0416d4d5425d07122366adddf37d123615f93ac497d5",
+      "bytes": 332
+    }
+  ],
+  "result_file_note": "result.json carries no self-hash; the three sibling evidence files are hashed above",
+  "engine": {
+    "expected_version": "4.7.2-stable",
+    "expected_version_string": "4.7.2.stable.official.ed1daf0bf",
+    "expected_binary_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+    "found": "ABSENT",
+    "search_evidence": "PATH, scoop shims/apps, winget links, Program Files (x86), %APPDATA%\\Godot (only unrelated game userdata), where /r over D:\\pynq, C:\\Users\\15378, C:\\Program Files, C:\\Program Files (x86) and all of D:\\; see stdout.txt section C05",
+    "runtime_commands_status": "blocked_not_executed",
+    "measured_engine_sha256": null
+  },
+  "tests": {
+    "framework": "competition/deepeye/simulator/tests/test_asset_contract.gd (SceneTree headless script; non-zero exit on failure)",
+    "status": "not_run_engine_absent",
+    "static_structure_check_of_final_bytes": "ALL_OK (no BOM, no CRLF, balanced delimiters, required API signatures, uid format)",
+    "python_replica_check": "ALL_OK (closed meshes, outward winding, exact declared dims, catalog volumes matched)",
+    "planned_when_engine_available": "godot --headless --path competition/deepeye/simulator --script res://tests/test_asset_contract.gd (prints MEASURE lines incl. drill pivot radius and 30-instance probe; expected >= 30 instances load, six-axis/oblique/close captures then remain native-relay/A-side steps)"
+  },
+  "measured_geometry": {
+    "method": "independent double-precision Python replica of the exact generator formulas (evidence C02); the factory itself re-measures actual transformed mesh vertices on every create_* call and stores geometry_bounds_m and pivot_bound_radius_m as node metadata (no stamped guess)",
+    "drill": {
+      "aabb_size_m": [
+        0.24,
+        0.24,
+        0.8
+      ],
+      "z_range_m": [
+        -0.4,
+        0.4
+      ],
+      "max_radius_about_z_m": 0.12,
+      "pivot_radius_replica_m": 0.404475,
+      "contract_rotation_bound_radius_m": 0.52,
+      "triangles_estimate": 1544,
+      "materials": 5
+    },
+    "obstacles": {
+      "water": {
+        "declared_size_m": [
+          6.0,
+          4.0,
+          2.0
+        ],
+        "replica_aabb_size_m": [
+          5.807882,
+          4.0,
+          1.964039
+        ],
+        "volume_m3": 23.735914,
+        "base_ellipsoid_volume_m3": 25.1327,
+        "triangles": 2208
+      },
+      "hard_rock": {
+        "declared_size_m": [
+          3.0,
+          3.0,
+          3.0
+        ],
+        "replica_aabb_size_m": [
+          2.553599,
+          3.0,
+          2.65799
+        ],
+        "volume_m3": 9.821047,
+        "triangles": 2208
+      },
+      "fault": {
+        "declared_size_m": [
+          8.0,
+          1.0,
+          6.0
+        ],
+        "replica_aabb_size_m": [
+          8.0,
+          1.0,
+          6.0
+        ],
+        "volume_m3": 48.0,
+        "triangles": 12
+      },
+      "void": {
+        "declared_size_m": [
+          4.0,
+          3.0,
+          3.0
+        ],
+        "replica_aabb_size_m": [
+          4.0,
+          3.0,
+          3.0
+        ],
+        "volume_m3": 18.715371,
+        "triangles": 2208
+      },
+      "casing": {
+        "declared_size_m": [
+          0.8,
+          0.8,
+          8.0
+        ],
+        "axis": "+Z",
+        "replica_aabb_size_m": [
+          0.799143,
+          0.799143,
+          8.0
+        ],
+        "volume_m3": 4.009765,
+        "nominal_cylinder_volume_m3": 4.021239,
+        "triangles": 192
+      }
+    },
+    "frame": {
+      "cube_min_m": [
+        -15.0,
+        -15.0,
+        -15.0
+      ],
+      "cube_max_m": [
+        15.0,
+        15.0,
+        15.0
+      ],
+      "visible_edges": 12,
+      "enclosing_surfaces": 0,
+      "edge_cross_section_m": 0.12,
+      "triangles": 144
+    },
+    "scene_estimate": {
+      "objects": "30 obstacles + drill + frame",
+      "asset_only_triangles_estimate": 42656,
+      "budget": 300000,
+      "note": "analytic estimate; the test prints the exact engine value when run; not a performance acceptance"
+    }
+  },
+  "non_claims": [
+    "no visual acceptance, no renderer/performance/collision-authority/system claim",
+    "no G01 pass (or any card pass); A/human remain the acceptance path",
+    "no screenshots captured (engine absent); nothing fabricated",
+    "no board/physical results; A alone operates the board",
+    "no 30-instance live-load claim (blocked with runtime; test will demonstrate it on a real engine)",
+    "no git add/commit/push; no peer or group messages sent"
+  ],
+  "limitations": [
+    "Godot runtime absent, so GDScript parse/import errors can only be caught structurally and by review here (balanced delimiters, API signatures, no encoding anomalies); the engine run remains the first true parse+load check",
+    "star-mesh volumes and AABBs are replica values; engine-measured floats will differ by ~1e-6 relative and the test records them",
+    "uid:// sidecar files are deterministic placeholders in Godot's uid format; the first real engine import may regenerate them (documented in evidence)",
+    "one early console-captured output file was polluted by the shared editor-host console and was superseded; all recorded evidence uses OS-level redirection"
+  ],
+  "blockers": [
+    {
+      "class": "[need desktop turn]",
+      "text": "Godot 4.7.2-stable is not installed on node B; runtime validation, 30-instance load and visual captures are blocked until a human/desktop decision provides the pinned engine (download/install/configuration excluded from this assignment).",
+      "evidence": "stdout.txt section C05"
+    }
+  ],
+  "next_steps_for_director": [
+    "review sources at the hashes above (independent B-main review is the acceptance path)",
+    "if/when the pinned engine is provided on node B: run C06 commands, then replace measured_geometry values with the printed MEASURE lines and record the engine binary --version/SHA256",
+    "native relay (not this worker) owns contexts/assets/view_*.png captures; none were attempted"
+  ]
+}

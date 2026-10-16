@@ -1,0 +1,188 @@
+DeepEye B assets factory evidence: raw command output
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-FACTORY-FOUNDATION-20261015-01-v1
+contract=DEEPEYE-HUMAN-LOCK-20261014/revision1 commit=f5989cd5defce561f9ba98e6b18fc2682945f0a2
+requirements_sha256=c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804
+captured_at_utc=2026-10-16T03:49:04Z
+
+=== C01 verify_inputs.py (exit 0): pinned contract / manifest / resource contract verification ===
+verify_inputs: DEEPEYE-IMPLEMENTATION-20261014/v1 assets worker input verification
+requirements canonical sha256: c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804
+expected                     c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804
+REQ_HASH OK
+requirements count: 15
+  H01 | 
+  H02 | 
+  H03 | 
+  H04 | 
+  H05 | 
+  H06 | 
+  H07 | 
+  H08 | 
+  H09 | 
+  H10 | 
+  H11 | 
+  H12 | 
+  H13 | 
+  H14 | 
+  H15 | 
+manifest sha256: c641f9f105d766efe8eac5aafd2e7a884d3e0bca845c8736ef13ae8a57e9c0f1
+MANIFEST OK
+resource_contract sha256: 852a686a0ee261773dbc233350a6ab1d540edae0b2c3889d928caefdfc629ff4
+RESOURCE_CONTRACT OK
+manifest sources verified: 20 / 20
+VERIFY_RESULT ALL_OK
+
+=== C02 mesh_replica.py (exit 0): independent Python replica of generator meshes (volumes, AABB, winding, closedness) ===
+{
+  "casing_nominal_volume_m3": 4.0212385965949355,
+  "casing_polygon_area_m2": 0.5012205781249981,
+  "casing_volume_m3": 4.009764624999985,
+  "drill": {
+    "aabb_max": [
+      0.12,
+      0.12,
+      0.4
+    ],
+    "aabb_min": [
+      -0.12,
+      -0.12,
+      -0.4
+    ],
+    "aabb_size": [
+      0.24,
+      0.24,
+      0.8
+    ],
+    "boundary_edges": 24,
+    "degenerate_triangles": 0,
+    "max_radius_about_z_replica_m": 0.12000000000000001,
+    "name": "drill",
+    "outward_normals_bad": 452,
+    "pivot_radius_replica_m": 0.40447496832313373,
+    "triangles": 1416,
+    "vertices": 764,
+    "volume_m3": 0.015162204805599074,
+    "z_range_replica_m": [
+      -0.4,
+      0.4
+    ]
+  },
+  "fault_volume_m3": 48.0,
+  "hard_rock": {
+    "aabb_max": [
+      1.2755136396139062,
+      1.5,
+      1.2802498593788652
+    ],
+    "aabb_min": [
+      -1.2780856970374888,
+      -1.5,
+      -1.3777405142405257
+    ],
+    "aabb_size": [
+      2.553599336651395,
+      3.0,
+      2.657990373619391
+    ],
+    "boundary_edges": 0,
+    "degenerate_triangles": 0,
+    "name": "hard_rock",
+    "outward_normals_bad": 0,
+    "triangles": 2208,
+    "vertices": 1106,
+    "volume_m3": 9.821047209094512
+  },
+  "void": {
+    "aabb_max": [
+      2.0,
+      1.5,
+      1.5
+    ],
+    "aabb_min": [
+      -2.0,
+      -1.5,
+      -1.5
+    ],
+    "aabb_size": [
+      4.0,
+      3.0,
+      3.0
+    ],
+    "boundary_edges": 0,
+    "degenerate_triangles": 0,
+    "name": "void",
+    "outward_normals_bad": 0,
+    "triangles": 2208,
+    "vertices": 1106,
+    "volume_m3": 18.715371463534236
+  },
+  "water": {
+    "aabb_max": [
+      2.932307803341366,
+      2.0,
+      0.9707935754928027
+    ],
+    "aabb_min": [
+      -2.8755740049171723,
+      -2.0,
+      -0.9932458217543512
+    ],
+    "aabb_size": [
+      5.807881808258538,
+      4.0,
+      1.964039397247154
+    ],
+    "boundary_edges": 0,
+    "degenerate_triangles": 0,
+    "name": "water",
+    "outward_normals_bad": 0,
+    "triangles": 2208,
+    "vertices": 1106,
+    "volume_m3": 23.735914252286936
+  }
+}
+
+=== C03 check_sources.py (exit 0): structural self-check of final product bytes (BOM/CRLF/tabs/balance/API/uid) ===
+SOURCE_OK simulator/world/drill_geometry.gd lines 180 sha256 e105ee050b75b9979f33c5fcf3dd5fcde5960fbd4d010452f33553df33779a25
+SOURCE_OK simulator/world/obstacle_geometry.gd lines 244 sha256 fa34a7a923b03b56a9759ff59ddc32c407ce9fd41e5b74db1c9cf37826b49745
+SOURCE_OK simulator/world/frame_geometry.gd lines 80 sha256 acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5
+SOURCE_OK simulator/world/asset_library.gd lines 120 sha256 9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce
+SOURCE_OK simulator/tests/test_asset_contract.gd lines 349 sha256 14f1507bdb47ce23cf2eba2c6dff9221fd35c356a312b0f72f1bb643b44d3485
+API OK class_name DeepEyeAssetLibrary
+API OK static func create_drill() -> Node3D
+API OK static func create_obstacle(kind: String) -> Node3D
+API OK static func create_frame() -> Node3D
+UID OK simulator/world/drill_geometry.gd.uid uid://b7qk3mn9rt2xd
+UID OK simulator/world/obstacle_geometry.gd.uid uid://c4jw8nvq2sh6k
+UID OK simulator/world/frame_geometry.gd.uid uid://dq2m9vxr5kp3t
+UID OK simulator/world/asset_library.gd.uid uid://bh5nt2qs8wj7m
+UID OK simulator/tests/test_asset_contract.gd.uid uid://cv8kr3mz6pt4n
+CHECK_RESULT ALL_OK
+
+=== C04 validate_catalog.py (exit 0): scene_catalog.json validation ===
+json_valid: True, assets: 7 bytes: 10169
+sha256: 4e6a112a5a92c6b31ae86abe1542fa44f185538e81ad080335efbf67f553561e
+
+=== C05 engine discovery: where /r D:\pynq | C:\Users\15378 | Program Files (x86) | D:\ godot*.exe (no Godot executable found) ===
+== start 2026-10-16T11:42:37.4025817+08:00 ==
+��Ϣ: ���ṩ��ģʽ�޷��ҵ��ļ���
+��Ϣ: ���ṩ��ģʽ�޷��ҵ��ļ���
+��Ϣ: ���ṩ��ģʽ�޷��ҵ��ļ���
+��Ϣ: ���ṩ��ģʽ�޷��ҵ��ļ���
+��Ϣ: ���ṩ��ģʽ�޷��ҵ��ļ���
+ENGINE_SEARCH_DONE  
+
+=== C07 product SHA256 (Get-FileHash -Algorithm SHA256) ===
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\asset_library.gd  9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\asset_library.gd.uid  0bb3d1ed877ef62e32c1bad57ad01d9a90772a4a22073aff030bd9db3d6eef4d
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\drill_geometry.gd  e105ee050b75b9979f33c5fcf3dd5fcde5960fbd4d010452f33553df33779a25
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\drill_geometry.gd.uid  7cf1f58d56903dee992e7880c2e4243285b4a6b451004e9cd83626a6f61099a1
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\frame_geometry.gd  acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\frame_geometry.gd.uid  6058ac651912e1387ab7a319c70627fddfb0d571be5d089e2a0f057ba6f7d0f4
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\obstacle_geometry.gd  fa34a7a923b03b56a9759ff59ddc32c407ce9fd41e5b74db1c9cf37826b49745
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\world\obstacle_geometry.gd.uid  359ae06087402995ff8b26c942555a6762b0df3d2970939adb349e3a13919512
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\assets\LICENSES.md  f0b9ffe3daa2a168eaa510efa8c92d698e39260833aafa8161231f6168ba9959
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\assets\scene_catalog.json  4e6a112a5a92c6b31ae86abe1542fa44f185538e81ad080335efbf67f553561e
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\tests\test_asset_contract.gd  14f1507bdb47ce23cf2eba2c6dff9221fd35c356a312b0f72f1bb643b44d3485
+D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\simulator\tests\test_asset_contract.gd.uid  14efc743fd8a5a90c19e0596c8065a1cd789335b3c37bb5d6a329f73da6cbf50
+

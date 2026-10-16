@@ -1,0 +1,193 @@
+{
+  "work_id": "B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "status": "two_findings_fixed_transformed_face_checks_added_pending_independent_director_rerun",
+  "engine": {
+    "version": "4.7.2.stable.official.ed1daf0bf",
+    "executable_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+    "executable_sha256_matches_expected": true,
+    "version_exit": 0
+  },
+  "final_run": {
+    "import_exit_code": 0,
+    "test_exit_code": 0,
+    "export_exit_code": 0,
+    "test_stdout_sha256": "db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc",
+    "test_stderr_sha256": "f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf",
+    "result_line": "RESULT checks=622 failures=0",
+    "source_origin": "fresh harness project built strictly from the worktree files (no payload override)",
+    "measure_lines": [
+      "MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216",
+      "MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208",
+      "MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208",
+      "MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12",
+      "MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208",
+      "MEASURE asset_id=obstacle_casing_v1_encoded max_radius_about_z_m=0.39983182371023 inside_collision_margin_m=0.00016817628977",
+      "MEASURE asset_id=obstacle_casing_v1 size=(0.7996, 0.7996, 8.0) volume_m3=4.00600112229586 pivot_radius_m=4.01993370056152 triangles=288",
+      "MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144",
+      "MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904"
+    ]
+  },
+  "baseline_before_fix": {
+    "command": "same new test file against the rejected-correction02 sources",
+    "result_line": "RESULT checks=622 failures=60",
+    "fail_lines": 60,
+    "fail_breakdown": {
+      "stud_det_negative": 18,
+      "stud_volume_negative": 18,
+      "stud_faces_not_outward": 18,
+      "casing_containment": 1,
+      "casing_margin_or_diameter": 2,
+      "mirrored_stud_control_not_negative": 3
+    },
+    "first_containment_fail": "FAIL: casing every transformed triangle is inside a disabled convex shape (worst=0.00005470050088 m at SolidMesh)",
+    "first_stud_fail": "FAIL: drill part right-handed basis det>0: CutterStud_0_0 det=-1.0"
+  },
+  "mirrored_review_selfcheck_before_fix": {
+    "method": "private copy of the B-main export_asset_meshes.gd + review math over the frozen pre-fix sources",
+    "findings_total": 19,
+    "casing_collision_envelope": {
+      "kind": "casing",
+      "finding": "collision_envelope",
+      "outside_face_vertices": 384,
+      "worst": [
+        5.470416716468751e-05,
+        "Visual/SolidMesh",
+        [
+          0.153099998831749,
+          -0.369600176811218,
+          4.0
+        ]
+      ]
+    },
+    "stud_example": {
+      "path": "Visual/CutterStud_0_0",
+      "triangles": 48,
+      "boundary_edges": 0,
+      "degenerate": 0,
+      "clockwise_volume_m3": -1.8239996597885216e-06,
+      "transform_determinant": -1.0
+    },
+    "note": "reproduces the B-main assets-main-review-03 findings exactly (18 studs det=-1 with identical volumes; casing 384 face vertices outside, worst 5.470416716468751e-05 m)"
+  },
+  "mirrored_review_selfcheck_after_fix": {
+    "findings_total": 0,
+    "status": "geometry_checks_pass",
+    "casing": {
+      "max_radius_about_z_m": 0.3998318237102257,
+      "collision_worst_signed_m": 1.7475820790480157e-08,
+      "clocked_volume_m3": 4.006001185963366,
+      "transform_determinant": 1.0
+    },
+    "studs": {
+      "count": 18,
+      "determinants": [
+        1.0
+      ],
+      "min_clockwise_volume_m3": 1.8239996597885014e-06
+    },
+    "drill_collision_worst_signed_m": -0.00014699772310731996
+  },
+  "findings": {
+    "B-ASSETS-CONTAIN05": {
+      "root_cause": "the casing visual CylinderMesh at nominal radius 0.4 m snaps ring vertices to the 1e-4 m grid before float32 storage; snapped vertices encoded up to 5.470416716468751e-05 m outside the disabled CylinderShape3D radius 0.4 m (384 face vertices outside at the 2e-6 m slack)",
+      "fix": "world/obstacle_geometry.gd CASING_VISUAL_RADIUS_M = 0.3998 m (0.0002 m inside the nominal 0.4 m); worst-case snapped radial bound 0.3998 + sqrt(2)*5e-5 = 0.39987071 m; nominal 0.8 m diameter / 8 m length stay declared-envelope values; disabled collision unchanged at CylinderShape3D radius 0.4 m / length 8 m",
+      "measured_engine": {
+        "max_radius_about_z_m": 0.39983182371023,
+        "inside_collision_margin_m": 0.00016817628977,
+        "aabb_size_m": [
+          0.7996,
+          0.7996,
+          8.0
+        ],
+        "volume_m3": 4.00600112229586,
+        "pivot_radius_m": 4.01993370056152,
+        "triangles": 288
+      },
+      "verified": "every transformed casing triangle inside the disabled collision shape (0 violations); visual encoded diameter 0.7996 m; no collision growth, tolerance relaxation or nominal-exactness claim; no rounding of the measurement"
+    },
+    "B-ASSETS-HAND06": {
+      "root_cause": "cutter stud basis columns (tangential, surface_normal, along) have determinant -1; the left-handed frame mirrors every transformed face, flipping the transformed face orientation and the clockwise-convention volume (-1.824e-06 m3)",
+      "fix": "world/drill_geometry.gd stud basis z = -along (determinant +1) with the same cylinder axis (mesh-local +Y -> surface_normal) and the same symmetric encoded vertex cloud; centers, blade and stud counts unchanged",
+      "measured_engine": {
+        "studs": 18,
+        "determinants": [
+          1.0
+        ],
+        "min_clockwise_volume_m3": 1.8239996597885014e-06,
+        "drill_max_radius_about_z_m": 0.11985299381223,
+        "drill_aabb_size_m": [
+          0.2396,
+          0.2396,
+          0.8
+        ],
+        "drill_pivot_radius_m": 0.40447494387627,
+        "drill_triangles": 2216
+      },
+      "verified": "all 18 studs det=1.0 with positive transformed clockwise volumes; every transformed face outward; drill bounds/radius/pivot/triangle count unchanged from correction-02 measurements"
+    }
+  },
+  "new_checks": {
+    "total_checks": 622,
+    "pre_correction_03_checks": 407,
+    "added_checks": 215,
+    "list": [
+      "containment: every transformed asset triangle is inside at least one disabled convex shape (box/cylinder/capsule in shape-local coordinates, 2e-6 m slack) - drill/obstacles/frame",
+      "handedness: det > 0 for every visual part transform",
+      "transformed closed solid: directed paired edges, no degenerate triangles, nonzero positive clockwise volume, outward per-face orientation per individual mesh",
+      "negative controls: intentionally enlarged casing (radius 0.4005) fails containment; mirrored stud (z column negated; reproduces the rejected frame) fails det>0, positive-volume and outward-orientation checks",
+      "casing specific: encoded radius >= 1e-4 m inside the collision radius; encoded diameter 0.7996 m <= 0.7998 m; original collision radius 0.4 m / length 8 m unchanged",
+      "30-instance probe: exact 30 obstacles + drill + frame, 70 meshes, 43904 triangles, all instances freed"
+    ]
+  },
+  "main_review_requests_addressed": {
+    "measure_actual_floats": "yes - all numbers above come from real-engine mesh faces; the encoded casing measurement is printed as MEASURE asset_id=obstacle_casing_v1_encoded",
+    "do_not_increase_collision": "collision untouched (CylinderShape3D radius 0.4 m / length 8 m; capsule 0.12 m for the drill)",
+    "no_loosened_tolerances_no_stamped_radius": "the containment slack stays 2e-6 m and the pivot bound remains measured, not stamped",
+    "no_visual_diameter_claim": "catalog says nominal 0.8 m declared envelope vs encoded 0.7996 m visual",
+    "no_uid_no_other_product_files": "only the four owned files changed; asset_library.gd, frame_geometry.gd, LICENSES.md, .uid files and A files untouched"
+  },
+  "claims": {
+    "visual": "not_claimed",
+    "g01": "not_accepted",
+    "screenshots": "not_captured_native_screenshot_follow_on_is_main_owned",
+    "physics": "not_run",
+    "board": "not_run",
+    "system": "not_run",
+    "compression_or_action_claims": "not_addressed_by_this_workstream"
+  },
+  "source_hashes": {
+    "world/drill_geometry.gd": {
+      "before_sha256": "c4b0a33ef37ff7bb0dd5ae00f1fdd2701cc80184a63eb5c3273b6e8a03d472e5",
+      "after_sha256": "e31473155bde0457a3481cc78b9c2947bbbc26228dfb4bd4e4e7190c136c8acc"
+    },
+    "world/obstacle_geometry.gd": {
+      "before_sha256": "ad2172b5899d98f76526b757e9f1bd40f0a3aa83b3df7b368a3fbbcb6b2608c0",
+      "after_sha256": "1bac63c23fd991667748fa3554d31a34a9e90946b67bef635a187967955c00ce"
+    },
+    "tests/test_asset_contract.gd": {
+      "before_sha256": "d6196865a7af5e5e45a1fe9f7c38ac55342774fd5a70b31e0058bff362c5a4b7",
+      "after_sha256": "0a7479ffe3a8f12f55f673dfcfec38329e45193fe91c54331fe81c50461c596e"
+    },
+    "assets/scene_catalog.json": {
+      "before_sha256": "5cbd4b28494fe52d6b0a568df5ba835139086ef27c0234ab2eb1c46af6bd7338",
+      "after_sha256": "d75c0369c48a629aec5ab693d321f59db42078955c9878e2a0a9d13cd7b35795"
+    }
+  },
+  "evidence_hashes": {
+    "commands.json": "4257ba29949c6c306de060ce35aa27ba2bd252c23a9bd684242da7755ac740ba",
+    "stdout.txt": "39f7b2bac4121fb29a0f6d720ac8158b59c7a33454108449e7f389b88e217ec9",
+    "stderr.txt": "abef146a47f333b374a7a35c5926671d4525ede8cc496e9e29240c624b0580be"
+  },
+  "unresolved_for_main": [
+    "independent rerun of the real-engine export and the review math (assets-main-review-04 or equivalent) for round-tripping acceptance",
+    "visual screenshot review remains main-owned",
+    "any G01/physics/board/system acceptance requires a separate dispatched task"
+  ],
+  "acceptance": "pending independent B-main review and rerun"
+}

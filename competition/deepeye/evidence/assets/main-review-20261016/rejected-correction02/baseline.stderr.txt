@@ -1,0 +1,7 @@
+ERROR: DeepEyeObstacleGeometry: unknown obstacle kind 'bogus_kind'; valid kinds: water, hard_rock, fault, void, casing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] build (res://world/obstacle_geometry.gd:41)
+       [1] create_obstacle (res://world/asset_library.gd:34)
+       [2] _test_obstacle_unknown_kind (res://tests/test_asset_contract.gd:164)
+       [3] _initialize (res://tests/test_asset_contract.gd:63)

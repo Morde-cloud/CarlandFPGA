@@ -1,0 +1,598 @@
+{
+  "work_id": "B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "baseline_rejected_correction02_manifest": "assets-rejected-correction02/manifest.json (exact 4 files verified before the fix)",
+  "engine": {
+    "executable": "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+    "executable_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+    "expected_binary_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+    "sha256_matches_expected": true,
+    "version": "4.7.2.stable.official.ed1daf0bf",
+    "version_argv": [
+      "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+      "--headless",
+      "--version"
+    ],
+    "version_exit": 0
+  },
+  "execution": {
+    "python": "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8",
+    "python_version": "Python 3.12.9",
+    "harness_project_final": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+    "harness_note": "private scratch project.godot is a test harness only; A product project.godot untouched; no service, config, credentials, queue or git action performed",
+    "private_scratch": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+    "evidence_files": "this directory (commands.json, stdout.txt, stderr.txt, result.json)"
+  },
+  "sources": {
+    "world/drill_geometry.gd": {
+      "before_sha256": "c4b0a33ef37ff7bb0dd5ae00f1fdd2701cc80184a63eb5c3273b6e8a03d472e5",
+      "after_sha256": "e31473155bde0457a3481cc78b9c2947bbbc26228dfb4bd4e4e7190c136c8acc",
+      "changed": true,
+      "bytes_after": 9409
+    },
+    "world/obstacle_geometry.gd": {
+      "before_sha256": "ad2172b5899d98f76526b757e9f1bd40f0a3aa83b3df7b368a3fbbcb6b2608c0",
+      "after_sha256": "1bac63c23fd991667748fa3554d31a34a9e90946b67bef635a187967955c00ce",
+      "changed": true,
+      "bytes_after": 11921
+    },
+    "tests/test_asset_contract.gd": {
+      "before_sha256": "d6196865a7af5e5e45a1fe9f7c38ac55342774fd5a70b31e0058bff362c5a4b7",
+      "after_sha256": "0a7479ffe3a8f12f55f673dfcfec38329e45193fe91c54331fe81c50461c596e",
+      "changed": true,
+      "bytes_after": 43605
+    },
+    "assets/scene_catalog.json": {
+      "before_sha256": "5cbd4b28494fe52d6b0a568df5ba835139086ef27c0234ab2eb1c46af6bd7338",
+      "after_sha256": "d75c0369c48a629aec5ab693d321f59db42078955c9878e2a0a9d13cd7b35795",
+      "changed": true,
+      "bytes_after": 19040
+    },
+    "world/asset_library.gd": {
+      "before_sha256": "9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce",
+      "after_sha256": "9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce",
+      "changed": false,
+      "bytes_after": 5762
+    },
+    "world/frame_geometry.gd": {
+      "before_sha256": "acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5",
+      "after_sha256": "acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5",
+      "changed": false,
+      "bytes_after": 3516
+    },
+    "assets/LICENSES.md": {
+      "before_sha256": "f0b9ffe3daa2a168eaa510efa8c92d698e39260833aafa8161231f6168ba9959",
+      "after_sha256": "f0b9ffe3daa2a168eaa510efa8c92d698e39260833aafa8161231f6168ba9959",
+      "changed": false,
+      "bytes_after": 3722
+    }
+  },
+  "commands": [
+    {
+      "phase": "baseline",
+      "label": "baseline_import",
+      "at_utc": "2026-10-16T04:34:10.600885+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/baseline_import.stdout.txt",
+      "log_stderr": "scratch/logs/baseline_import.stderr.txt"
+    },
+    {
+      "phase": "baseline",
+      "label": "baseline_test",
+      "at_utc": "2026-10-16T04:34:13.268063+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://tests/test_asset_contract.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 1,
+      "stdout_sha256": "0bf4b16cbec9d05a08c73d9d4501654472e64cb1a9941620c542d3a58521138f",
+      "stderr_sha256": "f21439b991673d239ec5e33f299c08cb31d692902658d18828084e8997ee0a26",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/baseline_test.stdout.txt",
+      "log_stderr": "scratch/logs/baseline_test.stderr.txt"
+    },
+    {
+      "phase": "baseline",
+      "label": "baseline_export",
+      "at_utc": "2026-10-16T04:34:13.736398+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/baseline_export.stdout.txt",
+      "log_stderr": "scratch/logs/baseline_export.stderr.txt"
+    },
+    {
+      "phase": "iter1",
+      "label": "iter1_import",
+      "at_utc": "2026-10-16T04:34:47.204536+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter1_import.stdout.txt",
+      "log_stderr": "scratch/logs/iter1_import.stderr.txt"
+    },
+    {
+      "phase": "iter1",
+      "label": "iter1_test",
+      "at_utc": "2026-10-16T04:34:49.947948+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://tests/test_asset_contract.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "16c96750a244374670f4ea42704b77a7af371ff6a510556458d540069b84fe5d",
+      "stderr_sha256": "2261a1987ba38953bf7ca6333b363db09e95e218ae45ee79af93223177b87c26",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter1_test.stdout.txt",
+      "log_stderr": "scratch/logs/iter1_test.stderr.txt"
+    },
+    {
+      "phase": "iter1",
+      "label": "iter1_export",
+      "at_utc": "2026-10-16T04:34:50.420906+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter1_export.stdout.txt",
+      "log_stderr": "scratch/logs/iter1_export.stderr.txt"
+    },
+    {
+      "phase": "iter2",
+      "label": "iter2_import",
+      "at_utc": "2026-10-16T04:36:06.699161+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter2_import.stdout.txt",
+      "log_stderr": "scratch/logs/iter2_import.stderr.txt"
+    },
+    {
+      "phase": "iter2",
+      "label": "iter2_test",
+      "at_utc": "2026-10-16T04:36:09.352350+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://tests/test_asset_contract.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc",
+      "stderr_sha256": "f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter2_test.stdout.txt",
+      "log_stderr": "scratch/logs/iter2_test.stderr.txt"
+    },
+    {
+      "phase": "iter2",
+      "label": "iter2_export",
+      "at_utc": "2026-10-16T04:36:09.826504+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter2_export.stdout.txt",
+      "log_stderr": "scratch/logs/iter2_export.stderr.txt"
+    },
+    {
+      "phase": "iter3",
+      "label": "iter3_import",
+      "at_utc": "2026-10-16T04:36:31.158715+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter3_import.stdout.txt",
+      "log_stderr": "scratch/logs/iter3_import.stderr.txt"
+    },
+    {
+      "phase": "iter3",
+      "label": "iter3_test",
+      "at_utc": "2026-10-16T04:36:33.898857+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://tests/test_asset_contract.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc",
+      "stderr_sha256": "f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter3_test.stdout.txt",
+      "log_stderr": "scratch/logs/iter3_test.stderr.txt"
+    },
+    {
+      "phase": "iter3",
+      "label": "iter3_export",
+      "at_utc": "2026-10-16T04:36:34.374936+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/iter3_export.stdout.txt",
+      "log_stderr": "scratch/logs/iter3_export.stderr.txt"
+    },
+    {
+      "phase": "final",
+      "label": "final_import",
+      "at_utc": "2026-10-16T04:36:51.428107+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/final_import.stdout.txt",
+      "log_stderr": "scratch/logs/final_import.stderr.txt"
+    },
+    {
+      "phase": "final",
+      "label": "final_test",
+      "at_utc": "2026-10-16T04:36:54.081511+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://tests/test_asset_contract.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc",
+      "stderr_sha256": "f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/final_test.stdout.txt",
+      "log_stderr": "scratch/logs/final_test.stderr.txt"
+    },
+    {
+      "phase": "final",
+      "label": "final_export",
+      "at_utc": "2026-10-16T04:36:54.553350+00:00",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project",
+      "exit_code": 0,
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120,
+      "log_stdout": "scratch/logs/final_export.stdout.txt",
+      "log_stderr": "scratch/logs/final_export.stderr.txt"
+    },
+    {
+      "phase": "before",
+      "label": "prefix_import",
+      "at_utc": null,
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project_prefix",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project_prefix",
+      "exit_code": 0,
+      "stdout_sha256": "8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": null,
+      "log_stdout": "scratch/logs/prefix_import.stdout.txt",
+      "log_stderr": "scratch/logs/prefix_import.stderr.txt"
+    },
+    {
+      "phase": "before",
+      "label": "prefix_export",
+      "at_utc": null,
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project_prefix",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch\\project_prefix",
+      "exit_code": 0,
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": null,
+      "log_stdout": "scratch/logs/prefix_export.stdout.txt",
+      "log_stderr": "scratch/logs/prefix_export.stderr.txt"
+    },
+    {
+      "phase": "baseline",
+      "label": "baseline_harness_runner",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "run.py",
+        "baseline"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "log_console": "scratch/logs/baseline.run.txt",
+      "log_console_sha256": "e597cec342397bc973e01f47829e4dde0f277afaaa16548a172a43dfdf096967",
+      "note": "runner wrapper always exits 0; the engine command exit codes above are the authoritative ones"
+    },
+    {
+      "phase": "iter1",
+      "label": "iter1_harness_runner",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "run.py",
+        "iter1"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "log_console": "scratch/logs/iter1.run.txt",
+      "log_console_sha256": "c4e46f8764c5241c23997148f6e5b372edeeda17fd8e2820a61ac4f6ce1f4e3c",
+      "note": "runner wrapper always exits 0; the engine command exit codes above are the authoritative ones"
+    },
+    {
+      "phase": "iter2",
+      "label": "iter2_harness_runner",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "run.py",
+        "iter2"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "log_console": "scratch/logs/iter2.run.txt",
+      "log_console_sha256": "61f87dac59a839e16300bb2d60c633479b6aecdb5272f3619d7d9258fa1f77b1",
+      "note": "runner wrapper always exits 0; the engine command exit codes above are the authoritative ones"
+    },
+    {
+      "phase": "iter3",
+      "label": "iter3_harness_runner",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "run.py",
+        "iter3"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "log_console": "scratch/logs/iter3.run.txt",
+      "log_console_sha256": "4edcf6c23e5491ca905eb5c98a0887bf564b58e5d7f64d763f4315fd64c0b14a",
+      "note": "runner wrapper always exits 0; the engine command exit codes above are the authoritative ones"
+    },
+    {
+      "phase": "final",
+      "label": "final_harness_runner",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "run.py",
+        "final",
+        "--worktree"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "log_console": "scratch/logs/final.run.txt",
+      "log_console_sha256": "c69dbbb6f567c3d0250f0ab025d47db6245f2641511676c498717b1fef7783f5",
+      "note": "runner wrapper always exits 0; the engine command exit codes above are the authoritative ones"
+    },
+    {
+      "phase": "selfcheck",
+      "label": "selfcheck_prefix",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "selfcheck.py",
+        "prefix",
+        "project_prefix"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 1,
+      "report_json": "scratch/logs/selfcheck_prefix.json",
+      "report_json_sha256": "e58f7ecd49fc7c3638aa6a93c645f5f8dd06c5fdab11a52037f08300f3b3b6d5",
+      "console_stdout_sha256": "65920ecaee6003f04c834cea7304feeb5c60510b8a6f40f952186e7d823aa50a",
+      "console": "scratch/logs/selfcheck_prefix.console.txt",
+      "note": "mirrored B-main review math over the pre-fix export (findings present => exit 1)"
+    },
+    {
+      "phase": "selfcheck",
+      "label": "selfcheck_iter3",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "selfcheck.py",
+        "iter3",
+        "project"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "report_json": "scratch/logs/selfcheck_iter3.json",
+      "report_json_sha256": "3737faa0fa5531016ab9a1ca67c6df555af859888ffc299c76eaadff77b28a28",
+      "console_stdout_sha256": "ce6f06db1e74e9fd43676d197b65573d9958555ebee34a987d47a0ba90fdeffe",
+      "console": "scratch/logs/selfcheck_iter3.console.txt",
+      "note": "mirrored B-main review math over the iter3 export"
+    },
+    {
+      "phase": "selfcheck",
+      "label": "selfcheck_final",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "selfcheck.py",
+        "final",
+        "project"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\assets-runtime-correction-03\\scratch",
+      "exit_code": 0,
+      "report_json": "scratch/logs/selfcheck_final.json",
+      "report_json_sha256": "fd18cdf6674fc813b2e3c1b8c58841b821b7bb317d91cd2d8f5ad5d5003ec3b9",
+      "console_stdout_sha256": "779b261281d1094efcf94d270c266d0a12804c4e8b108b65e689775404c57e19",
+      "console": "scratch/logs/selfcheck_final.console.txt",
+      "note": "mirrored B-main review math over the final worktree export"
+    },
+    {
+      "phase": "tooling",
+      "label": "engine_version",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--headless",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "4.7.2.stable.official.ed1daf0bf",
+      "stdout_sha256": "bf8803022b574250bb04dea65053a46b7c58570725316c1f7fe2aa6735706498",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_stdout": "scratch/logs/version.stdout.txt",
+      "log_stderr": "scratch/logs/version.stderr.txt"
+    },
+    {
+      "phase": "tooling",
+      "label": "python_version",
+      "argv": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.12.9"
+    }
+  ],
+  "acceptance": "pending independent B-main review; no visual/G05/G01/physics/board/system claims"
+}

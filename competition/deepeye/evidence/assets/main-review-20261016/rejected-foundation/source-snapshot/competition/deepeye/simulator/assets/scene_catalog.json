@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "catalog_id": "deepeye-assets-b-factory-foundation-01",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ASSETS-FACTORY-FOUNDATION-20261015-01-v1",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "resource_contract": {
+    "path": "competition/deepeye/docs/resource_contract.json",
+    "sha256": "852a686a0ee261773dbc233350a6ab1d540edae0b2c3889d928caefdfc629ff4",
+    "project_root": "competition/deepeye/simulator",
+    "factory_script": "res://world/asset_library.gd",
+    "factory_class_name": "DeepEyeAssetLibrary",
+    "methods": [
+      "static func create_drill() -> Node3D",
+      "static func create_obstacle(kind: String) -> Node3D",
+      "static func create_frame() -> Node3D"
+    ],
+    "kind_ids": ["water", "hard_rock", "fault", "void", "casing"]
+  },
+  "conventions": {
+    "units": "metre",
+    "forward_local": "+Z",
+    "up": "+Y",
+    "quaternion_serialization": "xyzw",
+    "asset_origin": "rigid body centre",
+    "children": "every asset root has exactly the children Visual and Collision",
+    "collision_semantics": "StaticBody3D presentation envelope with CollisionShape3D disabled and collision_layer/collision_mask 0; it documents bounds only and never grants authority or controller truth",
+    "runtime_truth_boundary": "presentation only; authoritative collision/integration belongs to A world_authority in a separate process"
+  },
+  "engine": {
+    "expected_version": "4.7.2-stable",
+    "expected_binary_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+    "runtime_status": "not_run",
+    "note": "expected version/hash taken from A greybox_drill_envelope.md; this catalog was produced without running Godot; on the first real engine run, execute simulator/tests/test_asset_contract.gd and record the printed MEASURE lines as measured evidence"
+  },
+  "provenance_rules": {
+    "all_assets": "original procedural geometry authored by the B asset domain in this repository; no downloaded models, textures, scans or third-party installers; license see simulator/assets/LICENSES.md",
+    "bounds": "declared envelope is the closed-form design bound; measured AABB values below come from the independent double-precision Python replica of the exact generator formulas (replica script recorded in evidence); the runtime factory re-measures actual transformed mesh vertices and stores geometry_bounds_m and pivot_bound_radius_m as metadata on every instance",
+    "volumes": "mesh volume computed by divergence theorem over the same triangles; star-mesh volumes are replica values for the exact deterministic vertex formulas; fault and casing are closed-form prism volumes"
+  },
+  "assets": [
+    {
+      "asset_id": "drill_pdc_v1",
+      "kind": "drill",
+      "factory_method": "create_drill()",
+      "geometry_script": "res://world/drill_geometry.gd",
+      "description": "PDC-style cutter head with six visual blades and eighteen cutter studs, metal matrix body, threaded joint and short collar; decorative geometry only, presentation only",
+      "license_ref": "LICENSES.md#drill_pdc_v1",
+      "declared_envelope_m": {
+        "max_diameter_m": 0.24,
+        "max_radius_m": 0.12,
+        "rigid_length_m": 0.80,
+        "z_range_m": [-0.4, 0.4]
+      },
+      "measured_replica": {
+        "aabb_size_m": [0.24, 0.24, 0.8],
+        "max_radius_about_z_m": 0.12,
+        "pivot_radius_m": 0.404475,
+        "pivot_radius_method": "maximum |v| over all transformed mesh vertices in the double-precision replica; the factory recomputes this from the actual engine mesh and sets pivot_bound_radius_m (never a stamped guess)"
+      },
+      "contract_rotation_bound_radius_m": 0.52,
+      "triangles_estimate": 1544,
+      "triangles_note": "analytic estimate from segment counts; test_asset_contract.gd prints the exact engine value",
+      "materials": ["collar_steel", "joint_bronze", "matrix_steel", "pdc_blade", "pdc_stud"],
+      "collision_envelope": "CapsuleShape3D radius 0.12, height 1.04 (Godot 4 full height incl. caps => covered z in [-0.52, 0.52]), disabled",
+      "gate_compatibility_note": "0.30 m equal blue/red gates are A-owned UI/editor geometry; the 0.24 m drill envelope leaves the connector interface untouched; no route is chosen or implied by this asset"
+    },
+    {
+      "asset_id": "obstacle_water_v1",
+      "kind": "water",
+      "factory_method": "create_obstacle(\"water\")",
+      "geometry_script": "res://world/obstacle_geometry.gd",
+      "description": "closed undulating ellipsoid semi-axes 3x2x1 m; inward-only deterministic undulation tapered to exact poles; translucent water material is presentation only",
+      "license_ref": "LICENSES.md#obstacle_water_v1",
+      "declared_envelope_m": {"size_m": [6.0, 4.0, 2.0]},
+      "measured_replica": {"aabb_size_m": [5.807882, 4.0, 1.964039], "aabb_min_m": [-2.875574, -2.0, -0.993246], "aabb_max_m": [2.932308, 2.0, 0.970794]},
+      "volume_m3": 23.7359,
+      "volume_method": "divergence-theorem volume of the exact replicated triangle mesh; base ellipsoid formula volume 25.1327 m3",
+      "triangles": 2208,
+      "vertices": 1106,
+      "collision_envelope": "BoxShape3D 6x4x2, disabled",
+      "required": true
+    },
+    {
+      "asset_id": "obstacle_hard_rock_v1",
+      "kind": "hard_rock",
+      "factory_method": "create_obstacle(\"hard_rock\")",
+      "geometry_script": "res://world/obstacle_geometry.gd",
+      "description": "irregular deterministic multi-lobe closed solid inside a 3x3x3 m box; convex-decomposition approximation and authoritative volume collision belong to A world side",
+      "license_ref": "LICENSES.md#obstacle_hard_rock_v1",
+      "declared_envelope_m": {"size_m": [3.0, 3.0, 3.0], "envelope_volume_m3": 27.0},
+      "measured_replica": {"aabb_size_m": [2.553599, 3.0, 2.65799], "aabb_min_m": [-1.278086, -1.5, -1.377741], "aabb_max_m": [1.275514, 1.5, 1.28025]},
+      "volume_m3": 9.821,
+      "volume_method": "divergence-theorem volume of the exact replicated triangle mesh of the deterministic harmonic generator",
+      "triangles": 2208,
+      "vertices": 1106,
+      "collision_envelope": "BoxShape3D 3x3x3, disabled",
+      "required": true
+    },
+    {
+      "asset_id": "obstacle_fault_v1",
+      "kind": "fault",
+      "factory_method": "create_obstacle(\"fault\")",
+      "geometry_script": "res://world/obstacle_geometry.gd",
+      "description": "inclined fault plate 8x1x6 m as a closed solid box prism; inclination is placement (editor/A), the asset is axis-aligned",
+      "license_ref": "LICENSES.md#obstacle_fault_v1",
+      "declared_envelope_m": {"size_m": [8.0, 1.0, 6.0]},
+      "measured_replica": {"aabb_size_m": [8.0, 1.0, 6.0]},
+      "volume_m3": 48.0,
+      "volume_method": "closed-form box volume 8 x 1 x 6",
+      "triangles": 12,
+      "collision_envelope": "BoxShape3D 8x1x6, disabled"
+    },
+    {
+      "asset_id": "obstacle_void_v1",
+      "kind": "void",
+      "factory_method": "create_obstacle(\"void\")",
+      "geometry_script": "res://world/obstacle_geometry.gd",
+      "description": "dark closed solid ellipsoid semi-axes 2x1.5x1.5 m",
+      "license_ref": "LICENSES.md#obstacle_void_v1",
+      "declared_envelope_m": {"size_m": [4.0, 3.0, 3.0]},
+      "measured_replica": {"aabb_size_m": [4.0, 3.0, 3.0]},
+      "volume_m3": 18.7154,
+      "volume_method": "divergence-theorem volume of the exact replicated triangle mesh; ellipsoid formula volume 18.8496 m3",
+      "triangles": 2208,
+      "vertices": 1106,
+      "collision_envelope": "BoxShape3D 4x3x3, disabled"
+    },
+    {
+      "asset_id": "obstacle_casing_v1",
+      "kind": "casing",
+      "factory_method": "create_obstacle(\"casing\")",
+      "geometry_script": "res://world/obstacle_geometry.gd",
+      "description": "metal casing solid cylinder outer diameter 0.8 m, length 8 m along local +Z, closed caps",
+      "license_ref": "LICENSES.md#obstacle_casing_v1",
+      "declared_envelope_m": {"size_m": [0.8, 0.8, 8.0], "axis": "+Z"},
+      "measured_replica": {"aabb_size_m": [0.799143, 0.799143, 8.0]},
+      "volume_m3": 4.009765,
+      "volume_method": "48-gon prism volume = 24 * 0.16 * sin(7.5 deg) * 8; nominal circle cylinder 4.021239 m3",
+      "triangles": 192,
+      "collision_envelope": "CylinderShape3D radius 0.4, height 8 rotated to +Z, disabled"
+    },
+    {
+      "asset_id": "frame_workspace_v1",
+      "kind": "frame",
+      "factory_method": "create_frame()",
+      "geometry_script": "res://world/frame_geometry.gd",
+      "description": "workspace cube [-15, 15]^3 shown as exactly 12 edge prisms (box section 0.12 m, outer faces flush with the cube bounds); no enclosing or transparent surfaces",
+      "license_ref": "LICENSES.md#frame_workspace_v1",
+      "declared_envelope_m": {"cube_min_m": [-15.0, -15.0, -15.0], "cube_max_m": [15.0, 15.0, 15.0]},
+      "measured_replica": {"aabb_size_m": [30.0, 30.0, 30.0], "aabb_min_m": [-15.0, -15.0, -15.0], "aabb_max_m": [15.0, 15.0, 15.0]},
+      "geometry": {"visible_edges": 12, "enclosing_surfaces": 0, "edge_cross_section_m": 0.12, "edge_length_m": 30.0},
+      "triangles": 144,
+      "collision_envelope": "twelve BoxShape3D edge envelopes, disabled; corner markers and coordinate ticks are A viewer/editor work and are not part of this asset"
+    }
+  ],
+  "scene_budget_estimate": {
+    "obstacles_max": 30,
+    "asset_only_triangles_30_obstacles_plus_drill_plus_frame": 42656,
+    "visible_face_target": 300000,
+    "note": "analytic estimate; test_asset_contract.gd prints the exact engine value; this is a budget estimate, not a performance acceptance"
+  },
+  "status": {
+    "source_preparation": "complete_by_assets_worker_pending_director_review",
+    "godot_runtime_validation": "blocked_no_installed_godot_4.7.2_stable_on_this_machine",
+    "visual_acceptance": "not_claimed",
+    "g01": "not_passed",
+    "collision_authority": "not_claimed",
+    "screenshots": "not_captured"
+  }
+}

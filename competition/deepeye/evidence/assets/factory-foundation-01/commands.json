@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ASSETS-FACTORY-FOUNDATION-20261015-01-v1",
+  "worker": "node B DeepSeek V4.1 Flash execution child (assets slot), route deepseek-flash/max",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "observed_at_utc": "2026-10-16T03:49:14Z",
+  "host": "node B Windows workstation; PowerShell 5.1.26100.9711; python venv 3.12.9",
+  "commands": [
+    {
+      "id": "C01",
+      "purpose": "re-verify pinned human contract (canonical requirements hash), input manifest and A resource contract, plus all 20 manifest source blobs",
+      "run": "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe D:/pynq/CarlandFPGA/.local/deployment/node-b/implementation-app-bridge/flash/assets/scratch/verify_inputs.py",
+      "exit_code": 0,
+      "outcome": "REQ_HASH OK c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; MANIFEST OK c641f9f105d766efe8eac5aafd2e7a884d3e0bca845c8736ef13ae8a57e9c0f1; RESOURCE_CONTRACT OK 852a686a0ee261773dbc233350a6ab1d540edae0b2c3889d928caefdfc629ff4; manifest sources 20/20; VERIFY_RESULT ALL_OK"
+    },
+    {
+      "id": "C02",
+      "purpose": "independent double-precision Python replica of the exact generator formulas: mesh volumes, AABB, winding/outwardness, closedness; also analytic stand-in for engine measurement while runtime is blocked",
+      "run": "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe D:/pynq/CarlandFPGA/.local/deployment/node-b/implementation-app-bridge/flash/assets/scratch/mesh_replica.py",
+      "exit_code": 0,
+      "outcome": "water V=23.735914 AABB 5.807882x4x1.964039; hard_rock V=9.821047 AABB 2.553599x3x2.657990; void V=18.715371 AABB exactly 4x3x3; casing V=4.009765 (nominal 4.021239); fault V=48.0; drill AABB exactly 0.24x0.24x0.80, pivot radius 0.404475, max radius 0.12; star meshes boundary_edges=0, outward_normals_bad=0, degenerate_triangles=0"
+    },
+    {
+      "id": "C03",
+      "purpose": "structural self-check of final product bytes (encoding, line endings, delimiters, required API signatures, uid sidecar format)",
+      "run": "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe D:/pynq/CarlandFPGA/.local/deployment/node-b/implementation-app-bridge/flash/assets/scratch/check_sources.py",
+      "exit_code": 0,
+      "outcome": "CHECK_RESULT ALL_OK: no BOM, no CRLF, no tabs, balanced delimiters, static func create_drill/create_obstacle/create_frame signatures present, class_name DeepEyeAssetLibrary present, five uid:// sidecars match ^uid://[a-z0-9]{13}$"
+    },
+    {
+      "id": "C04",
+      "purpose": "validate scene_catalog.json",
+      "run": "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe D:/pynq/CarlandFPGA/.local/deployment/node-b/implementation-app-bridge/flash/assets/scratch/validate_catalog.py",
+      "exit_code": 0,
+      "outcome": "json valid; 7 assets; 10169 bytes"
+    },
+    {
+      "id": "C05",
+      "purpose": "read-only Godot executable discovery performed BEFORE any Godot invocation",
+      "run": "where /r D:\\pynq godot*.exe; where /r C:\\Users\\15378 godot*.exe; where /r \"C:\\Program Files\" godot*.exe; where /r \"C:\\Program Files (x86)\" godot*.exe; where /r D:\\ godot*.exe",
+      "exit_code": "1 for every where invocation (no match)",
+      "outcome": "NO Godot executable found anywhere: not in PATH, scoop shims/apps, winget links, Program Files, Program Files (x86), %APPDATA%\\Godot (contains only unrelated game userdata), full user profile, full D:\\pynq tree, or full D:\\ tree. Expected engine 4.7.2-stable is NOT installed on this machine."
+    },
+    {
+      "id": "C06",
+      "purpose": "Godot runtime validation (import, contract test, startup) and six-axis/oblique/close visual capture",
+      "commands": [
+        "godot --version",
+        "godot --headless --path competition/deepeye/simulator --editor --import --log-file <private>/godot_import.log",
+        "godot --headless --path competition/deepeye/simulator --script res://tests/test_asset_contract.gd",
+        "godot --headless --path competition/deepeye/simulator --quit-after 4",
+        "<capture tooling for six-axis/oblique/close screenshots>"
+      ],
+      "status": "BLOCKED",
+      "reason": "no installed Godot executable (C05); downloading/installing/configuration is outside this assignment; no runtime result, measurement or screenshot was fabricated",
+      "blocker_class": "[need desktop turn: Godot 4.7.2-stable not installed on node B]"
+    },
+    {
+      "id": "C07",
+      "purpose": "final SHA256 of all owned product files",
+      "run": "Get-FileHash -Algorithm SHA256 (12 files under competition/deepeye/simulator)",
+      "exit_code": 0,
+      "outcome": "12 files hashed; see result.json files[] and stdout.txt section C07"
+    }
+  ],
+  "git_state": {
+    "worktree": "D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014",
+    "branch": "codex/b/deepeye-implementation-20261014",
+    "head": "1011259415a0916054eb580687612580bc1e5f09",
+    "git_write_performed": false
+  },
+  "notes": [
+    "Console stdout on this host is shared with the editor host process; every recorded output above was captured with OS-level redirection into dedicated files to avoid interleaving.",
+    "One earlier tee-captured file (scratch/verify_inputs.out.txt) was polluted by that shared console and superseded by the clean run recorded as run2.stdout.txt in section C01."
+  ]
+}

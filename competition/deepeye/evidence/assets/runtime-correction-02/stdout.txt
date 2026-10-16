@@ -1,0 +1,335 @@
+===== [before] import | baseline_import.stdout.txt | sha256=4308445ffee532251933e85d89a5cd9d7b948d152c0ffc59075902a25319a228 | pristine worktree sources, private scratch harness =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (7 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== [before] test | baseline_test.stdout.txt | sha256=83cf0b082206af2aa236c83064fbcfa76be1e00a4aa3558574b2f65965d9481c | PARSE01 reproduced: GDScript parse errors at lines 154/159 =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+===== [before] diag_radius | diag_radius.stdout.txt | sha256=13726a5e58c22a28828df821cbd42036dde2e2b41bb29e87010bab253fb4145c | GEOM02 diagnosis: HeadPDC node + bare cone probe + envelope push_error =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGNODE name=Collar class=CylinderMesh max_radius=0.06000000238418579 world=(0.00000000000000000, -0.06000000238418579, -0.23999999463558197) local=(0.00000000000000000, 0.07999999821186066, 0.05999999865889549)
+DIAGNODE name=Joint class=CylinderMesh max_radius=0.07402330317826793 world=(0.06839999556541443, -0.02830000035464764, -0.14000000059604645) local=(0.06839999556541443, 0.04999999701976776, 0.02829999849200249)
+DIAGNODE name=BodyMatrix class=CylinderMesh max_radius=0.09003694135889004 world=(0.01759999990463257, -0.08830000460147858, 0.15000000596046448) local=(0.01759999990463257, 0.17000000178813934, 0.08829999715089798)
+DIAGNODE name=HeadPDC class=CylinderMesh max_radius=0.12006673558429641 world=(0.08489999920129776, 0.08490000665187836, 0.15000000596046448) local=(0.08489999920129776, -0.12500000000000000, -0.08489999920129776)
+DIAGNODE name=Blade0 class=BoxMesh max_radius=0.11793925502390133 world=(0.11742515861988068, 0.01099999994039536, 0.18874807655811310) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_0_0 class=CylinderMesh max_radius=0.10832608491182327 world=(0.10832608491182327, 0.00000000000000000, 0.21957351267337799) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_0_1 class=CylinderMesh max_radius=0.10089827328920364 world=(0.10089827328920364, 0.00000000000000000, 0.23814304172992706) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_0_2 class=CylinderMesh max_radius=0.08604265004396439 world=(0.08604265004396439, 0.00000000000000000, 0.27528211474418640) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade1 class=BoxMesh max_radius=0.11793925671393550 world=(0.04918630048632622, 0.10719317197799683, 0.18874807655811310) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_1_0 class=CylinderMesh max_radius=0.10832609330793135 world=(0.05416304245591164, 0.09381315112113953, 0.21957351267337799) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_1_1 class=CylinderMesh max_radius=0.10089827413698381 world=(0.05044913664460182, 0.08738046884536743, 0.23814304172992706) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_1_2 class=CylinderMesh max_radius=0.08604264869987308 world=(0.04302132502198219, 0.07451511919498444, 0.27528211474418640) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade2 class=BoxMesh max_radius=0.11793925671393550 world=(-0.04918630048632622, 0.10719317197799683, 0.18874807655811310) local=(0.01200000010430813, -0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_2_0 class=CylinderMesh max_radius=0.10832609330793135 world=(-0.05416304245591164, 0.09381315112113953, 0.21957351267337799) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_2_1 class=CylinderMesh max_radius=0.10089827413698381 world=(-0.05044913664460182, 0.08738046884536743, 0.23814304172992706) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_2_2 class=CylinderMesh max_radius=0.08604264869987308 world=(-0.04302132502198219, 0.07451511919498444, 0.27528211474418640) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade3 class=BoxMesh max_radius=0.11793925502390133 world=(-0.11742515861988068, -0.01099999994039536, 0.18874807655811310) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_3_0 class=CylinderMesh max_radius=0.10832608491182327 world=(-0.10832608491182327, 0.00000000000000001, 0.21957351267337799) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_3_1 class=CylinderMesh max_radius=0.10089827328920364 world=(-0.10089827328920364, 0.00000000000000001, 0.23814304172992706) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_3_2 class=CylinderMesh max_radius=0.08604265004396439 world=(-0.08604265004396439, 0.00000000000000001, 0.27528211474418640) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade4 class=BoxMesh max_radius=0.11793925671393550 world=(-0.04918630048632622, -0.10719317197799683, 0.18874807655811310) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_4_0 class=CylinderMesh max_radius=0.10832609330793135 world=(-0.05416304245591164, -0.09381315112113953, 0.21957351267337799) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_4_1 class=CylinderMesh max_radius=0.10089827413698381 world=(-0.05044913664460182, -0.08738046884536743, 0.23814304172992706) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_4_2 class=CylinderMesh max_radius=0.08604264869987308 world=(-0.04302132502198219, -0.07451511919498444, 0.27528211474418640) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade5 class=BoxMesh max_radius=0.11793925671393550 world=(0.04918630048632622, -0.10719317197799683, 0.18874807655811310) local=(0.01200000010430813, -0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_5_0 class=CylinderMesh max_radius=0.10832609330793135 world=(0.05416304245591164, -0.09381315112113953, 0.21957351267337799) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_5_1 class=CylinderMesh max_radius=0.10089827413698381 world=(0.05044913664460182, -0.08738046884536743, 0.23814304172992706) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_5_2 class=CylinderMesh max_radius=0.08604264869987308 world=(0.04302132502198219, -0.07451511919498444, 0.27528211474418640) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGCONE faces=1152 max_radius=0.12006673031594023 vertex=(0.08489999920129776, -0.12500000000000000, 0.08489999920129776)
+DIAGCONE unique_radii=[0.0, 0.0199404, 0.0199529, 0.0199612, 0.0199692, 0.0199842, 0.02, 0.0200002, 0.0200385, 0.0699706, 0.0699869, 0.07, 0.0700032, 0.0700036, 0.0700078, 0.0700309, 0.0700407, 0.0700527, 0.1199587, 0.1199817, 0.1199883, 0.12, 0.1200035, 0.1200127, 0.1200234, 0.1200372, 0.1200667]
+
+===== [before] diag_winding | diag_winding.stdout.txt | sha256=5aea3a44ff75600620d2f9eb8c88472a0702b8a0f94d56fc1af8324ef37177f3 | WIND03 diagnosis: star meshes counter-clockwise front vs engine clockwise =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGWIND kind=water class=ArrayMesh triangles=2208 ccw_positive=2208 ccw_negative=0 outward_cw_faces=0 volume_ccw=23.735901402775131 volume_cw=-23.735901402775131
+DIAGNORMALS kind=water normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=hard_rock class=ArrayMesh triangles=2208 ccw_positive=2208 ccw_negative=0 outward_cw_faces=0 volume_ccw=9.821062080562124 volume_cw=-9.821062080562124
+DIAGNORMALS kind=hard_rock normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=fault class=BoxMesh triangles=12 ccw_positive=0 ccw_negative=12 outward_cw_faces=12 volume_ccw=-48.000000000000000 volume_cw=48.000000000000000
+DIAGNORMALS kind=fault normals_present=true outward=24 inward_or_zero=0 total=24
+DIAGWIND kind=void class=ArrayMesh triangles=2208 ccw_positive=2208 ccw_negative=0 outward_cw_faces=0 volume_ccw=18.714938586267341 volume_cw=-18.714938586267341
+DIAGNORMALS kind=void normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=casing class=CylinderMesh triangles=288 ccw_positive=0 ccw_negative=288 outward_cw_faces=288 volume_ccw=-4.009838310380785 volume_cw=4.009838310380785
+DIAGNORMALS kind=casing normals_present=true outward=247 inward_or_zero=0 total=247
+
+===== [iter1] import | iter1_import.stdout.txt | sha256=4308445ffee532251933e85d89a5cd9d7b948d152c0ffc59075902a25319a228 | payload sources, fix iteration 1 =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (7 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== [iter1] test | iter1_test.stdout.txt | sha256=846ddaa7bcb85a46d5f36534f3830b61011230db0bb8146eafedbe8ab8bc40a4 | fix iteration 1 full contract test =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-02-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1 size=(0.8, 0.8, 8.0) volume_m3=4.00983831038079 pivot_radius_m=4.0199556350708 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=407 failures=0
+
+===== [iter1] diag_radius_postfix | diag_radius_postfix.stdout.txt | sha256=8de24de7cdd3900837a13ac0f540b4bc8a11fc8bb04947401d5601098da834fd | head radius after fix =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGNODE name=Collar class=CylinderMesh max_radius=0.06000000238418579 world=(0.00000000000000000, -0.06000000238418579, -0.23999999463558197) local=(0.00000000000000000, 0.07999999821186066, 0.05999999865889549)
+DIAGNODE name=Joint class=CylinderMesh max_radius=0.07402330317826793 world=(0.06839999556541443, -0.02830000035464764, -0.14000000059604645) local=(0.06839999556541443, 0.04999999701976776, 0.02829999849200249)
+DIAGNODE name=BodyMatrix class=CylinderMesh max_radius=0.09003694135889004 world=(0.01759999990463257, -0.08830000460147858, 0.15000000596046448) local=(0.01759999990463257, 0.17000000178813934, 0.08829999715089798)
+DIAGNODE name=HeadPDC class=CylinderMesh max_radius=0.11985299381223263 world=(0.05649999901652336, 0.10570000112056732, 0.15000000596046448) local=(0.05649999901652336, -0.12500000000000000, -0.10569999366998672)
+DIAGNODE name=Blade0 class=BoxMesh max_radius=0.11777660667063715 world=(0.11726179718971252, 0.01099999994039536, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_0_0 class=CylinderMesh max_radius=0.10818399488925934 world=(0.10818399488925934, 0.00000000000000000, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_0_1 class=CylinderMesh max_radius=0.10076899081468582 world=(0.10076899081468582, 0.00000000000000000, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_0_2 class=CylinderMesh max_radius=0.08593899011611939 world=(0.08593899011611939, 0.00000000000000000, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade1 class=BoxMesh max_radius=0.11777660228938866 world=(0.06815717369318008, 0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, -0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_1_0 class=CylinderMesh max_radius=0.10818399019008001 world=(0.05409199744462967, 0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_1_1 class=CylinderMesh max_radius=0.10076898697032823 world=(0.05038449540734291, 0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_1_2 class=CylinderMesh max_radius=0.08593898239346988 world=(0.04296949505805969, 0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade2 class=BoxMesh max_radius=0.11777660228938866 world=(-0.06815717369318008, 0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_2_0 class=CylinderMesh max_radius=0.10818399019008001 world=(-0.05409199744462967, 0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_2_1 class=CylinderMesh max_radius=0.10076898697032823 world=(-0.05038449540734291, 0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_2_2 class=CylinderMesh max_radius=0.08593898239346988 world=(-0.04296949505805969, 0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade3 class=BoxMesh max_radius=0.11777660667063715 world=(-0.11726179718971252, -0.01099999994039536, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_3_0 class=CylinderMesh max_radius=0.10818399488925934 world=(-0.10818399488925934, 0.00000000000000001, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_3_1 class=CylinderMesh max_radius=0.10076899081468582 world=(-0.10076899081468582, 0.00000000000000001, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_3_2 class=CylinderMesh max_radius=0.08593899011611939 world=(-0.08593899011611939, 0.00000000000000001, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade4 class=BoxMesh max_radius=0.11777660228938866 world=(-0.06815717369318008, -0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, -0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_4_0 class=CylinderMesh max_radius=0.10818399019008001 world=(-0.05409199744462967, -0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_4_1 class=CylinderMesh max_radius=0.10076898697032823 world=(-0.05038449540734291, -0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_4_2 class=CylinderMesh max_radius=0.08593898239346988 world=(-0.04296949505805969, -0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade5 class=BoxMesh max_radius=0.11777660228938866 world=(0.06815717369318008, -0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_5_0 class=CylinderMesh max_radius=0.10818399019008001 world=(0.05409199744462967, -0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_5_1 class=CylinderMesh max_radius=0.10076898697032823 world=(0.05038449540734291, -0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_5_2 class=CylinderMesh max_radius=0.08593898239346988 world=(0.04296949505805969, -0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGCONE faces=1152 max_radius=0.12006673031594023 vertex=(0.08489999920129776, -0.12500000000000000, 0.08489999920129776)
+DIAGCONE unique_radii=[0.0, 0.0199404, 0.0199529, 0.0199612, 0.0199692, 0.0199842, 0.02, 0.0200002, 0.0200385, 0.0699706, 0.0699869, 0.07, 0.0700032, 0.0700036, 0.0700078, 0.0700309, 0.0700407, 0.0700527, 0.1199587, 0.1199817, 0.1199883, 0.12, 0.1200035, 0.1200127, 0.1200234, 0.1200372, 0.1200667]
+
+===== [iter1] diag_winding_postfix | diag_winding_postfix.stdout.txt | sha256=2fa239a8a3500d6f96dcfa94d3480d085dbe5b0955ebbc1c208b6753a81b3cca | winding after fix =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGWIND kind=water class=ArrayMesh triangles=2208 ccw_positive=0 ccw_negative=2208 outward_cw_faces=2208 volume_ccw=-23.735901402775131 volume_cw=23.735901402775131
+DIAGNORMALS kind=water normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=hard_rock class=ArrayMesh triangles=2208 ccw_positive=0 ccw_negative=2208 outward_cw_faces=2208 volume_ccw=-9.821062080562124 volume_cw=9.821062080562124
+DIAGNORMALS kind=hard_rock normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=fault class=BoxMesh triangles=12 ccw_positive=0 ccw_negative=12 outward_cw_faces=12 volume_ccw=-48.000000000000000 volume_cw=48.000000000000000
+DIAGNORMALS kind=fault normals_present=true outward=24 inward_or_zero=0 total=24
+DIAGWIND kind=void class=ArrayMesh triangles=2208 ccw_positive=0 ccw_negative=2208 outward_cw_faces=2208 volume_ccw=-18.714938586267341 volume_cw=18.714938586267341
+DIAGNORMALS kind=void normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=casing class=CylinderMesh triangles=288 ccw_positive=0 ccw_negative=288 outward_cw_faces=288 volume_ccw=-4.009838310380785 volume_cw=4.009838310380785
+DIAGNORMALS kind=casing normals_present=true outward=247 inward_or_zero=0 total=247
+
+===== [iter2] import | iter2_import.stdout.txt | sha256=16acda5231034270cffbbc4cefc7396cce435a8a24c1d0c3cc5a8a6e03b038cf | payload sources including refreshed catalog =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (8 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== [iter2] test | iter2_test.stdout.txt | sha256=846ddaa7bcb85a46d5f36534f3830b61011230db0bb8146eafedbe8ab8bc40a4 | fix iteration 2 full contract test =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-02-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1 size=(0.8, 0.8, 8.0) volume_m3=4.00983831038079 pivot_radius_m=4.0199556350708 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=407 failures=0
+
+===== [iter2] diag_meta_iter2 | diag_meta_iter2.stdout.txt | sha256=1516bf2a2887ef5efb9a650e02028353638c2e008b2b396dde1c18d22b79ea6f | factory envelope self-checks and measured vertex counts =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGMETA asset_id=drill_pdc_v1 envelope_ok=true vertex_count=6648 mesh_measured_pivot=0.404474943876266
+DIAGMETA asset_id=obstacle_water_v1 envelope_ok=true vertex_count=6624 mesh_measured_pivot=2.932299852371216
+DIAGMETA asset_id=obstacle_hard_rock_v1 envelope_ok=true vertex_count=6624 mesh_measured_pivot=1.500000000000000
+DIAGMETA asset_id=obstacle_fault_v1 envelope_ok=true vertex_count=36 mesh_measured_pivot=5.024937629699707
+DIAGMETA asset_id=obstacle_void_v1 envelope_ok=true vertex_count=6624 mesh_measured_pivot=2.000000000000000
+DIAGMETA asset_id=obstacle_casing_v1 envelope_ok=true vertex_count=864 mesh_measured_pivot=4.019955635070801
+DIAGMETA asset_id=frame_workspace_v1 envelope_ok=true vertex_count=432 mesh_measured_pivot=25.980762481689453
+
+===== [final] import | final_import.stdout.txt | sha256=16acda5231034270cffbbc4cefc7396cce435a8a24c1d0c3cc5a8a6e03b038cf | fresh harness project built strictly from the worktree files =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (8 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== [final] test | final_test.stdout.txt | sha256=846ddaa7bcb85a46d5f36534f3830b61011230db0bb8146eafedbe8ab8bc40a4 | authoritative headless contract run =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-02-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1 size=(0.8, 0.8, 8.0) volume_m3=4.00983831038079 pivot_radius_m=4.0199556350708 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=407 failures=0
+
+===== [final] diag_final_radius | diag_final_radius.stdout.txt | sha256=8de24de7cdd3900837a13ac0f540b4bc8a11fc8bb04947401d5601098da834fd | final per-node radius verification =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGNODE name=Collar class=CylinderMesh max_radius=0.06000000238418579 world=(0.00000000000000000, -0.06000000238418579, -0.23999999463558197) local=(0.00000000000000000, 0.07999999821186066, 0.05999999865889549)
+DIAGNODE name=Joint class=CylinderMesh max_radius=0.07402330317826793 world=(0.06839999556541443, -0.02830000035464764, -0.14000000059604645) local=(0.06839999556541443, 0.04999999701976776, 0.02829999849200249)
+DIAGNODE name=BodyMatrix class=CylinderMesh max_radius=0.09003694135889004 world=(0.01759999990463257, -0.08830000460147858, 0.15000000596046448) local=(0.01759999990463257, 0.17000000178813934, 0.08829999715089798)
+DIAGNODE name=HeadPDC class=CylinderMesh max_radius=0.11985299381223263 world=(0.05649999901652336, 0.10570000112056732, 0.15000000596046448) local=(0.05649999901652336, -0.12500000000000000, -0.10569999366998672)
+DIAGNODE name=Blade0 class=BoxMesh max_radius=0.11777660667063715 world=(0.11726179718971252, 0.01099999994039536, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_0_0 class=CylinderMesh max_radius=0.10818399488925934 world=(0.10818399488925934, 0.00000000000000000, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_0_1 class=CylinderMesh max_radius=0.10076899081468582 world=(0.10076899081468582, 0.00000000000000000, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_0_2 class=CylinderMesh max_radius=0.08593899011611939 world=(0.08593899011611939, 0.00000000000000000, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade1 class=BoxMesh max_radius=0.11777660228938866 world=(0.06815717369318008, 0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, -0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_1_0 class=CylinderMesh max_radius=0.10818399019008001 world=(0.05409199744462967, 0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_1_1 class=CylinderMesh max_radius=0.10076898697032823 world=(0.05038449540734291, 0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_1_2 class=CylinderMesh max_radius=0.08593898239346988 world=(0.04296949505805969, 0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade2 class=BoxMesh max_radius=0.11777660228938866 world=(-0.06815717369318008, 0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_2_0 class=CylinderMesh max_radius=0.10818399019008001 world=(-0.05409199744462967, 0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_2_1 class=CylinderMesh max_radius=0.10076898697032823 world=(-0.05038449540734291, 0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_2_2 class=CylinderMesh max_radius=0.08593898239346988 world=(-0.04296949505805969, 0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade3 class=BoxMesh max_radius=0.11777660667063715 world=(-0.11726179718971252, -0.01099999994039536, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_3_0 class=CylinderMesh max_radius=0.10818399488925934 world=(-0.10818399488925934, 0.00000000000000001, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_3_1 class=CylinderMesh max_radius=0.10076899081468582 world=(-0.10076899081468582, 0.00000000000000001, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_3_2 class=CylinderMesh max_radius=0.08593899011611939 world=(-0.08593899011611939, 0.00000000000000001, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade4 class=BoxMesh max_radius=0.11777660228938866 world=(-0.06815717369318008, -0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, -0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_4_0 class=CylinderMesh max_radius=0.10818399019008001 world=(-0.05409199744462967, -0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_4_1 class=CylinderMesh max_radius=0.10076898697032823 world=(-0.05038449540734291, -0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_4_2 class=CylinderMesh max_radius=0.08593898239346988 world=(-0.04296949505805969, -0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=Blade5 class=BoxMesh max_radius=0.11777660228938866 world=(0.06815717369318008, -0.09605169296264648, 0.18872503936290741) local=(0.01200000010430813, 0.01099999994039536, -0.05999999865889549)
+DIAGNODE name=CutterStud_5_0 class=CylinderMesh max_radius=0.10818399019008001 world=(0.05409199744462967, -0.09369008243083954, 0.21955673396587372) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_5_1 class=CylinderMesh max_radius=0.10076898697032823 world=(0.05038449540734291, -0.08726850152015686, 0.23813138902187347) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGNODE name=CutterStud_5_2 class=CylinderMesh max_radius=0.08593898239346988 world=(0.04296949505805969, -0.07442533969879150, 0.27528068423271179) local=(0.00000000000000000, 0.00499999988824129, -0.00799999944865704)
+DIAGCONE faces=1152 max_radius=0.12006673031594023 vertex=(0.08489999920129776, -0.12500000000000000, 0.08489999920129776)
+DIAGCONE unique_radii=[0.0, 0.0199404, 0.0199529, 0.0199612, 0.0199692, 0.0199842, 0.02, 0.0200002, 0.0200385, 0.0699706, 0.0699869, 0.07, 0.0700032, 0.0700036, 0.0700078, 0.0700309, 0.0700407, 0.0700527, 0.1199587, 0.1199817, 0.1199883, 0.12, 0.1200035, 0.1200127, 0.1200234, 0.1200372, 0.1200667]
+
+===== [final] diag_final_winding | diag_final_winding.stdout.txt | sha256=2fa239a8a3500d6f96dcfa94d3480d085dbe5b0955ebbc1c208b6753a81b3cca | final per-kind winding and normal verification =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGWIND kind=water class=ArrayMesh triangles=2208 ccw_positive=0 ccw_negative=2208 outward_cw_faces=2208 volume_ccw=-23.735901402775131 volume_cw=23.735901402775131
+DIAGNORMALS kind=water normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=hard_rock class=ArrayMesh triangles=2208 ccw_positive=0 ccw_negative=2208 outward_cw_faces=2208 volume_ccw=-9.821062080562124 volume_cw=9.821062080562124
+DIAGNORMALS kind=hard_rock normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=fault class=BoxMesh triangles=12 ccw_positive=0 ccw_negative=12 outward_cw_faces=12 volume_ccw=-48.000000000000000 volume_cw=48.000000000000000
+DIAGNORMALS kind=fault normals_present=true outward=24 inward_or_zero=0 total=24
+DIAGWIND kind=void class=ArrayMesh triangles=2208 ccw_positive=0 ccw_negative=2208 outward_cw_faces=2208 volume_ccw=-18.714938586267341 volume_cw=18.714938586267341
+DIAGNORMALS kind=void normals_present=true outward=1106 inward_or_zero=0 total=1106
+DIAGWIND kind=casing class=CylinderMesh triangles=288 ccw_positive=0 ccw_negative=288 outward_cw_faces=288 volume_ccw=-4.009838310380785 volume_cw=4.009838310380785
+DIAGNORMALS kind=casing normals_present=true outward=247 inward_or_zero=0 total=247
+
+===== [final] diag_final_meta | diag_final_meta.stdout.txt | sha256=1516bf2a2887ef5efb9a650e02028353638c2e008b2b396dde1c18d22b79ea6f | final envelope_ok and measured vertex counts =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIAGMETA asset_id=drill_pdc_v1 envelope_ok=true vertex_count=6648 mesh_measured_pivot=0.404474943876266
+DIAGMETA asset_id=obstacle_water_v1 envelope_ok=true vertex_count=6624 mesh_measured_pivot=2.932299852371216
+DIAGMETA asset_id=obstacle_hard_rock_v1 envelope_ok=true vertex_count=6624 mesh_measured_pivot=1.500000000000000
+DIAGMETA asset_id=obstacle_fault_v1 envelope_ok=true vertex_count=36 mesh_measured_pivot=5.024937629699707
+DIAGMETA asset_id=obstacle_void_v1 envelope_ok=true vertex_count=6624 mesh_measured_pivot=2.000000000000000
+DIAGMETA asset_id=obstacle_casing_v1 envelope_ok=true vertex_count=864 mesh_measured_pivot=4.019955635070801
+DIAGMETA asset_id=frame_workspace_v1 envelope_ok=true vertex_count=432 mesh_measured_pivot=25.980762481689453
+
+===== [final] engine version | version.stdout.txt | sha256=bf8803022b574250bb04dea65053a46b7c58570725316c1f7fe2aa6735706498 | 4.7.2.stable.official.ed1daf0bf exit=0 =====
+4.7.2.stable.official.ed1daf0bf
+

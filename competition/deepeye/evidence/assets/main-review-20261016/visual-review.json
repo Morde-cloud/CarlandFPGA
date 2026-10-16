@@ -1,0 +1,90 @@
+{
+  "at_utc": "2026-10-16T04:51:11.527736+00:00",
+  "reviewer_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "status": "all_eleven_final_images_viewed_individually_by_main",
+  "source_manifest_sha256": "e60b4a7c5b616eb0860fe0f1524a637125863604447285fcbe00f06c40bb1fd2",
+  "images": [
+    {
+      "path": "render/png/01_drill_actual_scale_oblique.png",
+      "sha256": "56985ef48a283f318ee0c2bfef79e1dc3679f6dfcda12550d019374c71fd566f",
+      "bytes": 41274
+    },
+    {
+      "path": "render/png/02_drill_head_detail_6blades_18studs.png",
+      "sha256": "f540a99ea0796a8178207c065d374d4f590e08fe53f96ef7078dd1979d362e6e",
+      "bytes": 38790
+    },
+    {
+      "path": "render/png/03_obstacle_kind_gallery_5kinds.png",
+      "sha256": "22a1f26b7fb22672c27eca535a5ece71dd82c78e2ace6440344b9645bf27557d",
+      "bytes": 45390
+    },
+    {
+      "path": "render/png/04_world_overview_30obstacles_drill_frame.png",
+      "sha256": "27c5593ed939949fa8dcb9a9a44b72e39b1b0eb506f4424b682266522f45f9a1",
+      "bytes": 56130
+    },
+    {
+      "path": "render/png/05_world_alt_angle_hollow_edge_cube.png",
+      "sha256": "0bcb2c531281738273f7a6358ae97cde62cfb03550d88719e577ad702f070513",
+      "bytes": 55417
+    },
+    {
+      "path": "render/png/06_drill_axis_minus_x.png",
+      "sha256": "192647fca728aed83c970948e4a26a47d4fe0282ba87585b763411cf4ee031d3",
+      "bytes": 35590
+    },
+    {
+      "path": "render/png/06_drill_axis_minus_y.png",
+      "sha256": "d713507cc147b75afdc909546d8e3276b085e39bc2d40836843b5f94ba1cf232",
+      "bytes": 35094
+    },
+    {
+      "path": "render/png/06_drill_axis_minus_z.png",
+      "sha256": "2c7d3337fac1db3b0809c7fe9d26a347ab8750ff5c0f37d006e1af4822f70448",
+      "bytes": 19557
+    },
+    {
+      "path": "render/png/06_drill_axis_plus_x.png",
+      "sha256": "402b3aedab34b9a4b65fb41f57fc769f056f756a3f75d386ff6220308b6eea3c",
+      "bytes": 34604
+    },
+    {
+      "path": "render/png/06_drill_axis_plus_y.png",
+      "sha256": "8d3152d119873c3fa0ed37cbf3201dd1583f87335b659d5f511b3166ba3fa9ef",
+      "bytes": 40406
+    },
+    {
+      "path": "render/png/06_drill_axis_plus_z.png",
+      "sha256": "2053538ffb1e8a47c5e7feb9b2794cb1daa6cfff37947bf60c566cc670381db9",
+      "bytes": 29021
+    }
+  ],
+  "observations": [
+    "All eleven images contain actual rendered asset pixels and the fixture label.",
+    "Oblique and six axis views show the complete drill silhouette; head view shows six blade groups.",
+    "Five obstacle kinds are visible in the labelled gallery; 30 obstacle instances are counted by actual scene traversal, not by counting occluded screenshot pixels.",
+    "The revised alternate world view contains the complete edge-only cube inside the image; prior cropped render is preserved.",
+    "Axial views occlude components; screenshots alone do not prove all 18 studs or all 30 obstacles. Exported scene/mesh counts supply those checks.",
+    "Dark cutter/void materials and plain procedural forms remain visual-quality limitations; this review does not certify final game-grade artwork or G01."
+  ],
+  "harness_changes_only": [
+    "sphere-fit camera distance corrected from r/tan(halfFOV) to r/sin(halfFOV)",
+    "camera fill light added for inspection; product materials/geometry unchanged"
+  ],
+  "historical_failures": [
+    "04 invalid resolution argument",
+    "04b successful render but cropped alternate world view",
+    "04c harness generation emitted literal backslash-n and failed parsing",
+    "04d successful corrected harness"
+  ],
+  "raw_harness_comment_discrepancy": "The retained harness header says five PNGs; it actually renders eleven including six axis views, as its executed shot list and hashes show.",
+  "not_claimed": [
+    "runtime gameplay",
+    "G01 full acceptance",
+    "FPS/performance",
+    "continuous collision",
+    "truth isolation",
+    "board/system"
+  ]
+}

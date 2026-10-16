@@ -1,0 +1,526 @@
+===== baseline_import.stdout.txt | sha256=8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7 | pre-fix baseline sources with the NEW correction-03 tests (payload tests only) =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== baseline_test.stdout.txt | sha256=0bf4b16cbec9d05a08c73d9d4501654472e64cb1a9941620c542d3a58521138f | NEW transformed-face checks FAIL on the rejected sources: 60 failures (18 det=-1, 18 negative volume, 18 not-outward studs, casing containment + margin + diameter) =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1 size=(0.8, 0.8, 8.0) volume_m3=4.00983831038079 pivot_radius_m=4.0199556350708 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=622 failures=60
+
+===== baseline_export.stdout.txt | sha256=6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330 | pre-fix export for the mirrored review self-check =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+EXPORT asset_count=7
+
+===== prefix_import.stdout.txt | sha256=8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7 | frozen pre-fix sources in a separate harness (iterations/baseline/sources) =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== prefix_export.stdout.txt | sha256=6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330 | pre-fix export of the frozen baseline sources with the B-main export script =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+EXPORT asset_count=7
+
+===== final_import.stdout.txt | sha256=8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7 | fresh harness project built strictly from the worktree files =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== final_test.stdout.txt | sha256=db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc | authoritative headless contract run from the worktree files: RESULT checks=622 failures=0 =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1_encoded max_radius_about_z_m=0.39983182371023 inside_collision_margin_m=0.00016817628977
+MEASURE asset_id=obstacle_casing_v1 size=(0.7996, 0.7996, 8.0) volume_m3=4.00600112229586 pivot_radius_m=4.01993370056152 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=622 failures=0
+
+===== final_export.stdout.txt | sha256=6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330 | B-main export script over the fixed worktree sources =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+EXPORT asset_count=7
+
+===== iter1_import.stdout.txt | sha256=8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7 | payload iteration 1 (tests + drill + obstacle fixes) =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== iter1_test.stdout.txt | sha256=16c96750a244374670f4ea42704b77a7af371ff6a510556458d540069b84fe5d | payload iteration 1 full contract test =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1 size=(0.7996, 0.7996, 8.0) volume_m3=4.00600112229586 pivot_radius_m=4.01993370056152 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=622 failures=0
+
+===== iter2_import.stdout.txt | sha256=8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7 | payload iteration 2 (same three payloads, encoded-radius MEASURE line added) =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== iter2_test.stdout.txt | sha256=db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc | payload iteration 2 full contract test =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1_encoded max_radius_about_z_m=0.39983182371023 inside_collision_margin_m=0.00016817628977
+MEASURE asset_id=obstacle_casing_v1 size=(0.7996, 0.7996, 8.0) volume_m3=4.00600112229586 pivot_radius_m=4.01993370056152 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=622 failures=0
+
+===== iter3_import.stdout.txt | sha256=8c3a936a1daa3c3a5ccd87100332fd624c633d665531386e2f6218fae6c9c7a7 | payload iteration 3 (all four owned files incl. refreshed catalog) =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DeepEyeAssetLibrary[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | DeepEyeDrillGeometry[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | DeepEyeFrameGeometry[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | DeepEyeObstacleGeometry[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+===== iter3_test.stdout.txt | sha256=db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc | payload iteration 3 full contract test =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+test_asset_contract: DeepEye B factory contract test
+task=DEEPEYE-IMPLEMENTATION-20261014/v1 work=B-ASSETS-RUNTIME-CORRECTION-20261016-03-v1
+godot=4.7.2-stable (official)
+MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216
+MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208
+MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208
+MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12
+MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208
+MEASURE asset_id=obstacle_casing_v1_encoded max_radius_about_z_m=0.39983182371023 inside_collision_margin_m=0.00016817628977
+MEASURE asset_id=obstacle_casing_v1 size=(0.7996, 0.7996, 8.0) volume_m3=4.00600112229586 pivot_radius_m=4.01993370056152 triangles=288
+MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144
+MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904
+RESULT checks=622 failures=0
+
+===== iter3_export.stdout.txt | sha256=6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330 | payload iteration 3 export for the mirrored review self-check =====
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+EXPORT asset_count=7
+
+===== selfcheck_prefix.console.txt | sha256=65920ecaee6003f04c834cea7304feeb5c60510b8a6f40f952186e7d823aa50a | mirrored B-main review math over the PRE-FIX export: 19 findings (18 studs det=-1 / negative volume; casing 384 vertices outside, worst 5.470416716468751e-05 m) =====
+��{  
+     " l a b e l " :   " p r e f i x " ,  
+     " a s s e t _ c o u n t " :   7 ,  
+     " f i n d i n g s " :   [  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 0 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 6 5 9 7 8 8 5 2 1 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 0 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 7 1 0 1 0 3 3 9 7 1 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 0 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 2 1 2 2 4 7 2 2 1 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 1 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 2 9 1 5 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 1 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 8 9 5 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 1 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 5 1 1 6 0 8 2 5 9 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 2 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 1 2 3 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 2 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 7 8 2 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 2 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 4 9 9 8 8 3 0 5 2 9 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 3 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 6 5 9 7 8 8 4 9 2 5 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 3 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 7 1 0 1 0 3 3 7 2 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 3 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 2 1 2 2 4 7 2 1 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 4 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 2 9 1 5 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 4 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 8 9 5 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 4 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 5 1 1 6 0 8 2 5 9 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 5 _ 0 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 4 3 7 8 9 1 2 3 6 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 5 _ 1 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 3 9 9 9 9 9 4 1 0 3 7 8 2 3 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " d r i l l " ,  
+             " f i n d i n g " :   " t o p o l o g y _ o r _ o r i e n t a t i o n " ,  
+             " m e s h " :   {  
+                 " p a t h " :   " V i s u a l / C u t t e r S t u d _ 5 _ 2 " ,  
+                 " t r i a n g l e s " :   4 8 ,  
+                 " b o u n d a r y _ e d g e s " :   0 ,  
+                 " d e g e n e r a t e " :   0 ,  
+                 " c l o c k w i s e _ v o l u m e _ m 3 " :   - 1 . 8 2 4 0 0 1 4 9 9 8 8 3 0 5 2 9 e - 0 6 ,  
+                 " t r a n s f o r m _ d e t e r m i n a n t " :   - 1 . 0  
+             }  
+         } ,  
+         {  
+             " k i n d " :   " c a s i n g " ,  
+             " f i n d i n g " :   " c o l l i s i o n _ e n v e l o p e " ,  
+             " o u t s i d e _ f a c e _ v e r t i c e s " :   3 8 4 ,  
+             " w o r s t " :   [  
+                 5 . 4 7 0 4 1 6 7 1 6 4 6 8 7 5 1 e - 0 5 ,  
+                 " V i s u a l / S o l i d M e s h " ,  
+                 [  
+                     0 . 1 5 3 0 9 9 9 9 8 8 3 1 7 4 9 ,  
+                     - 0 . 3 6 9 6 0 0 1 7 6 8 1 1 2 1 8 ,  
+                     4 . 0  
+                 ]  
+             ]  
+         }  
+     ] ,  
+     " s t a t u s " :   " i n d e p e n d e n t _ f i n d i n g s _ p e n d i n g _ d i s p o s i t i o n "  
+ }  
+ 
+
+===== selfcheck_iter3.console.txt | sha256=ce6f06db1e74e9fd43676d197b65573d9958555ebee34a987d47a0ba90fdeffe | mirrored B-main review math over the iter3 export: zero findings =====
+��{  
+     " l a b e l " :   " i t e r 3 " ,  
+     " a s s e t _ c o u n t " :   7 ,  
+     " f i n d i n g s " :   [ ] ,  
+     " s t a t u s " :   " g e o m e t r y _ c h e c k s _ p a s s "  
+ }  
+ 
+
+===== selfcheck_final.console.txt | sha256=779b261281d1094efcf94d270c266d0a12804c4e8b108b65e689775404c57e19 | mirrored B-main review math over the final worktree export: zero findings =====
+��{  
+     " l a b e l " :   " f i n a l " ,  
+     " a s s e t _ c o u n t " :   7 ,  
+     " f i n d i n g s " :   [ ] ,  
+     " s t a t u s " :   " g e o m e t r y _ c h e c k s _ p a s s "  
+ }  
+ 
+
+===== engine --version | version.stdout.txt | sha256=bf8803022b574250bb04dea65053a46b7c58570725316c1f7fe2aa6735706498 | 4.7.2.stable.official.ed1daf0bf exit=0 =====
+4.7.2.stable.official.ed1daf0bf
+

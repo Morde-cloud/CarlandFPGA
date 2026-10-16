@@ -1,0 +1,19 @@
+{
+  "work_id": "B-ASSETS-ENGINE-REVIEW-20261016-01",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "finding_id": "B-ASSETS-PARSE01",
+  "decision": "Reject runtime validation until source test parses and executes on the pinned engine",
+  "source_path": "competition/deepeye/simulator/tests/test_asset_contract.gd",
+  "source_sha256": "14f1507bdb47ce23cf2eba2c6dff9221fd35c356a312b0f72f1bb643b44d3485",
+  "engine_version": "4.7.2.stable.official.ed1daf0bf",
+  "engine_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+  "import_exit_code": 0,
+  "asset_test_exit_code": 1,
+  "errors": ["line154: Cannot infer type of mesh variable because value has no set type", "line159: Cannot infer type of aabb variable because value has no set type"],
+  "stderr_sha256": "7c54bea89b60463a115512be27756a53df1784176f5944037c2526daa319c3ec",
+  "evidence": "assets-engine-main/assets.stderr.txt",
+  "source_unchanged": true,
+  "engine_absence_blocker": "Resolved locally by main with official portable download and exact pinned hash/version verification",
+  "remaining": "Fix parser errors through bounded Flash task, run actual 30-instance/geometry tests, then native visual checks; no G01 acceptance yet"
+}

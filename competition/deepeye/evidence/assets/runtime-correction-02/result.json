@@ -1,0 +1,137 @@
+{
+  "work_id": "B-ASSETS-RUNTIME-CORRECTION-20261016-02-v1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "status": "four_findings_fixed_headless_green_pending_director_review",
+  "engine": {
+    "version": "4.7.2.stable.official.ed1daf0bf",
+    "executable_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+    "version_exit": 0
+  },
+  "final_run": {
+    "import_exit_code": 0,
+    "test_exit_code": 0,
+    "test_stdout_sha256": "846ddaa7bcb85a46d5f36534f3830b61011230db0bb8146eafedbe8ab8bc40a4",
+    "test_stderr_sha256": "e4db551485a60d9138acad1b9e17be83977834e49b30ac7b213506292ac8e1dd",
+    "result_line": "RESULT checks=407 failures=0",
+    "measure_lines": [
+      "MEASURE asset_id=drill_pdc_v1 size=(0.2396, 0.2396, 0.8) pivot_radius_m=0.40447494387627 max_radius_about_z_m=0.11985299381223 triangles=2216",
+      "MEASURE asset_id=obstacle_water_v1 size=(5.807899, 4.0, 1.964) volume_m3=23.7359014027751 pivot_radius_m=2.93229985237122 triangles=2208",
+      "MEASURE asset_id=obstacle_hard_rock_v1 size=(2.5536, 3.0, 2.6579) volume_m3=9.82106208056212 pivot_radius_m=1.5 triangles=2208",
+      "MEASURE asset_id=obstacle_fault_v1 size=(8.0, 1.0, 6.0) volume_m3=48.0 pivot_radius_m=5.02493762969971 triangles=12",
+      "MEASURE asset_id=obstacle_void_v1 size=(4.0, 3.0, 3.0) volume_m3=18.7149385862673 pivot_radius_m=2.0 triangles=2208",
+      "MEASURE asset_id=obstacle_casing_v1 size=(0.8, 0.8, 8.0) volume_m3=4.00983831038079 pivot_radius_m=4.0199556350708 triangles=288",
+      "MEASURE asset_id=frame_workspace_v1 size=(30.0, 30.0, 30.0) pivot_radius_m=25.9807624816895 triangles=144",
+      "MEASURE thirty_instance_probe objects=32 meshes=70 triangles=43904"
+    ]
+  },
+  "machine_checks": {
+    "leak_pattern_lines_in_final_test": 0,
+    "envelope_error_lines_in_final_test": 0,
+    "unexpected_fail_lines": 0,
+    "expected_negative_path_lines": "1 unknown-kind push_error from _test_obstacle_unknown_kind (deliberate negative-path assertion)"
+  },
+  "findings": {
+    "PARSE01": {
+      "fix": "tests/test_asset_contract.gd _test_frame now annotates var mesh: Mesh and var aabb: AABB",
+      "evidence": "baseline_test.stderr.txt preserves the original parse errors at lines 154/159; final test exit 0 with 407 checks"
+    },
+    "GEOM02": {
+      "root_cause": "Godot 4.7.2-stable CylinderMesh snaps primitive vertices to a 1e-4 m grid before float32 storage; the nominal 0.12 m cone base ring encoded its 45-degree vertices at (0.0849, 0.0849), radial 0.12006673558429641 m > 0.12",
+      "fix": "world/drill_geometry.gd HEAD_BASE_ENCODE_RADIUS_M = 0.1198 m (0.0002 m inward margin; worst-case snapped radius bound 0.1198 + sqrt(2)*5e-5 = 0.119871 m); declared envelope keeps nominal 0.24 m diameter / 0.12 m radius; disabled capsule collision radius unchanged",
+      "measured_engine": {
+        "max_radius_about_z_m": 0.11985299381223,
+        "margin_below_0_12_m": 0.00014700618777,
+        "pivot_radius_m": 0.40447494387627,
+        "aabb_size_m": [
+          0.2396,
+          0.2396,
+          0.8
+        ],
+        "triangles": 2216
+      },
+      "verified": "every transformed vertex <= 0.12 m measured from actual engine faces; envelope_ok true; blade/stud layout preserved and still inside the encoded cone"
+    },
+    "WIND03": {
+      "baseline_measured": {
+        "water": {
+          "ccw_positive_faces": 2208,
+          "outward_cw_faces": 0,
+          "volume_cw": -23.73590140277513
+        },
+        "hard_rock": {
+          "ccw_positive_faces": 2208,
+          "outward_cw_faces": 0,
+          "volume_cw": -9.821062080562124
+        },
+        "void": {
+          "ccw_positive_faces": 2208,
+          "outward_cw_faces": 0,
+          "volume_cw": -18.71493858626734
+        },
+        "fault_boxmesh": {
+          "outward_cw_faces": 12,
+          "volume_cw": 48.0
+        },
+        "casing_cylindermesh": {
+          "outward_cw_faces": 288,
+          "volume_cw": 4.009838310380785
+        }
+      },
+      "fix": "world/obstacle_geometry.gd star-mesh index winding flipped to Godot clockwise front faces; ARRAY_NORMAL normals unchanged and still outward; test volume/checks use the explicit clockwise convention -sum(p0.dot(p1.cross(p2)))/6",
+      "final_measured": {
+        "water": {
+          "ccw_positive_faces": 0,
+          "outward_cw_faces": 2208,
+          "volume_cw": 23.73590140277513
+        },
+        "hard_rock": {
+          "ccw_positive_faces": 0,
+          "outward_cw_faces": 2208,
+          "volume_cw": 9.821062080562124
+        },
+        "void": {
+          "ccw_positive_faces": 0,
+          "outward_cw_faces": 2208,
+          "volume_cw": 18.71493858626734
+        },
+        "fault_boxmesh": {
+          "outward_cw_faces": 12,
+          "volume_cw": 48.0
+        },
+        "casing_cylindermesh": {
+          "outward_cw_faces": 288,
+          "volume_cw": 4.009838310380785
+        },
+        "normals": "all stored normals outward (water/hard_rock/void 1106 of 1106; fault 24 of 24; casing 247 of 247)"
+      },
+      "negative_control": "the test builds a reversed-winding copy of every obstacle mesh and asserts every face flips to counter-clockwise, every face fails outward orientation and the signed volume negates; no abs(volume), culling change or primitive corruption assumption"
+    },
+    "LIFE04": {
+      "fix": "every factory output (drill, 5 obstacles, frame) and the 30-instance holder are freed deterministically before quit; no suppression added",
+      "verified": "final test and diagnostic stderr contain zero leaked-object/RID/PagedAllocator/instance-dependency lines (machine-scanned); baseline leak evidence preserved in the read-only main probe"
+    }
+  },
+  "catalog_refresh": {
+    "file": "competition/deepeye/simulator/assets/scene_catalog.json",
+    "after_sha256": "5cbd4b28494fe52d6b0a568df5ba835139086ef27c0234ab2eb1c46af6bd7338",
+    "changes": "engine.runtime_status now records the real headless run; per-asset measured_engine_20261016 blocks quote the 2026-10-16 MEASURE values; drill/casing replica expectations superseded with notes; scene budget updated to measured 43904 triangles; status marks visual_acceptance and g01 not accepted; physics/board/system not_run"
+  },
+  "claims": {
+    "visual": "not_claimed",
+    "g01": "not_accepted",
+    "screenshots": "not_captured_native_screenshot_follow_on_is_main_owned",
+    "physics": "not_run",
+    "board": "not_run",
+    "system": "not_run"
+  },
+  "unresolved_for_main": [
+    "independent review and acceptance of the four-file product diff",
+    "native screenshot follow-on (main-owned)",
+    "any visual/G01 evaluation requires a separate dispatched task"
+  ],
+  "acceptance": "pending independent B-main review"
+}

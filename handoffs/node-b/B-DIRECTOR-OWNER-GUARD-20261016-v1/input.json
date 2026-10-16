@@ -1,0 +1,63 @@
+{
+  "request": {
+    "operation_id": "B-DIRECTOR-OWNER-GUARD-20261016-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "f26caaeea99fde4378f9a8d12e38aa97ef15eac7",
+    "test_steps": [
+      "Run the exact command array in docs/deployment/evidence/external-owner-20261016/source-validation.json (130 affected tests, including four focused continuity checks).",
+      "Verify final Git artifact bytes with this manifest. Keep old continuity/cache manifests unchanged and verify their historical artifacts at 069cdfbb478bfa67390c61b9d749cab90c5e8327.",
+      "Do not deploy or create live owner declarations. Actual App writer inspection and the original admission fences are independent requirements for any future rollout."
+    ],
+    "expected_result": "130 targeted software tests exit 0. Explicit App-owned work is durably delivery_pending with original envelope/recipient; multiple messages do not block independent mesh work or replay after restart/removal. STOP, version/recipient checks, no old failed replay, pending self-check visibility and external-writer idle rejection hold. H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 unchanged."
+  },
+  "artifacts": [
+    "fpga_mesh/sessions.py",
+    "fpga_mesh/gateway.py",
+    "fpga_mesh/controller.py",
+    "fpga_mesh/project_control.py",
+    "fpga_mesh/update.py",
+    "fpga_mesh/continuity.py",
+    "tests/test_external_owner.py",
+    "tests/test_continuity.py",
+    "docs/deployment/EXTERNAL_TASK_OWNER.md",
+    "tests/test_sessions.py",
+    "tests/test_project_control.py",
+    "tests/test_controller.py",
+    "tests/test_mesh_update.py",
+    "tests/test_app_gateway.py",
+    "tests/test_controller_continuity.py",
+    "fpga_mesh/app_server.py",
+    "fpga_mesh/store.py",
+    "fpga_mesh/protocol.py",
+    "fpga_mesh/runtime.py",
+    "docs/deployment/evidence/external-owner-20261016/regression-stderr.txt",
+    "docs/deployment/evidence/external-owner-20261016/regression-stdout.txt",
+    "docs/deployment/evidence/external-owner-20261016/source-validation.json"
+  ],
+  "stages": {
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/external-owner-20261016/regression-stderr.txt"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "live_owner_declaration": {
+      "status": "not_run"
+    },
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    }
+  }
+}

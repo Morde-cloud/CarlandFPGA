@@ -160,6 +160,10 @@ def _state_directory(config: Path, node: str) -> Path:
 
 
 def _has_pending_work(db, table: str, condition: str) -> bool:
+    if table == 'main_runs' and db.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='external_deliveries'").fetchone():
+        if db.execute("SELECT 1 FROM external_deliveries WHERE status!='consumed' LIMIT 1").fetchone():
+            return True
     exists = db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
                         (table,)).fetchone()
     if not exists:
@@ -172,9 +176,23 @@ def _has_pending_work(db, table: str, condition: str) -> bool:
     return bool(db.execute(f'SELECT COUNT(*) FROM {table} WHERE {condition}').fetchone()[0])
 
 
+def _assert_no_declared_external_writer(state: Path) -> None:
+    """Declarations are holds, not an assertion that an App writer is idle."""
+    path = state / 'external-task-owners.json'
+    try:
+        owners = json.loads(path.read_text(encoding='utf-8'))
+    except FileNotFoundError:
+        return
+    except (OSError, ValueError) as exc:
+        raise ValueError('external writer state unreadable; service must not stop') from exc
+    if not isinstance(owners, dict) or owners:
+        raise ValueError('external App writers require explicit reconciliation; service must not stop')
+
+
 def assert_idle(config: Path, *, node: str) -> str:
-    """Read persisted activity without opening a controller or replaying work."""
+    """Check persisted activity; callers must also verify actual App writers."""
     state = _state_directory(config, node)
+    _assert_no_declared_external_writer(state)
     for filename, table, condition in _IDLE_CHECKS:
         path = state / filename
         if not path.exists():
@@ -194,6 +212,7 @@ def stop_idle_node(config: Path, *, node: str, stop=None) -> None:
     abort before stopping; finally closing the connections releases every lock.
     """
     state = _state_directory(config, node)
+    _assert_no_declared_external_writer(state)
     with ExitStack() as stack:
         locked = []
         for filename, table, condition in _IDLE_CHECKS:
@@ -208,6 +227,9 @@ def stop_idle_node(config: Path, *, node: str, stop=None) -> None:
         for db, table, condition in locked:
             if _has_pending_work(db, table, condition):
                 raise ValueError('node has active or pending work; service was not stopped')
+        # Recheck after acquiring admission fences. This file is not an App
+        # lock: operators must prevent concurrent App work/owner edits too.
+        _assert_no_declared_external_writer(state)
         if stop is not None:
             stop()
         else:

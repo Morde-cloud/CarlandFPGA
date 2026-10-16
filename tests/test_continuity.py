@@ -52,7 +52,7 @@ from fpga_mesh.store import SQLiteStore
 
 LEDGERS = ('state.sqlite', 'main_sessions.sqlite', 'child_jobs.sqlite')
 SOURCE_MODULES = {'runtime.py', 'controller.py', 'gateway.py', 'app_server.py',
-                  'child_control.py', 'project_control.py', 'continuity.py'}
+                  'child_control.py', 'project_control.py', 'continuity.py', 'sessions.py', 'update.py'}
 
 
 def iso(value: datetime) -> str:
@@ -203,6 +203,30 @@ class LedgerCollectionTests(unittest.TestCase):
                 self.assertEqual(len(digest), 64)
                 int(digest, 16)
 
+    def test_external_deliveries_are_read_only_and_legacy_absence_is_supported(self):
+        store, router, children = self.make_ledgers()
+        try:
+            message = peer_report('app-wait')
+            store.accept_inbound(message)
+            router.defer_external(message, {'recipient_thread_id': 'real-app-thread',
+                'declaration_hash': 'known-entry', 'reason': 'App recipient required'})
+            store.mark_inbound_processed(message.message_id)
+            before = router.db.total_changes
+            detected = collect(self.base)
+            self.assertEqual(detected['pending'], [])
+            self.assertEqual(len(detected['external_deliveries']), 1)
+            self.assertEqual(detected['external_deliveries'][0]['recipient_thread_id'], 'real-app-thread')
+            self.assertEqual(detected['external_deliveries'][0]['reason'], 'App recipient required')
+            self.assertEqual(router.db.total_changes, before)
+            # Simulate a legacy schema in this isolated fixture only.
+            with router.db:
+                router.db.execute('DROP TABLE external_deliveries')
+            self.assertEqual(collect(self.base)['external_deliveries'], [])
+        finally:
+            asyncio.run(children.close())
+            router.close()
+            store.close()
+
 
 class ObserveAndIncidentTests(unittest.TestCase):
     """Classification semantics of ContinuityJournal.observe()."""
@@ -217,6 +241,27 @@ class ObserveAndIncidentTests(unittest.TestCase):
 
     def incidents(self) -> dict:
         return {item['incident_id']: item for item in self.journal.status()['incidents']}
+
+    def test_external_pending_is_a_handoff_obligation_not_terminal_or_repair(self):
+        self.journal.watch(watch_id='external-watch', task_id='t', task_version=1,
+            source_kind='main', source_id='app-wait', recipient_thread_id='app', auto_resume=True)
+        delivery = {'message_id': 'app-wait', 'task_id': 't', 'task_version': 1,
+                    'recipient_thread_id': 'app', 'reason': 'needs App delivery', 'status': 'pending'}
+        current = snapshot(self.now, external_deliveries=[delivery], runs=[{
+            'message_id': 'app-wait', 'task_id': 't', 'task_version': 1, 'status': 'delivery_pending'}])
+        self.journal.observe(current)
+        incident = self.incidents()['external_delivery_pending:app-wait']
+        self.assertTrue(incident['active'])
+        self.assertEqual(incident['evidence']['recipient_thread_id'], 'app')
+        self.assertEqual(incident['evidence']['disposition'], 'app_delivery_required')
+        self.assertEqual(self.journal.get_watch('external-watch')['state'], 'waiting')
+        with self.assertRaises(ValueError):
+            self.journal.repair(incident_id=incident['incident_id'], phase='claim', owner_thread_id='main')
+        current['external_deliveries'][0]['status'] = 'consumed'
+        current['runs'][0]['status'] = 'external_consumed'
+        self.journal.observe(current)
+        self.assertFalse(self.incidents()[incident['incident_id']]['active'])
+        self.assertEqual(self.journal.get_watch('external-watch')['state'], 'waiting')
 
     def test_monitor_failure_survives_recovery_without_repeated_incidents(self):
         self.journal.monitor_result('OperationalError: database unavailable')
@@ -584,6 +629,34 @@ class RuntimeHarness(unittest.IsolatedAsyncioTestCase):
 
 class ContinuationDispatchTests(RuntimeHarness):
     """Persisted result -> exact recipient inbox -> one turn -> receipt."""
+
+    async def test_external_owner_or_delivery_suppresses_another_mesh_notification(self):
+        runtime = self.new_runtime('external-boundary')
+        self.register_main_session(runtime, 't', 'app-thread')
+        job = self.make_child(runtime, task_id='t')
+        runtime.continuity.journal.watch(watch_id='external-child', task_id='t', task_version=1,
+            source_kind='child', source_id=job['job_id'], recipient_thread_id='app-thread', auto_resume=True)
+        declaration = runtime.main_sessions.external_owners_path
+        declaration.write_text(json.dumps({'t': {'owner_kind': 'desktop',
+            'thread_id': 'app-thread', 'task_version': 1}}), encoding='utf-8')
+        report = runtime.continuity.check()
+        self.assertEqual(runtime.continuity.journal.get_watch('external-child')['state'], 'ready')
+        await runtime.continuity.journal.dispatch_ready(runtime, report)
+        self.assertEqual(self.total_inbound(runtime), 0)
+        owner = runtime.main_sessions.external_owner('t', 1)
+        message = peer_report('saved-app-delivery')
+        runtime.store.accept_inbound(message)
+        runtime.main_sessions.defer_external(message, owner)
+        runtime.store.mark_inbound_processed(message.message_id)
+        declaration.unlink()
+        report = runtime.continuity.check()
+        await runtime.continuity.journal.dispatch_ready(runtime, report)
+        self.assertEqual(self.total_inbound(runtime), 1, 'pending App delivery must not create another notification')
+        self.assertEqual(runtime.astra_gateway.calls, [])
+        self_check = await runtime.project_actions.call('fpga_self_check', {})
+        self.assertEqual(self_check['external_deliveries'][0]['recipient_thread_id'], 'app-thread')
+        self.assertTrue(any(i['kind'] == 'external_delivery_pending' and i['active']
+                            for i in self_check['incidents']))
 
     async def test_persisted_main_result_reaches_exact_inbox_as_one_turn_and_receipt(self):
         runtime = self.new_runtime('round-trip')

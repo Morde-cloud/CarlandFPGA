@@ -28,11 +28,14 @@ def age(value, now):
             datetime.fromisoformat(value.replace('Z', '+00:00'))).total_seconds()
 
 
-def rows(path, sql):
+def rows(path, sql, *, optional_table=None):
     # Do not instantiate routers/coordinators: their constructors recover jobs.
     with closing(sqlite3.connect(Path(path).resolve().as_uri() + '?mode=ro', uri=True)) as db:
         db.row_factory = sqlite3.Row
         db.execute('PRAGMA query_only=ON')
+        if optional_table and not db.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (optional_table,)).fetchone():
+            return []
         return [dict(r) for r in db.execute(sql)]
 
 
@@ -55,6 +58,9 @@ def collect(state):
         'retry': json.loads(retry[0]['payload']) if retry else {},
         'sessions': rows(state / 'main_sessions.sqlite', 'SELECT task_id,task_version,thread_id FROM main_sessions'),
         'runs': runs,
+        'external_deliveries': rows(state / 'main_sessions.sqlite',
+            'SELECT message_id,task_id,task_version,recipient_thread_id,declaration_hash,reason,status,created_at '
+            'FROM external_deliveries', optional_table='external_deliveries'),
         'jobs': rows(state / 'child_jobs.sqlite', 'SELECT job_id,task_id,task_version,work_id,status,route,error,native_agent_id,ownership_json,created_at,updated_at FROM child_jobs'),
     }
 
@@ -62,7 +68,7 @@ def collect(state):
 def source_hashes(root):
     return {name: hashlib.sha256((Path(root) / name).read_bytes()).hexdigest()
             for name in ('runtime.py', 'controller.py', 'gateway.py', 'app_server.py',
-                         'child_control.py', 'project_control.py', 'continuity.py')}
+                         'child_control.py', 'project_control.py', 'continuity.py', 'sessions.py', 'update.py')}
 
 
 class ContinuityJournal:
@@ -139,6 +145,11 @@ class ContinuityJournal:
 
         def add(kind, key, **evidence):
             found.append((kind + ':' + key, kind, evidence))
+
+        for delivery in snapshot.get('external_deliveries', []):
+            if delivery['status'] != 'consumed':
+                add('external_delivery_pending', delivery['message_id'], **delivery,
+                    disposition='human_paused' if paused else 'app_delivery_required')
 
         for item in snapshot['pending']:
             if age(item['received_at'], now) >= threshold:
@@ -238,7 +249,7 @@ class ContinuityJournal:
                 if prior:
                     return {**prior, 'execute': False}
                 disposition = json.loads(row['evidence']).get('disposition')
-                if paused or not row['active'] or disposition in {'human_paused', 'normal_active_wait', 'scheduled_backoff'}:
+                if paused or not row['active'] or disposition in {'human_paused', 'normal_active_wait', 'scheduled_backoff', 'app_delivery_required'}:
                     raise ValueError('paused, resolved or normal wait; repair creation forbidden')
                 value = {'phase': 'claimed', 'owner_thread_id': owner_thread_id, 'claimed_at': utcnow()}
             else:
@@ -265,6 +276,11 @@ class ContinuityJournal:
         for watch in self.status()['watches']:
             spec = watch['spec']; session = sessions.get(spec['task_id'])
             event = sources[spec['source_kind']].get(spec['source_id'])
+            owner_check = getattr(getattr(runtime, 'main_sessions', None), 'external_owner', None)
+            if (any(d['task_id'] == spec['task_id'] and d['status'] != 'consumed'
+                    for d in snapshot.get('external_deliveries', [])) or
+                    owner_check and owner_check(spec['task_id'], spec['task_version']) is not None):
+                continue  # An App obligation is not permission to enqueue another mesh notification.
             if (watch['state'] != 'ready' or not spec['auto_resume'] or not session or
                     session['thread_id'] != spec['recipient_thread_id'] or session['task_version'] != spec['task_version'] or
                     not event or event['task_id'] != spec['task_id'] or event.get('task_version') != spec['task_version'] or

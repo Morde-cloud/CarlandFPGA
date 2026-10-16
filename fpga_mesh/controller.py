@@ -10,6 +10,7 @@ from typing import Any, Callable, Protocol
 
 from .protocol import Envelope, MessageKind, SourceKind
 from .store import SQLiteStore
+from .sessions import ExternalDeliveryPending
 
 
 @dataclass(slots=True)
@@ -59,7 +60,8 @@ class Controller:
         if (message.source == SourceKind.HUMAN and
                 message.kind == MessageKind.HUMAN_INSTRUCTION and
                 self._active_message is None and
-                self.on_human_instruction is not None):
+                self.on_human_instruction is not None and
+                not self._external_delivery_expected(message)):
             try:
                 self.on_human_instruction(message)
             except Exception as exc:  # noqa: BLE001 - inbox retries version update
@@ -100,6 +102,10 @@ class Controller:
             return "human_stop"
         return None
 
+    def _external_delivery_expected(self, message: Envelope) -> bool:
+        check = getattr(self.gateway, 'external_delivery_expected', None)
+        return bool(check and check(message))
+
     async def run_until_idle(self) -> None:
         observed: set[str] = set()
         while True:
@@ -133,7 +139,8 @@ class Controller:
                     continue
                 if (message.source == SourceKind.HUMAN and
                         message.kind == MessageKind.HUMAN_INSTRUCTION and
-                        self.on_human_instruction is not None):
+                        self.on_human_instruction is not None and
+                        not self._external_delivery_expected(message)):
                     try:
                         # Reapplying is safe and recovers a crash after inbox
                         # persistence but before the child-version write.
@@ -202,6 +209,17 @@ class Controller:
                     # never turn an explicit stop into a blind side-effect replay.
                     break
                 except Exception as exc:  # noqa: BLE001 - persisted as recovery state
+                    if isinstance(exc, ExternalDeliveryPending):
+                        # The router already committed the original envelope and
+                        # recipient. This consumes dispatch, not App execution.
+                        self.store.append_event(
+                            f'external-delivery:{message.message_id}', 'external_delivery_pending',
+                            {'message_id': message.message_id, 'task_id': message.task_id,
+                             'task_version': message.task_version,
+                             'recipient_thread_id': exc.delivery['recipient_thread_id'],
+                             'reason': exc.delivery['reason'], 'execution_started': False})
+                        self.store.mark_inbound_processed(message.message_id)
+                        continue
                     if getattr(exc, 'safe_to_retry', False):
                         retry_at = max(
                             self._retry_at(stored.attempts),

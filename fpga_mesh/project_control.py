@@ -11,6 +11,7 @@ from .child_control import LocalControlServer, LocalControlFileClient
 from .protocol import Envelope, MessageKind, SourceKind
 from .mesh_tools import MeshDynamicTools
 from .official_models import OfficialModelManager
+from .sessions import ExternalOwnerRequired
 
 
 def tool(name, description, properties, required):
@@ -37,6 +38,12 @@ CONTINUITY_TOOLS = [
         ['incident_id', 'phase', 'owner_thread_id']),
 ]
 SESSION_TOOLS = CONTINUITY_TOOLS + [
+    tool('fpga_external_deliveries', 'Read durable unsent App delivery obligations and reported consumption receipts. Does not send or wake a chat.', {}, []),
+    tool('fpga_external_receipt', 'Record actual consumption by the exact saved App recipient and version. Requires turn/evidence and current matching declaration; STOP wins. This is a reported receipt, not automatic delivery proof.', {
+        'message_id': {'type': 'string'}, 'task_id': {'type': 'string'},
+        'task_version': {'type': 'integer', 'minimum': 1}, 'thread_id': {'type': 'string'},
+        'turn_id': {'type': 'string'}, 'evidence': {'type': 'string'}},
+        ['message_id', 'task_id', 'task_version', 'thread_id', 'turn_id', 'evidence']),
     tool('fpga_models_refresh', 'Refresh the official Codex model/effort catalog and native roles. Preserves current tasks, credentials and both execution entrances; makes no inference call. New role definitions apply to newly loaded conversations.', {}, []),
     tool('fpga_session_list', 'Read your project main sessions, allowed models/efforts and quality route without a model call.', {}, []),
     tool('fpga_session_open', 'Create a separate task conversation and queue its work. Choose optional allowed model/effort; critical work requires the quality main route. Repeated same work does not enqueue twice.', TASK_FIELDS, ['task_id', 'task_version', 'text']),
@@ -64,6 +71,12 @@ class ProjectActions:
         action = {'fpga_session_list': 'session_list', 'fpga_session_open': 'main_submit',
                   'fpga_session_route': 'session_route', 'fpga_models_refresh': 'models_refresh'}.get(name, name)
         r = self.runtime
+        if action in {'fpga_external_deliveries', 'external_deliveries'}:
+            return r.main_sessions.external_deliveries()
+        if action in {'fpga_external_receipt', 'external_receipt'}:
+            if r.controller.dispatch_blocked:
+                raise ValueError('human STOP prevents external receipt advancement')
+            return r.main_sessions.external_receipt(**args)
         if action in {'fpga_self_check', 'self_check', 'fpga_continuity_watch', 'continuity_watch',
                       'fpga_continuity_receipt', 'continuity_receipt', 'fpga_continuity_repair', 'continuity_repair'}:
             monitor = r.continuity
@@ -71,7 +84,8 @@ class ProjectActions:
             operation = action.removeprefix('fpga_')
             if operation == 'self_check':
                 return {**monitor.journal.status(), 'observed_at': snapshot['observed_at'],
-                        'loaded_source_hashes': monitor.loaded_hashes, 'monitor_error': monitor.error}
+                        'loaded_source_hashes': monitor.loaded_hashes, 'monitor_error': monitor.error,
+                        'external_deliveries': snapshot.get('external_deliveries', [])}
             if operation == 'continuity_watch':
                 sources = snapshot['jobs'] if args['source_kind'] == 'child' else snapshot['runs']
                 key = 'job_id' if args['source_kind'] == 'child' else 'message_id'
@@ -101,7 +115,14 @@ class ProjectActions:
             return {**r.snapshot(), 'pid': os.getpid(), 'identities': {'main': f'Astra-{r.config.node_id}', 'deepseek': f'DeepSeek-{r.config.node_id}'}, 'main_sessions': r.main_sessions.sessions()}
         if action in {'session_list', 'session_route', 'main_submit'}:
             gateway = r.astra_gateway
-            client = await gateway._ensure_client() if hasattr(gateway, '_ensure_client') else None
+            external = None
+            if action in {'session_route', 'main_submit'}:
+                guard = getattr(r.main_sessions, 'external_owner', None)
+                external = guard(str(args['task_id']), args.get('task_version')) if guard else None
+                if external is not None and action == 'session_route':
+                    raise ExternalOwnerRequired(external)
+            client = (await gateway._ensure_client() if external is None and
+                      hasattr(gateway, '_ensure_client') else None)
             if action == 'session_list':
                 catalog = await r.main_sessions.catalog(client) if client else {}
                 return {'sessions': r.main_sessions.sessions(), 'allowed_models': catalog,
@@ -123,14 +144,20 @@ class ProjectActions:
             if prior is not None:
                 return {'message_id': message_id, 'queued': False, 'task_id': task_id,
                         'session': r.main_sessions.session(task_id), 'identity': f'Astra-{r.config.node_id}'}
-            session = None
+            session = r.main_sessions.session(task_id) if external is not None else None
             if client:
-                session = await r.main_sessions.open_session(client, task_id=task_id, task_version=version, text=text,
-                    cwd=gateway.config.cwd, model=args.get('model'), effort=args.get('effort'), category=category,
-                    config=gateway.thread_config_factory() if gateway.thread_config_factory else None,
-                    dynamic_tools=gateway.dynamic_tools, developer_instructions=gateway.developer_instructions)
-                if not session['created'] and args.get('model'):
-                    await r.main_sessions.schedule_route(client, task_id=task_id, model=args['model'], effort=args['effort'], category=category or 'execution')
+                try:
+                    session = await r.main_sessions.open_session(client, task_id=task_id, task_version=version, text=text,
+                        cwd=gateway.config.cwd, model=args.get('model'), effort=args.get('effort'), category=category,
+                        config=gateway.thread_config_factory() if gateway.thread_config_factory else None,
+                        dynamic_tools=gateway.dynamic_tools, developer_instructions=gateway.developer_instructions)
+                    if not session['created'] and args.get('model'):
+                        await r.main_sessions.schedule_route(client, task_id=task_id, model=args['model'], effort=args['effort'], category=category or 'execution')
+                except ExternalOwnerRequired as exc:
+                    # Ownership changed during awaited routing. Keep this new
+                    # unsent envelope in the STOP-aware inbox for durable handoff.
+                    external = exc.owner
+                    session = r.main_sessions.session(task_id)
             message = Envelope(message_id=message_id, project_id=r.config.project_id,
                 sender=f'{r.config.node_id}/Astra-{r.config.node_id}', recipient=f'{r.config.node_id}/Astra-{r.config.node_id}',
                 task_id=task_id, task_version=version, sent_at=datetime.now(timezone.utc),
@@ -139,7 +166,8 @@ class ProjectActions:
                 r.main_sessions.record(message_id, task_id, 'queued')
             queued = await r.controller.offer(message)
             return {'message_id': message_id, 'queued': queued, 'task_id': task_id,
-                    'session': session, 'identity': f'Astra-{r.config.node_id}'}
+                    'session': session, 'identity': f'Astra-{r.config.node_id}',
+                    **({'external_owner': external, 'execution_started': False} if external else {})}
         if action == 'main_result':
             return r.main_sessions.result(str(args['message_id']))
         if action == 'main_wait':
@@ -152,7 +180,7 @@ class ProjectActions:
                     result = r.main_sessions.result(str(args['message_id']))
                     if result is None:
                         raise KeyError('unknown main message')
-                    if result['status'] in {'completed', 'failed', 'interrupted'}:
+                    if result['status'] in {'completed', 'failed', 'interrupted', 'delivery_pending', 'external_consumed'}:
                         return result
                     await self.changed.wait()
             try:

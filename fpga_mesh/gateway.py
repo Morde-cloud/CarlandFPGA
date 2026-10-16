@@ -16,6 +16,7 @@ from .effort import EFFORTS, AstraEffortSelector
 from .notifications import notification_matches_turn, terminal_error_message
 from .protocol import Envelope
 from .rpc import JsonRpcError, RequestNotSentError
+from .sessions import ExternalDeliveryPending, ExternalOwnerRequired
 
 
 LOG = logging.getLogger(__name__)
@@ -139,6 +140,11 @@ class AppServerGateway:
     async def handle(self, message: Envelope) -> ActionResult:
         try:
             return await self._handle(message)
+        except ExternalOwnerRequired as exc:
+            delivery = self.session_router.defer_external(message, exc.owner)
+            raise ExternalDeliveryPending(delivery) from exc
+        except ExternalDeliveryPending:
+            raise
         except asyncio.CancelledError:
             if self.session_router is not None:
                 self.session_router.record(message.message_id, message.task_id, 'interrupted', error='turn cancelled')
@@ -163,12 +169,17 @@ class AppServerGateway:
                 prior = self.session_router.result(message.message_id)
                 if prior and prior['status'] == 'completed':
                     return ActionResult(accepted=True, output=prior['result'])
-                if prior and prior['status'] in {'failed', 'interrupted'}:
+                if prior and prior['status'] in {'failed', 'interrupted', 'running', 'external_consumed'}:
                     return ActionResult(accepted=False, output={
                         'message_id': message.message_id, 'status': prior['status'],
                         'error': prior['error'], 'recovery_required': True,
-                        'text': '该任务已失败或中断，已保留原始证据。请由质量主模型检查后创建新的显式任务版本或工作分配；不自动重放。',
+                        'text': '该消息已有执行、交付或失败记录，已保留原始证据。请由质量主模型检查后创建新的显式任务版本或工作分配；不自动重放。',
                     })
+                delivery_reader = getattr(self.session_router, 'external_delivery', None)
+                delivery = delivery_reader(message.message_id) if delivery_reader else None
+                if delivery is not None:
+                    raise ExternalDeliveryPending(delivery)
+                self._assert_mesh_owned(message)
             event_text = str(message.payload.get("text", message.message_id))
             prompt = event_text
             if self.config.role == "astra":
@@ -233,6 +244,7 @@ class AppServerGateway:
         """Retry only proven unsent requests or an explicit capacity rejection."""
         for attempt in range(len(self.startup_retry_delays) + 1):
             try:
+                self._assert_mesh_owned(message)
                 try:
                     client = await self._start_request(self._ensure_client())
                 except asyncio.TimeoutError as exc:
@@ -276,6 +288,7 @@ class AppServerGateway:
                 # A crash/lost response after send must recover as interrupted,
                 # not queued. Only proven unsent/rejected work returns to queued.
                 if self.session_router is not None:
+                    self._assert_mesh_owned(message)
                     self.session_router.record(message.message_id, message.task_id, 'running')
                 started = await self._start_request(client.turn_start(
                     thread_id=self._thread_id, text=prompt, model=model, effort=effort,
@@ -294,6 +307,19 @@ class AppServerGateway:
                 await self._discard_client()
                 raise
         raise AssertionError("startup retry loop exhausted without outcome")
+
+    def _assert_mesh_owned(self, message):
+        guard = getattr(self.session_router, 'assert_mesh_owned', None)
+        if guard is not None:
+            guard(message.task_id, message.task_version)
+
+    def external_delivery_expected(self, message: Envelope) -> bool:
+        """Keep external human revisions out of mesh child-version side effects."""
+        reader = getattr(self.session_router, 'external_delivery', None)
+        if reader is not None and reader(message.message_id) is not None:
+            return True
+        owner = getattr(self.session_router, 'external_owner', None)
+        return owner is not None and owner(message.task_id, message.task_version) is not None
 
     async def _discard_client(self) -> None:
         try:

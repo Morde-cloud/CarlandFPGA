@@ -1,0 +1,67 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-CONTROL-20261016-02",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "7e95bc3f8e11faf5f8bf62515d6b5e4670f36b11",
+    "test_steps": [
+      "Read H01-H15 DEEPEYE-HUMAN-LOCK-20261014/r1 and verify requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged.",
+      "Run python -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py -v (80 tests).",
+      "Run python -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py check --inventory competition/deepeye/golden/control/register_candidate_inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json (29 offsets,61 PWM vectors,36 scenarios).",
+      "Run python -B -X utf8 competition/deepeye/evidence/control/main-review-20261016/independent_review.py --output-root YOUR_NEW_DIRECTORY --expect fixed (210007 angle cases,147 speed cases,24 STOP/orders,300 alias batches,7 revocations,1000 publications).",
+      "Review preserved initial/correction02 rejection evidence; no physical board operation, register writes or ENABLE requested. Return same-PR operation/request_hash/tested_commit/log hashes."
+    ],
+    "expected_result": "Pure software capture/snapshot candidate passes typed ingress, STOP retirement, detached public reads, frozen latch semantics and bounded history. Public bitfields/reset/tick layout/CDC still missing and A-owned; B05/R03/G05 and hardware/system not_run. Codec historical manifest unchanged; assets excluded."
+  },
+  "artifacts": [
+    "competition/deepeye/evidence/control/.gitattributes",
+    "competition/deepeye/evidence/control/capture-correction-02/commands.json",
+    "competition/deepeye/evidence/control/capture-correction-02/result.json",
+    "competition/deepeye/evidence/control/capture-correction-02/stderr.txt",
+    "competition/deepeye/evidence/control/capture-correction-02/stdout.txt",
+    "competition/deepeye/evidence/control/main-review-20261016/README.md",
+    "competition/deepeye/evidence/control/main-review-20261016/baseline.stderr.txt",
+    "competition/deepeye/evidence/control/main-review-20261016/baseline.stdout.txt",
+    "competition/deepeye/evidence/control/main-review-20261016/independent_review.py",
+    "competition/deepeye/evidence/control/main-review-20261016/old-identity-test-failures.stderr.txt",
+    "competition/deepeye/evidence/control/main-review-20261016/portable-command.json",
+    "competition/deepeye/evidence/control/main-review-20261016/portable.stderr.txt",
+    "competition/deepeye/evidence/control/main-review-20261016/portable.stdout.txt",
+    "competition/deepeye/evidence/control/main-review-20261016/rejected-correction02.json",
+    "competition/deepeye/evidence/control/main-review-20261016/rejected-foundation.json",
+    "competition/deepeye/evidence/control/main-review-20261016/result.json",
+    "competition/deepeye/evidence/control/snapshot-foundation-01/commands.json",
+    "competition/deepeye/evidence/control/snapshot-foundation-01/result.json",
+    "competition/deepeye/evidence/control/snapshot-foundation-01/stderr.txt",
+    "competition/deepeye/evidence/control/snapshot-foundation-01/stdout.txt",
+    "competition/deepeye/golden/control/.gitattributes",
+    "competition/deepeye/golden/control/README.md",
+    "competition/deepeye/golden/control/capture_snapshot_reference.py",
+    "competition/deepeye/golden/control/register_candidate_inventory.json",
+    "competition/deepeye/golden/control/snapshot_vectors.json",
+    "competition/deepeye/tests/control/.gitattributes",
+    "competition/deepeye/tests/control/test_capture_snapshot.py"
+  ],
+  "stages": {
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "control_software_candidate": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/control/main-review-20261016/baseline.stderr.txt"
+    }
+  }
+}

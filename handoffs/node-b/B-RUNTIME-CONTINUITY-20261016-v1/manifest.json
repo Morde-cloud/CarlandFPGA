@@ -1,0 +1,111 @@
+{
+  "artifacts": [
+    "fpga_mesh/continuity.py",
+    "fpga_mesh/runtime.py",
+    "fpga_mesh/controller.py",
+    "fpga_mesh/child_control.py",
+    "fpga_mesh/project_control.py",
+    "fpga_mesh/presence_policy.py",
+    "tests/test_continuity.py",
+    "tests/test_runtime.py",
+    "tests/test_work_leases.py",
+    "tests/test_presence_policy.py",
+    "docs/deployment/RUNTIME_CONTINUITY.md",
+    "docs/deployment/evidence/runtime-continuity-20261016/source-validation.json",
+    "docs/deployment/evidence/runtime-continuity-20261016/regression-stdout.txt",
+    "docs/deployment/evidence/runtime-continuity-20261016/regression-stderr.txt"
+  ],
+  "files": {
+    "docs/deployment/RUNTIME_CONTINUITY.md": {
+      "sha256": "366659eb932cb8f4c0daaa6195a1233741a76cd34659c3330490e1c2b0b20397",
+      "size": 8070
+    },
+    "docs/deployment/evidence/runtime-continuity-20261016/regression-stderr.txt": {
+      "sha256": "65170cd300727874996c0499e1435d6c210c89b5ec6dc0e01e142dc975440fc6",
+      "size": 3929
+    },
+    "docs/deployment/evidence/runtime-continuity-20261016/regression-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/runtime-continuity-20261016/source-validation.json": {
+      "sha256": "cbc43ac8ab91eabcba2a54a3716b610621c4d0d78ea854479d9787257b2e4c56",
+      "size": 3086
+    },
+    "fpga_mesh/child_control.py": {
+      "sha256": "819e53439a4efbb5e6b62e4177fd610978ea3af3197fa3e2c1cc3ec535e5816b",
+      "size": 34779
+    },
+    "fpga_mesh/continuity.py": {
+      "sha256": "a3f5b2a3e44be19c4c11ecb430d084cab32839baf62f80d31fbd44607d3efea8",
+      "size": 20378
+    },
+    "fpga_mesh/controller.py": {
+      "sha256": "a7892ec7805361fee70811392b85d9d4ca480c5389ca880c4f2d7a9fc233e79a",
+      "size": 15398
+    },
+    "fpga_mesh/presence_policy.py": {
+      "sha256": "ea5b186feb1666e8f7b8b949ef6d0722201416de76425cf29e4585a577e0ec83",
+      "size": 2504
+    },
+    "fpga_mesh/project_control.py": {
+      "sha256": "0e2daf16f45d6da0f41da45c9185097511c588905acc79c54189c81856bcc23d",
+      "size": 12629
+    },
+    "fpga_mesh/runtime.py": {
+      "sha256": "6dfc147724b701153fca41690462c95b8849c0b453acec179b03421ceca13a18",
+      "size": 25046
+    },
+    "tests/test_continuity.py": {
+      "sha256": "9b2c4ec5caa03c7a02e63a60ddffb0643fab847a32f1ef8cb37a388af8d7fb98",
+      "size": 53669
+    },
+    "tests/test_presence_policy.py": {
+      "sha256": "1c14524a089a98511f6aac37417a444a53dd53a1160d9fc8aa246c176329be95",
+      "size": 2779
+    },
+    "tests/test_runtime.py": {
+      "sha256": "aac06f36af7cc48617f26b0d0918dee456eb68bcd915d7753aa01eadf2defdfc",
+      "size": 14051
+    },
+    "tests/test_work_leases.py": {
+      "sha256": "a7d4c2a37f8ae1cf84abcd9fca80ef28681500c575cf159814c8628635db4e7b",
+      "size": 36455
+    }
+  },
+  "request": {
+    "code_commit": "cab13dc3324e25a318e0c8fc458da3b20a08f602",
+    "expected_result": "147 software tests pass; watched terminal result yields one exact-route continuation, STOP wins, unknown creation is not retried; no replacement product root or board claim. Preserve H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.",
+    "operation_id": "B-RUNTIME-CONTINUITY-20261016-v1",
+    "requester": "node-b",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "test_steps": [
+      "python -X utf8 -m unittest tests.test_continuity tests.test_project_control tests.test_runtime tests.test_controller tests.test_work_leases tests.test_app_gateway tests.test_runtime_integrity tests.test_presence_policy tests.test_mesh_update",
+      "Verify manifest raw bytes against Git blobs and source-validation.json; do not deploy while original product leases block idle/admission fence."
+    ]
+  },
+  "request_hash": "a7b5fdd57c22f6375aaf0a8b5a1220d7726004f61f056cdc4208670ff68d69ae",
+  "schema_version": 1,
+  "stages": {
+    "deployment": {
+      "status": "blocked"
+    },
+    "desktop_after_turn_wakeup": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "software_regression": {
+      "log": "docs/deployment/evidence/runtime-continuity-20261016/regression-stderr.txt",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

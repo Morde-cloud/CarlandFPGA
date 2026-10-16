@@ -1,0 +1,51 @@
+{
+  "request": {
+    "operation_id": "B-RUNTIME-CONTINUITY-20261016-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "cab13dc3324e25a318e0c8fc458da3b20a08f602",
+    "test_steps": [
+      "python -X utf8 -m unittest tests.test_continuity tests.test_project_control tests.test_runtime tests.test_controller tests.test_work_leases tests.test_app_gateway tests.test_runtime_integrity tests.test_presence_policy tests.test_mesh_update",
+      "Verify manifest raw bytes against Git blobs and source-validation.json; do not deploy while original product leases block idle/admission fence."
+    ],
+    "expected_result": "147 software tests pass; watched terminal result yields one exact-route continuation, STOP wins, unknown creation is not retried; no replacement product root or board claim. Preserve H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804."
+  },
+  "artifacts": [
+    "fpga_mesh/continuity.py",
+    "fpga_mesh/runtime.py",
+    "fpga_mesh/controller.py",
+    "fpga_mesh/child_control.py",
+    "fpga_mesh/project_control.py",
+    "fpga_mesh/presence_policy.py",
+    "tests/test_continuity.py",
+    "tests/test_runtime.py",
+    "tests/test_work_leases.py",
+    "tests/test_presence_policy.py",
+    "docs/deployment/RUNTIME_CONTINUITY.md",
+    "docs/deployment/evidence/runtime-continuity-20261016/source-validation.json",
+    "docs/deployment/evidence/runtime-continuity-20261016/regression-stdout.txt",
+    "docs/deployment/evidence/runtime-continuity-20261016/regression-stderr.txt"
+  ],
+  "stages": {
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/runtime-continuity-20261016/regression-stderr.txt"
+    },
+    "deployment": {
+      "status": "blocked"
+    },
+    "desktop_after_turn_wakeup": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    }
+  }
+}

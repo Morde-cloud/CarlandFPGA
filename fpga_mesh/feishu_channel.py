@@ -22,6 +22,25 @@ def _message_uuid(app_id: str, operation_id: str) -> str:
     return str(uuid.uuid5(uuid.NAMESPACE_URL, f"{app_id}:{operation_id}"))
 
 
+def _load_default_channel_factory(group_id: str) -> Callable[..., Any]:
+    # The SDK captures its WS event loop at import time. Load it on a worker
+    # without a running controller loop so SDK shutdown cannot stop our loop.
+    try:
+        from lark_channel import FeishuChannel, PolicyConfig, SecurityConfig
+    except ImportError as exc:
+        raise RuntimeError(
+            "Feishu requires lark-channel-sdk; install the feishu extra"
+        ) from exc
+    return lambda **kwargs: FeishuChannel(
+        **kwargs,
+        policy=PolicyConfig(
+            dm_policy="disabled", group_policy="allowlist",
+            group_allowlist=[group_id], require_mention=False,
+        ),
+        security=SecurityConfig(mode="strict"),
+    )
+
+
 class FeishuIngress:
     def __init__(
         self, *, node_id: str, project_id: str, group_id: str,
@@ -237,19 +256,8 @@ class FeishuNodeService:
         if not secret:
             raise ValueError("Astra Feishu app secret file is empty")
         if self.channel_factory is None:
-            try:
-                from lark_channel import FeishuChannel, PolicyConfig, SecurityConfig
-            except ImportError as exc:
-                raise RuntimeError(
-                    "Feishu requires lark-channel-sdk; install the feishu extra"
-                ) from exc
-            self.channel_factory = lambda **kwargs: FeishuChannel(
-                **kwargs,
-                policy=PolicyConfig(
-                    dm_policy="disabled", group_policy="allowlist",
-                    group_allowlist=[self.group_id], require_mention=False,
-                ),
-                security=SecurityConfig(mode="strict"),
+            self.channel_factory = await asyncio.to_thread(
+                _load_default_channel_factory, self.group_id,
             )
         channel = self.channel_factory(app_id=self.astra_app_id, app_secret=secret)
         controller_loop = asyncio.get_running_loop()

@@ -1,0 +1,128 @@
+{
+  "artifacts": [
+    "fpga_mesh/feishu_channel.py",
+    "tests/test_feishu_channel.py",
+    "fpga_mesh/runtime.py",
+    "fpga_mesh/continuity.py",
+    "fpga_mesh/presence_policy.py",
+    "tests/test_runtime.py",
+    "docs/deployment/evidence/local-runtime-compat-20261016/README.md",
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline-command.json",
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stderr.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stdout.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/port-verification.json",
+    "docs/deployment/evidence/local-runtime-compat-20261016/regression.stderr.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/regression.stdout.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/sdk-source.patch",
+    "docs/deployment/evidence/local-runtime-compat-20261016/sdk-tests.patch",
+    "docs/deployment/evidence/local-runtime-compat-20261016/source-provenance.json",
+    "docs/deployment/evidence/local-runtime-compat-20261016/source-validation.json"
+  ],
+  "files": {
+    "docs/deployment/evidence/local-runtime-compat-20261016/README.md": {
+      "sha256": "0642a235c32f581599ca2bb4b4e0c0159c82e6b203a0b5672b12191b372ed26c",
+      "size": 1894
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline-command.json": {
+      "sha256": "e776a4c0b23ba7383922101da27dea80b94a55f57a3394b3450b36fe9774cdb1",
+      "size": 785
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stderr.txt": {
+      "sha256": "de2132a01b4427d4449d5a730b8037cdafccedb549d1e96613db045a4524043e",
+      "size": 2763
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/port-verification.json": {
+      "sha256": "afa2ce2b9da06db2dc749bfcdfc0783276ab096ad53f5d3536da13f593c53587",
+      "size": 892
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/regression.stderr.txt": {
+      "sha256": "bacb87114c82439396b7975af013748a1a20e30bd9895cf1026678e9490e27fd",
+      "size": 684
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/regression.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/sdk-source.patch": {
+      "sha256": "04b0498a16c66b751d3a1a4f954f4d7b72ae6bc49002ea09a89c361e58b6f8bc",
+      "size": 2181
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/sdk-tests.patch": {
+      "sha256": "ce9a0ccf1e713416336622dd41fe6b188454e002cc79cd4e0abb1c679e2cd641",
+      "size": 5193
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/source-provenance.json": {
+      "sha256": "8e9031a3573c3d566a9fe149a2b99532cdf7976957d48d67236aff5a331bac94",
+      "size": 2256
+    },
+    "docs/deployment/evidence/local-runtime-compat-20261016/source-validation.json": {
+      "sha256": "66c232c3b89e10350cf1c1c947eeb2f5dd32756c76f88b90da4dc02a2403e33b",
+      "size": 2431
+    },
+    "fpga_mesh/continuity.py": {
+      "sha256": "8da0a6bcc7f8edc623023fbec4690e2f8c2e720571c9fee87f43fef39617dc25",
+      "size": 22272
+    },
+    "fpga_mesh/feishu_channel.py": {
+      "sha256": "7965257a7aaf51d31b6fa98312256f7700b7bb7d0cfd65d12f90a9b8c80a828a",
+      "size": 15269
+    },
+    "fpga_mesh/presence_policy.py": {
+      "sha256": "ea5b186feb1666e8f7b8b949ef6d0722201416de76425cf29e4585a577e0ec83",
+      "size": 2504
+    },
+    "fpga_mesh/runtime.py": {
+      "sha256": "6dfc147724b701153fca41690462c95b8849c0b453acec179b03421ceca13a18",
+      "size": 25046
+    },
+    "tests/test_feishu_channel.py": {
+      "sha256": "af083c9949fc28c3e149e983aaaffc738d27c9ccfd06201b193bfe5127e002f3",
+      "size": 21159
+    },
+    "tests/test_runtime.py": {
+      "sha256": "aac06f36af7cc48617f26b0d0918dee456eb68bcd915d7753aa01eadf2defdfc",
+      "size": 14051
+    }
+  },
+  "request": {
+    "code_commit": "27bc2c54f3469e3a521289fa1bbd6ea8af3451ec",
+    "expected_result": "19 focused tests exit0 with original warnings retained; two regressions fail before port. No live Feishu requests, runtime stop/deployment, SQL/locks/mapping edits or board operations. Candidate exactly matches normalized B SDK overlay in the two owned code files, applied by patch. H01-H15 SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 fixed.",
+    "operation_id": "B-LOCAL-RUNTIME-COMPAT-20261016-v1",
+    "requester": "node-b",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "test_steps": [
+      "Run exact 19-test command in source-validation.json on committed source27bc2c5; inspect both original failed regressions and all raw warnings.",
+      "Verify the minimal patches preserve the proven B SDK overlay semantics, policy/security, cross-loop message delivery, injected factory and silent presence.",
+      "Verify this new manifest separately. Keep previous cache/owner/token manifests and local human overlay unchanged; do not deploy or change updater/scheduled task."
+    ]
+  },
+  "request_hash": "1cd8472f2589a70fff5cda18138f8c23a332e9650a7d6b393268137d69a545eb",
+  "schema_version": 1,
+  "stages": {
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "live_sdk_reconnect": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "prior_candidate_regressions": {
+      "log": "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stderr.txt",
+      "status": "failed"
+    },
+    "software_regression": {
+      "log": "docs/deployment/evidence/local-runtime-compat-20261016/regression.stderr.txt",
+      "status": "passed"
+    }
+  }
+}

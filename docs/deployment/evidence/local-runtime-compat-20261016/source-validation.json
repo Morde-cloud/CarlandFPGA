@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-16T04:38:15.651244+00:00",
+  "task_id": "B-RUNTIME-CONTINUITY-20261016",
+  "task_version": 1,
+  "work_id": "B-LOCAL-RUNTIME-COMPAT-20261016-v1",
+  "operation_id": "B-LOCAL-RUNTIME-COMPAT-20261016-v1",
+  "source_commit": "27bc2c54f3469e3a521289fa1bbd6ea8af3451ec",
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_feishu_channel",
+    "tests.test_runtime.NodeRuntimeTests.test_feishu_config_and_result_queue_do_not_require_network_at_load",
+    "tests.test_runtime.NodeRuntimeTests.test_peer_presence_changes_stay_internal_without_model_turn"
+  ],
+  "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016",
+  "exit_code": 0,
+  "test_count": 19,
+  "test_seconds": 1.704,
+  "wall_seconds": 2.202999999994063,
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "git": "git version 2.53.0.windows.1",
+  "source_sha256": {
+    "fpga_mesh/feishu_channel.py": "7965257a7aaf51d31b6fa98312256f7700b7bb7d0cfd65d12f90a9b8c80a828a",
+    "tests/test_feishu_channel.py": "af083c9949fc28c3e149e983aaaffc738d27c9ccfd06201b193bfe5127e002f3",
+    "fpga_mesh/runtime.py": "6dfc147724b701153fca41690462c95b8849c0b453acec179b03421ceca13a18",
+    "fpga_mesh/continuity.py": "8da0a6bcc7f8edc623023fbec4690e2f8c2e720571c9fee87f43fef39617dc25",
+    "fpga_mesh/presence_policy.py": "ea5b186feb1666e8f7b8b949ef6d0722201416de76425cf29e4585a577e0ec83",
+    "tests/test_runtime.py": "aac06f36af7cc48617f26b0d0918dee456eb68bcd915d7753aa01eadf2defdfc",
+    "docs/deployment/evidence/local-runtime-compat-20261016/README.md": "0642a235c32f581599ca2bb4b4e0c0159c82e6b203a0b5672b12191b372ed26c"
+  },
+  "all_tested_source_raw_Git_matches": true,
+  "source_unchanged_during_tests": true,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "bacb87114c82439396b7975af013748a1a20e30bd9895cf1026678e9490e27fd",
+  "baseline_two_regressions_exit": 1,
+  "real_Feishu_requests": 0,
+  "deployment_performed": false,
+  "real_board_operations": 0,
+  "warnings_preserved": [
+    "lark_channel protobuf datetime.utcfromtimestamp DeprecationWarning",
+    "ResourceWarning: unclosed event loop; source not isolated by this scoped port; no full resource-lifecycle acceptance claimed"
+  ]
+}

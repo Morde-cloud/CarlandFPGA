@@ -1,0 +1,43 @@
+FE
+======================================================================
+ERROR: test_injected_factory_does_not_load_optional_sdk (tests.test_feishu_channel.FeishuNodeServiceTests.test_injected_factory_does_not_load_optional_sdk)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_feishu_channel.py", line 224, in test_injected_factory_does_not_load_optional_sdk
+    with patch.object(
+         ^^^^^^^^^^^^^
+  File "D:\python\one\Lib\unittest\mock.py", line 1467, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\unittest\mock.py", line 1437, in get_original
+    raise AttributeError(
+AttributeError: <module 'fpga_mesh.feishu_channel' from 'D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\feishu_channel.py'> does not have the attribute '_load_default_channel_factory'
+
+======================================================================
+FAIL: test_default_sdk_import_owns_loop_separate_from_controller (tests.test_feishu_channel.FeishuNodeServiceTests.test_default_sdk_import_owns_loop_separate_from_controller)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\python\one\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_feishu_channel.py", line 188, in test_default_sdk_import_owns_loop_separate_from_controller
+    await service.start()
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\fpga_mesh\feishu_channel.py", line 241, in start
+    from lark_channel import FeishuChannel, PolicyConfig, SecurityConfig
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_feishu_channel.py", line 165, in sdk_attribute
+    raise AssertionError("SDK imported on a running loop")
+AssertionError: SDK imported on a running loop
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.036s
+
+FAILED (failures=1, errors=1)

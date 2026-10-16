@@ -1,0 +1,56 @@
+{
+  "request": {
+    "operation_id": "B-LOCAL-RUNTIME-COMPAT-20261016-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "27bc2c54f3469e3a521289fa1bbd6ea8af3451ec",
+    "test_steps": [
+      "Run exact 19-test command in source-validation.json on committed source27bc2c5; inspect both original failed regressions and all raw warnings.",
+      "Verify the minimal patches preserve the proven B SDK overlay semantics, policy/security, cross-loop message delivery, injected factory and silent presence.",
+      "Verify this new manifest separately. Keep previous cache/owner/token manifests and local human overlay unchanged; do not deploy or change updater/scheduled task."
+    ],
+    "expected_result": "19 focused tests exit0 with original warnings retained; two regressions fail before port. No live Feishu requests, runtime stop/deployment, SQL/locks/mapping edits or board operations. Candidate exactly matches normalized B SDK overlay in the two owned code files, applied by patch. H01-H15 SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 fixed."
+  },
+  "artifacts": [
+    "fpga_mesh/feishu_channel.py",
+    "tests/test_feishu_channel.py",
+    "fpga_mesh/runtime.py",
+    "fpga_mesh/continuity.py",
+    "fpga_mesh/presence_policy.py",
+    "tests/test_runtime.py",
+    "docs/deployment/evidence/local-runtime-compat-20261016/README.md",
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline-command.json",
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stderr.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stdout.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/port-verification.json",
+    "docs/deployment/evidence/local-runtime-compat-20261016/regression.stderr.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/regression.stdout.txt",
+    "docs/deployment/evidence/local-runtime-compat-20261016/sdk-source.patch",
+    "docs/deployment/evidence/local-runtime-compat-20261016/sdk-tests.patch",
+    "docs/deployment/evidence/local-runtime-compat-20261016/source-provenance.json",
+    "docs/deployment/evidence/local-runtime-compat-20261016/source-validation.json"
+  ],
+  "stages": {
+    "prior_candidate_regressions": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/local-runtime-compat-20261016/baseline.stderr.txt"
+    },
+    "software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/local-runtime-compat-20261016/regression.stderr.txt"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "live_sdk_reconnect": {
+      "status": "not_run"
+    },
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    }
+  }
+}

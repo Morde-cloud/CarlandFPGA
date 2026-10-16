@@ -1,0 +1,123 @@
+--- known_base/tests/test_feishu_channel.py
++++ disk/tests/test_feishu_channel.py
+@@ -1,10 +1,15 @@
+ import asyncio
++import sys
+ import tempfile
++import threading
+ import unittest
+ import uuid
+ from dataclasses import dataclass, field
+ from pathlib import Path
+-
++from types import ModuleType
++from unittest.mock import patch
++
++from fpga_mesh import feishu_channel
+ from fpga_mesh.feishu_channel import FeishuAppSender, FeishuIngress, FeishuNodeService
+ from fpga_mesh.protocol import MessageKind, SourceKind
+ from fpga_mesh.store import SQLiteStore
+@@ -128,6 +133,103 @@
+ 
+ 
+ class FeishuNodeServiceTests(unittest.IsolatedAsyncioTestCase):
++    async def test_default_sdk_import_owns_loop_separate_from_controller(self):
++        controller_loop = asyncio.get_running_loop()
++        controller_thread = threading.get_ident()
++        imported_on = []
++        sdk_loop = None
++        channels = []
++        sdk = ModuleType("lark_channel")
++
++        class SDKChannel(FakeChannel):
++            def __init__(self, **kwargs):
++                super().__init__()
++                self.options = kwargs
++                channels.append(self)
++
++            async def disconnect(self):
++                # Mirror the SDK's shutdown of its captured WS loop.
++                if sdk_loop.is_running():
++                    sdk_loop.call_soon_threadsafe(sdk_loop.stop)
++                await super().disconnect()
++
++        def sdk_attribute(name):
++            nonlocal sdk_loop
++            if name == "FeishuChannel":
++                imported_on.append(threading.get_ident())
++                try:
++                    asyncio.get_running_loop()
++                except RuntimeError:
++                    pass
++                else:
++                    raise AssertionError("SDK imported on a running loop")
++                if sdk_loop is None:
++                    try:
++                        sdk_loop = asyncio.get_event_loop()
++                    except RuntimeError:
++                        sdk_loop = asyncio.new_event_loop()
++                return SDKChannel
++            if name in {"PolicyConfig", "SecurityConfig"}:
++                return lambda **kwargs: kwargs
++            raise AttributeError(name)
++
++        sdk.__getattr__ = sdk_attribute
++        controller = RecordingController()
++        with tempfile.TemporaryDirectory() as tmp:
++            secret_file = Path(tmp) / "astra-secret.txt"
++            secret_file.write_text("test-secret", encoding="utf-8")
++            service = FeishuNodeService(
++                node_id="B", project_id="fpga-main", group_id="oc_team",
++                astra_app_id="cli_astra_b", astra_secret_file=secret_file,
++                controller=controller,
++            )
++            try:
++                with patch.dict(sys.modules, {"lark_channel": sdk}):
++                    await service.start()
++                    await service.start()
++                self.assertTrue(imported_on)
++                self.assertTrue(all(t != controller_thread for t in imported_on))
++                self.assertIsNot(sdk_loop, controller_loop)
++                self.assertEqual(len(channels), 1)
++                channel = channels[0]
++                self.assertEqual(channel.options["policy"], {
++                    "dm_policy": "disabled", "group_policy": "allowlist",
++                    "group_allowlist": ["oc_team"], "require_mention": False,
++                })
++                self.assertEqual(channel.options["security"], {"mode": "strict"})
++                self.assertTrue(await channel.handlers["message"](FakeMessage()))
++                self.assertEqual(len(controller.messages), 1)
++                self.assertEqual(
++                    await service.send_as_astra("status", operation_id="op-1"),
++                    "om_sent",
++                )
++            finally:
++                await service.stop()
++                if sdk_loop is not None:
++                    sdk_loop.close()
++            await asyncio.sleep(0)
++            self.assertTrue(controller_loop.is_running())
++            self.assertFalse(channels[0].connected)
++
++    async def test_injected_factory_does_not_load_optional_sdk(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            secret_file = Path(tmp) / "astra-secret.txt"
++            secret_file.write_text("test-secret", encoding="utf-8")
++            channel = FakeChannel()
++            service = FeishuNodeService(
++                node_id="B", project_id="fpga-main", group_id="oc_team",
++                astra_app_id="cli_astra_b", astra_secret_file=secret_file,
++                controller=RecordingController(), channel_factory=lambda **_: channel,
++            )
++            with patch.object(
++                feishu_channel, "_load_default_channel_factory",
++                side_effect=AssertionError("unexpected optional SDK import"),
++            ) as load_sdk:
++                await service.start()
++                await service.stop()
++            load_sdk.assert_not_called()
++            self.assertFalse(channel.connected)
++
+     async def test_sdk_worker_delivers_message_on_controller_loop(self):
+         owner_loop = asyncio.get_running_loop()
+ 

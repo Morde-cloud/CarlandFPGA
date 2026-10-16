@@ -1,0 +1,38 @@
+{
+  "task_id": "B-RUNTIME-CONTINUITY-20261016",
+  "task_version": 1,
+  "work_id": "B-LOCAL-RUNTIME-COMPAT-20261016-v1",
+  "operation_id": "B-LOCAL-RUNTIME-COMPAT-20261016-v1",
+  "base_head": "dcace5700a334ab058522d45ccb6e1d78037f817",
+  "preimages": [
+    {
+      "path": "fpga_mesh/feishu_channel.py",
+      "disk_preimage_sha256": "674d51b6a2a41aca321920f61b4f7520eb870786e6a8f70807a3a40a7e6a3892",
+      "target_checkout_sha256": "bf24b39702089eaca1c04fc528ff55821c673762714041522a8e77f37fa9baed",
+      "target_git_sha256": "3b2c6473b24670588d6c9d7389c1bcf9d88674d41a693ab4dca4bbc3d8f007a3",
+      "target_git_raw_match": false,
+      "target_git_canonical_match": true
+    },
+    {
+      "path": "tests/test_feishu_channel.py",
+      "disk_preimage_sha256": "55426ef79009355724b561aa16004ac47e1dbd708920143d757d81a61e3e07e0",
+      "target_checkout_sha256": "aacd1fab5ce70c928b27588a0b458bbaed5438e35136ac090d28509b29b5e6a3",
+      "target_git_sha256": "f02e14e93db07224d0d5ee1b31ea64f439c9aa05ee2f4f2c6747559bf7885c24",
+      "target_git_raw_match": false,
+      "target_git_canonical_match": true
+    }
+  ],
+  "source_provenance": "B-preserve-sdk-overlay-920ab35.zip; SHA256 78a71fe2313c19b6db00760b3d592d3b71b2c66c4928477ce0c348cc97b9e25d; both local files match original overlay bytes",
+  "design": [
+    "Port only _load_default_channel_factory and awaited asyncio.to_thread invocation; preserve policy/security/sender/ingress/reconnect/outbox code.",
+    "Port only corresponding imports and two regression methods; do not overwrite whole local files. Normalize owned edited files to exact committed LF bytes before validation.",
+    "No actual SDK login/connect/send; regressions use synthetic channel and isolated temporary state.",
+    "Other source conflicts and scheduled-task preservation receive explicit plans only; no updater or live task modifications."
+  ],
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "patched_source_commit": "27bc2c54f3469e3a521289fa1bbd6ea8af3451ec",
+  "only_two_code_files_changed": true,
+  "full_local_file_copy_used": false,
+  "deployment_performed": false
+}

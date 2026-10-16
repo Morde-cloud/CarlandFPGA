@@ -1,0 +1,177 @@
+[
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlib.exe",
+      "work"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:23:52.611618+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-initial-rtl-observation.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main_port_replay_tb.sv"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:23:52.655118+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "6cda8bd5ad2fc0839cc0604d5391505771950a58d49ff1111139224fda8d051b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=1",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case0.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case0.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case0.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:23:52.754427+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "01ab94f67725c8480947f526725816cfef60184cc40b334b9dd9256bfd251b4a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=32",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case1.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case1.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case1.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:23:54.836640+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "473c7452c5b712d3fc5fc3866b21b39d4338b45832c767d45ceffd48797b1e56",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=256",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case2.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case2.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case2.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:23:56.921983+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "15daddf41cfe6d9aeb11050fae0985d9c3a69f22fd36f0e533f98aa4f359bc6f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=256",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case3.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case3.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case3.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:23:59.031845+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "3a5ef4f79855350caa262b1e8e4ee67c51f65b766a65b65403f621ea1dfe1e75",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=1024",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case4.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case4.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case4.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:24:01.026760+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "913b22592f9716e9714a8db7483327cf0aadb097a4da5555994f4694e116c3e5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=8",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case5.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case5.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case5.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:24:03.598985+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "57bff36575dd8c6a7c8eff86106a101ef020dc89bff6da1bfc3fbf730d929538",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=16",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case6.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case6.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\case6.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-review-original\\build",
+    "started_at": "2026-10-16T18:24:05.916582+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "6af26f24a188e025f9d3651204edae9bbacca2062608d8eba2750c26f930b9f5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

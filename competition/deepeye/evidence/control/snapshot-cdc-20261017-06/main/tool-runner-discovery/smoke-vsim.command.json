@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "D:\\modelsim1\\win64\\vsim.exe",
+    "-c",
+    "-onfinish",
+    "stop",
+    "work.smoke",
+    "-do",
+    "onerror {quit -code 8}; onbreak {quit -code 7}; run 20 ns; if {[examine -radix decimal sim:/smoke/done] != 1} {quit -code 9}; quit -code 0"
+  ],
+  "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\tool-smoke",
+  "at_utc": "2026-10-16T17:55:16.475339+00:00",
+  "exit_code": 0,
+  "expected_exit": 0,
+  "stdout_sha256": "3da634377c03c6f6929e16c29b99407e129fd6e94c1314d199036364d20e076c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,33 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -voptargs="+acc" -onfinish stop work.snapshot_mailbox_width_bounds_negative -do "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main-worker-rerun\negative_bounds.do" 
+# Start time: 02:32:32 on Oct 17,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.snapshot_mailbox_width_bounds_negative(fast)
+# Loading work.deepeye_snapshot_mailbox(fast)
+# do {D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main-worker-rerun\negative_bounds.do}
+# ** Error: deepeye_snapshot_mailbox: WIDTH=1025 is outside the legal range 1..1024
+#    Time: 0 ps  Scope: snapshot_mailbox_width_bounds_negative.u_dut.g_width_bounds_violation File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/rtl/control/deepeye_snapshot_mailbox.sv Line: 42
+# ** Fatal: deepeye_snapshot_mailbox: WIDTH bounds violation
+#    Time: 0 ps  Scope: snapshot_mailbox_width_bounds_negative.u_dut.g_width_bounds_violation File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/rtl/control/deepeye_snapshot_mailbox.sv Line: 43
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/rtl/control/deepeye_snapshot_mailbox.sv(43)
+#    Time: 0 ps  Iteration: 0  Region: /snapshot_mailbox_width_bounds_negative/u_dut/g_width_bounds_violation
+# Break in VlGenerateBlock g_width_bounds_violation at D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/rtl/control/deepeye_snapshot_mailbox.sv line 43
+# End time: 02:32:33 on Oct 17,2026, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0

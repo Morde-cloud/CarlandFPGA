@@ -1,0 +1,270 @@
+{
+  "status": "PASS",
+  "work_id": "B-SNAPSHOT-CDC-CANDIDATE-20261017-06-v1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "copied_at_utc": "2026-10-16T18:32:35.589702+00:00",
+  "source_out_dir": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-worker-rerun",
+  "sources": {
+    "rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\rtl\\control\\deepeye_snapshot_mailbox.sv",
+      "sha256": "f62a66799fad77c1641d3d4404d7a99ebe49218435faa7b4824f7720ae33eb0f"
+    },
+    "tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\rtl\\tb_snapshot_mailbox.sv",
+      "sha256": "a05ac99c9581fe121c2bcd7576304a6120d7d7e25f550be871d6edad8a3c795e"
+    },
+    "runner": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control\\run_snapshot_cdc.py",
+      "sha256": "44e7e1fb7d42c47e17eb0d7e7905648a5414e1702a10d85130158e03dfaad5ed"
+    }
+  },
+  "tools": {
+    "root": "D:\\modelsim1\\win64",
+    "hashes": {
+      "vlib": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e",
+      "vlog": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+      "vsim": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf"
+    },
+    "versions": {
+      "vlog": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017",
+      "vsim": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017"
+    }
+  },
+  "expected": {
+    "directed_accepted": 31,
+    "directed_delivered": 25,
+    "directed_discarded": 6,
+    "required_widths": [
+      1,
+      32,
+      256,
+      1024
+    ],
+    "soak_min_transfers": 16,
+    "positive_run_bound_ns": 600000
+  },
+  "limitations": [
+    "digital RTL fixture only; metastability, analog glitches and reset-pulse width are not modeled",
+    "no synthesis, implementation, timing closure, CDC/RDC sign-off, MTBF, B05/R03 or board result",
+    "physical integration gate of SNAPSHOT_CDC_CANDIDATE.md (both resets into the shared flush network, delay/skew bounds, reviewed CDC topology) still applies",
+    "WIDTH=0 cannot elaborate in portable SystemVerilog (zero-width declarations / zero replication); the upper-bound violation executes the same elaboration guard"
+  ],
+  "files": [
+    {
+      "name": "vlog-version.stdout.txt",
+      "bytes": 72,
+      "sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677"
+    },
+    {
+      "name": "vlog-version.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlog-version.command.json",
+      "bytes": 514,
+      "sha256": "1efe8b7e0359edbdeb3d4bd4048e75d1e393878c1ad798a9d315895bc66d6342"
+    },
+    {
+      "name": "vsim-version.stdout.txt",
+      "bytes": 73,
+      "sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27"
+    },
+    {
+      "name": "vsim-version.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vsim-version.command.json",
+      "bytes": 514,
+      "sha256": "42ba8f4a0933791a64fb12635b5216d4ffb05f6c0474f00e1bd66277a47a7aaa"
+    },
+    {
+      "name": "vlib-work.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlib-work.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlib-work.command.json",
+      "bytes": 507,
+      "sha256": "04a314d27f4c62601887151f80e952af49dd9aabb836a85dec37ef4c1904e709"
+    },
+    {
+      "name": "vlog-compile.stdout.txt",
+      "bytes": 704,
+      "sha256": "70afb2a739527753307a47d3a5f9603d35c1420647cff2df2aa49b33f4dd8d20"
+    },
+    {
+      "name": "vlog-compile.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlog-compile.command.json",
+      "bytes": 832,
+      "sha256": "ff0f0c92cc0435ab949a7a3ec379e151ce7e96750daadb81eb20aeae6d2628d6"
+    },
+    {
+      "name": "positive_w1.stdout.txt",
+      "bytes": 16899,
+      "sha256": "48ef0eea47bdd2d2e6e20c6200df0594cfd201e2354846160c33736a2edbba57"
+    },
+    {
+      "name": "positive_w1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w1.command.json",
+      "bytes": 750,
+      "sha256": "63659a12f641bbf97d8316a676148b64a938f9aa8712fe83ece742f97dfacc18"
+    },
+    {
+      "name": "positive_w1.do",
+      "bytes": 130,
+      "sha256": "054359a8b339eb1b05839261d193770daaa39619d56bfd385092644d328248c4"
+    },
+    {
+      "name": "positive_w32.stdout.txt",
+      "bytes": 17908,
+      "sha256": "f3bf4622cb0d36646b0769b2cb62b04f93c2d4bf451baaf5a27de53fe79edf32"
+    },
+    {
+      "name": "positive_w32.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w32.command.json",
+      "bytes": 753,
+      "sha256": "ee5df90d2b642ab9ea45a0c9fddeb270c783c3c42f167924941bc4419545c8a6"
+    },
+    {
+      "name": "positive_w32.do",
+      "bytes": 131,
+      "sha256": "def362ee03419c69de3b0903a9b6b6efe6b1fbd8ebe51a471c9f3133d8abdbbb"
+    },
+    {
+      "name": "positive_w256.stdout.txt",
+      "bytes": 24454,
+      "sha256": "b14ff72b686dd92ecc4be9c910700367663e8208f306be6429ff33cc1f843807"
+    },
+    {
+      "name": "positive_w256.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w256.command.json",
+      "bytes": 756,
+      "sha256": "dffad5d7989e46765eef3e6eb9eeb9582452481163121da9624cbcbba263d344"
+    },
+    {
+      "name": "positive_w256.do",
+      "bytes": 132,
+      "sha256": "0fc5f0169977cd483660a695a574e08edebcd80ec0cf90f09c662da0fa12a4ce"
+    },
+    {
+      "name": "positive_w1024.stdout.txt",
+      "bytes": 46368,
+      "sha256": "6992f8e86a3752f8b9be4cb6fbf40f5db84317f3c68858f5ed8716223d7c9725"
+    },
+    {
+      "name": "positive_w1024.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w1024.command.json",
+      "bytes": 758,
+      "sha256": "567509ca01e99092a07d40b6931fb19db8f9fbe198671694e9486132e1451779"
+    },
+    {
+      "name": "positive_w1024.do",
+      "bytes": 133,
+      "sha256": "04224a79be64841fc340559d1096ed256e2229a186c57111a3aa864835bfd5fb"
+    },
+    {
+      "name": "negative_watchdog.stdout.txt",
+      "bytes": 1999,
+      "sha256": "9422199bb128479529d934d3fcd5866be57efd044d67f5bf0cc44797d7ccf5cb"
+    },
+    {
+      "name": "negative_watchdog.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "negative_watchdog.command.json",
+      "bytes": 784,
+      "sha256": "eb0da0a9f2f345bd915c2bb93fcd9d93508967cc22cef05022ee1be9b1ef3af4"
+    },
+    {
+      "name": "negative_watchdog.do",
+      "bytes": 133,
+      "sha256": "b0734619cb0c42d1579443e6164b6fd32f4327cafd1c3060cf0033823437c956"
+    },
+    {
+      "name": "negative_bounds.stdout.txt",
+      "bytes": 2361,
+      "sha256": "f9708465bda4a3ff9f675b72f8ea8b8cc366f05d0a43a4bf168dbb65c9acdd56"
+    },
+    {
+      "name": "negative_bounds.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "negative_bounds.command.json",
+      "bytes": 759,
+      "sha256": "fe59707bc542a0b2076a03a60e44e8a76b9e8d86ebc8fdbb4f1998bad7c38c54"
+    },
+    {
+      "name": "negative_bounds.do",
+      "bytes": 134,
+      "sha256": "c35fd1354bb8e84f516ec5aef6b0447c2901b25f76fbfb9e8ef92173e63f29f7"
+    },
+    {
+      "name": "probe_lower_bound_zero.stdout.txt",
+      "bytes": 1038,
+      "sha256": "8ce81c3af31d5f105a3540fccbece8d01fa129fb21b448792bd65724b6c1b538"
+    },
+    {
+      "name": "probe_lower_bound_zero.stderr.txt",
+      "bytes": 22,
+      "sha256": "74c912e08b7e00158d87153a4e936c4451e411b1fe0c0c0287d9f8925af0185d"
+    },
+    {
+      "name": "probe_lower_bound_zero.command.json",
+      "bytes": 799,
+      "sha256": "40fd9a09e0c731a8426b58ce361edbb84f8f3bcc96cc3e3b597526720cadf070"
+    },
+    {
+      "name": "probe_lower_bound_zero.do",
+      "bytes": 139,
+      "sha256": "b2b713b7beced0412eedc28d64229fb6a8bd58133189a1d7c1f859a99723b2e0"
+    },
+    {
+      "name": "runner-start.json",
+      "bytes": 2594,
+      "sha256": "2270de68e103fe18a80b537ed61f790197f08a3c881e945b1cf45c91d51227de"
+    },
+    {
+      "name": "runner-result.json",
+      "bytes": 38216,
+      "sha256": "844fc5e2f50f01b05c60e45739cc9ed000bfc931cbc2acbfb461a9700b5c965e"
+    },
+    {
+      "name": "events-extract.txt",
+      "bytes": 101391,
+      "sha256": "6f032b4b33ec48560625c934c8be370e0e293a66c070100267afc5d07d0e966d"
+    }
+  ]
+}

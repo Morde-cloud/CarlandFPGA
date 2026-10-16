@@ -1,0 +1,322 @@
+{
+  "status": "PASS",
+  "negative_controls": 35,
+  "cases": [
+    {
+      "case": "case0",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 188,
+      "column": 17,
+      "rejected": true,
+      "reason": "(188, 'postvalid without captured token')",
+      "mutant_sha256": "c6483d64d94a2b87504848df3d1af88398a7e339759272e29ecfdd373cfa327c"
+    },
+    {
+      "case": "case0",
+      "mutation": "consume_corrupt_payload",
+      "row": 202,
+      "column": 12,
+      "rejected": true,
+      "reason": "(202, 'consume data torn/order')",
+      "mutant_sha256": "80785a417d1cf5323bc7aa104162bd6b1630c4aa7f7bd0c5e11368f0835ed697"
+    },
+    {
+      "case": "case0",
+      "mutation": "unarmed_accept",
+      "row": 32,
+      "column": 8,
+      "rejected": true,
+      "reason": "(32, 'postreset replay or offline accept')",
+      "mutant_sha256": "47b2ec2b8e7ae6689bbdabd623e0733b0f2be1c0b3ee8a9de2eef07a61c1b5c4"
+    },
+    {
+      "case": "case0",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "0e4d663bfabd5effbade1132893b954b96422e51237c6ee351306341a241b602"
+    },
+    {
+      "case": "case0",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,0,1,1,1,1,1,1,0,0,0,0,0,x,0,0,0,0')",
+      "mutant_sha256": "46e18ed3e6a56ada4da458305c4c675bde91c1ae22f547bf1888c76ff1e5a754"
+    },
+    {
+      "case": "case1",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 164,
+      "column": 17,
+      "rejected": true,
+      "reason": "(164, 'postvalid without captured token')",
+      "mutant_sha256": "28433ddc202066889841a1a80cdb4ac81894adf25d3a2ea4e33ba25333d48978"
+    },
+    {
+      "case": "case1",
+      "mutation": "consume_corrupt_payload",
+      "row": 168,
+      "column": 12,
+      "rejected": true,
+      "reason": "(168, 'consume data torn/order')",
+      "mutant_sha256": "a82cf98fad83465d0aeb2b28aada7e0d8bec01c983bc09e5ee679f93456c6ec6"
+    },
+    {
+      "case": "case1",
+      "mutation": "unarmed_accept",
+      "row": 42,
+      "column": 8,
+      "rejected": true,
+      "reason": "(42, 'postreset replay or offline accept')",
+      "mutant_sha256": "f45980e79ba51d8324adc6f7c61af544c0f9e331b0956f4f3b32eacb4676c87c"
+    },
+    {
+      "case": "case1",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 0, 1, 0, 1, 1, 0, 2627409465, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "92d067fe9d3274b23a68884e6d0a35ca23df15cf3a26f6933435aad2c82a9886"
+    },
+    {
+      "case": "case1",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,0,0,1,1,1,1,f55500a6,0,0,0,0,00000000,x,0,0,0,00000000')",
+      "mutant_sha256": "022956fcb99693ee9464f2792a9727d86c404d6a4afc8f15d0430f0ea76c3454"
+    },
+    {
+      "case": "case2",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 184,
+      "column": 17,
+      "rejected": true,
+      "reason": "(184, 'postvalid without captured token')",
+      "mutant_sha256": "8636ad9be10240c77c037a78f88590724c6e6d14dfeb9d6439fa3a911ac76d73"
+    },
+    {
+      "case": "case2",
+      "mutation": "consume_corrupt_payload",
+      "row": 214,
+      "column": 12,
+      "rejected": true,
+      "reason": "(214, 'consume data torn/order')",
+      "mutant_sha256": "0d0e93bbdf433289ef17f5fc135a5cfb11c369efd631d36505a665e0ec4903f0"
+    },
+    {
+      "case": "case2",
+      "mutation": "unarmed_accept",
+      "row": 30,
+      "column": 8,
+      "rejected": true,
+      "reason": "(30, 'postreset replay or offline accept')",
+      "mutant_sha256": "c64be0f88c8502308c1ebfb9d615ae49698e34c1e32d78e72cf7215527bb213a"
+    },
+    {
+      "case": "case2",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 0, 0, 0, 1, 1, 0, 21831061363768689935938306033463381353231793866320819897165088254351988698262, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "936909afeae8ed0ff84feab68fc7a11d457df841d34b27034b4f3bd7e6152c2e"
+    },
+    {
+      "case": "case2",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,1,0,1,1,1,1,222815a5160b4f0de1d6ed76ab22514895d110552b2112c32f815f4508b94a6a,0,0,0,0,0000000000000000000000000000000000000000000000000000000000000000,x,0,0,0,0000000000000000000000000000000000000000000000000000000000000000')",
+      "mutant_sha256": "f8c30b0b164382f9eb277ab7dc2d05c29bc667fe800b1498c2fe7c34d9ffb8b7"
+    },
+    {
+      "case": "case3",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 163,
+      "column": 17,
+      "rejected": true,
+      "reason": "(163, 'postvalid without captured token')",
+      "mutant_sha256": "217fdccba146310c8299548a194759021b8d29963eb8bd32f96205bde15e503b"
+    },
+    {
+      "case": "case3",
+      "mutation": "consume_corrupt_payload",
+      "row": 169,
+      "column": 12,
+      "rejected": true,
+      "reason": "(169, 'consume data torn/order')",
+      "mutant_sha256": "366dbf4fd2606faa24396f9b9157e90ffbfdb4e7061cbc322e643489e6915db0"
+    },
+    {
+      "case": "case3",
+      "mutation": "unarmed_accept",
+      "row": 30,
+      "column": 8,
+      "rejected": true,
+      "reason": "(30, 'postreset replay or offline accept')",
+      "mutant_sha256": "1e824a9f34112d61926ca46716b47ca472d798424831be631fb85c4ef759134f"
+    },
+    {
+      "case": "case3",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 1, 0, 0, 1, 1, 0, 108607467935842132150815205188357999060879075457935502491136744761915149480121, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "c86fc9b08be3cb4a341e0e285c4c8d9dfd67dd80cb68063e30c5090aae0c9cee"
+    },
+    {
+      "case": "case3",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,1,1,1,1,1,1,2bde772d5de4883fa676b7ee35846932058b91e8414017797c3814ee324ec1c7,0,0,0,0,0000000000000000000000000000000000000000000000000000000000000000,x,0,0,0,0000000000000000000000000000000000000000000000000000000000000000')",
+      "mutant_sha256": "12e9a4553b67ed54dc0715d599684f985a18ce85525c767861c7b8fe35e1d536"
+    },
+    {
+      "case": "case4",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 203,
+      "column": 17,
+      "rejected": true,
+      "reason": "(203, 'postvalid without captured token')",
+      "mutant_sha256": "1f2747cffe035962f44512ef9d3920d588fea24c0cecbdd188a4fec407e2a565"
+    },
+    {
+      "case": "case4",
+      "mutation": "consume_corrupt_payload",
+      "row": 239,
+      "column": 12,
+      "rejected": true,
+      "reason": "(239, 'consume data torn/order')",
+      "mutant_sha256": "7aaa9c245270d0d6de265dea61d217a578e4b43cdfdf332992e5ef576468ec3d"
+    },
+    {
+      "case": "case4",
+      "mutation": "unarmed_accept",
+      "row": 32,
+      "column": 8,
+      "rejected": true,
+      "reason": "(32, 'postreset replay or offline accept')",
+      "mutant_sha256": "742f0bbb22da67a1490ae2719675b521af977258d11e8f7c504bf3587a199b46"
+    },
+    {
+      "case": "case4",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 0, 0, 0, 1, 1, 0, 53150440263204933508560821530637265077635825953253560105519395713056176794590815345795296907122069167062521947026021114759767959389373605413787280571552594905390608030802037183578929248889587761023688666876587338796788721548138471545349211546374546639297746702117590798477875353961547445302547183759449636868, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "6dcef1818ee4e5fbd052d624ff9e6e9936b4869392258a21b9dddd5206ade3f4"
+    },
+    {
+      "case": "case4",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,1,0,1,1,1,0,55530c6ba6e58a7726b5640fc7666bd8d89ad5ec3ca9a159c44c30a6be58e33d71c67b763c93784fbdd80f1242a768fc417be750442ce871ab6552812d16c8419ef377cd010bcb5bdc56570b18129a0c39b483f2ea8e1e1465ada408bc564784a046f66c49fe3173f94c91da302d4f372e2e1093f42b8921eb04687b2aebbe3a,0,0,0,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,x,0,0,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')",
+      "mutant_sha256": "14733696cfc3a311bbed7c904be230bfd4c09478cdebb8d41b16584adb98a59a"
+    },
+    {
+      "case": "case5",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 530,
+      "column": 17,
+      "rejected": true,
+      "reason": "(530, 'postvalid without captured token')",
+      "mutant_sha256": "2eeb26cb9a58d460efa528ef4fe32c71c549beafaf455ebe0d7582f5f67b38e1"
+    },
+    {
+      "case": "case5",
+      "mutation": "consume_corrupt_payload",
+      "row": 556,
+      "column": 12,
+      "rejected": true,
+      "reason": "(556, 'consume data torn/order')",
+      "mutant_sha256": "58ba9b8862453a1be9f8f8b61656187f6128aa860095c53d11937240776749ee"
+    },
+    {
+      "case": "case5",
+      "mutation": "unarmed_accept",
+      "row": 253,
+      "column": 8,
+      "rejected": true,
+      "reason": "(253, 'postreset replay or offline accept')",
+      "mutant_sha256": "8d7d48f20b2e9783af913aef6b5e85f5fc286aad084193a681812b00cfba6378"
+    },
+    {
+      "case": "case5",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 0, 0, 0, 1, 1, 0, 64, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "8edb5816e74016554767afae407b782383356a7c6d889491978c8a168502c75f"
+    },
+    {
+      "case": "case5",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,0,0,1,1,1,1,08,0,0,0,0,00,x,0,0,0,00')",
+      "mutant_sha256": "3c324311ddb1ada724b79b84d21fa180afe1a62435bd78bde42e0ac2ef2e9672"
+    },
+    {
+      "case": "case6",
+      "mutation": "postvalid_corrupt_payload",
+      "row": 545,
+      "column": 17,
+      "rejected": true,
+      "reason": "(545, 'postvalid without captured token')",
+      "mutant_sha256": "74b2455b361535a6f8551c386f7c8182a389b0061a0042be1f19454e6fada215"
+    },
+    {
+      "case": "case6",
+      "mutation": "consume_corrupt_payload",
+      "row": 589,
+      "column": 12,
+      "rejected": true,
+      "reason": "(589, 'consume data torn/order')",
+      "mutant_sha256": "2a2d7489f1bdbadcb580e62f24b6e521aca030941832a93c61f222f11a186923"
+    },
+    {
+      "case": "case6",
+      "mutation": "unarmed_accept",
+      "row": 52,
+      "column": 8,
+      "rejected": true,
+      "reason": "(52, 'postreset replay or offline accept')",
+      "mutant_sha256": "3d83fea57b185becb68e1fd666c5d6dba0af812806ddd2697dc38743b00a34db"
+    },
+    {
+      "case": "case6",
+      "mutation": "asynchronous_flush_missing",
+      "row": 1300,
+      "column": 15,
+      "rejected": true,
+      "reason": "(1300, 'async reset incomplete', [1300, 1, 1, 0, 1, 1, 0, 19387, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])",
+      "mutant_sha256": "9d0ee1abf128a62bcd33551ead13dfa4110d67d534ab5ea07c43adc9e1cc2add"
+    },
+    {
+      "case": "case6",
+      "mutation": "unknown_port",
+      "row": 50,
+      "column": 13,
+      "rejected": true,
+      "reason": "(50, 'unknown port', '50,0,0,1,1,1,1,ef82,0,0,0,0,0000,x,0,0,0,0000')",
+      "mutant_sha256": "e804dc91d0c70c25f040b00260945bfb6cf4b6383cf83212664ca68cf198cbb4"
+    }
+  ],
+  "scope": "checker sensitivity against captured port mutations, not additional DUT runs"
+}

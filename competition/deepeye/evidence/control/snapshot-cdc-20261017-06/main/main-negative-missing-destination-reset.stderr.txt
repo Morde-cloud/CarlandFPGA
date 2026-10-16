@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main_port_review.py", line 140, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main_port_review.py", line 127, in main
+    raw=lf.read_bytes();counts=review(vs,raw,width)
+                               ^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main_port_review.py", line 64, in review
+    assert not any((sready,sonline,dvalid,donline,dd,psready,psonline,pdvalid,pdonline,pdd)),(i,'async reset incomplete',got)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (2510, 'async reset incomplete', [2510, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1])

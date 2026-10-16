@@ -1,0 +1,73 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-SNAPSHOT-CDC-CANDIDATE-20261017-06-v1",
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "at_utc": "2026-10-16T18:32:22.966700+00:00",
+  "out_dir": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-worker-rerun",
+  "out_dir_created_fresh": true,
+  "widths": [
+    1,
+    32,
+    256,
+    1024
+  ],
+  "required_widths": [
+    1,
+    32,
+    256,
+    1024
+  ],
+  "modelsim_root": "D:\\modelsim1\\win64",
+  "timeout_seconds": 60,
+  "tool_hashes": {
+    "vlib": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e",
+    "vlog": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+    "vsim": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf"
+  },
+  "sources": {
+    "rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\rtl\\control\\deepeye_snapshot_mailbox.sv",
+      "sha256": "f62a66799fad77c1641d3d4404d7a99ebe49218435faa7b4824f7720ae33eb0f"
+    },
+    "tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\rtl\\tb_snapshot_mailbox.sv",
+      "sha256": "a05ac99c9581fe121c2bcd7576304a6120d7d7e25f550be871d6edad8a3c795e"
+    },
+    "runner": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control\\run_snapshot_cdc.py",
+      "sha256": "44e7e1fb7d42c47e17eb0d7e7905648a5414e1702a10d85130158e03dfaad5ed"
+    }
+  },
+  "spec": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-candidate-spec.md",
+    "sha256": "7cf01d1c5428b6173a01f7b58d8168165e38349712b2d763db335c6f1509009f"
+  },
+  "positive_run_bound_ns": 600000,
+  "negative_hang_bound_ns": 1500000,
+  "tb_watchdog_ns": 1200000,
+  "note": "candidate RTL fixtures only; no synthesis/timing/CDC sign-off and no board result"
+}

@@ -1,0 +1,34 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -onfinish stop work.smoke -do "onerror {quit -code 8}; onbreak {quit -code 7}; run 20 ns; if {[examine -radix decimal sim:/smoke/done] != 1} {quit -code 9}; quit -code 0" 
+# Start time: 01:55:18 on Oct 17,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.smoke(fast)
+# onerror {quit -code 8}
+#  Warning: onerror command for use within macro
+#  onbreak {quit -code 7}
+#  Warning: onbreak command for use within macro
+#  run 20 ns
+# SMOKE_EXECUTED
+#  if {[examine -radix decimal sim:/smoke/done] != 1} {quit -code 9}
+# ** Error: (vish-4014) No objects found matching 'sim:/smoke/done'.
+# 
+#  quit -code 0
+# End time: 01:55:19 on Oct 17,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

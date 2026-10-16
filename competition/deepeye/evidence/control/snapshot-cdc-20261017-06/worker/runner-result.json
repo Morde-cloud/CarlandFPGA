@@ -1,0 +1,1321 @@
+{
+  "status": "PASS",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-SNAPSHOT-CDC-CANDIDATE-20261017-06-v1",
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "at_utc": "2026-10-16T18:29:03.103618+00:00",
+  "out_dir": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+  "widths": [
+    1,
+    32,
+    256,
+    1024
+  ],
+  "sources": {
+    "rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\rtl\\control\\deepeye_snapshot_mailbox.sv",
+      "sha256": "6d4500f250263f14ec24c6896cb69ad16704dd6c512dd565a1f92e91ccb2cc25"
+    },
+    "tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\rtl\\tb_snapshot_mailbox.sv",
+      "sha256": "a05ac99c9581fe121c2bcd7576304a6120d7d7e25f550be871d6edad8a3c795e"
+    },
+    "runner": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control\\run_snapshot_cdc.py",
+      "sha256": "44e7e1fb7d42c47e17eb0d7e7905648a5414e1702a10d85130158e03dfaad5ed"
+    }
+  },
+  "spec": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-candidate-spec.md",
+    "sha256": "7cf01d1c5428b6173a01f7b58d8168165e38349712b2d763db335c6f1509009f"
+  },
+  "tools": {
+    "root": "D:\\modelsim1\\win64",
+    "hashes": {
+      "vlib": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e",
+      "vlog": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+      "vsim": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf"
+    },
+    "versions": {
+      "vlog": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017",
+      "vsim": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017"
+    }
+  },
+  "expected": {
+    "directed_accepted": 31,
+    "directed_delivered": 25,
+    "directed_discarded": 6,
+    "required_widths": [
+      1,
+      32,
+      256,
+      1024
+    ],
+    "soak_min_transfers": 16,
+    "positive_run_bound_ns": 600000
+  },
+  "run_records": [
+    {
+      "name": "vlog-version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 0.031,
+      "at_utc": "2026-10-16T18:28:48.042585+00:00",
+      "stdout_sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vsim-version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 0.094,
+      "at_utc": "2026-10-16T18:28:48.127712+00:00",
+      "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlib-work",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 0.031,
+      "at_utc": "2026-10-16T18:28:48.165906+00:00",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlog-compile",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\rtl\\control\\deepeye_snapshot_mailbox.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\rtl\\tb_snapshot_mailbox.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 0.094,
+      "at_utc": "2026-10-16T18:28:48.264003+00:00",
+      "stdout_sha256": "c20b922c7229942394c42e9e742f5c37a370d03864a50c27e1de5f2eda299f9d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w1",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "-gWIDTH=1",
+        "work.tb_snapshot_mailbox",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\positive_w1.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 2.453,
+      "at_utc": "2026-10-16T18:28:50.720735+00:00",
+      "stdout_sha256": "8dc3bd8ba52e3e67b53c4ebb14777f60ae14bb9c91848b8c1e97566a4ab1b83e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w32",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "-gWIDTH=32",
+        "work.tb_snapshot_mailbox",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\positive_w32.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 2.39,
+      "at_utc": "2026-10-16T18:28:53.114288+00:00",
+      "stdout_sha256": "f6b5c2570101ecd9181624b726579dadbf82429b17ae3bb29e3b7df28792806d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w256",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "-gWIDTH=256",
+        "work.tb_snapshot_mailbox",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\positive_w256.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 2.235,
+      "at_utc": "2026-10-16T18:28:55.350417+00:00",
+      "stdout_sha256": "812e92b0534421987c76be294ed8323e43100fbe58d5227475c65545e9803539",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "positive_w1024",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "-gWIDTH=1024",
+        "work.tb_snapshot_mailbox",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\positive_w1024.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 0,
+      "timed_out": false,
+      "wall_seconds": 2.234,
+      "at_utc": "2026-10-16T18:28:57.586161+00:00",
+      "stdout_sha256": "4e5e5fb011aedc40775309471d73941a944d084dbb900b3db2b2fcd20065a597",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "negative_watchdog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "+tb_neg_hang",
+        "-gWIDTH=32",
+        "work.tb_snapshot_mailbox",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\negative_watchdog.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 7,
+      "timed_out": false,
+      "wall_seconds": 1.703,
+      "at_utc": "2026-10-16T18:28:59.292577+00:00",
+      "stdout_sha256": "21288e248b6f8065f09decceeabe4bbb56aa1047da1f5d6d644e0d381c8ce7dd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "negative_bounds",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "work.snapshot_mailbox_width_bounds_negative",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\negative_bounds.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 7,
+      "timed_out": false,
+      "wall_seconds": 2.0,
+      "at_utc": "2026-10-16T18:29:01.289278+00:00",
+      "stdout_sha256": "f48c58df24d72b48b79a343da985a13bd134dcb2a65e659aab40d7fbd0280f7f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "probe_lower_bound_zero",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-voptargs=+acc",
+        "-onfinish",
+        "stop",
+        "-gBOUNDS_WIDTH=0",
+        "work.snapshot_mailbox_width_bounds_negative",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4\\probe_lower_bound_zero.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\worker\\scratch-runner-out4",
+      "exit_code": 12,
+      "timed_out": false,
+      "wall_seconds": 1.813,
+      "at_utc": "2026-10-16T18:29:03.102616+00:00",
+      "stdout_sha256": "7a5ad6fa137d332f411d894c1a643865284f2ea83e4af0dadbaedaa19488a6ce",
+      "stderr_sha256": "74c912e08b7e00158d87153a4e936c4451e411b1fe0c0c0287d9f8925af0185d"
+    }
+  ],
+  "checks": [
+    {
+      "run": "vlog-version",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "vsim-version",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "vlib-work",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "vlib-work",
+      "check": "work_library_created",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "vlog-compile",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "vlog-compile",
+      "check": "zero_compile_errors",
+      "ok": true,
+      "detail": "errors='0'"
+    },
+    {
+      "run": "vlog-compile",
+      "check": "no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "vlog-compile",
+      "check": "tb_top_listed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "positive_w1",
+      "check": "not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "stdout_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "stdout_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "stderr_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "stderr_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "runner_reached_bound",
+      "ok": true,
+      "detail": "marker='w1'"
+    },
+    {
+      "run": "positive_w1",
+      "check": "exact_tb_done_marker",
+      "ok": true,
+      "detail": "found=[b'1']"
+    },
+    {
+      "run": "positive_w1",
+      "check": "all_cases_reported",
+      "ok": true,
+      "detail": "reported=14"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_startup_counts",
+      "ok": true,
+      "detail": "seen=(1, 1, 1, 0, 0) expected=(w=1,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_payload_stall_counts",
+      "ok": true,
+      "detail": "seen=(1, 1, 1, 0, 0) expected=(w=1,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_consecutive_counts",
+      "ok": true,
+      "detail": "seen=(1, 8, 8, 0, 0) expected=(w=1,acc=8,del=8,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_dst_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 2, 0, 0) expected=(w=1,acc=2,del=2,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_src_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(1, 3, 3, 0, 0) expected=(w=1,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_held_high_valid_across_reset_counts",
+      "ok": true,
+      "detail": "seen=(1, 1, 1, 0, 0) expected=(w=1,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_idle_counts",
+      "ok": true,
+      "detail": "seen=(1, 3, 3, 0, 0) expected=(w=1,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 1, 1, 0) expected=(w=1,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_valid_pending_stall_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 1, 1, 0) expected=(w=1,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_dst_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 1, 1, 0) expected=(w=1,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_src_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 1, 1, 0) expected=(w=1,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_dst_only_stalled_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 1, 1, 0) expected=(w=1,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "case_reset_dst_only_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(1, 2, 1, 1, 0) expected=(w=1,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "soak_ledger",
+      "ok": true,
+      "detail": "seen=(1, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "soak_min_transfers",
+      "ok": true,
+      "detail": "seen=(1, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "single_summary",
+      "ok": true,
+      "detail": "found=1"
+    },
+    {
+      "run": "positive_w1",
+      "check": "summary_width",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "summary_ledger",
+      "ok": true,
+      "detail": "acc=68 del=45 disc=23"
+    },
+    {
+      "run": "positive_w1",
+      "check": "summary_directed_counts",
+      "ok": true,
+      "detail": "directed=(31,25,6) expected=(31,25,6)"
+    },
+    {
+      "run": "positive_w1",
+      "check": "summary_soak_chain",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1",
+      "check": "summary_tb_errors_zero",
+      "ok": true,
+      "detail": "tb_errors=0"
+    },
+    {
+      "run": "positive_w1",
+      "check": "flush_events_min",
+      "ok": true,
+      "detail": "flush_events=70"
+    },
+    {
+      "run": "positive_w1",
+      "check": "src_reset_drops_min",
+      "ok": true,
+      "detail": "src_reset_drops=46"
+    },
+    {
+      "run": "positive_w1",
+      "check": "dst_reset_drops_min",
+      "ok": true,
+      "detail": "dst_reset_drops=46"
+    },
+    {
+      "run": "positive_w1",
+      "check": "event_accept_count",
+      "ok": true,
+      "detail": "events=68 summary=68"
+    },
+    {
+      "run": "positive_w1",
+      "check": "event_deliver_count",
+      "ok": true,
+      "detail": "events=45 summary=45"
+    },
+    {
+      "run": "positive_w1",
+      "check": "event_flush_count",
+      "ok": true,
+      "detail": "events=70 summary=70"
+    },
+    {
+      "run": "positive_w32",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "positive_w32",
+      "check": "not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "stdout_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "stdout_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "stderr_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "stderr_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "runner_reached_bound",
+      "ok": true,
+      "detail": "marker='w32'"
+    },
+    {
+      "run": "positive_w32",
+      "check": "exact_tb_done_marker",
+      "ok": true,
+      "detail": "found=[b'32']"
+    },
+    {
+      "run": "positive_w32",
+      "check": "all_cases_reported",
+      "ok": true,
+      "detail": "reported=14"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_startup_counts",
+      "ok": true,
+      "detail": "seen=(32, 1, 1, 0, 0) expected=(w=32,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_payload_stall_counts",
+      "ok": true,
+      "detail": "seen=(32, 1, 1, 0, 0) expected=(w=32,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_consecutive_counts",
+      "ok": true,
+      "detail": "seen=(32, 8, 8, 0, 0) expected=(w=32,acc=8,del=8,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_dst_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 2, 0, 0) expected=(w=32,acc=2,del=2,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_src_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(32, 3, 3, 0, 0) expected=(w=32,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_held_high_valid_across_reset_counts",
+      "ok": true,
+      "detail": "seen=(32, 1, 1, 0, 0) expected=(w=32,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_idle_counts",
+      "ok": true,
+      "detail": "seen=(32, 3, 3, 0, 0) expected=(w=32,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 1, 1, 0) expected=(w=32,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_valid_pending_stall_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 1, 1, 0) expected=(w=32,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_dst_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 1, 1, 0) expected=(w=32,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_src_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 1, 1, 0) expected=(w=32,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_dst_only_stalled_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 1, 1, 0) expected=(w=32,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "case_reset_dst_only_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(32, 2, 1, 1, 0) expected=(w=32,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "soak_ledger",
+      "ok": true,
+      "detail": "seen=(32, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "soak_min_transfers",
+      "ok": true,
+      "detail": "seen=(32, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "single_summary",
+      "ok": true,
+      "detail": "found=1"
+    },
+    {
+      "run": "positive_w32",
+      "check": "summary_width",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "summary_ledger",
+      "ok": true,
+      "detail": "acc=68 del=45 disc=23"
+    },
+    {
+      "run": "positive_w32",
+      "check": "summary_directed_counts",
+      "ok": true,
+      "detail": "directed=(31,25,6) expected=(31,25,6)"
+    },
+    {
+      "run": "positive_w32",
+      "check": "summary_soak_chain",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w32",
+      "check": "summary_tb_errors_zero",
+      "ok": true,
+      "detail": "tb_errors=0"
+    },
+    {
+      "run": "positive_w32",
+      "check": "flush_events_min",
+      "ok": true,
+      "detail": "flush_events=70"
+    },
+    {
+      "run": "positive_w32",
+      "check": "src_reset_drops_min",
+      "ok": true,
+      "detail": "src_reset_drops=46"
+    },
+    {
+      "run": "positive_w32",
+      "check": "dst_reset_drops_min",
+      "ok": true,
+      "detail": "dst_reset_drops=46"
+    },
+    {
+      "run": "positive_w32",
+      "check": "event_accept_count",
+      "ok": true,
+      "detail": "events=68 summary=68"
+    },
+    {
+      "run": "positive_w32",
+      "check": "event_deliver_count",
+      "ok": true,
+      "detail": "events=45 summary=45"
+    },
+    {
+      "run": "positive_w32",
+      "check": "event_flush_count",
+      "ok": true,
+      "detail": "events=70 summary=70"
+    },
+    {
+      "run": "positive_w256",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "positive_w256",
+      "check": "not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "stdout_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "stdout_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "stderr_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "stderr_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "runner_reached_bound",
+      "ok": true,
+      "detail": "marker='w256'"
+    },
+    {
+      "run": "positive_w256",
+      "check": "exact_tb_done_marker",
+      "ok": true,
+      "detail": "found=[b'256']"
+    },
+    {
+      "run": "positive_w256",
+      "check": "all_cases_reported",
+      "ok": true,
+      "detail": "reported=14"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_startup_counts",
+      "ok": true,
+      "detail": "seen=(256, 1, 1, 0, 0) expected=(w=256,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_payload_stall_counts",
+      "ok": true,
+      "detail": "seen=(256, 1, 1, 0, 0) expected=(w=256,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_consecutive_counts",
+      "ok": true,
+      "detail": "seen=(256, 8, 8, 0, 0) expected=(w=256,acc=8,del=8,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_dst_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 2, 0, 0) expected=(w=256,acc=2,del=2,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_src_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(256, 3, 3, 0, 0) expected=(w=256,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_held_high_valid_across_reset_counts",
+      "ok": true,
+      "detail": "seen=(256, 1, 1, 0, 0) expected=(w=256,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_idle_counts",
+      "ok": true,
+      "detail": "seen=(256, 3, 3, 0, 0) expected=(w=256,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 1, 1, 0) expected=(w=256,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_valid_pending_stall_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 1, 1, 0) expected=(w=256,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_dst_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 1, 1, 0) expected=(w=256,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_src_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 1, 1, 0) expected=(w=256,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_dst_only_stalled_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 1, 1, 0) expected=(w=256,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "case_reset_dst_only_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(256, 2, 1, 1, 0) expected=(w=256,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "soak_ledger",
+      "ok": true,
+      "detail": "seen=(256, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "soak_min_transfers",
+      "ok": true,
+      "detail": "seen=(256, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "single_summary",
+      "ok": true,
+      "detail": "found=1"
+    },
+    {
+      "run": "positive_w256",
+      "check": "summary_width",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "summary_ledger",
+      "ok": true,
+      "detail": "acc=68 del=45 disc=23"
+    },
+    {
+      "run": "positive_w256",
+      "check": "summary_directed_counts",
+      "ok": true,
+      "detail": "directed=(31,25,6) expected=(31,25,6)"
+    },
+    {
+      "run": "positive_w256",
+      "check": "summary_soak_chain",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w256",
+      "check": "summary_tb_errors_zero",
+      "ok": true,
+      "detail": "tb_errors=0"
+    },
+    {
+      "run": "positive_w256",
+      "check": "flush_events_min",
+      "ok": true,
+      "detail": "flush_events=70"
+    },
+    {
+      "run": "positive_w256",
+      "check": "src_reset_drops_min",
+      "ok": true,
+      "detail": "src_reset_drops=46"
+    },
+    {
+      "run": "positive_w256",
+      "check": "dst_reset_drops_min",
+      "ok": true,
+      "detail": "dst_reset_drops=46"
+    },
+    {
+      "run": "positive_w256",
+      "check": "event_accept_count",
+      "ok": true,
+      "detail": "events=68 summary=68"
+    },
+    {
+      "run": "positive_w256",
+      "check": "event_deliver_count",
+      "ok": true,
+      "detail": "events=45 summary=45"
+    },
+    {
+      "run": "positive_w256",
+      "check": "event_flush_count",
+      "ok": true,
+      "detail": "events=70 summary=70"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "exit_code_zero",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "stdout_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "stdout_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "stderr_no_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "stderr_no_fatal_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "runner_reached_bound",
+      "ok": true,
+      "detail": "marker='w1024'"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "exact_tb_done_marker",
+      "ok": true,
+      "detail": "found=[b'1024']"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "all_cases_reported",
+      "ok": true,
+      "detail": "reported=14"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_startup_counts",
+      "ok": true,
+      "detail": "seen=(1024, 1, 1, 0, 0) expected=(w=1024,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_payload_stall_counts",
+      "ok": true,
+      "detail": "seen=(1024, 1, 1, 0, 0) expected=(w=1024,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_consecutive_counts",
+      "ok": true,
+      "detail": "seen=(1024, 8, 8, 0, 0) expected=(w=1024,acc=8,del=8,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_dst_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 2, 0, 0) expected=(w=1024,acc=2,del=2,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_src_clock_stop_counts",
+      "ok": true,
+      "detail": "seen=(1024, 3, 3, 0, 0) expected=(w=1024,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_held_high_valid_across_reset_counts",
+      "ok": true,
+      "detail": "seen=(1024, 1, 1, 0, 0) expected=(w=1024,acc=1,del=1,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_idle_counts",
+      "ok": true,
+      "detail": "seen=(1024, 3, 3, 0, 0) expected=(w=1024,acc=3,del=3,disc=0,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 1, 1, 0) expected=(w=1024,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_valid_pending_stall_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 1, 1, 0) expected=(w=1024,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_dst_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 1, 1, 0) expected=(w=1024,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_src_clock_stopped_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 1, 1, 0) expected=(w=1024,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_dst_only_stalled_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 1, 1, 0) expected=(w=1024,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "case_reset_dst_only_inflight_request_counts",
+      "ok": true,
+      "detail": "seen=(1024, 2, 1, 1, 0) expected=(w=1024,acc=2,del=1,disc=1,err=0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "soak_ledger",
+      "ok": true,
+      "detail": "seen=(1024, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "soak_min_transfers",
+      "ok": true,
+      "detail": "seen=(1024, 37, 20, 17, 0)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "single_summary",
+      "ok": true,
+      "detail": "found=1"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "summary_width",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "summary_ledger",
+      "ok": true,
+      "detail": "acc=68 del=45 disc=23"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "summary_directed_counts",
+      "ok": true,
+      "detail": "directed=(31,25,6) expected=(31,25,6)"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "summary_soak_chain",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "positive_w1024",
+      "check": "summary_tb_errors_zero",
+      "ok": true,
+      "detail": "tb_errors=0"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "flush_events_min",
+      "ok": true,
+      "detail": "flush_events=70"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "src_reset_drops_min",
+      "ok": true,
+      "detail": "src_reset_drops=46"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "dst_reset_drops_min",
+      "ok": true,
+      "detail": "dst_reset_drops=46"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "event_accept_count",
+      "ok": true,
+      "detail": "events=68 summary=68"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "event_deliver_count",
+      "ok": true,
+      "detail": "events=45 summary=45"
+    },
+    {
+      "run": "positive_w1024",
+      "check": "event_flush_count",
+      "ok": true,
+      "detail": "events=70 summary=70"
+    },
+    {
+      "run": "negative_watchdog",
+      "check": "negative_exit_7",
+      "ok": true,
+      "detail": "exit=7"
+    },
+    {
+      "run": "negative_watchdog",
+      "check": "negative_not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_watchdog",
+      "check": "negative_hang_armed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_watchdog",
+      "check": "negative_watchdog_fatal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_watchdog",
+      "check": "negative_no_tb_done",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_watchdog",
+      "check": "negative_no_runner_bound",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_exit_7",
+      "ok": true,
+      "detail": "exit=7"
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_bounds_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_bounds_fatal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_no_guard_fire",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_no_tb_done",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "negative_bounds",
+      "check": "negative_no_runner_bound",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "probe_lower_bound_zero",
+      "check": "probe_hard_failure",
+      "ok": true,
+      "detail": "exit=12"
+    },
+    {
+      "run": "probe_lower_bound_zero",
+      "check": "probe_not_timed_out",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "probe_lower_bound_zero",
+      "check": "probe_tool_error_marker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "run": "probe_lower_bound_zero",
+      "check": "probe_no_tb_done",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "failures": [],
+  "negative_controls": {
+    "watchdog_hang": "must exit 7 with ** Fatal: TB_WATCHDOG_TIMEOUT and no TB_DONE",
+    "width_bounds": "must exit 7 with the WIDTH=1025 bounds messages and no TB_DONE",
+    "lower_bound_zero_probe": "recorded hard elaboration failure; never TB_DONE"
+  },
+  "limitations": [
+    "digital RTL fixture only; metastability, analog glitches and reset-pulse width are not modeled",
+    "no synthesis, implementation, timing closure, CDC/RDC sign-off, MTBF, B05/R03 or board result",
+    "physical integration gate of SNAPSHOT_CDC_CANDIDATE.md (both resets into the shared flush network, delay/skew bounds, reviewed CDC topology) still applies",
+    "WIDTH=0 cannot elaborate in portable SystemVerilog (zero-width declarations / zero replication); the upper-bound violation executes the same elaboration guard"
+  ],
+  "product_simulation": true,
+  "synthesis": false,
+  "board": false
+}

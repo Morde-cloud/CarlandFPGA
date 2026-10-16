@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control\\run_snapshot_cdc.py",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-worker-rerun"
+      ],
+      "exit_code": 2,
+      "expected_exit": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b359ff551ddd53fd64f9941de6328b9e02538916f7a669d63998d9e00cc39c08"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control\\run_snapshot_cdc.py",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\rtl\\control\\deepeye_snapshot_mailbox.sv"
+      ],
+      "exit_code": 2,
+      "expected_exit": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "88480bfae9ba24ee0a4f1ea0b8c945aac4d6687b6e6dff0fbeab187c3b1fa4b5"
+    },
+    {
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\portable with spaces\\run_snapshot_cdc.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\portable with spaces\\deepeye_snapshot_mailbox.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\portable with spaces\\tb_snapshot_mailbox.sv",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\portable with spaces\\fresh output",
+        "--public-evidence",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-portable-export"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout_sha256": "22821291c25841aabbf19c29c9f2115880912d0c3685dbb4824a73bf64227075",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "input_and_existing_output_hashes_unchanged": true,
+  "portable": "three flat files, explicit RTL/TB paths, directory and output names containing spaces",
+  "input_hashes": {
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\rtl\\control\\deepeye_snapshot_mailbox.sv": "f62a66799fad77c1641d3d4404d7a99ebe49218435faa7b4824f7720ae33eb0f",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\rtl\\tb_snapshot_mailbox.sv": "a05ac99c9581fe121c2bcd7576304a6120d7d7e25f550be871d6edad8a3c795e",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control\\run_snapshot_cdc.py": "44e7e1fb7d42c47e17eb0d7e7905648a5414e1702a10d85130158e03dfaad5ed"
+  }
+}

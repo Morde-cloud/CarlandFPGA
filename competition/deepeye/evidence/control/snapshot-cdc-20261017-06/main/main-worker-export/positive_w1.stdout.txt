@@ -1,0 +1,241 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -voptargs="+acc" -onfinish stop work.tb_snapshot_mailbox -do "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main-worker-rerun\positive_w1.do" -gWIDTH=1 
+# Start time: 02:32:23 on Oct 17,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_snapshot_mailbox(fast)
+# Loading work.deepeye_snapshot_mailbox(fast)
+# do {D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\main-worker-rerun\positive_w1.do}
+# TB_CASE_BEGIN case=startup width=1
+# TB_EVT case=startup width=1 kind=accept data=0
+# TB_EVT case=startup width=1 kind=deliver data=0
+# TB_CASE case=startup width=1 accepted=1 delivered=1 discarded=0 errors=0
+# TB_CASE_BEGIN case=payload_stall width=1
+# TB_EVT case=payload_stall width=1 kind=accept data=1
+# TB_EVT case=payload_stall width=1 kind=deliver data=1
+# TB_CASE case=payload_stall width=1 accepted=1 delivered=1 discarded=0 errors=0
+# TB_CASE_BEGIN case=consecutive width=1
+# TB_EVT case=consecutive width=1 kind=accept data=0
+# TB_EVT case=consecutive width=1 kind=deliver data=0
+# TB_EVT case=consecutive width=1 kind=accept data=1
+# TB_EVT case=consecutive width=1 kind=deliver data=1
+# TB_EVT case=consecutive width=1 kind=accept data=0
+# TB_EVT case=consecutive width=1 kind=deliver data=0
+# TB_EVT case=consecutive width=1 kind=accept data=1
+# TB_EVT case=consecutive width=1 kind=deliver data=1
+# TB_EVT case=consecutive width=1 kind=accept data=0
+# TB_EVT case=consecutive width=1 kind=deliver data=0
+# TB_EVT case=consecutive width=1 kind=accept data=1
+# TB_EVT case=consecutive width=1 kind=deliver data=1
+# TB_EVT case=consecutive width=1 kind=accept data=0
+# TB_EVT case=consecutive width=1 kind=deliver data=0
+# TB_EVT case=consecutive width=1 kind=accept data=1
+# TB_EVT case=consecutive width=1 kind=deliver data=1
+# TB_CASE case=consecutive width=1 accepted=8 delivered=8 discarded=0 errors=0
+# TB_CASE_BEGIN case=dst_clock_stop width=1
+# TB_EVT case=dst_clock_stop width=1 kind=accept data=0
+# TB_EVT case=dst_clock_stop width=1 kind=deliver data=0
+# TB_EVT case=dst_clock_stop width=1 kind=accept data=1
+# TB_EVT case=dst_clock_stop width=1 kind=deliver data=1
+# TB_CASE case=dst_clock_stop width=1 accepted=2 delivered=2 discarded=0 errors=0
+# TB_CASE_BEGIN case=src_clock_stop width=1
+# TB_EVT case=src_clock_stop width=1 kind=accept data=0
+# TB_EVT case=src_clock_stop width=1 kind=deliver data=0
+# TB_EVT case=src_clock_stop width=1 kind=accept data=1
+# TB_EVT case=src_clock_stop width=1 kind=deliver data=1
+# TB_EVT case=src_clock_stop width=1 kind=accept data=0
+# TB_EVT case=src_clock_stop width=1 kind=deliver data=0
+# TB_CASE case=src_clock_stop width=1 accepted=3 delivered=3 discarded=0 errors=0
+# TB_CASE_BEGIN case=held_high_valid_across_reset width=1
+# TB_EVT case=held_high_valid_across_reset width=1 kind=flush reason=src_reset discarded=0 accepted=15 delivered=15
+# TB_EVT case=held_high_valid_across_reset width=1 kind=accept data=0
+# TB_EVT case=held_high_valid_across_reset width=1 kind=deliver data=0
+# TB_CASE case=held_high_valid_across_reset width=1 accepted=1 delivered=1 discarded=0 errors=0
+# TB_CASE_BEGIN case=reset_idle width=1
+# TB_EVT case=reset_idle width=1 kind=accept data=0
+# TB_EVT case=reset_idle width=1 kind=deliver data=0
+# TB_EVT case=reset_idle width=1 kind=flush reason=src_reset discarded=0 accepted=17 delivered=17
+# TB_EVT case=reset_idle width=1 kind=accept data=1
+# TB_EVT case=reset_idle width=1 kind=deliver data=1
+# TB_EVT case=reset_idle width=1 kind=flush reason=dst_reset discarded=0 accepted=18 delivered=18
+# TB_EVT case=reset_idle width=1 kind=accept data=0
+# TB_EVT case=reset_idle width=1 kind=deliver data=0
+# TB_CASE case=reset_idle width=1 accepted=3 delivered=3 discarded=0 errors=0
+# TB_CASE_BEGIN case=reset_inflight_request width=1
+# TB_EVT case=reset_inflight_request width=1 kind=accept data=1
+# TB_EVT case=reset_inflight_request width=1 kind=flush reason=src_reset discarded=1 accepted=20 delivered=19
+# TB_EVT case=reset_inflight_request width=1 kind=accept data=0
+# TB_EVT case=reset_inflight_request width=1 kind=deliver data=0
+# TB_CASE case=reset_inflight_request width=1 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_valid_pending_stall width=1
+# TB_EVT case=reset_valid_pending_stall width=1 kind=accept data=1
+# TB_EVT case=reset_valid_pending_stall width=1 kind=flush reason=src_reset discarded=1 accepted=22 delivered=20
+# TB_EVT case=reset_valid_pending_stall width=1 kind=accept data=0
+# TB_EVT case=reset_valid_pending_stall width=1 kind=deliver data=0
+# TB_CASE case=reset_valid_pending_stall width=1 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_dst_clock_stopped width=1
+# TB_EVT case=reset_dst_clock_stopped width=1 kind=accept data=1
+# TB_EVT case=reset_dst_clock_stopped width=1 kind=flush reason=both discarded=1 accepted=24 delivered=21
+# TB_EVT case=reset_dst_clock_stopped width=1 kind=accept data=0
+# TB_EVT case=reset_dst_clock_stopped width=1 kind=deliver data=0
+# TB_CASE case=reset_dst_clock_stopped width=1 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_src_clock_stopped width=1
+# TB_EVT case=reset_src_clock_stopped width=1 kind=accept data=1
+# TB_EVT case=reset_src_clock_stopped width=1 kind=flush reason=src_reset discarded=1 accepted=26 delivered=22
+# TB_EVT case=reset_src_clock_stopped width=1 kind=accept data=0
+# TB_EVT case=reset_src_clock_stopped width=1 kind=deliver data=0
+# TB_CASE case=reset_src_clock_stopped width=1 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_dst_only_stalled width=1
+# TB_EVT case=reset_dst_only_stalled width=1 kind=accept data=1
+# TB_EVT case=reset_dst_only_stalled width=1 kind=flush reason=dst_reset discarded=1 accepted=28 delivered=23
+# TB_EVT case=reset_dst_only_stalled width=1 kind=accept data=0
+# TB_EVT case=reset_dst_only_stalled width=1 kind=deliver data=0
+# TB_CASE case=reset_dst_only_stalled width=1 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_dst_only_inflight_request width=1
+# TB_EVT case=reset_dst_only_inflight_request width=1 kind=accept data=1
+# TB_EVT case=reset_dst_only_inflight_request width=1 kind=flush reason=dst_reset discarded=1 accepted=30 delivered=24
+# TB_EVT case=reset_dst_only_inflight_request width=1 kind=accept data=0
+# TB_EVT case=reset_dst_only_inflight_request width=1 kind=deliver data=0
+# TB_CASE case=reset_dst_only_inflight_request width=1 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=random_soak width=1
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=1 accepted=33 delivered=26
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=1 accepted=36 delivered=28
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=36 delivered=28
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=36 delivered=28
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=1 accepted=37 delivered=28
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=37 delivered=28
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=37 delivered=28
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=42 delivered=33
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=42 delivered=33
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=42 delivered=33
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=1 accepted=44 delivered=34
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=44 delivered=34
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=44 delivered=34
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=44 delivered=34
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=1 accepted=46 delivered=35
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=46 delivered=35
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=47 delivered=36
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=47 delivered=36
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=1 accepted=50 delivered=38
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=1 accepted=51 delivered=38
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=1 accepted=53 delivered=39
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=55 delivered=41
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=1 accepted=56 delivered=41
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=56 delivered=41
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=1 accepted=58 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=58 delivered=42
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=1 accepted=59 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=59 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=59 delivered=42
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=1 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=1 accepted=61 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=deliver data=0
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=deliver data=1
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=1 accepted=65 delivered=45
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=1 accepted=66 delivered=45
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=0 accepted=66 delivered=45
+# TB_EVT case=random_soak width=1 kind=accept data=0
+# TB_EVT case=random_soak width=1 kind=flush reason=both discarded=1 accepted=67 delivered=45
+# TB_EVT case=random_soak width=1 kind=flush reason=dst_reset discarded=0 accepted=67 delivered=45
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=67 delivered=45
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=67 delivered=45
+# TB_EVT case=random_soak width=1 kind=accept data=1
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=1 accepted=68 delivered=45
+# TB_EVT case=random_soak width=1 kind=flush reason=src_reset discarded=0 accepted=68 delivered=45
+# TB_CASE case=random_soak width=1 accepted=37 delivered=20 discarded=17 errors=0
+# TB_SUMMARY width=1 accepted=68 delivered=45 discarded=23 directed_accepted=31 directed_delivered=25 directed_discarded=6 soak_accepted=37 soak_delivered=20 soak_discarded=17 flush_events=70 src_reset_drops=46 dst_reset_drops=46 tb_errors=0
+# TB_END width=1 sim_ns=18148.000ns
+# TB_DONE width=1
+RUNNER_REACHED_BOUND w1
+# End time: 02:32:24 on Oct 17,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

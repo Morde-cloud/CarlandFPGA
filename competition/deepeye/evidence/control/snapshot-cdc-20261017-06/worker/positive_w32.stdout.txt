@@ -1,0 +1,241 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -voptargs="+acc" -onfinish stop work.tb_snapshot_mailbox -do "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\worker\scratch-runner-out4\positive_w32.do" -gWIDTH=32 
+# Start time: 02:28:51 on Oct 17,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_snapshot_mailbox(fast)
+# Loading work.deepeye_snapshot_mailbox(fast)
+# do {D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\snapshot-cdc-20261017\worker\scratch-runner-out4\positive_w32.do}
+# TB_CASE_BEGIN case=startup width=32
+# TB_EVT case=startup width=32 kind=accept data=c3c33c3c
+# TB_EVT case=startup width=32 kind=deliver data=c3c33c3c
+# TB_CASE case=startup width=32 accepted=1 delivered=1 discarded=0 errors=0
+# TB_CASE_BEGIN case=payload_stall width=32
+# TB_EVT case=payload_stall width=32 kind=accept data=bc894029
+# TB_EVT case=payload_stall width=32 kind=deliver data=bc894029
+# TB_CASE case=payload_stall width=32 accepted=1 delivered=1 discarded=0 errors=0
+# TB_CASE_BEGIN case=consecutive width=32
+# TB_EVT case=consecutive width=32 kind=accept data=3d57c416
+# TB_EVT case=consecutive width=32 kind=deliver data=3d57c416
+# TB_EVT case=consecutive width=32 kind=accept data=be1c4803
+# TB_EVT case=consecutive width=32 kind=deliver data=be1c4803
+# TB_EVT case=consecutive width=32 kind=accept data=3eeacc68
+# TB_EVT case=consecutive width=32 kind=deliver data=3eeacc68
+# TB_EVT case=consecutive width=32 kind=accept data=bfb75055
+# TB_EVT case=consecutive width=32 kind=deliver data=bfb75055
+# TB_EVT case=consecutive width=32 kind=accept data=387dd442
+# TB_EVT case=consecutive width=32 kind=deliver data=387dd442
+# TB_EVT case=consecutive width=32 kind=accept data=b8ca58af
+# TB_EVT case=consecutive width=32 kind=deliver data=b8ca58af
+# TB_EVT case=consecutive width=32 kind=accept data=3990dc94
+# TB_EVT case=consecutive width=32 kind=deliver data=3990dc94
+# TB_EVT case=consecutive width=32 kind=accept data=ba5d6081
+# TB_EVT case=consecutive width=32 kind=deliver data=ba5d6081
+# TB_CASE case=consecutive width=32 accepted=8 delivered=8 discarded=0 errors=0
+# TB_CASE_BEGIN case=dst_clock_stop width=32
+# TB_EVT case=dst_clock_stop width=32 kind=accept data=3b2be4ee
+# TB_EVT case=dst_clock_stop width=32 kind=deliver data=3b2be4ee
+# TB_EVT case=dst_clock_stop width=32 kind=accept data=bbf068db
+# TB_EVT case=dst_clock_stop width=32 kind=deliver data=bbf068db
+# TB_CASE case=dst_clock_stop width=32 accepted=2 delivered=2 discarded=0 errors=0
+# TB_CASE_BEGIN case=src_clock_stop width=32
+# TB_EVT case=src_clock_stop width=32 kind=accept data=34beecc0
+# TB_EVT case=src_clock_stop width=32 kind=deliver data=34beecc0
+# TB_EVT case=src_clock_stop width=32 kind=accept data=b50b712d
+# TB_EVT case=src_clock_stop width=32 kind=deliver data=b50b712d
+# TB_EVT case=src_clock_stop width=32 kind=accept data=35d1f51a
+# TB_EVT case=src_clock_stop width=32 kind=deliver data=35d1f51a
+# TB_CASE case=src_clock_stop width=32 accepted=3 delivered=3 discarded=0 errors=0
+# TB_CASE_BEGIN case=held_high_valid_across_reset width=32
+# TB_EVT case=held_high_valid_across_reset width=32 kind=flush reason=src_reset discarded=0 accepted=15 delivered=15
+# TB_EVT case=held_high_valid_across_reset width=32 kind=accept data=496186f8
+# TB_EVT case=held_high_valid_across_reset width=32 kind=deliver data=496186f8
+# TB_CASE case=held_high_valid_across_reset width=32 accepted=1 delivered=1 discarded=0 errors=0
+# TB_CASE_BEGIN case=reset_idle width=32
+# TB_EVT case=reset_idle width=32 kind=accept data=3764fd6c
+# TB_EVT case=reset_idle width=32 kind=deliver data=3764fd6c
+# TB_EVT case=reset_idle width=32 kind=flush reason=src_reset discarded=0 accepted=17 delivered=17
+# TB_EVT case=reset_idle width=32 kind=accept data=b0310159
+# TB_EVT case=reset_idle width=32 kind=deliver data=b0310159
+# TB_EVT case=reset_idle width=32 kind=flush reason=dst_reset discarded=0 accepted=18 delivered=18
+# TB_EVT case=reset_idle width=32 kind=accept data=30ff8546
+# TB_EVT case=reset_idle width=32 kind=deliver data=30ff8546
+# TB_CASE case=reset_idle width=32 accepted=3 delivered=3 discarded=0 errors=0
+# TB_CASE_BEGIN case=reset_inflight_request width=32
+# TB_EVT case=reset_inflight_request width=32 kind=accept data=b14409b3
+# TB_EVT case=reset_inflight_request width=32 kind=flush reason=src_reset discarded=1 accepted=20 delivered=19
+# TB_EVT case=reset_inflight_request width=32 kind=accept data=32128d98
+# TB_EVT case=reset_inflight_request width=32 kind=deliver data=32128d98
+# TB_CASE case=reset_inflight_request width=32 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_valid_pending_stall width=32
+# TB_EVT case=reset_valid_pending_stall width=32 kind=accept data=b2df1185
+# TB_EVT case=reset_valid_pending_stall width=32 kind=flush reason=src_reset discarded=1 accepted=22 delivered=20
+# TB_EVT case=reset_valid_pending_stall width=32 kind=accept data=33a595f2
+# TB_EVT case=reset_valid_pending_stall width=32 kind=deliver data=33a595f2
+# TB_CASE case=reset_valid_pending_stall width=32 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_dst_clock_stopped width=32
+# TB_EVT case=reset_dst_clock_stopped width=32 kind=accept data=ac7219df
+# TB_EVT case=reset_dst_clock_stopped width=32 kind=flush reason=both discarded=1 accepted=24 delivered=21
+# TB_EVT case=reset_dst_clock_stopped width=32 kind=accept data=2d389dc4
+# TB_EVT case=reset_dst_clock_stopped width=32 kind=deliver data=2d389dc4
+# TB_CASE case=reset_dst_clock_stopped width=32 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_src_clock_stopped width=32
+# TB_EVT case=reset_src_clock_stopped width=32 kind=accept data=ad852231
+# TB_EVT case=reset_src_clock_stopped width=32 kind=flush reason=src_reset discarded=1 accepted=26 delivered=22
+# TB_EVT case=reset_src_clock_stopped width=32 kind=accept data=2e53a61e
+# TB_EVT case=reset_src_clock_stopped width=32 kind=deliver data=2e53a61e
+# TB_CASE case=reset_src_clock_stopped width=32 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_dst_only_stalled width=32
+# TB_EVT case=reset_dst_only_stalled width=32 kind=accept data=af182a0b
+# TB_EVT case=reset_dst_only_stalled width=32 kind=flush reason=dst_reset discarded=1 accepted=28 delivered=23
+# TB_EVT case=reset_dst_only_stalled width=32 kind=accept data=2fe6ae70
+# TB_EVT case=reset_dst_only_stalled width=32 kind=deliver data=2fe6ae70
+# TB_CASE case=reset_dst_only_stalled width=32 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=reset_dst_only_inflight_request width=32
+# TB_EVT case=reset_dst_only_inflight_request width=32 kind=accept data=a8b3325d
+# TB_EVT case=reset_dst_only_inflight_request width=32 kind=flush reason=dst_reset discarded=1 accepted=30 delivered=24
+# TB_EVT case=reset_dst_only_inflight_request width=32 kind=accept data=2979b64a
+# TB_EVT case=reset_dst_only_inflight_request width=32 kind=deliver data=2979b64a
+# TB_CASE case=reset_dst_only_inflight_request width=32 accepted=2 delivered=1 discarded=1 errors=0
+# TB_CASE_BEGIN case=random_soak width=32
+# TB_EVT case=random_soak width=32 kind=accept data=a9c63ab7
+# TB_EVT case=random_soak width=32 kind=deliver data=a9c63ab7
+# TB_EVT case=random_soak width=32 kind=accept data=2a8cbe9c
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=1 accepted=33 delivered=26
+# TB_EVT case=random_soak width=32 kind=accept data=ab5ac289
+# TB_EVT case=random_soak width=32 kind=deliver data=ab5ac289
+# TB_EVT case=random_soak width=32 kind=accept data=242746f6
+# TB_EVT case=random_soak width=32 kind=deliver data=242746f6
+# TB_EVT case=random_soak width=32 kind=accept data=a4edcae3
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=1 accepted=36 delivered=28
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=36 delivered=28
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=36 delivered=28
+# TB_EVT case=random_soak width=32 kind=accept data=25ba4ec8
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=1 accepted=37 delivered=28
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=37 delivered=28
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=37 delivered=28
+# TB_EVT case=random_soak width=32 kind=accept data=a600d335
+# TB_EVT case=random_soak width=32 kind=deliver data=a600d335
+# TB_EVT case=random_soak width=32 kind=accept data=26cd5722
+# TB_EVT case=random_soak width=32 kind=deliver data=26cd5722
+# TB_EVT case=random_soak width=32 kind=accept data=a79bdb0f
+# TB_EVT case=random_soak width=32 kind=deliver data=a79bdb0f
+# TB_EVT case=random_soak width=32 kind=accept data=20605f74
+# TB_EVT case=random_soak width=32 kind=deliver data=20605f74
+# TB_EVT case=random_soak width=32 kind=accept data=a12ee361
+# TB_EVT case=random_soak width=32 kind=deliver data=a12ee361
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=42 delivered=33
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=42 delivered=33
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=42 delivered=33
+# TB_EVT case=random_soak width=32 kind=accept data=21fb674e
+# TB_EVT case=random_soak width=32 kind=deliver data=21fb674e
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=43 delivered=34
+# TB_EVT case=random_soak width=32 kind=accept data=a241ebbb
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=1 accepted=44 delivered=34
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=44 delivered=34
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=44 delivered=34
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=44 delivered=34
+# TB_EVT case=random_soak width=32 kind=accept data=230e6fa0
+# TB_EVT case=random_soak width=32 kind=deliver data=230e6fa0
+# TB_EVT case=random_soak width=32 kind=accept data=a3d4f38d
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=1 accepted=46 delivered=35
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=46 delivered=35
+# TB_EVT case=random_soak width=32 kind=accept data=1ca177fa
+# TB_EVT case=random_soak width=32 kind=deliver data=1ca177fa
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=47 delivered=36
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=47 delivered=36
+# TB_EVT case=random_soak width=32 kind=accept data=9d6ffbe7
+# TB_EVT case=random_soak width=32 kind=deliver data=9d6ffbe7
+# TB_EVT case=random_soak width=32 kind=accept data=1e347fcc
+# TB_EVT case=random_soak width=32 kind=deliver data=1e347fcc
+# TB_EVT case=random_soak width=32 kind=accept data=9e82fc39
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=1 accepted=50 delivered=38
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=50 delivered=38
+# TB_EVT case=random_soak width=32 kind=accept data=1f4f0026
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=1 accepted=51 delivered=38
+# TB_EVT case=random_soak width=32 kind=accept data=98158413
+# TB_EVT case=random_soak width=32 kind=deliver data=98158413
+# TB_EVT case=random_soak width=32 kind=accept data=18e20878
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=1 accepted=53 delivered=39
+# TB_EVT case=random_soak width=32 kind=accept data=99a88c65
+# TB_EVT case=random_soak width=32 kind=deliver data=99a88c65
+# TB_EVT case=random_soak width=32 kind=accept data=1a751052
+# TB_EVT case=random_soak width=32 kind=deliver data=1a751052
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=55 delivered=41
+# TB_EVT case=random_soak width=32 kind=accept data=9ac394bf
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=1 accepted=56 delivered=41
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=56 delivered=41
+# TB_EVT case=random_soak width=32 kind=accept data=1b8818a4
+# TB_EVT case=random_soak width=32 kind=deliver data=1b8818a4
+# TB_EVT case=random_soak width=32 kind=accept data=94569c91
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=1 accepted=58 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=58 delivered=42
+# TB_EVT case=random_soak width=32 kind=accept data=152320fe
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=1 accepted=59 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=59 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=59 delivered=42
+# TB_EVT case=random_soak width=32 kind=accept data=95e9a4eb
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=1 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=60 delivered=42
+# TB_EVT case=random_soak width=32 kind=accept data=16b628d0
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=1 accepted=61 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=61 delivered=42
+# TB_EVT case=random_soak width=32 kind=accept data=977cad3d
+# TB_EVT case=random_soak width=32 kind=deliver data=977cad3d
+# TB_EVT case=random_soak width=32 kind=accept data=17c9312a
+# TB_EVT case=random_soak width=32 kind=deliver data=17c9312a
+# TB_EVT case=random_soak width=32 kind=accept data=9097b517
+# TB_EVT case=random_soak width=32 kind=deliver data=9097b517
+# TB_EVT case=random_soak width=32 kind=accept data=115c397c
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=1 accepted=65 delivered=45
+# TB_EVT case=random_soak width=32 kind=accept data=922abd69
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=1 accepted=66 delivered=45
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=0 accepted=66 delivered=45
+# TB_EVT case=random_soak width=32 kind=accept data=12f0c156
+# TB_EVT case=random_soak width=32 kind=flush reason=both discarded=1 accepted=67 delivered=45
+# TB_EVT case=random_soak width=32 kind=flush reason=dst_reset discarded=0 accepted=67 delivered=45
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=67 delivered=45
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=67 delivered=45
+# TB_EVT case=random_soak width=32 kind=accept data=93bd4543
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=1 accepted=68 delivered=45
+# TB_EVT case=random_soak width=32 kind=flush reason=src_reset discarded=0 accepted=68 delivered=45
+# TB_CASE case=random_soak width=32 accepted=37 delivered=20 discarded=17 errors=0
+# TB_SUMMARY width=32 accepted=68 delivered=45 discarded=23 directed_accepted=31 directed_delivered=25 directed_discarded=6 soak_accepted=37 soak_delivered=20 soak_discarded=17 flush_events=70 src_reset_drops=46 dst_reset_drops=46 tb_errors=0
+# TB_END width=32 sim_ns=18148.000ns
+# TB_DONE width=32
+RUNNER_REACHED_BOUND w32
+# End time: 02:28:52 on Oct 17,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

@@ -1,0 +1,18 @@
+{
+  "decision": "REJECTED_STRUCTURAL_RESET_CONTRACT",
+  "finding_id": "SC01",
+  "finding": "Nine state/synchronizer blocks release raw common asynchronous reset; local synchronized release is only a D-path branch. Pinned main spec requires local synchronized reset at state reset pins. Digital behavior passes but does not establish reset deassertion structure.",
+  "original_source_sha256": "6d4500f250263f14ec24c6896cb69ad16704dd6c512dd565a1f92e91ccb2cc25",
+  "preserved_files": {
+    "competition/deepeye/rtl/control/deepeye_snapshot_mailbox.sv": "6d4500f250263f14ec24c6896cb69ad16704dd6c512dd565a1f92e91ccb2cc25",
+    "competition/deepeye/rtl/control/SNAPSHOT_CDC_CANDIDATE.md": "3dfa0237c8a9a86107cf4febda369f483f357e4bea9022118f81d88b3b7f2d9b",
+    "competition/deepeye/tests/control/rtl/tb_snapshot_mailbox.sv": "a05ac99c9581fe121c2bcd7576304a6120d7d7e25f550be871d6edad8a3c795e",
+    "competition/deepeye/tools/control/run_snapshot_cdc.py": "44e7e1fb7d42c47e17eb0d7e7905648a5414e1702a10d85130158e03dfaad5ed"
+  },
+  "worker_public_hashes_verified": 46,
+  "worker_manifest_artifacts_verified": 43,
+  "earlier_independent_source_difference": "only case of documentation filename in one comment",
+  "digital_original": "7 cases / 70000 steps / accepted534=delivered500+reset_discarded34; no functional failure inferred",
+  "correction": "keep only two release synchronizers on raw common reset; connect nine other blocks to their domain synchronized reset; explicitly gate ready/capture by online",
+  "physical_validation": "still not_run; no observed analog failure or MTBF result"
+}

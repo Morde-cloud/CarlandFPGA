@@ -1,0 +1,51 @@
+[
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlib.exe",
+      "work"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low\\build",
+    "started_at": "2026-10-16T18:32:38.792420+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main_port_replay_tb.sv"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low\\build",
+    "started_at": "2026-10-16T18:32:38.835345+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "414de65ddc2fe089d602e2af6dfce76a22e46cbff4514493654c068c9cb9f32d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-voptargs=+acc",
+      "-onfinish",
+      "stop",
+      "-gWIDTH=1",
+      "work.main_port_replay_tb",
+      "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low\\case0.vectors.txt",
+      "+OUTPUT=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low\\case0.ports.csv",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low\\case0.do"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\snapshot-cdc-20261017\\main-negative-missing-rearm-low\\build",
+    "started_at": "2026-10-16T18:32:38.932257+00:00",
+    "exit_code": 0,
+    "expected_exit": 0,
+    "stdout_sha256": "1d92ad2a4044050e52798edf130df0bbdc8dadf49a13850c7482453254fffb1e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

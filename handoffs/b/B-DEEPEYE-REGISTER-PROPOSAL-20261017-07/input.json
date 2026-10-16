@@ -1,0 +1,65 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-REGISTER-PROPOSAL-20261017-07",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "b29f30f8ae109034947cd95eff970b1271897516",
+    "test_steps": [
+      "Read H01-H15 DEEPEYE-HUMAN-LOCK-20261014/r1 SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and frozen design1011259415a0916054eb580687612580bc1e5f09.",
+      "Compare every source_row with pinned A registers.csv and inspect all51 B-proposed bitfields/reset/access values; no A freeze or actual HWH proof is implied.",
+      "Run the explicit-path static descriptor review command in competition/deepeye/evidence/control/register-proposal-20261017-07/README.md; expect29 rows/51 fields/19 arithmetic examples/4 invalid encodings. All35 examples remain design expectations, not an implemented state machine.",
+      "A: accept/reject STOP strobe/error priority, CONFIG-only apply purpose, latch/revocation/read protocol, queue attribution, tick/period words and16bit sequence projections explicitly. Supply actual identity/reset and missing local high-count/edge-tick diagnostics without using0x2c or an AI side-channel.",
+      "C: do not infer register authority, source authentication or motion enable from these candidates. Keep prior TRACE/snapshot operations tied to their original sources. Return same PR operation/request_hash/tested_commit feedback; no hardware execution requested."
+    ],
+    "expected_result": "B-authored declarative register candidate and static encoding review only. Public ABI remains A-owned. Runtime/RTL register implementation, B05/R03, synthesis/implementation/board/system are not_run. Original B inventory/model, mailbox06 and A files unchanged."
+  },
+  "artifacts": [
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/.gitattributes",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/descriptor-review.command.json",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/descriptor-review.json",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/descriptor-review.stderr.txt",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/descriptor-review.stdout.txt",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/input-pins.json",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/inputs/enums.json",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/inputs/frozen-taskbook-final.md",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/inputs/interface.json",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/inputs/registers.csv",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/main-decisions.md",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/README.md",
+    "competition/deepeye/evidence/control/register-proposal-20261017-07/review_descriptor.py",
+    "competition/deepeye/golden/control/register_semantics_candidate.json",
+    "competition/deepeye/golden/control/REGISTER_SEMANTICS_CANDIDATE.md",
+    "competition/deepeye/golden/control/register_semantics_examples.json"
+  ],
+  "stages": {
+    "runtime": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "B05": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "static_descriptor_review": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/control/register-proposal-20261017-07/descriptor-review.json"
+    }
+  }
+}

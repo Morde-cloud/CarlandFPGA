@@ -1,0 +1,167 @@
+{
+  "work_id": "B-CONTROL-MAIN-REVIEW-20261016-01",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "source_sha256": "47eace83b88f429c80365602b6e72542aba75d7f05e42217fc88cdf299faaeab",
+  "baseline_command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "competition/deepeye/tests/control",
+    "-p",
+    "test_capture_snapshot.py",
+    "-v"
+  ],
+  "baseline_exit": 0,
+  "baseline": "64 tests passed",
+  "baseline_stderr_sha256": "d17129b565ccb4609cc0d8d827bf1b5aa0763962cda1fc964aa08b84cc646e40",
+  "findings": [
+    {
+      "id": "B-CONTROL-STOP01",
+      "reproduction": "STOP after apply, then late complete valid capture for same request; publish_snapshot succeeds",
+      "actual": {
+        "stopped": true,
+        "enabled": false,
+        "eligibility": true,
+        "snapshot": {
+          "batch_key": [
+            1,
+            0,
+            1,
+            1
+          ],
+          "capture_quality_bits": 15,
+          "hardware_enable_eligible": false,
+          "high_pitch": 250000,
+          "high_speed": 50000,
+          "high_yaw": 250000,
+          "period_pitch": 2000000,
+          "period_speed": 2000000,
+          "period_yaw": 2000000,
+          "phase_code": 3,
+          "pitch_q": 0,
+          "speed_code": 0,
+          "words": [
+            1,
+            0,
+            1,
+            1,
+            15000,
+            15000,
+            0,
+            15
+          ],
+          "yaw_q": 0
+        }
+      },
+      "expected": "STOP must prevent captured eligibility from being restored until an explicit new accepted request path"
+    },
+    {
+      "id": "B-CONTROL-CONSTRUCT02",
+      "reproduction": "Public ChannelEvidence constructor accepts caller-authored derived validity/codes with period=0/high=0",
+      "actual": {
+        "batch_key": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "capture_quality_bits": 15,
+        "hardware_enable_eligible": false,
+        "high_pitch": 0,
+        "high_speed": 0,
+        "high_yaw": 0,
+        "period_pitch": 0,
+        "period_speed": 0,
+        "period_yaw": 0,
+        "phase_code": 3,
+        "pitch_q": 999999,
+        "speed_code": 999999,
+        "words": [
+          1,
+          0,
+          1,
+          1,
+          1014999,
+          1014999,
+          999999,
+          15
+        ],
+        "yaw_q": 999999
+      },
+      "expected": "derive/validate all validity and decoded values at ingestion; raw ctor must not grant eligibility"
+    },
+    {
+      "id": "B-CONTROL-ALIAS03",
+      "reproduction": "Caller mutates previously submitted evidence/key through object.__setattr__; model stored aliases",
+      "actual": {
+        "active_request": 1,
+        "snapshot": {
+          "batch_key": [
+            1,
+            0,
+            2,
+            1
+          ],
+          "capture_quality_bits": 15,
+          "hardware_enable_eligible": false,
+          "high_pitch": 250000,
+          "high_speed": 50000,
+          "high_yaw": 250000,
+          "period_pitch": 2000000,
+          "period_speed": 2000000,
+          "period_yaw": 2000000,
+          "phase_code": 3,
+          "pitch_q": 0,
+          "speed_code": 0,
+          "words": [
+            1,
+            0,
+            2,
+            1,
+            27000,
+            15000,
+            0,
+            15
+          ],
+          "yaw_q": 12000
+        }
+      },
+      "expected": "detached canonical snapshots, revalidation at trust boundary; caller objects cannot rewrite pending/published state"
+    },
+    {
+      "id": "B-CONTROL-HISTORY04",
+      "reproduction": "Mutating retained key changes an already published historical snapshot",
+      "actual": {
+        "before": [
+          1,
+          0,
+          2,
+          1,
+          27000,
+          15000,
+          0,
+          15
+        ],
+        "after": [
+          9,
+          0,
+          2,
+          1,
+          27000,
+          15000,
+          0,
+          15
+        ]
+      },
+      "expected": "historical snapshot/key detached from caller aliases"
+    }
+  ],
+  "decision": "REJECT candidate software model pending correction; these are software fixture bugs, no board was operated",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

@@ -1,0 +1,304 @@
+{
+ "claims": {
+  "acceptance": "not_claimed",
+  "board": "not_claimed",
+  "cdc_rdc": "not_claimed",
+  "hardware_enable_eligible": false,
+  "timing": "not_claimed"
+ },
+ "command_records": "see commands.json in this directory",
+ "contract": {
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "requirements_ids": [
+   "H01",
+   "H02",
+   "H03",
+   "H04",
+   "H05",
+   "H06",
+   "H07",
+   "H08",
+   "H09",
+   "H10",
+   "H11",
+   "H12",
+   "H13",
+   "H14",
+   "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "revision": 1
+ },
+ "development_failures_found_and_fixed": [
+  "module check run 1: AttributeError on ChannelEvidence.batch_seq inside _start_cycle; fixed to batch_key.batch_seq (raw exit-1 trace was in the session log before the fix)",
+  "module check run 2: overflow scenario submitted evidence with session 100 instead of UINT32_MAX; vector session binding corrected",
+  "unittest run 1: 2 failures; records used __slots__ only, so slot assignment stayed mutable; BatchKey/ChannelEvidence/CaptureSnapshot now freeze at construction and reject later writes",
+  "unittest run 1: fault test expected mask 1 for fault bit index 1; expectation corrected to bit index 0 (mask 1)"
+ ],
+ "evidence_sha256": {
+  "commands.json": "ac5a1a1956d0d0fc283033fc48b338118ab9ada052f2c2728e4b6ebea62d7adc",
+  "stderr.txt": "c608e95e0e497f3f07816a4f7aa623626c03c4c7e6687e26257a312d2a26ac8a",
+  "stdout.txt": "6bc0db0421280642373edba55aff881757ac7788744b2c96127aba39f10a34e2"
+ },
+ "executed_at_utc_end": "2026-10-16T03:54:10.735426Z",
+ "executed_at_utc_start": "2026-10-16T03:54:09.198952Z",
+ "input_manifest": {
+  "expected_sha256": "c641f9f105d766efe8eac5aafd2e7a884d3e0bca845c8736ef13ae8a57e9c0f1",
+  "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\implementation-app-bridge\\input_manifest.json",
+  "sha256": "c641f9f105d766efe8eac5aafd2e7a884d3e0bca845c8736ef13ae8a57e9c0f1",
+  "sha256_matches_expected": true,
+  "sources_all_match": true,
+  "sources_verified": [
+   {
+    "expected_sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd",
+    "group": "lock",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/immutable_scope.md",
+    "sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd"
+   },
+   {
+    "expected_sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+    "group": "lock",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/immutable_scope.json",
+    "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+   },
+   {
+    "expected_sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18",
+    "group": "design",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/taskbook_final.md",
+    "sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18"
+   },
+   {
+    "expected_sha256": "e93f10d247109e8cb7070ded7fdfac5b3543a44afb3387261531556eebde41be",
+    "group": "design",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/execution_plan_final.json",
+    "sha256": "e93f10d247109e8cb7070ded7fdfac5b3543a44afb3387261531556eebde41be"
+   },
+   {
+    "expected_sha256": "c4668714bc25959f0cb5cc8ef326ca04f90dc33eb03905a40ec6c4114804a2e1",
+    "group": "design",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/execution_orchestration_v5.md",
+    "sha256": "c4668714bc25959f0cb5cc8ef326ca04f90dc33eb03905a40ec6c4114804a2e1"
+   },
+   {
+    "expected_sha256": "f77589954051b36eeb42f1a6cb4ceb13f97df631bd305b8c2ae8b0d2678bd3b9",
+    "group": "design",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/simulation_contract_final.json",
+    "sha256": "f77589954051b36eeb42f1a6cb4ceb13f97df631bd305b8c2ae8b0d2678bd3b9"
+   },
+   {
+    "expected_sha256": "43336cc32cbc24a8ee2589786f0785c3049f009759f5ef63c43c096f9d822ed3",
+    "group": "design",
+    "match": true,
+    "path": "docs/competition/deepeye-2026/release_manifest_final.json",
+    "sha256": "43336cc32cbc24a8ee2589786f0785c3049f009759f5ef63c43c096f9d822ed3"
+   },
+   {
+    "expected_sha256": "0577cba5bfeda43171483abc73545e45806c44ea5546d1bcb1d581cd49b450cb",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/interface.json",
+    "sha256": "0577cba5bfeda43171483abc73545e45806c44ea5546d1bcb1d581cd49b450cb"
+   },
+   {
+    "expected_sha256": "852a686a0ee261773dbc233350a6ab1d540edae0b2c3889d928caefdfc629ff4",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/resource_contract.json",
+    "sha256": "852a686a0ee261773dbc233350a6ab1d540edae0b2c3889d928caefdfc629ff4"
+   },
+   {
+    "expected_sha256": "fd3d69509776829a4e33ea4f1a6ce8b39679bd101080b33dc2ff1df38c0a4f33",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/registers.csv",
+    "sha256": "fd3d69509776829a4e33ea4f1a6ce8b39679bd101080b33dc2ff1df38c0a4f33"
+   },
+   {
+    "expected_sha256": "0b96fd5845c49d10e38658f6fbbe9e87a0e9a0a5ef91a523028b0d2afbd7dd88",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/trace_contract_review.md",
+    "sha256": "0b96fd5845c49d10e38658f6fbbe9e87a0e9a0a5ef91a523028b0d2afbd7dd88"
+   },
+   {
+    "expected_sha256": "a291d48a8791757bf0d612bdcc08d4c5c0d2a133b57990e803063619f8a88f28",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/host_contract.json",
+    "sha256": "a291d48a8791757bf0d612bdcc08d4c5c0d2a133b57990e803063619f8a88f28"
+   },
+   {
+    "expected_sha256": "0f15f4f2589f4804ef671d520531fc12f163d2df21ca887e40723492f2eff5ff",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/host_timing_contract.md",
+    "sha256": "0f15f4f2589f4804ef671d520531fc12f163d2df21ca887e40723492f2eff5ff"
+   },
+   {
+    "expected_sha256": "06588c82bdc803800c5891ca4aa46e184e6391ddd9045a77d99297878973bd74",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/boot_profiles.json",
+    "sha256": "06588c82bdc803800c5891ca4aa46e184e6391ddd9045a77d99297878973bd74"
+   },
+   {
+    "expected_sha256": "a52f3631d94d396c7da769f82a09e70d55c765b0c2651de27476e644c486573e",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/enums.json",
+    "sha256": "a52f3631d94d396c7da769f82a09e70d55c765b0c2651de27476e644c486573e"
+   },
+   {
+    "expected_sha256": "a382894a5c3117b7f2c4c473af7f2ebc8cda446fbb0ec79a666bcec41e56d434",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/sensor_source_contract.json",
+    "sha256": "a382894a5c3117b7f2c4c473af7f2ebc8cda446fbb0ec79a666bcec41e56d434"
+   },
+   {
+    "expected_sha256": "93b42cf3303866c3580b1a02b0e1fc0c113ecbca63f26020a03ad5ed9b82f0f1",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/docs/greybox_drill_envelope.md",
+    "sha256": "93b42cf3303866c3580b1a02b0e1fc0c113ecbca63f26020a03ad5ed9b82f0f1"
+   },
+   {
+    "expected_sha256": "31533439f1bab32ca71fae138bb988f51ce1d043b4e364a6c33a09eab1d5f5ec",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/integration/wire.py",
+    "sha256": "31533439f1bab32ca71fae138bb988f51ce1d043b4e364a6c33a09eab1d5f5ec"
+   },
+   {
+    "expected_sha256": "f130591cdb0f665d81206801a6c82d08d2c47489876e1f05114d4e1130b8a4f2",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/integration/test_trace_payload.py",
+    "sha256": "f130591cdb0f665d81206801a6c82d08d2c47489876e1f05114d4e1130b8a4f2"
+   },
+   {
+    "expected_sha256": "be6e37bfb9873eb5557aba170f3de4d4593833daf134ccde8593b9f7e3624161",
+    "group": "a",
+    "match": true,
+    "path": "competition/deepeye/simulator/project.godot",
+    "sha256": "be6e37bfb9873eb5557aba170f3de4d4593833daf134ccde8593b9f7e3624161"
+   }
+  ]
+ },
+ "instance": "deepseek-b-22",
+ "inventory_file": {
+  "bytes": 13511,
+  "path": "competition/deepeye/golden/control/register_candidate_inventory.json",
+  "registers": 29,
+  "sha256": "ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5"
+ },
+ "negative_vectors": {
+  "boundary_counts": [
+   "boundary-high-accept",
+   "boundary-period-minus-3",
+   "boundary-high-minus-3"
+  ],
+  "duplicate_identical_vs_conflict": [
+   "dup-identical-before-publish",
+   "dup-conflict-before-publish",
+   "dup-conflict-after-publish",
+   "dup-identical-after-publish"
+  ],
+  "reset_interleavings": [
+   "reset-before-snapshot",
+   "reset-clears-pending",
+   "reset-after-publish-reestablish"
+  ],
+  "sequences_and_typed_rejection": [
+   "overflow-replay-regression",
+   "epoch-rollover-refusal",
+   "typed-rejection",
+   "register-inventory-access",
+   "fault-stop-recovery",
+   "fault-enable-refusal"
+  ],
+  "stop_racing_capture_apply": [
+   "stop-dominates-apply",
+   "stop-mid-batch",
+   "apply-before-enable"
+  ],
+  "torn_multiword_attempts": [
+   "frozen-atomic-shadow-stop",
+   "FrozenReadTests.test_latch_atomic_against_shadow_writes",
+   "FrozenReadTests.test_words_consistency_detects_torn_mixed_and_typed"
+  ],
+  "wrong_batch_and_channel_bindings": [
+   "wrong-session-evidence",
+   "wrong-epoch-evidence",
+   "wrong-request-evidence",
+   "mixed-batch-no-merge",
+   "missing-channel-no-publish"
+  ]
+ },
+ "node": "B",
+ "notes": [
+  "all commands ran with PYTHONDONTWRITEBYTECODE=1; no bytecode was written to the worktree",
+  "flash stdout/stderr are byte copies of the worktree evidence captures",
+  "candidate-only software evidence; no board, CDC/RDC, ABI or acceptance claim"
+ ],
+ "overall_status": "completed",
+ "platform": "Windows-11-10.0.26200-SP0",
+ "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+ "route": "deepseek-flash/max",
+ "schema": 1,
+ "source_sha256": {
+  "competition/deepeye/golden/control/README.md": "65c8856fb100a6b13beaad360ba8fd7b2a7bbc7f9cf3daf1120b9da13dcde26a",
+  "competition/deepeye/golden/control/capture_snapshot_reference.py": "47eace83b88f429c80365602b6e72542aba75d7f05e42217fc88cdf299faaeab",
+  "competition/deepeye/golden/control/register_candidate_inventory.json": "ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5",
+  "competition/deepeye/golden/control/snapshot_vectors.json": "e15abfe85a9d23ebf966b19140916ca0f1f7d1fdcf1aaece361ff635ebe78982",
+  "competition/deepeye/tests/control/test_capture_snapshot.py": "69510b0904888856ce3b63133851645ee4f3ddcaaaba0a0826044e76189f64cf"
+ },
+ "statuses": {
+  "b05_g05_r03": "not_run",
+  "board": "not_run",
+  "candidate_software_tests": "run (this work)",
+  "hardware_enable": "not_eligible",
+  "implementation": "not_run",
+  "simulation": "not_run",
+  "synthesis": "not_run",
+  "system": "not_run"
+ },
+ "task": {
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1
+ },
+ "unittest": {
+  "counts_line": "Ran 64 tests in 0.158s",
+  "packet_cwd_counts_line": "Ran 64 tests in 0.156s",
+  "plain_exit_code": 0,
+  "result": "OK"
+ },
+ "unresolved_reported_to_B_main": [
+  "R03 public control/status/config bit numbering, access types and reset values (A freeze)",
+  "R03 WSTRB byte-enable semantics for partial-word writes",
+  "R03 sample-tick word order and multiword read atomicity for 0x40/0x44",
+  "R03 capture diagnostic address map and per-channel word mapping",
+  "CDC/RDC physical reset/handshake and first-snapshot implementation",
+  "A matched HWH/bit artifact and real per-register reset values",
+  "R03/G05/HIL calibrated physical PWM timing and measured IO capture bounds"
+ ],
+ "vector_file": {
+  "bytes": 99792,
+  "check_exit_code": 0,
+  "check_passed": true,
+  "negative_scenarios": 22,
+  "path": "competition/deepeye/golden/control/snapshot_vectors.json",
+  "pwm_vectors": 61,
+  "scenarios": 33,
+  "sha256": "e15abfe85a9d23ebf966b19140916ca0f1f7d1fdcf1aaece361ff635ebe78982"
+ },
+ "work_id": "B-CONTROL-SNAPSHOT-FOUNDATION-20261015-01-v1"
+}

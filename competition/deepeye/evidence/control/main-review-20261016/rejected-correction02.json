@@ -1,0 +1,78 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-CONTROL-MAIN-BOUNDARY-20261016-03",
+  "source_sha256": "db40d2f06201aeb04bbf2da50b65cbaf47d7c95a7cc88e3d57b60ad6439f695d",
+  "baseline": {
+    "argv": [
+      "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "competition/deepeye/tests/control",
+      "-p",
+      "test_capture_snapshot.py",
+      "-v"
+    ],
+    "exit": 0,
+    "stderr_sha256": "514496cefdbf3fd5618d720b8a58d95cce27b17d5f86f918922bfd9d1163ce3d"
+  },
+  "independent_counts": {
+    "stop_positions_orders": 24,
+    "angle_grid": 210007,
+    "speed_grid": 147,
+    "random_ingress_aliases": 300,
+    "revocation_events": 7,
+    "bounded_publications": 1000
+  },
+  "findings": [
+    {
+      "id": "B-CONTROL-SCALAR05",
+      "period": 0,
+      "eligible": true,
+      "reproduction": "int subclass overrides subtraction; period 0 treated valid"
+    },
+    {
+      "id": "B-CONTROL-OUTPUT06",
+      "before": [
+        1,
+        0,
+        1,
+        1,
+        15000,
+        15000,
+        0,
+        15
+      ],
+      "after": [
+        1,
+        0,
+        1,
+        1,
+        27345,
+        15000,
+        0,
+        15
+      ],
+      "mutated_history_consistent": true,
+      "reproduction": "caller-retained publish_snapshot result aliases internal published/history"
+    },
+    {
+      "id": "B-CONTROL-OUTPUT06-latest",
+      "reproduction": "latest_published returns internal snapshot; caller changes future frozen reads"
+    }
+  ],
+  "decision": "reject",
+  "not_claimed": [
+    "B05",
+    "R03",
+    "CDC",
+    "RTL",
+    "hardware",
+    "system"
+  ]
+}

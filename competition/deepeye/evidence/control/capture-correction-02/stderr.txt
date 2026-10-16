@@ -1,0 +1,95 @@
+===== [1] emit-vectors-scratch-inventory exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py emit --inventory D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\control-correction-02\scratch\evidence-emit-inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json =====
+
+===== [2] check-real-inventory-vectors exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py check --inventory competition/deepeye/golden/control/register_candidate_inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json =====
+
+===== [3] unittest-verbose exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py -v =====
+test_documents_make_no_stage_or_enable_claims (test_capture_snapshot.ClaimTests.test_documents_make_no_stage_or_enable_claims) ... ok
+test_enable_is_a_software_flag_only (test_capture_snapshot.ClaimTests.test_enable_is_a_software_flag_only) ... ok
+test_batch_key_ranges (test_capture_snapshot.EvidenceTests.test_batch_key_ranges) ... ok
+test_bool_and_wrong_types_rejected (test_capture_snapshot.EvidenceTests.test_bool_and_wrong_types_rejected) ... ok
+test_construct02_impossible_codes_never_construct (test_capture_snapshot.EvidenceTests.test_construct02_impossible_codes_never_construct) ... ok
+test_create_valid_flags (test_capture_snapshot.EvidenceTests.test_create_valid_flags) ... ok
+test_invalid_when_period_or_high_off (test_capture_snapshot.EvidenceTests.test_invalid_when_period_or_high_off) ... ok
+test_public_constructor_rejects_caller_authored_derived_fields (test_capture_snapshot.EvidenceTests.test_public_constructor_rejects_caller_authored_derived_fields) ... ok
+test_public_constructor_requires_exact_batch_key (test_capture_snapshot.EvidenceTests.test_public_constructor_requires_exact_batch_key) ... ok
+test_records_are_immutable (test_capture_snapshot.EvidenceTests.test_records_are_immutable) ... ok
+test_conflict_invalidates_latch_but_retains_bytes (test_capture_snapshot.FrozenReadTests.test_conflict_invalidates_latch_but_retains_bytes) ... ok
+test_invalid_channel_evidence_revokes_latch_freshness (test_capture_snapshot.FrozenReadTests.test_invalid_channel_evidence_revokes_latch_freshness) ... ok
+test_latch_atomic_against_shadow_writes (test_capture_snapshot.FrozenReadTests.test_latch_atomic_against_shadow_writes) ... ok
+test_new_cycle_evidence_revokes_latch_freshness (test_capture_snapshot.FrozenReadTests.test_new_cycle_evidence_revokes_latch_freshness) ... ok
+test_new_session_and_new_epoch_revoke_latch_freshness (test_capture_snapshot.FrozenReadTests.test_new_session_and_new_epoch_revoke_latch_freshness) ... ok
+test_old_latch_survives_new_cycle_as_bytes_not_freshness (test_capture_snapshot.FrozenReadTests.test_old_latch_survives_new_cycle_as_bytes_not_freshness) ... ok
+test_read_without_snapshot_is_invalid (test_capture_snapshot.FrozenReadTests.test_read_without_snapshot_is_invalid) ... ok
+test_reset_invalidates_latch_but_retains_bytes (test_capture_snapshot.FrozenReadTests.test_reset_invalidates_latch_but_retains_bytes) ... ok
+test_stop_invalidates_latch_but_retains_bytes (test_capture_snapshot.FrozenReadTests.test_stop_invalidates_latch_but_retains_bytes) ... ok
+test_stop_then_enable_never_restores_freshness_or_eligibility (test_capture_snapshot.FrozenReadTests.test_stop_then_enable_never_restores_freshness_or_eligibility) ... ok
+test_words_consistency_detects_torn_mixed_and_typed (test_capture_snapshot.FrozenReadTests.test_words_consistency_detects_torn_mixed_and_typed) ... ok
+test_words_consistency_uses_a_caller_side_copy (test_capture_snapshot.FrozenReadTests.test_words_consistency_uses_a_caller_side_copy) ... ok
+test_apply_clears_eligibility_and_never_relabels (test_capture_snapshot.ModelCoreTests.test_apply_clears_eligibility_and_never_relabels) ... ok
+test_apply_requires_enable_and_refuses_replay (test_capture_snapshot.ModelCoreTests.test_apply_requires_enable_and_refuses_replay) ... ok
+test_clear_fault_never_enables_and_requires_stopped (test_capture_snapshot.ModelCoreTests.test_clear_fault_never_enables_and_requires_stopped) ... ok
+test_conflict_after_publish_revokes_but_never_mutates_object (test_capture_snapshot.ModelCoreTests.test_conflict_after_publish_revokes_but_never_mutates_object) ... ok
+test_conflict_before_publish_poisons_batch (test_capture_snapshot.ModelCoreTests.test_conflict_before_publish_poisons_batch) ... ok
+test_defaults_and_no_eligibility (test_capture_snapshot.ModelCoreTests.test_defaults_and_no_eligibility) ... ok
+test_detached_pending_key_and_held_alias_cannot_rewrite_model (test_capture_snapshot.ModelCoreTests.test_detached_pending_key_and_held_alias_cannot_rewrite_model) ... ok
+test_epoch_and_session_never_reuse_retired_request (test_capture_snapshot.ModelCoreTests.test_epoch_and_session_never_reuse_retired_request) ... ok
+test_every_channel_permutation_publishes_one_batch (test_capture_snapshot.ModelCoreTests.test_every_channel_permutation_publishes_one_batch) ... ok
+test_fault_forces_stop_and_new_handshake (test_capture_snapshot.ModelCoreTests.test_fault_forces_stop_and_new_handshake) ... ok
+test_happy_path_publish (test_capture_snapshot.ModelCoreTests.test_happy_path_publish) ... ok
+test_identical_duplicate_idempotent_before_and_after_publish (test_capture_snapshot.ModelCoreTests.test_identical_duplicate_idempotent_before_and_after_publish) ... ok
+test_ingestion_is_detached_from_caller_records (test_capture_snapshot.ModelCoreTests.test_ingestion_is_detached_from_caller_records) ... ok
+test_invalid_channel_revokes_eligibility_and_new_cycle_recovers (test_capture_snapshot.ModelCoreTests.test_invalid_channel_revokes_eligibility_and_new_cycle_recovers) ... ok
+test_missing_channel_blocks_publish (test_capture_snapshot.ModelCoreTests.test_missing_channel_blocks_publish) ... ok
+test_newer_batch_never_merges_old_channel (test_capture_snapshot.ModelCoreTests.test_newer_batch_never_merges_old_channel) ... ok
+test_reset_before_session_and_evidence_without_session (test_capture_snapshot.ModelCoreTests.test_reset_before_session_and_evidence_without_session) ... ok
+test_reset_scope_validated (test_capture_snapshot.ModelCoreTests.test_reset_scope_validated) ... ok
+test_reset_scopes_invalidate_and_require_new_session (test_capture_snapshot.ModelCoreTests.test_reset_scopes_invalidate_and_require_new_session) ... ok
+test_stop_dominates_apply_then_enable_recovers (test_capture_snapshot.ModelCoreTests.test_stop_dominates_apply_then_enable_recovers) ... ok
+test_stop_mid_batch_clears_pending_and_refuses_stale_cycle (test_capture_snapshot.ModelCoreTests.test_stop_mid_batch_clears_pending_and_refuses_stale_cycle) ... ok
+test_stop_retires_request_and_late_capture_stays_refused (test_capture_snapshot.ModelCoreTests.test_stop_retires_request_and_late_capture_stays_refused) ... ok
+test_stop_with_complete_pending_batch_blocks_publication (test_capture_snapshot.ModelCoreTests.test_stop_with_complete_pending_batch_blocks_publication) ... ok
+test_tampered_or_foreign_records_rejected_at_ingestion (test_capture_snapshot.ModelCoreTests.test_tampered_or_foreign_records_rejected_at_ingestion) ... ok
+test_wrong_bindings_rejected_without_state_change (test_capture_snapshot.ModelCoreTests.test_wrong_bindings_rejected_without_state_change) ... ok
+test_angle_boundary_plus2_accepted_minus3_rejected (test_capture_snapshot.PwmMathTests.test_angle_boundary_plus2_accepted_minus3_rejected) ... ok
+test_angle_formula_edges (test_capture_snapshot.PwmMathTests.test_angle_formula_edges) ... ok
+test_angle_formula_full_scan_bounds (test_capture_snapshot.PwmMathTests.test_angle_formula_full_scan_bounds) ... ok
+test_classify_flags_are_candidate_only (test_capture_snapshot.PwmMathTests.test_classify_flags_are_candidate_only) ... ok
+test_half_code_tie_is_rejected_and_below_half_code (test_capture_snapshot.PwmMathTests.test_half_code_tie_is_rejected_and_below_half_code) ... ok
+test_period_boundary_candidate_only (test_capture_snapshot.PwmMathTests.test_period_boundary_candidate_only) ... ok
+test_pwm_api_typed_limits (test_capture_snapshot.PwmMathTests.test_pwm_api_typed_limits) ... ok
+test_speed_boundary_plus2_accepted_minus3_rejected (test_capture_snapshot.PwmMathTests.test_speed_boundary_plus2_accepted_minus3_rejected) ... ok
+test_speed_formula (test_capture_snapshot.PwmMathTests.test_speed_formula) ... ok
+test_describe_contract (test_capture_snapshot.RegisterInventoryTests.test_describe_contract) ... ok
+test_module_inventory_matches_document (test_capture_snapshot.RegisterInventoryTests.test_module_inventory_matches_document) ... ok
+test_partial_strobes_refused (test_capture_snapshot.RegisterInventoryTests.test_partial_strobes_refused) ... ok
+test_reserved_no_access (test_capture_snapshot.RegisterInventoryTests.test_reserved_no_access) ... ok
+test_unknown_offsets_rejected (test_capture_snapshot.RegisterInventoryTests.test_unknown_offsets_rejected) ... ok
+test_values_unknown_then_roundtrip (test_capture_snapshot.RegisterInventoryTests.test_values_unknown_then_roundtrip) ... ok
+test_batch_replay_regression_and_wrap_refused (test_capture_snapshot.SequenceTests.test_batch_replay_regression_and_wrap_refused) ... ok
+test_bounded_state_after_many_cycles (test_capture_snapshot.SequenceTests.test_bounded_state_after_many_cycles) ... ok
+test_epoch_replay_regression_and_wrap_refused (test_capture_snapshot.SequenceTests.test_epoch_replay_regression_and_wrap_refused) ... ok
+test_request_replay_regression_overflow_refused (test_capture_snapshot.SequenceTests.test_request_replay_regression_overflow_refused) ... ok
+test_session_replay_regression_overflow_refused (test_capture_snapshot.SequenceTests.test_session_replay_regression_overflow_refused) ... ok
+test_model_api_rejects_bools_and_foreign_objects (test_capture_snapshot.TypedBypassTests.test_model_api_rejects_bools_and_foreign_objects) ... ok
+test_inventory_missing_dependencies_explicit (test_capture_snapshot.VectorDocumentTests.test_inventory_missing_dependencies_explicit) ... ok
+test_inventory_no_enable_or_stage_claims (test_capture_snapshot.VectorDocumentTests.test_inventory_no_enable_or_stage_claims) ... ok
+test_inventory_offsets_and_names_exact (test_capture_snapshot.VectorDocumentTests.test_inventory_offsets_and_names_exact) ... ok
+test_inventory_reserved_no_access (test_capture_snapshot.VectorDocumentTests.test_inventory_reserved_no_access) ... ok
+test_inventory_source_hashes_match_pinned_inputs (test_capture_snapshot.VectorDocumentTests.test_inventory_source_hashes_match_pinned_inputs) ... ok
+test_inventory_unknown_fields_null_with_reason (test_capture_snapshot.VectorDocumentTests.test_inventory_unknown_fields_null_with_reason) ... ok
+test_pwm_vectors_match_bruteforce_oracle_and_module (test_capture_snapshot.VectorDocumentTests.test_pwm_vectors_match_bruteforce_oracle_and_module) ... ok
+test_scenario_vectors_with_independent_executor (test_capture_snapshot.VectorDocumentTests.test_scenario_vectors_with_independent_executor) ... ok
+test_vectors_document_flags (test_capture_snapshot.VectorDocumentTests.test_vectors_document_flags) ... ok
+
+----------------------------------------------------------------------
+Ran 77 tests in 0.165s
+
+OK
+===== [4] unittest-plain exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py =====
+.............................................................................
+----------------------------------------------------------------------
+Ran 77 tests in 0.151s
+
+OK
+===== [5] corrected-reproductions exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\control-correction-02\scratch\repro_corrected_probe.py =====
+

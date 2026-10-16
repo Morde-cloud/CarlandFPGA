@@ -1,0 +1,14 @@
+===== [1] emit-candidate-artifacts exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py emit --inventory competition/deepeye/golden/control/register_candidate_inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json =====
+emitted inventory: competition/deepeye/golden/control/register_candidate_inventory.json bytes=13511 sha256=ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5
+emitted vectors: competition/deepeye/golden/control/snapshot_vectors.json bytes=99792 sha256=e15abfe85a9d23ebf966b19140916ca0f1f7d1fdcf1aaece361ff635ebe78982
+registers=29 pwm_vectors=61 scenarios=33 negative_scenarios=22
+candidate-only: no board/CDC/ABI/enable claim is made
+===== [2] check-vectors exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py check --inventory competition/deepeye/golden/control/register_candidate_inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json =====
+vector file: competition/deepeye/golden/control/snapshot_vectors.json
+registers checked: 29
+pwm vectors checked: 61
+scenarios checked: 33
+vector check passed: inventory crosswalk, candidate PWM decode, scenario semantics
+===== [3] unittest-verbose exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py -v =====
+===== [4] unittest-plain exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py =====
+===== [5] unittest-packet-cwd exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s tests/control -p test_capture_snapshot.py -v =====

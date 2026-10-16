@@ -1,0 +1,115 @@
+{
+ "commands": [
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "competition/deepeye/golden/control/capture_snapshot_reference.py",
+    "emit",
+    "--inventory",
+    "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\control-correction-02\\scratch\\evidence-emit-inventory.json",
+    "--vectors",
+    "competition/deepeye/golden/control/snapshot_vectors.json"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.179,
+   "exit_code": 0,
+   "label": "emit-vectors-scratch-inventory",
+   "stderr_bytes": 0,
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_bytes": 527,
+   "stdout_sha256": "7a61a973ad83c3674aa868e682eadd17037207035fbbb203fe6dc04a085d79f8"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "competition/deepeye/golden/control/capture_snapshot_reference.py",
+    "check",
+    "--inventory",
+    "competition/deepeye/golden/control/register_candidate_inventory.json",
+    "--vectors",
+    "competition/deepeye/golden/control/snapshot_vectors.json"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.183,
+   "exit_code": 0,
+   "label": "check-real-inventory-vectors",
+   "stderr_bytes": 0,
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_bytes": 226,
+   "stdout_sha256": "b276a0419c3113d075e1670a9a1b3246fec27186f534c047c07a9f3af05bdae7"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "competition/deepeye/tests/control",
+    "-p",
+    "test_capture_snapshot.py",
+    "-v"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.406,
+   "exit_code": 0,
+   "label": "unittest-verbose",
+   "stderr_bytes": 10547,
+   "stderr_sha256": "2bf2ecc9b769b24cd384aa58b68b8e853751afc3f349c95cfadaf5da24a2342c",
+   "stdout_bytes": 0,
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "competition/deepeye/tests/control",
+    "-p",
+    "test_capture_snapshot.py"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.389,
+   "exit_code": 0,
+   "label": "unittest-plain",
+   "stderr_bytes": 181,
+   "stderr_sha256": "7d08c646ad3e37754630bb822bbc4c451c49679173f2161b54da19fc8998f2fd",
+   "stdout_bytes": 0,
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\control-correction-02\\scratch\\repro_corrected_probe.py"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.147,
+   "exit_code": 0,
+   "label": "corrected-reproductions",
+   "stderr_bytes": 0,
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_bytes": 1517,
+   "stdout_sha256": "f6079c74f6875ddf53acd7c3eed5d09c817e9eeb1efba193e7084f089f34c417"
+  }
+ ],
+ "correction_work_id": "B-CONTROL-INGRESS-STOP-CORRECTION-20261016-02-v1",
+ "task": "DEEPEYE-IMPLEMENTATION-20261014",
+ "task_version": 1
+}

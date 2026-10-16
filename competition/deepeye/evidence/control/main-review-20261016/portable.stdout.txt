@@ -1,0 +1,43 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-CONTROL-MAIN-BOUNDARY-20261016-03",
+  "source_sha256": "0d37c9176cbab304bcc18ffaa096f9e69b5845c3bc7e00883799c27949e094e2",
+  "baseline": {
+    "argv": [
+      "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "competition/deepeye/tests/control",
+      "-p",
+      "test_capture_snapshot.py",
+      "-v"
+    ],
+    "exit": 0,
+    "stderr_sha256": "49f527509e911d1f49da0585d79b32671b94faff13bedec867cfc80094ed854d"
+  },
+  "independent_counts": {
+    "stop_positions_orders": 24,
+    "angle_grid": 210007,
+    "speed_grid": 147,
+    "random_ingress_aliases": 300,
+    "revocation_events": 7,
+    "bounded_publications": 1000,
+    "strict_subclass_output_checks": 6
+  },
+  "findings": [],
+  "decision": "software_foundation_pass_only",
+  "not_claimed": [
+    "B05",
+    "R03",
+    "CDC",
+    "RTL",
+    "hardware",
+    "system"
+  ]
+}

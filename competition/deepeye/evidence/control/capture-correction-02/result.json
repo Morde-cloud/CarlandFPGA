@@ -1,0 +1,167 @@
+{
+ "claims": {
+  "acceptance": "not_claimed",
+  "board": "not_claimed",
+  "cdc_rdc": "not_claimed",
+  "hardware_enable_eligible": false,
+  "timing": "not_claimed"
+ },
+ "command_records": "see commands.json in this directory",
+ "contract": {
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "requirements_ids": [
+   "H01",
+   "H02",
+   "H03",
+   "H04",
+   "H05",
+   "H06",
+   "H07",
+   "H08",
+   "H09",
+   "H10",
+   "H11",
+   "H12",
+   "H13",
+   "H14",
+   "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_sha256_matches_expected": true,
+  "revision": 1
+ },
+ "correction_results": {
+  "B-CONTROL-ALIAS03": {
+   "active_request": 1,
+   "id": "B-CONTROL-ALIAS03",
+   "snapshot_key": [
+    1,
+    0,
+    1,
+    1
+   ],
+   "snapshot_yaw_q": 0
+  },
+  "B-CONTROL-CONSTRUCT02": {
+   "construction_path": [
+    "ctor:ValidationError",
+    "ctor:ValidationError",
+    "ctor:ValidationError"
+   ],
+   "eligibility": false,
+   "id": "B-CONTROL-CONSTRUCT02",
+   "pending_channels": []
+  },
+  "B-CONTROL-HISTORY04": {
+   "after": [
+    1,
+    0,
+    1,
+    1,
+    15000,
+    15000,
+    0,
+    15
+   ],
+   "before": [
+    1,
+    0,
+    1,
+    1,
+    15000,
+    15000,
+    0,
+    15
+   ],
+   "caller_key_is_not_snapshot_key": true,
+   "id": "B-CONTROL-HISTORY04",
+   "latest_published_words": [
+    1,
+    0,
+    1,
+    1,
+    15000,
+    15000,
+    0,
+    15
+   ],
+   "unchanged": true,
+   "words_consistent": true
+  },
+  "B-CONTROL-STOP01": {
+   "id": "B-CONTROL-STOP01",
+   "late_capture_after_enable": [
+    "ForeignEvidenceError",
+    "ForeignEvidenceError",
+    "ForeignEvidenceError"
+   ],
+   "late_capture_after_stop": [
+    "ForeignEvidenceError",
+    "ForeignEvidenceError",
+    "ForeignEvidenceError"
+   ],
+   "publish_after_enable": "PublishNotReadyError",
+   "publish_after_stop": "PublishNotReadyError",
+   "recovery_batch": [
+    1,
+    0,
+    2,
+    1
+   ],
+   "recovery_eligibility": true,
+   "state_after_stop": {
+    "eligibility": false,
+    "enabled": false,
+    "stopped": true
+   }
+  }
+ },
+ "correction_work_id": "B-CONTROL-INGRESS-STOP-CORRECTION-20261016-02-v1",
+ "evidence_sha256": {
+  "commands.json": "514a8f09eecfcb656c3e098bff136f9713d273bd81ce3740f83710b07275bbb1",
+  "stderr.txt": "5313f800e1feaf0a4dda63db8f5c4733961c283968fdb117d54d21106ffc05d1",
+  "stdout.txt": "b577b3737fcb39f3e0ac887a4cf5b4ad18728d8f2a4cea554e522beba97bd4a0"
+ },
+ "frozen_read_semantics": "coherent is True only while the latched bytes were latched from current published eligibility and no revocation happened since; STOP/reset/fault/conflict/new session/new epoch/new applied request/new capture cycle or invalid channel evidence turn outstanding latches INVALID while their bytes stay readable as stale history; shadow register writes never disturb a latch.",
+ "notes": [
+  "Correction of the four defects rejected by B main after review_control_failures.py: STOP01, CONSTRUCT02, ALIAS03, HISTORY04.",
+  "The emit command wrote the scratch inventory to D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\control-correction-02\\scratch\\evidence-emit-inventory.json; its bytes equal the repository inventory (ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5) which was not rewritten.",
+  "The corrected-reproduction probe lives only in the assigned scratch directory: D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\director-app-recovery-20261016\\control-correction-02\\scratch\\repro_corrected_probe.py",
+  "Original rejected source sha256 was 47eace83b88f429c80365602b6e72542aba75d7f05e42217fc88cdf299faaeab (B main snapshot, preserved under control-rejected-original)."
+ ],
+ "platform": "Windows-11-10.0.26200-SP0",
+ "problems": [],
+ "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+ "sources": {
+  "competition/deepeye/golden/control/README.md": "a1bab7fb247051a0b72795a77a0140f9ce66a36708d59e3172279dc8899c54ee",
+  "competition/deepeye/golden/control/capture_snapshot_reference.py": "db40d2f06201aeb04bbf2da50b65cbaf47d7c95a7cc88e3d57b60ad6439f695d",
+  "competition/deepeye/golden/control/register_candidate_inventory.json": "ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5",
+  "competition/deepeye/golden/control/snapshot_vectors.json": "2afe825063d36b877fd7d54331a015ddf50566b6e5d7c5eedd5bf7fb5cad1149",
+  "competition/deepeye/tests/control/test_capture_snapshot.py": "0b76954521cba1f1e46c8f77320ad9d19b7216b007e46480dac6b2f21161b36a"
+ },
+ "sources_unchanged": {
+  "competition/deepeye/evidence/control/snapshot-foundation-01/commands.json": "ac5a1a1956d0d0fc283033fc48b338118ab9ada052f2c2728e4b6ebea62d7adc",
+  "competition/deepeye/evidence/control/snapshot-foundation-01/result.json": "718aaf031204a99ab45ba610e06c39a5b3bf0c69d63b521171e8e2be7b96657e",
+  "competition/deepeye/evidence/control/snapshot-foundation-01/stderr.txt": "c608e95e0e497f3f07816a4f7aa623626c03c4c7e6687e26257a312d2a26ac8a",
+  "competition/deepeye/evidence/control/snapshot-foundation-01/stdout.txt": "6bc0db0421280642373edba55aff881757ac7788744b2c96127aba39f10a34e2",
+  "competition/deepeye/golden/control/register_candidate_inventory.json": "ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5"
+ },
+ "stages": {
+  "board": "not_run",
+  "implementation": "not_run",
+  "simulation": "not_run",
+  "synthesis": "not_run",
+  "system": "not_run"
+ },
+ "status": "completed",
+ "task": "DEEPEYE-IMPLEMENTATION-20261014",
+ "task_version": 1,
+ "unittest": {
+  "failed": 0,
+  "passed": 77,
+  "run": 77,
+  "verbatim": "Ran 77 tests ... OK"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "commands": [
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "competition/deepeye/golden/control/capture_snapshot_reference.py",
+    "emit",
+    "--inventory",
+    "competition/deepeye/golden/control/register_candidate_inventory.json",
+    "--vectors",
+    "competition/deepeye/golden/control/snapshot_vectors.json"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.187,
+   "exit_code": 0,
+   "finished_utc": "2026-10-16T03:54:09.375581Z",
+   "label": "emit-candidate-artifacts",
+   "started_utc": "2026-10-16T03:54:09.198952Z",
+   "stderr_bytes": 0,
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_bytes": 451,
+   "stdout_sha256": "70a2bd7ed447ed80567b0a249ff1b6b8d7fda57b79f57038dd93aa79cab683f3"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "competition/deepeye/golden/control/capture_snapshot_reference.py",
+    "check",
+    "--inventory",
+    "competition/deepeye/golden/control/register_candidate_inventory.json",
+    "--vectors",
+    "competition/deepeye/golden/control/snapshot_vectors.json"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.188,
+   "exit_code": 0,
+   "finished_utc": "2026-10-16T03:54:09.570155Z",
+   "label": "check-vectors",
+   "started_utc": "2026-10-16T03:54:09.375581Z",
+   "stderr_bytes": 0,
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_bytes": 226,
+   "stdout_sha256": "97a06410176a55e29b8babd4ac8f295336c8540dae70032d5172e2248e8db3cf"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "competition/deepeye/tests/control",
+    "-p",
+    "test_capture_snapshot.py",
+    "-v"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.39,
+   "exit_code": 0,
+   "finished_utc": "2026-10-16T03:54:09.961071Z",
+   "label": "unittest-verbose",
+   "started_utc": "2026-10-16T03:54:09.570155Z",
+   "stderr_bytes": 8475,
+   "stderr_sha256": "d17129b565ccb4609cc0d8d827bf1b5aa0763962cda1fc964aa08b84cc646e40",
+   "stdout_bytes": 0,
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "competition/deepeye/tests/control",
+    "-p",
+    "test_capture_snapshot.py"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+   "duration_s": 0.391,
+   "exit_code": 0,
+   "finished_utc": "2026-10-16T03:54:10.347559Z",
+   "label": "unittest-plain",
+   "started_utc": "2026-10-16T03:54:09.961071Z",
+   "stderr_bytes": 168,
+   "stderr_sha256": "01d9bcc832995c9a30311491e6b5dde12235bb3441cf33289f5cc7ce4b105b0c",
+   "stdout_bytes": 0,
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "argv": [
+    "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/control",
+    "-p",
+    "test_capture_snapshot.py",
+    "-v"
+   ],
+   "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye",
+   "duration_s": 0.39,
+   "exit_code": 0,
+   "finished_utc": "2026-10-16T03:54:10.735426Z",
+   "label": "unittest-packet-cwd",
+   "started_utc": "2026-10-16T03:54:10.347559Z",
+   "stderr_bytes": 8475,
+   "stderr_sha256": "bbf5f0bbe07898e25519b05ccd73d3623beb4740547eea41e2bf0571095fd072",
+   "stdout_bytes": 0,
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+ ],
+ "note": "raw per-command stdout/stderr are concatenated in stdout.txt/stderr.txt with exit codes and argv headers",
+ "schema": 1
+}

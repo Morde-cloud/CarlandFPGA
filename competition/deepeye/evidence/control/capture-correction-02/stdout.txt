@@ -1,0 +1,105 @@
+===== [1] emit-vectors-scratch-inventory exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py emit --inventory D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\control-correction-02\scratch\evidence-emit-inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json =====
+emitted inventory: D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\control-correction-02\scratch\evidence-emit-inventory.json bytes=13511 sha256=ce91081847df1c8bd857884f3763f93b197a1e7eeb7092b568fd5a2d2f4d83a5
+emitted vectors: competition/deepeye/golden/control/snapshot_vectors.json bytes=112519 sha256=2afe825063d36b877fd7d54331a015ddf50566b6e5d7c5eedd5bf7fb5cad1149
+registers=29 pwm_vectors=61 scenarios=36 negative_scenarios=25
+candidate-only: no board/CDC/ABI/enable claim is made
+===== [2] check-real-inventory-vectors exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 competition/deepeye/golden/control/capture_snapshot_reference.py check --inventory competition/deepeye/golden/control/register_candidate_inventory.json --vectors competition/deepeye/golden/control/snapshot_vectors.json =====
+vector file: competition/deepeye/golden/control/snapshot_vectors.json
+registers checked: 29
+pwm vectors checked: 61
+scenarios checked: 36
+vector check passed: inventory crosswalk, candidate PWM decode, scenario semantics
+===== [3] unittest-verbose exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py -v =====
+
+===== [4] unittest-plain exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_capture_snapshot.py =====
+
+===== [5] corrected-reproductions exit=0 argv=D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\director-app-recovery-20261016\control-correction-02\scratch\repro_corrected_probe.py =====
+{
+ "results": [
+  {
+   "id": "B-CONTROL-STOP01",
+   "late_capture_after_enable": [
+    "ForeignEvidenceError",
+    "ForeignEvidenceError",
+    "ForeignEvidenceError"
+   ],
+   "late_capture_after_stop": [
+    "ForeignEvidenceError",
+    "ForeignEvidenceError",
+    "ForeignEvidenceError"
+   ],
+   "publish_after_enable": "PublishNotReadyError",
+   "publish_after_stop": "PublishNotReadyError",
+   "recovery_batch": [
+    1,
+    0,
+    2,
+    1
+   ],
+   "recovery_eligibility": true,
+   "state_after_stop": {
+    "eligibility": false,
+    "enabled": false,
+    "stopped": true
+   }
+  },
+  {
+   "construction_path": [
+    "ctor:ValidationError",
+    "ctor:ValidationError",
+    "ctor:ValidationError"
+   ],
+   "eligibility": false,
+   "id": "B-CONTROL-CONSTRUCT02",
+   "pending_channels": []
+  },
+  {
+   "active_request": 1,
+   "id": "B-CONTROL-ALIAS03",
+   "snapshot_key": [
+    1,
+    0,
+    1,
+    1
+   ],
+   "snapshot_yaw_q": 0
+  },
+  {
+   "after": [
+    1,
+    0,
+    1,
+    1,
+    15000,
+    15000,
+    0,
+    15
+   ],
+   "before": [
+    1,
+    0,
+    1,
+    1,
+    15000,
+    15000,
+    0,
+    15
+   ],
+   "caller_key_is_not_snapshot_key": true,
+   "id": "B-CONTROL-HISTORY04",
+   "latest_published_words": [
+    1,
+    0,
+    1,
+    1,
+    15000,
+    15000,
+    0,
+    15
+   ],
+   "unchanged": true,
+   "words_consistent": true
+  }
+ ],
+ "source_sha256": "db40d2f06201aeb04bbf2da50b65cbaf47d7c95a7cc88e3d57b60ad6439f695d"
+}

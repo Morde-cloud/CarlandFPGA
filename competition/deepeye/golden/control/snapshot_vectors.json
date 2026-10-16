@@ -1,0 +1,5913 @@
+{
+ "candidate_only": true,
+ "capture_scenarios": [
+  {
+   "description": "Three channels of one batch publish atomically and become eligible.",
+   "id": "happy-path-atomic-publish",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250002,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 249998,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 51000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "latest_published"
+    }
+   ]
+  },
+  {
+   "description": "Channel arrival permutation yaw-pitch-speed still publishes one batch.",
+   "id": "perm-1-yaw-pitch-speed",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Channel arrival permutation yaw-speed-pitch still publishes one batch.",
+   "id": "perm-2-yaw-speed-pitch",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Channel arrival permutation pitch-yaw-speed still publishes one batch.",
+   "id": "perm-3-pitch-yaw-speed",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Channel arrival permutation pitch-speed-yaw still publishes one batch.",
+   "id": "perm-4-pitch-speed-yaw",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Channel arrival permutation speed-yaw-pitch still publishes one batch.",
+   "id": "perm-5-speed-yaw-pitch",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Channel arrival permutation speed-pitch-yaw still publishes one batch.",
+   "id": "perm-6-speed-pitch-yaw",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Missing channel evidence cannot publish and stays ineligible.",
+   "id": "missing-channel-no-publish",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       "pitch",
+       "yaw"
+      ]
+     },
+     "op": "pending_channels"
+    }
+   ]
+  },
+  {
+   "description": "A newer batch_seq starts fresh pending state; old pitch is never merged with new yaw.",
+   "id": "mixed-batch-no-merge",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 490000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       "yaw"
+      ]
+     },
+     "op": "pending_channels"
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "batch_seq": 2,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 249984,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 70000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       2
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Evidence from another session is rejected without state change.",
+   "id": "wrong-session-evidence",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 99
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Evidence from another control epoch is rejected without state change.",
+   "id": "wrong-epoch-evidence",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 2,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    }
+   ]
+  },
+  {
+   "description": "Evidence bound to another request_seq is rejected without state change.",
+   "id": "wrong-request-evidence",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    }
+   ]
+  },
+  {
+   "description": "Identical duplicate channel evidence before publication is idempotent.",
+   "id": "dup-identical-before-publish",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "duplicate_ignored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Conflicting duplicate before publication poisons the batch permanently.",
+   "id": "dup-conflict-before-publish",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "BatchConflictError",
+      "outcome": "error"
+     },
+     "high_ticks": 250016,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Conflict after publication revokes eligibility; frozen bytes become INVALID; object unchanged.",
+   "id": "dup-conflict-after-publish",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": {
+       "had_snapshot": true
+      }
+     },
+     "label": "f1",
+     "op": "frozen_read"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "BatchConflictError",
+      "outcome": "error"
+     },
+     "high_ticks": 250016,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "latest_published"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1,
+       15000,
+       15000,
+       0,
+       15
+      ]
+     },
+     "label": "f1",
+     "op": "frozen_words"
+    }
+   ]
+  },
+  {
+   "description": "Identical duplicate after publication is idempotent and does not restore or revoke eligibility.",
+   "id": "dup-identical-after-publish",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "duplicate_ignored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    }
+   ]
+  },
+  {
+   "description": "Reset before any snapshot: eligibility impossible; old session id cannot be reused; old keys rejected.",
+   "id": "reset-before-snapshot",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "reset",
+     "reason": "fixture-reset",
+     "scope": "fixture"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "SessionStateError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 101
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Reset during a complete pending batch clears it; publication becomes impossible.",
+   "id": "reset-clears-pending",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "reset",
+     "reason": "mid-batch-reset",
+     "scope": "capture"
+    },
+    {
+     "expect": {
+      "error": "SessionStateError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    }
+   ]
+  },
+  {
+   "description": "Published history survives reset as a stale object; a genuinely new session republishes.",
+   "id": "reset-after-publish-reestablish",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "reset",
+     "reason": "after-publish-reset",
+     "scope": "authority"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "latest_published"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 101
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 101
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 101
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 101
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       101,
+       1,
+       8,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "STOP revokes eligibility and blocks apply; enable is separate; the same session continues after enable.",
+   "id": "stop-dominates-apply",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "stop"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "stopped"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "enabled"
+    },
+    {
+     "expect": {
+      "error": "StopDominanceError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "clear_fault"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "enabled"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       8,
+       2
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "STOP during a partial batch clears it and retires the active request; stale evidence for the discarded cycle is refused.",
+   "id": "stop-mid-batch",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "stop"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "A new apply clears visible eligibility; the old snapshot is never relabeled to the new request.",
+   "id": "apply-clears-eligibility-not-relabel",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "latest_published"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       8,
+       2
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "A fault stops conservatively and requires a new session plus enable before apply.",
+   "id": "fault-stop-recovery",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "bit": 2,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "set_fault"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "stopped"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "enabled"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "error": "SessionStateError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "clear_fault"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 101
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 101
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 101
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 101
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       101,
+       1,
+       8,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "clear_fault and enable stay separate: enable refuses while faults latch; clear_fault alone never enables.",
+   "id": "fault-enable-refusal",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 1
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "bit": 5,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "set_fault"
+    },
+    {
+     "expect": {
+      "error": "FaultStateError",
+      "outcome": "error"
+     },
+     "op": "enable"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "clear_fault"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "expect": {
+      "error": "StateError",
+      "outcome": "error"
+     },
+     "op": "clear_fault"
+    },
+    {
+     "bit": 6,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "set_fault"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "clear_fault"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "enabled"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "enabled"
+    }
+   ]
+  },
+  {
+   "description": "Apply is blocked before enable and replay of the same request is refused.",
+   "id": "apply-before-enable",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 5
+    },
+    {
+     "expect": {
+      "error": "StopDominanceError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 1
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 1
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 1
+    }
+   ]
+  },
+  {
+   "description": "Candidate +/-2 boundary evidence is accepted and publishes.",
+   "id": "boundary-high-accept",
+   "negative": false,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 10002,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 249998,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50002,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Candidate period +/-3 is stored as invalid and revokes eligibility (candidate-only bound).",
+   "id": "boundary-period-minus3",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "invalid_stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 1999997,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "invalid_stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000003,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "invalid_stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 1999997,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Candidate high-count +/-3 is invalid; an identical repeat is idempotent; a valid value conflicts.",
+   "id": "boundary-high-minus3",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "invalid_stored"
+     },
+     "high_ticks": 249997,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "invalid_stored"
+     },
+     "high_ticks": 250003,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "invalid_stored"
+     },
+     "high_ticks": 50003,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "duplicate_ignored"
+     },
+     "high_ticks": 249997,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "BatchConflictError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Bools, floats, strings and None cannot bypass validators (bool is never an int).",
+   "id": "typed-rejection",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": true
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": true,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7.0,
+     "session": 100
+    },
+    {
+     "batch_seq": "1",
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": null,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": false,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaww",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "begin_session",
+     "session": "100"
+    },
+    {
+     "control_epoch": 1.0,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": null
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "reset",
+     "reason": "x",
+     "scope": 5
+    },
+    {
+     "bit": true,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "set_fault"
+    },
+    {
+     "bit": 8,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "set_fault"
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "offset": 8,
+     "op": "shadow_write",
+     "value": true
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Candidate sequences are monotonic and non-wrapping: replay, regression and overflow refused.",
+   "id": "overflow-replay-regression",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 4294967295
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_session",
+     "session": 4294967295
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_session",
+     "session": 0
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "begin_session",
+     "session": 4294967296
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "control_epoch": 0,
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "control_epoch": 3,
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 65535
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 65535
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 10
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 65536
+    },
+    {
+     "batch_seq": 4294967295,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 65535,
+     "session": 4294967295
+    },
+    {
+     "batch_seq": 4294967295,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 65535,
+     "session": 4294967295
+    },
+    {
+     "batch_seq": 4294967295,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 65535,
+     "session": 4294967295
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       4294967295,
+       1,
+       65535,
+       4294967295
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "batch_seq": 4294967295,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "duplicate_ignored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 65535,
+     "session": 4294967295
+    },
+    {
+     "batch_seq": 0,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 65535,
+     "session": 4294967295
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "Epoch wrap and replay are refused; out-of-range epoch is a typed rejection.",
+   "id": "epoch-rollover-refusal",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 1
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 255,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "control_epoch": 0,
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "control_epoch": 256,
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "control_epoch": 255,
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "begin_epoch"
+    }
+   ]
+  },
+  {
+   "description": "29 pinned offsets; 0x2c reserved no_access; unknown values null; partial strobes refused.",
+   "id": "register-inventory-access",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": 29
+     },
+     "op": "reg_count"
+    },
+    {
+     "expect": {
+      "error": "ReservedRegisterAccessError",
+      "outcome": "error"
+     },
+     "offset": 44,
+     "op": "shadow_read"
+    },
+    {
+     "expect": {
+      "error": "ReservedRegisterAccessError",
+      "outcome": "error"
+     },
+     "offset": 44,
+     "op": "shadow_write",
+     "value": 0
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": null
+     },
+     "offset": 8,
+     "op": "shadow_read"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "offset": 8,
+     "op": "shadow_write",
+     "value": 4294967295
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": 4294967295
+     },
+     "offset": 8,
+     "op": "shadow_read"
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "offset": 8,
+     "op": "shadow_write",
+     "value": 4294967296
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "offset": 256,
+     "op": "shadow_write",
+     "value": 1
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "offset": 256,
+     "op": "shadow_read"
+    },
+    {
+     "expect": {
+      "error": "ValidationError",
+      "outcome": "error"
+     },
+     "offset": 8,
+     "op": "shadow_write",
+     "value": 1,
+     "write_strobes": 1
+    }
+   ]
+  },
+  {
+   "description": "STOP retires the active request: late capture evidence for it is refused, enable alone cannot republish, and only a new applied request recovers.",
+   "id": "stop-late-capture-refused",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "stop"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": []
+     },
+     "op": "pending_channels"
+    },
+    {
+     "expect": {
+      "error": "PublishNotReadyError",
+      "outcome": "error"
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       8,
+       2
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "A new control epoch retires the active request: old-request evidence is refused until a new apply, and the old request replay is refused.",
+   "id": "epoch-retires-request",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "control_epoch": 2,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 2,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "error": "SequenceViolationError",
+      "outcome": "error"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 8
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 2,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "pitch",
+     "control_epoch": 2,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "speed",
+     "control_epoch": 2,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 8,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       2,
+       8,
+       2
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    }
+   ]
+  },
+  {
+   "description": "A new capture cycle revokes captured eligibility: the latched read keeps its bytes but is no longer coherent until a fresh latch from the new publication.",
+   "id": "frozen-new-cycle-revokes-freshness",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": {
+       "had_snapshot": true
+      }
+     },
+     "label": "f1",
+     "op": "frozen_read"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    },
+    {
+     "batch_seq": 2,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 2,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1,
+       15000,
+       15000,
+       0,
+       15
+      ]
+     },
+     "label": "f1",
+     "op": "frozen_words"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       2
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": {
+       "had_snapshot": true
+      }
+     },
+     "label": "f2",
+     "op": "frozen_read"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "label": "f2",
+     "op": "frozen_coherent"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    }
+   ]
+  },
+  {
+   "description": "Frozen reads are atomic; shadow writes cannot mutate them; STOP makes them INVALID with bytes retained and retires the active request.",
+   "id": "frozen-atomic-shadow-stop",
+   "negative": true,
+   "steps": [
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_session",
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "enable"
+    },
+    {
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "begin_epoch"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "apply_request",
+     "request_seq": 7
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "pitch",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "batch_seq": 1,
+     "channel": "speed",
+     "control_epoch": 1,
+     "expect": {
+      "outcome": "ok",
+      "value": "stored"
+     },
+     "high_ticks": 50000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1
+      ]
+     },
+     "op": "publish"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": {
+       "had_snapshot": true
+      }
+     },
+     "label": "f1",
+     "op": "frozen_read"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1,
+       15000,
+       15000,
+       0,
+       15
+      ]
+     },
+     "label": "f1",
+     "op": "frozen_words"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "offset": 80,
+     "op": "shadow_write",
+     "value": 12345
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1,
+       15000,
+       15000,
+       0,
+       15
+      ]
+     },
+     "label": "f1",
+     "op": "frozen_words"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": true
+     },
+     "op": "validate_words",
+     "words": [
+      100,
+      1,
+      7,
+      1,
+      15000,
+      15000,
+      0,
+      15
+     ]
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "validate_words",
+     "words": [
+      100,
+      1,
+      7,
+      1,
+      15000,
+      14999,
+      0,
+      15
+     ]
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "validate_words",
+     "words": [
+      100,
+      1,
+      7,
+      2,
+      15000,
+      15000,
+      0,
+      15
+     ]
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "validate_words",
+     "words": [
+      100,
+      1,
+      7,
+      1,
+      15000,
+      15000,
+      0
+     ]
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "validate_words",
+     "words": [
+      100,
+      1,
+      7,
+      1,
+      15000,
+      15000,
+      0,
+      true
+     ]
+    },
+    {
+     "expect": {
+      "outcome": "ok"
+     },
+     "op": "stop"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "label": "f1",
+     "op": "frozen_coherent"
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": [
+       100,
+       1,
+       7,
+       1,
+       15000,
+       15000,
+       0,
+       15
+      ]
+     },
+     "label": "f1",
+     "op": "frozen_words"
+    },
+    {
+     "batch_seq": 1,
+     "channel": "yaw",
+     "control_epoch": 1,
+     "expect": {
+      "error": "ForeignEvidenceError",
+      "outcome": "error"
+     },
+     "high_ticks": 250000,
+     "op": "submit",
+     "period_ticks": 2000000,
+     "request_seq": 7,
+     "session": 100
+    },
+    {
+     "expect": {
+      "outcome": "ok",
+      "value": false
+     },
+     "op": "eligibility"
+    }
+   ]
+  }
+ ],
+ "contract": {
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "requirements_ids": [
+   "H01",
+   "H02",
+   "H03",
+   "H04",
+   "H05",
+   "H06",
+   "H07",
+   "H08",
+   "H09",
+   "H10",
+   "H11",
+   "H12",
+   "H13",
+   "H14",
+   "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "revision": 1
+ },
+ "correction_work_id": "B-CONTROL-INGRESS-STOP-CORRECTION-20261016-02-v1",
+ "hardware_enable_eligible": false,
+ "input_manifest_sha256": "c641f9f105d766efe8eac5aafd2e7a884d3e0bca845c8736ef13ae8a57e9c0f1",
+ "negative_scenario_ids": [
+  "missing-channel-no-publish",
+  "mixed-batch-no-merge",
+  "wrong-session-evidence",
+  "wrong-epoch-evidence",
+  "wrong-request-evidence",
+  "dup-conflict-before-publish",
+  "dup-conflict-after-publish",
+  "reset-before-snapshot",
+  "reset-clears-pending",
+  "stop-dominates-apply",
+  "stop-mid-batch",
+  "apply-clears-eligibility-not-relabel",
+  "fault-stop-recovery",
+  "fault-enable-refusal",
+  "apply-before-enable",
+  "boundary-period-minus3",
+  "boundary-high-minus3",
+  "typed-rejection",
+  "overflow-replay-regression",
+  "epoch-rollover-refusal",
+  "register-inventory-access",
+  "stop-late-capture-refused",
+  "epoch-retires-request",
+  "frozen-new-cycle-revokes-freshness",
+  "frozen-atomic-shadow-stop"
+ ],
+ "notes": [
+  "All vectors are candidate-only offline software checks; no board, CDC/RDC, ABI or enable claim.",
+  "The +/-2 tick tolerance and +/-3 rejection are proposed candidate bounds, not measured hardware limits.",
+  "The capture word view is candidate-local for atomic-read tests only; no public address map or tick word order is claimed.",
+  "Correction B-CONTROL-INGRESS-STOP-CORRECTION-20261016-02-v1: derived evidence fields are re-derived and cross-checked at every ingress, STOP and new epochs retire the active request, records are detached from caller aliases, and frozen-read coherence follows captured eligibility."
+ ],
+ "pwm_vectors": [
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -15000,
+    "delta_ticks": -3,
+    "expected_high_ticks": 10000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 9997,
+   "id": "pwm-yaw-code-15000-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -15000,
+    "delta_ticks": -2,
+    "expected_high_ticks": 10000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 9998,
+   "id": "pwm-yaw-code-15000-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -15000,
+    "delta_ticks": 0,
+    "expected_high_ticks": 10000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 10000,
+   "id": "pwm-yaw-code-15000-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -15000,
+    "delta_ticks": 2,
+    "expected_high_ticks": 10000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 10002,
+   "id": "pwm-yaw-code-15000-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -15000,
+    "delta_ticks": 3,
+    "expected_high_ticks": 10000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 10003,
+   "id": "pwm-yaw-code-15000-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -14999,
+    "delta_ticks": -3,
+    "expected_high_ticks": 10016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 10013,
+   "id": "pwm-yaw-code-14999-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -14999,
+    "delta_ticks": -2,
+    "expected_high_ticks": 10016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 10014,
+   "id": "pwm-yaw-code-14999-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -14999,
+    "delta_ticks": 0,
+    "expected_high_ticks": 10016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 10016,
+   "id": "pwm-yaw-code-14999-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -14999,
+    "delta_ticks": 2,
+    "expected_high_ticks": 10016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 10018,
+   "id": "pwm-yaw-code-14999-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -14999,
+    "delta_ticks": 3,
+    "expected_high_ticks": 10016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 10019,
+   "id": "pwm-yaw-code-14999-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -1,
+    "delta_ticks": -3,
+    "expected_high_ticks": 249984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 249981,
+   "id": "pwm-yaw-code-1-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -1,
+    "delta_ticks": -2,
+    "expected_high_ticks": 249984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 249982,
+   "id": "pwm-yaw-code-1-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -1,
+    "delta_ticks": 0,
+    "expected_high_ticks": 249984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 249984,
+   "id": "pwm-yaw-code-1-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -1,
+    "delta_ticks": 2,
+    "expected_high_ticks": 249984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 249986,
+   "id": "pwm-yaw-code-1-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": -1,
+    "delta_ticks": 3,
+    "expected_high_ticks": 249984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 249987,
+   "id": "pwm-yaw-code-1-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 0,
+    "delta_ticks": -3,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 249997,
+   "id": "pwm-yaw-code0-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 0,
+    "delta_ticks": -2,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 249998,
+   "id": "pwm-yaw-code0-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250000,
+   "id": "pwm-yaw-code0-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 0,
+    "delta_ticks": 2,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250002,
+   "id": "pwm-yaw-code0-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 0,
+    "delta_ticks": 3,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 250003,
+   "id": "pwm-yaw-code0-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 1,
+    "delta_ticks": -3,
+    "expected_high_ticks": 250016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 250013,
+   "id": "pwm-yaw-code1-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 1,
+    "delta_ticks": -2,
+    "expected_high_ticks": 250016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250014,
+   "id": "pwm-yaw-code1-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 1,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250016,
+   "id": "pwm-yaw-code1-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 1,
+    "delta_ticks": 2,
+    "expected_high_ticks": 250016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250018,
+   "id": "pwm-yaw-code1-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 1,
+    "delta_ticks": 3,
+    "expected_high_ticks": 250016,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 250019,
+   "id": "pwm-yaw-code1-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 14999,
+    "delta_ticks": -3,
+    "expected_high_ticks": 489984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 489981,
+   "id": "pwm-yaw-code14999-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 14999,
+    "delta_ticks": -2,
+    "expected_high_ticks": 489984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 489982,
+   "id": "pwm-yaw-code14999-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 14999,
+    "delta_ticks": 0,
+    "expected_high_ticks": 489984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 489984,
+   "id": "pwm-yaw-code14999-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 14999,
+    "delta_ticks": 2,
+    "expected_high_ticks": 489984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 489986,
+   "id": "pwm-yaw-code14999-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 14999,
+    "delta_ticks": 3,
+    "expected_high_ticks": 489984,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 489987,
+   "id": "pwm-yaw-code14999-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 15000,
+    "delta_ticks": -3,
+    "expected_high_ticks": 490000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 489997,
+   "id": "pwm-yaw-code15000-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 15000,
+    "delta_ticks": -2,
+    "expected_high_ticks": 490000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 489998,
+   "id": "pwm-yaw-code15000-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 15000,
+    "delta_ticks": 0,
+    "expected_high_ticks": 490000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 490000,
+   "id": "pwm-yaw-code15000-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 15000,
+    "delta_ticks": 2,
+    "expected_high_ticks": 490000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 490002,
+   "id": "pwm-yaw-code15000-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 15000,
+    "delta_ticks": 3,
+    "expected_high_ticks": 490000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 490003,
+   "id": "pwm-yaw-code15000-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "yaw",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "yaw",
+    "decoded_code": 0,
+    "delta_ticks": 8,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 250008,
+   "id": "pwm-yaw-code0-dp8-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 0,
+    "delta_ticks": -3,
+    "expected_high_ticks": 50000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 49997,
+   "id": "pwm-speed-code0-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 0,
+    "delta_ticks": -2,
+    "expected_high_ticks": 50000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 49998,
+   "id": "pwm-speed-code0-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 50000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 50000,
+   "id": "pwm-speed-code0-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 0,
+    "delta_ticks": 2,
+    "expected_high_ticks": 50000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 50002,
+   "id": "pwm-speed-code0-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 0,
+    "delta_ticks": 3,
+    "expected_high_ticks": 50000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 50003,
+   "id": "pwm-speed-code0-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 1,
+    "delta_ticks": -3,
+    "expected_high_ticks": 51000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 50997,
+   "id": "pwm-speed-code1-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 1,
+    "delta_ticks": -2,
+    "expected_high_ticks": 51000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 50998,
+   "id": "pwm-speed-code1-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 1,
+    "delta_ticks": 0,
+    "expected_high_ticks": 51000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 51000,
+   "id": "pwm-speed-code1-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 1,
+    "delta_ticks": 2,
+    "expected_high_ticks": 51000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 51002,
+   "id": "pwm-speed-code1-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 1,
+    "delta_ticks": 3,
+    "expected_high_ticks": 51000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 51003,
+   "id": "pwm-speed-code1-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 19,
+    "delta_ticks": -3,
+    "expected_high_ticks": 69000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 68997,
+   "id": "pwm-speed-code19-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 19,
+    "delta_ticks": -2,
+    "expected_high_ticks": 69000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 68998,
+   "id": "pwm-speed-code19-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 19,
+    "delta_ticks": 0,
+    "expected_high_ticks": 69000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 69000,
+   "id": "pwm-speed-code19-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 19,
+    "delta_ticks": 2,
+    "expected_high_ticks": 69000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 69002,
+   "id": "pwm-speed-code19-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 19,
+    "delta_ticks": 3,
+    "expected_high_ticks": 69000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 69003,
+   "id": "pwm-speed-code19-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 20,
+    "delta_ticks": -3,
+    "expected_high_ticks": 70000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 69997,
+   "id": "pwm-speed-code20-dm3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 20,
+    "delta_ticks": -2,
+    "expected_high_ticks": 70000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 69998,
+   "id": "pwm-speed-code20-dm2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 20,
+    "delta_ticks": 0,
+    "expected_high_ticks": 70000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 70000,
+   "id": "pwm-speed-code20-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 20,
+    "delta_ticks": 2,
+    "expected_high_ticks": 70000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 70002,
+   "id": "pwm-speed-code20-dp2-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "speed",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "speed",
+    "decoded_code": 20,
+    "delta_ticks": 3,
+    "expected_high_ticks": 70000,
+    "hardware_enable_eligible": false,
+    "mode": "speed",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": false
+   },
+   "high_ticks": 70003,
+   "id": "pwm-speed-code20-dp3-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "pitch",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "pitch",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 1999997,
+    "period_valid": false,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250000,
+   "id": "pwm-pitch-code0-dp0-periodm3",
+   "period_ticks": 1999997
+  },
+  {
+   "channel": "pitch",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "pitch",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 1999998,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250000,
+   "id": "pwm-pitch-code0-dp0-periodm2",
+   "period_ticks": 1999998
+  },
+  {
+   "channel": "pitch",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "pitch",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000000,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250000,
+   "id": "pwm-pitch-code0-dp0-periodp0",
+   "period_ticks": 2000000
+  },
+  {
+   "channel": "pitch",
+   "expect": {
+    "accepted": true,
+    "candidate_only": true,
+    "channel": "pitch",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000002,
+    "period_valid": true,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250000,
+   "id": "pwm-pitch-code0-dp0-periodp2",
+   "period_ticks": 2000002
+  },
+  {
+   "channel": "pitch",
+   "expect": {
+    "accepted": false,
+    "candidate_only": true,
+    "channel": "pitch",
+    "decoded_code": 0,
+    "delta_ticks": 0,
+    "expected_high_ticks": 250000,
+    "hardware_enable_eligible": false,
+    "mode": "angle",
+    "period_ticks": 2000003,
+    "period_valid": false,
+    "within_candidate_tolerance": true
+   },
+   "high_ticks": 250000,
+   "id": "pwm-pitch-code0-dp0-periodp3",
+   "period_ticks": 2000003
+  }
+ ],
+ "schema": 1,
+ "stages": {
+  "board": "not_run",
+  "implementation": "not_run",
+  "simulation": "not_run",
+  "synthesis": "not_run",
+  "system": "not_run"
+ },
+ "task": "DEEPEYE-IMPLEMENTATION-20261014",
+ "task_version": 1,
+ "work_id": "B-CONTROL-SNAPSHOT-FOUNDATION-20261015-01-v1"
+}

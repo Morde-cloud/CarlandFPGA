@@ -1,0 +1,65 @@
+{
+  "request": {
+    "operation_id": "B-DIRECTOR-OWNER-GUARD-20261016-v2",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "0a2afa358c9775fe4d9faee77ec0b0aa4fa9df57",
+    "test_steps": [
+      "Run the exact command array in docs/deployment/evidence/external-owner-20261016-v2/source-validation.json: 107 affected tests, including five focused continuity checks.",
+      "Verify v2 manifest against final Git bytes. Preserve v1 B-DIRECTOR-OWNER-GUARD-20261016-v1 at historical98be52b, including f26 source, original130-test log and independently reproduced P2.",
+      "No deployment or live declaration/SQL/lock changes. Any later rollout requires actual App writer reconciliation and original idle/admission fences."
+    ],
+    "expected_result": "107 targeted software tests exit0. Corrupt/mismatched declaration obligations have explicit never-delivered withdrawal or supersession with immutable review/responsibility and original envelope. Attempts become unknown exactly once; unknown/executed work cannot close as unsent. Successor must have complete pending envelope, same task, nondecreasing version, no previous attempt; orphan queued and lower-version candidates reject. STOP/identity/idempotency/no-replay/self-check/idle boundaries hold. H01-H15 SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804."
+  },
+  "artifacts": [
+    "fpga_mesh/sessions.py",
+    "fpga_mesh/gateway.py",
+    "fpga_mesh/controller.py",
+    "fpga_mesh/project_control.py",
+    "fpga_mesh/update.py",
+    "fpga_mesh/continuity.py",
+    "tests/test_external_owner.py",
+    "tests/test_continuity.py",
+    "docs/deployment/EXTERNAL_TASK_OWNER.md",
+    "tests/test_sessions.py",
+    "tests/test_project_control.py",
+    "tests/test_controller.py",
+    "tests/test_mesh_update.py",
+    "tests/test_app_gateway.py",
+    "tests/test_controller_continuity.py",
+    "fpga_mesh/app_server.py",
+    "fpga_mesh/store.py",
+    "fpga_mesh/protocol.py",
+    "fpga_mesh/runtime.py",
+    "docs/deployment/evidence/external-owner-20261016-v2/main-independent-v1-negative-repro.json",
+    "docs/deployment/evidence/external-owner-20261016-v2/regression-stderr.txt",
+    "docs/deployment/evidence/external-owner-20261016-v2/regression-stdout.txt",
+    "docs/deployment/evidence/external-owner-20261016-v2/source-validation.json"
+  ],
+  "stages": {
+    "prior_candidate_known_defect": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/external-owner-20261016-v2/main-independent-v1-negative-repro.json"
+    },
+    "v2_software_regression": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/external-owner-20261016-v2/regression-stderr.txt"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    }
+  }
+}

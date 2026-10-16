@@ -1,0 +1,257 @@
+{
+ "schema": 1,
+ "work_id": "B-TRACE-OFFLINE-PAYLOAD-20261017-05-v1",
+ "task": {
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1
+ },
+ "contract": {
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_ids": [
+   "H01",
+   "H02",
+   "H03",
+   "H04",
+   "H05",
+   "H06",
+   "H07",
+   "H08",
+   "H09",
+   "H10",
+   "H11",
+   "H12",
+   "H13",
+   "H14",
+   "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+ },
+ "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+ "base_commit": "c5d079c24e45d97d6bd8181a7414a64c7c110860",
+ "main_spec_sha256": "7bc33ebc28c9f08e200c539a1a59c07b42b36211cb49b08ac449875bf75f9a73",
+ "status": "candidate_only_not_public_abi; A owns the public schema, the only production type7 enable decision and the physical board",
+ "proposal_revision": 1,
+ "outer_frame": {
+  "struct_format": "<2sBBBBHI",
+  "header_bytes": 12,
+  "crc_bytes": 2,
+  "overhead_bytes": 14,
+  "payload_max_bytes": 32,
+  "frame_max_bytes": 46,
+  "fields": [
+   {
+    "name": "magic",
+    "offset": 0,
+    "bytes": 2,
+    "value": "A5 5A"
+   },
+   {
+    "name": "version",
+    "offset": 2,
+    "bytes": 1,
+    "value": 3
+   },
+   {
+    "name": "type",
+    "offset": 3,
+    "bytes": 1,
+    "value": 7,
+    "notes": "candidate fixtures only; the existing A wire.py must keep rejecting type7"
+   },
+   {
+    "name": "payload_len",
+    "offset": 4,
+    "bytes": 1,
+    "range": "21..32"
+   },
+   {
+    "name": "config_epoch",
+    "offset": 5,
+    "bytes": 1,
+    "notes": "must equal binding.config_epoch"
+   },
+   {
+    "name": "sequence",
+    "offset": 6,
+    "bytes": 2,
+    "encoding": "little-endian uint16",
+    "notes": "frame sequence, not an acquisition index; must increase without wrap inside one binding"
+   },
+   {
+    "name": "tick_ms",
+    "offset": 8,
+    "bytes": 4,
+    "encoding": "little-endian uint32",
+    "notes": "low 32 bits of the FIRST acquisition tick in this candidate payload"
+   }
+  ],
+  "crc": {
+   "algorithm": "CRC-16/CCITT-FALSE",
+   "poly": "0x1021",
+   "init": "0xFFFF",
+   "refin": false,
+   "refout": false,
+   "xorout": 0,
+   "coverage": "version byte through the last payload byte",
+   "storage": "little-endian uint16 after the payload"
+  }
+ },
+ "payload": {
+  "prefix_bytes": 21,
+  "fields": [
+   {
+    "name": "revision",
+    "offset": 0,
+    "bytes": 1,
+    "value": 1,
+    "notes": "candidate revision, distinct from the outer ABI version"
+   },
+   {
+    "name": "settings",
+    "offset": 1,
+    "bytes": 1,
+    "bits": {
+     "0..2": "E code 0 maps to 0, 1 to 1, 2 to 2, 3 to 4, 4 to 8; 5..7 invalid",
+     "3": "RAW flag, RAW requires k bits 0",
+     "4..7": "Rice k 0..15"
+    }
+   },
+   {
+    "name": "quality",
+    "offset": 2,
+    "bytes": 1,
+    "bits": {
+     "0..1": "channel 0..3",
+     "2": "valid",
+     "3": "saturated",
+     "4": "held",
+     "5": "source_fault",
+     "6": "long_source_tick",
+     "7": "reserved, must be 0"
+    },
+    "notes": "the four quality flags are common to every point of the block; the per-point mask is recovered by expansion"
+   },
+   {
+    "name": "point_count",
+    "offset": 3,
+    "bytes": 1,
+    "range": "1..128"
+   },
+   {
+    "name": "significant_bits",
+    "offset": 4,
+    "bytes": 1,
+    "notes": "includes the 16 anchor bits for any valid block; 0 for quality-only invalid blocks"
+   },
+   {
+    "name": "session",
+    "offset": 5,
+    "bytes": 4,
+    "encoding": "little-endian uint32",
+    "notes": "must equal binding.session"
+   },
+   {
+    "name": "first_index",
+    "offset": 9,
+    "bytes": 4,
+    "encoding": "little-endian uint32",
+    "notes": "first ACTUAL acquisition index of the block"
+   },
+   {
+    "name": "first_tick_ms",
+    "offset": 13,
+    "bytes": 8,
+    "encoding": "little-endian uint64",
+    "notes": "first actual acquisition tick of the block"
+   }
+  ],
+  "optional_strides": {
+   "offset": 21,
+   "bytes": 4,
+   "present_when": "point_count > 1",
+   "fields": [
+    "index_stride uint16 little-endian 1..65535",
+    "tick_stride_ms uint16 little-endian 1..65535"
+   ],
+   "notes": "every point sits at first + i * stride; uint32 index and uint64 tick progression must not overflow"
+  },
+  "held_source_extension": {
+   "offset": "21 + strides",
+   "present_when": "quality held bit is set",
+   "short_form": {
+    "bytes": 2,
+    "encoding": "uint16 little-endian age",
+    "range": "1..65535",
+    "long_bit": 0,
+    "bound": "age <= first_tick (the uint64 origin would underflow otherwise)"
+   },
+   "long_form": {
+    "bytes": 8,
+    "encoding": "uint64 little-endian absolute source tick",
+    "long_bit": 1,
+    "requires": "source_tick < first_tick and first_tick - source_tick > 65535"
+   },
+   "notes": "the source update origin is constant for the whole held block; later point ages follow from their ticks"
+  },
+  "code_section": {
+   "offset": "21 + strides + extension",
+   "length": "ceil(significant_bits / 8) bytes, 0 when invalid",
+   "anchor": "first sample, little-endian uint16",
+   "raw_body": "each later sample little-endian uint16",
+   "rice_body": "MSB-first bitstream after the anchor: quotient zero bits then a one terminator, then k remainder bits",
+   "padding": "unused low bits of the final byte are zero"
+  }
+ },
+ "canonicality": {
+  "mode_selection": "two-stage: stage 1 picks the Rice k with the fewest significant bits, stage 2 keeps Rice only when its padded code-byte count is strictly smaller than RAW 2*value_count bytes; a stored-byte tie selects RAW",
+  "k_selection": "fewest significant bits over legal k 0..15 with every quotient at most 31; ties choose the lowest k - exactly the unchanged inner codec k rule",
+  "invalid_shape": "quality-only invalid blocks carry zero significant bits, no code bytes, RAW with k=0 and no anchor",
+  "held_forms": "short age 1..65535, long absolute source tick only when the age exceeds 65535",
+  "decode_checks": "version, type, magic, exact length, CRC, config_epoch, session, E versus binding, reserved bit, strides, overflow, source forms, and a canonical re-encoding byte comparison of the decoded values"
+ },
+ "recovery": {
+  "packing": "greedy longest legal prefix; split at quality change, held origin change, stride change, gap, overflow or the 32 B budget; every input point can become a singleton",
+  "sequence_capacity": "no partial output is returned when the uint16 sequence range cannot hold every frame; sequence never wraps",
+  "receiver": "at most 16 packets cached by sequence; exact duplicates return status duplicate with zero points; the same sequence with different bytes conflicts; a sequence no longer in the cache is rejected; sequence gaps are accepted without synthesizing points; per-channel first index and tick must both exceed that channel high water; failures never partially advance state"
+ },
+ "differences_from_inner_codec": {
+  "body_order": "candidate anchor and RAW words are little-endian; the inner fixture uses MSB-first bit words",
+  "mode_rule": "both choose Rice k by fewest significant bits (ties lowest k); the inner codec keeps Rice on a bit tie below RAW bits while the candidate then compares STORED BYTES of the whole code section and prefers RAW on a byte tie",
+  "example": "[0, 64] at E0: inner fixture rice k=6, 25 significant bits, 4 stored bytes; candidate RAW, 32 significant bits, 4 stored bytes"
+ },
+ "ledger_definition": {
+  "count": "decoded point count of the block",
+  "value_count": "points with valid true (0 for quality-only blocks)",
+  "selected_raw_bytes": "2 * value_count, the RAW body byte count the stored-byte selection compared against",
+  "significant_bits": "code-section bits from the payload field, anchor included",
+  "stored_code_bytes": "actual code-section byte length, ceil(significant_bits / 8)",
+  "padding_bits": "8 * stored_code_bytes - significant_bits, all zero",
+  "metadata_bytes": "21 prefix + 4 strides + 0/2/8 held extension",
+  "payload_bytes": "metadata_bytes + stored_code_bytes",
+  "outer_overhead_bytes": "12 header + 2 CRC = 14",
+  "frame_bytes": "payload_bytes + 14, at most 46",
+  "line_bits_8n1": "10 * frame_bytes, one start bit and one stop bit per byte"
+ },
+ "limitations": [
+  "Candidate only; not a public ABI freeze and not implemented in any A/C file; A wire.py keeps rejecting type7.",
+  "Extra metadata can expand traffic; no compression, throughput, latency or continuous-sampling claim is made.",
+  "Indices are actual per-channel acquisition indices, never frame sequence numbers; equal indices across channels do not prove common sampling time.",
+  "No source authentication, calibration, runtime clock acquisition, observation lease, motion authorization or AI feed is provided; the receiver cannot attest handshake, session uniqueness or trust.",
+  "Saturation is reported status only and never implies endpoint values.",
+  "The uint64 tick and low32 rollover vectors are synthetic future-layout proposals; A reports current ADC ticks at most 2**31-1, multiples of 10, and EM tick values that are multiples of 50 ms.",
+  "C must independently decode the approved candidate and adapt source, profile and physical units after A approval."
+ ],
+ "a_approval_gates": [
+  "candidate field packing and revision byte",
+  "header tick rule: low 32 bits of the first acquisition tick",
+  "per-channel acquisition index meaning and C four-channel grouping",
+  "64-bit clock origin and its proof",
+  "quality-only frames and uniform-mask splitting",
+  "held source origin and short/long form canonicality",
+  "stage-two stored-byte RAW tie policy and little-endian body adaptation",
+  "binding and sequence retirement rules",
+  "full BOOT digest and the actual TRACE scheduling and sliding-window budget"
+ ]
+}

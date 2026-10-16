@@ -1,0 +1,46 @@
+{
+  "files": {
+    "independent_trace_reference.py": "64b4dd798e4464fb04c83c36719aeb1d327b8b393cb7478ebcb38f82de58fefd",
+    "main_trace_review.py": "41d9a38aec60b5fb07489601d46e439f75a6da0b50fe6843e9f0d8a02b09ee06",
+    "audit_public_trace_vectors.py": "b9fc612462c5425c6e207f5fc65be5f63d89315fa2305f28c32c2aae65bf3d68",
+    "check_trace_regressions.py": "a91ed24f394b7cd553abcd18d665dcc08cbbf4c4ff2ce3e597d9a0fa4451b52b",
+    "check_a_type7_boundary.py": "b00496660f45c22e6c11611ef2f0ca72d864684df45086e349852386ee6f76f4",
+    "main_manual_vectors.json": "36b8e3fdb53e3c8fc911cc44b4f4151d62863d2e05b189f68c42fefe869b2d24",
+    "main_candidate_spec.md": "7bc33ebc28c9f08e200c539a1a59c07b42b36211cb49b08ac449875bf75f9a73",
+    "original-review-decision.json": "eecc0571d99431e7436aa9f46aabda18eb3c98ce87e189c2593320d1b6b3fd6e",
+    "main-original-negative.json": "b68a2419ec1baad815e8bbb5bbae04915b7be8feebb5c09c0d6c5489a2f505e5",
+    "main-original-unit.command.json": "83c3307bd8bdb7e6c9afec2899f4b8fd7c9612bff603d7cbf4e39e5e60f27c64",
+    "main-original-unit.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "main-original-unit.stderr.txt": "ea3291381cadbcf2a4341aeff8faf7ae35736b8a2f2ec59e24a503a9d4fdb4e1",
+    "main-original-negative.command.json": "3e8059c291c6907451f2cc8d81413d19711970d3dc9371ce0ba0bbffb2837819",
+    "main-original-negative.stdout.txt": "b6a4eba3a0ae82ec7c26c878bf8a9aab008e9f9eb65ad589825c9b3a7a35b3e0",
+    "main-original-negative.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "a-type7-boundary.json": "372413c32ddcf2155dd3da51ea9470a01208a89ae8265bb880a169f459c7c0c2",
+    "rejected-trace_candidate.py": "acff2ee76d37d351df650cf1dce6292d7393861e56ccc71d94fcb0ab6eceba3d",
+    "pinned_a_wire.py": "31533439f1bab32ca71fae138bb988f51ce1d043b4e364a6c33a09eab1d5f5ec"
+  },
+  "scope": "static main reference, original rejection and A pinned input; final acceptance pending",
+  "a_source_commit": "66aa291d7f01cc3cfefb8c30c4e8ad3aec6547bd",
+  "a_source_path": "competition/deepeye/integration/wire.py",
+  "a_boundary_command": [
+    "python",
+    "-B",
+    "-X",
+    "utf8",
+    "check_a_type7_boundary.py",
+    "--a-wire",
+    "pinned_a_wire.py",
+    "--manual",
+    "main_manual_vectors.json",
+    "--output",
+    "NEW_PATH"
+  ],
+  "a_boundary_observed_exit_code": 0,
+  "a_boundary_capture_note": "actual result JSON saved by check; initial stdout was returned by native exec, not saved as a separate raw file",
+  "review_tool_refinement": {
+    "prior_sha256": "6bf89c413f86c247234ecb260b7f75faa820ef8483334420e431409d0ba82085",
+    "current_sha256": "b9fc612462c5425c6e207f5fc65be5f63d89315fa2305f28c32c2aae65bf3d68",
+    "reason": "Preserve all pinned manual fields exactly; independently validate three explicit enrichment keys instead of rejecting them by whole-object equality.",
+    "prior_bytes": "reviewer-schema-before.py"
+  }
+}

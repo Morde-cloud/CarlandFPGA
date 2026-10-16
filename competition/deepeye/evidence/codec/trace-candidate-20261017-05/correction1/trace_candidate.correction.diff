@@ -1,0 +1,227 @@
+--- TRACE_CANDIDATE.md
++++ TRACE_CANDIDATE.md
+@@ -1,6 +1,8 @@
+ # Offline TRACE candidate revision 1 (B proposal, candidate only)
+ 
+-Task DEEPEYE-IMPLEMENTATION-20261014/v1; work B-TRACE-OFFLINE-PAYLOAD-20261017-05-v1.
++Task DEEPEYE-IMPLEMENTATION-20261014/v1; work B-TRACE-OFFLINE-PAYLOAD-20261017-05-v1,
++corrected under B-TRACE-CANONICAL-SOURCEAGE-CORRECTION-20261017-01-v1 (TC01
++two-stage Rice k selection, TC02 short held-age bound; wire fields unchanged).
+ Status: **candidate only, offline, B-side proposal**. This module emits and
+ parses candidate type7 fixture bytes for independent review. It is NOT a public
+ ABI freeze and defines no production transport, scanner, scheduling,
+@@ -26,6 +28,11 @@
+   61 frozen vectors `known_vectors.json` SHA256
+   `c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99`. Both
+   stay unchanged; their bytes are never reused as candidate bytes.
++- Correction work B-TRACE-CANONICAL-SOURCEAGE-CORRECTION-20261017-01-v1:
++  TC01 restored the inner codec's minimum-significant-bit Rice k rule as stage
++  one, with the stored-byte Rice/RAW comparison as stage two; TC02 bounds the
++  short held source age to 1 <= age <= first_tick so the uint64 origin cannot
++  underflow. No wire field, offset or flag changed.
+ 
+ Files:
+ 
+@@ -33,10 +40,16 @@
+ - `trace_candidate_layout.json` - machine-readable offsets, lengths, flags,
+   CRC parameters, canonicality and recovery rules, limitations, A gates.
+ - `trace_candidate_vectors.json` - raw vectors: 8 main hand-derived vectors
+-  copied verbatim, 30 synthetic vectors, 2 packer verification cases,
+-  22 malformed payloads, 9 malformed frames, per-block and aggregate ledgers.
++  copied verbatim (plus the enriched `byte_ledger`/`restored_points` fields the
++  committed tests read), 32 synthetic vectors, 2 packer verification cases,
++  23 malformed payloads, 11 malformed frames, per-block and aggregate ledgers.
+ - `TRACE_CANDIDATE.md` - this document.
+-- Tests: `competition/deepeye/tests/codec/test_trace_candidate.py`.
++- Tests: `competition/deepeye/tests/codec/test_trace_candidate.py` (72) and
++  `test_trace_corrections.py` (10, TC01/TC02).
++- Portable generator for the correction round:
++  `competition/deepeye/evidence/codec/trace-candidate-20261017-05/correction1/make_trace_vectors.py`
++  (explicit `--golden`/`--manual`/`--spec`/`--output-dir`; the read-only
++  original generator stays at `.../worker/make_trace_vectors.py`).
+ 
+ ## Outer frame
+ 
+@@ -119,15 +132,18 @@
+   values are not 0/65535). The vectors include a saturated non-endpoint case
+   with values 1234, 65535, 42.
+ - Held: every point keeps its own actual acquisition tick while the source
+-  update origin is constant. The short form stores a 1..65535 age; the long
+-  form stores the absolute origin and requires age > 65535. A long form whose
+-  age fits 16 bits is noncanonical and rejected.
++  update origin is constant. The short form stores a 1..65535 age bounded by
++  the first tick (1 <= age <= first_tick, so the uint64 origin cannot
++  underflow; B main finding TC02); the long form stores the absolute origin
++  and requires age > 65535. A long form whose age fits 16 bits is noncanonical
++  and rejected.
+ - Invalid points carry value/source_tick None; a fresh valid point requires
+   source_tick_ms == tick_ms; a held valid point requires source_tick_ms <
+   tick_ms; saturated/held cannot be set on invalid points.
+ 
+ Current source versus synthetic future layout: A currently reports ADC tick
+-values of at most 2^31-1 that are multiples of 10, and EM counts of 50. The
++values of at most 2^31-1 that are multiples of 10, and its EM tick values are
++multiples of 50 ms. The
+ uint64 tick vectors and low32 rollover vectors in this candidate are synthetic
+ future-layout proposals, not accepted current-source records. Index32 and
+ frame sequence16 never wrap inside one binding. A/C own the actual source
+@@ -135,29 +151,38 @@
+ uint64 acquisition sequence to a zero-extended index qualified by
+ binding+channel, never by frame sequence.
+ 
+-## Canonical mode/k selection (stored bytes, not bits)
+-
+-For each valid block the encoder computes the ZigZag residual list, then for
+-every k (0..15) the padded code length in STORED BYTES; Rice is selected only
+-when its stored-byte count is STRICTLY smaller than RAW 2*count bytes,
+-otherwise RAW wins, including ties. Ties choose the lowest k. This is an
+-explicit difference from the inner fixture codec, which compares BODY BIT
+-counts (RAW only when the best Rice body is >= 16*(n-1) bits):
+-
+-- Values [0, 64], E0: inner rule keeps Rice k=6 with 25 body bits (25 < 32);
+-  candidate padded bytes are 4 (Rice) vs 4 (RAW 2*2), a stored-byte tie, so
+-  the candidate stays RAW with 32 significant bits. Both produce 4 stored
+-  bytes here, but the bytes differ.
+-- Values [0, 2048, 4096], E0: inner rule keeps Rice k=11 with 28 body bits
+-  against 32 raw bits (28 < 32, mode rice, 44 total bits); the candidate sees
+-  44 bits -> 6 stored Rice bytes vs 6 RAW bytes, a stored-byte tie, and stays
+-  RAW with 48 significant bits. This is exactly the case where the bit rule
+-  would keep Rice but the stored-byte rule stays RAW.
+-- Three equal fresh values: candidate Rice k=0 with 18 significant bits -> 3
+-  stored bytes < 6 RAW bytes, so Rice is kept.
++## Canonical mode/k selection (two-stage)
++
++For each valid block the encoder computes the ZigZag residual list and then
++applies two stages:
++
++1. Stage 1 chooses the Rice k (0..15, unary quotient <= 31) with the FEWEST
++   SIGNIFICANT BITS (16 anchor bits plus the body bits), ties choosing the
++   lowest k. This is exactly the unchanged inner fixture codec's k rule.
++2. Stage 2 keeps Rice only when its padded code-byte count is STRICTLY smaller
++   than RAW's 2*count bytes; otherwise RAW wins, including every stored-byte
++   tie. This remains the explicit difference from the inner codec, which keeps
++   Rice on a bit tie below 16*(n-1) raw body bits.
++
++- TC01 counterexample (B main finding, now fixed): values [10000, 10001,
++  10002, 10004] at E0 give ZigZag [2, 2, 4]; k0 needs 27 significant bits
++  while k1 needs 26 (k2 also 26, so the tie keeps k1), and 4 stored Rice bytes
++  beat 8 RAW bytes. The rejected byte-minimizing rule had chosen k0 at 27 bits;
++  the corrected frame is a committed vector and a unit test.
++- Values [0, 8, 16], E0: k2 costs 30 significant bits and k3 costs 28, both in
++  4 padded bytes; the minimum-significant-bit rule selects k3 while the
++  rejected byte-minimizing rule selected k2.
++- Values [0, 64], E0: stage 1 picks k=6 with 25 significant bits (k7 ties at
++  25, lowest k wins, matching the inner codec); stage 2 sees 4 stored Rice
++  bytes vs 4 RAW bytes, a stored-byte tie, so the candidate stays RAW with 32
++  significant bits. Both produce 4 stored bytes here, but the bytes differ.
++- Values [0, 2048, 4096], E0: best Rice k=11 with 44 significant bits -> 6
++  stored bytes vs 6 RAW bytes, another stored-byte tie, so RAW with 48 bits.
++- Three equal fresh values: Rice k=0 with 18 significant bits -> 3 stored
++  bytes < 6 RAW bytes, so Rice is kept.
+ 
+ RAW stores the original values, so the tie policy is always lossless. The
+-decoder enforces canonicality: it re-derives the canonical selection from the
++decoder enforces canonicality: it re-derives the two-stage selection from the
+ decoded values and requires declared mode/k/significant-bits/code bytes to
+ match; nonzero padding bits, truncated/overlong unary, RAW when Rice is
+ strictly byte-better and nonoptimal k are all rejected.
+@@ -241,18 +266,22 @@
+   source points, binding/channel/sequence, payload and frame bytes, restored
+   points and the byte ledger. Expected bytes were never derived from this
+   implementation; the tests only check agreement with the committed file.
+-- `synthetic_vectors` (30, labelled software_fixture): all_e (5), boundary
+-  (4), mask (6), age_forms (3), tick_forms (3), tie (2), channels_4x128 (4,
+-  four channels x 128 selected points), sparse_pack (3).
++- `synthetic_vectors` (32, labelled software_fixture): all_e (5), boundary
++  (4), mask (6), age_forms (3), tick_forms (3), tie (2), canonical_k (2: the
++  TC01 hand-derived case plus the equal-padded-bytes family),
++  channels_4x128 (4, four channels x 128 selected points), sparse_pack (3).
+ - `packer_verification` (2): greedy longest-prefix results checked against an
+-  exhaustive brute-force minimum-frame search.
+-- `malformed_payloads` (22) and `malformed_frames` (9): exact injected defects
++  exhaustive longest-fitting-prefix check from each block start; this is not a
++  claim of globally optimal packing.
++- `malformed_payloads` (23) and `malformed_frames` (11): exact injected defects
+   and the expected rejection, covering declared/actual length mismatches,
+   CRC corruption, epoch/session/E/tick-low mismatch, reserved bits, zero
+   count, stride 0, progression overflow, zero/noncanonical/truncated/
+   overlong unary, nonzero padding, RAW claimed when Rice is strictly
+   byte-better, nonoptimal k, noncanonical long age, invalid-shape flags and
+-  trailing bytes.
++  trailing bytes, plus the TC02 short ages above the first tick (the main
++  portable-check underflow frame copied verbatim and a crafted tick-0 age-1
++  frame).
+ - Ledger: every vector carries the per-block ledger; the file carries the
+   aggregate; the tests recompute both.
+ 
+@@ -261,7 +290,8 @@
+ Payload rejects: length < 21 or > 32; revision != 1; reserved quality bit7;
+ E code 5..7; E != binding; RAW with k != 0; session mismatch; count 0 or
+ > 128; missing/zero strides; index/tick progression overflow; noncanonical
+-long age; long bit without held; short age 0; invalid block without RAW,
++long age; long bit without held; short age 0 or above first_tick; invalid
++block without RAW,
+ with bits != 0, saturated, held or trailing bytes; valid block with bits < 16
+ or length mismatch against metadata + code bytes; nonzero padding; truncated
+ or overlong unary; noncanonical mode/k/bits; code bytes not equal to the
+@@ -301,13 +331,18 @@
+ 
+ ```
+ python -B -m unittest discover -s competition/deepeye/tests/codec -p test_trace_candidate.py -v
++python -B -m unittest discover -s competition/deepeye/tests/codec -p test_trace_corrections.py -v
+ python -B -m unittest discover -s competition/deepeye/tests/codec -p test_codec_reference.py -v
+ python -B -m unittest discover -s competition/deepeye/tests/codec -p test_scalar_boundary.py -v
+ ```
+ 
+-The last two are the pre-existing 49 + 18 = 67 codec tests, which stay green
+-and unchanged; together with the new file they are the only suites this work
+-ran (no full historical suite was executed).
++`test_trace_candidate.py` (72) and `test_trace_corrections.py` (10: the TC01
++hand-derived frame, the equal-padded-bytes family with an independent
++two-stage oracle, the inner-codec k crosscheck, and the TC02 age-bound and
++receiver-atomicity cases) are the candidate suites; the last two are the
++pre-existing 49 + 18 = 67 codec tests. All stay green and unchanged, and they
++are the only suites this correction ran (no full historical suite was
++executed).
+ 
+ ## Limitations
+ 
+@@ -317,9 +352,9 @@
+   acceptance claim of any kind.
+ - The receiver is offline software: it cannot prove real handshakes, session
+   uniqueness or source authenticity; binding is an expected-value fixture.
+-- The current A source reports ADC ticks <= 2^31-1 in multiples of 10 and EM
+-  counts of 50; uint64/interleaved-span vectors are synthetic future-layout
+-  proposals, not measurements. C mapping (uint64 acquisition sequence ->
++- The current A source reports ADC ticks <= 2^31-1 in multiples of 10, and
++  its EM tick values are multiples of 50 ms; uint64/interleaved-span vectors
++  are synthetic future-layout proposals, not measurements. C mapping (uint64 acquisition sequence ->
+   zero-extended index qualified by session/channel, never frame sequence) is
+   a proposal for A/C approval.
+ - High-water receiver checks reject legitimate interleaved or retransmitted
+@@ -346,3 +381,25 @@
+ (captured stdout/stderr, command records with exit codes and hashes, the
+ vector generator `make_trace_vectors.py`, result summary) with generator
+ captures under `worker/captures/`.
++
++The bounded correction B-TRACE-CANONICAL-SOURCEAGE-CORRECTION-20261017-01-v1
++adds `.../correction1/` next to it: the portable correction generator
++`correction1/make_trace_vectors.py` (explicit `--golden`/`--manual`/`--spec`/
++`--output-dir`; determinism verified across two fresh directories), raw
++command captures, the parent regression runs on the rejected original (exit 1,
++both findings) and on the corrected source (exit 0), the parent public audit
++runs, and per-file hashes. The enriched `byte_ledger`/`restored_points` fields
++inside `manual_vectors.vectors` are kept for the committed 72 tests; the pinned
++`main_manual_vectors.json` values are all preserved exactly (verified with the
++independent provenance check in the same evidence directory).
++
++Reproduce the vector and layout artifacts from the repository root (no private
++or `.local` path is needed; `--golden` points at the codec sources and the
++pinned main copies live in the published `main/` directory):
++
++```
++python -B competition/deepeye/evidence/codec/trace-candidate-20261017-05/correction1/make_trace_vectors.py --golden competition/deepeye/golden/codec --manual competition/deepeye/evidence/codec/trace-candidate-20261017-05/main/main_manual_vectors.json --spec competition/deepeye/evidence/codec/trace-candidate-20261017-05/main/main_candidate_spec.md --output-dir <fresh-directory>
++```
++
++then copy the generated `trace_candidate_vectors.json` and
++`trace_candidate_layout.json` to `golden/codec/` explicitly.

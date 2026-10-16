@@ -1,0 +1,23 @@
+test_bool_rejected_across_the_api (test_scalar_boundary.BoolRejectionTests.test_bool_rejected_across_the_api) ... ok
+test_int_enum_rejected_across_the_api (test_scalar_boundary.IntEnumRejectionTests.test_int_enum_rejected_across_the_api) ... ok
+test_arithmetic_trap_rejected_before_any_arithmetic (test_scalar_boundary.OperatorTrapTests.test_arithmetic_trap_rejected_before_any_arithmetic) ... ok
+test_comparison_trap_rejected_before_any_comparison (test_scalar_boundary.OperatorTrapTests.test_comparison_trap_rejected_before_any_comparison) ... ok
+test_passive_int_subclass_rejected_across_the_api (test_scalar_boundary.PassiveSubclassRejectionTests.test_passive_int_subclass_rejected_across_the_api) ... ok
+test_forged_anchor_operator_never_runs (test_scalar_boundary.ReproducedE0CorruptionTests.test_forged_anchor_operator_never_runs) ... ok
+test_forged_anchor_rshift_is_rejected (test_scalar_boundary.ReproducedE0CorruptionTests.test_forged_anchor_rshift_is_rejected) ... ok
+test_forged_residual_operator_never_runs (test_scalar_boundary.ReproducedE0CorruptionTests.test_forged_residual_operator_never_runs) ... ok
+test_forged_residual_sub_is_rejected (test_scalar_boundary.ReproducedE0CorruptionTests.test_forged_residual_sub_is_rejected) ... ok
+test_ordinary_values_keep_the_same_encoded_bytes (test_scalar_boundary.ReproducedE0CorruptionTests.test_ordinary_values_keep_the_same_encoded_bytes) ... ok
+test_require_int_accepts_exact_builtin_ints (test_scalar_boundary.StrictHelperTests.test_require_int_accepts_exact_builtin_ints) ... ok
+test_require_int_rejects_bool_subclasses_enums_and_non_ints (test_scalar_boundary.StrictHelperTests.test_require_int_rejects_bool_subclasses_enums_and_non_ints) ... ok
+test_block_len_boundaries (test_scalar_boundary.ValidBuiltinBoundaryControls.test_block_len_boundaries) ... ok
+test_e_boundaries_and_zigzag_helpers (test_scalar_boundary.ValidBuiltinBoundaryControls.test_e_boundaries_and_zigzag_helpers) ... ok
+test_fixture_numeric_field_boundaries (test_scalar_boundary.ValidBuiltinBoundaryControls.test_fixture_numeric_field_boundaries) ... ok
+test_quantize_and_reconstruct_builtin_values (test_scalar_boundary.ValidBuiltinBoundaryControls.test_quantize_and_reconstruct_builtin_values) ... ok
+test_samples_at_uint16_boundaries_roundtrip (test_scalar_boundary.ValidBuiltinBoundaryControls.test_samples_at_uint16_boundaries_roundtrip) ... ok
+test_select_body_encoding_and_block_apis (test_scalar_boundary.ValidBuiltinBoundaryControls.test_select_body_encoding_and_block_apis) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.001s
+
+OK

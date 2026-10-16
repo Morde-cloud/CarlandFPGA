@@ -1,0 +1,9 @@
+{
+  "finding": "TC04 generator previously allowed an existing output directory despite fresh-output contract",
+  "change": "mkdir exist_ok=False before any artifact writes",
+  "previous_sha256": "85b8941477d10bf7b7df570e7a898d0dc44ca16d8ec5dc6621b2c0f9d96276c6",
+  "current_sha256": "ec7b087c11ffb6455bdca4e88bfd067d40a62cb73bf86c7631a22727d40cbab4",
+  "prior_worker_evidence_preserved": true,
+  "main_validation": "PASS: existing output and input-alias directories rejected, prior bytes unchanged",
+  "raw_logs": "review-01/main-generator-{existing-output,input-alias}-rejected.*"
+}

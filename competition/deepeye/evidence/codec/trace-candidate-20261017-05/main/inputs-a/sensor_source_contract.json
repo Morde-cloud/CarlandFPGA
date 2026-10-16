@@ -1,0 +1,77 @@
+{
+  "contract_id": "deepeye_sensor_source_candidate_v1",
+  "status": "candidate_software_only",
+  "task": "DEEPEYE-IMPLEMENTATION-20261014/v1",
+  "work_id": "A-app-sensor-boundary-20261015-v1",
+  "human_contract": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "implementation_baseline": "32dff0c4252b1e08dc54beee168fd3959bf822df",
+  "basis": ["taskbook_final.md sections 8.5, 8.6 and G03", "simulation/sensors/forward_profile.py SensorSample.to_payload"],
+  "direction": {"producer": "world_authority", "consumer": "hardware_bridge", "reverse_requests": false, "ai_access": false},
+  "record_fields": {
+    "profile_id": {"type": "string", "const": "deepeye_forward_profile_candidate_v1"},
+    "profile_status": {"type": "string", "const": "candidate_only"},
+    "profile_note": {"type": "string", "const": "not_calibrated;not_em_surrogate_v2;not_formally_frozen"},
+    "source_mode": {"type": "string", "const": "twin_fixture"},
+    "adc_tick_ms": {"type": "integer_excluding_bool", "minimum": 0, "maximum": 2147483647, "multiple_of": 10},
+    "em_tick_ms": {"type": "integer_excluding_bool_or_null", "minimum": 0, "maximum": 2147483647, "multiple_of": 50},
+    "channel_values": {"type": "JSON_array", "length": 4, "items": "finite_number_excluding_bool_or_null"},
+    "channel_counts": {"type": "JSON_array", "length": 4, "items": "integer_excluding_bool_or_null", "minimum": 0, "maximum": 4095},
+    "quality": {"type": "integer_excluding_bool", "minimum": 0, "maximum": 8191}
+  },
+  "record_policy": {
+    "all_fields_required": true,
+    "additional_fields": false,
+    "nested_objects": false,
+    "duplicate_JSON_keys": "reject",
+    "NaN_and_infinity": "reject",
+    "type_coercion": false,
+    "raw_JSON_size_limit": "4096 bytes for byte input, 4096 code points for string input; UTF-8 bytes only",
+    "returned_record": "detached frozen dataclass with immutable value/count tuples"
+  },
+  "channels": [
+    {"index": 0, "name": "log10_rho_apparent", "limits": [-0.6989700043360187, 3.3010299956639813]},
+    {"index": 1, "name": "yaw_log10_rho_difference", "limits": [-2.0, 2.0]},
+    {"index": 2, "name": "pitch_log10_rho_difference", "limits": [-2.0, 2.0]},
+    {"index": 3, "name": "near_bit_vibration_rms_g", "limits": [0.0, 2.0]}
+  ],
+  "count_rule": "For valid channel i: round((value-low)/(high-low)*4095), Python ties-to-even; normalized proxy only, no DAC/XADC calibration.",
+  "quality_rules": {
+    "bits_0_3": "valid per channel; EM bits 0..2 must be all 0 or all 1",
+    "bits_4_7": "saturated per channel; requires valid; saturated EM value is an endpoint; vibration RMS may be below endpoint because saturation is window-wide",
+    "bits_8_10": "EM held iff em_tick_ms < adc_tick_ms; all 3 agree",
+    "bit_11": "zero; vibration RMS is never an EM held sample",
+    "bit_12": "source_fault iff EM invalid; current candidate has no other source_fault category",
+    "bits_13_15": "zero on this raw candidate record; do not map UART grant semantics into it",
+    "invalid_channel": "value/count null and saturated/held cleared",
+    "invalid_EM": "em_tick_ms null, all 3 EM channels invalid; real vibration may remain valid",
+    "vibration": "10 contiguous observed 10ms ADC records; earliest origin-zero valid tick 90ms; a saturated RMS is at least sqrt(4/10) g"
+  },
+  "ledger_rules": {
+    "storage": "in-memory single-writer per-run snapshot, no durable journal or automatic restore",
+    "origin": "trusted caller binds start_tick_ms to start_monotonic_ns; full producer ADC history starts at that tick",
+    "receiver_clock": "nonnegative integer nanoseconds, same domain as origin; healthy/accept/accept_json share a high-water mark initialized to origin; every valid nondecreasing clock argument is observed before untrusted payload parsing/validation; equality allowed",
+    "clock_high_water_ns": "read-only diagnostic separate from the sample snapshot; valid trusted clocks advance even if payload/JSON is rejected; invalid or backward clock inputs raise ValueError and do not change it",
+    "ADC": "strictly increasing 10ms-grid tick; duplicates/reverse/backfill rejected; first tick equals origin",
+    "EM": "50ms-grid tick not later than ADC, age <=100ms; a new EM timestamp must equal this record's ADC tick; no late introduction of a missed acquisition",
+    "hold": "numeric EM values, counts and saturation unchanged while em_tick_ms unchanged; never increments native EM count",
+    "invalidated_hold": "after source_fault, old EM cannot revive; later new valid acquisition in its own ADC slot required",
+    "ADC_gap": "no fabricated rows; contiguous vibration count resets to one; claimed vibration validity must exactly match observed history",
+    "arrival": "origin-mapped ADC and EM timestamps must each be <= receipt and no older than 100ms",
+    "rejection": "ValueError, no sample admission/EM count/heartbeat/snapshot mutation; a valid nondecreasing trusted clock argument remains observed even on rejection",
+    "source_fault_record": "admit explicit invalid state but do not update last_healthy_received_ns; healthy() immediately false",
+    "heartbeat": "healthy first observes the shared clock high-water mark without changing sample/heartbeat records; valid EM and receipt age and original EM age each <=100ms required; expired strictly above 100ms; an earlier subsequent query/admission clock raises instead of reviving health",
+    "health_diagnostic": "last_healthy_received_ns is valid EM ingress time, including legitimate hold; it never replaces original EM deadline",
+    "run_reset": "new externally authorized run/channel binding only; no automatic reset or fault clearing"
+  },
+  "unimplemented": [
+    "authenticated process transport, ACLs and run/epoch binding",
+    "trusted clock acquisition, clock error/drift bounds and runtime scheduler measurement",
+    "attestation that producer really acquired instead of forging plausible values and ticks",
+    "durable ledger and crash recovery",
+    "hardware sending, DAC, XADC, PL, RS485, FPGA observations and controls",
+    "independent FDEM validation, sensor calibration and physical performance"
+  ],
+  "product_acceptance": {"G03": "not_run", "G09": "not_run", "all_H01_H15": "unchanged mandatory", "physical_chain": "not_run"}
+}

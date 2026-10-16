@@ -1,0 +1,32 @@
+{
+  "source_sha256": "acff2ee76d37d351df650cf1dce6292d7393861e56ccc71d94fcb0ab6eceba3d",
+  "checks": 2,
+  "failures": 2,
+  "issues": [
+    {
+      "id": "TC01",
+      "expected_frame_hex": "a55a03071d00000000000000011004041a0100000000000000000000000000000001000a0010274880a94b",
+      "actual_frame_hex": "a55a03071d00000000000000010004041b0100000000000000000000000000000001000a0010272420b29c",
+      "reason": "k must minimize significant bits before comparing padded Rice/RAW bytes"
+    },
+    {
+      "id": "TC02",
+      "accepted_points": [
+        {
+          "index": 7,
+          "tick_ms": 1000,
+          "value": 100,
+          "valid": true,
+          "saturated": false,
+          "held": true,
+          "source_fault": false,
+          "source_tick_ms": -1
+        }
+      ],
+      "state_mutated": true,
+      "reason": "uint16 source age1001 cannot be subtracted from uint64 first_tick1000"
+    }
+  ],
+  "status": "FAIL",
+  "scope": "offline proposal correctness, no runtime/board acceptance"
+}

@@ -1,0 +1,60 @@
+{
+  "request": {
+    "operation_id": "B-PRESERVE-EXISTING-TASK-20261018-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "fd867aa485d9fe7ea8754ec35aa53f1df1962154",
+    "test_steps": [
+      "Run the focused PowerShell fixture command in fixtures-command.json on the exact committed source; inspect fixture-cases.json and the raw unittest log.",
+      "Run the four unchanged admission/rollback tests recorded in admission-command.json; check no real task or service is invoked.",
+      "Review task XML/launcher snapshots, strict identity/action/routing checks, all recheck boundaries and the absence of registration/routing/role mutations. Preserve all five live conflicts; do not deploy."
+    ],
+    "expected_result": "18 PowerShell fixture methods and 4 admission/rollback methods pass; task Set/Register never invoked, Start at most once, changed definitions never restored, busy/failure never replayed. Offline review only. H01-H15 SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804."
+  },
+  "artifacts": [
+    "deploy/Update-FPGAMesh.ps1",
+    "deploy/Preserve-FPGAMeshTask.ps1",
+    "tests/test_update_existing_task.py",
+    "tests/fixtures/update_existing_task/Invoke-Fixture.ps1",
+    "tests/fixtures/update_existing_task/PythonShim.ps1",
+    "fpga_mesh/update.py",
+    "deploy/Stop-FPGAMeshForUpdate.ps1",
+    "tests/test_mesh_update.py",
+    "docs/deployment/evidence/preserve-existing-task-20261018/admission-command.json",
+    "docs/deployment/evidence/preserve-existing-task-20261018/admission.stderr.txt",
+    "docs/deployment/evidence/preserve-existing-task-20261018/admission.stdout.txt",
+    "docs/deployment/evidence/preserve-existing-task-20261018/fixture-cases.json",
+    "docs/deployment/evidence/preserve-existing-task-20261018/fixtures-command.json",
+    "docs/deployment/evidence/preserve-existing-task-20261018/fixtures.stderr.txt",
+    "docs/deployment/evidence/preserve-existing-task-20261018/fixtures.stdout.txt",
+    "docs/deployment/evidence/preserve-existing-task-20261018/main-review.json",
+    "docs/deployment/evidence/preserve-existing-task-20261018/preliminary-failure-command.json",
+    "docs/deployment/evidence/preserve-existing-task-20261018/preliminary-failure.stderr.txt",
+    "docs/deployment/evidence/preserve-existing-task-20261018/REVIEW.md",
+    "docs/deployment/evidence/preserve-existing-task-20261018/validation.json"
+  ],
+  "stages": {
+    "preliminary_fixture_assertion": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/preserve-existing-task-20261018/preliminary-failure.stderr.txt"
+    },
+    "final_powershell_fixtures": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/preserve-existing-task-20261018/fixtures.stderr.txt"
+    },
+    "admission_and_rollback": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/preserve-existing-task-20261018/admission.stderr.txt"
+    },
+    "deployment": {
+      "status": "not_run"
+    },
+    "actual_app_delivery": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    }
+  }
+}

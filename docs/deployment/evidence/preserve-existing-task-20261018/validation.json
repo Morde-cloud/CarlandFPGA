@@ -1,0 +1,81 @@
+{
+  "task_id": "B-RUNTIME-CONTINUITY-20261016",
+  "task_version": 1,
+  "operation_id": "B-PRESERVE-EXISTING-TASK-20261018-v1",
+  "source_commit": "fd867aa485d9fe7ea8754ec35aa53f1df1962154",
+  "tested_commit": "fd867aa485d9fe7ea8754ec35aa53f1df1962154",
+  "base_commit": "3c7ccdcf9e7beb3b11e3e8edd1ce7e91939d300a",
+  "fixture_test_methods": 18,
+  "fixture_process_cases": 46,
+  "fixture_exit_code": 0,
+  "fixture_elapsed_seconds": 41.562,
+  "admission_test_methods": 4,
+  "admission_exit_code": 0,
+  "powershell_versions": [
+    "5.1.26100.9711"
+  ],
+  "source_sha256": {
+    "deploy/Update-FPGAMesh.ps1": "d51aedad81458b12fff6e7a4e41574b2a4f9de93a7ee7269df9970e5e49d2147",
+    "deploy/Preserve-FPGAMeshTask.ps1": "bc3eadaafcdfc5932f1e97b121df1c559c10e28934844e82b4728648ca8ccf19",
+    "tests/test_update_existing_task.py": "ed4f396822186f9a2646e8f7f87cf06f53aa48fdb8192481eaa69bce02b614b2",
+    "tests/fixtures/update_existing_task/Invoke-Fixture.ps1": "23f168e64da5cce5b348322616b3479d3f669aac16959569d3699d4548bb3249",
+    "tests/fixtures/update_existing_task/PythonShim.ps1": "dcb4245c66fff450a23c64d30ac2a5d09ddada51fb039ac603afa23a9dc4c690"
+  },
+  "live_files_preserved": {
+    "AGENTS.md": true,
+    "fpga_mesh/app_server.py": true,
+    "fpga_mesh/controller.py": true,
+    "fpga_mesh/gateway.py": true,
+    "fpga_mesh/runtime.py": true,
+    ".local/deployment/node-b/launch-node-b.py": true,
+    "deploy/Update-FPGAMesh.ps1": true,
+    "deploy/register-autostart.ps1": true,
+    "deploy/Stop-FPGAMeshForUpdate.ps1": true
+  },
+  "unchanged_admission_source": [
+    "fpga_mesh/update.py",
+    "deploy/Stop-FPGAMeshForUpdate.ps1",
+    "tests/test_mesh_update.py"
+  ],
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_freeze": "1011259415a0916054eb580687612580bc1e5f09",
+  "child_job_id": "child-e60561d50a0b4f6ba669eab3b2100906",
+  "child_status": "completed; ownership released",
+  "deployment": "not_run",
+  "physical_board": "not_run",
+  "unchanged_guard_bytes": {
+    "fpga_mesh/update.py": {
+      "checkout_sha256": "e701d9c4fb72841e54f35783d8f051c6a760bac438131de7ef22fc9923d75ae6",
+      "git_sha256": "e701d9c4fb72841e54f35783d8f051c6a760bac438131de7ef22fc9923d75ae6",
+      "equal_after_crlf_normalization": true
+    },
+    "deploy/Stop-FPGAMeshForUpdate.ps1": {
+      "checkout_sha256": "4aa99b4bc4383c79c5f2dcfe0b5efc1093b4195d7820c4dcc4da687aca9addd6",
+      "git_sha256": "44ab9a5eed0e5fac3813e41bc7c18163bc9a570390d02ee553511c9ed67d0099",
+      "equal_after_crlf_normalization": true
+    },
+    "tests/test_mesh_update.py": {
+      "checkout_sha256": "de7241fc020ac2bcb6cca2b44ff1168a352168df1c4ef0d51f2a6d640021f83e",
+      "git_sha256": "de7241fc020ac2bcb6cca2b44ff1168a352168df1c4ef0d51f2a6d640021f83e",
+      "equal_after_crlf_normalization": true
+    }
+  }
+}

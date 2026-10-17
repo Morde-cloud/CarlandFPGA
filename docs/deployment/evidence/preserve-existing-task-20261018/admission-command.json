@@ -1,0 +1,21 @@
+{
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "tests.test_mesh_update.MeshUpdateTests.test_stop_fences_all_new_work_until_service_has_stopped",
+    "tests.test_mesh_update.MeshUpdateTests.test_work_arriving_after_preflight_prevents_stop_without_interrupting_it",
+    "tests.test_mesh_update.MeshUpdateTests.test_busy_admission_writer_aborts_stop_and_releases_other_ledger_locks",
+    "tests.test_mesh_update.MeshUpdateTests.test_write_failure_rolls_back_already_completed_changes"
+  ],
+  "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016",
+  "exit_code": 0,
+  "elapsed_seconds": 0.516,
+  "test_count": 4,
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "scope": "unchanged real stop_idle_node on synthetic SQLite ledgers plus source rollback; stop callbacks mocked, no real service/task access"
+}

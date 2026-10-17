@@ -1,0 +1,1657 @@
+{
+  "note": "Nonzero per-case process exits are expected rejection scenarios; unittest results are authoritative. Raw commands/stdout/stderr/events and snapshot/result receipts are retained privately by case name.",
+  "cases": [
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-005cj9sg",
+      "raw_sha256": {
+        "command.json": "6a98e7d6e0139384e6cc958dd37e0e6ea369c99125dc17fd826eed3b11ab4cd6",
+        "events.jsonl": "e1e05eea6ae29e05dce5ef68f2e9b863c83bd05313876da0f12c023982602b79",
+        "stderr.txt": "2f1a5cf4fa3a460078b453670d20859f0b0af5505f67709b36eacac2e672a738",
+        "stdout.txt": "13cdf58ea762225c3227e6b10fa33c19da91c2930388ed4338389168f94e9615"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_ACTION_EXECUTE_MODE": "wrong"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-0d2x39mv",
+      "raw_sha256": {
+        "command.json": "9224d66cf1e7fda016bf07edc80f37dfdf549803ee9d04e21390db777a527490",
+        "events.jsonl": "394130f358af0c6576a1904e63ec7b1272612bf96e6b3b5f198f0471cdedd5de",
+        "stderr.txt": "ff1e5b4efc5e6db0bc6adbffd3cec913ba3fbf96c0bf28184c3fc3e60d9920da",
+        "stdout.txt": "5185326b3e1d619a41a5e640bad8c27042864428634758088d5880e9ac2d740e"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-1t_h5b4x",
+      "raw_sha256": {
+        "command.json": "af000876c42e5ca2d036555171222e37885dae01b90aea94d5cdd7889cba4016",
+        "events.jsonl": "08eb0be29a185e27eaeef27442ff7e237e28ccb0b8ed3e037c275e1e4259c61d",
+        "stderr.txt": "c98223d3db229660333981859ba64d18a631f97ea849e88bdbad02fc3260cb6f",
+        "stdout.txt": "1eee504d668ad9845b1d89ca7305b81114b0081493250951db8f4228e980ffa1"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_routing_changes_at_stop_or_apply_prevent_next_mutation",
+      "scenario": {
+        "FIXTURE_MUTATE_ROUTING_ON": "stop"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 2,
+        "Export-ScheduledTask": 2,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 3,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-3wbjl066",
+      "raw_sha256": {
+        "command.json": "5140e04cb39d9ccc2dea7a35799c1819826b051319f274b46b93a74947a37b2b",
+        "events.jsonl": "f27370fe80fc3cc4c5e149d59c8d462aa689095e70a346274aa06292ac99ec92",
+        "snapshot.json": "f32e28f2e289ab74ec0b46bccdf7a81c771a8bf85c0713b1e11a08d454715881",
+        "stderr.txt": "3dae3eefb66301eb10629ca161161af2595871954c1efa2dba1d0ad7a640fc54",
+        "stdout.txt": "7bf02e431eef6eb20dbde5ae162243c4ac831de709025bf07ed7ab1106386798",
+        "update-result.json": "de7aef76ab19278c0f7cc2032c38d3df5206ef67d9f59be36702005ed3ecdca9"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_ACTION_WORKDIR_MODE": "wrong"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-4rpxf6bb",
+      "raw_sha256": {
+        "command.json": "46f30dce5cb24f98f88e0d0a0df01056ec2fbd70656a79081b02143364ff0078",
+        "events.jsonl": "a3ca8eadb2f392824dd046b22d410fbe7c8f4cb102a818f946c70287906b050f",
+        "stderr.txt": "ff1e5b4efc5e6db0bc6adbffd3cec913ba3fbf96c0bf28184c3fc3e60d9920da",
+        "stdout.txt": "3f8daec2021ea8c545552ece9ee968ba77a0637ec1b0071c56e80524af933219"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_check_only_has_zero_writes_and_zero_mutations",
+      "scenario": {},
+      "exit_code": 0,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-4zdf1scc",
+      "raw_sha256": {
+        "command.json": "1fbc8ac8408c718562792914402cfb2734959b1573556e531ef86a3ab9b1b3f2",
+        "events.jsonl": "9d8074fecb604092e782301ab0b699e98818c683f1a3cbe0ba07e7effaa4b0de",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.txt": "b96c731d49831937f4d8851480587546899f9b3ed4e143a3e85ed1475616e032"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_start_failure_is_single_attempt_without_apply_replay",
+      "scenario": {
+        "FIXTURE_START_FAIL": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 4,
+        "Export-ScheduledTask": 4,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-5ab2go78",
+      "raw_sha256": {
+        "command.json": "0d7d88e8a2f70e57452d58f1c790f9b414693099f4a8b661cf67b60cf7190883",
+        "events.jsonl": "87df752154a487f108f315f97f07426876353f5db59ea5b49213a9d16ce1b935",
+        "snapshot.json": "2b4382c188cc1b2c3dc6309d58e9d19677d06c2b3e78b7c6c8636d26c5b8ed39",
+        "stderr.txt": "e4bdfb3f428bb7bfabf1d96db191f0cea982083727b32c35436871376cffbdd3",
+        "stdout.txt": "f36d3bc1ef39e525be2577c1e696b95404ba9b60139281ec479f1a0b2d9bf7e3",
+        "update-result.json": "f8d1a59408b5752b2d769a48a5d4a1747daae46fc739364d53dca475e9592885"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_routing_changes_at_stop_or_apply_prevent_next_mutation",
+      "scenario": {
+        "FIXTURE_MUTATE_ROUTING_ON": "apply"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 3,
+        "Export-ScheduledTask": 3,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-5g2l7eh5",
+      "raw_sha256": {
+        "command.json": "3a86390026fa4f51e98f426d01ef333509b562440b3d6b2f512b5925b795c90d",
+        "events.jsonl": "aa69f87c7a1be7fa89222b712db3d4f86c45724f4590342aca2921f50b17a659",
+        "snapshot.json": "f6513ab87cfee01636f354292052c8a5243814219d05bde0b282c250e6b680d1",
+        "stderr.txt": "3dae3eefb66301eb10629ca161161af2595871954c1efa2dba1d0ad7a640fc54",
+        "stdout.txt": "0728ab1758a2b7d02d93fccb85ca07c01e71aea9908b6be0e1a2076261c7e8ac",
+        "update-result.json": "0a49fa8fa7aca49dfa95ccbf496b37451191b93e535535f3bede4b6dd8cc14aa"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-5jpzuxme",
+      "raw_sha256": {
+        "command.json": "392def0977de59e569906ed0d1f005fe406864913103c3592d5790bae25e8908",
+        "events.jsonl": "e01fb53a1bf2559a58f80b99f7bc6ad68f060865aabc2e608f7cb8e9310748c3",
+        "stderr.txt": "c98223d3db229660333981859ba64d18a631f97ea849e88bdbad02fc3260cb6f",
+        "stdout.txt": "5782f22d73a88e0ac8fcb221c42b6949de8c0545a6d3c566183ce30c3eb25fa3"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-74419yl3",
+      "raw_sha256": {
+        "command.json": "895bcbfaf8a6a9c99eaa113c90bc22c8422e4ccae325e7440139533514f22700",
+        "events.jsonl": "e706a8ea025ecff23b46d5d7a9a63c217597ad0fc5f301d06e1dab0c158e8459",
+        "stderr.txt": "031804c5e3342a12b19e034a93a9b150a7c86c43565d909f75f2145461d0463b",
+        "stdout.txt": "dbf5f3bcc29fe6df9ec061c714eaed8a599a4a1cce0dcf18b5c0cdd704cb697e"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-80y1jcgw",
+      "raw_sha256": {
+        "command.json": "42fee6b109647e50f36e15798022e1828b8cd37b9ab7032e52aa7ee34c392ebd",
+        "events.jsonl": "34ed3429a594bcb2cece7a1c8126c7629a3fc421e39094a1de6e32297eedd3cf",
+        "stderr.txt": "dea5d32be007add398b84404d88bccbf149315bc145a345e4e27b155ddf42efd",
+        "stdout.txt": "d38e8e8ab8fdd83c5157efd43bc341d171c66c4c39087e0045c664e67124f01b"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_launcher_changes_before_stop_and_after_start_are_preserved",
+      "scenario": {
+        "FIXTURE_MUTATE_LAUNCHER_EXPORT_AT": "5"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 5,
+        "Export-ScheduledTask": 5,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": false,
+      "private_case": "case-8sk72x_i",
+      "raw_sha256": {
+        "command.json": "004d23054afad19f3471355878b17bfd493623e4f9c2d7c58d7250766f4bc1d0",
+        "events.jsonl": "6a6359c596675ff82896b053090191ca57b621dad9683199bc1d99155a5aab18",
+        "snapshot.json": "35aef61dbf6545b43f75ef64c4dcc78ebbd85b0059321999e15eeca5ec2d3422",
+        "stderr.txt": "520d670bb311a79a277d8bafa28ab57454100ea22ef788ca5a04b2547988949d",
+        "stdout.txt": "fbe856e36de14155d6e30ac945cbd37c920e909ff5f7c7030708ce03095bc92f",
+        "update-result.json": "32bd528e9573244980e1c81b2dc2dd275c89b5cf11c923cfcd480ee7e00c8a52"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_launcher_change_at_apply_refuses_before_start",
+      "scenario": {
+        "FIXTURE_MUTATE_LAUNCHER_ON": "apply"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 4,
+        "Export-ScheduledTask": 4,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": false,
+      "private_case": "case-99rykx0e",
+      "raw_sha256": {
+        "command.json": "73dccba07f00236d5b7467014b0b301864c848c44254742c4885a14cbd75aeba",
+        "events.jsonl": "7122dff24553ad6eaaadfa7031c98f924e57d9a09c17f909f53c53065535800a",
+        "snapshot.json": "0c342376fd91d49dee48ed8f1102fd7667c7f66d74366b594ca326b8662239c5",
+        "stderr.txt": "0f54206386e2299ca917be1e92ef4f09d902512a31887a0475ea4f02ac906a69",
+        "stdout.txt": "190fddbcfc3dcb1f538fe4f37b68196e6b8774ce507b301e4cffd99e5566b0e8",
+        "update-result.json": "49a2444b51b2cd87c98c188d9d65e2e35efbd2021322e341e6682f59c121e132"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-9foqkcxl",
+      "raw_sha256": {
+        "command.json": "973b91bd42299e6c5068e0c3ac63cddb9a31baa27e862040fd58daf47aad8b74",
+        "events.jsonl": "ecb435f16c99d1ca963b1cba079a5cb1c08eafec006815dc2d364ec44e2dd06a",
+        "stderr.txt": "e7fd91fbd3cf50edb0e1ab52d18fa0a260bb82586c77055648e6ac22c58a1333",
+        "stdout.txt": "1aeb40acf808dcb082b9c436e98232e0d7ba4e3a5c011683b3905fe471f768a7"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_busy_and_lock_refuse_without_stop_apply_or_start",
+      "scenario": {
+        "FIXTURE_BUSY": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 2,
+        "Export-ScheduledTask": 2,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 2,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-_j2f6zib",
+      "raw_sha256": {
+        "command.json": "2929333a0e445c1ba43d316de3204cdce401d228ca3b119eb135a0660cd2f403",
+        "events.jsonl": "dd4d582a00c4b44c930e5206c5c95d39be8f104d421b98f0b6aab63f58666d87",
+        "snapshot.json": "b63df61a46c311f2ca3fc54fd7b62d85908f7bd1bff6be07bfbe98494fdf9f89",
+        "stderr.txt": "3148ece7e5211c66aa9d892193a2dace8a8f9a1c30b4d9210ee53709a02d3138",
+        "stdout.txt": "3f58653fdb2f8b8a071a878e4015ad217d41c8189c24df894270bccd8288c85b",
+        "update-result.json": "4bc0ad01340e5f1d078e8046418e7d6d1e86944b6f5535f124c6a694e4cc48a1"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-arw60tc2",
+      "raw_sha256": {
+        "command.json": "49e7a62f9a789d29c625aba3a6637c3af0bd4a11c99c61343b7fce9342482dd0",
+        "events.jsonl": "5244d7dd1a2f470f778ec4e793d9a8eee51f0fc440df187193b5db2e65346d1d",
+        "stderr.txt": "bd661326d51e3aafd27e04d15e93b85025becdb76819fa158a0be1eb21bb5d48",
+        "stdout.txt": "dac6a10aecfb9c1b207b182766b830f82a6a7d06ee2357c0ca50f55d474714d8"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_busy_and_lock_refuse_without_stop_apply_or_start",
+      "scenario": {
+        "FIXTURE_LOCKED": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 2,
+        "Export-ScheduledTask": 2,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 2,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-bf1voquy",
+      "raw_sha256": {
+        "command.json": "437e039f542f2f3fcc9c5113f826e3b5117bcdffad309091bac7046cfd60068f",
+        "events.jsonl": "12424b8813da659c20620a893adbf53687681c813e9efd4f04ff09bbf9d6ec3a",
+        "snapshot.json": "8b9730eabd1f3de31e23a5854471a7be2a7339b7f7448a3a62423b6d4a57ceb8",
+        "stderr.txt": "7eb5e8dda2dd4c0171d98ae07d8820ca41d1021b91dde183434cf271fd20be21",
+        "stdout.txt": "dc04b14781afd9a3c57e5e6b27d44324cb124897353dd4d4407328a2461d8a4a",
+        "update-result.json": "ecfc7f2661c0d36065ad7a1e53d35937a29e285afaa7c1ae986d8f554587957b"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_PRINCIPAL_MODE": "wrong"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-effyzrq7",
+      "raw_sha256": {
+        "command.json": "fe1ef56a6924aa89524435bcb2b1b5480736f95319fb85b3fd40a2777c9445a1",
+        "events.jsonl": "ca7f753bbafc9f21fab887c9a03ade8796d9d574e2250c9a3ce4ad52e93ce4e6",
+        "stderr.txt": "5d27e2d61f5cfe7e7288c482aecfced79c9d07d6a69716697b387f4e59bd24d9",
+        "stdout.txt": "bd4fae5dda9b2e22f506f8042b5f9e8cad5ee23e04b20f5ef2c3703adc42eb3e"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_module_action_task_is_preserved_end_to_end",
+      "scenario": {},
+      "exit_code": 0,
+      "task_calls": {
+        "Get-ScheduledTask": 5,
+        "Export-ScheduledTask": 5,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 1,
+        "scope_audit": 1,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-f0h_zp7_",
+      "raw_sha256": {
+        "command.json": "24c51bb9a8b7918cf78ed1f859bd40f131012dcf309b20583d16f7244502ef34",
+        "events.jsonl": "99f0f575034e2bd26a7c1bb74022a1b986274dcaf09e86cc9639a417a0adc2dc",
+        "snapshot.json": "072a399b1d47cf8d9e4e56d1897442507240cc928fcaef68bd91ac478fcaac47",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.txt": "0500afa82511883b7940ce736305215653c952efe9b7c69a024d325cea105c5a",
+        "update-result.json": "d1e7038ecc577228189850f90b507af072610b809ac0c7ab4f5234eaa5d114d8"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_no_forbidden_reinstall_or_role_rewrite_on_success",
+      "scenario": {},
+      "exit_code": 0,
+      "task_calls": {
+        "Get-ScheduledTask": 5,
+        "Export-ScheduledTask": 5,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 1,
+        "scope_audit": 1,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-f7udcguk",
+      "raw_sha256": {
+        "command.json": "a8a990c22eaf0754c213d6970f8672ff8fd7ba4c2eb2ae1e05870dbd92f99b34",
+        "events.jsonl": "2a2a989c554cb4210a1e26fc93a4f9e7b18740dcf9e86509c41f1757f17df35a",
+        "snapshot.json": "5efd2c3b7a51c7fb922176279c2fc8513c04bea26cd1ca28cd7d892495cdcc55",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.txt": "dcde293aca196ce1069dc0c1b1a5477718272f999fedc50136aa67b09534ef6f",
+        "update-result.json": "38e4656bd6c2ca6328c451e770df1216cde4a40de9fe35b8e937fd391b6e2633"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-fd2b4v90",
+      "raw_sha256": {
+        "command.json": "63a3917b16819a4dda84ea484496c93ecc809e81cb88246683998b257cdc4f68",
+        "events.jsonl": "804c38c7a32d9a6aaffd9c4390f395b84ef58fd78ec25e2d833a199544f44fa2",
+        "stderr.txt": "177ee79750feb2a779eb8f6d0d0f7ff2bcad9a31d3f0703b021ec48756f3878e",
+        "stdout.txt": "67e37dd0c575862a1a593104f14130dab7b71900ca7ecfe9b071abbc788b37e2"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-h1kos6hs",
+      "raw_sha256": {
+        "command.json": "22152955aabdeac85870434862b1354bd130da187fc9495e0c2fb78697a7a818",
+        "events.jsonl": "ec1d02e6096fa8799b4f10676057f46e9e2f29f55fcce8b80d2fd8e29ff8295d",
+        "stderr.txt": "02d54a9242c11d2224f944012403ff3dac23eeb5298a9ef6a55dd14546bbb054",
+        "stdout.txt": "9cbb5d44dec4d3ec0d266a8839f17ca9e5fcd81efa4d03b32fbf0355fcb86b2d"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-h82yrk8t",
+      "raw_sha256": {
+        "command.json": "f1928f9e937518fc7a18e425d1005f3a07873bab645abc1d51fbd2c8edbfba27",
+        "events.jsonl": "7497ffe596d883022594838e23dceada4d1b97ebe93ba5c208c613bc8601ae04",
+        "stderr.txt": "77719d49e51389a0cc734570606e35267c23ef67d2beb814570ab7d54ac0a7b9",
+        "stdout.txt": "21a51dbc9504cd7f7018dfcda6d147209ab66776e01fbbc6dd0d0691ccdda4d4"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_TASK_MISSING": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 0,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-i3zwupoi",
+      "raw_sha256": {
+        "command.json": "948516fe28fc6e2d551edd3c99d791abebf767f9abb8bf6c48ec979e540356bc",
+        "events.jsonl": "00e73a72eda61aa332a28c3f8b3c02bef63355556f4a8d9de998b0f268392f22",
+        "stderr.txt": "077fa17d44389510267f4b5c88ba07c80633a564632bcbf04a4178ee59edeaf5",
+        "stdout.txt": "48011bff9432e5122a9eeede555d8aedef6ee7d3902abb41dd2ab761054fa8b1"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_launcher_change_at_stop_refuses_before_apply",
+      "scenario": {
+        "FIXTURE_MUTATE_LAUNCHER_ON": "stop"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 3,
+        "Export-ScheduledTask": 3,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 3,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": false,
+      "private_case": "case-k8lr3ogv",
+      "raw_sha256": {
+        "command.json": "7760737792330585d696cfbd41815695d4c2c1b29920701230d8d8ee6faadc60",
+        "events.jsonl": "67082fc10a3bf9c9a4991ceddccfc6bfab6e0e401a6a617d8fe715940006006a",
+        "snapshot.json": "79d923040597b4b3d1cd850574354ed4a0e3d0f2b531ee64b6dcc571450bc0af",
+        "stderr.txt": "589d68ff87f470fc3cf6abb8b7ded6fb2f23f77d2c55c00db983a4b067895d28",
+        "stdout.txt": "6815ced685c2020ff6b795c190e6021ecf1d221c58176bc461eb3f2ad1a82464",
+        "update-result.json": "2ab464a422cffe6a00a0b8167c1a9afbb4fe2d556ae53bb779831b7edf9a9437"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_duplicate_name_in_other_folder_refuses_before_stop",
+      "scenario": {
+        "FIXTURE_DUPLICATE_TASK": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 0,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-ppk0lznc",
+      "raw_sha256": {
+        "command.json": "d616bc7077dc189fec89dc4a06893c54bd68b66fa336d94c8844999c923bc5d1",
+        "events.jsonl": "eb751a7a8fe5c3f919ee957709ece4247a115bc0d130bd12a2d29e00baa5e998",
+        "stderr.txt": "077fa17d44389510267f4b5c88ba07c80633a564632bcbf04a4178ee59edeaf5",
+        "stdout.txt": "4b134467b68191792083a3de61d1eaf0296e56364d2690ecb1edcebc2d7dc230"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_ACTION_ARGUMENTS_MODE": "empty"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-q96tx2uf",
+      "raw_sha256": {
+        "command.json": "981098fd3edadc1b3a3a690f989bdd6108d624d43c93f4d3cbaef87d33c08578",
+        "events.jsonl": "45d1846c06273ca6f6698fdd192cfe97fdf6327fb3de42e2086cc8e88ea254a9",
+        "stderr.txt": "bd247cd7f7c06714b103d0f8d388f3a26f0670d55c2c73824c33dc9ad340e9c4",
+        "stdout.txt": "4c22ebc39dfab600bbe87a6867cca9154ca776080b19e091251653aa84513fec"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_TASK_NAME_MODE": "wrong"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 0,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-qudk8hl8",
+      "raw_sha256": {
+        "command.json": "fb4bfd65df368a2fa94b6ace8aa101faeb5ddccf0a4e190454e120d90912aa0d",
+        "events.jsonl": "75f464ec1d3937ee9a25aac0baf3fdc6fae71ff6a340142335a6416fa1540173",
+        "stderr.txt": "077fa17d44389510267f4b5c88ba07c80633a564632bcbf04a4178ee59edeaf5",
+        "stdout.txt": "5ca5bf3e226349e19f6f9d7e43f8d028a5b9d00dcd691c4eb5cadbb8530c851e"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_xml_change_on_second_export_refuses_before_stop",
+      "scenario": {
+        "FIXTURE_MUTATE_XML_EXPORT_AT": "2"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 2,
+        "Export-ScheduledTask": 2,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 2,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-s5va3m7j",
+      "raw_sha256": {
+        "command.json": "a29a9607f3fcdeb5c087bb95a12610a4077ebebd8830097797ac5bdb6eaf5d00",
+        "events.jsonl": "e47a9c59f5fc8a8ad79f7dad3ddf2a0c1e9f88c8346d8c6da0246053a44d7cdc",
+        "snapshot.json": "df0647ac648a15ee644811ac937bfcd0c91db4659198e60e9a6a99a745499b02",
+        "stderr.txt": "f38f23a0f122df9fd2cdc7e2d0574dad27e2bbba960b5ca5e2595bb6ee9afdda",
+        "stdout.txt": "afb00fc5c2a31202fb1a3cf4717adabeefecd8d703215470b7a30852a693c40f",
+        "update-result.json": "3b0c06c29ef5515d7d547ef42e9b2ac41fbf629f726a0df959f1364c1e1351af"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-s6kzwp2o",
+      "raw_sha256": {
+        "command.json": "c9ae153bc93039747e5ea6f0dd542741ddb0ae9c0134bc56123cf2966357e3ea",
+        "events.jsonl": "1a29e172e91fe2e928011b31ad972386f49cdec2932bf641bc98d3d2a2becd78",
+        "stderr.txt": "19ad5acbb2de3ce66490e84e21d47a7012d37290c3fd189b232f0b80ce7b4bb3",
+        "stdout.txt": "4766e6815c8cad6be97e32d3737ffdeb69edc0d810ed7171bd967f6e51eee83d"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_xml_changes_before_apply_before_start_and_after_start_are_preserved",
+      "scenario": {
+        "FIXTURE_MUTATE_XML_EXPORT_AT": "3"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 3,
+        "Export-ScheduledTask": 3,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 3,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-sdk1ipw_",
+      "raw_sha256": {
+        "command.json": "948f023a7136754f44b635ba593680f40381f228d66f34046a86db54b6205378",
+        "events.jsonl": "7f5ed16f20b0c91d75d202e46b379e5b967346c8c197d107c6207fe5df911c24",
+        "snapshot.json": "30bf99c2f18867d527e36002bedaba8ce56dde7ad8bc60d97ac315e166056151",
+        "stderr.txt": "589d68ff87f470fc3cf6abb8b7ded6fb2f23f77d2c55c00db983a4b067895d28",
+        "stdout.txt": "3206670d5792722cd7d16586997da8862d78a026f8f00d57297b74c464869ef0",
+        "update-result.json": "896a5451534dc0866bea24b42db308de72524ff324f79db1e3a4109b2ee74e28"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-t5dpmr7i",
+      "raw_sha256": {
+        "command.json": "1d89d9d1c5762ac05cd65742abe4c70d0898b0d8ab55f9d5727e4e276af845a7",
+        "events.jsonl": "125235ff12a02f76676378921f9a31101a469f72fec8f760f1c86f20c42402b8",
+        "stderr.txt": "fc56c865e2a8ba064e804cf604877b16600ed4bb493a16f4a303df1c0a61bb9e",
+        "stdout.txt": "25911e9841f9472816e92435653ca723ada9a6afeeac286da295044c4fbd5ef9"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_TASK_PATH_MODE": "wrong"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 0,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-tbejng6y",
+      "raw_sha256": {
+        "command.json": "679ad0c635fe980dfc191df74e1cc257cb709fd57bec33d4cb63588c617aa250",
+        "events.jsonl": "4fb783e520637fe164258aa5351c28e8003697a23430731dfde09cc7134fad20",
+        "stderr.txt": "077fa17d44389510267f4b5c88ba07c80633a564632bcbf04a4178ee59edeaf5",
+        "stdout.txt": "93821acc943bee7c14dc0ccc6b5353e1266b76ee726389b94f6a74d435442f81"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_ACTION_COUNT_MODE": "two"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-ti4clsf3",
+      "raw_sha256": {
+        "command.json": "15811a5c67358fc620cbdd6007176af08c4eebb95d035f6f2c74fb3a27fe9e49",
+        "events.jsonl": "dcc3554c88f0a272cec815f504ee97f8cddec0d1c962c4d72278581a8073eeeb",
+        "stderr.txt": "643d2a58ab1c4363efa2308fc4ea5ecb3e9162ee8c14e20e45ce448d02b5c2b6",
+        "stdout.txt": "71bbbbb0941f3288f0c474bd005d7d0a9c0470c6c5db6233e55bb8e454fbea1a"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-u3dshu_y",
+      "raw_sha256": {
+        "command.json": "be667c5ef96a2e221a28adf9b5b4cd608f52bc0709ead0ff567d37a20e2482df",
+        "events.jsonl": "e1c291bf8ecf21d08b7a66629b8351fbb158e3f4b6741a9ac24d3aa77561c8ec",
+        "stderr.txt": "33b2b6f3d88a5dfc17abf917760bf03f5a091e9d6737c6f43208f761d84e952c",
+        "stdout.txt": "b6cf088cd5c033ae90bded9c22d78f995e6fed89196657ae4880920776617fb3"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_xml_changes_before_apply_before_start_and_after_start_are_preserved",
+      "scenario": {
+        "FIXTURE_MUTATE_XML_EXPORT_AT": "5"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 5,
+        "Export-ScheduledTask": 5,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-u90ezab4",
+      "raw_sha256": {
+        "command.json": "79e6e4230a1beb19b9ff138f88b2a6034f864f4f440b7c776a3ce93dc648a8a0",
+        "events.jsonl": "65ae571cf569b94a2002e629a69f9ad824fe70ffe7db751f85f7b12a329f229c",
+        "snapshot.json": "041d6c1577573ef0d804338cf28daaffdd47547da5cc9bcdd983968fc54350c9",
+        "stderr.txt": "520d670bb311a79a277d8bafa28ab57454100ea22ef788ca5a04b2547988949d",
+        "stdout.txt": "5369a893113c731e43a1ebf01e73babfdf529e6d67d16768be817175942fe4b5",
+        "update-result.json": "3a3bea04818cefea4dea89e9adb8ae565bab696ce4775f94851f6bf0d54c0ac7"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-unsqeg4f",
+      "raw_sha256": {
+        "command.json": "e0b5f87a6bbaa9c5d6698a6c2dc115de51ae93d7bbf560f9af37ec218d5bbb68",
+        "events.jsonl": "b20bb67f4f465a52b6e20114f6f1dd38709236c125f8d99b2be9879bead84164",
+        "stderr.txt": "8fe5fea1eabd1fc682be2e2b80041b3fc16468641b7c60b0642280d09d05e864",
+        "stdout.txt": "024f217552129caad129d0fe1499715a4285ed9991dedbfc6c43bc7bdee20c86"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {
+        "FIXTURE_DESCRIPTION_MODE": "wrong"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-v74cumfq",
+      "raw_sha256": {
+        "command.json": "f8a4bf6e6ce271fc87589a0e20be3970d74e9a44dde380351c8a8e661165f486",
+        "events.jsonl": "eb81f319ba5660e138bcf9ba9773c97df016d2b65515234d6102da84d9496a82",
+        "stderr.txt": "99d6d3e08844e06094a6592cd503561e001691aeab965e409b15761e738b27da",
+        "stdout.txt": "ff16763517fc809c1c0bd0a4de37a0ab8264fa8a8ee548ea1dd32ec9991b77f1"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_custom_launcher_task_is_preserved_end_to_end",
+      "scenario": {},
+      "exit_code": 0,
+      "task_calls": {
+        "Get-ScheduledTask": 5,
+        "Export-ScheduledTask": 5,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 1,
+        "scope_audit": 1,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-wj1etcgs",
+      "raw_sha256": {
+        "command.json": "d9aa713c1cf1695ee0cf52c6509ebe60a653d877f8f9b54693019fa873751cb0",
+        "events.jsonl": "b7d618101d2290453bb9e313010d5f4560ea93c667b27c45443cd71fbec5ae3e",
+        "snapshot.json": "76548f7424fc70d75d482091aa782eae6e167e3873af24796fa96c8c5ef5b17a",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.txt": "47639f7b602e2360c925e6e332617c31eab95d73aa5f5f0f5d2c30c023ab8cff",
+        "update-result.json": "dc16b4299256080ea259795779ce469f302116ddc93f4dbb3bdc01144d0c8583"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_utf16_export_is_saved_as_readable_xml_without_changing_definition",
+      "scenario": {
+        "FIXTURE_XML_UTF16": "1"
+      },
+      "exit_code": 0,
+      "task_calls": {
+        "Get-ScheduledTask": 5,
+        "Export-ScheduledTask": 5,
+        "Start-ScheduledTask": 1,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 1,
+        "scope_audit": 1,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-www1r__e",
+      "raw_sha256": {
+        "command.json": "8214873c2f79e71e329cba94c20d6f0e0c118fd5f11603d1089e922231c4016d",
+        "events.jsonl": "f90089881f266ed638bdea3735e538cb6f1953568d8a0aad8397d04ca12aec73",
+        "snapshot.json": "3140b5b5c782c3615353cc3046acaf6b0890b93645199dbebc70a052e1680ea4",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.txt": "86fb19c8d271037c324beeba658d268f5417afdb171c1a201199c51ac0aed415",
+        "update-result.json": "f8d1e45bed444905c2b036bfd4e88360b47c182d2e9b757360c81355bf55113a"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_apply_failure_does_not_start",
+      "scenario": {
+        "FIXTURE_APPLY_FAIL": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 3,
+        "Export-ScheduledTask": 3,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 3,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-x0uluzeo",
+      "raw_sha256": {
+        "command.json": "05427a215fe683bc42d8a2ca6ec1b643e6f15da11000f574baea14be1c93f153",
+        "events.jsonl": "15633e96a7bc8dadae83bdc1e67d6190dd17eb503418dcd219ab1d254dacd2a2",
+        "snapshot.json": "819c2b791dfd83df54244b1bd0cd05dc87c5442b9efbe6b7f5b9aea295826f18",
+        "stderr.txt": "5a29c6ba2ea5e1e40557cfae33dfde7dc10eb15accc629ce04132d3270669954",
+        "stdout.txt": "7a57ba3b55fc1a9b313ce9f3b6e0f7fd6a20bf5b14a562a93ddb1c7ef2c64818",
+        "update-result.json": "f8831ae559198dffa0623f96cc381ea601b56df65696b90d0adf2d69af4cbec7"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_routing_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-x6_s_1v9",
+      "raw_sha256": {
+        "command.json": "fa212bc62827fdb13f33f9eb2c3f10447274c5e9f0d39bdb5ab42edad9cb8d92",
+        "events.jsonl": "06df08ca939ae8bbee39e9ac648bc5882107aba667ff571b3e2409fe33f14abd",
+        "stderr.txt": "c8afd0333d03ee666831f7beb5110d18ae724f1c7ede323c717ea309efcbc09b",
+        "stdout.txt": "ed0c6c52ad5008e93be97538299226552355f7e01ad9c245844af9465aebb950"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_launcher_changes_before_stop_and_after_start_are_preserved",
+      "scenario": {
+        "FIXTURE_MUTATE_LAUNCHER_EXPORT_AT": "2"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 2,
+        "Export-ScheduledTask": 2,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 2,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": false,
+      "private_case": "case-y1ieghfv",
+      "raw_sha256": {
+        "command.json": "395ad3bbb7f386cc12bc605055d7228dd9a3a6e8bd21b7bfc6bda3daa69d4729",
+        "events.jsonl": "786094677a3c2956f9ae157e981f135251fa5b11d4b54d1e95264884786dcff8",
+        "snapshot.json": "08ef27ed8aace1d0663e2db682c212d000c5aa871df81c24d51b69b17caffbc1",
+        "stderr.txt": "f38f23a0f122df9fd2cdc7e2d0574dad27e2bbba960b5ca5e2595bb6ee9afdda",
+        "stdout.txt": "e0951f3c731368e9c028b9d1297f73a642ecb1f55fec4cfe8ef7cd5ad6c6f887",
+        "update-result.json": "e50175831f95370e9f093ffd8c616224917f44274e8af24e0e2669fe4bd0bad3"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_xml_changes_before_apply_before_start_and_after_start_are_preserved",
+      "scenario": {
+        "FIXTURE_MUTATE_XML_EXPORT_AT": "4"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 4,
+        "Export-ScheduledTask": 4,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 1,
+        "apply": 1,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 4,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-y8jbr0nf",
+      "raw_sha256": {
+        "command.json": "adcdb547073f89441015ae18380a284d9d0817206598127d5c1562dfe69b385a",
+        "events.jsonl": "b7ad29e8e604ac9ecb118d367a813946513ab709a184c811fdc85a1d72310afb",
+        "snapshot.json": "311408a073b0c26199bb36a8064ff4414d18e2a3d47503957aa49cf6ff01f437",
+        "stderr.txt": "0f54206386e2299ca917be1e92ef4f09d902512a31887a0475ea4f02ac906a69",
+        "stdout.txt": "eb7b762be00ccb19f6fa0fcd953fde9c61197618fd9c7ef2014e6edc9eeb7949",
+        "update-result.json": "8a8e2b84ca4c54b840c988c88795aa5108818bce3ce203bf47f499278efb788e"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_routing_validation_cannot_be_disabled_by_python_optimization",
+      "scenario": {
+        "PYTHONOPTIMIZE": "1"
+      },
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 1,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-yd4inb62",
+      "raw_sha256": {
+        "command.json": "24a51576180167cc17a5faf3705c6d9db6e8a830b0425aa2982e6255fda4a4ce",
+        "events.jsonl": "8c5349e0efac4a3ee0b09433e3fbb14f7b289ec6dfdcf35e526cd1254171eb29",
+        "stderr.txt": "8fe5fea1eabd1fc682be2e2b80041b3fc16468641b7c60b0642280d09d05e864",
+        "stdout.txt": "0a18d0ca4300722f8692ea5c5f7450c7a9e7fa18fd3e117ec520596146cda51d"
+      }
+    },
+    {
+      "test": "tests.test_update_existing_task.ExistingTaskFixtureTests.test_invalid_task_inventory_refuses_before_admission",
+      "scenario": {},
+      "exit_code": 1,
+      "task_calls": {
+        "Get-ScheduledTask": 1,
+        "Export-ScheduledTask": 1,
+        "Start-ScheduledTask": 0,
+        "Stop-ScheduledTask": 0,
+        "Set-ScheduledTask": 0,
+        "Register-ScheduledTask": 0,
+        "Unregister-ScheduledTask": 0,
+        "Enable-ScheduledTask": 0,
+        "Disable-ScheduledTask": 0
+      },
+      "shim_counts": {
+        "preflight": 1,
+        "stop_idle": 0,
+        "apply": 0,
+        "health": 0,
+        "scope_audit": 0,
+        "forbidden_command": 0,
+        "routing_forward": 0,
+        "unknown_command": 0
+      },
+      "launcher_unchanged": true,
+      "private_case": "case-yol0u1ei",
+      "raw_sha256": {
+        "command.json": "44c1f79eb72c27bb5b6b1fb8d2de81279eb40565705df6d7b7b972a67ea9d1b5",
+        "events.jsonl": "58017cd486ab3cd70684d6bcedce751b290432abdaa21f6fe26b749de6b06f5a",
+        "stderr.txt": "ef57983aed811614275dcfc60b771c3864da8e1dc7d579e2ee8a7744b27d5931",
+        "stdout.txt": "785a2dd76641fe276724ef2bb4927dd52b2e6653f16b8909635aef205a8a0bee"
+      }
+    }
+  ]
+}

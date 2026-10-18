@@ -1,0 +1,74 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-BLOCK-ENCODER-RTL-20261018-08-v1",
+  "operation_id": "B-DEEPEYE-BLOCK-ENCODER-20261018-08",
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "at_utc": "2026-10-18T14:16:38.658377+00:00",
+  "output_dir": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\codec\\block-encoder-20261018-08\\worker\\attempt-02",
+  "output_created_fresh": true,
+  "sources": {
+    "rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\codec\\deepeye_block_encoder.sv",
+      "sha256": "f8376158e39d613442b8d5a6a6b9ca96265c571d8f4e5b3c7f96a57a811402ff"
+    },
+    "tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\codec\\rtl\\tb_block_encoder.sv",
+      "sha256": "da9f27d9b9a9d1c8dca5ae1078bc27ba3daa8e807acbd5ab86622c02c76209e7"
+    },
+    "runner": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\codec\\run_block_encoder.py",
+      "sha256": "723c4cea4f30ef627d2c06698d841c3fff666e5375140502af763913102091a1"
+    },
+    "golden": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\codec\\codec_reference.py",
+      "sha256": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5"
+    },
+    "known_vectors": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\codec\\known_vectors.json",
+      "sha256": "c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99"
+    },
+    "rules": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\codec\\integer_candidate_rules.json",
+      "sha256": "275525f2cf951d196d333171cb777c41aaeeedd5239689fe096f40055b7dbeb8"
+    },
+    "spec": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\main_block_encoder_spec.md",
+      "sha256": "e31bbe3a115bb37581c81e6ac15c23175c6f251c2b290505f71f0fbc2ec1d601"
+    }
+  },
+  "modelsim_home": "D:\\modelsim1\\win64",
+  "tool_hashes": {
+    "vlib": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e",
+    "vlog": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+    "vsim": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf"
+  },
+  "timeout_seconds": 3600,
+  "vector_cases": 735,
+  "directed_cases": 41,
+  "total_cases": 776,
+  "max_cycles_last_to_meta": 20000
+}

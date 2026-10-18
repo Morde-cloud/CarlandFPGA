@@ -1,0 +1,12 @@
+{
+  "status": "IN_PROGRESS_SOURCE_SNAPSHOT_REJECTED_BY_MAIN",
+  "source": "observed-worker-01.sv",
+  "source_sha256": "f8376158e39d613442b8d5a6a6b9ca96265c571d8f4e5b3c7f96a57a811402ff",
+  "worker_terminal": false,
+  "finding": "BE01 long-unary bit selection can address outside17-bit wr_val",
+  "reproduction": "main-observation-01: ModelSim10.7 compilation succeeded; main independent public-port monitor failed at case7 cycle10492. Case7 is128 samples, first64 zero then64 value9, E0; best k0 and one quotient18. Metadata previously handshaken; valid payload contains unknown bits because unary emission indexes wr_val[17] for the first zero of18. No worker file was edited while its lease is active.",
+  "actual_harness_exit": 1,
+  "simulator_exit": 0,
+  "exit_boundary": "A simulator process exit0 on fatal is not success; required completion marker/negative-marker checks correctly rejected.",
+  "next": "Wait for worker terminal, compare final source; retain this snapshot/log even if worker independently corrects it. Only final exact source can be accepted."
+}

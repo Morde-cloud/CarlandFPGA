@@ -1,0 +1,6211 @@
+[
+  {
+    "id": "D_startup_idle",
+    "kind": "idle",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "idle"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 0,
+      "sample": 0,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "startup_cfg_ready",
+        "ok": 1
+      },
+      {
+        "token": "startup_no_other_outputs",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_invalid_count0",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 0,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_invalid_count0",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_invalid_count129",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 0,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_invalid_count129",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_invalid_count255",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 0,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_invalid_count255",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_invalid_e3",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 0,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_invalid_e3",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_invalid_e15",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 1,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 0,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_invalid_e15",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_length_missing_last",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 2,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 2,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_length_missing_last",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_length_early_last",
+    "kind": "error",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "error"
+    ],
+    "expected_meta": {
+      "error": 2,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 2,
+      "count": 0,
+      "e": 0,
+      "raw": 1,
+      "k": 0,
+      "bits": 0,
+      "bytes": 0,
+      "cycles": 0
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 1,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_no_payload",
+        "ok": 1
+      },
+      {
+        "token": "error_no_meta_restart",
+        "ok": 1
+      },
+      {
+        "token": "error_returns_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_length_early_last",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_n1_raw_tie",
+    "kind": "legal",
+    "e": 8,
+    "samples": [
+      5
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 1,
+      "e": 8,
+      "raw": 1,
+      "k": 0,
+      "bits": 16,
+      "bytes": 2
+    },
+    "expected_payload_hex": "0005",
+    "observed_meta": {
+      "error": 0,
+      "count": 1,
+      "e": 8,
+      "raw": 1,
+      "k": 0,
+      "bits": 16,
+      "bytes": 2,
+      "cycles": 1
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 1,
+      "meta": 1,
+      "data": 2
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_consecutive_A",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_consecutive_B",
+    "kind": "legal",
+    "e": 1,
+    "samples": [
+      65535,
+      65534,
+      0,
+      65535
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 4,
+      "e": 1,
+      "raw": 1,
+      "k": 0,
+      "bits": 64,
+      "bytes": 8
+    },
+    "expected_payload_hex": "fffffffe0000ffff",
+    "observed_meta": {
+      "error": 0,
+      "count": 4,
+      "e": 1,
+      "raw": 1,
+      "k": 0,
+      "bits": 64,
+      "bytes": 8,
+      "cycles": 78
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 4,
+      "meta": 1,
+      "data": 8
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_input_gaps_meta_stall",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_extra_sample_ignored",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "extra_sample_not_accepted",
+        "ok": 1
+      },
+      {
+        "token": "extra_sample_not_accepted",
+        "ok": 1
+      },
+      {
+        "token": "extra_sample_not_accepted",
+        "ok": 1
+      },
+      {
+        "token": "extra_sample_not_accepted",
+        "ok": 1
+      },
+      {
+        "token": "extra_sample_not_accepted",
+        "ok": 1
+      },
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_long_backpressure",
+    "kind": "legal",
+    "e": 1,
+    "samples": [
+      65535,
+      65534,
+      0,
+      65535
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 4,
+      "e": 1,
+      "raw": 1,
+      "k": 0,
+      "bits": 64,
+      "bytes": 8
+    },
+    "expected_payload_hex": "fffffffe0000ffff",
+    "observed_meta": {
+      "error": 0,
+      "count": 4,
+      "e": 1,
+      "raw": 1,
+      "k": 0,
+      "bits": 64,
+      "bytes": 8,
+      "cycles": 78
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 4,
+      "meta": 1,
+      "data": 8
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_holds_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_stable_under_stall",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_reset_load",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 2,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "load_phase_s_ready",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_reset_load",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_cancel_load",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 2,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "load_phase_s_ready",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_cancel_load",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_reset_div",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 8,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "div_phase_no_meta",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_reset_div",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_cancel_div",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 8,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "div_phase_no_meta",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_cancel_div",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_reset_sel",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 8,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "sel_phase_internal",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_reset_sel",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_cancel_sel",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 8,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "sel_phase_internal",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_cancel_sel",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_reset_meta",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_reset_meta",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_cancel_meta",
+    "kind": "abort",
+    "e": null,
+    "samples": null,
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": null,
+    "expected_payload_hex": null,
+    "observed_meta": null,
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 0,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_cancel_meta",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_reset_data",
+    "kind": "abort",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_reset",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_reset_data",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "D_cancel_data",
+    "kind": "abort",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed",
+      "abort"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": null,
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 0
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "outputs_low_during_cancel",
+        "ok": 1
+      },
+      {
+        "token": "abort_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "R_after_cancel_data",
+    "kind": "legal",
+    "e": 0,
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "tags": [
+      "directed"
+    ],
+    "expected_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3
+    },
+    "expected_payload_hex": "000024",
+    "observed_meta": {
+      "error": 0,
+      "count": 3,
+      "e": 0,
+      "raw": 0,
+      "k": 0,
+      "bits": 22,
+      "bytes": 3,
+      "cycles": 84
+    },
+    "observed_payload_hex": null,
+    "counts": {
+      "pass": 1,
+      "cfg": 1,
+      "sample": 3,
+      "meta": 1,
+      "data": 3
+    },
+    "checks": [
+      {
+        "token": "meta_known",
+        "ok": 1
+      },
+      {
+        "token": "meta_within_20000",
+        "ok": 1
+      },
+      {
+        "token": "meta_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "meta_error_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_count_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_e_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_raw_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_k_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bits_match",
+        "ok": 1
+      },
+      {
+        "token": "meta_bytes_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "payload_known",
+        "ok": 1
+      },
+      {
+        "token": "payload_last_flag",
+        "ok": 1
+      },
+      {
+        "token": "payload_data_match",
+        "ok": 1
+      },
+      {
+        "token": "payload_valid_at_ready",
+        "ok": 1
+      },
+      {
+        "token": "no_extra_payload",
+        "ok": 1
+      },
+      {
+        "token": "returned_idle",
+        "ok": 1
+      }
+    ],
+    "pass": true
+  }
+]

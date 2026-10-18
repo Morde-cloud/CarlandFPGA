@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\independent-completion-audit-20261018-v1\main_encoder_review.py", line 156, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\independent-completion-audit-20261018-v1\main_encoder_review.py", line 152, in main
+    stats=verify(cases,out/'ports.txt')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\independent-completion-audit-20261018-v1\main_encoder_review.py", line 115, in verify
+    for i,(row,b) in enumerate(zip(ev['O'],data)):assert row[1:]==[i,b,int(i==len(data)-1)],(c['id'],'byte',i,row,b)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, 'byte', 2, [153, 2, 65, 1], 64)

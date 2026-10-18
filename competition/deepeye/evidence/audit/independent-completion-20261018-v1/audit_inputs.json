@@ -1,0 +1,175 @@
+{
+  "base_head": "781be78d9da77a75ea711cf690eeea6523733d3a",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "pinned_sources": {
+    "docs/competition/deepeye-2026/taskbook_final.md": {
+      "git_object": "4cad00f041d891bb17e634b7c94634384cbbbddf",
+      "sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18"
+    },
+    "docs/competition/deepeye-2026/execution_plan_final.json": {
+      "git_object": "b4c8a4e0bc32c241ef93e79ea5e40d27f099ae11",
+      "sha256": "e93f10d247109e8cb7070ded7fdfac5b3543a44afb3387261531556eebde41be"
+    },
+    "docs/competition/deepeye-2026/execution_orchestration_v5.md": {
+      "git_object": "ee851a8cdb0c3c140bbf99d246f8e78bec471358",
+      "sha256": "c4668714bc25959f0cb5cc8ef326ca04f90dc33eb03905a40ec6c4114804a2e1"
+    },
+    "docs/competition/deepeye-2026/immutable_scope.md": {
+      "git_object": "f744f507f5e972f77a07de7099bb381c1085961d",
+      "sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd"
+    },
+    "docs/competition/deepeye-2026/immutable_scope.json": {
+      "git_object": "190e46b7dee1dba49f0d92f9044a898931a7644b",
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    "docs/competition/deepeye-2026/release_manifest_final.json": {
+      "git_object": "dae29c53ce1e216b0c1be2de719c358c7a23e9a6",
+      "sha256": "43336cc32cbc24a8ee2589786f0785c3049f009759f5ef63c43c096f9d822ed3"
+    }
+  },
+  "b_cards": {
+    "B01": {
+      "owner": "B",
+      "stage": "s1",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "not_run"
+    },
+    "B02": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "A01",
+        "B01"
+      ],
+      "status": "not_run"
+    },
+    "B03": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "B01",
+        "B02"
+      ],
+      "status": "not_run"
+    },
+    "B04": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "R03",
+        "B03"
+      ],
+      "status": "not_run"
+    },
+    "B05": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "R03",
+        "B04",
+        "R04"
+      ],
+      "status": "not_run"
+    },
+    "B06": {
+      "owner": "B",
+      "stage": "s2",
+      "dependencies": [
+        "B02",
+        "B03",
+        "B04",
+        "B05"
+      ],
+      "status": "not_run"
+    },
+    "G01": {
+      "owner": "B",
+      "stage": "s1",
+      "dependencies": [
+        "R03"
+      ],
+      "status": "not_run",
+      "deliverable": "3D资产、碰撞体、材质与可运行灰盒",
+      "writer_packages": {
+        "A": [
+          "simulator/project.godot",
+          "simulator/export_presets.cfg",
+          "simulator/main.gd"
+        ],
+        "B": [
+          "simulator/world/",
+          "simulator/assets/",
+          "simulator/tests/test_asset_contract.gd"
+        ]
+      }
+    },
+    "G05": {
+      "owner": "B",
+      "stage": "s3",
+      "dependencies": [
+        "R03",
+        "B05",
+        "B06"
+      ],
+      "status": "not_run",
+      "deliverable": "双轴协议、板输出及三路独立捕获",
+      "internal_gate": "rebuild B06 same standard using exact commit containing new G05 RTL; pair fresh bit/hwh; do not reuse old build"
+    }
+  },
+  "card_text": {
+    "B01": "### B01 编码和独立回解\n\nB编码，C独立解码，A签收；输入固定uint16向量及ABI。覆盖静态/斜坡/窄峰/极值/随机噪声、E=0/1/2/4/8、RAW、块重启和饱和。python tools/verify_codec.py --samples 1000000 --seed 20261014要求E=0逐位一致、已编码点误差违规0、unary长度有界、不可压缩块无死锁；原始、编码及全线字节分别统计。输出golden/codec和反例日志。\n\n",
+    "B02": "### B02 实际采样与时间戳\n\nB实现XADC/输入流、通道顺序、sample_id/tick/quality、DMA与PS原始记录。python tools/run_rtl.py --suite acquisition覆盖100Hz/通道、输入无效、饱和和重启；A运行python integration/board_acquisition.py --duration 600，通道错位、重复和静默丢样0。实际采样时序/偏斜与理想档位分报，12bit数据不能称16bit测量精度。\n\n",
+    "B03": "### B03 流水线 FIFO和复位\n\nB实现独立编码块、有限队列、背压与跨域同步释放；明确单侧复位/停钟契约。python tools/run_rtl.py --suite stream_reset --seed 20261014覆盖满空、TLAST/长度、长背压、停止时钟、半帧复位、所有合法释放顺序；接收样本唯一去向、溢出计数一致。保存CDC/RDC和时序例外，仿真不能证明亚稳态可靠性。\n\n",
+    "B04": "### B04 线速 调度与恢复\n\nB实现Q0事件/控制、Q1当前趋势、Q2历史；C对端独立收发。python tools/verify_link.py --baud 300 --duration 1800与--baud 9600分别覆盖正常、事件洪泛、5%损坏/丢帧、噪声RAW和断链，三维增量另验G05；长期队列有界、坏CRC拒绝、错误长度重同步、无静默历史丢失。A逻辑分析仪核真实8N1/换向/所有业务计费，含guard和重传；事件P99≤3s无错、≤6s一次重传。\n\n",
+    "B05": "### B05 控制确认与保守状态\n\nB实现session/观察seq/TTL、影子配置、stop优先和上电未使能。python tools/run_rtl.py --suite control_state覆盖重复、旧会话、超范围、TTL、epoch回绕、首次ACK丢失后延迟重试且STATE/EVENT丢失、重启；重复不续期，重发应答的剩余TTL按当前值重算。A运行python integration/board_control.py --trials 100核GPIO/PWM捕获、CONFIG_ACK、GAIN_ACK及TTL反例，三轴捕获及3D新帧另由G05核，非法应用0，迟到旧ACK不得重开租期。已识别数字fault至PL停止标记≤2ms；100Hz模拟异常至识别/保守状态≤20ms，恢复新握手和enable。此为逻辑保护，非矿用安全认证。\n\n",
+    "B06": "### B06 实现和模块板测\n\nB构建、A加载。vivado -mode batch -source fpga/build.tcl固定2026.1、xc7z020clg400-1、目标100MHz；python tools/check_build.py要求实现后WNS≥0/TNS=0、关键未约束0、错误DRC0，LUT/FF/BRAM/DSP各目标≤75%。A运行python integration/board_modules.py，配对bit/hwh、真实黄金一致，报告每模块周期/吞吐/背压影响。不用综合估计替实现，不用旧BRAM替新设计。\n\n",
+    "G01": "### G01 三维资产 渲染与碰撞原型\n\nB负责simulator/world/和simulator/assets/，A维护project.godot与导出配置。先完成可编辑PDC钻头、五类封闭地质体、12边框空心立方体和蓝红等径圈，再对齐独立碰撞体及材质/灯光；以G01首个可启动程序作为资产集成基准。输出模型源/GLB/贴图/许可、scene_catalog.json和六向/斜视/近景真实截图。python tools/verify_game.py --suite assets要求五类网格封闭、尺寸/体积有来源、碰撞包络包含钻具、30实例可加载、无不透明立方体面；godot --headless --path simulator --script tests/test_asset_contract.gd非零退出表示失败。10月17日前完成基础3D，10月21日前视觉定稿；没有引擎或素材时先用可编辑程序化实体，正式钻头仍须有刀翼/胎体等轮廓。\n\n\n资产制作可与R03并行；本卡可运行验收依赖R03的A-owned工程骨架。simulator/tests/test_asset_contract.gd明确由B唯一写，A的verify_game.py仅编排调用，避免无人负责或重复写。引擎锁Godot4.7.2稳定版及同版模板，官方archive已核；从v4维护分支改选当前稳定版是新产品未开工前的技术优化，不是删除展示要求。\n\n",
+    "G05": "### G05 双轴协议与板端执行反馈\n\nB负责fpga/control3d/和golden/protocol3d/，A维护ABI3共同schema与唯一上板。实现CONTROL3D/ACK3D/STATE3D、三路yaw/pitch/speed输出及独立捕获、FAST_9600与STRESS_300握手profile；物理GAIN仍互斥不叠加。python tools/verify_link.py --profile fast_9600 --duration 1800及--profile stress_300 --duration 1800要求固定/滑窗账包含全部方向/事件/ACK/重试/空等，非法授权/旧profile拒绝；python tools/run_rtl.py --suite control3d覆盖双轴限值、曲率字段解释、TTL/重复/重启。A运行python integration/board_control3d.py --trials 100，断任一路回采/断串口/过期各20次，均进入约定停止；最大响应正常目标分别2s/16s，以实测证据为准。10月23日前完成，不用旧单yaw回采证明pitch通过。\n\n\n新增双轴RTL纳入后，对包含全部新RTL的精确tested_commit重新执行B06同标准综合/实现/时序/DRC/资源检查并生成同次bit/hwh。此为本卡内构建子门，不把B06重新依赖G05构成环；未重建不得板测或继承旧B06通过。量化后合成曲率、加减速全程、两角速码边界/对角/零速、三路断线和0.001°/s有效捕获精度均给独立向量及实板记录；BOOT完整规范hash改变须重新握手。\n\n\n三路PWM在同一帧边界原子更新，capture快照必须来自应用新cmd之后开始的同一个完整输出周期，绑定session/request_seq/control_epoch/capture_seq与采样周期；旧捕获不得重新贴新命令标签。FAST请求210–241.25ms后，255ms的ACK槽允许只报accepted；来不及完成捕获时不能假报captured，由后续305ms STATE或合法下一STATE提供真实完整捕获再推进。重试槽同理，保留所有空等/阶段与2s端到端门；未得有效捕获不执行。禁止用在本周期中途拼接的yaw/pitch/speed或写寄存器证明应用。\n\n"
+  },
+  "tracked_product_source": [
+    "competition/deepeye/golden/codec/README.md",
+    "competition/deepeye/golden/codec/TRACE_CANDIDATE.md",
+    "competition/deepeye/golden/codec/codec_reference.py",
+    "competition/deepeye/golden/codec/integer_candidate_rules.json",
+    "competition/deepeye/golden/codec/known_vectors.json",
+    "competition/deepeye/golden/codec/trace_candidate.py",
+    "competition/deepeye/golden/codec/trace_candidate_layout.json",
+    "competition/deepeye/golden/codec/trace_candidate_vectors.json",
+    "competition/deepeye/golden/control/.gitattributes",
+    "competition/deepeye/golden/control/README.md",
+    "competition/deepeye/golden/control/REGISTER_SEMANTICS_CANDIDATE.md",
+    "competition/deepeye/golden/control/capture_snapshot_reference.py",
+    "competition/deepeye/golden/control/register_candidate_inventory.json",
+    "competition/deepeye/golden/control/register_semantics_candidate.json",
+    "competition/deepeye/golden/control/register_semantics_examples.json",
+    "competition/deepeye/golden/control/snapshot_vectors.json",
+    "competition/deepeye/rtl/control/SNAPSHOT_CDC_CANDIDATE.md",
+    "competition/deepeye/rtl/control/deepeye_snapshot_mailbox.sv",
+    "competition/deepeye/simulator/assets/.gitattributes",
+    "competition/deepeye/simulator/assets/LICENSES.md",
+    "competition/deepeye/simulator/assets/scene_catalog.json",
+    "competition/deepeye/simulator/tests/.gitattributes",
+    "competition/deepeye/simulator/tests/test_asset_contract.gd",
+    "competition/deepeye/simulator/tests/test_asset_contract.gd.uid",
+    "competition/deepeye/simulator/world/.gitattributes",
+    "competition/deepeye/simulator/world/asset_library.gd",
+    "competition/deepeye/simulator/world/asset_library.gd.uid",
+    "competition/deepeye/simulator/world/drill_geometry.gd",
+    "competition/deepeye/simulator/world/drill_geometry.gd.uid",
+    "competition/deepeye/simulator/world/frame_geometry.gd",
+    "competition/deepeye/simulator/world/frame_geometry.gd.uid",
+    "competition/deepeye/simulator/world/obstacle_geometry.gd",
+    "competition/deepeye/simulator/world/obstacle_geometry.gd.uid",
+    "competition/deepeye/tests/codec/test_codec_reference.py",
+    "competition/deepeye/tests/codec/test_scalar_boundary.py",
+    "competition/deepeye/tests/codec/test_trace_candidate.py",
+    "competition/deepeye/tests/codec/test_trace_corrections.py",
+    "competition/deepeye/tests/control/.gitattributes",
+    "competition/deepeye/tests/control/rtl/tb_snapshot_mailbox.sv",
+    "competition/deepeye/tests/control/test_capture_snapshot.py",
+    "competition/deepeye/tools/control/run_snapshot_cdc.py",
+    "competition/deepeye/tools/verify_codec_candidate.py"
+  ]
+}

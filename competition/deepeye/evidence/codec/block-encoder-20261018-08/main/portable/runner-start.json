@@ -1,0 +1,71 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-BLOCK-ENCODER-RTL-20261018-08-v1",
+  "operation_id": "B-DEEPEYE-BLOCK-ENCODER-20261018-08",
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "at_utc": "2026-10-18T14:28:52.153017+00:00",
+  "output_dir": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable result with spaces",
+  "output_created_fresh": true,
+  "sources": {
+    "rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable inputs with spaces\\deepeye_block_encoder.sv",
+      "sha256": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5"
+    },
+    "tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable inputs with spaces\\tb_block_encoder.sv",
+      "sha256": "0c81780d78345d6eba7d1bddaea4d39810427cd9bdefc6369f2ca389f4c92335"
+    },
+    "runner": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable inputs with spaces\\run_block_encoder.py",
+      "sha256": "fcab77585e1cd42439c5e3265486c682a38c9d456b0ea56b4491e6ddacbf9d4c"
+    },
+    "golden": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable inputs with spaces\\codec_reference.py",
+      "sha256": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5"
+    },
+    "known_vectors": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable inputs with spaces\\known_vectors.json",
+      "sha256": "c1eee67b73b8cdd449ac72b2a77c78f714eaf448b1216b16296488881ac10e99"
+    },
+    "rules": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-completion-audit-20261018-v1\\portable inputs with spaces\\integer_candidate_rules.json",
+      "sha256": "275525f2cf951d196d333171cb777c41aaeeedd5239689fe096f40055b7dbeb8"
+    },
+    "spec": null
+  },
+  "modelsim_home": "D:\\modelsim1\\win64",
+  "tool_hashes": {
+    "vlib": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e",
+    "vlog": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+    "vsim": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf"
+  },
+  "timeout_seconds": 120,
+  "vector_cases": 787,
+  "directed_cases": 41,
+  "total_cases": 828,
+  "max_cycles_last_to_meta": 20000
+}

@@ -1,0 +1,36 @@
+{
+  "operation_id": "B-LOCAL-MERGE-REHEARSAL-20261018-v1",
+  "reviewer_thread": "01a14296-5b5e-7681-b339-d59c4596175b",
+  "decision": "Accept exact captured live-to-candidate patches for isolated rehearsal only",
+  "candidate_commit": "abb3ec996e24ca0e91a2063b943f2e736282fdab",
+  "preimages": "Fresh INPUTS.json; exact bytes rechecked before stage copy. Matching historical hashes do not authorize live overwrite.",
+  "files": {
+    "fpga_mesh/app_server.py": {
+      "retained_local_behavior": "Windows official Desktop exe and matching Code Mode host; explicit selector; double-entry runtime_cache_dir wiring; immutable snapshot behavior",
+      "reviewed_delta": "Typed RuntimeIntegrityError; sticky selector binding checked before source discovery; full file inventory/digest/manifest/key/path validation; symlink/junction refusal; atomic no-overwrite binding publication",
+      "replaced_local_logic": "Old inner verify loop is replaced by _verify_snapshot, extending checks without dropping the required exe/host pair",
+      "basis": "Complete normalized live-to-candidate diff and base/live/candidate snapshots"
+    },
+    "fpga_mesh/controller.py": {
+      "retained_local_behavior": "Ordinary human followups queue; effective STOP alone cancels active dispatch; turn-boundary priorities, child revisions, persisted unsent backoff and interruption evidence remain",
+      "reviewed_delta": "on_activity notifications; two external-delivery exceptions to mesh child-version updates; durable ExternalDeliveryPending consumes dispatch only and records execution_started=false, without normal completed result",
+      "basis": "Complete normalized patch, offer/run_until_idle exception and finally control flow"
+    },
+    "fpga_mesh/gateway.py": {
+      "retained_local_behavior": "Official provider/model/effort and registered thread identity; finite startup retries; proven-unsent versus rejected versus ambiguous-sent distinction; failed/interrupted work never replayed",
+      "reviewed_delta": "Owner checks before work preparation and send; durable external pending/unknown handling; running/consumed/closed messages refused; RuntimeIntegrityError maps to pre-start deferral only",
+      "basis": "Complete normalized patch, _handle/_start_turn/_initialize_client and owner guard flow"
+    },
+    "fpga_mesh/runtime.py": {
+      "retained_local_behavior": "presence_policy.install_fence; silent peer state; existing background tool configuration; Astra/DeepSeek runtime cache paths; SDK lifecycle through candidate feishu_channel dependency",
+      "reviewed_delta": "ContinuityMonitor creation, activity callbacks, start/stop lifecycle, health source hashes and result notification; unused uuid and comments only otherwise",
+      "basis": "Complete normalized patch; runtime lifecycle and dependency import inspection"
+    }
+  },
+  "dependency_rule": "All staged runtime dependencies and tests come from exact raw Git candidate blobs; preserve approved SDK isolation and presence dependencies. Four files are first copied from live snapshots, then patched to exact candidate bytes.",
+  "agents_rule": "Private AGENTS bytes copied intact to stage; excluded from public artifacts, inventory and any ZIP. No live write.",
+  "installation_permission": false,
+  "new_source_correction_requested": false,
+  "requirements_ids": ["H01","H02","H03","H04","H05","H06","H07","H08","H09","H10","H11","H12","H13","H14","H15"],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

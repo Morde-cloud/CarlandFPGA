@@ -1,0 +1,106 @@
+{
+  "live_four_files_unchanged": {
+    "fpga_mesh/app_server.py": true,
+    "fpga_mesh/controller.py": true,
+    "fpga_mesh/gateway.py": true,
+    "fpga_mesh/runtime.py": true
+  },
+  "stage_candidate_files_verified": 125,
+  "private_agents_preserved": true,
+  "agents_publicly_packaged": false,
+  "new_zip_created": false,
+  "import_receipts": [
+    {
+      "receipt": "38804.json",
+      "pid": 38804,
+      "project_module_count": 43,
+      "outside_stage": [],
+      "modules": {
+        "fpga_mesh.protocol": "fpga_mesh/protocol.py",
+        "fpga_mesh": "fpga_mesh/__init__.py",
+        "fpga_mesh.rpc": "fpga_mesh/rpc.py",
+        "fpga_mesh.app_server": "fpga_mesh/app_server.py",
+        "tests.test_app_server": "tests/test_app_server.py",
+        "tests.test_runtime_cache_reuse": "tests/test_runtime_cache_reuse.py",
+        "fpga_mesh.tasks": "fpga_mesh/tasks.py",
+        "fpga_mesh.store": "fpga_mesh/store.py",
+        "fpga_mesh.sessions": "fpga_mesh/sessions.py",
+        "fpga_mesh.controller": "fpga_mesh/controller.py",
+        "fpga_mesh.codex": "fpga_mesh/codex.py",
+        "fpga_mesh.notifications": "fpga_mesh/notifications.py",
+        "fpga_mesh.effort": "fpga_mesh/effort.py",
+        "fpga_mesh.gateway": "fpga_mesh/gateway.py",
+        "tests.test_app_gateway": "tests/test_app_gateway.py",
+        "tests.test_runtime_integrity": "tests/test_runtime_integrity.py",
+        "tests.test_controller": "tests/test_controller.py",
+        "fpga_mesh.pool": "fpga_mesh/pool.py",
+        "fpga_mesh.child_control": "fpga_mesh/child_control.py",
+        "tests.test_controller_continuity": "tests/test_controller_continuity.py",
+        "fpga_mesh.mesh_tools": "fpga_mesh/mesh_tools.py",
+        "fpga_mesh.install_routing": "fpga_mesh/install_routing.py",
+        "fpga_mesh.official_models": "fpga_mesh/official_models.py",
+        "fpga_mesh.project_control": "fpga_mesh/project_control.py",
+        "fpga_mesh.update": "fpga_mesh/update.py",
+        "tests.test_sessions": "tests/test_sessions.py",
+        "tests.test_external_owner": "tests/test_external_owner.py",
+        "fpga_mesh.agent_policy": "fpga_mesh/agent_policy.py",
+        "fpga_mesh.mcp_children": "fpga_mesh/mcp_children.py",
+        "fpga_mesh.dynamic_children": "fpga_mesh/dynamic_children.py",
+        "fpga_mesh.feishu_channel": "fpga_mesh/feishu_channel.py",
+        "fpga_mesh.hardware": "fpga_mesh/hardware.py",
+        "fpga_mesh.http_transport": "fpga_mesh/http_transport.py",
+        "fpga_mesh.models_ui": "fpga_mesh/models_ui.py",
+        "fpga_mesh.ownership": "fpga_mesh/ownership.py",
+        "fpga_mesh.quota": "fpga_mesh/quota.py",
+        "fpga_mesh.testing": "fpga_mesh/testing.py",
+        "fpga_mesh.runtime": "fpga_mesh/runtime.py",
+        "tests.test_runtime": "tests/test_runtime.py",
+        "fpga_mesh.continuity": "fpga_mesh/continuity.py",
+        "tests.test_continuity": "tests/test_continuity.py",
+        "tests.test_feishu_channel": "tests/test_feishu_channel.py",
+        "fpga_mesh.presence_policy": "fpga_mesh/presence_policy.py"
+      }
+    },
+    {
+      "receipt": "46996.json",
+      "pid": 46996,
+      "project_module_count": 4,
+      "outside_stage": [],
+      "modules": {
+        "fpga_mesh.protocol": "fpga_mesh/protocol.py",
+        "fpga_mesh": "fpga_mesh/__init__.py",
+        "fpga_mesh.rpc": "fpga_mesh/rpc.py",
+        "fpga_mesh.app_server": "fpga_mesh/app_server.py"
+      }
+    },
+    {
+      "receipt": "58468.json",
+      "pid": 58468,
+      "project_module_count": 4,
+      "outside_stage": [],
+      "modules": {
+        "fpga_mesh.protocol": "fpga_mesh/protocol.py",
+        "fpga_mesh": "fpga_mesh/__init__.py",
+        "fpga_mesh.rpc": "fpga_mesh/rpc.py",
+        "fpga_mesh.app_server": "fpga_mesh/app_server.py"
+      }
+    }
+  ],
+  "updater_module": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\runtime-continuity-20261016\\local-merge-rehearsal-20261018\\stage\\fpga_mesh\\update.py",
+  "existing_archive_boundary_check": {
+    "archive_revision": "3c7ccdcf9e7beb3b11e3e8edd1ce7e91939d300a",
+    "archive_sha256": "e7175fc4b8ab31e4cd373ae9f6b2461bb66e68aa4a68a41197defa24df6caadd",
+    "expected_conflicts": [
+      "AGENTS.md",
+      "fpga_mesh/app_server.py",
+      "fpga_mesh/controller.py",
+      "fpga_mesh/gateway.py",
+      "fpga_mesh/runtime.py"
+    ],
+    "command": "stage fpga_mesh.update.plan_update(existing genuine 3c7ccdc archive, live root)",
+    "read_only": true,
+    "apply_or_stop_invoked": false,
+    "note": "Historical genuine archive, not a new abb3ec9 package. Conflicts remain; stage rehearsal does not add install support or accepted preimages."
+  },
+  "no_live_deployment": true
+}

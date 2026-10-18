@@ -1,0 +1,58 @@
+{
+  "request": {
+    "code_commit": "abb3ec996e24ca0e91a2063b943f2e736282fdab",
+    "expected_result": "183 focused stage tests pass, all 125 staged candidate files verify, all observed project imports stay inside stage, four live files and private AGENTS remain unchanged. No new ZIP, whitelist, force, live task/service/config/SQL mutation or board work. H01-H15 SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.",
+    "operation_id": "B-LOCAL-MERGE-REHEARSAL-20261018-v1",
+    "requester": "node-b",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "test_steps": [
+      "Check all four fresh preimage/candidate hashes and full patches against the private three-way source records; no unknown-preimage overwrite is authorized.",
+      "Verify the raw Git candidate inventory and stage postimages, then inspect the exact 183-test command/raw log and three-process import provenance.",
+      "Review the proposed next installation ownership and retained five conflicts; do not deploy or treat stage as an installer."
+    ]
+  },
+  "artifacts": [
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/dependency-plan.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/file-matrix.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/fpga_mesh__app_server.py.live-to-candidate.patch",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/fpga_mesh__controller.py.live-to-candidate.patch",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/fpga_mesh__gateway.py.live-to-candidate.patch",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/fpga_mesh__runtime.py.live-to-candidate.patch",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/INSTALLATION_NEXT.md",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/patch-review.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/README.md",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/rehearsal-verification.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/scope.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/selected-tests.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/stage-patch-commands.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/stage-proof.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/test-command.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/test-result.json",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/tests.stderr.txt",
+    "docs/deployment/evidence/local-merge-rehearsal-20261018/tests.stdout.txt"
+  ],
+  "stages": {
+    "deployment": {
+      "status": "not_run"
+    },
+    "import_provenance": {
+      "log": "docs/deployment/evidence/local-merge-rehearsal-20261018/rehearsal-verification.json",
+      "status": "passed"
+    },
+    "isolated_patch_rehearsal": {
+      "log": "docs/deployment/evidence/local-merge-rehearsal-20261018/stage-patch-commands.json",
+      "status": "passed"
+    },
+    "live_installation_path": {
+      "status": "blocked"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "stage_regression": {
+      "log": "docs/deployment/evidence/local-merge-rehearsal-20261018/tests.stderr.txt",
+      "status": "passed"
+    }
+  }
+}

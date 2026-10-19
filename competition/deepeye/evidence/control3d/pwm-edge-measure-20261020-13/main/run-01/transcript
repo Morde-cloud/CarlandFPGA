@@ -1,0 +1,28 @@
+# vsim -c -onfinish stop work.main_tb_pwm_edge_measure "+VECTORS=w32_t64.vectors.txt" "+TRACE=invalid_w3_t65.ports.txt" -do "w32_t64.do" -gTAG_W=65 -gCOUNT_W=3 
+# Start time: 01:40:54 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: tb.sv(27): (vopt-2697) MSB of part-select into 'x' is out of bounds.
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.main_tb_pwm_edge_measure(fast)
+# do w32_t64.do
+# ** Fatal: PWM_EDGE_UNSUPPORTED_PARAMETERS COUNT_W=3 TAG_W=65
+#    Time: 0 ps  Scope: main_tb_pwm_edge_measure.dut.g_param_guard File: dut.sv Line: 202
+# ** Note: $finish    : dut.sv(202)
+#    Time: 0 ps  Iteration: 0  Region: /main_tb_pwm_edge_measure/dut/g_param_guard
+# Break at dut.sv line 202
+# Stopped at dut.sv line 202
+# End time: 01:40:55 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 1

@@ -1,0 +1,83 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-PWM-EDGE-MEASURE-20261020-13",
+  "at_utc": "2026-10-19T17:48:46.319717+00:00",
+  "decision": "ACCEPT_INTERNAL_SYNCHRONOUS_RAW_MEASUREMENT_DIGITAL_SIMULATION_ONLY",
+  "director_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "director_App_turn": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+  "child_job": "child-7cc873906b4f4f56992d01d99ce71fcd",
+  "source_files": {
+    "competition/deepeye/fpga/control3d/deepeye_pwm_edge_measure.sv": "f285268a83e5853f760c69255ab50af623116493a889637c3186cbd2f9da2187",
+    "competition/deepeye/fpga/control3d/pwm_edge_measure_candidate.md": "b478334f8f4ef59c6358de9216b984b1bab95121960b2fe93c3a0fce529fcbda",
+    "competition/deepeye/tests/rtl/control3d/tb_pwm_edge_measure.sv": "d15c25d34707277841074b58da4f54ae2f22f4441573c55282937d9efbb3499f",
+    "competition/deepeye/tools/control3d/run_pwm_edge_measure.py": "17ae98f734badb1cc0a2af649de353a94df9fd50bfdc5a96c1536bd7dd9080e6",
+    "competition/deepeye/tests/rtl/control3d/main_tb_pwm_edge_measure.sv": "ec6077397b3a4cc745f584b645fa8ff8207550f59e61cea9195ca3a2ac35ef95",
+    "competition/deepeye/tools/control3d/main_verify_pwm_edge_measure.py": "f15f4c03982ec4ece87c1304937e35757f9bfba3c7c4af23fcdbf42d61c09a74"
+  },
+  "main_run_result_sha256": "daade07ac99491418bde483ae6d52430189a2095d98db0bd4d70bc03740b01a6",
+  "main_sampled_edges": 1253606,
+  "main_rle_rows": 79247,
+  "main_small_width_exhaustive_pairs": 129,
+  "main_random_samples": 60000,
+  "main_invalid_guards": 7,
+  "main_isolated_mutants_rejected": 2,
+  "author_audit_sha256": "809324f663bf8657cb94475569671f0db90c1747a3524fcea0f7109ae4e9f756",
+  "author_positive_configurations": 7,
+  "author_sampled_edges": 1050712,
+  "author_assertion_invocations": 11562459,
+  "author_counts_are_not_independent_cases": true,
+  "initial_and_final_main_public_trace_bytes_equal": true,
+  "no_main_functional_RTL_repair": true,
+  "closed_findings": [
+    "DUT13-PARAM01: author replaced replication constants with sized-context unsized literals; exact final RTL explicitly rejects zero/negative/out-of-range boundaries in actual main simulation",
+    "MAIN13-HARNESS01/02: full64 comparisons avoid invalid part-select; exact DUT fatal marker required, initial lax guard conclusion rejected",
+    "MAIN13-PROVENANCE01: incorrect automatic false boolean in harness02 superseded by HARNESS_CORRECTION.json; initial pre-author-read oracle and all vectors unchanged"
+  ],
+  "review_reasoning": [
+    "R0 establishes age0; all unsigned increments occur only while old age < MAX. Therefore high/period addition cannot wrap for supported COUNT_W. Old age==MAX branches to one overflow before candidate creation. This is structural reasoning, not a full32-bit traversal.",
+    "Result-slot retirement exists in idle/high/low/overflow branches; a closing fresh rising either replaces an empty/consumed slot or preserves a stalled old slot with visible overrun.",
+    "Only reset/STOP/rearm clears all window state; tag latched only on rearm. Default event pulses, sticky loss flags and saturating loss count match separate absolute-index reference.",
+    "out_valid abort qualification suppresses same-edge handshake; this is a synchronous binary-input contract only. Old complete result may persist through subsequent overflow and supplies no freshness/authority."
+  ],
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_source": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design": "1011259415a0916054eb580687612580bc1e5f09",
+  "stages": {
+    "simulation": "passed bounded digital only",
+    "synthesis": "blocked no local Vivado discovered",
+    "implementation": "blocked no local Vivado discovered",
+    "CDC_RDC": "not_run",
+    "board": "not_run A only",
+    "system": "not_run",
+    "G05_B06_R03": "not_run_unaccepted",
+    "formal_cards": "29 not_run"
+  },
+  "open_integration": [
+    "public ABI/BOOT/clock/source",
+    "independent asynchronous/physical capture",
+    "three-channel complete same-period capture after applying command",
+    "source/session/request/control_epoch and start/end times",
+    "waveform freshness/liveness/TTL/profile/curvature",
+    "both PC_DIRECT and FPGA-output full product chains"
+  ],
+  "32bit_limit": "bounded functionality and width reasoning only, no complete max32 period/overflow observed"
+}

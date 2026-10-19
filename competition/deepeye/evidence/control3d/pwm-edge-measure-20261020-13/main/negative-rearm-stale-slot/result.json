@@ -1,0 +1,118 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-EDGE-MEASURE-20261020-13",
+  "created_at_utc": "2026-10-19T17:46:28.661384+00:00",
+  "oracle": "absolute sample indices, first fall, one result queue",
+  "runner_sha256": "f15f4c03982ec4ece87c1304937e35757f9bfba3c7c4af23fcdbf42d61c09a74",
+  "tb_sha256": "ec6077397b3a4cc745f584b645fa8ff8207550f59e61cea9195ca3a2ac35ef95",
+  "commands": [
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-version"
+      ],
+      "name": "vlog-version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-rearm-stale-slot",
+      "exit_code": 0,
+      "stdout_sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "name": "vsim-version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-rearm-stale-slot",
+      "exit_code": 0,
+      "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "name": "vlib",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-rearm-stale-slot",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "dut.sv",
+        "tb.sv"
+      ],
+      "name": "vlog",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-rearm-stale-slot",
+      "exit_code": 0,
+      "stdout_sha256": "534c8467ea01dbe07caa66494c6478018bb2f16b46a396da9227dc940910e3b0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=2",
+        "-gTAG_W=1",
+        "+VECTORS=w2_t1.vectors.txt",
+        "+TRACE=w2_t1.ports.txt",
+        "-do",
+        "w2_t1.do"
+      ],
+      "name": "w2_t1",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-rearm-stale-slot",
+      "exit_code": 0,
+      "stdout_sha256": "02b796ac61fa25bee5371ae73ca6abe689e3f66b5d828c245f6217523040de81",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "runs": [
+    {
+      "count_w": 2,
+      "tag_w": 1,
+      "sampled_edges": 14372,
+      "rle_rows": 11680,
+      "coverage": {
+        "complete_period_high_pair": 3,
+        "no_start_constant": 18,
+        "fresh_after_constant": 2,
+        "overflow_high": 1,
+        "overflow_low": 1,
+        "overflow_rise_on_overflow": 1,
+        "old_record_vs_overflow_ready0": 1,
+        "old_record_vs_overflow_ready1": 1,
+        "abort_reset": 24,
+        "abort_stop": 24,
+        "abort_rearm": 24,
+        "control_priority": 35,
+        "overrun_saturation": 1,
+        "mixed_loss_saturation": 6,
+        "stall": 1,
+        "simultaneous_retire_refill": 1,
+        "ready_alternation": 20,
+        "random_sample": 12000
+      },
+      "expected_events": {
+        "records": 315,
+        "retired": 173,
+        "overflow": 533,
+        "overrun": 52
+      },
+      "vectors_sha256": "0f25706684ecc6fa9fd27fcc3d6430a68fc0d42b04da3167d83b4e1a1a3a2e0b",
+      "passed": false,
+      "ports_sha256": "5490620fce758b797d7e6452839cda9b4f06267e9293e2d0955b6f56a5161279"
+    }
+  ],
+  "status": "expected_public_port_rejection",
+  "32bit_limit_claim": "bounded functional samples only; no full max32 period or overflow executed",
+  "frozen_receipt_sha256": "6aa3e9c4cf14130915bc52d5aa1a72854e4f4e75c67ca50225f0d04c0f0dc38f",
+  "rtl_sha256": "fa192236cdd2b18590b9168d109b08ded47c2203b775f24f77cf175505a2f4b7"
+}

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "operation_id": "B-DEEPEYE-PWM-EDGE-MEASURE-20261020-13",
+  "work_id": "B-PWM-EDGE-MEASURE-RTL-20261020-13-v1",
+  "created_utc": "2026-10-19T17:44:27.539753+00:00",
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "pinned_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+    "scope_sha256": "cc7960d77300fcd46a2b8e6e5e0aca1adafc99842d172934ab77ca8d593b3a90",
+    "scope_frozen_sha256": "7cef6c82254b97c776ff3e6646f4cc19cecef2c1ed4c660395204cd7a8e8ade5",
+    "coordinator_decision_sha256": "1d527d7069a4f5a3041296f709ad58ba913d9066f8b64032acf57b9b58afd283"
+  },
+  "snapshots": {
+    "rtl": {
+      "path": "deepeye_pwm_edge_measure.sv",
+      "source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_edge_measure.sv",
+      "sha256": "f285268a83e5853f760c69255ab50af623116493a889637c3186cbd2f9da2187"
+    },
+    "testbench": {
+      "path": "tb_pwm_edge_measure.sv",
+      "source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_pwm_edge_measure.sv",
+      "sha256": "d15c25d34707277841074b58da4f54ae2f22f4441573c55282937d9efbb3499f"
+    },
+    "runner": {
+      "path": "run_pwm_edge_measure.py",
+      "source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\run_pwm_edge_measure.py",
+      "sha256": "17ae98f734badb1cc0a2af649de353a94df9fd50bfdc5a96c1536bd7dd9080e6"
+    }
+  },
+  "provenance": [
+    {
+      "label": "normative_scope",
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-capture-20261020-13\\SCOPE.md",
+      "expected_sha256": "cc7960d77300fcd46a2b8e6e5e0aca1adafc99842d172934ab77ca8d593b3a90",
+      "actual_sha256": "cc7960d77300fcd46a2b8e6e5e0aca1adafc99842d172934ab77ca8d593b3a90",
+      "verified": true
+    },
+    {
+      "label": "scope_frozen_receipt",
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-capture-20261020-13\\SCOPE_FROZEN.json",
+      "expected_sha256": "7cef6c82254b97c776ff3e6646f4cc19cecef2c1ed4c660395204cd7a8e8ade5",
+      "actual_sha256": "7cef6c82254b97c776ff3e6646f4cc19cecef2c1ed4c660395204cd7a8e8ade5",
+      "verified": true
+    },
+    {
+      "label": "coordinator_decision",
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\SCOPE_REVIEW_DECISION_20261020_13.json",
+      "expected_sha256": "1d527d7069a4f5a3041296f709ad58ba913d9066f8b64032acf57b9b58afd283",
+      "actual_sha256": "1d527d7069a4f5a3041296f709ad58ba913d9066f8b64032acf57b9b58afd283",
+      "verified": true
+    },
+    {
+      "label": "main_scope_continue_readback",
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-capture-20261020-13\\SCOPE_CONTINUE_CONSUMED.json",
+      "expected_sha256": "21f10e999c585d54441517be2d4f9dcccdbde6f3304493c096abcb511dc0175e",
+      "actual_sha256": "21f10e999c585d54441517be2d4f9dcccdbde6f3304493c096abcb511dc0175e",
+      "verified": true
+    }
+  ]
+}

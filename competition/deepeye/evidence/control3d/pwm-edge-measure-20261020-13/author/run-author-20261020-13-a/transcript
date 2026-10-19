@@ -1,0 +1,107 @@
+# vsim -c -onfinish stop work_mutant.tb_pwm_edge_measure "+SEED=20261020" "+SMOKE=1" "+RUNLOG=logs/mutant_w3_t3.runlog.txt" -do "logs/mutant_w3_t3.do" -gTAG_W=3 -gCOUNT_W=3 
+# Start time: 01:40:36 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_pwm_edge_measure(fast)
+# do logs/mutant_w3_t3.do
+# TB_BEGIN COUNT_W=3 TAG_W=3 SEED=20261020 SMOKE=1 MAX=7
+# GROUP_BEGIN reset_unarmed
+# GROUP_END reset_unarmed cycles=11 checks=123 mismatches=0
+# GROUP_BEGIN rearm_phases
+# MISMATCH cycle=21 field=out_period exp=5 act=6
+# MISMATCH cycle=21 field=run_frames exp=5 act=6
+# MISMATCH cycle=34 field=out_period exp=5 act=6
+# MISMATCH cycle=34 field=rearm_high exp=5 act=6
+# MISMATCH cycle=47 field=out_period exp=5 act=6
+# MISMATCH cycle=47 field=rearm_rise exp=5 act=6
+# MISMATCH cycle=59 field=out_period exp=5 act=6
+# MISMATCH cycle=59 field=rearm_fall exp=5 act=6
+# GROUP_END rearm_phases cycles=60 checks=674 mismatches=8
+# GROUP_BEGIN held_rearm
+# MISMATCH cycle=76 field=out_period exp=5 act=6
+# MISMATCH cycle=76 field=held_rearm.record exp=5 act=6
+# GROUP_END held_rearm cycles=77 checks=869 mismatches=10
+# GROUP_BEGIN tag_behavior
+# MISMATCH cycle=87 field=out_period exp=5 act=6
+# MISMATCH cycle=87 field=run_frames exp=5 act=6
+# MISMATCH cycle=87 field=tag_zero exp=5 act=6
+# MISMATCH cycle=98 field=out_period exp=5 act=6
+# MISMATCH cycle=98 field=run_frames exp=5 act=6
+# MISMATCH cycle=98 field=tag_ones exp=5 act=6
+# MISMATCH cycle=109 field=out_period exp=5 act=6
+# MISMATCH cycle=109 field=tag_latch_a exp=5 act=6
+# MISMATCH cycle=110 field=out_period exp=5 act=6
+# MISMATCH cycle=110 field=tag_latch_a_stable exp=5 act=6
+# MISMATCH cycle=117 field=out_period exp=5 act=6
+# MISMATCH cycle=117 field=tag_b exp=5 act=6
+# GROUP_END tag_behavior cycles=118 checks=1334 mismatches=22
+# GROUP_BEGIN abort_stages
+# MISMATCH cycle=155 field=out_period exp=5 act=6
+# MISMATCH cycle=155 field=abort.fill exp=5 act=6
+# MISMATCH cycle=194 field=out_period exp=5 act=6
+# MISMATCH cycle=194 field=abort.fill exp=5 act=6
+# MISMATCH cycle=233 field=out_period exp=5 act=6
+# MISMATCH cycle=233 field=abort.fill exp=5 act=6
+# GROUP_END abort_stages cycles=235 checks=2678 mismatches=28
+# GROUP_BEGIN queue_backpressure
+# MISMATCH cycle=245 field=out_period exp=5 act=6
+# MISMATCH cycle=245 field=run_frames exp=5 act=6
+# MISMATCH cycle=245 field=queue.fill_a exp=5 act=6
+# MISMATCH cycle=246 field=out_period exp=5 act=6
+# MISMATCH cycle=247 field=out_period exp=5 act=6
+# MISMATCH cycle=248 field=out_period exp=5 act=6
+# MISMATCH cycle=249 field=out_period exp=5 act=6
+# MISMATCH cycle=250 field=out_period exp=5 act=6
+# MISMATCH cycle=250 field=queue.overrun_keep exp=5 act=6
+# MISMATCH cycle=251 field=out_period exp=5 act=6
+# MISMATCH cycle=252 field=out_period exp=5 act=6
+# MISMATCH cycle=253 field=out_period exp=5 act=6
+# MISMATCH cycle=254 field=out_period exp=5 act=6
+# MISMATCH cycle=255 field=out_period exp=5 act=6
+# MISMATCH cycle=255 field=queue.overrun_keep exp=5 act=6
+# MISMATCH cycle=256 field=out_period exp=5 act=6
+# MISMATCH cycle=257 field=out_period exp=5 act=6
+# MISMATCH cycle=258 field=out_period exp=5 act=6
+# MISMATCH cycle=259 field=out_period exp=5 act=6
+# MISMATCH cycle=260 field=out_period exp=5 act=6
+# MISMATCH cycle=260 field=queue.overrun_keep exp=5 act=6
+# MISMATCH cycle=261 field=out_period exp=5 act=6
+# GROUP_END queue_backpressure cycles=302 checks=3601 mismatches=88
+# GROUP_BEGIN same_edge_swap
+# GROUP_END same_edge_swap cycles=318 checks=3796 mismatches=97
+# GROUP_BEGIN consume_no_candidate
+# GROUP_END consume_no_candidate cycles=329 checks=3920 mismatches=100
+# GROUP_BEGIN flush_discard
+# GROUP_END flush_discard cycles=347 checks=4122 mismatches=105
+# GROUP_BEGIN constant_levels
+# GROUP_END constant_levels cycles=403 checks=4750 mismatches=105
+# GROUP_BEGIN exhaustive_pairs
+# GROUP_END exhaustive_pairs cycles=977 checks=11127 mismatches=273
+# GROUP_BEGIN bounds_small
+# GROUP_END bounds_small cycles=1073 checks=12201 mismatches=285
+# GROUP_BEGIN overflow_queue
+# GROUP_END overflow_queue cycles=1110 checks=12646 mismatches=300
+# GROUP_BEGIN random_schedule
+# RANDOM_DONE cycles=5000 seed=20261020
+# GROUP_END random_schedule cycles=6114 checks=67731 mismatches=1308
+# TB_STATS COUNT_W=3 TAG_W=3 groups=14 cases=21 cycles=6114 cycle_assertions=67731 directed_checks=388 records_checked=131 records_generated=1119 handshakes=1114 overflow_events=75 overrun_events=8 mismatches=1308 random_cycles=5000
+# TB_FAIL mismatches=1308
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author/run-author-20261020-13-a/snapshots/tb_pwm_edge_measure.sv(1555)
+#    Time: 61146 ns  Iteration: 0  Instance: /tb_pwm_edge_measure
+# Break at D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author/run-author-20261020-13-a/snapshots/tb_pwm_edge_measure.sv line 1555
+# Stopped at D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author/run-author-20261020-13-a/snapshots/tb_pwm_edge_measure.sv line 1555
+# End time: 01:40:37 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

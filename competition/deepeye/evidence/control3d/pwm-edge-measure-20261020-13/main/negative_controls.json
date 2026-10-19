@@ -1,0 +1,134 @@
+{
+  "at_utc": "2026-10-19T17:46:26.103088+00:00",
+  "original_rtl_sha256": "f285268a83e5853f760c69255ab50af623116493a889637c3186cbd2f9da2187",
+  "mutants": [
+    {
+      "label": "high-plus-one",
+      "mutant_sha256": "e132a0384f762eacc16494e3028d82061dd93fc753b7d2166b1468afb5934cd8",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_edge_measure.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\mutants\\high-plus-one.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_edge_measure.sv",
+        "--frozen",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\frozen-harness-03",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-high-plus-one",
+        "--owned-root",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main",
+        "--cases",
+        "2:1",
+        "--negative"
+      ],
+      "exit_code": 0,
+      "result_sha256": "3bb13c51a57ab18f04ff47b4f5e347a501ec76e869b019fc529b18b514ecb351",
+      "stdout_sha256": "c9a73afd6bbf6288e82bb48c93086b4e3279218eefa061818d9545ac43b41a49",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected_at_public_ports": true
+    },
+    {
+      "label": "rearm-stale-slot",
+      "mutant_sha256": "fa192236cdd2b18590b9168d109b08ded47c2203b775f24f77cf175505a2f4b7",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_edge_measure.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\mutants\\rearm-stale-slot.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_edge_measure.sv",
+        "--frozen",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\frozen-harness-03",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\negative-rearm-stale-slot",
+        "--owned-root",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main",
+        "--cases",
+        "2:1",
+        "--negative"
+      ],
+      "exit_code": 0,
+      "result_sha256": "f68b6ad1b50ce04414fe182d040b536500ef2516a950b07180d0564455058984",
+      "stdout_sha256": "0bc9baf6b471d75b4c2397f767362eab8d32cbd2b736e8ba5e5a94fc30caa196",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected_at_public_ports": true
+    }
+  ],
+  "extra_invalid_parameters": [
+    {
+      "count_w": 0,
+      "tag_w": 32,
+      "explicit_guard": true,
+      "command": [
+        "D:/modelsim1/win64/vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=0",
+        "-gTAG_W=32",
+        "+VECTORS=w2_t1.vectors.txt",
+        "+TRACE=extra-invalid-0-32.ports.txt",
+        "-do",
+        "w2_t1.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-02",
+      "exit_code": 0,
+      "stdout_sha256": "67186368cb73675b6d10d6e39e02feab4a2dfb48af06179d16aa78bfb33c6e77",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "count_w": -1,
+      "tag_w": 32,
+      "explicit_guard": true,
+      "command": [
+        "D:/modelsim1/win64/vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=-1",
+        "-gTAG_W=32",
+        "+VECTORS=w2_t1.vectors.txt",
+        "+TRACE=extra-invalid--1-32.ports.txt",
+        "-do",
+        "w2_t1.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-02",
+      "exit_code": 0,
+      "stdout_sha256": "8a9bc173b28b801dc6d96902f41b93d740ef8a9eb7f76e1453844bb0972d2d20",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "count_w": 3,
+      "tag_w": -1,
+      "explicit_guard": true,
+      "command": [
+        "D:/modelsim1/win64/vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=3",
+        "-gTAG_W=-1",
+        "+VECTORS=w2_t1.vectors.txt",
+        "+TRACE=extra-invalid-3--1.ports.txt",
+        "-do",
+        "w2_t1.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-02",
+      "exit_code": 0,
+      "stdout_sha256": "d223925c20f56becf6ba0ed765471292a123f62e42db49a53553f5524fd06ddd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "original_unchanged": true,
+  "status": "passed"
+}

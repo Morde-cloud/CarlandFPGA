@@ -1,0 +1,55 @@
+{
+  "at_utc": "2026-10-19T17:42:48.702606+00:00",
+  "original_reference_frozen_before_author_read": true,
+  "original_freeze_sha256": "e67d87250eab7dae2adcb24b7862c6a611f9a320aa5b2e508b136ab1fba0601b",
+  "first_author_read_tool_chunk": "9ddf97",
+  "first_author_read_occurred_after_original_freeze_and_before_harness02": true,
+  "final_harness_freeze_sha256": "6aa3e9c4cf14130915bc52d5aa1a72854e4f4e75c67ca50225f0d04c0f0dc38f",
+  "reference_and_stimulus_AST_identical": true,
+  "five_replay_vector_files_byte_identical": [
+    {
+      "file": "w16_t64.vectors.txt",
+      "sha256": "20db39da230b3579a508221f388f307005461131fcf9874542f6bc8118c23573"
+    },
+    {
+      "file": "w2_t1.vectors.txt",
+      "sha256": "0f25706684ecc6fa9fd27fcc3d6430a68fc0d42b04da3167d83b4e1a1a3a2e0b"
+    },
+    {
+      "file": "w32_t64.vectors.txt",
+      "sha256": "3b169a9238609712ae6469995c747f13151b948d09f522d5026d31f22fb3a68f"
+    },
+    {
+      "file": "w3_t64.vectors.txt",
+      "sha256": "2d53246f68baef4ce8e9553d68c1aafdcafb11add1584d1da65226420076e00d"
+    },
+    {
+      "file": "w4_t32.vectors.txt",
+      "sha256": "9ded1c303af44beb8660ed1e95376edffeb90a8b64958fb92d2da504ed05b976"
+    }
+  ],
+  "findings": [
+    {
+      "id": "MAIN13-HARNESS01",
+      "original": "run-01/result.json reported passed despite TAG_W0 failing elaboration before explicit DUT guard",
+      "decision": "Reject its invalid-parameter conclusion; positive public-port results remain historical evidence only. Final acceptance requires the tightened harness and exact final RTL."
+    },
+    {
+      "id": "MAIN13-HARNESS02",
+      "original": "main TB part-select [-1:0] prevented invalid TAG_W0 diagnostic",
+      "repair": "Compare unsigned public outputs to full64 expected tokens; supported widths unchanged, no invalid part-select."
+    },
+    {
+      "id": "MAIN13-PROVENANCE01",
+      "original": "frozen-harness-02/result.json mechanically copied author_implementation_read=false after source had been read",
+      "decision": "That boolean is incorrect and explicitly superseded here; all original bytes preserved. Final runner no longer guesses human-read provenance. Original pre-author-read oracle_frozen.json remains valid."
+    },
+    {
+      "id": "DUT13-PARAM01",
+      "observed_source_sha256": "d470cb9eb2d1f774cc433c148250e720df693c82fe825cee1403e4d219b4df54",
+      "original": "TAG_ZERO uses zero replication when TAG_W0, causing elaboration failure before explicit unsupported-parameter diagnostic",
+      "status": "pending author terminal; no main write to active worker ownership"
+    }
+  ],
+  "other_RTL_findings": "Initial source review sees expected priorities and unsigned bounded increments; no functional acceptance before exact final bytes."
+}

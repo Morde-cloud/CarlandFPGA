@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-19T17:26:26.390136+00:00",
+  "project_id": "fpga-main",
+  "task_id": "B-MAIN-CONTINUATION-20261019",
+  "task_version": 1,
+  "message_id": "main:c42d7c2b792b3b6036f1c7c11ce2c096606300269d9086467816c3e8a1c1bc4f",
+  "event": "B-LOCAL-CAPTURE-CONTINUE-20261020-v1/SCOPE_FROZEN_REVIEW",
+  "parent_work_id": "B-LOCAL-CAPTURE-CONTINUE-20261020-v1",
+  "instruction_operation_id": "B-LOCAL-CAPTURE-CONTINUE-20261020-v1-DIRECTOR-SCOPE",
+  "product_operation_id": "B-DEEPEYE-PWM-EDGE-MEASURE-20261020-13",
+  "execution_work_id": "B-PWM-EDGE-MEASURE-RTL-20261020-13-v1",
+  "decision_operation_id": "B-LOCAL-CAPTURE-CONTINUE-20261020-v1-SCOPE-REVIEW-13",
+  "actual_coordinator": {
+    "thread_id": "01a154de-abd8-7590-b9a3-2819249458e3",
+    "turn_id": "01a1552e-7a95-72c2-9188-aca9c2ccd899",
+    "started_at_epoch": 1792430471,
+    "model": "gpt-6-astra",
+    "effort": "ultra"
+  },
+  "actual_scope_event_consumed": true,
+  "consumption_evidence": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/main-continuation-20261019-v1/SCOPE_REVIEW_CONSUMED_20261020_13.json",
+    "sha256": "dbca0630320c93187e8f8b0f6ebe4763eabd51483d0846e5a98c48c8d6f34e20"
+  },
+  "decision": "CONTINUE",
+  "decision_level": "FROZEN_INTERNAL_RAW_MEASUREMENT_SCOPE_ONLY_IMPLEMENTATION_AUTHORIZED_NOT_PRODUCT_ACCEPTANCE",
+  "spec": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-capture-20261020-13/SCOPE.md",
+    "sha256": "cc7960d77300fcd46a2b8e6e5e0aca1adafc99842d172934ab77ca8d593b3a90"
+  },
+  "frozen_receipt": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-capture-20261020-13/SCOPE_FROZEN.json",
+    "sha256": "7cef6c82254b97c776ff3e6646f4cc19cecef2c1ed4c660395204cd7a8e8ade5"
+  },
+  "baseline_head": "f7e95af8f8abae6d4a5312c08d99e095a7e5dec1",
+  "product_director": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+    "App_turn_id": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+    "technical_decision_owner_unchanged": true
+  },
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirement_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "pinned_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "canonical_checked_at": [
+      "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+      "f7e95af8f8abae6d4a5312c08d99e095a7e5dec1"
+    ],
+    "canonicalization": "requirements only; ensure_ascii=False, sort_keys=True, separators=(comma,colon); UTF-8",
+    "design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "blocking_findings": [],
+  "scope_changes_required": [],
+  "review_findings": [
+    "The single-channel synchronous edge primitive is an input-ready missing hardware component. It does not repeat generator12, encoder08/stream09, or promote software10/proposal11 into RTL. No new public ABI, clock, pin, profile or board decision is needed for isolated integer edge counts.",
+    "R0/F0/R1 sampled-edge differences establish high>=1 and period>=2 without using requested generator settings. Rearm only establishes a baseline; prior-window edges and pending records cannot be relabelled with the new opaque tag.",
+    "The stated age convention is consistent: R0 age0; at elapsed MAX the old age is MAX-1 and a closing R1 is legal. Old age==MAX means elapsed MAX+1 and invalidates only that partial. A genuinely fresh rising on this overflowing edge can begin the next partial at age0.",
+    "No fresh R0 after rearm means there is no partial to overflow. Once an unfinished partial overflows it reports one loss and returns to waiting, rather than repeatedly reporting an absence watchdog. This deliberately does not prove input liveness.",
+    "Retaining an already complete correct raw record during later overflow is acceptable under this exact transport contract. It preserves recorded counts, not freshness, current waveform validity, applied-command binding or motion eligibility. Explicit reset/STOP/rearm flushes it and its old tag.",
+    "Result retirement and measurement are independent on ordinary edges: old valid&&ready consumes the old record even if a different partial overflows; a full stalled slot survives that overflow. A fresh complete candidate replaces an old consumed record without overrun, but is never consumed on its creation edge. A full stalled slot drops only the new candidate with visible saturating loss.",
+    "Reset/STOP has priority over rearm; rearm has priority over sampling and result handshake. Qualifying out_valid by the abort inputs consistently suppresses an old-record handshake on an abort edge. This assumes the specified synchronous sampled controls and confers no asynchronous STOP or CDC guarantee.",
+    "The acceptance plan separates independently authored event-index/queue expectations from generator or author logic, includes all required count/control/buffer boundaries, and requires an actual public-port mutant failure. COUNT_W16 maximum and overflow are fully observable; COUNT_W32 coverage stays explicitly bounded.",
+    "The corrected frozen G05 line464 requires atomic three-channel frame updates and a complete same-period capture after applying a command. This primitive alone does not satisfy that integration gate. Zero/full-duty constant-level capture and missing-signal timeout decisions are not invented here; the primitive deliberately emits no complete period without observed R/F/R.",
+    "Fresh saved PR30 feedback has five unchanged comment bodies/dates and zero reviews. A08/09 limited simulation acceptance and C integration constraints remain intact; delivery or queued transport for12 does not create peer acceptance for12 or13."
+  ],
+  "implementation_and_review_focus": [
+    "Freeze the independent reference and deterministic stimulus before consuming author implementation. Preserve the freeze time/hash and raw public-port results.",
+    "Exercise exact MAX and MAX+1, overflow-edge rising recovery, every partial-stage abort/rearm, and old-result retirement versus overflow both ready and stalled. This applies existing frozen rules, not a new interface.",
+    "Keep COUNT_W32 arithmetic unsigned and width-safe; separate structural reasoning from actually observed cycles. Record full-width TAG_W64 and invalid-parameter diagnostics.",
+    "Keep loss pulses/stickies and saturation observable after buffer drops or partial overflow. Explicit flush clears old diagnostics and cannot restore old-window payload.",
+    "Run the specified ModelSim positive suite and isolated faulty-copy negative control, retaining failures, commands, versions, exits and exact executed hashes. Only actual accepted bytes may enter the new manifest."
+  ],
+  "authorization": {
+    "responsible_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+    "one_ordinary_execution_job": "DeepSeek Flash/max",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-PWM-EDGE-MEASURE-RTL-20261020-13-v1",
+    "worker_ownership": [
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/control3d/deepeye_pwm_edge_measure.sv",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/control3d/pwm_edge_measure_candidate.md",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/control3d/tb_pwm_edge_measure.sv",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tools/control3d/run_pwm_edge_measure.py",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author"
+    ],
+    "director_ownership": [
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_edge_measure.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_edge_measure.py",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\handoffs\\b\\B-DEEPEYE-PWM-EDGE-MEASURE-20261020-13",
+      "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-capture-20261020-13"
+    ],
+    "worker_start_condition": "Product director actually reads this completed result via the original message_id, checks decision/spec/work/operation/hash, and uses the supported lease ledger. Conflicting or duplicate ownership must be reconciled; duplicates are reused, not replayed.",
+    "main_independent_acceptance_required": true,
+    "source_and_evidence_publication": "After actual implementation and main independent acceptance, publish one new operation13 source/manifest checkpoint through existing PR30; force=false, verify exact remote bytes, retain unknown-write reconciliation.",
+    "coordinator_creates_no_worker_or_second_root": true,
+    "child_constraints": "No commit/push/peer/group/config/service/SQL/credential/board authority. Carry H01-H15/fixed hash and B standing-order escalation markers in the exact assignment.",
+    "old_operations_and_protected_dirty_unchanged": true,
+    "old35pct_rule_revoked": true
+  },
+  "formal_limits": {
+    "current_new_implementation": "not_started_at_review",
+    "new_simulation": "not_run",
+    "synthesis": "blocked_without_actual_Vivado",
+    "implementation": "blocked_without_actual_Vivado",
+    "CDC_RDC": "not_run",
+    "board": "not_run_A_only",
+    "G05_B06_R03": "not_run_unaccepted",
+    "formal_cards": "29 not_run",
+    "no_authority": [
+      "public register/pin/frequency/HWH/BOOT/TRACE ABI",
+      "three-channel same-period capture or applied-command binding",
+      "source/session/request/control_epoch/capture_seq or timestamp validity",
+      "freshness/liveness/TTL/profile/curvature/motion eligibility",
+      "complete PC_DIRECT or FPGA-output product acceptance"
+    ]
+  },
+  "result_delivery": {
+    "channel": "completed result of this original main_submit message_id through main_wait",
+    "message_id": "main:c42d7c2b792b3b6036f1c7c11ce2c096606300269d9086467816c3e8a1c1bc4f",
+    "no_resubmission_or_App_proxy": true,
+    "gateway": "Coordinator ends this turn to return the decision. Distinct App producer may wait; never wait for a queued message while holding the same resident serial gateway.",
+    "next_event": "Only actual completion/failure/substantive blocker with precise commit/evidence/hash. No periodic READY, timer, Goal or empty continuation."
+  },
+  "actions_this_turn": {
+    "own_coordination_evidence_only": true,
+    "product_code_changed": false,
+    "worker_started": false,
+    "historical_tests_rerun": false,
+    "new_network_write": false,
+    "group_or_peer_message": false,
+    "service_config_SQL_credentials_queue_changes": false
+  }
+}

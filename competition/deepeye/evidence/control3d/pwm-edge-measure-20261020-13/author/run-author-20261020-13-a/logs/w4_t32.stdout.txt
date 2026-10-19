@@ -1,0 +1,63 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -onfinish stop work.tb_pwm_edge_measure "+SEED=20261020" "+SMOKE=0" "+RUNLOG=logs/w4_t32.runlog.txt" -do "logs/w4_t32.do" -gTAG_W=32 -gCOUNT_W=4 
+# Start time: 01:40:21 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_pwm_edge_measure(fast)
+# do logs/w4_t32.do
+# TB_BEGIN COUNT_W=4 TAG_W=32 SEED=20261020 SMOKE=0 MAX=f
+# GROUP_BEGIN reset_unarmed
+# GROUP_END reset_unarmed cycles=11 checks=123 mismatches=0
+# GROUP_BEGIN rearm_phases
+# GROUP_END rearm_phases cycles=60 checks=674 mismatches=0
+# GROUP_BEGIN held_rearm
+# GROUP_END held_rearm cycles=77 checks=869 mismatches=0
+# GROUP_BEGIN tag_behavior
+# GROUP_END tag_behavior cycles=118 checks=1334 mismatches=0
+# GROUP_BEGIN abort_stages
+# GROUP_END abort_stages cycles=235 checks=2678 mismatches=0
+# GROUP_BEGIN queue_backpressure
+# GROUP_END queue_backpressure cycles=310 checks=3721 mismatches=0
+# GROUP_BEGIN same_edge_swap
+# GROUP_END same_edge_swap cycles=326 checks=3916 mismatches=0
+# GROUP_BEGIN consume_no_candidate
+# GROUP_END consume_no_candidate cycles=337 checks=4040 mismatches=0
+# GROUP_BEGIN flush_discard
+# GROUP_END flush_discard cycles=355 checks=4242 mismatches=0
+# GROUP_BEGIN constant_levels
+# GROUP_END constant_levels cycles=427 checks=5046 mismatches=0
+# GROUP_BEGIN exhaustive_pairs
+# GROUP_END exhaustive_pairs cycles=5537 checks=61571 mismatches=0
+# GROUP_BEGIN bounds_small
+# GROUP_END bounds_small cycles=5681 checks=63173 mismatches=0
+# GROUP_BEGIN loss_saturation
+# GROUP_END loss_saturation cycles=6151 checks=68949 mismatches=0
+# GROUP_BEGIN overflow_queue
+# GROUP_END overflow_queue cycles=6204 checks=69602 mismatches=0
+# GROUP_BEGIN random_schedule
+# RANDOM_DONE cycles=20000 seed=20261020
+# GROUP_END random_schedule cycles=26208 checks=289756 mismatches=0
+# TB_STATS COUNT_W=4 TAG_W=32 groups=15 cases=105 cycles=26208 cycle_assertions=289756 directed_checks=1117 records_checked=470 records_generated=4038 handshakes=4033 overflow_events=26 overrun_events=38 mismatches=0 random_cycles=20000
+# TB_PASS
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author/run-author-20261020-13-a/snapshots/tb_pwm_edge_measure.sv(1555)
+#    Time: 262086 ns  Iteration: 0  Instance: /tb_pwm_edge_measure
+# Break at D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author/run-author-20261020-13-a/snapshots/tb_pwm_edge_measure.sv line 1555
+# Stopped at D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-edge-measure-20261020-13/author/run-author-20261020-13-a/snapshots/tb_pwm_edge_measure.sv line 1555
+# End time: 01:40:21 on Oct 20,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

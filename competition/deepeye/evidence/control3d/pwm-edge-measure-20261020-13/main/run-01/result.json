@@ -1,0 +1,435 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-EDGE-MEASURE-20261020-13",
+  "created_at_utc": "2026-10-19T17:40:35.616079+00:00",
+  "oracle": "absolute sample indices, first fall, one result queue",
+  "runner_sha256": "fdbedba14b5efc8f54cfa1e0d71791bcb047d427d4a5d2355cce350e2935a4e8",
+  "tb_sha256": "3a7912cd50f8fc596e41c8ac215eec80e0ec8d5aed1ea3b57c6fee63a1d58247",
+  "commands": [
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-version"
+      ],
+      "name": "vlog-version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "name": "vsim-version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "name": "vlib",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "dut.sv",
+        "tb.sv"
+      ],
+      "name": "vlog",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "17648138db4622481d1043bd2e2139d81fcce63ed04683f05098fec4f56ab29a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=2",
+        "-gTAG_W=1",
+        "+VECTORS=w2_t1.vectors.txt",
+        "+TRACE=w2_t1.ports.txt",
+        "-do",
+        "w2_t1.do"
+      ],
+      "name": "w2_t1",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "2387736c13152e0800586354280156b5bd3fe0c14a8b39e178f971f343538d6e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=3",
+        "-gTAG_W=64",
+        "+VECTORS=w3_t64.vectors.txt",
+        "+TRACE=w3_t64.ports.txt",
+        "-do",
+        "w3_t64.do"
+      ],
+      "name": "w3_t64",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "b70fb88b280ac26fd5e2201d504225e1ff41c92e0b9b8377e42499eaa22559c8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=4",
+        "-gTAG_W=32",
+        "+VECTORS=w4_t32.vectors.txt",
+        "+TRACE=w4_t32.ports.txt",
+        "-do",
+        "w4_t32.do"
+      ],
+      "name": "w4_t32",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "810263f19b4393f067dc536da1ecbdf843842bd73c1a320471ffdb9ddad639aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=16",
+        "-gTAG_W=64",
+        "+VECTORS=w16_t64.vectors.txt",
+        "+TRACE=w16_t64.ports.txt",
+        "-do",
+        "w16_t64.do"
+      ],
+      "name": "w16_t64",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "f9de9ce088f38151c804891771ce0d2b5a18092ad54faede64e051a4dd6cf207",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=32",
+        "-gTAG_W=64",
+        "+VECTORS=w32_t64.vectors.txt",
+        "+TRACE=w32_t64.ports.txt",
+        "-do",
+        "w32_t64.do"
+      ],
+      "name": "w32_t64",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "a14ce33d5f73b5b4c42702c9f4227c8ebf0c9753429f1f2fa96d0b9d0691e989",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=1",
+        "-gTAG_W=32",
+        "+VECTORS=w32_t64.vectors.txt",
+        "+TRACE=invalid_w1_t32.ports.txt",
+        "-do",
+        "w32_t64.do"
+      ],
+      "name": "invalid_w1_t32",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "9e756b84ac25740c74a5f0f1e643623a09a81019995d2a6e85ea25c8c31ee034",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=33",
+        "-gTAG_W=32",
+        "+VECTORS=w32_t64.vectors.txt",
+        "+TRACE=invalid_w33_t32.ports.txt",
+        "-do",
+        "w32_t64.do"
+      ],
+      "name": "invalid_w33_t32",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "b698a864b650e3a86fb43bb6d2f441ea018fab78fa0a13f4b5072a5b15fca8fa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=3",
+        "-gTAG_W=0",
+        "+VECTORS=w32_t64.vectors.txt",
+        "+TRACE=invalid_w3_t0.ports.txt",
+        "-do",
+        "w32_t64.do"
+      ],
+      "name": "invalid_w3_t0",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 12,
+      "stdout_sha256": "ef759b738e41cc63297797e09a5c5469730ed63f76536a8026596b020ad15d30",
+      "stderr_sha256": "74c912e08b7e00158d87153a4e936c4451e411b1fe0c0c0287d9f8925af0185d"
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_edge_measure",
+        "-gCOUNT_W=3",
+        "-gTAG_W=65",
+        "+VECTORS=w32_t64.vectors.txt",
+        "+TRACE=invalid_w3_t65.ports.txt",
+        "-do",
+        "w32_t64.do"
+      ],
+      "name": "invalid_w3_t65",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-edge-measure-20261020-13\\main\\run-01",
+      "exit_code": 0,
+      "stdout_sha256": "44e0b502c340cff30e6e35d570553c2ab0130b347205f5594e06e786937e9c4b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "runs": [
+    {
+      "count_w": 2,
+      "tag_w": 1,
+      "sampled_edges": 14372,
+      "rle_rows": 11680,
+      "coverage": {
+        "complete_period_high_pair": 3,
+        "no_start_constant": 18,
+        "fresh_after_constant": 2,
+        "overflow_high": 1,
+        "overflow_low": 1,
+        "overflow_rise_on_overflow": 1,
+        "old_record_vs_overflow_ready0": 1,
+        "old_record_vs_overflow_ready1": 1,
+        "abort_reset": 24,
+        "abort_stop": 24,
+        "abort_rearm": 24,
+        "control_priority": 35,
+        "overrun_saturation": 1,
+        "mixed_loss_saturation": 6,
+        "stall": 1,
+        "simultaneous_retire_refill": 1,
+        "ready_alternation": 20,
+        "random_sample": 12000
+      },
+      "expected_events": {
+        "records": 315,
+        "retired": 173,
+        "overflow": 533,
+        "overrun": 52
+      },
+      "vectors_sha256": "0f25706684ecc6fa9fd27fcc3d6430a68fc0d42b04da3167d83b4e1a1a3a2e0b",
+      "passed": true,
+      "ports_sha256": "cb29141afe2ff38ec733a6cb9d9f196a0e4e8c11e31c3c08b4b6012ecb0b55fe"
+    },
+    {
+      "count_w": 3,
+      "tag_w": 64,
+      "sampled_edges": 18760,
+      "rle_rows": 16802,
+      "coverage": {
+        "complete_period_high_pair": 21,
+        "no_start_constant": 34,
+        "fresh_after_constant": 2,
+        "overflow_high": 1,
+        "overflow_low": 1,
+        "overflow_rise_on_overflow": 1,
+        "old_record_vs_overflow_ready0": 1,
+        "old_record_vs_overflow_ready1": 1,
+        "abort_reset": 48,
+        "abort_stop": 48,
+        "abort_rearm": 48,
+        "control_priority": 35,
+        "overrun_saturation": 1,
+        "mixed_loss_saturation": 10,
+        "stall": 1,
+        "simultaneous_retire_refill": 1,
+        "ready_alternation": 20,
+        "random_sample": 12000
+      },
+      "expected_events": {
+        "records": 692,
+        "retired": 422,
+        "overflow": 413,
+        "overrun": 69
+      },
+      "vectors_sha256": "2d53246f68baef4ce8e9553d68c1aafdcafb11add1584d1da65226420076e00d",
+      "passed": true,
+      "ports_sha256": "ddb8a103046694875d509d164d2915ac7b61417cf3cfd142b02551aeb15a913c"
+    },
+    {
+      "count_w": 4,
+      "tag_w": 32,
+      "sampled_edges": 21432,
+      "rle_rows": 17674,
+      "coverage": {
+        "complete_period_high_pair": 105,
+        "no_start_constant": 66,
+        "fresh_after_constant": 2,
+        "overflow_high": 1,
+        "overflow_low": 1,
+        "overflow_rise_on_overflow": 1,
+        "old_record_vs_overflow_ready0": 1,
+        "old_record_vs_overflow_ready1": 1,
+        "abort_reset": 48,
+        "abort_stop": 48,
+        "abort_rearm": 48,
+        "control_priority": 35,
+        "overrun_saturation": 1,
+        "mixed_loss_saturation": 18,
+        "stall": 1,
+        "simultaneous_retire_refill": 1,
+        "ready_alternation": 20,
+        "random_sample": 12000
+      },
+      "expected_events": {
+        "records": 1101,
+        "retired": 740,
+        "overflow": 186,
+        "overrun": 82
+      },
+      "vectors_sha256": "9ded1c303af44beb8660ed1e95376edffeb90a8b64958fb92d2da504ed05b976",
+      "passed": true,
+      "ports_sha256": "3ab14e15e1e2380439282747d1e69905c8d58a323c6708be458fede29ad05cb5"
+    },
+    {
+      "count_w": 16,
+      "tag_w": 64,
+      "sampled_edges": 1132372,
+      "rle_rows": 16585,
+      "coverage": {
+        "complete_period_high_pair": 6,
+        "no_start_constant": 262146,
+        "fresh_after_constant": 2,
+        "overflow_high": 1,
+        "overflow_low": 1,
+        "overflow_rise_on_overflow": 1,
+        "old_record_vs_overflow_ready0": 1,
+        "old_record_vs_overflow_ready1": 1,
+        "abort_reset": 48,
+        "abort_stop": 48,
+        "abort_rearm": 48,
+        "control_priority": 35,
+        "stall": 1,
+        "simultaneous_retire_refill": 1,
+        "ready_alternation": 20,
+        "random_sample": 12000
+      },
+      "expected_events": {
+        "records": 1022,
+        "retired": 765,
+        "overflow": 5,
+        "overrun": 64
+      },
+      "vectors_sha256": "20db39da230b3579a508221f388f307005461131fcf9874542f6bc8118c23573",
+      "passed": true,
+      "ports_sha256": "b30695f44ac8443b0989ea12ead1ebf055cccbbb0e04c7009980237c34cca96c"
+    },
+    {
+      "count_w": 32,
+      "tag_w": 64,
+      "sampled_edges": 66670,
+      "rle_rows": 16506,
+      "coverage": {
+        "complete_period_high_pair": 5,
+        "no_start_constant": 40000,
+        "fresh_after_constant": 2,
+        "abort_reset": 48,
+        "abort_stop": 48,
+        "abort_rearm": 48,
+        "control_priority": 35,
+        "stall": 1,
+        "simultaneous_retire_refill": 1,
+        "ready_alternation": 20,
+        "random_sample": 12000
+      },
+      "expected_events": {
+        "records": 1033,
+        "retired": 778,
+        "overflow": 0,
+        "overrun": 68
+      },
+      "vectors_sha256": "3b169a9238609712ae6469995c747f13151b948d09f522d5026d31f22fb3a68f",
+      "passed": true,
+      "ports_sha256": "956a5d44c610dd58f9c5ecc3df05838ac4cf0c6617a8fe5535ecd72c5fb62420"
+    }
+  ],
+  "status": "passed",
+  "32bit_limit_claim": "bounded functional samples only; no full max32 period or overflow executed",
+  "frozen_receipt_sha256": "c1e434525040343fa70fdfc5330b0cc781fd5d78713e653d4a9588cb94a7a1dc",
+  "rtl_sha256": "d470cb9eb2d1f774cc433c148250e720df693c82fe825cee1403e4d219b4df54",
+  "invalid_parameters": [
+    {
+      "count_w": 1,
+      "tag_w": 32,
+      "rejected": true,
+      "exit_code": 0
+    },
+    {
+      "count_w": 33,
+      "tag_w": 32,
+      "rejected": true,
+      "exit_code": 0
+    },
+    {
+      "count_w": 3,
+      "tag_w": 0,
+      "rejected": true,
+      "exit_code": 12
+    },
+    {
+      "count_w": 3,
+      "tag_w": 65,
+      "rejected": true,
+      "exit_code": 0
+    }
+  ]
+}

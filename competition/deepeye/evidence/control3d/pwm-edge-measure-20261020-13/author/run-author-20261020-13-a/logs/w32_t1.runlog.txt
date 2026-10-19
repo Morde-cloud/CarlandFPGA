@@ -1,0 +1,6261 @@
+TB_BEGIN COUNT_W=32 TAG_W=1 SEED=20261020 SMOKE=1 MAX=ffffffff
+G_BEGIN reset_unarmed
+S 1 1 0 0 0 0 0
+S 2 1 0 0 1 1 1
+S 3 0 0 0 0 0 0
+S 5 0 0 0 1 0 0
+S 6 0 0 0 0 0 1
+S 7 0 0 0 1 0 1
+S 8 0 0 0 0 0 0
+S 9 0 0 0 1 0 0
+S 10 0 0 0 0 0 1
+S 11 0 0 0 1 0 1
+G_END reset_unarmed cycles=11 checks=123 mismatches=0
+G_BEGIN rearm_phases
+S 12 1 0 0 0 0 0
+S 13 1 0 0 1 1 1
+S 14 0 0 0 0 0 0
+S 15 0 0 1 0 1 0
+S 16 0 0 0 1 1 1
+S 18 0 0 0 0 1 1
+S 21 0 0 0 1 1 1
+R 21 period=5 high=2 tag=1
+C 21 run_frames period=5 high=2 tag=1
+H 22 period=5 high=2 tag=1
+S 23 1 0 0 0 0 0
+S 24 1 0 0 1 1 1
+S 25 0 0 0 0 0 0
+S 26 0 0 1 1 0 0
+S 27 0 0 0 1 0 0
+S 28 0 0 0 0 0 0
+S 29 0 0 0 1 0 0
+S 31 0 0 0 0 0 0
+S 34 0 0 0 1 0 0
+R 34 period=5 high=2 tag=0
+C 34 rearm_high period=5 high=2 tag=0
+S 35 0 0 0 1 0 1
+H 35 period=5 high=2 tag=0
+S 36 1 0 0 0 0 0
+S 37 1 0 0 1 1 1
+S 38 0 0 0 0 0 0
+S 39 0 0 0 0 1 0
+S 40 0 0 1 1 1 0
+S 41 0 0 0 0 1 0
+S 42 0 0 0 1 1 0
+S 44 0 0 0 0 1 0
+S 47 0 0 0 1 1 0
+R 47 period=5 high=2 tag=1
+C 47 rearm_rise period=5 high=2 tag=1
+S 48 0 0 0 1 1 1
+H 48 period=5 high=2 tag=1
+S 49 1 0 0 0 0 0
+S 50 1 0 0 1 1 1
+S 51 0 0 0 0 0 0
+S 52 0 0 0 1 0 0
+S 53 0 0 1 0 0 0
+S 54 0 0 0 1 0 0
+S 56 0 0 0 0 0 0
+S 59 0 0 0 1 0 0
+R 59 period=5 high=2 tag=0
+C 59 rearm_fall period=5 high=2 tag=0
+S 60 0 0 0 1 0 1
+H 60 period=5 high=2 tag=0
+G_END rearm_phases cycles=60 checks=674 mismatches=0
+G_BEGIN held_rearm
+S 61 1 0 0 0 0 0
+S 62 1 0 0 1 1 1
+S 63 0 0 0 0 0 0
+S 64 0 0 1 0 1 0
+S 65 0 0 1 1 0 0
+S 66 0 0 1 0 1 0
+S 67 0 0 1 1 0 0
+S 68 0 0 1 0 1 0
+S 69 0 0 1 1 0 0
+S 70 0 0 0 0 0 0
+S 71 0 0 0 1 0 0
+S 73 0 0 0 0 0 0
+S 76 0 0 0 1 0 0
+R 76 period=5 high=2 tag=0
+C 76 held_rearm.record period=5 high=2 tag=0
+S 77 0 0 0 1 0 1
+H 77 period=5 high=2 tag=0
+G_END held_rearm cycles=77 checks=869 mismatches=0
+G_BEGIN tag_behavior
+S 78 1 0 0 0 0 0
+S 79 1 0 0 1 1 1
+S 80 0 0 0 0 0 0
+S 81 0 0 1 0 0 0
+S 82 0 0 0 1 0 1
+S 84 0 0 0 0 0 1
+S 87 0 0 0 1 0 1
+R 87 period=5 high=2 tag=0
+C 87 run_frames period=5 high=2 tag=0
+C 87 tag_zero period=5 high=2 tag=0
+H 88 period=5 high=2 tag=0
+S 89 1 0 0 0 0 0
+S 90 1 0 0 1 1 1
+S 91 0 0 0 0 0 0
+S 92 0 0 1 0 1 0
+S 93 0 0 0 1 1 1
+S 95 0 0 0 0 1 1
+S 98 0 0 0 1 1 1
+R 98 period=5 high=2 tag=1
+C 98 run_frames period=5 high=2 tag=1
+C 98 tag_ones period=5 high=2 tag=1
+H 99 period=5 high=2 tag=1
+S 100 1 0 0 0 0 0
+S 101 1 0 0 1 1 1
+S 102 0 0 0 0 0 0
+S 103 0 0 1 0 0 0
+S 104 0 0 0 1 0 0
+S 106 0 0 0 0 1 0
+S 109 0 0 0 1 1 0
+R 109 period=5 high=2 tag=0
+C 109 tag_latch_a period=5 high=2 tag=0
+C 110 tag_latch_a_stable period=5 high=2 tag=0
+S 111 0 0 1 0 1 0
+S 112 0 0 0 1 1 0
+S 114 0 0 0 0 1 0
+S 117 0 0 0 1 1 0
+R 117 period=5 high=2 tag=1
+C 117 tag_b period=5 high=2 tag=1
+S 118 0 0 0 1 1 1
+H 118 period=5 high=2 tag=1
+G_END tag_behavior cycles=118 checks=1334 mismatches=0
+G_BEGIN abort_stages
+S 119 1 0 0 0 0 0
+S 120 1 0 0 1 1 1
+S 121 0 0 0 0 0 0
+S 122 1 0 0 0 1 0
+A 122 kind=0 tag=1
+S 123 1 0 0 0 0 0
+S 124 1 0 0 1 1 1
+S 125 0 0 0 0 0 0
+S 126 0 0 1 0 1 0
+S 127 0 0 0 1 1 0
+S 128 1 0 0 0 1 0
+A 128 kind=0 tag=1
+S 129 1 0 0 0 0 0
+S 130 1 0 0 1 1 1
+S 131 0 0 0 0 0 0
+S 132 0 0 1 0 1 0
+S 133 0 0 0 1 1 0
+S 134 0 0 0 0 1 0
+S 135 1 0 0 0 1 0
+A 135 kind=0 tag=1
+S 136 1 0 0 0 0 0
+S 137 1 0 0 1 1 1
+S 138 0 0 0 0 0 0
+S 139 0 0 1 0 1 0
+S 140 0 0 0 1 1 0
+S 142 0 0 0 0 1 0
+S 145 1 0 0 1 1 0
+A 145 kind=0 tag=1
+S 146 1 0 0 0 0 0
+S 147 1 0 0 1 1 1
+S 148 0 0 0 0 0 0
+S 149 0 0 1 0 1 0
+S 150 0 0 0 1 1 0
+S 152 0 0 0 0 1 0
+S 155 0 0 0 1 1 0
+R 155 period=5 high=2 tag=1
+C 155 abort.fill period=5 high=2 tag=1
+S 156 1 0 0 1 1 1
+A 156 kind=0 tag=1
+S 157 0 0 0 0 1 0
+S 158 1 0 0 0 0 0
+S 159 1 0 0 1 1 1
+S 160 0 0 0 0 0 0
+S 161 0 1 0 0 1 0
+A 161 kind=1 tag=1
+S 162 1 0 0 0 0 0
+S 163 1 0 0 1 1 1
+S 164 0 0 0 0 0 0
+S 165 0 0 1 0 1 0
+S 166 0 0 0 1 1 0
+S 167 0 1 0 0 1 0
+A 167 kind=1 tag=1
+S 168 1 0 0 0 0 0
+S 169 1 0 0 1 1 1
+S 170 0 0 0 0 0 0
+S 171 0 0 1 0 1 0
+S 172 0 0 0 1 1 0
+S 173 0 0 0 0 1 0
+S 174 0 1 0 0 1 0
+A 174 kind=1 tag=1
+S 175 1 0 0 0 0 0
+S 176 1 0 0 1 1 1
+S 177 0 0 0 0 0 0
+S 178 0 0 1 0 1 0
+S 179 0 0 0 1 1 0
+S 181 0 0 0 0 1 0
+S 184 0 1 0 1 1 0
+A 184 kind=1 tag=1
+S 185 1 0 0 0 0 0
+S 186 1 0 0 1 1 1
+S 187 0 0 0 0 0 0
+S 188 0 0 1 0 1 0
+S 189 0 0 0 1 1 0
+S 191 0 0 0 0 1 0
+S 194 0 0 0 1 1 0
+R 194 period=5 high=2 tag=1
+C 194 abort.fill period=5 high=2 tag=1
+S 195 0 1 0 1 1 1
+A 195 kind=1 tag=1
+S 196 0 0 0 0 1 0
+S 197 1 0 0 0 0 0
+S 198 1 0 0 1 1 1
+S 199 0 0 0 0 0 0
+S 200 0 0 1 0 1 0
+A 200 kind=2 tag=1
+S 201 1 0 0 0 0 0
+S 202 1 0 0 1 1 1
+S 203 0 0 0 0 0 0
+S 204 0 0 1 0 1 0
+S 205 0 0 0 1 1 0
+S 206 0 0 1 0 1 0
+A 206 kind=2 tag=1
+S 207 1 0 0 0 0 0
+S 208 1 0 0 1 1 1
+S 209 0 0 0 0 0 0
+S 210 0 0 1 0 1 0
+S 211 0 0 0 1 1 0
+S 212 0 0 0 0 1 0
+S 213 0 0 1 0 1 0
+A 213 kind=2 tag=1
+S 214 1 0 0 0 0 0
+S 215 1 0 0 1 1 1
+S 216 0 0 0 0 0 0
+S 217 0 0 1 0 1 0
+S 218 0 0 0 1 1 0
+S 220 0 0 0 0 1 0
+S 223 0 0 1 1 1 0
+A 223 kind=2 tag=1
+S 224 1 0 0 0 0 0
+S 225 1 0 0 1 1 1
+S 226 0 0 0 0 0 0
+S 227 0 0 1 0 1 0
+S 228 0 0 0 1 1 0
+S 230 0 0 0 0 1 0
+S 233 0 0 0 1 1 0
+R 233 period=5 high=2 tag=1
+C 233 abort.fill period=5 high=2 tag=1
+S 234 0 0 1 1 1 1
+A 234 kind=2 tag=1
+S 235 0 0 0 0 1 0
+G_END abort_stages cycles=235 checks=2678 mismatches=0
+G_BEGIN queue_backpressure
+S 236 1 0 0 0 0 0
+S 237 1 0 0 1 1 1
+S 238 0 0 0 0 0 0
+S 239 0 0 1 0 1 0
+S 240 0 0 0 1 1 0
+S 242 0 0 0 0 1 0
+S 245 0 0 0 1 1 0
+R 245 period=5 high=2 tag=1
+C 245 run_frames period=5 high=2 tag=1
+C 245 queue.fill_a period=5 high=2 tag=1
+S 247 0 0 0 0 1 0
+S 250 0 0 0 1 1 0
+V 250 loss=1 seen=1
+C 250 queue.overrun_keep period=5 high=2 tag=1
+S 252 0 0 0 0 1 0
+S 255 0 0 0 1 1 0
+V 255 loss=2 seen=1
+C 255 queue.overrun_keep period=5 high=2 tag=1
+S 257 0 0 0 0 1 0
+S 260 0 0 0 1 1 0
+V 260 loss=3 seen=1
+C 260 queue.overrun_keep period=5 high=2 tag=1
+S 262 0 0 0 0 1 0
+S 265 0 0 0 1 1 0
+V 265 loss=4 seen=1
+C 265 queue.overrun_keep period=5 high=2 tag=1
+S 267 0 0 0 0 1 0
+S 270 0 0 0 1 1 0
+V 270 loss=5 seen=1
+C 270 queue.overrun_keep period=5 high=2 tag=1
+S 272 0 0 0 0 1 0
+S 275 0 0 0 1 1 0
+V 275 loss=6 seen=1
+C 275 queue.overrun_keep period=5 high=2 tag=1
+S 277 0 0 0 0 1 0
+S 280 0 0 0 1 1 0
+V 280 loss=7 seen=1
+C 280 queue.overrun_keep period=5 high=2 tag=1
+S 282 0 0 0 0 1 0
+S 285 0 0 0 1 1 0
+V 285 loss=8 seen=1
+C 285 queue.overrun_keep period=5 high=2 tag=1
+C 315 queue.stall_stable period=5 high=2 tag=1
+S 316 0 0 0 0 1 1
+H 316 period=5 high=2 tag=1
+S 317 1 0 0 0 0 0
+S 318 1 0 0 1 1 1
+S 319 0 0 0 0 0 0
+S 320 0 0 1 0 0 0
+S 321 0 0 0 1 0 1
+S 323 0 0 0 0 0 1
+S 326 0 0 0 1 0 1
+R 326 period=5 high=2 tag=0
+C 326 run_frames period=5 high=2 tag=0
+C 326 queue.after_consume period=5 high=2 tag=0
+H 327 period=5 high=2 tag=0
+G_END queue_backpressure cycles=327 checks=3976 mismatches=0
+G_BEGIN same_edge_swap
+S 328 1 0 0 0 0 0
+S 329 1 0 0 1 1 1
+S 330 0 0 0 0 0 0
+S 331 0 0 1 0 1 0
+S 332 0 0 0 1 1 0
+S 334 0 0 0 0 1 0
+S 337 0 0 0 1 1 0
+R 337 period=5 high=2 tag=1
+C 337 run_frames period=5 high=2 tag=1
+C 337 swap.fill_a period=5 high=2 tag=1
+S 338 0 0 0 1 0 0
+S 339 0 0 0 0 0 0
+S 342 0 0 0 1 0 1
+H 342 period=5 high=2 tag=1
+R 342 period=5 high=2 tag=1
+C 342 swap.fill_b period=5 high=2 tag=1
+H 343 period=5 high=2 tag=1
+G_END same_edge_swap cycles=343 checks=4171 mismatches=0
+G_BEGIN consume_no_candidate
+S 344 1 0 0 0 0 0
+S 345 1 0 0 1 1 1
+S 346 0 0 0 0 0 0
+S 347 0 0 1 0 1 0
+S 348 0 0 0 1 1 0
+S 350 0 0 0 0 1 0
+S 353 0 0 0 1 1 0
+R 353 period=5 high=2 tag=1
+C 353 run_frames period=5 high=2 tag=1
+C 353 consume.fill period=5 high=2 tag=1
+S 354 0 0 0 1 1 1
+H 354 period=5 high=2 tag=1
+G_END consume_no_candidate cycles=354 checks=4295 mismatches=0
+G_BEGIN flush_discard
+S 355 1 0 0 0 0 0
+S 356 1 0 0 1 1 1
+S 357 0 0 0 0 0 0
+S 358 0 0 1 0 1 0
+S 359 0 0 0 1 1 0
+S 361 0 0 0 0 1 0
+S 364 0 0 0 1 1 0
+R 364 period=5 high=2 tag=1
+C 364 run_frames period=5 high=2 tag=1
+C 364 flush.fill period=5 high=2 tag=1
+S 365 0 0 1 0 0 0
+S 366 0 0 0 1 0 0
+S 368 0 0 0 0 0 0
+S 371 0 0 0 1 0 0
+R 371 period=5 high=2 tag=0
+C 371 flush.new_tag period=5 high=2 tag=0
+S 372 0 0 0 1 0 1
+H 372 period=5 high=2 tag=0
+G_END flush_discard cycles=372 checks=4497 mismatches=0
+G_BEGIN constant_levels
+S 373 1 0 0 0 0 0
+S 374 1 0 0 1 1 1
+S 375 0 0 0 0 0 0
+S 376 0 0 1 0 1 0
+S 377 0 0 0 0 1 0
+S 387 1 0 0 0 0 0
+S 388 1 0 0 1 1 1
+S 389 0 0 0 0 0 0
+S 390 0 0 1 1 1 0
+S 391 0 0 0 1 1 0
+G_END constant_levels cycles=400 checks=4811 mismatches=0
+G_BEGIN smoke_wide
+S 401 1 0 0 0 0 0
+S 402 1 0 0 1 1 1
+S 403 0 0 0 0 0 0
+S 404 0 0 1 0 1 0
+S 405 0 0 0 1 1 1
+S 414 0 0 0 0 1 1
+S 422 0 0 0 1 1 1
+R 422 period=17 high=9 tag=1
+C 422 run_frames period=17 high=9 tag=1
+H 423 period=17 high=9 tag=1
+S 431 0 0 0 0 1 1
+S 439 0 0 0 1 1 1
+R 439 period=17 high=9 tag=1
+C 439 run_frames period=17 high=9 tag=1
+H 440 period=17 high=9 tag=1
+S 441 1 0 0 0 0 0
+S 442 1 0 0 1 1 1
+S 443 0 0 0 0 0 0
+S 444 0 0 1 0 0 0
+S 445 0 0 0 1 0 1
+S 1444 0 0 0 0 0 1
+S 1445 0 0 0 1 0 1
+R 1445 period=1000 high=999 tag=0
+C 1445 run_frames period=1000 high=999 tag=0
+C 1445 smoke.p1000 period=1000 high=999 tag=0
+H 1446 period=1000 high=999 tag=0
+S 1447 1 0 0 0 0 0
+S 1448 1 0 0 1 1 1
+S 1449 0 0 0 0 0 0
+S 1450 0 0 1 0 1 0
+S 1451 0 0 0 1 1 1
+S 1452 0 0 0 0 1 1
+S 1468 0 0 0 1 1 1
+R 1468 period=17 high=1 tag=1
+C 1468 run_frames period=17 high=1 tag=1
+C 1468 smoke.tag_ones period=17 high=1 tag=1
+H 1469 period=17 high=1 tag=1
+G_END smoke_wide cycles=1469 checks=16579 mismatches=0
+G_BEGIN random_schedule
+S 1470 1 0 0 0 0 0
+S 1471 1 0 0 1 1 1
+S 1472 0 0 0 0 0 0
+S 1473 0 0 1 0 0 0
+S 1474 0 0 0 1 1 0
+S 1475 0 0 0 0 0 1
+S 1476 0 0 0 1 1 0
+R 1476 period=2 high=1 tag=0
+S 1477 0 0 0 0 0 1
+H 1477 period=2 high=1 tag=0
+S 1478 0 0 0 1 1 0
+R 1478 period=2 high=1 tag=0
+S 1479 0 0 0 0 0 1
+H 1479 period=2 high=1 tag=0
+S 1480 0 0 0 1 1 0
+R 1480 period=2 high=1 tag=0
+S 1481 0 0 0 0 0 1
+H 1481 period=2 high=1 tag=0
+S 1482 0 0 0 0 0 0
+S 1485 0 0 0 1 1 0
+R 1485 period=5 high=1 tag=0
+S 1486 0 0 0 1 1 1
+H 1486 period=5 high=1 tag=0
+S 1490 0 0 0 0 0 1
+S 1491 0 0 0 0 0 0
+S 1493 0 0 0 1 1 0
+R 1493 period=8 high=5 tag=0
+S 1494 0 0 0 0 0 1
+H 1494 period=8 high=5 tag=0
+S 1495 0 0 0 1 1 0
+R 1495 period=2 high=1 tag=0
+S 1496 0 0 0 0 0 1
+H 1496 period=2 high=1 tag=0
+S 1497 0 0 0 1 1 0
+R 1497 period=2 high=1 tag=0
+S 1498 0 0 0 1 1 1
+H 1498 period=2 high=1 tag=0
+S 1499 0 0 0 0 0 1
+S 1500 0 0 0 0 0 0
+S 1501 0 0 0 1 1 0
+R 1501 period=4 high=2 tag=0
+S 1502 0 0 0 1 1 1
+H 1502 period=4 high=2 tag=0
+S 1504 0 0 0 0 0 1
+S 1505 0 0 0 1 1 0
+R 1505 period=4 high=3 tag=0
+S 1506 0 0 0 0 0 1
+H 1506 period=4 high=3 tag=0
+S 1507 0 0 0 0 0 0
+S 1509 0 0 0 1 1 0
+R 1509 period=4 high=1 tag=0
+S 1510 0 0 0 1 1 1
+H 1510 period=4 high=1 tag=0
+S 1513 0 0 0 0 0 1
+S 1514 0 0 0 1 1 0
+R 1514 period=5 high=4 tag=0
+S 1515 0 0 0 0 0 1
+H 1515 period=5 high=4 tag=0
+S 1516 0 0 0 1 1 0
+R 1516 period=2 high=1 tag=0
+S 1517 0 0 0 1 1 1
+H 1517 period=2 high=1 tag=0
+S 1519 0 0 0 0 0 1
+S 1520 0 0 0 1 1 0
+R 1520 period=4 high=3 tag=0
+S 1521 0 0 0 0 0 1
+H 1521 period=4 high=3 tag=0
+S 1522 0 0 0 1 1 0
+R 1522 period=2 high=1 tag=0
+S 1523 0 0 0 0 0 1
+H 1523 period=2 high=1 tag=0
+S 1524 0 0 0 0 0 0
+S 1529 0 0 0 1 1 0
+R 1529 period=7 high=1 tag=0
+S 1530 0 0 0 0 0 1
+H 1530 period=7 high=1 tag=0
+S 1531 0 0 0 0 0 0
+S 1532 0 0 0 1 1 0
+R 1532 period=3 high=1 tag=0
+S 1533 0 0 0 1 1 1
+H 1533 period=3 high=1 tag=0
+S 1534 0 0 0 0 0 1
+S 1535 0 0 0 0 0 0
+S 1536 0 0 0 1 1 0
+R 1536 period=4 high=2 tag=0
+S 1537 0 0 0 0 0 1
+H 1537 period=4 high=2 tag=0
+S 1538 0 0 0 0 0 0
+S 1539 0 0 0 1 1 0
+R 1539 period=3 high=1 tag=0
+S 1540 0 0 0 0 0 1
+H 1540 period=3 high=1 tag=0
+S 1541 0 0 0 0 0 0
+S 1543 0 0 0 1 1 0
+R 1543 period=4 high=1 tag=0
+S 1544 0 0 0 1 1 1
+H 1544 period=4 high=1 tag=0
+S 1545 0 0 0 0 0 1
+S 1546 0 0 0 0 0 0
+S 1548 0 0 0 1 1 0
+R 1548 period=5 high=2 tag=0
+S 1549 0 0 0 0 0 1
+H 1549 period=5 high=2 tag=0
+S 1550 0 0 0 0 0 0
+S 1551 0 0 0 1 1 0
+R 1551 period=3 high=1 tag=0
+S 1552 0 0 0 0 0 1
+H 1552 period=3 high=1 tag=0
+S 1553 0 0 0 1 1 0
+R 1553 period=2 high=1 tag=0
+S 1554 0 0 0 1 1 1
+H 1554 period=2 high=1 tag=0
+S 1556 0 0 0 0 0 1
+S 1557 0 0 0 1 1 0
+R 1557 period=4 high=3 tag=0
+S 1558 0 0 0 0 0 1
+H 1558 period=4 high=3 tag=0
+S 1559 0 0 0 1 1 0
+R 1559 period=2 high=1 tag=0
+S 1560 0 0 0 1 1 1
+H 1560 period=2 high=1 tag=0
+S 1561 0 0 0 0 0 1
+S 1562 0 0 0 1 1 0
+R 1562 period=3 high=2 tag=0
+S 1563 0 0 0 1 1 1
+H 1563 period=3 high=2 tag=0
+S 1565 0 0 0 0 0 1
+S 1566 0 0 0 0 0 0
+S 1568 0 0 0 1 1 0
+R 1568 period=6 high=3 tag=0
+S 1569 0 0 0 1 1 1
+H 1569 period=6 high=3 tag=0
+S 1572 0 0 0 0 0 1
+S 1573 0 0 0 0 0 0
+S 1577 0 0 0 1 1 0
+R 1577 period=9 high=4 tag=0
+S 1578 0 0 0 1 1 1
+H 1578 period=9 high=4 tag=0
+S 1585 0 0 0 0 0 1
+S 1586 0 0 0 1 1 0
+R 1586 period=9 high=8 tag=0
+S 1587 0 0 0 0 0 1
+H 1587 period=9 high=8 tag=0
+S 1588 0 0 0 1 1 0
+R 1588 period=2 high=1 tag=0
+S 1589 0 0 0 0 0 1
+H 1589 period=2 high=1 tag=0
+S 1590 0 0 0 0 0 0
+S 1593 0 0 0 1 1 0
+R 1593 period=5 high=1 tag=0
+S 1594 0 0 0 0 0 1
+H 1594 period=5 high=1 tag=0
+S 1595 0 0 0 0 0 0
+S 1596 0 0 0 1 1 0
+R 1596 period=3 high=1 tag=0
+S 1597 0 0 0 1 1 1
+H 1597 period=3 high=1 tag=0
+S 1598 0 0 0 0 0 1
+S 1599 0 0 0 0 0 0
+S 1604 0 0 0 1 1 0
+R 1604 period=8 high=2 tag=0
+S 1605 0 0 0 0 0 1
+H 1605 period=8 high=2 tag=0
+S 1606 0 0 0 0 0 0
+S 1608 0 0 0 1 1 0
+R 1608 period=4 high=1 tag=0
+S 1609 0 0 0 0 0 1
+H 1609 period=4 high=1 tag=0
+S 1610 0 0 0 1 1 0
+R 1610 period=2 high=1 tag=0
+S 1611 0 0 0 0 0 1
+H 1611 period=2 high=1 tag=0
+S 1612 0 0 0 0 0 0
+S 1613 0 0 0 1 1 0
+R 1613 period=3 high=1 tag=0
+S 1614 0 0 0 0 0 1
+H 1614 period=3 high=1 tag=0
+S 1615 0 0 0 1 1 0
+R 1615 period=2 high=1 tag=0
+S 1616 0 0 0 0 0 1
+H 1616 period=2 high=1 tag=0
+S 1617 0 0 0 1 1 0
+R 1617 period=2 high=1 tag=0
+S 1618 0 0 0 1 1 1
+H 1618 period=2 high=1 tag=0
+S 1621 0 0 0 0 0 1
+S 1622 0 0 0 1 1 0
+R 1622 period=5 high=4 tag=0
+S 1623 0 0 0 1 1 1
+H 1623 period=5 high=4 tag=0
+S 1624 0 0 0 0 0 1
+S 1625 0 0 0 0 0 0
+S 1626 0 0 0 1 1 0
+R 1626 period=4 high=2 tag=0
+S 1627 0 0 0 1 1 1
+H 1627 period=4 high=2 tag=0
+S 1631 0 0 0 0 0 1
+S 1632 0 0 0 0 0 0
+S 1635 0 0 0 1 1 0
+R 1635 period=9 high=5 tag=0
+S 1636 0 0 0 0 0 1
+H 1636 period=9 high=5 tag=0
+S 1637 0 0 0 0 0 0
+S 1639 0 0 0 1 1 0
+R 1639 period=4 high=1 tag=0
+S 1640 0 0 0 1 1 1
+H 1640 period=4 high=1 tag=0
+S 1642 0 0 0 0 0 1
+S 1643 0 0 0 1 1 0
+R 1643 period=4 high=3 tag=0
+S 1644 0 0 0 0 0 1
+H 1644 period=4 high=3 tag=0
+S 1645 0 0 0 1 1 0
+R 1645 period=2 high=1 tag=0
+S 1646 0 0 0 1 1 1
+H 1646 period=2 high=1 tag=0
+S 1649 0 0 0 0 0 1
+S 1650 0 0 0 1 1 0
+R 1650 period=5 high=4 tag=0
+S 1651 0 0 0 1 1 1
+H 1651 period=5 high=4 tag=0
+S 1652 0 0 0 0 0 1
+S 1653 0 0 0 1 1 0
+R 1653 period=3 high=2 tag=0
+S 1654 0 0 0 0 0 1
+H 1654 period=3 high=2 tag=0
+S 1655 0 0 0 0 0 0
+S 1657 0 0 0 1 1 0
+R 1657 period=4 high=1 tag=0
+S 1658 0 0 0 0 0 1
+H 1658 period=4 high=1 tag=0
+S 1659 0 0 0 0 0 0
+S 1660 0 0 0 1 1 0
+R 1660 period=3 high=1 tag=0
+S 1661 0 0 0 1 1 1
+H 1661 period=3 high=1 tag=0
+S 1662 0 0 0 0 0 1
+S 1663 0 0 0 0 0 0
+S 1665 0 0 0 1 1 0
+R 1665 period=5 high=2 tag=0
+S 1666 0 0 0 1 1 1
+H 1666 period=5 high=2 tag=0
+S 1667 0 0 0 0 0 1
+S 1668 0 0 0 0 0 0
+S 1669 0 0 0 1 1 0
+R 1669 period=4 high=2 tag=0
+S 1670 0 0 0 0 0 1
+H 1670 period=4 high=2 tag=0
+S 1671 0 0 0 0 0 0
+S 1677 0 0 1 1 1 0
+S 1678 0 0 0 0 0 1
+S 1679 0 0 0 1 1 0
+S 1680 0 0 0 0 0 1
+S 1681 0 0 0 1 1 0
+R 1681 period=2 high=1 tag=1
+S 1682 0 0 0 1 1 1
+H 1682 period=2 high=1 tag=1
+S 1683 0 0 0 0 0 1
+S 1684 0 0 0 1 1 0
+R 1684 period=3 high=2 tag=1
+S 1685 0 0 0 0 0 1
+H 1685 period=3 high=2 tag=1
+S 1686 0 0 0 1 1 0
+R 1686 period=2 high=1 tag=1
+S 1687 0 0 0 0 0 1
+H 1687 period=2 high=1 tag=1
+S 1688 0 0 0 0 0 0
+S 1689 0 0 0 1 1 0
+R 1689 period=3 high=1 tag=1
+S 1690 0 0 0 1 1 1
+H 1690 period=3 high=1 tag=1
+S 1694 0 0 0 0 0 1
+S 1695 0 0 0 1 1 0
+R 1695 period=6 high=5 tag=1
+S 1696 0 0 0 1 1 1
+H 1696 period=6 high=5 tag=1
+S 1700 0 0 0 0 0 1
+S 1701 0 0 0 1 1 0
+R 1701 period=6 high=5 tag=1
+S 1702 0 0 0 1 1 1
+H 1702 period=6 high=5 tag=1
+S 1705 0 0 0 0 0 1
+S 1706 0 0 0 0 0 0
+S 1708 0 0 0 1 1 0
+R 1708 period=7 high=4 tag=1
+S 1709 0 0 0 0 0 1
+H 1709 period=7 high=4 tag=1
+S 1710 0 0 0 1 1 0
+R 1710 period=2 high=1 tag=1
+S 1711 0 0 0 1 1 1
+H 1711 period=2 high=1 tag=1
+S 1713 0 0 0 0 0 1
+S 1714 0 0 0 1 1 0
+R 1714 period=4 high=3 tag=1
+S 1715 0 0 0 0 0 1
+H 1715 period=4 high=3 tag=1
+S 1716 0 0 0 0 0 0
+S 1717 0 0 0 1 1 0
+R 1717 period=3 high=1 tag=1
+S 1718 0 0 0 1 1 1
+H 1718 period=3 high=1 tag=1
+S 1721 0 0 0 0 0 1
+S 1722 0 0 0 0 0 0
+S 1726 0 0 0 1 1 0
+R 1726 period=9 high=4 tag=1
+S 1727 0 0 0 0 0 1
+H 1727 period=9 high=4 tag=1
+S 1728 0 0 0 0 0 0
+S 1729 0 0 0 1 1 0
+R 1729 period=3 high=1 tag=1
+S 1730 0 0 0 1 1 1
+H 1730 period=3 high=1 tag=1
+S 1733 0 0 0 0 0 1
+S 1734 0 0 0 1 1 0
+R 1734 period=5 high=4 tag=1
+S 1735 0 0 0 0 0 1
+H 1735 period=5 high=4 tag=1
+S 1736 0 0 0 1 1 0
+R 1736 period=2 high=1 tag=1
+S 1737 0 0 0 1 1 1
+H 1737 period=2 high=1 tag=1
+S 1738 0 0 0 0 0 1
+S 1739 0 0 0 0 0 0
+S 1741 0 0 0 1 1 0
+R 1741 period=5 high=2 tag=1
+S 1742 0 0 0 1 1 1
+H 1742 period=5 high=2 tag=1
+S 1745 0 0 0 0 0 1
+S 1746 0 0 0 0 0 0
+S 1748 0 0 0 1 1 0
+R 1748 period=7 high=4 tag=1
+S 1749 0 0 0 0 0 1
+H 1749 period=7 high=4 tag=1
+S 1750 0 0 0 0 0 0
+S 1753 0 0 0 1 1 0
+R 1753 period=5 high=1 tag=1
+S 1754 0 0 0 0 0 1
+H 1754 period=5 high=1 tag=1
+S 1755 0 0 0 1 1 0
+R 1755 period=2 high=1 tag=1
+S 1756 0 0 0 0 0 1
+H 1756 period=2 high=1 tag=1
+S 1757 0 0 0 1 1 0
+R 1757 period=2 high=1 tag=1
+S 1758 0 0 0 1 1 1
+H 1758 period=2 high=1 tag=1
+S 1760 0 0 0 0 0 1
+S 1761 0 0 0 0 0 0
+S 1762 0 0 0 1 1 0
+R 1762 period=5 high=3 tag=1
+S 1763 0 0 0 1 1 1
+H 1763 period=5 high=3 tag=1
+S 1764 0 0 0 0 0 1
+S 1765 0 0 0 0 0 0
+S 1768 0 0 0 1 1 0
+R 1768 period=6 high=2 tag=1
+S 1769 0 0 0 0 0 1
+H 1769 period=6 high=2 tag=1
+S 1770 0 0 0 0 0 0
+S 1773 0 0 0 1 1 0
+R 1773 period=5 high=1 tag=1
+S 1774 0 0 0 0 0 1
+H 1774 period=5 high=1 tag=1
+S 1775 0 0 0 1 1 0
+R 1775 period=2 high=1 tag=1
+S 1776 0 0 0 0 0 1
+H 1776 period=2 high=1 tag=1
+S 1777 0 0 0 0 0 0
+S 1779 0 0 0 1 1 0
+R 1779 period=4 high=1 tag=1
+S 1780 0 0 0 1 1 1
+H 1780 period=4 high=1 tag=1
+S 1782 0 0 0 0 0 1
+S 1783 0 0 0 1 1 0
+R 1783 period=4 high=3 tag=1
+S 1784 0 0 0 0 0 1
+H 1784 period=4 high=3 tag=1
+S 1785 0 0 0 1 1 0
+R 1785 period=2 high=1 tag=1
+S 1786 0 0 0 1 1 1
+H 1786 period=2 high=1 tag=1
+S 1788 0 0 0 0 0 1
+S 1789 0 0 0 0 0 0
+S 1791 0 0 0 1 1 0
+R 1791 period=6 high=3 tag=1
+S 1792 0 0 0 1 1 1
+H 1792 period=6 high=3 tag=1
+S 1793 0 0 0 0 0 1
+S 1794 0 0 0 0 0 0
+S 1797 0 0 0 1 1 0
+R 1797 period=6 high=2 tag=1
+S 1798 0 0 0 1 1 1
+H 1798 period=6 high=2 tag=1
+S 1799 0 0 0 0 0 1
+S 1800 0 0 0 0 0 0
+S 1801 0 0 0 1 1 0
+R 1801 period=4 high=2 tag=1
+S 1802 0 0 0 0 0 1
+H 1802 period=4 high=2 tag=1
+S 1803 0 0 0 0 0 0
+S 1808 0 0 0 1 1 0
+R 1808 period=7 high=1 tag=1
+S 1809 0 0 0 0 0 1
+H 1809 period=7 high=1 tag=1
+S 1810 0 0 0 1 1 0
+R 1810 period=2 high=1 tag=1
+S 1811 0 0 0 0 0 1
+H 1811 period=2 high=1 tag=1
+S 1812 0 0 0 0 0 0
+S 1814 0 0 0 1 1 0
+R 1814 period=4 high=1 tag=1
+S 1815 0 0 0 0 0 1
+H 1815 period=4 high=1 tag=1
+S 1816 0 0 0 1 1 0
+R 1816 period=2 high=1 tag=1
+S 1817 0 0 0 0 0 1
+H 1817 period=2 high=1 tag=1
+S 1818 0 0 0 0 0 0
+S 1820 0 0 0 1 1 0
+R 1820 period=4 high=1 tag=1
+S 1821 0 0 0 1 1 1
+H 1821 period=4 high=1 tag=1
+S 1822 0 0 0 0 0 1
+S 1823 0 0 0 1 1 0
+R 1823 period=3 high=2 tag=1
+S 1824 0 0 0 0 0 1
+H 1824 period=3 high=2 tag=1
+S 1825 0 0 0 1 1 0
+R 1825 period=2 high=1 tag=1
+S 1826 0 0 0 1 1 1
+H 1826 period=2 high=1 tag=1
+S 1827 0 0 0 0 0 1
+S 1828 0 0 0 1 1 0
+R 1828 period=3 high=2 tag=1
+S 1829 0 0 0 0 0 1
+H 1829 period=3 high=2 tag=1
+S 1830 0 0 0 1 1 0
+R 1830 period=2 high=1 tag=1
+S 1831 0 0 0 1 1 1
+H 1831 period=2 high=1 tag=1
+S 1834 0 0 0 0 0 1
+S 1835 0 0 0 1 1 0
+R 1835 period=5 high=4 tag=1
+S 1836 0 0 0 0 0 1
+H 1836 period=5 high=4 tag=1
+S 1837 0 0 0 1 1 0
+R 1837 period=2 high=1 tag=1
+S 1838 0 0 0 0 0 1
+H 1838 period=2 high=1 tag=1
+S 1839 0 0 0 1 1 0
+R 1839 period=2 high=1 tag=1
+S 1840 0 0 0 0 0 1
+H 1840 period=2 high=1 tag=1
+S 1841 0 0 0 1 1 0
+R 1841 period=2 high=1 tag=1
+S 1842 0 0 0 1 1 1
+H 1842 period=2 high=1 tag=1
+S 1844 0 0 0 0 0 1
+S 1845 0 0 0 0 0 0
+S 1846 0 0 0 1 1 0
+R 1846 period=5 high=3 tag=1
+S 1847 0 0 0 0 0 1
+H 1847 period=5 high=3 tag=1
+S 1848 0 0 0 1 1 0
+R 1848 period=2 high=1 tag=1
+S 1849 0 0 0 1 1 1
+H 1849 period=2 high=1 tag=1
+S 1851 0 0 0 0 0 1
+S 1852 0 0 0 1 1 0
+R 1852 period=4 high=3 tag=1
+S 1853 0 0 0 1 1 1
+H 1853 period=4 high=3 tag=1
+S 1855 0 0 0 0 0 1
+S 1856 0 0 0 1 1 0
+R 1856 period=4 high=3 tag=1
+S 1857 0 0 0 1 1 1
+H 1857 period=4 high=3 tag=1
+S 1863 0 0 0 0 0 1
+S 1864 0 0 0 1 1 0
+R 1864 period=8 high=7 tag=1
+S 1865 0 0 0 1 1 1
+H 1865 period=8 high=7 tag=1
+S 1866 0 0 0 0 0 1
+S 1867 0 0 0 0 0 0
+S 1868 0 0 0 1 1 0
+R 1868 period=4 high=2 tag=1
+S 1869 0 0 0 0 0 1
+H 1869 period=4 high=2 tag=1
+S 1870 0 0 0 0 0 0
+S 1872 0 0 0 1 1 0
+R 1872 period=4 high=1 tag=1
+S 1873 0 0 0 0 0 1
+H 1873 period=4 high=1 tag=1
+S 1874 0 0 0 1 1 0
+R 1874 period=2 high=1 tag=1
+S 1875 0 0 0 1 1 1
+H 1875 period=2 high=1 tag=1
+S 1877 0 0 0 0 0 1
+S 1878 0 0 0 1 1 0
+R 1878 period=4 high=3 tag=1
+S 1879 0 0 0 0 0 1
+H 1879 period=4 high=3 tag=1
+S 1880 0 0 0 1 1 0
+R 1880 period=2 high=1 tag=1
+S 1881 0 0 0 1 1 1
+H 1881 period=2 high=1 tag=1
+S 1882 0 0 0 0 0 1
+S 1883 0 0 0 0 0 0
+S 1885 0 0 0 1 1 0
+R 1885 period=5 high=2 tag=1
+S 1886 0 0 0 1 1 1
+H 1886 period=5 high=2 tag=1
+S 1890 0 0 0 0 0 1
+S 1891 0 0 0 0 0 0
+S 1892 0 0 0 1 1 0
+R 1892 period=7 high=5 tag=1
+S 1893 0 0 0 0 0 1
+H 1893 period=7 high=5 tag=1
+S 1894 0 0 0 1 1 0
+R 1894 period=2 high=1 tag=1
+S 1895 0 0 0 1 1 1
+H 1895 period=2 high=1 tag=1
+S 1896 0 0 0 0 0 1
+S 1897 0 0 0 1 1 0
+R 1897 period=3 high=2 tag=1
+S 1898 0 0 0 0 0 1
+H 1898 period=3 high=2 tag=1
+S 1899 0 0 0 1 1 0
+R 1899 period=2 high=1 tag=1
+S 1900 0 0 0 1 1 1
+H 1900 period=2 high=1 tag=1
+S 1901 0 0 0 0 0 1
+S 1902 0 0 0 0 0 0
+S 1903 0 0 0 1 1 0
+R 1903 period=4 high=2 tag=1
+S 1904 0 0 0 0 0 1
+H 1904 period=4 high=2 tag=1
+S 1905 0 0 0 1 1 0
+R 1905 period=2 high=1 tag=1
+S 1906 0 0 0 0 0 1
+H 1906 period=2 high=1 tag=1
+S 1907 0 0 0 1 1 0
+R 1907 period=2 high=1 tag=1
+S 1908 0 0 0 1 1 1
+H 1908 period=2 high=1 tag=1
+S 1910 0 0 0 0 0 1
+S 1911 0 0 0 0 0 0
+S 1912 0 0 0 1 1 0
+R 1912 period=5 high=3 tag=1
+S 1913 0 0 0 0 0 1
+H 1913 period=5 high=3 tag=1
+S 1914 0 0 0 0 0 0
+S 1916 0 0 0 1 1 0
+R 1916 period=4 high=1 tag=1
+S 1917 0 0 0 1 1 1
+H 1917 period=4 high=1 tag=1
+S 1919 0 0 0 0 0 1
+S 1920 0 0 0 0 0 0
+S 1922 0 0 0 1 1 0
+R 1922 period=6 high=3 tag=1
+S 1923 0 0 0 1 1 1
+H 1923 period=6 high=3 tag=1
+S 1927 0 0 0 0 0 1
+S 1928 0 0 0 1 1 0
+R 1928 period=6 high=5 tag=1
+S 1929 0 0 0 1 1 1
+H 1929 period=6 high=5 tag=1
+S 1931 0 0 0 0 0 1
+S 1932 0 0 0 0 0 0
+S 1934 0 0 0 1 1 0
+R 1934 period=6 high=3 tag=1
+S 1935 0 0 0 0 0 1
+H 1935 period=6 high=3 tag=1
+S 1936 0 0 0 1 1 0
+R 1936 period=2 high=1 tag=1
+S 1937 0 0 0 0 0 1
+H 1937 period=2 high=1 tag=1
+S 1938 0 0 0 0 0 0
+S 1941 0 0 0 1 1 0
+R 1941 period=5 high=1 tag=1
+S 1942 0 0 0 1 1 1
+H 1942 period=5 high=1 tag=1
+S 1943 0 0 0 0 0 1
+S 1944 0 0 0 1 1 0
+R 1944 period=3 high=2 tag=1
+S 1945 0 0 0 0 0 1
+H 1945 period=3 high=2 tag=1
+S 1946 0 0 0 0 0 0
+S 1947 0 0 0 1 1 0
+R 1947 period=3 high=1 tag=1
+S 1948 0 0 0 1 1 1
+H 1948 period=3 high=1 tag=1
+S 1950 0 0 0 0 0 1
+S 1951 0 0 0 0 0 0
+S 1952 0 0 0 1 1 0
+R 1952 period=5 high=3 tag=1
+S 1953 0 0 0 1 1 1
+H 1953 period=5 high=3 tag=1
+S 1956 0 0 0 0 0 1
+S 1957 0 0 0 0 0 0
+S 1960 0 0 0 1 1 0
+R 1960 period=8 high=4 tag=1
+S 1961 0 0 0 0 0 1
+H 1961 period=8 high=4 tag=1
+S 1962 0 0 0 0 0 0
+S 1963 0 0 0 1 1 0
+R 1963 period=3 high=1 tag=1
+S 1964 0 0 0 0 0 1
+H 1964 period=3 high=1 tag=1
+S 1965 0 0 0 1 1 0
+R 1965 period=2 high=1 tag=1
+S 1966 0 0 0 1 1 1
+H 1966 period=2 high=1 tag=1
+S 1967 0 0 0 0 0 1
+S 1968 0 0 0 0 0 0
+S 1969 0 0 0 1 1 0
+R 1969 period=4 high=2 tag=1
+S 1970 0 0 0 0 0 1
+H 1970 period=4 high=2 tag=1
+S 1971 0 0 0 0 0 0
+S 1973 0 0 0 1 1 0
+R 1973 period=4 high=1 tag=1
+S 1974 0 0 0 1 1 1
+H 1974 period=4 high=1 tag=1
+S 1976 0 0 0 0 0 1
+S 1977 0 0 0 0 0 0
+S 1979 0 0 0 1 1 0
+R 1979 period=6 high=3 tag=1
+S 1980 0 0 0 0 0 1
+H 1980 period=6 high=3 tag=1
+S 1981 0 0 0 0 0 0
+S 1982 0 0 0 1 1 0
+R 1982 period=3 high=1 tag=1
+S 1983 0 0 0 1 1 1
+H 1983 period=3 high=1 tag=1
+S 1985 0 0 0 0 0 1
+S 1986 0 0 0 0 0 0
+S 1988 0 0 0 1 1 0
+R 1988 period=6 high=3 tag=1
+S 1989 0 0 0 1 1 1
+H 1989 period=6 high=3 tag=1
+S 1990 0 0 0 0 0 1
+S 1991 0 0 0 0 0 0
+S 1992 0 0 0 1 1 0
+R 1992 period=4 high=2 tag=1
+S 1993 0 0 0 1 1 1
+H 1993 period=4 high=2 tag=1
+S 1994 0 0 0 0 0 1
+S 1995 0 0 0 1 1 0
+R 1995 period=3 high=2 tag=1
+S 1996 0 0 0 0 0 1
+H 1996 period=3 high=2 tag=1
+S 1997 0 0 0 1 1 0
+R 1997 period=2 high=1 tag=1
+S 1998 0 0 0 0 0 1
+H 1998 period=2 high=1 tag=1
+S 1999 0 0 0 1 1 0
+R 1999 period=2 high=1 tag=1
+S 2000 0 0 0 1 1 1
+H 2000 period=2 high=1 tag=1
+S 2001 0 0 0 0 0 1
+S 2002 0 0 0 1 1 0
+R 2002 period=3 high=2 tag=1
+S 2003 0 0 0 1 1 1
+H 2003 period=3 high=2 tag=1
+S 2005 0 0 0 0 0 1
+S 2006 0 0 0 1 1 0
+R 2006 period=4 high=3 tag=1
+S 2007 0 0 0 0 0 1
+H 2007 period=4 high=3 tag=1
+S 2008 0 0 0 1 1 0
+R 2008 period=2 high=1 tag=1
+S 2009 0 0 0 1 1 1
+H 2009 period=2 high=1 tag=1
+S 2011 0 0 0 0 0 1
+S 2012 0 0 0 1 1 0
+R 2012 period=4 high=3 tag=1
+S 2013 0 0 0 1 1 1
+H 2013 period=4 high=3 tag=1
+S 2014 0 0 0 0 0 1
+S 2015 0 0 0 1 1 0
+R 2015 period=3 high=2 tag=1
+S 2016 0 0 0 0 0 1
+H 2016 period=3 high=2 tag=1
+S 2017 0 0 0 0 0 0
+S 2019 0 0 0 1 1 0
+R 2019 period=4 high=1 tag=1
+S 2020 0 0 0 0 0 1
+H 2020 period=4 high=1 tag=1
+S 2021 0 0 0 1 1 0
+R 2021 period=2 high=1 tag=1
+S 2022 0 0 0 0 0 1
+H 2022 period=2 high=1 tag=1
+S 2023 0 0 0 1 1 0
+R 2023 period=2 high=1 tag=1
+S 2024 0 0 0 1 1 1
+H 2024 period=2 high=1 tag=1
+S 2025 0 0 0 0 0 1
+S 2026 0 0 0 0 0 0
+S 2027 0 0 0 1 1 0
+R 2027 period=4 high=2 tag=1
+S 2028 0 0 0 0 0 1
+H 2028 period=4 high=2 tag=1
+S 2029 0 0 0 0 0 0
+S 2030 0 0 0 1 1 0
+R 2030 period=3 high=1 tag=1
+S 2031 0 0 0 1 1 1
+H 2031 period=3 high=1 tag=1
+S 2032 0 0 0 0 0 1
+S 2033 0 0 0 1 1 0
+R 2033 period=3 high=2 tag=1
+S 2034 0 0 0 1 1 1
+H 2034 period=3 high=2 tag=1
+S 2035 0 0 0 0 0 1
+S 2036 0 0 0 0 0 0
+S 2037 0 0 0 1 1 0
+R 2037 period=4 high=2 tag=1
+S 2038 0 0 0 0 0 1
+H 2038 period=4 high=2 tag=1
+S 2039 0 0 0 1 1 0
+R 2039 period=2 high=1 tag=1
+S 2040 0 0 0 0 0 1
+H 2040 period=2 high=1 tag=1
+S 2041 0 0 0 1 1 0
+R 2041 period=2 high=1 tag=1
+S 2042 0 0 0 0 0 1
+H 2042 period=2 high=1 tag=1
+S 2043 0 0 0 0 0 0
+S 2044 0 0 0 1 1 0
+R 2044 period=3 high=1 tag=1
+S 2045 0 0 0 1 1 1
+H 2045 period=3 high=1 tag=1
+S 2048 0 0 0 0 0 1
+S 2049 0 0 0 0 0 0
+S 2051 0 0 0 1 1 0
+R 2051 period=7 high=4 tag=1
+S 2052 0 0 0 0 0 1
+H 2052 period=7 high=4 tag=1
+S 2053 0 0 0 1 1 0
+R 2053 period=2 high=1 tag=1
+S 2054 0 0 0 1 1 1
+H 2054 period=2 high=1 tag=1
+S 2055 0 0 0 0 0 1
+S 2056 0 0 0 1 1 0
+R 2056 period=3 high=2 tag=1
+S 2057 0 0 0 1 1 1
+H 2057 period=3 high=2 tag=1
+S 2058 0 0 0 0 0 1
+S 2059 0 0 0 1 1 0
+R 2059 period=3 high=2 tag=1
+S 2060 0 0 0 1 1 1
+H 2060 period=3 high=2 tag=1
+S 2063 0 0 0 0 0 1
+S 2064 0 0 0 1 1 0
+R 2064 period=5 high=4 tag=1
+S 2065 0 0 0 0 0 1
+H 2065 period=5 high=4 tag=1
+S 2066 0 0 0 1 1 0
+R 2066 period=2 high=1 tag=1
+S 2067 0 0 0 0 0 1
+H 2067 period=2 high=1 tag=1
+S 2068 0 0 0 0 0 0
+S 2071 0 0 0 1 1 0
+R 2071 period=5 high=1 tag=1
+S 2072 0 0 0 1 1 1
+H 2072 period=5 high=1 tag=1
+S 2073 0 0 0 0 0 1
+S 2074 0 0 0 1 1 0
+R 2074 period=3 high=2 tag=1
+S 2075 0 0 0 0 0 1
+H 2075 period=3 high=2 tag=1
+S 2076 0 0 0 1 1 0
+R 2076 period=2 high=1 tag=1
+S 2077 0 0 0 0 0 1
+H 2077 period=2 high=1 tag=1
+S 2078 0 0 0 1 1 0
+R 2078 period=2 high=1 tag=1
+S 2079 0 0 0 1 1 1
+H 2079 period=2 high=1 tag=1
+S 2080 0 0 0 0 0 1
+S 2081 0 0 0 0 0 0
+S 2082 0 0 0 1 1 0
+R 2082 period=4 high=2 tag=1
+S 2083 0 0 0 1 1 1
+H 2083 period=4 high=2 tag=1
+S 2086 0 0 0 0 0 1
+S 2087 0 0 0 1 1 0
+R 2087 period=5 high=4 tag=1
+S 2088 0 0 0 1 1 1
+H 2088 period=5 high=4 tag=1
+S 2090 0 0 0 0 0 1
+S 2091 0 0 0 0 0 0
+S 2092 0 0 0 1 1 0
+R 2092 period=5 high=3 tag=1
+S 2093 0 0 0 1 1 1
+H 2093 period=5 high=3 tag=1
+S 2094 0 0 0 0 0 1
+S 2095 0 0 0 1 1 0
+R 2095 period=3 high=2 tag=1
+S 2096 0 0 0 1 1 1
+H 2096 period=3 high=2 tag=1
+S 2097 0 0 0 0 0 1
+S 2098 0 0 0 1 1 0
+R 2098 period=3 high=2 tag=1
+S 2099 0 0 0 1 1 1
+H 2099 period=3 high=2 tag=1
+S 2102 0 0 0 0 0 1
+S 2103 0 0 0 0 0 0
+S 2105 0 0 0 1 1 0
+R 2105 period=7 high=4 tag=1
+S 2106 0 0 0 1 1 1
+H 2106 period=7 high=4 tag=1
+S 2110 0 0 0 0 0 1
+S 2111 0 0 0 1 1 0
+R 2111 period=6 high=5 tag=1
+S 2112 0 0 0 1 1 1
+H 2112 period=6 high=5 tag=1
+S 2113 0 0 0 0 0 1
+S 2114 0 0 0 1 1 0
+R 2114 period=3 high=2 tag=1
+S 2115 0 0 0 1 1 1
+H 2115 period=3 high=2 tag=1
+S 2117 0 0 0 0 0 1
+S 2118 0 0 0 0 0 0
+S 2119 0 0 0 1 1 0
+R 2119 period=5 high=3 tag=1
+S 2120 0 0 0 1 1 1
+H 2120 period=5 high=3 tag=1
+S 2121 0 0 0 0 0 1
+S 2122 0 0 0 0 0 0
+S 2123 0 0 0 1 1 0
+R 2123 period=4 high=2 tag=1
+S 2124 0 0 0 0 0 1
+H 2124 period=4 high=2 tag=1
+S 2125 0 0 0 0 0 0
+S 2129 0 0 0 1 1 0
+R 2129 period=6 high=1 tag=1
+S 2130 0 0 0 1 1 1
+H 2130 period=6 high=1 tag=1
+S 2131 0 0 0 0 0 1
+S 2132 0 0 0 0 0 0
+S 2134 0 0 0 1 1 0
+R 2134 period=5 high=2 tag=1
+S 2135 0 0 0 1 1 1
+H 2135 period=5 high=2 tag=1
+S 2137 0 0 0 0 0 1
+S 2138 0 0 0 1 1 0
+R 2138 period=4 high=3 tag=1
+S 2139 0 0 0 0 0 1
+H 2139 period=4 high=3 tag=1
+S 2140 0 0 0 0 0 0
+S 2142 0 0 0 1 1 0
+R 2142 period=4 high=1 tag=1
+S 2143 0 0 0 0 0 1
+H 2143 period=4 high=1 tag=1
+S 2144 0 0 0 0 0 0
+S 2145 0 0 0 1 1 0
+R 2145 period=3 high=1 tag=1
+S 2146 0 0 0 0 0 1
+H 2146 period=3 high=1 tag=1
+S 2147 0 0 0 0 0 0
+S 2148 0 0 0 1 1 0
+R 2148 period=3 high=1 tag=1
+S 2149 0 0 0 1 1 1
+H 2149 period=3 high=1 tag=1
+S 2150 0 0 0 0 0 1
+S 2151 0 0 0 1 1 0
+R 2151 period=3 high=2 tag=1
+S 2152 0 0 0 1 1 1
+H 2152 period=3 high=2 tag=1
+S 2153 0 0 0 0 0 1
+S 2154 0 0 0 1 1 0
+R 2154 period=3 high=2 tag=1
+S 2155 0 0 0 0 0 1
+H 2155 period=3 high=2 tag=1
+S 2156 0 0 0 0 0 0
+S 2157 0 0 0 1 1 0
+R 2157 period=3 high=1 tag=1
+S 2158 0 0 0 0 0 1
+H 2158 period=3 high=1 tag=1
+S 2159 0 0 0 1 1 0
+R 2159 period=2 high=1 tag=1
+S 2160 0 0 0 0 0 1
+H 2160 period=2 high=1 tag=1
+S 2161 0 0 0 0 0 0
+S 2162 0 0 0 1 1 0
+R 2162 period=3 high=1 tag=1
+S 2163 0 0 0 1 1 1
+H 2163 period=3 high=1 tag=1
+S 2165 0 0 0 0 0 1
+S 2166 0 0 0 0 0 0
+S 2168 0 0 0 1 1 0
+R 2168 period=6 high=3 tag=1
+S 2169 0 0 0 1 1 1
+H 2169 period=6 high=3 tag=1
+S 2170 0 0 0 0 0 1
+S 2171 0 0 0 0 0 0
+S 2173 0 0 0 1 1 0
+R 2173 period=5 high=2 tag=1
+S 2174 0 0 0 1 1 1
+H 2174 period=5 high=2 tag=1
+S 2175 0 0 0 0 0 1
+S 2176 0 0 0 0 0 0
+S 2177 0 0 0 1 1 0
+R 2177 period=4 high=2 tag=1
+S 2178 0 0 0 1 1 1
+H 2178 period=4 high=2 tag=1
+S 2181 0 0 0 0 0 1
+S 2182 0 0 0 1 1 0
+R 2182 period=5 high=4 tag=1
+S 2183 0 0 0 0 0 1
+H 2183 period=5 high=4 tag=1
+S 2184 0 0 0 1 1 0
+R 2184 period=2 high=1 tag=1
+S 2185 0 0 0 0 0 1
+H 2185 period=2 high=1 tag=1
+S 2186 0 0 0 1 1 0
+R 2186 period=2 high=1 tag=1
+S 2187 0 0 0 1 1 1
+H 2187 period=2 high=1 tag=1
+S 2188 0 0 0 0 0 1
+S 2189 0 0 0 0 0 0
+S 2190 0 0 0 1 1 0
+R 2190 period=4 high=2 tag=1
+S 2191 0 0 0 1 1 1
+H 2191 period=4 high=2 tag=1
+S 2192 0 0 0 0 0 1
+S 2193 0 0 0 1 1 0
+R 2193 period=3 high=2 tag=1
+S 2194 0 0 0 0 0 1
+H 2194 period=3 high=2 tag=1
+S 2195 0 0 0 1 1 0
+R 2195 period=2 high=1 tag=1
+S 2196 0 0 0 1 1 1
+H 2196 period=2 high=1 tag=1
+S 2197 0 0 0 0 0 1
+S 2198 0 0 0 1 1 0
+R 2198 period=3 high=2 tag=1
+S 2199 0 0 0 0 0 1
+H 2199 period=3 high=2 tag=1
+S 2200 0 0 0 1 1 0
+R 2200 period=2 high=1 tag=1
+S 2201 0 0 0 1 1 1
+H 2201 period=2 high=1 tag=1
+S 2203 0 0 0 0 0 1
+S 2204 0 0 0 0 0 0
+S 2205 0 0 0 1 1 0
+R 2205 period=5 high=3 tag=1
+S 2206 0 0 0 1 1 1
+H 2206 period=5 high=3 tag=1
+S 2207 0 0 0 0 0 1
+S 2208 0 0 0 0 0 0
+S 2210 0 0 0 1 1 0
+R 2210 period=5 high=2 tag=1
+S 2211 0 0 0 0 0 1
+H 2211 period=5 high=2 tag=1
+S 2212 0 0 0 1 1 0
+R 2212 period=2 high=1 tag=1
+S 2213 0 0 0 0 0 1
+H 2213 period=2 high=1 tag=1
+S 2214 0 0 0 0 0 0
+S 2215 0 0 0 1 1 0
+R 2215 period=3 high=1 tag=1
+S 2216 0 0 0 0 0 1
+H 2216 period=3 high=1 tag=1
+S 2217 0 0 0 0 0 0
+S 2219 0 0 0 1 1 0
+R 2219 period=4 high=1 tag=1
+S 2220 0 0 0 0 0 1
+H 2220 period=4 high=1 tag=1
+S 2221 0 0 0 1 1 0
+R 2221 period=2 high=1 tag=1
+S 2222 0 0 0 1 1 1
+H 2222 period=2 high=1 tag=1
+S 2223 0 0 0 0 0 1
+S 2224 0 0 0 0 0 0
+S 2225 0 0 0 1 1 0
+R 2225 period=4 high=2 tag=1
+S 2226 0 0 0 1 1 1
+H 2226 period=4 high=2 tag=1
+S 2227 0 0 0 0 0 1
+S 2228 0 0 0 1 1 0
+R 2228 period=3 high=2 tag=1
+S 2229 0 0 0 1 1 1
+H 2229 period=3 high=2 tag=1
+S 2231 0 0 0 0 0 1
+S 2232 0 0 0 1 1 0
+R 2232 period=4 high=3 tag=1
+S 2233 0 0 0 0 0 1
+H 2233 period=4 high=3 tag=1
+S 2234 0 0 0 1 1 0
+R 2234 period=2 high=1 tag=1
+S 2235 0 0 0 1 1 1
+H 2235 period=2 high=1 tag=1
+S 2236 0 0 0 0 0 1
+S 2237 0 0 0 1 1 0
+R 2237 period=3 high=2 tag=1
+S 2238 0 0 0 0 0 1
+H 2238 period=3 high=2 tag=1
+S 2239 0 0 0 1 1 0
+R 2239 period=2 high=1 tag=1
+S 2240 0 0 0 1 1 1
+H 2240 period=2 high=1 tag=1
+S 2244 0 0 0 0 0 1
+S 2245 0 0 0 1 1 0
+R 2245 period=6 high=5 tag=1
+S 2246 0 0 0 1 1 1
+H 2246 period=6 high=5 tag=1
+S 2247 0 0 0 0 0 1
+S 2248 0 0 0 0 0 0
+S 2250 0 0 0 1 1 0
+R 2250 period=5 high=2 tag=1
+S 2251 0 0 0 1 1 1
+H 2251 period=5 high=2 tag=1
+S 2254 0 0 0 0 0 1
+S 2255 0 0 0 1 1 0
+R 2255 period=5 high=4 tag=1
+S 2256 0 0 0 0 0 1
+H 2256 period=5 high=4 tag=1
+S 2257 0 0 0 1 1 0
+R 2257 period=2 high=1 tag=1
+S 2258 0 0 0 0 0 1
+H 2258 period=2 high=1 tag=1
+S 2259 0 0 0 0 0 0
+S 2260 0 0 0 1 1 0
+R 2260 period=3 high=1 tag=1
+S 2261 0 0 0 1 1 1
+H 2261 period=3 high=1 tag=1
+S 2262 0 0 0 0 0 1
+S 2263 0 0 0 0 0 0
+S 2265 0 0 0 1 1 0
+R 2265 period=5 high=2 tag=1
+S 2266 0 0 0 0 0 1
+H 2266 period=5 high=2 tag=1
+S 2267 0 0 0 1 1 0
+R 2267 period=2 high=1 tag=1
+S 2268 0 0 0 0 0 1
+H 2268 period=2 high=1 tag=1
+S 2269 0 0 0 0 0 0
+S 2271 0 0 0 1 1 0
+R 2271 period=4 high=1 tag=1
+S 2272 0 0 0 1 1 1
+H 2272 period=4 high=1 tag=1
+S 2273 0 0 0 0 0 1
+S 2274 0 0 0 1 1 0
+R 2274 period=3 high=2 tag=1
+S 2275 0 0 0 1 1 1
+H 2275 period=3 high=2 tag=1
+S 2276 0 0 0 0 0 1
+S 2277 0 0 0 1 1 0
+R 2277 period=3 high=2 tag=1
+S 2278 0 0 0 0 0 1
+H 2278 period=3 high=2 tag=1
+S 2279 0 0 0 0 0 0
+S 2284 0 0 0 1 1 0
+R 2284 period=7 high=1 tag=1
+S 2285 0 0 0 0 0 1
+H 2285 period=7 high=1 tag=1
+S 2286 0 0 0 1 1 0
+R 2286 period=2 high=1 tag=1
+S 2287 0 0 0 1 1 1
+H 2287 period=2 high=1 tag=1
+S 2288 0 0 0 0 0 1
+S 2289 0 0 0 1 1 0
+R 2289 period=3 high=2 tag=1
+S 2290 0 0 0 1 1 1
+H 2290 period=3 high=2 tag=1
+S 2291 0 0 0 0 0 1
+S 2292 0 0 0 0 0 0
+S 2294 0 0 0 1 1 0
+R 2294 period=5 high=2 tag=1
+S 2295 0 0 0 1 1 1
+H 2295 period=5 high=2 tag=1
+S 2297 0 0 0 0 0 1
+S 2298 0 0 0 1 1 0
+R 2298 period=4 high=3 tag=1
+S 2299 0 0 0 1 1 1
+H 2299 period=4 high=3 tag=1
+S 2300 0 0 0 0 0 1
+S 2301 0 0 0 1 1 0
+R 2301 period=3 high=2 tag=1
+S 2302 0 0 0 1 1 1
+H 2302 period=3 high=2 tag=1
+S 2305 0 0 0 0 0 1
+S 2306 0 0 0 1 1 0
+R 2306 period=5 high=4 tag=1
+S 2307 0 0 0 0 0 1
+H 2307 period=5 high=4 tag=1
+S 2308 0 0 0 0 0 0
+S 2311 0 0 0 1 1 0
+R 2311 period=5 high=1 tag=1
+S 2312 0 0 0 0 0 1
+H 2312 period=5 high=1 tag=1
+S 2313 0 0 0 1 1 0
+R 2313 period=2 high=1 tag=1
+S 2314 0 0 0 1 1 1
+H 2314 period=2 high=1 tag=1
+S 2315 0 0 0 0 0 1
+S 2316 0 0 0 1 1 0
+R 2316 period=3 high=2 tag=1
+S 2317 0 0 0 0 0 1
+H 2317 period=3 high=2 tag=1
+S 2318 0 0 0 1 1 0
+R 2318 period=2 high=1 tag=1
+S 2319 0 0 0 0 0 1
+H 2319 period=2 high=1 tag=1
+S 2320 0 0 0 0 0 0
+S 2322 0 0 0 1 1 0
+R 2322 period=4 high=1 tag=1
+S 2323 0 0 0 0 0 1
+H 2323 period=4 high=1 tag=1
+S 2324 0 0 0 0 0 0
+S 2325 0 0 0 1 1 0
+R 2325 period=3 high=1 tag=1
+S 2326 0 0 0 1 1 1
+H 2326 period=3 high=1 tag=1
+S 2328 0 0 0 0 0 1
+S 2329 0 0 0 1 1 0
+R 2329 period=4 high=3 tag=1
+S 2330 0 0 0 0 0 1
+H 2330 period=4 high=3 tag=1
+S 2331 0 0 0 0 0 0
+S 2334 0 0 0 1 1 0
+R 2334 period=5 high=1 tag=1
+S 2335 0 0 0 1 1 1
+H 2335 period=5 high=1 tag=1
+S 2336 0 0 0 0 0 1
+S 2337 0 0 0 1 1 0
+R 2337 period=3 high=2 tag=1
+S 2338 0 0 0 1 1 1
+H 2338 period=3 high=2 tag=1
+S 2339 0 0 0 0 0 1
+S 2340 0 0 0 0 0 0
+S 2343 0 0 0 1 1 0
+R 2343 period=6 high=2 tag=1
+S 2344 0 0 0 0 0 1
+H 2344 period=6 high=2 tag=1
+S 2345 0 0 0 0 0 0
+S 2346 0 0 0 1 1 0
+R 2346 period=3 high=1 tag=1
+S 2347 0 0 0 0 0 1
+H 2347 period=3 high=1 tag=1
+S 2348 0 0 0 1 1 0
+R 2348 period=2 high=1 tag=1
+S 2349 0 0 0 0 0 1
+H 2349 period=2 high=1 tag=1
+S 2350 0 0 0 0 0 0
+S 2351 0 0 0 1 1 0
+R 2351 period=3 high=1 tag=1
+S 2352 0 0 0 1 1 1
+H 2352 period=3 high=1 tag=1
+S 2353 0 0 0 0 0 1
+S 2354 0 0 0 0 0 0
+S 2356 0 0 0 1 1 0
+R 2356 period=5 high=2 tag=1
+S 2357 0 0 0 1 1 1
+H 2357 period=5 high=2 tag=1
+S 2359 0 0 0 0 0 1
+S 2360 0 0 0 0 0 0
+S 2361 0 0 0 1 1 0
+R 2361 period=5 high=3 tag=1
+S 2362 0 0 0 1 1 1
+H 2362 period=5 high=3 tag=1
+S 2363 0 0 0 0 0 1
+S 2364 0 0 0 1 1 0
+R 2364 period=3 high=2 tag=1
+S 2365 0 0 0 0 0 1
+H 2365 period=3 high=2 tag=1
+S 2366 0 0 0 0 0 0
+S 2367 0 0 0 1 1 0
+R 2367 period=3 high=1 tag=1
+S 2368 0 0 0 0 0 1
+H 2368 period=3 high=1 tag=1
+S 2369 0 0 0 0 0 0
+S 2373 0 0 0 1 1 0
+R 2373 period=6 high=1 tag=1
+S 2374 0 0 0 0 0 1
+H 2374 period=6 high=1 tag=1
+S 2375 0 0 0 0 0 0
+S 2379 0 0 0 1 1 0
+R 2379 period=6 high=1 tag=1
+S 2380 0 0 0 1 1 1
+H 2380 period=6 high=1 tag=1
+S 2381 0 0 0 0 0 1
+S 2382 0 0 0 1 1 0
+R 2382 period=3 high=2 tag=1
+S 2383 0 0 0 1 1 1
+H 2383 period=3 high=2 tag=1
+S 2384 0 0 0 0 0 1
+S 2385 0 0 0 1 1 0
+R 2385 period=3 high=2 tag=1
+S 2386 0 0 0 0 0 1
+H 2386 period=3 high=2 tag=1
+S 2387 0 0 0 1 1 0
+R 2387 period=2 high=1 tag=1
+S 2388 0 0 0 0 0 1
+H 2388 period=2 high=1 tag=1
+S 2389 0 0 0 1 1 0
+R 2389 period=2 high=1 tag=1
+S 2390 0 0 0 0 0 1
+H 2390 period=2 high=1 tag=1
+S 2391 0 0 0 1 1 0
+R 2391 period=2 high=1 tag=1
+S 2392 0 0 0 1 1 1
+H 2392 period=2 high=1 tag=1
+S 2397 0 0 0 0 0 1
+S 2398 0 0 0 1 1 0
+R 2398 period=7 high=6 tag=1
+S 2399 0 0 0 0 0 1
+H 2399 period=7 high=6 tag=1
+S 2400 0 0 0 1 1 0
+R 2400 period=2 high=1 tag=1
+S 2401 0 0 0 0 0 1
+H 2401 period=2 high=1 tag=1
+S 2402 0 0 0 0 0 0
+S 2404 0 0 0 1 1 0
+R 2404 period=4 high=1 tag=1
+S 2405 0 0 0 1 1 1
+H 2405 period=4 high=1 tag=1
+S 2406 0 0 0 0 0 1
+S 2407 0 0 0 0 0 0
+S 2409 0 0 0 1 1 0
+R 2409 period=5 high=2 tag=1
+S 2410 0 0 0 1 1 1
+H 2410 period=5 high=2 tag=1
+S 2411 0 0 0 0 0 1
+S 2412 0 0 0 0 0 0
+S 2413 0 0 0 1 1 0
+R 2413 period=4 high=2 tag=1
+S 2414 0 0 0 1 1 1
+H 2414 period=4 high=2 tag=1
+S 2415 0 0 0 0 0 1
+S 2416 0 0 0 0 0 0
+S 2418 0 0 0 1 1 0
+R 2418 period=5 high=2 tag=1
+S 2419 0 0 0 0 0 1
+H 2419 period=5 high=2 tag=1
+S 2420 0 0 0 0 0 0
+S 2421 0 0 0 1 1 0
+R 2421 period=3 high=1 tag=1
+S 2422 0 0 0 0 0 1
+H 2422 period=3 high=1 tag=1
+S 2423 0 0 0 0 0 0
+S 2424 0 0 0 1 1 0
+R 2424 period=3 high=1 tag=1
+S 2425 0 0 0 0 0 1
+H 2425 period=3 high=1 tag=1
+S 2426 0 0 0 1 1 0
+R 2426 period=2 high=1 tag=1
+S 2427 0 0 0 1 1 1
+H 2427 period=2 high=1 tag=1
+S 2429 0 0 0 0 0 1
+S 2430 0 0 0 0 0 0
+S 2431 0 0 0 1 1 0
+R 2431 period=5 high=3 tag=1
+S 2432 0 0 0 1 1 1
+H 2432 period=5 high=3 tag=1
+S 2433 0 0 0 0 0 1
+S 2434 0 0 0 1 1 0
+R 2434 period=3 high=2 tag=1
+S 2435 0 0 0 0 0 1
+H 2435 period=3 high=2 tag=1
+S 2436 0 0 0 1 1 0
+R 2436 period=2 high=1 tag=1
+S 2437 0 0 0 0 0 1
+H 2437 period=2 high=1 tag=1
+S 2438 0 0 0 1 1 0
+R 2438 period=2 high=1 tag=1
+S 2439 0 0 0 1 1 1
+H 2439 period=2 high=1 tag=1
+S 2444 0 0 0 0 0 1
+S 2445 0 0 0 0 0 0
+S 2448 0 0 0 1 1 0
+R 2448 period=10 high=6 tag=1
+S 2449 0 0 0 0 0 1
+H 2449 period=10 high=6 tag=1
+S 2450 0 0 0 1 1 0
+R 2450 period=2 high=1 tag=1
+S 2451 0 0 0 1 1 1
+H 2451 period=2 high=1 tag=1
+S 2452 0 0 0 0 0 1
+S 2453 0 0 0 1 1 0
+R 2453 period=3 high=2 tag=1
+S 2454 0 0 0 0 0 1
+H 2454 period=3 high=2 tag=1
+S 2455 0 0 0 1 1 0
+R 2455 period=2 high=1 tag=1
+S 2456 0 0 0 1 1 1
+H 2456 period=2 high=1 tag=1
+S 2457 0 0 0 0 0 1
+S 2458 0 0 0 1 1 0
+R 2458 period=3 high=2 tag=1
+S 2459 0 0 0 0 0 1
+H 2459 period=3 high=2 tag=1
+S 2460 0 0 0 1 1 0
+R 2460 period=2 high=1 tag=1
+S 2461 0 0 0 0 0 1
+H 2461 period=2 high=1 tag=1
+S 2462 0 0 0 0 0 0
+S 2465 0 0 0 1 1 0
+R 2465 period=5 high=1 tag=1
+S 2466 0 0 0 0 0 1
+H 2466 period=5 high=1 tag=1
+S 2467 0 0 0 1 1 0
+R 2467 period=2 high=1 tag=1
+S 2468 0 0 0 0 0 1
+H 2468 period=2 high=1 tag=1
+S 2469 0 0 0 1 1 0
+R 2469 period=2 high=1 tag=1
+S 2470 0 0 0 1 1 1
+H 2470 period=2 high=1 tag=1
+S 2472 0 0 0 0 0 1
+S 2473 0 0 0 1 1 0
+R 2473 period=4 high=3 tag=1
+S 2474 0 0 0 0 0 1
+H 2474 period=4 high=3 tag=1
+S 2475 0 0 0 1 1 0
+R 2475 period=2 high=1 tag=1
+S 2476 0 0 0 1 1 1
+H 2476 period=2 high=1 tag=1
+S 2479 0 0 0 0 0 1
+S 2480 0 0 0 1 1 0
+R 2480 period=5 high=4 tag=1
+S 2481 0 0 0 1 1 1
+H 2481 period=5 high=4 tag=1
+S 2482 0 0 0 0 0 1
+S 2483 0 0 0 0 0 0
+S 2485 0 0 0 1 1 0
+R 2485 period=5 high=2 tag=1
+S 2486 0 0 0 1 1 1
+H 2486 period=5 high=2 tag=1
+S 2487 0 0 0 0 0 1
+S 2488 0 0 0 0 0 0
+S 2489 0 0 0 1 1 0
+R 2489 period=4 high=2 tag=1
+S 2490 0 0 0 0 0 1
+H 2490 period=4 high=2 tag=1
+S 2491 0 0 0 0 0 0
+S 2493 0 0 0 1 1 0
+R 2493 period=4 high=1 tag=1
+S 2494 0 0 0 1 1 1
+H 2494 period=4 high=1 tag=1
+S 2496 0 0 0 0 0 1
+S 2497 0 0 0 1 1 0
+R 2497 period=4 high=3 tag=1
+S 2498 0 0 0 0 0 1
+H 2498 period=4 high=3 tag=1
+S 2499 0 0 0 1 1 0
+R 2499 period=2 high=1 tag=1
+S 2500 0 0 0 0 0 1
+H 2500 period=2 high=1 tag=1
+S 2501 0 0 0 0 0 0
+S 2505 0 0 0 1 1 0
+R 2505 period=6 high=1 tag=1
+S 2506 0 0 0 1 1 1
+H 2506 period=6 high=1 tag=1
+S 2507 0 0 0 0 0 1
+S 2508 0 0 0 1 1 0
+R 2508 period=3 high=2 tag=1
+S 2509 0 0 0 0 0 1
+H 2509 period=3 high=2 tag=1
+S 2510 0 0 0 0 0 0
+S 2511 0 0 0 1 1 0
+R 2511 period=3 high=1 tag=1
+S 2512 0 0 0 0 0 1
+H 2512 period=3 high=1 tag=1
+S 2513 0 0 0 0 0 0
+S 2515 0 0 0 1 1 0
+R 2515 period=4 high=1 tag=1
+S 2516 0 0 0 0 0 1
+H 2516 period=4 high=1 tag=1
+S 2517 0 0 0 1 1 0
+R 2517 period=2 high=1 tag=1
+S 2518 0 0 0 0 0 1
+H 2518 period=2 high=1 tag=1
+S 2519 0 0 0 0 0 0
+S 2525 0 0 1 1 1 0
+S 2526 0 0 0 0 0 1
+S 2527 0 0 0 1 1 0
+S 2528 0 0 0 0 0 1
+S 2529 0 0 0 0 0 0
+S 2530 0 0 0 1 1 0
+R 2530 period=3 high=1 tag=1
+S 2531 0 0 0 0 0 1
+H 2531 period=3 high=1 tag=1
+S 2532 0 0 0 1 1 0
+R 2532 period=2 high=1 tag=1
+S 2533 0 0 0 0 0 1
+H 2533 period=2 high=1 tag=1
+S 2534 0 0 0 1 1 0
+R 2534 period=2 high=1 tag=1
+S 2535 0 0 0 1 1 1
+H 2535 period=2 high=1 tag=1
+S 2536 0 0 0 0 0 1
+S 2537 0 0 0 1 1 0
+R 2537 period=3 high=2 tag=1
+S 2538 0 0 0 0 0 1
+H 2538 period=3 high=2 tag=1
+S 2539 0 0 0 0 0 0
+S 2540 0 0 0 1 1 0
+R 2540 period=3 high=1 tag=1
+S 2541 0 0 0 1 1 1
+H 2541 period=3 high=1 tag=1
+S 2542 0 0 0 0 0 1
+S 2543 0 0 0 0 0 0
+S 2552 0 0 1 1 1 0
+S 2553 0 0 0 1 1 1
+S 2555 0 0 0 0 0 1
+S 2556 0 0 0 0 0 0
+S 2563 0 0 1 1 1 0
+S 2564 0 1 0 0 0 1
+S 2565 0 0 0 1 1 0
+S 2566 0 0 0 0 0 1
+S 2567 0 0 0 0 0 0
+S 2569 0 0 0 1 1 0
+S 2570 0 0 0 1 1 1
+S 2571 0 0 0 0 0 1
+S 2572 0 0 0 0 0 0
+S 2573 0 0 0 1 1 0
+S 2574 0 0 0 0 0 1
+S 2575 0 0 0 0 0 0
+S 2576 0 0 0 1 1 0
+S 2577 0 0 0 1 1 1
+S 2578 0 0 0 0 0 1
+S 2579 0 0 0 1 1 0
+S 2580 0 0 0 1 1 1
+S 2581 0 0 0 0 0 1
+S 2582 0 0 0 1 1 0
+S 2583 0 0 0 1 1 1
+S 2585 0 0 0 0 0 1
+S 2586 0 0 0 0 0 0
+S 2587 0 0 0 1 1 0
+S 2588 0 0 0 1 1 1
+S 2589 0 0 0 0 0 1
+S 2590 0 0 0 1 1 0
+S 2591 0 0 0 0 0 1
+S 2592 0 0 0 0 0 0
+S 2597 0 0 0 1 1 0
+S 2598 0 0 0 0 0 1
+S 2599 0 0 0 0 0 0
+S 2604 0 0 0 1 1 0
+S 2605 0 0 0 1 1 1
+S 2607 0 0 0 0 0 1
+S 2608 0 0 0 0 0 0
+S 2610 0 0 0 1 1 0
+S 2611 0 0 0 0 0 1
+S 2612 0 0 0 1 1 0
+S 2613 0 0 0 1 1 1
+S 2617 0 0 0 0 0 1
+S 2618 0 0 0 1 1 0
+S 2619 0 0 0 1 1 1
+S 2621 0 0 0 0 0 1
+S 2622 0 0 0 0 0 0
+S 2626 0 0 0 1 1 0
+S 2627 0 0 0 0 0 1
+S 2628 0 0 0 0 0 0
+S 2629 0 0 0 1 1 0
+S 2630 0 0 0 1 1 1
+S 2631 0 0 0 0 0 1
+S 2632 0 0 0 0 0 0
+S 2634 0 0 0 1 1 0
+S 2635 0 0 0 0 0 1
+S 2636 0 0 0 1 1 0
+S 2637 0 0 0 1 1 1
+S 2638 0 0 0 0 0 1
+S 2639 0 0 0 1 1 0
+S 2640 0 0 0 0 0 1
+S 2641 0 0 0 0 0 0
+S 2644 0 0 0 1 1 0
+S 2645 0 0 0 0 0 1
+S 2646 0 0 0 0 0 0
+S 2647 0 0 0 1 1 0
+S 2648 0 0 0 1 1 1
+S 2649 0 0 0 0 0 1
+S 2650 0 0 0 0 0 0
+S 2656 0 0 1 1 1 0
+S 2657 0 0 0 1 1 1
+S 2658 0 0 0 0 0 1
+S 2659 0 0 0 0 0 0
+S 2662 0 0 0 1 1 0
+S 2663 0 0 0 1 1 1
+S 2664 0 0 0 0 0 1
+S 2665 0 0 0 1 1 0
+R 2665 period=3 high=2 tag=1
+S 2666 0 0 0 1 1 1
+H 2666 period=3 high=2 tag=1
+S 2667 0 0 0 0 0 1
+S 2668 0 0 0 0 0 0
+S 2670 0 0 0 1 1 0
+R 2670 period=5 high=2 tag=1
+S 2671 0 0 0 0 0 1
+H 2671 period=5 high=2 tag=1
+S 2672 0 0 0 1 1 0
+R 2672 period=2 high=1 tag=1
+S 2673 0 0 0 1 1 1
+H 2673 period=2 high=1 tag=1
+S 2674 0 0 0 0 0 1
+S 2675 0 0 0 1 1 0
+R 2675 period=3 high=2 tag=1
+S 2676 0 0 0 0 0 1
+H 2676 period=3 high=2 tag=1
+S 2677 0 0 0 1 1 0
+R 2677 period=2 high=1 tag=1
+S 2678 0 0 0 0 0 1
+H 2678 period=2 high=1 tag=1
+S 2679 0 0 0 1 1 0
+R 2679 period=2 high=1 tag=1
+S 2680 0 0 0 0 0 1
+H 2680 period=2 high=1 tag=1
+S 2681 0 0 0 1 1 0
+R 2681 period=2 high=1 tag=1
+S 2682 0 0 0 1 1 1
+H 2682 period=2 high=1 tag=1
+S 2683 0 0 0 0 0 1
+S 2684 0 0 0 0 0 0
+S 2685 0 0 0 1 1 0
+R 2685 period=4 high=2 tag=1
+S 2686 0 0 0 1 1 1
+H 2686 period=4 high=2 tag=1
+S 2688 0 0 0 0 0 1
+S 2689 0 0 0 0 0 0
+S 2692 0 0 0 1 1 0
+R 2692 period=7 high=3 tag=1
+S 2693 0 0 0 1 1 1
+H 2693 period=7 high=3 tag=1
+S 2694 0 0 0 0 0 1
+S 2695 0 0 0 1 1 0
+R 2695 period=3 high=2 tag=1
+S 2696 0 0 0 1 1 1
+H 2696 period=3 high=2 tag=1
+S 2697 0 0 0 0 0 1
+S 2698 0 0 0 0 0 0
+S 2699 0 0 0 1 1 0
+R 2699 period=4 high=2 tag=1
+S 2700 0 0 0 1 1 1
+H 2700 period=4 high=2 tag=1
+S 2704 0 0 0 0 0 1
+S 2705 0 0 0 0 0 0
+S 2708 0 0 0 1 1 0
+R 2708 period=9 high=5 tag=1
+S 2709 0 0 0 1 1 1
+H 2709 period=9 high=5 tag=1
+S 2710 0 0 0 0 0 1
+S 2711 0 0 0 0 0 0
+S 2713 0 0 0 1 1 0
+R 2713 period=5 high=2 tag=1
+S 2714 0 0 0 1 1 1
+H 2714 period=5 high=2 tag=1
+S 2716 0 0 0 0 0 1
+S 2717 0 0 0 1 1 0
+R 2717 period=4 high=3 tag=1
+S 2718 0 0 0 1 1 1
+H 2718 period=4 high=3 tag=1
+S 2720 0 0 0 0 0 1
+S 2721 0 0 0 0 0 0
+S 2722 0 0 0 1 1 0
+R 2722 period=5 high=3 tag=1
+S 2723 0 0 0 0 0 1
+H 2723 period=5 high=3 tag=1
+S 2724 0 0 0 1 1 0
+R 2724 period=2 high=1 tag=1
+S 2725 0 0 0 1 1 1
+H 2725 period=2 high=1 tag=1
+S 2726 0 0 0 0 0 1
+S 2727 0 0 0 0 0 0
+S 2728 0 0 0 1 1 0
+R 2728 period=4 high=2 tag=1
+S 2729 0 0 0 1 1 1
+H 2729 period=4 high=2 tag=1
+S 2731 0 0 0 0 0 1
+S 2732 0 0 0 0 0 0
+S 2733 0 0 0 1 1 0
+R 2733 period=5 high=3 tag=1
+S 2734 0 0 0 0 0 1
+H 2734 period=5 high=3 tag=1
+S 2735 0 0 0 1 1 0
+R 2735 period=2 high=1 tag=1
+S 2736 0 0 0 0 0 1
+H 2736 period=2 high=1 tag=1
+S 2737 0 0 0 0 0 0
+S 2739 0 0 0 1 1 0
+R 2739 period=4 high=1 tag=1
+S 2740 0 0 0 1 1 1
+H 2740 period=4 high=1 tag=1
+S 2741 0 0 0 0 0 1
+S 2742 0 0 0 1 1 0
+R 2742 period=3 high=2 tag=1
+S 2743 0 0 0 1 1 1
+H 2743 period=3 high=2 tag=1
+S 2746 0 0 0 0 0 1
+S 2747 0 0 0 1 1 0
+R 2747 period=5 high=4 tag=1
+S 2748 0 0 0 1 1 1
+H 2748 period=5 high=4 tag=1
+S 2750 0 0 0 0 0 1
+S 2751 0 0 0 1 1 0
+R 2751 period=4 high=3 tag=1
+S 2752 0 0 0 0 0 1
+H 2752 period=4 high=3 tag=1
+S 2753 0 0 0 1 1 0
+R 2753 period=2 high=1 tag=1
+S 2754 0 0 0 0 0 1
+H 2754 period=2 high=1 tag=1
+S 2755 0 0 0 0 0 0
+S 2756 0 0 0 1 1 0
+R 2756 period=3 high=1 tag=1
+S 2757 0 0 0 1 1 1
+H 2757 period=3 high=1 tag=1
+S 2758 0 0 0 0 0 1
+S 2759 0 0 0 1 1 0
+R 2759 period=3 high=2 tag=1
+S 2760 0 0 0 0 0 1
+H 2760 period=3 high=2 tag=1
+S 2761 0 0 0 1 1 0
+R 2761 period=2 high=1 tag=1
+S 2762 0 0 0 1 1 1
+H 2762 period=2 high=1 tag=1
+S 2763 0 0 0 0 0 1
+S 2764 0 0 0 0 0 0
+S 2766 0 0 0 1 1 0
+R 2766 period=5 high=2 tag=1
+S 2767 0 0 0 1 1 1
+H 2767 period=5 high=2 tag=1
+S 2768 0 0 0 0 0 1
+S 2769 0 0 0 0 0 0
+S 2770 0 0 0 1 1 0
+R 2770 period=4 high=2 tag=1
+S 2771 0 0 0 1 1 1
+H 2771 period=4 high=2 tag=1
+S 2775 0 0 0 0 0 1
+S 2776 0 0 0 0 0 0
+S 2777 0 0 0 1 1 0
+R 2777 period=7 high=5 tag=1
+S 2778 0 0 0 0 0 1
+H 2778 period=7 high=5 tag=1
+S 2779 0 0 0 1 1 0
+R 2779 period=2 high=1 tag=1
+S 2780 0 0 0 0 0 1
+H 2780 period=2 high=1 tag=1
+S 2781 0 0 0 1 1 0
+R 2781 period=2 high=1 tag=1
+S 2782 0 0 0 1 1 1
+H 2782 period=2 high=1 tag=1
+S 2783 0 0 0 0 0 1
+S 2784 0 0 0 0 0 0
+S 2785 0 0 0 1 1 0
+R 2785 period=4 high=2 tag=1
+S 2786 0 0 0 1 1 1
+H 2786 period=4 high=2 tag=1
+S 2787 0 0 0 0 0 1
+S 2788 0 0 0 1 1 0
+R 2788 period=3 high=2 tag=1
+S 2789 0 0 0 1 1 1
+H 2789 period=3 high=2 tag=1
+S 2790 0 0 0 0 0 1
+S 2791 0 0 0 0 0 0
+S 2792 0 0 0 1 1 0
+R 2792 period=4 high=2 tag=1
+S 2793 0 0 0 1 1 1
+H 2793 period=4 high=2 tag=1
+S 2794 0 0 0 0 0 1
+S 2795 0 0 0 0 0 0
+S 2796 0 0 0 1 1 0
+R 2796 period=4 high=2 tag=1
+S 2797 0 0 0 1 1 1
+H 2797 period=4 high=2 tag=1
+S 2799 0 0 0 0 0 1
+S 2800 0 0 0 1 1 0
+R 2800 period=4 high=3 tag=1
+S 2801 0 0 0 0 0 1
+H 2801 period=4 high=3 tag=1
+S 2802 0 0 0 0 0 0
+S 2805 0 0 0 1 1 0
+R 2805 period=5 high=1 tag=1
+S 2806 0 0 0 0 0 1
+H 2806 period=5 high=1 tag=1
+S 2807 0 0 0 0 0 0
+S 2808 0 0 0 1 1 0
+R 2808 period=3 high=1 tag=1
+S 2809 0 0 0 0 0 1
+H 2809 period=3 high=1 tag=1
+S 2810 0 0 0 0 0 0
+S 2813 0 0 0 1 1 0
+R 2813 period=5 high=1 tag=1
+S 2814 0 0 0 1 1 1
+H 2814 period=5 high=1 tag=1
+S 2816 0 0 0 0 0 1
+S 2817 0 0 0 0 0 0
+S 2819 0 0 0 1 1 0
+R 2819 period=6 high=3 tag=1
+S 2820 0 0 0 1 1 1
+H 2820 period=6 high=3 tag=1
+S 2823 0 0 0 0 0 1
+S 2824 0 0 0 0 0 0
+S 2825 0 0 0 1 1 0
+R 2825 period=6 high=4 tag=1
+S 2826 0 0 0 1 1 1
+H 2826 period=6 high=4 tag=1
+S 2830 0 0 0 0 0 1
+S 2831 0 0 0 1 1 0
+R 2831 period=6 high=5 tag=1
+S 2832 0 0 0 0 0 1
+H 2832 period=6 high=5 tag=1
+S 2833 0 0 0 1 1 0
+R 2833 period=2 high=1 tag=1
+S 2834 0 0 0 1 1 1
+H 2834 period=2 high=1 tag=1
+S 2837 0 0 0 0 0 1
+S 2838 0 0 0 1 1 0
+R 2838 period=5 high=4 tag=1
+S 2839 0 0 0 1 1 1
+H 2839 period=5 high=4 tag=1
+S 2847 0 0 0 0 0 1
+S 2848 0 0 0 0 0 0
+S 2849 0 0 0 1 1 0
+R 2849 period=11 high=9 tag=1
+S 2850 0 0 0 0 0 1
+H 2850 period=11 high=9 tag=1
+S 2851 0 0 0 1 1 0
+R 2851 period=2 high=1 tag=1
+S 2852 0 0 0 0 0 1
+H 2852 period=2 high=1 tag=1
+S 2853 0 0 0 1 1 0
+R 2853 period=2 high=1 tag=1
+S 2854 0 0 0 0 0 1
+H 2854 period=2 high=1 tag=1
+S 2855 0 0 0 0 0 0
+S 2856 0 0 0 1 1 0
+R 2856 period=3 high=1 tag=1
+S 2857 0 0 0 1 1 1
+H 2857 period=3 high=1 tag=1
+S 2858 0 0 0 0 0 1
+S 2859 0 0 0 0 0 0
+S 2862 0 0 0 1 1 0
+R 2862 period=6 high=2 tag=1
+S 2863 0 0 0 1 1 1
+H 2863 period=6 high=2 tag=1
+S 2865 0 0 0 0 0 1
+S 2866 0 0 0 1 1 0
+R 2866 period=4 high=3 tag=1
+S 2867 0 0 0 1 1 1
+H 2867 period=4 high=3 tag=1
+S 2868 0 0 0 0 0 1
+S 2869 0 0 0 1 1 0
+R 2869 period=3 high=2 tag=1
+S 2870 0 0 0 0 0 1
+H 2870 period=3 high=2 tag=1
+S 2871 0 0 0 1 1 0
+R 2871 period=2 high=1 tag=1
+S 2872 0 0 0 0 0 1
+H 2872 period=2 high=1 tag=1
+S 2873 0 0 0 1 1 0
+R 2873 period=2 high=1 tag=1
+S 2874 0 0 0 0 0 1
+H 2874 period=2 high=1 tag=1
+S 2875 0 0 0 1 1 0
+R 2875 period=2 high=1 tag=1
+S 2876 0 0 0 0 0 1
+H 2876 period=2 high=1 tag=1
+S 2877 0 0 0 0 0 0
+S 2879 0 0 0 1 1 0
+R 2879 period=4 high=1 tag=1
+S 2880 0 0 0 1 1 1
+H 2880 period=4 high=1 tag=1
+S 2882 0 0 0 0 0 1
+S 2883 0 0 0 0 0 0
+S 2884 0 0 0 1 1 0
+R 2884 period=5 high=3 tag=1
+S 2885 0 0 0 1 1 1
+H 2885 period=5 high=3 tag=1
+S 2887 0 0 0 0 0 1
+S 2888 0 0 0 1 1 0
+R 2888 period=4 high=3 tag=1
+S 2889 0 0 0 1 1 1
+H 2889 period=4 high=3 tag=1
+S 2890 0 0 0 0 0 1
+S 2891 0 0 0 0 0 0
+S 2893 0 0 0 1 1 0
+R 2893 period=5 high=2 tag=1
+S 2894 0 0 0 0 0 1
+H 2894 period=5 high=2 tag=1
+S 2895 0 0 0 1 1 0
+R 2895 period=2 high=1 tag=1
+S 2896 0 0 0 0 0 1
+H 2896 period=2 high=1 tag=1
+S 2897 0 0 0 0 0 0
+S 2898 0 0 0 1 1 0
+R 2898 period=3 high=1 tag=1
+S 2899 0 0 0 0 0 1
+H 2899 period=3 high=1 tag=1
+S 2900 0 0 0 1 1 0
+R 2900 period=2 high=1 tag=1
+S 2901 0 0 0 1 1 1
+H 2901 period=2 high=1 tag=1
+S 2903 0 0 0 0 0 1
+S 2904 0 0 0 1 1 0
+R 2904 period=4 high=3 tag=1
+S 2905 0 0 0 0 0 1
+H 2905 period=4 high=3 tag=1
+S 2906 0 0 0 0 0 0
+S 2908 0 0 0 1 1 0
+R 2908 period=4 high=1 tag=1
+S 2909 0 0 0 1 1 1
+H 2909 period=4 high=1 tag=1
+S 2911 0 0 0 0 0 1
+S 2912 0 0 0 0 0 0
+S 2913 0 0 0 1 1 0
+R 2913 period=5 high=3 tag=1
+S 2914 0 0 0 1 1 1
+H 2914 period=5 high=3 tag=1
+S 2917 0 0 0 0 0 1
+S 2918 0 0 0 0 0 0
+S 2921 0 0 0 1 1 0
+R 2921 period=8 high=4 tag=1
+S 2922 0 0 0 0 0 1
+H 2922 period=8 high=4 tag=1
+S 2923 0 0 0 0 0 0
+S 2924 0 0 0 1 1 0
+R 2924 period=3 high=1 tag=1
+S 2925 0 0 0 0 0 1
+H 2925 period=3 high=1 tag=1
+S 2926 0 0 0 0 0 0
+S 2927 0 0 0 1 1 0
+R 2927 period=3 high=1 tag=1
+S 2928 0 0 0 1 1 1
+H 2928 period=3 high=1 tag=1
+S 2929 0 0 0 0 0 1
+S 2930 0 0 0 1 1 0
+R 2930 period=3 high=2 tag=1
+S 2931 0 0 0 0 0 1
+H 2931 period=3 high=2 tag=1
+S 2932 0 0 0 1 1 0
+R 2932 period=2 high=1 tag=1
+S 2933 0 0 0 0 0 1
+H 2933 period=2 high=1 tag=1
+S 2934 0 0 0 0 0 0
+S 2935 0 0 0 1 1 0
+R 2935 period=3 high=1 tag=1
+S 2936 0 0 0 1 1 1
+H 2936 period=3 high=1 tag=1
+S 2939 0 0 0 0 0 1
+S 2940 0 0 0 0 0 0
+S 2941 0 0 0 1 1 0
+R 2941 period=6 high=4 tag=1
+S 2942 0 0 0 0 0 1
+H 2942 period=6 high=4 tag=1
+S 2943 0 0 0 0 0 0
+S 2945 0 0 0 1 1 0
+R 2945 period=4 high=1 tag=1
+S 2946 0 0 0 1 1 1
+H 2946 period=4 high=1 tag=1
+S 2951 0 0 0 0 0 1
+S 2952 0 0 0 0 0 0
+S 2953 0 0 0 1 1 0
+R 2953 period=8 high=6 tag=1
+S 2954 0 0 0 0 0 1
+H 2954 period=8 high=6 tag=1
+S 2955 0 0 0 1 1 0
+R 2955 period=2 high=1 tag=1
+S 2956 0 0 0 0 0 1
+H 2956 period=2 high=1 tag=1
+S 2957 0 0 0 0 0 0
+S 2958 0 0 0 1 1 0
+R 2958 period=3 high=1 tag=1
+S 2959 0 0 0 1 1 1
+H 2959 period=3 high=1 tag=1
+S 2960 0 0 0 0 0 1
+S 2961 0 0 0 1 1 0
+R 2961 period=3 high=2 tag=1
+S 2962 0 0 0 0 0 1
+H 2962 period=3 high=2 tag=1
+S 2963 0 0 0 0 0 0
+S 2964 0 0 0 1 1 0
+R 2964 period=3 high=1 tag=1
+S 2965 0 0 0 1 1 1
+H 2965 period=3 high=1 tag=1
+S 2966 0 0 0 0 0 1
+S 2967 0 0 0 1 1 0
+R 2967 period=3 high=2 tag=1
+S 2968 0 0 0 1 1 1
+H 2968 period=3 high=2 tag=1
+S 2969 0 0 0 0 0 1
+S 2970 0 0 0 1 1 0
+R 2970 period=3 high=2 tag=1
+S 2971 0 0 0 0 0 1
+H 2971 period=3 high=2 tag=1
+S 2972 0 0 0 0 0 0
+S 2973 0 0 0 1 1 0
+R 2973 period=3 high=1 tag=1
+S 2974 0 0 0 1 1 1
+H 2974 period=3 high=1 tag=1
+S 2976 0 0 0 0 0 1
+S 2977 0 0 0 1 1 0
+R 2977 period=4 high=3 tag=1
+S 2978 0 0 0 0 0 1
+H 2978 period=4 high=3 tag=1
+S 2979 0 0 0 0 0 0
+S 2982 0 0 0 1 1 0
+R 2982 period=5 high=1 tag=1
+S 2983 0 0 0 0 0 1
+H 2983 period=5 high=1 tag=1
+S 2984 0 0 0 1 1 0
+R 2984 period=2 high=1 tag=1
+S 2985 0 0 0 0 0 1
+H 2985 period=2 high=1 tag=1
+S 2986 0 0 0 0 0 0
+S 2989 0 0 0 1 1 0
+R 2989 period=5 high=1 tag=1
+S 2990 0 0 0 1 1 1
+H 2990 period=5 high=1 tag=1
+S 2994 0 0 0 0 0 1
+S 2995 0 0 0 0 0 0
+S 3000 0 0 0 1 1 0
+R 3000 period=11 high=5 tag=1
+S 3001 0 0 0 1 1 1
+H 3001 period=11 high=5 tag=1
+S 3003 0 0 0 0 0 1
+S 3004 0 0 0 0 0 0
+S 3005 0 0 0 1 1 0
+R 3005 period=5 high=3 tag=1
+S 3006 0 0 0 1 1 1
+H 3006 period=5 high=3 tag=1
+S 3008 0 0 0 0 0 1
+S 3009 0 0 0 0 0 0
+S 3011 0 0 0 1 1 0
+R 3011 period=6 high=3 tag=1
+S 3012 0 0 0 0 0 1
+H 3012 period=6 high=3 tag=1
+S 3013 0 0 0 0 0 0
+S 3015 0 0 0 1 1 0
+R 3015 period=4 high=1 tag=1
+S 3016 0 0 0 0 0 1
+H 3016 period=4 high=1 tag=1
+S 3017 0 0 0 1 1 0
+R 3017 period=2 high=1 tag=1
+S 3018 0 0 0 1 1 1
+H 3018 period=2 high=1 tag=1
+S 3019 0 0 0 0 0 1
+S 3020 0 0 0 1 1 0
+R 3020 period=3 high=2 tag=1
+S 3021 0 0 0 0 0 1
+H 3021 period=3 high=2 tag=1
+S 3022 0 0 0 1 1 0
+R 3022 period=2 high=1 tag=1
+S 3023 0 0 0 1 1 1
+H 3023 period=2 high=1 tag=1
+S 3024 0 0 0 0 0 1
+S 3025 0 0 0 0 0 0
+S 3027 0 0 0 1 1 0
+R 3027 period=5 high=2 tag=1
+S 3028 0 0 0 0 0 1
+H 3028 period=5 high=2 tag=1
+S 3029 0 0 0 0 0 0
+S 3032 0 0 0 1 1 0
+R 3032 period=5 high=1 tag=1
+S 3033 0 0 0 1 1 1
+H 3033 period=5 high=1 tag=1
+S 3035 0 0 0 0 0 1
+S 3036 0 0 0 1 1 0
+R 3036 period=4 high=3 tag=1
+S 3037 0 0 0 1 1 1
+H 3037 period=4 high=3 tag=1
+S 3039 0 0 0 0 0 1
+S 3040 0 0 0 0 0 0
+S 3042 0 0 0 1 1 0
+R 3042 period=6 high=3 tag=1
+S 3043 0 0 0 0 0 1
+H 3043 period=6 high=3 tag=1
+S 3044 0 0 0 0 0 0
+S 3045 0 0 0 1 1 0
+R 3045 period=3 high=1 tag=1
+S 3046 0 0 0 1 1 1
+H 3046 period=3 high=1 tag=1
+S 3048 0 0 0 0 0 1
+S 3049 0 0 0 1 1 0
+R 3049 period=4 high=3 tag=1
+S 3050 0 0 0 0 0 1
+H 3050 period=4 high=3 tag=1
+S 3051 0 0 0 1 1 0
+R 3051 period=2 high=1 tag=1
+S 3052 0 0 0 0 0 1
+H 3052 period=2 high=1 tag=1
+S 3053 0 0 0 1 1 0
+R 3053 period=2 high=1 tag=1
+S 3054 0 0 0 1 1 1
+H 3054 period=2 high=1 tag=1
+S 3055 0 0 0 0 0 1
+S 3056 0 0 0 0 0 0
+S 3058 0 0 0 1 1 0
+R 3058 period=5 high=2 tag=1
+S 3059 0 0 0 1 1 1
+H 3059 period=5 high=2 tag=1
+S 3061 0 0 0 0 0 1
+S 3062 0 0 0 1 1 0
+R 3062 period=4 high=3 tag=1
+S 3063 0 0 0 1 1 1
+H 3063 period=4 high=3 tag=1
+S 3064 0 0 0 0 0 1
+S 3065 0 0 0 0 0 0
+S 3066 0 0 0 1 1 0
+R 3066 period=4 high=2 tag=1
+S 3067 0 0 0 0 0 1
+H 3067 period=4 high=2 tag=1
+S 3068 0 0 0 1 1 0
+R 3068 period=2 high=1 tag=1
+S 3069 0 0 0 1 1 1
+H 3069 period=2 high=1 tag=1
+S 3072 0 0 0 0 0 1
+S 3073 0 0 0 0 0 0
+S 3074 0 0 0 1 1 0
+R 3074 period=6 high=4 tag=1
+S 3075 0 0 0 0 0 1
+H 3075 period=6 high=4 tag=1
+S 3076 0 0 0 0 0 0
+S 3077 0 0 0 1 1 0
+R 3077 period=3 high=1 tag=1
+S 3078 0 0 0 0 0 1
+H 3078 period=3 high=1 tag=1
+S 3079 0 0 0 0 0 0
+S 3080 0 0 0 1 1 0
+R 3080 period=3 high=1 tag=1
+S 3081 0 0 0 1 1 1
+H 3081 period=3 high=1 tag=1
+S 3085 0 0 0 0 0 1
+S 3086 0 0 0 0 0 0
+S 3088 0 0 0 1 1 0
+R 3088 period=8 high=5 tag=1
+S 3089 0 0 0 1 1 1
+H 3089 period=8 high=5 tag=1
+S 3090 0 0 0 0 0 1
+S 3091 0 0 0 1 1 0
+R 3091 period=3 high=2 tag=1
+S 3092 0 0 0 1 1 1
+H 3092 period=3 high=2 tag=1
+S 3097 0 0 0 0 0 1
+S 3098 0 0 0 0 0 0
+S 3099 0 0 0 1 1 0
+R 3099 period=8 high=6 tag=1
+S 3100 0 0 0 0 0 1
+H 3100 period=8 high=6 tag=1
+S 3101 0 0 0 0 0 0
+S 3104 0 0 0 1 1 0
+R 3104 period=5 high=1 tag=1
+S 3105 0 0 0 0 0 1
+H 3105 period=5 high=1 tag=1
+S 3106 0 0 0 1 1 0
+R 3106 period=2 high=1 tag=1
+S 3107 0 0 0 1 1 1
+H 3107 period=2 high=1 tag=1
+S 3108 0 0 0 0 0 1
+S 3109 0 0 0 0 0 0
+S 3110 0 0 0 1 1 0
+R 3110 period=4 high=2 tag=1
+S 3111 0 0 0 0 0 1
+H 3111 period=4 high=2 tag=1
+S 3112 0 0 0 0 0 0
+S 3117 0 0 0 1 1 0
+R 3117 period=7 high=1 tag=1
+S 3118 0 0 0 0 0 1
+H 3118 period=7 high=1 tag=1
+S 3119 0 0 0 1 1 0
+R 3119 period=2 high=1 tag=1
+S 3120 0 0 0 0 0 1
+H 3120 period=2 high=1 tag=1
+S 3121 0 0 0 1 1 0
+R 3121 period=2 high=1 tag=1
+S 3122 0 0 0 1 1 1
+H 3122 period=2 high=1 tag=1
+S 3126 0 0 0 0 0 1
+S 3127 0 0 0 0 0 0
+S 3129 0 0 0 1 1 0
+R 3129 period=8 high=5 tag=1
+S 3130 0 0 0 1 1 1
+H 3130 period=8 high=5 tag=1
+S 3133 0 0 0 0 0 1
+S 3134 0 0 0 1 1 0
+R 3134 period=5 high=4 tag=1
+S 3135 0 0 0 1 1 1
+H 3135 period=5 high=4 tag=1
+S 3137 0 0 0 0 0 1
+S 3138 0 0 0 0 0 0
+S 3141 0 0 0 1 1 0
+R 3141 period=7 high=3 tag=1
+S 3142 0 0 0 0 0 1
+H 3142 period=7 high=3 tag=1
+S 3143 0 0 0 0 0 0
+S 3144 0 0 0 1 1 0
+R 3144 period=3 high=1 tag=1
+S 3145 0 0 0 0 0 1
+H 3145 period=3 high=1 tag=1
+S 3146 0 0 0 0 0 0
+S 3147 0 0 0 1 1 0
+R 3147 period=3 high=1 tag=1
+S 3148 0 0 0 1 1 1
+H 3148 period=3 high=1 tag=1
+S 3150 0 0 0 0 0 1
+S 3151 0 0 0 1 1 0
+R 3151 period=4 high=3 tag=1
+S 3152 0 0 0 0 0 1
+H 3152 period=4 high=3 tag=1
+S 3153 0 0 0 1 1 0
+R 3153 period=2 high=1 tag=1
+S 3154 0 0 0 1 1 1
+H 3154 period=2 high=1 tag=1
+S 3156 0 0 0 0 0 1
+S 3157 0 0 0 1 1 0
+R 3157 period=4 high=3 tag=1
+S 3158 0 0 0 0 0 1
+H 3158 period=4 high=3 tag=1
+S 3159 0 0 0 1 1 0
+R 3159 period=2 high=1 tag=1
+S 3160 0 0 0 1 1 1
+H 3160 period=2 high=1 tag=1
+S 3163 0 0 0 0 0 1
+S 3164 0 0 0 0 0 0
+S 3167 0 0 0 1 1 0
+R 3167 period=8 high=4 tag=1
+S 3168 0 0 0 0 0 1
+H 3168 period=8 high=4 tag=1
+S 3169 0 0 0 0 0 0
+S 3170 0 0 0 1 1 0
+R 3170 period=3 high=1 tag=1
+S 3171 0 0 0 0 0 1
+H 3171 period=3 high=1 tag=1
+S 3172 0 0 0 1 1 0
+R 3172 period=2 high=1 tag=1
+S 3173 0 0 0 1 1 1
+H 3173 period=2 high=1 tag=1
+S 3174 0 0 0 0 0 1
+S 3175 0 0 0 0 0 0
+S 3177 0 0 0 1 1 0
+R 3177 period=5 high=2 tag=1
+S 3178 0 0 0 1 1 1
+H 3178 period=5 high=2 tag=1
+S 3179 0 0 0 0 0 1
+S 3180 0 0 0 0 0 0
+S 3182 0 0 0 1 1 0
+R 3182 period=5 high=2 tag=1
+S 3183 0 0 0 1 1 1
+H 3183 period=5 high=2 tag=1
+S 3188 0 0 0 0 0 1
+S 3189 0 0 0 1 1 0
+R 3189 period=7 high=6 tag=1
+S 3190 0 0 0 1 1 1
+H 3190 period=7 high=6 tag=1
+S 3192 0 0 0 0 0 1
+S 3193 0 0 0 0 0 0
+S 3195 0 0 0 1 1 0
+R 3195 period=6 high=3 tag=1
+S 3196 0 0 0 1 1 1
+H 3196 period=6 high=3 tag=1
+S 3197 0 0 0 0 0 1
+S 3198 0 0 0 1 1 0
+R 3198 period=3 high=2 tag=1
+S 3199 0 0 0 1 1 1
+H 3199 period=3 high=2 tag=1
+S 3201 0 0 0 0 0 1
+S 3202 0 0 0 0 0 0
+S 3206 0 0 0 1 1 0
+R 3206 period=8 high=3 tag=1
+S 3207 0 0 0 0 0 1
+H 3207 period=8 high=3 tag=1
+S 3208 0 0 0 0 0 0
+S 3210 0 0 0 1 1 0
+R 3210 period=4 high=1 tag=1
+S 3211 0 0 0 0 0 1
+H 3211 period=4 high=1 tag=1
+S 3212 0 0 0 0 0 0
+S 3213 0 0 0 1 1 0
+R 3213 period=3 high=1 tag=1
+S 3214 0 0 0 0 0 1
+H 3214 period=3 high=1 tag=1
+S 3215 0 0 0 0 0 0
+S 3216 0 0 0 1 1 0
+R 3216 period=3 high=1 tag=1
+S 3217 0 0 0 1 1 1
+H 3217 period=3 high=1 tag=1
+S 3218 0 0 0 0 0 1
+S 3219 0 0 0 0 0 0
+S 3220 0 0 0 1 1 0
+R 3220 period=4 high=2 tag=1
+S 3221 0 0 0 1 1 1
+H 3221 period=4 high=2 tag=1
+S 3222 0 0 0 0 0 1
+S 3223 0 0 0 0 0 0
+S 3227 0 0 0 1 1 0
+R 3227 period=7 high=2 tag=1
+S 3228 0 0 0 1 1 1
+H 3228 period=7 high=2 tag=1
+S 3229 0 0 0 0 0 1
+S 3230 0 0 0 0 0 0
+S 3231 0 0 0 1 1 0
+R 3231 period=4 high=2 tag=1
+S 3232 0 0 0 1 1 1
+H 3232 period=4 high=2 tag=1
+S 3233 0 0 0 0 0 1
+S 3234 0 0 0 1 1 0
+R 3234 period=3 high=2 tag=1
+S 3235 0 0 0 0 0 1
+H 3235 period=3 high=2 tag=1
+S 3236 0 0 0 1 1 0
+R 3236 period=2 high=1 tag=1
+S 3237 0 0 0 1 1 1
+H 3237 period=2 high=1 tag=1
+S 3238 0 0 0 0 0 1
+S 3239 0 0 0 0 0 0
+S 3243 0 0 0 1 1 0
+R 3243 period=7 high=2 tag=1
+S 3244 0 0 0 1 1 1
+H 3244 period=7 high=2 tag=1
+S 3246 0 0 0 0 0 1
+S 3247 0 0 0 1 1 0
+R 3247 period=4 high=3 tag=1
+S 3248 0 0 0 0 0 1
+H 3248 period=4 high=3 tag=1
+S 3249 0 0 0 1 1 0
+R 3249 period=2 high=1 tag=1
+S 3250 0 0 0 0 0 1
+H 3250 period=2 high=1 tag=1
+S 3251 0 0 0 1 1 0
+R 3251 period=2 high=1 tag=1
+S 3252 0 0 0 0 0 1
+H 3252 period=2 high=1 tag=1
+S 3253 0 0 0 1 1 0
+R 3253 period=2 high=1 tag=1
+S 3254 0 0 0 0 0 1
+H 3254 period=2 high=1 tag=1
+S 3255 0 0 0 1 1 0
+R 3255 period=2 high=1 tag=1
+S 3256 0 0 0 0 0 1
+H 3256 period=2 high=1 tag=1
+S 3257 0 0 0 1 1 0
+R 3257 period=2 high=1 tag=1
+S 3258 0 0 0 0 0 1
+H 3258 period=2 high=1 tag=1
+S 3259 0 0 0 1 1 0
+R 3259 period=2 high=1 tag=1
+S 3260 0 0 0 0 0 1
+H 3260 period=2 high=1 tag=1
+S 3261 0 0 0 1 1 0
+R 3261 period=2 high=1 tag=1
+S 3262 0 0 0 1 1 1
+H 3262 period=2 high=1 tag=1
+S 3266 0 0 0 0 0 1
+S 3267 0 0 0 0 0 0
+S 3268 0 0 0 1 1 0
+R 3268 period=7 high=5 tag=1
+S 3269 0 0 0 1 1 1
+H 3269 period=7 high=5 tag=1
+S 3270 0 0 0 0 0 1
+S 3271 0 0 0 0 0 0
+S 3273 0 0 0 1 1 0
+R 3273 period=5 high=2 tag=1
+S 3274 0 0 0 1 1 1
+H 3274 period=5 high=2 tag=1
+S 3275 0 0 0 0 0 1
+S 3276 0 0 0 0 0 0
+S 3284 0 0 1 1 1 0
+S 3285 0 0 0 1 1 1
+S 3287 0 0 0 0 0 1
+S 3288 0 0 0 1 1 0
+S 3289 0 0 0 0 0 1
+S 3290 0 0 0 0 0 0
+S 3293 0 0 0 1 1 0
+R 3293 period=5 high=1 tag=1
+S 3294 0 0 0 0 0 1
+H 3294 period=5 high=1 tag=1
+S 3295 0 0 0 1 1 0
+R 3295 period=2 high=1 tag=1
+S 3296 0 0 0 1 1 1
+H 3296 period=2 high=1 tag=1
+S 3298 0 0 0 0 0 1
+S 3299 0 0 0 1 1 0
+R 3299 period=4 high=3 tag=1
+S 3300 0 0 0 0 0 1
+H 3300 period=4 high=3 tag=1
+S 3301 0 0 0 0 0 0
+S 3305 0 0 0 1 1 0
+R 3305 period=6 high=1 tag=1
+S 3306 0 0 0 1 1 1
+H 3306 period=6 high=1 tag=1
+S 3309 0 0 0 0 0 1
+S 3310 0 0 0 0 0 0
+S 3315 0 0 0 1 1 0
+R 3315 period=10 high=4 tag=1
+S 3316 0 0 0 0 0 1
+H 3316 period=10 high=4 tag=1
+S 3317 0 0 0 1 1 0
+R 3317 period=2 high=1 tag=1
+S 3318 0 0 0 1 1 1
+H 3318 period=2 high=1 tag=1
+S 3322 0 0 0 0 0 1
+S 3323 0 0 0 1 1 0
+R 3323 period=6 high=5 tag=1
+S 3324 0 0 0 1 1 1
+H 3324 period=6 high=5 tag=1
+S 3326 0 0 0 0 0 1
+S 3327 0 0 0 1 1 0
+R 3327 period=4 high=3 tag=1
+S 3328 0 0 0 1 1 1
+H 3328 period=4 high=3 tag=1
+S 3329 0 0 0 0 0 1
+S 3330 0 0 0 0 0 0
+S 3331 0 0 0 1 1 0
+R 3331 period=4 high=2 tag=1
+S 3332 0 0 0 1 1 1
+H 3332 period=4 high=2 tag=1
+S 3333 0 0 0 0 0 1
+S 3334 0 0 0 1 1 0
+R 3334 period=3 high=2 tag=1
+S 3335 0 0 0 1 1 1
+H 3335 period=3 high=2 tag=1
+S 3336 0 0 0 0 0 1
+S 3337 0 0 0 1 1 0
+R 3337 period=3 high=2 tag=1
+S 3338 0 0 0 0 0 1
+H 3338 period=3 high=2 tag=1
+S 3339 0 0 0 1 1 0
+R 3339 period=2 high=1 tag=1
+S 3340 0 0 0 1 1 1
+H 3340 period=2 high=1 tag=1
+S 3344 0 0 0 0 0 1
+S 3345 0 0 0 0 0 0
+S 3346 0 0 0 1 1 0
+R 3346 period=7 high=5 tag=1
+S 3347 0 0 0 1 1 1
+H 3347 period=7 high=5 tag=1
+S 3348 0 0 0 0 0 1
+S 3349 0 0 0 1 1 0
+R 3349 period=3 high=2 tag=1
+S 3350 0 0 0 1 1 1
+H 3350 period=3 high=2 tag=1
+S 3353 0 0 0 0 0 1
+S 3354 0 0 0 0 0 0
+S 3355 0 0 0 1 1 0
+R 3355 period=6 high=4 tag=1
+S 3356 0 0 0 1 1 1
+H 3356 period=6 high=4 tag=1
+S 3357 0 0 0 0 0 1
+S 3358 0 0 0 1 1 0
+R 3358 period=3 high=2 tag=1
+S 3359 0 0 0 1 1 1
+H 3359 period=3 high=2 tag=1
+S 3363 0 0 0 0 0 1
+S 3364 0 0 0 1 1 0
+R 3364 period=6 high=5 tag=1
+S 3365 0 0 0 0 0 1
+H 3365 period=6 high=5 tag=1
+S 3366 0 0 0 0 0 0
+S 3367 0 0 0 1 1 0
+R 3367 period=3 high=1 tag=1
+S 3368 0 0 0 0 0 1
+H 3368 period=3 high=1 tag=1
+S 3369 0 0 0 1 1 0
+R 3369 period=2 high=1 tag=1
+S 3370 0 0 0 1 1 1
+H 3370 period=2 high=1 tag=1
+S 3371 0 0 0 0 0 1
+S 3372 0 0 0 1 1 0
+R 3372 period=3 high=2 tag=1
+S 3373 0 0 0 1 1 1
+H 3373 period=3 high=2 tag=1
+S 3374 0 0 0 0 0 1
+S 3375 0 0 0 0 0 0
+S 3377 0 0 0 1 1 0
+R 3377 period=5 high=2 tag=1
+S 3378 0 0 0 1 1 1
+H 3378 period=5 high=2 tag=1
+S 3381 0 0 0 0 0 1
+S 3382 0 0 0 1 1 0
+R 3382 period=5 high=4 tag=1
+S 3383 0 0 0 1 1 1
+H 3383 period=5 high=4 tag=1
+S 3384 0 0 0 0 0 1
+S 3385 0 0 0 1 1 0
+R 3385 period=3 high=2 tag=1
+S 3386 0 0 0 0 0 1
+H 3386 period=3 high=2 tag=1
+S 3387 0 0 0 0 0 0
+S 3388 0 0 0 1 1 0
+R 3388 period=3 high=1 tag=1
+S 3389 0 0 0 0 0 1
+H 3389 period=3 high=1 tag=1
+S 3390 0 0 0 0 0 0
+S 3393 0 0 0 1 1 0
+R 3393 period=5 high=1 tag=1
+S 3394 0 0 0 1 1 1
+H 3394 period=5 high=1 tag=1
+S 3397 0 0 0 0 0 1
+S 3398 0 0 0 1 1 0
+R 3398 period=5 high=4 tag=1
+S 3399 0 0 0 1 1 1
+H 3399 period=5 high=4 tag=1
+S 3401 0 0 0 0 0 1
+S 3402 0 0 0 1 1 0
+R 3402 period=4 high=3 tag=1
+S 3403 0 0 0 1 1 1
+H 3403 period=4 high=3 tag=1
+S 3404 0 0 0 0 0 1
+S 3405 0 0 0 1 1 0
+R 3405 period=3 high=2 tag=1
+S 3406 0 0 0 1 1 1
+H 3406 period=3 high=2 tag=1
+S 3408 0 0 0 0 0 1
+S 3409 0 0 0 0 0 0
+S 3411 0 0 0 1 1 0
+R 3411 period=6 high=3 tag=1
+S 3412 0 0 0 0 0 1
+H 3412 period=6 high=3 tag=1
+S 3413 0 0 0 1 1 0
+R 3413 period=2 high=1 tag=1
+S 3414 0 0 0 0 0 1
+H 3414 period=2 high=1 tag=1
+S 3415 0 0 0 1 1 0
+R 3415 period=2 high=1 tag=1
+S 3416 0 0 0 0 0 1
+H 3416 period=2 high=1 tag=1
+S 3417 0 0 0 1 1 0
+R 3417 period=2 high=1 tag=1
+S 3418 0 0 0 0 0 1
+H 3418 period=2 high=1 tag=1
+S 3419 0 0 0 1 1 0
+R 3419 period=2 high=1 tag=1
+S 3420 0 0 0 1 1 1
+H 3420 period=2 high=1 tag=1
+S 3423 0 0 0 0 0 1
+S 3424 0 0 0 0 0 0
+S 3426 0 0 0 1 1 0
+R 3426 period=7 high=4 tag=1
+S 3427 0 0 0 1 1 1
+H 3427 period=7 high=4 tag=1
+S 3428 0 0 0 0 0 1
+S 3429 0 0 0 0 0 0
+S 3430 0 0 0 1 1 0
+R 3430 period=4 high=2 tag=1
+S 3431 0 0 0 0 0 1
+H 3431 period=4 high=2 tag=1
+S 3432 0 0 0 0 0 0
+S 3433 0 0 0 1 1 0
+R 3433 period=3 high=1 tag=1
+S 3434 0 0 0 0 0 1
+H 3434 period=3 high=1 tag=1
+S 3435 0 0 0 1 1 0
+R 3435 period=2 high=1 tag=1
+S 3436 0 0 0 1 1 1
+H 3436 period=2 high=1 tag=1
+S 3437 0 0 0 0 0 1
+S 3438 0 0 0 0 0 0
+S 3441 0 0 0 1 1 0
+R 3441 period=6 high=2 tag=1
+S 3442 0 0 0 0 0 1
+H 3442 period=6 high=2 tag=1
+S 3443 0 0 0 1 1 0
+R 3443 period=2 high=1 tag=1
+S 3444 0 0 0 0 0 1
+H 3444 period=2 high=1 tag=1
+S 3445 0 0 0 0 0 0
+S 3447 0 0 0 1 1 0
+R 3447 period=4 high=1 tag=1
+S 3448 0 0 0 0 0 1
+H 3448 period=4 high=1 tag=1
+S 3449 0 0 0 1 1 0
+R 3449 period=2 high=1 tag=1
+S 3450 0 0 0 1 1 1
+H 3450 period=2 high=1 tag=1
+S 3452 0 0 0 0 0 1
+S 3453 0 0 0 0 0 0
+S 3454 0 0 0 1 1 0
+R 3454 period=5 high=3 tag=1
+S 3455 0 0 0 0 0 1
+H 3455 period=5 high=3 tag=1
+S 3456 0 0 0 1 1 0
+R 3456 period=2 high=1 tag=1
+S 3457 0 0 0 0 0 1
+H 3457 period=2 high=1 tag=1
+S 3458 0 0 0 1 1 0
+R 3458 period=2 high=1 tag=1
+S 3459 0 0 0 0 0 1
+H 3459 period=2 high=1 tag=1
+S 3460 0 0 0 1 1 0
+R 3460 period=2 high=1 tag=1
+S 3461 0 0 0 1 1 1
+H 3461 period=2 high=1 tag=1
+S 3464 0 0 0 0 0 1
+S 3465 0 0 0 1 1 0
+R 3465 period=5 high=4 tag=1
+S 3466 0 0 0 1 1 1
+H 3466 period=5 high=4 tag=1
+S 3470 0 0 0 0 0 1
+S 3471 0 0 0 0 0 0
+S 3472 0 0 0 1 1 0
+R 3472 period=7 high=5 tag=1
+S 3473 0 0 0 1 1 1
+H 3473 period=7 high=5 tag=1
+S 3474 0 0 0 0 0 1
+S 3475 0 0 0 0 0 0
+S 3476 0 0 0 1 1 0
+R 3476 period=4 high=2 tag=1
+S 3477 0 0 0 1 1 1
+H 3477 period=4 high=2 tag=1
+S 3482 0 0 0 0 0 1
+S 3483 0 0 0 1 1 0
+R 3483 period=7 high=6 tag=1
+S 3484 0 0 0 0 0 1
+H 3484 period=7 high=6 tag=1
+S 3485 0 0 0 0 0 0
+S 3486 0 0 0 1 1 0
+R 3486 period=3 high=1 tag=1
+S 3487 0 0 0 0 0 1
+H 3487 period=3 high=1 tag=1
+S 3488 0 0 0 1 1 0
+R 3488 period=2 high=1 tag=1
+S 3489 0 0 0 0 0 1
+H 3489 period=2 high=1 tag=1
+S 3490 0 0 0 1 1 0
+R 3490 period=2 high=1 tag=1
+S 3491 0 0 0 0 0 1
+H 3491 period=2 high=1 tag=1
+S 3492 0 0 0 0 0 0
+S 3493 0 0 0 1 1 0
+R 3493 period=3 high=1 tag=1
+S 3494 0 0 0 1 1 1
+H 3494 period=3 high=1 tag=1
+S 3495 0 0 0 0 0 1
+S 3496 0 0 0 1 1 0
+R 3496 period=3 high=2 tag=1
+S 3497 0 0 0 0 0 1
+H 3497 period=3 high=2 tag=1
+S 3498 0 0 0 1 1 0
+R 3498 period=2 high=1 tag=1
+S 3499 0 0 0 1 1 1
+H 3499 period=2 high=1 tag=1
+S 3500 0 0 0 0 0 1
+S 3501 0 0 0 1 1 0
+R 3501 period=3 high=2 tag=1
+S 3502 0 0 0 0 0 1
+H 3502 period=3 high=2 tag=1
+S 3503 0 0 0 0 0 0
+S 3504 0 0 0 1 1 0
+R 3504 period=3 high=1 tag=1
+S 3505 0 0 0 1 1 1
+H 3505 period=3 high=1 tag=1
+S 3506 0 0 0 0 0 1
+S 3507 0 0 0 1 1 0
+R 3507 period=3 high=2 tag=1
+S 3508 0 0 0 1 1 1
+H 3508 period=3 high=2 tag=1
+S 3510 0 0 0 0 0 1
+S 3511 0 0 0 0 0 0
+S 3513 0 0 0 1 1 0
+R 3513 period=6 high=3 tag=1
+S 3514 0 0 0 1 1 1
+H 3514 period=6 high=3 tag=1
+S 3515 0 0 0 0 0 1
+S 3516 0 0 0 0 0 0
+S 3521 0 0 0 1 1 0
+R 3521 period=8 high=2 tag=1
+S 3522 0 0 0 0 0 1
+H 3522 period=8 high=2 tag=1
+S 3523 0 0 0 0 0 0
+S 3525 0 0 0 1 1 0
+R 3525 period=4 high=1 tag=1
+S 3526 0 0 0 1 1 1
+H 3526 period=4 high=1 tag=1
+S 3530 0 0 0 0 0 1
+S 3531 0 0 0 1 1 0
+R 3531 period=6 high=5 tag=1
+S 3532 0 0 0 1 1 1
+H 3532 period=6 high=5 tag=1
+S 3534 0 0 0 0 0 1
+S 3535 0 0 0 0 0 0
+S 3537 0 0 0 1 1 0
+R 3537 period=6 high=3 tag=1
+S 3538 0 0 0 1 1 1
+H 3538 period=6 high=3 tag=1
+S 3542 0 0 0 0 0 1
+S 3543 0 0 0 0 0 0
+S 3545 0 0 0 1 1 0
+R 3545 period=8 high=5 tag=1
+S 3546 0 0 0 0 0 1
+H 3546 period=8 high=5 tag=1
+S 3547 0 0 0 0 0 0
+S 3548 0 0 0 1 1 0
+R 3548 period=3 high=1 tag=1
+S 3549 0 0 0 0 0 1
+H 3549 period=3 high=1 tag=1
+S 3550 0 0 0 0 0 0
+S 3551 0 0 0 1 1 0
+R 3551 period=3 high=1 tag=1
+S 3552 0 0 0 1 1 1
+H 3552 period=3 high=1 tag=1
+S 3553 0 0 0 0 0 1
+S 3554 0 0 0 0 0 0
+S 3555 0 0 0 1 1 0
+R 3555 period=4 high=2 tag=1
+S 3556 0 0 0 1 1 1
+H 3556 period=4 high=2 tag=1
+S 3559 0 0 0 0 0 1
+S 3560 0 0 0 1 1 0
+R 3560 period=5 high=4 tag=1
+S 3561 0 0 0 1 1 1
+H 3561 period=5 high=4 tag=1
+S 3563 0 0 0 0 0 1
+S 3564 0 0 0 0 0 0
+S 3565 0 0 0 1 1 0
+R 3565 period=5 high=3 tag=1
+S 3566 0 0 0 1 1 1
+H 3566 period=5 high=3 tag=1
+S 3568 0 0 0 0 0 1
+S 3569 0 0 0 0 0 0
+S 3571 0 0 0 1 1 0
+R 3571 period=6 high=3 tag=1
+S 3572 0 0 0 0 0 1
+H 3572 period=6 high=3 tag=1
+S 3573 0 0 0 1 1 0
+R 3573 period=2 high=1 tag=1
+S 3574 0 0 0 0 0 1
+H 3574 period=2 high=1 tag=1
+S 3575 0 0 0 1 1 0
+R 3575 period=2 high=1 tag=1
+S 3576 0 0 0 1 1 1
+H 3576 period=2 high=1 tag=1
+S 3577 0 0 0 0 0 1
+S 3578 0 0 0 0 0 0
+S 3579 0 0 0 1 1 0
+R 3579 period=4 high=2 tag=1
+S 3580 0 0 0 1 1 1
+H 3580 period=4 high=2 tag=1
+S 3581 0 0 0 0 0 1
+S 3582 0 0 0 0 0 0
+S 3590 0 0 1 1 1 0
+S 3591 0 0 0 1 1 1
+S 3593 0 0 0 0 0 1
+S 3594 0 0 0 0 0 0
+S 3595 0 0 0 1 1 0
+S 3596 0 0 0 1 1 1
+S 3597 0 0 0 0 0 1
+S 3598 0 0 0 1 1 0
+R 3598 period=3 high=2 tag=1
+S 3599 0 0 0 0 0 1
+H 3599 period=3 high=2 tag=1
+S 3600 0 0 0 1 1 0
+R 3600 period=2 high=1 tag=1
+S 3601 0 0 0 0 0 1
+H 3601 period=2 high=1 tag=1
+S 3602 0 0 0 0 0 0
+S 3603 0 0 0 1 1 0
+R 3603 period=3 high=1 tag=1
+S 3604 0 0 0 1 1 1
+H 3604 period=3 high=1 tag=1
+S 3606 0 0 0 0 0 1
+S 3607 0 0 0 0 0 0
+S 3608 0 0 0 1 1 0
+R 3608 period=5 high=3 tag=1
+S 3609 0 0 0 1 1 1
+H 3609 period=5 high=3 tag=1
+S 3610 0 0 0 0 0 1
+S 3611 0 0 0 0 0 0
+S 3613 0 0 0 1 1 0
+R 3613 period=5 high=2 tag=1
+S 3614 0 0 0 0 0 1
+H 3614 period=5 high=2 tag=1
+S 3615 0 0 0 1 1 0
+R 3615 period=2 high=1 tag=1
+S 3616 0 0 0 1 1 1
+H 3616 period=2 high=1 tag=1
+S 3619 0 0 0 0 0 1
+S 3620 0 0 0 0 0 0
+S 3623 0 0 0 1 1 0
+R 3623 period=8 high=4 tag=1
+S 3624 0 0 0 0 0 1
+H 3624 period=8 high=4 tag=1
+S 3625 0 0 0 0 0 0
+S 3626 0 0 0 1 1 0
+R 3626 period=3 high=1 tag=1
+S 3627 0 0 0 1 1 1
+H 3627 period=3 high=1 tag=1
+S 3629 0 0 0 0 0 1
+S 3630 0 0 0 1 1 0
+R 3630 period=4 high=3 tag=1
+S 3631 0 0 0 0 0 1
+H 3631 period=4 high=3 tag=1
+S 3632 0 0 0 0 0 0
+S 3636 0 0 0 1 1 0
+R 3636 period=6 high=1 tag=1
+S 3637 0 0 0 1 1 1
+H 3637 period=6 high=1 tag=1
+S 3640 0 0 0 0 0 1
+S 3641 0 0 0 0 0 0
+S 3647 0 0 1 1 1 0
+S 3648 0 0 0 1 1 1
+S 3649 0 0 0 0 0 1
+S 3650 0 0 0 1 1 0
+S 3651 0 0 0 1 1 1
+S 3653 0 0 0 0 0 1
+S 3654 0 0 0 1 1 0
+R 3654 period=4 high=3 tag=1
+S 3655 0 0 0 0 0 1
+H 3655 period=4 high=3 tag=1
+S 3656 0 0 0 1 1 0
+R 3656 period=2 high=1 tag=1
+S 3657 0 0 0 1 1 1
+H 3657 period=2 high=1 tag=1
+S 3658 0 0 0 0 0 1
+S 3659 0 0 0 1 1 0
+R 3659 period=3 high=2 tag=1
+S 3660 0 0 0 1 1 1
+H 3660 period=3 high=2 tag=1
+S 3663 0 0 0 0 0 1
+S 3664 0 0 0 1 1 0
+R 3664 period=5 high=4 tag=1
+S 3665 0 0 0 1 1 1
+H 3665 period=5 high=4 tag=1
+S 3666 0 0 0 0 0 1
+S 3667 0 0 0 1 1 0
+R 3667 period=3 high=2 tag=1
+S 3668 0 0 0 0 0 1
+H 3668 period=3 high=2 tag=1
+S 3669 0 0 0 1 1 0
+R 3669 period=2 high=1 tag=1
+S 3670 0 0 0 1 1 1
+H 3670 period=2 high=1 tag=1
+S 3675 0 0 0 0 0 1
+S 3676 0 0 0 0 0 0
+S 3678 0 0 0 1 1 0
+R 3678 period=9 high=6 tag=1
+S 3679 0 0 0 1 1 1
+H 3679 period=9 high=6 tag=1
+S 3682 0 0 0 0 0 1
+S 3683 0 0 0 1 1 0
+R 3683 period=5 high=4 tag=1
+S 3684 0 0 0 1 1 1
+H 3684 period=5 high=4 tag=1
+S 3685 0 0 0 0 0 1
+S 3686 0 0 0 1 1 0
+R 3686 period=3 high=2 tag=1
+S 3687 0 0 0 0 0 1
+H 3687 period=3 high=2 tag=1
+S 3688 0 0 0 0 0 0
+S 3695 0 0 1 1 1 0
+S 3696 0 0 0 1 1 1
+S 3698 0 0 0 0 0 1
+S 3699 0 0 0 0 0 0
+S 3700 0 0 0 1 1 0
+S 3701 0 0 0 1 1 1
+S 3702 0 0 0 0 0 1
+S 3703 0 0 0 1 1 0
+R 3703 period=3 high=2 tag=1
+S 3704 0 0 0 0 0 1
+H 3704 period=3 high=2 tag=1
+S 3705 0 0 0 1 1 0
+R 3705 period=2 high=1 tag=1
+S 3706 0 0 0 1 1 1
+H 3706 period=2 high=1 tag=1
+S 3707 0 0 0 0 0 1
+S 3708 0 0 0 0 0 0
+S 3710 0 0 0 1 1 0
+R 3710 period=5 high=2 tag=1
+S 3711 0 0 0 0 0 1
+H 3711 period=5 high=2 tag=1
+S 3712 0 0 0 0 0 0
+S 3713 0 0 0 1 1 0
+R 3713 period=3 high=1 tag=1
+S 3714 0 0 0 1 1 1
+H 3714 period=3 high=1 tag=1
+S 3718 0 0 0 0 0 1
+S 3719 0 0 0 0 0 0
+S 3722 0 0 0 1 1 0
+R 3722 period=9 high=5 tag=1
+S 3723 0 0 0 0 0 1
+H 3723 period=9 high=5 tag=1
+S 3724 0 0 0 1 1 0
+R 3724 period=2 high=1 tag=1
+S 3725 0 0 0 0 0 1
+H 3725 period=2 high=1 tag=1
+S 3726 0 0 0 1 1 0
+R 3726 period=2 high=1 tag=1
+S 3727 0 0 0 1 1 1
+H 3727 period=2 high=1 tag=1
+S 3728 0 0 0 0 0 1
+S 3729 0 0 0 0 0 0
+S 3733 0 0 0 1 1 0
+R 3733 period=7 high=2 tag=1
+S 3734 0 0 0 1 1 1
+H 3734 period=7 high=2 tag=1
+S 3735 0 0 0 0 0 1
+S 3736 0 0 0 0 0 0
+S 3739 0 0 0 1 1 0
+R 3739 period=6 high=2 tag=1
+S 3740 0 0 0 1 1 1
+H 3740 period=6 high=2 tag=1
+S 3741 0 0 0 0 0 1
+S 3742 0 0 0 0 0 0
+S 3744 0 0 0 1 1 0
+R 3744 period=5 high=2 tag=1
+S 3745 0 0 0 0 0 1
+H 3745 period=5 high=2 tag=1
+S 3746 0 0 0 1 1 0
+R 3746 period=2 high=1 tag=1
+S 3747 0 0 0 0 0 1
+H 3747 period=2 high=1 tag=1
+S 3748 0 0 0 1 1 0
+R 3748 period=2 high=1 tag=1
+S 3749 0 0 0 1 1 1
+H 3749 period=2 high=1 tag=1
+S 3750 0 0 0 0 0 1
+S 3751 0 0 0 1 1 0
+R 3751 period=3 high=2 tag=1
+S 3752 0 0 0 1 1 1
+H 3752 period=3 high=2 tag=1
+S 3753 0 0 0 0 0 1
+S 3754 0 0 0 0 0 0
+S 3755 0 0 0 1 1 0
+R 3755 period=4 high=2 tag=1
+S 3756 0 0 0 1 1 1
+H 3756 period=4 high=2 tag=1
+S 3757 0 0 0 0 0 1
+S 3758 0 0 0 0 0 0
+S 3759 0 0 0 1 1 0
+R 3759 period=4 high=2 tag=1
+S 3760 0 0 0 1 1 1
+H 3760 period=4 high=2 tag=1
+S 3763 0 0 0 0 0 1
+S 3764 0 0 0 1 1 0
+R 3764 period=5 high=4 tag=1
+S 3765 0 0 0 0 0 1
+H 3765 period=5 high=4 tag=1
+S 3766 0 0 0 1 1 0
+R 3766 period=2 high=1 tag=1
+S 3767 0 0 0 1 1 1
+H 3767 period=2 high=1 tag=1
+S 3769 0 0 0 0 0 1
+S 3770 0 0 0 0 0 0
+S 3772 0 0 0 1 1 0
+R 3772 period=6 high=3 tag=1
+S 3773 0 0 0 0 0 1
+H 3773 period=6 high=3 tag=1
+S 3774 0 0 0 0 0 0
+S 3776 0 0 0 1 1 0
+R 3776 period=4 high=1 tag=1
+S 3777 0 0 0 0 0 1
+H 3777 period=4 high=1 tag=1
+S 3778 0 0 0 1 1 0
+R 3778 period=2 high=1 tag=1
+S 3779 0 0 0 1 1 1
+H 3779 period=2 high=1 tag=1
+S 3781 0 0 0 0 0 1
+S 3782 0 0 0 0 0 0
+S 3786 0 0 0 1 1 0
+R 3786 period=8 high=3 tag=1
+S 3787 0 0 0 0 0 1
+H 3787 period=8 high=3 tag=1
+S 3788 0 0 0 1 1 0
+R 3788 period=2 high=1 tag=1
+S 3789 0 0 0 0 0 1
+H 3789 period=2 high=1 tag=1
+S 3790 0 0 0 0 0 0
+S 3791 0 0 0 1 1 0
+R 3791 period=3 high=1 tag=1
+S 3792 0 0 0 0 0 1
+H 3792 period=3 high=1 tag=1
+S 3793 0 0 0 0 0 0
+S 3796 0 0 0 1 1 0
+R 3796 period=5 high=1 tag=1
+S 3797 0 0 0 1 1 1
+H 3797 period=5 high=1 tag=1
+S 3798 0 0 0 0 0 1
+S 3799 0 0 0 0 0 0
+S 3801 0 0 0 1 1 0
+R 3801 period=5 high=2 tag=1
+S 3802 0 0 0 0 0 1
+H 3802 period=5 high=2 tag=1
+S 3803 0 0 0 1 1 0
+R 3803 period=2 high=1 tag=1
+S 3804 0 0 0 0 0 1
+H 3804 period=2 high=1 tag=1
+S 3805 0 0 0 1 1 0
+R 3805 period=2 high=1 tag=1
+S 3806 0 0 0 1 1 1
+H 3806 period=2 high=1 tag=1
+S 3807 0 0 0 0 0 1
+S 3808 0 0 0 1 1 0
+R 3808 period=3 high=2 tag=1
+S 3809 0 0 0 1 1 1
+H 3809 period=3 high=2 tag=1
+S 3810 0 0 0 0 0 1
+S 3811 0 0 0 0 0 0
+S 3812 0 0 0 1 1 0
+R 3812 period=4 high=2 tag=1
+S 3813 0 0 0 0 0 1
+H 3813 period=4 high=2 tag=1
+S 3814 0 0 0 1 1 0
+R 3814 period=2 high=1 tag=1
+S 3815 0 0 0 1 1 1
+H 3815 period=2 high=1 tag=1
+S 3816 0 0 0 0 0 1
+S 3817 0 0 0 1 1 0
+R 3817 period=3 high=2 tag=1
+S 3818 0 0 0 1 1 1
+H 3818 period=3 high=2 tag=1
+S 3821 0 0 0 0 0 1
+S 3822 0 0 0 1 1 0
+R 3822 period=5 high=4 tag=1
+S 3823 0 0 0 1 1 1
+H 3823 period=5 high=4 tag=1
+S 3824 0 0 0 0 0 1
+S 3825 0 0 0 0 0 0
+S 3827 0 0 0 1 1 0
+R 3827 period=5 high=2 tag=1
+S 3828 0 0 0 1 1 1
+H 3828 period=5 high=2 tag=1
+S 3832 0 0 0 0 0 1
+S 3833 0 0 0 0 0 0
+S 3834 0 0 0 1 1 0
+R 3834 period=7 high=5 tag=1
+S 3835 0 0 0 0 0 1
+H 3835 period=7 high=5 tag=1
+S 3836 0 0 0 0 0 0
+S 3838 0 0 0 1 1 0
+R 3838 period=4 high=1 tag=1
+S 3839 0 0 0 0 0 1
+H 3839 period=4 high=1 tag=1
+S 3840 0 0 0 1 1 0
+R 3840 period=2 high=1 tag=1
+S 3841 0 0 0 1 1 1
+H 3841 period=2 high=1 tag=1
+S 3843 0 0 0 0 0 1
+S 3844 0 0 0 1 1 0
+R 3844 period=4 high=3 tag=1
+S 3845 0 0 0 0 0 1
+H 3845 period=4 high=3 tag=1
+S 3846 0 0 0 0 0 0
+S 3847 0 0 0 1 1 0
+R 3847 period=3 high=1 tag=1
+S 3848 0 0 0 1 1 1
+H 3848 period=3 high=1 tag=1
+S 3849 0 0 0 0 0 1
+S 3850 0 0 0 1 1 0
+R 3850 period=3 high=2 tag=1
+S 3851 0 0 0 1 1 1
+H 3851 period=3 high=2 tag=1
+S 3852 0 0 0 0 0 1
+S 3853 0 0 0 0 0 0
+S 3854 0 0 0 1 1 0
+R 3854 period=4 high=2 tag=1
+S 3855 0 0 0 0 0 1
+H 3855 period=4 high=2 tag=1
+S 3856 0 0 0 0 0 0
+S 3859 0 0 0 1 1 0
+R 3859 period=5 high=1 tag=1
+S 3860 0 0 0 1 1 1
+H 3860 period=5 high=1 tag=1
+S 3862 0 0 0 0 0 1
+S 3863 0 0 0 1 1 0
+R 3863 period=4 high=3 tag=1
+S 3864 0 0 0 0 0 1
+H 3864 period=4 high=3 tag=1
+S 3865 0 0 0 1 1 0
+R 3865 period=2 high=1 tag=1
+S 3866 0 0 0 1 1 1
+H 3866 period=2 high=1 tag=1
+S 3867 0 0 0 0 0 1
+S 3868 0 0 0 1 1 0
+R 3868 period=3 high=2 tag=1
+S 3869 0 0 0 0 0 1
+H 3869 period=3 high=2 tag=1
+S 3870 0 0 0 1 1 0
+R 3870 period=2 high=1 tag=1
+S 3871 0 0 0 1 1 1
+H 3871 period=2 high=1 tag=1
+S 3872 0 0 0 0 0 1
+S 3873 0 0 0 1 1 0
+R 3873 period=3 high=2 tag=1
+S 3874 0 0 0 0 0 1
+H 3874 period=3 high=2 tag=1
+S 3875 0 0 0 1 1 0
+R 3875 period=2 high=1 tag=1
+S 3876 0 0 0 1 1 1
+H 3876 period=2 high=1 tag=1
+S 3877 0 0 0 0 0 1
+S 3878 0 0 0 1 1 0
+R 3878 period=3 high=2 tag=1
+S 3879 0 0 0 0 0 1
+H 3879 period=3 high=2 tag=1
+S 3880 0 0 0 0 0 0
+S 3881 0 0 0 1 1 0
+R 3881 period=3 high=1 tag=1
+S 3882 0 0 0 1 1 1
+H 3882 period=3 high=1 tag=1
+S 3883 0 0 0 0 0 1
+S 3884 0 0 0 1 1 0
+R 3884 period=3 high=2 tag=1
+S 3885 0 0 0 0 0 1
+H 3885 period=3 high=2 tag=1
+S 3886 0 0 0 0 0 0
+S 3887 0 0 0 1 1 0
+R 3887 period=3 high=1 tag=1
+S 3888 0 0 0 0 0 1
+H 3888 period=3 high=1 tag=1
+S 3889 0 0 0 1 1 0
+R 3889 period=2 high=1 tag=1
+S 3890 0 0 0 0 0 1
+H 3890 period=2 high=1 tag=1
+S 3891 0 0 0 0 0 0
+S 3902 0 0 1 1 1 0
+S 3903 0 0 0 1 1 1
+S 3912 0 0 0 0 0 1
+S 3913 0 0 0 0 0 0
+S 3914 0 0 0 1 1 0
+S 3915 0 0 0 1 1 1
+S 3917 0 0 0 0 0 1
+S 3918 0 0 0 1 1 0
+R 3918 period=4 high=3 tag=1
+S 3919 0 0 0 0 0 1
+H 3919 period=4 high=3 tag=1
+S 3920 0 0 0 1 1 0
+R 3920 period=2 high=1 tag=1
+S 3921 0 0 0 0 0 1
+H 3921 period=2 high=1 tag=1
+S 3922 0 0 0 1 1 0
+R 3922 period=2 high=1 tag=1
+S 3923 0 0 0 1 1 1
+H 3923 period=2 high=1 tag=1
+S 3936 0 0 0 0 0 1
+S 3937 0 0 0 1 1 0
+R 3937 period=15 high=14 tag=1
+S 3938 0 0 0 1 1 1
+H 3938 period=15 high=14 tag=1
+S 3940 0 0 0 0 0 1
+S 3941 0 0 0 0 0 0
+S 3943 0 0 0 1 1 0
+R 3943 period=6 high=3 tag=1
+S 3944 0 0 0 0 0 1
+H 3944 period=6 high=3 tag=1
+S 3945 0 0 0 0 0 0
+S 3949 0 0 0 1 1 0
+R 3949 period=6 high=1 tag=1
+S 3950 0 0 0 1 1 1
+H 3950 period=6 high=1 tag=1
+S 3952 0 0 0 0 0 1
+S 3953 0 0 0 0 0 0
+S 3958 0 0 0 1 1 0
+R 3958 period=9 high=3 tag=1
+S 3959 0 0 0 1 1 1
+H 3959 period=9 high=3 tag=1
+S 3960 0 0 0 0 0 1
+S 3961 0 0 0 1 1 0
+R 3961 period=3 high=2 tag=1
+S 3962 0 0 0 0 0 1
+H 3962 period=3 high=2 tag=1
+S 3963 0 0 0 0 0 0
+S 3964 0 0 0 1 1 0
+R 3964 period=3 high=1 tag=1
+S 3965 0 0 0 1 1 1
+H 3965 period=3 high=1 tag=1
+S 3968 0 0 0 0 0 1
+S 3969 0 0 0 0 0 0
+S 3970 0 0 0 1 1 0
+R 3970 period=6 high=4 tag=1
+S 3971 0 0 0 1 1 1
+H 3971 period=6 high=4 tag=1
+S 3974 0 0 0 0 0 1
+S 3975 0 0 0 0 0 0
+S 3980 0 0 0 1 1 0
+R 3980 period=10 high=4 tag=1
+S 3981 0 0 0 1 1 1
+H 3981 period=10 high=4 tag=1
+S 3983 0 0 0 0 0 1
+S 3984 0 0 0 1 1 0
+R 3984 period=4 high=3 tag=1
+S 3985 0 0 0 1 1 1
+H 3985 period=4 high=3 tag=1
+S 3993 0 0 0 0 0 1
+S 3994 0 0 0 0 0 0
+S 3995 0 0 0 1 1 0
+R 3995 period=11 high=9 tag=1
+S 3996 0 0 0 0 0 1
+H 3996 period=11 high=9 tag=1
+S 3997 0 0 0 0 0 0
+S 3998 0 0 0 1 1 0
+R 3998 period=3 high=1 tag=1
+S 3999 0 0 0 0 0 1
+H 3999 period=3 high=1 tag=1
+S 4000 0 0 0 1 1 0
+R 4000 period=2 high=1 tag=1
+S 4001 0 0 0 1 1 1
+H 4001 period=2 high=1 tag=1
+S 4002 0 0 0 0 0 1
+S 4003 0 0 0 1 1 0
+R 4003 period=3 high=2 tag=1
+S 4004 0 0 0 1 1 1
+H 4004 period=3 high=2 tag=1
+S 4012 0 0 0 0 0 1
+S 4013 0 0 0 1 1 0
+R 4013 period=10 high=9 tag=1
+S 4014 0 0 0 1 1 1
+H 4014 period=10 high=9 tag=1
+S 4015 0 0 0 0 0 1
+S 4016 0 0 0 0 0 0
+S 4018 0 0 0 1 1 0
+R 4018 period=5 high=2 tag=1
+S 4019 0 0 0 0 0 1
+H 4019 period=5 high=2 tag=1
+S 4020 0 0 0 1 1 0
+R 4020 period=2 high=1 tag=1
+S 4021 0 0 0 0 0 1
+H 4021 period=2 high=1 tag=1
+S 4022 0 0 0 1 1 0
+R 4022 period=2 high=1 tag=1
+S 4023 0 0 0 1 1 1
+H 4023 period=2 high=1 tag=1
+S 4027 0 0 0 0 0 1
+S 4028 0 0 0 0 0 0
+S 4029 0 0 0 1 1 0
+R 4029 period=7 high=5 tag=1
+S 4030 0 0 0 1 1 1
+H 4030 period=7 high=5 tag=1
+S 4032 0 0 0 0 0 1
+S 4033 0 0 0 1 1 0
+R 4033 period=4 high=3 tag=1
+S 4034 0 0 0 1 1 1
+H 4034 period=4 high=3 tag=1
+S 4035 0 0 0 0 0 1
+S 4036 0 0 0 1 1 0
+R 4036 period=3 high=2 tag=1
+S 4037 0 0 0 0 0 1
+H 4037 period=3 high=2 tag=1
+S 4038 0 0 0 0 0 0
+S 4039 0 0 0 1 1 0
+R 4039 period=3 high=1 tag=1
+S 4040 0 0 0 1 1 1
+H 4040 period=3 high=1 tag=1
+S 4042 0 0 0 0 0 1
+S 4043 0 0 0 0 0 0
+S 4044 0 0 0 1 1 0
+R 4044 period=5 high=3 tag=1
+S 4045 0 0 0 1 1 1
+H 4045 period=5 high=3 tag=1
+S 4046 0 0 0 0 0 1
+S 4047 0 0 0 0 0 0
+S 4048 0 0 0 1 1 0
+R 4048 period=4 high=2 tag=1
+S 4049 0 0 0 1 1 1
+H 4049 period=4 high=2 tag=1
+S 4052 0 0 0 0 0 1
+S 4053 0 0 0 0 0 0
+S 4054 0 0 0 1 1 0
+R 4054 period=6 high=4 tag=1
+S 4055 0 0 0 1 1 1
+H 4055 period=6 high=4 tag=1
+S 4056 0 0 0 0 0 1
+S 4057 0 0 0 0 0 0
+S 4065 0 0 1 1 1 0
+S 4066 0 0 0 1 1 1
+S 4069 0 0 0 0 0 1
+S 4070 0 0 0 0 0 0
+S 4080 0 0 1 1 1 0
+S 4081 0 1 0 0 0 1
+S 4082 1 0 0 0 0 0
+S 4083 0 0 0 1 1 0
+S 4084 0 0 0 1 1 1
+S 4085 0 0 0 0 0 1
+S 4086 0 0 0 0 0 0
+S 4088 0 0 0 1 1 0
+S 4089 0 0 0 0 0 1
+S 4090 0 0 0 0 0 0
+S 4097 0 0 1 1 1 0
+S 4098 0 1 0 0 0 1
+S 4099 0 0 0 0 0 0
+S 4100 0 0 0 1 1 0
+S 4101 0 0 0 1 1 1
+S 4103 0 0 0 0 0 1
+S 4104 0 0 0 1 1 0
+S 4105 0 0 0 0 0 1
+S 4106 0 0 0 0 0 0
+S 4110 0 0 0 1 1 0
+S 4111 0 0 0 1 1 1
+S 4113 0 0 0 0 0 1
+S 4114 0 0 0 1 1 0
+S 4115 0 0 0 0 0 1
+S 4116 0 0 0 0 0 0
+S 4119 0 0 0 1 1 0
+S 4120 0 0 0 0 0 1
+S 4121 0 0 0 1 1 0
+S 4122 0 0 0 0 0 1
+S 4123 0 0 0 0 0 0
+S 4124 0 0 0 1 1 0
+S 4125 0 0 0 1 1 1
+S 4127 0 0 0 0 0 1
+S 4128 0 0 0 1 1 0
+S 4129 0 0 0 0 0 1
+S 4130 0 0 0 1 1 0
+S 4131 0 0 0 1 1 1
+S 4132 0 0 0 0 0 1
+S 4133 0 0 0 1 1 0
+S 4134 0 0 0 1 1 1
+S 4135 0 0 0 0 0 1
+S 4136 0 0 0 1 1 0
+S 4137 0 0 0 1 1 1
+S 4138 0 0 0 0 0 1
+S 4139 0 0 0 1 1 0
+S 4140 0 0 0 1 1 1
+S 4143 0 0 0 0 0 1
+S 4144 0 0 0 0 0 0
+S 4147 0 0 0 1 1 0
+S 4148 0 0 0 0 0 1
+S 4149 0 0 0 1 1 0
+S 4150 0 0 0 0 0 1
+S 4151 0 0 0 0 0 0
+S 4152 0 0 0 1 1 0
+S 4153 0 0 0 1 1 1
+S 4154 0 0 0 0 0 1
+S 4155 0 0 0 0 0 0
+S 4157 0 0 0 1 1 0
+S 4158 0 0 0 1 1 1
+S 4162 0 0 0 0 0 1
+S 4163 0 0 0 1 1 0
+S 4164 0 0 0 0 0 1
+S 4165 0 0 0 0 0 0
+S 4166 0 0 0 1 1 0
+S 4167 0 0 0 1 1 1
+S 4169 0 0 0 0 0 1
+S 4170 0 0 0 1 1 0
+S 4171 0 0 0 1 1 1
+S 4174 0 0 0 0 0 1
+S 4175 0 0 0 0 0 0
+S 4180 0 0 0 1 1 0
+S 4181 0 0 0 1 1 1
+S 4185 0 0 0 0 0 1
+S 4186 0 0 0 1 1 0
+S 4187 0 0 0 1 1 1
+S 4189 0 0 0 0 0 1
+S 4190 0 0 0 1 1 0
+S 4191 0 0 0 0 0 1
+S 4192 0 0 0 1 1 0
+S 4193 0 0 0 1 1 1
+S 4195 0 0 0 0 0 1
+S 4196 0 0 0 1 1 0
+S 4197 0 0 0 1 1 1
+S 4201 0 0 0 0 0 1
+S 4202 0 0 0 1 1 0
+S 4203 0 0 0 1 1 1
+S 4204 0 0 0 0 0 1
+S 4205 0 0 0 1 1 0
+S 4206 0 0 0 0 0 1
+S 4207 0 0 0 1 1 0
+S 4208 0 0 0 0 0 1
+S 4209 0 0 0 0 0 0
+S 4210 0 0 0 1 1 0
+S 4211 0 0 0 1 1 1
+S 4212 0 0 0 0 0 1
+S 4213 0 0 0 0 0 0
+S 4221 0 0 1 1 1 0
+S 4222 0 0 0 1 1 1
+S 4223 0 0 0 0 0 1
+S 4224 0 0 0 1 1 0
+S 4225 0 0 0 1 1 1
+S 4229 0 0 0 0 0 1
+S 4230 0 0 0 0 0 0
+S 4231 0 0 0 1 1 0
+R 4231 period=7 high=5 tag=1
+S 4232 0 0 0 1 1 1
+H 4232 period=7 high=5 tag=1
+S 4236 0 0 0 0 0 1
+S 4237 0 0 0 0 0 0
+S 4239 0 0 0 1 1 0
+R 4239 period=8 high=5 tag=1
+S 4240 0 0 0 1 1 1
+H 4240 period=8 high=5 tag=1
+S 4241 0 0 0 0 0 1
+S 4242 0 0 0 0 0 0
+S 4244 0 0 0 1 1 0
+R 4244 period=5 high=2 tag=1
+S 4245 0 0 0 1 1 1
+H 4245 period=5 high=2 tag=1
+S 4251 0 0 0 0 0 1
+S 4252 0 0 0 1 1 0
+R 4252 period=8 high=7 tag=1
+S 4253 0 0 0 1 1 1
+H 4253 period=8 high=7 tag=1
+S 4254 0 0 0 0 0 1
+S 4255 0 0 0 0 0 0
+S 4258 0 0 0 1 1 0
+R 4258 period=6 high=2 tag=1
+S 4259 0 0 0 0 0 1
+H 4259 period=6 high=2 tag=1
+S 4260 0 0 0 0 0 0
+S 4261 0 0 0 1 1 0
+R 4261 period=3 high=1 tag=1
+S 4262 0 0 0 0 0 1
+H 4262 period=3 high=1 tag=1
+S 4263 0 0 0 0 0 0
+S 4264 0 0 0 1 1 0
+R 4264 period=3 high=1 tag=1
+S 4265 0 0 0 0 0 1
+H 4265 period=3 high=1 tag=1
+S 4266 0 0 0 1 1 0
+R 4266 period=2 high=1 tag=1
+S 4267 0 0 0 1 1 1
+H 4267 period=2 high=1 tag=1
+S 4271 0 0 0 0 0 1
+S 4272 0 0 0 1 1 0
+R 4272 period=6 high=5 tag=1
+S 4273 0 0 0 1 1 1
+H 4273 period=6 high=5 tag=1
+S 4280 0 0 0 0 0 1
+S 4281 0 0 0 0 0 0
+S 4282 0 0 0 1 1 0
+R 4282 period=10 high=8 tag=1
+S 4283 0 0 0 0 0 1
+H 4283 period=10 high=8 tag=1
+S 4284 0 0 0 0 0 0
+S 4285 0 0 0 1 1 0
+R 4285 period=3 high=1 tag=1
+S 4286 0 0 0 0 0 1
+H 4286 period=3 high=1 tag=1
+S 4287 0 0 0 1 1 0
+R 4287 period=2 high=1 tag=1
+S 4288 0 0 0 0 0 1
+H 4288 period=2 high=1 tag=1
+S 4289 0 0 0 0 0 0
+S 4291 0 0 0 1 1 0
+R 4291 period=4 high=1 tag=1
+S 4292 0 0 0 0 0 1
+H 4292 period=4 high=1 tag=1
+S 4293 0 0 0 0 0 0
+S 4294 0 0 0 1 1 0
+R 4294 period=3 high=1 tag=1
+S 4295 0 0 0 0 0 1
+H 4295 period=3 high=1 tag=1
+S 4296 0 0 0 1 1 0
+R 4296 period=2 high=1 tag=1
+S 4297 0 0 0 0 0 1
+H 4297 period=2 high=1 tag=1
+S 4298 0 0 0 1 1 0
+R 4298 period=2 high=1 tag=1
+S 4299 0 0 0 1 1 1
+H 4299 period=2 high=1 tag=1
+S 4300 0 0 0 0 0 1
+S 4301 0 0 0 1 1 0
+R 4301 period=3 high=2 tag=1
+S 4302 0 0 0 0 0 1
+H 4302 period=3 high=2 tag=1
+S 4303 0 0 0 1 1 0
+R 4303 period=2 high=1 tag=1
+S 4304 0 0 0 1 1 1
+H 4304 period=2 high=1 tag=1
+S 4307 0 0 0 0 0 1
+S 4308 0 0 0 0 0 0
+S 4310 0 0 0 1 1 0
+R 4310 period=7 high=4 tag=1
+S 4311 0 0 0 0 0 1
+H 4311 period=7 high=4 tag=1
+S 4312 0 0 0 1 1 0
+R 4312 period=2 high=1 tag=1
+S 4313 0 0 0 0 0 1
+H 4313 period=2 high=1 tag=1
+S 4314 0 0 0 0 0 0
+S 4316 0 0 0 1 1 0
+R 4316 period=4 high=1 tag=1
+S 4317 0 0 0 0 0 1
+H 4317 period=4 high=1 tag=1
+S 4318 0 0 0 0 0 0
+S 4319 0 0 0 1 1 0
+R 4319 period=3 high=1 tag=1
+S 4320 0 0 0 0 0 1
+H 4320 period=3 high=1 tag=1
+S 4321 0 0 0 0 0 0
+S 4325 0 0 0 1 1 0
+R 4325 period=6 high=1 tag=1
+S 4326 0 0 0 1 1 1
+H 4326 period=6 high=1 tag=1
+S 4328 0 0 0 0 0 1
+S 4329 0 0 0 1 1 0
+R 4329 period=4 high=3 tag=1
+S 4330 0 0 0 0 0 1
+H 4330 period=4 high=3 tag=1
+S 4331 0 0 0 0 0 0
+S 4332 0 0 0 1 1 0
+R 4332 period=3 high=1 tag=1
+S 4333 0 0 0 0 0 1
+H 4333 period=3 high=1 tag=1
+S 4334 0 0 0 0 0 0
+S 4335 0 0 0 1 1 0
+R 4335 period=3 high=1 tag=1
+S 4336 0 0 0 0 0 1
+H 4336 period=3 high=1 tag=1
+S 4337 0 0 0 0 0 0
+S 4341 0 0 0 1 1 0
+R 4341 period=6 high=1 tag=1
+S 4342 0 0 0 0 0 1
+H 4342 period=6 high=1 tag=1
+S 4343 0 0 0 1 1 0
+R 4343 period=2 high=1 tag=1
+S 4344 0 0 0 0 0 1
+H 4344 period=2 high=1 tag=1
+S 4345 0 0 0 1 1 0
+R 4345 period=2 high=1 tag=1
+S 4346 0 0 0 1 1 1
+H 4346 period=2 high=1 tag=1
+S 4348 0 0 0 0 0 1
+S 4349 0 0 0 0 0 0
+S 4354 0 0 0 1 1 0
+R 4354 period=9 high=3 tag=1
+S 4355 0 0 0 1 1 1
+H 4355 period=9 high=3 tag=1
+S 4356 0 0 0 0 0 1
+S 4357 0 0 0 1 1 0
+R 4357 period=3 high=2 tag=1
+S 4358 0 0 0 0 0 1
+H 4358 period=3 high=2 tag=1
+S 4359 0 0 0 0 0 0
+S 4361 0 0 0 1 1 0
+R 4361 period=4 high=1 tag=1
+S 4362 0 0 0 1 1 1
+H 4362 period=4 high=1 tag=1
+S 4366 0 0 0 0 0 1
+S 4367 0 0 0 1 1 0
+R 4367 period=6 high=5 tag=1
+S 4368 0 0 0 0 0 1
+H 4368 period=6 high=5 tag=1
+S 4369 0 0 0 0 0 0
+S 4373 0 0 0 1 1 0
+R 4373 period=6 high=1 tag=1
+S 4374 0 0 0 1 1 1
+H 4374 period=6 high=1 tag=1
+S 4377 0 0 0 0 0 1
+S 4378 0 0 0 0 0 0
+S 4383 0 0 0 1 1 0
+R 4383 period=10 high=4 tag=1
+S 4384 0 0 0 0 0 1
+H 4384 period=10 high=4 tag=1
+S 4385 0 0 0 0 0 0
+S 4393 0 0 1 1 1 0
+S 4394 0 1 0 0 0 1
+S 4395 0 0 0 1 1 0
+S 4396 0 0 0 1 1 1
+S 4397 0 0 0 0 0 1
+S 4398 0 0 0 0 0 0
+S 4399 0 0 0 1 1 0
+S 4400 0 0 0 1 1 1
+S 4401 0 0 0 0 0 1
+S 4402 0 0 0 1 1 0
+S 4403 0 0 0 1 1 1
+S 4404 0 0 0 0 0 1
+S 4405 0 0 0 1 1 0
+S 4406 0 0 0 0 0 1
+S 4407 0 0 0 0 0 0
+S 4408 0 0 0 1 1 0
+S 4409 0 0 0 1 1 1
+S 4410 0 0 0 0 0 1
+S 4411 0 0 0 1 1 0
+S 4412 0 0 0 1 1 1
+S 4413 0 0 0 0 0 1
+S 4414 0 0 0 1 1 0
+S 4415 0 0 0 1 1 1
+S 4416 0 0 0 0 0 1
+S 4417 0 0 0 0 0 0
+S 4418 0 0 0 1 1 0
+S 4419 0 0 0 1 1 1
+S 4420 0 0 0 0 0 1
+S 4421 0 0 0 0 0 0
+S 4422 0 0 0 1 1 0
+S 4423 0 0 0 1 1 1
+S 4425 0 0 0 0 0 1
+S 4426 0 0 0 1 1 0
+S 4427 0 0 0 1 1 1
+S 4429 0 0 0 0 0 1
+S 4430 0 0 0 0 0 0
+S 4432 0 0 0 1 1 0
+S 4433 0 0 0 0 0 1
+S 4434 0 0 0 1 1 0
+S 4435 0 0 0 0 0 1
+S 4436 0 0 0 0 0 0
+S 4443 0 0 1 1 1 0
+S 4444 0 0 0 1 1 1
+S 4446 0 0 0 0 0 1
+S 4447 0 0 0 0 0 0
+S 4448 0 0 0 1 1 0
+S 4449 0 0 0 0 0 1
+S 4450 0 0 0 1 1 0
+R 4450 period=2 high=1 tag=1
+S 4451 0 0 0 0 0 1
+H 4451 period=2 high=1 tag=1
+S 4452 0 0 0 1 1 0
+R 4452 period=2 high=1 tag=1
+S 4453 0 0 0 1 1 1
+H 4453 period=2 high=1 tag=1
+S 4454 0 0 0 0 0 1
+S 4455 0 0 0 0 0 0
+S 4458 0 0 0 1 1 0
+R 4458 period=6 high=2 tag=1
+S 4459 0 0 0 0 0 1
+H 4459 period=6 high=2 tag=1
+S 4460 0 0 0 0 0 0
+S 4464 0 0 0 1 1 0
+R 4464 period=6 high=1 tag=1
+S 4465 0 0 0 0 0 1
+H 4465 period=6 high=1 tag=1
+S 4466 0 0 0 1 1 0
+R 4466 period=2 high=1 tag=1
+S 4467 0 0 0 0 0 1
+H 4467 period=2 high=1 tag=1
+S 4468 0 0 0 1 1 0
+R 4468 period=2 high=1 tag=1
+S 4469 0 0 0 1 1 1
+H 4469 period=2 high=1 tag=1
+S 4471 0 0 0 0 0 1
+S 4472 0 0 0 0 0 0
+S 4474 0 0 0 1 1 0
+R 4474 period=6 high=3 tag=1
+S 4475 0 0 0 1 1 1
+H 4475 period=6 high=3 tag=1
+S 4478 0 0 0 0 0 1
+S 4479 0 0 0 1 1 0
+R 4479 period=5 high=4 tag=1
+S 4480 0 0 0 1 1 1
+H 4480 period=5 high=4 tag=1
+S 4481 0 0 0 0 0 1
+S 4482 0 0 0 0 0 0
+S 4484 0 0 0 1 1 0
+R 4484 period=5 high=2 tag=1
+S 4485 0 0 0 0 0 1
+H 4485 period=5 high=2 tag=1
+S 4486 0 0 0 0 0 0
+S 4488 0 0 0 1 1 0
+R 4488 period=4 high=1 tag=1
+S 4489 0 0 0 1 1 1
+H 4489 period=4 high=1 tag=1
+S 4490 0 0 0 0 0 1
+S 4491 0 0 0 0 0 0
+S 4492 0 0 0 1 1 0
+R 4492 period=4 high=2 tag=1
+S 4493 0 0 0 1 1 1
+H 4493 period=4 high=2 tag=1
+S 4494 0 0 0 0 0 1
+S 4495 0 0 0 1 1 0
+R 4495 period=3 high=2 tag=1
+S 4496 0 0 0 1 1 1
+H 4496 period=3 high=2 tag=1
+S 4498 0 0 0 0 0 1
+S 4499 0 0 0 0 0 0
+S 4500 0 0 0 1 1 0
+R 4500 period=5 high=3 tag=1
+S 4501 0 0 0 1 1 1
+H 4501 period=5 high=3 tag=1
+S 4502 0 0 0 0 0 1
+S 4503 0 0 0 1 1 0
+R 4503 period=3 high=2 tag=1
+S 4504 0 0 0 1 1 1
+H 4504 period=3 high=2 tag=1
+S 4505 0 0 0 0 0 1
+S 4506 0 0 0 1 1 0
+R 4506 period=3 high=2 tag=1
+S 4507 0 0 0 0 0 1
+H 4507 period=3 high=2 tag=1
+S 4508 0 0 0 0 0 0
+S 4509 0 0 0 1 1 0
+R 4509 period=3 high=1 tag=1
+S 4510 0 0 0 0 0 1
+H 4510 period=3 high=1 tag=1
+S 4511 0 0 0 1 1 0
+R 4511 period=2 high=1 tag=1
+S 4512 0 0 0 0 0 1
+H 4512 period=2 high=1 tag=1
+S 4513 0 0 0 1 1 0
+R 4513 period=2 high=1 tag=1
+S 4514 0 0 0 0 0 1
+H 4514 period=2 high=1 tag=1
+S 4515 0 0 0 0 0 0
+S 4516 0 0 0 1 1 0
+R 4516 period=3 high=1 tag=1
+S 4517 0 0 0 0 0 1
+H 4517 period=3 high=1 tag=1
+S 4518 0 0 0 0 0 0
+S 4519 0 0 0 1 1 0
+R 4519 period=3 high=1 tag=1
+S 4520 0 0 0 0 0 1
+H 4520 period=3 high=1 tag=1
+S 4521 0 0 0 0 0 0
+S 4522 0 0 0 1 1 0
+R 4522 period=3 high=1 tag=1
+S 4523 0 0 0 0 0 1
+H 4523 period=3 high=1 tag=1
+S 4524 0 0 0 0 0 0
+S 4526 0 0 0 1 1 0
+R 4526 period=4 high=1 tag=1
+S 4527 0 0 0 0 0 1
+H 4527 period=4 high=1 tag=1
+S 4528 0 0 0 1 1 0
+R 4528 period=2 high=1 tag=1
+S 4529 0 0 0 0 0 1
+H 4529 period=2 high=1 tag=1
+S 4530 0 0 0 1 1 0
+R 4530 period=2 high=1 tag=1
+S 4531 0 0 0 0 0 1
+H 4531 period=2 high=1 tag=1
+S 4532 0 0 0 0 0 0
+S 4536 0 0 0 1 1 0
+R 4536 period=6 high=1 tag=1
+S 4537 0 0 0 1 1 1
+H 4537 period=6 high=1 tag=1
+S 4538 0 0 0 0 0 1
+S 4539 0 0 0 1 1 0
+R 4539 period=3 high=2 tag=1
+S 4540 0 0 0 1 1 1
+H 4540 period=3 high=2 tag=1
+S 4541 0 0 0 0 0 1
+S 4542 0 0 0 1 1 0
+R 4542 period=3 high=2 tag=1
+S 4543 0 0 0 0 0 1
+H 4543 period=3 high=2 tag=1
+S 4544 0 0 0 0 0 0
+S 4545 0 0 0 1 1 0
+R 4545 period=3 high=1 tag=1
+S 4546 0 0 0 1 1 1
+H 4546 period=3 high=1 tag=1
+S 4547 0 0 0 0 0 1
+S 4548 0 0 0 1 1 0
+R 4548 period=3 high=2 tag=1
+S 4549 0 0 0 1 1 1
+H 4549 period=3 high=2 tag=1
+S 4553 0 0 0 0 0 1
+S 4554 0 0 0 0 0 0
+S 4559 0 0 0 1 1 0
+R 4559 period=11 high=5 tag=1
+S 4560 0 0 0 0 0 1
+H 4560 period=11 high=5 tag=1
+S 4561 0 0 0 0 0 0
+S 4564 0 0 0 1 1 0
+R 4564 period=5 high=1 tag=1
+S 4565 0 0 0 1 1 1
+H 4565 period=5 high=1 tag=1
+S 4566 0 0 0 0 0 1
+S 4567 0 0 0 0 0 0
+S 4569 0 0 0 1 1 0
+R 4569 period=5 high=2 tag=1
+S 4570 0 0 0 0 0 1
+H 4570 period=5 high=2 tag=1
+S 4571 0 0 0 1 1 0
+R 4571 period=2 high=1 tag=1
+S 4572 0 0 0 1 1 1
+H 4572 period=2 high=1 tag=1
+S 4574 0 0 0 0 0 1
+S 4575 0 0 0 1 1 0
+R 4575 period=4 high=3 tag=1
+S 4576 0 0 0 1 1 1
+H 4576 period=4 high=3 tag=1
+S 4579 0 0 0 0 0 1
+S 4580 0 0 0 0 0 0
+S 4582 0 0 0 1 1 0
+R 4582 period=7 high=4 tag=1
+S 4583 0 0 0 0 0 1
+H 4583 period=7 high=4 tag=1
+S 4584 0 0 0 0 0 0
+S 4586 0 0 0 1 1 0
+R 4586 period=4 high=1 tag=1
+S 4587 0 0 0 0 0 1
+H 4587 period=4 high=1 tag=1
+S 4588 0 0 0 1 1 0
+R 4588 period=2 high=1 tag=1
+S 4589 0 0 0 1 1 1
+H 4589 period=2 high=1 tag=1
+S 4590 0 0 0 0 0 1
+S 4591 0 0 0 1 1 0
+R 4591 period=3 high=2 tag=1
+S 4592 0 0 0 1 1 1
+H 4592 period=3 high=2 tag=1
+S 4597 0 0 0 0 0 1
+S 4598 0 0 0 0 0 0
+S 4599 0 0 0 1 1 0
+R 4599 period=8 high=6 tag=1
+S 4600 0 0 0 0 0 1
+H 4600 period=8 high=6 tag=1
+S 4601 0 0 0 0 0 0
+S 4603 0 0 0 1 1 0
+R 4603 period=4 high=1 tag=1
+S 4604 0 0 0 1 1 1
+H 4604 period=4 high=1 tag=1
+S 4606 0 0 0 0 0 1
+S 4607 0 0 0 0 0 0
+S 4609 0 0 0 1 1 0
+R 4609 period=6 high=3 tag=1
+S 4610 0 0 0 1 1 1
+H 4610 period=6 high=3 tag=1
+S 4612 0 0 0 0 0 1
+S 4613 0 0 0 0 0 0
+S 4615 0 0 0 1 1 0
+R 4615 period=6 high=3 tag=1
+S 4616 0 0 0 0 0 1
+H 4616 period=6 high=3 tag=1
+S 4617 0 0 0 0 0 0
+S 4620 0 0 0 1 1 0
+R 4620 period=5 high=1 tag=1
+S 4621 0 0 0 1 1 1
+H 4621 period=5 high=1 tag=1
+S 4622 0 0 0 0 0 1
+S 4623 0 0 0 0 0 0
+S 4624 0 0 0 1 1 0
+R 4624 period=4 high=2 tag=1
+S 4625 0 0 0 1 1 1
+H 4625 period=4 high=2 tag=1
+S 4626 0 0 0 0 0 1
+S 4627 0 0 0 1 1 0
+R 4627 period=3 high=2 tag=1
+S 4628 0 0 0 0 0 1
+H 4628 period=3 high=2 tag=1
+S 4629 0 0 0 1 1 0
+R 4629 period=2 high=1 tag=1
+S 4630 0 0 0 1 1 1
+H 4630 period=2 high=1 tag=1
+S 4631 0 0 0 0 0 1
+S 4632 0 0 0 0 0 0
+S 4633 0 0 0 1 1 0
+R 4633 period=4 high=2 tag=1
+S 4634 0 0 0 1 1 1
+H 4634 period=4 high=2 tag=1
+S 4637 0 0 0 0 0 1
+S 4638 0 0 0 1 1 0
+R 4638 period=5 high=4 tag=1
+S 4639 0 0 0 1 1 1
+H 4639 period=5 high=4 tag=1
+S 4640 0 0 0 0 0 1
+S 4641 0 0 0 0 0 0
+S 4646 0 0 0 1 1 0
+R 4646 period=8 high=2 tag=1
+S 4647 0 0 0 1 1 1
+H 4647 period=8 high=2 tag=1
+S 4648 0 0 0 0 0 1
+S 4649 0 0 0 0 0 0
+S 4651 0 0 0 1 1 0
+R 4651 period=5 high=2 tag=1
+S 4652 0 0 0 1 1 1
+H 4652 period=5 high=2 tag=1
+S 4654 0 0 0 0 0 1
+S 4655 0 0 0 0 0 0
+S 4658 0 0 0 1 1 0
+R 4658 period=7 high=3 tag=1
+S 4659 0 0 0 0 0 1
+H 4659 period=7 high=3 tag=1
+S 4660 0 0 0 0 0 0
+S 4662 0 0 0 1 1 0
+R 4662 period=4 high=1 tag=1
+S 4663 0 0 0 1 1 1
+H 4663 period=4 high=1 tag=1
+S 4664 0 0 0 0 0 1
+S 4665 0 0 0 0 0 0
+S 4666 0 0 0 1 1 0
+R 4666 period=4 high=2 tag=1
+S 4667 0 0 0 0 0 1
+H 4667 period=4 high=2 tag=1
+S 4668 0 0 0 1 1 0
+R 4668 period=2 high=1 tag=1
+S 4669 0 0 0 0 0 1
+H 4669 period=2 high=1 tag=1
+S 4670 0 0 0 0 0 0
+S 4671 0 0 0 1 1 0
+R 4671 period=3 high=1 tag=1
+S 4672 0 0 0 1 1 1
+H 4672 period=3 high=1 tag=1
+S 4676 0 0 0 0 0 1
+S 4677 0 0 0 1 1 0
+R 4677 period=6 high=5 tag=1
+S 4678 0 0 0 0 0 1
+H 4678 period=6 high=5 tag=1
+S 4679 0 0 0 0 0 0
+S 4680 0 0 0 1 1 0
+R 4680 period=3 high=1 tag=1
+S 4681 0 0 0 1 1 1
+H 4681 period=3 high=1 tag=1
+S 4682 0 0 0 0 0 1
+S 4683 0 0 0 0 0 0
+S 4688 0 0 0 1 1 0
+R 4688 period=8 high=2 tag=1
+S 4689 0 0 0 1 1 1
+H 4689 period=8 high=2 tag=1
+S 4690 0 0 0 0 0 1
+S 4691 0 0 0 1 1 0
+R 4691 period=3 high=2 tag=1
+S 4692 0 0 0 1 1 1
+H 4692 period=3 high=2 tag=1
+S 4694 0 0 0 0 0 1
+S 4695 0 0 0 1 1 0
+R 4695 period=4 high=3 tag=1
+S 4696 0 0 0 0 0 1
+H 4696 period=4 high=3 tag=1
+S 4697 0 0 0 0 0 0
+S 4698 0 0 0 1 1 0
+R 4698 period=3 high=1 tag=1
+S 4699 0 0 0 0 0 1
+H 4699 period=3 high=1 tag=1
+S 4700 0 0 0 0 0 0
+S 4702 0 0 0 1 1 0
+R 4702 period=4 high=1 tag=1
+S 4703 0 0 0 1 1 1
+H 4703 period=4 high=1 tag=1
+S 4708 0 0 0 0 0 1
+S 4709 0 0 0 0 0 0
+S 4710 0 0 0 1 1 0
+R 4710 period=8 high=6 tag=1
+S 4711 0 0 0 0 0 1
+H 4711 period=8 high=6 tag=1
+S 4712 0 0 0 0 0 0
+S 4714 0 0 0 1 1 0
+R 4714 period=4 high=1 tag=1
+S 4715 0 0 0 0 0 1
+H 4715 period=4 high=1 tag=1
+S 4716 0 0 0 1 1 0
+R 4716 period=2 high=1 tag=1
+S 4717 0 0 0 0 0 1
+H 4717 period=2 high=1 tag=1
+S 4718 0 0 0 1 1 0
+R 4718 period=2 high=1 tag=1
+S 4719 0 0 0 1 1 1
+H 4719 period=2 high=1 tag=1
+S 4720 0 0 0 0 0 1
+S 4721 0 0 0 0 0 0
+S 4723 0 0 0 1 1 0
+R 4723 period=5 high=2 tag=1
+S 4724 0 0 0 1 1 1
+H 4724 period=5 high=2 tag=1
+S 4725 0 0 0 0 0 1
+S 4726 0 0 0 0 0 0
+S 4728 0 0 0 1 1 0
+R 4728 period=5 high=2 tag=1
+S 4729 0 0 0 0 0 1
+H 4729 period=5 high=2 tag=1
+S 4730 0 0 0 0 0 0
+S 4732 0 0 0 1 1 0
+R 4732 period=4 high=1 tag=1
+S 4733 0 0 0 1 1 1
+H 4733 period=4 high=1 tag=1
+S 4736 0 0 0 0 0 1
+S 4737 0 0 0 0 0 0
+S 4739 0 0 0 1 1 0
+R 4739 period=7 high=4 tag=1
+S 4740 0 0 0 0 0 1
+H 4740 period=7 high=4 tag=1
+S 4741 0 0 0 0 0 0
+S 4742 0 0 0 1 1 0
+R 4742 period=3 high=1 tag=1
+S 4743 0 0 0 1 1 1
+H 4743 period=3 high=1 tag=1
+S 4744 0 0 0 0 0 1
+S 4745 0 0 0 0 0 0
+S 4748 0 0 0 1 1 0
+R 4748 period=6 high=2 tag=1
+S 4749 0 0 0 1 1 1
+H 4749 period=6 high=2 tag=1
+S 4750 0 0 0 0 0 1
+S 4751 0 0 0 0 0 0
+S 4754 0 0 0 1 1 0
+R 4754 period=6 high=2 tag=1
+S 4755 0 0 0 1 1 1
+H 4755 period=6 high=2 tag=1
+S 4756 0 0 0 0 0 1
+S 4757 0 0 0 0 0 0
+S 4760 0 0 0 1 1 0
+R 4760 period=6 high=2 tag=1
+S 4761 0 0 0 0 0 1
+H 4761 period=6 high=2 tag=1
+S 4762 0 0 0 1 1 0
+R 4762 period=2 high=1 tag=1
+S 4763 0 0 0 1 1 1
+H 4763 period=2 high=1 tag=1
+S 4764 0 0 0 0 0 1
+S 4765 0 0 0 1 1 0
+R 4765 period=3 high=2 tag=1
+S 4766 0 0 0 0 0 1
+H 4766 period=3 high=2 tag=1
+S 4767 0 0 0 0 0 0
+S 4770 0 0 0 1 1 0
+R 4770 period=5 high=1 tag=1
+S 4771 0 0 0 1 1 1
+H 4771 period=5 high=1 tag=1
+S 4772 0 0 0 0 0 1
+S 4773 0 0 0 1 1 0
+R 4773 period=3 high=2 tag=1
+S 4774 0 0 0 0 0 1
+H 4774 period=3 high=2 tag=1
+S 4775 0 0 0 0 0 0
+S 4776 0 0 0 1 1 0
+R 4776 period=3 high=1 tag=1
+S 4777 0 0 0 0 0 1
+H 4777 period=3 high=1 tag=1
+S 4778 0 0 0 1 1 0
+R 4778 period=2 high=1 tag=1
+S 4779 0 0 0 1 1 1
+H 4779 period=2 high=1 tag=1
+S 4783 0 0 0 0 0 1
+S 4784 0 0 0 0 0 0
+S 4785 0 0 0 1 1 0
+R 4785 period=7 high=5 tag=1
+S 4786 0 0 0 0 0 1
+H 4786 period=7 high=5 tag=1
+S 4787 0 0 0 1 1 0
+R 4787 period=2 high=1 tag=1
+S 4788 0 0 0 1 1 1
+H 4788 period=2 high=1 tag=1
+S 4789 0 0 0 0 0 1
+S 4790 0 0 0 1 1 0
+R 4790 period=3 high=2 tag=1
+S 4791 0 0 0 1 1 1
+H 4791 period=3 high=2 tag=1
+S 4792 0 0 0 0 0 1
+S 4793 0 0 0 0 0 0
+S 4794 0 0 0 1 1 0
+R 4794 period=4 high=2 tag=1
+S 4795 0 0 0 1 1 1
+H 4795 period=4 high=2 tag=1
+S 4796 0 0 0 0 0 1
+S 4797 0 0 0 0 0 0
+S 4798 0 0 0 1 1 0
+R 4798 period=4 high=2 tag=1
+S 4799 0 0 0 1 1 1
+H 4799 period=4 high=2 tag=1
+S 4802 0 0 0 0 0 1
+S 4803 0 0 0 1 1 0
+R 4803 period=5 high=4 tag=1
+S 4804 0 0 0 0 0 1
+H 4804 period=5 high=4 tag=1
+S 4805 0 0 0 0 0 0
+S 4807 0 0 0 1 1 0
+R 4807 period=4 high=1 tag=1
+S 4808 0 0 0 0 0 1
+H 4808 period=4 high=1 tag=1
+S 4809 0 0 0 0 0 0
+S 4811 0 0 0 1 1 0
+R 4811 period=4 high=1 tag=1
+S 4812 0 0 0 1 1 1
+H 4812 period=4 high=1 tag=1
+S 4813 0 0 0 0 0 1
+S 4814 0 0 0 0 0 0
+S 4816 0 0 0 1 1 0
+R 4816 period=5 high=2 tag=1
+S 4817 0 0 0 1 1 1
+H 4817 period=5 high=2 tag=1
+S 4818 0 0 0 0 0 1
+S 4819 0 0 0 0 0 0
+S 4821 0 0 0 1 1 0
+R 4821 period=5 high=2 tag=1
+S 4822 0 0 0 1 1 1
+H 4822 period=5 high=2 tag=1
+S 4823 0 0 0 0 0 1
+S 4824 0 0 0 1 1 0
+R 4824 period=3 high=2 tag=1
+S 4825 0 0 0 0 0 1
+H 4825 period=3 high=2 tag=1
+S 4826 0 0 0 0 0 0
+S 4827 0 0 0 1 1 0
+R 4827 period=3 high=1 tag=1
+S 4828 0 0 0 1 1 1
+H 4828 period=3 high=1 tag=1
+S 4833 0 0 0 0 0 1
+S 4834 0 0 0 0 0 0
+S 4835 0 0 0 1 1 0
+R 4835 period=8 high=6 tag=1
+S 4836 0 0 0 1 1 1
+H 4836 period=8 high=6 tag=1
+S 4837 0 0 0 0 0 1
+S 4838 0 0 0 0 0 0
+S 4846 0 0 1 1 1 0
+S 4847 0 0 0 1 1 1
+S 4849 0 0 0 0 0 1
+S 4850 0 0 0 0 0 0
+S 4851 0 0 0 1 1 0
+S 4852 0 0 0 0 0 1
+S 4853 0 0 0 1 1 0
+R 4853 period=2 high=1 tag=1
+S 4854 0 0 0 1 1 1
+H 4854 period=2 high=1 tag=1
+S 4855 0 0 0 0 0 1
+S 4856 0 0 0 0 0 0
+S 4857 0 0 0 1 1 0
+R 4857 period=4 high=2 tag=1
+S 4858 0 0 0 0 0 1
+H 4858 period=4 high=2 tag=1
+S 4859 0 0 0 0 0 0
+S 4860 0 0 0 1 1 0
+R 4860 period=3 high=1 tag=1
+S 4861 0 0 0 0 0 1
+H 4861 period=3 high=1 tag=1
+S 4862 0 0 0 0 0 0
+S 4863 0 0 0 1 1 0
+R 4863 period=3 high=1 tag=1
+S 4864 0 0 0 0 0 1
+H 4864 period=3 high=1 tag=1
+S 4865 0 0 0 1 1 0
+R 4865 period=2 high=1 tag=1
+S 4866 0 0 0 1 1 1
+H 4866 period=2 high=1 tag=1
+S 4868 0 0 0 0 0 1
+S 4869 0 0 0 0 0 0
+S 4870 0 0 0 1 1 0
+R 4870 period=5 high=3 tag=1
+S 4871 0 0 0 1 1 1
+H 4871 period=5 high=3 tag=1
+S 4872 0 0 0 0 0 1
+S 4873 0 0 0 0 0 0
+S 4875 0 0 0 1 1 0
+R 4875 period=5 high=2 tag=1
+S 4876 0 0 0 0 0 1
+H 4876 period=5 high=2 tag=1
+S 4877 0 0 0 1 1 0
+R 4877 period=2 high=1 tag=1
+S 4878 0 0 0 0 0 1
+H 4878 period=2 high=1 tag=1
+S 4879 0 0 0 1 1 0
+R 4879 period=2 high=1 tag=1
+S 4880 0 0 0 0 0 1
+H 4880 period=2 high=1 tag=1
+S 4881 0 0 0 1 1 0
+R 4881 period=2 high=1 tag=1
+S 4882 0 0 0 0 0 1
+H 4882 period=2 high=1 tag=1
+S 4883 0 0 0 0 0 0
+S 4886 0 0 0 1 1 0
+R 4886 period=5 high=1 tag=1
+S 4887 0 0 0 0 0 1
+H 4887 period=5 high=1 tag=1
+S 4888 0 0 0 0 0 0
+S 4893 0 0 0 1 1 0
+R 4893 period=7 high=1 tag=1
+S 4894 0 0 0 1 1 1
+H 4894 period=7 high=1 tag=1
+S 4896 0 0 0 0 0 1
+S 4897 0 0 0 1 1 0
+R 4897 period=4 high=3 tag=1
+S 4898 0 0 0 0 0 1
+H 4898 period=4 high=3 tag=1
+S 4899 0 0 0 1 1 0
+R 4899 period=2 high=1 tag=1
+S 4900 0 0 0 1 1 1
+H 4900 period=2 high=1 tag=1
+S 4903 0 0 0 0 0 1
+S 4904 0 0 0 1 1 0
+R 4904 period=5 high=4 tag=1
+S 4905 0 0 0 1 1 1
+H 4905 period=5 high=4 tag=1
+S 4906 0 0 0 0 0 1
+S 4907 0 0 0 0 0 0
+S 4908 0 0 0 1 1 0
+R 4908 period=4 high=2 tag=1
+S 4909 0 0 0 0 0 1
+H 4909 period=4 high=2 tag=1
+S 4910 0 0 0 1 1 0
+R 4910 period=2 high=1 tag=1
+S 4911 0 0 0 0 0 1
+H 4911 period=2 high=1 tag=1
+S 4912 0 0 0 1 1 0
+R 4912 period=2 high=1 tag=1
+S 4913 0 0 0 0 0 1
+H 4913 period=2 high=1 tag=1
+S 4914 0 0 0 1 1 0
+R 4914 period=2 high=1 tag=1
+S 4915 0 0 0 0 0 1
+H 4915 period=2 high=1 tag=1
+S 4916 0 0 0 0 0 0
+S 4917 0 0 0 1 1 0
+R 4917 period=3 high=1 tag=1
+S 4918 0 0 0 0 0 1
+H 4918 period=3 high=1 tag=1
+S 4919 0 0 0 0 0 0
+S 4921 0 0 0 1 1 0
+R 4921 period=4 high=1 tag=1
+S 4922 0 0 0 0 0 1
+H 4922 period=4 high=1 tag=1
+S 4923 0 0 0 0 0 0
+S 4924 0 0 0 1 1 0
+R 4924 period=3 high=1 tag=1
+S 4925 0 0 0 0 0 1
+H 4925 period=3 high=1 tag=1
+S 4926 0 0 0 1 1 0
+R 4926 period=2 high=1 tag=1
+S 4927 0 0 0 1 1 1
+H 4927 period=2 high=1 tag=1
+S 4928 0 0 0 0 0 1
+S 4929 0 0 0 0 0 0
+S 4930 0 0 0 1 1 0
+R 4930 period=4 high=2 tag=1
+S 4931 0 0 0 0 0 1
+H 4931 period=4 high=2 tag=1
+S 4932 0 0 0 1 1 0
+R 4932 period=2 high=1 tag=1
+S 4933 0 0 0 0 0 1
+H 4933 period=2 high=1 tag=1
+S 4934 0 0 0 1 1 0
+R 4934 period=2 high=1 tag=1
+S 4935 0 0 0 1 1 1
+H 4935 period=2 high=1 tag=1
+S 4936 0 0 0 0 0 1
+S 4937 0 0 0 0 0 0
+S 4939 0 0 0 1 1 0
+R 4939 period=5 high=2 tag=1
+S 4940 0 0 0 0 0 1
+H 4940 period=5 high=2 tag=1
+S 4941 0 0 0 1 1 0
+R 4941 period=2 high=1 tag=1
+S 4942 0 0 0 0 0 1
+H 4942 period=2 high=1 tag=1
+S 4943 0 0 0 0 0 0
+S 4944 0 0 0 1 1 0
+R 4944 period=3 high=1 tag=1
+S 4945 0 0 0 1 1 1
+H 4945 period=3 high=1 tag=1
+S 4946 0 0 0 0 0 1
+S 4947 0 0 0 1 1 0
+R 4947 period=3 high=2 tag=1
+S 4948 0 0 0 0 0 1
+H 4948 period=3 high=2 tag=1
+S 4949 0 0 0 1 1 0
+R 4949 period=2 high=1 tag=1
+S 4950 0 0 0 1 1 1
+H 4950 period=2 high=1 tag=1
+S 4951 0 0 0 0 0 1
+S 4952 0 0 0 0 0 0
+S 4953 0 0 0 1 1 0
+R 4953 period=4 high=2 tag=1
+S 4954 0 0 0 0 0 1
+H 4954 period=4 high=2 tag=1
+S 4955 0 0 0 1 1 0
+R 4955 period=2 high=1 tag=1
+S 4956 0 0 0 1 1 1
+H 4956 period=2 high=1 tag=1
+S 4960 0 0 0 0 0 1
+S 4961 0 0 0 0 0 0
+S 4962 0 0 0 1 1 0
+R 4962 period=7 high=5 tag=1
+S 4963 0 0 0 0 0 1
+H 4963 period=7 high=5 tag=1
+S 4964 0 0 0 0 0 0
+S 4969 0 0 0 1 1 0
+R 4969 period=7 high=1 tag=1
+S 4970 0 0 0 1 1 1
+H 4970 period=7 high=1 tag=1
+S 4971 0 0 0 0 0 1
+S 4972 0 0 0 0 0 0
+S 4973 0 0 0 1 1 0
+R 4973 period=4 high=2 tag=1
+S 4974 0 0 0 1 1 1
+H 4974 period=4 high=2 tag=1
+S 4977 0 0 0 0 0 1
+S 4978 0 0 0 0 0 0
+S 4980 0 0 0 1 1 0
+R 4980 period=7 high=4 tag=1
+S 4981 0 0 0 1 1 1
+H 4981 period=7 high=4 tag=1
+S 4983 0 0 0 0 0 1
+S 4984 0 0 0 0 0 0
+S 4985 0 0 0 1 1 0
+R 4985 period=5 high=3 tag=1
+S 4986 0 0 0 1 1 1
+H 4986 period=5 high=3 tag=1
+S 4991 0 0 0 0 0 1
+S 4992 0 0 0 0 0 0
+S 4994 0 0 0 1 1 0
+R 4994 period=9 high=6 tag=1
+S 4995 0 0 0 0 0 1
+H 4995 period=9 high=6 tag=1
+S 4996 0 0 0 0 0 0
+S 4997 0 0 0 1 1 0
+R 4997 period=3 high=1 tag=1
+S 4998 0 0 0 0 0 1
+H 4998 period=3 high=1 tag=1
+S 4999 0 0 0 1 1 0
+R 4999 period=2 high=1 tag=1
+S 5000 0 0 0 1 1 1
+H 5000 period=2 high=1 tag=1
+S 5002 0 0 0 0 0 1
+S 5003 0 0 0 0 0 0
+S 5004 0 0 0 1 1 0
+R 5004 period=5 high=3 tag=1
+S 5005 0 0 0 0 0 1
+H 5005 period=5 high=3 tag=1
+S 5006 0 0 0 0 0 0
+S 5009 0 0 0 1 1 0
+R 5009 period=5 high=1 tag=1
+S 5010 0 0 0 0 0 1
+H 5010 period=5 high=1 tag=1
+S 5011 0 0 0 0 0 0
+S 5013 0 0 0 1 1 0
+R 5013 period=4 high=1 tag=1
+S 5014 0 0 0 0 0 1
+H 5014 period=4 high=1 tag=1
+S 5015 0 0 0 1 1 0
+R 5015 period=2 high=1 tag=1
+S 5016 0 0 0 0 0 1
+H 5016 period=2 high=1 tag=1
+S 5017 0 0 0 0 0 0
+S 5018 0 0 0 1 1 0
+R 5018 period=3 high=1 tag=1
+S 5019 0 0 0 1 1 1
+H 5019 period=3 high=1 tag=1
+S 5021 0 0 0 0 0 1
+S 5022 0 0 0 1 1 0
+R 5022 period=4 high=3 tag=1
+S 5023 0 0 0 0 0 1
+H 5023 period=4 high=3 tag=1
+S 5024 0 0 0 1 1 0
+R 5024 period=2 high=1 tag=1
+S 5025 0 0 0 1 1 1
+H 5025 period=2 high=1 tag=1
+S 5026 0 0 0 0 0 1
+S 5027 0 0 0 1 1 0
+R 5027 period=3 high=2 tag=1
+S 5028 0 0 0 1 1 1
+H 5028 period=3 high=2 tag=1
+S 5030 0 0 0 0 0 1
+S 5031 0 0 0 1 1 0
+R 5031 period=4 high=3 tag=1
+S 5032 0 0 0 0 0 1
+H 5032 period=4 high=3 tag=1
+S 5033 0 0 0 0 0 0
+S 5035 0 0 0 1 1 0
+R 5035 period=4 high=1 tag=1
+S 5036 0 0 0 0 0 1
+H 5036 period=4 high=1 tag=1
+S 5037 0 0 0 0 0 0
+S 5040 0 0 0 1 1 0
+R 5040 period=5 high=1 tag=1
+S 5041 0 0 0 1 1 1
+H 5041 period=5 high=1 tag=1
+S 5043 0 0 0 0 0 1
+S 5044 0 0 0 0 0 0
+S 5045 0 0 0 1 1 0
+R 5045 period=5 high=3 tag=1
+S 5046 0 0 0 0 0 1
+H 5046 period=5 high=3 tag=1
+S 5047 0 0 0 1 1 0
+R 5047 period=2 high=1 tag=1
+S 5048 0 0 0 1 1 1
+H 5048 period=2 high=1 tag=1
+S 5050 0 0 0 0 0 1
+S 5051 0 0 0 1 1 0
+R 5051 period=4 high=3 tag=1
+S 5052 0 0 0 0 0 1
+H 5052 period=4 high=3 tag=1
+S 5053 0 0 0 0 0 0
+S 5054 0 0 0 1 1 0
+R 5054 period=3 high=1 tag=1
+S 5055 0 0 0 1 1 1
+H 5055 period=3 high=1 tag=1
+S 5057 0 0 0 0 0 1
+S 5058 0 0 0 1 1 0
+R 5058 period=4 high=3 tag=1
+S 5059 0 0 0 0 0 1
+H 5059 period=4 high=3 tag=1
+S 5060 0 0 0 0 0 0
+S 5061 0 0 0 1 1 0
+R 5061 period=3 high=1 tag=1
+S 5062 0 0 0 0 0 1
+H 5062 period=3 high=1 tag=1
+S 5063 0 0 0 1 1 0
+R 5063 period=2 high=1 tag=1
+S 5064 0 0 0 0 0 1
+H 5064 period=2 high=1 tag=1
+S 5065 0 0 0 1 1 0
+R 5065 period=2 high=1 tag=1
+S 5066 0 0 0 1 1 1
+H 5066 period=2 high=1 tag=1
+S 5067 0 0 0 0 0 1
+S 5068 0 0 0 1 1 0
+R 5068 period=3 high=2 tag=1
+S 5069 0 0 0 0 0 1
+H 5069 period=3 high=2 tag=1
+S 5070 0 0 0 0 0 0
+S 5071 0 0 0 1 1 0
+R 5071 period=3 high=1 tag=1
+S 5072 0 0 0 0 0 1
+H 5072 period=3 high=1 tag=1
+S 5073 0 0 0 1 1 0
+R 5073 period=2 high=1 tag=1
+S 5074 0 0 0 0 0 1
+H 5074 period=2 high=1 tag=1
+S 5075 0 0 0 1 1 0
+R 5075 period=2 high=1 tag=1
+S 5076 0 0 0 0 0 1
+H 5076 period=2 high=1 tag=1
+S 5077 0 0 0 1 1 0
+R 5077 period=2 high=1 tag=1
+S 5078 0 0 0 0 0 1
+H 5078 period=2 high=1 tag=1
+S 5079 0 0 0 0 0 0
+S 5081 0 0 0 1 1 0
+R 5081 period=4 high=1 tag=1
+S 5082 0 0 0 1 1 1
+H 5082 period=4 high=1 tag=1
+S 5083 0 0 0 0 0 1
+S 5084 0 0 0 1 1 0
+R 5084 period=3 high=2 tag=1
+S 5085 0 0 0 0 0 1
+H 5085 period=3 high=2 tag=1
+S 5086 0 0 0 0 0 0
+S 5098 0 0 1 1 1 0
+S 5099 0 1 0 0 0 1
+S 5100 1 0 0 0 0 0
+S 5101 0 0 0 0 0 0
+S 5104 0 0 0 1 1 0
+S 5105 0 0 0 0 0 1
+S 5106 0 0 0 0 0 0
+S 5107 0 0 0 1 1 0
+S 5108 0 0 0 1 1 1
+S 5110 0 0 0 0 0 1
+S 5111 0 0 0 1 1 0
+S 5112 0 0 0 1 1 1
+S 5115 0 0 0 0 0 1
+S 5116 0 0 0 0 0 0
+S 5120 0 0 0 1 1 0
+S 5121 0 0 0 1 1 1
+S 5122 0 0 0 0 0 1
+S 5123 0 0 0 1 1 0
+S 5124 0 0 0 1 1 1
+S 5125 0 0 0 0 0 1
+S 5126 0 0 0 0 0 0
+S 5129 0 0 0 1 1 0
+S 5130 0 0 0 1 1 1
+S 5132 0 0 0 0 0 1
+S 5133 0 0 0 0 0 0
+S 5134 0 0 0 1 1 0
+S 5135 0 0 0 0 0 1
+S 5136 0 0 0 1 1 0
+S 5137 0 0 0 1 1 1
+S 5138 0 0 0 0 0 1
+S 5139 0 0 0 0 0 0
+S 5140 0 0 0 1 1 0
+S 5141 0 0 0 0 0 1
+S 5142 0 0 0 0 0 0
+S 5144 0 0 0 1 1 0
+S 5145 0 0 0 1 1 1
+S 5146 0 0 0 0 0 1
+S 5147 0 0 0 1 1 0
+S 5148 0 0 0 1 1 1
+S 5149 0 0 0 0 0 1
+S 5150 0 0 0 1 1 0
+S 5151 0 0 0 0 0 1
+S 5152 0 0 0 1 1 0
+S 5153 0 0 0 1 1 1
+S 5154 0 0 0 0 0 1
+S 5155 0 0 0 0 0 0
+S 5158 0 0 0 1 1 0
+S 5159 0 0 0 0 0 1
+S 5160 0 0 0 1 1 0
+S 5161 0 0 0 0 0 1
+S 5162 0 0 0 1 1 0
+S 5163 0 0 0 0 0 1
+S 5164 0 0 0 1 1 0
+S 5165 0 0 0 1 1 1
+S 5166 0 0 0 0 0 1
+S 5167 0 0 0 0 0 0
+S 5168 0 0 0 1 1 0
+S 5169 0 0 0 1 1 1
+S 5171 0 0 0 0 0 1
+S 5172 0 0 0 1 1 0
+S 5173 0 0 0 1 1 1
+S 5178 0 0 0 0 0 1
+S 5179 0 0 0 0 0 0
+S 5185 0 0 1 1 1 0
+S 5186 0 0 0 0 0 1
+S 5187 0 0 0 0 0 0
+S 5191 0 0 0 1 1 0
+S 5192 0 0 0 1 1 1
+S 5193 0 0 0 0 0 1
+S 5194 0 0 0 1 1 0
+R 5194 period=3 high=2 tag=1
+S 5195 0 0 0 0 0 1
+H 5195 period=3 high=2 tag=1
+S 5196 0 0 0 1 1 0
+R 5196 period=2 high=1 tag=1
+S 5197 0 0 0 1 1 1
+H 5197 period=2 high=1 tag=1
+S 5203 0 0 0 0 0 1
+S 5204 0 0 0 0 0 0
+S 5205 0 0 0 1 1 0
+R 5205 period=9 high=7 tag=1
+S 5206 0 0 0 0 0 1
+H 5206 period=9 high=7 tag=1
+S 5207 0 0 0 1 1 0
+R 5207 period=2 high=1 tag=1
+S 5208 0 0 0 0 0 1
+H 5208 period=2 high=1 tag=1
+S 5209 0 0 0 0 0 0
+S 5213 0 0 0 1 1 0
+R 5213 period=6 high=1 tag=1
+S 5214 0 0 0 0 0 1
+H 5214 period=6 high=1 tag=1
+S 5215 0 0 0 1 1 0
+R 5215 period=2 high=1 tag=1
+S 5216 0 0 0 0 0 1
+H 5216 period=2 high=1 tag=1
+S 5217 0 0 0 0 0 0
+S 5218 0 0 0 1 1 0
+R 5218 period=3 high=1 tag=1
+S 5219 0 0 0 0 0 1
+H 5219 period=3 high=1 tag=1
+S 5220 0 0 0 0 0 0
+S 5221 0 0 0 1 1 0
+R 5221 period=3 high=1 tag=1
+S 5222 0 0 0 0 0 1
+H 5222 period=3 high=1 tag=1
+S 5223 0 0 0 1 1 0
+R 5223 period=2 high=1 tag=1
+S 5224 0 0 0 1 1 1
+H 5224 period=2 high=1 tag=1
+S 5225 0 0 0 0 0 1
+S 5226 0 0 0 0 0 0
+S 5227 0 0 0 1 1 0
+R 5227 period=4 high=2 tag=1
+S 5228 0 0 0 0 0 1
+H 5228 period=4 high=2 tag=1
+S 5229 0 0 0 1 1 0
+R 5229 period=2 high=1 tag=1
+S 5230 0 0 0 0 0 1
+H 5230 period=2 high=1 tag=1
+S 5231 0 0 0 0 0 0
+S 5232 0 0 0 1 1 0
+R 5232 period=3 high=1 tag=1
+S 5233 0 0 0 0 0 1
+H 5233 period=3 high=1 tag=1
+S 5234 0 0 0 0 0 0
+S 5235 0 0 0 1 1 0
+R 5235 period=3 high=1 tag=1
+S 5236 0 0 0 1 1 1
+H 5236 period=3 high=1 tag=1
+S 5237 0 0 0 0 0 1
+S 5238 0 0 0 1 1 0
+R 5238 period=3 high=2 tag=1
+S 5239 0 0 0 0 0 1
+H 5239 period=3 high=2 tag=1
+S 5240 0 0 0 0 0 0
+S 5243 0 0 0 1 1 0
+R 5243 period=5 high=1 tag=1
+S 5244 0 0 0 1 1 1
+H 5244 period=5 high=1 tag=1
+S 5245 0 0 0 0 0 1
+S 5246 0 0 0 0 0 0
+S 5247 0 0 0 1 1 0
+R 5247 period=4 high=2 tag=1
+S 5248 0 0 0 1 1 1
+H 5248 period=4 high=2 tag=1
+S 5252 0 0 0 0 0 1
+S 5253 0 0 0 0 0 0
+S 5254 0 0 0 1 1 0
+R 5254 period=7 high=5 tag=1
+S 5255 0 0 0 0 0 1
+H 5255 period=7 high=5 tag=1
+S 5256 0 0 0 0 0 0
+S 5257 0 0 0 1 1 0
+R 5257 period=3 high=1 tag=1
+S 5258 0 0 0 0 0 1
+H 5258 period=3 high=1 tag=1
+S 5259 0 0 0 0 0 0
+S 5260 0 0 0 1 1 0
+R 5260 period=3 high=1 tag=1
+S 5261 0 0 0 0 0 1
+H 5261 period=3 high=1 tag=1
+S 5262 0 0 0 1 1 0
+R 5262 period=2 high=1 tag=1
+S 5263 0 0 0 1 1 1
+H 5263 period=2 high=1 tag=1
+S 5270 0 0 0 0 0 1
+S 5271 0 0 0 0 0 0
+S 5272 0 0 0 1 1 0
+R 5272 period=10 high=8 tag=1
+S 5273 0 0 0 0 0 1
+H 5273 period=10 high=8 tag=1
+S 5274 0 0 0 1 1 0
+R 5274 period=2 high=1 tag=1
+S 5275 0 0 0 0 0 1
+H 5275 period=2 high=1 tag=1
+S 5276 0 0 0 1 1 0
+R 5276 period=2 high=1 tag=1
+S 5277 0 0 0 1 1 1
+H 5277 period=2 high=1 tag=1
+S 5278 0 0 0 0 0 1
+S 5279 0 0 0 1 1 0
+R 5279 period=3 high=2 tag=1
+S 5280 0 0 0 0 0 1
+H 5280 period=3 high=2 tag=1
+S 5281 0 0 0 0 0 0
+S 5283 0 0 0 1 1 0
+R 5283 period=4 high=1 tag=1
+S 5284 0 0 0 0 0 1
+H 5284 period=4 high=1 tag=1
+S 5285 0 0 0 0 0 0
+S 5287 0 0 0 1 1 0
+R 5287 period=4 high=1 tag=1
+S 5288 0 0 0 0 0 1
+H 5288 period=4 high=1 tag=1
+S 5289 0 0 0 1 1 0
+R 5289 period=2 high=1 tag=1
+S 5290 0 0 0 0 0 1
+H 5290 period=2 high=1 tag=1
+S 5291 0 0 0 0 0 0
+S 5292 0 0 0 1 1 0
+R 5292 period=3 high=1 tag=1
+S 5293 0 0 0 1 1 1
+H 5293 period=3 high=1 tag=1
+S 5294 0 0 0 0 0 1
+S 5295 0 0 0 0 0 0
+S 5297 0 0 0 1 1 0
+R 5297 period=5 high=2 tag=1
+S 5298 0 0 0 1 1 1
+H 5298 period=5 high=2 tag=1
+S 5299 0 0 0 0 0 1
+S 5300 0 0 0 0 0 0
+S 5304 0 0 0 1 1 0
+R 5304 period=7 high=2 tag=1
+S 5305 0 0 0 0 0 1
+H 5305 period=7 high=2 tag=1
+S 5306 0 0 0 0 0 0
+S 5308 0 0 0 1 1 0
+R 5308 period=4 high=1 tag=1
+S 5309 0 0 0 1 1 1
+H 5309 period=4 high=1 tag=1
+S 5310 0 0 0 0 0 1
+S 5311 0 0 0 1 1 0
+R 5311 period=3 high=2 tag=1
+S 5312 0 0 0 1 1 1
+H 5312 period=3 high=2 tag=1
+S 5313 0 0 0 0 0 1
+S 5314 0 0 0 0 0 0
+S 5320 0 0 1 1 1 0
+S 5321 0 0 0 0 0 1
+S 5322 0 0 0 1 1 0
+S 5323 0 0 0 1 1 1
+S 5327 0 0 0 0 0 1
+S 5328 0 0 0 1 1 0
+R 5328 period=6 high=5 tag=1
+S 5329 0 0 0 0 0 1
+H 5329 period=6 high=5 tag=1
+S 5330 0 0 0 1 1 0
+R 5330 period=2 high=1 tag=1
+S 5331 0 0 0 0 0 1
+H 5331 period=2 high=1 tag=1
+S 5332 0 0 0 1 1 0
+R 5332 period=2 high=1 tag=1
+S 5333 0 0 0 0 0 1
+H 5333 period=2 high=1 tag=1
+S 5334 0 0 0 0 0 0
+S 5336 0 0 0 1 1 0
+R 5336 period=4 high=1 tag=1
+S 5337 0 0 0 1 1 1
+H 5337 period=4 high=1 tag=1
+S 5338 0 0 0 0 0 1
+S 5339 0 0 0 1 1 0
+R 5339 period=3 high=2 tag=1
+S 5340 0 0 0 0 0 1
+H 5340 period=3 high=2 tag=1
+S 5341 0 0 0 0 0 0
+S 5342 0 0 0 1 1 0
+R 5342 period=3 high=1 tag=1
+S 5343 0 0 0 0 0 1
+H 5343 period=3 high=1 tag=1
+S 5344 0 0 0 1 1 0
+R 5344 period=2 high=1 tag=1
+S 5345 0 0 0 0 0 1
+H 5345 period=2 high=1 tag=1
+S 5346 0 0 0 0 0 0
+S 5347 0 0 0 1 1 0
+R 5347 period=3 high=1 tag=1
+S 5348 0 0 0 0 0 1
+H 5348 period=3 high=1 tag=1
+S 5349 0 0 0 1 1 0
+R 5349 period=2 high=1 tag=1
+S 5350 0 0 0 0 0 1
+H 5350 period=2 high=1 tag=1
+S 5351 0 0 0 1 1 0
+R 5351 period=2 high=1 tag=1
+S 5352 0 0 0 1 1 1
+H 5352 period=2 high=1 tag=1
+S 5353 0 0 0 0 0 1
+S 5354 0 0 0 1 1 0
+R 5354 period=3 high=2 tag=1
+S 5355 0 0 0 0 0 1
+H 5355 period=3 high=2 tag=1
+S 5356 0 0 0 0 0 0
+S 5357 0 0 0 1 1 0
+R 5357 period=3 high=1 tag=1
+S 5358 0 0 0 1 1 1
+H 5358 period=3 high=1 tag=1
+S 5363 0 0 0 0 0 1
+S 5364 0 0 0 1 1 0
+R 5364 period=7 high=6 tag=1
+S 5365 0 0 0 1 1 1
+H 5365 period=7 high=6 tag=1
+S 5367 0 0 0 0 0 1
+S 5368 0 0 0 0 0 0
+S 5373 0 0 0 1 1 0
+R 5373 period=9 high=3 tag=1
+S 5374 0 0 0 1 1 1
+H 5374 period=9 high=3 tag=1
+S 5375 0 0 0 0 0 1
+S 5376 0 0 0 1 1 0
+R 5376 period=3 high=2 tag=1
+S 5377 0 0 0 1 1 1
+H 5377 period=3 high=2 tag=1
+S 5378 0 0 0 0 0 1
+S 5379 0 0 0 1 1 0
+R 5379 period=3 high=2 tag=1
+S 5380 0 0 0 0 0 1
+H 5380 period=3 high=2 tag=1
+S 5381 0 0 0 1 1 0
+R 5381 period=2 high=1 tag=1
+S 5382 0 0 0 0 0 1
+H 5382 period=2 high=1 tag=1
+S 5383 0 0 0 1 1 0
+R 5383 period=2 high=1 tag=1
+S 5384 0 0 0 1 1 1
+H 5384 period=2 high=1 tag=1
+S 5385 0 0 0 0 0 1
+S 5386 0 0 0 1 1 0
+R 5386 period=3 high=2 tag=1
+S 5387 0 0 0 0 0 1
+H 5387 period=3 high=2 tag=1
+S 5388 0 0 0 0 0 0
+S 5389 0 0 0 1 1 0
+R 5389 period=3 high=1 tag=1
+S 5390 0 0 0 0 0 1
+H 5390 period=3 high=1 tag=1
+S 5391 0 0 0 0 0 0
+S 5392 0 0 0 1 1 0
+R 5392 period=3 high=1 tag=1
+S 5393 0 0 0 0 0 1
+H 5393 period=3 high=1 tag=1
+S 5394 0 0 0 0 0 0
+S 5395 0 0 0 1 1 0
+R 5395 period=3 high=1 tag=1
+S 5396 0 0 0 1 1 1
+H 5396 period=3 high=1 tag=1
+S 5398 0 0 0 0 0 1
+S 5399 0 0 0 0 0 0
+S 5401 0 0 0 1 1 0
+R 5401 period=6 high=3 tag=1
+S 5402 0 0 0 1 1 1
+H 5402 period=6 high=3 tag=1
+S 5404 0 0 0 0 0 1
+S 5405 0 0 0 1 1 0
+R 5405 period=4 high=3 tag=1
+S 5406 0 0 0 1 1 1
+H 5406 period=4 high=3 tag=1
+S 5407 0 0 0 0 0 1
+S 5408 0 0 0 1 1 0
+R 5408 period=3 high=2 tag=1
+S 5409 0 0 0 0 0 1
+H 5409 period=3 high=2 tag=1
+S 5410 0 0 0 1 1 0
+R 5410 period=2 high=1 tag=1
+S 5411 0 0 0 1 1 1
+H 5411 period=2 high=1 tag=1
+S 5412 0 0 0 0 0 1
+S 5413 0 0 0 0 0 0
+S 5414 0 0 0 1 1 0
+R 5414 period=4 high=2 tag=1
+S 5415 0 0 0 0 0 1
+H 5415 period=4 high=2 tag=1
+S 5416 0 0 0 0 0 0
+S 5417 0 0 0 1 1 0
+R 5417 period=3 high=1 tag=1
+S 5418 0 0 0 1 1 1
+H 5418 period=3 high=1 tag=1
+S 5420 0 0 0 0 0 1
+S 5421 0 0 0 0 0 0
+S 5423 0 0 0 1 1 0
+R 5423 period=6 high=3 tag=1
+S 5424 0 0 0 1 1 1
+H 5424 period=6 high=3 tag=1
+S 5426 0 0 0 0 0 1
+S 5427 0 0 0 1 1 0
+R 5427 period=4 high=3 tag=1
+S 5428 0 0 0 1 1 1
+H 5428 period=4 high=3 tag=1
+S 5431 0 0 0 0 0 1
+S 5432 0 0 0 0 0 0
+S 5434 0 0 0 1 1 0
+R 5434 period=7 high=4 tag=1
+S 5435 0 0 0 0 0 1
+H 5435 period=7 high=4 tag=1
+S 5436 0 0 0 0 0 0
+S 5437 0 0 0 1 1 0
+R 5437 period=3 high=1 tag=1
+S 5438 0 0 0 0 0 1
+H 5438 period=3 high=1 tag=1
+S 5439 0 0 0 0 0 0
+S 5441 0 0 0 1 1 0
+R 5441 period=4 high=1 tag=1
+S 5442 0 0 0 0 0 1
+H 5442 period=4 high=1 tag=1
+S 5443 0 0 0 0 0 0
+S 5445 0 0 0 1 1 0
+R 5445 period=4 high=1 tag=1
+S 5446 0 0 0 1 1 1
+H 5446 period=4 high=1 tag=1
+S 5448 0 0 0 0 0 1
+S 5449 0 0 0 1 1 0
+R 5449 period=4 high=3 tag=1
+S 5450 0 0 0 1 1 1
+H 5450 period=4 high=3 tag=1
+S 5451 0 0 0 0 0 1
+S 5452 0 0 0 0 0 0
+S 5455 0 0 0 1 1 0
+R 5455 period=6 high=2 tag=1
+S 5456 0 0 0 1 1 1
+H 5456 period=6 high=2 tag=1
+S 5458 0 0 0 0 0 1
+S 5459 0 0 0 1 1 0
+R 5459 period=4 high=3 tag=1
+S 5460 0 0 0 0 0 1
+H 5460 period=4 high=3 tag=1
+S 5461 0 0 0 0 0 0
+S 5462 0 0 0 1 1 0
+R 5462 period=3 high=1 tag=1
+S 5463 0 0 0 0 0 1
+H 5463 period=3 high=1 tag=1
+S 5464 0 0 0 1 1 0
+R 5464 period=2 high=1 tag=1
+S 5465 0 0 0 1 1 1
+H 5465 period=2 high=1 tag=1
+S 5469 0 0 0 0 0 1
+S 5470 0 0 0 1 1 0
+R 5470 period=6 high=5 tag=1
+S 5471 0 0 0 0 0 1
+H 5471 period=6 high=5 tag=1
+S 5472 0 0 0 0 0 0
+S 5473 0 0 0 1 1 0
+R 5473 period=3 high=1 tag=1
+S 5474 0 0 0 1 1 1
+H 5474 period=3 high=1 tag=1
+S 5475 0 0 0 0 0 1
+S 5476 0 0 0 1 1 0
+R 5476 period=3 high=2 tag=1
+S 5477 0 0 0 1 1 1
+H 5477 period=3 high=2 tag=1
+S 5478 0 0 0 0 0 1
+S 5479 0 0 0 1 1 0
+R 5479 period=3 high=2 tag=1
+S 5480 0 0 0 1 1 1
+H 5480 period=3 high=2 tag=1
+S 5481 0 0 0 0 0 1
+S 5482 0 0 0 0 0 0
+S 5484 0 0 0 1 1 0
+R 5484 period=5 high=2 tag=1
+S 5485 0 0 0 1 1 1
+H 5485 period=5 high=2 tag=1
+S 5487 0 0 0 0 0 1
+S 5488 0 0 0 1 1 0
+R 5488 period=4 high=3 tag=1
+S 5489 0 0 0 1 1 1
+H 5489 period=4 high=3 tag=1
+S 5493 0 0 0 0 0 1
+S 5494 0 0 0 0 0 0
+S 5495 0 0 0 1 1 0
+R 5495 period=7 high=5 tag=1
+S 5496 0 0 0 1 1 1
+H 5496 period=7 high=5 tag=1
+S 5498 0 0 0 0 0 1
+S 5499 0 0 0 1 1 0
+R 5499 period=4 high=3 tag=1
+S 5500 0 0 0 0 0 1
+H 5500 period=4 high=3 tag=1
+S 5501 0 0 0 0 0 0
+S 5505 0 0 0 1 1 0
+R 5505 period=6 high=1 tag=1
+S 5506 0 0 0 1 1 1
+H 5506 period=6 high=1 tag=1
+S 5508 0 0 0 0 0 1
+S 5509 0 0 0 0 0 0
+S 5510 0 0 0 1 1 0
+R 5510 period=5 high=3 tag=1
+S 5511 0 0 0 1 1 1
+H 5511 period=5 high=3 tag=1
+S 5512 0 0 0 0 0 1
+S 5513 0 0 0 0 0 0
+S 5514 0 0 0 1 1 0
+R 5514 period=4 high=2 tag=1
+S 5515 0 0 0 1 1 1
+H 5515 period=4 high=2 tag=1
+S 5517 0 0 0 0 0 1
+S 5518 0 0 0 1 1 0
+R 5518 period=4 high=3 tag=1
+S 5519 0 0 0 0 0 1
+H 5519 period=4 high=3 tag=1
+S 5520 0 0 0 0 0 0
+S 5522 0 0 0 1 1 0
+R 5522 period=4 high=1 tag=1
+S 5523 0 0 0 0 0 1
+H 5523 period=4 high=1 tag=1
+S 5524 0 0 0 0 0 0
+S 5531 0 0 1 1 1 0
+S 5532 0 1 0 0 0 1
+S 5533 0 0 0 0 0 0
+S 5536 0 0 0 1 1 0
+S 5537 0 0 0 1 1 1
+S 5538 0 0 0 0 0 1
+S 5539 0 0 0 0 0 0
+S 5540 0 0 0 1 1 0
+S 5541 0 0 0 1 1 1
+S 5545 0 0 0 0 0 1
+S 5546 0 0 0 0 0 0
+S 5547 0 0 0 1 1 0
+S 5548 0 0 0 0 0 1
+S 5549 0 0 0 1 1 0
+S 5550 0 0 0 0 0 1
+S 5551 0 0 0 1 1 0
+S 5552 0 0 0 1 1 1
+S 5555 0 0 0 0 0 1
+S 5556 0 0 0 1 1 0
+S 5557 0 0 0 1 1 1
+S 5560 0 0 0 0 0 1
+S 5561 0 0 0 1 1 0
+S 5562 0 0 0 0 0 1
+S 5563 0 0 0 1 1 0
+S 5564 0 0 0 0 0 1
+S 5565 0 0 0 0 0 0
+S 5566 0 0 0 1 1 0
+S 5567 0 0 0 1 1 1
+S 5569 0 0 0 0 0 1
+S 5570 0 0 0 1 1 0
+S 5571 0 0 0 0 0 1
+S 5572 0 0 0 0 0 0
+S 5578 0 0 1 1 1 0
+S 5579 0 0 0 1 1 1
+S 5581 0 0 0 0 0 1
+S 5582 0 0 0 1 1 0
+S 5583 0 0 0 1 1 1
+S 5585 0 0 0 0 0 1
+S 5586 0 0 0 0 0 0
+S 5591 0 0 0 1 1 0
+R 5591 period=9 high=3 tag=1
+S 5592 0 0 0 0 0 1
+H 5592 period=9 high=3 tag=1
+S 5593 0 0 0 0 0 0
+S 5595 0 0 0 1 1 0
+R 5595 period=4 high=1 tag=1
+S 5596 0 0 0 1 1 1
+H 5596 period=4 high=1 tag=1
+S 5597 0 0 0 0 0 1
+S 5598 0 0 0 0 0 0
+S 5599 0 0 0 1 1 0
+R 5599 period=4 high=2 tag=1
+S 5600 0 0 0 1 1 1
+H 5600 period=4 high=2 tag=1
+S 5602 0 0 0 0 0 1
+S 5603 0 0 0 1 1 0
+R 5603 period=4 high=3 tag=1
+S 5604 0 0 0 0 0 1
+H 5604 period=4 high=3 tag=1
+S 5605 0 0 0 0 0 0
+S 5606 0 0 0 1 1 0
+R 5606 period=3 high=1 tag=1
+S 5607 0 0 0 1 1 1
+H 5607 period=3 high=1 tag=1
+S 5608 0 0 0 0 0 1
+S 5609 0 0 0 1 1 0
+R 5609 period=3 high=2 tag=1
+S 5610 0 0 0 0 0 1
+H 5610 period=3 high=2 tag=1
+S 5611 0 0 0 0 0 0
+S 5612 0 0 0 1 1 0
+R 5612 period=3 high=1 tag=1
+S 5613 0 0 0 0 0 1
+H 5613 period=3 high=1 tag=1
+S 5614 0 0 0 0 0 0
+S 5615 0 0 0 1 1 0
+R 5615 period=3 high=1 tag=1
+S 5616 0 0 0 0 0 1
+H 5616 period=3 high=1 tag=1
+S 5617 0 0 0 0 0 0
+S 5618 0 0 0 1 1 0
+R 5618 period=3 high=1 tag=1
+S 5619 0 0 0 1 1 1
+H 5619 period=3 high=1 tag=1
+S 5620 0 0 0 0 0 1
+S 5621 0 0 0 0 0 0
+S 5622 0 0 0 1 1 0
+R 5622 period=4 high=2 tag=1
+S 5623 0 0 0 1 1 1
+H 5623 period=4 high=2 tag=1
+S 5624 0 0 0 0 0 1
+S 5625 0 0 0 0 0 0
+S 5627 0 0 0 1 1 0
+R 5627 period=5 high=2 tag=1
+S 5628 0 0 0 1 1 1
+H 5628 period=5 high=2 tag=1
+S 5630 0 0 0 0 0 1
+S 5631 0 0 0 1 1 0
+R 5631 period=4 high=3 tag=1
+S 5632 0 0 0 0 0 1
+H 5632 period=4 high=3 tag=1
+S 5633 0 0 0 0 0 0
+S 5634 0 0 0 1 1 0
+R 5634 period=3 high=1 tag=1
+S 5635 0 0 0 0 0 1
+H 5635 period=3 high=1 tag=1
+S 5636 0 0 0 1 1 0
+R 5636 period=2 high=1 tag=1
+S 5637 0 0 0 0 0 1
+H 5637 period=2 high=1 tag=1
+S 5638 0 0 0 0 0 0
+S 5639 0 0 0 1 1 0
+R 5639 period=3 high=1 tag=1
+S 5640 0 0 0 0 0 1
+H 5640 period=3 high=1 tag=1
+S 5641 0 0 0 1 1 0
+R 5641 period=2 high=1 tag=1
+S 5642 0 0 0 1 1 1
+H 5642 period=2 high=1 tag=1
+S 5643 0 0 0 0 0 1
+S 5644 0 0 0 1 1 0
+R 5644 period=3 high=2 tag=1
+S 5645 0 0 0 0 0 1
+H 5645 period=3 high=2 tag=1
+S 5646 0 0 0 1 1 0
+R 5646 period=2 high=1 tag=1
+S 5647 0 0 0 0 0 1
+H 5647 period=2 high=1 tag=1
+S 5648 0 0 0 1 1 0
+R 5648 period=2 high=1 tag=1
+S 5649 0 0 0 0 0 1
+H 5649 period=2 high=1 tag=1
+S 5650 0 0 0 1 1 0
+R 5650 period=2 high=1 tag=1
+S 5651 0 0 0 1 1 1
+H 5651 period=2 high=1 tag=1
+S 5652 0 0 0 0 0 1
+S 5653 0 0 0 0 0 0
+S 5654 0 0 0 1 1 0
+R 5654 period=4 high=2 tag=1
+S 5655 0 0 0 0 0 1
+H 5655 period=4 high=2 tag=1
+S 5656 0 0 0 0 0 0
+S 5658 0 0 0 1 1 0
+R 5658 period=4 high=1 tag=1
+S 5659 0 0 0 0 0 1
+H 5659 period=4 high=1 tag=1
+S 5660 0 0 0 0 0 0
+S 5664 0 0 0 1 1 0
+R 5664 period=6 high=1 tag=1
+S 5665 0 0 0 1 1 1
+H 5665 period=6 high=1 tag=1
+S 5666 0 0 0 0 0 1
+S 5667 0 0 0 1 1 0
+R 5667 period=3 high=2 tag=1
+S 5668 0 0 0 1 1 1
+H 5668 period=3 high=2 tag=1
+S 5669 0 0 0 0 0 1
+S 5670 0 0 0 0 0 0
+S 5671 0 0 0 1 1 0
+R 5671 period=4 high=2 tag=1
+S 5672 0 0 0 0 0 1
+H 5672 period=4 high=2 tag=1
+S 5673 0 0 0 1 1 0
+R 5673 period=2 high=1 tag=1
+S 5674 0 0 0 0 0 1
+H 5674 period=2 high=1 tag=1
+S 5675 0 0 0 1 1 0
+R 5675 period=2 high=1 tag=1
+S 5676 0 0 0 1 1 1
+H 5676 period=2 high=1 tag=1
+S 5677 0 0 0 0 0 1
+S 5678 0 0 0 0 0 0
+S 5682 0 0 0 1 1 0
+R 5682 period=7 high=2 tag=1
+S 5683 0 0 0 0 0 1
+H 5683 period=7 high=2 tag=1
+S 5684 0 0 0 1 1 0
+R 5684 period=2 high=1 tag=1
+S 5685 0 0 0 1 1 1
+H 5685 period=2 high=1 tag=1
+S 5686 0 0 0 0 0 1
+S 5687 0 0 0 0 0 0
+S 5689 0 0 0 1 1 0
+R 5689 period=5 high=2 tag=1
+S 5690 0 0 0 1 1 1
+H 5690 period=5 high=2 tag=1
+S 5691 0 0 0 0 0 1
+S 5692 0 0 0 1 1 0
+R 5692 period=3 high=2 tag=1
+S 5693 0 0 0 0 0 1
+H 5693 period=3 high=2 tag=1
+S 5694 0 0 0 1 1 0
+R 5694 period=2 high=1 tag=1
+S 5695 0 0 0 0 0 1
+H 5695 period=2 high=1 tag=1
+S 5696 0 0 0 0 0 0
+S 5698 0 0 0 1 1 0
+R 5698 period=4 high=1 tag=1
+S 5699 0 0 0 0 0 1
+H 5699 period=4 high=1 tag=1
+S 5700 0 0 0 0 0 0
+S 5703 0 0 0 1 1 0
+R 5703 period=5 high=1 tag=1
+S 5704 0 0 0 0 0 1
+H 5704 period=5 high=1 tag=1
+S 5705 0 0 0 0 0 0
+S 5706 0 0 0 1 1 0
+R 5706 period=3 high=1 tag=1
+S 5707 0 0 0 1 1 1
+H 5707 period=3 high=1 tag=1
+S 5709 0 0 0 0 0 1
+S 5710 0 0 0 1 1 0
+R 5710 period=4 high=3 tag=1
+S 5711 0 0 0 0 0 1
+H 5711 period=4 high=3 tag=1
+S 5712 0 0 0 0 0 0
+S 5717 0 0 0 1 1 0
+R 5717 period=7 high=1 tag=1
+S 5718 0 0 0 1 1 1
+H 5718 period=7 high=1 tag=1
+S 5719 0 0 0 0 0 1
+S 5720 0 0 0 0 0 0
+S 5721 0 0 0 1 1 0
+R 5721 period=4 high=2 tag=1
+S 5722 0 0 0 0 0 1
+H 5722 period=4 high=2 tag=1
+S 5723 0 0 0 1 1 0
+R 5723 period=2 high=1 tag=1
+S 5724 0 0 0 0 0 1
+H 5724 period=2 high=1 tag=1
+S 5725 0 0 0 0 0 0
+S 5726 0 0 0 1 1 0
+R 5726 period=3 high=1 tag=1
+S 5727 0 0 0 1 1 1
+H 5727 period=3 high=1 tag=1
+S 5730 0 0 0 0 0 1
+S 5731 0 0 0 1 1 0
+R 5731 period=5 high=4 tag=1
+S 5732 0 0 0 0 0 1
+H 5732 period=5 high=4 tag=1
+S 5733 0 0 0 1 1 0
+R 5733 period=2 high=1 tag=1
+S 5734 0 0 0 1 1 1
+H 5734 period=2 high=1 tag=1
+S 5736 0 0 0 0 0 1
+S 5737 0 0 0 1 1 0
+R 5737 period=4 high=3 tag=1
+S 5738 0 0 0 0 0 1
+H 5738 period=4 high=3 tag=1
+S 5739 0 0 0 1 1 0
+R 5739 period=2 high=1 tag=1
+S 5740 0 0 0 1 1 1
+H 5740 period=2 high=1 tag=1
+S 5741 0 0 0 0 0 1
+S 5742 0 0 0 0 0 0
+S 5743 0 0 0 1 1 0
+R 5743 period=4 high=2 tag=1
+S 5744 0 0 0 1 1 1
+H 5744 period=4 high=2 tag=1
+S 5746 0 0 0 0 0 1
+S 5747 0 0 0 1 1 0
+R 5747 period=4 high=3 tag=1
+S 5748 0 0 0 0 0 1
+H 5748 period=4 high=3 tag=1
+S 5749 0 0 0 1 1 0
+R 5749 period=2 high=1 tag=1
+S 5750 0 0 0 1 1 1
+H 5750 period=2 high=1 tag=1
+S 5752 0 0 0 0 0 1
+S 5753 0 0 0 1 1 0
+R 5753 period=4 high=3 tag=1
+S 5754 0 0 0 1 1 1
+H 5754 period=4 high=3 tag=1
+S 5755 0 0 0 0 0 1
+S 5756 0 0 0 0 0 0
+S 5757 0 0 0 1 1 0
+R 5757 period=4 high=2 tag=1
+S 5758 0 0 0 0 0 1
+H 5758 period=4 high=2 tag=1
+S 5759 0 0 0 1 1 0
+R 5759 period=2 high=1 tag=1
+S 5760 0 0 0 0 0 1
+H 5760 period=2 high=1 tag=1
+S 5761 0 0 0 1 1 0
+R 5761 period=2 high=1 tag=1
+S 5762 0 0 0 0 0 1
+H 5762 period=2 high=1 tag=1
+S 5763 0 0 0 0 0 0
+S 5773 0 0 1 1 1 0
+S 5774 0 0 0 1 1 1
+S 5775 0 0 0 0 0 1
+S 5776 0 0 0 1 1 0
+S 5777 0 0 0 0 0 1
+S 5778 0 0 0 1 1 0
+R 5778 period=2 high=1 tag=1
+S 5779 0 0 0 1 1 1
+H 5779 period=2 high=1 tag=1
+S 5780 0 0 0 0 0 1
+S 5781 0 0 0 1 1 0
+R 5781 period=3 high=2 tag=1
+S 5782 0 0 0 0 0 1
+H 5782 period=3 high=2 tag=1
+S 5783 0 0 0 1 1 0
+R 5783 period=2 high=1 tag=1
+S 5784 0 0 0 1 1 1
+H 5784 period=2 high=1 tag=1
+S 5787 0 0 0 0 0 1
+S 5788 0 0 0 1 1 0
+R 5788 period=5 high=4 tag=1
+S 5789 0 0 0 0 0 1
+H 5789 period=5 high=4 tag=1
+S 5790 0 0 0 1 1 0
+R 5790 period=2 high=1 tag=1
+S 5791 0 0 0 0 0 1
+H 5791 period=2 high=1 tag=1
+S 5792 0 0 0 1 1 0
+R 5792 period=2 high=1 tag=1
+S 5793 0 0 0 0 0 1
+H 5793 period=2 high=1 tag=1
+S 5794 0 0 0 1 1 0
+R 5794 period=2 high=1 tag=1
+S 5795 0 0 0 0 0 1
+H 5795 period=2 high=1 tag=1
+S 5796 0 0 0 0 0 0
+S 5798 0 0 0 1 1 0
+R 5798 period=4 high=1 tag=1
+S 5799 0 0 0 1 1 1
+H 5799 period=4 high=1 tag=1
+S 5802 0 0 0 0 0 1
+S 5803 0 0 0 0 0 0
+S 5807 0 0 0 1 1 0
+R 5807 period=9 high=4 tag=1
+S 5808 0 0 0 1 1 1
+H 5808 period=9 high=4 tag=1
+S 5809 0 0 0 0 0 1
+S 5810 0 0 0 1 1 0
+R 5810 period=3 high=2 tag=1
+S 5811 0 0 0 0 0 1
+H 5811 period=3 high=2 tag=1
+S 5812 0 0 0 0 0 0
+S 5813 0 0 0 1 1 0
+R 5813 period=3 high=1 tag=1
+S 5814 0 0 0 0 0 1
+H 5814 period=3 high=1 tag=1
+S 5815 0 0 0 0 0 0
+S 5817 0 0 0 1 1 0
+R 5817 period=4 high=1 tag=1
+S 5818 0 0 0 0 0 1
+H 5818 period=4 high=1 tag=1
+S 5819 0 0 0 1 1 0
+R 5819 period=2 high=1 tag=1
+S 5820 0 0 0 1 1 1
+H 5820 period=2 high=1 tag=1
+S 5822 0 0 0 0 0 1
+S 5823 0 0 0 0 0 0
+S 5824 0 0 0 1 1 0
+R 5824 period=5 high=3 tag=1
+S 5825 0 0 0 1 1 1
+H 5825 period=5 high=3 tag=1
+S 5827 0 0 0 0 0 1
+S 5828 0 0 0 1 1 0
+R 5828 period=4 high=3 tag=1
+S 5829 0 0 0 0 0 1
+H 5829 period=4 high=3 tag=1
+S 5830 0 0 0 1 1 0
+R 5830 period=2 high=1 tag=1
+S 5831 0 0 0 0 0 1
+H 5831 period=2 high=1 tag=1
+S 5832 0 0 0 1 1 0
+R 5832 period=2 high=1 tag=1
+S 5833 0 0 0 0 0 1
+H 5833 period=2 high=1 tag=1
+S 5834 0 0 0 1 1 0
+R 5834 period=2 high=1 tag=1
+S 5835 0 0 0 0 0 1
+H 5835 period=2 high=1 tag=1
+S 5836 0 0 0 1 1 0
+R 5836 period=2 high=1 tag=1
+S 5837 0 0 0 1 1 1
+H 5837 period=2 high=1 tag=1
+S 5838 0 0 0 0 0 1
+S 5839 0 0 0 1 1 0
+R 5839 period=3 high=2 tag=1
+S 5840 0 0 0 0 0 1
+H 5840 period=3 high=2 tag=1
+S 5841 0 0 0 0 0 0
+S 5843 0 0 0 1 1 0
+R 5843 period=4 high=1 tag=1
+S 5844 0 0 0 1 1 1
+H 5844 period=4 high=1 tag=1
+S 5852 0 0 0 0 0 1
+S 5853 0 0 0 0 0 0
+S 5854 0 0 0 1 1 0
+R 5854 period=11 high=9 tag=1
+S 5855 0 0 0 1 1 1
+H 5855 period=11 high=9 tag=1
+S 5856 0 0 0 0 0 1
+S 5857 0 0 0 0 0 0
+S 5859 0 0 0 1 1 0
+R 5859 period=5 high=2 tag=1
+S 5860 0 0 0 0 0 1
+H 5860 period=5 high=2 tag=1
+S 5861 0 0 0 0 0 0
+S 5862 0 0 0 1 1 0
+R 5862 period=3 high=1 tag=1
+S 5863 0 0 0 1 1 1
+H 5863 period=3 high=1 tag=1
+S 5866 0 0 0 0 0 1
+S 5867 0 0 0 0 0 0
+S 5870 0 0 0 1 1 0
+R 5870 period=8 high=4 tag=1
+S 5871 0 0 0 1 1 1
+H 5871 period=8 high=4 tag=1
+S 5874 0 0 0 0 0 1
+S 5875 0 0 0 0 0 0
+S 5878 0 0 0 1 1 0
+R 5878 period=8 high=4 tag=1
+S 5879 0 0 0 0 0 1
+H 5879 period=8 high=4 tag=1
+S 5880 0 0 0 0 0 0
+S 5882 0 0 0 1 1 0
+R 5882 period=4 high=1 tag=1
+S 5883 0 0 0 0 0 1
+H 5883 period=4 high=1 tag=1
+S 5884 0 0 0 0 0 0
+S 5885 0 0 0 1 1 0
+R 5885 period=3 high=1 tag=1
+S 5886 0 0 0 1 1 1
+H 5886 period=3 high=1 tag=1
+S 5887 0 0 0 0 0 1
+S 5888 0 0 0 1 1 0
+R 5888 period=3 high=2 tag=1
+S 5889 0 0 0 1 1 1
+H 5889 period=3 high=2 tag=1
+S 5890 0 0 0 0 0 1
+S 5891 0 0 0 0 0 0
+S 5892 0 0 0 1 1 0
+R 5892 period=4 high=2 tag=1
+S 5893 0 0 0 0 0 1
+H 5893 period=4 high=2 tag=1
+S 5894 0 0 0 1 1 0
+R 5894 period=2 high=1 tag=1
+S 5895 0 0 0 1 1 1
+H 5895 period=2 high=1 tag=1
+S 5898 0 0 0 0 0 1
+S 5899 0 0 0 1 1 0
+R 5899 period=5 high=4 tag=1
+S 5900 0 0 0 0 0 1
+H 5900 period=5 high=4 tag=1
+S 5901 0 0 0 1 1 0
+R 5901 period=2 high=1 tag=1
+S 5902 0 0 0 0 0 1
+H 5902 period=2 high=1 tag=1
+S 5903 0 0 0 0 0 0
+S 5905 0 0 0 1 1 0
+R 5905 period=4 high=1 tag=1
+S 5906 0 0 0 1 1 1
+H 5906 period=4 high=1 tag=1
+S 5909 0 0 0 0 0 1
+S 5910 0 0 0 1 1 0
+R 5910 period=5 high=4 tag=1
+S 5911 0 0 0 0 0 1
+H 5911 period=5 high=4 tag=1
+S 5912 0 0 0 1 1 0
+R 5912 period=2 high=1 tag=1
+S 5913 0 0 0 1 1 1
+H 5913 period=2 high=1 tag=1
+S 5914 0 0 0 0 0 1
+S 5915 0 0 0 1 1 0
+R 5915 period=3 high=2 tag=1
+S 5916 0 0 0 0 0 1
+H 5916 period=3 high=2 tag=1
+S 5917 0 0 0 1 1 0
+R 5917 period=2 high=1 tag=1
+S 5918 0 0 0 1 1 1
+H 5918 period=2 high=1 tag=1
+S 5921 0 0 0 0 0 1
+S 5922 0 0 0 1 1 0
+R 5922 period=5 high=4 tag=1
+S 5923 0 0 0 0 0 1
+H 5923 period=5 high=4 tag=1
+S 5924 0 0 0 0 0 0
+S 5926 0 0 0 1 1 0
+R 5926 period=4 high=1 tag=1
+S 5927 0 0 0 1 1 1
+H 5927 period=4 high=1 tag=1
+S 5928 0 0 0 0 0 1
+S 5929 0 0 0 1 1 0
+R 5929 period=3 high=2 tag=1
+S 5930 0 0 0 0 0 1
+H 5930 period=3 high=2 tag=1
+S 5931 0 0 0 0 0 0
+S 5932 0 0 0 1 1 0
+R 5932 period=3 high=1 tag=1
+S 5933 0 0 0 0 0 1
+H 5933 period=3 high=1 tag=1
+S 5934 0 0 0 0 0 0
+S 5935 0 0 0 1 1 0
+R 5935 period=3 high=1 tag=1
+S 5936 0 0 0 1 1 1
+H 5936 period=3 high=1 tag=1
+S 5937 0 0 0 0 0 1
+S 5938 0 0 0 0 0 0
+S 5941 0 0 0 1 1 0
+R 5941 period=6 high=2 tag=1
+S 5942 0 0 0 1 1 1
+H 5942 period=6 high=2 tag=1
+S 5943 0 0 0 0 0 1
+S 5944 0 0 0 1 1 0
+R 5944 period=3 high=2 tag=1
+S 5945 0 0 0 0 0 1
+H 5945 period=3 high=2 tag=1
+S 5946 0 0 0 1 1 0
+R 5946 period=2 high=1 tag=1
+S 5947 0 0 0 0 0 1
+H 5947 period=2 high=1 tag=1
+S 5948 0 0 0 0 0 0
+S 5950 0 0 0 1 1 0
+R 5950 period=4 high=1 tag=1
+S 5951 0 0 0 1 1 1
+H 5951 period=4 high=1 tag=1
+S 5953 0 0 0 0 0 1
+S 5954 0 0 0 1 1 0
+R 5954 period=4 high=3 tag=1
+S 5955 0 0 0 1 1 1
+H 5955 period=4 high=3 tag=1
+S 5956 0 0 0 0 0 1
+S 5957 0 0 0 0 0 0
+S 5959 0 0 0 1 1 0
+R 5959 period=5 high=2 tag=1
+S 5960 0 0 0 1 1 1
+H 5960 period=5 high=2 tag=1
+S 5962 0 0 0 0 0 1
+S 5963 0 0 0 0 0 0
+S 5966 0 0 0 1 1 0
+R 5966 period=7 high=3 tag=1
+S 5967 0 0 0 0 0 1
+H 5967 period=7 high=3 tag=1
+S 5968 0 0 0 1 1 0
+R 5968 period=2 high=1 tag=1
+S 5969 0 0 0 1 1 1
+H 5969 period=2 high=1 tag=1
+S 5970 0 0 0 0 0 1
+S 5971 0 0 0 1 1 0
+R 5971 period=3 high=2 tag=1
+S 5972 0 0 0 0 0 1
+H 5972 period=3 high=2 tag=1
+S 5973 0 0 0 1 1 0
+R 5973 period=2 high=1 tag=1
+S 5974 0 0 0 1 1 1
+H 5974 period=2 high=1 tag=1
+S 5975 0 0 0 0 0 1
+S 5976 0 0 0 1 1 0
+R 5976 period=3 high=2 tag=1
+S 5977 0 0 0 0 0 1
+H 5977 period=3 high=2 tag=1
+S 5978 0 0 0 0 0 0
+S 5981 0 0 0 1 1 0
+R 5981 period=5 high=1 tag=1
+S 5982 0 0 0 1 1 1
+H 5982 period=5 high=1 tag=1
+S 5983 0 0 0 0 0 1
+S 5984 0 0 0 0 0 0
+S 5986 0 0 0 1 1 0
+R 5986 period=5 high=2 tag=1
+S 5987 0 0 0 0 0 1
+H 5987 period=5 high=2 tag=1
+S 5988 0 0 0 0 0 0
+S 5990 0 0 0 1 1 0
+R 5990 period=4 high=1 tag=1
+S 5991 0 0 0 1 1 1
+H 5991 period=4 high=1 tag=1
+S 5993 0 0 0 0 0 1
+S 5994 0 0 0 1 1 0
+R 5994 period=4 high=3 tag=1
+S 5995 0 0 0 0 0 1
+H 5995 period=4 high=3 tag=1
+S 5996 0 0 0 0 0 0
+S 6000 0 0 0 1 1 0
+R 6000 period=6 high=1 tag=1
+S 6001 0 0 0 0 0 1
+H 6001 period=6 high=1 tag=1
+S 6002 0 0 0 1 1 0
+R 6002 period=2 high=1 tag=1
+S 6003 0 0 0 1 1 1
+H 6003 period=2 high=1 tag=1
+S 6007 0 0 0 0 0 1
+S 6008 0 0 0 1 1 0
+R 6008 period=6 high=5 tag=1
+S 6009 0 0 0 1 1 1
+H 6009 period=6 high=5 tag=1
+S 6010 0 0 0 0 0 1
+S 6011 0 0 0 1 1 0
+R 6011 period=3 high=2 tag=1
+S 6012 0 0 0 0 0 1
+H 6012 period=3 high=2 tag=1
+S 6013 0 0 0 1 1 0
+R 6013 period=2 high=1 tag=1
+S 6014 0 0 0 1 1 1
+H 6014 period=2 high=1 tag=1
+S 6015 0 0 0 0 0 1
+S 6016 0 0 0 0 0 0
+S 6018 0 0 0 1 1 0
+R 6018 period=5 high=2 tag=1
+S 6019 0 0 0 1 1 1
+H 6019 period=5 high=2 tag=1
+S 6020 0 0 0 0 0 1
+S 6021 0 0 0 1 1 0
+R 6021 period=3 high=2 tag=1
+S 6022 0 0 0 1 1 1
+H 6022 period=3 high=2 tag=1
+S 6024 0 0 0 0 0 1
+S 6025 0 0 0 0 0 0
+S 6027 0 0 0 1 1 0
+R 6027 period=6 high=3 tag=1
+S 6028 0 0 0 0 0 1
+H 6028 period=6 high=3 tag=1
+S 6029 0 0 0 1 1 0
+R 6029 period=2 high=1 tag=1
+S 6030 0 0 0 0 0 1
+H 6030 period=2 high=1 tag=1
+S 6031 0 0 0 0 0 0
+S 6032 0 0 0 1 1 0
+R 6032 period=3 high=1 tag=1
+S 6033 0 0 0 0 0 1
+H 6033 period=3 high=1 tag=1
+S 6034 0 0 0 0 0 0
+S 6037 0 0 0 1 1 0
+R 6037 period=5 high=1 tag=1
+S 6038 0 0 0 0 0 1
+H 6038 period=5 high=1 tag=1
+S 6039 0 0 0 1 1 0
+R 6039 period=2 high=1 tag=1
+S 6040 0 0 0 1 1 1
+H 6040 period=2 high=1 tag=1
+S 6041 0 0 0 0 0 1
+S 6042 0 0 0 1 1 0
+R 6042 period=3 high=2 tag=1
+S 6043 0 0 0 1 1 1
+H 6043 period=3 high=2 tag=1
+S 6045 0 0 0 0 0 1
+S 6046 0 0 0 0 0 0
+S 6049 0 0 0 1 1 0
+R 6049 period=7 high=3 tag=1
+S 6050 0 0 0 0 0 1
+H 6050 period=7 high=3 tag=1
+S 6051 0 0 0 1 1 0
+R 6051 period=2 high=1 tag=1
+S 6052 0 0 0 1 1 1
+H 6052 period=2 high=1 tag=1
+S 6054 0 0 0 0 0 1
+S 6055 0 0 0 0 0 0
+S 6062 0 0 1 1 1 0
+S 6063 0 0 0 1 1 1
+S 6064 0 0 0 0 0 1
+S 6065 0 0 0 0 0 0
+S 6066 0 0 0 1 1 0
+S 6067 0 0 0 1 1 1
+S 6068 0 0 0 0 0 1
+S 6069 0 0 0 0 0 0
+S 6072 0 0 0 1 1 0
+R 6072 period=6 high=2 tag=1
+S 6073 0 0 0 0 0 1
+H 6073 period=6 high=2 tag=1
+S 6074 0 0 0 1 1 0
+R 6074 period=2 high=1 tag=1
+S 6075 0 0 0 1 1 1
+H 6075 period=2 high=1 tag=1
+S 6077 0 0 0 0 0 1
+S 6078 0 0 0 1 1 0
+R 6078 period=4 high=3 tag=1
+S 6079 0 0 0 1 1 1
+H 6079 period=4 high=3 tag=1
+S 6080 0 0 0 0 0 1
+S 6081 0 0 0 0 0 0
+S 6083 0 0 0 1 1 0
+R 6083 period=5 high=2 tag=1
+S 6084 0 0 0 1 1 1
+H 6084 period=5 high=2 tag=1
+S 6085 0 0 0 0 0 1
+S 6086 0 0 0 1 1 0
+R 6086 period=3 high=2 tag=1
+S 6087 0 0 0 1 1 1
+H 6087 period=3 high=2 tag=1
+S 6090 0 0 0 0 0 1
+S 6091 0 0 0 1 1 0
+R 6091 period=5 high=4 tag=1
+S 6092 0 0 0 1 1 1
+H 6092 period=5 high=4 tag=1
+S 6093 0 0 0 0 0 1
+S 6094 0 0 0 1 1 0
+R 6094 period=3 high=2 tag=1
+S 6095 0 0 0 0 0 1
+H 6095 period=3 high=2 tag=1
+S 6096 0 0 0 0 0 0
+S 6097 0 0 0 1 1 0
+R 6097 period=3 high=1 tag=1
+S 6098 0 0 0 1 1 1
+H 6098 period=3 high=1 tag=1
+S 6102 0 0 0 0 0 1
+S 6103 0 0 0 1 1 0
+R 6103 period=6 high=5 tag=1
+S 6104 0 0 0 0 0 1
+H 6104 period=6 high=5 tag=1
+S 6105 0 0 0 0 0 0
+S 6107 0 0 0 1 1 0
+R 6107 period=4 high=1 tag=1
+S 6108 0 0 0 1 1 1
+H 6108 period=4 high=1 tag=1
+S 6110 0 0 0 0 0 1
+S 6111 0 0 0 1 1 0
+R 6111 period=4 high=3 tag=1
+S 6112 0 0 0 1 1 1
+H 6112 period=4 high=3 tag=1
+S 6116 0 0 0 0 0 1
+S 6117 0 0 0 1 1 0
+R 6117 period=6 high=5 tag=1
+S 6118 0 0 0 0 0 1
+H 6118 period=6 high=5 tag=1
+S 6119 0 0 0 1 1 0
+R 6119 period=2 high=1 tag=1
+S 6120 0 0 0 1 1 1
+H 6120 period=2 high=1 tag=1
+S 6121 0 0 0 0 0 1
+S 6122 0 0 0 0 0 0
+S 6124 0 0 0 1 1 0
+R 6124 period=5 high=2 tag=1
+S 6125 0 0 0 0 0 1
+H 6125 period=5 high=2 tag=1
+S 6126 0 0 0 0 0 0
+S 6132 0 0 1 1 1 0
+S 6133 0 0 0 1 1 1
+S 6135 0 0 0 0 0 1
+S 6136 0 0 0 0 0 0
+S 6137 0 0 0 1 1 0
+S 6138 0 0 0 1 1 1
+S 6139 0 0 0 0 0 1
+S 6140 0 0 0 0 0 0
+S 6142 0 0 0 1 1 0
+R 6142 period=5 high=2 tag=1
+S 6143 0 0 0 0 0 1
+H 6143 period=5 high=2 tag=1
+S 6144 0 0 0 0 0 0
+S 6145 0 0 0 1 1 0
+R 6145 period=3 high=1 tag=1
+S 6146 0 0 0 1 1 1
+H 6146 period=3 high=1 tag=1
+S 6148 0 0 0 0 0 1
+S 6149 0 0 0 0 0 0
+S 6151 0 0 0 1 1 0
+R 6151 period=6 high=3 tag=1
+S 6152 0 0 0 0 0 1
+H 6152 period=6 high=3 tag=1
+S 6153 0 0 0 1 1 0
+R 6153 period=2 high=1 tag=1
+S 6154 0 0 0 0 0 1
+H 6154 period=2 high=1 tag=1
+S 6155 0 0 0 0 0 0
+S 6159 0 0 0 1 1 0
+R 6159 period=6 high=1 tag=1
+S 6160 0 0 0 0 0 1
+H 6160 period=6 high=1 tag=1
+S 6161 0 0 0 1 1 0
+R 6161 period=2 high=1 tag=1
+S 6162 0 0 0 1 1 1
+H 6162 period=2 high=1 tag=1
+S 6163 0 0 0 0 0 1
+S 6164 0 0 0 1 1 0
+R 6164 period=3 high=2 tag=1
+S 6165 0 0 0 0 0 1
+H 6165 period=3 high=2 tag=1
+S 6166 0 0 0 0 0 0
+S 6167 0 0 0 1 1 0
+R 6167 period=3 high=1 tag=1
+S 6168 0 0 0 0 0 1
+H 6168 period=3 high=1 tag=1
+S 6169 0 0 0 1 1 0
+R 6169 period=2 high=1 tag=1
+S 6170 0 0 0 0 0 1
+H 6170 period=2 high=1 tag=1
+S 6171 0 0 0 1 1 0
+R 6171 period=2 high=1 tag=1
+S 6172 0 0 0 1 1 1
+H 6172 period=2 high=1 tag=1
+S 6176 0 0 0 0 0 1
+S 6177 0 0 0 0 0 0
+S 6178 0 0 0 1 1 0
+R 6178 period=7 high=5 tag=1
+S 6179 0 0 0 0 0 1
+H 6179 period=7 high=5 tag=1
+S 6180 0 0 0 1 1 0
+R 6180 period=2 high=1 tag=1
+S 6181 0 0 0 0 0 1
+H 6181 period=2 high=1 tag=1
+S 6182 0 0 0 1 1 0
+R 6182 period=2 high=1 tag=1
+S 6183 0 0 0 1 1 1
+H 6183 period=2 high=1 tag=1
+S 6187 0 0 0 0 0 1
+S 6188 0 0 0 1 1 0
+R 6188 period=6 high=5 tag=1
+S 6189 0 0 0 0 0 1
+H 6189 period=6 high=5 tag=1
+S 6190 0 0 0 1 1 0
+R 6190 period=2 high=1 tag=1
+S 6191 0 0 0 1 1 1
+H 6191 period=2 high=1 tag=1
+S 6192 0 0 0 0 0 1
+S 6193 0 0 0 1 1 0
+R 6193 period=3 high=2 tag=1
+S 6194 0 0 0 1 1 1
+H 6194 period=3 high=2 tag=1
+S 6196 0 0 0 0 0 1
+S 6197 0 0 0 0 0 0
+S 6199 0 0 0 1 1 0
+R 6199 period=6 high=3 tag=1
+S 6200 0 0 0 0 0 1
+H 6200 period=6 high=3 tag=1
+S 6201 0 0 0 0 0 0
+S 6202 0 0 0 1 1 0
+R 6202 period=3 high=1 tag=1
+S 6203 0 0 0 0 0 1
+H 6203 period=3 high=1 tag=1
+S 6204 0 0 0 1 1 0
+R 6204 period=2 high=1 tag=1
+S 6205 0 0 0 1 1 1
+H 6205 period=2 high=1 tag=1
+S 6206 0 0 0 0 0 1
+S 6207 0 0 0 1 1 0
+R 6207 period=3 high=2 tag=1
+S 6208 0 0 0 0 0 1
+H 6208 period=3 high=2 tag=1
+S 6209 0 0 0 1 1 0
+R 6209 period=2 high=1 tag=1
+S 6210 0 0 0 1 1 1
+H 6210 period=2 high=1 tag=1
+S 6211 0 0 0 0 0 1
+S 6212 0 0 0 1 1 0
+R 6212 period=3 high=2 tag=1
+S 6213 0 0 0 0 0 1
+H 6213 period=3 high=2 tag=1
+S 6214 0 0 0 0 0 0
+S 6218 0 0 0 1 1 0
+R 6218 period=6 high=1 tag=1
+S 6219 0 0 0 1 1 1
+H 6219 period=6 high=1 tag=1
+S 6226 0 0 0 0 0 1
+S 6227 0 0 0 1 1 0
+R 6227 period=9 high=8 tag=1
+S 6228 0 0 0 1 1 1
+H 6228 period=9 high=8 tag=1
+S 6230 0 0 0 0 0 1
+S 6231 0 0 0 1 1 0
+R 6231 period=4 high=3 tag=1
+S 6232 0 0 0 0 0 1
+H 6232 period=4 high=3 tag=1
+S 6233 0 0 0 1 1 0
+R 6233 period=2 high=1 tag=1
+S 6234 0 0 0 1 1 1
+H 6234 period=2 high=1 tag=1
+S 6235 0 0 0 0 0 1
+S 6236 0 0 0 0 0 0
+S 6237 0 0 0 1 1 0
+R 6237 period=4 high=2 tag=1
+S 6238 0 0 0 1 1 1
+H 6238 period=4 high=2 tag=1
+S 6241 0 0 0 0 0 1
+S 6242 0 0 0 1 1 0
+R 6242 period=5 high=4 tag=1
+S 6243 0 0 0 0 0 1
+H 6243 period=5 high=4 tag=1
+S 6244 0 0 0 1 1 0
+R 6244 period=2 high=1 tag=1
+S 6245 0 0 0 0 0 1
+H 6245 period=2 high=1 tag=1
+S 6246 0 0 0 0 0 0
+S 6247 0 0 0 1 1 0
+R 6247 period=3 high=1 tag=1
+S 6248 0 0 0 1 1 1
+H 6248 period=3 high=1 tag=1
+S 6250 0 0 0 0 0 1
+S 6251 0 0 0 1 1 0
+R 6251 period=4 high=3 tag=1
+S 6252 0 0 0 0 0 1
+H 6252 period=4 high=3 tag=1
+S 6253 0 0 0 1 1 0
+R 6253 period=2 high=1 tag=1
+S 6254 0 0 0 0 0 1
+H 6254 period=2 high=1 tag=1
+S 6255 0 0 0 1 1 0
+R 6255 period=2 high=1 tag=1
+S 6256 0 0 0 1 1 1
+H 6256 period=2 high=1 tag=1
+S 6258 0 0 0 0 0 1
+S 6259 0 0 0 1 1 0
+R 6259 period=4 high=3 tag=1
+S 6260 0 0 0 1 1 1
+H 6260 period=4 high=3 tag=1
+S 6261 0 0 0 0 0 1
+S 6262 0 0 0 0 0 0
+S 6263 0 0 0 1 1 0
+R 6263 period=4 high=2 tag=1
+S 6264 0 0 0 0 0 1
+H 6264 period=4 high=2 tag=1
+S 6265 0 0 0 0 0 0
+S 6272 0 0 1 1 1 0
+S 6273 0 1 0 0 0 1
+S 6274 0 0 0 0 0 0
+S 6275 0 0 0 1 1 0
+S 6276 0 0 0 0 0 1
+S 6277 0 0 0 0 0 0
+S 6278 0 0 0 1 1 0
+S 6279 0 0 0 1 1 1
+S 6281 0 0 0 0 0 1
+S 6282 0 0 0 0 0 0
+S 6283 0 0 0 1 1 0
+S 6284 0 0 0 1 1 1
+S 6285 0 0 0 0 0 1
+S 6286 0 0 0 1 1 0
+S 6287 0 0 0 0 0 1
+S 6288 0 0 0 0 0 0
+S 6289 0 0 0 1 1 0
+S 6290 0 0 0 1 1 1
+S 6293 0 0 0 0 0 1
+S 6294 0 0 0 0 0 0
+S 6295 0 0 0 1 1 0
+S 6296 0 0 0 1 1 1
+S 6298 0 0 0 0 0 1
+S 6299 0 0 0 1 1 0
+S 6300 0 0 0 0 0 1
+S 6301 0 0 0 0 0 0
+S 6302 0 0 0 1 1 0
+S 6303 0 0 0 1 1 1
+S 6309 0 0 0 0 0 1
+S 6310 0 0 0 0 0 0
+S 6313 0 0 0 1 1 0
+S 6314 0 0 0 0 0 1
+S 6315 0 0 0 0 0 0
+S 6316 0 0 0 1 1 0
+S 6317 0 0 0 0 0 1
+S 6318 0 0 0 1 1 0
+S 6319 0 0 0 0 0 1
+S 6320 0 0 0 1 1 0
+S 6321 0 0 0 1 1 1
+S 6324 0 0 0 0 0 1
+S 6325 0 0 0 0 0 0
+S 6326 0 0 0 1 1 0
+S 6327 0 0 0 1 1 1
+S 6328 0 0 0 0 0 1
+S 6329 0 0 0 1 1 0
+S 6330 0 0 0 0 0 1
+S 6331 0 0 0 0 0 0
+S 6334 0 0 0 1 1 0
+S 6335 0 0 0 1 1 1
+S 6338 0 0 0 0 0 1
+S 6339 0 0 0 0 0 0
+S 6342 0 0 0 1 1 0
+S 6343 0 0 0 0 0 1
+S 6344 0 0 0 0 0 0
+S 6349 0 0 0 1 1 0
+S 6350 0 0 0 0 0 1
+S 6351 0 0 0 0 0 0
+S 6352 0 0 0 1 1 0
+S 6353 0 0 0 0 0 1
+S 6354 0 0 0 0 0 0
+S 6355 0 0 0 1 1 0
+S 6356 0 0 0 0 0 1
+S 6357 0 0 0 0 0 0
+S 6361 0 0 0 1 1 0
+S 6362 0 0 0 1 1 1
+S 6363 0 0 0 0 0 1
+S 6364 0 0 0 0 0 0
+S 6366 0 0 0 1 1 0
+S 6367 0 0 0 0 0 1
+S 6368 0 0 0 0 0 0
+S 6369 0 0 0 1 1 0
+S 6370 0 0 0 1 1 1
+S 6372 0 0 0 0 0 1
+S 6373 0 0 0 1 1 0
+S 6374 0 0 0 1 1 1
+S 6375 0 0 0 0 0 1
+S 6376 0 0 0 1 1 0
+S 6377 0 0 0 0 0 1
+S 6378 0 0 0 1 1 0
+S 6379 0 0 0 1 1 1
+S 6380 0 0 0 0 0 1
+S 6381 0 0 0 0 0 0
+S 6383 0 0 0 1 1 0
+S 6384 0 0 0 1 1 1
+S 6385 0 0 0 0 0 1
+S 6386 0 0 0 1 1 0
+S 6387 0 0 0 0 0 1
+S 6388 0 0 0 0 0 0
+S 6391 0 0 0 1 1 0
+S 6392 0 0 0 0 0 1
+S 6393 0 0 0 1 1 0
+S 6394 0 0 0 0 0 1
+S 6395 0 0 0 0 0 0
+S 6396 0 0 0 1 1 0
+S 6397 0 0 0 1 1 1
+S 6398 0 0 0 0 0 1
+S 6399 0 0 0 1 1 0
+S 6400 0 0 0 0 0 1
+S 6401 0 0 0 1 1 0
+S 6402 0 0 0 0 0 1
+S 6403 0 0 0 0 0 0
+S 6410 0 0 1 1 1 0
+S 6411 0 1 0 0 0 1
+S 6412 0 0 0 1 1 0
+S 6413 0 0 0 0 0 1
+S 6414 0 0 0 1 1 0
+S 6415 0 0 0 1 1 1
+S 6417 0 0 0 0 0 1
+S 6418 0 0 0 1 1 0
+S 6419 0 0 0 0 0 1
+S 6420 0 0 0 1 1 0
+S 6421 0 0 0 0 0 1
+S 6422 0 0 0 1 1 0
+S 6423 0 0 0 1 1 1
+S 6424 0 0 0 0 0 1
+S 6425 0 0 0 0 0 0
+S 6428 0 0 0 1 1 0
+S 6429 0 0 0 0 0 1
+S 6430 0 0 0 1 1 0
+S 6431 0 0 0 0 0 1
+S 6432 0 0 0 0 0 0
+S 6433 0 0 0 1 1 0
+S 6434 0 0 0 0 0 1
+S 6435 0 0 0 1 1 0
+S 6436 0 0 0 0 0 1
+S 6437 0 0 0 0 0 0
+S 6438 0 0 0 1 1 0
+S 6439 0 0 0 1 1 1
+S 6441 0 0 0 0 0 1
+S 6442 0 0 0 1 1 0
+S 6443 0 0 0 1 1 1
+S 6444 0 0 0 0 0 1
+S 6445 0 0 0 0 0 0
+S 6446 0 0 0 1 1 0
+S 6447 0 0 0 0 0 1
+S 6448 0 0 0 0 0 0
+S 6454 0 0 1 1 1 0
+S 6455 0 0 0 1 1 1
+S 6456 0 0 0 0 0 1
+S 6457 0 0 0 0 0 0
+S 6461 0 0 0 1 1 0
+S 6462 0 0 0 1 1 1
+S 6463 0 0 0 0 0 1
+S 6464 0 0 0 0 0 0
+S 6467 0 0 0 1 1 0
+R 6467 period=6 high=2 tag=1
+S 6468 0 0 0 0 0 1
+H 6468 period=6 high=2 tag=1
+S 6469 0 0 0 1 1 0
+R 6469 period=2 high=1 tag=1
+S 6470 0 0 0 0 0 1
+H 6470 period=2 high=1 tag=1
+S 6471 0 0 0 0 0 0
+S 6472 0 0 0 1 1 0
+R 6472 period=3 high=1 tag=1
+S 6473 0 0 0 1 1 1
+H 6473 period=3 high=1 tag=1
+G_END random_schedule cycles=6473 checks=71664 mismatches=0
+E cycles=6473 groups=12 cases=0 cycle_assertions=71664 directed_checks=176 records_checked=42 records_generated=1083 handshakes=1078 overflow_events=0 overrun_events=8 mismatches=0 random_cycles=5000

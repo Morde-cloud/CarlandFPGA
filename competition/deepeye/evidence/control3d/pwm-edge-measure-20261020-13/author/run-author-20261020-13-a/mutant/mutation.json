@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "original_rtl_sha256": "d470cb9eb2d1f774cc433c148250e720df693c82fe825cee1403e4d219b4df54",
+  "mutant_rtl_sha256": "54b5c8e72d4383496f5ebff0642786336e7eb10fc4befcc959ccdc8adf970018",
+  "replacement_count": 1,
+  "old_text": "slot_period_q <= age_q + 1'b1;",
+  "new_text": "slot_period_q <= age_q + 2'd2;",
+  "purpose": "isolated off-by-one period mutant; must be rejected by public-port evidence"
+}

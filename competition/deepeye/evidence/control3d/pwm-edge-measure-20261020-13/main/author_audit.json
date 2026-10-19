@@ -1,0 +1,36 @@
+{
+  "at_utc": "2026-10-19T17:48:46.316274+00:00",
+  "runs": [
+    {
+      "run": "run-author-20261020-13-a",
+      "manifest_sha256": "2fa1209ef2fa4c2d3cc19b5c10f6e8ae679417a2b065744de8ed645b69db02f2",
+      "files_verified": 85,
+      "result_sha256": "2fc466be196f5ec8550f36d5327319c608aee55704b3fe5ab0b877936ed18add",
+      "status": "failed"
+    },
+    {
+      "run": "run-author-20261020-13-b",
+      "manifest_sha256": "5341fc92cc6f2912b1d1e27ada52df8b98d7f64741c72781ceeda9e9bee2144b",
+      "files_verified": 85,
+      "result_sha256": "e739497e2941b452a2e56f215fb208a5b9db987b7e66fc43a0c0af3b8618d951",
+      "status": "passed"
+    }
+  ],
+  "final_author_snapshots_match_product": true,
+  "positive_configurations": 7,
+  "totals": {
+    "groups": 95,
+    "cases": 132,
+    "cycles": 1050712,
+    "cycle_assertions": 11562459,
+    "directed_checks": 2615,
+    "records_checked": 858,
+    "records_generated": 18333,
+    "handshakes": 18298,
+    "overflow_events": 2625,
+    "overrun_events": 106,
+    "random_cycles": 110000
+  },
+  "main_reran_author_suite": false,
+  "reason": "Exact final authored source/log manifest verified; independent main suite supplies a separate reference and actual simulation. No redundant author-suite rerun was required after the terminal hashes matched."
+}

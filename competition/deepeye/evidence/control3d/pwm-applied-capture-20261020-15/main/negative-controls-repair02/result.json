@@ -1,0 +1,208 @@
+{
+  "at_utc": "2026-10-19T19:39:54.814665+00:00",
+  "frozen_vectors_sha256": "bd069d90085713da98101cba040dee78bba66e25467500ec4f11c279152bcf9d",
+  "original_source_sha256": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3",
+  "original_tb_sha256": "0d72aadf0bc50aee97e24599f3ab0d6abfb276ed2e4787005fb932e21b8ce506",
+  "selection": "exact contiguous reset-bounded original frozen rows; no expected/input edits; all fields checked",
+  "cases": [
+    {
+      "name": "same-tag-cache",
+      "frozen_first_row": 18143,
+      "frozen_last_row": 18152,
+      "selected_sampled_edges": 10,
+      "selected_rows": 10,
+      "vectors_sha256": "625bebf47788c12d5c2b2ae4330822b94ab38b08d78bbdb02446a881ed699521",
+      "mutant_sha256": "14bbb622f14550462e48153d3b9785bee1e276bb1feb1167596103bb2f134e92",
+      "correct_control": "passed",
+      "mutant_compiled": true,
+      "actual_public_counterexample": "** Fatal: PUBLIC_PORT_MISMATCH post row=9 repeat=0 edge=10 field=18 got=0000000000000001 expected=0000000000000000",
+      "mutant_exit_code": 0,
+      "expected_rejection": true
+    },
+    {
+      "name": "mismatch-admitted",
+      "frozen_first_row": 18169,
+      "frozen_last_row": 18181,
+      "selected_sampled_edges": 13,
+      "selected_rows": 13,
+      "vectors_sha256": "57e4b13cbf7226ef688acd31cfb3a7d9cc3bda53cfaf6551bbf96169d8f93a9a",
+      "mutant_sha256": "b66fa61c5017ef0ea49b1b4352ed650f35f0ad08943ac18dedfc1a7900470c04",
+      "correct_control": "passed",
+      "mutant_compiled": true,
+      "actual_public_counterexample": "** Fatal: PUBLIC_PORT_MISMATCH post row=12 repeat=0 edge=13 field=18 got=0000000000000001 expected=0000000000000000",
+      "mutant_exit_code": 0,
+      "expected_rejection": true
+    }
+  ],
+  "commands": [
+    {
+      "name": "same-tag-cache/vlib",
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/compile-correct",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "generator.sv",
+        "capture.sv",
+        "correct.sv",
+        "tb.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "ca6b621ce8e0d91f628190187a51706c0867676cc2bff4cb0967b52a10835f5c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/correct",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_applied_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=vectors.txt",
+        "-do",
+        "run.do",
+        "+TRACE=correct.ports.txt"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "c78b29cb0ec5359961b1672fd00b3ca0c6fb3a2e00bf49343dcea1460fad34f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/compile-mutant",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "mutant.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "aa5316d3ce37c64d25ef71202b09a02e7cac7fa7a3beec0847d20067bd857b3f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/mutant",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_applied_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=vectors.txt",
+        "-do",
+        "run.do",
+        "+TRACE=mutant.ports.txt"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "3eb46f50c9366186611f9c495cbd88dd9c0f0827f4f8877dba764d0f206ad69c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mismatch-admitted/vlib",
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\mismatch-admitted",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mismatch-admitted/compile-correct",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "generator.sv",
+        "capture.sv",
+        "correct.sv",
+        "tb.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\mismatch-admitted",
+      "exit_code": 0,
+      "stdout_sha256": "7f76b38d8c7f1f25c5ea3693e263190b02afc235265aa5242a341f891c36c0ab",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mismatch-admitted/correct",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_applied_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=vectors.txt",
+        "-do",
+        "run.do",
+        "+TRACE=correct.ports.txt"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\mismatch-admitted",
+      "exit_code": 0,
+      "stdout_sha256": "b8ad2dfac8ca179c098cdf30b98cec3f926f9dd48a3a3fe40a4a1cc4b7316cfe",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mismatch-admitted/compile-mutant",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "mutant.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\mismatch-admitted",
+      "exit_code": 0,
+      "stdout_sha256": "0accebb99d51a9d1e67b358584e3aed81e60353419fe97309f66530f387776a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mismatch-admitted/mutant",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_applied_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=vectors.txt",
+        "-do",
+        "run.do",
+        "+TRACE=mutant.ports.txt"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair02\\mismatch-admitted",
+      "exit_code": 0,
+      "stdout_sha256": "3bcafb2f770fa1363f8c5e7ee7fc590acfc164891dc838b8acd088e555015b1c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "status": "remaining_two_actual_public_port_rejections"
+}

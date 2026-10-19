@@ -1,0 +1,18 @@
+{
+  "description": "T/pending invalidation and rearm are made tag-dependent, so a same-tag reapplication retains and exports an interval that lacks a complete post-boundary cycle.",
+  "id": "m2-same-tag-state-retained",
+  "replacements": [
+    {
+      "new": "rst || stop || (transfer_now && (cfg_tag != expected_tag_q)) || (g_pending && (cfg_tag != expected_tag_q)) || !g_running",
+      "occurrences": 1,
+      "old": "rst || stop || transfer_now || g_pending || !g_running"
+    },
+    {
+      "new": "assign capture_rearm = capture_arm && (cfg_tag != expected_tag_q);",
+      "occurrences": 1,
+      "old": "assign capture_rearm = capture_arm;"
+    }
+  ],
+  "sha256": "2092e7eddac461e998e4fad43a6b074a08783ac53ba211a7dce4834fc79a0713",
+  "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\dryrun-author-20261020-15-b\\mutants\\m2-same-tag-state-retained\\deepeye_pwm_applied_capture.sv"
+}

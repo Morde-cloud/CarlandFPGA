@@ -1,0 +1,312 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
+@@
+ import re
+ import shutil
+ import subprocess
+ import sys
++import traceback
+ from pathlib import Path
+@@
+ def relative_to_worktree(path: Path) -> str:
+     try:
+         return path.resolve().relative_to(WORKTREE).as_posix()
+     except ValueError:
+         return str(path)
++
++
++NOT_RUN = [
++    "synthesis",
++    "implementation",
++    "place-and-route",
++    "static timing",
++    "CDC/RDC",
++    "physical board operation",
++    "system integration",
++    "all29 formal acceptance cards",
++    "G05 applied-command/full-cycle/system binding",
++    "public register/TRACE type7/HWH/BOOT ABI",
++    "physical frequency, clock, source, TTL, profile, curvature or motion authority",
++]
++LIMITATIONS = [
++    "Author-side local ModelSim simulation only; no main acceptance is claimed.",
++    "Actual digital loopback is supplemental and explicitly named; the primary source is independent sample_levels schedules.",
++    "Code7 is demonstrated only on a deliberately faulty wrapper copy because the correct composition does not reach it.",
++    "Maximum COUNT_W=32 and WITNESS_W=64 coverage is bounded observation, not a claim of full traversal.",
++    "The 16-bit period 65535 record is fully observed; 65536 is an overflow observation, not a timing or frequency claim.",
++    "Mutant rejection is public-port behavioral evidence, not proof against every possible fault.",
++    "No Vivado synthesis or implementation was run because the toolchain is unavailable.",
++]
++
++
++def main(argv: list[str] | None = None) -> int:
++    parser = argparse.ArgumentParser(
++        description="Run the op15 applied-capture author suite with fail-closed evidence."
++    )
++    parser.add_argument("--modelsim-root", default=str(DEFAULT_MODELSIM))
++    parser.add_argument("--out", default=str(DEFAULT_OUT))
++    parser.add_argument("--timeout", type=float, default=900.0)
++    args = parser.parse_args(argv)
++
++    out = Path(args.out).resolve()
++    if out.exists():
++        print(f"REFUSE existing output directory: {out}")
++        return 2
++    missing = [f"{key}: {path}" for key, path in FILES.items() if not path.is_file()]
++    if missing:
++        print("MISSING required inputs:")
++        for item in missing:
++            print(f"  {item}")
++        return 2
++
++    out.mkdir(parents=True)
++    logs = out / "logs"
++    work = out / "work"
++    logs.mkdir()
++    work.mkdir()
++    (out / "mutants").mkdir()
++    commands: list[dict] = []
++    failures: list[str] = []
++    warnings: list[str] = []
++    started = utc_now()
++    summary: dict = {
++        "task_id": TASK_ID,
++        "task_version": TASK_VERSION,
++        "work_id": WORK_ID,
++        "operation_id": OPERATION_ID,
++        "contract_id": CONTRACT_ID,
++        "contract_revision": CONTRACT_REVISION,
++        "contract_pin": CONTRACT_PIN,
++        "design_pin": DESIGN_PIN,
++        "requirements_sha256": REQ_SHA,
++        "requirement_ids": REQUIREMENT_IDS,
++        "baseline_commit": "7dd2c4108ee49cc6e0feb7c715d786f8b11a99c2",
++        "worktree": str(WORKTREE),
++        "python": sys.version,
++        "platform": platform.platform(),
++        "started_utc": started,
++        "modelsim_root": str(Path(args.modelsim_root).resolve()),
++        "timeout_seconds": args.timeout,
++    }
++
++    try:
++        tools = discover_tools(Path(args.modelsim_root))
++        summary["tools"] = tools
++        run_command([tools["vlog"], "-version"], out, logs,
++                    "tool-vlog-version", 60, commands)
++        run_command([tools["vsim"], "-version"], out, logs,
++                    "tool-vsim-version", 60, commands)
++        summary["tool_versions"] = {
++            "vlog": (logs / "tool-vlog-version.stdout.txt").read_text(
++                encoding="utf-8", errors="replace").strip(),
++            "vsim": (logs / "tool-vsim-version.stdout.txt").read_text(
++                encoding="utf-8", errors="replace").strip(),
++        }
++
++        before = input_hash_report()
++        summary["input_hashes_before"] = before
++        if not all(item["match"] for item in before.values()):
++            failures.append("immutable input hash mismatch before run")
++        summary["protected_dirty_before"] = protected_report()
++        if summary["protected_dirty_before"]["present"] and not summary["protected_dirty_before"].get("match", False):
++            warnings.append("protected dirty handoff hash changed before run")
++
++        summary["source_snapshot"] = snapshot_sources(out, FILES, HERE)
++        snapshot = {
++            key: out / "source_snapshot" / f"{key}{FILES[key].suffix}"
++            for key in FILES
++        }
++
++        positive_lib, positive_info = compile_design(
++            work, logs, commands, tools, snapshot["rtl"], snapshot["tb"],
++            snapshot["atomic"], snapshot["capture"], args.timeout, "positive",
++        )
++        summary["positive_compile"] = compile_summary(positive_info)
++        if not positive_info["compiled"]:
++            failures.append("positive compilation failed")
++            summary["positive"] = []
++            summary["positive_totals"] = {
++                key: 0 for key in (
++                    "cases", "samples", "assertions", "records", "raw_faults",
++                    "failure_events", "window_starts", "handshakes", "mismatches",
++                    "scenarios", "groups", "passed_scenarios",
++                )
++            }
++        else:
++            positive, positive_totals = run_positive_suite(
++                work, logs, commands, tools, args.timeout)
++            summary["positive"] = positive
++            summary["positive_totals"] = positive_totals
++            for entry in positive:
++                if not entry["passed"]:
++                    failures.append(f"positive scenario failed: {entry['id']}")
++
++        rtl_text = snapshot["rtl"].read_text(encoding="utf-8")
++        mutants = run_mutant_suite(
++            out, work, logs, commands, tools, snapshot, rtl_text, args.timeout)
++        summary["mutants"] = mutants
++        for entry in mutants:
++            if not entry["compile"]["compiled"]:
++                failures.append(f"mutant compilation failed: {entry['id']}")
++                continue
++            for run_entry in entry["runs"]:
++                if run_entry["expect"] == "fail" and not run_entry.get("rejected", False):
++                    failures.append(
++                        f"mutant not rejected at public ports: {entry['id']} "
++                        f"group {run_entry['group']}"
++                    )
++                if run_entry["expect"] == "pass_code7" and not run_entry.get("demonstrated", False):
++                    failures.append(
++                        f"code7 faulty-copy probe did not demonstrate code7: {entry['id']}"
++                    )
++
++        invalid_compile, invalid_runs = run_invalid_suite(
++            work, logs, commands, tools, snapshot, args.timeout)
++        summary["invalid_compile"] = invalid_compile
++        summary["invalid_parameters"] = invalid_runs
++        if not invalid_compile["compiled"]:
++            failures.append("invalid-parameter compilation failed")
++        for entry in invalid_runs:
++            if not entry["passed"]:
++                failures.append(
++                    f"invalid-parameter diagnostic failed: {entry['id']} "
++                    f"diagnostic={entry['diagnostic']} expected={entry['expected']}"
++                )
++        if len(invalid_runs) != len(INVALID_RUNS):
++            failures.append("not every invalid-parameter case ran")
++
++        after = input_hash_report()
++        summary["input_hashes_after"] = after
++        if not all(item["match"] for item in after.values()):
++            failures.append("immutable input hash mismatch after run")
++        summary["protected_dirty_after"] = protected_report()
++        if summary["protected_dirty_after"]["present"] and not summary["protected_dirty_after"].get("match", False):
++            warnings.append("protected dirty handoff hash changed after run")
++    except Exception as exc:
++        failures.append(f"{type(exc).__name__}: {exc}")
++        summary["exception_traceback"] = traceback.format_exc()
++
++    summary["ended_utc"] = utc_now()
++    summary["commands"] = commands
++    summary["command_count"] = len(commands)
++    summary["failures"] = failures
++    summary["warnings"] = warnings
++    summary["result"] = "PASS" if not failures else "FAIL"
++    summary["acceptance"] = (
++        "Author-side local ModelSim simulation evidence only. Main acceptance, "
++        "synthesis, implementation, CDC/RDC, board/system and all29 formal "
++        "cards are not claimed."
++    )
++    summary["not_run"] = NOT_RUN
++    summary["limitations"] = LIMITATIONS
++    positive_totals = summary.get("positive_totals", {})
++    mutant_runs = sum(len(entry.get("runs", [])) for entry in summary.get("mutants", []))
++    scenario_total = (
++        positive_totals.get("scenarios", 0)
++        + mutant_runs
++        + len(summary.get("invalid_parameters", []))
++    )
++    summary["scenario_counts"] = {
++        "positive_scenarios": positive_totals.get("scenarios", 0),
++        "mutant_runs": mutant_runs,
++        "invalid_parameter_scenarios": len(summary.get("invalid_parameters", [])),
++        "total": scenario_total,
++    }
++    write_json(out / "RUN_SUMMARY.json", summary)
++
++    lines = [
++        f"result={summary['result']}",
++        f"positive_scenarios={positive_totals.get('scenarios', 0)} "
++        f"passed={positive_totals.get('passed_scenarios', 0)}",
++        f"samples={positive_totals.get('samples', 0)} "
++        f"assertions={positive_totals.get('assertions', 0)} "
++        f"records={positive_totals.get('records', 0)}",
++        f"mutant_runs={mutant_runs} invalid_parameter_runs={len(summary.get('invalid_parameters', []))}",
++        f"failures={len(failures)} warnings={len(warnings)}",
++    ]
++    console = "\n".join(lines) + "\n"
++    (out / "RUNNER_CONSOLE.txt").write_text(console, encoding="utf-8")
++
++    author_dir = out.parent
++    excluded = {
++        "EVIDENCE_TREE_MANIFEST.json",
++        "TERMINAL_MANIFEST.json",
++        "TERMINAL_MANIFEST.sha256.txt",
++    }
++    records, total_bytes = tree_records(author_dir, excluded)
++    evidence_tree_sha = tree_sha256(records)
++    tree_manifest_path = author_dir / "EVIDENCE_TREE_MANIFEST.json"
++    write_json(tree_manifest_path, {
++        "root": str(author_dir),
++        "excluded_from_tree": sorted(excluded),
++        "file_count": len(records),
++        "bytes": total_bytes,
++        "tree_sha256": evidence_tree_sha,
++        "files": records,
++    })
++
++    five_paths = {}
++    for key in ("rtl", "candidate", "tb", "runner"):
++        source = FILES[key] if key != "runner" else HERE
++        five_paths[key] = {
++            "path": relative_to_worktree(source),
++            "absolute_path": str(source.resolve()),
++            "bytes": source.stat().st_size,
++            "sha256": sha256_file(source),
++        }
++    five_paths["evidence_author_dir"] = {
++        "path": relative_to_worktree(author_dir),
++        "absolute_path": str(author_dir),
++        "file_count": len(records),
++        "bytes": total_bytes,
++        "tree_sha256": evidence_tree_sha,
++        "tree_manifest": relative_to_worktree(tree_manifest_path),
++        "tree_manifest_sha256": sha256_file(tree_manifest_path),
++        "excluded_from_tree": sorted(excluded),
++    }
++
++    run_summary_path = out / "RUN_SUMMARY.json"
++    terminal = {
++        "task_id": TASK_ID,
++        "task_version": TASK_VERSION,
++        "work_id": WORK_ID,
++        "operation_id": OPERATION_ID,
++        "contract_id": CONTRACT_ID,
++        "contract_revision": CONTRACT_REVISION,
++        "contract_pin": CONTRACT_PIN,
++        "design_pin": DESIGN_PIN,
++        "requirements_sha256": REQ_SHA,
++        "baseline_commit": "7dd2c4108ee49cc6e0feb7c715d786f8b11a99c2",
++        "result": summary["result"],
++        "five_paths": five_paths,
++        "run_summary": {
++            "path": relative_to_worktree(run_summary_path),
++            "absolute_path": str(run_summary_path),
++            "sha256": sha256_file(run_summary_path),
++        },
++        "positive_totals": positive_totals,
++        "scenario_counts": summary["scenario_counts"],
++        "input_hashes": summary.get("input_hashes_after", summary.get("input_hashes_before")),
++        "protected_dirty": summary.get("protected_dirty_after", summary.get("protected_dirty_before")),
++        "failures": failures,
++        "warnings": warnings,
++        "not_run": NOT_RUN,
++        "limitations": LIMITATIONS,
++        "acceptance": summary["acceptance"],
++        "generated_utc": utc_now(),
++    }
++    terminal_path = author_dir / "TERMINAL_MANIFEST.json"
++    write_json(terminal_path, terminal)
++    (author_dir / "TERMINAL_MANIFEST.sha256.txt").write_text(
++        f"{sha256_file(terminal_path)}  TERMINAL_MANIFEST.json\n",
++        encoding="utf-8",
++    )
++    print(console, end="")
++    print(f"terminal_manifest={terminal_path}")
++    print(f"terminal_manifest_sha256={sha256_file(terminal_path)}")
++    return 0 if not failures else 1
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+*** End Patch

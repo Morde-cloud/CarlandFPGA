@@ -1,0 +1,200 @@
+﻿*** Begin Patch
+*** Add File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
++// tb_pwm_applied_capture - authored public-port self-checking stimulus.
++//
++// Task: DEEPEYE-IMPLEMENTATION-20261014/v1
++// Work: B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1
++// Operation: B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15
++// Contract: DEEPEYE-HUMAN-LOCK-20261014/revision1 (H01-H15), requirements
++// SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
++// Contract pin: f5989cd5defce561f9ba98e6b18fc2682945f0a2.
++// Frozen design: 1011259415a0916054eb580687612580bc1e5f09.
++//
++// The default sample source is an independently driven observed-level
++// schedule. LOOPBACK=1 names the supplemental internal digital-loopback case.
++// The checker reads public ports and absolute sampled indices only. It does not
++// use hierarchy, forces, internal counters, or expected tuples as measurements.
++
++`timescale 1ns/1ps
++
++module tb_pwm_applied_capture #(
++    parameter integer COUNT_W   = 32,
++    parameter integer WITNESS_W = 64,
++    parameter integer TAG_W     = 32,
++    parameter integer TEST_GROUP = 0,
++    parameter integer LOOPBACK   = 0
++);
++
++    localparam logic [COUNT_W-1:0]   COUNT_ZERO = '0;
++    localparam logic [TAG_W-1:0]     TAG_ZERO   = '0;
++    localparam logic [TAG_W-1:0]     TAG_ONES   = '1;
++
++    logic                 clk;
++    logic                 rst;
++    logic                 stop;
++    logic                 cfg_valid;
++    logic                 cfg_ready;
++    logic [COUNT_W-1:0]   cfg_period;
++    logic [COUNT_W-1:0]   cfg_high_yaw;
++    logic [COUNT_W-1:0]   cfg_high_pitch;
++    logic [COUNT_W-1:0]   cfg_high_speed;
++    logic [TAG_W-1:0]     cfg_tag;
++    logic [2:0]           stimulus_levels;
++    logic [2:0]           sample_levels;
++    logic                 out_ready;
++
++    logic                 accepted;
++    logic                 rejected;
++    logic                 applied;
++    logic                 frame_start;
++    logic                 running;
++    logic                 pending;
++    logic [2:0]           pwm;
++    logic [COUNT_W-1:0]   active_period;
++    logic [COUNT_W-1:0]   active_high_yaw;
++    logic [COUNT_W-1:0]   active_high_pitch;
++    logic [COUNT_W-1:0]   active_high_speed;
++    logic [TAG_W-1:0]     active_tag;
++    logic                 window_active;
++    logic                 window_started;
++    logic                 capture_armed;
++    logic                 out_valid;
++    logic [COUNT_W-1:0]   out_period;
++    logic [COUNT_W-1:0]   out_high0;
++    logic [COUNT_W-1:0]   out_high1;
++    logic [COUNT_W-1:0]   out_high2;
++    logic [WITNESS_W-1:0] out_start;
++    logic [WITNESS_W-1:0] out_end;
++    logic [TAG_W-1:0]     out_tag;
++    logic [COUNT_W-1:0]   expected_period;
++    logic [COUNT_W-1:0]   expected_high0;
++    logic [COUNT_W-1:0]   expected_high1;
++    logic [COUNT_W-1:0]   expected_high2;
++    logic [TAG_W-1:0]     expected_tag;
++    logic [3:0]           raw_fault_events;
++    logic                 failure_event;
++    logic [2:0]           failure_code;
++
++    logic pre_cfg_ready;
++    logic pre_applied;
++    logic pre_out_valid;
++    logic pre_out_ready;
++
++    integer groups;
++    integer cases;
++    integer samples;
++    integer assertions;
++    integer mismatches;
++    integer records;
++    integer raw_faults;
++    integer failure_events;
++    integer window_starts;
++    integer handshakes;
++    integer group_cases_start;
++    integer group_samples_start;
++    integer group_assertions_start;
++    integer group_mismatches_start;
++    integer group_records_start;
++    integer group_raw_faults_start;
++    integer group_failure_events_start;
++    integer group_window_starts_start;
++    integer group_handshakes_start;
++
++    assign sample_levels = LOOPBACK ? pwm : stimulus_levels;
++
++    deepeye_pwm_applied_capture #(
++        .COUNT_W(COUNT_W),
++        .WITNESS_W(WITNESS_W),
++        .TAG_W(TAG_W)
++    ) dut (
++        .clk(clk),
++        .rst(rst),
++        .stop(stop),
++        .cfg_valid(cfg_valid),
++        .cfg_ready(cfg_ready),
++        .cfg_period(cfg_period),
++        .cfg_high_yaw(cfg_high_yaw),
++        .cfg_high_pitch(cfg_high_pitch),
++        .cfg_high_speed(cfg_high_speed),
++        .cfg_tag(cfg_tag),
++        .sample_levels(sample_levels),
++        .out_ready(out_ready),
++        .accepted(accepted),
++        .rejected(rejected),
++        .applied(applied),
++        .frame_start(frame_start),
++        .running(running),
++        .pending(pending),
++        .pwm(pwm),
++        .active_period(active_period),
++        .active_high_yaw(active_high_yaw),
++        .active_high_pitch(active_high_pitch),
++        .active_high_speed(active_high_speed),
++        .active_tag(active_tag),
++        .window_active(window_active),
++        .window_started(window_started),
++        .capture_armed(capture_armed),
++        .out_valid(out_valid),
++        .out_period(out_period),
++        .out_high0(out_high0),
++        .out_high1(out_high1),
++        .out_high2(out_high2),
++        .out_start(out_start),
++        .out_end(out_end),
++        .out_tag(out_tag),
++        .expected_period(expected_period),
++        .expected_high0(expected_high0),
++        .expected_high1(expected_high1),
++        .expected_high2(expected_high2),
++        .expected_tag(expected_tag),
++        .raw_fault_events(raw_fault_events),
++        .failure_event(failure_event),
++        .failure_code(failure_code)
++    );
++
++    initial begin
++        clk = 1'b0;
++        forever #5 clk = ~clk;
++    end
++
++    initial begin
++        rst = 1'b1;
++        stop = 1'b0;
++        cfg_valid = 1'b0;
++        cfg_period = COUNT_ZERO;
++        cfg_high_yaw = COUNT_ZERO;
++        cfg_high_pitch = COUNT_ZERO;
++        cfg_high_speed = COUNT_ZERO;
++        cfg_tag = TAG_ZERO;
++        stimulus_levels = 3'b000;
++        out_ready = 1'b0;
++        pre_cfg_ready = 1'b0;
++        pre_applied = 1'b0;
++        pre_out_valid = 1'b0;
++        pre_out_ready = 1'b0;
++        groups = 0;
++        cases = 0;
++        samples = 0;
++        assertions = 0;
++        mismatches = 0;
++        records = 0;
++        raw_faults = 0;
++        failure_events = 0;
++        window_starts = 0;
++        handshakes = 0;
++        group_cases_start = 0;
++        group_samples_start = 0;
++        group_assertions_start = 0;
++        group_mismatches_start = 0;
++        group_records_start = 0;
++        group_raw_faults_start = 0;
++        group_failure_events_start = 0;
++        group_window_starts_start = 0;
++        group_handshakes_start = 0;
++    end
++
++    // PATCH_INSERT_TASKS
++
++    // PATCH_INSERT_DISPATCH
++endmodule
+*** End Patch

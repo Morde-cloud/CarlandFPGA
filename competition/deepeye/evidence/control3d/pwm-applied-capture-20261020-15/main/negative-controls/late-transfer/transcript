@@ -1,0 +1,27 @@
+# vsim -c -onfinish stop work.main_tb_pwm_applied_capture "+VECTORS=vectors.txt" -do "run.do" "+TRACE=mutant.ports.txt" -gTAG_W=64 -gWITNESS_W=6 -gCOUNT_W=3 
+# Start time: 03:38:31 on Oct 20,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.main_tb_pwm_applied_capture(fast)
+# do run.do
+# ** Fatal: PUBLIC_PORT_MISMATCH pre row=7 repeat=0 edge=7 valid=1/0000000000000000 ready=1/0000000000000001
+#    Time: 37 ns  Scope: main_tb_pwm_applied_capture File: tb.sv Line: 77
+# ** Note: $finish    : tb.sv(77)
+#    Time: 37 ns  Iteration: 0  Instance: /main_tb_pwm_applied_capture
+# Break at tb.sv line 77
+# Stopped at tb.sv line 77
+# End time: 03:38:32 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

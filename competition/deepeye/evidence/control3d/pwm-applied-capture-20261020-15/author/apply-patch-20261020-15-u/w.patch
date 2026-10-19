@@ -1,0 +1,30 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+             cycle(1'b0, 1'b1, 1'b0, 1'b1, 3'b000);
+             check_unbound("missing_edge_stop_closes");
+             check64(failure_event, 1'b0, "missing_edge_stop_not_fault");
++
++            cases = cases + 1;
++            start_application(3, 1, 2, 1, 8'hA2, 3'b111, 1'b1,
++                              "phase_shift_window_start");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b010);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            expect_record(3, 1, 2, 1, 8'hA2, 4, 7,
++                          "phase_shifted_complete_record");
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(out_valid, 1'b0, "phase_shift_record_handshake");
+             group_end("constant_input_and_missing_edges");
+*** Update File: competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md
+@@
+   tags, rapid replacement, old partial/slot ready conflicts, mismatch and
+   wrong-period/wrong-high controls, constant high input, and a missing closing
+-  edge;
++  edge, plus an equal-period phase-shifted complete interval whose absolute
++  local witnesses start later than the first post-boundary edge;
+*** End Patch

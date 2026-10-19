@@ -1,0 +1,17 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+  "scope": "author runner qualification, not the already tested RTL snapshot",
+  "status": "main_reproduced_defects_waiting_for_original_child_terminal_before_any_owned_file_repair",
+  "original_child": "child-fbe6ddad25a748b3b978f7a4a7f1130a",
+  "tested_runner_sha256": "cb1b3aeb1cd6c8dfbd40d2f906102be8a79d5e1d48f30102103cdd08863ac472",
+  "probe": "runner-qualification-red/result.json",
+  "probe_kind": "16 synthetic predicate cases; zero ModelSim commands;13 incorrect qualifications reproduced",
+  "findings": [
+    "RUNNER15-EXIT01: positive, invalid and mutant qualification omit required subprocess terminal status checks; timeout/exception or unexpected nonzero normal execution must not inherit PASS text",
+    "RUNNER15-ERROR02: positive parsing fails to reject a simulator Error after a PASS marker",
+    "RUNNER15-GUARD03: exact parameter display alone qualifies without the wrapper's own fatal diagnostic"
+  ],
+  "planned_repair_boundary": "After actual child terminal release only, preserve original runner/terminal bytes, make completed-process and explicit error/fatal qualification checks, rerun the identical predicate probes and one fresh actual author suite with logs outside the tree being hashed. No RTL, frozen main oracle/TB/input or immutable12/14 changes.",
+  "publication_authorized_by_this_record": false,
+  "formal_cards": "29 not_run"
+}

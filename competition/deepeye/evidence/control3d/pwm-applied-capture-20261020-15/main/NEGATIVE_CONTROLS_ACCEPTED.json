@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "scope": "three actual isolated public-port faulty-copy counterexamples, not the failed preparation runs",
+  "cases": [
+    {
+      "name": "late-transfer",
+      "frozen_first_row": 18143,
+      "frozen_last_row": 18150,
+      "selected_sampled_edges": 8,
+      "selected_rows": 8,
+      "vectors_sha256": "4f2ce188121f75433c7eb0c00ec7b5e45896402a7b7dce0069f489bdfd178fd7",
+      "mutant_sha256": "9e49c15a5dd6e755ffddc2cbfc373ff042f02aaa46679aab86a37fda43ca55ae",
+      "correct_control": "passed",
+      "mutant_compiled": true,
+      "actual_public_counterexample": "** Fatal: PUBLIC_PORT_MISMATCH pre row=7 repeat=0 edge=7 valid=1/0000000000000000 ready=1/0000000000000001",
+      "mutant_exit_code": 0,
+      "expected_rejection": true,
+      "result_directory": "negative-controls",
+      "raw_mutant_stdout_sha256": "8eafb8b30e5508d045f4afe266fdf1fe5b7dca8e474322ed7ed5b39f7861291b",
+      "raw_correct_stdout_sha256": "16056050979c908bfde626ca3b0dde02ee7fb104b8de3b42ef7c2529d947bc98"
+    },
+    {
+      "name": "same-tag-cache",
+      "frozen_first_row": 18143,
+      "frozen_last_row": 18152,
+      "selected_sampled_edges": 10,
+      "selected_rows": 10,
+      "vectors_sha256": "625bebf47788c12d5c2b2ae4330822b94ab38b08d78bbdb02446a881ed699521",
+      "mutant_sha256": "14bbb622f14550462e48153d3b9785bee1e276bb1feb1167596103bb2f134e92",
+      "correct_control": "passed",
+      "mutant_compiled": true,
+      "actual_public_counterexample": "** Fatal: PUBLIC_PORT_MISMATCH post row=9 repeat=0 edge=10 field=18 got=0000000000000001 expected=0000000000000000",
+      "mutant_exit_code": 0,
+      "expected_rejection": true,
+      "result_directory": "negative-controls-repair02",
+      "raw_mutant_stdout_sha256": "3eb46f50c9366186611f9c495cbd88dd9c0f0827f4f8877dba764d0f206ad69c",
+      "raw_correct_stdout_sha256": "c78b29cb0ec5359961b1672fd00b3ca0c6fb3a2e00bf49343dcea1460fad34f0"
+    },
+    {
+      "name": "mismatch-admitted",
+      "frozen_first_row": 18169,
+      "frozen_last_row": 18181,
+      "selected_sampled_edges": 13,
+      "selected_rows": 13,
+      "vectors_sha256": "57e4b13cbf7226ef688acd31cfb3a7d9cc3bda53cfaf6551bbf96169d8f93a9a",
+      "mutant_sha256": "b66fa61c5017ef0ea49b1b4352ed650f35f0ad08943ac18dedfc1a7900470c04",
+      "correct_control": "passed",
+      "mutant_compiled": true,
+      "actual_public_counterexample": "** Fatal: PUBLIC_PORT_MISMATCH post row=12 repeat=0 edge=13 field=18 got=0000000000000001 expected=0000000000000000",
+      "mutant_exit_code": 0,
+      "expected_rejection": true,
+      "result_directory": "negative-controls-repair02",
+      "raw_mutant_stdout_sha256": "3bcafb2f770fa1363f8c5e7ee7fc590acfc164891dc838b8acd088e555015b1c",
+      "raw_correct_stdout_sha256": "b8ad2dfac8ca179c098cdf30b98cec3f926f9dd48a3a3fe40a4a1cc4b7316cfe"
+    }
+  ],
+  "original_DUT_sha256": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3",
+  "frozen_vectors_sha256": "bd069d90085713da98101cba040dee78bba66e25467500ec4f11c279152bcf9d",
+  "all_selected_inputs_and_expected_values_unchanged": true,
+  "all34_fields_checked": true,
+  "historical_failed_preparations_retained": [
+    "negative-controls/same-tag-cache compile exit2 (16 errors)",
+    "negative-controls-repair01/same-tag-cache pre-reset X failure, rejected as wrong counterexample"
+  ],
+  "correction_records": {
+    "NEGATIVE_PREPARATION_CORRECTION.json": "271005d4bb210e66bb17b6181cf35817e299dd61fa64c56e461f574070b13112",
+    "NEGATIVE_PREPARATION_CORRECTION02.json": "ea50bea0d1de096da1d354c296119fd2fe11b65c43662096835167a8ef4446d2"
+  },
+  "main_changed_production_RTL": false
+}

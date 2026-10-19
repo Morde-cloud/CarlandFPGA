@@ -1,0 +1,18 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+         input logic [WITNESS_W-1:0] end_i,
+                                  input string label);
+         begin
++            if ((out_valid !== 1'b1) || (out_period !== period) ||
++                (out_high0 !== high0) || (out_high1 !== high1) ||
++                (out_high2 !== high2) || (out_start !== start_i) ||
++                (out_end !== end_i) || (out_tag !== tag)) begin
++                $display("RECORD_DETAIL sample=%0d label=%s valid=%0b period=%0d h=%0d,%0d,%0d start=%0d end=%0d tag=%0h expected=%0d,%0d,%0d,%0d,%0d,%0d",
++                         samples, label, out_valid, out_period,
++                         out_high0, out_high1, out_high2, out_start,
++                         out_end, out_tag, period, high0, high1, high2,
++                         start_i, end_i);
++            end
+             check64(out_valid, 1'b1, label);
+*** End Patch

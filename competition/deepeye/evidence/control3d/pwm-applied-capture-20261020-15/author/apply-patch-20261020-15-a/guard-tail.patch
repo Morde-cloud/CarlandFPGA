@@ -1,0 +1,6 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/fpga/control3d/deepeye_pwm_applied_capture.sv
+@@
+-            // PATCH_GUARD_TAIL
++            $fatal(1, "DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths");
+*** End Patch

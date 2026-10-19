@@ -1,0 +1,254 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+-            for (i = 0; i < 3; i = i + 1) begin
++            for (i = 0; i < 17; i = i + 1) begin
+                 cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
+                 check64(out_valid, 1'b1, "backpressure_holds_valid");
+@@
+-    // PATCH_INSERT_TASKS
++    task automatic group_same_edge_fault;
++        integer hb;
++        integer n;
++        begin
++            group_begin("same_edge_raw_fault_vs_old_retirement");
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'h81, 3'b000, 1'b1,
++                              "same_edge_fault_window_start");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b010);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            expect_record(3, 1, 2, 1, 8'h81, 1, 4,
++                          "same_edge_old_record");
++            for (n = 0; n < 11; n = n + 1) begin
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            end
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb + 1,
++                    "same_edge_pre_fault_handshake_permitted");
++            check64(raw_fault_events, 4'b0100,
++                    "same_edge_witness_event_after_edge");
++            check64(out_valid, 1'b0, "same_edge_fault_masks_immediately");
++            check64(window_active, 1'b1, "same_edge_wrapper_latency");
++            check64(failure_event, 1'b0, "same_edge_failure_not_yet");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("same_edge_closes_next_edge");
++            check64(failure_event, 1'b1, "same_edge_failure_pulse");
++            check64(failure_code, 3'd4, "same_edge_code4");
++            start_application(3, 1, 2, 1, 8'h81, 3'b000, 1'b1,
++                              "same_edge_recovery_application");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h81, 1, 4,
++                          "same_edge_recovered_record");
++            group_end("same_edge_raw_fault_vs_old_retirement");
++        end
++    endtask
++
++    task automatic group_future_waveform_before_application;
++        integer hb;
++        begin
++            group_begin("matching_future_waveform_before_application");
++            cases = cases + 1;
++            reset_dut();
++            cfg_period = 2;
++            cfg_high_yaw = 1;
++            cfg_high_pitch = 1;
++            cfg_high_speed = 1;
++            cfg_tag = 8'h52;
++            cycle(1'b0, 1'b0, 1'b1, 1'b1, 3'b000);
++            check64(accepted, 1'b1, "future_wave_T_accepted");
++            check64(pending, 1'b1, "future_wave_T_pending");
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b111);
++            check64(applied, 1'b1, "future_wave_A0_applied");
++            check64(pending, 1'b0, "future_wave_A0_pending_clear");
++            check64(window_active, 1'b0, "future_wave_A0_not_bound");
++            check64(window_started, 1'b0, "future_wave_A0_no_start");
++            check64(handshakes, hb, "future_wave_A0_no_handshake");
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(window_active, 1'b1, "future_wave_O_opens");
++            check64(window_started, 1'b1, "future_wave_O_started");
++            check64(capture_armed, 1'b1, "future_wave_O_armed");
++            check64(handshakes, hb, "future_wave_O_no_handshake");
++            expect_no_record("future_wave_pre_application_not_admitted");
++            emit_frame(2, 1, 1, 1);
++            expect_record(2, 1, 1, 1, 8'h52, 1, 3,
++                          "future_wave_post_boundary_record");
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb + 1, "future_wave_record_handshake");
++            group_end("matching_future_waveform_before_application");
++        end
++    endtask
++
++    task automatic group_same_tag_boundaries;
++        integer hb;
++        begin
++            group_begin("same_tag_reapplication_complete_post_boundary");
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'h61, 3'b000, 1'b1,
++                              "same_tuple_window_start");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h61, 1, 4,
++                          "same_tuple_old_record");
++            cfg_period = 3;
++            cfg_high_yaw = 1;
++            cfg_high_pitch = 2;
++            cfg_high_speed = 1;
++            cfg_tag = 8'h61;
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b1, 1'b1, 3'b000);
++            check64(pre_out_valid, 1'b0,
++                    "same_tuple_T_suppresses_old_valid");
++            check64(handshakes, hb, "same_tuple_T_no_old_handshake");
++            check_unbound("same_tuple_T_clears_binding");
++            wait_application_and_observe(3, 1, 2, 1, 8'h61, 3'b000, 1'b1,
++                                         "same_tuple_new_application");
++            expect_no_record("same_tuple_no_spliced_old_interval");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h61, 1, 4,
++                          "same_tuple_fresh_post_boundary_record");
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb + 1, "same_tuple_record_handshake");
++
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'h62, 3'b000, 1'b1,
++                              "same_tag_old_window_start");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h62, 1, 4,
++                          "same_tag_old_record");
++            cfg_period = 2;
++            cfg_high_yaw = 1;
++            cfg_high_pitch = 1;
++            cfg_high_speed = 1;
++            cfg_tag = 8'h62;
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b1, 1'b1, 3'b000);
++            check64(pre_out_valid, 1'b0,
++                    "same_tag_different_tuple_T_suppresses_old_valid");
++            check64(handshakes, hb,
++                    "same_tag_different_tuple_T_no_old_handshake");
++            check_unbound("same_tag_different_tuple_T_clears_binding");
++            wait_application_and_observe(2, 1, 1, 1, 8'h62, 3'b000, 1'b1,
++                                         "same_tag_different_tuple_application");
++            expect_no_record("same_tag_different_tuple_no_old_slot");
++            emit_frame(2, 1, 1, 1);
++            expect_record(2, 1, 1, 1, 8'h62, 1, 3,
++                          "same_tag_different_tuple_fresh_record");
++            group_end("same_tag_reapplication_complete_post_boundary");
++        end
++    endtask
++
++    task automatic group_control_at_handshake;
++        integer hb;
++        begin
++            group_begin("stop_reset_at_handshake_edge");
++            cases = cases + 1;
++            reset_dut();
++            start_application(4, 1, 2, 1, 8'h91, 3'b000, 1'b1,
++                              "handshake_stop_window");
++            emit_frame(4, 1, 2, 1);
++            expect_record(4, 1, 2, 1, 8'h91, 1, 5,
++                          "handshake_stop_record");
++            hb = handshakes;
++            cycle(1'b0, 1'b1, 1'b0, 1'b1, 3'b000);
++            check64(pre_out_valid, 1'b0,
++                    "stop_at_handshake_suppresses_valid");
++            check64(handshakes, hb, "stop_at_handshake_no_handshake");
++            check_unbound("stop_at_handshake_closes");
++            check64(failure_event, 1'b0, "stop_at_handshake_not_fault");
++            check64(failure_code, 3'd0, "stop_at_handshake_code0");
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb, "stop_release_no_stale_handshake");
++            check_unbound("stop_release_no_auto_recovery");
++            start_application(4, 1, 2, 1, 8'h91, 3'b000, 1'b1,
++                              "stop_recovery_application");
++            emit_frame(4, 1, 2, 1);
++            expect_record(4, 1, 2, 1, 8'h91, 1, 5,
++                          "stop_recovery_record");
++
++            cases = cases + 1;
++            hb = handshakes;
++            cycle(1'b1, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(pre_out_valid, 1'b0,
++                    "reset_at_handshake_suppresses_valid");
++            check64(handshakes, hb, "reset_at_handshake_no_handshake");
++            check_unbound("reset_at_handshake_closes");
++            check64(failure_event, 1'b0, "reset_at_handshake_not_fault");
++            check64(failure_code, 3'd0, "reset_at_handshake_code0");
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb, "reset_release_no_stale_handshake");
++            check_unbound("reset_release_no_auto_recovery");
++            start_application(4, 1, 2, 1, 8'h91, 3'b000, 1'b1,
++                              "reset_recovery_application");
++            emit_frame(4, 1, 2, 1);
++            expect_record(4, 1, 2, 1, 8'h91, 1, 5,
++                          "reset_recovery_record");
++            group_end("stop_reset_at_handshake_edge");
++        end
++    endtask
++
++    task automatic group_code7_probe;
++        begin
++            group_begin("code7_unexpected_disarm_deliberate_copy");
++            cases = cases + 1;
++            reset_dut();
++            cfg_period = 3;
++            cfg_high_yaw = 1;
++            cfg_high_pitch = 2;
++            cfg_high_speed = 1;
++            cfg_tag = 8'h71;
++            cycle(1'b0, 1'b0, 1'b1, 1'b0, 3'b000);
++            check64(accepted, 1'b1, "code7_probe_accepted");
++            check64(pending, 1'b1, "code7_probe_pending");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check64(applied, 1'b1, "code7_probe_applied");
++            check64(pending, 1'b0, "code7_probe_pending_clear");
++            check64(window_active, 1'b0, "code7_probe_not_bound_at_A0");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check64(window_active, 1'b1, "code7_probe_window_open");
++            check64(window_started, 1'b1, "code7_probe_started");
++            check64(failure_event, 1'b0, "code7_probe_no_failure_at_O");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("code7_probe_closes");
++            check64(failure_event, 1'b1, "code7_probe_failure_pulse");
++            check64(failure_code, 3'd7, "code7_probe_code7");
++            if ((failure_event === 1'b1) && (failure_code === 3'd7) &&
++                (window_active === 1'b0) && (out_valid === 1'b0)) begin
++                $display("CODE7_OBSERVED code=7 window_active=0 out_valid=0");
++            end
++            group_end("code7_unexpected_disarm_deliberate_copy");
++        end
++    endtask
++
++    // PATCH_INSERT_TASKS
+@@
+             8: group_loopback_record();
+             9: group_loopback_exhaustion();
+             10: group_phase_controls();
++            11: group_same_edge_fault();
++            12: group_future_waveform_before_application();
++            13: group_same_tag_boundaries();
++            14: group_control_at_handshake();
+             20: group_t_boundary(1'b0, "T_boundary_public_control");
+             21: group_t_boundary(1'b1, "same_tag_boundary_public_control");
+             22: group_mismatch_admission_control();
+-            30: begin
+-                group_begin("code7_deliberate_faulty_copy");
+-                reset_dut();
+-                start_application(3, 1, 2, 1, 8'h71, 3'b000, 1'b1,
+-                                  "code7_probe_window_start");
+-                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
+-                check_unbound("code7_probe_closes");
+-                check64(failure_event, 1'b1, "code7_probe_failure_pulse");
+-                check64(failure_code, 3'd7, "code7_probe_code7");
+-                group_end("code7_deliberate_faulty_copy");
+-            end
++            30: group_code7_probe();
+*** End Patch

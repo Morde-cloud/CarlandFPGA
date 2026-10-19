@@ -1,0 +1,104 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -l D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-applied-capture-20261020-15\author\run-main-repaired-20261020-15-a\logs\g13-same-tag-boundaries.transcript.txt -wlf D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-applied-capture-20261020-15\author\run-main-repaired-20261020-15-a\logs\g13-same-tag-boundaries.wlf -do "run -all; quit -f" tb_pwm_applied_capture -gTEST_GROUP=13 -gTAG_W=8 -gTRACE=1 -gLOOPBACK=0 -gWITNESS_W=8 -gCOUNT_W=4 
+# Start time: 04:11:48 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_pwm_applied_capture(fast)
+# run -all
+# GROUP_BEGIN same_tag_reapplication_complete_post_boundary
+# TRACE_PRE sample=1 rst=1 stop=0 cfg_valid=0 cfg_ready=0 period=0 high=0,0,0 tag=0 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=1 applied=0 pending=0 running=0 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=2 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=0 high=0,0,0 tag=0 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=2 applied=0 pending=0 running=0 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=3 rst=0 stop=0 cfg_valid=1 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=3 applied=0 pending=1 running=0 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=4 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=3 high=1,2,1 tag=61 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=4 applied=1 pending=0 running=1 frame_start=1 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=5 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=111 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=5 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=1 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=6 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=111 pwm=10 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=6 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=7 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=10 pwm=0 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=7 applied=0 pending=0 running=1 frame_start=1 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=8 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=111 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=8 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=9 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=111 pwm=10 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=9 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=1 raw_faults=0 failure_event=0 failure_code=0 raw=3,1,2,1,1,4,61
+# TRACE_PRE sample=10 rst=0 stop=0 cfg_valid=1 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=0 out_ready=1 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=10 applied=0 pending=1 running=1 frame_start=1 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=11 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=3 high=1,2,1 tag=61 levels=0 pwm=111 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=11 applied=0 pending=1 running=1 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=12 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=3 high=1,2,1 tag=61 levels=0 pwm=10 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=12 applied=0 pending=1 running=1 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=13 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=3 high=1,2,1 tag=61 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=13 applied=1 pending=0 running=1 frame_start=1 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=14 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=111 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=14 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=1 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=15 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=111 pwm=10 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=15 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=16 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=10 pwm=0 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=16 applied=0 pending=0 running=1 frame_start=1 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=17 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=111 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=17 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=18 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=111 pwm=10 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=18 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=1 raw_faults=0 failure_event=0 failure_code=0 raw=3,1,2,1,1,4,61
+# TRACE_PRE sample=19 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=0 out_ready=1 window_active=1 armed=1 out_valid=1 expected=3,1,2,1,61
+# HANDSHAKE sample=19 period=3 h0=1 h1=2 h2=1 start=1 end=4 tag=61
+# TRACE_POST sample=19 applied=0 pending=0 running=1 frame_start=1 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=20 rst=1 stop=0 cfg_valid=0 cfg_ready=0 period=3 high=1,2,1 tag=61 levels=0 pwm=111 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,61
+# TRACE_POST sample=20 applied=0 pending=0 running=0 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=21 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=61 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=21 applied=0 pending=0 running=0 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=22 rst=0 stop=0 cfg_valid=1 cfg_ready=1 period=3 high=1,2,1 tag=62 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=22 applied=0 pending=1 running=0 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=23 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=3 high=1,2,1 tag=62 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=23 applied=1 pending=0 running=1 frame_start=1 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=24 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=62 levels=0 pwm=111 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=24 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=1 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=25 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=62 levels=111 pwm=10 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,62
+# TRACE_POST sample=25 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=26 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=62 levels=10 pwm=0 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,62
+# TRACE_POST sample=26 applied=0 pending=0 running=1 frame_start=1 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=27 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=62 levels=0 pwm=111 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,62
+# TRACE_POST sample=27 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=28 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=3 high=1,2,1 tag=62 levels=111 pwm=10 out_ready=0 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,62
+# TRACE_POST sample=28 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=1 raw_faults=0 failure_event=0 failure_code=0 raw=3,1,2,1,1,4,62
+# TRACE_PRE sample=29 rst=0 stop=0 cfg_valid=1 cfg_ready=1 period=2 high=1,1,1 tag=62 levels=0 pwm=0 out_ready=1 window_active=1 armed=1 out_valid=0 expected=3,1,2,1,62
+# TRACE_POST sample=29 applied=0 pending=1 running=1 frame_start=1 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=30 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=2 high=1,1,1 tag=62 levels=0 pwm=111 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=30 applied=0 pending=1 running=1 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=31 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=2 high=1,1,1 tag=62 levels=0 pwm=10 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=31 applied=0 pending=1 running=1 frame_start=0 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=32 rst=0 stop=0 cfg_valid=0 cfg_ready=0 period=2 high=1,1,1 tag=62 levels=0 pwm=0 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=32 applied=1 pending=0 running=1 frame_start=1 window_active=0 window_started=0 armed=0 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=33 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=2 high=1,1,1 tag=62 levels=0 pwm=111 out_ready=0 window_active=0 armed=0 out_valid=0 expected=0,0,0,0,0
+# TRACE_POST sample=33 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=1 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=34 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=2 high=1,1,1 tag=62 levels=111 pwm=0 out_ready=0 window_active=1 armed=1 out_valid=0 expected=2,1,1,1,62
+# TRACE_POST sample=34 applied=0 pending=0 running=1 frame_start=1 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=35 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=2 high=1,1,1 tag=62 levels=0 pwm=111 out_ready=0 window_active=1 armed=1 out_valid=0 expected=2,1,1,1,62
+# TRACE_POST sample=35 applied=0 pending=0 running=1 frame_start=0 window_active=1 window_started=0 armed=1 out_valid=0 raw_faults=0 failure_event=0 failure_code=0 raw=0,0,0,0,0,0,0
+# TRACE_PRE sample=36 rst=0 stop=0 cfg_valid=0 cfg_ready=1 period=2 high=1,1,1 tag=62 levels=111 pwm=0 out_ready=0 window_active=1 armed=1 out_valid=0 expected=2,1,1,1,62
+# TRACE_POST sample=36 applied=0 pending=0 running=1 frame_start=1 window_active=1 window_started=0 armed=1 out_valid=1 raw_faults=0 failure_event=0 failure_code=0 raw=2,1,1,1,1,3,62
+# GROUP_END same_tag_reapplication_complete_post_boundary cases=2 samples=36 assertions=250 mismatches=0 records=4 raw_faults=0 failure_events=0 window_starts=4 handshakes=1
+# TB_STATS groups=1 cases=2 samples=36 assertions=250 records=4 raw_faults=0 failure_events=0 window_starts=4 handshakes=1 mismatches=0
+# TB_PASS group=13 loopback=0
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-main-repaired-20261020-15-a/source_snapshot/tb.sv(1353)
+#    Time: 386 ns  Iteration: 0  Instance: /tb_pwm_applied_capture
+# End time: 04:11:49 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

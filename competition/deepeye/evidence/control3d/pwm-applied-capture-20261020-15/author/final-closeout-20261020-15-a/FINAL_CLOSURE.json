@@ -1,0 +1,112 @@
+{
+  "actual_exits": {
+    "runner": 0
+  },
+  "branch": "codex/b/deepeye-implementation-20261014",
+  "closeout_stdout_sha256": "327c0ad4efaa20c6a152f59ce80a05de9ed7e7e42bf8ca15d577d65c4d87b79b",
+  "command_log_manifest_sha256": "ab08748294557f70479e4d329d4cff7d2db3e3bc9beef7ff1a4e3ad71a2f7870",
+  "corrections": [
+    "Preserved and reconciled the g15-b missing pre-run source snapshot with a post-hoc timestamp-proven source copy.",
+    "Moved accidental worktree-root ModelSim lib/_info and transcript artifacts under author evidence.",
+    "Preserved the initial raced manifest trio and recomputed the final evidence tree once."
+  ],
+  "design_pin": "1011259415a0916054eb580687612580bc1e5f09",
+  "evidence_tree_sha256": "9483a4a3c35f89276958ec1a6dbbccfac8285eb44808af9af1395eca24681d47",
+  "final_report_sha256": "784710fe45dd8fc8898ee5958dc750a9aefa80e253970083eb824e1e1c1847c8",
+  "five_paths": {
+    "candidate": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\pwm_applied_capture_candidate.md",
+      "bytes": 13971,
+      "path": "competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md",
+      "sha256": "825f3dff310fc3c8b2c94c22d5fa3b35559f20fc15f786555581712c2e9fe495"
+    },
+    "evidence_author_dir": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author",
+      "bytes": 67309982,
+      "excluded_from_tree": [
+        "final-closeout-20261020-15-a/FINAL_CLOSURE.json",
+        "final-closeout-20261020-15-a/closeout.stderr.txt",
+        "final-closeout-20261020-15-a/closeout.stdout.txt",
+        "run-author-20261020-15-c/EVIDENCE_TREE_MANIFEST.json",
+        "run-author-20261020-15-c/TERMINAL_MANIFEST.json",
+        "run-author-20261020-15-c/TERMINAL_MANIFEST.sha256.txt"
+      ],
+      "file_count": 2683,
+      "path": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author",
+      "tree_manifest": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c/EVIDENCE_TREE_MANIFEST.json",
+      "tree_manifest_sha256": "fbc096f9f92871be5c13861dc52a9169038503580a94d4741a69686573031043",
+      "tree_sha256": "9483a4a3c35f89276958ec1a6dbbccfac8285eb44808af9af1395eca24681d47"
+    },
+    "rtl": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_applied_capture.sv",
+      "bytes": 15841,
+      "path": "competition/deepeye/fpga/control3d/deepeye_pwm_applied_capture.sv",
+      "sha256": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3"
+    },
+    "runner": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\run_pwm_applied_capture.py",
+      "bytes": 40481,
+      "path": "competition/deepeye/tools/control3d/run_pwm_applied_capture.py",
+      "sha256": "331b3a4aa4cc9baa3b378e27dc1accd50f2e2bce60ad50348b57603ccd17d18e"
+    },
+    "tb": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_pwm_applied_capture.sv",
+      "bytes": 62560,
+      "path": "competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv",
+      "sha256": "d31eb33a117fb3ea612ab50d2bffc6cd3ab8edc901337bff7f95e76809a2e0b5"
+    }
+  },
+  "generated_utc": "2026-10-19T20:04:50.840905+00:00",
+  "head": "7dd2c4108ee49cc6e0feb7c715d786f8b11a99c2",
+  "limitations": [
+    "Author-side local ModelSim simulation only; no main acceptance is claimed.",
+    "Actual digital loopback is supplemental and explicitly named; the primary source is independent sample_levels schedules.",
+    "Code7 is demonstrated only on a deliberately faulty wrapper copy because the correct composition does not reach it.",
+    "Maximum COUNT_W=32 and WITNESS_W=64 coverage is bounded observation, not a claim of full traversal.",
+    "The 16-bit period 65535 record is fully observed; 65536 is an overflow observation, not a timing or frequency claim.",
+    "Mutant rejection is public-port behavioral evidence, not proof against every possible fault.",
+    "No Vivado synthesis or implementation was run because the toolchain is unavailable."
+  ],
+  "not_run": [
+    "synthesis",
+    "implementation",
+    "place-and-route",
+    "static timing",
+    "CDC/RDC",
+    "physical board operation",
+    "system integration",
+    "all29 formal acceptance cards",
+    "G05 applied-command/full-cycle/system binding",
+    "public register/TRACE type7/HWH/BOOT ABI",
+    "physical frequency, clock, source, TTL, profile, curvature or motion authority"
+  ],
+  "operation_id": "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+  "parent_main": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "positive_totals": {
+    "assertions": 100587,
+    "cases": 1431,
+    "failure_events": 953,
+    "groups": 19,
+    "handshakes": 459,
+    "mismatches": 0,
+    "passed_scenarios": 19,
+    "raw_faults": 6,
+    "records": 476,
+    "samples": 208667,
+    "scenarios": 19,
+    "window_starts": 507
+  },
+  "publication_claimed": false,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "result": "PASS",
+  "self_acceptance": false,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "terminal_manifest_sha256": "f743347af42910b50e146970de362df17588b8600ab7309d97e3a805acf1da32",
+  "tree_manifest_sha256": "fbc096f9f92871be5c13861dc52a9169038503580a94d4741a69686573031043",
+  "verification_sha256": "95366a3161147ee6f2f82d22b13177f627ba9562b7690d0ae3a0017787b264c6",
+  "warnings": [
+    "The runner initial evidence-tree manifest was captured before externally redirected runner stdout finished flushing. Initial manifests are preserved and the final tree was recomputed after all logs were complete."
+  ],
+  "work_id": "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1"
+}

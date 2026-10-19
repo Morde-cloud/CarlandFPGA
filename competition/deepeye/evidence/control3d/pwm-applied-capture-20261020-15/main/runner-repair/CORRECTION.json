@@ -1,0 +1,47 @@
+{
+  "at_utc": "2026-10-19T20:11:12.357522+00:00",
+  "findings": [
+    "RUNNER15-EXIT01",
+    "RUNNER15-ERROR02",
+    "RUNNER15-GUARD03"
+  ],
+  "actual_child_terminal_consumed": true,
+  "child_terminal_sha256": "e9888ec079497c2b1e25cb310f61bff0e7a2061e17bbe61245ce91d02b776ff8",
+  "original_runner_sha256": "331b3a4aa4cc9baa3b378e27dc1accd50f2e2bce60ad50348b57603ccd17d18e",
+  "corrected_runner_sha256": "83f192c70ab48427e70a0dc66662e4a24a66be90633a454a82e179a6a79ddf98",
+  "changes": [
+    {
+      "old": "def parse_tb_output(stdout_path: Path, stderr_path: Path) -> dict:",
+      "new": "def completed_process(record: dict, expected_failure: bool = False) -> bool:\n    \"\"\"A marker never upgrades a timeout/exception or unexpected process exit.\n\n    The expected-failure path permits ModelSim's completed exit0/exit1 fatal\n    conventions only alongside the caller's exact diagnostic/counterexample.\n    Normal PASS paths require completed exit0.\n    \"\"\"\n    code = record.get(\"exit\")\n    return type(code) is int and code in ((0, 1) if expected_failure else (0,))\n\n\ndef parse_tb_output(stdout_path: Path, stderr_path: Path) -> dict:"
+    },
+    {
+      "old": "\"failed\": (\"TB_FAIL\" in text) or (\"Fatal:\" in text),",
+      "new": "\"failed\": (\"TB_FAIL\" in text) or bool(re.search(r\"\\*\\*\\s+(?:Error|Fatal):\", text + \"\\n\" + err)),"
+    },
+    {
+      "old": "    passed = bool(\n        parsed[\"passed\"]",
+      "new": "    passed = bool(\n        completed_process(result[\"record\"])\n        and parsed[\"passed\"]"
+    },
+    {
+      "old": "    guard_missing = \"APPLIED_CAPTURE_INVALID_GUARD_MISSING\" in text",
+      "new": "    guard_missing = \"APPLIED_CAPTURE_INVALID_GUARD_MISSING\" in text\n    err = (logs / f\"{name}.stderr.txt\").read_text(encoding=\"utf-8\", errors=\"replace\")\n    diagnostic_text = text + \"\\n\" + err\n    own_fatal = bool(re.search(\n        r\"\\*\\* Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths\",\n        diagnostic_text,\n    ))\n    unexpected_error = bool(re.search(r\"\\*\\*\\s+Error:\", diagnostic_text))"
+    },
+    {
+      "old": "        \"passed\": exact and not guard_missing,",
+      "new": "        \"own_fatal\": own_fatal,\n        \"process_completed\": completed_process(record, expected_failure=True),\n        \"passed\": (exact and own_fatal and not guard_missing and not unexpected_error\n                   and completed_process(record, expected_failure=True)),"
+    },
+    {
+      "old": "                run_entry[\"rejected\"] = bool(\n                    parsed[\"failed\"]",
+      "new": "                run_entry[\"rejected\"] = bool(\n                    completed_process(result[\"record\"], expected_failure=True)\n                    and parsed[\"failed\"]"
+    },
+    {
+      "old": "                run_entry[\"demonstrated\"] = bool(\n                    parsed[\"passed\"]",
+      "new": "                run_entry[\"demonstrated\"] = bool(\n                    completed_process(result[\"record\"])\n                    and parsed[\"passed\"]"
+    },
+    {
+      "old": "    summary[\"ended_utc\"] = utc_now()",
+      "new": "    for command in commands:\n        if type(command.get(\"exit\")) is not int:\n            failures.append(f\"incomplete tool command: {command['name']} exit={command.get('exit')}\")\n    summary[\"ended_utc\"] = utc_now()"
+    }
+  ],
+  "scope": "Main repairs only the released author runner qualification. No DUT/immutable12/14/frozen main model/inputs/TB changes. Original author terminal/source/logs retained; rerun predicates and one fresh actual author suite required before acceptance."
+}

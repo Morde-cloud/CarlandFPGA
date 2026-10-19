@@ -1,0 +1,88 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+ endmodule
++
++module tb_invalid_applied_capture #(
++    parameter integer COUNT_W   = 32,
++    parameter integer WITNESS_W = 64,
++    parameter integer TAG_W     = 32
++);
++    logic          clk;
++    logic [31:0]   cfg_period;
++    logic [31:0]   cfg_high_yaw;
++    logic [31:0]   cfg_high_pitch;
++    logic [31:0]   cfg_high_speed;
++    logic [63:0]   cfg_tag;
++
++    deepeye_pwm_applied_capture #(
++        .COUNT_W(COUNT_W),
++        .WITNESS_W(WITNESS_W),
++        .TAG_W(TAG_W)
++    ) dut (
++        .clk(clk),
++        .rst(1'b1),
++        .stop(1'b0),
++        .cfg_valid(1'b0),
++        .cfg_ready(),
++        .cfg_period(cfg_period),
++        .cfg_high_yaw(cfg_high_yaw),
++        .cfg_high_pitch(cfg_high_pitch),
++        .cfg_high_speed(cfg_high_speed),
++        .cfg_tag(cfg_tag),
++        .sample_levels(3'b000),
++        .out_ready(1'b0),
++        .accepted(),
++        .rejected(),
++        .applied(),
++        .frame_start(),
++        .running(),
++        .pending(),
++        .pwm(),
++        .active_period(),
++        .active_high_yaw(),
++        .active_high_pitch(),
++        .active_high_speed(),
++        .active_tag(),
++        .window_active(),
++        .window_started(),
++        .capture_armed(),
++        .out_valid(),
++        .out_period(),
++        .out_high0(),
++        .out_high1(),
++        .out_high2(),
++        .out_start(),
++        .out_end(),
++        .out_tag(),
++        .expected_period(),
++        .expected_high0(),
++        .expected_high1(),
++        .expected_high2(),
++        .expected_tag(),
++        .raw_fault_events(),
++        .failure_event(),
++        .failure_code()
++    );
++
++    initial begin
++        clk = 1'b0;
++        cfg_period = 32'd0;
++        cfg_high_yaw = 32'd0;
++        cfg_high_pitch = 32'd0;
++        cfg_high_speed = 32'd0;
++        cfg_tag = 64'd0;
++    end
++
++    initial begin
++        forever #5 clk = ~clk;
++    end
++
++    initial begin
++        #20;
++        $display("APPLIED_CAPTURE_INVALID_GUARD_MISSING COUNT_W=%0d WITNESS_W=%0d TAG_W=%0d",
++                 COUNT_W, WITNESS_W, TAG_W);
++        $fatal(1, "APPLIED_CAPTURE_INVALID_GUARD_MISSING");
++    end
++endmodule
+*** End Patch

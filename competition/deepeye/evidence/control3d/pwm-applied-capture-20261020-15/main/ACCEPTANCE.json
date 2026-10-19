@@ -1,0 +1,88 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+  "at_utc": "2026-10-19T20:13:59.058381+00:00",
+  "decision": "ACCEPT_INTERNAL_APPLIED_CAPTURE_DIGITAL_SIMULATION_ONLY",
+  "director_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "director_App_turn": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+  "child_job": "child-fbe6ddad25a748b3b978f7a4a7f1130a",
+  "source_files": {
+    "competition/deepeye/fpga/control3d/deepeye_pwm_applied_capture.sv": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3",
+    "competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md": "825f3dff310fc3c8b2c94c22d5fa3b35559f20fc15f786555581712c2e9fe495",
+    "competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv": "d31eb33a117fb3ea612ab50d2bffc6cd3ab8edc901337bff7f95e76809a2e0b5",
+    "competition/deepeye/tools/control3d/run_pwm_applied_capture.py": "83f192c70ab48427e70a0dc66662e4a24a66be90633a454a82e179a6a79ddf98",
+    "competition/deepeye/tests/rtl/control3d/main_tb_pwm_applied_capture.sv": "0d72aadf0bc50aee97e24599f3ab0d6abfb276ed2e4787005fb932e21b8ce506",
+    "competition/deepeye/tools/control3d/main_verify_pwm_applied_capture.py": "fd2d43b901a9cf71a46b3f6129c37b982744786c7ea1ad8bbb5c38cc6b5cd223"
+  },
+  "main_run_result_sha256": "d0d95934b2d23c6eb60e8d70342fff108ec3a5b74c75d87e5f4ea22c2ae93489",
+  "main_sampled_edges": 492440,
+  "main_rle_rows": 83462,
+  "small_width_legal_configurations": 1394,
+  "measurable_configurations": 450,
+  "main_invalid_guards": 11,
+  "main_isolated_mutants_rejected": 3,
+  "main_raw_command_records_previously_verified": 45,
+  "author_audit_sha256": "db451e3a59e9e0c3c66db05bbe4d66679f4ad026d7e289fa335e67e3fe239191",
+  "main_RTL_repair": false,
+  "main_runner_repair": true,
+  "closed_findings": [
+    "RUNNER15-EXIT01",
+    "RUNNER15-ERROR02",
+    "RUNNER15-GUARD03"
+  ],
+  "review_reasoning": [
+    "Combinational cfg_valid&&cfg_ready clears qualification before an old transfer even for a rejected command; pending and actual-applied observation suppress old transport.",
+    "Only the observed registered actual-applied event rearms the unchanged raw capture and latches active expected tuple. Its sampled baseline does not infer a rise. New transfer outranks the old actual-applied observation.",
+    "Every application isolates even identical tags/tuples; expected tuple is comparison only, never raw measurement backfill. Actual sample_levels common R0, first lane falls and common R1 remain necessary.",
+    "Raw faults or raw/expected mismatch immediately mask out_valid. Window closes on the following edge and capture flushes afterward. capture_stop/rearm have no raw_valid/equality dependence, avoiding an abort-qualifier combinational loop.",
+    "An old valid record can retire on an edge where a new registered raw fault first arises after the edge; this is transport behavior, never freshness/authority. Known pre-edge STOP/reset/transfer suppress it immediately.",
+    "Failure remains closed until a new actual application; ineligible legal generator commands keep PWM running but cannot create a measurement. Code7 remains defensive normal-unreachable.",
+    "COUNT32/WITNESS64 execution is bounded; full16bit65535/raw65536 and small witness exhaustion were observed. No maximum-width traversal or physical timing is inferred."
+  ],
+  "history_limits": [
+    "Author g15-b had no pre-run snapshot. Its later source/timestamp reconstruction is retained as historical context only, not proof of exact pre-run bytes. Final run-c and main repaired run have actual pre-run snapshots.",
+    "Author accidentally created root lib cache142B and failed-compile transcript602B outside its five paths; then moved them into owned evidence with hashes. Main verified surviving bytes. This scope deviation is disclosed, not retroactively authorized; no restoration/replay was attempted.",
+    "Original run-c tree manifest raced externally redirected stdout. Initial manifest bytes are preserved; child later reclosed its terminal tree. Main verified the actual final2683-file tree. Fresh main repaired run redirects its outer streams outside the hashed author tree.",
+    "Main cancellation request encountered already completed child. No cancellation occurred; final terminal completed/nonstale consumed before main repair; idle pool reclaimed0.",
+    "Old op13 missing15 original404 response bytes and op14 missing early temporary author history remain unchanged and are not recovered by op15."
+  ],
+  "contract": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_source": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design": "1011259415a0916054eb580687612580bc1e5f09",
+  "stages": {
+    "simulation": "passed bounded internal synchronous digital only",
+    "synthesis": "blocked no local Vivado discovered",
+    "implementation": "blocked no local Vivado discovered",
+    "CDC_RDC": "not_run",
+    "board": "not_run A only",
+    "system": "not_run",
+    "G05_B06_R03": "not_run_unaccepted",
+    "formal_cards": "29 not_run"
+  },
+  "open_integration": [
+    "authenticated source/session/request/control_epoch/capture_seq",
+    "BOOT/host clock/freshness/TTL/profile/curvature/final motion authority",
+    "public TRACE/register/HWH ABI and asynchronous/physical capture",
+    "both PC_DIRECT and FPGA-output full chains"
+  ],
+  "no_old_suite_replay": true
+}

@@ -1,0 +1,52 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+-    // PATCH_INSERT_DISPATCH
++    initial begin
++        repeat (2) @(negedge clk);
++        case (TEST_GROUP)
++            0: group_controls();
++            1: exhaustive_group(3, "exhaustive_count_w2_all_legal_tuples");
++            2: exhaustive_group(7, "exhaustive_count_w3_all_legal_tuples");
++            3: group_faults_and_recovery();
++            4: group_min_width_exhaustion();
++            5: group_count16_boundaries();
++            6: group_max_widths();
++            7: group_default_smoke();
++            8: group_loopback_record();
++            9: group_loopback_exhaustion();
++            10: group_phase_controls();
++            20: group_t_boundary(1'b0, "T_boundary_public_control");
++            21: group_t_boundary(1'b1, "same_tag_boundary_public_control");
++            22: group_mismatch_admission_control();
++            30: begin
++                group_begin("code7_deliberate_faulty_copy");
++                reset_dut();
++                start_application(3, 1, 2, 1, 8'h71, 3'b000, 1'b1,
++                                  "code7_probe_window_start");
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++                check_unbound("code7_probe_closes");
++                check64(failure_event, 1'b1, "code7_probe_failure_pulse");
++                check64(failure_code, 3'd7, "code7_probe_code7");
++                group_end("code7_deliberate_faulty_copy");
++            end
++            default: begin
++                group_begin("invalid_test_group");
++                cases = cases + 1;
++                mismatch("unknown_test_group", 0, TEST_GROUP);
++                group_end("invalid_test_group");
++            end
++        endcase
++        $display("TB_STATS groups=%0d cases=%0d samples=%0d assertions=%0d records=%0d raw_faults=%0d failure_events=%0d window_starts=%0d handshakes=%0d mismatches=%0d",
++                 groups, cases, samples, assertions, records, raw_faults,
++                 failure_events, window_starts, handshakes, mismatches);
++        if (mismatches == 0) begin
++            $display("TB_PASS group=%0d loopback=%0d", TEST_GROUP, LOOPBACK);
++            $finish;
++        end else begin
++            $display("TB_FAIL group=%0d mismatches=%0d", TEST_GROUP, mismatches);
++            $fatal(1, "TB_FAIL public-port self-check");
++        end
++    end
+ endmodule
+*** End Patch

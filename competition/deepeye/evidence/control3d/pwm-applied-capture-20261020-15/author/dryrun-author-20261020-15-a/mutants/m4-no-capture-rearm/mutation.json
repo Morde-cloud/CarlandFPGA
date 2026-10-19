@@ -1,0 +1,13 @@
+{
+  "description": "Every rearm is suppressed. The correct design never reaches code7; this deliberately faulty copy exposes the defensive code7 path.",
+  "id": "m4-no-capture-rearm",
+  "replacements": [
+    {
+      "new": "assign capture_rearm = 1'b0;",
+      "occurrences": 1,
+      "old": "assign capture_rearm = capture_arm;"
+    }
+  ],
+  "sha256": "3120d6a38681f795660929b9fbc8258563ac62fd1f1cf6bad909a471ba983f73",
+  "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\dryrun-author-20261020-15-a\\mutants\\m4-no-capture-rearm\\deepeye_pwm_applied_capture.sv"
+}

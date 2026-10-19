@@ -1,0 +1,34 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+     parameter integer TAG_W     = 32,
+     parameter integer TEST_GROUP = 0,
+-    parameter integer LOOPBACK   = 0
++    parameter integer LOOPBACK   = 0,
++    parameter integer TRACE      = 0
+@@
+             pre_out_ready = out_ready;
+             samples = samples + 1;
++            if (TRACE) begin
++                $display("TRACE_PRE sample=%0d rst=%0b stop=%0b cfg_valid=%0b cfg_ready=%0b period=%0d high=%0d,%0d,%0d tag=%0h levels=%0b pwm=%0b out_ready=%0b window_active=%0b armed=%0b out_valid=%0b expected=%0d,%0d,%0d,%0d,%0h",
++                         samples, rst, stop, cfg_valid, pre_cfg_ready,
++                         cfg_period, cfg_high_yaw, cfg_high_pitch,
++                         cfg_high_speed, cfg_tag, sample_levels, pwm,
++                         out_ready, window_active, capture_armed, out_valid,
++                         expected_period, expected_high0, expected_high1,
++                         expected_high2, expected_tag);
++            end
+             if (pre_out_valid && pre_out_ready) begin
+@@
+             if (window_started) window_starts = window_starts + 1;
+             if (failure_event) failure_events = failure_events + 1;
+             if (raw_fault_events !== 4'b0000) raw_faults = raw_faults + 1;
++            if (TRACE) begin
++                $display("TRACE_POST sample=%0d applied=%0b pending=%0b running=%0b frame_start=%0b window_active=%0b window_started=%0b armed=%0b out_valid=%0b raw_faults=%0b failure_event=%0b failure_code=%0d raw=%0d,%0d,%0d,%0d,%0d,%0d,%0h",
++                         samples, applied, pending, running, frame_start,
++                         window_active, window_started, capture_armed, out_valid,
++                         raw_fault_events, failure_event, failure_code,
++                         out_period, out_high0, out_high1, out_high2,
++                         out_start, out_end, out_tag);
++            end
+*** End Patch

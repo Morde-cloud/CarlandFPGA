@@ -1,0 +1,233 @@
+﻿*** Begin Patch
+*** Add File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
++#!/usr/bin/env python3
++"""Portable fail-closed ModelSim runner for the op15 applied-capture wrapper.
++
++Task: DEEPEYE-IMPLEMENTATION-20261014/v1
++Work: B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1
++Operation: B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15
++
++The runner snapshots every source/input byte before compilation, refuses to
++overwrite an output directory, preserves stdout/stderr and exits for every
++command, and creates isolated wrapper mutants in separate libraries. It needs
++no private controller, scope, oracle, or old-suite file to reproduce the run.
++
++This is author-side local simulation evidence only. It is not main acceptance,
++synthesis, implementation, CDC/RDC, board, system, or product acceptance.
++"""
++
++from __future__ import annotations
++
++import argparse
++import datetime as dt
++import hashlib
++import json
++import os
++import platform
++import re
++import shutil
++import subprocess
++import sys
++from pathlib import Path
++
++TASK_ID = "DEEPEYE-IMPLEMENTATION-20261014"
++TASK_VERSION = 1
++WORK_ID = "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1"
++OPERATION_ID = "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15"
++CONTRACT_ID = "DEEPEYE-HUMAN-LOCK-20261014"
++CONTRACT_REVISION = 1
++CONTRACT_PIN = "f5989cd5defce561f9ba98e6b18fc2682945f0a2"
++DESIGN_PIN = "1011259415a0916054eb580687612580bc1e5f09"
++REQ_SHA = "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
++ATOMIC_SHA = "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428"
++CAPTURE_SHA = "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456"
++REQUIREMENT_IDS = [f"H{i:02d}" for i in range(1, 16)]
++
++HERE = Path(__file__).resolve()
++WORKTREE = HERE.parents[4]
++FILES = {
++    "rtl": WORKTREE / "competition/deepeye/fpga/control3d/deepeye_pwm_applied_capture.sv",
++    "tb": WORKTREE / "competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv",
++    "atomic": WORKTREE / "competition/deepeye/fpga/control3d/deepeye_atomic_pwm.sv",
++    "capture": WORKTREE / "competition/deepeye/fpga/control3d/deepeye_pwm_coherent_capture.sv",
++}
++DEFAULT_OUT = WORKTREE / "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-a"
++DEFAULT_MODELSIM = Path("D:/modelsim1/win64")
++
++TB_STATS_RE = re.compile(
++    r"TB_STATS\s+groups=(\d+)\s+cases=(\d+)\s+samples=(\d+)\s+assertions=(\d+)\s+"
++    r"records=(\d+)\s+raw_faults=(\d+)\s+failure_events=(\d+)\s+"
++    r"window_starts=(\d+)\s+handshakes=(\d+)\s+mismatches=(\d+)"
++)
++MISMATCH_RE = re.compile(r"MISMATCH\s+sample=\S+\s+label=(\S+)")
++
++POSITIVE_RUNS = [
++    {"id": "g00-startup-controls", "group": 0, "count_w": 8, "witness_w": 16, "tag_w": 8, "loopback": 0},
++    {"id": "g01-exhaustive-w2", "group": 1, "count_w": 2, "witness_w": 8, "tag_w": 4, "loopback": 0},
++    {"id": "g02-exhaustive-w3", "group": 2, "count_w": 3, "witness_w": 8, "tag_w": 5, "loopback": 0},
++    {"id": "g03-faults-recovery", "group": 3, "count_w": 4, "witness_w": 8, "tag_w": 8, "loopback": 0},
++    {"id": "g04-min-exhaustion", "group": 4, "count_w": 2, "witness_w": 2, "tag_w": 1, "loopback": 0},
++    {"id": "g05-count16-boundaries", "group": 5, "count_w": 16, "witness_w": 32, "tag_w": 16, "loopback": 0},
++    {"id": "g06-max-width-bounded", "group": 6, "count_w": 32, "witness_w": 64, "tag_w": 64, "loopback": 0},
++    {"id": "g07-default-smoke", "group": 7, "count_w": 32, "witness_w": 64, "tag_w": 32, "loopback": 0},
++    {"id": "g08-loopback-record", "group": 8, "count_w": 4, "witness_w": 16, "tag_w": 8, "loopback": 1},
++    {"id": "g09-loopback-exhaustion", "group": 9, "count_w": 2, "witness_w": 2, "tag_w": 1, "loopback": 1},
++    {"id": "g10-phase-controls", "group": 10, "count_w": 4, "witness_w": 8, "tag_w": 8, "loopback": 0},
++    {"id": "g20-T-boundary-control", "group": 20, "count_w": 4, "witness_w": 8, "tag_w": 8, "loopback": 0},
++    {"id": "g21-same-tag-control", "group": 21, "count_w": 4, "witness_w": 8, "tag_w": 8, "loopback": 0},
++    {"id": "g22-mismatch-control", "group": 22, "count_w": 4, "witness_w": 8, "tag_w": 8, "loopback": 0},
++]
++
++INVALID_RUNS = [
++    {"id": "invalid-count-zero", "count_w": 0, "witness_w": 64, "tag_w": 32},
++    {"id": "invalid-count-negative", "count_w": -1, "witness_w": 64, "tag_w": 32},
++    {"id": "invalid-count-high", "count_w": 33, "witness_w": 64, "tag_w": 32},
++    {"id": "invalid-witness-zero", "count_w": 32, "witness_w": 0, "tag_w": 32},
++    {"id": "invalid-witness-negative", "count_w": 32, "witness_w": -2, "tag_w": 32},
++    {"id": "invalid-witness-high", "count_w": 32, "witness_w": 65, "tag_w": 32},
++    {"id": "invalid-tag-zero", "count_w": 32, "witness_w": 64, "tag_w": 0},
++    {"id": "invalid-tag-negative", "count_w": 32, "witness_w": 64, "tag_w": -1},
++    {"id": "invalid-tag-high", "count_w": 32, "witness_w": 64, "tag_w": 65},
++]
++
++
++def utc_now() -> str:
++    return dt.datetime.now(dt.timezone.utc).isoformat()
++
++
++def sha256_bytes(data: bytes) -> str:
++    return hashlib.sha256(data).hexdigest()
++
++
++def sha256_file(path: Path) -> str:
++    return sha256_bytes(path.read_bytes())
++
++
++def write_json(path: Path, value: object) -> None:
++    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
++
++
++def run_command(cmd: list[str], cwd: Path, log_dir: Path, name: str, timeout: float,
++                commands: list[dict]) -> dict:
++    stdout_path = log_dir / f"{name}.stdout.txt"
++    stderr_path = log_dir / f"{name}.stderr.txt"
++    started = utc_now()
++    record = {
++        "name": name,
++        "argv": cmd,
++        "cwd": str(cwd),
++        "started_utc": started,
++        "stdout": str(stdout_path),
++        "stderr": str(stderr_path),
++    }
++    commands.append(record)
++    with stdout_path.open("wb") as out_f, stderr_path.open("wb") as err_f:
++        try:
++            proc = subprocess.run(
++                cmd,
++                cwd=str(cwd),
++                stdout=out_f,
++                stderr=err_f,
++                timeout=timeout,
++                check=False,
++            )
++            record["exit"] = proc.returncode
++        except subprocess.TimeoutExpired:
++            record["exit"] = "timeout"
++            record["timeout_s"] = timeout
++        except Exception as exc:
++            record["exit"] = "exception"
++            record["exception"] = f"{type(exc).__name__}: {exc}"
++    record["ended_utc"] = utc_now()
++    record["stdout_sha256"] = sha256_file(stdout_path)
++    record["stderr_sha256"] = sha256_file(stderr_path)
++    return record
++
++
++def parse_tb_output(stdout_path: Path, stderr_path: Path) -> dict:
++    text = stdout_path.read_text(encoding="utf-8", errors="replace")
++    err = stderr_path.read_text(encoding="utf-8", errors="replace")
++    stats_match = TB_STATS_RE.search(text)
++    stats = None
++    if stats_match:
++        keys = ("groups", "cases", "samples", "assertions", "records", "raw_faults",
++                "failure_events", "window_starts", "handshakes", "mismatches")
++        stats = {key: int(value) for key, value in zip(keys, stats_match.groups())}
++    return {
++        "passed": "TB_PASS" in text,
++        "failed": ("TB_FAIL" in text) or ("Fatal:" in text),
++        "stats": stats,
++        "mismatch_labels": MISMATCH_RE.findall(text),
++        "stdout_tail": text[-4000:],
++        "stderr_tail": err[-2000:],
++    }
++
++
++def snapshot_sources(out: Path, paths: dict[str, Path], runner: Path) -> dict:
++    snap = out / "source_snapshot"
++    snap.mkdir(parents=True, exist_ok=False)
++    manifest = {"files": {}, "runner": {"source_path": str(runner)}}
++    for key, source in paths.items():
++        destination = snap / f"{key}{source.suffix}"
++        destination.write_bytes(source.read_bytes())
++        manifest["files"][key] = {
++            "source_path": str(source),
++            "snapshot_name": destination.name,
++            "bytes": destination.stat().st_size,
++            "sha256": sha256_file(destination),
++        }
++    runner_snapshot = snap / "run_pwm_applied_capture.py"
++    runner_snapshot.write_bytes(runner.read_bytes())
++    manifest["runner"]["snapshot_name"] = runner_snapshot.name
++    manifest["runner"]["sha256"] = sha256_file(runner_snapshot)
++    manifest["runner"]["bytes"] = runner_snapshot.stat().st_size
++    return manifest
++
++
++def discover_tools(modelsim_root: Path) -> dict[str, str]:
++    tools = {}
++    for name in ("vlib", "vlog", "vsim"):
++        path = modelsim_root / f"{name}.exe"
++        if not path.is_file():
++            path = modelsim_root / name
++        if not path.is_file():
++            raise FileNotFoundError(f"ModelSim tool not found: {name} under {modelsim_root}")
++        tools[name] = str(path)
++    return tools
++
++
++def compile_design(out: Path, logs: Path, commands: list[dict], tools: dict[str, str],
++                   rtl_path: Path, tb_path: Path, atomic_path: Path, capture_path: Path,
++                   timeout: float, label: str) -> tuple[Path, dict]:
++    lib = out / label / "lib"
++    lib.parent.mkdir(parents=True, exist_ok=False)
++    vlib_record = run_command([tools["vlib"], "lib"], lib.parent, logs, f"{label}-vlib", timeout, commands)
++    vlog_cmd = [
++        tools["vlog"], "-sv", "-work", "lib",
++        str(atomic_path), str(capture_path), str(rtl_path), str(tb_path),
++    ]
++    vlog_record = run_command(vlog_cmd, lib.parent, logs, f"{label}-vlog", timeout, commands)
++    text = (logs / f"{label}-vlog.stdout.txt").read_text(encoding="utf-8", errors="replace")
++    info = {
++        "label": label,
++        "vlib": vlib_record,
++        "vlog": vlog_record,
++        "compiled": (vlib_record["exit"] == 0 and vlog_record["exit"] == 0
++                     and "Errors: 0" in text),
++    }
++    return lib.parent, info
++
++
++def run_tb(lib_parent: Path, logs: Path, commands: list[dict], tools: dict[str, str],
++           name: str, group: int, count_w: int, witness_w: int, tag_w: int,
++           loopback: int, timeout: float, top: str = "tb_pwm_applied_capture") -> dict:
++    cmd = [
++        tools["vsim"], "-c", "-work", "lib", "-do", "run -all; quit -f",
++        f"-gCOUNT_W={count_w}", f"-gWITNESS_W={witness_w}", f"-gTAG_W={tag_w}",
++        f"-gTEST_GROUP={group}", f"-gLOOPBACK={loopback}", top,
++    ]
++    record = run_command(cmd, lib_parent, logs, name, timeout, commands)
++    parsed = parse_tb_output(logs / f"{name}.stdout.txt", logs / f"{name}.stderr.txt")
++    return {"record": record, "parsed": parsed}
++
+*** End Patch

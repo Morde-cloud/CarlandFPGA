@@ -1,0 +1,25 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
+@@
+     {"id": "g14-control-at-handshake", "group": 14, "count_w": 4, "witness_w": 8, "tag_w": 8, "loopback": 0, "trace": 1},
++    {"id": "g15-constant-missing-edges", "group": 15, "count_w": 8, "witness_w": 8, "tag_w": 8, "loopback": 0, "trace": 1},
+@@
+             summary["positive"] = positive
+             summary["positive_totals"] = positive_totals
++            exhaustive = [entry for entry in positive if entry["group"] in (1, 2)]
++            summary["exhaustive_small_domain"] = {
++                "legal_command_triples": sum(
++                    entry["stats"]["cases"] for entry in exhaustive
++                    if entry["stats"] is not None),
++                "eligible_sampled_records": sum(
++                    entry["stats"]["records"] for entry in exhaustive
++                    if entry["stats"] is not None),
++                "groups": ["exhaustive_count_w2_all_legal_tuples",
++                           "exhaustive_count_w3_all_legal_tuples"],
++            }
+             for entry in positive:
+@@
+         "positive_totals": positive_totals,
++        "exhaustive_small_domain": summary.get("exhaustive_small_domain"),
+         "scenario_counts": summary["scenario_counts"],
+*** End Patch

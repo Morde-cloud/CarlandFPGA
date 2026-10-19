@@ -1,0 +1,27 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
+@@
+-DEFAULT_OUT = WORKTREE / "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-a"
++DEFAULT_OUT = WORKTREE / "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c"
+*** Update File: competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md
+@@
+-Every run snapshots exact source/input bytes before compilation and preserves
+-unique stdout, stderr, ModelSim transcript, WLF, command, exit, and hash records.
++The official runner snapshots exact source/input bytes before compilation and
++preserves unique stdout, stderr, ModelSim transcript, WLF, command, exit, and
++hash records. The isolated `g15-b` debug run predated its source snapshot; its
++exact unchanged source bytes are preserved in a post-hoc reconstruction with a
++logged timestamp proof.
+@@
+-  --out competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-b
++  --out competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c
+@@
+ - The old author14 early temporary preparation metadata was unavailable; this
+   work preserves every preflight, compile, debug, source snapshot, and official
+   run directory instead.
++- Isolated `g15-b` validation initially omitted a pre-run source snapshot, and a
++  later compile attempt left a ModelSim `lib` cache and `transcript` at the
++  worktree root. Both root artifacts were moved under author evidence with
++  hashes, and unchanged `g15-b` source bytes were reconstructed with timestamp
++  proof in `source-snapshot-debug-g15-b-posthoc-20261020-15-a`.
+*** End Patch

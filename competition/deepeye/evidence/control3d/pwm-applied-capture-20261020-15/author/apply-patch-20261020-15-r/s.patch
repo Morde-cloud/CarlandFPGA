@@ -1,0 +1,16 @@
+*** Begin Patch
+*** Update File: competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md
+@@
+ - same tag/same tuple reapplications, different tuple/same tag, zero and full-64
+   tags, rapid replacement, old partial/slot ready conflicts, mismatch and
+-  wrong-period/wrong-high controls;
++  wrong-period/wrong-high controls, constant high input, and a missing closing
++  edge;
+@@
+ - The old author14 early temporary preparation metadata was unavailable; this
+   work preserves every preflight, compile, debug, source snapshot, and official
+   run directory instead.
++- A long-stall attempt with `COUNT_W=4` legitimately produced a raw period
++  overflow after 15 idle samples. The group was widened to `COUNT_W=8` instead of
++  weakening or masking the stall.
+*** End Patch

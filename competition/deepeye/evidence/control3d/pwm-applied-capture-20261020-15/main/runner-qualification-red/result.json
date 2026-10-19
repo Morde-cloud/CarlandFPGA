@@ -1,0 +1,130 @@
+{
+  "at_utc": "2026-10-19T19:57:09.085546+00:00",
+  "kind": "synthetic runner predicate failure injection; zero ModelSim commands",
+  "tested_runner_sha256": "cb1b3aeb1cd6c8dfbd40d2f906102be8a79d5e1d48f30102103cdd08863ac472",
+  "cases": [
+    {
+      "kind": "positive_terminal_status",
+      "exit": 0,
+      "observed_pass": true,
+      "expected_pass": true,
+      "matches": true
+    },
+    {
+      "kind": "positive_terminal_status",
+      "exit": 1,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "positive_terminal_status",
+      "exit": 2,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "positive_terminal_status",
+      "exit": "timeout",
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "positive_terminal_status",
+      "exit": "exception",
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "positive_simulator_error_after_marker",
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": 0,
+      "own_fatal_present": false,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": 0,
+      "own_fatal_present": true,
+      "observed_pass": true,
+      "expected_pass": true,
+      "matches": true
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": 1,
+      "own_fatal_present": false,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": 1,
+      "own_fatal_present": true,
+      "observed_pass": true,
+      "expected_pass": true,
+      "matches": true
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": 2,
+      "own_fatal_present": false,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": 2,
+      "own_fatal_present": true,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": "timeout",
+      "own_fatal_present": false,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": "timeout",
+      "own_fatal_present": true,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": "exception",
+      "own_fatal_present": false,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    },
+    {
+      "kind": "guard_terminal_and_fatal",
+      "exit": "exception",
+      "own_fatal_present": true,
+      "observed_pass": true,
+      "expected_pass": false,
+      "matches": false
+    }
+  ],
+  "mismatch_count": 13,
+  "status": "runner_qualification_defect_reproduced"
+}

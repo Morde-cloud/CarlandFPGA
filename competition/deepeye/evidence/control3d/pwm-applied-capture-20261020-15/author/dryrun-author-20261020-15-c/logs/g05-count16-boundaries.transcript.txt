@@ -1,0 +1,28 @@
+# vsim -c -l D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-applied-capture-20261020-15\author\dryrun-author-20261020-15-c\logs\g05-count16-boundaries.transcript.txt -wlf D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-applied-capture-20261020-15\author\dryrun-author-20261020-15-c\logs\g05-count16-boundaries.wlf -do "run -all; quit -f" tb_pwm_applied_capture -gTEST_GROUP=5 -gTAG_W=16 -gTRACE=0 -gLOOPBACK=0 -gWITNESS_W=32 -gCOUNT_W=16 
+# Start time: 03:51:32 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_pwm_applied_capture(fast)
+# run -all
+# GROUP_BEGIN count_w16_full_period_and_raw_overflow
+# HANDSHAKE sample=65542 period=65535 h0=1 h1=2 h2=3 start=1 end=65536 tag=a55a
+# GROUP_END count_w16_full_period_and_raw_overflow cases=2 samples=196613 assertions=127 mismatches=0 records=1 raw_faults=1 failure_events=1 window_starts=2 handshakes=1
+# TB_STATS groups=1 cases=2 samples=196613 assertions=127 records=1 raw_faults=1 failure_events=1 window_starts=2 handshakes=1 mismatches=0
+# TB_PASS group=5 loopback=0
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/dryrun-author-20261020-15-c/source_snapshot/tb.sv(1340)
+#    Time: 1966156 ns  Iteration: 0  Instance: /tb_pwm_applied_capture
+# End time: 03:51:33 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

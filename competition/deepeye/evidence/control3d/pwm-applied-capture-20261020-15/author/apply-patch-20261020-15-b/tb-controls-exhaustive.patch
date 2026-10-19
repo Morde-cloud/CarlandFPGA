@@ -1,0 +1,157 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+-    // PATCH_INSERT_TASKS
++    task automatic group_controls;
++        integer hb;
++        integer waited;
++        logic [COUNT_W-1:0] p2;
++        logic [COUNT_W-1:0] p3;
++        begin
++            group_begin("startup_actual_application_and_registered_observation");
++            reset_dut();
++            cases = cases + 1;
++            cfg_period = 3;
++            cfg_high_yaw = 1;
++            cfg_high_pitch = 2;
++            cfg_high_speed = 1;
++            cfg_tag = 8'hA5;
++            cycle(1'b0, 1'b0, 1'b1, 1'b0, 3'b000);
++            check64(pre_cfg_ready, 1'b1, "startup_T_ready");
++            check64(accepted, 1'b1, "startup_accepted");
++            check64(rejected, 1'b0, "startup_not_rejected");
++            check64(applied, 1'b0, "startup_accepted_not_applied");
++            check64(pending, 1'b1, "startup_pending");
++            check_unbound("startup_not_bound");
++            cycle(1'b0, 1'b0, 1'b1, 1'b0, 3'b000);
++            check64(pre_cfg_ready, 1'b0, "held_valid_while_pending_no_T");
++            check64(accepted, 1'b0, "held_valid_no_second_accept");
++            check64(rejected, 1'b0, "held_valid_not_rejected");
++            check64(applied, 1'b1, "startup_actual_application");
++            check64(pending, 1'b0, "startup_pending_cleared");
++            check64(running, 1'b1, "startup_running");
++            check64(active_period, 3, "startup_active_period");
++            check64(active_high_yaw, 1, "startup_active_yaw");
++            check64(active_high_pitch, 2, "startup_active_pitch");
++            check64(active_high_speed, 1, "startup_active_speed");
++            check64(active_tag, 8'hA5, "startup_active_tag");
++            check_unbound("application_not_observation");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            check64(window_active, 1'b1, "observation_opens_window");
++            check64(window_started, 1'b1, "observation_started_pulse");
++            check64(capture_armed, 1'b1, "observation_arms_capture");
++            check64(failure_event, 1'b0, "observation_no_failure");
++            check_expected_context(3, 1, 2, 1, 8'hA5, "observation_context");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b010);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            expect_record(3, 1, 2, 1, 8'hA5, 2, 5, "literal_independent_record");
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b111);
++            check64(handshakes, hb + 1, "literal_record_handshakes_once");
++            check64(out_valid, 1'b0, "retired_record_not_valid");
++
++            submit_command(2, 1, 1, 1, 8'h5A, 1'b1, 3'b000,
++                           "pre_observation_command");
++            waited = 0;
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            waited = 1;
++            while ((applied !== 1'b1) && (waited < 70000)) begin
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++                waited = waited + 1;
++            end
++            check64(applied, 1'b1, "first_application_before_O");
++            check64(active_period, 2, "first_application_active");
++            p2 = 2;
++            p3 = 4;
++            hb = handshakes;
++            cfg_period = p3;
++            cfg_high_yaw = 1;
++            cfg_high_pitch = 2;
++            cfg_high_speed = 3;
++            cfg_tag = 8'hC3;
++            cycle(1'b0, 1'b0, 1'b1, 1'b1, 3'b000);
++            check64(pre_applied, 1'b1, "new_T_on_observation_edge");
++            check64(pre_cfg_ready, 1'b1, "new_T_on_O_ready");
++            check64(accepted, 1'b1, "new_T_on_O_accepted");
++            check64(pending, 1'b1, "new_T_on_O_pending");
++            check64(handshakes, hb, "new_T_on_O_suppresses_old_handshake");
++            check_unbound("new_T_on_O_discards_prior_application");
++            check64(window_started, 1'b0, "new_T_on_O_no_prior_start");
++            wait_application_and_observe(4, 1, 2, 3, 8'hC3, 3'b000, 1'b1,
++                                         "new_T_later_application");
++
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            hb = handshakes;
++            cfg_period = 3;
++            cfg_high_yaw = 4;
++            cfg_high_pitch = 2;
++            cfg_high_speed = 1;
++            cfg_tag = 8'h33;
++            cycle(1'b0, 1'b0, 1'b1, 1'b1, 3'b001);
++            check64(pre_cfg_ready, 1'b1, "illegal_T_ready");
++            check64(rejected, 1'b1, "illegal_T_rejected");
++            check64(accepted, 1'b0, "illegal_T_not_accepted");
++            check64(pending, 1'b0, "illegal_T_not_pending");
++            check64(handshakes, hb, "illegal_T_no_old_handshake");
++            check_unbound("illegal_T_discards_old_binding");
++            check64(failure_event, 1'b0, "illegal_T_not_fault");
++            check64(failure_code, 3'd0, "illegal_T_clears_code");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("illegal_T_no_automatic_recovery");
++            start_application(4, 1, 2, 3, 8'hC3, 3'b000, 1'b1,
++                              "legal_application_recovery");
++            emit_frame(4, 1, 2, 3);
++            expect_record(4, 1, 2, 3, 8'hC3, 1, 5,
++                          "recovery_independent_record");
++            cases = cases + 1;
++            group_end("startup_actual_application_and_registered_observation");
++        end
++    endtask
++
++    task automatic exhaustive_group(input integer max_period,
++                                    input string name);
++        integer p;
++        integer h0;
++        integer h1;
++        integer h2;
++        logic eligible;
++        logic [TAG_W-1:0] tuple_tag;
++        begin
++            group_begin(name);
++            for (p = 1; p <= max_period; p = p + 1) begin
++                for (h0 = 0; h0 <= p; h0 = h0 + 1) begin
++                    for (h1 = 0; h1 <= p; h1 = h1 + 1) begin
++                        for (h2 = 0; h2 <= p; h2 = h2 + 1) begin
++                            cases = cases + 1;
++                            eligible = (p >= 2) && (h0 > 0) && (h0 < p) &&
++                                       (h1 > 0) && (h1 < p) &&
++                                       (h2 > 0) && (h2 < p);
++                            tuple_tag = p ^ (h0 << 1) ^ (h1 << 2) ^ (h2 << 3);
++                            reset_dut();
++                            start_application(p, h0, h1, h2, tuple_tag,
++                                              3'b000, eligible,
++                                              "exhaustive_classification");
++                            if (eligible) begin
++                                emit_frame(p, h0, h1, h2);
++                                expect_record(p, h0, h1, h2, tuple_tag,
++                                              1, p + 1,
++                                              "exhaustive_sampled_record");
++                                cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++                                check64(out_valid, 1'b0,
++                                        "exhaustive_record_handshake");
++                            end else begin
++                                expect_no_record("ineligible_no_record");
++                            end
++                        end
++                    end
++                end
++            end
++            group_end(name);
++        end
++    endtask
++
++    // PATCH_INSERT_TASKS
+*** End Patch

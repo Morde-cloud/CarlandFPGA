@@ -1,0 +1,93 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+-    // PATCH_INSERT_TASKS
++    task automatic group_faults_and_recovery;
++        integer hb;
++        integer i;
++        begin
++            group_begin("faults_backpressure_raw_expected_separation_recovery");
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "mismatch_window_start");
++            emit_frame(4, 1, 1, 1);
++            expect_no_record("wrong_period_not_external_valid");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("wrong_period_closes");
++            check64(failure_event, 1'b1, "wrong_period_failure_pulse");
++            check64(failure_code, 3'd1, "wrong_period_code1");
++
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "same_tuple_tag_recovery_1");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h11, 1, 4,
++                          "same_tuple_tag_recovered_record_1");
++            for (i = 0; i < 3; i = i + 1) begin
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++                check64(out_valid, 1'b1, "backpressure_holds_valid");
++                check64(out_period, 3, "backpressure_period_stable");
++                check64(out_high0, 1, "backpressure_h0_stable");
++                check64(out_high1, 2, "backpressure_h1_stable");
++                check64(out_high2, 1, "backpressure_h2_stable");
++            end
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb + 1, "backpressured_record_handshake");
++            check64(out_valid, 1'b0, "backpressured_record_retired");
++
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "phase_shape_window_start");
++            emit_frame(3, 1, 1, 1);
++            expect_no_record("equal_period_wrong_high_not_valid");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("equal_period_wrong_high_closes");
++            check64(failure_event, 1'b1, "equal_period_failure_pulse");
++            check64(failure_code, 3'd1, "equal_period_code1");
++
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "same_tuple_tag_recovery_2");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h11, 1, 4,
++                          "same_tuple_tag_recovered_record_2");
++
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "incoherent_window_start");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b001);
++            check64(raw_fault_events, 4'b0001, "incoherent_raw_event_immediate");
++            check64(out_valid, 1'b0, "incoherent_masks_immediately");
++            check64(window_active, 1'b1, "incoherent_registered_latency_window");
++            check64(failure_event, 1'b0, "incoherent_not_yet_wrapper_fault");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("incoherent_closes_next_edge");
++            check64(failure_event, 1'b1, "incoherent_failure_pulse");
++            check64(failure_code, 3'd2, "incoherent_code2");
++
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "overrun_window_start");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h11, 1, 4,
++                          "pre_overrun_record");
++            emit_continuation(3, 1, 2, 1);
++            check64(raw_fault_events, 4'b1000, "overrun_raw_event");
++            check64(out_valid, 1'b0, "overrun_masks_full_slot");
++            check64(window_active, 1'b1, "overrun_registered_latency_window");
++            check64(failure_event, 1'b0, "overrun_not_yet_wrapper_fault");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            check_unbound("overrun_closes_next_edge");
++            check64(failure_event, 1'b1, "overrun_failure_pulse");
++            check64(failure_code, 3'd5, "overrun_code5");
++
++            start_application(3, 1, 2, 1, 8'h11, 3'b000, 1'b1,
++                              "same_tuple_tag_recovery_3");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h11, 1, 4,
++                          "same_tuple_tag_recovered_record_3");
++            group_end("faults_backpressure_raw_expected_separation_recovery");
++        end
++    endtask
++
++    // PATCH_INSERT_TASKS
+*** End Patch

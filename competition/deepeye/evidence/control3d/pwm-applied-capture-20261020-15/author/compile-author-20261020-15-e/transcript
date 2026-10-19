@@ -1,0 +1,34 @@
+# vsim -c -do "run -all; quit -f" tb_pwm_applied_capture -gTEST_GROUP=3 -gTAG_W=8 -gLOOPBACK=0 -gWITNESS_W=8 -gCOUNT_W=4 
+# Start time: 03:38:50 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_pwm_applied_capture(fast)
+# run -all
+# GROUP_BEGIN faults_backpressure_raw_expected_separation_recovery
+# MISMATCH sample=11 label=wrong_period_closes expected=0 actual=1
+# HANDSHAKE sample=22 period=3 h0=1 h1=2 h2=1 start=1 end=4 tag=11
+# MISMATCH sample=31 label=equal_period_wrong_high_closes expected=0 actual=1
+# MISMATCH sample=48 label=incoherent_closes_next_edge expected=0 actual=1
+# MISMATCH sample=61 label=overrun_closes_next_edge expected=0 actual=1
+# GROUP_END faults_backpressure_raw_expected_separation_recovery cases=1 samples=69 assertions=444 mismatches=4 records=4 raw_faults=2 failure_events=4 window_starts=7 handshakes=1
+# TB_STATS groups=1 cases=1 samples=69 assertions=444 records=4 raw_faults=2 failure_events=4 window_starts=7 handshakes=1 mismatches=4
+# TB_FAIL group=3 mismatches=4
+# ** Fatal: TB_FAIL public-port self-check
+#    Time: 716 ns  Scope: tb_pwm_applied_capture File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/compile-author-20261020-15-e/src/tb_pwm_applied_capture.sv Line: 1078
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/compile-author-20261020-15-e/src/tb_pwm_applied_capture.sv(1078)
+#    Time: 716 ns  Iteration: 0  Instance: /tb_pwm_applied_capture
+# End time: 03:38:51 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

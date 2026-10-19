@@ -1,0 +1,32 @@
+{
+  "at_utc": "2026-10-19T19:33:59.297789+00:00",
+  "command": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_applied_capture.py",
+    "--tb",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_applied_capture.sv",
+    "--out",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\frozen-oracle",
+    "--owned-root",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main",
+    "--freeze-only"
+  ],
+  "cwd": "D:\\pynq\\CarlandFPGA",
+  "exit_code": 0,
+  "stdout_sha256": "fe05386af2af7295a2b5357af70f2596beb7be5d6fcab09fe606d582ef5c1132",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "author15_source_read_before_freeze": false,
+  "worker_id": "child-fbe6ddad25a748b3b978f7a4a7f1130a",
+  "scope_sha256": "a099b1756d2207c7c7cb11f5babb0b5e2e5433765d0c19a6dcc1538618578135",
+  "preparation": "prep01 succeeded before author read; final long overflow stimulus uses an actual maximum-period applied generator tuple instead of P2 while retaining full sampled raw65536 overflow. This reduces incidental toggling/trace size. Prior full source/input/preparation result preserved, no RTL ever run/author read before this freeze.",
+  "runner_sha256": "fd2d43b901a9cf71a46b3f6129c37b982744786c7ea1ad8bbb5c38cc6b5cd223",
+  "tb_sha256": "0d72aadf0bc50aee97e24599f3ab0d6abfb276ed2e4787005fb932e21b8ce506",
+  "frozen_receipt_sha256": "63c6669716cb2441f654ce841ecd288afc5b8425931e7d02bfcbcc2d94f74887",
+  "sampled_edges": 492440,
+  "rle_rows": 83462,
+  "scenarios": 1394,
+  "measurable_scenarios": 450
+}

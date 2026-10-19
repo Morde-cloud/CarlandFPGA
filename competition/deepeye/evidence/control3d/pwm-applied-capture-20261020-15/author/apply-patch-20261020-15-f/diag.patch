@@ -1,0 +1,23 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+                 if ((out_period !== expected_period) ||
+                     (out_high0 !== expected_high0) ||
+                     (out_high1 !== expected_high1) ||
+                     (out_high2 !== expected_high2) ||
+                     (out_tag !== expected_tag)) begin
+                     mismatch("handshake_raw_matches_expected",
+-                             {64'b0, expected_tag}, {64'b0, out_tag});
++                             {32'b0, expected_period}, {32'b0, out_period});
+                 end
+@@
+                 if ((out_period !== expected_period) ||
+                     (out_high0 !== expected_high0) ||
+                     (out_high1 !== expected_high1) ||
+                     (out_high2 !== expected_high2) ||
+                     (out_tag !== expected_tag)) begin
+                     mismatch("out_valid_raw_matches_expected",
+-                             {64'b0, expected_tag}, {64'b0, out_tag});
++                             {32'b0, expected_period}, {32'b0, out_period});
+                 end
+*** End Patch

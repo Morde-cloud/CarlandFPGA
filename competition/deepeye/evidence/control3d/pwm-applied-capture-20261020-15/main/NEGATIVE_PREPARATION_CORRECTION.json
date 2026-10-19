@@ -1,0 +1,10 @@
+{
+  "finding": "MAIN15-NEGATIVE-PREPARATION01",
+  "at_utc": "2026-10-19T19:39:25.512284+00:00",
+  "original_runner_sha256": "bae8b757cc2a4bd4943ee33f7b3fa24e02ee21b222da2a5cc54451a19eaf004f",
+  "repaired_runner_sha256": "4e15f6a1675142e2fba0cfbf331689f31649c04221fb13009db8a30e93af0f40",
+  "original_result_sha256": "a537ebdd8839627a2e8dd9cd1b1b2bc63f8e7edecbac322928904d639f470479",
+  "reason": "Same-tag-cache faulty-copy declarations were below their first use; ModelSim10.7 compiled that copy with16 errors. Not counted as a valid negative control. Move the auxiliary cache declarations/always block before the first assign use. Keep correct DUT, model, frozen stimuli, TB and all original bytes unchanged. First late-transfer counterexample already completed and is not rerun.",
+  "original_correct_DUT_sha256": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3",
+  "frozen_receipt_sha256": "63c6669716cb2441f654ce841ecd288afc5b8425931e7d02bfcbcc2d94f74887"
+}

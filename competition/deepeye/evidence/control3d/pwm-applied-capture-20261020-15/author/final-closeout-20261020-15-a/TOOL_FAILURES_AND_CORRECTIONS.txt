@@ -1,0 +1,18 @@
+Preserved command/preparation failures and corrections
+=======================================================
+1. A preflight used a relative virtual-environment path and failed before any run or
+   product output. It is preserved in preflight-author-20261020-15-c/FAILED_PREFLIGHT_NOTE.txt;
+   the corrected absolute-path preflight reports Python 3.12.9.
+2. A read-only verification search expected *.log files, but the suite stores *.txt logs.
+   It failed without changing evidence; closeout rechecks all *.stdout.txt logs.
+3. Two early apply-patch wrapper attempts failed (stdin instead of required UTF-8 argument;
+   one combined command rejected by command policy). No source bytes changed. The successful
+   patch and actual result are preserved under apply-patch-20261020-15-v/.
+4. Isolated g15-b validation lacked a pre-run source snapshot. Exact unchanged sources and
+   timestamp/log proof are preserved under source-snapshot-debug-g15-b-posthoc-20261020-15-a/.
+5. A later compile left a 142-byte ModelSim lib/_info cache and failed-compile transcript at
+   the worktree root. They were moved with hashes to stray-root-artifacts-20261020-15-a/;
+   root copies are absent.
+6. The runner generated its initial tree manifest while externally redirected stdout was
+   still flushing. The initial manifests are preserved under
+   run-author-20261020-15-c/manifest-attempts-20261020-15-a/ and the final tree is closed once.

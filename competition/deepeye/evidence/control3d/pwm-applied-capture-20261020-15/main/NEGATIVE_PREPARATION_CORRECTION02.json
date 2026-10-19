@@ -1,0 +1,8 @@
+{
+  "finding": "MAIN15-NEGATIVE-PREPARATION02",
+  "at_utc": "2026-10-19T19:39:54.526130+00:00",
+  "previous_runner_sha256": "4e15f6a1675142e2fba0cfbf331689f31649c04221fb13009db8a30e93af0f40",
+  "new_runner_sha256": "c02ebe013559835059cb764ac73f35f0f57889cb0fc2c7cb161b0b5172f69e23",
+  "previous_result_sha256": "d770ad268cb87e9c1a56b401abc5b52cc49bb5b6e57fb53024e53ba10a55ab53",
+  "reason": "The repaired same-tag mutant compiled but its intentionally added cache bypass exposed uninitialized X before the first sampled reset. This is not the required same-tag boundary counterexample. Add explicit reset/stop masking to the faulty cache bypass only. Do not change production RTL, frozen oracle/inputs/TB or accept the wrong counterexample. Preserve all prior failed preparations."
+}

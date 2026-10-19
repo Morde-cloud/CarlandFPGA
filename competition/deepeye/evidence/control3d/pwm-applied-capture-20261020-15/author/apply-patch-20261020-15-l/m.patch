@@ -1,0 +1,27 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
+@@
+     author_dir = out.parent
++    run_relative = out.relative_to(author_dir).as_posix()
+     excluded = {
+-        "EVIDENCE_TREE_MANIFEST.json",
+-        "TERMINAL_MANIFEST.json",
+-        "TERMINAL_MANIFEST.sha256.txt",
++        f"{run_relative}/EVIDENCE_TREE_MANIFEST.json",
++        f"{run_relative}/TERMINAL_MANIFEST.json",
++        f"{run_relative}/TERMINAL_MANIFEST.sha256.txt",
+     }
+     records, total_bytes = tree_records(author_dir, excluded)
+     evidence_tree_sha = tree_sha256(records)
+-    tree_manifest_path = author_dir / "EVIDENCE_TREE_MANIFEST.json"
++    tree_manifest_path = out / "EVIDENCE_TREE_MANIFEST.json"
+@@
+-    terminal_path = author_dir / "TERMINAL_MANIFEST.json"
++    terminal_path = out / "TERMINAL_MANIFEST.json"
+     write_json(terminal_path, terminal)
+-    (author_dir / "TERMINAL_MANIFEST.sha256.txt").write_text(
++    (out / "TERMINAL_MANIFEST.sha256.txt").write_text(
+         f"{sha256_file(terminal_path)}  TERMINAL_MANIFEST.json\n",
+         encoding="utf-8",
+     )
+*** End Patch

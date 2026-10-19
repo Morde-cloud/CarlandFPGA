@@ -1,0 +1,13 @@
+{
+  "description": "Combinational T guard omits transfer_now, so a pre-existing old matched slot is exported and handshaken on the transfer edge.",
+  "id": "m1-t-invalidation-delayed",
+  "replacements": [
+    {
+      "new": "rst || stop || g_pending || !g_running",
+      "occurrences": 1,
+      "old": "rst || stop || transfer_now || g_pending || !g_running"
+    }
+  ],
+  "sha256": "6c45cb1cb793059dc633052785f067cd282d2e35d2c40d21919ec56f64f4fcac",
+  "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\run-author-20261020-15-c\\mutants\\m1-t-invalidation-delayed\\deepeye_pwm_applied_capture.sv"
+}

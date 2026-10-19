@@ -1,0 +1,102 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
+@@
+ def run_command(cmd: list[str], cwd: Path, log_dir: Path, name: str, timeout: float,
+                 commands: list[dict]) -> dict:
+     stdout_path = log_dir / f"{name}.stdout.txt"
+     stderr_path = log_dir / f"{name}.stderr.txt"
++    if stdout_path.exists() or stderr_path.exists():
++        raise FileExistsError(f"refusing to overwrite log for {name}")
+     started = utc_now()
+@@
+     return {
+         "passed": "TB_PASS" in text,
+         "failed": ("TB_FAIL" in text) or ("Fatal:" in text),
+         "stats": stats,
+         "mismatch_labels": MISMATCH_RE.findall(text),
++        "code7_observed": "CODE7_OBSERVED" in text,
+         "stdout_tail": text[-4000:],
+         "stderr_tail": err[-2000:],
+     }
+@@
+ def run_tb(lib_parent: Path, logs: Path, commands: list[dict], tools: dict[str, str],
+            name: str, group: int, count_w: int, witness_w: int, tag_w: int,
+            loopback: int, timeout: float, top: str = "tb_pwm_applied_capture") -> dict:
++    log_file = logs / f"{name}.transcript.txt"
++    wlf_file = logs / f"{name}.wlf"
++    if log_file.exists() or wlf_file.exists():
++        raise FileExistsError(f"refusing to overwrite simulator artifact for {name}")
+     cmd = [
+-        tools["vsim"], "-c", "-work", "lib", "-do", "run -all; quit -f",
++        tools["vsim"], "-c", "-work", "lib",
++        "-l", str(log_file), "-wlf", str(wlf_file),
++        "-do", "run -all; quit -f",
+         f"-gCOUNT_W={count_w}", f"-gWITNESS_W={witness_w}", f"-gTAG_W={tag_w}",
+         f"-gTEST_GROUP={group}", f"-gLOOPBACK={loopback}", top,
+     ]
+     record = run_command(cmd, lib_parent, logs, name, timeout, commands)
+     parsed = parse_tb_output(logs / f"{name}.stdout.txt", logs / f"{name}.stderr.txt")
++    parsed["transcript"] = str(log_file)
++    parsed["transcript_sha256"] = sha256_file(log_file) if log_file.is_file() else None
++    parsed["wlf"] = str(wlf_file)
++    parsed["wlf_sha256"] = sha256_file(wlf_file) if wlf_file.is_file() else None
+     return {"record": record, "parsed": parsed}
++
++
++def clamp_width(value: int, low: int, high: int) -> int:
++    return low if value < low else (high if value > high else value)
++
++
++def run_invalid(lib_parent: Path, logs: Path, commands: list[dict],
++                tools: dict[str, str], spec: dict, timeout: float) -> dict:
++    name = spec["id"]
++    log_file = logs / f"{name}.transcript.txt"
++    wlf_file = logs / f"{name}.wlf"
++    if log_file.exists() or wlf_file.exists():
++        raise FileExistsError(f"refusing to overwrite simulator artifact for {name}")
++    cmd = [
++        tools["vsim"], "-c", "-work", "lib",
++        "-l", str(log_file), "-wlf", str(wlf_file),
++        "-do", "run -all; quit -f",
++        f"-gCOUNT_W={spec['count_w']}",
++        f"-gWITNESS_W={spec['witness_w']}",
++        f"-gTAG_W={spec['tag_w']}",
++        "tb_invalid_applied_capture",
++    ]
++    record = run_command(cmd, lib_parent, logs, name, timeout, commands)
++    text = (logs / f"{name}.stdout.txt").read_text(encoding="utf-8", errors="replace")
++    match = INVALID_RE.search(text)
++    diagnostic = None
++    if match:
++        values = tuple(int(value) for value in match.groups())
++        diagnostic = {
++            "count_w": values[0],
++            "witness_w": values[1],
++            "tag_w": values[2],
++            "safe_count_w": values[3],
++            "safe_witness_w": values[4],
++            "safe_tag_w": values[5],
++        }
++    expected = {
++        "count_w": spec["count_w"],
++        "witness_w": spec["witness_w"],
++        "tag_w": spec["tag_w"],
++        "safe_count_w": clamp_width(spec["count_w"], 2, 32),
++        "safe_witness_w": clamp_width(spec["witness_w"], 2, 64),
++        "safe_tag_w": clamp_width(spec["tag_w"], 1, 64),
++    }
++    guard_missing = "APPLIED_CAPTURE_INVALID_GUARD_MISSING" in text
++    exact = diagnostic is not None and diagnostic == expected
++    return {
++        "record": record,
++        "diagnostic": diagnostic,
++        "expected": expected,
++        "guard_missing": guard_missing,
++        "diagnostic_exact": exact,
++        "passed": exact and not guard_missing,
++        "transcript": str(log_file),
++        "transcript_sha256": sha256_file(log_file) if log_file.is_file() else None,
++        "wlf": str(wlf_file),
++        "wlf_sha256": sha256_file(wlf_file) if wlf_file.is_file() else None,
++    }
+*** End Patch

@@ -1,0 +1,32 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -onfinish stop work.main_tb_pwm_applied_capture "+VECTORS=c32_w64_t64.vectors.txt" "+TRACE=invalid_c1_w8_t32.ports.txt" -do "c32_w64_t64.do" -gTAG_W=32 -gWITNESS_W=8 -gCOUNT_W=1 
+# Start time: 03:35:44 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.main_tb_pwm_applied_capture(fast)
+# do c32_w64_t64.do
+# DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=1 WITNESS_W=8 TAG_W=32 SAFE_COUNT_W=2 SAFE_WITNESS_W=8 SAFE_TAG_W=32
+# ** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths
+#    Time: 0 ps  Scope: main_tb_pwm_applied_capture.dut File: dut.sv Line: 365
+# ** Note: $finish    : dut.sv(365)
+#    Time: 0 ps  Iteration: 0  Instance: /main_tb_pwm_applied_capture/dut
+# Break at dut.sv line 365
+# Stopped at dut.sv line 365
+# End time: 03:35:45 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

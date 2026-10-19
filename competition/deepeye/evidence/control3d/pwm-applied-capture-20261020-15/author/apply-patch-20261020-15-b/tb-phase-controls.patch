@@ -1,0 +1,134 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+-    // PATCH_INSERT_TASKS
++    task automatic drive_partial(input integer sample_count);
++        integer n;
++        logic [2:0] levels;
++        begin
++            for (n = 1; n <= sample_count; n = n + 1) begin
++                if (n == 1) levels = 3'b111;
++                else levels = 3'b000;
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, levels);
++            end
++        end
++    endtask
++
++    task automatic group_phase_controls;
++        integer phase;
++        integer hb;
++        begin
++            group_begin("reset_stop_and_T_at_every_bounded_phase");
++            for (phase = 0; phase <= 4; phase = phase + 1) begin
++                reset_dut();
++                start_application(3, 1, 2, 1, 8'h21, 3'b000, 1'b1,
++                                  "phase_T_initial_window");
++                drive_partial(phase);
++                hb = handshakes;
++                submit_command(4, 1, 2, 3, 8'h22, 1'b1, 3'b000,
++                               "phase_T_at_boundary");
++                check64(handshakes, hb, "phase_T_old_slot_never_handshakes");
++                wait_application_and_observe(4, 1, 2, 3, 8'h22, 3'b000, 1'b1,
++                                             "phase_T_new_application");
++                cases = cases + 1;
++
++                drive_partial(phase);
++                cycle(1'b0, 1'b1, 1'b0, 1'b0, 3'b000);
++                check_unbound("phase_stop_unbound");
++                check64(failure_event, 1'b0, "phase_stop_not_fault");
++                check64(failure_code, 3'd0, "phase_stop_code0");
++                cycle(1'b0, 1'b1, 1'b0, 1'b0, 3'b000);
++                check_unbound("phase_stop_held_unbound");
++                check64(failure_event, 1'b0, "phase_stop_held_not_fault");
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++                check_unbound("phase_stop_release_no_auto_recovery");
++                cases = cases + 1;
++
++                start_application(3, 1, 2, 1, 8'h23, 3'b000, 1'b1,
++                                  "phase_reset_prepare_window");
++                drive_partial(phase);
++                cycle(1'b1, 1'b0, 1'b0, 1'b0, 3'b000);
++                check_unbound("phase_reset_unbound");
++                check64(failure_event, 1'b0, "phase_reset_not_fault");
++                check64(failure_code, 3'd0, "phase_reset_code0");
++                cycle(1'b1, 1'b0, 1'b0, 1'b0, 3'b000);
++                check_unbound("phase_reset_held_unbound");
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++                check_unbound("phase_reset_release_no_auto_recovery");
++                cases = cases + 1;
++
++                start_application(3, 1, 2, 1, 8'h23, 3'b000, 1'b1,
++                                  "phase_next_iteration_prepare");
++            end
++            group_end("reset_stop_and_T_at_every_bounded_phase");
++        end
++    endtask
++
++    task automatic group_t_boundary(input logic same_tag,
++                                    input string name);
++        integer hb;
++        logic [TAG_W-1:0] next_tag;
++        begin
++            group_begin(name);
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'h31, 3'b000, 1'b1,
++                              "old_window_start");
++            emit_frame(3, 1, 2, 1);
++            expect_record(3, 1, 2, 1, 8'h31, 1, 4,
++                          "old_matched_slot_present");
++            if (same_tag) begin
++                cfg_period = 3;
++                cfg_high_yaw = 1;
++                cfg_high_pitch = 2;
++                cfg_high_speed = 1;
++                next_tag = 8'h31;
++            end else begin
++                cfg_period = 2;
++                cfg_high_yaw = 1;
++                cfg_high_pitch = 1;
++                cfg_high_speed = 1;
++                next_tag = 8'h32;
++            end
++            cfg_tag = next_tag;
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b1, 1'b1, 3'b000);
++            check64(pre_out_valid, 1'b0, "T_suppresses_preexisting_out_valid");
++            check64(handshakes, hb, "T_suppresses_old_handshake");
++            check64(accepted, 1'b1, "T_boundary_accepted");
++            check64(pending, 1'b1, "T_boundary_pending");
++            check_unbound("T_boundary_clears_binding");
++            check64(window_started, 1'b0, "T_boundary_no_start");
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check_unbound("T_boundary_pending_cycle_unbound");
++            wait_application_and_observe(cfg_period, cfg_high_yaw,
++                                         cfg_high_pitch, cfg_high_speed,
++                                         next_tag, 3'b000, 1'b1,
++                                         "T_boundary_new_application");
++            expect_no_record("T_boundary_no_same_edge_creation");
++            group_end(name);
++        end
++    endtask
++
++    task automatic group_mismatch_admission_control;
++        integer hb;
++        begin
++            group_begin("mismatch_never_admitted_public_control");
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'h41, 3'b000, 1'b1,
++                              "mismatch_control_window_start");
++            emit_frame(4, 1, 1, 1);
++            expect_no_record("mismatch_control_not_external_valid");
++            hb = handshakes;
++            cycle(1'b0, 1'b0, 1'b0, 1'b1, 3'b000);
++            check64(handshakes, hb, "mismatch_control_no_handshake");
++            check_unbound("mismatch_control_closes");
++            check64(failure_event, 1'b1, "mismatch_control_failure_pulse");
++            check64(failure_code, 3'd1, "mismatch_control_code1");
++            group_end("mismatch_never_admitted_public_control");
++        end
++    endtask
++
++    // PATCH_INSERT_TASKS
+*** End Patch

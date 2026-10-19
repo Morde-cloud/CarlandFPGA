@@ -1,0 +1,96 @@
+{
+  "at_utc": "2026-10-19T19:39:25.776462+00:00",
+  "frozen_vectors_sha256": "bd069d90085713da98101cba040dee78bba66e25467500ec4f11c279152bcf9d",
+  "original_source_sha256": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3",
+  "original_tb_sha256": "0d72aadf0bc50aee97e24599f3ab0d6abfb276ed2e4787005fb932e21b8ce506",
+  "selection": "exact contiguous reset-bounded original frozen rows; no expected/input edits; all fields checked",
+  "cases": [],
+  "commands": [
+    {
+      "name": "same-tag-cache/vlib",
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair01\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/compile-correct",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "generator.sv",
+        "capture.sv",
+        "correct.sv",
+        "tb.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair01\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "743c121d86de73165fd2571aa4b44a9488e60d8241148f94edbb6db5ee36cc06",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/correct",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_applied_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=vectors.txt",
+        "-do",
+        "run.do",
+        "+TRACE=correct.ports.txt"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair01\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "5b70461bea00d5c2849afc70fe687c8c4df95e216fcb073096a4eb11e906a019",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/compile-mutant",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "mutant.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair01\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "ced6e27a9fa7810ab13da2f4c08ad282b39e90afda5c3725323e259ca2095394",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "same-tag-cache/mutant",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_applied_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=vectors.txt",
+        "-do",
+        "run.do",
+        "+TRACE=mutant.ports.txt"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main\\negative-controls-repair01\\same-tag-cache",
+      "exit_code": 0,
+      "stdout_sha256": "14399d6bde160a0ef4f61158930bc08686aad00233652b3f14e30ddb36e1c7af",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "status": "failed",
+  "error": "AssertionError(('same-tag-cache', b'Reading D:/modelsim1/tcl/vsim/pref.tcl\\r\\n\\r\\n# 10.7\\r\\n\\r\\n# vsim -c -onfinish stop work.main_tb_pwm_applied_capture \"+VECTORS=vectors.txt\" -do \"run.do\" \"+TRACE=mutant.ports.txt\" -gTAG_W=64 -gWITNESS_W=6 -gCOUNT_W=3 \\r\\n# Start time: 03:39:28 on Oct 20,2026\\r\\n# ** Note: (vsim-3813) Design is being optimized due to module recompilation...\\r\\n# //  ModelSim SE-64 10.7 Dec  7 2017\\r\\n# //\\r\\n# //  Copyright 1991-2017 Mentor Graphics Corporation\\r\\n# //  All Rights Reserved.\\r\\n# //\\r\\n# //  ModelSim SE-64 and its associated documentation contain trade\\r\\n# //  secrets and commercial or financial information that are the property of\\r\\n# //  Mentor Graphics Corporation and are privileged, confidential,\\r\\n# //  and exempt from disclosure under the Freedom of Information Act,\\r\\n# //  5 U.S.C. Section 552. Furthermore, this information\\r\\n# //  is prohibited from disclosure under the Trade Secrets Act,\\r\\n# //  18 U.S.C. Section 1905.\\r\\n# //\\r\\n# Loading sv_std.std\\r\\n# Loading work.main_tb_pwm_applied_capture(fast)\\r\\n# do run.do\\r\\n# ** Fatal: PUBLIC_PORT_MISMATCH pre row=0 repeat=0 edge=0 valid=x/0000000000000000 ready=0/0000000000000000\\r\\n#    Time: 2 ns  Scope: main_tb_pwm_applied_capture File: tb.sv Line: 77\\r\\n# ** Note: $finish    : tb.sv(77)\\r\\n#    Time: 2 ns  Iteration: 0  Instance: /main_tb_pwm_applied_capture\\r\\n# Break at tb.sv line 77\\r\\n# Stopped at tb.sv line 77\\r\\n# End time: 03:39:29 on Oct 20,2026, Elapsed time: 0:00:01\\r\\n# Errors: 1, Warnings: 0\\r\\n'))"
+}

@@ -1,0 +1,62 @@
+﻿{
+    "task_id":  "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version":  1,
+    "work_id":  "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1",
+    "operation_id":  "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+    "purpose":  "Reconstruct exact source bytes used by isolated g15-b, which lacked a pre-run snapshot.",
+    "reconstructed_utc":  "2026-10-19T19:59:11.3583573Z",
+    "g15_run_directory":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\debug-author-20261020-15-g15-b",
+    "g15_log_start":  "03:56:59 on Oct 20,2026",
+    "g15_log_end":  "03:56:59 on Oct 20,2026, Elapsed time: 0:00:00",
+    "current_sources":  [
+                            {
+                                "key":  "rtl",
+                                "source":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_applied_capture.sv",
+                                "source_last_write_utc":  "2026-10-19T19:32:24.6309001Z",
+                                "source_bytes":  15841,
+                                "source_sha256":  "D8C33EBAD98ACCA113E18DBC5831643646663B946714AF139D8B1637047356F3",
+                                "snapshot":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\source-snapshot-debug-g15-b-posthoc-20261020-15-a\\rtl.sv",
+                                "snapshot_sha256":  "D8C33EBAD98ACCA113E18DBC5831643646663B946714AF139D8B1637047356F3",
+                                "hash_match":  true
+                            },
+                            {
+                                "key":  "tb",
+                                "source":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_pwm_applied_capture.sv",
+                                "source_last_write_utc":  "2026-10-19T19:56:54.3346217Z",
+                                "source_bytes":  62560,
+                                "source_sha256":  "D31EB33A117FB3EA612AB50D2BFFC6CD3AB8EDC901337BFF7F95E76809A2E0B5",
+                                "snapshot":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\source-snapshot-debug-g15-b-posthoc-20261020-15-a\\tb.sv",
+                                "snapshot_sha256":  "D31EB33A117FB3EA612AB50D2BFFC6CD3AB8EDC901337BFF7F95E76809A2E0B5",
+                                "hash_match":  true
+                            },
+                            {
+                                "key":  "atomic",
+                                "source":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv",
+                                "source_last_write_utc":  "2026-10-19T16:50:16.9443205Z",
+                                "source_bytes":  7983,
+                                "source_sha256":  "9DC8ECF96E59A2AE8467BDA64572F62EB602D52DB535733F236F64FF97C43428",
+                                "snapshot":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\source-snapshot-debug-g15-b-posthoc-20261020-15-a\\atomic.sv",
+                                "snapshot_sha256":  "9DC8ECF96E59A2AE8467BDA64572F62EB602D52DB535733F236F64FF97C43428",
+                                "hash_match":  true
+                            },
+                            {
+                                "key":  "capture",
+                                "source":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_coherent_capture.sv",
+                                "source_last_write_utc":  "2026-10-19T18:27:07.7187497Z",
+                                "source_bytes":  17155,
+                                "source_sha256":  "4BADDFC31248C49000C00AC74BC2319CEF6C9016C7DF3F1822030C69CD82F456",
+                                "snapshot":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\source-snapshot-debug-g15-b-posthoc-20261020-15-a\\capture.sv",
+                                "snapshot_sha256":  "4BADDFC31248C49000C00AC74BC2319CEF6C9016C7DF3F1822030C69CD82F456",
+                                "hash_match":  true
+                            }
+                        ],
+    "comparison_to_run_b_snapshot":  {
+                                         "rtl_hash_equals":  true,
+                                         "run_b_rtl_sha256":  "D8C33EBAD98ACCA113E18DBC5831643646663B946714AF139D8B1637047356F3",
+                                         "tb_hash_differs":  true,
+                                         "run_b_tb_sha256":  "AF431E75E64E491AAFAD36008AD85CF73D5336D56506BA6408F722D6EDB00ED6",
+                                         "explanation":  "g15-b followed the phase-shift TB/candidate edits; RTL unchanged, TB intentionally differs from run-b."
+                                     },
+    "timestamp_proof":  "All four source last-write times predate the logged 03:56:59 vlog start; current source mtimes remain before that start.",
+    "limitation":  "Post-hoc reconstruction from unchanged source bytes and log/timestamp ordering; no pre-run copy existed for g15-b."
+}

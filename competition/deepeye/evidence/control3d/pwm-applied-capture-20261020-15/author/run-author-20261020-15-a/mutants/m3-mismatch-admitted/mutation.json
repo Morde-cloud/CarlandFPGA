@@ -1,0 +1,13 @@
+{
+  "description": "Raw/expected equality is removed from out_valid, so a mismatching raw slot becomes externally valid and handshakeable.",
+  "id": "m3-mismatch-admitted",
+  "replacements": [
+    {
+      "new": "assign out_valid = transport_window && c_armed && !raw_fault &&\n                       c_out_valid;",
+      "occurrences": 1,
+      "old": "assign out_valid = transport_window && c_armed && !raw_fault &&\n                       c_out_valid && raw_equal;"
+    }
+  ],
+  "sha256": "57e8b25681ac27bd07c43262a17961f65cc1164c3dd73b1f301690200bc3550e",
+  "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\run-author-20261020-15-a\\mutants\\m3-mismatch-admitted\\deepeye_pwm_applied_capture.sv"
+}

@@ -1,0 +1,95 @@
+{
+  "at_utc": "2026-10-19T20:13:59.054932+00:00",
+  "status": "verified_original_final_and_main_repaired_runs",
+  "runs": [
+    {
+      "run": "run-author-20261020-15-c",
+      "terminal_sha256": "f743347af42910b50e146970de362df17588b8600ab7309d97e3a805acf1da32",
+      "summary_sha256": "3a9225ec17fe1f49807b56aae82db0754915672b3e162b21411ae303f9e5780f",
+      "tree_manifest_sha256": "fbc096f9f92871be5c13861dc52a9169038503580a94d4741a69686573031043",
+      "tree_sha256": "9483a4a3c35f89276958ec1a6dbbccfac8285eb44808af9af1395eca24681d47",
+      "tree_files_verified": 2683,
+      "tree_bytes": 67309982,
+      "commands_verified": 47,
+      "actual_exits": [
+        0
+      ],
+      "positive_totals": {
+        "assertions": 100587,
+        "cases": 1431,
+        "failure_events": 953,
+        "groups": 19,
+        "handshakes": 459,
+        "mismatches": 0,
+        "passed_scenarios": 19,
+        "raw_faults": 6,
+        "records": 476,
+        "samples": 208667,
+        "scenarios": 19,
+        "window_starts": 507
+      },
+      "scenario_counts": {
+        "invalid_parameter_scenarios": 9,
+        "mutant_runs": 5,
+        "positive_scenarios": 19,
+        "total": 33
+      },
+      "runner_sha256": "331b3a4aa4cc9baa3b378e27dc1accd50f2e2bce60ad50348b57603ccd17d18e"
+    },
+    {
+      "run": "run-main-repaired-20261020-15-a",
+      "terminal_sha256": "5eb0d25d29cb74c4f89936c4ef232b937c8dd47f4a1b7da10a3fa084e67493af",
+      "summary_sha256": "1bc4a0db74686b8c6d5033052f4a626f9ba9d59cd5f954d43965a99754f4bf31",
+      "tree_manifest_sha256": "e5b07800d7afc119cbc196343d9a84a7153efe6445c83de910c0854903910cc6",
+      "tree_sha256": "948338cdbf9e032c3ad618279e1f71ae079278c27ca04dc77bef0bc4ee801e33",
+      "tree_files_verified": 3011,
+      "tree_bytes": 76078343,
+      "commands_verified": 47,
+      "actual_exits": [
+        0
+      ],
+      "positive_totals": {
+        "assertions": 100587,
+        "cases": 1431,
+        "failure_events": 953,
+        "groups": 19,
+        "handshakes": 459,
+        "mismatches": 0,
+        "passed_scenarios": 19,
+        "raw_faults": 6,
+        "records": 476,
+        "samples": 208667,
+        "scenarios": 19,
+        "window_starts": 507
+      },
+      "scenario_counts": {
+        "invalid_parameter_scenarios": 9,
+        "mutant_runs": 5,
+        "positive_scenarios": 19,
+        "total": 33
+      },
+      "runner_sha256": "83f192c70ab48427e70a0dc66662e4a24a66be90633a454a82e179a6a79ddf98"
+    }
+  ],
+  "runner_findings_closed": [
+    "RUNNER15-EXIT01",
+    "RUNNER15-ERROR02",
+    "RUNNER15-GUARD03"
+  ],
+  "synthetic_probes": {
+    "original_incorrect": 13,
+    "cases": 16,
+    "repaired_incorrect": 0
+  },
+  "main_author_rerun_required_by_runner_change": true,
+  "no_RTL_or_main_oracle_change": true,
+  "observed_author_files_still_present": 615,
+  "history_limits": [
+    "Author g15-b had no pre-run snapshot. Its later source/timestamp reconstruction is retained as historical context only, not proof of exact pre-run bytes. Final run-c and main repaired run have actual pre-run snapshots.",
+    "Author accidentally created root lib cache142B and failed-compile transcript602B outside its five paths; then moved them into owned evidence with hashes. Main verified surviving bytes. This scope deviation is disclosed, not retroactively authorized; no restoration/replay was attempted.",
+    "Original run-c tree manifest raced externally redirected stdout. Initial manifest bytes are preserved; child later reclosed its terminal tree. Main verified the actual final2683-file tree. Fresh main repaired run redirects its outer streams outside the hashed author tree.",
+    "Main cancellation request encountered already completed child. No cancellation occurred; final terminal completed/nonstale consumed before main repair; idle pool reclaimed0.",
+    "Old op13 missing15 original404 response bytes and op14 missing early temporary author history remain unchanged and are not recovered by op15."
+  ],
+  "assertion_invocations_are_not_independent_cases": true
+}

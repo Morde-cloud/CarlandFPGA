@@ -1,0 +1,22 @@
+{
+  "initial_manifests": {
+    "EVIDENCE_TREE_MANIFEST.json": {
+      "bytes": 544011,
+      "initial_path": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c/manifest-attempts-20261020-15-a/EVIDENCE_TREE_MANIFEST.initial.json",
+      "sha256": "28270e4e697ecb04f626be8c865eb6baa8c4896eb2a9be1f450e1c3ea19de51b"
+    },
+    "TERMINAL_MANIFEST.json": {
+      "bytes": 6889,
+      "initial_path": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c/manifest-attempts-20261020-15-a/TERMINAL_MANIFEST.initial.json",
+      "sha256": "e14fe9539d0932b37d2335ab3973235955878fa94e4ff07a34e4125232f7db0d"
+    },
+    "TERMINAL_MANIFEST.sha256.txt": {
+      "bytes": 90,
+      "initial_path": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c/manifest-attempts-20261020-15-a/TERMINAL_MANIFEST.sha256.initial.txt",
+      "sha256": "b272f4ea251fff8d508f1a4af4bf530bcaab30b50ba8a67e7df72fce8e30ce2a"
+    }
+  },
+  "purpose": "Preserve runner manifests before final closeout recomputation.",
+  "reason": "External stdout was still flushing when the runner computed its tree manifest; the command stdout is 922 bytes now but was 0 at the runner tree scan.",
+  "recorded_utc": "2026-10-19T20:04:46.733024+00:00"
+}

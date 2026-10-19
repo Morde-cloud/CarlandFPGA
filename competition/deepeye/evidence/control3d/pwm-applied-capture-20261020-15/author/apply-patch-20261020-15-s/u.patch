@@ -1,0 +1,15 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+-    // PATCH_INSERT_TASKS
+-
+     initial begin
+*** Update File: competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md
+@@
+ Every run snapshots exact source/input bytes before compilation and preserves
+ unique stdout, stderr, ModelSim transcript, WLF, command, exit, and hash records.
+-Failed or preparatory runs under the author evidence directory are retained.
++TRACE-enabled representative groups record pre-edge input rows and public
++outputs for every sampled edge. Failed or preparatory runs under the author
++evidence directory are retained.
+*** End Patch

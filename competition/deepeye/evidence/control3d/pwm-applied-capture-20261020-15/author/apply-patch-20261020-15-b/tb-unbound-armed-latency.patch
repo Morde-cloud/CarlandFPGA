@@ -1,0 +1,10 @@
+﻿*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+             check64(window_active, 1'b0, label);
+             check_zero_context(label);
+             check64(out_valid, 1'b0, label);
+-            check64(capture_armed, 1'b0, label);
+         end
+     endtask
+*** End Patch

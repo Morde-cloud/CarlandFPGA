@@ -1,0 +1,70 @@
+﻿{
+    "task_id":  "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version":  1,
+    "work_id":  "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1",
+    "operation_id":  "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+    "purpose":  "Preserve ModelSim scratch/cache and transcript accidentally created at the worktree root; no source or prior run directory was edited.",
+    "recorded_utc":  "2026-10-19T19:58:48.1558807Z",
+    "powershell_version":  "5.1.26100.9711",
+    "worktree":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+    "destination":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\stray-root-artifacts-20261020-15-a",
+    "before":  [
+                   {
+                       "path":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\lib",
+                       "kind":  "directory",
+                       "file_count":  1,
+                       "files":  [
+                                     {
+                                         "relative_path":  "_info",
+                                         "bytes":  142,
+                                         "sha256":  "B98879F7B90CBEFC39F23C1419CF529831AF5E376DE9997E47440F7D947E6685"
+                                     }
+                                 ]
+                   },
+                   {
+                       "path":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\transcript",
+                       "kind":  "file",
+                       "bytes":  602,
+                       "sha256":  "21E1F2BFBD59DD0835568F7041FCC71DA4C96EFCFC9DB4B2A3FA3E044CDA9409",
+                       "last_write_utc":  "2026-10-19T19:37:20.2423114Z"
+                   }
+               ],
+    "moves":  [
+                  {
+                      "source":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\lib",
+                      "target":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\stray-root-artifacts-20261020-15-a\\lib",
+                      "operation":  "Move-Item -LiteralPath source -Destination target",
+                      "source_absent_after":  true,
+                      "target_present_after":  true
+                  },
+                  {
+                      "source":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\transcript",
+                      "target":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\stray-root-artifacts-20261020-15-a\\transcript",
+                      "operation":  "Move-Item -LiteralPath source -Destination target",
+                      "source_absent_after":  true,
+                      "target_present_after":  true
+                  }
+              ],
+    "after":  [
+                  {
+                      "path":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\stray-root-artifacts-20261020-15-a\\lib",
+                      "kind":  "directory",
+                      "file_count":  1,
+                      "files":  [
+                                    {
+                                        "relative_path":  "_info",
+                                        "bytes":  142,
+                                        "sha256":  "B98879F7B90CBEFC39F23C1419CF529831AF5E376DE9997E47440F7D947E6685"
+                                    }
+                                ]
+                  },
+                  {
+                      "path":  "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\stray-root-artifacts-20261020-15-a\\transcript",
+                      "kind":  "file",
+                      "bytes":  602,
+                      "sha256":  "21E1F2BFBD59DD0835568F7041FCC71DA4C96EFCFC9DB4B2A3FA3E044CDA9409",
+                      "last_write_utc":  "2026-10-19T19:37:20.2423114Z"
+                  }
+              ],
+    "note":  "The root lib contained only ModelSim _info cache data (142 bytes). The transcript was a failed compile attempt for an earlier run-c compile directory. Both are retained read-only as failure preparation evidence."
+}

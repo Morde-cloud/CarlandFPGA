@@ -1,0 +1,170 @@
+{
+  "project_id": "fpga-main",
+  "task_id": "B-MAIN-CONTINUATION-20261019",
+  "task_version": 1,
+  "actual_thread": "01a154de-abd8-7590-b9a3-2819249458e3",
+  "actual_turn": "01a1559d-12a9-7b62-a9ff-4fa90bcca25e",
+  "model": "gpt-6-astra",
+  "effort": "ultra",
+  "input_message_id": "main:0e47fbccec6ec503089273cf1cca3e47dd7e70630528b0b3f1e4b26e7527eda0",
+  "parent_work_id": "B-LOCAL-APPLIED-CAPTURE-CONTINUE-20261020-v1",
+  "instruction_operation": "B-LOCAL-APPLIED-CAPTURE-CONTINUE-20261020-v1-DIRECTOR-SCOPE",
+  "product_operation": "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+  "execution_work_id": "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1",
+  "product_task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "product_task_version": 1,
+  "product_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "product_App_turn": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+  "at_utc": "2026-10-19T19:26:54.165583+00:00",
+  "decision": "CONTINUE",
+  "decision_scope": "Authorize only the single frozen internal applied-capture wrapper increment under the existing sole product director; no product acceptance yet",
+  "spec_path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-applied-capture-20261020-15/SCOPE.md",
+  "spec_sha256": "a099b1756d2207c7c7cb11f5babb0b5e2e5433765d0c19a6dcc1538618578135",
+  "scope_frozen_sha256": "66b7d77986be0492e68e326971fb7b5210562cf38cc0fe51f4ab593023fbdebe",
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirement_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design": "1011259415a0916054eb580687612580bc1e5f09",
+    "requirements_recomputed_against_fixed_pin": true,
+    "all_requirements_preserved": true,
+    "human_revoked_old35percent_stop_rule": true
+  },
+  "consumed": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/main-continuation-20261019-v1/SCOPE_REVIEW_CONSUMED_20261020_15.json",
+    "sha256": "118418ba50727cf1f6d4f6ab7a9d290b287c2f7a849c2c054001736f3d52c1db"
+  },
+  "input_verification": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/main-continuation-20261019-v1/SCOPE15_INPUT_VERIFICATION.json",
+    "sha256": "f4414c850fdc913ead26d2d925c97788981a63bcc9fb6a85c14b43da7409a0ca"
+  },
+  "baseline_head": "7dd2c4108ee49cc6e0feb7c715d786f8b11a99c2",
+  "baseline_operation14_source": "21ae4c6bc9d03aea8a79bf784d9873ebdaf1c903",
+  "baseline_operation14_request_sha256": "1d23fc80980b0269bece376230d3722892355b725e217f7644e5b519b8230970",
+  "baseline_operation14_manifest_sha256": "f93e490bb0da5fb7e676538ec29e73aa56aacd388b574351de008b1d61ea8602",
+  "immutable_RTL_inputs": {
+    "competition/deepeye/fpga/control3d/deepeye_atomic_pwm.sv": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+    "competition/deepeye/fpga/control3d/deepeye_pwm_coherent_capture.sv": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456"
+  },
+  "independent_findings": [
+    {
+      "id": "S15-APPLICATION-TIMING",
+      "result": "sufficiently specified",
+      "reason": "Op12 consumes old pending on A0, updates active context/PWM/applied after A0; wrapper observes those on O=A0+1. Old pending forbids T at A0. A possible new T on O has higher priority and prevents opening the superseded application. No use of accepted as applied, private phase or hierarchy required."
+    },
+    {
+      "id": "S15-TRANSFER-ISOLATION",
+      "result": "sufficiently specified",
+      "reason": "H includes current T as well as pending/STOP/reset/not-running. It suppresses old external handshakes before T, including illegal rejected attempts, and directly flushes capture. Recovery waits for another actual legal application. Same tag/tuple reuse never substitutes for this boundary."
+    },
+    {
+      "id": "S15-NO-COMBINATIONAL-LOOP",
+      "result": "sufficiently specified",
+      "reason": "capture_stop/rearm use wrapper/generator state and inputs only. They do not depend on capture out_valid, equal or mismatch. The abort qualifier inside raw14 therefore does not feed itself. c_out_ready influences only sequential slot retirement, with no combinational bypass."
+    },
+    {
+      "id": "S15-RAW-CONTEXT-SEPARATION",
+      "result": "sufficiently specified",
+      "reason": "Only sample_levels enters raw measurement. Expected tuple/tag latches actual generator active ports at arm and is comparison-only. out_valid requires a matched completed raw slot in an eligible bound window; mismatching and unqualified residual fields cannot handshake."
+    },
+    {
+      "id": "S15-FAILURE-LATENCY",
+      "result": "sufficiently specified",
+      "reason": "A fault created after edge E immediately masks external validity through F or !c_armed. On E+1 wrapper closes W unless a higher-priority intentional boundary supersedes it; after W closes capture_stop flushes the raw state. No post-fault handshake is possible. A pre-edge matched old record may retire at E before the newly arising fault, exactly as the frozen local transport policy allows; no freshness is granted."
+    },
+    {
+      "id": "S15-RECOVERY",
+      "result": "sufficiently specified",
+      "reason": "Mismatch/code1 closes on observation; every fault closes W and prevents automatic raw14 recovery from requalifying output. Only a new actual application opens another baseline. code7 is a defensive invariant, not claimed normally reachable coverage; normal disarm by witness overflow is handled by its higher-priority raw fault."
+    },
+    {
+      "id": "S15-ELIGIBILITY-WITNESS",
+      "result": "sufficiently specified",
+      "reason": "Generator period1/high0/full legal behavior stays unchanged. Those applications have no R/F/R measurement and emit code6. Eligible tuples may still fail to fit a small local witness namespace. WITNESS_W2 permits external R0=1/R1=3 for P2, whereas high-baseline loopback needs local2..4 and must exhaust without a record."
+    },
+    {
+      "id": "S15-LITERAL-EXAMPLES",
+      "result": "independently reconciled against immutable inputs",
+      "reason": "Independent sample example after baseline edge3: actual R0 edge5, falls6/7/6 and R1 edge8 give local2..5, P3,H1/2/1; earliest handshake9. Actual loopback captures previous registered PWM and gives R0 edge6/R1 edge9 instead. These are deliberately different observed input schedules."
+    },
+    {
+      "id": "S15-ACCEPTANCE-COVERAGE",
+      "result": "sufficient for proceeding to implementation",
+      "reason": "Counts are1394 parameter-configuration legal tuples,450 measurable and944 unmeasurable, not globally unique numeric tuples across widths. Independent pre-author command/event and sample/index oracle, T-ready conflicts, same-tag boundaries, incorrect samples, full16bit boundaries, bounded32/64, explicit invalid wrapper diagnostics and actual public-port mutant rejection are required. No scope claim equals implementation acceptance."
+    }
+  ],
+  "blocking_scope_defects": [],
+  "scope_revision_required": false,
+  "authorization": {
+    "executor_count": 1,
+    "route": "existing API-key DeepSeek Flash",
+    "effort": "max fixed",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1",
+    "worker_ownership": [
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/control3d/deepeye_pwm_applied_capture.sv",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tools/control3d/run_pwm_applied_capture.py",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author"
+    ],
+    "main_ownership": [
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\main",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_applied_capture.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_applied_capture.py",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\handoffs\\b\\B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-applied-capture-20261020-15"
+    ],
+    "technical_decisions_owner": "existing sole product quality main",
+    "activation": "Only after the product App actually consumes this completed original-message CONTINUE and hashes; reuse a duplicate stable work result if admission reports one, never spawn a second executor.",
+    "main_quality_gate": "Freeze independent model/inputs before reading author15 implementation; author15 must not read main oracle. Independently inspect exact terminal bytes and actual logs/mutant counterexamples before publication. Main repairs worker-owned files only after terminal release.",
+    "not_authorized": [
+      "another product root or App/native context",
+      "another work item or helper worker",
+      "changes to immutable08-14 source/interfaces/tests/evidence or protected dirty codec input",
+      "standalone replay of historical suites/publications",
+      "child commits/push/peer/group or credentials/service/config/SQL/queue/board operations"
+    ]
+  },
+  "required_delivery": {
+    "operation_id": "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+    "publication": "new source/request/manifest on existing PR30 after sole product main independent review",
+    "logging": "Fresh15 private helper/output phase; explicit op15/work15 binding before first API; every request/response unique; unchanged shared legacy client; long-path verification by blob OID; unknown/stale write outcomes reconciled without side-effect replay.",
+    "failure_retention": "Preserve author/main preparations, failures, originals and corrections. Historical PUB13 missing15 raw404 bytes and AUTHOR14 temporary preparation gap remain disclosed, never reconstructed.",
+    "terminal_event": "Return exact commits/request/manifest/source and evidence hashes through supported original coordinator task/v1 completion event; no periodic polling, empty READY, timeout resubmission, Goal or automation."
+  },
+  "acceptance_boundary": {
+    "current_stage": "scope authorized only; op15 implementation/simulation not_run",
+    "formal_cards": "all29 not_run/unaccepted",
+    "G05_B06_R03": "not_run/unaccepted",
+    "physical_board": "A only; no access on B",
+    "synthesis_implementation": "blocked while Vivado unavailable",
+    "CDC_RDC_board_system": "not_run",
+    "public_ABI_TRACE_type7_register_HWH_BOOT": "not_opened",
+    "clock_physical_source_capture": "not_accepted",
+    "source_session_request_control_epoch_capture_seq_timestamp_freshness_TTL_profile_curvature_motion_authority": "not_granted",
+    "both_control_paths_and_full3D_contract": "all requirements preserved, no system acceptance",
+    "diagnostic_codes_and_bit_mapping": "internal candidate semantics only"
+  },
+  "feedback_boundary": "Five recorded raw GET responses verified; PR30 six comments/zero reviews with last6273192999. A PR24/C PR25 head metadata is not review or acceptance. Prior op14 peer queued messages are not resent or upgraded to delivered.",
+  "coordinator_actions": "Own evidence writes only, no child/product mutation. Complete this turn to release gateway; same task/thread remains available for substantive result events."
+}

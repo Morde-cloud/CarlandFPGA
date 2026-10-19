@@ -1,0 +1,36 @@
+# vsim -c -l D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-applied-capture-20261020-15\author\dryrun-author-20261020-15-a\logs\m2-same-tag-state-retained-g13.transcript.txt -wlf D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-applied-capture-20261020-15\author\dryrun-author-20261020-15-a\logs\m2-same-tag-state-retained-g13.wlf -do "run -all; quit -f" tb_pwm_applied_capture -gTEST_GROUP=13 -gTAG_W=8 -gLOOPBACK=0 -gWITNESS_W=8 -gCOUNT_W=4 
+# Start time: 03:48:43 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_pwm_applied_capture(fast)
+# run -all
+# GROUP_BEGIN same_tag_reapplication_complete_post_boundary
+# HANDSHAKE sample=10 period=3 h0=1 h1=2 h2=1 start=1 end=4 tag=61
+# MISMATCH sample=10 label=same_tuple_T_suppresses_old_valid expected=0 actual=1
+# MISMATCH sample=10 label=same_tuple_T_no_old_handshake expected=0 actual=1
+# HANDSHAKE sample=19 period=3 h0=1 h1=2 h2=1 start=1 end=4 tag=61
+# HANDSHAKE sample=29 period=3 h0=1 h1=2 h2=1 start=1 end=4 tag=62
+# MISMATCH sample=29 label=same_tag_different_tuple_T_suppresses_old_valid expected=0 actual=1
+# MISMATCH sample=29 label=same_tag_different_tuple_T_no_old_handshake expected=2 actual=3
+# GROUP_END same_tag_reapplication_complete_post_boundary cases=2 samples=36 assertions=252 mismatches=4 records=4 raw_faults=0 failure_events=0 window_starts=4 handshakes=3
+# TB_STATS groups=1 cases=2 samples=36 assertions=252 records=4 raw_faults=0 failure_events=0 window_starts=4 handshakes=3 mismatches=4
+# TB_FAIL group=13 mismatches=4
+# ** Fatal: TB_FAIL public-port self-check
+#    Time: 386 ns  Scope: tb_pwm_applied_capture File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/dryrun-author-20261020-15-a/source_snapshot/tb.sv Line: 1291
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/dryrun-author-20261020-15-a/source_snapshot/tb.sv(1291)
+#    Time: 386 ns  Iteration: 0  Instance: /tb_pwm_applied_capture
+# End time: 03:48:43 on Oct 20,2026, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0

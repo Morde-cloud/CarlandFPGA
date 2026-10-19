@@ -1,0 +1,254 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tools/control3d/run_pwm_applied_capture.py
+@@
+         "transcript_sha256": sha256_file(log_file) if log_file.is_file() else None,
+         "wlf": str(wlf_file),
+         "wlf_sha256": sha256_file(wlf_file) if wlf_file.is_file() else None,
+     }
++
++
++def input_hash_report() -> dict:
++    report = {}
++    for key, expected in (("atomic", ATOMIC_SHA), ("capture", CAPTURE_SHA)):
++        actual = sha256_file(FILES[key])
++        report[key] = {
++            "path": str(FILES[key]),
++            "expected": expected,
++            "actual": actual,
++            "match": actual == expected,
++        }
++    return report
++
++
++def protected_report() -> dict:
++    report = {
++        "path": str(PROTECTED),
++        "expected": PROTECTED_SHA,
++        "present": PROTECTED.is_file(),
++    }
++    if report["present"]:
++        actual = sha256_file(PROTECTED)
++        report["actual"] = actual
++        report["match"] = actual == PROTECTED_SHA
++    return report
++
++
++def make_mutant(spec: dict, rtl_text: str, destination: Path) -> list[dict]:
++    text = rtl_text
++    replacements = []
++    for old, new in spec["replacements"]:
++        count = text.count(old)
++        if count != 1:
++            raise RuntimeError(
++                f"{spec['id']}: expected exactly one occurrence, found {count}: {old[:96]!r}"
++            )
++        text = text.replace(old, new)
++        replacements.append({"old": old, "new": new, "occurrences": count})
++    destination.parent.mkdir(parents=True, exist_ok=False)
++    destination.write_text(text, encoding="utf-8", newline="\n")
++    return replacements
++
++
++def compile_summary(info: dict) -> dict:
++    return {
++        "label": info["label"],
++        "compiled": info["compiled"],
++        "vlib_exit": info["vlib"]["exit"],
++        "vlog_exit": info["vlog"]["exit"],
++        "vlib_stdout": info["vlib"]["stdout"],
++        "vlib_stderr": info["vlib"]["stderr"],
++        "vlog_stdout": info["vlog"]["stdout"],
++        "vlog_stderr": info["vlog"]["stderr"],
++    }
++
++
++def positive_entry(spec: dict, result: dict) -> dict:
++    parsed = result["parsed"]
++    stats = parsed["stats"]
++    passed = bool(
++        parsed["passed"]
++        and not parsed["failed"]
++        and stats is not None
++        and stats["mismatches"] == 0
++    )
++    entry = {
++        "id": spec["id"],
++        "group": spec["group"],
++        "generator": {
++            "COUNT_W": spec["count_w"],
++            "WITNESS_W": spec["witness_w"],
++            "TAG_W": spec["tag_w"],
++            "LOOPBACK": spec["loopback"],
++        },
++        "passed": passed,
++        "exit": result["record"]["exit"],
++        "stats": stats,
++        "mismatch_labels": parsed["mismatch_labels"],
++        "code7_observed": parsed["code7_observed"],
++        "stdout": result["record"]["stdout"],
++        "stderr": result["record"]["stderr"],
++        "transcript": parsed["transcript"],
++        "transcript_sha256": parsed["transcript_sha256"],
++        "wlf": parsed["wlf"],
++        "wlf_sha256": parsed["wlf_sha256"],
++    }
++    if not passed:
++        entry["stdout_tail"] = parsed["stdout_tail"]
++        entry["stderr_tail"] = parsed["stderr_tail"]
++    return entry
++
++
++def run_positive_suite(work: Path, logs: Path, commands: list[dict],
++                       tools: dict[str, str], timeout: float) -> tuple[list[dict], dict]:
++    results = []
++    for spec in POSITIVE_RUNS:
++        result = run_tb(
++            work / "positive", logs, commands, tools,
++            spec["id"], spec["group"], spec["count_w"], spec["witness_w"],
++            spec["tag_w"], spec["loopback"], timeout,
++        )
++        results.append(positive_entry(spec, result))
++    keys = ("cases", "samples", "assertions", "records", "raw_faults",
++            "failure_events", "window_starts", "handshakes", "mismatches")
++    totals = {key: sum((entry["stats"] or {}).get(key, 0) for entry in results)
++              for key in keys}
++    totals["scenarios"] = len(results)
++    totals["groups"] = len(results)
++    totals["passed_scenarios"] = sum(1 for entry in results if entry["passed"])
++    return results, totals
++
++
++def run_mutant_suite(out: Path, work: Path, logs: Path, commands: list[dict],
++                     tools: dict[str, str], snapshot: dict[str, Path],
++                     rtl_text: str, timeout: float) -> list[dict]:
++    results = []
++    for spec in MUTANT_SPECS:
++        mutant_dir = out / "mutants" / spec["id"]
++        mutant_path = mutant_dir / "deepeye_pwm_applied_capture.sv"
++        replacements = make_mutant(spec, rtl_text, mutant_path)
++        write_json(mutant_dir / "mutation.json", {
++            "id": spec["id"],
++            "description": spec["description"],
++            "source_path": str(mutant_path),
++            "sha256": sha256_file(mutant_path),
++            "replacements": replacements,
++        })
++        lib_parent, info = compile_design(
++            work, logs, commands, tools, mutant_path, snapshot["tb"],
++            snapshot["atomic"], snapshot["capture"], timeout, f"mutant-{spec['id']}",
++        )
++        entry = {
++            "id": spec["id"],
++            "description": spec["description"],
++            "source": str(mutant_path),
++            "sha256": sha256_file(mutant_path),
++            "replacements": replacements,
++            "compile": compile_summary(info),
++            "runs": [],
++        }
++        if not info["compiled"]:
++            results.append(entry)
++            continue
++        for run_spec in spec["runs"]:
++            name = f"{spec['id']}-g{run_spec['group']}"
++            result = run_tb(
++                lib_parent, logs, commands, tools, name, run_spec["group"],
++                run_spec["count_w"], run_spec["witness_w"], run_spec["tag_w"],
++                0, timeout,
++            )
++            parsed = result["parsed"]
++            stats = parsed["stats"]
++            labels = parsed["mismatch_labels"]
++            run_entry = {
++                "group": run_spec["group"],
++                "expect": run_spec["expect"],
++                "exit": result["record"]["exit"],
++                "passed": parsed["passed"],
++                "failed": parsed["failed"],
++                "stats": stats,
++                "mismatch_labels": labels,
++                "code7_observed": parsed["code7_observed"],
++                "stdout": result["record"]["stdout"],
++                "stderr": result["record"]["stderr"],
++                "transcript": parsed["transcript"],
++                "transcript_sha256": parsed["transcript_sha256"],
++                "wlf": parsed["wlf"],
++                "wlf_sha256": parsed["wlf_sha256"],
++            }
++            if run_spec["expect"] == "fail":
++                run_entry["rejected"] = bool(
++                    parsed["failed"]
++                    and not parsed["passed"]
++                    and stats is not None
++                    and stats["mismatches"] > 0
++                    and any(label in labels for label in run_spec["required_any"])
++                )
++            elif run_spec["expect"] == "pass_code7":
++                run_entry["demonstrated"] = bool(
++                    parsed["passed"]
++                    and not parsed["failed"]
++                    and stats is not None
++                    and stats["mismatches"] == 0
++                    and parsed["code7_observed"]
++                    and all(marker in (parsed["stdout_tail"] or "")
++                            for marker in run_spec["required_any"])
++                )
++            if not run_entry.get("rejected", run_entry.get("demonstrated", False)):
++                run_entry["stdout_tail"] = parsed["stdout_tail"]
++                run_entry["stderr_tail"] = parsed["stderr_tail"]
++            entry["runs"].append(run_entry)
++        results.append(entry)
++    return results
++
++
++def run_invalid_suite(work: Path, logs: Path, commands: list[dict],
++                      tools: dict[str, str], snapshot: dict[str, Path],
++                      timeout: float) -> tuple[dict, list[dict]]:
++    lib_parent, info = compile_design(
++        work, logs, commands, tools, snapshot["rtl"], snapshot["tb"],
++        snapshot["atomic"], snapshot["capture"], timeout, "invalid",
++    )
++    results = []
++    if info["compiled"]:
++        for spec in INVALID_RUNS:
++            result = run_invalid(lib_parent, logs, commands, tools, spec, timeout)
++            result["id"] = spec["id"]
++            results.append(result)
++    return compile_summary(info), results
++
++
++def tree_records(root: Path, excluded: set[str]) -> tuple[list[dict], int]:
++    records = []
++    total_bytes = 0
++    for path in sorted(root.rglob("*")):
++        if not path.is_file():
++            continue
++        relative = path.relative_to(root).as_posix()
++        if relative in excluded:
++            continue
++        size = path.stat().st_size
++        total_bytes += size
++        records.append({
++            "path": relative,
++            "bytes": size,
++            "sha256": sha256_file(path),
++        })
++    return records, total_bytes
++
++
++def tree_sha256(records: list[dict]) -> str:
++    digest = hashlib.sha256()
++    for record in records:
++        digest.update(record["path"].encode("utf-8"))
++        digest.update(b"\x00")
++        digest.update(record["sha256"].encode("ascii"))
++        digest.update(b"\n")
++    return digest.hexdigest()
++
++
++def relative_to_worktree(path: Path) -> str:
++    try:
++        return path.resolve().relative_to(WORKTREE).as_posix()
++    except ValueError:
++        return str(path)
+*** End Patch

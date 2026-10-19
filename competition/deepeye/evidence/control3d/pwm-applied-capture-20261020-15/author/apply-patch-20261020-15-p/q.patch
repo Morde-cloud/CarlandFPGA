@@ -1,0 +1,46 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv
+@@
+     task automatic group_code7_probe;
+@@
+     endtask
++
++    task automatic group_constant_and_missing_edges;
++        integer n;
++        begin
++            group_begin("constant_input_and_missing_edges");
++            cases = cases + 1;
++            reset_dut();
++            start_application(3, 1, 2, 1, 8'hA1, 3'b000, 1'b1,
++                              "constant_window_start");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            for (n = 0; n < 6; n = n + 1) begin
++                cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            end
++            expect_no_record("constant_high_no_record");
++            check64(raw_fault_events, 4'b0000, "constant_high_no_fault");
++            cycle(1'b0, 1'b1, 1'b0, 1'b1, 3'b000);
++            check_unbound("constant_stop_closes");
++            check64(failure_event, 1'b0, "constant_stop_not_fault");
++            check64(failure_code, 3'd0, "constant_stop_code0");
++            start_application(3, 1, 2, 1, 8'hA1, 3'b000, 1'b1,
++                              "missing_edge_recovery");
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b111);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b010);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            cycle(1'b0, 1'b0, 1'b0, 1'b0, 3'b000);
++            expect_no_record("missing_closing_edge_no_record");
++            check64(raw_fault_events, 4'b0000, "missing_closing_no_fault");
++            cycle(1'b0, 1'b1, 1'b0, 1'b1, 3'b000);
++            check_unbound("missing_edge_stop_closes");
++            check64(failure_event, 1'b0, "missing_edge_stop_not_fault");
++            group_end("constant_input_and_missing_edges");
++        end
++    endtask
+ 
+     // PATCH_INSERT_TASKS
+@@
+             14: group_control_at_handshake();
++            15: group_constant_and_missing_edges();
+             20: group_t_boundary(1'b0, "T_boundary_public_control");
+*** End Patch

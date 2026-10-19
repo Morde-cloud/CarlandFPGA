@@ -1,0 +1,133 @@
+{
+  "acceptance": "Author-side local ModelSim simulation evidence only. Main acceptance, synthesis, implementation, CDC/RDC, board/system and all29 formal cards are not claimed.",
+  "baseline_commit": "7dd2c4108ee49cc6e0feb7c715d786f8b11a99c2",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "contract_revision": 1,
+  "design_pin": "1011259415a0916054eb580687612580bc1e5f09",
+  "exhaustive_small_domain": {
+    "eligible_sampled_records": 450,
+    "groups": [
+      "exhaustive_count_w2_all_legal_tuples",
+      "exhaustive_count_w3_all_legal_tuples"
+    ],
+    "legal_command_triples": 1394
+  },
+  "failures": [],
+  "five_paths": {
+    "candidate": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\pwm_applied_capture_candidate.md",
+      "bytes": 13179,
+      "path": "competition/deepeye/fpga/control3d/pwm_applied_capture_candidate.md",
+      "sha256": "2b0d91f5799808f42928cea8ca3c7a430c49265ed8681ec3c7ecdedc7de5f005"
+    },
+    "evidence_author_dir": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author",
+      "bytes": 39646396,
+      "excluded_from_tree": [
+        "dryrun-author-20261020-15-c/EVIDENCE_TREE_MANIFEST.json",
+        "dryrun-author-20261020-15-c/TERMINAL_MANIFEST.json",
+        "dryrun-author-20261020-15-c/TERMINAL_MANIFEST.sha256.txt"
+      ],
+      "file_count": 1637,
+      "path": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author",
+      "tree_manifest": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/dryrun-author-20261020-15-c/EVIDENCE_TREE_MANIFEST.json",
+      "tree_manifest_sha256": "9c6945a84e93a7678bad9df9ee9d4e9756900ef1bd079cdca80c93c1ec09ba2f",
+      "tree_sha256": "0c6aea7a15fc8d9c47b0996a1191e4e8c4aa012632a62cffa65c447212f914af"
+    },
+    "rtl": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_applied_capture.sv",
+      "bytes": 15841,
+      "path": "competition/deepeye/fpga/control3d/deepeye_pwm_applied_capture.sv",
+      "sha256": "d8c33ebad98acca113e18dbc5831643646663b946714af139d8b1637047356f3"
+    },
+    "runner": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\run_pwm_applied_capture.py",
+      "bytes": 40481,
+      "path": "competition/deepeye/tools/control3d/run_pwm_applied_capture.py",
+      "sha256": "cb1b3aeb1cd6c8dfbd40d2f906102be8a79d5e1d48f30102103cdd08863ac472"
+    },
+    "tb": {
+      "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_pwm_applied_capture.sv",
+      "bytes": 61844,
+      "path": "competition/deepeye/tests/rtl/control3d/tb_pwm_applied_capture.sv",
+      "sha256": "71c51481ddff859ea427fade46f2c27507dc8a1e9eea9fd74fb10e6acc564133"
+    }
+  },
+  "generated_utc": "2026-10-19T19:52:21.445000+00:00",
+  "input_hashes": {
+    "atomic": {
+      "actual": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+      "expected": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+      "match": true,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv"
+    },
+    "capture": {
+      "actual": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+      "expected": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+      "match": true,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_coherent_capture.sv"
+    }
+  },
+  "limitations": [
+    "Author-side local ModelSim simulation only; no main acceptance is claimed.",
+    "Actual digital loopback is supplemental and explicitly named; the primary source is independent sample_levels schedules.",
+    "Code7 is demonstrated only on a deliberately faulty wrapper copy because the correct composition does not reach it.",
+    "Maximum COUNT_W=32 and WITNESS_W=64 coverage is bounded observation, not a claim of full traversal.",
+    "The 16-bit period 65535 record is fully observed; 65536 is an overflow observation, not a timing or frequency claim.",
+    "Mutant rejection is public-port behavioral evidence, not proof against every possible fault.",
+    "No Vivado synthesis or implementation was run because the toolchain is unavailable."
+  ],
+  "not_run": [
+    "synthesis",
+    "implementation",
+    "place-and-route",
+    "static timing",
+    "CDC/RDC",
+    "physical board operation",
+    "system integration",
+    "all29 formal acceptance cards",
+    "G05 applied-command/full-cycle/system binding",
+    "public register/TRACE type7/HWH/BOOT ABI",
+    "physical frequency, clock, source, TTL, profile, curvature or motion authority"
+  ],
+  "operation_id": "B-DEEPEYE-PWM-APPLIED-CAPTURE-20261020-15",
+  "positive_totals": {
+    "assertions": 100530,
+    "cases": 1430,
+    "failure_events": 953,
+    "groups": 19,
+    "handshakes": 458,
+    "mismatches": 0,
+    "passed_scenarios": 19,
+    "raw_faults": 6,
+    "records": 475,
+    "samples": 208656,
+    "scenarios": 19,
+    "window_starts": 506
+  },
+  "protected_dirty": {
+    "actual": "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8",
+    "expected": "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8",
+    "match": true,
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\handoffs\\b\\B-DEEPEYE-CODEC-20261016-01\\input.json",
+    "present": true
+  },
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "result": "PASS",
+  "run_summary": {
+    "absolute_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-applied-capture-20261020-15\\author\\dryrun-author-20261020-15-c\\RUN_SUMMARY.json",
+    "path": "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/dryrun-author-20261020-15-c/RUN_SUMMARY.json",
+    "sha256": "8d2244f131438717a5938eb05992d416ada47c7de869a0e5ea8237fdda7ed026"
+  },
+  "scenario_counts": {
+    "invalid_parameter_scenarios": 9,
+    "mutant_runs": 5,
+    "positive_scenarios": 19,
+    "total": 33
+  },
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "warnings": [],
+  "work_id": "B-PWM-APPLIED-CAPTURE-RTL-20261020-15-v1"
+}

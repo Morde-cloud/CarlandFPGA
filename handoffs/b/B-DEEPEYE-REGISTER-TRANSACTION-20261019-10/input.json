@@ -1,0 +1,122 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-REGISTER-TRANSACTION-20261019-10",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "de4e8bdd61e0126988b42c36b9e4e89cabbc3223",
+    "test_steps": [
+      "Run the three commands in competition/deepeye/evidence/control/register-transaction-20261019-10/main/README.md",
+      "Require70 unit tests,12 independent bus methods and4 adversarial methods; inspect raw logs and negative control",
+      "Verify H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; no0x2c or hardware I/O"
+    ],
+    "expected_result": "Bounded offline software reference passes; public ABI, RTL/CDC/board/system and29 formal cards remain not_run. Original worker failures/provenance limits remain explicit."
+  },
+  "artifacts": [
+    "competition/deepeye/golden/control/register_transaction_reference.py",
+    "competition/deepeye/golden/control/REGISTER_TRANSACTION_REFERENCE.md",
+    "competition/deepeye/tests/control/test_register_transaction.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/.gitattributes",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-owner-decision.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-review/comment.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-review/findings.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-review/manifest.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-review/readback.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-review/receipt.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A-review/selected-result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/A_REVIEW_RECONCILED.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/INTEGRATION.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/MAIN_ACCEPTANCE.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/MAIN_OBSERVATION01.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/MAIN_SPEC.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/README.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/corrected-worker-regression/command.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/corrected-worker-regression/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/corrected-worker-regression/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/corrected-worker-regression/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-adversarial/command.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-adversarial/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-adversarial/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-adversarial/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-main/command.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-main/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-main/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-main/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-worker/command.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-worker/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-worker/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-worker/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/main-worker-original/command.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/main-worker-original/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/main-worker-original/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/main-worker-original/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/main_adversarial.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/main_review.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/original_worker_REGISTER_TRANSACTION_REFERENCE.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/original_worker_register_transaction_reference.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/original_worker_test_register_transaction.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/adversarial.stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/adversarial.stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/main.stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/main.stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/worker.stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/portable/worker.stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-bus-review/command.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-bus-review/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-bus-review/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-bus-review/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-main-observation/observed_reference.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-main-observation/result.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-main-observation/stderr.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/wip-main-observation/stdout.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/worker-raw-map.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/worker-raw/returncode.txt",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/worker-raw/run_metadata.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/worker-raw/stderr.bin",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/worker-raw/stdout.bin",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/main/worker-terminal.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/RESULT.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/RESULT.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/STARTED.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/apply_patch_bridge.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/artifact_hashes.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/collect_evidence.py",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/final_manifest.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/pin_verification.json",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/run_offline_tests.py",
+    "competition/deepeye/golden/control/register_semantics_candidate.json",
+    "competition/deepeye/golden/control/register_semantics_examples.json",
+    "competition/deepeye/golden/control/REGISTER_SEMANTICS_CANDIDATE.md"
+  ],
+  "stages": {
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "B05": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "offline_reference": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/control/register-transaction-20261019-10/main/final-main/stdout.txt"
+    }
+  }
+}

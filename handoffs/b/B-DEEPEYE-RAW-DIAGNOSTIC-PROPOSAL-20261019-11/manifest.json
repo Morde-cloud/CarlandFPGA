@@ -1,0 +1,96 @@
+{
+  "artifacts": [
+    "competition/deepeye/golden/control/raw_capture_diagnostic_candidate.json",
+    "competition/deepeye/golden/control/RAW_CAPTURE_DIAGNOSTIC_CANDIDATE.md",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/.gitattributes",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/README.md",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/diagnostic_review.py",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/result.json",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stderr.txt",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stdout.txt",
+    "handoffs/b/B-DEEPEYE-REGISTER-TRANSACTION-20261019-10/manifest.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/.gitattributes": {
+      "sha256": "cdbe181deee63cd6b76a34f4c3b69bc306a09375c256444c313f7e2e0080521d",
+      "size": 16
+    },
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/README.md": {
+      "sha256": "93ca04b3a5b6dedd1757c9be61e9ec8908bddb13eeae7f7175d9af2314363f76",
+      "size": 1207
+    },
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/diagnostic_review.py": {
+      "sha256": "16e53cdfb76d6024a9576f7d015e03207c8550fe7ae1b2a3badb723b9beb7158",
+      "size": 3594
+    },
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/result.json": {
+      "sha256": "5f9022e0985f5162b2ffe589e561a0b430abd0d212d6b3b105accfad49c2b523",
+      "size": 1524
+    },
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stdout.txt": {
+      "sha256": "ebe274ca7320fbb7155667025a492116ff3b160c5c5f216415de96d2940affbc",
+      "size": 531
+    },
+    "competition/deepeye/golden/control/RAW_CAPTURE_DIAGNOSTIC_CANDIDATE.md": {
+      "sha256": "a9c9a52f70745462450b477654964fd3d35df338a533151e7aba01105f6bd9fd",
+      "size": 6608
+    },
+    "competition/deepeye/golden/control/raw_capture_diagnostic_candidate.json": {
+      "sha256": "0237b3d57808965ac0367e15c910b9230a2072a43449a4960bd85c8a5e0760a5",
+      "size": 17925
+    },
+    "handoffs/b/B-DEEPEYE-REGISTER-TRANSACTION-20261019-10/manifest.json": {
+      "sha256": "f0c8acd38e3b5c5c6aa90a8aab91a26f09ec6010ca9d4462569e47e5f38dd6bf",
+      "size": 25787
+    }
+  },
+  "request": {
+    "code_commit": "9d8437151359eabec66342985506f13d98ce7b5a",
+    "expected_result": "Descriptor/arithmetic checks pass only; A approval required before extension RTL/register acceptance. No hardware execution requested and29 formal cards remain not_run.",
+    "operation_id": "B-DEEPEYE-RAW-DIAGNOSTIC-PROPOSAL-20261019-11",
+    "requester": "node-b",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Run the descriptor audit command in competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/README.md",
+      "Review separate new-aperture offsets/HWH matching, no0x2c access, equal64-bit three-channel counts, rollover/revocation and no AI ingress",
+      "Verify H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+    ]
+  },
+  "request_hash": "b8cf87f58739730a601f72625945246cd5f898f7911274f7bf8d5345c1a0f9e9",
+  "schema_version": 1,
+  "stages": {
+    "B05": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "descriptor_arithmetic": {
+      "log": "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stdout.txt",
+      "status": "passed"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-RAW-DIAGNOSTIC-PROPOSAL-20261019-11",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "9d8437151359eabec66342985506f13d98ce7b5a",
+    "test_steps": [
+      "Run the descriptor audit command in competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/README.md",
+      "Review separate new-aperture offsets/HWH matching, no0x2c access, equal64-bit three-channel counts, rollover/revocation and no AI ingress",
+      "Verify H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+    ],
+    "expected_result": "Descriptor/arithmetic checks pass only; A approval required before extension RTL/register acceptance. No hardware execution requested and29 formal cards remain not_run."
+  },
+  "artifacts": [
+    "competition/deepeye/golden/control/raw_capture_diagnostic_candidate.json",
+    "competition/deepeye/golden/control/RAW_CAPTURE_DIAGNOSTIC_CANDIDATE.md",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/.gitattributes",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/README.md",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/diagnostic_review.py",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/result.json",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stderr.txt",
+    "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stdout.txt",
+    "handoffs/b/B-DEEPEYE-REGISTER-TRANSACTION-20261019-10/manifest.json"
+  ],
+  "stages": {
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "B05": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "descriptor_arithmetic": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/control/raw-diagnostic-proposal-20261019-11/stdout.txt"
+    }
+  }
+}

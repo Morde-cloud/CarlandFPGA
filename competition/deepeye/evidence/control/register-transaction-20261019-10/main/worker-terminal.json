@@ -1,0 +1,51 @@
+[
+  {
+    "job_id": "child-5359df93a4e5482c8e06d7b012394546",
+    "instance_id": "deepseek-b-31",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "route": "deepseek",
+    "work_id": "B-REGISTER-TRANSACTION-MODEL-20261019-10-v1",
+    "ownership": [
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control/register-transaction-20261019-10/worker",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/golden/control/register_transaction_reference.md",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/golden/control/register_transaction_reference.py",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_register_transaction.py"
+    ],
+    "native_agent_id": null,
+    "status": "completed",
+    "terminal": true,
+    "stale": false,
+    "result": {
+      "thread_id": "01a15303-84cb-76b1-b9d4-ab0e5abe4f49",
+      "turn": {
+        "id": "01a15303-85b0-7bf3-b7a9-5d87f4cd1ce8",
+        "rootTurnId": "01a15303-85b0-7bf3-b7a9-5d87f4cd1ce8",
+        "items": [
+          {
+            "type": "agentMessage",
+            "id": "540ae981-832b-44c3-a020-58a70dd898c9",
+            "text": "**Status**\nBounded offline register-transaction reference is complete in worktree `D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014` at recorded base `433db2a82854a669778eb8c3cd35c309623a087e`. Software-only; no board, RTL, MMIO, AXI, service, credential, network, Git, message or delegation action.\n\n**Verification**\n- Requirements-only canonical SHA `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804` matches; H01-H15 present in order.\n- Main spec, scope JSON/MD, B07 descriptor/doc/examples and owner decision all match `STARTED.json` pins.\n- Commit IDs are recorded deployment pins; no Git command was executed.\n\n**Artifacts**\n- `competition/deepeye/golden/control/register_transaction_reference.py:1` — `b5e4ee6cdbde370a5b837b6f16b7c4d9962f4a0899092f4d267609baa887ac1a`, 1180 lines.\n- `competition/deepeye/tests/control/test_register_transaction.py:1` — `39eb1832fb5171ee9f58af37e46d4903ac3b49b7834e25f798cb06894f2023b1`, 1191 lines.\n- `competition/deepeye/golden/control/REGISTER_TRANSACTION_REFERENCE.md:1` — `2131534dc1e8d4d0fdf06c5f92c4ab1d47feebb94caa9632ba12efbfe11f5c80`, 382 lines.\n- `competition/deepeye/evidence/control/register-transaction-20261019-10/worker/RESULT.json:1` — final result, hash `10ba79dfbddf1f0f490b5682e1e149e83f4500f311a96d34f7e2079bb9b0bb82`.\n- `competition/deepeye/evidence/control/register-transaction-20261019-10/worker/final_manifest.json:1` — hashes all 15 source/result/log files; no hash mismatches.\n\n**Tests**\n`D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_register_transaction.py -v`\nResult: `Ran 70 tests`, `OK`, exit code `0`, 0 failures/errors. Raw streams are in `worker/logs/stdout.bin` (0 bytes) and `worker/logs/stderr.bin` (9826 bytes, SHA `0392cbc85fa390e7c8b52e16daca8c4e74bccfa7c6f29673bd51fde704e494a6`; unittest reports on stderr).\n\n**Fixes / Audit**\n- Earlier `_latch` attribute/method shadowing was fixed by renaming the method to `_latch_snapshot`; the original traceback was not retained in `worker/`, and current LATCH/RELEASE/conflict tests pass.\n- Evidence collector’s LF-only status regex misclassified a passing CRLF run; corrected and rerun successfully.\n- Audited the flagged `complete_capture`/coherent-latch concern: no public path exists without a preceding `begin_capture`, which revokes the latch and clears tickets. No source change needed.\n- Ratio-valid revocation is covered through `_gain_ratio_valid` and status bit 9; no source change needed.\n\n**Open Semantics**\nActive CONFIG/enabled retention across `set_context`, capture under fault/stop, pending discard on new capture, RELEASE invalidation, one-attempt ticket consumption, reset high-water/resume, and bit-2-until-RELEASE are documented as fixture choices or unresolved A-owned questions in the reference document. Full ABI, clock, queue, diagnostic-bank and board acceptance remain A-owned.\n\nNo blockers; main owns independent acceptance.",
+            "phase": "final_answer",
+            "memoryCitation": null,
+            "delivery": null,
+            "questions": null
+          }
+        ],
+        "itemsView": "summary",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1792394102,
+        "completedAt": 1792395711,
+        "durationMs": 1609612
+      },
+      "text": "**Status**\nBounded offline register-transaction reference is complete in worktree `D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014` at recorded base `433db2a82854a669778eb8c3cd35c309623a087e`. Software-only; no board, RTL, MMIO, AXI, service, credential, network, Git, message or delegation action.\n\n**Verification**\n- Requirements-only canonical SHA `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804` matches; H01-H15 present in order.\n- Main spec, scope JSON/MD, B07 descriptor/doc/examples and owner decision all match `STARTED.json` pins.\n- Commit IDs are recorded deployment pins; no Git command was executed.\n\n**Artifacts**\n- `competition/deepeye/golden/control/register_transaction_reference.py:1` — `b5e4ee6cdbde370a5b837b6f16b7c4d9962f4a0899092f4d267609baa887ac1a`, 1180 lines.\n- `competition/deepeye/tests/control/test_register_transaction.py:1` — `39eb1832fb5171ee9f58af37e46d4903ac3b49b7834e25f798cb06894f2023b1`, 1191 lines.\n- `competition/deepeye/golden/control/REGISTER_TRANSACTION_REFERENCE.md:1` — `2131534dc1e8d4d0fdf06c5f92c4ab1d47feebb94caa9632ba12efbfe11f5c80`, 382 lines.\n- `competition/deepeye/evidence/control/register-transaction-20261019-10/worker/RESULT.json:1` — final result, hash `10ba79dfbddf1f0f490b5682e1e149e83f4500f311a96d34f7e2079bb9b0bb82`.\n- `competition/deepeye/evidence/control/register-transaction-20261019-10/worker/final_manifest.json:1` — hashes all 15 source/result/log files; no hash mismatches.\n\n**Tests**\n`D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe -B -X utf8 -m unittest discover -s competition/deepeye/tests/control -p test_register_transaction.py -v`\nResult: `Ran 70 tests`, `OK`, exit code `0`, 0 failures/errors. Raw streams are in `worker/logs/stdout.bin` (0 bytes) and `worker/logs/stderr.bin` (9826 bytes, SHA `0392cbc85fa390e7c8b52e16daca8c4e74bccfa7c6f29673bd51fde704e494a6`; unittest reports on stderr).\n\n**Fixes / Audit**\n- Earlier `_latch` attribute/method shadowing was fixed by renaming the method to `_latch_snapshot`; the original traceback was not retained in `worker/`, and current LATCH/RELEASE/conflict tests pass.\n- Evidence collector’s LF-only status regex misclassified a passing CRLF run; corrected and rerun successfully.\n- Audited the flagged `complete_capture`/coherent-latch concern: no public path exists without a preceding `begin_capture`, which revokes the latch and clears tickets. No source change needed.\n- Ratio-valid revocation is covered through `_gain_ratio_valid` and status bit 9; no source change needed.\n\n**Open Semantics**\nActive CONFIG/enabled retention across `set_context`, capture under fault/stop, pending discard on new capture, RELEASE invalidation, one-attempt ticket consumption, reset high-water/resume, and bit-2-until-RELEASE are documented as fixture choices or unresolved A-owned questions in the reference document. Full ABI, clock, queue, diagnostic-bank and board acceptance remain A-owned.\n\nNo blockers; main owns independent acceptance.",
+      "reasoning_effort": "max",
+      "model": "deepseek-flash",
+      "provider": "deepseek"
+    },
+    "error": null,
+    "created_at": "2026-10-19T07:15:00.705135Z",
+    "updated_at": "2026-10-19T07:41:51.838861Z"
+  }
+]

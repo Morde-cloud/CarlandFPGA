@@ -1,0 +1,31 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-REGISTER-TRANSACTION-20261019-10",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "decision": "accepted bounded offline reference after main correction; no formal card acceptance",
+  "source_sha256": "d2fad9f6ff4602e896e60d6c30050d4c1f65d07be82dc96965d9f274e0305718",
+  "worker_tests": 70,
+  "independent_main_methods": 12,
+  "independent_adversarial_methods": 4,
+  "command_strobe_cases": 1104,
+  "shadow_reference_cases": 3000,
+  "capture_projections": 128,
+  "reader_revocation_interleavings": 136,
+  "invalid_capture_cases": 34,
+  "original_negative_control": {
+    "failures": 9,
+    "errors": 1,
+    "source_matches_final_worker_before_correction": true
+  },
+  "portable_same_source": true,
+  "worker_manifest15_verified_before_main_edit": true,
+  "worker_unretained_early_trace": "D1 reported only; no complete failure provenance claim",
+  "A_review": "matching authenticated comment read;9 selected A artifacts including both port logs checked against pinned manifest;2 selected downloads failed, not treated as verified; port bytes equal pinned B Git blobs",
+  "simulation": "not_run",
+  "synthesis": "not_run",
+  "implementation": "not_run",
+  "board": "not_run",
+  "all29_formal_cards": "not_run",
+  "A_owns_full_ABI": true
+}

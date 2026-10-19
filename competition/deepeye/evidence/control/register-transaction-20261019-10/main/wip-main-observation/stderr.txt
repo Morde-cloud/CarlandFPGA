@@ -1,0 +1,105 @@
+test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) ... 
+  test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='STOP') ... FAIL
+  test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='fault') ... FAIL
+  test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='newcycle') ... FAIL
+  test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='context') ... FAIL
+  test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='offline') ... FAIL
+  test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='reset') ... ERROR
+test_cdc_revokes_pending_even_before_any_capture (__main__.Adversarial.test_cdc_revokes_pending_even_before_any_capture) ... FAIL
+test_losing_gate_revokes_enabled_fixture (__main__.Adversarial.test_losing_gate_revokes_enabled_fixture) ... FAIL
+test_new_session_and_boot_cannot_carry_enable_or_config (__main__.Adversarial.test_new_session_and_boot_cannot_carry_enable_or_config) ... 
+  test_new_session_and_boot_cannot_carry_enable_or_config (__main__.Adversarial.test_new_session_and_boot_cannot_carry_enable_or_config) (change={'session': 10}) ... FAIL
+  test_new_session_and_boot_cannot_carry_enable_or_config (__main__.Adversarial.test_new_session_and_boot_cannot_carry_enable_or_config) (change={'boot_digest': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'}) ... FAIL
+
+======================================================================
+ERROR: test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='reset')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 23, in test_callback_revocation_never_publishes
+    try:x.complete_capture(t,v)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\wip-main-observation\observed_reference.py", line 943, in complete_capture
+    0x38: (self._context.request_seq
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'request_seq'
+
+======================================================================
+FAIL: test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='STOP')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 25, in test_callback_revocation_never_publishes
+    self.assertEqual(x.read(12)&(8|16|512),0,'revoked callback republished capture')
+AssertionError: 528 != 0 : revoked callback republished capture
+
+======================================================================
+FAIL: test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='fault')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 25, in test_callback_revocation_never_publishes
+    self.assertEqual(x.read(12)&(8|16|512),0,'revoked callback republished capture')
+AssertionError: 528 != 0 : revoked callback republished capture
+
+======================================================================
+FAIL: test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='newcycle')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 25, in test_callback_revocation_never_publishes
+    self.assertEqual(x.read(12)&(8|16|512),0,'revoked callback republished capture')
+AssertionError: 528 != 0 : revoked callback republished capture
+
+======================================================================
+FAIL: test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='context')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 25, in test_callback_revocation_never_publishes
+    self.assertEqual(x.read(12)&(8|16|512),0,'revoked callback republished capture')
+AssertionError: 528 != 0 : revoked callback republished capture
+
+======================================================================
+FAIL: test_callback_revocation_never_publishes (__main__.Adversarial.test_callback_revocation_never_publishes) (action='offline')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 25, in test_callback_revocation_never_publishes
+    self.assertEqual(x.read(12)&(8|16|512),0,'revoked callback republished capture')
+AssertionError: 528 != 0 : revoked callback republished capture
+
+======================================================================
+FAIL: test_cdc_revokes_pending_even_before_any_capture (__main__.Adversarial.test_cdc_revokes_pending_even_before_any_capture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 36, in test_cdc_revokes_pending_even_before_any_capture
+    x=make();x.write(20,1);x.set_cdc(False,False);self.assertEqual(x.read(12)&256,0)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 256 != 0
+
+======================================================================
+FAIL: test_losing_gate_revokes_enabled_fixture (__main__.Adversarial.test_losing_gate_revokes_enabled_fixture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 34, in test_losing_gate_revokes_enabled_fixture
+    x=make();x.write(8,4);x.set_fixture_gates(False,True);self.assertEqual(x.read(12)&1025,1)
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1024 != 1
+
+======================================================================
+FAIL: test_new_session_and_boot_cannot_carry_enable_or_config (__main__.Adversarial.test_new_session_and_boot_cannot_carry_enable_or_config) (change={'session': 10})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 30, in test_new_session_and_boot_cannot_carry_enable_or_config
+    x=make();x.write(8,4);x.set_context({**ctx(),**change});self.assertEqual(x.read(12)&1025,1)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1024 != 1
+
+======================================================================
+FAIL: test_new_session_and_boot_cannot_carry_enable_or_config (__main__.Adversarial.test_new_session_and_boot_cannot_carry_enable_or_config) (change={'boot_digest': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\deployment\node-b\evidence\register-transaction-20261019-10\main_adversarial.py", line 30, in test_new_session_and_boot_cannot_carry_enable_or_config
+    x=make();x.write(8,4);x.set_context({**ctx(),**change});self.assertEqual(x.read(12)&1025,1)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1024 != 1
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+FAILED (failures=9, errors=1)

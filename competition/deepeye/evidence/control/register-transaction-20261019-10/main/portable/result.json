@@ -1,0 +1,62 @@
+{
+  "files": {
+    "golden/control/register_transaction_reference.py": "d2fad9f6ff4602e896e60d6c30050d4c1f65d07be82dc96965d9f274e0305718",
+    "tests/control/test_register_transaction.py": "0b29240518dd56162968d2e7bcbcf9869f1133bc133b0b69c3052bf13f581c15",
+    "main_review.py": "a9d45029f0094c80f73792c9f699c9c827fc85adb39b70ea593d35e3feb89ef9",
+    "main_adversarial.py": "4f4988da033a4b291a3ad24fc2e05d3a2a1bafa64a6b1c5322594c7bbabc5db4"
+  },
+  "runs": [
+    {
+      "name": "worker",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/control",
+        "-p",
+        "test_register_transaction.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "a10fe5d6c41f1a5d08c93ed3b93c86ec5894d9f1f0ff059e2fe965782f5eeef9"
+    },
+    {
+      "name": "main",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "main_review.py",
+        "--source",
+        "golden/control/register_transaction_reference.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "85614c46c885242588bd8871137441a308449945ed69bf89d0a790ed53a19669",
+      "stderr_sha256": "ffce42d3c53053de3c5d642b4ae4a419c78a426996c95c4c8173ddeefa29a69d"
+    },
+    {
+      "name": "adversarial",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "main_adversarial.py",
+        "--source",
+        "golden/control/register_transaction_reference.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "3994ec5263abb975646c8b729d4b05a4a7c4d5cec1e681b018806b42ff37c44e",
+      "stderr_sha256": "4654b8cacd3ba7810e56398f0b686ca16a8f872961b4fc803f47aafac8a88217"
+    }
+  ],
+  "no_repository_controller_or_credentials_required": true,
+  "software_only": true
+}

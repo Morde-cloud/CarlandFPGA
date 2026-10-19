@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-REGISTER-TRANSACTION-20261019-10-v1",
+  "operation_id": "B-DEEPEYE-REGISTER-TRANSACTION-20261019-10",
+  "thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "started_at_utc": "2026-10-19T07:20:07.700174+00:00",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "contract_revision": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "lock_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "base_commit": "433db2a82854a669778eb8c3cd35c309623a087e",
+  "worktree": "D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014",
+  "source_pins": {
+    "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/register-transaction-20261019-10/MAIN_SPEC.md": {
+      "sha256": "ffbbfe35ce89f1f1135bb063dfd49832bcfa33b01cc58541a239cadeacbfa314",
+      "role": "main task specification"
+    },
+    "docs/competition/deepeye-2026/immutable_scope.json": {
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+      "role": "DEEPEYE-HUMAN-LOCK-20261014/revision1 canonical scope"
+    },
+    "docs/competition/deepeye-2026/immutable_scope.md": {
+      "sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd",
+      "role": "DEEPEYE-HUMAN-LOCK-20261014/revision1 human-readable scope"
+    },
+    "competition/deepeye/golden/control/register_semantics_candidate.json": {
+      "sha256": "73e288e65cb4116292cc81f8e623321b83836de6659d8607296b6ac70c815466",
+      "role": "B07 register descriptor approved as baseline by A decision"
+    },
+    "competition/deepeye/golden/control/REGISTER_SEMANTICS_CANDIDATE.md": {
+      "sha256": "097b00653d06c87925f0b7fe9f0431ceb2d8fd4d4fa4845876b52bd69afe3eac",
+      "role": "B07 register semantics document"
+    },
+    "competition/deepeye/golden/control/register_semantics_examples.json": {
+      "sha256": "25ea5ad889f3ea6b3b8a521aa4b45f4a337589209633615126aa53a3bd9394af",
+      "role": "B07 hand-derived examples"
+    },
+    "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/stream-reset-integration-20261018-09/owner-decision-readback/register_trace_decisions_20261018.md": {
+      "sha256": "5cb049b28da33eea74e8a30365962d731b3f2d198065086daab1998ff747e116",
+      "role": "A owner decision input for the offline reference implementation"
+    }
+  },
+  "owned_paths": [
+    "competition/deepeye/golden/control/register_transaction_reference.py",
+    "competition/deepeye/tests/control/test_register_transaction.py",
+    "competition/deepeye/golden/control/REGISTER_TRANSACTION_REFERENCE.md",
+    "competition/deepeye/evidence/control/register-transaction-20261019-10/worker/"
+  ],
+  "environment": {
+    "python_executable": "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+    "python_version": "3.12.9",
+    "invocation": ["-B", "-X", "utf8"],
+    "subprocess_capture": "binary stdout/stderr preserved"
+  },
+  "preexisting_worktree_changes_not_touched": [
+    " M handoffs/b/B-DEEPEYE-CODEC-20261016-01/input.json"
+  ],
+  "software_fixture": true,
+  "hardware_enable_eligible": false,
+  "movement_authorized": false,
+  "stage": "offline software reference and portable unittest suite only; no RTL, MMIO, AXI, board, public-ABI or acceptance claim",
+  "acceptance_claimed": false
+}

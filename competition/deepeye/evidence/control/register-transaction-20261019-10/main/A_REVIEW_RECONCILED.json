@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "operation_id": "B-DEEPEYE-BLOCK-ENCODER-20261018-08",
+      "request_hash": "1d9241391495c931a925203b8b9efb2f7e2cf31256042aae997c009b2e186440",
+      "source": "4d244c5b4ed282dfa4ee610e6a2fa7b4d9ca4c40",
+      "tested_head": "433db2a82854a669778eb8c3cd35c309623a087e",
+      "B_path": "competition/deepeye/evidence/codec/block-encoder-20261018-08/main/independent_ports/ports.txt",
+      "A_commit": "addb2c944ea8f659c48a783c5af1853be8d24d65",
+      "A_path": "a-encoder-ascii-ports/ports.txt",
+      "bytes": 3983883,
+      "sha256": "17f1ee44b29092a734e264fece0e7b81ac1ce251cee9ec050254132a24f16dbd",
+      "byte_identical": true
+    },
+    {
+      "operation_id": "B-DEEPEYE-STREAM-RESET-20261018-09",
+      "request_hash": "34ee72df3b3b2dee80402865d79dcdc1084b128ed3ae41487bca073b1261d126",
+      "source": "1c3fc4d0f0a5b1390787cc8c44ac34b055aa9818",
+      "tested_head": "433db2a82854a669778eb8c3cd35c309623a087e",
+      "B_path": "competition/deepeye/evidence/stream/stream-reset-20261018-09/main/independent_ports/ports.txt",
+      "A_commit": "addb2c944ea8f659c48a783c5af1853be8d24d65",
+      "A_path": "a-stream-ascii-ports/ports.txt",
+      "bytes": 2144103,
+      "sha256": "ab0c0f9c03b9327e380f07fd7f68f2a6e51d3cc41c25198e0a72ea37529e0d1c",
+      "byte_identical": true
+    }
+  ],
+  "A_manifest_sha256": "e2d9b6f26a13844aea92397e02afd6dd31c455a4892de10acade7c7947f1d945",
+  "selected_artifacts_verified": 9,
+  "selected_artifact_download_failures": 2,
+  "comment_API_readback": "blocked HTTP403; peer+published findings/receipt read and verified",
+  "scope": "B exact byte reconciliation of A original-suite reruns; no new B simulation, no new A oracle or hardware acceptance"
+}

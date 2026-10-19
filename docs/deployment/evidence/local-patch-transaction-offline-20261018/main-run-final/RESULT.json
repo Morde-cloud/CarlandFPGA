@@ -1,0 +1,469 @@
+{
+  "tests_run": 61,
+  "successful": true,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    [
+      "test_symlink_is_rejected_when_supported (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_symlink_is_rejected_when_supported)",
+      "symlink creation unavailable: OSError(22, '\u5ba2\u6237\u7aef\u6ca1\u6709\u6240\u9700\u7684\u7279\u6743\u3002')"
+    ]
+  ],
+  "subtest_observations": [
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_casefold_duplicate_targets_and_sources_are_rejected_before_journal_creation (case='target')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_casefold_duplicate_targets_and_sources_are_rejected_before_journal_creation (case='source')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_each_replacement_index_before_and_after_replace_is_honest (index=0, mode='before')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_each_replacement_index_before_and_after_replace_is_honest (index=0, mode='after')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_each_replacement_index_before_and_after_replace_is_honest (index=1, mode='before')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_each_replacement_index_before_and_after_replace_is_honest (index=1, mode='after')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_foreign_same_bytes_and_corrupt_backup_are_preserved_during_partial_rollback (case='foreign-bytes')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_foreign_same_bytes_and_corrupt_backup_are_preserved_during_partial_rollback (case='same-bytes-foreign')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_foreign_same_bytes_and_corrupt_backup_are_preserved_during_partial_rollback (case='corrupt-backup')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_backup_initial_log_payload_and_intent_failures_prevent_target_writes (case='backup')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_backup_initial_log_payload_and_intent_failures_prevent_target_writes (case='initial-log')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_backup_initial_log_payload_and_intent_failures_prevent_target_writes (case='payload-temp')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_backup_initial_log_payload_and_intent_failures_prevent_target_writes (case='write-intent')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='backup', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='backup', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='journal-create', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='plan_bound', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='plan_bound', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='payload-temp', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='payload-temp', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='write_intent', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='write_intent', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='applied', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='applied', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='rollback_intent', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='rollback_intent', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='rollback-temp', operation='write')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_injected_os_write_and_fsync_failures_are_reported_by_boundary (stage='rollback-temp', operation='fsync')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_invalid_second_preflight_entry_stops_before_journal_and_target_writes (case='preimage-hash')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_invalid_second_preflight_entry_stops_before_journal_and_target_writes (case='source-missing')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_invalid_second_preflight_entry_stops_before_journal_and_target_writes (case='target-missing')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='../escape')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='a/b')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='a\\x08')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='CON')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='name.')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='name ')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='.hidden')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_malformed_operation_ids_are_rejected_before_journal_creation (operation_id='-leading')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_nonfinite_json_values_are_rejected_before_journal_creation (token='NaN')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_nonfinite_json_values_are_rejected_before_journal_creation (token='Infinity')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_nonfinite_json_values_are_rejected_before_journal_creation (token='-Infinity')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_plan_preimage_source_hash_and_size_fail_before_any_write (case='plan-hash')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_plan_preimage_source_hash_and_size_fail_before_any_write (case='preimage')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_plan_preimage_source_hash_and_size_fail_before_any_write (case='pre-size')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_plan_preimage_source_hash_and_size_fail_before_any_write (case='source')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_real_journal_corruption_during_apply_is_detected_before_replace (mode='truncate')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_real_journal_corruption_during_apply_is_detected_before_replace (mode='overwrite')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_rollback_intent_temp_and_replace_failures_stop_only_unsafe_work (case='rollback-intent')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_rollback_intent_temp_and_replace_failures_stop_only_unsafe_work (case='rollback-temp')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_rollback_intent_temp_and_replace_failures_stop_only_unsafe_work (case='rollback-replace')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_root_and_plan_overlap_are_rejected_before_journal_creation (case='target-source')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_root_and_plan_overlap_are_rejected_before_journal_creation (case='source-journal')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_root_and_plan_overlap_are_rejected_before_journal_creation (case='journal-ancestor')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_root_and_plan_overlap_are_rejected_before_journal_creation (case='plan-in-target')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='unknown-key')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='bool-schema')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='empty-files')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='bool-size')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='oversize')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='image-extra')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='no-op')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='traversal')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='backslash')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='ads')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='reserved')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='short-alias')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='trailing-dot')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='absolute-source')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='case-duplicate')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='leading-dot-target')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='wildcard-target')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='invalid-module-name')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='invalid-test-name')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='denied-config')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='denied-credential')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='denied-launcher')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='denied-owner')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='denied-agents')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='denied-database')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='hidden-source')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_strict_schema_types_limits_and_unsafe_paths_fail_closed (case='wildcard-source')",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_target_change_before_each_write_preserves_foreign_bytes_and_rolls_back_earlier (index=0)",
+      "outcome": "passed",
+      "exception": null
+    },
+    {
+      "id": "tests.test_local_patch_transaction.LocalPatchTransactionTests.test_target_change_before_each_write_preserves_foreign_bytes_and_rolls_back_earlier (index=1)",
+      "outcome": "passed",
+      "exception": null
+    }
+  ],
+  "elapsed_seconds": 12.344,
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "suite": "both",
+  "project_imports": {
+    "fpga_mesh.protocol": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\protocol.py",
+      "sha256": "c19ca5d6755f543eb49f9205d63c93923cb154f400ea77144f8735e53b5106fb"
+    },
+    "fpga_mesh": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\__init__.py",
+      "sha256": "09151d5722fd6523c7b9133d47d24015b4e675ce17e39620eb9091270f18119a"
+    },
+    "fpga_mesh.local_patch_transaction": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\local_patch_transaction.py",
+      "sha256": "0e40b530127087e763bdc5e05a61d5ddd8e55131db83a35dcb9e1bec7e0db952"
+    },
+    "tests.test_local_patch_transaction": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\tests\\test_local_patch_transaction.py",
+      "sha256": "731f98b1ca33b0f6d22961ebb817f068a795095ffb94581176a567db01b0796d"
+    }
+  },
+  "all_project_imports_in_worktree": true,
+  "source_sha256": "0e40b530127087e763bdc5e05a61d5ddd8e55131db83a35dcb9e1bec7e0db952",
+  "test_sha256": "731f98b1ca33b0f6d22961ebb817f068a795095ffb94581176a567db01b0796d"
+}

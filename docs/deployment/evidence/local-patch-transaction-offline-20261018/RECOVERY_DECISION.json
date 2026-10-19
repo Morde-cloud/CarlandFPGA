@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-19T03:19:46.512680+00:00",
+  "task_id": "B-RUNTIME-CONTINUITY-20261016",
+  "task_version": 1,
+  "operation_id": "B-LOCAL-PATCH-TRANSACTION-OFFLINE-20261018-v1",
+  "recovery_work_id": "B-LOCAL-PATCH-TRANSACTION-OFFLINE-RECOVERY-20261019-v1",
+  "incident": "B-PATCH-WORKER-TIMEOUT-20261019-v1",
+  "decision_owner": "01a14296-5b5e-7681-b339-d59c4596175b",
+  "failed_job_id": "child-f0d2c5d7edc5427190fca75bb82b3c21",
+  "failed_work_id": "B-LOCAL-PATCH-TRANSACTION-OFFLINE-20261018-implementation-v1",
+  "failed_error": "TimeoutError: Codex turn 01a14fa9-2d26-7ba0-bef6-ac246378a5d4 exceeded 3600.0s; interrupted and closed; reconciliation required, no automatic replay",
+  "actual_controller_terminal_at": "2026-10-19T03:15:50.664205Z",
+  "old_instance_retired": true,
+  "matching_execution_processes": [],
+  "source_snapshot": {
+    "fpga_mesh/local_patch_transaction.py": {
+      "partial_sha256": "d86a74d5ce1f556dacd75c4694e516544c7ee8316c19cc26e2052f85e40857f6",
+      "partial_bytes": 83897,
+      "normalized_sha256": "fd429de501217ac2255758a7f3055ce4535ee7b81cbad38a254377a3a084d9ed",
+      "normalized_bytes": 82084,
+      "initial_correction": "Normalize source line endings and trailing blank lines only before independent testing; partial bytes preserved."
+    },
+    "tests/test_local_patch_transaction.py": {
+      "partial_sha256": "a022d41a78985a56cd2c61aaad8c302ff593d1423a20ca658202b4d7eca33f96",
+      "partial_bytes": 69846,
+      "normalized_sha256": "7dabc3bda401542a3abdb8f5c1d77f28de126187ab72f39f2cde2aa279d2c1cd",
+      "normalized_bytes": 68474,
+      "initial_correction": "Normalize source line endings and trailing blank lines only before independent testing; partial bytes preserved."
+    }
+  },
+  "worker_test_evidence_present": false,
+  "decision": "Reuse partial source and tests; main independently runs focused and adversarial checks, fixes only confirmed remaining defects, and completes the same offline operation. No old job replay and no second executor.",
+  "old_worker_directory_modified": false,
+  "source_write_ownership": [
+    "fpga_mesh/local_patch_transaction.py",
+    "tests/test_local_patch_transaction.py"
+  ],
+  "live_mutation_authorized": false,
+  "main_consumption_of_previous_increment": "LOCAL_PATCH_REHEARSAL_EVIDENCE_CONSUMED per coordinator receipt, not deployment approval",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

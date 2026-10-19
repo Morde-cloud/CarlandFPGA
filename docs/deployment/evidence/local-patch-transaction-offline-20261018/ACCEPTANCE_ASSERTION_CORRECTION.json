@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-19T03:30:47.202204+00:00",
+  "kind": "acceptance_receipt_assertion_correction",
+  "failed_assertion": "assert any(x['winerror']==32 for x in os_errors)",
+  "original_exit_code": 1,
+  "actual_final_run_winerror": 5,
+  "evidence": "main-run-final/call-observations.jsonl, sharing-lock apply observation",
+  "test_contract": "Actual sharing lock can report WinError 5 or 32; existing regression accepts both and also asserts unchanged target and main review required.",
+  "correction": "Bind check to sharing-lock apply result, require non-success and unchanged targets, accept native WinError 5 or 32. No source/test changes and no test rerun.",
+  "revised_script_sha256": "0b8d27a538d2381d9b8c6a094c60eb8c1dbdbe167a08344719186fad5f3c5a89"
+}

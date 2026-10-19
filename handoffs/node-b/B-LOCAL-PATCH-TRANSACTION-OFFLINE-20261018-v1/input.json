@@ -1,0 +1,102 @@
+{
+  "request": {
+    "operation_id": "B-LOCAL-PATCH-TRANSACTION-OFFLINE-20261018-v1",
+    "task_id": "B-RUNTIME-CONTINUITY-20261016",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "501cd7aa8d3700b57e20fee4e93a7c0319a32110",
+    "test_steps": [
+      "Verify the operation request hash, manifest, raw source blobs and archived final test results against the exact published head.",
+      "Inspect main-run-01 and regressions-before-fix failure evidence, four repaired findings, and final 61-method run: 60 passed, one privilege-dependent symlink skip, zero failures/errors.",
+      "For reproduction copy the three archived harnesses into a new private evidence directory, set their checkout path to an isolated source checkout, and run execute_focused.py with a new run ID and suite both; retain new raw logs.",
+      "Review API limits and remaining installation prerequisites. Do not deploy, alter live services/tasks/configuration/SQL, or operate the board."
+    ],
+    "expected_result": "Exact tested source bytes, final 61 methods with 60 pass/one symlink privilege skip and 86 passed observed subtests; safe private fixtures, honest partial/ambiguous outcomes and no automatic replay. Offline core acceptance only. H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; A alone operates board."
+  },
+  "artifacts": [
+    "fpga_mesh/local_patch_transaction.py",
+    "tests/test_local_patch_transaction.py",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/ACCEPTANCE_ASSERTION_CORRECTION.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/FAILED_WORKER_RECEIPT.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/MAIN_ACCEPTANCE.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/MAIN_REVIEW_CRITERIA.md",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/README.md",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/RECOVERY_DECISION.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/SPEC.md",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/WINDOWS_CAPABILITIES.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/execute_focused.py",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/independent_acceptance.py",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-01.command.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-01.stderr.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-01.stdout.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-01/RESULT.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-01/call-observations.jsonl",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-01/selected-tests.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-02.command.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-02.stderr.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-02.stdout.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-02/RESULT.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-02/call-observations.jsonl",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-02/selected-tests.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final.command.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final.stderr.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final.stdout.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final/RESULT.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final/call-observations.jsonl",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final/selected-tests.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-after-fix.command.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-after-fix.stderr.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-after-fix.stdout.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-after-fix/RESULT.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-after-fix/call-observations.jsonl",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-after-fix/selected-tests.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix.command.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix.stderr.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix.stdout.txt",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix/RESULT.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix/call-observations.jsonl",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix/selected-tests.json",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/run_focused_tests.py",
+    "docs/deployment/evidence/local-patch-transaction-offline-20261018/source-binding.json"
+  ],
+  "stages": {
+    "focused_offline_tests": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/local-patch-transaction-offline-20261018/main-run-final.stderr.txt"
+    },
+    "quality_main_review": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/local-patch-transaction-offline-20261018/MAIN_ACCEPTANCE.json"
+    },
+    "failed_worker": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/local-patch-transaction-offline-20261018/FAILED_WORKER_RECEIPT.json"
+    },
+    "recovered_main_execution": {
+      "status": "passed",
+      "log": "docs/deployment/evidence/local-patch-transaction-offline-20261018/RECOVERY_DECISION.json"
+    },
+    "original_regression_findings": {
+      "status": "failed",
+      "log": "docs/deployment/evidence/local-patch-transaction-offline-20261018/regressions-before-fix.stderr.txt"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "live_deployment": {
+      "status": "not_run"
+    },
+    "coordinator_acceptance": {
+      "status": "not_run"
+    }
+  }
+}

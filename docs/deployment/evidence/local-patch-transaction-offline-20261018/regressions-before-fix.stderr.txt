@@ -1,0 +1,35 @@
+test_restore_temporary_tampering_is_rejected_before_target_replace (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_restore_temporary_tampering_is_rejected_before_target_replace) ... FAIL
+test_same_bytes_foreign_replacement_during_rollback_is_not_owned (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_same_bytes_foreign_replacement_during_rollback_is_not_owned) ... FAIL
+test_journal_corruption_after_write_intent_prevents_target_replace (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_journal_corruption_after_write_intent_prevents_target_replace) ... FAIL
+
+======================================================================
+FAIL: test_restore_temporary_tampering_is_rejected_before_target_replace (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_restore_temporary_tampering_is_rejected_before_target_replace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_local_patch_transaction.py", line 1410, in test_restore_temporary_tampering_is_rejected_before_target_replace
+    self.assertEqual(alpha.read_bytes(), b"new-alpha")
+AssertionError: b'bad-alpha' != b'new-alpha'
+
+======================================================================
+FAIL: test_same_bytes_foreign_replacement_during_rollback_is_not_owned (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_same_bytes_foreign_replacement_during_rollback_is_not_owned)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_local_patch_transaction.py", line 1439, in test_same_bytes_foreign_replacement_during_rollback_is_not_owned
+    self.assertEqual(report["status"], "ambiguous")
+AssertionError: 'rolled_back' != 'ambiguous'
+- rolled_back
++ ambiguous
+
+
+======================================================================
+FAIL: test_journal_corruption_after_write_intent_prevents_target_replace (tests.test_local_patch_transaction.LocalPatchTransactionTests.test_journal_corruption_after_write_intent_prevents_target_replace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\runtime-continuity-20261016\tests\test_local_patch_transaction.py", line 1463, in test_journal_corruption_after_write_intent_prevents_target_replace
+    self.assertEqual(target.read_bytes(), b"old-alpha")
+AssertionError: b'new-alpha' != b'old-alpha'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.476s
+
+FAILED (failures=3)

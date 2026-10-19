@@ -1,0 +1,129 @@
+{
+  "at": "2026-10-19T03:30:47.485134+00:00",
+  "task_id": "B-RUNTIME-CONTINUITY-20261016",
+  "task_version": 1,
+  "operation_id": "B-LOCAL-PATCH-TRANSACTION-OFFLINE-20261018-v1",
+  "recovery_work_id": "B-LOCAL-PATCH-TRANSACTION-OFFLINE-RECOVERY-20261019-v1",
+  "acceptance": "QUALITY_MAIN_ACCEPTED_OFFLINE_TRANSACTION_CORE_ONLY",
+  "source_files": {
+    "fpga_mesh/local_patch_transaction.py": {
+      "sha256": "0e40b530127087e763bdc5e05a61d5ddd8e55131db83a35dcb9e1bec7e0db952",
+      "bytes": 84158
+    },
+    "tests/test_local_patch_transaction.py": {
+      "sha256": "731f98b1ca33b0f6d22961ebb817f068a795095ffb94581176a567db01b0796d",
+      "bytes": 73919
+    }
+  },
+  "test_methods": 61,
+  "passed_methods": 60,
+  "skipped_methods": 1,
+  "skip_reason": "symlink creation unavailable: OSError(22, '客户端没有所需的特权。')",
+  "test_method_groups": {
+    "module": 37,
+    "independent": 24
+  },
+  "subtest_observations_passed": 86,
+  "subtest_count_note": "Observed unittest subtest callbacks, not 86 additional independent top-level methods.",
+  "unittest_seconds": 12.338,
+  "runner_seconds": 12.344,
+  "process_seconds": 13.125,
+  "project_imports": {
+    "fpga_mesh.protocol": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\protocol.py",
+      "sha256": "c19ca5d6755f543eb49f9205d63c93923cb154f400ea77144f8735e53b5106fb"
+    },
+    "fpga_mesh": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\__init__.py",
+      "sha256": "09151d5722fd6523c7b9133d47d24015b4e675ce17e39620eb9091270f18119a"
+    },
+    "fpga_mesh.local_patch_transaction": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\fpga_mesh\\local_patch_transaction.py",
+      "sha256": "0e40b530127087e763bdc5e05a61d5ddd8e55131db83a35dcb9e1bec7e0db952"
+    },
+    "tests.test_local_patch_transaction": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\runtime-continuity-20261016\\tests\\test_local_patch_transaction.py",
+      "sha256": "731f98b1ca33b0f6d22961ebb817f068a795095ffb94581176a567db01b0796d"
+    }
+  },
+  "main_process_imports_verified": true,
+  "observed_api_calls": {
+    "apply": 135,
+    "inspect": 41,
+    "dry_run": 2
+  },
+  "observed_windows_error_codes": [
+    5
+  ],
+  "confirmed_and_fixed_findings": [
+    {
+      "finding": "Inspect accepted a same-bytes foreign replacement after completed rollback.",
+      "failure_evidence": "main-run-01.stderr.txt",
+      "correction": "Require the recorded restored file identity as well as preimage bytes for ownership and clean rollback inspection.",
+      "regression": "test_inspection_requires_restored_identity_after_same_bytes_foreign_replacement"
+    },
+    {
+      "finding": "A changed restore temporary could be moved into the target.",
+      "failure_evidence": "regressions-before-fix.stderr.txt",
+      "correction": "Recheck restore temporary size/hash and its original file identity immediately before replacement.",
+      "regression": "test_restore_temporary_tampering_is_rejected_before_target_replace"
+    },
+    {
+      "finding": "A foreign same-preimage replacement during rollback could be recorded as owned restoration.",
+      "failure_evidence": "regressions-before-fix.stderr.txt",
+      "correction": "Bind restored destination identity to the verified restore temporary; report ambiguous on mismatch.",
+      "regression": "test_same_bytes_foreign_replacement_during_rollback_is_not_owned"
+    },
+    {
+      "finding": "Corruption after a durable write_intent could precede a target write.",
+      "failure_evidence": "regressions-before-fix.stderr.txt",
+      "correction": "Revalidate journal path/identity/chain immediately before each apply or rollback replacement.",
+      "regression": "test_journal_corruption_after_write_intent_prevents_target_replace"
+    }
+  ],
+  "worker_failure_consumed": {
+    "job_id": "child-f0d2c5d7edc5427190fca75bb82b3c21",
+    "status": "failed",
+    "receipt": "FAILED_WORKER_RECEIPT.json",
+    "recovery": "RECOVERY_DECISION.json",
+    "completed_worker_result_delivered": false,
+    "reported_validation_executed_by_main": true,
+    "old_job_replayed": false,
+    "additional_worker_started": false
+  },
+  "live_baseline_files_verified_unchanged": 9,
+  "live_baseline_details_private_only": true,
+  "existing_tracked_sources_and_deploy_files_unchanged": true,
+  "scope_choices": [
+    "Windows-only apply; dry-run and inspection are read-only",
+    "Existing regular allowed source files only; no addition/deletion or metadata/ACL-preservation claim",
+    "Out-of-band exact raw-plan hash required; this binds a plan but does not authorize deployment",
+    "No CLI and no live updater/service/admission integration",
+    "Existing journals refuse apply; inspect never resumes or restores",
+    "Cooperating calls serialize through a Global target-identity mutex; arbitrary external races remain outside an atomic guarantee",
+    "File fsync and replacement are bounded safeguards, not a promise of power-loss directory durability",
+    "Automatic rollback is limited to own still-matching postimage identity and bytes; journal, backups and temporary artifacts are retained"
+  ],
+  "deployment_performed": false,
+  "service_or_task_actions": false,
+  "board_work": false,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "coordinator_acceptance_of_this_increment": "not_yet_observed"
+}

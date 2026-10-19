@@ -1,0 +1,91 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-PWM-ATOMIC-20261020-12",
+  "work_id": "B-ATOMIC-PWM-RTL-20261020-12-v1",
+  "director_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "director_turn": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+  "at_utc": "2026-10-19T16:55:55.848658+00:00",
+  "decision": "ACCEPT_INTERNAL_DIGITAL_SIMULATION_ONLY",
+  "rtl_sha256": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+  "main_sampled_edges": 46190,
+  "legal_small_tuples": 1394,
+  "long_frame": {
+    "full_frame_intervals": 2000000,
+    "high_counts": [
+      10000,
+      490000,
+      70000
+    ],
+    "new_period": 37,
+    "new_complete_frames": 2,
+    "passed": true
+  },
+  "negative_controls": "both_expected_rejections",
+  "oracle_canonical_bytes_match": true,
+  "run02_run03_port_bytes_match": true,
+  "author_rerun_groups": 9,
+  "author_check_invocations": 90644277,
+  "actual_tool": "ModelSim SE-64 10.7",
+  "source_change": "Simulation diagnostic synthesis-exclusion comments only; no functional RTL repair",
+  "main_harness_failures": [
+    "run-01 onbreak returned1 on ordinary successful $finish",
+    "run-02 functional pass but runtime CRLF vectors differ from frozen canonicalLF; run-03 byte-exact"
+  ],
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "stages": {
+    "simulation": "passed",
+    "synthesis": "blocked",
+    "implementation": "blocked",
+    "board": "not_run",
+    "system": "not_run",
+    "formal_cards": "29 not_run"
+  },
+  "limits": [
+    "Only internal synchronous generator; not public ABI or motion authority",
+    "No clock frequency/pin/capture/HWH/TTL/curvature/source/BOOT proof",
+    "No synthesis, timing, CDC/RDC or physical loopback measurement",
+    "Max32 period only partial observations, not a full-wrap32 test"
+  ],
+  "results": [
+    {
+      "path": "competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/main/run-03/result.json",
+      "sha256": "4d8c2633bc3486c4b30dd31982f29560bad100bc6f6a566852f6c2efb3a2fd71"
+    },
+    {
+      "path": "competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/main/author-rerun-01/run_summary.json",
+      "sha256": "2c253767757af02084abc6c787f0e5aa923976c62f326cfcdc1c087f28f7ca73"
+    },
+    {
+      "path": "competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/main/negative_controls.json",
+      "sha256": "786eefb4132dbe7a8dc4f6be083078729518bcb260cf4d31de9512fc7e6a6857"
+    },
+    {
+      "path": "competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/main/author_audit.json",
+      "sha256": "d468b3a039572ada9a6714b6772bd52859a310736ae8ad93f27d6a957372457d"
+    }
+  ],
+  "protected_dirty_sha256": "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8"
+}

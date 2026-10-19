@@ -1,0 +1,128 @@
+{
+  "generated_at_utc": "2026-10-19T16:44:41.398247+00:00",
+  "record_count": 5,
+  "records": [
+    {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-version"
+      ],
+      "command": "D:\\modelsim1\\win64\\vlog.exe -version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\author\\run-author-20261020-12-a",
+      "elapsed_seconds": 0.030065,
+      "error": null,
+      "exit_code_file": "logs\\01_vlog_version.exit_code.txt",
+      "exit_code_sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "finished_at_utc": "2026-10-19T16:44:36.916904+00:00",
+      "label": "vlog_version",
+      "returncode": 0,
+      "started_at_utc": "2026-10-19T16:44:36.886839+00:00",
+      "stderr": "logs\\01_vlog_version.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "logs\\01_vlog_version.stdout.txt",
+      "stdout_sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677",
+      "timed_out": false,
+      "timeout_seconds": 60
+    },
+    {
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "command": "D:\\modelsim1\\win64\\vsim.exe -version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\author\\run-author-20261020-12-a",
+      "elapsed_seconds": 0.050525,
+      "error": null,
+      "exit_code_file": "logs\\02_vsim_version.exit_code.txt",
+      "exit_code_sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "finished_at_utc": "2026-10-19T16:44:36.976047+00:00",
+      "label": "vsim_version",
+      "returncode": 0,
+      "started_at_utc": "2026-10-19T16:44:36.925522+00:00",
+      "stderr": "logs\\02_vsim_version.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "logs\\02_vsim_version.stdout.txt",
+      "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+      "timed_out": false,
+      "timeout_seconds": 60
+    },
+    {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "command": "D:\\modelsim1\\win64\\vlib.exe work",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\author\\run-author-20261020-12-a",
+      "elapsed_seconds": 0.038263,
+      "error": null,
+      "exit_code_file": "logs\\03_vlib_create_work.exit_code.txt",
+      "exit_code_sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "finished_at_utc": "2026-10-19T16:44:37.024067+00:00",
+      "label": "vlib_create_work",
+      "returncode": 0,
+      "started_at_utc": "2026-10-19T16:44:36.985804+00:00",
+      "stderr": "logs\\03_vlib_create_work.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "logs\\03_vlib_create_work.stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timed_out": false,
+      "timeout_seconds": 300
+    },
+    {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_atomic_pwm.sv"
+      ],
+      "command": "D:\\modelsim1\\win64\\vlog.exe -sv -work work D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_atomic_pwm.sv",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\author\\run-author-20261020-12-a",
+      "elapsed_seconds": 0.065256,
+      "error": null,
+      "exit_code_file": "logs\\04_vlog_compile.exit_code.txt",
+      "exit_code_sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "finished_at_utc": "2026-10-19T16:44:37.091323+00:00",
+      "label": "vlog_compile",
+      "returncode": 0,
+      "started_at_utc": "2026-10-19T16:44:37.026067+00:00",
+      "stderr": "logs\\04_vlog_compile.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "logs\\04_vlog_compile.stdout.txt",
+      "stdout_sha256": "bd5e7eeb6fbef8a9262be554670bae68f7962aa5f835e0fefd158e6dafda0d72",
+      "timed_out": false,
+      "timeout_seconds": 300
+    },
+    {
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "-lib",
+        "work",
+        "tb_atomic_pwm",
+        "+ATOMIC_PWM_SEED=123456789",
+        "-do",
+        "run -all; quit -f"
+      ],
+      "command": "D:\\modelsim1\\win64\\vsim.exe -c -onfinish stop -lib work tb_atomic_pwm +ATOMIC_PWM_SEED=123456789 -do \"run -all; quit -f\"",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\author\\run-author-20261020-12-a",
+      "elapsed_seconds": 4.275773,
+      "error": null,
+      "exit_code_file": "logs\\05_vsim_main.exit_code.txt",
+      "exit_code_sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "finished_at_utc": "2026-10-19T16:44:41.386890+00:00",
+      "label": "vsim_main",
+      "returncode": 0,
+      "started_at_utc": "2026-10-19T16:44:37.111117+00:00",
+      "stderr": "logs\\05_vsim_main.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "logs\\05_vsim_main.stdout.txt",
+      "stdout_sha256": "b3a5cdbefda2f7967610086861377a601e688288124a7c9ca0f8828affbfa34c",
+      "timed_out": false,
+      "timeout_seconds": 900
+    }
+  ]
+}

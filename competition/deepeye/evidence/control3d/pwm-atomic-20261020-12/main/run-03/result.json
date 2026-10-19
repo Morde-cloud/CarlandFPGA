@@ -1,0 +1,298 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-ATOMIC-20261020-12",
+  "kind": "main_independent_public_ports",
+  "rtl": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv",
+  "rtl_sha256": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+  "tb_sha256": "7bff8dbcdb4325910de35e498aea3ebe770db0b6b8ab1280009363f02d9cd228",
+  "runner_sha256": "ba2491beffd479c2f1e28ab63dd7eefa4df82d29bf8e0bc2cb80856665cb6839",
+  "negative_control": false,
+  "commands": [
+    {
+      "name": "vlog-version",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vsim-version",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlib",
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlog",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "dut.sv",
+        "tb.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "063a1d848b547af88309c0756edc39e0a9b45c2575c736edb358fb5f8d104a54",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "w2_t1",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=2",
+        "-gTAG_W=1",
+        "+VECTORS=w2_t1.vectors.txt",
+        "+TRACE=w2_t1.ports.txt",
+        "-do",
+        "w2_t1.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "4c54602aed5d9af942c3c53d81578612379f03b5f4f3d7b4ef0d4377891fe299",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "w3_t64",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=3",
+        "-gTAG_W=64",
+        "+VECTORS=w3_t64.vectors.txt",
+        "+TRACE=w3_t64.ports.txt",
+        "-do",
+        "w3_t64.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "d9be53e603f07b28da349297b04f9abc610d01ae0fdfe0c52ee1bd498b76d905",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "w32_t32",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=32",
+        "-gTAG_W=32",
+        "+VECTORS=w32_t32.vectors.txt",
+        "+TRACE=w32_t32.ports.txt",
+        "-do",
+        "w32_t32.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "5539bd3ef53b9b0475ef6ebe4af1d69c1c99856fc16dc0765c976ca451780905",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "long",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm_long",
+        "-do",
+        "long.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "5fb42f2285b562acb4eaedb4ba83b9dc0bdf96225a0c27e92ce84f1a5ec8fed9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "invalid_w1_t32",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=1",
+        "-gTAG_W=32",
+        "+VECTORS=w32_t32.vectors.txt",
+        "+TRACE=invalid_w1_t32.ports.txt",
+        "-do",
+        "long.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "7cede3a46eece2541beb1f67f66685ddf707a1c212459b868a1d1ad0d40e880d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "invalid_w33_t32",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=33",
+        "-gTAG_W=32",
+        "+VECTORS=w32_t32.vectors.txt",
+        "+TRACE=invalid_w33_t32.ports.txt",
+        "-do",
+        "long.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "72026c4d677376362cecb61d93eeab09347c8f94f130b2e7be120db26a81618b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "invalid_w3_t0",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=3",
+        "-gTAG_W=0",
+        "+VECTORS=w32_t32.vectors.txt",
+        "+TRACE=invalid_w3_t0.ports.txt",
+        "-do",
+        "long.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "c7f6d429145bbcb8eeacf211e73161ec03cf6a5bb692dcfed8cc857f2f2ecedb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "invalid_w3_t65",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_atomic_pwm",
+        "-gCOUNT_W=3",
+        "-gTAG_W=65",
+        "+VECTORS=w32_t32.vectors.txt",
+        "+TRACE=invalid_w3_t65.ports.txt",
+        "-do",
+        "long.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\run-03",
+      "exit_code": 0,
+      "stdout_sha256": "595db7cb4b1cfed80f1941bfefb9faf8545974cc4aa14b50912579970e3f0c9e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "runs": [
+    {
+      "count_w": 2,
+      "tag_w": 1,
+      "rows": 7041,
+      "coverage": {
+        "exhaustive_legal_tuple": 99,
+        "boundary_position": 18,
+        "abort_or_busy_overlap": 132,
+        "random_cycle": 6000
+      },
+      "vectors_sha256": "792c44276245cdfb192ed3e7e9cc8f0dbed7e091fa6db59b7eb3d043511926d7",
+      "ports_sha256": "2da7df7035c9386ba89e46b6c375d665d85de6427d9aa9bba052b4836ff744d1",
+      "passed": true
+    },
+    {
+      "count_w": 3,
+      "tag_w": 64,
+      "rows": 26603,
+      "coverage": {
+        "exhaustive_legal_tuple": 1295,
+        "boundary_position": 84,
+        "abort_or_busy_overlap": 1176,
+        "random_cycle": 6000
+      },
+      "vectors_sha256": "1ffad1a5a2d8c65016c6a2aa05d915255d130112a90b9d0fcc6cd5c5445d7201",
+      "ports_sha256": "e766b74117cff8715bd045174aad7565d54f32bc8cff322575f20a278ae52852",
+      "passed": true
+    },
+    {
+      "count_w": 32,
+      "tag_w": 32,
+      "rows": 12546,
+      "coverage": {
+        "32bit_legal_tuple": 40,
+        "32bit_full_frames": 20,
+        "32bit_partial_abort": 20,
+        "unsigned_invalid": 4,
+        "random_cycle": 6000
+      },
+      "vectors_sha256": "a399c4d33ec1dd4cd3c1301d55d456ff3c9539dd3063606c792c7db48edceee7",
+      "ports_sha256": "9a6ea46ebf2b07001385fcb8a17165b670cd4fc798ce04ad3393b5cddbcf5582",
+      "passed": true
+    }
+  ],
+  "status": "passed",
+  "long_case": {
+    "full_frame_intervals": 2000000,
+    "high_counts": [
+      10000,
+      490000,
+      70000
+    ],
+    "new_period": 37,
+    "new_complete_frames": 2,
+    "passed": true
+  },
+  "invalid_parameters": [
+    {
+      "count_w": 1,
+      "tag_w": 32,
+      "rejected": true,
+      "exit_code": 0
+    },
+    {
+      "count_w": 33,
+      "tag_w": 32,
+      "rejected": true,
+      "exit_code": 0
+    },
+    {
+      "count_w": 3,
+      "tag_w": 0,
+      "rejected": true,
+      "exit_code": 0
+    },
+    {
+      "count_w": 3,
+      "tag_w": 65,
+      "rejected": true,
+      "exit_code": 0
+    }
+  ]
+}

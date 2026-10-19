@@ -1,0 +1,12 @@
+{
+  "fixed_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "path": "docs/competition/deepeye-2026/taskbook_final.md",
+  "raw_sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18",
+  "matches": [
+    {
+      "line": 464,
+      "text": "三路PWM在同一帧边界原子更新，capture快照必须来自应用新cmd之后开始的同一个完整输出周期，绑定session/request_seq/control_epoch/capture_seq与采样周期；旧捕获不得重新贴新命令标签。FAST请求210–241.25ms后，255ms的ACK槽允许只报accepted；来不及完成捕获时不能假报captured，由后续305ms STATE或合法下一STATE提供真实完整捕获再推进。重试槽同理，保留所有空等/阶段与2s端到端门；未得有效捕获不执行。禁止用在本周期中途拼接的yaw/pitch/speed或写寄存器证明应用。"
+    }
+  ],
+  "interpretation": "Coordinator CONTINUE retains the internal candidate design; its nonblocking claim that the frozen text lacks atomic wording is contradicted by this exact Git source line. No public ABI is frozen here. Hardware interface and chosen queue/bypass rules remain B internal. Original spec/decision preserved; no behavioral change or second scope event."
+}

@@ -1,0 +1,71 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-ATOMIC-20261020-12",
+  "status": "both_expected_rejections",
+  "original_unchanged": true,
+  "mutations": [
+    {
+      "name": "stop_ignored",
+      "source_sha256": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+      "mutant_sha256": "ef7e14d5ab26813bdcdb29c26066ee75c85b16b697ee246206e4e45b2ec38486"
+    },
+    {
+      "name": "pitch_from_yaw",
+      "source_sha256": "9dc8ecf96e59a2ae8467bda64572f62eb602d52db535733f236f64ff97c43428",
+      "mutant_sha256": "b0d89c1ae1b81d91ad6ddb06f41ca9459004e76c9b138a6fd4bba8df97f64395"
+    }
+  ],
+  "runs": [
+    {
+      "name": "stop_ignored",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_atomic_pwm.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\mutations\\stop_ignored.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_atomic_pwm.sv",
+        "--tool",
+        "D:/modelsim1/win64",
+        "--owned-root",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\negative-stop_ignored",
+        "--cases",
+        "2:1",
+        "--negative"
+      ],
+      "exit_code": 0,
+      "result": "competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\negative-stop_ignored\\result.json",
+      "actual_mismatch_log": "competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\negative-stop_ignored\\w2_t1.stdout.txt"
+    },
+    {
+      "name": "pitch_from_yaw",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_atomic_pwm.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\mutations\\pitch_from_yaw.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_atomic_pwm.sv",
+        "--tool",
+        "D:/modelsim1/win64",
+        "--owned-root",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\negative-pitch_from_yaw",
+        "--cases",
+        "2:1",
+        "--negative"
+      ],
+      "exit_code": 0,
+      "result": "competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\negative-pitch_from_yaw\\result.json",
+      "actual_mismatch_log": "competition\\deepeye\\evidence\\control3d\\pwm-atomic-20261020-12\\main\\negative-pitch_from_yaw\\w2_t1.stdout.txt"
+    }
+  ]
+}

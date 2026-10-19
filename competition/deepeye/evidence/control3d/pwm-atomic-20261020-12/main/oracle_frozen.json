@@ -1,0 +1,49 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-ATOMIC-20261020-12",
+  "frozen_at_utc": "2026-10-19T16:43:41.673376+00:00",
+  "independence": "Written before child terminal result, without reading author RTL or testbench/model. Uses absolute edge interval origins/deadlines and external accepted tuples. No RTL result yet.",
+  "runner_sha256": "e34e0bf9da8453eb3523756b4f4b60ca67daed637bc716636e7732ecfdf3d093",
+  "tb_sha256": "7bff8dbcdb4325910de35e498aea3ebe770db0b6b8ab1280009363f02d9cd228",
+  "cases": [
+    {
+      "count_w": 2,
+      "tag_w": 1,
+      "rows": 7041,
+      "coverage": {
+        "exhaustive_legal_tuple": 99,
+        "boundary_position": 18,
+        "abort_or_busy_overlap": 132,
+        "random_cycle": 6000
+      },
+      "vectors_sha256": "792c44276245cdfb192ed3e7e9cc8f0dbed7e091fa6db59b7eb3d043511926d7",
+      "bytes": 309809
+    },
+    {
+      "count_w": 3,
+      "tag_w": 64,
+      "rows": 26603,
+      "coverage": {
+        "exhaustive_legal_tuple": 1295,
+        "boundary_position": 84,
+        "abort_or_busy_overlap": 1176,
+        "random_cycle": 6000
+      },
+      "vectors_sha256": "1ffad1a5a2d8c65016c6a2aa05d915255d130112a90b9d0fcc6cd5c5445d7201",
+      "bytes": 1486417
+    },
+    {
+      "count_w": 32,
+      "tag_w": 32,
+      "rows": 12546,
+      "coverage": {
+        "32bit_legal_tuple": 40,
+        "32bit_full_frames": 20,
+        "32bit_partial_abort": 20,
+        "unsigned_invalid": 4,
+        "random_cycle": 6000
+      },
+      "vectors_sha256": "a399c4d33ec1dd4cd3c1301d55d456ff3c9539dd3063606c792c7db48edceee7",
+      "bytes": 791834
+    }
+  ]
+}

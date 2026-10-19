@@ -1,0 +1,231 @@
+{
+  "attribution": "The frame-boundary atomic update is a B internal design choice for this bounded increment, not a quoted frozen public ABI.",
+  "author_verification_only": true,
+  "command_count": 9,
+  "contract": {
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "requirements": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "revision": 1
+  },
+  "coordinator_decision_sha256": "75b72a4279e36b7f9ff29ae9fa4738e6aa238665cb735ee82296e6c81d86e288",
+  "generated_at_utc": "2026-10-19T16:45:52.575284+00:00",
+  "independent_acceptance": false,
+  "limitations": [
+    "Author testcase success is not independent acceptance.",
+    "Simulation only; no synthesis, implementation, timing, CDC/RDC or board result.",
+    "The 32-bit high-bit case is a bounded partial observation, not a full 2^32-period run.",
+    "All 29 formal cards remain not_run; physical-board work remains A-only.",
+    "This is not a public ABI, register, pin, capture, stop-authority or motion grant."
+  ],
+  "main_simulation": {
+    "counts": {
+      "boundary": 8,
+      "busy": 11584,
+      "bypass": 1,
+      "held": 3,
+      "highbit": 2,
+      "invalid": 8,
+      "long": 2000000,
+      "overlaps": 7,
+      "period": 2,
+      "random": 12000,
+      "tag": 3,
+      "tag64": 4,
+      "w2": 99
+    },
+    "coverage": [
+      "accepted_atomicity_traffic",
+      "atomic_apply_traffic",
+      "boundary_positions_8",
+      "busy_held_valid_observed",
+      "candidate_2m_complete_frame",
+      "default_complete_frames",
+      "deterministic_random_12000",
+      "held_valid_busy_checked",
+      "invalid_inputs_each_field",
+      "period_up_and_down",
+      "public_port_checks_above_one_million",
+      "rejected_invalid_traffic",
+      "reset_stop_flush_traffic",
+      "reset_stop_overlap_checked",
+      "same_edge_bypass_checked",
+      "tag64_boundary_values",
+      "tag_atomicity_checked",
+      "unsigned_highbit32_partial",
+      "width2_frame_counts",
+      "width2_legal_tuples_exhaustive"
+    ],
+    "seed": 123456789,
+    "summary": {
+      "aborted": 140,
+      "accepted": 409,
+      "applied": 401,
+      "cases": 9,
+      "checks": 90644277,
+      "default_frames": 491,
+      "fail": 0,
+      "pass": 9,
+      "rejected": 74,
+      "tag64_frames": 491,
+      "w2_frames": 5739
+    }
+  },
+  "normative_scope_sha256": "7d23a7a1023379bed18b81b794ab4cfaf364d7e1652511a3f382bdce2ec6d95c",
+  "operation_id": "B-DEEPEYE-PWM-ATOMIC-20261020-12",
+  "parameter_guards": [
+    {
+      "COUNT_W": 1,
+      "TAG_W": 32,
+      "accepted_on_marker_instead_of_process_status": true,
+      "failed_at_time_zero": true,
+      "marker": "ATOMIC_PWM_UNSUPPORTED_PARAMETERS COUNT_W=1 TAG_W=32",
+      "process_exit_code": 0,
+      "process_exit_code_gated": false,
+      "stderr": "logs\\06_guard_invalid_COUNT_W_1_TAG_W_32.stderr.txt",
+      "stdout": "logs\\06_guard_invalid_COUNT_W_1_TAG_W_32.stdout.txt"
+    },
+    {
+      "COUNT_W": 33,
+      "TAG_W": 32,
+      "accepted_on_marker_instead_of_process_status": true,
+      "failed_at_time_zero": true,
+      "marker": "ATOMIC_PWM_UNSUPPORTED_PARAMETERS COUNT_W=33 TAG_W=32",
+      "process_exit_code": 0,
+      "process_exit_code_gated": false,
+      "stderr": "logs\\07_guard_invalid_COUNT_W_33_TAG_W_32.stderr.txt",
+      "stdout": "logs\\07_guard_invalid_COUNT_W_33_TAG_W_32.stdout.txt"
+    },
+    {
+      "COUNT_W": 32,
+      "TAG_W": 0,
+      "accepted_on_marker_instead_of_process_status": true,
+      "failed_at_time_zero": true,
+      "marker": "ATOMIC_PWM_UNSUPPORTED_PARAMETERS COUNT_W=32 TAG_W=0",
+      "process_exit_code": 0,
+      "process_exit_code_gated": false,
+      "stderr": "logs\\08_guard_invalid_COUNT_W_32_TAG_W_0.stderr.txt",
+      "stdout": "logs\\08_guard_invalid_COUNT_W_32_TAG_W_0.stdout.txt"
+    },
+    {
+      "COUNT_W": 32,
+      "TAG_W": 65,
+      "accepted_on_marker_instead_of_process_status": true,
+      "failed_at_time_zero": true,
+      "marker": "ATOMIC_PWM_UNSUPPORTED_PARAMETERS COUNT_W=32 TAG_W=65",
+      "process_exit_code": 0,
+      "process_exit_code_gated": false,
+      "stderr": "logs\\09_guard_invalid_COUNT_W_32_TAG_W_65.stderr.txt",
+      "stdout": "logs\\09_guard_invalid_COUNT_W_32_TAG_W_65.stdout.txt"
+    }
+  ],
+  "publication_performed": false,
+  "replay_vectors": {
+    "line_count": 12009,
+    "path": "replay_events.log",
+    "random_markers": [
+      "# ATOMIC_PWM_RANDOM_BEGIN",
+      "# ATOMIC_PWM_RANDOM_END"
+    ],
+    "random_step_count": 12000,
+    "seed_header": "# ATOMIC_PWM_SEED 123456789",
+    "sha256": "8f1ca2c0b5d5b01a0b69ecf609da263c780e32449558aeb1aebd58127510cdfc",
+    "size_bytes": 518357,
+    "step_count": 12006
+  },
+  "source_manifest": {
+    "files": [
+      {
+        "label": "rtl",
+        "sha256": "c7af3a96554d927e724e7cf2e41c460affe4e551eae4cb2bf41134335cd498d7",
+        "size_bytes": 7842,
+        "snapshot": "inputs\\rtl\\deepeye_atomic_pwm.sv",
+        "source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv"
+      },
+      {
+        "label": "testbench",
+        "sha256": "fb54036dfa496fab1bde085234708897798e68c2b526a39b95f0f7e0882d12c9",
+        "size_bytes": 57075,
+        "snapshot": "inputs\\testbench\\tb_atomic_pwm.sv",
+        "source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_atomic_pwm.sv"
+      },
+      {
+        "label": "runner",
+        "sha256": "864e7bb6a471db36534757f938697bc28601ba867582a0506855f0123485f4b5",
+        "size_bytes": 31306,
+        "snapshot": "inputs\\runner\\run_atomic_pwm.py",
+        "source": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\run_atomic_pwm.py"
+      }
+    ],
+    "generated_at_utc": "2026-10-19T16:45:40.582073+00:00"
+  },
+  "status": "pass",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "tool_discovery": {
+    "discovery_scope": "path, size and SHA256 before any tool invocation",
+    "generated_at_utc": "2026-10-19T16:45:40.625081+00:00",
+    "tools": {
+      "vlib": {
+        "path": "D:\\modelsim1\\win64\\vlib.exe",
+        "sha256": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e",
+        "size_bytes": 2653576
+      },
+      "vlog": {
+        "path": "D:\\modelsim1\\win64\\vlog.exe",
+        "sha256": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+        "size_bytes": 18617736
+      },
+      "vsim": {
+        "path": "D:\\modelsim1\\win64\\vsim.exe",
+        "sha256": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf",
+        "size_bytes": 3478920
+      }
+    }
+  },
+  "tool_versions": {
+    "generated_at_utc": "2026-10-19T16:45:40.720216+00:00",
+    "versions": {
+      "vlog": {
+        "exit_code": 0,
+        "first_line": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017",
+        "stderr": "logs\\01_vlog_version.stderr.txt",
+        "stdout": "logs\\01_vlog_version.stdout.txt",
+        "version_command": [
+          "D:\\modelsim1\\win64\\vlog.exe",
+          "-version"
+        ]
+      },
+      "vsim": {
+        "exit_code": 0,
+        "first_line": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017",
+        "stderr": "logs\\02_vsim_version.stderr.txt",
+        "stdout": "logs\\02_vsim_version.stdout.txt",
+        "version_command": [
+          "D:\\modelsim1\\win64\\vsim.exe",
+          "-version"
+        ]
+      }
+    },
+    "vlib_version_option": "not invoked; ModelSim 10.7 vlib -version reports usage"
+  },
+  "work_id": "B-ATOMIC-PWM-RTL-20261020-12-v1"
+}

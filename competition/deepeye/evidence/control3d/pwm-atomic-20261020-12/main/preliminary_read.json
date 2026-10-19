@@ -1,0 +1,17 @@
+{
+  "operation_id":"B-DEEPEYE-PWM-ATOMIC-20261020-12",
+  "kind":"nonterminal_read_only_source_inspection",
+  "source_sha256":"c7af3a96554d927e724e7cf2e41c460affe4e551eae4cb2bf41134335cd498d7",
+  "acceptance":false,
+  "observed":[
+    "Single always_ff writer; one whole pending tuple; cfg_ready is suppressed while pending/reset/stop.",
+    "apply_now uses old-state pending/boundary and has priority over ordinary transfer, so no incoming bypass.",
+    "Unsigned period/high comparisons reject zero period or high above period.",
+    "boundary is phase+1==period; reachable phase never exceeds period-1. At max representable period, boundary occurs before adder overflow.",
+    "Registered pwm levels use next phase, or phase-zero high>0 on apply/wrap.",
+    "Synchronous stop/reset clears active and pending metadata and flags. External authority/TTL/physical stop remains absent by scope."
+  ],
+  "pending_review_finding":"Simulation parameter $fatal generate guard lacks explicit synthesis exclusion in these nonterminal bytes. Recheck final author bytes; if still present, add synthesis translate_off/on or equivalent simulation-only guard after terminal ownership release, then run relevant tests on final bytes.",
+  "file_write_to_child_owned_paths":false,
+  "oracle_previously_frozen":true
+}

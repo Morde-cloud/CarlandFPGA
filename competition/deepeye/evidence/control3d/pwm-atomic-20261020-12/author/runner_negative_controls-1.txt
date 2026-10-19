@@ -1,0 +1,29 @@
+﻿runner_negative_controls
+generated_at_utc=
+2026-10-19T16:46:14.7063175Z
+probe_1=existing_output_rejection
+command=
+-B -X utf8 competition/deepeye/tools/control3d/run_atomic_pwm.py --owned-root competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/author --vlib D:/modelsim1/win64/vlib.exe --vlog D:/modelsim1/win64/vlog.exe --vsim D:/modelsim1/win64/vsim.exe --seed 123456789 --output competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/author/run-author-20261020-12-d --rtl competition/deepeye/fpga/control3d/deepeye_atomic_pwm.sv --testbench competition/deepeye/tests/rtl/control3d/tb_atomic_pwm.sv
+exit_code=
+2
+python.exe : ATOMIC_PWM_RUNNER_FAIL stage=arguments error=output already exists and will not be overwritten: D:\pynq\Ca
+rlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-atomic-20261020-1
+2\author\run-author-20261020-12-d
+所在位置 行:2 字符: 1040
++ ... existing,'--rtl',$rtl,'--testbench',$tb); $o1=(& $py @a1 2>&1 | Out-S ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ATOMIC_PWM_RUNN...r-20261020-12-d:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+probe_2=aliased_input_rejection
+command=
+-B -X utf8 competition/deepeye/tools/control3d/run_atomic_pwm.py --owned-root competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/author --vlib D:/modelsim1/win64/vlib.exe --vlog D:/modelsim1/win64/vlog.exe --vsim D:/modelsim1/win64/vsim.exe --seed 123456789 --output competition/deepeye/evidence/control3d/pwm-atomic-20261020-12/author/negative-alias-probe-do-not-create --rtl competition/deepeye/fpga/control3d/deepeye_atomic_pwm.sv --testbench competition/deepeye/fpga/control3d/deepeye_atomic_pwm.sv
+exit_code=
+2
+python.exe : ATOMIC_PWM_RUNNER_FAIL stage=arguments error=aliased inputs are forbidden: rtl == testbench
+所在位置 行:2 字符: 1175
++ ... robeOut,'--rtl',$rtl,'--testbench',$rtl); $o2=(& $py @a2 2>&1 | Out-S ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ATOMIC_PWM_RUNN...tl == testbench:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+probe_2_output_created=
+False

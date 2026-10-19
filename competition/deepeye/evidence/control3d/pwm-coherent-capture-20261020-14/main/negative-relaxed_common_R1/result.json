@@ -1,0 +1,128 @@
+{
+  "operation_id": "B-DEEPEYE-PWM-COHERENT-CAPTURE-20261020-14",
+  "at_utc": "2026-10-19T18:35:35.050895+00:00",
+  "oracle": "absolute per-lane sample-event indices and local origin; one independent consumer queue",
+  "runner_sha256": "89919ae706090d0b78eb8df2d4f731a4454c97947da509162fc3200f59ad1de6",
+  "tb_sha256": "9a7810a28fc6f75783da03b80d487fc3eec376bcdcb8090d701efb3f345c9e9e",
+  "commands": [
+    {
+      "name": "vlog-version",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-relaxed_common_R1",
+      "exit_code": 0,
+      "stdout_sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vsim-version",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-relaxed_common_R1",
+      "exit_code": 0,
+      "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlib",
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-relaxed_common_R1",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vlog",
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "dut.sv",
+        "tb.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-relaxed_common_R1",
+      "exit_code": 0,
+      "stdout_sha256": "83be8728cfd3c77d16bea40167a23c2827e9f6350aea4c9889e37ae005febbe7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "c3_w6_t64",
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-onfinish",
+        "stop",
+        "work.main_tb_pwm_coherent_capture",
+        "-gCOUNT_W=3",
+        "-gWITNESS_W=6",
+        "-gTAG_W=64",
+        "+VECTORS=c3_w6_t64.vectors.txt",
+        "+TRACE=c3_w6_t64.ports.txt",
+        "-do",
+        "c3_w6_t64.do"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-relaxed_common_R1",
+      "exit_code": 0,
+      "stdout_sha256": "e226be5d801eda18d5961138850a6fc2beaf7056846cc11b4cc8f1abb7500a7c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "runs": [
+    {
+      "count_w": 3,
+      "witness_w": 6,
+      "tag_w": 64,
+      "sampled_edges": 18129,
+      "rle_rows": 15703,
+      "coverage": {
+        "all_small_high_triple": 441,
+        "equal_period_phase_shift": 3,
+        "unequal_or_extra_edges": 24,
+        "period_overflow_all_high": 1,
+        "period_overflow_missing_lane": 1,
+        "period_overflow_all_low": 1,
+        "period_overflow_rise_on_overflow": 1,
+        "constant_baseline": 30,
+        "fresh_start_after_high_rearm": 18,
+        "witness_overflow_old_queue": 2,
+        "retire_while_unarmed": 2,
+        "idle_namespace_exhaustion": 68,
+        "abort_reset": 26,
+        "abort_stop": 26,
+        "abort_rearm": 26,
+        "held_priority_controls": 35,
+        "overrun_saturation": 1,
+        "retire_refill_after_saturation": 1,
+        "incoherent_saturation": 12,
+        "same_edge_consume_refill": 1,
+        "consume_zero_payload": 1,
+        "random_sample": 8000
+      },
+      "expected_events": {
+        "candidates": 1396,
+        "admitted": 1362,
+        "retired": 754,
+        "starts": 2225,
+        "incoherent": 2378,
+        "period_overflow": 6,
+        "witness_overflow": 3,
+        "overrun": 34
+      },
+      "vectors_sha256": "3a2d1d7e526eb72bdf200bbb4dc229b454a91beadd5d84bfa422591bfdd7d244",
+      "passed": false,
+      "ports_sha256": "8282e388182189248760869454f352d691bba140a7a454d0e372b7109f78fa99"
+    }
+  ],
+  "status": "expected_public_port_rejection",
+  "full32_count_and64_witness_traversal": false,
+  "frozen_receipt_sha256": "41c860c8e4672725a5617c877fcf684420fe2e516a35cc69128eae46b0a42ab5",
+  "rtl_sha256": "616b8f92e326578d8243faa791aa65d014be55eca185af7d3ebe80149624e922"
+}

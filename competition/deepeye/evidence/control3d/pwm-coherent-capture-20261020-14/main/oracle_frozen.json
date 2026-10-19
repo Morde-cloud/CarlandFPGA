@@ -1,0 +1,51 @@
+{
+  "at_utc": "2026-10-19T18:26:41.618789+00:00",
+  "actual_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "actual_App_turn": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "input_files": [
+    {
+      "file": "SCOPE.md",
+      "sha256": "f2d8ed287848e536b140629f3f30f7105d2171a6cc0c00be2186d09c9115331d"
+    },
+    {
+      "file": "SCOPE_FROZEN.json",
+      "sha256": "0a8992e32b30e1b084f7392c2941b42e1b3814048d6cd0139f669189353f4eea"
+    },
+    {
+      "file": "SCOPE_CONTINUE_CONSUMED.json",
+      "sha256": "021672d5204c8d034ea879921f6d0c3b34180ad538b2b49719c5ab4750d8a4a6"
+    },
+    {
+      "file": "SCOPE_REVIEW_DECISION_20261020_14.json",
+      "sha256": "2290a3e5f69d55f02036d318ac6953e8b0081694c253ff02d65e26461c6b6c99"
+    },
+    {
+      "file": "immutable_scope.md",
+      "sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd"
+    },
+    {
+      "file": "immutable_scope.json",
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    }
+  ],
+  "frozen_result_sha256": "fea7c48aab1c74844e2d1328ee6ef19ae6eacc3fb9eec684ea0a863b80d30fcb",
+  "author_implementation_read": false,
+  "freeze_before_author_read": true,
+  "hand_checked_literal_cases": [
+    "Literal start1/falls2,3,2/end4 -> period3/high1,2,1/full64tag",
+    "Old retire/new fill uses next actual common edges4/6",
+    "Rearm suppresses old handshake and high baseline cannot generate start/period",
+    "Last representable end3, next edge witness fault, stable queued record, unarmed retirement",
+    "At would-be tick8/elapsed4, witness fault outranks count overflow; no restart",
+    "Equal-period phase-shifted one-hot lanes never form a common interval"
+  ],
+  "sampled_edges": 800870,
+  "RLE_rows": 65156,
+  "primary_small_width_tuples": 450,
+  "repeated_tuples_with_shorter_witness": 9,
+  "random_samples": 48000,
+  "child_job_id": "child-ee0aedf1c857468891297b79118e6232",
+  "simulation": "not_run_at_freeze",
+  "formal_cards": "29 not_run"
+}

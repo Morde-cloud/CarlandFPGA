@@ -1,0 +1,11 @@
+--- original.sv
++++ relaxed_common_start.sv
+@@ -234,7 +234,7 @@
+                     fall_mask   = (previous_q & (~sample_levels)) & 3'b111;
+ 
+                     if (!partial_valid_q) begin
+-                        if (rise_mask == RISE_ALL) begin // MUTATION_IDLE_RELAXED_COMMON
++                        if (rise_mask != RISE_NONE) begin // MUTATION_IDLE_RELAXED_COMMON
+                             partial_valid_q <= 1'b1;
+                             partial_start_q <= witness_now;
+                             partial_age_q   <= COUNT_ZERO;

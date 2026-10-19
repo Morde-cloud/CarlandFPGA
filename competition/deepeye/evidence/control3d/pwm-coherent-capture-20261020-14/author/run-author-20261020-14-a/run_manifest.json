@@ -1,0 +1,868 @@
+{
+  "baseline_head": "732a58ba60c7cce0027d683e912d986453755843",
+  "ended_utc": "2026-10-19T18:44:29.954624+00:00",
+  "failures": [],
+  "host": {
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "inputs": {
+    "checks": [
+      {
+        "bytes": 17516,
+        "expected_sha256": "f2d8ed287848e536b140629f3f30f7105d2171a6cc0c00be2186d09c9115331d",
+        "label": "scope",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\SCOPE.md",
+        "sha256": "f2d8ed287848e536b140629f3f30f7105d2171a6cc0c00be2186d09c9115331d"
+      },
+      {
+        "bytes": 6825,
+        "expected_sha256": "0a8992e32b30e1b084f7392c2941b42e1b3814048d6cd0139f669189353f4eea",
+        "label": "scope_frozen",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\SCOPE_FROZEN.json",
+        "sha256": "0a8992e32b30e1b084f7392c2941b42e1b3814048d6cd0139f669189353f4eea"
+      },
+      {
+        "bytes": 13109,
+        "expected_sha256": "2290a3e5f69d55f02036d318ac6953e8b0081694c253ff02d65e26461c6b6c99",
+        "label": "scope_review_decision",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\SCOPE_REVIEW_DECISION_20261020_14.json",
+        "sha256": "2290a3e5f69d55f02036d318ac6953e8b0081694c253ff02d65e26461c6b6c99"
+      },
+      {
+        "bytes": 1867,
+        "expected_sha256": null,
+        "label": "scope_continue_consumed",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\SCOPE_CONTINUE_CONSUMED.json",
+        "sha256": "021672d5204c8d034ea879921f6d0c3b34180ad538b2b49719c5ab4750d8a4a6"
+      },
+      {
+        "bytes": 7648,
+        "expected_sha256": null,
+        "label": "scope_review_consumed",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\SCOPE_REVIEW_CONSUMED_20261020_14.json",
+        "sha256": "551a0fd6cfb536f09549524bc7706d35bfc087a1cf4470111f7bd6335c3d4f8b"
+      },
+      {
+        "bytes": 4580,
+        "expected_sha256": "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8",
+        "label": "protected_dirty_codec_input",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\handoffs\\b\\B-DEEPEYE-CODEC-20261016-01\\input.json",
+        "sha256": "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8"
+      },
+      {
+        "bytes": 4680,
+        "expected_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+        "label": "canonical_requirements",
+        "matches": true,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\docs\\competition\\deepeye-2026\\immutable_scope.json",
+        "rule": "json.dumps(requirements, ensure_ascii=False, sort_keys=True, separators=(',',':')).encode('utf-8')",
+        "sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+      }
+    ],
+    "contract": {
+      "design": "1011259415a0916054eb580687612580bc1e5f09",
+      "id": "DEEPEYE-HUMAN-LOCK-20261014",
+      "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+      "requirements_ids": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H07",
+        "H08",
+        "H09",
+        "H10",
+        "H11",
+        "H12",
+        "H13",
+        "H14",
+        "H15"
+      ],
+      "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+      "revision": 1
+    },
+    "failures": [],
+    "head": "732a58ba60c7cce0027d683e912d986453755843"
+  },
+  "invalid_guard_runs": [
+    {
+      "command_seq": 21,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "COUNT_W=0",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_count_zero"
+    },
+    {
+      "command_seq": 22,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "COUNT_W=-1",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_count_negative"
+    },
+    {
+      "command_seq": 23,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "COUNT_W=33",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_count_high"
+    },
+    {
+      "command_seq": 24,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "WITNESS_W=0",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_witness_zero"
+    },
+    {
+      "command_seq": 25,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "WITNESS_W=-1",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_witness_negative"
+    },
+    {
+      "command_seq": 26,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "WITNESS_W=65",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_witness_high"
+    },
+    {
+      "command_seq": 27,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "TAG_W=0",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_tag_zero"
+    },
+    {
+      "command_seq": 28,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "TAG_W=-1",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_tag_negative"
+    },
+    {
+      "command_seq": 29,
+      "diagnostic_present": true,
+      "exit_code": 0,
+      "expected_parameter_text": "TAG_W=65",
+      "failures": [],
+      "guard_missing_fatal": false,
+      "modelSim_fatal": true,
+      "passed": true,
+      "top": "tb_invalid_tag_high"
+    }
+  ],
+  "limitations": {
+    "author_evidence_only": "not main acceptance, not product acceptance",
+    "board": "not_run_A_only",
+    "cdc_rdc": "not_run",
+    "count_w32_witness_w64": "bounded_observations_only_no_full_traversal",
+    "formal_cards": "29 not_run",
+    "full_G05_B06_R03": "not_run_unaccepted",
+    "implementation": "blocked_no_vivado_not_run",
+    "modelsim_cli_exit_note": "vsim returns 0 after $fatal/TB_FAIL under the recorded -do script; failure is established by the explicit fatal/TB_FAIL public-port log, not by process exit code",
+    "physical_capture": "not_claimed",
+    "pins_hwh_boot_clock_source_ttl_profile_curvature_motion_authority": "not_run",
+    "public_ABI_TRACE_type7": "not_opened",
+    "sampled_transition_liveness_command_applied": "not_claimed",
+    "synthesis": "blocked_no_vivado_not_run"
+  },
+  "limits": {
+    "author_evidence_only": true,
+    "main_or_product_acceptance": "not_claimed"
+  },
+  "mutant_files": [
+    {
+      "diff_path": "mutants/relaxed-common-start.diff",
+      "diff_sha256": "6ad261e0f878247f641f94697315835dc121b09d73997d193cce02424c95d8f7",
+      "id": "relaxed-common-start",
+      "match_count": 1,
+      "original_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+      "path": "mutants/relaxed_common_start.sv",
+      "sha256": "53dceb360779d74be63c8be375bbe5e0ba1e249118f8439df9f2054d890b5925"
+    },
+    {
+      "diff_path": "mutants/retain-partial-on-subset.diff",
+      "diff_sha256": "84d7901b91114128e4407d07a89efaa86c607e2fabd9079bbbf18a0d6bfe43e0",
+      "id": "retain-partial-on-subset",
+      "match_count": 1,
+      "original_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+      "path": "mutants/retain_partial_on_subset.sv",
+      "sha256": "3b16f00978e92df2b08d86745f34708eb8de9d3c9abe65b78c887dfb27bb4877"
+    }
+  ],
+  "mutant_runs": [
+    {
+      "command_seq": 32,
+      "exit_code": 0,
+      "failures": [],
+      "group": 8,
+      "groups": [
+        {
+          "assertions": 28,
+          "cases": 1,
+          "fault_events": 1,
+          "mismatches": 1,
+          "name": "mutant_relaxed_common_start_public_ports",
+          "records": 0,
+          "samples": 7
+        }
+      ],
+      "id": "relaxed-common-start",
+      "mismatch_labels": [
+        "mutant_relaxed_subset_start.events"
+      ],
+      "parameters": {
+        "COUNT_W": 8,
+        "TAG_W": 8,
+        "WITNESS_W": 8,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 28,
+        "cases": 1,
+        "fault_events": 1,
+        "groups": 1,
+        "mismatches": 1,
+        "records": 0,
+        "samples": 7
+      },
+      "vsim_errors_expected_for_TB_FAIL": true
+    },
+    {
+      "command_seq": 35,
+      "exit_code": 0,
+      "failures": [],
+      "group": 7,
+      "groups": [
+        {
+          "assertions": 27,
+          "cases": 1,
+          "fault_events": 1,
+          "mismatches": 2,
+          "name": "mutant_mixed_frame_public_ports",
+          "records": 0,
+          "samples": 9
+        }
+      ],
+      "id": "retain-partial-on-subset",
+      "mismatch_labels": [
+        "mutant_mixed_no_record.valid",
+        "mutant_mixed_no_record.period"
+      ],
+      "parameters": {
+        "COUNT_W": 8,
+        "TAG_W": 8,
+        "WITNESS_W": 8,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 27,
+        "cases": 1,
+        "fault_events": 1,
+        "groups": 1,
+        "mismatches": 2,
+        "records": 0,
+        "samples": 9
+      },
+      "vsim_errors_expected_for_TB_FAIL": true
+    }
+  ],
+  "operation_id": "B-DEEPEYE-PWM-COHERENT-CAPTURE-20261020-14",
+  "original_rtl_sha256_after": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+  "positive_runs": [
+    {
+      "command_seq": 10,
+      "exit_code": 0,
+      "failures": [],
+      "group": 0,
+      "groups": [
+        {
+          "assertions": 406,
+          "cases": 10,
+          "fault_events": 1,
+          "mismatches": 0,
+          "name": "controls_tags_and_abort_phases",
+          "records": 4,
+          "samples": 52
+        },
+        {
+          "assertions": 229,
+          "cases": 6,
+          "fault_events": 12,
+          "mismatches": 0,
+          "name": "negative_coherence_and_recovery",
+          "records": 6,
+          "samples": 65
+        },
+        {
+          "assertions": 430,
+          "cases": 7,
+          "fault_events": 2,
+          "mismatches": 0,
+          "name": "one_slot_transport_and_fault_priority",
+          "records": 8,
+          "samples": 70
+        },
+        {
+          "assertions": 51,
+          "cases": 1,
+          "fault_events": 1,
+          "mismatches": 0,
+          "name": "period_before_incoherent_with_stalled_record",
+          "records": 1,
+          "samples": 24
+        }
+      ],
+      "id": "g00-main-controls-negatives-queue-priority",
+      "parameters": {
+        "COUNT_W": 4,
+        "TAG_W": 8,
+        "WITNESS_W": 8,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 1116,
+        "cases": 24,
+        "fault_events": 16,
+        "groups": 4,
+        "mismatches": 0,
+        "records": 19,
+        "samples": 211
+      }
+    },
+    {
+      "command_seq": 11,
+      "exit_code": 0,
+      "failures": [],
+      "group": 1,
+      "groups": [
+        {
+          "assertions": 404,
+          "cases": 9,
+          "fault_events": 0,
+          "mismatches": 0,
+          "name": "exhaustive_count_w2_legal_high_triples",
+          "records": 9,
+          "samples": 56
+        },
+        {
+          "assertions": 50,
+          "cases": 6,
+          "fault_events": 7,
+          "mismatches": 0,
+          "name": "fault_count_saturation",
+          "records": 0,
+          "samples": 21
+        }
+      ],
+      "id": "g01-exhaustive-count-w2-plus-saturation",
+      "parameters": {
+        "COUNT_W": 2,
+        "TAG_W": 4,
+        "WITNESS_W": 8,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 454,
+        "cases": 15,
+        "fault_events": 7,
+        "groups": 2,
+        "mismatches": 0,
+        "records": 9,
+        "samples": 77
+      }
+    },
+    {
+      "command_seq": 12,
+      "exit_code": 0,
+      "failures": [],
+      "group": 2,
+      "groups": [
+        {
+          "assertions": 24988,
+          "cases": 441,
+          "fault_events": 0,
+          "mismatches": 0,
+          "name": "exhaustive_count_w3_legal_high_triples",
+          "records": 441,
+          "samples": 4042
+        }
+      ],
+      "id": "g02-exhaustive-count-w3",
+      "parameters": {
+        "COUNT_W": 3,
+        "TAG_W": 5,
+        "WITNESS_W": 8,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 24988,
+        "cases": 441,
+        "fault_events": 0,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 441,
+        "samples": 4042
+      }
+    },
+    {
+      "command_seq": 13,
+      "exit_code": 0,
+      "failures": [],
+      "group": 3,
+      "groups": [
+        {
+          "assertions": 655475,
+          "cases": 3,
+          "fault_events": 1,
+          "mismatches": 0,
+          "name": "count_w16_full_period_boundaries",
+          "records": 3,
+          "samples": 163856
+        }
+      ],
+      "id": "g03-count-w16-full-period-boundaries",
+      "parameters": {
+        "COUNT_W": 16,
+        "TAG_W": 16,
+        "WITNESS_W": 32,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 655475,
+        "cases": 3,
+        "fault_events": 1,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 3,
+        "samples": 163856
+      }
+    },
+    {
+      "command_seq": 14,
+      "exit_code": 0,
+      "failures": [],
+      "group": 4,
+      "groups": [
+        {
+          "assertions": 88,
+          "cases": 2,
+          "fault_events": 2,
+          "mismatches": 0,
+          "name": "count_w2_witness_w2_exhaustion",
+          "records": 1,
+          "samples": 18
+        }
+      ],
+      "id": "g04-min-widths-witness-w2",
+      "parameters": {
+        "COUNT_W": 2,
+        "TAG_W": 1,
+        "WITNESS_W": 2,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 88,
+        "cases": 2,
+        "fault_events": 2,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 1,
+        "samples": 18
+      }
+    },
+    {
+      "command_seq": 15,
+      "exit_code": 0,
+      "failures": [],
+      "group": 5,
+      "groups": [
+        {
+          "assertions": 144,
+          "cases": 3,
+          "fault_events": 0,
+          "mismatches": 0,
+          "name": "count_w32_witness_w64_tag_w64",
+          "records": 3,
+          "samples": 21
+        }
+      ],
+      "id": "g05-max-widths-bounded",
+      "parameters": {
+        "COUNT_W": 32,
+        "TAG_W": 64,
+        "WITNESS_W": 64,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 144,
+        "cases": 3,
+        "fault_events": 0,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 3,
+        "samples": 21
+      }
+    },
+    {
+      "command_seq": 16,
+      "exit_code": 0,
+      "failures": [],
+      "group": 6,
+      "groups": [
+        {
+          "assertions": 12588,
+          "cases": 128,
+          "fault_events": 0,
+          "mismatches": 0,
+          "name": "deterministic_random_three_lane_schedule",
+          "records": 128,
+          "samples": 2407
+        }
+      ],
+      "id": "g06-deterministic-random-schedule",
+      "parameters": {
+        "COUNT_W": 8,
+        "TAG_W": 16,
+        "WITNESS_W": 16,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 12588,
+        "cases": 128,
+        "fault_events": 0,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 128,
+        "samples": 2407
+      }
+    },
+    {
+      "command_seq": 17,
+      "exit_code": 0,
+      "failures": [],
+      "group": 9,
+      "groups": [
+        {
+          "assertions": 153,
+          "cases": 5,
+          "fault_events": 5,
+          "mismatches": 0,
+          "name": "small_literal_period_and_witness",
+          "records": 3,
+          "samples": 44
+        }
+      ],
+      "id": "g09-small-boundaries",
+      "parameters": {
+        "COUNT_W": 2,
+        "TAG_W": 3,
+        "WITNESS_W": 3,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 153,
+        "cases": 5,
+        "fault_events": 5,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 3,
+        "samples": 44
+      }
+    },
+    {
+      "command_seq": 18,
+      "exit_code": 0,
+      "failures": [],
+      "group": 10,
+      "groups": [
+        {
+          "assertions": 52,
+          "cases": 1,
+          "fault_events": 0,
+          "mismatches": 0,
+          "name": "default_parameter_smoke",
+          "records": 1,
+          "samples": 8
+        }
+      ],
+      "id": "g10-default-parameter-smoke",
+      "parameters": {
+        "COUNT_W": null,
+        "TAG_W": null,
+        "WITNESS_W": null,
+        "source": "defaults"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 52,
+        "cases": 1,
+        "fault_events": 0,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 1,
+        "samples": 8
+      }
+    },
+    {
+      "command_seq": 19,
+      "exit_code": 0,
+      "failures": [],
+      "group": 11,
+      "groups": [
+        {
+          "assertions": 138,
+          "cases": 3,
+          "fault_events": 2,
+          "mismatches": 0,
+          "name": "count_w3_period_overflow",
+          "records": 3,
+          "samples": 40
+        }
+      ],
+      "id": "g11-count-w3-period-overflow",
+      "parameters": {
+        "COUNT_W": 3,
+        "TAG_W": 4,
+        "WITNESS_W": 8,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 138,
+        "cases": 3,
+        "fault_events": 2,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 3,
+        "samples": 40
+      }
+    },
+    {
+      "command_seq": 20,
+      "exit_code": 0,
+      "failures": [],
+      "group": 12,
+      "groups": [
+        {
+          "assertions": 133,
+          "cases": 3,
+          "fault_events": 3,
+          "mismatches": 0,
+          "name": "witness_w3_namespace_exhaustion",
+          "records": 2,
+          "samples": 38
+        }
+      ],
+      "id": "g12-witness-w3-exhaustion",
+      "parameters": {
+        "COUNT_W": 3,
+        "TAG_W": 1,
+        "WITNESS_W": 3,
+        "source": "explicit"
+      },
+      "passed": true,
+      "stats": {
+        "assertions": 133,
+        "cases": 3,
+        "fault_events": 3,
+        "groups": 1,
+        "mismatches": 0,
+        "records": 2,
+        "samples": 38
+      }
+    }
+  ],
+  "schema": 1,
+  "sources": {
+    "inputs": [
+      {
+        "bytes": 17516,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\SCOPE.md",
+        "role": "scope",
+        "sha256": "f2d8ed287848e536b140629f3f30f7105d2171a6cc0c00be2186d09c9115331d",
+        "snapshot_path": "inputs/SCOPE.md"
+      },
+      {
+        "bytes": 6825,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\SCOPE_FROZEN.json",
+        "role": "scope_frozen",
+        "sha256": "0a8992e32b30e1b084f7392c2941b42e1b3814048d6cd0139f669189353f4eea",
+        "snapshot_path": "inputs/SCOPE_FROZEN.json"
+      },
+      {
+        "bytes": 13109,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\SCOPE_REVIEW_DECISION_20261020_14.json",
+        "role": "scope_review_decision",
+        "sha256": "2290a3e5f69d55f02036d318ac6953e8b0081694c253ff02d65e26461c6b6c99",
+        "snapshot_path": "inputs/SCOPE_REVIEW_DECISION_20261020_14.json"
+      },
+      {
+        "bytes": 1867,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\SCOPE_CONTINUE_CONSUMED.json",
+        "role": "scope_continue_consumed",
+        "sha256": "021672d5204c8d034ea879921f6d0c3b34180ad538b2b49719c5ab4750d8a4a6",
+        "snapshot_path": "inputs/SCOPE_CONTINUE_CONSUMED.json"
+      },
+      {
+        "bytes": 7648,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\SCOPE_REVIEW_CONSUMED_20261020_14.json",
+        "role": "scope_review_consumed",
+        "sha256": "551a0fd6cfb536f09549524bc7706d35bfc087a1cf4470111f7bd6335c3d4f8b",
+        "snapshot_path": "inputs/SCOPE_REVIEW_CONSUMED_20261020_14.json"
+      },
+      {
+        "bytes": 6684,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\docs\\competition\\deepeye-2026\\immutable_scope.json",
+        "role": "contract_json",
+        "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+        "snapshot_path": "inputs/immutable_scope.json"
+      },
+      {
+        "bytes": 6139,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\docs\\competition\\deepeye-2026\\immutable_scope.md",
+        "role": "contract_md",
+        "sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd",
+        "snapshot_path": "inputs/immutable_scope.md"
+      }
+    ],
+    "sources": [
+      {
+        "bytes": 17155,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_coherent_capture.sv",
+        "role": "rtl",
+        "sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+        "snapshot_path": "sources/deepeye_pwm_coherent_capture.sv"
+      },
+      {
+        "bytes": 65516,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\tb_pwm_coherent_capture.sv",
+        "role": "tb",
+        "sha256": "6efa84f8b6fa1d56356615a85a702f0372d0957a71eadb870121963b6d42976e",
+        "snapshot_path": "sources/tb_pwm_coherent_capture.sv"
+      },
+      {
+        "bytes": 36519,
+        "origin_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\run_pwm_coherent_capture.py",
+        "role": "runner",
+        "sha256": "bb52d8b2693ff34851b53eefa80d7442ade95bf37dd05c11809c74cf2b86f911",
+        "snapshot_path": "sources/run_pwm_coherent_capture.py"
+      }
+    ]
+  },
+  "started_utc": "2026-10-19T18:43:47.691548+00:00",
+  "status": "PASS",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "toolchain": {
+    "modelsim_root": "D:\\modelsim1\\win64",
+    "observed_product": "ModelSim SE-64 10.7, compiler/simulator 2017.12",
+    "tools": {
+      "vlib": {
+        "bytes": 2653576,
+        "path": "D:\\modelsim1\\win64\\vlib.exe",
+        "sha256": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e"
+      },
+      "vlog": {
+        "bytes": 18617736,
+        "path": "D:\\modelsim1\\win64\\vlog.exe",
+        "sha256": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6"
+      },
+      "vsim": {
+        "bytes": 3478920,
+        "path": "D:\\modelsim1\\win64\\vsim.exe",
+        "sha256": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf"
+      }
+    },
+    "versions": {
+      "vlib": {
+        "command_record_seq": 7,
+        "exit_code": 1,
+        "text": "Usage: vlib -help\r\n       vlib [-short | -dos | -long | -unix ]\r\n            [-type (directory|flat)]\r\n            [-compress | -nocompress]\r\n            [-dirpath] <path>\r\n            [-unnamed_designs <count>] [(-lock|-unlock) <design>]\r\n            [-locklib|-unlocklib] <library_name>"
+      },
+      "vlog": {
+        "command_record_seq": 5,
+        "exit_code": 0,
+        "text": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017"
+      },
+      "vsim": {
+        "command_record_seq": 6,
+        "exit_code": 0,
+        "text": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017"
+      }
+    }
+  },
+  "totals": {
+    "exhaustive_total": 450,
+    "exhaustive_w2_tuples": 9,
+    "exhaustive_w3_tuples": 441,
+    "invalid_guards": 9,
+    "invalid_guards_passed": 9,
+    "mutants": 2,
+    "mutants_rejected_at_public_ports": 2,
+    "positive_assertions": 695329,
+    "positive_cases": 628,
+    "positive_fault_events": 36,
+    "positive_groups": 15,
+    "positive_mismatches": 0,
+    "positive_records": 613,
+    "positive_runs": 11,
+    "positive_samples": 170762
+  },
+  "work_id": "B-PWM-COHERENT-CAPTURE-RTL-20261020-14-v1",
+  "worktree_rtl_sha256_after": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456"
+}

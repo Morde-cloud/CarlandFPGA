@@ -1,0 +1,42 @@
+{
+  "at_utc": "2026-10-19T18:34:40.979422+00:00",
+  "finding": "MAIN14-DIAGNOSTIC01",
+  "decision": "Harness-only correction; no change to oracle, stimuli, expected ports, testbench or RTL",
+  "original_failure": "The checker required exact parameter values on the fatal line. DUT emits a preceding exact parameter display then its own explicit fatal at time zero. That satisfies the frozen contract.",
+  "replacement": "Require exact DUT fatal marker AND exact parameter display before that fatal; unrelated compile/elaboration failure does not qualify.",
+  "original_frozen_sha256": "fea7c48aab1c74844e2d1328ee6ef19ae6eacc3fb9eec684ea0a863b80d30fcb",
+  "original_main_run_sha256": "eaf8bd44c60de987b744099afa688251155bb57c0101699383079d2a7d082a75",
+  "original_runner_sha256": "3cafe531fa0dab2ffb937f57ed1e107ad44cb1e7287da200028323392c774ac5",
+  "corrected_runner_sha256": "89919ae706090d0b78eb8df2d4f731a4454c97947da509162fc3200f59ad1de6",
+  "main_tb_sha256": "9a7810a28fc6f75783da03b80d487fc3eec376bcdcb8090d701efb3f345c9e9e",
+  "AST_reference_stimuli_vectors_identical": true,
+  "vectors": [
+    {
+      "name": "c16_w17_t64.vectors.txt",
+      "sha256": "764c54c5a46be4d03d673a14bd51d739ace88d9969f826b5bdd731823fc510f2"
+    },
+    {
+      "name": "c2_w2_t64.vectors.txt",
+      "sha256": "f5d89440d81e01e345c9143f6b8d88e24248a24744be692ec9d1727ac1bee873"
+    },
+    {
+      "name": "c2_w3_t32.vectors.txt",
+      "sha256": "ba5795b6e3f3cc3381b3594b9bb87ff7525a7927013bbf3f0293d8b13c04128a"
+    },
+    {
+      "name": "c2_w6_t1.vectors.txt",
+      "sha256": "4f9b0c96e5b8e497e99b60f1b75b4617714fedf0674771b9aa7eb9f1b81d61db"
+    },
+    {
+      "name": "c32_w64_t64.vectors.txt",
+      "sha256": "5770f9c68a521ddf96872526894a84e3574de885d44407fc29d8080e2f1ec0e0"
+    },
+    {
+      "name": "c3_w6_t64.vectors.txt",
+      "sha256": "3a2d1d7e526eb72bdf200bbb4dc229b454a91beadd5d84bfa422591bfdd7d244"
+    }
+  ],
+  "chronology": "Original oracle_frozen.json was read and confirmed before first author RTL read in tool df4153. This correction and frozen-harness02 were made AFTER that read. No pre-author chronology is claimed for harness02.",
+  "source_snapshot_during_active_child_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+  "not_terminal_acceptance": true
+}

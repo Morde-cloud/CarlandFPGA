@@ -1,0 +1,11 @@
+--- original.sv
++++ retain_partial_on_subset.sv
+@@ -292,7 +292,7 @@
+                             // interval may be spliced into a later frame.
+                             incoherent_event_q <= 1'b1;
+                             incoherent_seen_q  <= 1'b1;
+-                            partial_valid_q    <= 1'b0; // MUTATION_ABORT_PARTIAL
++                            partial_valid_q    <= partial_valid_q; // MUTATION_ABORT_PARTIAL
+                             if (fault_count_q != COUNT_MAX) begin
+                                 fault_count_q <= fault_count_q + 1'b1;
+                             end

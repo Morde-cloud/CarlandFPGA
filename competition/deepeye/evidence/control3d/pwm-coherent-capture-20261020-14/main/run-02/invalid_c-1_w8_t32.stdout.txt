@@ -1,0 +1,37 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -onfinish stop work.main_tb_pwm_coherent_capture "+VECTORS=c32_w64_t64.vectors.txt" "+TRACE=invalid_c-1_w8_t32.ports.txt" -do "c32_w64_t64.do" -gTAG_W=32 -gWITNESS_W=8 -gCOUNT_W=-1 
+# Start time: 02:35:13 on Oct 20,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: tb.sv(14): (vopt-2241) Connection width does not match width of port 'out_period'. The port definition is at: dut.sv(47).
+# ** Warning: tb.sv(14): (vopt-2241) Connection width does not match width of port 'out_high0'. The port definition is at: dut.sv(48).
+# ** Warning: tb.sv(14): (vopt-2241) Connection width does not match width of port 'out_high1'. The port definition is at: dut.sv(49).
+# ** Warning: tb.sv(14): (vopt-2241) Connection width does not match width of port 'out_high2'. The port definition is at: dut.sv(50).
+# ** Warning: tb.sv(14): (vopt-2241) Connection width does not match width of port 'fault_count'. The port definition is at: dut.sv(62).
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.main_tb_pwm_coherent_capture(fast)
+# do c32_w64_t64.do
+# DEEPEYE_COHERENT_INVALID_PARAM COUNT_W=-1 WITNESS_W=8 TAG_W=32
+# ** Fatal: DEEPEYE_COHERENT_INVALID_PARAM unsupported widths
+#    Time: 0 ps  Scope: main_tb_pwm_coherent_capture.dut File: dut.sv Line: 136
+# ** Note: $finish    : dut.sv(136)
+#    Time: 0 ps  Iteration: 0  Instance: /main_tb_pwm_coherent_capture/dut
+# Break at dut.sv line 136
+# Stopped at dut.sv line 136
+# End time: 02:35:14 on Oct 20,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 5

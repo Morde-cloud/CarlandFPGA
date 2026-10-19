@@ -1,0 +1,29 @@
+{
+  "at_utc": "2026-10-19T18:47:22.376127+00:00",
+  "run_manifest_sha256": "b580d67142750f73396f0e55855fdd8da4a5eb02d1dabe70ded233d01b8f3457",
+  "final_author_snapshots_match_product": true,
+  "command_records_verified": 35,
+  "source_and_input_snapshots_verified": 10,
+  "positive_runs": 11,
+  "totals": {
+    "exhaustive_total": 450,
+    "exhaustive_w2_tuples": 9,
+    "exhaustive_w3_tuples": 441,
+    "invalid_guards": 9,
+    "invalid_guards_passed": 9,
+    "mutants": 2,
+    "mutants_rejected_at_public_ports": 2,
+    "positive_assertions": 695329,
+    "positive_cases": 628,
+    "positive_fault_events": 36,
+    "positive_groups": 15,
+    "positive_mismatches": 0,
+    "positive_records": 613,
+    "positive_runs": 11,
+    "positive_samples": 170762
+  },
+  "SHA256SUMS_checks": [],
+  "main_reran_author_suite": false,
+  "reason": "Main actually ran its independent frozen reference/public-port suite; exact author final source and raw logs are separately audited. Assertion invocations are not independent product cases.",
+  "author_runner_portability_limit": "Author preflight binds B private scope/controller receipt paths and protected dirty input; independent reproduction uses the portable main runner with the published frozen evidence."
+}

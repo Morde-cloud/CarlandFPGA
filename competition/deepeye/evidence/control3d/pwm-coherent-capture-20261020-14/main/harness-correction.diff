@@ -1,0 +1,14 @@
+--- frozen-oracle/runner.py
++++ corrected-runner.py
+@@ -189,8 +189,9 @@
+             for c,w,t in [(1,8,32),(33,8,32),(0,8,32),(-1,8,32),(3,1,32),(3,65,32),(3,0,32),(3,-1,32),(3,8,0),(3,8,-1),(3,8,65)]:
+                 label='invalid_c%d_w%d_t%d'%(c,w,t);p=run(label,[a.tool/'vsim.exe','-c','-onfinish','stop','work.main_tb_pwm_coherent_capture','-gCOUNT_W='+str(c),'-gWITNESS_W='+str(w),'-gTAG_W='+str(t),'+VECTORS='+v.name,'+TRACE='+label+'.ports.txt','-do',do.name]);raw=p.stdout+p.stderr
+                 fatal=re.search(rb'\*\* Fatal:[^\r\n]*',raw);assert fatal and b'MAIN_COHERENT_CAPTURE_PASS' not in raw
+-                line=fatal.group();assert b'UNSUPPORTED' in line.upper() or b'PARAMETER' in line.upper()
+-                assert all(s.encode() in line for s in ['COUNT_W=%d'%c,'WITNESS_W=%d'%w,'TAG_W=%d'%t]),'explicit DUT diagnostic must identify the unsupported parameter values'
++                line=fatal.group();assert b'DEEPEYE_COHERENT_INVALID_PARAM unsupported widths' in line
++                diagnostic=('DEEPEYE_COHERENT_INVALID_PARAM COUNT_W=%d WITNESS_W=%d TAG_W=%d'%(c,w,t)).encode()
++                assert diagnostic in raw[:fatal.start()], 'explicit DUT diagnostic with exact values must precede its own fatal'
+                 r['invalid_parameters'].append({'count_w':c,'witness_w':w,'tag_w':t,'explicit_guard':True,'exit_code':p.returncode})
+             r['status']='passed'
+         save();print(json.dumps(r))

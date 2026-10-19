@@ -1,0 +1,71 @@
+{
+  "at_utc": "2026-10-19T18:35:40.009378+00:00",
+  "status": "passed",
+  "original_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+  "original_unchanged": true,
+  "cases": [
+    {
+      "name": "relaxed_common_R1",
+      "description": "Treat any nonzero rising subset as shared completion after common R0; permits mixed end witnesses",
+      "mutant_sha256": "616b8f92e326578d8243faa791aa65d014be55eca185af7d3ebe80149624e922",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_coherent_capture.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\relaxed_common_R1.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_coherent_capture.sv",
+        "--frozen",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\frozen-harness02",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-relaxed_common_R1",
+        "--owned-root",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main",
+        "--cases",
+        "3:6:64",
+        "--negative"
+      ],
+      "driver_exit_code": 0,
+      "result_sha256": "797b62b4c8f9d34681d2dd5503e81cdddbd21d25637e257ac0f746b297f79049",
+      "public_port_log_sha256": "e226be5d801eda18d5961138850a6fc2beaf7056846cc11b4cc8f1abb7500a7c",
+      "failure_lines": [
+        "# ** Fatal: PUBLIC_PORT_MISMATCH post row=5363 repeat=0 edge=7362 field=2 got=0000000000000001 expected=0000000000000000"
+      ]
+    },
+    {
+      "name": "stale_rearm_slot",
+      "description": "Retain old whole result slot over rearm while combinational out_valid is temporarily suppressed",
+      "mutant_sha256": "466c3a8664fdebcec8a08fb3ef0f912fed3b5452666865cc3767c3ac36dfad82",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_coherent_capture.py",
+        "--rtl",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\stale_rearm_slot.sv",
+        "--tb",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_coherent_capture.sv",
+        "--frozen",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\frozen-harness02",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main\\negative-stale_rearm_slot",
+        "--owned-root",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main",
+        "--cases",
+        "3:6:64",
+        "--negative"
+      ],
+      "driver_exit_code": 0,
+      "result_sha256": "ce20212f93546002af82a1891a4640b35937184645e7e6d3b9af35806f25d33a",
+      "public_port_log_sha256": "703853740c31643c1ce457f48250af38e22dbd635fc18bf86c8b5be945c7345c",
+      "failure_lines": [
+        "# ** Fatal: PUBLIC_PORT_MISMATCH post row=6876 repeat=0 edge=9242 field=3 got=0000000000000005 expected=0000000000000000"
+      ]
+    }
+  ],
+  "scope": "Two deliberately incorrect isolated copies rejected by actual main public-port simulation; not original RTL modifications or board evidence"
+}

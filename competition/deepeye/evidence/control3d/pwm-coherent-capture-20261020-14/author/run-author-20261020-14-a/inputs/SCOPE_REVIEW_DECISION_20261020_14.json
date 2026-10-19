@@ -1,0 +1,175 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-19T18:20:01.210885+00:00",
+  "project_id": "fpga-main",
+  "node_id": "B",
+  "task_id": "B-MAIN-CONTINUATION-20261019",
+  "task_version": 1,
+  "message_id": "main:969de0027c01217e520304ff72318297d7097ed159f78b9e6f24a9f715bc7136",
+  "event": "B-LOCAL-COHERENT-CAPTURE-CONTINUE-20261020-v1/SCOPE_FROZEN_REVIEW",
+  "parent_work_id": "B-LOCAL-COHERENT-CAPTURE-CONTINUE-20261020-v1",
+  "instruction_operation_id": "B-LOCAL-COHERENT-CAPTURE-CONTINUE-20261020-v1-DIRECTOR-SCOPE",
+  "product_operation_id": "B-DEEPEYE-PWM-COHERENT-CAPTURE-20261020-14",
+  "execution_work_id": "B-PWM-COHERENT-CAPTURE-RTL-20261020-14-v1",
+  "decision_operation_id": "B-LOCAL-COHERENT-CAPTURE-CONTINUE-20261020-v1-SCOPE-REVIEW-14",
+  "actual_coordinator": {
+    "thread_id": "01a154de-abd8-7590-b9a3-2819249458e3",
+    "turn_id": "01a15560-8305-7783-a7fc-afa6e3920e51",
+    "started_at_epoch": 1792433750,
+    "model": "gpt-6-astra",
+    "effort": "ultra"
+  },
+  "actual_scope_event_consumed": true,
+  "consumption_receipt": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/main-continuation-20261019-v1/SCOPE_REVIEW_CONSUMED_20261020_14.json",
+    "sha256": "551a0fd6cfb536f09549524bc7706d35bfc087a1cf4470111f7bd6335c3d4f8b"
+  },
+  "decision": "CONTINUE",
+  "decision_level": "ONE_FROZEN_INTERNAL_COHERENT_CAPTURE_SCOPE_IMPLEMENTATION_AUTHORIZED_NOT_ACCEPTANCE",
+  "spec": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-coherent-capture-20261020-14/SCOPE.md",
+    "sha256": "f2d8ed287848e536b140629f3f30f7105d2171a6cc0c00be2186d09c9115331d"
+  },
+  "frozen_receipt": {
+    "path": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-coherent-capture-20261020-14/SCOPE_FROZEN.json",
+    "sha256": "0a8992e32b30e1b084f7392c2941b42e1b3814048d6cd0139f669189353f4eea"
+  },
+  "baseline_head": "732a58ba60c7cce0027d683e912d986453755843",
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "requirement_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design": "1011259415a0916054eb580687612580bc1e5f09",
+    "canonical_pin_and_baseline_HEAD_recomputed": true
+  },
+  "product_director": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+    "App_turn_id": "01a154e7-12a1-7e12-ad4a-c4e2577b93b9",
+    "sole_technical_decision_owner_unchanged": true
+  },
+  "blocking_findings": [],
+  "scope_rewrite_required": false,
+  "review_findings": [
+    "The new shared capture FSM fills the specific missing common-edge coherence function. It preserves accepted12/13 byte identities and requires no new public ABI, pin, clock, register/HWH, profile or board authorization.",
+    "A common observed rising mask111 establishes a shared R0. Per-lane first falls and a later common R1 support one whole raw interval. Rejecting any proper-subset rise during a partial prevents an earlier/later lane interval from being spliced into a coherent record. Numeric period equality alone is never sufficient.",
+    "Rearm samples a baseline at local tick0 and never counts that edge as R0; actual start>=1. Witnesses are nonwrapping local window indices, with start<end and period=end-start. Tag reuse/zero remains opaque and cannot establish unique request or applied-command identity.",
+    "The namespace-exhaustion rule is distinct from a missing-signal watchdog: processing at t==TMAX is legal, but the next armed edge disarms and clears the partial without manufacturing TMAX+1 or wrapping. It occurs once even when idle, with explicit rearm needed for further acquisition.",
+    "Result transport is correctly independent of armed: a pre-existing complete record may retire on the exhaustion edge or later unarmed edges and stays stable while stalled. Its transport-valid status grants no freshness, waveform liveness or motion eligibility.",
+    "Period overflow uses old age==CMAX, making elapsed CMAX legal and CMAX+1 invalid. Only a representable genuine common rising can restart on that period-overflow edge. Witness exhaustion has priority and forbids that restart when its own next tick is unrepresentable.",
+    "The fault priority witness_overflow > period_overflow > incoherent > overrun is consistent with candidate eligibility. Exactly one event increments saturating fault_count per edge. Its count is fault/drop notifications, not an asserted number of lost physical frames.",
+    "Reset/STOP outrank rearm, both suppress old transport handshakes and clear window/queue/diagnostics. Ordinary retire/refill has no bypass; stalled payload remains whole and the frontend continues independently.",
+    "The independent acceptance plan addresses actual common-edge/phase mismatch, extra/missing edges, abort windows, timestamp and period boundaries, queue behavior and isolated mutant rejection. COUNT_W2/3 legal high triples total9+441=450 when witness width is sufficient. The full16-bit65535/65536 tests likewise require adequate witness width; min-witness tests exercise a deliberately shorter representable window.",
+    "Synchronous sample observations cannot reveal unsampled transitions or infer constant-channel duty/period. After-real-command capture, source/session/request/control_epoch/capture_seq, physical time, freshness/TTL/profile/curvature and both complete control chains remain open G05/system integration gates."
+  ],
+  "analytical_examples_not_simulation": [
+    {
+      "parameters": "COUNT_W2, WITNESS_W2",
+      "edges": "rearm0/000; t1/111; t2/000; t3/111",
+      "conclusion": "A period2/high1x3 record with start1/end3 is legal. The next ordinary edge emits only witness exhaustion and disarms; an older ready record may retire on that edge, or later while unarmed. No new capture without rearm."
+    },
+    {
+      "parameters": "COUNT_W2, WITNESS_W3",
+      "edges": "R0 at1; all first falls at2; common R1 at4 versus5",
+      "conclusion": "R1 at4 gives legal period3. If it first arrives at5, period4 is rejected once by period overflow, while that representable common rise starts the next partial at5."
+    },
+    {
+      "parameters": "COUNT_W2, WITNESS_W3",
+      "edges": "R0 at4; falls at5; no new rise through7; ordinary next edge",
+      "conclusion": "Old tick7 and old age3 exhaust both ranges. Only witness_overflow is emitted, capture disarms, and no unrepresentable next start is created."
+    }
+  ],
+  "publication_prerequisite_review": {
+    "finding": "PUB13-READLOG01",
+    "historical_limitation_unchanged": "15 original op13 lookup404 bodies remain unavailable; no reconstruction, old receipt rewrite or old publication replay.",
+    "helper": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14\\unique_observations.py",
+      "sha256": "9f54798abd76f67014141d845495fad2364d5c2aed21dac19749b82062dd33a3",
+      "local_proof_sha256": "26b7478ddb58e48f64a835fff83c1f2838f30ac3a6ddfa4df0b1bc71e9ff997a",
+      "legacy_readonly_sha256": "df1c53fc95a423beb65915604d2525739c4338ecc416c3e8909472c2db8d1b6f",
+      "limitation": "PUB13-READLOG01 remains historical:15 earlier404 raw responses lost; no recreation or old helper write"
+    },
+    "local_proof": "Inspected the exact wrapper/test and verified three separate response bytes/hash records, retaining first404 after second same-logical-name200; the third fake request uses its own request/response name. Three actual saved scope GETs also use unique ordinal names. No network or credential call was made by the coordinator.",
+    "mechanism": "Fresh phase directory plus serial monotonic per-call prefix, raw-path collision checks and saved observation index; no concurrency or crash-resume guarantee inferred.",
+    "required_before_future_publication": [
+      "At the new publication call site, explicitly set the product operation B-DEEPEYE-PWM-COHERENT-CAPTURE-20261020-14 and execution work B-PWM-COHERENT-CAPTURE-RTL-20261020-14-v1 before the first request. new_client currently defaults to the scope parent work and DIRECTOR-SCOPE IDs, which correctly describe these scope reads but must not label product publication.",
+      "Verify the frozen wrapper and legacy client hashes before future use; keep each request/response routed through the ordinal wrapper and resolve filenames through its observation index. Keep old client read-only.",
+      "Verify final publication raw hashes/index/IDs and final ref/PR/metadata bytes. Unknown writes still require reconciliation, not automatic replay."
+    ],
+    "worker_start_not_blocked_by_publication_callsite_binding": "This is a future director-owned publication precondition; the frozen RTL scope need not be rewritten and no helper change is required just to bind the call-site metadata."
+  },
+  "authorization": {
+    "responsible_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-PWM-COHERENT-CAPTURE-RTL-20261020-14-v1",
+    "route": "Exactly one DeepSeek Flash/max execution through supported ledger after actual decision consumption",
+    "worker_ownership": [
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/control3d/deepeye_pwm_coherent_capture.sv",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/control3d/pwm_coherent_capture_candidate.md",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/control3d/tb_pwm_coherent_capture.sv",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/tools/control3d/run_pwm_coherent_capture.py",
+      ".local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-coherent-capture-20261020-14/author"
+    ],
+    "director_ownership": [
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-coherent-capture-20261020-14\\main",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\control3d\\main_tb_pwm_coherent_capture.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\control3d\\main_verify_pwm_coherent_capture.py",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\handoffs\\b\\B-DEEPEYE-PWM-COHERENT-CAPTURE-20261020-14",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\independent-coherent-capture-20261020-14"
+    ],
+    "no_new_root_native_or_App_context": true,
+    "preserve_old_operations_and_dirty_input": true,
+    "child_restrictions": "No commit/publish, credential, peer/group, service/config/SQL/queue, public-schema or board authority. Carry contract IDs/hash and actual escalation markers in prompt.",
+    "duplicate_and_failure_handling": "Reuse identical jobs; conflicting ownership or uncertain side effects require reconciliation. Never automatically replay failed/interrupted mutations.",
+    "director_independent_acceptance": "Freeze main oracle/stimulus before reading author implementation. Require actual ModelSim public-port positive/negative results and pinned exact source/raw evidence; only then publish one new operation14 checkpoint on existing PR30 with force=false and exact byte checks.",
+    "old35percent_rule_revoked": true
+  },
+  "formal_limits": {
+    "new_RTL": "not_started_at_review",
+    "new_simulation": "not_run",
+    "synthesis": "blocked_without_actual_Vivado",
+    "implementation": "blocked_without_actual_Vivado",
+    "CDC_RDC": "not_run",
+    "board": "not_run_A_only",
+    "G05_B06_R03_system": "not_run_unaccepted",
+    "formal_cards": "29 not_run",
+    "public_ABI_TRACEtype7_and_motion_authority": "unchanged; no expansion"
+  },
+  "result_delivery": {
+    "message_id": "main:969de0027c01217e520304ff72318297d7097ed159f78b9e6f24a9f715bc7136",
+    "channel": "completed result via original main_submit message_id/main_wait",
+    "end_turn_to_release_serial_gateway": true,
+    "no_repeat_submit_or_App_proxy": true,
+    "next_event": "Actual completion/failure/substantive blocker only; no timer, READY, model polling, Goal or automation.",
+    "current_product_consumption_not_yet_claimed": true
+  },
+  "actions_this_turn": {
+    "own_coordinator_evidence_only": true,
+    "worker_or_new_session_created": false,
+    "product_or_legacy_helper_changed": false,
+    "historical_test_or_helper_proof_rerun": false,
+    "network_publication_or_peer_send": false,
+    "service_config_SQL_credential_queue_changes": false,
+    "human_group_report": "One stable scope-decision report after artifact readback; its queued receipt is separate and not proof of worker start."
+  }
+}

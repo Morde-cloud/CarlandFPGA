@@ -1,0 +1,40 @@
+{
+  "variant": "original",
+  "runner_sha256": "c9ed6752d607c99e9678881d8ab77d0cfde887d2d9b10f3f74ffa62b1b5d4872",
+  "byte_preserving": false,
+  "timeout_partial_preserving": false,
+  "calls": [
+    {
+      "name": "bytes",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))"
+      ],
+      "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))\"",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-original",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.109,
+      "stdout": "bytes.stdout.log",
+      "stderr": "bytes.stderr.log"
+    },
+    {
+      "name": "timeout",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import os,time;os.write(1,bytes([255,13,10])+b\"partial\");os.write(2,bytes([128,13,10])+b\"err\");time.sleep(2)"
+      ],
+      "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os,time;os.write(1,bytes([255,13,10])+b\\\"partial\\\");os.write(2,bytes([128,13,10])+b\\\"err\\\");time.sleep(2)\"",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-original",
+      "exit_code": null,
+      "timed_out": true,
+      "elapsed_seconds": 0.375,
+      "stdout": "timeout.stdout.log",
+      "stderr": "timeout.stderr.log"
+    }
+  ]
+}

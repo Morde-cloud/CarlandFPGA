@@ -1,0 +1,9 @@
+{
+  "status": "IN_PROGRESS_WORKER_SNAPSHOT_DEFECT_OBSERVED_NOT_FINAL_WORKER_DECISION",
+  "original_sha256": "c5b960803293dd21626f3e4ff42f3dfd597c3a288efd93c7685999720421970e",
+  "diagnostic_sha256": "d42125cc073a9107632799ddb2c0179bf65f8b2689931a8df5ba82d4f9ae3e43",
+  "finding": "On cfg admission tail advances; subsequent input writes/count/closure use next free slot rather than reserved slot. Correct128 sample block became error2 and the next block timed out.",
+  "raw_evidence": "main-observation01/ports.txt",
+  "repair_scope": "Private snapshot only; active worker files untouched. Sample references changed to one-bit complement of advanced tail.",
+  "mutations": 6
+}

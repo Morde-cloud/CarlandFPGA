@@ -1,0 +1,112 @@
+{
+  "status": "PASS_RAW_BYTES_TIMEOUT_PORTABLE_AND_GUARDS",
+  "original_defect_reproduced": true,
+  "raw_results": [
+    {
+      "variant": "original",
+      "runner_sha256": "c9ed6752d607c99e9678881d8ab77d0cfde887d2d9b10f3f74ffa62b1b5d4872",
+      "byte_preserving": false,
+      "timeout_partial_preserving": false,
+      "calls": [
+        {
+          "name": "bytes",
+          "command": [
+            "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+            "-B",
+            "-c",
+            "import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))"
+          ],
+          "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))\"",
+          "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-original",
+          "exit_code": 0,
+          "timed_out": false,
+          "elapsed_seconds": 0.109,
+          "stdout": "bytes.stdout.log",
+          "stderr": "bytes.stderr.log"
+        },
+        {
+          "name": "timeout",
+          "command": [
+            "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+            "-B",
+            "-c",
+            "import os,time;os.write(1,bytes([255,13,10])+b\"partial\");os.write(2,bytes([128,13,10])+b\"err\");time.sleep(2)"
+          ],
+          "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os,time;os.write(1,bytes([255,13,10])+b\\\"partial\\\");os.write(2,bytes([128,13,10])+b\\\"err\\\");time.sleep(2)\"",
+          "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-original",
+          "exit_code": null,
+          "timed_out": true,
+          "elapsed_seconds": 0.375,
+          "stdout": "timeout.stdout.log",
+          "stderr": "timeout.stderr.log"
+        }
+      ]
+    },
+    {
+      "variant": "corrected",
+      "runner_sha256": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5",
+      "byte_preserving": true,
+      "timeout_partial_preserving": true,
+      "calls": [
+        {
+          "name": "bytes",
+          "command": [
+            "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+            "-B",
+            "-c",
+            "import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))"
+          ],
+          "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))\"",
+          "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-corrected",
+          "exit_code": 0,
+          "timed_out": false,
+          "elapsed_seconds": 0.094,
+          "stdout": "bytes.stdout.log",
+          "stderr": "bytes.stderr.log",
+          "stdout_sha256": "0a24261e5c821275c5346616dc534c5f7a95db29d85d773423f1cf0196657136",
+          "stderr_sha256": "da2f629f2f2b56d09ea80020eb5a6519d3dc948d303a71c73293aba105da9e33",
+          "stdout_bytes": 11,
+          "stderr_bytes": 6
+        },
+        {
+          "name": "timeout",
+          "command": [
+            "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+            "-B",
+            "-c",
+            "import os,time;os.write(1,bytes([255,13,10])+b\"partial\");os.write(2,bytes([128,13,10])+b\"err\");time.sleep(2)"
+          ],
+          "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os,time;os.write(1,bytes([255,13,10])+b\\\"partial\\\");os.write(2,bytes([128,13,10])+b\\\"err\\\");time.sleep(2)\"",
+          "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-corrected",
+          "exit_code": null,
+          "timed_out": true,
+          "elapsed_seconds": 0.375,
+          "stdout": "timeout.stdout.log",
+          "stderr": "timeout.stderr.log",
+          "stdout_sha256": "7d233487c0fcdb114bb5476a8e40d6cfb1f6e969049dd762d098a1e7c3d70c31",
+          "stderr_sha256": "da2f629f2f2b56d09ea80020eb5a6519d3dc948d303a71c73293aba105da9e33",
+          "stdout_bytes": 10,
+          "stderr_bytes": 6
+        }
+      ]
+    }
+  ],
+  "portable_cases": 54,
+  "portable_checks": 1353306,
+  "runner_sha256": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5",
+  "wrapper_sha256": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+  "flat_inputs": {
+    "deepeye_block_encoder.sv": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+    "deepeye_block_stream.sv": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+    "tb_block_stream.sv": "8ad916887b0fb448b4e9a1ac6475a0368daeafe761e8de7140f13ad06cf8e7c2",
+    "codec_reference.py": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5",
+    "main_stream_spec.md": "012a946647a3e967f1978946e648a36a1da36d696af6b95a3a4330a1e2732070",
+    "run_block_stream.py": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5"
+  },
+  "summary_sha256": "0d7c2ad2239188da18b0d0c9f28c7a168f4d92e4d0fcf72f64720b56b21ad0ba",
+  "input_and_prior_output_bytes_preserved": true,
+  "guard_exit_codes": [
+    2,
+    2
+  ]
+}

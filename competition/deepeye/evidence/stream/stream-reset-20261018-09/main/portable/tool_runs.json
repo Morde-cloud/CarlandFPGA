@@ -1,0 +1,84 @@
+[
+  {
+    "command": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-version"
+    ],
+    "command_line": "D:\\modelsim1\\win64\\vsim.exe -version",
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces",
+    "elapsed_seconds": 0.062,
+    "exit_code": 0,
+    "name": "version",
+    "stderr": "version.stderr.log",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "version.stdout.log",
+    "stdout_bytes": 73,
+    "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "timed_out": false
+  },
+  {
+    "command": [
+      "D:\\modelsim1\\win64\\vlib.exe",
+      "work"
+    ],
+    "command_line": "D:\\modelsim1\\win64\\vlib.exe work",
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces",
+    "elapsed_seconds": 0.047,
+    "exit_code": 0,
+    "name": "vlib",
+    "stderr": "vlib.stderr.log",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "vlib.stdout.log",
+    "stdout_bytes": 87,
+    "stdout_sha256": "c21ed5d399e185c71761a30f357f9b92f309bd849613ffcc78ad40d57f65ce3e",
+    "timed_out": false
+  },
+  {
+    "command": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\export\\deepeye_block_encoder.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\export\\deepeye_block_stream.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\export\\tb_block_stream.sv"
+    ],
+    "command_line": "D:\\modelsim1\\win64\\vlog.exe -sv -work work \"D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\export\\deepeye_block_encoder.sv\" \"D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\export\\deepeye_block_stream.sv\" \"D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\export\\tb_block_stream.sv\"",
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces",
+    "elapsed_seconds": 0.078,
+    "exit_code": 0,
+    "name": "vlog",
+    "stderr": "vlog.stderr.log",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "vlog.stdout.log",
+    "stdout_bytes": 821,
+    "stdout_sha256": "d332facefbeb6b742ddae56461c8be3766227d26652cad85d81c61ebd03e6ba3",
+    "timed_out": false
+  },
+  {
+    "command": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\run.do",
+      "-l",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\vsim.log",
+      "tb_block_stream"
+    ],
+    "command_line": "D:\\modelsim1\\win64\\vsim.exe -c -do \"D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\run.do\" -l \"D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces\\vsim.log\" tb_block_stream",
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\portable output with spaces",
+    "elapsed_seconds": 2.094,
+    "exit_code": 0,
+    "name": "vsim",
+    "stderr": "vsim.stderr.log",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "vsim.stdout.log",
+    "stdout_bytes": 19147,
+    "stdout_sha256": "9f988afff064521b64363300198b540ab1e552909f99963279b916691cd155cd",
+    "timed_out": false
+  }
+]

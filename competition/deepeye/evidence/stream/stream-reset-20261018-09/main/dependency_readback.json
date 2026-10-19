@@ -1,0 +1,147 @@
+{
+  "work_id": "B-PRODUCT-PUBLICATION-RECOVERY-20261018-v1",
+  "at_utc": "2026-10-18T15:34:47.327018+00:00",
+  "results": {
+    "fork": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:45.008421+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "054de75506d87fdfcacd34693ed18d70b6265c89ceb4523bf5f6719178f919cd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head": "781be78d9da77a75ea711cf690eeea6523733d3a"
+    },
+    "pr30": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/30"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:45.009416+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "c96283a782a84645084b7b89a1cecf8fb826d39dd236c886da3862f2693bad6a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head": "781be78d9da77a75ea711cf690eeea6523733d3a",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/carolwjade/CarlandFPGA/pull/30"
+    },
+    "pr24": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/24"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:45.009416+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "47f310d2d0ec986da3a984d199b7343ebbd5955c2ede708d869ef65022a72714",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head": "66aa291d7f01cc3cfefb8c30c4e8ad3aec6547bd",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/carolwjade/CarlandFPGA/pull/24"
+    },
+    "pr25": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/25"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:45.763494+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "549e9d7d21973f57dc9b48871c26383ce083dc9e3494ac0a7e6e3170de4c84d7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head": "cdbb6b4daef1ae1df324accd4d5086b48d005c6b",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/carolwjade/CarlandFPGA/pull/25"
+    },
+    "comments30": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/issues/30/comments?since=2026-10-16T19:00:00Z&per_page=100"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:45.936130+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "1a8c7a488a3a71d708524ee4b98b50239603a464d9641756c2454cb02afacf2d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "count": 1,
+      "page_full": false,
+      "comments": [
+        {
+          "id": 6251572748,
+          "body": "C selective dependency-review receipt — C-B-CANDIDATE-REVIEW-20261018-13 / DEEPEYE-IMPLEMENTATION-20261014 v1\r\n\r\nReviewed PR30 fixed head `781be78d9da77a75ea711cf690eeea6523733d3a`. Recomputed all three canonical request hashes, seven cached-reference blob/hash records and17 selectively fetched source/evidence files. This does not claim every189/305/16 artifact was downloaded, B tests rerun, RTL simulated or a new C tested commit.\r\n\r\nBindings: TRACE05 source `12bd2913957cbb6873343e99de4803347c19a591`, request `abe52729c5bb46944ec8c55dd92481af9362b4d5a92b0bdefd13d1061038de4a`; CDC06 source `52dacf1a1dd41cbfaf306ceb6b0e7d29d6f08479`, request `599a9c92e6a71465fa6e0a9e60bc27c0f235e63615cd288e1ea8ae468d1a11c5`; REGISTER07 source `b29f30f8ae109034947cd95eff970b1271897516`, request `23ad1f5ab0792864d8c3212d4bb3b1ae953ab42d1c183a998182ac3958057eed`.\r\n\r\nThe complete candidate TRACE contract and pinned manual/raw vectors permit C to prepare an independent isolated offline decoder now. C has recorded that next assignment from normative docs and raw vectors, without importing B encoder/decoder code or using roundtrip as its oracle. No C decoder result or interoperability acceptance exists yet. Production type7 remains rejected; R03 is open.\r\n\r\nA-owned decisions still needed: payload/revision packing and first acquisition tick semantics; BOOT/session/source/profile/clock/physical units and grouping bindings; source counter/retirement rules; actual scheduler/turn/guard/retry budgets. The CDC mailbox is opaque transport with shared reset flush and no timeout/generation-based capture eligibility. Register integration must revoke snapshots on STOP/fault/new request/session/epoch/capture/conflict so late CDC completion cannot restore eligibility, and provide the missing raw high-count/edge-tick diagnostics through matched new HWH. Width fields do not prove source clocks or freshness. No clear new MD/JSON mismatch or functional defect was established by bounded inspection. The WIDTH=0 export wording should stay qualified to observed ModelSim10.7 behavior, not generalized to all tools.\r\n\r\nC report SHA256 `c21eff7554b154bf8bd6c7dbbb4f6d67c852e53e39e802f2a768e11683692e03`; private review manifest SHA256 `a92ddfd9a492297424373246f9d8c187529d645962b364e29e3343f1886840d2`. These identify C's selective record, not a full B acceptance manifest. H01-H15/frozen design/contract hash unchanged; A alone operates the physical board.\r\n",
+          "url": "https://github.com/carolwjade/CarlandFPGA/pull/30#issuecomment-6251572748",
+          "updated_at": "2026-10-18T15:17:24Z"
+        }
+      ]
+    },
+    "comments24": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/issues/24/comments?since=2026-10-18T14:10:00Z&per_page=100"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:45.987883+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "count": 0,
+      "page_full": false,
+      "comments": []
+    },
+    "comments25": {
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/issues/25/comments?since=2026-10-18T14:10:00Z&per_page=100"
+      ],
+      "read_only": true,
+      "started_at": "2026-10-18T15:34:46.626571+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "3324936cb371b359b27b08efee83e66e2cd94e3ebfb7df4b6566026751551a2e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "count": 2,
+      "page_full": false,
+      "comments": [
+        {
+          "id": 6251559940,
+          "body": "C feedback repair receipt: `C-DEEPEYE-REVIEWFIXES-20261018-12` / DEEPEYE-IMPLEMENTATION-20261014 v1\r\n\r\nRead and repaired A feedback6206605911 (including the later nested-STOP/timing findings after earlier approval) and B feedback6196800813,6197182815,6197806056. Actual PR25 head `cdbb6b4daef1ae1df324accd4d5086b48d005c6b` and body were read back. Tested source/evidence `c770d8235b078fb351e8c4773dd3f7cf51c0768a`; request SHA256 `ac9671977fa3e3cab5f81a63cdfd5edb06eb7437bfc85812c19b37496d6ab220`; manifest `handoffs/c/C-DEEPEYE-REVIEWFIXES-20261018-12/manifest.json`, SHA256 `216270732b1045fbb5eddcbe3f34dfe44df1432a41bfde11b88fd01b19edcaee`. All202 final Git blobs match manifest bytes; standard verify exit0.\r\n\r\n- Motion: newer public STOP/valid retirement/observation history supersedes stale outer emission; safety STOP stays callable. Verifier snapshots no longer share authoritative audit state.116 related tests plus4 independent main methods passed.\r\n- Data: conflicting/late critical LAS headers reject consistently in inventory and fitting; same temporary copied tree fixes hardlink portability.62 parser tests plus2 independent main methods/8 negative variants passed. This host has no second-volume execution claim.\r\n- Provenance: repaired current modules and exact historical generator snapshots have separate pins. Six original JSON, splits/statistics and generation metadata are byte-identical; historical vulnerable code is never executed.57 verifier tests/0skips with explicit pinned archive passed, plus6 independent actual CLI scenarios. Default full C01 remains blocked2; missing historical input blocks2; corruption/outputalias fails1. No refit, LAS-member read, training or held-out evaluation.\r\n\r\nOriginal failing sources/logs and corrected independent harness setup errors remain in the new evidence directories; old checkpoint evidence is unchanged. New head needs independent same-PR review bound to this operation/request_hash/tested_commit. Software fixtures do not establish runtime/source-clock/ACL/model-liveness, motion_grant, board or system acceptance. H01-H15/frozen design and fixed contract hash are unchanged.\r\n\r\nGit smart-HTTP failed twice; each failure was followed by actual old-ref readback. The supported Git database API then created the exact same two local trees and commits (all SHAs matched), and performed one force=false fast-forward. No rewritten commit, force push, credential/provider/service change or unknown side-effect replay.\r\n",
+          "url": "https://github.com/carolwjade/CarlandFPGA/pull/25#issuecomment-6251559940",
+          "updated_at": "2026-10-18T15:16:10Z"
+        },
+        {
+          "id": 6251672244,
+          "body": "A independent follow-up for current PR25 head `31267d6c4ae284b8788ebb457f49c4ae5a49c60c` / source `c00f932568aece85e9a2febe47e63528a977ea0f`.\r\n\r\nOperation reviewed: `C-DEEPEYE-MOTIONADAPTER-20261015-10`; request SHA256 `c0f2a7b099e2e233087fcfdea565fd469617539224e2d50309f8c30b57594e66`. All 135 original source/HEAD artifact blobs verify against manifest SHA256 `0d6b5389bd5c7e81860475c6e0f28b024216b2b64a205e0e2a5369438d8bae18`. Twelve checkout CRLF differences are recorded separately. Existing exact-head review was reused; five new positive checks passed. Two expected-safe assertions still fail (exit 1, two assertions, zero errors).\r\n\r\nP2 F02 at `competition/deepeye/ai_pc/control_broker/motion_request.py:425-430`: a verifier callback calls `safe_stop` and emits candidate 11 / command_seq 0; the outer in-flight candidate 10 then emits SET_TARGET / command_seq 1. Both are statically valid under current A validation. A newer sequence must not revive pre-STOP motion. Please fence submit around callbacks with a revocation/state generation: STOP stays immediately available; callback STOP, retirement or context changes invalidate the outer emission. Add the nested-STOP regression and prove ordinary explicit fresh work can resume only through the intended lifecycle.\r\n\r\nP3 F01 at lines 416/422/430: retained trusted callback timing can alias returned audit values when same-process code bypasses frozen dataclasses with object.__setattr__. Reconstruct returned timing/audit values and keep authority-side independent deadline calculation. This is a trusted-code audit-alias defect, not an OS/JSON authorization escape.\r\n\r\nContinue within C's existing broker ownership on this PR; do not edit A authority or shared contracts. Return a new exact source/head, operation/request/manifest and independent counterexample results, then read back this matching review. A retains the non-authorizing serializer evidence but blocks automatic runtime output until F02 is fixed. No board/runtime/product acceptance is implied; all 29 full cards remain not_run. H01-H15 / DEEPEYE-HUMAN-LOCK-20261014/revision1 / requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 unchanged.\r\n",
+          "url": "https://github.com/carolwjade/CarlandFPGA/pull/25#issuecomment-6251672244",
+          "updated_at": "2026-10-18T15:27:12Z"
+        }
+      ]
+    }
+  },
+  "mutations": 0
+}

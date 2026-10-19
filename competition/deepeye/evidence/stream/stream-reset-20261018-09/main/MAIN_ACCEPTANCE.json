@@ -1,0 +1,266 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-STREAM-RESET-INTEGRATION-20261018-09-v1",
+  "operation_id": "B-DEEPEYE-STREAM-RESET-20261018-09",
+  "recorded_at_utc": "2026-10-19T03:19:03.584669+00:00",
+  "decision": "ACCEPTED_TWO_SLOT_INTERNAL_STREAM_DIGITAL_CANDIDATE_ONLY",
+  "main_thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "worker_job": "child-cbe5f9cf39f84a78a5bfd6ccf69747d7",
+  "worker_thread": "01a14fa5-f55a-74c3-93a6-8446ddd6a739",
+  "worker_turn": "01a14fa5-f621-79a2-85b0-8e732ad4639b",
+  "worker_route": {
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "effort": "max",
+    "terminal": true,
+    "stale": false
+  },
+  "wrapper_sha256": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+  "runner_sha256": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5",
+  "core_sha256": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+  "tb_sha256": "8ad916887b0fb448b4e9a1ac6475a0368daeafe761e8de7140f13ad06cf8e7c2",
+  "main_independent": {
+    "status": "PASS_INDEPENDENT_STREAM_PORTS",
+    "counts": {
+      "event_rows": 27744,
+      "flushed_blocks": 53,
+      "reset_edges": 6,
+      "admitted": 374,
+      "samples": 14011,
+      "payload_bytes": 13100,
+      "completed_blocks": 290,
+      "raw_blocks": 80,
+      "rice_blocks": 210,
+      "simultaneous_cfg_retire": 22,
+      "error_blocks": 31,
+      "simultaneous_sample_retire": 26,
+      "cancel_edges": 38,
+      "whitebox_counter_seeds": 5
+    },
+    "all_E": [
+      0,
+      1,
+      2,
+      4,
+      8
+    ],
+    "N_values": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      10,
+      17,
+      18,
+      19,
+      24,
+      31,
+      33,
+      51,
+      52,
+      57,
+      64,
+      65,
+      69,
+      89,
+      96,
+      106,
+      121,
+      126,
+      127,
+      128
+    ],
+    "monitor": {
+      "cycles": 540297,
+      "events": 27744,
+      "stall_stability_checks": 25377,
+      "full_queue_cycles": 530212
+    },
+    "oracle_imports_worker_or_golden": false,
+    "whitebox_scope": "Only counter seeding; stream/counter transitions checked via actual public ports. No seeded state used as public stream proof.",
+    "core_sha256": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+    "wrapper_sha256": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+    "tb_sha256": "29949efc33689ada0bd2d8203fb6407f357075f424b077f43329235cde5d31d8",
+    "checker_sha256": "d0e1f62f5d1dc9770ae954f86f4243273ad24839a6bbdf6078eb093928893583",
+    "commands_sha256": "e54c20465471a4fc234dd969697977fb05a693dd8c391a4bba9f0f41629bd23c",
+    "ports_sha256": "ab0c0f9c03b9327e380f07fd7f68f2a6e51d3cc41c25198e0a72ea37529e0d1c",
+    "scope": "two-slot single-clock internal stream integration digital simulation only"
+  },
+  "negative_controls": {
+    "rtl_count": 4,
+    "log_count": 27,
+    "result_sha256": "160c3773b64212368c6abb508d0780a2bf8e7f8810bee542f4286d884b6875a3",
+    "source_is_exact_final_wrapper": true
+  },
+  "portable_and_raw_capture": {
+    "status": "PASS_RAW_BYTES_TIMEOUT_PORTABLE_AND_GUARDS",
+    "original_defect_reproduced": true,
+    "raw_results": [
+      {
+        "variant": "original",
+        "runner_sha256": "c9ed6752d607c99e9678881d8ab77d0cfde887d2d9b10f3f74ffa62b1b5d4872",
+        "byte_preserving": false,
+        "timeout_partial_preserving": false,
+        "calls": [
+          {
+            "name": "bytes",
+            "command": [
+              "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+              "-B",
+              "-c",
+              "import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))"
+            ],
+            "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))\"",
+            "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-original",
+            "exit_code": 0,
+            "timed_out": false,
+            "elapsed_seconds": 0.109,
+            "stdout": "bytes.stdout.log",
+            "stderr": "bytes.stderr.log"
+          },
+          {
+            "name": "timeout",
+            "command": [
+              "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+              "-B",
+              "-c",
+              "import os,time;os.write(1,bytes([255,13,10])+b\"partial\");os.write(2,bytes([128,13,10])+b\"err\");time.sleep(2)"
+            ],
+            "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os,time;os.write(1,bytes([255,13,10])+b\\\"partial\\\");os.write(2,bytes([128,13,10])+b\\\"err\\\");time.sleep(2)\"",
+            "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-original",
+            "exit_code": null,
+            "timed_out": true,
+            "elapsed_seconds": 0.375,
+            "stdout": "timeout.stdout.log",
+            "stderr": "timeout.stderr.log"
+          }
+        ]
+      },
+      {
+        "variant": "corrected",
+        "runner_sha256": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5",
+        "byte_preserving": true,
+        "timeout_partial_preserving": true,
+        "calls": [
+          {
+            "name": "bytes",
+            "command": [
+              "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+              "-B",
+              "-c",
+              "import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))"
+            ],
+            "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))\"",
+            "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-corrected",
+            "exit_code": 0,
+            "timed_out": false,
+            "elapsed_seconds": 0.094,
+            "stdout": "bytes.stdout.log",
+            "stderr": "bytes.stderr.log",
+            "stdout_sha256": "0a24261e5c821275c5346616dc534c5f7a95db29d85d773423f1cf0196657136",
+            "stderr_sha256": "da2f629f2f2b56d09ea80020eb5a6519d3dc948d303a71c73293aba105da9e33",
+            "stdout_bytes": 11,
+            "stderr_bytes": 6
+          },
+          {
+            "name": "timeout",
+            "command": [
+              "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+              "-B",
+              "-c",
+              "import os,time;os.write(1,bytes([255,13,10])+b\"partial\");os.write(2,bytes([128,13,10])+b\"err\");time.sleep(2)"
+            ],
+            "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os,time;os.write(1,bytes([255,13,10])+b\\\"partial\\\");os.write(2,bytes([128,13,10])+b\\\"err\\\");time.sleep(2)\"",
+            "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-corrected",
+            "exit_code": null,
+            "timed_out": true,
+            "elapsed_seconds": 0.375,
+            "stdout": "timeout.stdout.log",
+            "stderr": "timeout.stderr.log",
+            "stdout_sha256": "7d233487c0fcdb114bb5476a8e40d6cfb1f6e969049dd762d098a1e7c3d70c31",
+            "stderr_sha256": "da2f629f2f2b56d09ea80020eb5a6519d3dc948d303a71c73293aba105da9e33",
+            "stdout_bytes": 10,
+            "stderr_bytes": 6
+          }
+        ]
+      }
+    ],
+    "portable_cases": 54,
+    "portable_checks": 1353306,
+    "runner_sha256": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5",
+    "wrapper_sha256": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+    "flat_inputs": {
+      "deepeye_block_encoder.sv": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+      "deepeye_block_stream.sv": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+      "tb_block_stream.sv": "8ad916887b0fb448b4e9a1ac6475a0368daeafe761e8de7140f13ad06cf8e7c2",
+      "codec_reference.py": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5",
+      "main_stream_spec.md": "012a946647a3e967f1978946e648a36a1da36d696af6b95a3a4330a1e2732070",
+      "run_block_stream.py": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5"
+    },
+    "summary_sha256": "0d7c2ad2239188da18b0d0c9f28c7a168f4d92e4d0fcf72f64720b56b21ad0ba",
+    "input_and_prior_output_bytes_preserved": true,
+    "guard_exit_codes": [
+      2,
+      2
+    ]
+  },
+  "worker_final_manifest_files_verified": 23,
+  "worker_final_original_runner_sha256": "c9ed6752d607c99e9678881d8ab77d0cfde887d2d9b10f3f74ffa62b1b5d4872",
+  "findings": [
+    {
+      "id": "SR01",
+      "finding": "Advanced tail used for samples instead of reserved fill slot",
+      "status": "worker_fixed_before_terminal",
+      "main_original_snapshot_sha256": "c5b960803293dd21626f3e4ff42f3dfd597c3a288efd93c7685999720421970e",
+      "main_actual_failure": "main-observation01/ports.txt: correct first block emitted error2; following expected payload timed out",
+      "fix": "Latched fill_slot_q; main final374-admission actual-port check passed."
+    },
+    {
+      "id": "SR02",
+      "finding": "Runner decoded and re-encoded stdout/stderr instead of preserving raw bytes",
+      "status": "main_fixed_after_terminal",
+      "fix": "Capture and save bytes, include raw hashes; decode only derived analysis. Original non-UTF8 and partial-timeout corruption reproduced; corrected capture and54-case portable rerun passed."
+    }
+  ],
+  "main_harness_correction": "Initial assertion assumed ASCII timeout output must be lost; this was false on this host. Original harness/log retained; corrected fixture uses non-UTF8 partial timeout bytes. No ASCII-loss product defect claim.",
+  "source_review": "Two raw128x16 slots; full capacity backpressures admission; separate fill_slot latch; ordered core transaction; occupancy updated once for concurrent allocation/retirement; bounded indices; cancel adds preflush occupancy once, rst priority; RAM never feeds unwritten fresh-block samples. No asynchronous/CDC claim.",
+  "limitations": [
+    "Internal MSB-first bytes only, not TRACE outer payload or frozen public ABI.",
+    "Output is not frame-atomic across reset/cancel: receiver must share the boundary and discard partial frame.",
+    "Counters saturate; saturation may lose numeric accounting and does not affect data flow.",
+    "Intentional unaccepted producer attempts are not proof for a producer that violates hold-until-accepted; valid-source backpressure cases are tested separately.",
+    "No formal exhaustive, physical throughput, synthesis/timing/CDC/RDC, board or system acceptance."
+  ],
+  "contract_source": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "B01": "not_accepted",
+  "B03": "not_accepted",
+  "B_all_responsibilities_complete": false,
+  "synthesis": "not_run_vivado_not_discovered",
+  "implementation": "not_run",
+  "board": "not_run",
+  "system": "not_run",
+  "A_C_files_modified": false,
+  "public_abi_changed": false
+}

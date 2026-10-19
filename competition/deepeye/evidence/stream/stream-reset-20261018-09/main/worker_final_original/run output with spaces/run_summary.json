@@ -1,0 +1,166 @@
+{
+  "at_utc": "2026-10-18T15:52:36.896449+00:00",
+  "commands": [
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "command_line": "D:\\modelsim1\\win64\\vsim.exe -version",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces",
+      "elapsed_seconds": 0.062,
+      "exit_code": 0,
+      "name": "version",
+      "stderr": "version.stderr.log",
+      "stdout": "version.stdout.log",
+      "timed_out": false
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "command_line": "D:\\modelsim1\\win64\\vlib.exe work",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces",
+      "elapsed_seconds": 0.047,
+      "exit_code": 0,
+      "name": "vlib",
+      "stderr": "vlib.stderr.log",
+      "stdout": "vlib.stdout.log",
+      "timed_out": false
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\export\\deepeye_block_encoder.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\export\\deepeye_block_stream.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\export\\tb_block_stream.sv"
+      ],
+      "command_line": "D:\\modelsim1\\win64\\vlog.exe -sv -work work \"D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\export\\deepeye_block_encoder.sv\" \"D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\export\\deepeye_block_stream.sv\" \"D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\export\\tb_block_stream.sv\"",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces",
+      "elapsed_seconds": 0.094,
+      "exit_code": 0,
+      "name": "vlog",
+      "stderr": "vlog.stderr.log",
+      "stdout": "vlog.stdout.log",
+      "timed_out": false
+    },
+    {
+      "command": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-do",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\run.do",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\vsim.log",
+        "tb_block_stream"
+      ],
+      "command_line": "D:\\modelsim1\\win64\\vsim.exe -c -do \"D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\run.do\" -l \"D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces\\vsim.log\" tb_block_stream",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces",
+      "elapsed_seconds": 2.172,
+      "exit_code": 0,
+      "name": "vsim",
+      "stderr": "vsim.stderr.log",
+      "stdout": "vsim.stdout.log",
+      "timed_out": false
+    }
+  ],
+  "contract": {
+    "contract": "DEEPEYE-HUMAN-LOCK-20261014",
+    "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+    "encoder_commit": "1c8ce8433b2adf5b50947b124f7397c603f7a978",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "revision": 1
+  },
+  "coverage": {
+    "all_e": 5,
+    "alloc_retire": 1,
+    "backtoback_blocks": 12,
+    "byte_stall_cycles": 1500,
+    "cancel_recovery": 1,
+    "cfg_notready": 20034,
+    "concurrent_fill": 1,
+    "corefeed_cancel": 1,
+    "early_last": 2,
+    "fill_during_emit": 1,
+    "finalbyte_cancel": 1,
+    "firstbyte_cancel": 1,
+    "heldcancel": 1,
+    "invalid_cfg": 9,
+    "meta_cancel": 1,
+    "meta_reset": 1,
+    "meta_stall_cycles": 1000,
+    "midbyte_cancel": 1,
+    "missing_last": 1,
+    "n1": 5,
+    "n128": 9,
+    "partial_cancel": 1,
+    "partial_reset": 1,
+    "pointer_wrap": 1,
+    "queuefull_cycles": 4096,
+    "random_ready_stalls": 517,
+    "random_schedule_cycles": 21298,
+    "random_valid_gaps": 748,
+    "raw": 13,
+    "reset_recovery": 1,
+    "rice": 22,
+    "sample_notready": 40,
+    "saturation": 5
+  },
+  "failure": null,
+  "limitations": [
+    "simulation only; no synthesis, implementation, timing, resource, board or system result",
+    "internal two-slot candidate only; not TRACE, a public ABI/register map, BOOT/tick source or motion authority",
+    "reset/cancel are synchronous and external consumers must discard partially consumed frames",
+    "counter boundary checks use whitebox hierarchical deposits and are not blackbox stream evidence"
+  ],
+  "operation_id": "B-DEEPEYE-STREAM-RESET-20261018-09",
+  "output": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\stream-reset-20261018-09\\worker\\attempt-11-final-space-path\\run output with spaces",
+  "source_hashes": {
+    "core": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+    "golden": "2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5",
+    "runner": "c9ed6752d607c99e9678881d8ab77d0cfde887d2d9b10f3f74ffa62b1b5d4872",
+    "spec": "012a946647a3e967f1978946e648a36a1da36d696af6b95a3a4330a1e2732070",
+    "tb": "8ad916887b0fb448b4e9a1ac6475a0368daeafe761e8de7140f13ad06cf8e7c2",
+    "wrapper": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4"
+  },
+  "status": "PASS",
+  "summary": {
+    "cases": 54,
+    "cfg_hs": 101,
+    "checks": 1353306,
+    "data_hs": 2401,
+    "error": 12,
+    "fail": 0,
+    "meta_hs": 92,
+    "ok": 77,
+    "pass": 54,
+    "sample_hs": 2794,
+    "whitebox": 9
+  },
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "vector_count": 35,
+  "work_id": "B-STREAM-RESET-INTEGRATION-20261018-09-v1"
+}

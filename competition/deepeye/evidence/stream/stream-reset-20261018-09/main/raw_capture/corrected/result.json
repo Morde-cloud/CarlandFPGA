@@ -1,0 +1,48 @@
+{
+  "variant": "corrected",
+  "runner_sha256": "8bc5022932440dcf80b49db29149d700c144e2629fd6d3cd785941f05b8937d5",
+  "byte_preserving": true,
+  "timeout_partial_preserving": true,
+  "calls": [
+    {
+      "name": "bytes",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))"
+      ],
+      "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os;os.write(1,bytes([255,13,10,78,85,76,0,116,97,105,108]));os.write(2,bytes([128,13,10,101,114,114]))\"",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-corrected",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.094,
+      "stdout": "bytes.stdout.log",
+      "stderr": "bytes.stderr.log",
+      "stdout_sha256": "0a24261e5c821275c5346616dc534c5f7a95db29d85d773423f1cf0196657136",
+      "stderr_sha256": "da2f629f2f2b56d09ea80020eb5a6519d3dc948d303a71c73293aba105da9e33",
+      "stdout_bytes": 11,
+      "stderr_bytes": 6
+    },
+    {
+      "name": "timeout",
+      "command": [
+        "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import os,time;os.write(1,bytes([255,13,10])+b\"partial\");os.write(2,bytes([128,13,10])+b\"err\");time.sleep(2)"
+      ],
+      "command_line": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -c \"import os,time;os.write(1,bytes([255,13,10])+b\\\"partial\\\");os.write(2,bytes([128,13,10])+b\\\"err\\\");time.sleep(2)\"",
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\raw-pipe2-corrected",
+      "exit_code": null,
+      "timed_out": true,
+      "elapsed_seconds": 0.375,
+      "stdout": "timeout.stdout.log",
+      "stderr": "timeout.stderr.log",
+      "stdout_sha256": "7d233487c0fcdb114bb5476a8e40d6cfb1f6e969049dd762d098a1e7c3d70c31",
+      "stderr_sha256": "da2f629f2f2b56d09ea80020eb5a6519d3dc948d303a71c73293aba105da9e33",
+      "stdout_bytes": 10,
+      "stderr_bytes": 6
+    }
+  ]
+}

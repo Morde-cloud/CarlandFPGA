@@ -1,0 +1,1256 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PRODUCT-PUBLICATION-RECOVERY-20261018-v1",
+  "operation_id": "B-DEEPEYE-BLOCK-ENCODER-20261018-08",
+  "base": "781be78d9da77a75ea711cf690eeea6523733d3a",
+  "target": "1c8ce8433b2adf5b50947b124f7397c603f7a978",
+  "output": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/stream-reset-integration-20261018-09/publication-recovery08-api",
+  "body_file": "D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/independent-completion-audit-20261018-v1/block-pr-body.md",
+  "title": "DeepEye B: integer block RTL encoder and independent completion audit",
+  "manifest": "handoffs/b/B-DEEPEYE-BLOCK-ENCODER-20261018-08/manifest.json",
+  "manifest_sha256": "854f092b0d79c014bbd8669ae407d88c0375933b0c672f494f964b6ad2c414ab",
+  "decision": "Main explicitly chooses Git database API after this new recovery's single Git push failed and authoritative fork/PR readback remained old. Preserve identical blobs, trees, two commits and parent chain; only then one force=false branch update. No rerun of previous Git publishers, no unknown side effect replay, no credentials/config change. Local09 work continues independently.",
+  "started_at_utc": "2026-10-18T15:52:28.507418+00:00",
+  "status": "PUBLISHED_EXACT_GIT_HEAD_BODY_MANIFEST_VERIFIED",
+  "steps": [
+    {
+      "name": "ref-before",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014",
+      "started_at_utc": "2026-10-18T15:52:28.620811+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.734,
+      "stdout_sha256": "054de75506d87fdfcacd34693ed18d70b6265c89ceb4523bf5f6719178f919cd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pr-before",
+      "method": "GET",
+      "path": "repos/carolwjade/CarlandFPGA/pulls/30",
+      "started_at_utc": "2026-10-18T15:52:29.359812+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/30"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.985,
+      "stdout_sha256": "038a272e47e8209eff4b1c4fd0db45cc45ae42857ce127b047b1a24f8681b155",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-ad377ea3ad1e1c52e0a6f80121109c8970e87521",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:52:31.491006+00:00",
+      "status": "completed",
+      "request_sha256": "c0a6f63a8940023dac7e55962b25ce7ce74fccf154093767b0ddb0b5f1c45eed",
+      "request_bytes": 640390,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-ad377ea3ad1e1c52e0a6f80121109c8970e87521.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.047,
+      "stdout_sha256": "1002a43b67377204a0faab4ffb336a25c5785b1108421a08a2eb6388152b7d62",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-62fbf95c6cc0b0076b509a9f63ef1e495bbd7b0e",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:52:33.662873+00:00",
+      "status": "completed",
+      "request_sha256": "78ef6a398d10c38bdd894de5a4c45dda18d709113f77b756283ca5d55217c18a",
+      "request_bytes": 482678,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-62fbf95c6cc0b0076b509a9f63ef1e495bbd7b0e.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.75,
+      "stdout_sha256": "2e2aaef8800db79a7051bf568fd8c1d2935ddcaec2919fd79c188a2f0947d2e5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-f75373d46ba069ec8163c9b1648dea47150984a7",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:52:36.573243+00:00",
+      "status": "completed",
+      "request_sha256": "a2dd540a6fa0fc6388fb46f1c1708bd6e3c6af4c38c896a8fdc5510b75b26d7c",
+      "request_bytes": 5311878,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-f75373d46ba069ec8163c9b1648dea47150984a7.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.094,
+      "stdout_sha256": "c844c02ac91a7e891d3ee36086abbf53bf96f8e71689f349ad4a375b6efab5fc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-9445a9117b70718226df6c7ea5ccceea4338c4a6",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:52:42.284211+00:00",
+      "status": "completed",
+      "request_sha256": "2a28a255c301375f9efa7a6df519cda69aa0f6f362a4c36537bb1478c954dbcf",
+      "request_bytes": 5308862,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-9445a9117b70718226df6c7ea5ccceea4338c4a6.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.234,
+      "stdout_sha256": "c0182e82c8e5fd621301a562b30e9b0b67c4d341c8f512e83b682bf6e25b40f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-8637f3bbff61751b24c5b5c31b7452820e85414a",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:52:47.708158+00:00",
+      "status": "completed",
+      "request_sha256": "4ef8bf0cbe4560faaa498f8582a84678fff3470ae087777ec58c5e711c193286",
+      "request_bytes": 5153254,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-8637f3bbff61751b24c5b5c31b7452820e85414a.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.329,
+      "stdout_sha256": "699e6977d0a78c2d816753e0bcf4511862639eaa162c03a209c7a2c9f505fccd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-01dcf30974a90611a956868ec9c9ac65ae0171bb",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:52:55.411297+00:00",
+      "status": "completed",
+      "request_sha256": "d28e845765765cb6ce27ae514de3a1e9f7e21a969a6809658cea8ea0474aa79c",
+      "request_bytes": 5311878,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-01dcf30974a90611a956868ec9c9ac65ae0171bb.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.359,
+      "stdout_sha256": "b02c44640be2347c6520d972752f0c68680223c7c8266c98abfb6177e640ed18",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-da7cea7009ccaffbc2db37e5b085481d106f6939",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:02.653507+00:00",
+      "status": "completed",
+      "request_sha256": "2bc4ee4518da9dc6aa6946a253d2bad79f440e7f4ca0d2a059f9b132c823bb4d",
+      "request_bytes": 1501446,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-da7cea7009ccaffbc2db37e5b085481d106f6939.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.484,
+      "stdout_sha256": "11feecdffe9078fee0280997e040d6fc6367f58f9725453e7effb1ef79fb9bab",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-9ff408410fdc97832e3b710762d5bb5231b1171d",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:05.689049+00:00",
+      "status": "completed",
+      "request_sha256": "c42348eb678cab85b34c018ec794feddc949ef4a554878251ac9aeaf6881f405",
+      "request_bytes": 1481254,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-9ff408410fdc97832e3b710762d5bb5231b1171d.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.453,
+      "stdout_sha256": "32d92e6270d2a17d087060ce35fe3a604d129b010b2346d6da7923df5e2781d7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-d5c5cc99d44b6435ac28a14bc8860bfc9172b516",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:08.288916+00:00",
+      "status": "completed",
+      "request_sha256": "6634bf745aae329f6d1a18c5a2b1f1838e9e56b74c4774fe697fad27fea84b5a",
+      "request_bytes": 4765262,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-d5c5cc99d44b6435ac28a14bc8860bfc9172b516.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.203,
+      "stdout_sha256": "6cf27043a3a11d2e2df9afa5447fc312e75621fd23fc95c4669951a4063578c8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-312a39b4522bd71df37f3ddfc2a09fbe74ba0124",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:11.809437+00:00",
+      "status": "completed",
+      "request_sha256": "7ceb2ca78ca1cc2ed113c4508c6a6d9bd6d38aa20c84d4026d1884181f16b654",
+      "request_bytes": 35591430,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-312a39b4522bd71df37f3ddfc2a09fbe74ba0124.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 15.547,
+      "stdout_sha256": "807c2c34a52b2a0481a4e539472da89daf5ec6101c57ae774a95cdaec00b9978",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-bc5e8414007b63f6f4d01785203dc02399babd4d",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:27.896994+00:00",
+      "status": "completed",
+      "request_sha256": "8aadbe36e0687c2a175574c5afc64a2c339984357f6ab41d514992cb6fd71823",
+      "request_bytes": 802594,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-bc5e8414007b63f6f4d01785203dc02399babd4d.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.297,
+      "stdout_sha256": "f77aa5b616fb70622d1c7bf3e67a98bd9eda37c41730388edcccf57b604fc257",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-0217d8985aff89026fc06d130c0a9e0c57d76b72",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:30.316444+00:00",
+      "status": "completed",
+      "request_sha256": "ff61319c545375581711bc507fd7142d173593cd3eccd38b3e2178358826a3e1",
+      "request_bytes": 1374046,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-0217d8985aff89026fc06d130c0a9e0c57d76b72.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.485,
+      "stdout_sha256": "1559ae363bfae5162c52b09690cf5230538176d21ec799167cdc9d893c787631",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-720efbe04a286baf3d01f5d96b1e7785fe63b201",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:33.136060+00:00",
+      "status": "completed",
+      "request_sha256": "0bd9cce19f0c4ce7c838cd59436ffef8b26d95691cc3d934b797fd34e34259d7",
+      "request_bytes": 22751838,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-720efbe04a286baf3d01f5d96b1e7785fe63b201.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.031,
+      "stdout_sha256": "6ec97ef7f5fe4bcfb17522e77ea2dc5cad3eaa97f1929bb17e03c47439c1f3c3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-22e1ecafea00adab3f0b677037f3514a3a39fe80",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:44.626314+00:00",
+      "status": "completed",
+      "request_sha256": "826e9d00a931038bf0bdaf1b5390ab137fdbf7b3547497f668947656209c6358",
+      "request_bytes": 22751934,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-22e1ecafea00adab3f0b677037f3514a3a39fe80.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.594,
+      "stdout_sha256": "350e579b4ceb541b8cac61ac98807d1121927ce3a2e7bdc3d9a14f49ceaae18d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-a3310aa6be33cff08d0ec01c7f5c8c93321914d5",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:56.882390+00:00",
+      "status": "completed",
+      "request_sha256": "1eb2995d6287be5e0fbe3dee7115702b7cd49ff9aada835045b775b71fecba49",
+      "request_bytes": 1373782,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-a3310aa6be33cff08d0ec01c7f5c8c93321914d5.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.718,
+      "stdout_sha256": "685de6fa14890206fbe9d8e410d8248c71ce49bafdaf3df679634233221673a4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-468288f77344a0268a196686d7ad5d19dca81475",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:53:59.931133+00:00",
+      "status": "completed",
+      "request_sha256": "69c784c6d2fa40da2ac153cca06cb7f2326d53e60add10ab8e86529f17d95f12",
+      "request_bytes": 22751826,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-468288f77344a0268a196686d7ad5d19dca81475.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.485,
+      "stdout_sha256": "c7c1111f84c9d7408329ed3367fb6ca8726ad15278ad7596f85c5ac04282fdcf",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-1f3a544b9dafd189293b17876e7331e152a06ad7",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:11.887403+00:00",
+      "status": "completed",
+      "request_sha256": "9b20c8f42020c62ca5e13e77dc264836b33df8dc7868664ab9cfaf6c26598664",
+      "request_bytes": 22751922,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-1f3a544b9dafd189293b17876e7331e152a06ad7.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.719,
+      "stdout_sha256": "675ae99e5c07acd9167cefbd8aaf80b607fc02377a2a0bffe7f4b0a63fd7c01c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-2afb8539b87be562ff3bf4818c6b331029e8f72f",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:24.407939+00:00",
+      "status": "completed",
+      "request_sha256": "d594a12caa4725467208b5b2eb746efb86186fc5fa241eab4bd9e17e7f2b4f8a",
+      "request_bytes": 1337986,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-2afb8539b87be562ff3bf4818c6b331029e8f72f.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.609,
+      "stdout_sha256": "8ce8c4e5de09c52eecf13831a2da2a9e6ba09233988c906bd631b33296e28e57",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-0ceeb497bceb01a3c4073ac1e06e3dc2d71027b6",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:27.440175+00:00",
+      "status": "completed",
+      "request_sha256": "d866620c2c4412d214ba8dd020ca8d54a7e92097bcb6a6ee9f61764a3960c82c",
+      "request_bytes": 732538,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-0ceeb497bceb01a3c4073ac1e06e3dc2d71027b6.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.438,
+      "stdout_sha256": "b6a4892c59c7aa93363ae313de5351f395aa16d10f601aba46f7d9ea0f407f97",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-117ff41642c1604d4e0c3e08f49f15cf8864e5e5",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:30.003503+00:00",
+      "status": "completed",
+      "request_sha256": "c0b8f818bf2858e072a39fdb09e3ddd0c8efebca4623eff2232b6c06a941217b",
+      "request_bytes": 728054,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-117ff41642c1604d4e0c3e08f49f15cf8864e5e5.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.187,
+      "stdout_sha256": "6d918fa263d2a9d80c6cccd43ac753c2603c3b1ff5c824ae57bfc8ffb84e89a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-abdd26d9ec6e04c12b870599f3768a848b76c57c",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:32.531887+00:00",
+      "status": "completed",
+      "request_sha256": "c4e4a8983ec73273876afc924eb29c73323df0b06d70a1ea7a255f4c1ab2f7ea",
+      "request_bytes": 20349622,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-abdd26d9ec6e04c12b870599f3768a848b76c57c.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.703,
+      "stdout_sha256": "f806c24cc4bc423be1efb833a75ae9e0d337178dc54b21d6a6e19fe216388e29",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-011a547bd37235f715d28b76db9987b805afa820",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:42.696578+00:00",
+      "status": "completed",
+      "request_sha256": "6acd6c5cd85e6117fc6986390ba7b10ebb34fc1b19dc32f8c622b506b76ba3b8",
+      "request_bytes": 20349690,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-011a547bd37235f715d28b76db9987b805afa820.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.11,
+      "stdout_sha256": "8b6f8731fea6d8cc81480f084c6c1ba8e5e243618e7df1be9b67063752f8c493",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-b345029f1c1bfb5f8028a8a998bffd270a3741d4",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:54:52.820888+00:00",
+      "status": "completed",
+      "request_sha256": "dae31bcf008d36ec3cb4b47be590e6bf3ad0bfdc021ef2d1dfeed6584a0626fb",
+      "request_bytes": 32118218,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-b345029f1c1bfb5f8028a8a998bffd270a3741d4.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 15.515,
+      "stdout_sha256": "12f030b4586321aecb3e9a80b660046609937f9e97de412f5b8cb1a5b249d46c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-9e07a30baf47b3ccdba23e449cadbf8dfc005a26",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:55:08.958553+00:00",
+      "status": "completed",
+      "request_sha256": "95d8b830571c289224e183cc0ea53576601b34d723b6fa35aa3947bb289c611b",
+      "request_bytes": 1129474,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-9e07a30baf47b3ccdba23e449cadbf8dfc005a26.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.406,
+      "stdout_sha256": "b21448fb5f30d584dc46b2005d982213e5846f811c49b084df384ec5714119d7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-841c178f386e1fc7ced7331d81975a99d9bdfe35",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:55:11.688433+00:00",
+      "status": "completed",
+      "request_sha256": "a59833019d42ef95ed1b6f5e7f514b90d21b5ae4c57ee3d4d248f855d8b17e46",
+      "request_bytes": 20349130,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-841c178f386e1fc7ced7331d81975a99d9bdfe35.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.156,
+      "stdout_sha256": "600385739c0e1941c6837247d3292e074bf949348440db7d53729058e3d6034f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-3652566f4c1f9c9ff2d26ab4ea8c896ad5444603",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:55:22.252053+00:00",
+      "status": "completed",
+      "request_sha256": "a835dd888e0322264070f1d14fc9f9d18b7c06157c32c176c7759f9fd6df6b29",
+      "request_bytes": 20349226,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-3652566f4c1f9c9ff2d26ab4ea8c896ad5444603.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.563,
+      "stdout_sha256": "7b660a437f440b2a7dea3c80bd870f5d26ed56a6211b27d113a033f6f3b738f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-e97798aafdb43ece99491779d193af2ebcb94d4c",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:55:32.758818+00:00",
+      "status": "completed",
+      "request_sha256": "44866f83655c06af6473e5ff9d17cc15384a3bddd424a2e70770b63afec84d81",
+      "request_bytes": 32267862,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-e97798aafdb43ece99491779d193af2ebcb94d4c.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 14.109,
+      "stdout_sha256": "16fcb3d72d7075c4fe24566992f00151e9b9f18ec0276aafb5ba5199346e4ed3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-e3c2e4ff4dffca4780e13862c508a684b5a400bc",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:55:47.434407+00:00",
+      "status": "completed",
+      "request_sha256": "04ca46f5452d05efbd8e299ff00acdd7d665bde40a44d1e2cafd4d646bd6414b",
+      "request_bytes": 1286450,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-e3c2e4ff4dffca4780e13862c508a684b5a400bc.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.64,
+      "stdout_sha256": "e6b715acf933b128f7031e1d769602b9ee4cb44dad88e7ac44f204dbe0ea70fc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-9e6a095ad97612e8ee906ec5340f4253f0e7b966",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:55:50.364327+00:00",
+      "status": "completed",
+      "request_sha256": "756404e7f6c89a73d4746b52d82aeea419b81d44615c9118b533195cbb374975",
+      "request_bytes": 20635234,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-9e6a095ad97612e8ee906ec5340f4253f0e7b966.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.0,
+      "stdout_sha256": "8f2850d4dd3d30b8d7da99f41e741e0cabf7aa6b0f1aaafa84b35744450a48fc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-32461619f39a9ee1713fc480d1e37c2d82fd056a",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:56:00.736606+00:00",
+      "status": "completed",
+      "request_sha256": "f9271b43c6a17ec94883cdcf1635f4b52d7ea78be2d2c66289e5d02e7db0e95d",
+      "request_bytes": 20635330,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-32461619f39a9ee1713fc480d1e37c2d82fd056a.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.203,
+      "stdout_sha256": "5140fb88b7b87ca62ec4f2889eb4eaa29ec5625c508f9e4c0b53a29e71c3b1ba",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-2b89adc01c7bc247284340801beabdda2a73aab3",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:56:10.775288+00:00",
+      "status": "completed",
+      "request_sha256": "e83785e5da7f312493e0b561ecd2852767646f1a155a7352ee0f4eac88ba88e4",
+      "request_bytes": 4248078,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-2b89adc01c7bc247284340801beabdda2a73aab3.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.719,
+      "stdout_sha256": "d726b85ae8cd670d55de462ca730d27eeddf1f27efe6eef1bcfe2a7457fdad96",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-07ba47556dd6f9470c423c67e7d00fe391f15385",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:56:15.118518+00:00",
+      "status": "completed",
+      "request_sha256": "e1a893ffda04b5d7eeb532fec798af2ef5e847678971f87c219f8f52906cd1e0",
+      "request_bytes": 1288518,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-07ba47556dd6f9470c423c67e7d00fe391f15385.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.688,
+      "stdout_sha256": "8b1c405dd55da5e454420a78201f11b5c18ef20e21703108d03317217b42f308",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-e6cbeeb8a7b0277acec59d37341f4e3a9ed95ffd",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:56:18.118544+00:00",
+      "status": "completed",
+      "request_sha256": "af02a60c4a3bc2873dd385076927d2a54eb138a82e40aa8acb8345d76ed4f31b",
+      "request_bytes": 20631190,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-e6cbeeb8a7b0277acec59d37341f4e3a9ed95ffd.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.953,
+      "stdout_sha256": "7b9915cec16de8ac827dfe0693c8aadc5cee915abe81a39f93658f027f6e537a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "blob-0e3d5d706d490e7c6732a4d5f7b816546d98794c",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs",
+      "started_at_utc": "2026-10-18T15:56:28.497118+00:00",
+      "status": "completed",
+      "request_sha256": "0b13ce5da34f23f287bd2a5133f1be12f3cc730f479ad6556cbc6080aaa71f52",
+      "request_bytes": 20631286,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\blob-0e3d5d706d490e7c6732a4d5f7b816546d98794c.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.312,
+      "stdout_sha256": "7afa0d3856d075f18d9154a1a01c22be6995c7a77029e6198548a9501752a526",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "commit0-tree",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/trees",
+      "started_at_utc": "2026-10-18T15:56:39.560587+00:00",
+      "status": "completed",
+      "request_sha256": "43c0776dc864d72a9c2f5909d940b7c7ab8cb9cb6a343fc70611fb20336be78f",
+      "request_bytes": 771052,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/trees",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\commit0-tree.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.531,
+      "stdout_sha256": "3379e454d81b94f31eb34c22cebea030db571d499906aaa44c6c1b84dcdc4294",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "commit0-commit",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/commits",
+      "started_at_utc": "2026-10-18T15:56:43.090044+00:00",
+      "status": "completed",
+      "request_sha256": "692c8a6bf79e00e06f1bc49bd014094361a454c6139cb421390543a645cc7750",
+      "request_bytes": 450,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/commits",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\commit0-commit.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.937,
+      "stdout_sha256": "3c31d1dca55e0983eede5b19cedc4996c423af0d4160b1ca86011626dbe3f416",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "commit0-readback",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/commits/4d244c5b4ed282dfa4ee610e6a2fa7b4d9ca4c40",
+      "started_at_utc": "2026-10-18T15:56:44.026905+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/commits/4d244c5b4ed282dfa4ee610e6a2fa7b4d9ca4c40"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.703,
+      "stdout_sha256": "3c31d1dca55e0983eede5b19cedc4996c423af0d4160b1ca86011626dbe3f416",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "commit1-tree",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/trees",
+      "started_at_utc": "2026-10-18T15:56:45.085365+00:00",
+      "status": "completed",
+      "request_sha256": "351309ea58b61b17c204941afa56d3c12848f34574d891b5902922f370fae4d9",
+      "request_bytes": 148105,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/trees",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\commit1-tree.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.562,
+      "stdout_sha256": "6b159f0fe471b5777d6bd56ff8c56a98022f3679773512f3dbe558e25fb866eb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "commit1-commit",
+      "method": "POST",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/commits",
+      "started_at_utc": "2026-10-18T15:56:46.655318+00:00",
+      "status": "completed",
+      "request_sha256": "97d8c0b2b7fb6bbceb66b04f5f9528f5159ee1f90f6db1186fd46437cc94c9f5",
+      "request_bytes": 440,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "POST",
+        "repos/Morde-cloud/CarlandFPGA/git/commits",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\commit1-commit.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.922,
+      "stdout_sha256": "633b2fff3dadd4918952ddbd95594c61473c5ed27fa448faca55f9a0fe0b489e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "commit1-readback",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/commits/1c8ce8433b2adf5b50947b124f7397c603f7a978",
+      "started_at_utc": "2026-10-18T15:56:47.582566+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/commits/1c8ce8433b2adf5b50947b124f7397c603f7a978"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.062,
+      "stdout_sha256": "633b2fff3dadd4918952ddbd95594c61473c5ed27fa448faca55f9a0fe0b489e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ref-pre-update",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014",
+      "started_at_utc": "2026-10-18T15:56:48.657696+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.719,
+      "stdout_sha256": "054de75506d87fdfcacd34693ed18d70b6265c89ceb4523bf5f6719178f919cd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pr-pre-update",
+      "method": "GET",
+      "path": "repos/carolwjade/CarlandFPGA/pulls/30",
+      "started_at_utc": "2026-10-18T15:56:49.379994+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/30"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.984,
+      "stdout_sha256": "038a272e47e8209eff4b1c4fd0db45cc45ae42857ce127b047b1a24f8681b155",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ref-update",
+      "method": "PATCH",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/refs/heads/codex/b/deepeye-implementation-20261014",
+      "started_at_utc": "2026-10-18T15:56:50.366994+00:00",
+      "status": "completed",
+      "request_sha256": "e17be45ec95b41b2c1b17a08a203d2454f5a1876b1d5df0f943c5fc417ff1ca3",
+      "request_bytes": 64,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "PATCH",
+        "repos/Morde-cloud/CarlandFPGA/git/refs/heads/codex/b/deepeye-implementation-20261014",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\ref-update.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.297,
+      "stdout_sha256": "aa68576da518ecd5d6f4377df010ca45b868694c8c4e35e77c0383b9d844d2ab",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ref-after",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014",
+      "started_at_utc": "2026-10-18T15:56:51.663254+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.75,
+      "stdout_sha256": "aa68576da518ecd5d6f4377df010ca45b868694c8c4e35e77c0383b9d844d2ab",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pr-after",
+      "method": "GET",
+      "path": "repos/carolwjade/CarlandFPGA/pulls/30",
+      "started_at_utc": "2026-10-18T15:56:52.414617+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/30"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.422,
+      "stdout_sha256": "761292395b35d3ad2750bc581c8eaf89bbda645cdb9ce35a3d79a508ec767adf",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pr-metadata-update",
+      "method": "PATCH",
+      "path": "repos/carolwjade/CarlandFPGA/pulls/30",
+      "started_at_utc": "2026-10-18T15:56:54.848160+00:00",
+      "status": "completed",
+      "request_sha256": "357370e4fc5a5aa7fcfc7c50758737f783ac21681649daf280d303f66e8eada6",
+      "request_bytes": 4705,
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "PATCH",
+        "repos/carolwjade/CarlandFPGA/pulls/30",
+        "--input",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\publication-recovery08-api\\pr-metadata-update.request.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.219,
+      "stdout_sha256": "a4b24e9ca188ebcf345ba6c4a8517b6d7e1ed65ce61886977a19735355f7bf8e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pr-final",
+      "method": "GET",
+      "path": "repos/carolwjade/CarlandFPGA/pulls/30",
+      "started_at_utc": "2026-10-18T15:56:58.075477+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/carolwjade/CarlandFPGA/pulls/30"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.281,
+      "stdout_sha256": "a4b24e9ca188ebcf345ba6c4a8517b6d7e1ed65ce61886977a19735355f7bf8e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "manifest-readback",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/blobs/e01cc8180c21e46e0d46aaa9ef8ba42f611c65a3",
+      "started_at_utc": "2026-10-18T15:57:00.419942+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/blobs/e01cc8180c21e46e0d46aaa9ef8ba42f611c65a3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.891,
+      "stdout_sha256": "5a7968740a73ef09f15476b7bd3c321c74e4c00eb40a0b57dcf9c095672d02ad",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ref-final",
+      "method": "GET",
+      "path": "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014",
+      "started_at_utc": "2026-10-18T15:57:01.357382+00:00",
+      "status": "completed",
+      "command": [
+        "D:/pynq/CarlandFPGA/.local/tools/gh/bin/gh.exe",
+        "api",
+        "--method",
+        "GET",
+        "repos/Morde-cloud/CarlandFPGA/git/ref/heads/codex/b/deepeye-implementation-20261014"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.688,
+      "stdout_sha256": "aa68576da518ecd5d6f4377df010ca45b868694c8c4e35e77c0383b9d844d2ab",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "created_blobs": {
+    "ad377ea3ad1e1c52e0a6f80121109c8970e87521": {
+      "size": 480265,
+      "sha256": "8319ecdf0d680ee5a99fe6026715818031586b0457dde6faba32764e90a2dafa"
+    },
+    "62fbf95c6cc0b0076b509a9f63ef1e495bbd7b0e": {
+      "size": 361982,
+      "sha256": "3ee789e262a82d9f3cb37071d3ebe056fab73e0d15d8adbb05ec5a7d7c8f2fa1"
+    },
+    "f75373d46ba069ec8163c9b1648dea47150984a7": {
+      "size": 3983883,
+      "sha256": "17f1ee44b29092a734e264fece0e7b81ac1ce251cee9ec050254132a24f16dbd"
+    },
+    "9445a9117b70718226df6c7ea5ccceea4338c4a6": {
+      "size": 3981619,
+      "sha256": "c0e24960a21f86aa5f1f27fcabd8f08defe2eeb9e8a672c0a3a7cf30e72db64b"
+    },
+    "8637f3bbff61751b24c5b5c31b7452820e85414a": {
+      "size": 3864913,
+      "sha256": "2c180aca553e81b9fce315d44ba7b032ea40ad4c9637aada4993567b139ede66"
+    },
+    "01dcf30974a90611a956868ec9c9ac65ae0171bb": {
+      "size": 3983883,
+      "sha256": "50542e43910692eb9948539223556525f209a771a028f5fa57c0cf07f8b34c12"
+    },
+    "da7cea7009ccaffbc2db37e5b085481d106f6939": {
+      "size": 1126059,
+      "sha256": "b2e09beecf57639367ba98e6618b568064f82117cddca24d87938cb524581c79"
+    },
+    "9ff408410fdc97832e3b710762d5bb5231b1171d": {
+      "size": 1110913,
+      "sha256": "08a2116c25a4c607b3ba7b0a1611db433804d32e8fdcc518f2bd66df0ac66d96"
+    },
+    "d5c5cc99d44b6435ac28a14bc8860bfc9172b516": {
+      "size": 3573921,
+      "sha256": "2dea912b634aa756d82a7a053860bc5b3990913095415df1275662c18ea400ca"
+    },
+    "312a39b4522bd71df37f3ddfc2a09fbe74ba0124": {
+      "size": 26693545,
+      "sha256": "552df8eaf16f7db4efafdef0c0707dfabd86102984139cc2485cd9654db1517d"
+    },
+    "bc5e8414007b63f6f4d01785203dc02399babd4d": {
+      "size": 601919,
+      "sha256": "0832707af77bb48b3497b7cf930159a5a2c3ce078598b172feb51f3c5fee5e89"
+    },
+    "0217d8985aff89026fc06d130c0a9e0c57d76b72": {
+      "size": 1030508,
+      "sha256": "5f5066ae82b9158d539da5fb3e78160e35872d16c1fb6461feb8bb95e85316a6"
+    },
+    "720efbe04a286baf3d01f5d96b1e7785fe63b201": {
+      "size": 17063853,
+      "sha256": "ced87a1d9fc8241d95ef7b10596faba59dcf0b1dd820d492e01dc93aa03e36f5"
+    },
+    "22e1ecafea00adab3f0b677037f3514a3a39fe80": {
+      "size": 17063925,
+      "sha256": "cbae9f39a2647e6e8bc8f7b09af78124d8ccae6f2e6c0740bdd6cdb52cdca9e1"
+    },
+    "a3310aa6be33cff08d0ec01c7f5c8c93321914d5": {
+      "size": 1030311,
+      "sha256": "af565f8e61525561542b7193da8d2e70aa4139182ee9070853a0857504bde3a5"
+    },
+    "468288f77344a0268a196686d7ad5d19dca81475": {
+      "size": 17063843,
+      "sha256": "c1dafccc562b23799f74fce02660ca5c036299f661c76e84e83bda89e8cbfb74"
+    },
+    "1f3a544b9dafd189293b17876e7331e152a06ad7": {
+      "size": 17063915,
+      "sha256": "c460f0291e62d48fd3a0e94bf6964227d65061439966714ede40b62ebcc7570f"
+    },
+    "2afb8539b87be562ff3bf4818c6b331029e8f72f": {
+      "size": 1003463,
+      "sha256": "83690a9f7cdca64122384b71b2fe71561be75c91dd0996487be0af422be65171"
+    },
+    "0ceeb497bceb01a3c4073ac1e06e3dc2d71027b6": {
+      "size": 549376,
+      "sha256": "be0bf40801386a7c1676fc3b42e03302b7c5d67c6a5c608a77ceb84bbbd161de"
+    },
+    "117ff41642c1604d4e0c3e08f49f15cf8864e5e5": {
+      "size": 546014,
+      "sha256": "95bab87c1880a875cd335effe026c56de1885fec0ba60842f227cf13725cf1bf"
+    },
+    "abdd26d9ec6e04c12b870599f3768a848b76c57c": {
+      "size": 15262189,
+      "sha256": "d7d9fe3257fd218f41bc1306eaf7388b42b2efce6d073a58ccbcd9f22ad00f06"
+    },
+    "011a547bd37235f715d28b76db9987b805afa820": {
+      "size": 15262241,
+      "sha256": "1038e68c9422ceb7b57715566a9f8e91d2bc51abe75e9ff1674f88eee7dedfb7"
+    },
+    "b345029f1c1bfb5f8028a8a998bffd270a3741d4": {
+      "size": 24088638,
+      "sha256": "1a523966e947549b31da8b051419ad0d71d8c1ec5986fb41fe74cb64fdb42479"
+    },
+    "9e07a30baf47b3ccdba23e449cadbf8dfc005a26": {
+      "size": 847079,
+      "sha256": "0a711fc68a1d5144ce87e15768f3fe38685ff2116d81f00b618c02e6850df7ec"
+    },
+    "841c178f386e1fc7ced7331d81975a99d9bdfe35": {
+      "size": 15261821,
+      "sha256": "f856ab20b84300468a59675a96dda3f7d6957201b9625cc7882e74687ae8d223"
+    },
+    "3652566f4c1f9c9ff2d26ab4ea8c896ad5444603": {
+      "size": 15261893,
+      "sha256": "f11f831733e0b0a1b8f3ce131eb6436acc81a538381ada7fdb44c7daad3f0bba"
+    },
+    "e97798aafdb43ece99491779d193af2ebcb94d4c": {
+      "size": 24200870,
+      "sha256": "725c0748f398ab6e74b038bf2a0bcddfc3c7fb909d0731d4bc3d70ae132812c4"
+    },
+    "e3c2e4ff4dffca4780e13862c508a684b5a400bc": {
+      "size": 964812,
+      "sha256": "9b0bd282e60dff1e1c3f9894a0162b02cb2deb0a902a6691828b9794a01bf874"
+    },
+    "9e6a095ad97612e8ee906ec5340f4253f0e7b966": {
+      "size": 15476398,
+      "sha256": "7542f4b133e4ad0a149dc2bce92b755904006b2d5debe4e011bc65639e767d96"
+    },
+    "32461619f39a9ee1713fc480d1e37c2d82fd056a": {
+      "size": 15476470,
+      "sha256": "c2ba527736ecdd7afc790e06469e1a7b5c7e71301fa478e250d22d2ca0b454d2"
+    },
+    "2b89adc01c7bc247284340801beabdda2a73aab3": {
+      "size": 3186033,
+      "sha256": "fc3c2d9a7308a8787ba85ea6f48f5655cb602314cd69724e3538f5f6065840ba"
+    },
+    "07ba47556dd6f9470c423c67e7d00fe391f15385": {
+      "size": 966362,
+      "sha256": "20a2a245a467cf9e15ccc169039e37fd78abc75cde1c53472f32bcd0e56613cf"
+    },
+    "e6cbeeb8a7b0277acec59d37341f4e3a9ed95ffd": {
+      "size": 15473366,
+      "sha256": "843d361355cee7f8cbae6b238581e8691c3535d408f7b6f8527aba2bef9ddf96"
+    },
+    "0e3d5d706d490e7c6732a4d5f7b816546d98794c": {
+      "size": 15473438,
+      "sha256": "dc071c1451833845167d480768048049066a92d8f2c960097102cccf28cb5608"
+    }
+  },
+  "created_commits": [
+    {
+      "sha": "4d244c5b4ed282dfa4ee610e6a2fa7b4d9ca4c40",
+      "tree": "019564870e26c87e7744559e2a6b48761ce22c42",
+      "parent": "781be78d9da77a75ea711cf690eeea6523733d3a",
+      "files": 310
+    },
+    {
+      "sha": "1c8ce8433b2adf5b50947b124f7397c603f7a978",
+      "tree": "9372a635ea009697246e1660a9facb032f3a5a16",
+      "parent": "4d244c5b4ed282dfa4ee610e6a2fa7b4d9ca4c40",
+      "files": 2
+    }
+  ],
+  "force": false,
+  "persistent_config_changed": false,
+  "observed_fork_head": "1c8ce8433b2adf5b50947b124f7397c603f7a978",
+  "observed_pr_head": "1c8ce8433b2adf5b50947b124f7397c603f7a978",
+  "published": true,
+  "body_sha256": "0e9b60131b2949062e918fbfd47faf837bf1deebb67e266da6e7e9bffdaca05c",
+  "pr_url": "https://github.com/carolwjade/CarlandFPGA/pull/30",
+  "finished_at_utc": "2026-10-18T15:57:02.040589+00:00"
+}

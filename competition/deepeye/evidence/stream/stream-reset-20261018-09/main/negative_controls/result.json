@@ -1,0 +1,249 @@
+{
+  "status": "ALL_NEGATIVE_CONTROLS_REJECTED",
+  "source_sha256": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+  "positive_ports_sha256": "ab0c0f9c03b9327e380f07fd7f68f2a6e51d3cc41c25198e0a72ea37529e0d1c",
+  "rtl_mutants": [
+    {
+      "name": "core_cancel_disconnected",
+      "mutant_sha256": "96a2dd9851ae6139ef109153c20910b4dd09f856caf22faecdcd036f9f83e14a",
+      "rejected": true,
+      "reason": "simulator marker gate",
+      "actual_rtl_compiled_and_simulated": true
+    },
+    {
+      "name": "core_ignores_output_backpressure",
+      "mutant_sha256": "de322402179ed60ef3e6f725a2a05dda8b262e7fc34b428b2d9eb6dc7361f772",
+      "rejected": true,
+      "reason": "simulator marker gate",
+      "actual_rtl_compiled_and_simulated": true
+    },
+    {
+      "name": "byte_corruption",
+      "mutant_sha256": "e89d4fb95760f1ed583761bf4aa53de3db587b200a4d811319576eed6ea6ae92",
+      "rejected": true,
+      "reason": "('payload mismatch', {'cycle': 26267, 'rst': 0, 'cancel': 0, 'cf': 0, 'count': 1, 'e': 0, 'tag': 8888, 'sf': 0, 'sdata': 31337, 'slast': 1, 'hf': 0, 'mtag': 0, 'error': 0, 'mcount': 0, 'me': 0, 'raw': 0, 'k': 0, 'bits': 0, 'bytes': 0, 'bf': 1, 'data': 1, 'last': 0, 'level': 2, 'filling': 0, 'cfgstat': 2, 'sstat': 145, 'okstat': 0, 'errstat': 0, 'abortstat': 0}, {'count': 128, 'e': 0, 'tag': 101, 'xs': [0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535, 0, 65535], 'error': 0, 'sealed': True, 'header': True, 'index': 0, 'raw': 1, 'k': 0, 'bits': 2048, 'bytes': 256, 'payload': [0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 2",
+      "actual_rtl_compiled_and_simulated": true
+    },
+    {
+      "name": "counter_wrap",
+      "mutant_sha256": "e6ccdea9528f18c019859fe831fd35194ab8d43a7c891d410bc437f4fa0c9074",
+      "rejected": true,
+      "reason": "simulator marker gate",
+      "actual_rtl_compiled_and_simulated": true
+    }
+  ],
+  "corrupted_logs": [
+    {
+      "name": "good_header_mtag",
+      "line_index": 149,
+      "field": "mtag",
+      "delta": 1,
+      "sha256": "6d95434a0c3e2891b569a9cde68b2b9eb2e3560e85f38fcf6f400f6075ce331e",
+      "rejected": true
+    },
+    {
+      "name": "good_header_mcount",
+      "line_index": 149,
+      "field": "mcount",
+      "delta": 1,
+      "sha256": "19254653a73d5fe4d66d2ac7f8e8c94d9d7086bbfd6d62acc2cb535b3ca8b0cf",
+      "rejected": true
+    },
+    {
+      "name": "good_header_me",
+      "line_index": 149,
+      "field": "me",
+      "delta": 1,
+      "sha256": "1a76176dec77251d2a7b50cb1b343d868e41513b1a5c0cfb97f0310613f3121e",
+      "rejected": true
+    },
+    {
+      "name": "good_header_raw",
+      "line_index": 149,
+      "field": "raw",
+      "delta": 1,
+      "sha256": "33ca482c85d9752089a9fb40e42467fc5b42885901160e7aca2e19045ab1a603",
+      "rejected": true
+    },
+    {
+      "name": "good_header_k",
+      "line_index": 149,
+      "field": "k",
+      "delta": 1,
+      "sha256": "43b493f5795b5e4fca9f452749a105ff56f87cacc2540deeb8e1226c507f2dee",
+      "rejected": true
+    },
+    {
+      "name": "good_header_bits",
+      "line_index": 149,
+      "field": "bits",
+      "delta": 1,
+      "sha256": "9ed6cd3999b57a71a2ec1df9c360ff40495b9e67485a5515e0f414fe1e9d2a22",
+      "rejected": true
+    },
+    {
+      "name": "good_header_bytes",
+      "line_index": 149,
+      "field": "bytes",
+      "delta": 1,
+      "sha256": "1f5665eaacaeabbb9fc3cdcc33c42f566c4229a9e5df215c821fa144371d66b9",
+      "rejected": true
+    },
+    {
+      "name": "good_header_error",
+      "line_index": 149,
+      "field": "error",
+      "delta": 1,
+      "sha256": "a37b990fff85b9de90816fe5100ba58a2f57d46fb333f3e13202ae2ab08f469c",
+      "rejected": true
+    },
+    {
+      "name": "error_header_mcount",
+      "line_index": 413,
+      "field": "mcount",
+      "delta": 1,
+      "sha256": "10fa70349d76eb684c9ca2ab3d81c6b404e45c91c87edf43d8501e9622812bfd",
+      "rejected": true
+    },
+    {
+      "name": "error_header_me",
+      "line_index": 413,
+      "field": "me",
+      "delta": 1,
+      "sha256": "b2b1e5c31801da422ef2969bb23a35d953b0f0119f9754cfba84d421abb58810",
+      "rejected": true
+    },
+    {
+      "name": "error_header_raw",
+      "line_index": 413,
+      "field": "raw",
+      "delta": 1,
+      "sha256": "aab25539c1cbe257e88a8c6b348ec2226a6eb259c6f778e92ac603bba6740dbe",
+      "rejected": true
+    },
+    {
+      "name": "error_header_k",
+      "line_index": 413,
+      "field": "k",
+      "delta": 1,
+      "sha256": "a62bf561abb9d19003444dd34ced0351c8bfd66e62e7ffbd80007e52c19ae989",
+      "rejected": true
+    },
+    {
+      "name": "error_header_bits",
+      "line_index": 413,
+      "field": "bits",
+      "delta": 1,
+      "sha256": "0afd00238bfa31672b2dc8c80876d349a76ae57f02f9bd036e6a2e01d6c07d6f",
+      "rejected": true
+    },
+    {
+      "name": "error_header_bytes",
+      "line_index": 413,
+      "field": "bytes",
+      "delta": 1,
+      "sha256": "7c90c2a9473e797f3f64eee02357556cd55bbcca1c63a27b46feaa9128204bf1",
+      "rejected": true
+    },
+    {
+      "name": "error_header_mtag",
+      "line_index": 413,
+      "field": "mtag",
+      "delta": 1,
+      "sha256": "71051580dd767adab4b050cc432ffbece7845b306264a1d97e96a8a2fd26981b",
+      "rejected": true
+    },
+    {
+      "name": "byte_data",
+      "line_index": 150,
+      "field": "data",
+      "delta": 1,
+      "sha256": "d21a30f2732e310b2565d136c013ef7fd69dec12175539c4e27cb95ebbebb727",
+      "rejected": true
+    },
+    {
+      "name": "byte_last",
+      "line_index": 150,
+      "field": "last",
+      "delta": 1,
+      "sha256": "87d421c9fdd2453213ede8f8dbfd11ce22125445649ae939d6f26cf41560e6db",
+      "rejected": true
+    },
+    {
+      "name": "byte_okstat",
+      "line_index": 150,
+      "field": "okstat",
+      "delta": 1,
+      "sha256": "588f0e7721d8e7be8aae3f6fd9f5747fc7e9b14c36b29d55c3b93b6f9e82f555",
+      "rejected": true
+    },
+    {
+      "name": "byte_level",
+      "line_index": 150,
+      "field": "level",
+      "delta": 1,
+      "sha256": "9b80618ac8b7f5f1faec53dcd6811323b437b2b9a01ef78d4966076a43c58f2c",
+      "rejected": true
+    },
+    {
+      "name": "cfg_cfgstat",
+      "line_index": 2,
+      "field": "cfgstat",
+      "delta": 1,
+      "sha256": "2ed28547b05ff3e16a220bb05e6b511205a3929f51033622e934c801e566b036",
+      "rejected": true
+    },
+    {
+      "name": "cfg_level",
+      "line_index": 2,
+      "field": "level",
+      "delta": 1,
+      "sha256": "bef5c5193134b65dce198a2997a0403500eaf3236042b1b4bcb1fbd63dd0f4bf",
+      "rejected": true
+    },
+    {
+      "name": "cfg_filling",
+      "line_index": 2,
+      "field": "filling",
+      "delta": 1,
+      "sha256": "89fee23910a1d5ecc7f4b02bf4579be818be6a95713c5a685a5cea932e42049c",
+      "rejected": true
+    },
+    {
+      "name": "sample_sstat",
+      "line_index": 3,
+      "field": "sstat",
+      "delta": 1,
+      "sha256": "87f0d2509d3154c75d88e312c21c2a391982c57e004de0ce3679bc433ee437cc",
+      "rejected": true
+    },
+    {
+      "name": "sample_filling",
+      "line_index": 3,
+      "field": "filling",
+      "delta": 1,
+      "sha256": "197b2176328941cf2e2b1b25ff8500e3cecee6f86270ab1158bb57f6d2e8eab9",
+      "rejected": true
+    },
+    {
+      "name": "drop_metadata",
+      "line_index": 149,
+      "sha256": "f675db492d0b29424d1b4ac8cb04ab573bf0668e5338754d6ecf0079dbb4bdf5",
+      "rejected": true
+    },
+    {
+      "name": "drop_byte",
+      "line_index": 150,
+      "sha256": "e5392de4394736a3a7285eb615e4e644fa25bd13cbc685168cc399e5704f1955",
+      "rejected": true
+    },
+    {
+      "name": "duplicate_byte",
+      "line_index": 150,
+      "sha256": "216d1d6aadfddeb0642ae3cc7c4c15704efbac329e036d93861fc55c83398948",
+      "rejected": true
+    }
+  ],
+  "rtl_count": 4,
+  "log_count": 27
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "version",
+    "command": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-version"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "vlib",
+    "command": [
+      "D:\\modelsim1\\win64\\vlib.exe",
+      "work"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "vlog",
+    "command": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\codec\\deepeye_block_encoder.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_block_stream.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\main_stream_ports.sv"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "ab6aa380be4a374771ad450b50572a3d353166a227686fdf74e83148074c5a24",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "vsim",
+    "command": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-lib",
+      "work",
+      "main_stream_ports",
+      "+COMMANDS=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\main-final-review\\commands.txt",
+      "+PORTS=D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\main-final-review\\ports.txt",
+      "-do",
+      "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\stream-reset-integration-20261018-09\\main-final-review\\run.do"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "a248cae9a2a5891e1eac315def97b5a9730b2e466293b97bfca7e5d12cce8700",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

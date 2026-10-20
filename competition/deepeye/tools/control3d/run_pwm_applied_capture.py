@@ -56,12 +56,23 @@ PROTECTED_SHA = "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f
 DEFAULT_OUT = WORKTREE / "competition/deepeye/evidence/control3d/pwm-applied-capture-20261020-15/author/run-author-20261020-15-c"
 DEFAULT_MODELSIM = Path("D:/modelsim1/win64")
 
-TB_STATS_RE = re.compile(
-    r"TB_STATS\s+groups=(\d+)\s+cases=(\d+)\s+samples=(\d+)\s+assertions=(\d+)\s+"
-    r"records=(\d+)\s+raw_faults=(\d+)\s+failure_events=(\d+)\s+"
-    r"window_starts=(\d+)\s+handshakes=(\d+)\s+mismatches=(\d+)"
-)
-MISMATCH_RE = re.compile(r"MISMATCH\s+sample=\S+\s+label=(\S+)")
+# The current TB emits these exact whole-line records, optionally prefixed by
+# ModelSim's "# ". Bound ASCII decimals before int conversion; \d also accepts
+# non-ASCII numerals. This is a log protocol, not a search for success keywords.
+STAT_KEYS = ("groups", "cases", "samples", "assertions", "records", "raw_faults",
+             "failure_events", "window_starts", "handshakes", "mismatches")
+DECIMAL = r"[0-9]{1,20}"
+TB_STATS_RE = re.compile("TB_STATS " + " ".join(
+    key + "=(" + DECIMAL + ")" for key in STAT_KEYS))
+PASS_RE = re.compile(r"TB_PASS group=(" + DECIMAL + r") loopback=([01])")
+FAIL_RE = re.compile(r"TB_FAIL group=(" + DECIMAL + r") mismatches=(" + DECIMAL + r")")
+MISMATCH_RE = re.compile(
+    r"MISMATCH sample=(" + DECIMAL + r") label=([A-Za-z0-9_]+)"
+    r" expected=[0-9a-fA-FxXzZ]+ actual=[0-9a-fA-FxXzZ]+")
+CODE7_LINE = "CODE7_OBSERVED code=7 window_active=0 out_valid=0"
+FAIL_FATAL_LINE = "** Fatal: TB_FAIL public-port self-check"
+SIM_ERROR_RE = re.compile(r"\*\*\s+(?:Error|Fatal):")
+RESERVED = ("TB_STATS", "TB_PASS", "TB_FAIL", "MISMATCH", "CODE7_OBSERVED")
 INVALID_RE = re.compile(
     r"DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM\s+"
     r"COUNT_W=(-?\d+)\s+WITNESS_W=(-?\d+)\s+TAG_W=(-?\d+)\s+"
@@ -268,23 +279,124 @@ def completed_process(record: dict, expected_failure: bool = False) -> bool:
 
 
 def parse_tb_output(stdout_path: Path, stderr_path: Path) -> dict:
-    text = stdout_path.read_text(encoding="utf-8", errors="replace")
-    err = stderr_path.read_text(encoding="utf-8", errors="replace")
-    stats_match = TB_STATS_RE.search(text)
-    stats = None
-    if stats_match:
-        keys = ("groups", "cases", "samples", "assertions", "records", "raw_faults",
-                "failure_events", "window_starts", "handshakes", "mismatches")
-        stats = {key: int(value) for key, value in zip(keys, stats_match.groups())}
+    """Validate one complete TB outcome; preserve diagnostics on rejection.
+
+    Duplicate records (even identical), unknown prefixes/suffixes, incomplete
+    counters, conflicting terminal evidence, and records in stderr fail closed.
+    Expected mutant failure additionally needs the TB's own fatal diagnostic.
+    Simulator metadata after the terminal record is permitted; later errors
+    are still examined. No line is silently selected as the authoritative one.
+    """
+    # Preserve line framing: splitlines()/universal-newline conversion would
+    # also treat embedded CR, vertical tabs or Unicode separators as new lines.
+    text = stdout_path.read_bytes().decode("utf-8", errors="replace")
+    err = stderr_path.read_bytes().decode("utf-8", errors="replace")
+    errors, stats_rows, outcomes, mismatches, code7, own_fatals = [], [], [], [], [], []
+    simulator_errors = []
+    if "\ufffd" in text or "\ufffd" in err:
+        errors.append("invalid UTF-8 or replacement character in transcript")
+    for index, line in enumerate(text.split("\n")):
+        if line.endswith("\r"):
+            line = line[:-1]
+        body = line[2:] if line.startswith("# ") else line
+        match = TB_STATS_RE.fullmatch(body)
+        if match:
+            stats_rows.append((index, dict(zip(STAT_KEYS, map(int, match.groups())))))
+            continue
+        match = PASS_RE.fullmatch(body)
+        if match:
+            outcomes.append((index, "pass", int(match[1]), int(match[2])))
+            continue
+        match = FAIL_RE.fullmatch(body)
+        if match:
+            outcomes.append((index, "fail", int(match[1]), int(match[2])))
+            continue
+        match = MISMATCH_RE.fullmatch(body)
+        if match:
+            mismatches.append((index, int(match[1]), match[2]))
+            continue
+        if body == CODE7_LINE:
+            code7.append(index)
+            continue
+        if body == FAIL_FATAL_LINE:
+            own_fatals.append(index)
+            continue
+        if any(token in body for token in RESERVED):
+            errors.append(f"malformed or unexpected TB record at stdout line {index + 1}")
+        if SIM_ERROR_RE.search(body):
+            simulator_errors.append(f"stdout line {index + 1}: {body}")
+    for index, line in enumerate(err.split("\n")):
+        if any(token in line for token in RESERVED):
+            errors.append(f"unexpected TB record at stderr line {index + 1}")
+        if SIM_ERROR_RE.search(line):
+            simulator_errors.append(f"stderr line {index + 1}: {line}")
+    if len(stats_rows) != 1:
+        errors.append(f"expected one complete TB_STATS row, got {len(stats_rows)}")
+    if len(outcomes) != 1:
+        errors.append(f"expected one terminal TB_PASS/TB_FAIL row, got {len(outcomes)}")
+    stats = stats_rows[0][1] if len(stats_rows) == 1 else None
+    terminal = None
+    if len(outcomes) == 1:
+        end, kind, group, value = outcomes[0]
+        terminal = {"kind": kind, "group": group,
+                    ("loopback" if kind == "pass" else "mismatches"): value}
+        if stats is not None:
+            start = stats_rows[0][0]
+            if start >= end:
+                errors.append("statistics must precede terminal outcome")
+            if any(i >= start or sample > stats["samples"] for i, sample, _ in mismatches):
+                errors.append("mismatch record outside sampled pre-statistics interval")
+            if len(mismatches) != stats["mismatches"]:
+                errors.append("mismatch records disagree with statistics")
+            if any(i >= start for i in code7):
+                errors.append("code7 observation must precede statistics")
+            if kind == "pass" and stats["mismatches"] != 0:
+                errors.append("PASS conflicts with nonzero mismatches")
+            if kind == "fail" and (value == 0 or value != stats["mismatches"]):
+                errors.append("FAIL count disagrees with positive mismatch count")
+        if kind == "pass" and own_fatals:
+            errors.append("PASS conflicts with TB fatal diagnostic")
+        if kind == "fail" and (len(own_fatals) != 1 or own_fatals[0] <= end):
+            errors.append("FAIL requires one subsequent TB fatal diagnostic")
+    if len(code7) > 1:
+        errors.append("duplicate code7 observation")
+    if simulator_errors:
+        errors.append("unexpected simulator Error/Fatal diagnostic")
+    valid = not errors
     return {
-        "passed": "TB_PASS" in text,
-        "failed": ("TB_FAIL" in text) or bool(re.search(r"\*\*\s+(?:Error|Fatal):", text + "\n" + err)),
+        "passed": valid and terminal is not None and terminal["kind"] == "pass",
+        "failed": bool(errors) or (terminal is not None and terminal["kind"] == "fail"),
+        "protocol_valid": valid,
+        "protocol_errors": errors,
+        "simulator_errors": simulator_errors,
+        "terminal": terminal,
         "stats": stats,
-        "mismatch_labels": MISMATCH_RE.findall(text),
-        "code7_observed": "CODE7_OBSERVED" in text,
+        "mismatch_labels": [label for _, _, label in mismatches],
+        "code7_observed": valid and len(code7) == 1,
         "stdout_tail": text[-4000:],
         "stderr_tail": err[-2000:],
     }
+
+
+def positive_result(spec: dict, result: dict) -> bool:
+    parsed = result["parsed"]
+    terminal = parsed["terminal"]
+    return bool(completed_process(result["record"]) and parsed["passed"]
+                and parsed["protocol_valid"] and not parsed["failed"]
+                and terminal["group"] == spec["group"]
+                and terminal["loopback"] == spec.get("loopback", 0))
+
+
+def mutant_result(spec: dict, result: dict) -> bool:
+    parsed = result["parsed"]
+    if spec["expect"] == "pass_code7":
+        return positive_result(spec, result) and parsed["code7_observed"]
+    terminal = parsed["terminal"]
+    return bool(spec["expect"] == "fail"
+                and completed_process(result["record"], expected_failure=True)
+                and parsed["protocol_valid"] and terminal["kind"] == "fail"
+                and terminal["group"] == spec["group"]
+                and any(label in parsed["mismatch_labels"] for label in spec["required_any"]))
 
 
 def snapshot_sources(out: Path, paths: dict[str, Path], runner: Path) -> dict:
@@ -493,13 +605,7 @@ def compile_summary(info: dict) -> dict:
 def positive_entry(spec: dict, result: dict) -> dict:
     parsed = result["parsed"]
     stats = parsed["stats"]
-    passed = bool(
-        completed_process(result["record"])
-        and parsed["passed"]
-        and not parsed["failed"]
-        and stats is not None
-        and stats["mismatches"] == 0
-    )
+    passed = positive_result(spec, result)
     entry = {
         "id": spec["id"],
         "group": spec["group"],
@@ -510,6 +616,8 @@ def positive_entry(spec: dict, result: dict) -> dict:
             "LOOPBACK": spec["loopback"],
         },
         "passed": passed,
+        "protocol_errors": parsed["protocol_errors"],
+        "terminal": parsed["terminal"],
         "exit": result["record"]["exit"],
         "stats": stats,
         "mismatch_labels": parsed["mismatch_labels"],
@@ -606,25 +714,11 @@ def run_mutant_suite(out: Path, work: Path, logs: Path, commands: list[dict],
                 "wlf_sha256": parsed["wlf_sha256"],
             }
             if run_spec["expect"] == "fail":
-                run_entry["rejected"] = bool(
-                    completed_process(result["record"], expected_failure=True)
-                    and parsed["failed"]
-                    and not parsed["passed"]
-                    and stats is not None
-                    and stats["mismatches"] > 0
-                    and any(label in labels for label in run_spec["required_any"])
-                )
+                run_entry["rejected"] = mutant_result(run_spec, result)
             elif run_spec["expect"] == "pass_code7":
-                run_entry["demonstrated"] = bool(
-                    completed_process(result["record"])
-                    and parsed["passed"]
-                    and not parsed["failed"]
-                    and stats is not None
-                    and stats["mismatches"] == 0
-                    and parsed["code7_observed"]
-                    and all(marker in (parsed["stdout_tail"] or "")
-                            for marker in run_spec["required_any"])
-                )
+                run_entry["demonstrated"] = mutant_result(run_spec, result)
+            run_entry["protocol_errors"] = parsed["protocol_errors"]
+            run_entry["terminal"] = parsed["terminal"]
             if not run_entry.get("rejected", run_entry.get("demonstrated", False)):
                 run_entry["stdout_tail"] = parsed["stdout_tail"]
                 run_entry["stderr_tail"] = parsed["stderr_tail"]

@@ -1,0 +1,56 @@
+{
+  "decision": "ACCEPT_PYTHON_RUNNER_QUALIFICATION_ONLY",
+  "at_utc": "2026-10-20T07:49:13.331849+00:00",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-16",
+  "owner_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "review": "Critical implementation and acceptance performed directly by quality main; no separate new independent author/reviewer claimed.",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "source_sha256": "b4ac06464af965999d35444f607fa6c7db537b80c340d39cbcc233ee2dce37b0",
+  "test_sha256": "1483b0ca72cf9d66f3c85eac17f3d81f6fccf51eab21deee0e3431b84620ecf8",
+  "tests": {
+    "unit_methods": 23,
+    "portable_methods": 23,
+    "original_A_red_reproductions": 2,
+    "original_A_negatives_rejected_after_repair": 2,
+    "saved_commands": 47,
+    "saved_stdout_stderr_hashes": 94,
+    "saved_scenarios_reclassified": 33,
+    "new_ModelSim_commands": 0,
+    "new_hardware_commands": 0
+  },
+  "original_B_qualification_files_retained": 102,
+  "original_A_files_rehashed": 40,
+  "existing_tracked_files_unchanged": 4732,
+  "existing_tracked_files_changed": [
+    "competition/deepeye/tools/control3d/run_pwm_applied_capture.py"
+  ],
+  "historical_fixture_format": "Original bare TB_PASS synthetic normal fixture is no longer accepted; preserved unchanged. Canonical protocol tests cover the original process/error/fatal predicates.",
+  "limits": [
+    "No RTL/TB/oracle changes",
+    "Saved simulator evidence reused, not new simulation",
+    "No new independent RTL oracle",
+    "ABI/freshness/BOOT/motion/CDC/RDC/synthesis/implementation/board/system remain outside this increment",
+    "All29 formal cards not_run; A-only board"
+  ]
+}

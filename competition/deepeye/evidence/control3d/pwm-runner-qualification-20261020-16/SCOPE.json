@@ -1,0 +1,48 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PWM-RUNNER-QUALIFICATION-20261020-16-v1",
+  "operation_id": "B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-16",
+  "owner_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "current_turn_id": "not independently obtained",
+  "at_utc": "2026-10-20T07:41:39.299337+00:00",
+  "baseline": "df82af1bc91d01aeb9adee19f48c0890dfc1ac5b",
+  "ownership": [
+    "competition/deepeye/tools/control3d/run_pwm_applied_capture.py",
+    "competition/deepeye/tests/control/test_pwm_applied_capture_runner.py",
+    "competition/deepeye/evidence/control3d/pwm-runner-qualification-20261020-16/**",
+    "handoffs/b/B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-16/**"
+  ],
+  "execution": "Quality main implements and evaluates the critical parser change directly; fresh child_status shows zero active jobs, zero instances,90 historical jobs. No new delegation.",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "design_pin": "1011259415a0916054eb580687612580bc1e5f09",
+  "authority": "A matched PR30 comment6281218043 requests B-owned parser repair under existing implementation ownership.",
+  "design": "Exactly one complete ASCII stats row then exactly one whole-line PASS/FAIL with optional known # prefix; bind group/loopback; validate mismatch count and labels; reject malformed/duplicate/conflicting terminal evidence and simulator errors on normal paths. Preserve process-exit checks.",
+  "validation": "Original A two negatives before/after; canonical positive/negative transcript tests and process-status injection; classify exact saved 47-command suite without invoking ModelSim.",
+  "limits": "No RTL/TB/old oracle/old evidence edits; no full B15 simulator replay, new board run, ABI/TTL/BOOT/motion authority. All29 formal cards not_run.",
+  "prior_review": "Op15 coordinator wait actually failed with usage limit; no ACCEPT, no automatic resubmission. Independent A review is the current actionable input.",
+  "local_preparation_failures": [
+    "A tree GET succeeded once; local output-directory collision then aborted before blob reads. Recovery consumed saved tree and fetched only remaining blobs.",
+    "One long inline PowerShell preparation command failed parsing before script creation/network. Replaced by apply_patch. Neither failure is a product test result."
+  ]
+}

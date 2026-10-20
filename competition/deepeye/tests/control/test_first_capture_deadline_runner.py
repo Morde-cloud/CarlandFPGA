@@ -554,5 +554,116 @@ class MainQualificationRegressionTests(unittest.TestCase):
             self.assertFalse(runner.qualify_normal_log(text, 1, "standalone", runner.SMALL_GROUPS, 0)[0])
 
 
+class ErrorAccountingAndAggregationTests(unittest.TestCase):
+    def test_guard_plain_diagnostics_in_all_positions(self):
+        marker = "# ** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width"
+        for text in ("Error: unrelated", "Fatal: unrelated", "ERROR: unrelated", "fAtAl: unrelated"):
+            variants = [text + "\n" + REAL_GUARD0_LOG, REAL_GUARD0_LOG + text + "\n",
+                        REAL_GUARD0_LOG.replace(marker, text + "\n" + marker)]
+            for variant in variants:
+                with self.subTest(diagnostic=text):
+                    self.assertFalse(runner.qualify_guard_log(variant, 0, 0)[0])
+
+    def test_normal_nonzero_and_conflicting_tallies(self):
+        for errors in (1, 2, 7):
+            for label in ("Errors", "ERRORS", "eRrOrS"):
+                with self.subTest(errors=errors, label=label):
+                    text = REAL_NORMAL_LOG + f"{label}: {errors}, Warnings: 0\n"
+                    self.assertFalse(runner.qualify_normal_log(text, 1, "standalone", runner.SMALL_GROUPS, 0)[0])
+
+    def test_guard_tally_only_own_fatal(self):
+        for errors in (0, 2, 7):
+            text = REAL_GUARD0_LOG.replace("Errors: 1, Warnings: 0", f"Errors: {errors}, Warnings: 0")
+            self.assertFalse(runner.qualify_guard_log(text, 0, 0)[0])
+        self.assertFalse(runner.qualify_guard_log(REAL_GUARD0_LOG + "Errors: 1, Warnings: 0\n", 0, 0)[0])
+
+    def test_mutant_tally_only_own_fatal(self):
+        base = MainQualificationRegressionTests.complete_mutant()
+        self.assertTrue(runner.qualify_mutant_log(base + "Errors: 1, Warnings: 2\n", 1, 0)[0])
+        for extra in ("Errors: 0, Warnings: 0\n", "Errors: 2, Warnings: 0\n",
+                      "Errors: 1, Warnings: 0\nErrors: 1, Warnings: 0\n"):
+            self.assertFalse(runner.qualify_mutant_log(base + extra, 1, 0)[0])
+
+    def test_malformed_tallies_reject(self):
+        for extra in ("Errors: -1, Warnings: 0", "Errors: 01, Warnings: 0",
+                      "Errors: 0, Warnings: nope", "Errors: 0", "Errors : 0, Warnings: 0",
+                      "prefix Errors: 0, Warnings: 0"):
+            with self.subTest(extra=extra):
+                self.assertFalse(runner.qualify_normal_log(REAL_NORMAL_LOG + extra, 1, "standalone", runner.SMALL_GROUPS, 0)[0])
+                self.assertFalse(runner.qualify_guard_log(REAL_GUARD0_LOG + extra, 0, 0)[0])
+                self.assertFalse(runner.qualify_mutant_log(MainQualificationRegressionTests.complete_mutant() + extra, 1, 0)[0])
+
+    def test_multiple_stage_zero_tallies(self):
+        stages = "Errors: 0, Warnings: 0\nERRORS: 0, WARNINGS: 3\n"
+        self.assertTrue(runner.qualify_normal_log(stages + REAL_NORMAL_LOG + stages, 1, "standalone", runner.SMALL_GROUPS, 0)[0])
+        self.assertTrue(runner.qualify_guard_log(stages + REAL_GUARD0_LOG, 0, 0)[0])
+        text = stages + MainQualificationRegressionTests.complete_mutant() + "errors: 1, warnings: 0\n"
+        self.assertTrue(runner.qualify_mutant_log(text, 1, 0)[0])
+
+    def test_premature_own_fatal_tally_rejects(self):
+        tally = "Errors: 1, Warnings: 0\n"
+        self.assertFalse(runner.qualify_guard_log(tally + REAL_GUARD0_LOG, 0, 0)[0])
+        self.assertFalse(runner.qualify_mutant_log(tally + MainQualificationRegressionTests.complete_mutant(), 1, 0)[0])
+
+    def test_three_outcomes_are_distinct(self):
+        target = runner.classify_mutant_execution(MainQualificationRegressionTests.complete_mutant(), 1, 0, False)
+        survivor = runner.classify_mutant_execution(REAL_NORMAL_LOG, 1, 0, False)
+        failed = runner.classify_mutant_execution(REAL_NORMAL_LOG, 1, 17, False)
+        self.assertEqual((target["outcome"], target["run_valid"], target["target_hit"]), ("target_hit", True, True))
+        self.assertEqual((survivor["outcome"], survivor["run_valid"], survivor["target_hit"]), ("survived", True, False))
+        self.assertEqual((failed["outcome"], failed["run_valid"], failed["target_hit"]), ("execution_error", False, False))
+
+    @staticmethod
+    def synthetic_aggregation(injection):
+        """Exercise the actual aggregator using explicit process-free stubs."""
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            rtl = root / "competition/deepeye/fpga/control3d/deepeye_first_capture_deadline.sv"
+            rtl.parent.mkdir(parents=True)
+            rtl.write_text("Synthetic orchestration fixture only; not RTL.")
+            def simulator(case_dir, modelsim_dir, top, generic, width, timeout):
+                selected = case_dir.parent.name == "cancel-ignored" and width == 2
+                bad = injection if selected or injection == "all_survivors" else None
+                text = (REAL_NORMAL_LOG if bad in ("survivor", "all_survivors")
+                        else MainQualificationRegressionTests.complete_mutant())
+                text = text.replace("width=1", f"width={width}")
+                code = 17 if bad == "exit" else 0
+                if bad == "foreign": text += "** Error: unrelated selected execution failure\n"
+                if bad == "empty": text = ""
+                if bad != "missing": (case_dir / "sim.log").write_text(text)
+                return {"exit_code": code, "timed_out": bad == "timeout", "synthetic_only": True}
+            with patch.object(runner, "compile_case", return_value={"ok": True, "synthetic_only": True}), \
+                 patch.object(runner, "run_vsim_case", side_effect=simulator), \
+                 patch.object(runner, "make_mutant", side_effect=lambda source, spec: source), \
+                 patch.object(runner.subprocess, "Popen", side_effect=AssertionError("No process allowed")):
+                return runner.mutant_cases(root, root / "unused-vendor", root / "cases", 1)
+
+    def test_one_foreign_error_cannot_be_masked(self):
+        rows = self.synthetic_aggregation("foreign")
+        bad = next(r for r in rows if r["mutant"] == "cancel-ignored")
+        self.assertFalse(bad["ok"])
+        self.assertEqual(bad["execution_error_widths"], [2])
+        self.assertEqual(bad["hit_widths"], [1, 3])
+
+    def test_one_exit_or_timeout_cannot_be_masked(self):
+        for injection in ("exit", "timeout"):
+            with self.subTest(injection=injection):
+                self.assertFalse(all(r["ok"] for r in self.synthetic_aggregation(injection)))
+
+    def test_empty_or_missing_output_cannot_be_masked(self):
+        for injection in ("empty", "missing"):
+            with self.subTest(injection=injection):
+                self.assertFalse(all(r["ok"] for r in self.synthetic_aggregation(injection)))
+
+    def test_survivors_are_valid_but_not_target_hits(self):
+        rows = self.synthetic_aggregation("survivor")
+        self.assertTrue(all(r["ok"] for r in rows))
+        mixed = next(r for r in rows if r["mutant"] == "cancel-ignored")
+        self.assertEqual(mixed["hit_widths"], [1, 3])
+        self.assertEqual(mixed["survivor_widths"], [2])
+        self.assertFalse(all(r["ok"] for r in self.synthetic_aggregation("all_survivors")))
+
+
 if __name__ == "__main__":
     unittest.main()

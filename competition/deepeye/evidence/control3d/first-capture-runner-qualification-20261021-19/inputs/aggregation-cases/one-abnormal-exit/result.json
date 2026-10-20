@@ -1,0 +1,94 @@
+{
+  "name": "one-abnormal-exit",
+  "expected": false,
+  "accepted": true,
+  "match": false,
+  "case_ok": [
+    {
+      "mutant": "deadline-off-by-one",
+      "aggregate": true,
+      "widths": [
+        {
+          "width": 1,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 2,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 3,
+          "ok": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "mutant": "repeat-start-renewal",
+      "aggregate": true,
+      "widths": [
+        {
+          "width": 1,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 2,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 3,
+          "ok": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "mutant": "cancel-ignored",
+      "aggregate": true,
+      "widths": [
+        {
+          "width": 1,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 2,
+          "ok": false,
+          "reasons": [
+            "mutant simulation exit 17 unexpected"
+          ]
+        },
+        {
+          "width": 3,
+          "ok": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "mutant": "late-observed-resurrection",
+      "aggregate": true,
+      "widths": [
+        {
+          "width": 1,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 2,
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "width": 3,
+          "ok": true,
+          "reasons": []
+        }
+      ]
+    }
+  ]
+}

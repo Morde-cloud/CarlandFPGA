@@ -1,0 +1,39 @@
+{
+  "mutant": "cancel-ignored",
+  "width": 2,
+  "compile": {
+    "ok": true,
+    "synthetic_compile_stub": true,
+    "reason": "synthetic selected compilation failure"
+  },
+  "sim": {
+    "exit_code": 0,
+    "timed_out": false,
+    "synthetic_simulation_stub": true
+  },
+  "parse": {
+    "kind": "mutant",
+    "width": 2,
+    "check_fail_lines": 0,
+    "summaries": 0,
+    "fatals": 0,
+    "scenarios": 0,
+    "reasons": [
+      "mutant produced no valid numeric CHECK_FAIL",
+      "mutant requires one matching SUMMARY/FINISH/own-fatal",
+      "RUN mismatch (0, 'guard') expected (2, 'standalone')",
+      "expected exactly one SUMMARY, found 0",
+      "expected exactly one FINISH, found 0",
+      "unrelated fatal/error 1"
+    ]
+  },
+  "ok": false,
+  "reasons": [
+    "mutant produced no valid numeric CHECK_FAIL",
+    "mutant requires one matching SUMMARY/FINISH/own-fatal",
+    "RUN mismatch (0, 'guard') expected (2, 'standalone')",
+    "expected exactly one SUMMARY, found 0",
+    "expected exactly one FINISH, found 0",
+    "unrelated fatal/error 1"
+  ]
+}

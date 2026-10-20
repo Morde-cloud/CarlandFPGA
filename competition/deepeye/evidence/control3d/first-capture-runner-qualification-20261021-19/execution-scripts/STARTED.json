@@ -1,0 +1,55 @@
+{
+  "at_utc": "2026-10-20T18:27:48.808052+00:00",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-FIRST-CAPTURE-DEADLINE-RUNNER-REVISE-20261021-19-v1",
+  "main_execution_work": "B-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19-v1",
+  "operation_id": "B-DEEPEYE-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19",
+  "instruction_operation": "B-FIRST-CAPTURE-DEADLINE-RUNNER-REVISE-20261021-19-DIRECTOR",
+  "result_event": "B-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19-RESULT-v1",
+  "thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "actual_turn": {
+    "timestamp": "2026-10-20T18:23:57.596Z",
+    "turn_id": "01a15a8e-4c25-70b1-8d34-39d2a8b3c17e",
+    "model": "gpt-6-astra",
+    "effort": "ultra"
+  },
+  "baseline": "6c1dbca6ec15d8bd3c7bc123cf839a2152869a9b",
+  "decision": "REVISE",
+  "decision_pins": {
+    "COMPLETED_REVIEW_DECISION.json": "67413ae196d9bd528e5ccea7c5d01a948829be30d280b1f42e188a5a1fc1305b",
+    "COMPLETED_REVIEW_CONSUMED.json": "b473402f3242593f4d11d9b4bb0cd0373a4b746f415f606ca6a7c8b9c9cbd88c",
+    "REVIEW_FINDINGS.md": "1f109493aa55f4e7a58beee05c18ed9dab69625b081275e61041500a56e23fc6",
+    "RUNNER_REPAIR_AUTHORIZATION.txt": "8ebed426ec2fd054924bc7d450108b2598503847a2e05875bf44861d1d971d65"
+  },
+  "ownership": [
+    "competition/deepeye/tools/control3d/run_first_capture_deadline.py",
+    "competition/deepeye/tests/control/test_first_capture_deadline_runner.py",
+    "competition/deepeye/evidence/control3d/first-capture-runner-qualification-20261021-19/",
+    "handoffs/b/B-DEEPEYE-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19/"
+  ],
+  "private_ownership": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\first-capture-runner-qualification-20261021-19",
+  "new_workers": 0,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design": "1011259415a0916054eb580687612580bc1e5f09",
+  "expectations": "Freeze exact coordinator43+4 and supplemental accounting/outcome expectations before runner edits. Existing Python/new regression/portable runs only;21historical logs read-only. No simulator, vendor tool, old RTL/oracle/vector/manifest change.",
+  "return_target": "01a154de-abd8-7590-b9a3-2819249458e3"
+}

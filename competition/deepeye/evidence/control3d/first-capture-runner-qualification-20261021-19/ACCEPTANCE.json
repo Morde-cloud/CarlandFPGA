@@ -1,0 +1,83 @@
+{
+  "at_utc": "2026-10-20T18:41:21.342097+00:00",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19",
+  "work_id": "B-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19-v1",
+  "thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "actual_turn": {
+    "timestamp": "2026-10-20T18:23:57.596Z",
+    "turn_id": "01a15a8e-4c25-70b1-8d34-39d2a8b3c17e",
+    "model": "gpt-6-astra",
+    "effort": "ultra"
+  },
+  "decision": "MAIN_ACCEPT_BOUNDED_PYTHON_REPAIR_PENDING_COORDINATOR_REVIEW",
+  "prior_operation18_coordinator_decision": "REVISE",
+  "prior_decision_sha256": "67413ae196d9bd528e5ccea7c5d01a948829be30d280b1f42e188a5a1fc1305b",
+  "baseline": "6c1dbca6ec15d8bd3c7bc123cf839a2152869a9b",
+  "changed_sources": {
+    "competition/deepeye/tests/control/test_first_capture_deadline_runner.py": {
+      "before": "36cf08c72057b9de9191cb532ebd78d67da7a847bba4b4654ccfa68022e479a1",
+      "after": "1247a7c84fde50368ddf88d967e7b8d14468719da023b498d64014c63ebe8159"
+    },
+    "competition/deepeye/tools/control3d/run_first_capture_deadline.py": {
+      "before": "a78779ae94f72f183eedfb994a8d6f645258d3289881ec2511cf5afe5143d9eb",
+      "after": "283902fbb281bd313b553e2efbc622b49441c9250cded0461fa92bc700ad8eba"
+    }
+  },
+  "old_tracked_total": 5745,
+  "old_tracked_unchanged": 5743,
+  "coordinator_inputs_verified": 176,
+  "root_causes": [
+    "FC18-P2-01 foreign plain/case-varied guard diagnostics",
+    "FC18-P2-02 malformed/conflicting/extra error tallies",
+    "FC18-P2-03 selected mutant execution errors masked by another width target hit"
+  ],
+  "baseline_coordinator_misaccepts": {
+    "parser": 15,
+    "aggregation": 3
+  },
+  "baseline_all_mismatches": {
+    "parser": 585,
+    "aggregation": 30,
+    "aggregation_exceptions": 3
+  },
+  "repaired": {
+    "parser": 874,
+    "aggregation": 40,
+    "mismatches": 0,
+    "exceptions": 0,
+    "unit_methods": 45,
+    "portable_methods": 45,
+    "unchanged_original_methods_run": 33,
+    "actual_python_cli_cases": 8,
+    "readonly_historical_author_logs": 21
+  },
+  "test_seams": "Synthetic compiler/simulator output only; actual qualification, aggregation and CLI entrypoint execute.",
+  "review_limit": "Main inspected findings/code then froze expectations before repair; main designed and evaluated repair, not blind or a separate implementer review.",
+  "new_workers": 0,
+  "new_ModelSim": 0,
+  "new_Vivado": 0,
+  "new_RTL_cases": 0,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design": "1011259415a0916054eb580687612580bc1e5f09",
+  "formal_status": "all29/G05/B06/R03/board/system not_run; no ABI/BOOT/clock/physicalTTL/freshness/ENABLE/motion grant"
+}

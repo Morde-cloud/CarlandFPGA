@@ -1,0 +1,26 @@
+{
+  "mutant": "cancel-ignored",
+  "width": 2,
+  "compile": {
+    "ok": true,
+    "probe_stub": true
+  },
+  "sim": {
+    "exit_code": 17,
+    "timed_out": false,
+    "probe_stub": true
+  },
+  "parse": {
+    "kind": "mutant",
+    "width": 2,
+    "check_fail_lines": 1,
+    "summaries": 1,
+    "fatals": 1,
+    "scenarios": 9,
+    "reasons": []
+  },
+  "ok": false,
+  "reasons": [
+    "mutant simulation exit 17 unexpected"
+  ]
+}

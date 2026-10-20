@@ -1,0 +1,102 @@
+明确修订授权：B first-capture deadline runner qualification
+
+唯一产品质量主仍为 DEEPEYE-IMPLEMENTATION-20261014/v1，
+App thread 01a13b55-095b-7461-8dd5-5476a130bd82。保持原 worktree/branch。
+本授权由协调质量主 B-MAIN-CONTINUATION-20261019/v1 给出。
+不是第二产品根，也不委托新的 RTL 实现。
+
+parentwork: B-FIRST-CAPTURE-DEADLINE-RUNNER-REVISE-20261021-19-v1
+instruction operation: B-FIRST-CAPTURE-DEADLINE-RUNNER-REVISE-20261021-19-DIRECTOR
+product operation: B-DEEPEYE-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19
+main execution work: B-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19-v1
+result event key: B-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19-RESULT-v1
+
+必须先实读并核对同目录 COMPLETED_REVIEW_DECISION.json、
+COMPLETED_REVIEW_CONSUMED.json、REVIEW_FINDINGS.md 和本授权的完整内容与哈希。
+op18 输入 head 6c1dbca6ec15d8bd3c7bc123cf839a2152869a9b，
+source d80254db6936f53b2f870713b85c523b52af4911，
+request c0a0dc7fb76cb3caab91722bd08778e6af078b50276fa9cc52be006a6355d7e9，
+manifest 812b1ab5c3b8500a9118cefd2cc7c6b34facb5aaa02c3768c515fe964c0a62d3。
+旧 runner SHA a78779ae94f72f183eedfb994a8d6f645258d3289881ec2511cf5afe5143d9eb。
+三项 P2 的日志、预期、脚本和实测返回都在协调 completed-review 目录。
+
+范围与独占写权（相对原产品 worktree）：
+1. competition/deepeye/tools/control3d/run_first_capture_deadline.py
+2. competition/deepeye/tests/control/test_first_capture_deadline_runner.py
+3. competition/deepeye/evidence/control3d/first-capture-runner-qualification-20261021-19/
+4. handoffs/b/B-DEEPEYE-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19/
+另唯一私有写权：
+D:/pynq/CarlandFPGA/.local/deployment/node-b/evidence/first-capture-runner-qualification-20261021-19/
+
+这是质量主已接管 runner 的窄修订，由原质量主承担代码修复及评价；本次不授权
+新 child/native/App worker 或第二产品会话。先核当前没有冲突 writer、同 work
+重复任务、已存在新 operation 输出或未知发布副作用；若存在先对账，不覆盖、
+不再启动第二执行者。实际消费/当前主 thread/turn、准确写权、输入哈希及验收
+预期先持久化在新私有目录。协调目录与其他目录只读。
+
+必须解决：
+FC18-P2-01：guard 对普通 Error:/Fatal:、大小写变体和不同位置的外来错误拒绝，
+保持精确且匹配参数的自身 fatal 正例。
+FC18-P2-02：normal、guard、mutant 对错误 tally 有明确且一致的验证。
+normal 不得允许非零 error。guard/mutant 只允许对应自身预期 fatal 的错误；
+额外、畸形、矛盾计数须拒绝。根据已保存真实 ModelSim 日志明确各阶段 tally
+规则，避免误拒绝不同阶段的多个零 tally，不按测试字符串做特殊白名单。
+FC18-P2-03：每个已选择 mutant width 的实际运行都必须有有效结果。
+某一 width 的超时、异常退出、外来错误或不完整协议不得被另一个 width 的
+target hit 掩盖。若允许健康且完整的 survivor，须显式分类并与运行失败区分；
+整体至少一个真实 target hit 的规则与全部已选择运行有效的规则分别核验。
+
+先保存三类修复的独立预期，再改 runner。使用协调的 43 parser fixtures 与
+4 aggregation fixtures（均已明确 synthetic），追加必要边界和接受对照。
+归档新回归到新公开 evidence，并保留输入来源/原始 hash；不得把协调已读过
+作者实现的探针改称盲 oracle。核实错误注入确实走真实 qualification/
+aggregation 路径，不用重写一个总是返回预期的测试替身冒充实际函数调用。
+
+验收至少包括：
+- 三个根因分别有修前拒绝失败与修后正确拒绝；接受对照仍通过；
+- normal/guard/mutant tally 覆盖零、一、额外非零、冲突、畸形、大小写与阶段位置；
+- orchestration 覆盖一个 width 外来错误、异常退出、超时、缺失/不完整输出，
+  健康运行与已冻结的 survivor 策略；overall/CLI 不能把失败变成 PASS/exit0；
+- 受影响的现有 Python 单元测试及新增回归实际执行，工具版本、命令、退出、
+  stdout/stderr、精确 source 和 portable 运行输入都有保存；
+- 对 21 个已保存作者实际日志只读重判，明确其为历史日志重判，不算新
+  ModelSim 或新 RTL case。必要时只读核对 main 历史 logs，保留原结果；
+- 任何回归失败都保存原始证据，修订期望须解释依据，不能为通过而放宽；
+- 仅这两个 Python 源文件可变，所有 RTL/TB/main oracle/old08–18 evidence/
+  handoff 原字节不变，受保护 codec SHA
+   6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8 不变。
+
+本次是 Python 判定修订，不运行旧 RTL/ModelSim/Vivado/板 suite，不改 DUT、
+testbench、绝对边沿 oracle 或原冻结向量。原 op18 132010+112 主实跑边沿和
+四个真实 RTL mutant 记录照实引用；没有发现 RTL 缺陷，不把本次修订冒充
+新硬件功能或重新接受正式卡。不要覆盖 op18 ACCEPTANCE/FINAL_RECEIPT；
+新回执应明确原 op18 协调结论是 REVISE，新 operation 仅闭合 runner 缺陷。
+
+独立质量核验通过后，以本新 operation/source commit/request/manifest 发布到
+现有 PR30。仍使用逐请求唯一 raw HTTP 记录，首次 API 前绑定本 op/work；
+一次 force=false ref 更新及实际 head/metadata/完整选定字节读回。未知副作用
+先对账，不重放旧 publisher，不重复旧 peer outbox。公开报告包含三项问题、
+修前/后结果、真实新测试数量与历史重判数量。必要的新 A/C 精确交接各一次，
+不群播报。发布后通过现有 App 向协调 thread
+01a154de-abd8-7590-b9a3-2819249458e3 发一次真实 completed/failed/实质 blocked
+事件，携带上述 result event key、工作 ID、实际 thread/turn、精确 commit、
+证据绝对路径与 SHA。不要 controller resume/main_submit/main_wait/周期轮询/
+自提交空 READY/Goal/automation。App ACK 不算协调消费；发后释放本回合。
+
+A comment 6296895679 是 op17 限定接受，不是 op18/op19 接受。无需重跑其历史
+测试或重新请求旧接受。原 A/C 传输状态不授予公共接口权限。
+
+固定合同：DEEPEYE-HUMAN-LOCK-20261014/revision1，
+H01 H02 H03 H04 H05 H06 H07 H08 H09 H10 H11 H12 H13 H14 H15；
+requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804，
+contract pin f5989cd5defce561f9ba98e6b18fc2682945f0a2，
+design 1011259415a0916054eb580687612580bc1e5f09。
+完整 3D/UI、空心仅边框立方体、实体体积碰撞、自由相机、可编辑/随机布局、
+自由入/出面、等蓝红门与完整通行、隐藏真值、设备约束因果观测、在线三维
+决策、实质 PC AI、PC_DIRECT 与 FPGA 输出两链路全部保留。
+all29/G05/B06/R03/board/system not_run。新模块 synthesis/implementation/
+timing/CDC_RDC not_run/blocked，无 physicalTTL/sourcefreshness/BOOT/clock/
+public ABI/TRACE/register/HWH/ENABLE/motion 权限，不接产品 STOP/PWM。
+A 独占物理板；不改服务、SQL、凭据、配置或队列。旧 35% 停止规则已撤销。
+若实际出现需要桌面/人类的阻塞，按既有 [需桌面回合]/[需本人操作] 规范报告
+准确阻塞证据；不要凭空请求许可或停止独立可做工作。

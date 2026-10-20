@@ -1,0 +1,384 @@
+{
+  "source_sha256": "a78779ae94f72f183eedfb994a8d6f645258d3289881ec2511cf5afe5143d9eb",
+  "synthetic_only": true,
+  "vendor_invocations": 0,
+  "blocked_subprocess_attempts": [],
+  "cases": 4,
+  "unexpected_accepts": 3,
+  "results": [
+    {
+      "name": "all-good",
+      "expected": true,
+      "accepted": true,
+      "match": true,
+      "case_ok": [
+        {
+          "mutant": "deadline-off-by-one",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "repeat-start-renewal",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "cancel-ignored",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "late-observed-resurrection",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "one-foreign-error",
+      "expected": false,
+      "accepted": true,
+      "match": false,
+      "case_ok": [
+        {
+          "mutant": "deadline-off-by-one",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "repeat-start-renewal",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "cancel-ignored",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": false,
+              "reasons": [
+                "unrelated fatal/error 1"
+              ]
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "late-observed-resurrection",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "one-abnormal-exit",
+      "expected": false,
+      "accepted": true,
+      "match": false,
+      "case_ok": [
+        {
+          "mutant": "deadline-off-by-one",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "repeat-start-renewal",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "cancel-ignored",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": false,
+              "reasons": [
+                "mutant simulation exit 17 unexpected"
+              ]
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "late-observed-resurrection",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "one-timeout",
+      "expected": false,
+      "accepted": true,
+      "match": false,
+      "case_ok": [
+        {
+          "mutant": "deadline-off-by-one",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "repeat-start-renewal",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "cancel-ignored",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": false,
+              "reasons": [
+                "mutant simulation timeout"
+              ]
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        },
+        {
+          "mutant": "late-observed-resurrection",
+          "aggregate": true,
+          "widths": [
+            {
+              "width": 1,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 2,
+              "ok": true,
+              "reasons": []
+            },
+            {
+              "width": 3,
+              "ok": true,
+              "reasons": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

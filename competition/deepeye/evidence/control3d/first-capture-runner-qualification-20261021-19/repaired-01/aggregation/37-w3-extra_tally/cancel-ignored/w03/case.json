@@ -1,0 +1,41 @@
+{
+  "mutant": "cancel-ignored",
+  "width": 3,
+  "compile": {
+    "ok": true,
+    "synthetic_compile_stub": true,
+    "reason": "synthetic selected compilation failure"
+  },
+  "sim": {
+    "exit_code": 0,
+    "timed_out": false,
+    "synthetic_simulation_stub": true
+  },
+  "parse": {
+    "kind": "mutant",
+    "width": 3,
+    "check_fail_lines": 1,
+    "summaries": 1,
+    "fatals": 1,
+    "scenarios": 9,
+    "reasons": [
+      "extra, duplicate or premature expected-fatal error tally"
+    ]
+  },
+  "ok": false,
+  "run_valid": false,
+  "target_hit": false,
+  "outcome": "execution_error",
+  "reasons": [
+    "unqualified selected simulation",
+    "extra, duplicate or premature expected-fatal error tally",
+    "unrelated Error/Fatal diagnostic",
+    "normal error tally must be zero",
+    "CHECK_FAIL present 1",
+    "malformed FC marker 1",
+    "unrelated fatal/error 1",
+    "FINISH status FAIL",
+    "scenario s0 status fail",
+    "SUMMARY failures 1"
+  ]
+}

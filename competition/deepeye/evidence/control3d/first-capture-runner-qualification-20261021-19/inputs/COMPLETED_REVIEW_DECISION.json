@@ -1,0 +1,94 @@
+{
+  "task_id": "B-MAIN-CONTINUATION-20261019",
+  "task_version": 1,
+  "actual_thread": "01a154de-abd8-7590-b9a3-2819249458e3",
+  "actual_turn": "01a15a7f-3d8b-7462-9a8f-8c4b3f88b17d",
+  "event_dedup_key": "B-FIRST-CAPTURE-DEADLINE-20261021-18-RESULT-v1",
+  "parentwork": "B-LOCAL-FIRST-CAPTURE-DEADLINE-CONTINUE-20261021-v1",
+  "instruction_operation": "B-LOCAL-FIRST-CAPTURE-DEADLINE-CONTINUE-20261021-DIRECTOR",
+  "product_operation": "B-DEEPEYE-FIRST-CAPTURE-DEADLINE-20261021-18",
+  "product_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "product_turn": "01a15a57-d30e-75f2-9fa1-fc0d16a995a6",
+  "head": "6c1dbca6ec15d8bd3c7bc123cf839a2152869a9b",
+  "source_commit": "d80254db6936f53b2f870713b85c523b52af4911",
+  "request_sha256": "c0a0dc7fb76cb3caab91722bd08778e6af078b50276fa9cc52be006a6355d7e9",
+  "manifest_sha256": "812b1ab5c3b8500a9118cefd2cc7c6b34facb5aaa02c3768c515fe964c0a62d3",
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "decision": "REVISE",
+  "at_utc": "2026-10-20T18:23:36.498979+00:00",
+  "blocking_findings": [
+    {
+      "id": "FC18-P2-01",
+      "priority": "P2",
+      "title": "Guard admits unrelated plain Error/Fatal output"
+    },
+    {
+      "id": "FC18-P2-02",
+      "priority": "P2",
+      "title": "Qualifiers admit nonzero or conflicting error tallies"
+    },
+    {
+      "id": "FC18-P2-03",
+      "priority": "P2",
+      "title": "Another width's mutant hit masks selected simulation failure"
+    }
+  ],
+  "reason": "47/47 byte checks pass, but the exact delivered runner yields 15 parser misaccepts plus 3 synthetic aggregation misaccepts. Runner qualification must be repaired before this increment can be accepted.",
+  "findings": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\first-capture-deadline-20261021-18\\completed-review\\REVIEW_FINDINGS.md",
+    "bytes": 6283,
+    "sha256": "1f109493aa55f4e7a58beee05c18ed9dab69625b081275e61041500a56e23fc6"
+  },
+  "consumption": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\first-capture-deadline-20261021-18\\completed-review\\COMPLETED_REVIEW_CONSUMED.json",
+    "bytes": 15539,
+    "sha256": "b473402f3242593f4d11d9b4bb0cd0373a4b746f415f606ca6a7c8b9c9cbd88c"
+  },
+  "rtl_assessment": "No new functional RTL defect established. Original independent RTL evidence preserved and reviewed; no coordinator rerun or full-system acceptance.",
+  "repair_authorization": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\first-capture-deadline-20261021-18\\completed-review\\RUNNER_REPAIR_AUTHORIZATION.txt",
+    "bytes": 7447,
+    "sha256": "8ebed426ec2fd054924bc7d450108b2598503847a2e05875bf44861d1d971d65"
+  },
+  "new_parent_work": "B-FIRST-CAPTURE-DEADLINE-RUNNER-REVISE-20261021-19-v1",
+  "new_instruction_operation": "B-FIRST-CAPTURE-DEADLINE-RUNNER-REVISE-20261021-19-DIRECTOR",
+  "new_product_operation": "B-DEEPEYE-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19",
+  "new_execution_work": "B-FIRST-CAPTURE-RUNNER-QUALIFICATION-20261021-19-v1",
+  "no_new_child_or_root_authorized": true,
+  "return_channel": "One App dispatch to same existing product director; actual completed/failed/substantive blocked result later via App to same coordinator. No controller resume/main_submit/main_wait/Goal/automation/polling.",
+  "not_run": [
+    "synthesis",
+    "implementation",
+    "timing",
+    "CDC/RDC",
+    "all29",
+    "G05",
+    "B06",
+    "R03",
+    "board",
+    "system"
+  ]
+}

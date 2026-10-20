@@ -1,0 +1,15 @@
+DEEPEYE_FC_RUN width=2 kind=standalone
+DEEPEYE_FC_CHECK_FAIL width=2 scenario=s0 phase=post waiting dut=1 ref=0
+DEEPEYE_FC_SCENARIO id=s0 width=2 group=obs budget=1 obs=0 checks=1 status=fail
+DEEPEYE_FC_SCENARIO id=s1 width=2 group=cancel budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s2 width=2 group=reset budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s3 width=2 group=restart budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s4 width=2 group=priority budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s5 width=2 group=held budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s6 width=2 group=terminal budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s7 width=2 group=latch budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SCENARIO id=s8 width=2 group=random budget=1 obs=0 checks=1 status=pass
+DEEPEYE_FC_SUMMARY width=2 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1
+DEEPEYE_FC_FINISH width=2 status=FAIL
+** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=2 failures=1
+** Error: unrelated simulator runtime failure

@@ -1,0 +1,351 @@
+{
+  "at_utc": "2026-10-20T18:10:53.250267+00:00",
+  "source_sha256": "a78779ae94f72f183eedfb994a8d6f645258d3289881ec2511cf5afe5143d9eb",
+  "independence": "Coordinator-designed expected cases after source inspection, not pre-source blind oracle. No author expected-value code imported.",
+  "cases": [
+    {
+      "name": "normal-minimal-positive",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-ModelSim-prefix-positive",
+      "kind": "normal",
+      "text": "# DEEPEYE_FC_RUN width=1 kind=standalone\n# DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n# DEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-nonzero-exit",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "exit_code": 1,
+      "timed_out": false
+    },
+    {
+      "name": "normal-timeout",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": true
+    },
+    {
+      "name": "normal-explicit-modelsim-error",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n** Error: unrelated load failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-plain-error",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nError: unrelated load failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-plain-fatal",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nFatal: unrelated runtime failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-error-tally-1",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nErrors: 1, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-error-tally-2",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nErrors: 2, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-error-tally-7",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nErrors: 7, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-conflicting-tallies",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nErrors: 0, Warnings: 0\nErrors: 7, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-warning-control",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nWarning: arbitrary warning\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-minimal-positive",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-ModelSim-prefix-positive",
+      "kind": "guard",
+      "text": "# DEEPEYE_FC_RUN width=0 kind=guard\n# DEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n# ** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-nonzero-exit",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false,
+      "exit_code": 1,
+      "timed_out": false
+    },
+    {
+      "name": "guard-timeout",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": true
+    },
+    {
+      "name": "guard-explicit-modelsim-error",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n** Error: unrelated load failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-plain-error",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nError: unrelated load failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-plain-fatal",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nFatal: unrelated runtime failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-error-tally-1",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nErrors: 1, Warnings: 0\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-error-tally-2",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nErrors: 2, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-error-tally-7",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nErrors: 7, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-conflicting-tallies",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nErrors: 0, Warnings: 0\nErrors: 7, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-warning-control",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nWarning: arbitrary warning\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-minimal-positive",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-ModelSim-prefix-positive",
+      "kind": "mutant",
+      "text": "# DEEPEYE_FC_RUN width=1 kind=standalone\n# DEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\n# DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\n# DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\n# DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n# DEEPEYE_FC_FINISH width=1 status=FAIL\n# ** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-nonzero-exit",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\n",
+      "expected_accept": false,
+      "exit_code": 1,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-timeout",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": true
+    },
+    {
+      "name": "mutant-explicit-modelsim-error",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\n** Error: unrelated load failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-plain-error",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nError: unrelated load failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-plain-fatal",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nFatal: unrelated runtime failure\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-error-tally-1",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nErrors: 1, Warnings: 0\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-error-tally-2",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nErrors: 2, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-error-tally-7",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nErrors: 7, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-conflicting-tallies",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nErrors: 0, Warnings: 0\nErrors: 7, Warnings: 0\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-warning-control",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=1 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\nWarning: arbitrary warning\n",
+      "expected_accept": true,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-plain-error-position-0",
+      "kind": "guard",
+      "text": "ERROR: unrelated prepare failure\nDEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-plain-error-position-1",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nERROR: unrelated prepare failure\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-plain-error-position-2",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\nERROR: unrelated prepare failure\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-missing-own-fatal",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "guard-wrong-param",
+      "kind": "guard",
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-finish-before-summary",
+      "kind": "normal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_FINISH width=1 status=PASS\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "mutant-no-numeric-difference",
+      "kind": "mutant",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_CHECK_FAIL width=1 scenario=s0 phase=post waiting dut=0 ref=0\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=0 checks=1 status=fail\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=0 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=1 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=FAIL\n** Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=1 failures=1\n",
+      "expected_accept": false,
+      "exit_code": 0,
+      "timed_out": false
+    }
+  ]
+}

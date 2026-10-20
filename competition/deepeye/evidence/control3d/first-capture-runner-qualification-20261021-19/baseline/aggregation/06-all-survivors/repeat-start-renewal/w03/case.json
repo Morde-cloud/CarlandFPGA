@@ -1,0 +1,37 @@
+{
+  "mutant": "repeat-start-renewal",
+  "width": 3,
+  "compile": {
+    "ok": true,
+    "synthetic_compile_stub": true,
+    "reason": "synthetic selected compilation failure"
+  },
+  "sim": {
+    "exit_code": 0,
+    "timed_out": false,
+    "synthetic_simulation_stub": true
+  },
+  "parse": {
+    "kind": "mutant",
+    "width": 3,
+    "check_fail_lines": 0,
+    "summaries": 1,
+    "fatals": 0,
+    "scenarios": 9,
+    "reasons": [
+      "mutant FINISH order/status",
+      "mutant produced no valid numeric CHECK_FAIL",
+      "mutant requires one matching SUMMARY/FINISH/own-fatal",
+      "expected exactly one FINISH, found 0",
+      "malformed FC marker 1"
+    ]
+  },
+  "ok": false,
+  "reasons": [
+    "mutant FINISH order/status",
+    "mutant produced no valid numeric CHECK_FAIL",
+    "mutant requires one matching SUMMARY/FINISH/own-fatal",
+    "expected exactly one FINISH, found 0",
+    "malformed FC marker 1"
+  ]
+}

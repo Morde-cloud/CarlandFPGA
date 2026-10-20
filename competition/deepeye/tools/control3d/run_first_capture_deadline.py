@@ -92,6 +92,49 @@ def iter_normalized(text: str):
         yield raw, normalize_line(raw)
 
 
+ERROR_TALLY_RE = re.compile(
+    r"Errors: (0|[1-9][0-9]*), Warnings: (0|[1-9][0-9]*)",
+    re.IGNORECASE | re.ASCII,
+)
+
+
+def diagnostic_accounting(text: str, own_fatal=None) -> list[str]:
+    """Account for stage-local tallies and exactly the expected own fatal.
+
+    Complete minimal transcripts may omit tool tallies. Normal execution may
+    contain any number of zero tallies. Expected-fatal execution may contain
+    zero tallies before its fatal and at most one tally of one afterward.
+    Tallies cannot hide a foreign diagnostic or replace protocol validation.
+    """
+    reasons = []
+    fatal_count = 0
+    positive_tallies = 0
+    for _, line in iter_normalized(text):
+        if own_fatal is not None and own_fatal.fullmatch(line):
+            fatal_count += 1
+            continue
+        tally = ERROR_TALLY_RE.fullmatch(line)
+        if tally:
+            errors = tally.group(1)
+            if own_fatal is None:
+                if errors != "0":
+                    reasons.append("normal error tally must be zero")
+            elif errors == "0":
+                if fatal_count:
+                    reasons.append("zero error tally after own fatal contradicts that fatal")
+            elif errors == "1" and fatal_count == 1 and positive_tallies == 0:
+                positive_tallies += 1
+            else:
+                reasons.append("extra, duplicate or premature expected-fatal error tally")
+        elif re.search("errors", line, re.IGNORECASE | re.ASCII):
+            reasons.append("malformed error tally")
+        elif re.search(r"\b(?:error|fatal)\b", line, re.IGNORECASE | re.ASCII):
+            reasons.append("unrelated Error/Fatal diagnostic")
+    if own_fatal is not None and fatal_count != 1:
+        reasons.append("expected exactly one own fatal for error accounting")
+    return reasons
+
+
 def run_process(argv, cwd: Path, log_path: Path, timeout: float) -> dict:
     log_path.parent.mkdir(parents=True, exist_ok=True)
     started = utc_now()
@@ -152,7 +195,7 @@ def parse_groups(text: str) -> dict:
 
 
 def parse_normal_log(text: str, width: int, kind: str, expected_groups: set) -> tuple[bool, dict, list[str]]:
-    reasons = []
+    reasons = diagnostic_accounting(text)
     phase = 0
     for _, line in iter_normalized(text):
         if RUN_RE.fullmatch(line):
@@ -301,7 +344,7 @@ def parse_normal_log(text: str, width: int, kind: str, expected_groups: set) -> 
 
 
 def parse_guard_log(text: str, width: int) -> tuple[bool, dict, list[str]]:
-    reasons = []
+    reasons = diagnostic_accounting(text, GUARD_FATAL_RE)
     if width not in (0, 33):
         reasons.append(f"guard width {width} is not an unsupported width 0/33")
     order = []
@@ -444,6 +487,7 @@ def parse_mutant_log(text: str, width: int) -> tuple[bool, dict, list[str]]:
     fatal_re = re.compile(
         r"\*\* Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=([0-9]+) failures=([0-9]+)"
     )
+    reasons.extend(diagnostic_accounting(text, fatal_re))
     for _, line in iter_normalized(text):
         run = RUN_RE.fullmatch(line)
         fail = fail_re.fullmatch(line)
@@ -488,9 +532,10 @@ def parse_mutant_log(text: str, width: int) -> tuple[bool, dict, list[str]]:
                 reasons.append("mutant fatal order")
             phase = 4
             fatals.append((int(fatal.group(1)), int(fatal.group(2))))
-        elif re.fullmatch(r"Errors: 1, Warnings: [0-9]+", line):
-            # ModelSim includes the one own-fatal in its diagnostic tally.
-            cleaned.append(line.replace("Errors: 1,", "Errors: 0,", 1))
+        elif ERROR_TALLY_RE.fullmatch(line):
+            # Already checked in original order, against the original fatal.
+            # The normal-protocol projection must not reclassify that tally.
+            continue
         else:
             cleaned.append(line)
     if not failure_count:
@@ -760,6 +805,24 @@ def make_mutant(source_text: str, spec: dict) -> str:
     return text
 
 
+def classify_mutant_execution(text: str, width: int, exit_code, timed_out: bool) -> dict:
+    """A healthy survivor is valid execution but never a target counterexample."""
+    hit, parsed, hit_reasons = qualify_mutant_log(text, width, exit_code, timed_out)
+    if hit:
+        return {"ok": True, "run_valid": True, "target_hit": True,
+                "outcome": "target_hit", "parse": parsed, "reasons": []}
+    survived, normal, normal_reasons = qualify_normal_log(
+        text, width, "standalone", SMALL_GROUPS, exit_code, timed_out
+    )
+    if survived:
+        return {"ok": True, "run_valid": True, "target_hit": False,
+                "outcome": "survived", "parse": normal, "reasons": []}
+    return {"ok": False, "run_valid": False, "target_hit": False,
+            "outcome": "execution_error", "parse": parsed,
+            "reasons": ["unqualified selected simulation",
+                        *hit_reasons, *normal_reasons]}
+
+
 def mutant_cases(source_root: Path, modelsim_dir: Path, run_root: Path, timeout: float) -> list[dict]:
     source_path = source_root / "competition/deepeye/fpga/control3d/deepeye_first_capture_deadline.sv"
     source_text = source_path.read_text(encoding="utf-8")
@@ -788,34 +851,39 @@ def mutant_cases(source_root: Path, modelsim_dir: Path, run_root: Path, timeout:
                 "sim": None,
                 "parse": None,
                 "ok": False,
+                "run_valid": False,
+                "target_hit": False,
+                "outcome": "execution_error",
             }
             if not compile_record["ok"]:
                 record["reasons"] = ["mutant compile failed; not a target hit"]
             else:
-                sim = run_vsim_case(case_dir, modelsim_dir, "tb_first_capture_deadline", "BUDGET_W", width, timeout)
-                record["sim"] = sim
-                sim_text = (case_dir / "sim.log").read_text(encoding="utf-8", errors="replace")
-                if sim["timed_out"]:
-                    record["reasons"] = ["mutant simulation timeout"]
-                else:
-                    ok, parsed, reasons = qualify_mutant_log(
+                try:
+                    sim = run_vsim_case(case_dir, modelsim_dir, "tb_first_capture_deadline", "BUDGET_W", width, timeout)
+                    record["sim"] = sim
+                    sim_text = (case_dir / "sim.log").read_text(encoding="utf-8", errors="replace")
+                    record.update(classify_mutant_execution(
                         sim_text, width, sim["exit_code"], sim["timed_out"]
-                    )
-                    record["parse"] = parsed
-                    record["reasons"] = reasons
-                    record["ok"] = bool(ok)
+                    ))
+                except OSError as exc:
+                    record["reasons"] = [f"selected simulation output unavailable: {exc}"]
             write_case_record(case_dir, record)
             mutant_records.append(record)
-        hit = any(r["ok"] for r in mutant_records)
-        compile_ok = all(r["compile"]["ok"] for r in mutant_records)
+        hit = any(r["target_hit"] for r in mutant_records)
+        all_valid = bool(mutant_records) and all(r["run_valid"] for r in mutant_records)
+        passed = hit and all_valid
         results.append({
             "mutant": name,
-            "ok": bool(hit and compile_ok),
-            "hit_widths": [r["width"] for r in mutant_records if r["ok"]],
+            "ok": passed,
+            "all_selected_runs_valid": all_valid,
+            "hit_widths": [r["width"] for r in mutant_records if r["target_hit"]],
+            "survivor_widths": [r["width"] for r in mutant_records if r["outcome"] == "survived"],
+            "execution_error_widths": [r["width"] for r in mutant_records if not r["run_valid"]],
             "records": mutant_records,
-            "reasons": [] if (hit and compile_ok) else ["mutant not behaviorally rejected"],
+            "reasons": ([] if all_valid else ["at least one selected invocation failed"]) +
+                       ([] if hit else ["no qualified target counterexample"]),
         })
-        print(f"{name}: {'REJECTED' if hit and compile_ok else 'FAIL'} widths={[r['width'] for r in mutant_records if r['ok']]}")
+        print(f"{name}: {'REJECTED' if passed else 'FAIL'} target_widths={[r['width'] for r in mutant_records if r['target_hit']]}")
     return results
 
 

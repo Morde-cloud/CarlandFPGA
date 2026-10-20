@@ -1,0 +1,375 @@
+{
+  "case": {
+    "name": "one-survivor",
+    "injection": "survivor",
+    "width": 2,
+    "expected": true
+  },
+  "coordinator": false,
+  "expected": true,
+  "actual": true,
+  "match": true,
+  "exception": null,
+  "records": [
+    {
+      "mutant": "deadline-off-by-one",
+      "ok": true,
+      "hit_widths": [
+        1,
+        2,
+        3
+      ],
+      "records": [
+        {
+          "mutant": "deadline-off-by-one",
+          "width": 1,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 1,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "deadline-off-by-one",
+          "width": 2,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 2,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "deadline-off-by-one",
+          "width": 3,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 3,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        }
+      ],
+      "reasons": []
+    },
+    {
+      "mutant": "repeat-start-renewal",
+      "ok": true,
+      "hit_widths": [
+        1,
+        2,
+        3
+      ],
+      "records": [
+        {
+          "mutant": "repeat-start-renewal",
+          "width": 1,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 1,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "repeat-start-renewal",
+          "width": 2,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 2,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "repeat-start-renewal",
+          "width": 3,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 3,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        }
+      ],
+      "reasons": []
+    },
+    {
+      "mutant": "cancel-ignored",
+      "ok": true,
+      "hit_widths": [
+        1,
+        3
+      ],
+      "records": [
+        {
+          "mutant": "cancel-ignored",
+          "width": 1,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 1,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "cancel-ignored",
+          "width": 2,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 2,
+            "check_fail_lines": 0,
+            "summaries": 1,
+            "fatals": 0,
+            "scenarios": 9,
+            "reasons": [
+              "mutant FINISH order/status",
+              "mutant produced no valid numeric CHECK_FAIL",
+              "mutant requires one matching SUMMARY/FINISH/own-fatal",
+              "expected exactly one FINISH, found 0",
+              "malformed FC marker 1"
+            ]
+          },
+          "ok": false,
+          "reasons": [
+            "mutant FINISH order/status",
+            "mutant produced no valid numeric CHECK_FAIL",
+            "mutant requires one matching SUMMARY/FINISH/own-fatal",
+            "expected exactly one FINISH, found 0",
+            "malformed FC marker 1"
+          ]
+        },
+        {
+          "mutant": "cancel-ignored",
+          "width": 3,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 3,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        }
+      ],
+      "reasons": []
+    },
+    {
+      "mutant": "late-observed-resurrection",
+      "ok": true,
+      "hit_widths": [
+        1,
+        2,
+        3
+      ],
+      "records": [
+        {
+          "mutant": "late-observed-resurrection",
+          "width": 1,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 1,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "late-observed-resurrection",
+          "width": 2,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 2,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        },
+        {
+          "mutant": "late-observed-resurrection",
+          "width": 3,
+          "compile": {
+            "ok": true,
+            "synthetic_compile_stub": true,
+            "reason": "synthetic selected compilation failure"
+          },
+          "sim": {
+            "exit_code": 0,
+            "timed_out": false,
+            "synthetic_simulation_stub": true
+          },
+          "parse": {
+            "kind": "mutant",
+            "width": 3,
+            "check_fail_lines": 1,
+            "summaries": 1,
+            "fatals": 1,
+            "scenarios": 9,
+            "reasons": []
+          },
+          "ok": true,
+          "reasons": []
+        }
+      ],
+      "reasons": []
+    }
+  ],
+  "synthetic_only": true
+}

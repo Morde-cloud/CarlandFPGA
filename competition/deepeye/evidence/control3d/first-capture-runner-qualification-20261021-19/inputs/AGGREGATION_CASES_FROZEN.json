@@ -1,0 +1,27 @@
+{
+  "at_utc": "2026-10-20T18:16:19.834159+00:00",
+  "cases": [
+    [
+      "all-good",
+      null,
+      true
+    ],
+    [
+      "one-foreign-error",
+      "foreign_error",
+      false
+    ],
+    [
+      "one-abnormal-exit",
+      "abnormal_exit",
+      false
+    ],
+    [
+      "one-timeout",
+      "timeout",
+      false
+    ]
+  ],
+  "kind": "Synthetic orchestration seam only; compile/ModelSim calls replaced with local data stubs; no real RTL execution.",
+  "expectation": "An unrelated failure in one selected width must not disappear into overall success because another width supplied a target hit."
+}

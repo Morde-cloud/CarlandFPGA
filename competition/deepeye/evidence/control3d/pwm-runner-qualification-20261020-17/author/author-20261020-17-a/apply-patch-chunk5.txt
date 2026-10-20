@@ -1,0 +1,76 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_pwm_applied_capture_runner.py
+@@
+         self.assertFalse(self.invalid_result(diagnostic + "\n", stderr=GUARD_FATAL + "\n",
+                                              code=1)["passed"])
+ 
++    def test_guard_exit_completion_and_negative_width_controls(self):
++        controls = [
++            (0, 64, 32),
++            (-7, -4, -2),
++            (-1, 0, 0),
++            (33, 65, 65),
++            (32, 64, 64),
++        ]
++        for count_w, witness_w, tag_w in controls:
++            with self.subTest(count_w=count_w, witness_w=witness_w, tag_w=tag_w):
++                diagnostic = guard_diagnostic(count_w, witness_w, tag_w)
++                actual = self.invalid_result(
++                    diagnostic + "\n" + GUARD_FATAL + "\n", code=1,
++                    count_w=count_w, witness_w=witness_w, tag_w=tag_w,
++                )
++                self.assertTrue(actual["passed"])
++                self.assertEqual(actual["diagnostic"], actual["expected"])
++        diagnostic = guard_diagnostic(-7, -4, -2)
++        good = diagnostic + "\n" + GUARD_FATAL + "\n"
++        for code in (0, 1):
++            with self.subTest(code=code):
++                self.assertTrue(self.invalid_result(good, code=code,
++                                                    count_w=-7, witness_w=-4, tag_w=-2)["passed"])
++        for code in (2, -1, True, False, 0.0, 1.0, None, "0", "1", "timeout", "exception"):
++            with self.subTest(code=repr(code)):
++                self.assertFalse(self.invalid_result(good, code=code,
++                                                     count_w=-7, witness_w=-4, tag_w=-2)["passed"])
++
++    def test_code7_cross_group_loopback_and_observation_shape(self):
++        self.assertTrue(runner.positive_entry(NORMAL, self.result([STATS, PASS]))["passed"])
++        self.assertFalse(runner.positive_entry(NORMAL, self.result([CODE7, STATS, PASS]))["passed"])
++        loopback = {**NORMAL, "group": 8, "loopback": 1}
++        loopback_pass = "TB_PASS group=8 loopback=1"
++        self.assertTrue(runner.positive_entry(
++            loopback, self.result([STATS, loopback_pass]))["passed"])
++        self.assertFalse(runner.positive_entry(
++            loopback, self.result([CODE7, STATS, loopback_pass]))["passed"])
++
++        probe = {"id": "code7", "expect": "pass_code7", "group": 30,
++                 "loopback": 0, "required_any": ["CODE7_OBSERVED"]}
++        terminal = "TB_PASS group=30 loopback=0"
++        self.assertTrue(runner.mutant_result(probe, self.result([CODE7, STATS, terminal])))
++        self.assertFalse(runner.mutant_result(probe, self.result([STATS, terminal])))
++        probe_loopback = {**probe, "loopback": 1}
++        self.assertFalse(runner.mutant_result(
++            probe_loopback,
++            self.result([CODE7, STATS, "TB_PASS group=30 loopback=1"]),
++        ))
++        variants = [
++            [STATS, CODE7, terminal],
++            [CODE7, CODE7, STATS, terminal],
++            [CODE7.replace("code=7", "code=6"), STATS, terminal],
++            [CODE7.replace("window_active=0", "window_active=1"), STATS, terminal],
++            [CODE7.replace("out_valid=0", "out_valid=1"), STATS, terminal],
++            [CODE7 + " extra", STATS, terminal],
++            ["NOT_" + CODE7, STATS, terminal],
++        ]
++        for rows in variants:
++            with self.subTest(rows=rows):
++                self.assertFalse(runner.mutant_result(probe, self.result(rows)))
++        self.assertFalse(runner.mutant_result(
++            NEGATIVE, self.result([CODE7, *self.negative_lines()])))
++
++    def test_original_a_counterexamples_are_rejected_after_repair(self):
++        self.assertFalse(self.invalid_result(A030_STDOUT, code=1)["passed"])
++        self.assertFalse(self.invalid_result(A032_STDOUT, code=1)["passed"])
++        self.assertFalse(runner.positive_entry(
++            NORMAL, self.raw_result(A026_STDOUT, code=0))["passed"])
++
+*** End Patch

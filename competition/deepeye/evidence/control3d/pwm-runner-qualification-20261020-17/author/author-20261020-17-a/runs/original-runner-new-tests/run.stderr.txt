@@ -1,0 +1,412 @@
+test_both_original_a_negative_shapes (test_pwm_applied_capture_runner.TerminalProtocolTests.test_both_original_a_negative_shapes) ... ok
+test_code7_cross_group_loopback_and_observation_shape (test_pwm_applied_capture_runner.TerminalProtocolTests.test_code7_cross_group_loopback_and_observation_shape) ... FAIL
+test_code7_requires_exact_observation_and_own_group (test_pwm_applied_capture_runner.TerminalProtocolTests.test_code7_requires_exact_observation_and_own_group) ... ok
+test_conflict_in_every_statistic_is_rejected (test_pwm_applied_capture_runner.TerminalProtocolTests.test_conflict_in_every_statistic_is_rejected) ... ok
+test_current_positive_formats (test_pwm_applied_capture_runner.TerminalProtocolTests.test_current_positive_formats) ... ok
+test_duplicate_stats_even_if_identical (test_pwm_applied_capture_runner.TerminalProtocolTests.test_duplicate_stats_even_if_identical) ... ok
+test_exact_positive_process_status (test_pwm_applied_capture_runner.TerminalProtocolTests.test_exact_positive_process_status) ... ok
+test_failure_count_and_label_must_match (test_pwm_applied_capture_runner.TerminalProtocolTests.test_failure_count_and_label_must_match) ... ok
+test_failure_record_order (test_pwm_applied_capture_runner.TerminalProtocolTests.test_failure_record_order) ... ok
+test_group_and_loopback_are_bound_to_requested_run (test_pwm_applied_capture_runner.TerminalProtocolTests.test_group_and_loopback_are_bound_to_requested_run) ... ok
+test_guard_exit_completion_and_negative_width_controls (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_exit_completion_and_negative_width_controls) ... ok
+test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) ... 
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='double hash') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='double hash prefix') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='leading space') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='tab prefix') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='hash tab') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='unknown text') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='fatal double hash') ... FAIL
+  test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='diagnostic trailing space') ... FAIL
+test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) ... 
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (label='conflicting diagnostic') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (label='extra unrelated fatal') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (label='own fatal longer') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=0 WITNESS_W=64 TAG_W=32 SAFE_COUNT_W=2 SAFE_WITNESS_W=64 SAFE_TAG_W=32') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='APPLIED_CAPTURE_INVALID_GUARD_MISSING') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='** Fatal: unrelated failure') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='TB_STATS groups=1') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='TB_PASS group=0 loopback=0') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='TB_FAIL group=21 mismatches=1') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='MISMATCH sample=10 label=wrong_boundary expected=0 actual=1') ... FAIL
+  test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='CODE7_OBSERVED code=7 window_active=0 out_valid=0') ... FAIL
+test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) ... FAIL
+test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) ... 
+  test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='fatal before diagnostic') ... FAIL
+  test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='duplicate diagnostic') ... FAIL
+  test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='duplicate own fatal') ... FAIL
+  test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='own fatal with suffix') ... FAIL
+  test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='unrelated fatal after own fatal') ... FAIL
+  test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='prefixed by unknown text') ... FAIL
+test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) ... 
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 1') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 2') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 3') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 4') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 5') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 6') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='extra field') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='leading zero') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='non-ASCII digit') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='leading-zero safe count') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='non-ASCII safe count') ... FAIL
+  test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='unbounded input') ... ERROR
+test_incomplete_duplicate_or_reordered_fields (test_pwm_applied_capture_runner.TerminalProtocolTests.test_incomplete_duplicate_or_reordered_fields) ... ok
+test_invalid_utf8_is_rejected (test_pwm_applied_capture_runner.TerminalProtocolTests.test_invalid_utf8_is_rejected) ... ok
+test_mutant_cannot_pass_on_malformed_or_unrelated_failure (test_pwm_applied_capture_runner.TerminalProtocolTests.test_mutant_cannot_pass_on_malformed_or_unrelated_failure) ... ok
+test_nonzero_mismatch_cannot_pass (test_pwm_applied_capture_runner.TerminalProtocolTests.test_nonzero_mismatch_cannot_pass) ... ok
+test_numeric_grammar_is_ascii_bounded_unsigned (test_pwm_applied_capture_runner.TerminalProtocolTests.test_numeric_grammar_is_ascii_bounded_unsigned) ... ok
+test_old_synthetic_bare_pass_is_not_current_tb_protocol (test_pwm_applied_capture_runner.TerminalProtocolTests.test_old_synthetic_bare_pass_is_not_current_tb_protocol) ... ok
+test_only_lf_or_crlf_separates_protocol_records (test_pwm_applied_capture_runner.TerminalProtocolTests.test_only_lf_or_crlf_separates_protocol_records) ... ok
+test_original_a_counterexamples_are_rejected_after_repair (test_pwm_applied_capture_runner.TerminalProtocolTests.test_original_a_counterexamples_are_rejected_after_repair) ... FAIL
+test_original_invalid_width_guard_exit_and_fatal_requirements (test_pwm_applied_capture_runner.TerminalProtocolTests.test_original_invalid_width_guard_exit_and_fatal_requirements) ... ok
+test_outcome_unique_and_ordered (test_pwm_applied_capture_runner.TerminalProtocolTests.test_outcome_unique_and_ordered) ... ok
+test_stats_cannot_hide_behind_prefix_or_suffix (test_pwm_applied_capture_runner.TerminalProtocolTests.test_stats_cannot_hide_behind_prefix_or_suffix) ... ok
+test_stderr_cannot_supply_or_duplicate_terminal_records (test_pwm_applied_capture_runner.TerminalProtocolTests.test_stderr_cannot_supply_or_duplicate_terminal_records) ... ok
+test_substring_marker_is_not_pass (test_pwm_applied_capture_runner.TerminalProtocolTests.test_substring_marker_is_not_pass) ... ok
+test_trailing_error_fatal_or_contradiction (test_pwm_applied_capture_runner.TerminalProtocolTests.test_trailing_error_fatal_or_contradiction) ... ok
+test_valid_failure_requires_completed_expected_exit (test_pwm_applied_capture_runner.TerminalProtocolTests.test_valid_failure_requires_completed_expected_exit) ... ok
+
+======================================================================
+ERROR: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='unbounded input')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 350, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 94, in invalid_result
+    return runner.run_invalid(self.root, self.root, [], {"vsim": "NEVER_EXECUTE"},
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tools\control3d\run_pwm_applied_capture.py", line 507, in run_invalid
+    values = tuple(int(value) for value in match.groups())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tools\control3d\run_pwm_applied_capture.py", line 507, in <genexpr>
+    values = tuple(int(value) for value in match.groups())
+                   ^^^^^^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion: value has 5000 digits; use sys.set_int_max_str_digits() to increase the limit
+
+======================================================================
+FAIL: test_code7_cross_group_loopback_and_observation_shape (test_pwm_applied_capture_runner.TerminalProtocolTests.test_code7_cross_group_loopback_and_observation_shape)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 420, in test_code7_cross_group_loopback_and_observation_shape
+    self.assertFalse(runner.positive_entry(NORMAL, self.result([CODE7, STATS, PASS]))["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='double hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='double hash prefix')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='leading space')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='tab prefix')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='hash tab')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='unknown text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='fatal double hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_known_prefix_and_lf_crlf_framing (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_known_prefix_and_lf_crlf_framing) (label='diagnostic trailing space')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 316, in test_guard_known_prefix_and_lf_crlf_framing
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (label='conflicting diagnostic')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 369, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (label='extra unrelated fatal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 369, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (label='own fatal longer')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 369, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=0 WITNESS_W=64 TAG_W=32 SAFE_COUNT_W=2 SAFE_WITNESS_W=64 SAFE_TAG_W=32')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='APPLIED_CAPTURE_INVALID_GUARD_MISSING')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='** Fatal: unrelated failure')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='TB_STATS groups=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='TB_PASS group=0 loopback=0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='TB_FAIL group=21 mismatches=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='MISMATCH sample=10 label=wrong_boundary expected=0 actual=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker) (stderr='CODE7_OBSERVED code=7 window_active=0 out_valid=0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 386, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_mixed_conflicts_stderr_and_missing_marker (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_mixed_conflicts_stderr_and_missing_marker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 387, in test_guard_mixed_conflicts_stderr_and_missing_marker
+    self.assertFalse(self.invalid_result(diagnostic + "\n", stderr=GUARD_FATAL + "\n",
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='fatal before diagnostic')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 291, in test_guard_requires_one_exact_diagnostic_then_one_own_fatal
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='duplicate diagnostic')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 291, in test_guard_requires_one_exact_diagnostic_then_one_own_fatal
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='duplicate own fatal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 291, in test_guard_requires_one_exact_diagnostic_then_one_own_fatal
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='own fatal with suffix')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 291, in test_guard_requires_one_exact_diagnostic_then_one_own_fatal
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='unrelated fatal after own fatal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 291, in test_guard_requires_one_exact_diagnostic_then_one_own_fatal
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_requires_one_exact_diagnostic_then_one_own_fatal (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_requires_one_exact_diagnostic_then_one_own_fatal) (label='prefixed by unknown text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 291, in test_guard_requires_one_exact_diagnostic_then_one_own_fatal
+    self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 3')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 4')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 5')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='duplicate field 6')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='extra field')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 333, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='leading zero')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 350, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='non-ASCII digit')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 350, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='leading-zero safe count')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 350, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_guard_six_unique_fields_and_ascii_decimal_grammar (test_pwm_applied_capture_runner.TerminalProtocolTests.test_guard_six_unique_fields_and_ascii_decimal_grammar) (label='non-ASCII safe count')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 350, in test_guard_six_unique_fields_and_ascii_decimal_grammar
+    self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_original_a_counterexamples_are_rejected_after_repair (test_pwm_applied_capture_runner.TerminalProtocolTests.test_original_a_counterexamples_are_rejected_after_repair)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\evidence\control3d\pwm-runner-qualification-20261020-17\author\author-20261020-17-a\runs\original-runner-new-tests\tests\control\test_pwm_applied_capture_runner.py", line 454, in test_original_a_counterexamples_are_rejected_after_repair
+    self.assertFalse(self.invalid_result(A030_STDOUT, code=1)["passed"])
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.315s
+
+FAILED (failures=40, errors=1)

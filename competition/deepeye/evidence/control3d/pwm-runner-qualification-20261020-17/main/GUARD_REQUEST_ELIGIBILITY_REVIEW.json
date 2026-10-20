@@ -1,0 +1,61 @@
+{
+  "at_utc": "2026-10-20T16:01:24.039725+00:00",
+  "finding": "P17-GUARD-VALID-REQUEST",
+  "child_job": "child-7617ec81a92346b38b4485d7030f63df",
+  "child_terminal": "completed/nonstale; ownership actually released",
+  "runner_before_sha256": "0a6101a263fa3c69a8c1737fe965a255ef15aef3ae177fd98e813661a4be8e05",
+  "test_before_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
+  "actual_control": {
+    "kind": "guard",
+    "id": "valid-2-2-1",
+    "spec": {
+      "count_w": 2,
+      "witness_w": 2,
+      "tag_w": 1
+    },
+    "stdout": "DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=2 WITNESS_W=2 TAG_W=1 SAFE_COUNT_W=2 SAFE_WITNESS_W=2 SAFE_TAG_W=1\n** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths\n",
+    "stderr": "",
+    "exit": 1,
+    "expected": false,
+    "stdout_sha256": "cdc3565acbad789839234bcbde24f971de6ce042f5dc0718e1f9726a62d38fe8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "actual_result": {
+    "record": {
+      "exit": 1,
+      "synthetic": true
+    },
+    "diagnostic": {
+      "count_w": 2,
+      "witness_w": 2,
+      "tag_w": 1,
+      "safe_count_w": 2,
+      "safe_witness_w": 2,
+      "safe_tag_w": 1
+    },
+    "expected": {
+      "count_w": 2,
+      "witness_w": 2,
+      "tag_w": 1,
+      "safe_count_w": 2,
+      "safe_witness_w": 2,
+      "safe_tag_w": 1
+    },
+    "guard_missing": false,
+    "diagnostic_exact": true,
+    "own_fatal": true,
+    "protocol_errors": [],
+    "process_completed": true,
+    "passed": true,
+    "transcript": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-runner-qualification-20261020-17\\main\\guard-eligibility-review\\case.transcript.txt",
+    "transcript_sha256": null,
+    "wlf": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\pwm-runner-qualification-20261020-17\\main\\guard-eligibility-review\\case.wlf",
+    "wlf_sha256": null
+  },
+  "issue": "The author healthy-guard table includes fully legal32/64/64 widths and expects PASS. A matched false guard for supported widths must fail the invalid-parameter test.",
+  "decision": "Preserve author results/source; main adds explicit invalid-request eligibility and corrects only the newly added test control, preserving original23 method bytes. Reject noninteger width specs. This is within guard qualification; no RTL or public ABI change.",
+  "supplemental_cases": 77,
+  "supplemental_expected_accept": 9,
+  "supplemental_cases_sha256": "60546b2888ec80718427b67b7abc1dc9a4b2046bd77f2e33e37e8f42b36da2a3",
+  "independence": "New expectations frozen after main found the gap, before correcting source. Not part of the original1007-case freeze."
+}

@@ -1,0 +1,57 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_pwm_applied_capture_runner.py
+@@
+                 with patch.object(runner, "run_command", return_value={"exit": code}):
+                     actual = runner.run_invalid(self.root, self.root, [], {"vsim": "NEVER_EXECUTE"},
+                                                 {"id": "guard", "count_w": 0, "witness_w": 64, "tag_w": 32}, 1)
+                 self.assertEqual(actual["passed"], type(code) is int and code in (0, 1) and fatal)
+ 
++    def test_guard_requires_one_exact_diagnostic_then_one_own_fatal(self):
++        diagnostic = guard_diagnostic(0, 64, 32)
++        good = diagnostic + "\n" + GUARD_FATAL + "\n"
++        actual = self.invalid_result(good, code=1)
++        self.assertTrue(actual["passed"])
++        self.assertEqual(actual["diagnostic"], {
++            "count_w": 0, "witness_w": 64, "tag_w": 32,
++            "safe_count_w": 2, "safe_witness_w": 64, "safe_tag_w": 32,
++        })
++        variants = {
++            "missing own fatal": diagnostic + "\n",
++            "missing diagnostic": GUARD_FATAL + "\n",
++            "fatal before diagnostic": GUARD_FATAL + "\n" + diagnostic + "\n",
++            "duplicate diagnostic": diagnostic + "\n" + diagnostic + "\n" + GUARD_FATAL + "\n",
++            "duplicate own fatal": diagnostic + "\n" + GUARD_FATAL + "\n" + GUARD_FATAL + "\n",
++            "own fatal with suffix": diagnostic + "\n" + GUARD_FATAL + " extra\n",
++            "unrelated fatal after own fatal": A030_STDOUT,
++            "prefixed by unknown text": A032_STDOUT,
++        }
++        for label, stdout in variants.items():
++            with self.subTest(label=label):
++                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
++
++    def test_guard_known_prefix_and_lf_crlf_framing(self):
++        diagnostic = guard_diagnostic(0, 64, 32)
++        valid = [
++            diagnostic + "\n" + GUARD_FATAL + "\n",
++            "# " + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "# " + diagnostic + "\r\n# " + GUARD_FATAL + "\r\n",
++            diagnostic + "\n# " + GUARD_FATAL + "\r\n",
++        ]
++        for stdout in valid:
++            with self.subTest(valid=repr(stdout)):
++                self.assertTrue(self.invalid_result(stdout, code=1)["passed"])
++        invalid = {
++            "double hash": "## " + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "double hash prefix": "# # " + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "leading space": " # " + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "tab prefix": "\t" + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "hash tab": "#\t" + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "unknown text": "X# " + diagnostic + "\n# " + GUARD_FATAL + "\n",
++            "fatal double hash": "# " + diagnostic + "\n## " + GUARD_FATAL + "\n",
++            "diagnostic trailing space": diagnostic + " \n# " + GUARD_FATAL + "\n",
++        }
++        for label, stdout in invalid.items():
++            with self.subTest(label=label):
++                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
++
+*** End Patch

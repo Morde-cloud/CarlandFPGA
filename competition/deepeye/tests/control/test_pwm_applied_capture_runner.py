@@ -21,6 +21,36 @@ CODE7 = "CODE7_OBSERVED code=7 window_active=0 out_valid=0"
 NORMAL = {"id": "fixture", "group": 0, "loopback": 0,
           "count_w": 4, "witness_w": 8, "tag_w": 8}
 NEGATIVE = {"group": 21, "expect": "fail", "required_any": ["wrong_boundary"]}
+GUARD_FATAL = "** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths"
+A030_STDOUT = (
+    b"DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=0 WITNESS_W=64 TAG_W=32 "
+    b"SAFE_COUNT_W=2 SAFE_WITNESS_W=64 SAFE_TAG_W=32\n"
+    b"** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths\n"
+    b"** Fatal: unrelated simulator failure\n"
+)
+A032_STDOUT = (
+    b"NOT_DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=0 WITNESS_W=64 TAG_W=32 "
+    b"SAFE_COUNT_W=2 SAFE_WITNESS_W=64 SAFE_TAG_W=32\n"
+    b"NOT_** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths\n"
+)
+A026_STDOUT = (
+    b"CODE7_OBSERVED code=7 window_active=0 out_valid=0\n"
+    b"TB_STATS groups=1 cases=1 samples=29 assertions=206 records=2 raw_faults=0 "
+    b"failure_events=0 window_starts=1 handshakes=1 mismatches=0\n"
+    b"TB_PASS group=0 loopback=0\n"
+)
+
+
+def guard_diagnostic(count_w, witness_w, tag_w):
+    safe_count_w = max(2, min(32, count_w))
+    safe_witness_w = max(2, min(64, witness_w))
+    safe_tag_w = max(1, min(64, tag_w))
+    return (
+        "DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM "
+        f"COUNT_W={count_w} WITNESS_W={witness_w} TAG_W={tag_w} "
+        f"SAFE_COUNT_W={safe_count_w} SAFE_WITNESS_W={safe_witness_w} "
+        f"SAFE_TAG_W={safe_tag_w}"
+    )
 
 
 class TerminalProtocolTests(unittest.TestCase):
@@ -37,6 +67,32 @@ class TerminalProtocolTests(unittest.TestCase):
         parsed.update(transcript=None, transcript_sha256=None, wlf=None, wlf_sha256=None)
         return {"parsed": parsed, "record": {"exit": code,
                 "stdout": str(self.root / "out"), "stderr": str(self.root / "err")}}
+
+    def raw_result(self, stdout, *, stderr=b"", code=0):
+        if isinstance(stdout, str):
+            stdout = stdout.encode("utf-8")
+        if isinstance(stderr, str):
+            stderr = stderr.encode("utf-8")
+        (self.root / "out").write_bytes(stdout)
+        (self.root / "err").write_bytes(stderr)
+        parsed = runner.parse_tb_output(self.root / "out", self.root / "err")
+        parsed.update(transcript=None, transcript_sha256=None, wlf=None, wlf_sha256=None)
+        return {"parsed": parsed, "record": {"exit": code,
+                "stdout": str(self.root / "out"), "stderr": str(self.root / "err")}}
+
+    def invalid_result(self, stdout, *, stderr="", code=1,
+                       count_w=0, witness_w=64, tag_w=32):
+        if isinstance(stdout, str):
+            stdout = stdout.encode("utf-8")
+        if isinstance(stderr, str):
+            stderr = stderr.encode("utf-8")
+        (self.root / "guard.stdout.txt").write_bytes(stdout)
+        (self.root / "guard.stderr.txt").write_bytes(stderr)
+        spec = {"id": "guard", "count_w": count_w,
+                "witness_w": witness_w, "tag_w": tag_w}
+        with patch.object(runner, "run_command", return_value={"exit": code}):
+            return runner.run_invalid(self.root, self.root, [], {"vsim": "NEVER_EXECUTE"},
+                                      spec, 1)
 
     def accepted(self, lines, **kw):
         return runner.positive_entry(NORMAL, self.result(lines, **kw))["passed"]
@@ -210,6 +266,207 @@ class TerminalProtocolTests(unittest.TestCase):
                     actual = runner.run_invalid(self.root, self.root, [], {"vsim": "NEVER_EXECUTE"},
                                                 {"id": "guard", "count_w": 0, "witness_w": 64, "tag_w": 32}, 1)
                 self.assertEqual(actual["passed"], type(code) is int and code in (0, 1) and fatal)
+
+    def test_guard_requires_one_exact_diagnostic_then_one_own_fatal(self):
+        diagnostic = guard_diagnostic(0, 64, 32)
+        good = diagnostic + "\n" + GUARD_FATAL + "\n"
+        actual = self.invalid_result(good, code=1)
+        self.assertTrue(actual["passed"])
+        self.assertEqual(actual["diagnostic"], {
+            "count_w": 0, "witness_w": 64, "tag_w": 32,
+            "safe_count_w": 2, "safe_witness_w": 64, "safe_tag_w": 32,
+        })
+        variants = {
+            "missing own fatal": diagnostic + "\n",
+            "missing diagnostic": GUARD_FATAL + "\n",
+            "fatal before diagnostic": GUARD_FATAL + "\n" + diagnostic + "\n",
+            "duplicate diagnostic": diagnostic + "\n" + diagnostic + "\n" + GUARD_FATAL + "\n",
+            "duplicate own fatal": diagnostic + "\n" + GUARD_FATAL + "\n" + GUARD_FATAL + "\n",
+            "own fatal with suffix": diagnostic + "\n" + GUARD_FATAL + " extra\n",
+            "unrelated fatal after own fatal": A030_STDOUT,
+            "prefixed by unknown text": A032_STDOUT,
+        }
+        for label, stdout in variants.items():
+            with self.subTest(label=label):
+                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+
+    def test_guard_known_prefix_and_lf_crlf_framing(self):
+        diagnostic = guard_diagnostic(0, 64, 32)
+        valid = [
+            diagnostic + "\n" + GUARD_FATAL + "\n",
+            "# " + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "# " + diagnostic + "\r\n# " + GUARD_FATAL + "\r\n",
+            diagnostic + "\n# " + GUARD_FATAL + "\r\n",
+        ]
+        for stdout in valid:
+            with self.subTest(valid=repr(stdout)):
+                self.assertTrue(self.invalid_result(stdout, code=1)["passed"])
+        invalid = {
+            "double hash": "## " + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "double hash prefix": "# # " + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "leading space": " # " + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "tab prefix": "\t" + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "hash tab": "#\t" + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "unknown text": "X# " + diagnostic + "\n# " + GUARD_FATAL + "\n",
+            "fatal double hash": "# " + diagnostic + "\n## " + GUARD_FATAL + "\n",
+            "diagnostic trailing space": diagnostic + " \n# " + GUARD_FATAL + "\n",
+        }
+        for label, stdout in invalid.items():
+            with self.subTest(label=label):
+                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+        for separator in ("\r", "\v", "\f", "\u2028", "\u2029"):
+            with self.subTest(separator=repr(separator)):
+                stdout = diagnostic + separator + GUARD_FATAL + "\n"
+                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+
+    def test_guard_six_unique_fields_and_ascii_decimal_grammar(self):
+        diagnostic = guard_diagnostic(0, 64, 32)
+        fields = diagnostic.split()
+        self.assertEqual(len(fields), 7)
+        variants = {}
+        for index in range(1, 7):
+            variants[f"missing field {index}"] = " ".join(fields[:index] + fields[index + 1:])
+            variants[f"duplicate field {index}"] = " ".join(fields + [fields[index]])
+        for left, right in itertools.combinations(range(1, 7), 2):
+            swapped = fields.copy()
+            swapped[left], swapped[right] = swapped[right], swapped[left]
+            variants[f"reordered fields {left}:{right}"] = " ".join(swapped)
+        variants["extra field"] = diagnostic + " EXTRA=0"
+        for label, row in variants.items():
+            with self.subTest(label=label):
+                self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+
+        numeric = {
+            "plus sign": diagnostic.replace("COUNT_W=0", "COUNT_W=+0"),
+            "leading zero": diagnostic.replace("COUNT_W=0", "COUNT_W=00"),
+            "non-ASCII digit": diagnostic.replace("COUNT_W=0", "COUNT_W=\u0660"),
+            "hexadecimal": diagnostic.replace("COUNT_W=0", "COUNT_W=0x0"),
+            "decimal point": diagnostic.replace("COUNT_W=0", "COUNT_W=0.0"),
+            "digit separator": diagnostic.replace("COUNT_W=0", "COUNT_W=1_0"),
+            "negative safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=-2"),
+            "plus safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=+2"),
+            "leading-zero safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=02"),
+            "non-ASCII safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=\u0662"),
+            "unbounded input": diagnostic.replace("COUNT_W=0", "COUNT_W=" + "9" * 5000),
+        }
+        for label, row in numeric.items():
+            with self.subTest(label=label):
+                self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
+
+    def test_guard_mixed_conflicts_stderr_and_missing_marker(self):
+        diagnostic = guard_diagnostic(0, 64, 32)
+        good = diagnostic + "\n" + GUARD_FATAL + "\n"
+        mixed = {
+            "conflicting diagnostic": (
+                diagnostic + "\n" +
+                diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=3") + "\n" +
+                GUARD_FATAL + "\n"
+            ),
+            "extra error": diagnostic + "\n" + GUARD_FATAL + "\n** Error: later failure\n",
+            "extra unrelated fatal": A030_STDOUT,
+            "own fatal longer": diagnostic + "\n" + GUARD_FATAL + " trailing\n",
+            "own fatal shorter": diagnostic + "\n" + GUARD_FATAL.replace(" unsupported widths", "") + "\n",
+            "guard missing stdout": good + "APPLIED_CAPTURE_INVALID_GUARD_MISSING\n",
+        }
+        for label, stdout in mixed.items():
+            with self.subTest(label=label):
+                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+
+        self.assertTrue(self.invalid_result(good, stderr="Info: simulator completed\n", code=1)["passed"])
+        stderr_crossings = [
+            diagnostic,
+            GUARD_FATAL,
+            "APPLIED_CAPTURE_INVALID_GUARD_MISSING",
+            "** Error: unrelated failure",
+            "** Fatal: unrelated failure",
+            "TB_STATS groups=1",
+            "TB_PASS group=0 loopback=0",
+            "TB_FAIL group=21 mismatches=1",
+            MISMATCH,
+            CODE7,
+        ]
+        for text in stderr_crossings:
+            with self.subTest(stderr=text):
+                self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
+        self.assertFalse(self.invalid_result(diagnostic + "\n", stderr=GUARD_FATAL + "\n",
+                                             code=1)["passed"])
+
+    def test_guard_exit_completion_and_negative_width_controls(self):
+        controls = [
+            (0, 64, 32),
+            (-7, -4, -2),
+            (-1, 0, 0),
+            (33, 65, 65),
+        ]
+        for count_w, witness_w, tag_w in controls:
+            with self.subTest(count_w=count_w, witness_w=witness_w, tag_w=tag_w):
+                diagnostic = guard_diagnostic(count_w, witness_w, tag_w)
+                actual = self.invalid_result(
+                    diagnostic + "\n" + GUARD_FATAL + "\n", code=1,
+                    count_w=count_w, witness_w=witness_w, tag_w=tag_w,
+                )
+                self.assertTrue(actual["passed"])
+                self.assertEqual(actual["diagnostic"], actual["expected"])
+        diagnostic = guard_diagnostic(-7, -4, -2)
+        good = diagnostic + "\n" + GUARD_FATAL + "\n"
+        for code in (0, 1):
+            with self.subTest(code=code):
+                self.assertTrue(self.invalid_result(good, code=code,
+                                                    count_w=-7, witness_w=-4, tag_w=-2)["passed"])
+        for code in (2, -1, True, False, 0.0, 1.0, None, "0", "1", "timeout", "exception"):
+            with self.subTest(code=repr(code)):
+                self.assertFalse(self.invalid_result(good, code=code,
+                                                     count_w=-7, witness_w=-4, tag_w=-2)["passed"])
+
+    def test_supported_widths_cannot_qualify_an_invalid_parameter_guard(self):
+        # A perfectly formatted false guard is still a DUT/test failure.
+        for widths in ((2, 2, 1), (4, 8, 8), (32, 64, 64)):
+            with self.subTest(widths=widths):
+                text = guard_diagnostic(*widths) + "\n" + GUARD_FATAL + "\n"
+                result = self.invalid_result(text, code=1, count_w=widths[0],
+                                             witness_w=widths[1], tag_w=widths[2])
+                self.assertFalse(result["passed"])
+
+    def test_code7_cross_group_loopback_and_observation_shape(self):
+        self.assertTrue(runner.positive_entry(NORMAL, self.result([STATS, PASS]))["passed"])
+        self.assertFalse(runner.positive_entry(NORMAL, self.result([CODE7, STATS, PASS]))["passed"])
+        loopback = {**NORMAL, "group": 8, "loopback": 1}
+        loopback_pass = "TB_PASS group=8 loopback=1"
+        self.assertTrue(runner.positive_entry(
+            loopback, self.result([STATS, loopback_pass]))["passed"])
+        self.assertFalse(runner.positive_entry(
+            loopback, self.result([CODE7, STATS, loopback_pass]))["passed"])
+
+        probe = {"id": "code7", "expect": "pass_code7", "group": 30,
+                 "loopback": 0, "required_any": ["CODE7_OBSERVED"]}
+        terminal = "TB_PASS group=30 loopback=0"
+        self.assertTrue(runner.mutant_result(probe, self.result([CODE7, STATS, terminal])))
+        self.assertFalse(runner.mutant_result(probe, self.result([STATS, terminal])))
+        probe_loopback = {**probe, "loopback": 1}
+        self.assertFalse(runner.mutant_result(
+            probe_loopback,
+            self.result([CODE7, STATS, "TB_PASS group=30 loopback=1"]),
+        ))
+        variants = [
+            [STATS, CODE7, terminal],
+            [CODE7, CODE7, STATS, terminal],
+            [CODE7.replace("code=7", "code=6"), STATS, terminal],
+            [CODE7.replace("window_active=0", "window_active=1"), STATS, terminal],
+            [CODE7.replace("out_valid=0", "out_valid=1"), STATS, terminal],
+            [CODE7 + " extra", STATS, terminal],
+            ["NOT_" + CODE7, STATS, terminal],
+        ]
+        for rows in variants:
+            with self.subTest(rows=rows):
+                self.assertFalse(runner.mutant_result(probe, self.result(rows)))
+        self.assertFalse(runner.mutant_result(
+            NEGATIVE, self.result([CODE7, *self.negative_lines()])))
+
+    def test_original_a_counterexamples_are_rejected_after_repair(self):
+        self.assertFalse(self.invalid_result(A030_STDOUT, code=1)["passed"])
+        self.assertFalse(self.invalid_result(A032_STDOUT, code=1)["passed"])
+        self.assertFalse(runner.positive_entry(
+            NORMAL, self.raw_result(A026_STDOUT, code=0))["passed"])
 
 
 if __name__ == "__main__":

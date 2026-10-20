@@ -1,0 +1,80 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_pwm_applied_capture_runner.py
+@@
+         for label, stdout in invalid.items():
+             with self.subTest(label=label):
+                 self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+ 
++    def test_guard_six_unique_fields_and_ascii_decimal_grammar(self):
++        diagnostic = guard_diagnostic(0, 64, 32)
++        fields = diagnostic.split()
++        self.assertEqual(len(fields), 7)
++        variants = {}
++        for index in range(1, 7):
++            variants[f"missing field {index}"] = " ".join(fields[:index] + fields[index + 1:])
++            variants[f"duplicate field {index}"] = " ".join(fields + [fields[index]])
++        for left, right in itertools.combinations(range(1, 7), 2):
++            swapped = fields.copy()
++            swapped[left], swapped[right] = swapped[right], swapped[left]
++            variants[f"reordered fields {left}:{right}"] = " ".join(swapped)
++        variants["extra field"] = diagnostic + " EXTRA=0"
++        for label, row in variants.items():
++            with self.subTest(label=label):
++                self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
++
++        numeric = {
++            "plus sign": diagnostic.replace("COUNT_W=0", "COUNT_W=+0"),
++            "leading zero": diagnostic.replace("COUNT_W=0", "COUNT_W=00"),
++            "non-ASCII digit": diagnostic.replace("COUNT_W=0", "COUNT_W=\u0660"),
++            "hexadecimal": diagnostic.replace("COUNT_W=0", "COUNT_W=0x0"),
++            "decimal point": diagnostic.replace("COUNT_W=0", "COUNT_W=0.0"),
++            "digit separator": diagnostic.replace("COUNT_W=0", "COUNT_W=1_0"),
++            "negative safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=-2"),
++            "plus safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=+2"),
++            "leading-zero safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=02"),
++            "non-ASCII safe count": diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=\u0662"),
++            "unbounded input": diagnostic.replace("COUNT_W=0", "COUNT_W=" + "9" * 5000),
++        }
++        for label, row in numeric.items():
++            with self.subTest(label=label):
++                self.assertFalse(self.invalid_result(row + "\n" + GUARD_FATAL + "\n")["passed"])
++
++    def test_guard_mixed_conflicts_stderr_and_missing_marker(self):
++        diagnostic = guard_diagnostic(0, 64, 32)
++        good = diagnostic + "\n" + GUARD_FATAL + "\n"
++        mixed = {
++            "conflicting diagnostic": (
++                diagnostic + "\n" +
++                diagnostic.replace("SAFE_COUNT_W=2", "SAFE_COUNT_W=3") + "\n" +
++                GUARD_FATAL + "\n"
++            ),
++            "extra error": diagnostic + "\n" + GUARD_FATAL + "\n** Error: later failure\n",
++            "extra unrelated fatal": A030_STDOUT,
++            "own fatal longer": diagnostic + "\n" + GUARD_FATAL + " trailing\n",
++            "own fatal shorter": diagnostic + "\n" + GUARD_FATAL.replace(" unsupported widths", "") + "\n",
++            "guard missing stdout": good + "APPLIED_CAPTURE_INVALID_GUARD_MISSING\n",
++        }
++        for label, stdout in mixed.items():
++            with self.subTest(label=label):
++                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
++
++        self.assertTrue(self.invalid_result(good, stderr="Info: simulator completed\n", code=1)["passed"])
++        stderr_crossings = [
++            diagnostic,
++            GUARD_FATAL,
++            "APPLIED_CAPTURE_INVALID_GUARD_MISSING",
++            "** Error: unrelated failure",
++            "** Fatal: unrelated failure",
++            "TB_STATS groups=1",
++            "TB_PASS group=0 loopback=0",
++            "TB_FAIL group=21 mismatches=1",
++            MISMATCH,
++            CODE7,
++        ]
++        for text in stderr_crossings:
++            with self.subTest(stderr=text):
++                self.assertFalse(self.invalid_result(good, stderr=text + "\n", code=1)["passed"])
++        self.assertFalse(self.invalid_result(diagnostic + "\n", stderr=GUARD_FATAL + "\n",
++                                             code=1)["passed"])
++
+*** End Patch

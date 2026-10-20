@@ -73,11 +73,16 @@ CODE7_LINE = "CODE7_OBSERVED code=7 window_active=0 out_valid=0"
 FAIL_FATAL_LINE = "** Fatal: TB_FAIL public-port self-check"
 SIM_ERROR_RE = re.compile(r"\*\*\s+(?:Error|Fatal):")
 RESERVED = ("TB_STATS", "TB_PASS", "TB_FAIL", "MISMATCH", "CODE7_OBSERVED")
-INVALID_RE = re.compile(
-    r"DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM\s+"
-    r"COUNT_W=(-?\d+)\s+WITNESS_W=(-?\d+)\s+TAG_W=(-?\d+)\s+"
-    r"SAFE_COUNT_W=(\d+)\s+SAFE_WITNESS_W=(\d+)\s+SAFE_TAG_W=(\d+)"
-)
+GUARD_TOKEN = "DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM"
+GUARD_MISSING_TOKEN = "APPLIED_CAPTURE_INVALID_GUARD_MISSING"
+GUARD_FATAL_LINE = "** Fatal: " + GUARD_TOKEN + " unsupported widths"
+GUARD_KEYS = ("count_w", "witness_w", "tag_w",
+              "safe_count_w", "safe_witness_w", "safe_tag_w")
+SIGNED_CANONICAL = r"(?:0|-?[1-9][0-9]{0,19})"
+UNSIGNED_CANONICAL = r"(?:0|[1-9][0-9]{0,19})"
+INVALID_RE = re.compile(GUARD_TOKEN + " " + " ".join(
+    key.upper() + "=(" + (SIGNED_CANONICAL if i < 3 else UNSIGNED_CANONICAL) + ")"
+    for i, key in enumerate(GUARD_KEYS)))
 
 POSITIVE_RUNS = [
     {"id": "g00-startup-controls", "group": 0, "count_w": 8, "witness_w": 16, "tag_w": 8, "loopback": 0, "trace": 1},
@@ -358,6 +363,10 @@ def parse_tb_output(stdout_path: Path, stderr_path: Path) -> dict:
             errors.append("PASS conflicts with TB fatal diagnostic")
         if kind == "fail" and (len(own_fatals) != 1 or own_fatals[0] <= end):
             errors.append("FAIL requires one subsequent TB fatal diagnostic")
+        if code7 and (kind != "pass" or group != 30 or value != 0):
+            errors.append("CODE7 is reserved for PASS group30 loopback0")
+        if kind == "pass" and group == 30 and (value != 0 or len(code7) != 1):
+            errors.append("PASS group30 requires one CODE7 observation and loopback0")
     if len(code7) > 1:
         errors.append("duplicate code7 observation")
     if simulator_errors:
@@ -375,6 +384,54 @@ def parse_tb_output(stdout_path: Path, stderr_path: Path) -> dict:
         "code7_observed": valid and len(code7) == 1,
         "stdout_tail": text[-4000:],
         "stderr_tail": err[-2000:],
+    }
+
+
+def parse_invalid_output(stdout_path: Path, stderr_path: Path) -> dict:
+    """Recognize only one ordered invalid-width diagnostic/own-fatal pair.
+
+    All protocol records belong to stdout. Other Error/Fatal diagnostics,
+    duplicates, malformed guard records and ordinary TB outcomes invalidate
+    this expected-failure qualification even if the process completed.
+    """
+    text = stdout_path.read_bytes().decode("utf-8", errors="replace")
+    err = stderr_path.read_bytes().decode("utf-8", errors="replace")
+    errors, diagnostics, fatals = [], [], []
+    guard_missing = GUARD_MISSING_TOKEN in text or GUARD_MISSING_TOKEN in err
+    tokens = (*RESERVED, GUARD_TOKEN, GUARD_MISSING_TOKEN)
+    if "\ufffd" in text or "\ufffd" in err:
+        errors.append("invalid UTF-8 or replacement character in transcript")
+    for index, line in enumerate(text.split("\n")):
+        if line.endswith("\r"):
+            line = line[:-1]
+        body = line[2:] if line.startswith("# ") else line
+        match = INVALID_RE.fullmatch(body)
+        if match:
+            diagnostics.append((index, dict(zip(GUARD_KEYS, map(int, match.groups())))))
+        elif body == GUARD_FATAL_LINE:
+            fatals.append(index)
+        else:
+            if any(token in body for token in tokens):
+                errors.append(f"malformed or unexpected guard record at stdout line {index + 1}")
+            if SIM_ERROR_RE.search(body):
+                errors.append(f"unexpected simulator Error/Fatal at stdout line {index + 1}")
+    for index, line in enumerate(err.split("\n")):
+        if any(token in line for token in tokens) or SIM_ERROR_RE.search(line):
+            errors.append(f"unexpected guard record or Error/Fatal at stderr line {index + 1}")
+    if len(diagnostics) != 1:
+        errors.append(f"expected one complete guard diagnostic, got {len(diagnostics)}")
+    if len(fatals) != 1:
+        errors.append(f"expected one exact guard fatal, got {len(fatals)}")
+    if len(diagnostics) == len(fatals) == 1 and diagnostics[0][0] >= fatals[0]:
+        errors.append("guard diagnostic must precede its fatal")
+    if guard_missing:
+        errors.append("guard-missing marker present")
+    return {
+        "diagnostic": diagnostics[0][1] if len(diagnostics) == 1 else None,
+        "own_fatal": len(fatals) == 1,
+        "guard_missing": guard_missing,
+        "protocol_valid": not errors,
+        "protocol_errors": errors,
     }
 
 
@@ -500,19 +557,12 @@ def run_invalid(lib_parent: Path, logs: Path, commands: list[dict],
         "tb_invalid_applied_capture",
     ]
     record = run_command(cmd, lib_parent, logs, name, timeout, commands)
-    text = (logs / f"{name}.stdout.txt").read_text(encoding="utf-8", errors="replace")
-    match = INVALID_RE.search(text)
-    diagnostic = None
-    if match:
-        values = tuple(int(value) for value in match.groups())
-        diagnostic = {
-            "count_w": values[0],
-            "witness_w": values[1],
-            "tag_w": values[2],
-            "safe_count_w": values[3],
-            "safe_witness_w": values[4],
-            "safe_tag_w": values[5],
-        }
+    parsed = parse_invalid_output(logs / f"{name}.stdout.txt", logs / f"{name}.stderr.txt")
+    diagnostic = parsed["diagnostic"]
+    widths = (spec["count_w"], spec["witness_w"], spec["tag_w"])
+    requested_invalid = (all(type(value) is int for value in widths)
+                         and not (2 <= widths[0] <= 32 and 2 <= widths[1] <= 64
+                                  and 1 <= widths[2] <= 64))
     expected = {
         "count_w": spec["count_w"],
         "witness_w": spec["witness_w"],
@@ -521,24 +571,19 @@ def run_invalid(lib_parent: Path, logs: Path, commands: list[dict],
         "safe_witness_w": clamp_width(spec["witness_w"], 2, 64),
         "safe_tag_w": clamp_width(spec["tag_w"], 1, 64),
     }
-    guard_missing = "APPLIED_CAPTURE_INVALID_GUARD_MISSING" in text
-    err = (logs / f"{name}.stderr.txt").read_text(encoding="utf-8", errors="replace")
-    diagnostic_text = text + "\n" + err
-    own_fatal = bool(re.search(
-        r"\*\* Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths",
-        diagnostic_text,
-    ))
-    unexpected_error = bool(re.search(r"\*\*\s+Error:", diagnostic_text))
     exact = diagnostic is not None and diagnostic == expected
     return {
         "record": record,
         "diagnostic": diagnostic,
         "expected": expected,
-        "guard_missing": guard_missing,
+        "guard_missing": parsed["guard_missing"],
         "diagnostic_exact": exact,
-        "own_fatal": own_fatal,
+        "invalid_request_expected": requested_invalid,
+        "own_fatal": parsed["own_fatal"],
+        "protocol_errors": parsed["protocol_errors"] + ([] if requested_invalid else [
+            "invalid-parameter qualification requires an unsupported integer width"]),
         "process_completed": completed_process(record, expected_failure=True),
-        "passed": (exact and own_fatal and not guard_missing and not unexpected_error
+        "passed": (requested_invalid and exact and parsed["protocol_valid"]
                    and completed_process(record, expected_failure=True)),
         "transcript": str(log_file),
         "transcript_sha256": sha256_file(log_file) if log_file.is_file() else None,

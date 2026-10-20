@@ -1,0 +1,435 @@
+{
+  "summary_sha256": "1bc4a0db74686b8c6d5033052f4a626f9ba9d59cd5f954d43965a99754f4bf31",
+  "old_command_count": 47,
+  "stream_count": 94,
+  "scenarios": [
+    {
+      "name": "g00-startup-controls",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 2,
+        "samples": 29,
+        "assertions": 206,
+        "records": 2,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 3,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g01-exhaustive-w2",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 99,
+        "samples": 629,
+        "assertions": 6705,
+        "records": 9,
+        "raw_faults": 0,
+        "failure_events": 90,
+        "window_starts": 9,
+        "handshakes": 9,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g02-exhaustive-w3",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1295,
+        "samples": 10927,
+        "assertions": 90293,
+        "records": 441,
+        "raw_faults": 0,
+        "failure_events": 854,
+        "window_starts": 441,
+        "handshakes": 441,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g03-faults-recovery",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 84,
+        "assertions": 508,
+        "records": 4,
+        "raw_faults": 2,
+        "failure_events": 4,
+        "window_starts": 7,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g04-min-exhaustion",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 16,
+        "assertions": 141,
+        "records": 2,
+        "raw_faults": 1,
+        "failure_events": 1,
+        "window_starts": 2,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g05-count16-boundaries",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 2,
+        "samples": 196613,
+        "assertions": 127,
+        "records": 1,
+        "raw_faults": 1,
+        "failure_events": 1,
+        "window_starts": 2,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g06-max-width-bounded",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 2,
+        "samples": 23,
+        "assertions": 130,
+        "records": 2,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 2,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g07-default-smoke",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 13,
+        "assertions": 73,
+        "records": 1,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 1,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g08-loopback-record",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 12,
+        "assertions": 75,
+        "records": 1,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 1,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g09-loopback-exhaustion",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 10,
+        "assertions": 68,
+        "records": 0,
+        "raw_faults": 1,
+        "failure_events": 1,
+        "window_starts": 1,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g10-phase-controls",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 15,
+        "samples": 135,
+        "assertions": 1110,
+        "records": 0,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 20,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g11-same-edge-fault",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 30,
+        "assertions": 154,
+        "records": 2,
+        "raw_faults": 1,
+        "failure_events": 1,
+        "window_starts": 2,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g12-future-waveform",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 9,
+        "assertions": 48,
+        "records": 1,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 1,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g13-same-tag-boundaries",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 2,
+        "samples": 36,
+        "assertions": 250,
+        "records": 4,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 4,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g14-control-at-handshake",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 2,
+        "samples": 30,
+        "assertions": 221,
+        "records": 3,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 3,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g15-constant-missing-edges",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 2,
+        "samples": 32,
+        "assertions": 174,
+        "records": 1,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 3,
+        "handshakes": 1,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g20-T-boundary-control",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 14,
+        "assertions": 118,
+        "records": 1,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 2,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g21-same-tag-control",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 14,
+        "assertions": 118,
+        "records": 1,
+        "raw_faults": 0,
+        "failure_events": 0,
+        "window_starts": 2,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "g22-mismatch-control",
+      "kind": "positive",
+      "accepted": true,
+      "stats": {
+        "groups": 1,
+        "cases": 1,
+        "samples": 11,
+        "assertions": 68,
+        "records": 0,
+        "raw_faults": 0,
+        "failure_events": 1,
+        "window_starts": 1,
+        "handshakes": 0,
+        "mismatches": 0
+      },
+      "protocol_errors": []
+    },
+    {
+      "name": "m1-t-invalidation-delayed-g21",
+      "kind": "fail",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "m2-same-tag-state-retained-g13",
+      "kind": "fail",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "m3-mismatch-admitted-g22",
+      "kind": "fail",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "m4-no-capture-rearm-g30",
+      "kind": "pass_code7",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "m4-no-capture-rearm-g13",
+      "kind": "fail",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-count-zero",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-count-negative",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-count-high",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-witness-zero",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-witness-negative",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-witness-high",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-tag-zero",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-tag-negative",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    },
+    {
+      "name": "invalid-tag-high",
+      "kind": "guard",
+      "accepted": true,
+      "protocol_errors": []
+    }
+  ],
+  "new_simulator_commands": 0,
+  "old_positive_samples": 208667
+}

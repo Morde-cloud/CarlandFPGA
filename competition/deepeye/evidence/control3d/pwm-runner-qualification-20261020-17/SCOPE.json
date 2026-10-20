@@ -1,0 +1,50 @@
+{
+  "status": "ACTUALLY_CONSUMED_STARTED_INPUTS_VERIFIED",
+  "at_utc": "2026-10-20T15:47:57.009912+00:00",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PWM-RUNNER-QUALIFICATION-20261020-17-v1",
+  "operation_id": "B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-17",
+  "parent_work": "B-RUNNER-P2-REMAINDER-20261020-17-COORD-v1",
+  "recovery_work": "B-RUNNER-P2-REMAINDER-20261020-17-APP-RECOVERY-v1",
+  "dispatch_operation": "B-RUNNER-P2-REMAINDER-20261020-17-COORD-DISPATCH",
+  "thread_id": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "actual_turn": {
+    "timestamp": "2026-10-20T15:39:44.293Z",
+    "turn_id": "01a159f7-df23-7280-bd69-f31bd459dd05",
+    "model": "gpt-6-astra",
+    "effort": "ultra"
+  },
+  "baseline": "f7736ac737d1c7b256974beb1574b94096819270",
+  "ownership": [
+    "competition/deepeye/tools/control3d/run_pwm_applied_capture.py",
+    "competition/deepeye/tests/control/test_pwm_applied_capture_runner.py",
+    "competition/deepeye/evidence/control3d/pwm-runner-qualification-20261020-17/**",
+    "handoffs/b/B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-17/**"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "design_pin": "1011259415a0916054eb580687612580bc1e5f09",
+  "return_target": "01a154de-abd8-7590-b9a3-2819249458e3",
+  "return_channel": "App send_message_to_thread",
+  "execution_decision": "Main owns exact grammar/CODE7 design and runner implementation/independent evaluation. One Flash/max ordinary assignment will extend only test file and author evidence; no duplicate writer. This reduces routine test construction pressure without delegating acceptance.",
+  "limits": "No RTL/TB/old evidence edits; no simulator/board execution; all29/G05/B06/R03/board/systemnot_run. No old coordinator quota/resume replay."
+}

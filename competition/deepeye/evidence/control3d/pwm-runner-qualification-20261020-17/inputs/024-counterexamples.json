@@ -1,0 +1,202 @@
+{
+  "cases": [
+    {
+      "name": "positive-control",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "expectation_met": true,
+      "kind": "positive",
+      "stdout_path": "counterexamples\\positive-control\\case.stdout.txt",
+      "stdout_sha256": "2ab5ad49cfebe3c5af328fd6c569dba8ade002213ee8a0e94575d944756736f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "passed": true,
+        "failed": false,
+        "protocol_valid": true,
+        "protocol_errors": [],
+        "simulator_errors": [],
+        "terminal": {
+          "kind": "pass",
+          "group": 0,
+          "loopback": 0
+        },
+        "stats": {
+          "groups": 1,
+          "cases": 1,
+          "samples": 29,
+          "assertions": 206,
+          "records": 2,
+          "raw_faults": 0,
+          "failure_events": 0,
+          "window_starts": 1,
+          "handshakes": 1,
+          "mismatches": 0
+        },
+        "mismatch_labels": [],
+        "code7_observed": false,
+        "stdout_tail": "TB_STATS groups=1 cases=1 samples=29 assertions=206 records=2 raw_faults=0 failure_events=0 window_starts=1 handshakes=1 mismatches=0\nTB_PASS group=0 loopback=0\n",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "code7-in-ordinary-group",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "expectation_met": false,
+      "kind": "positive",
+      "stdout_path": "counterexamples\\code7-in-ordinary-group\\case.stdout.txt",
+      "stdout_sha256": "4df540e0c3e98473be7761e913822d7549193300fcd60255db45641edd5801fd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "passed": true,
+        "failed": false,
+        "protocol_valid": true,
+        "protocol_errors": [],
+        "simulator_errors": [],
+        "terminal": {
+          "kind": "pass",
+          "group": 0,
+          "loopback": 0
+        },
+        "stats": {
+          "groups": 1,
+          "cases": 1,
+          "samples": 29,
+          "assertions": 206,
+          "records": 2,
+          "raw_faults": 0,
+          "failure_events": 0,
+          "window_starts": 1,
+          "handshakes": 1,
+          "mismatches": 0
+        },
+        "mismatch_labels": [],
+        "code7_observed": true,
+        "stdout_tail": "CODE7_OBSERVED code=7 window_active=0 out_valid=0\nTB_STATS groups=1 cases=1 samples=29 assertions=206 records=2 raw_faults=0 failure_events=0 window_starts=1 handshakes=1 mismatches=0\nTB_PASS group=0 loopback=0\n",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "guard-control",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "expectation_met": true,
+      "kind": "guard",
+      "stdout_path": "counterexamples\\guard-control\\invalid-count-zero.stdout.txt",
+      "stdout_sha256": "208fca1fd3b587c0409950405d437b2213061042e8dfb50896bb3941d6a4d97b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "record": {
+          "exit": 1
+        },
+        "diagnostic": {
+          "count_w": 0,
+          "witness_w": 64,
+          "tag_w": 32,
+          "safe_count_w": 2,
+          "safe_witness_w": 64,
+          "safe_tag_w": 32
+        },
+        "expected": {
+          "count_w": 0,
+          "witness_w": 64,
+          "tag_w": 32,
+          "safe_count_w": 2,
+          "safe_witness_w": 64,
+          "safe_tag_w": 32
+        },
+        "guard_missing": false,
+        "diagnostic_exact": true,
+        "own_fatal": true,
+        "process_completed": true,
+        "passed": true,
+        "transcript": "C:\\Users\\CarlJade\\Documents\\ChatGPT\\FPGA\u591a\u673a\u534f\u4f5c\u5f00\u53d1\\.planning\\deepeye-resume-20261018\\b-op16-independent-20261020\\counterexamples\\guard-control\\invalid-count-zero.transcript.txt",
+        "transcript_sha256": null,
+        "wlf": "C:\\Users\\CarlJade\\Documents\\ChatGPT\\FPGA\u591a\u673a\u534f\u4f5c\u5f00\u53d1\\.planning\\deepeye-resume-20261018\\b-op16-independent-20261020\\counterexamples\\guard-control\\invalid-count-zero.wlf",
+        "wlf_sha256": null
+      }
+    },
+    {
+      "name": "guard-extra-unrelated-fatal",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "expectation_met": false,
+      "kind": "guard",
+      "stdout_path": "counterexamples\\guard-extra-unrelated-fatal\\invalid-count-zero.stdout.txt",
+      "stdout_sha256": "43945861d9cc0029db7d9d2d130b22b97cce5d348d8d1ee9e21b90304bc1d29f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "record": {
+          "exit": 1
+        },
+        "diagnostic": {
+          "count_w": 0,
+          "witness_w": 64,
+          "tag_w": 32,
+          "safe_count_w": 2,
+          "safe_witness_w": 64,
+          "safe_tag_w": 32
+        },
+        "expected": {
+          "count_w": 0,
+          "witness_w": 64,
+          "tag_w": 32,
+          "safe_count_w": 2,
+          "safe_witness_w": 64,
+          "safe_tag_w": 32
+        },
+        "guard_missing": false,
+        "diagnostic_exact": true,
+        "own_fatal": true,
+        "process_completed": true,
+        "passed": true,
+        "transcript": "C:\\Users\\CarlJade\\Documents\\ChatGPT\\FPGA\u591a\u673a\u534f\u4f5c\u5f00\u53d1\\.planning\\deepeye-resume-20261018\\b-op16-independent-20261020\\counterexamples\\guard-extra-unrelated-fatal\\invalid-count-zero.transcript.txt",
+        "transcript_sha256": null,
+        "wlf": "C:\\Users\\CarlJade\\Documents\\ChatGPT\\FPGA\u591a\u673a\u534f\u4f5c\u5f00\u53d1\\.planning\\deepeye-resume-20261018\\b-op16-independent-20261020\\counterexamples\\guard-extra-unrelated-fatal\\invalid-count-zero.wlf",
+        "wlf_sha256": null
+      }
+    },
+    {
+      "name": "guard-prefixed-records",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "expectation_met": false,
+      "kind": "guard",
+      "stdout_path": "counterexamples\\guard-prefixed-records\\invalid-count-zero.stdout.txt",
+      "stdout_sha256": "8c0c9db3c279cd13ed88436b5acbbdde48371f79c07c926a3d72c73097fa0eca",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": {
+        "record": {
+          "exit": 1
+        },
+        "diagnostic": {
+          "count_w": 0,
+          "witness_w": 64,
+          "tag_w": 32,
+          "safe_count_w": 2,
+          "safe_witness_w": 64,
+          "safe_tag_w": 32
+        },
+        "expected": {
+          "count_w": 0,
+          "witness_w": 64,
+          "tag_w": 32,
+          "safe_count_w": 2,
+          "safe_witness_w": 64,
+          "safe_tag_w": 32
+        },
+        "guard_missing": false,
+        "diagnostic_exact": true,
+        "own_fatal": true,
+        "process_completed": true,
+        "passed": true,
+        "transcript": "C:\\Users\\CarlJade\\Documents\\ChatGPT\\FPGA\u591a\u673a\u534f\u4f5c\u5f00\u53d1\\.planning\\deepeye-resume-20261018\\b-op16-independent-20261020\\counterexamples\\guard-prefixed-records\\invalid-count-zero.transcript.txt",
+        "transcript_sha256": null,
+        "wlf": "C:\\Users\\CarlJade\\Documents\\ChatGPT\\FPGA\u591a\u673a\u534f\u4f5c\u5f00\u53d1\\.planning\\deepeye-resume-20261018\\b-op16-independent-20261020\\counterexamples\\guard-prefixed-records\\invalid-count-zero.wlf",
+        "wlf_sha256": null
+      }
+    }
+  ],
+  "process_network_attempts": [],
+  "new_simulator_commands": 0
+}

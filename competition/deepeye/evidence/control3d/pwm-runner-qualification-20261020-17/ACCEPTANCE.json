@@ -1,0 +1,91 @@
+{
+  "decision": "ACCEPT_BOUNDED_GUARD_AND_CODE7_PYTHON_QUALIFICATION",
+  "at_utc": "2026-10-20T16:08:14.602220+00:00",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PWM-RUNNER-QUALIFICATION-20261020-17-v1",
+  "operation_id": "B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-17",
+  "owner_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "owner_turn": "01a159f7-df23-7280-bd69-f31bd459dd05",
+  "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+  "revision": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirement_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "design_pin": "1011259415a0916054eb580687612580bc1e5f09",
+  "runner_sha256": "b6735257dbfc107a14791ec69cb7386f306d0408173acf9466a0f69c93c30b94",
+  "test_sha256": "f8d4d5633949f8583e2d25b2622b3a67b30a05880bd84c2788e327c440516a34",
+  "tests": {
+    "total_unit_methods": 31,
+    "added_methods": 8,
+    "minimal_portable_methods": 31,
+    "original23_unchanged_file_exit": 0,
+    "main_independent_cases": 1084,
+    "original_frozen_cases": 1007,
+    "supplemental_cases": 77,
+    "main_expected_accepting_controls": 82,
+    "main_mismatches": 0,
+    "exact_A_baseline_accepts": 3,
+    "exact_A_repaired_rejects": 3,
+    "original_op16_negatives_rejected": 2,
+    "old_commands": 47,
+    "old_raw_streams_rehashed": 94,
+    "old_scenarios_classified": 33,
+    "new_ModelSim_commands": 0,
+    "new_hardware_commands": 0
+  },
+  "existing_tracked_files_unchanged": 4943,
+  "existing_tracked_files_changed": [
+    "competition/deepeye/tests/control/test_pwm_applied_capture_runner.py",
+    "competition/deepeye/tools/control3d/run_pwm_applied_capture.py"
+  ],
+  "author_role": "Flash/max authored7test methods and portable execution only; main authored runner, corrected one new expectation and added1method.",
+  "independent_expectations": "Main froze1007 before implementation and77 before eligibility fix; main is not a separate independent author of its own runner.",
+  "preserved_findings": [
+    "A existing P2 three exact byte counterexamples",
+    "P17-GUARD-VALID-REQUEST main review, author historical PASS remains limited",
+    "author declared24879 bytes corrected to actual24934 for its exact candidatehash",
+    "child absolute-ownership admission rejection reconciled before corrected request; no duplicate job"
+  ],
+  "commands_index": [
+    {
+      "path": "competition/deepeye/evidence/control3d/pwm-runner-qualification-20261020-17/main/check-01.command.json",
+      "sha256": "c978b18c3ae89c4f680a1a9661872ec46ee58383a281d5ea0cbceb3fcb9d9597",
+      "exit_code": 0
+    },
+    {
+      "path": "competition/deepeye/evidence/control3d/pwm-runner-qualification-20261020-17/main/check-02.command.json",
+      "sha256": "1d3a61e5e857c6208675c6782e5186fc74d17a27cd9b75eff9c0b2e2245057ea",
+      "exit_code": 0
+    }
+  ],
+  "not_run": [
+    "new RTL simulation",
+    "synthesis",
+    "implementation",
+    "CDC/RDC",
+    "board",
+    "system",
+    "G05",
+    "B06",
+    "R03",
+    "all29formal"
+  ],
+  "A_OOC_claim": "Report read only; original synthesis bytes not reviewed here.",
+  "remaining": "Exact-source independent coordinator/A/C review; full project gates unchanged."
+}

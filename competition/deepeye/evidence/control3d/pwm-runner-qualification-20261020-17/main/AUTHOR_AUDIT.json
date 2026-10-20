@@ -1,0 +1,43 @@
+{
+  "terminal_job": "child-7617ec81a92346b38b4485d7030f63df",
+  "terminal_state": "completed/nonstale",
+  "author_candidate_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
+  "author_candidate_actual_bytes": 24934,
+  "author_RESULT_declared_test_bytes": 24879,
+  "author_candidate_runs": [
+    {
+      "run": "original-runner-final-tests",
+      "runner_sha256": "b4ac06464af965999d35444f607fa6c7db537b80c340d39cbcc233ee2dce37b0",
+      "test_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
+      "exit": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ca4af28d55a6cf63b11b851999be5a7fa31b5b5a642268c0fbf578bb0d6af56d"
+    },
+    {
+      "run": "original-runner-new-tests",
+      "runner_sha256": "b4ac06464af965999d35444f607fa6c7db537b80c340d39cbcc233ee2dce37b0",
+      "test_sha256": "c1820438d8a07a3544831ab79b07362ce4daea3b7229164150e3c1e1a1253e46",
+      "exit": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "cd45e39496161ea70a81bdf9c13192cda390b88244d0469d9c76eb485f1b0a32"
+    },
+    {
+      "run": "post-edit-run-01",
+      "runner_sha256": "0a6101a263fa3c69a8c1737fe965a255ef15aef3ae177fd98e813661a4be8e05",
+      "test_sha256": "c1820438d8a07a3544831ab79b07362ce4daea3b7229164150e3c1e1a1253e46",
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "01b8d06ffae6b27d565a97798e781c7d1345cb19cf974e53ad04877ed6bc6907"
+    },
+    {
+      "run": "post-edit-run-02",
+      "runner_sha256": "0a6101a263fa3c69a8c1737fe965a255ef15aef3ae177fd98e813661a4be8e05",
+      "test_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "01b8d06ffae6b27d565a97798e781c7d1345cb19cf974e53ad04877ed6bc6907"
+    }
+  ],
+  "main_decision": "Author tests useful, but legal-width healthy guard expectation rejected and corrected after terminal release; author original outputs retained. Source hashes take precedence over the inaccurate declared byte count.",
+  "separate_independent_implementer_claimed": false
+}

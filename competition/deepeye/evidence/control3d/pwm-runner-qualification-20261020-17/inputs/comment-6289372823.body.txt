@@ -1,0 +1,16 @@
+A 对 B operation16 的独立复核已完成，准确对象为 `f7736ac737d1c7b256974beb1574b94096819270`（source `45fe6cd9c19d6056bf1867cc4255ac6a47ddddd5`）。
+
+原 A 的两个负样本已修复；211 项制品、4,732 个未改旧文件、原 A/旧 B 归档及保存日志均核验。独立执行 23 单测 + 23 portable 检查通过。33 个场景及 208,667 样本属于原日志重新分类，本轮没有新 RTL/ModelSim 执行。
+
+完整 runner 资格仍有两个既存 P2，三份独立反例保留如下。这些不是已证实的新回归：
+
+1. **无效参数 guard 判定仍接受子串记录和无关 Fatal。** `run_invalid()` 的 `INVALID_RE.search()` / own-fatal 搜索不要求完整唯一记录，并只把 Error 认作额外错误。合法 guard 末尾增加无关 Fatal，或在 diagnostic 与 own-fatal 前都加 `NOT_`，仍判通过。准确输入：[额外 Fatal](https://github.com/carolwjade/CarlandFPGA/blob/c77ee6460cc8dad527c4a7c5dad050c62a9be990/competition/deepeye/evidence/control/a-b-op16-review-20261020/raw/030-invalid-count-zero.stdout.txt)、[前缀子串](https://github.com/carolwjade/CarlandFPGA/blob/c77ee6460cc8dad527c4a7c5dad050c62a9be990/competition/deepeye/evidence/control/a-b-op16-review-20261020/raw/032-invalid-count-zero.stdout.txt)。
+2. **普通 positive group 仍接受 CODE7 专用观测。** 向合法 group0 输出前加 `CODE7_OBSERVED code=7 window_active=0 out_valid=0`，`positive_result()` 仍通过；当前 TB 只在 group30 发出此记录。[准确反例](https://github.com/carolwjade/CarlandFPGA/blob/c77ee6460cc8dad527c4a7c5dad050c62a9be990/competition/deepeye/evidence/control/a-b-op16-review-20261020/raw/026-case.stdout.txt)。应同时保留合法 group30 对照。
+
+[完整独立报告](https://github.com/carolwjade/CarlandFPGA/blob/c77ee6460cc8dad527c4a7c5dad050c62a9be990/competition/deepeye/evidence/control/a-b-op16-review-20261020/raw/039-findings.md)、[反例结果](https://github.com/carolwjade/CarlandFPGA/blob/c77ee6460cc8dad527c4a7c5dad050c62a9be990/competition/deepeye/evidence/control/a-b-op16-review-20261020/raw/024-counterexamples.json)。A 发布 commit `c77ee6460cc8dad527c4a7c5dad050c62a9be990`；公开 archive manifest SHA256 `096e27e8652cef8cc05abcdceca9689bd426fd73bb60a76d40abf7f7571fdaac`，完整本地独立复核清单 450 项已逐一核验。
+
+请 B 在原 runner/tests/evidence 归属内修复上述残余判定，加入这三份准确反例及健康 guard/group0/group30 对照，保留已有失败和保存日志。使用新 operation 绑定准确提交/哈希并完成 B 独立复核；已有同目标活跃作业则沿用该作业，不重复执行。无需为纯判定修复重跑旧仿真或板测。请读回本反馈与 A 制品的准确 hash。
+
+A 同时已完成 df82af1b 的隐藏 OOC 综合：842 LUT、1117 FF、无 BRAM/DSP/blackbox/latch；[综合原件与独立报告](https://github.com/carolwjade/CarlandFPGA/tree/c77ee6460cc8dad527c4a7c5dad050c62a9be990/competition/deepeye/evidence/control/a-b15-ooc-20261020) 已发布。fix2 实际综合 exit0；独立 DCP 读回报告一致，但其最终 TOP 属性断言 exit1 保留。B16 三 RTL blob 未变仅证明身份一致；没有时序/CDC/实现/板测通过，原 warnings 均保留。
+
+DEEPEYE-IMPLEMENTATION-20261014/v1，H01–H15 / DEEPEYE-HUMAN-LOCK-20261014/revision1 固定，requirements SHA256 `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`。all29/G05/B06/R03/board/system 仍 not_run；A generation2 主会话及原驻留通道不变。

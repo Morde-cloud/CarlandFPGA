@@ -1,0 +1,39 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_pwm_applied_capture_runner.py
+@@
+     def result(self, lines, *, prefix="# ", newline="\n", stderr="", code=0):
+         stdout = (newline.join(prefix + line for line in lines) + newline).encode()
+         (self.root / "out").write_bytes(stdout)
+         (self.root / "err").write_text(stderr, encoding="utf-8")
+         parsed = runner.parse_tb_output(self.root / "out", self.root / "err")
+         parsed.update(transcript=None, transcript_sha256=None, wlf=None, wlf_sha256=None)
+         return {"parsed": parsed, "record": {"exit": code,
+                 "stdout": str(self.root / "out"), "stderr": str(self.root / "err")}}
+ 
++    def raw_result(self, stdout, *, stderr=b"", code=0):
++        if isinstance(stdout, str):
++            stdout = stdout.encode("utf-8")
++        if isinstance(stderr, str):
++            stderr = stderr.encode("utf-8")
++        (self.root / "out").write_bytes(stdout)
++        (self.root / "err").write_bytes(stderr)
++        parsed = runner.parse_tb_output(self.root / "out", self.root / "err")
++        parsed.update(transcript=None, transcript_sha256=None, wlf=None, wlf_sha256=None)
++        return {"parsed": parsed, "record": {"exit": code,
++                "stdout": str(self.root / "out"), "stderr": str(self.root / "err")}}
++
++    def invalid_result(self, stdout, *, stderr="", code=1,
++                       count_w=0, witness_w=64, tag_w=32):
++        if isinstance(stdout, str):
++            stdout = stdout.encode("utf-8")
++        if isinstance(stderr, str):
++            stderr = stderr.encode("utf-8")
++        (self.root / "guard.stdout.txt").write_bytes(stdout)
++        (self.root / "guard.stderr.txt").write_bytes(stderr)
++        spec = {"id": "guard", "count_w": count_w,
++                "witness_w": witness_w, "tag_w": tag_w}
++        with patch.object(runner, "run_command", return_value={"exit": code}):
++            return runner.run_invalid(self.root, self.root, [], {"vsim": "NEVER_EXECUTE"},
++                                      spec, 1)
++
+*** End Patch

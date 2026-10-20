@@ -1,0 +1,81 @@
+*** Begin Patch
+*** Add File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/evidence/control3d/pwm-runner-qualification-20261020-17/author/author-20261020-17-a/RESULT.json
++{
++  "schema": 1,
++  "status": "completed",
++  "completed_utc": "2026-10-20T15:57:06Z",
++  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
++  "task_version": 1,
++  "work_id": "B-PWM-RUNNER-QUALIFICATION-20261020-17-EXEC-v1",
++  "operation_id": "B-DEEPEYE-PWM-RUNNER-QUALIFICATION-20261020-17",
++  "quality_main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
++  "worktree_head": "f7736ac737d1c7b256974beb1574b94096819270",
++  "contract": {
++    "id": "DEEPEYE-HUMAN-LOCK-20261014",
++    "revision": 1,
++    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
++    "design_pin": "1011259415a0916054eb580687612580bc1e5f09",
++    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
++    "requirements_match": true,
++    "requirement_ids": [
++      "H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08",
++      "H09", "H10", "H11", "H12", "H13", "H14", "H15"
++    ],
++    "design_sha256": "c0f6c5875c2a76d331f8695312c32ca18e2ad21cb63d1d040ea561aee7fc1242"
++  },
++  "deliverable": {
++    "test_path": "competition/deepeye/tests/control/test_pwm_applied_capture_runner.py",
++    "test_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
++    "test_bytes": 24879,
++    "original_test_methods": 23,
++    "preserved_original_test_methods": 23,
++    "added_test_methods": 7,
++    "total_test_methods": 30,
++    "original_a_fixtures_embedded_exact": true,
++    "protected_codec_input_sha256": "6db8fca48b2240807ae7df68dc8aa21501eb1b6ab9e89392c5a9272de1a887f8"
++  },
++  "final_portable_run": {
++    "runner_sha256": "0a6101a263fa3c69a8c1737fe965a255ef15aef3ae177fd98e813661a4be8e05",
++    "test_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
++    "command": "python.exe -B -m unittest discover -s tests/control -p test_pwm_applied_capture_runner.py -v",
++    "exit": 0,
++    "tests_run": 30,
++    "failures": 0,
++    "errors": 0,
++    "result": "OK",
++    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
++    "stderr_sha256": "01b8d06ffae6b27d565a97798e781c7d1345cb19cf974e53ad04877ed6bc6907",
++    "evidence_dir": "author/author-20261020-17-a/runs/post-edit-run-02"
++  },
++  "original_runner_control": {
++    "runner_sha256": "b4ac06464af965999d35444f607fa6c7db537b80c340d39cbcc233ee2dce37b0",
++    "test_sha256": "6cd5ba7f9d0b3ee5fdd188b56cbb564092d2a490a4c7d2e8b0bca8a480bb0082",
++    "exit": 1,
++    "tests_run": 30,
++    "failures": 45,
++    "errors": 1,
++    "classification": "expected-failure control; error is the original runner's unchecked overlong-int conversion",
++    "stderr_sha256": "ca4af28d55a6cf63b11b851999be5a7fa31b5b5a642268c0fbf578bb0d6af56d",
++    "evidence_dir": "author/author-20261020-17-a/runs/original-runner-final-tests"
++  },
++  "verification": {
++    "command_file": "author/author-20261020-17-a/verification.command.txt",
++    "exit": 0,
++    "stdout": "author/author-20261020-17-a/verification.stdout.json",
++    "stdout_sha256": "9928b9b87efc2dcdabb5398b6f4e6ecde1b919dc27d48ba479f833ea123ee905",
++    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
++    "all_checks_pass": true
++  },
++  "boundaries": {
++    "author_scope": "portable Python test authoring only",
++    "product_acceptance": false,
++    "main_runner_implementation_owned_by_parent": true,
++    "all_formal_29_g05_b06_r03_board_system": "not_run",
++    "simulator_or_hardware_executed": false,
++    "commit_push_or_publication_performed": false,
++    "desktop_or_human_dependency": false,
++    "source_change_requires_fresh_run": true,
++    "ownership_released": true
++  }
++}
+*** End Patch

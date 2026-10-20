@@ -1,0 +1,38 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_pwm_applied_capture_runner.py
+@@
+ CODE7 = "CODE7_OBSERVED code=7 window_active=0 out_valid=0"
+ NORMAL = {"id": "fixture", "group": 0, "loopback": 0,
+           "count_w": 4, "witness_w": 8, "tag_w": 8}
+ NEGATIVE = {"group": 21, "expect": "fail", "required_any": ["wrong_boundary"]}
++GUARD_FATAL = "** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths"
++A030_STDOUT = (
++    b"DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=0 WITNESS_W=64 TAG_W=32 "
++    b"SAFE_COUNT_W=2 SAFE_WITNESS_W=64 SAFE_TAG_W=32\n"
++    b"** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths\n"
++    b"** Fatal: unrelated simulator failure\n"
++)
++A032_STDOUT = (
++    b"NOT_DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM COUNT_W=0 WITNESS_W=64 TAG_W=32 "
++    b"SAFE_COUNT_W=2 SAFE_WITNESS_W=64 SAFE_TAG_W=32\n"
++    b"NOT_** Fatal: DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM unsupported widths\n"
++)
++A026_STDOUT = (
++    b"CODE7_OBSERVED code=7 window_active=0 out_valid=0\n"
++    b"TB_STATS groups=1 cases=1 samples=29 assertions=206 records=2 raw_faults=0 "
++    b"failure_events=0 window_starts=1 handshakes=1 mismatches=0\n"
++    b"TB_PASS group=0 loopback=0\n"
++)
++
++
++def guard_diagnostic(count_w, witness_w, tag_w):
++    safe_count_w = max(2, min(32, count_w))
++    safe_witness_w = max(2, min(64, witness_w))
++    safe_tag_w = max(1, min(64, tag_w))
++    return (
++        "DEEPEYE_APPLIED_CAPTURE_INVALID_PARAM "
++        f"COUNT_W={count_w} WITNESS_W={witness_w} TAG_W={tag_w} "
++        f"SAFE_COUNT_W={safe_count_w} SAFE_WITNESS_W={safe_witness_w} "
++        f"SAFE_TAG_W={safe_tag_w}"
++    )
+*** End Patch

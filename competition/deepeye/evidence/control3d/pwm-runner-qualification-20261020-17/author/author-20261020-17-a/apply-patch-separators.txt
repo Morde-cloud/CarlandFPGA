@@ -1,0 +1,13 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/control/test_pwm_applied_capture_runner.py
+@@
+         for label, stdout in invalid.items():
+             with self.subTest(label=label):
+                 self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
++        for separator in ("\r", "\v", "\f", "\u2028", "\u2029"):
++            with self.subTest(separator=repr(separator)):
++                stdout = diagnostic + separator + GUARD_FATAL + "\n"
++                self.assertFalse(self.invalid_result(stdout, code=1)["passed"])
+ 
+     def test_guard_six_unique_fields_and_ascii_decimal_grammar(self):
+*** End Patch

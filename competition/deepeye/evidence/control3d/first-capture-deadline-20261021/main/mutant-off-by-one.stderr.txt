@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\control3d\main_verify_first_capture_deadline.py", line 290, in <module>
+    run(args.root.resolve(),args.out.resolve(),args.source.resolve() if args.source else None)
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\control3d\main_verify_first_capture_deadline.py", line 269, in run
+    assert results[name]["mismatches"]==0,results[name]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'rows': 1847, 'mismatches': 103, 'first_mismatches': [{'row': 2, 'actual': (2, 0, 0, 1), 'expected': (2, 0, 0, 68)}, {'row': 3, 'actual': (3, 0, 1, 68), 'expected': (3, 0, 1, 4)}, {'row': 16, 'actual': (16, 0, 0, 1), 'expected': (16, 0, 0, 68)}, {'row': 17, 'actual': (17, 8, 1, 34), 'expected': (17, 8, 1, 4)}, {'row': 18, 'actual': (18, 0, 0, 2), 'expected': (18, 0, 0, 4)}, {'row': 19, 'actual': (19, 0, 0, 2), 'expected': (19, 0, 0, 4)}, {'row': 37, 'actual': (37, 0, 1, 1), 'expected': (37, 0, 1, 68)}, {'row': 44, 'actual': (44, 0, 1, 1), 'expected': (44, 0, 1, 68)}, {'row': 65, 'actual': (65, 0, 1, 1), 'expected': (65, 0, 1, 68)}, {'row': 72, 'actual': (72, 0, 1, 1), 'expected': (72, 0, 1, 68)}, {'row': 93, 'actual': (93, 0, 1, 1), 'expected': (93, 0, 1, 68)}, {'row': 100, 'actual': (100, 0, 1, 1), 'expected': (100, 0, 1, 68)}]}

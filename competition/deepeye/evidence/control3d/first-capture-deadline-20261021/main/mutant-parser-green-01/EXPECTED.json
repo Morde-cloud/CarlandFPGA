@@ -1,0 +1,75 @@
+{
+  "source_log_sha256": "9f7e77d514094b57aace3a6a5caa96306dc398905d04c3d1d434f2b91c8fb0bb",
+  "expected": [
+    {
+      "name": "real-mutant-control",
+      "text_sha256": "9f7e77d514094b57aace3a6a5caa96306dc398905d04c3d1d434f2b91c8fb0bb",
+      "accept": true
+    },
+    {
+      "name": "missing-finish",
+      "text_sha256": "c01ea391fe04dc430c20b8c65434edda5326b5ac540ae0b3bf970a02e6d39b8f",
+      "accept": false
+    },
+    {
+      "name": "missing-summary",
+      "text_sha256": "acefeb9cca2d43a635ee74d5091d05eb6f1fb3b5b22a1df91dd144d58fe366bd",
+      "accept": false
+    },
+    {
+      "name": "missing-fatal",
+      "text_sha256": "d6cb616f0578bcb19c405c74e03295b17d994444adb1cd7c4b4b2fb0ed3d691f",
+      "accept": false
+    },
+    {
+      "name": "duplicate-summary",
+      "text_sha256": "b720df40b45d25dbb3303f29e8ab2cecae9923369924788e5e9a1b24ff0fd35e",
+      "accept": false
+    },
+    {
+      "name": "load-error",
+      "text_sha256": "20e24ac67640a5d590d182e1d4873318fb0d6ee9105b47232077b0269db91b3c",
+      "accept": false
+    },
+    {
+      "name": "extra-unrelated-error",
+      "text_sha256": "2d2d87f36a107fb042606677360de445d94bf94d2ad38cec43f75d633f6d4f11",
+      "accept": false
+    },
+    {
+      "name": "non-numeric-X",
+      "text_sha256": "5eebe7bb22e5d17b544494180f869091147cc384b823d59e98cf542c0e36f311",
+      "accept": false
+    },
+    {
+      "name": "false-counterexample",
+      "text_sha256": "f4f2486263a4d954c2216e621a60b10269d268fca27445547bdaf64b77ae6e4f",
+      "accept": false
+    },
+    {
+      "name": "wrong-fatal-count",
+      "text_sha256": "3e12cd8e1eddab20f6e6d5b24aa9d013448d24cae2e3bd49a17e54bffd2ea849",
+      "accept": false
+    },
+    {
+      "name": "wrong-summary-count",
+      "text_sha256": "44313e46224773d8b0489d5a91baf9e54bce7347bb224fc68e541b583f95c3d1",
+      "accept": false
+    },
+    {
+      "name": "duplicate-finish",
+      "text_sha256": "46232ac66e2b405d5ff3df4fcb469a92a346c0abcbaa687137eb5db9d7bdf168",
+      "accept": false
+    },
+    {
+      "name": "prefixed-checks",
+      "text_sha256": "e5e9be30d64ab503e8aba8c8d36906534904c28a58d9786cd1edf1453278079b",
+      "accept": false
+    },
+    {
+      "name": "empty-check-record",
+      "text_sha256": "041d0f21096bb53e6bf570d521e3312e434d028dbb56422b21675a83e901bdeb",
+      "accept": false
+    }
+  ]
+}

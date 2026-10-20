@@ -1,0 +1,512 @@
+{
+  "status": "FAIL",
+  "cases": 47,
+  "mismatches": [
+    {
+      "name": "prefix-23",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "prefix-2309",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "finish-before-run",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "summary-before-scenarios",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "scenario-after-finish",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "empty-all-groups",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "one-empty-group",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "guard-0-reversed",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "guard-33-reversed",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    }
+  ],
+  "source_sha256": "b7dea7fb82236a6e8fa8a3b959fb26835d6d35e0557d7fda9eaaca44cf9fd7fc",
+  "frozen_sha256": "c96c4d084cc76212553ae2d6909543a7a849708fa0c3f2819bed5c2c73b22c58",
+  "cases_detail": [
+    {
+      "name": "synthetic-protocol-control",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "modelsim-prefix-control",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "crlf-control",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "prefix-4e4f545f",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one RUN, found 0",
+        "expected exactly one SUMMARY, found 0",
+        "expected exactly one FINISH, found 0",
+        "malformed FC marker 12"
+      ]
+    },
+    {
+      "name": "prefix-232320",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one RUN, found 0",
+        "expected exactly one SUMMARY, found 0",
+        "expected exactly one FINISH, found 0",
+        "malformed FC marker 12"
+      ]
+    },
+    {
+      "name": "prefix-23",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "prefix-2309",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "prefix-70726566697820",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one RUN, found 0",
+        "expected exactly one SUMMARY, found 0",
+        "expected exactly one FINISH, found 0",
+        "malformed FC marker 12"
+      ]
+    },
+    {
+      "name": "finish-before-run",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "summary-before-scenarios",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "scenario-after-finish",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "duplicate-summary",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one SUMMARY, found 2"
+      ]
+    },
+    {
+      "name": "conflicting-summary",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one SUMMARY, found 2"
+      ]
+    },
+    {
+      "name": "duplicate-finish",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one FINISH, found 2"
+      ]
+    },
+    {
+      "name": "missing-finish",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one FINISH, found 0"
+      ]
+    },
+    {
+      "name": "missing-run",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one RUN, found 0"
+      ]
+    },
+    {
+      "name": "missing-scenario",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "SUMMARY group obs count 1 actual 0",
+        "SUMMARY scenarios 9 actual 8",
+        "SUMMARY checks 9 actual 8"
+      ]
+    },
+    {
+      "name": "unrelated-fatal",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "unrelated fatal/error 1"
+      ]
+    },
+    {
+      "name": "unrelated-error",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "unrelated fatal/error 1"
+      ]
+    },
+    {
+      "name": "incomplete-summary",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one SUMMARY, found 0",
+        "malformed FC marker 1"
+      ]
+    },
+    {
+      "name": "wrong-group",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "scenario s0 group unknown unexpected",
+        "SUMMARY group obs count 1 actual 0"
+      ]
+    },
+    {
+      "name": "duplicate-id",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "duplicate scenario id s0"
+      ]
+    },
+    {
+      "name": "nonpositive-check",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "scenario s0 checks not positive",
+        "SUMMARY checks 9 actual 8"
+      ]
+    },
+    {
+      "name": "empty-all-groups",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "one-empty-group",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "unicode-digits",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "malformed FC marker 9",
+        "SUMMARY group obs count 1 actual 0",
+        "SUMMARY group cancel count 1 actual 0",
+        "SUMMARY group reset count 1 actual 0",
+        "SUMMARY group restart count 1 actual 0",
+        "SUMMARY group priority count 1 actual 0",
+        "SUMMARY group held count 1 actual 0",
+        "SUMMARY group terminal count 1 actual 0",
+        "SUMMARY group latch count 1 actual 0",
+        "SUMMARY group random count 1 actual 0",
+        "SUMMARY scenarios 9 actual 0",
+        "SUMMARY checks 9 actual 0"
+      ]
+    },
+    {
+      "name": "trailing-record-garbage",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "expected exactly one FINISH, found 0",
+        "malformed FC marker 1"
+      ]
+    },
+    {
+      "name": "guard-0-exact",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "guard-0-reversed",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "guard-0-extra-fatal",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-0-duplicate-diagnostic",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard expected one diagnostic, found 2"
+      ]
+    },
+    {
+      "name": "guard-0-prefixed",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard expected one RUN, found 0",
+        "guard expected one diagnostic, found 0",
+        "guard expected one fatal text, found 0",
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-33-exact",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "guard-33-reversed",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "guard-33-extra-fatal",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-33-duplicate-diagnostic",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard expected one diagnostic, found 2"
+      ]
+    },
+    {
+      "name": "guard-33-prefixed",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard expected one RUN, found 0",
+        "guard expected one diagnostic, found 0",
+        "guard expected one fatal text, found 0",
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-1-exact",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 1 is not an unsupported width 0/33"
+      ]
+    },
+    {
+      "name": "guard-1-reversed",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 1 is not an unsupported width 0/33"
+      ]
+    },
+    {
+      "name": "guard-1-extra-fatal",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 1 is not an unsupported width 0/33",
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-1-duplicate-diagnostic",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 1 is not an unsupported width 0/33",
+        "guard expected one diagnostic, found 2"
+      ]
+    },
+    {
+      "name": "guard-1-prefixed",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 1 is not an unsupported width 0/33",
+        "guard expected one RUN, found 0",
+        "guard expected one diagnostic, found 0",
+        "guard expected one fatal text, found 0",
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-32-exact",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 32 is not an unsupported width 0/33"
+      ]
+    },
+    {
+      "name": "guard-32-reversed",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 32 is not an unsupported width 0/33"
+      ]
+    },
+    {
+      "name": "guard-32-extra-fatal",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 32 is not an unsupported width 0/33",
+        "guard unexpected fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "guard-32-duplicate-diagnostic",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 32 is not an unsupported width 0/33",
+        "guard expected one diagnostic, found 2"
+      ]
+    },
+    {
+      "name": "guard-32-prefixed",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "guard width 32 is not an unsupported width 0/33",
+        "guard expected one RUN, found 0",
+        "guard expected one diagnostic, found 0",
+        "guard expected one fatal text, found 0",
+        "guard unexpected fatal/error lines 1"
+      ]
+    }
+  ]
+}

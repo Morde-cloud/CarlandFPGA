@@ -1,0 +1,99 @@
+{
+  "case_id": "composition",
+  "kind": "composition",
+  "top": "tb_first_capture_deadline_composition",
+  "generic": "DUT_BUDGET_W",
+  "generic_value": 4,
+  "compile": {
+    "ok": true,
+    "vlib": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\vlib.log",
+      "started_utc": "2026-10-20T17:40:50.785Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:40:50.834Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vlog": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_first_capture_deadline.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\tb_first_capture_deadline.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_coherent_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_applied_capture.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\compile.log",
+      "started_utc": "2026-10-20T17:40:50.835Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:40:50.922Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "b9a1c563248fabb4b0826eb96174f15908092828854b6d825ec28398071e573f"
+    },
+    "compile_error": false,
+    "reason": null
+  },
+  "sim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-quiet",
+      "-wlf",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\sim.wlf",
+      "-gDUT_BUDGET_W=4",
+      "tb_first_capture_deadline_composition",
+      "-do",
+      "run -all; quit -f"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\work",
+    "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-06\\composition\\sim.log",
+    "started_utc": "2026-10-20T17:40:50.937Z",
+    "timeout_seconds": 300.0,
+    "ended_utc": "2026-10-20T17:40:52.693Z",
+    "exit_code": 0,
+    "timed_out": false,
+    "log_sha256": "e600f8218b1dbb18b98528b05699238516d84880d68c0ddcf1084ed81caa23d2"
+  },
+  "parse": {
+    "kind": "composition",
+    "width": 4,
+    "runs": 1,
+    "summaries": 1,
+    "finishes": 1,
+    "scenarios": 7,
+    "checks": 660,
+    "failures": 2,
+    "groups": {
+      "trace": 7
+    },
+    "check_fail_lines": 2,
+    "reasons": [
+      "CHECK_FAIL present 2",
+      "malformed FC marker 1",
+      "unrelated fatal/error 1",
+      "FINISH status FAIL",
+      "scenario backpressure-fault status fail",
+      "SUMMARY failures 2"
+    ]
+  },
+  "ok": false,
+  "reasons": [
+    "CHECK_FAIL present 2",
+    "malformed FC marker 1",
+    "unrelated fatal/error 1",
+    "FINISH status FAIL",
+    "scenario backpressure-fault status fail",
+    "SUMMARY failures 2"
+  ]
+}

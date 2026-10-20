@@ -1,0 +1,85 @@
+{
+  "case_id": "composition",
+  "kind": "composition",
+  "top": "tb_first_capture_deadline_composition",
+  "generic": "DUT_BUDGET_W",
+  "generic_value": 4,
+  "compile": {
+    "ok": true,
+    "vlib": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\vlib.log",
+      "started_utc": "2026-10-20T17:41:06.892Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:41:06.946Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vlog": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_first_capture_deadline.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\tb_first_capture_deadline.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_atomic_pwm.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_coherent_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_pwm_applied_capture.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\compile.log",
+      "started_utc": "2026-10-20T17:41:06.947Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:41:07.041Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "d5375b19acebef3d26c7b001634cb506b31f61be051be2611f929e76dfe9192f"
+    },
+    "compile_error": false,
+    "reason": null
+  },
+  "sim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-quiet",
+      "-wlf",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\sim.wlf",
+      "-gDUT_BUDGET_W=4",
+      "tb_first_capture_deadline_composition",
+      "-do",
+      "run -all; quit -f"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\work",
+    "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-07\\composition\\sim.log",
+    "started_utc": "2026-10-20T17:41:07.053Z",
+    "timeout_seconds": 300.0,
+    "ended_utc": "2026-10-20T17:41:08.800Z",
+    "exit_code": 0,
+    "timed_out": false,
+    "log_sha256": "3a83a60987a1c441081282d99c765fec872f0b0d6989c4fa2ae5443be96bd438"
+  },
+  "parse": {
+    "kind": "composition",
+    "width": 4,
+    "runs": 1,
+    "summaries": 1,
+    "finishes": 1,
+    "scenarios": 7,
+    "checks": 661,
+    "failures": 0,
+    "groups": {
+      "trace": 7
+    },
+    "check_fail_lines": 0,
+    "reasons": []
+  },
+  "ok": true,
+  "reasons": []
+}

@@ -1,0 +1,35 @@
+{
+  "N3-good": {
+    "start_at": 4,
+    "slot_after": 6,
+    "first_observed_at": 7,
+    "monitor_complete_at": 7
+  },
+  "N2-late": {
+    "start_at": 4,
+    "slot_after": 6,
+    "monitor_expired_at": 6,
+    "not_revived_at": 7
+  },
+  "quiet": {
+    "start_at": 4,
+    "monitor_expired_at": 11,
+    "old_out_valid_always": 0
+  },
+  "raw-fault": {
+    "pre_handshake_at": 8,
+    "post_fault_at": 8,
+    "cancel_terminal_at": 9
+  },
+  "backpressure": {
+    "complete_at": 7,
+    "post_fault_at": 8,
+    "cancel_terminal_at": 9
+  },
+  "stop": {
+    "cancel_at": 6
+  },
+  "new-request": {
+    "cancel_at": 6
+  }
+}

@@ -1,0 +1,615 @@
+{
+  "at_utc": "2026-10-20T17:41:58.593857+00:00",
+  "basis": "independent synthetic protocol fixtures, not simulation results",
+  "normal": [
+    {
+      "name": "synthetic-protocol-control",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": true,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "modelsim-prefix-control",
+      "text": "# DEEPEYE_FC_RUN width=1 kind=standalone\n# DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\n# DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n# DEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": true,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "crlf-control",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\r\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\r\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\r\nDEEPEYE_FC_FINISH width=1 status=PASS\r\n",
+      "expected_accept": true,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "prefix-4e4f545f",
+      "text": "NOT_DEEPEYE_FC_RUN width=1 kind=standalone\nNOT_DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nNOT_DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nNOT_DEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "prefix-232320",
+      "text": "## DEEPEYE_FC_RUN width=1 kind=standalone\n## DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\n## DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n## DEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "prefix-23",
+      "text": "#DEEPEYE_FC_RUN width=1 kind=standalone\n#DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\n#DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n#DEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "prefix-2309",
+      "text": "#\tDEEPEYE_FC_RUN width=1 kind=standalone\n#\tDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\n#\tDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n#\tDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "prefix-70726566697820",
+      "text": "prefix DEEPEYE_FC_RUN width=1 kind=standalone\nprefix DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nprefix DEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nprefix DEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "finish-before-run",
+      "text": "DEEPEYE_FC_FINISH width=1 status=PASS\nDEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "summary-before-scenarios",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "scenario-after-finish",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "duplicate-summary",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "conflicting-summary",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=10 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "duplicate-finish",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "missing-finish",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "missing-run",
+      "text": "DEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "missing-scenario",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "unrelated-fatal",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n# ** Fatal: unrelated\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "unrelated-error",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n# ** Error: unrelated\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "incomplete-summary",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "wrong-group",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=unknown budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "duplicate-id",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "nonpositive-check",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=0 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "empty-all-groups",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=0 checks=0 failures=0 groups=obs:0,cancel:0,reset:0,restart:0,priority:0,held:0,terminal:0,latch:0,random:0\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "one-empty-group",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=8 checks=8 failures=0 groups=obs:0,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "unicode-digits",
+      "text": "DEEPEYE_FC_RUN width=١ kind=standalone\nDEEPEYE_FC_SCENARIO id=s٠ width=١ group=obs budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s١ width=١ group=cancel budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٢ width=١ group=reset budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٣ width=١ group=restart budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٤ width=١ group=priority budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٥ width=١ group=held budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٦ width=١ group=terminal budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٧ width=١ group=latch budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SCENARIO id=s٨ width=١ group=random budget=١ obs=١ checks=١ status=pass\nDEEPEYE_FC_SUMMARY width=١ kind=standalone scenarios=٩ checks=٩ failures=٠ groups=obs:١,cancel:١,reset:١,restart:١,priority:١,held:١,terminal:١,latch:١,random:١\nDEEPEYE_FC_FINISH width=١ status=PASS\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    },
+    {
+      "name": "trailing-record-garbage",
+      "text": "DEEPEYE_FC_RUN width=1 kind=standalone\nDEEPEYE_FC_SCENARIO id=s0 width=1 group=obs budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s1 width=1 group=cancel budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s2 width=1 group=reset budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s3 width=1 group=restart budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s4 width=1 group=priority budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s5 width=1 group=held budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s6 width=1 group=terminal budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s7 width=1 group=latch budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SCENARIO id=s8 width=1 group=random budget=1 obs=1 checks=1 status=pass\nDEEPEYE_FC_SUMMARY width=1 kind=standalone scenarios=9 checks=9 failures=0 groups=obs:1,cancel:1,reset:1,restart:1,priority:1,held:1,terminal:1,latch:1,random:1\nDEEPEYE_FC_FINISH width=1 status=PASS garbage\n",
+      "expected_accept": false,
+      "width": 1,
+      "kind": "standalone",
+      "groups": [
+        "obs",
+        "cancel",
+        "reset",
+        "restart",
+        "priority",
+        "held",
+        "terminal",
+        "latch",
+        "random"
+      ]
+    }
+  ],
+  "guard": [
+    {
+      "name": "guard-0-exact",
+      "width": 0,
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": true
+    },
+    {
+      "name": "guard-0-reversed",
+      "width": 0,
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-0-extra-fatal",
+      "width": 0,
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n** Fatal: unrelated\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-0-duplicate-diagnostic",
+      "width": 0,
+      "text": "DEEPEYE_FC_RUN width=0 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-0-prefixed",
+      "width": 0,
+      "text": "## DEEPEYE_FC_RUN width=0 kind=guard\n## DEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=0 SAFE_BUDGET_W=1\n## ** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-33-exact",
+      "width": 33,
+      "text": "DEEPEYE_FC_RUN width=33 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=33 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": true
+    },
+    {
+      "name": "guard-33-reversed",
+      "width": 33,
+      "text": "DEEPEYE_FC_RUN width=33 kind=guard\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=33 SAFE_BUDGET_W=32\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-33-extra-fatal",
+      "width": 33,
+      "text": "DEEPEYE_FC_RUN width=33 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=33 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n** Fatal: unrelated\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-33-duplicate-diagnostic",
+      "width": 33,
+      "text": "DEEPEYE_FC_RUN width=33 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=33 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=33 SAFE_BUDGET_W=32\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-33-prefixed",
+      "width": 33,
+      "text": "## DEEPEYE_FC_RUN width=33 kind=guard\n## DEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=33 SAFE_BUDGET_W=32\n## ** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-1-exact",
+      "width": 1,
+      "text": "DEEPEYE_FC_RUN width=1 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=1 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-1-reversed",
+      "width": 1,
+      "text": "DEEPEYE_FC_RUN width=1 kind=guard\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=1 SAFE_BUDGET_W=1\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-1-extra-fatal",
+      "width": 1,
+      "text": "DEEPEYE_FC_RUN width=1 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=1 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n** Fatal: unrelated\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-1-duplicate-diagnostic",
+      "width": 1,
+      "text": "DEEPEYE_FC_RUN width=1 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=1 SAFE_BUDGET_W=1\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=1 SAFE_BUDGET_W=1\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-1-prefixed",
+      "width": 1,
+      "text": "## DEEPEYE_FC_RUN width=1 kind=guard\n## DEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=1 SAFE_BUDGET_W=1\n## ** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-32-exact",
+      "width": 32,
+      "text": "DEEPEYE_FC_RUN width=32 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=32 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-32-reversed",
+      "width": 32,
+      "text": "DEEPEYE_FC_RUN width=32 kind=guard\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=32 SAFE_BUDGET_W=32\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-32-extra-fatal",
+      "width": 32,
+      "text": "DEEPEYE_FC_RUN width=32 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=32 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n** Fatal: unrelated\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-32-duplicate-diagnostic",
+      "width": 32,
+      "text": "DEEPEYE_FC_RUN width=32 kind=guard\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=32 SAFE_BUDGET_W=32\n** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\nDEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=32 SAFE_BUDGET_W=32\n",
+      "expected_accept": false
+    },
+    {
+      "name": "guard-32-prefixed",
+      "width": 32,
+      "text": "## DEEPEYE_FC_RUN width=32 kind=guard\n## DEEPEYE_FIRST_CAPTURE_INVALID_PARAM BUDGET_W=32 SAFE_BUDGET_W=32\n## ** Fatal: DEEPEYE_FIRST_CAPTURE_INVALID_PARAM unsupported width\n",
+      "expected_accept": false
+    }
+  ],
+  "source_sha256": "80ec0e4e55cffed8095a0c1e8f8c5f48c389137d45bbf4190b9047cdb12e91fe"
+}

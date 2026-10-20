@@ -1,0 +1,90 @@
+{
+  "case_id": "standalone-w04",
+  "kind": "standalone",
+  "top": "tb_first_capture_deadline",
+  "generic": "BUDGET_W",
+  "generic_value": 4,
+  "compile": {
+    "ok": true,
+    "vlib": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\vlib.log",
+      "started_utc": "2026-10-20T17:41:17.225Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:41:17.271Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vlog": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\control3d\\deepeye_first_capture_deadline.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\tb_first_capture_deadline.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\compile.log",
+      "started_utc": "2026-10-20T17:41:17.272Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:41:17.351Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "d9c963082377e075cc4fb5daf024ee34c978e7e6865db7a424d6c58df740967a"
+    },
+    "compile_error": false,
+    "reason": null
+  },
+  "sim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-quiet",
+      "-wlf",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\sim.wlf",
+      "-gBUDGET_W=4",
+      "tb_first_capture_deadline",
+      "-do",
+      "run -all; quit -f"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\work",
+    "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\preflight-08\\standalone-w04\\sim.log",
+    "started_utc": "2026-10-20T17:41:17.366Z",
+    "timeout_seconds": 300.0,
+    "ended_utc": "2026-10-20T17:41:19.176Z",
+    "exit_code": 0,
+    "timed_out": false,
+    "log_sha256": "81846438e50e94a2d49b35956aaae81dc0d0cb133b5e5bbdc0ec93ee2e2abb6a"
+  },
+  "parse": {
+    "kind": "standalone",
+    "width": 4,
+    "runs": 1,
+    "summaries": 1,
+    "finishes": 1,
+    "scenarios": 727,
+    "checks": 137997,
+    "failures": 0,
+    "groups": {
+      "obs": 150,
+      "cancel": 150,
+      "reset": 150,
+      "restart": 135,
+      "priority": 8,
+      "held": 2,
+      "terminal": 2,
+      "latch": 30,
+      "random": 100
+    },
+    "check_fail_lines": 0,
+    "reasons": []
+  },
+  "ok": true,
+  "reasons": []
+}

@@ -1,0 +1,109 @@
+{
+  "status": "FAIL",
+  "source_sha256": "b7dea7fb82236a6e8fa8a3b959fb26835d6d35e0557d7fda9eaaca44cf9fd7fc",
+  "cases": 14,
+  "rows": [
+    {
+      "name": "real-mutant-control",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "missing-finish",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "missing-summary",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "missing-fatal",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "duplicate-summary",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "load-error",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "extra-unrelated-error",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant fatal/error lines 1"
+      ]
+    },
+    {
+      "name": "non-numeric-X",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "false-counterexample",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "wrong-fatal-count",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "wrong-summary-count",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "duplicate-finish",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    },
+    {
+      "name": "prefixed-checks",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant produced no CHECK_FAIL"
+      ]
+    },
+    {
+      "name": "empty-check-record",
+      "expected": false,
+      "actual": true,
+      "matches": false,
+      "reasons": []
+    }
+  ]
+}

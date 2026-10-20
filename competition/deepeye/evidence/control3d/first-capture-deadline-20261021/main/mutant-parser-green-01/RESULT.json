@@ -1,0 +1,232 @@
+{
+  "status": "PASS",
+  "source_sha256": "a78779ae94f72f183eedfb994a8d6f645258d3289881ec2511cf5afe5143d9eb",
+  "cases": 14,
+  "rows": [
+    {
+      "name": "real-mutant-control",
+      "expected": true,
+      "actual": true,
+      "matches": true,
+      "reasons": []
+    },
+    {
+      "name": "missing-finish",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant fatal order",
+        "expected exactly one FINISH, found 0"
+      ]
+    },
+    {
+      "name": "missing-summary",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant FINISH order/status",
+        "mutant requires one matching SUMMARY/FINISH/own-fatal",
+        "FINISH order",
+        "expected exactly one SUMMARY, found 0"
+      ]
+    },
+    {
+      "name": "missing-fatal",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant requires one matching SUMMARY/FINISH/own-fatal"
+      ]
+    },
+    {
+      "name": "duplicate-summary",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant SUMMARY order",
+        "mutant requires one matching SUMMARY/FINISH/own-fatal",
+        "SUMMARY order",
+        "expected exactly one SUMMARY, found 2"
+      ]
+    },
+    {
+      "name": "load-error",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "unrelated fatal/error 1"
+      ]
+    },
+    {
+      "name": "extra-unrelated-error",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "unrelated fatal/error 1"
+      ]
+    },
+    {
+      "name": "non-numeric-X",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant requires one matching SUMMARY/FINISH/own-fatal",
+        "CHECK_FAIL present 1"
+      ]
+    },
+    {
+      "name": "false-counterexample",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "CHECK_FAIL has no numeric mismatch"
+      ]
+    },
+    {
+      "name": "wrong-fatal-count",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant requires one matching SUMMARY/FINISH/own-fatal"
+      ]
+    },
+    {
+      "name": "wrong-summary-count",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant requires one matching SUMMARY/FINISH/own-fatal"
+      ]
+    },
+    {
+      "name": "duplicate-finish",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant FINISH order/status",
+        "mutant requires one matching SUMMARY/FINISH/own-fatal",
+        "FINISH order",
+        "expected exactly one FINISH, found 2"
+      ]
+    },
+    {
+      "name": "prefixed-checks",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "scenario status disagrees with CHECK_FAIL",
+        "mutant produced no valid numeric CHECK_FAIL",
+        "mutant requires one matching SUMMARY/FINISH/own-fatal",
+        "malformed FC marker 1623"
+      ]
+    },
+    {
+      "name": "empty-check-record",
+      "expected": false,
+      "actual": false,
+      "matches": true,
+      "reasons": [
+        "mutant produced no valid numeric CHECK_FAIL",
+        "mutant requires one matching SUMMARY/FINISH/own-fatal",
+        "expected exactly one SUMMARY, found 0",
+        "expected exactly one FINISH, found 0",
+        "CHECK_FAIL present 1"
+      ]
+    }
+  ]
+}

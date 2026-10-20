@@ -1,0 +1,72 @@
+{
+  "mutant": "cancel-ignored",
+  "width": 1,
+  "compile": {
+    "ok": true,
+    "vlib": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "work"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\vlib.log",
+      "started_utc": "2026-10-20T17:45:04.942Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:45:04.998Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vlog": {
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "work",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\dut_mutant.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\control\\tb_first_capture_deadline.sv"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\work",
+      "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\compile.log",
+      "started_utc": "2026-10-20T17:45:04.999Z",
+      "timeout_seconds": 300.0,
+      "ended_utc": "2026-10-20T17:45:05.086Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "a669a5e383f66f0f9638603723cf7b4c2e854ed958d769d8394f21f922ad8274"
+    },
+    "compile_error": false,
+    "reason": null
+  },
+  "sim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-quiet",
+      "-wlf",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\sim.wlf",
+      "-gBUDGET_W=1",
+      "tb_first_capture_deadline",
+      "-do",
+      "run -all; quit -f"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\work",
+    "log": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\control3d\\first-capture-deadline-20261021\\author\\run-mutants-final-01\\mutants\\cancel-ignored\\w01\\sim.log",
+    "started_utc": "2026-10-20T17:45:05.101Z",
+    "timeout_seconds": 300.0,
+    "ended_utc": "2026-10-20T17:45:06.892Z",
+    "exit_code": 0,
+    "timed_out": false,
+    "log_sha256": "8c965d4b26aa3e1295727b46e03600f4dbf408c9dfc176a135aeaa4ea3c630e7"
+  },
+  "parse": {
+    "kind": "mutant",
+    "width": 1,
+    "check_fail_lines": 392,
+    "summaries": 1,
+    "finishes": 1,
+    "reasons": []
+  },
+  "ok": true,
+  "reasons": []
+}

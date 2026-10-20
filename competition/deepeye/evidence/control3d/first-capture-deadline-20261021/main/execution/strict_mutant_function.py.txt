@@ -1,0 +1,82 @@
+def parse_mutant_log(text: str, width: int) -> tuple[bool, dict, list[str]]:
+    """Qualify complete numeric behavioral failures, never load failures or X."""
+    reasons = []
+    cleaned = []
+    counts = {}
+    finished_ids = set()
+    failure_count = 0
+    summaries = []
+    fatals = []
+    phase = 0
+    fail_re = re.compile(
+        r"DEEPEYE_FC_CHECK_FAIL width=([0-9]+) scenario=([A-Za-z0-9_.:-]+) "
+        r"phase=post (?:(waiting|completed|expired|invalid_request|started_event|"
+        r"completed_event|expired_event|invalid_request_event) dut=([01]) ref=([01])"
+        r"|state-not-onehot-or-zero count=([2-4]))"
+    )
+    fatal_re = re.compile(
+        r"\*\* Fatal: DEEPEYE_FC_BEHAVIOR_FAIL width=([0-9]+) failures=([0-9]+)"
+    )
+    for _, line in iter_normalized(text):
+        run = RUN_RE.fullmatch(line)
+        fail = fail_re.fullmatch(line)
+        scenario = SCENARIO_RE.fullmatch(line)
+        summary = SUMMARY_RE.fullmatch(line)
+        finish = FINISH_RE.fullmatch(line)
+        fatal = fatal_re.fullmatch(line)
+        if run:
+            if phase != 0:
+                reasons.append("mutant RUN order")
+            phase = 1
+            cleaned.append(line)
+        elif fail:
+            fw, sid, signal, actual, reference, count = fail.groups()
+            if phase != 1 or int(fw) != width or sid in finished_ids:
+                reasons.append("CHECK_FAIL width/scenario/order")
+            if signal is not None and actual == reference:
+                reasons.append("CHECK_FAIL has no numeric mismatch")
+            counts[sid] = counts.get(sid, 0) + 1
+            failure_count += 1
+        elif scenario:
+            sid, sw, group, budget, obs, checks, status = scenario.groups()
+            if (status == "fail") != (counts.get(sid, 0) > 0):
+                reasons.append("scenario status disagrees with CHECK_FAIL")
+            if counts.get(sid, 0) > int(checks):
+                reasons.append("scenario failure count exceeds checks")
+            finished_ids.add(sid)
+            cleaned.append(line.removesuffix("fail") + "pass" if status == "fail" else line)
+        elif summary:
+            if phase != 1:
+                reasons.append("mutant SUMMARY order")
+            phase = 2
+            summaries.append(int(summary.group(5)))
+            cleaned.append(re.sub(r"failures=[0-9]+", "failures=0", line))
+        elif finish:
+            if phase != 2 or finish.group(2) != "FAIL":
+                reasons.append("mutant FINISH order/status")
+            phase = 3
+            cleaned.append(line.removesuffix("FAIL") + "PASS")
+        elif fatal:
+            if phase != 3:
+                reasons.append("mutant fatal order")
+            phase = 4
+            fatals.append((int(fatal.group(1)), int(fatal.group(2))))
+        elif re.fullmatch(r"Errors: 1, Warnings: [0-9]+", line):
+            # ModelSim includes the one own-fatal in its diagnostic tally.
+            cleaned.append(line.replace("Errors: 1,", "Errors: 0,", 1))
+        else:
+            cleaned.append(line)
+    if not failure_count:
+        reasons.append("mutant produced no valid numeric CHECK_FAIL")
+    if set(counts) - finished_ids:
+        reasons.append("CHECK_FAIL has no completed scenario")
+    if summaries != [failure_count] or fatals != [(width, failure_count)] or phase != 4:
+        reasons.append("mutant requires one matching SUMMARY/FINISH/own-fatal")
+    ok, parsed, normal_reasons = parse_normal_log(
+        "\n".join(cleaned), width, "standalone", SMALL_GROUPS
+    )
+    reasons.extend(normal_reasons)
+    result = {"kind": "mutant", "width": width, "check_fail_lines": failure_count,
+              "summaries": len(summaries), "fatals": len(fatals),
+              "scenarios": parsed["scenarios"], "reasons": reasons}
+    return (ok and not reasons), result, reasons

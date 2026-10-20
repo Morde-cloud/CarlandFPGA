@@ -1,0 +1,11 @@
+{
+  "tool_chunk_id": "c17763",
+  "exit_code": 1,
+  "command": "python -B -X utf8 accept18.py",
+  "error": "TypeError: string indices must be integers, not 'str'",
+  "location": "accept18.py:18",
+  "cause": "Main audit assumed TRACKED_BEFORE.json was a list; original startup writes a path-to-hash mapping.",
+  "effect": "Audit stopped before any acceptance or selection write.",
+  "correction": "Iterate mapping items. Original startup data and product files remain unchanged.",
+  "original_script": "acceptance-audit-first.py"
+}

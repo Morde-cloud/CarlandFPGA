@@ -1,0 +1,582 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+ endmodule
+ 
++module tb_encoded_frame_queue_compose;
++    localparam integer WAIT_LIMIT = 300000;
++
++    logic clk = 1'b0;
++    always #5 clk = ~clk;
++
++    logic rst = 1'b1;
++    logic cancel = 1'b0;
++
++    logic cfg_valid = 1'b0;
++    logic cfg_ready;
++    logic [7:0] cfg_count = 8'd0;
++    logic [3:0] cfg_e = 4'd0;
++    logic [15:0] cfg_tag = 16'd0;
++    logic s_valid = 1'b0;
++    logic s_ready;
++    logic [15:0] s_data = 16'd0;
++    logic s_last = 1'b0;
++
++    logic stream_meta_valid;
++    logic stream_meta_ready;
++    logic [15:0] stream_meta_tag;
++    logic [1:0] stream_meta_error;
++    logic [7:0] stream_meta_count;
++    logic [3:0] stream_meta_e;
++    logic stream_meta_raw;
++    logic [3:0] stream_meta_k;
++    logic [11:0] stream_meta_valid_bits;
++    logic [8:0] stream_meta_bytes;
++    logic stream_m_valid;
++    logic stream_m_ready;
++    logic [7:0] stream_m_data;
++    logic stream_m_last;
++    logic [1:0] stream_level;
++    logic stream_filling;
++    logic [31:0] stream_stat_cfg;
++    logic [31:0] stream_stat_samples;
++    logic [31:0] stream_stat_ok;
++    logic [31:0] stream_stat_error;
++    logic [31:0] stream_stat_aborted;
++
++    logic queue_meta_ready;
++    logic queue_in_ready;
++    logic queue_out_meta_valid;
++    logic queue_out_meta_ready = 1'b0;
++    logic [15:0] queue_out_meta_tag;
++    logic [1:0] queue_out_meta_error;
++    logic [7:0] queue_out_meta_count;
++    logic [3:0] queue_out_meta_e;
++    logic queue_out_meta_raw;
++    logic [3:0] queue_out_meta_k;
++    logic [11:0] queue_out_meta_valid_bits;
++    logic [8:0] queue_out_meta_bytes;
++    logic queue_out_valid;
++    logic queue_out_ready = 1'b0;
++    logic [7:0] queue_out_data;
++    logic queue_out_last;
++    logic [1:0] queue_level;
++    logic queue_receiving;
++    logic queue_faulted;
++    logic queue_fault_event;
++    logic [1:0] queue_fault_code;
++    logic [31:0] queue_stat_meta;
++    logic [31:0] queue_stat_in_bytes;
++    logic [31:0] queue_stat_retired;
++    logic [31:0] queue_stat_aborted;
++    logic [31:0] queue_stat_fault;
++
++    logic [15:0] samples [0:127];
++    logic [7:0] exp_payload [0:255];
++    int exp_length = 0;
++
++    int checks = 0;
++    int failures = 0;
++    int cases = 0;
++    int pass_cases = 0;
++    string current_case = "";
++    bit case_failed = 1'b0;
++    int case_checks = 0;
++
++    deepeye_block_stream stream (
++        .clk(clk),
++        .rst(rst),
++        .cancel(cancel),
++        .cfg_valid(cfg_valid),
++        .cfg_ready(cfg_ready),
++        .cfg_count(cfg_count),
++        .cfg_e(cfg_e),
++        .cfg_tag(cfg_tag),
++        .s_valid(s_valid),
++        .s_ready(s_ready),
++        .s_data(s_data),
++        .s_last(s_last),
++        .meta_valid(stream_meta_valid),
++        .meta_ready(stream_meta_ready),
++        .meta_tag(stream_meta_tag),
++        .meta_error(stream_meta_error),
++        .meta_count(stream_meta_count),
++        .meta_e(stream_meta_e),
++        .meta_raw(stream_meta_raw),
++        .meta_k(stream_meta_k),
++        .meta_valid_bits(stream_meta_valid_bits),
++        .meta_bytes(stream_meta_bytes),
++        .m_valid(stream_m_valid),
++        .m_ready(stream_m_ready),
++        .m_data(stream_m_data),
++        .m_last(stream_m_last),
++        .level(stream_level),
++        .filling(stream_filling),
++        .stat_cfg(stream_stat_cfg),
++        .stat_samples(stream_stat_samples),
++        .stat_ok(stream_stat_ok),
++        .stat_error(stream_stat_error),
++        .stat_aborted(stream_stat_aborted)
++    );
++
++    deepeye_encoded_frame_queue #(
++        .STAT_W(32)
++    ) queue (
++        .clk(clk),
++        .rst(rst),
++        .cancel(cancel),
++        .in_meta_valid(stream_meta_valid),
++        .in_meta_ready(stream_meta_ready),
++        .in_meta_tag(stream_meta_tag),
++        .in_meta_error(stream_meta_error),
++        .in_meta_count(stream_meta_count),
++        .in_meta_e(stream_meta_e),
++        .in_meta_raw(stream_meta_raw),
++        .in_meta_k(stream_meta_k),
++        .in_meta_valid_bits(stream_meta_valid_bits),
++        .in_meta_bytes(stream_meta_bytes),
++        .in_valid(stream_m_valid),
++        .in_ready(stream_m_ready),
++        .in_data(stream_m_data),
++        .in_last(stream_m_last),
++        .out_meta_valid(queue_out_meta_valid),
++        .out_meta_ready(queue_out_meta_ready),
++        .out_meta_tag(queue_out_meta_tag),
++        .out_meta_error(queue_out_meta_error),
++        .out_meta_count(queue_out_meta_count),
++        .out_meta_e(queue_out_meta_e),
++        .out_meta_raw(queue_out_meta_raw),
++        .out_meta_k(queue_out_meta_k),
++        .out_meta_valid_bits(queue_out_meta_valid_bits),
++        .out_meta_bytes(queue_out_meta_bytes),
++        .out_valid(queue_out_valid),
++        .out_ready(queue_out_ready),
++        .out_data(queue_out_data),
++        .out_last(queue_out_last),
++        .level(queue_level),
++        .receiving(queue_receiving),
++        .faulted(queue_faulted),
++        .fault_event(queue_fault_event),
++        .fault_code(queue_fault_code),
++        .stat_meta(queue_stat_meta),
++        .stat_in_bytes(queue_stat_in_bytes),
++        .stat_retired(queue_stat_retired),
++        .stat_aborted(queue_stat_aborted),
++        .stat_fault(queue_stat_fault)
++    );
++
++    task automatic check(input bit condition, input string message);
++        checks = checks + 1;
++        case_checks = case_checks + 1;
++        if (!condition) begin
++            failures = failures + 1;
++            case_failed = 1'b1;
++            $display("TB_CHECK_FAIL case=%s msg=%s time=%0t", current_case, message, $time);
++        end
++    endtask
++
++    task automatic check_val(input logic [63:0] actual,
++                             input logic [63:0] expected,
++                             input string message);
++        checks = checks + 1;
++        case_checks = case_checks + 1;
++        if (actual !== expected) begin
++            failures = failures + 1;
++            case_failed = 1'b1;
++            $display("TB_CHECK_FAIL case=%s msg=%s actual=%0d expected=%0d time=%0t",
++                     current_case, message, actual, expected, $time);
++        end
++    endtask
++
++    task automatic case_begin(input string name);
++        current_case = name;
++        case_failed = 1'b0;
++        case_checks = 0;
++        cases = cases + 1;
++        $display("CASE_BEGIN name=%s", name);
++    endtask
++
++    task automatic case_end();
++        if (!case_failed && (case_checks > 0)) begin
++            pass_cases = pass_cases + 1;
++            $display("CASE_END name=%s status=pass checks=%0d", current_case, case_checks);
++        end else begin
++            $display("CASE_END name=%s status=fail checks=%0d", current_case, case_checks);
++        end
++    endtask
++
++    task automatic compose_reset(input integer cycles);
++        @(negedge clk);
++        rst = 1'b1;
++        cancel = 1'b0;
++        cfg_valid = 1'b0;
++        s_valid = 1'b0;
++        queue_out_meta_ready = 1'b0;
++        queue_out_ready = 1'b0;
++        #1;
++        check_val(queue_meta_ready, 0, "compose reset queue meta ready");
++        check_val(queue_in_ready, 0, "compose reset queue payload ready");
++        repeat (cycles) @(posedge clk);
++        #1;
++        check_val(queue_level, 0, "compose reset queue level");
++        check_val(queue_stat_meta, 0, "compose reset queue stat_meta");
++        check_val(queue_stat_in_bytes, 0, "compose reset queue stat_in_bytes");
++        check_val(queue_stat_retired, 0, "compose reset queue stat_retired");
++        check_val(queue_stat_aborted, 0, "compose reset queue stat_aborted");
++        check_val(queue_stat_fault, 0, "compose reset queue stat_fault");
++        check_val(stream_level, 0, "compose reset stream level");
++        check_val(stream_stat_cfg, 0, "compose reset stream stat_cfg");
++        @(negedge clk);
++        rst = 1'b0;
++    endtask
++
++    task automatic send_block(input integer count,
++                              input logic [3:0] e,
++                              input logic [15:0] tag);
++        integer i;
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((cfg_ready !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(cfg_ready, 1, "stream cfg_ready");
++        cfg_valid = 1'b1;
++        cfg_count = count[7:0];
++        cfg_e = e;
++        cfg_tag = tag;
++        @(posedge clk);
++        #1;
++        cfg_valid = 1'b0;
++        for (i = 0; i < count; i = i + 1) begin
++            guard = 0;
++            @(negedge clk);
++            #1;
++            while ((s_ready !== 1'b1) && (guard < WAIT_LIMIT)) begin
++                @(negedge clk);
++                #1;
++                guard = guard + 1;
++            end
++            check_val(s_ready, 1, "stream s_ready");
++            s_valid = 1'b1;
++            s_data = samples[i];
++            s_last = (i == (count - 1));
++            @(posedge clk);
++            #1;
++            s_valid = 1'b0;
++            s_data = 16'd0;
++            s_last = 1'b0;
++        end
++    endtask
++
++    task automatic send_invalid_cfg(input logic [15:0] tag);
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((cfg_ready !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(cfg_ready, 1, "invalid cfg ready");
++        cfg_valid = 1'b1;
++        cfg_count = 8'd0;
++        cfg_e = 4'd0;
++        cfg_tag = tag;
++        @(posedge clk);
++        #1;
++        cfg_valid = 1'b0;
++    endtask
++
++    task automatic send_early_last(input logic [15:0] tag);
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((cfg_ready !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(cfg_ready, 1, "early last cfg ready");
++        cfg_valid = 1'b1;
++        cfg_count = 8'd2;
++        cfg_e = 4'd0;
++        cfg_tag = tag;
++        @(posedge clk);
++        #1;
++        cfg_valid = 1'b0;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((s_ready !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(s_ready, 1, "early last sample ready");
++        s_valid = 1'b1;
++        s_data = 16'h1111;
++        s_last = 1'b1;
++        @(posedge clk);
++        #1;
++        s_valid = 1'b0;
++        s_data = 16'd0;
++        s_last = 1'b0;
++    endtask
++
++    task automatic wait_queue_meta();
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((queue_out_meta_valid !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(queue_out_meta_valid, 1, "queue metadata wait");
++    endtask
++
++    task automatic handshake_queue_meta();
++        check_val(queue_out_meta_valid, 1, "queue metadata at handshake");
++        queue_out_meta_ready = 1'b1;
++        @(posedge clk);
++        #1;
++        queue_out_meta_ready = 1'b0;
++    endtask
++
++    task automatic drain_success_meta(input logic [15:0] tag,
++                                      input integer count,
++                                      input logic [3:0] e,
++                                      input logic raw,
++                                      input logic [3:0] k,
++                                      input logic [11:0] valid_bits,
++                                      input integer bytes);
++        wait_queue_meta();
++        check_val(queue_out_meta_tag, tag, "compose success tag");
++        check_val(queue_out_meta_error, 0, "compose success error");
++        check_val(queue_out_meta_count, count, "compose success count");
++        check_val(queue_out_meta_e, e, "compose success e");
++        check_val(queue_out_meta_raw, raw, "compose success raw");
++        check_val(queue_out_meta_k, k, "compose success k");
++        check_val(queue_out_meta_valid_bits, valid_bits, "compose success valid_bits");
++        check_val(queue_out_meta_bytes, bytes, "compose success bytes");
++        handshake_queue_meta();
++        for (integer i = 0; i < bytes; i = i + 1) begin
++            integer guard;
++            guard = 0;
++            @(negedge clk);
++            #1;
++            while ((queue_out_valid !== 1'b1) && (guard < WAIT_LIMIT)) begin
++                @(negedge clk);
++                #1;
++                guard = guard + 1;
++            end
++            check_val(queue_out_valid, 1, "compose payload valid");
++            check_val(queue_out_data, exp_payload[i], "compose payload data");
++            check_val(queue_out_last, (i == (bytes - 1)), "compose payload last");
++            queue_out_ready = 1'b1;
++            @(posedge clk);
++            #1;
++            queue_out_ready = 1'b0;
++        end
++    endtask
++
++    task automatic drain_error_meta(input logic [15:0] tag,
++                                    input logic [1:0] error);
++        wait_queue_meta();
++        check_val(queue_out_meta_tag, tag, "compose error tag");
++        check_val(queue_out_meta_error, error, "compose error code");
++        check_val(queue_out_meta_count, 0, "compose error count");
++        check_val(queue_out_meta_valid_bits, 0, "compose error valid_bits");
++        check_val(queue_out_meta_bytes, 0, "compose error bytes");
++        handshake_queue_meta();
++        @(negedge clk);
++        #1;
++        check_val(queue_out_valid, 0, "compose error no payload");
++    endtask
++
++    initial begin
++        $display("TB_BEGIN tb=encoded_frame_queue_compose");
++
++        case_begin("compose_two_raw_rice_stall");
++        compose_reset(2);
++        samples[0] = 16'h1234;
++        send_block(1, 4'd0, 16'hC001);
++        samples[0] = 16'd1000;
++        samples[1] = 16'd1001;
++        samples[2] = 16'd1002;
++        samples[3] = 16'd1001;
++        send_block(4, 4'd0, 16'hC001);
++        check_val(cfg_ready, 1, "stream accepts work while first encodes");
++        @(negedge clk);
++        #1;
++        while (queue_level != 2) begin
++            @(negedge clk);
++            #1;
++        end
++        check_val(queue_level, 2, "two encoded frames retained while stalled");
++        check_val(queue_out_meta_valid, 1, "stalled head metadata visible");
++        check_val(queue_out_meta_tag, 16'hC001, "stalled head tag");
++        check_val(queue_meta_ready, 0, "full queue backpressures metadata");
++        samples[0] = 16'hABCD;
++        send_block(1, 4'd0, 16'hC003);
++        repeat (6) begin
++            @(negedge clk);
++            #1;
++            check_val(stream_meta_valid, 1, "third frame stalls at stream metadata");
++            check_val(queue_meta_ready, 0, "queue remains full while third stalls");
++        end
++        exp_length = 2;
++        exp_payload[0] = 8'h12;
++        exp_payload[1] = 8'h34;
++        drain_success_meta(16'hC001, 1, 4'd0, 1'b1, 4'd0, 12'd16, 2);
++        check_val(queue_level, 1, "queue level after first encoded frame");
++        exp_length = 3;
++        exp_payload[0] = 8'h03;
++        exp_payload[1] = 8'hE8;
++        exp_payload[2] = 8'h25;
++        drain_success_meta(16'hC001, 4, 4'd0, 1'b0, 4'd0, 12'd24, 3);
++        check_val(queue_level, 1, "queue level after second encoded frame");
++        exp_length = 2;
++        exp_payload[0] = 8'hAB;
++        exp_payload[1] = 8'hCD;
++        drain_success_meta(16'hC003, 1, 4'd0, 1'b1, 4'd0, 12'd16, 2);
++        check_val(queue_level, 0, "queue level after third encoded frame");
++        check_val(queue_stat_meta, 3, "compose stat_meta");
++        check_val(queue_stat_retired, 3, "compose stat_retired");
++        check_val(queue_stat_in_bytes, 7, "compose stat_in_bytes");
++        check_val(queue_stat_fault, 0, "compose no queue faults");
++        check_val(stream_stat_cfg, 3, "compose stream cfg count");
++        check_val(stream_stat_samples, 6, "compose stream sample count");
++        check_val(stream_stat_ok, 3, "compose stream ok count");
++        check_val(stream_stat_error, 0, "compose stream error count");
++        check_val(stream_level, 0, "compose stream level zero");
++        case_end();
++
++        case_begin("compose_error_and_cancel");
++        compose_reset(2);
++        send_invalid_cfg(16'hC101);
++        drain_error_meta(16'hC101, 2'd1);
++        check_val(queue_level, 0, "compose error1 queue level");
++        check_val(stream_stat_error, 1, "compose stream error1");
++        send_early_last(16'hC102);
++        drain_error_meta(16'hC102, 2'd2);
++        check_val(queue_level, 0, "compose error2 queue level");
++        check_val(stream_stat_error, 2, "compose stream error2");
++        samples[0] = 16'h2222;
++        send_block(1, 4'd0, 16'hC103);
++        samples[0] = 16'h3333;
++        send_block(1, 4'd0, 16'hC104);
++        @(negedge clk);
++        #1;
++        while (queue_level != 2) begin
++            @(negedge clk);
++            #1;
++        end
++        check_val(queue_level, 2, "compose cancel pre-level");
++        @(negedge clk);
++        cancel = 1'b1;
++        #1;
++        check_val(queue_out_meta_valid, 0, "compose cancel gates queue meta");
++        check_val(queue_out_valid, 0, "compose cancel gates queue payload");
++        repeat (2) @(posedge clk);
++        #1;
++        check_val(queue_level, 0, "compose cancel clears queue level");
++        check_val(queue_stat_aborted, 2, "compose cancel aborts two frames");
++        check_val(queue_stat_retired, 2, "compose cancel preserves retired");
++        check_val(stream_level, 0, "compose cancel clears stream level");
++        @(negedge clk);
++        cancel = 1'b0;
++        samples[0] = 16'h4444;
++        send_block(1, 4'd0, 16'hC105);
++        exp_length = 2;
++        exp_payload[0] = 8'h44;
++        exp_payload[1] = 8'h44;
++        drain_success_meta(16'hC105, 1, 4'd0, 1'b1, 4'd0, 12'd16, 2);
++        check_val(queue_level, 0, "compose recovery level");
++        check_val(queue_stat_meta, 5, "compose error/cancel stat_meta");
++        check_val(queue_stat_retired, 3, "compose error/cancel stat_retired");
++        check_val(queue_stat_aborted, 2, "compose error/cancel stat_aborted");
++        check_val(queue_stat_in_bytes, 6, "compose error/cancel stat_in_bytes");
++        check_val(queue_stat_fault, 0, "compose error/cancel no local faults");
++        check_val(stream_stat_cfg, 5, "compose error/cancel stream cfg");
++        check_val(stream_stat_ok, 3, "compose error/cancel stream ok");
++        check_val(stream_stat_error, 2, "compose error/cancel stream error");
++        check_val(stream_level, 0, "compose error/cancel stream level");
++        case_end();
++
++        case_begin("compose_full_256");
++        compose_reset(2);
++        for (integer fi = 0; fi < 128; fi = fi + 1) begin
++            samples[fi] = ((fi % 2) == 0) ? 16'h0000 : 16'hFFFF;
++        end
++        send_block(128, 4'd0, 16'hC201);
++        wait_queue_meta();
++        check_val(queue_out_meta_tag, 16'hC201, "full256 tag");
++        check_val(queue_out_meta_error, 0, "full256 error");
++        check_val(queue_out_meta_count, 128, "full256 count");
++        check_val(queue_out_meta_e, 0, "full256 e");
++        check_val(queue_out_meta_raw, 1, "full256 raw");
++        check_val(queue_out_meta_k, 0, "full256 k");
++        check_val(queue_out_meta_valid_bits, 2048, "full256 valid_bits");
++        check_val(queue_out_meta_bytes, 256, "full256 bytes");
++        handshake_queue_meta();
++        for (integer bi = 0; bi < 256; bi = bi + 1) begin
++            integer guard;
++            logic [7:0] expected_byte;
++            guard = 0;
++            @(negedge clk);
++            #1;
++            while ((queue_out_valid !== 1'b1) && (guard < WAIT_LIMIT)) begin
++                @(negedge clk);
++                #1;
++                guard = guard + 1;
++            end
++            check_val(queue_out_valid, 1, "full256 payload valid");
++            expected_byte = (((bi / 2) % 2) == 0) ? 8'h00 : 8'hFF;
++            check_val(queue_out_data, expected_byte, "full256 payload data");
++            check_val(queue_out_last, (bi == 255), "full256 payload last");
++            queue_out_ready = 1'b1;
++            @(posedge clk);
++            #1;
++            queue_out_ready = 1'b0;
++        end
++        check_val(queue_level, 0, "full256 level");
++        check_val(queue_stat_meta, 1, "full256 stat_meta");
++        check_val(queue_stat_retired, 1, "full256 stat_retired");
++        check_val(queue_stat_in_bytes, 256, "full256 stat_in_bytes");
++        check_val(stream_stat_cfg, 1, "full256 stream cfg");
++        check_val(stream_stat_samples, 128, "full256 stream samples");
++        check_val(stream_stat_ok, 1, "full256 stream ok");
++        check_val(stream_level, 0, "full256 stream level");
++        case_end();
++
++        $display("TB_SUMMARY cases=%0d pass=%0d fail=%0d checks=%0d",
++                 cases, pass_cases, (cases - pass_cases), checks);
++        $display("TB_STAT cases=%0d", cases);
++        $display("TB_STAT checks=%0d", checks);
++        $display("TB_STAT failures=%0d", failures);
++        $display("TB_STAT final_queue_level=%0d", queue_level);
++        $display("TB_STAT final_queue_stat_meta=%0d", queue_stat_meta);
++        $display("TB_STAT final_queue_stat_in_bytes=%0d", queue_stat_in_bytes);
++        $display("TB_STAT final_queue_stat_retired=%0d", queue_stat_retired);
++        $display("TB_STAT final_queue_stat_aborted=%0d", queue_stat_aborted);
++        $display("TB_STAT final_queue_stat_fault=%0d", queue_stat_fault);
++        if ((failures == 0) && (pass_cases == cases)) begin
++            $display("TB_END pass");
++        end else begin
++            $display("TB_END fail");
++        end
++        $finish;
++    end
++
++endmodule
++
+ `ifndef GUARD_W
+*** End Patch

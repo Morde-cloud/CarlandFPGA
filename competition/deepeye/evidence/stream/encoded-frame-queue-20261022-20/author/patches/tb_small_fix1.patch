@@ -1,0 +1,10 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+         drive_meta_small(16'hA100, 2'd0, 8'd2, 12'd16, 9'd2, accepted);
+         check_val(accepted, 1, "small post-saturation descriptor accepted");
+         drive_byte_small(8'h5A, 1'b0, byte_ok);
+         check_val(byte_ok, 1, "small post-saturation first byte");
+-        drive_byte_small(8'hA5, 1'b1, byte_ok);
++        drive_byte_small(8'h5B, 1'b1, byte_ok);
+*** End Patch

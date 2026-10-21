@@ -1,0 +1,26 @@
+{
+  "operation_id": "B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20",
+  "timing": "Planned while the sole author job remained running, before reading its new RTL or runner; exact executable probe seams are chosen only after its terminal result.",
+  "scope": "Synthetic log/process qualification of the new author runner, separate from actual ModelSim functional evidence.",
+  "valid_control": "The exact real successful author log and actual command record must remain accepted.",
+  "must_reject": [
+    "Successful-looking log with a nonzero actual subprocess exit code",
+    "Timeout even when captured output contains the ordinary success marker",
+    "Missing required result/log output",
+    "Ordinary success marker replaced by an enclosing NOT_<marker>_suffix substring",
+    "Duplicate ordinary success marker",
+    "An additional conflicting or malformed required statistics record",
+    "A required statistics record or field removed",
+    "A foreign plain or case-varied fatal/error diagnostic",
+    "A positive or malformed error tally on an ordinary successful run",
+    "Invalid parameter run with an unrelated fatal instead of the exact DUT-owned guard",
+    "Exact guard plus a foreign error/fatal or contradictory error accounting",
+    "Any selected execution failure hidden by a different selected successful case"
+  ],
+  "constraints": [
+    "Do not run old suites or alter old runner artifacts.",
+    "Do not count synthetic probes as new RTL or vendor runs.",
+    "Retain original and repaired outputs if a main-owned repair is necessary after author terminal ownership release.",
+    "A qualification that is not applicable to the actual runner structure must be explicitly explained, not silently counted as a pass."
+  ]
+}

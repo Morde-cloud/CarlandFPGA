@@ -1,0 +1,137 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+     task automatic check_invariant(input string message);
+         logic [63:0] rhs;
+         rhs = {32'd0, stat_retired} + {32'd0, stat_aborted} + {62'd0, level};
+         check_val({32'd0, stat_meta}, rhs, message);
+     endtask
++
++    task automatic clear_expected();
++        exp_head = 0;
++        exp_tail = 0;
++        pend_active = 1'b0;
++    endtask
++
++    task automatic do_cancel(input integer cycles, input logic [63:0] expected_abort);
++        logic [31:0] pre_meta;
++        logic [31:0] pre_bytes;
++        logic [31:0] pre_retired;
++        logic [31:0] pre_abort;
++        logic [31:0] pre_fault;
++        logic [1:0] pre_level;
++        @(negedge clk);
++        pre_meta = stat_meta;
++        pre_bytes = stat_in_bytes;
++        pre_retired = stat_retired;
++        pre_abort = stat_aborted;
++        pre_fault = stat_fault;
++        pre_level = level;
++        cancel = 1'b1;
++        rst = 1'b0;
++        #1;
++        check_val(in_meta_ready, 0, "cancel gates in_meta_ready");
++        check_val(in_ready, 0, "cancel gates in_ready");
++        check_val(out_meta_valid, 0, "cancel gates out_meta_valid");
++        check_val(out_valid, 0, "cancel gates out_valid");
++        repeat (cycles) @(posedge clk);
++        #1;
++        check_val(level, 0, "cancel clears level");
++        check_val(receiving, 0, "cancel clears receiving");
++        check_val(faulted, 0, "cancel clears faulted");
++        check_val(fault_event, 0, "cancel clears fault_event");
++        check_val(fault_code, 0, "cancel clears fault_code");
++        check_val(stat_meta, pre_meta, "cancel preserves stat_meta");
++        check_val(stat_in_bytes, pre_bytes, "cancel preserves stat_in_bytes");
++        check_val(stat_retired, pre_retired, "cancel preserves stat_retired");
++        check_val(stat_fault, pre_fault, "cancel preserves stat_fault");
++        check_val({32'd0, stat_aborted}, {32'd0, pre_abort} + {62'd0, pre_level},
++                  "cancel adds pre-edge level once");
++        check_val(stat_aborted, expected_abort, "cancel abort total");
++        check_val(out_meta_valid, 0, "cancel leaves no metadata");
++        check_val(out_valid, 0, "cancel leaves no payload");
++        @(negedge clk);
++        cancel = 1'b0;
++        #1;
++        check_val(in_meta_ready, 1, "in_meta_ready after cancel");
++        check_val(in_ready, 0, "in_ready after cancel");
++        clear_expected();
++    endtask
++
++    task automatic reset_with_cancel();
++        @(negedge clk);
++        rst = 1'b1;
++        cancel = 1'b1;
++        #1;
++        check_val(in_meta_ready, 0, "rst+cancel gates in_meta_ready");
++        check_val(in_ready, 0, "rst+cancel gates in_ready");
++        check_val(out_meta_valid, 0, "rst+cancel gates out_meta_valid");
++        check_val(out_valid, 0, "rst+cancel gates out_valid");
++        repeat (2) @(posedge clk);
++        #1;
++        check_val(level, 0, "rst+cancel level");
++        check_val(receiving, 0, "rst+cancel receiving");
++        check_val(faulted, 0, "rst+cancel faulted");
++        check_val(fault_event, 0, "rst+cancel fault_event");
++        check_val(fault_code, 0, "rst+cancel fault_code");
++        check_val(stat_meta, 0, "rst+cancel stat_meta");
++        check_val(stat_in_bytes, 0, "rst+cancel stat_in_bytes");
++        check_val(stat_retired, 0, "rst+cancel stat_retired");
++        check_val(stat_aborted, 0, "rst priority keeps aborted zero");
++        check_val(stat_fault, 0, "rst+cancel stat_fault");
++        @(negedge clk);
++        rst = 1'b0;
++        cancel = 1'b0;
++        #1;
++        clear_expected();
++    endtask
++
++    task automatic fault1_case(input logic [1:0] error,
++                               input logic [8:0] bytes,
++                               input logic [11:0] valid_bits,
++                               input logic [15:0] tag);
++        do_reset(2);
++        drive_meta(tag, error, 8'h5A, 4'hA, 1'b1, 4'hF, valid_bits, bytes, accepted);
++        check_val(accepted, 1, "invalid descriptor accepted into reservation");
++        check_val(level, 1, "invalid descriptor reserves one slot");
++        check_val(receiving, 0, "invalid descriptor opens no payload");
++        check_val(faulted, 1, "invalid descriptor latches faulted");
++        check_val(fault_code, 1, "invalid descriptor fault_code one");
++        check_val(fault_event, 1, "invalid descriptor fault_event pulse");
++        check_val(stat_meta, 1, "invalid descriptor stat_meta");
++        check_val(stat_fault, 1, "invalid descriptor stat_fault");
++        check_val(stat_in_bytes, 0, "invalid descriptor no input bytes");
++        check_val(out_meta_valid, 0, "invalid descriptor not visible");
++        check_val(out_valid, 0, "invalid descriptor no payload output");
++        check_val(in_meta_ready, 0, "faulted blocks new metadata");
++        check_val(in_ready, 0, "faulted blocks payload");
++        @(negedge clk);
++        #1;
++        check_val(fault_event, 0, "fault_event clears after one cycle");
++        check_val(faulted, 1, "faulted remains sticky");
++        drive_meta(16'h7F01, 2'd0, 8'd1, 4'd0, 1'b1, 4'd0, 12'd8, 9'd1, accepted);
++        check_val(accepted, 0, "faulted rejects later descriptor");
++        check_val(stat_meta, 1, "rejected descriptor does not increment stat_meta");
++        check_val(stat_fault, 1, "rejected descriptor does not increment stat_fault");
++        do_cancel(1, 64'd1);
++    endtask
++
++    task automatic error_forward_case(input logic [1:0] error,
++                                      input logic [15:0] tag);
++        do_reset(2);
++        push_error(tag, error, 8'hA5, 4'h9, 1'b1, 4'hF, 12'd0, 9'd0);
++        drive_meta(tag, error, 8'hA5, 4'h9, 1'b1, 4'hF, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "upstream error descriptor accepted");
++        check_val(level, 1, "upstream error reserves one slot");
++        check_val(receiving, 0, "upstream error opens no payload");
++        check_val(stat_meta, 1, "upstream error stat_meta");
++        check_val(stat_fault, 0, "upstream error is not a local fault");
++        check_val(faulted, 0, "upstream error leaves faulted clear");
++        drain_one(3, 0);
++        check_val(level, 0, "upstream error retires on metadata");
++        check_val(stat_retired, 1, "upstream error retired count");
++        check_val(in_ready, 0, "upstream error never opens payload input");
++        check_val(out_valid, 0, "upstream error emits no payload");
++        check_invariant("upstream error invariant");
++    endtask
+*** End Patch

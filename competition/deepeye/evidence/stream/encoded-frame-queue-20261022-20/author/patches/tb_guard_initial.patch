@@ -1,0 +1,97 @@
+*** Begin Patch
+*** Add File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
++// Directed public-port testbenches for deepeye_encoded_frame_queue.
++//
++// Work: B-ENCODED-FRAME-QUEUE-RTL-20261022-20-v1
++// Task: DEEPEYE-IMPLEMENTATION-20261014/v1
++// Operation: B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20
++// Contract: DEEPEYE-HUMAN-LOCK-20261014/revision1 (H01-H15), requirements
++// SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
++// Frozen design: 1011259415a0916054eb580687612580bc1e5f09.
++//
++// The guard bench below is compiled with +define+GUARD_W=<0|1|33>.  It exists
++// only to reach the module's own simulation-time parameter fatal; it is not a
++// product test and prints no PASS claim.
++
++`ifndef GUARD_W
++`define GUARD_W 0
++`endif
++
++module tb_encoded_frame_queue_guard;
++    localparam integer W = `GUARD_W;
++
++    logic clk = 1'b0;
++    logic rst = 1'b1;
++    logic cancel = 1'b0;
++    logic in_meta_valid = 1'b0;
++    logic in_valid = 1'b0;
++    logic out_meta_ready = 1'b0;
++    logic out_ready = 1'b0;
++
++    logic in_meta_ready;
++    logic in_ready;
++    logic out_meta_valid;
++    logic out_valid;
++    logic [7:0] out_data;
++    logic out_last;
++    logic [1:0] level;
++    logic receiving;
++    logic faulted;
++    logic fault_event;
++    logic [1:0] fault_code;
++
++    deepeye_encoded_frame_queue #(
++        .STAT_W(W)
++    ) dut (
++        .clk(clk),
++        .rst(rst),
++        .cancel(cancel),
++        .in_meta_valid(in_meta_valid),
++        .in_meta_ready(in_meta_ready),
++        .in_meta_tag(16'h0000),
++        .in_meta_error(2'd0),
++        .in_meta_count(8'd0),
++        .in_meta_e(4'd0),
++        .in_meta_raw(1'b0),
++        .in_meta_k(4'd0),
++        .in_meta_valid_bits(12'd0),
++        .in_meta_bytes(9'd0),
++        .in_valid(in_valid),
++        .in_ready(in_ready),
++        .in_data(8'h00),
++        .in_last(1'b0),
++        .out_meta_valid(out_meta_valid),
++        .out_meta_ready(out_meta_ready),
++        .out_meta_tag(),
++        .out_meta_error(),
++        .out_meta_count(),
++        .out_meta_e(),
++        .out_meta_raw(),
++        .out_meta_k(),
++        .out_meta_valid_bits(),
++        .out_meta_bytes(),
++        .out_valid(out_valid),
++        .out_ready(out_ready),
++        .out_data(out_data),
++        .out_last(out_last),
++        .level(level),
++        .receiving(receiving),
++        .faulted(faulted),
++        .fault_event(fault_event),
++        .fault_code(fault_code),
++        .stat_meta(),
++        .stat_in_bytes(),
++        .stat_retired(),
++        .stat_aborted(),
++        .stat_fault()
++    );
++
++    initial begin
++        $display("GUARD_TB_BEGIN W=%0d", W);
++        #200;
++        $display("GUARD_TB_UNEXPECTED_NO_FATAL W=%0d", W);
++        $finish;
++    end
++
++endmodule
+*** End Patch

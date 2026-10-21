@@ -1,0 +1,27 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+-        @(negedge clk);
+-        #1;
++        @(posedge clk);
++        #1;
+         check_val(fault_event, 0, "fault_event clears after one cycle");
+@@
+-                @(negedge clk);
+-                #1;
++                @(posedge clk);
++                #1;
+                 check_val(fault_event, 0, "early last event clears");
+@@
+-            @(negedge clk);
+-            #1;
++            @(posedge clk);
++            #1;
+             check_val(fault_event, 0, "missing last event clears");
+@@
+-            @(negedge clk);
+-            #1;
++            @(posedge clk);
++            #1;
+             check_val(fault_event, 0, "pulse fault event clears");
+*** End Patch

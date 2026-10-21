@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\stream\run_encoded_frame_queue.py", line 765, in execute_suite
+    text = step_text(steps_dir / "03-vsim")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\stream\run_encoded_frame_queue.py", line 261, in step_text
+    return read_raw(step_dir / "stdout.txt") + "\n" + read_raw(step_dir / "stderr.txt")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\stream\run_encoded_frame_queue.py", line 257, in read_raw
+    return path.read_text(encoding="utf-8", errors="replace")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\missing-output\\run\\standalone\\steps\\03-vsim\\stdout.txt'

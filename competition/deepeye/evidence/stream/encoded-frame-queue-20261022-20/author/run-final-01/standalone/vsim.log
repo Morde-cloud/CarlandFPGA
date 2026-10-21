@@ -1,0 +1,81 @@
+# vsim -c -do "run -all; quit -f" -l vsim.log tb_encoded_frame_queue 
+# Start time: 01:24:22 on Oct 22,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_encoded_frame_queue(fast)
+# run -all
+# TB_BEGIN tb=encoded_frame_queue
+# CASE_BEGIN name=reset_idle
+# CASE_END name=reset_idle status=pass checks=26
+# CASE_BEGIN name=single_success
+# CASE_END name=single_success status=pass checks=109
+# CASE_BEGIN name=two_deep_stall
+# CASE_END name=two_deep_stall status=pass checks=120
+# CASE_BEGIN name=no_same_edge_bypass
+# CASE_END name=no_same_edge_bypass status=pass checks=40
+# CASE_BEGIN name=full_old_level_no_credit
+# CASE_END name=full_old_level_no_credit status=pass checks=86
+# CASE_BEGIN name=framing_boundaries
+# CASE_END name=framing_boundaries status=pass checks=6504
+# CASE_BEGIN name=early_last_fault2
+# CASE_END name=early_last_fault2 status=pass checks=908
+# CASE_BEGIN name=missing_last_fault2
+# CASE_END name=missing_last_fault2 status=pass checks=714
+# CASE_BEGIN name=invalid_framing_fault1
+# CASE_END name=invalid_framing_fault1 status=pass checks=660
+# CASE_BEGIN name=upstream_error_forward
+# CASE_END name=upstream_error_forward status=pass checks=408
+# CASE_BEGIN name=fault_drains_older
+# CASE_END name=fault_drains_older status=pass checks=142
+# CASE_BEGIN name=fault_event_single_pulse
+# CASE_END name=fault_event_single_pulse status=pass checks=51
+# CASE_BEGIN name=duplicate_aba_tags
+# CASE_END name=duplicate_aba_tags status=pass checks=194
+# CASE_BEGIN name=cancel_empty
+# CASE_END name=cancel_empty status=pass checks=68
+# CASE_BEGIN name=cancel_after_meta
+# CASE_END name=cancel_after_meta status=pass checks=79
+# CASE_BEGIN name=cancel_partial_payload
+# CASE_END name=cancel_partial_payload status=pass checks=87
+# CASE_BEGIN name=cancel_sealed_output
+# CASE_END name=cancel_sealed_output status=pass checks=86
+# CASE_BEGIN name=cancel_partial_output
+# CASE_END name=cancel_partial_output status=pass checks=105
+# CASE_BEGIN name=cancel_held_once
+# CASE_END name=cancel_held_once status=pass checks=73
+# CASE_BEGIN name=reset_priority_over_cancel
+# CASE_END name=reset_priority_over_cancel status=pass checks=113
+# CASE_BEGIN name=simultaneous_alloc_retire
+# CASE_END name=simultaneous_alloc_retire status=pass checks=63
+# CASE_BEGIN name=simultaneous_seal_retire
+# CASE_END name=simultaneous_seal_retire status=pass checks=81
+# CASE_BEGIN name=pointer_wrap_many
+# CASE_END name=pointer_wrap_many status=pass checks=232
+# TB_SUMMARY cases=23 pass=23 fail=0 checks=10949
+# TB_STAT cases=23
+# TB_STAT checks=10949
+# TB_STAT failures=0
+# TB_STAT final_level=0
+# TB_STAT final_stat_meta=8
+# TB_STAT final_stat_in_bytes=7
+# TB_STAT final_stat_retired=8
+# TB_STAT final_stat_aborted=0
+# TB_STAT final_stat_fault=0
+# TB_END pass
+# ** Note: $finish    : sources/tb_encoded_frame_queue.sv(1328)
+#    Time: 32761 ns  Iteration: 0  Instance: /tb_encoded_frame_queue
+# End time: 01:24:23 on Oct 22,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

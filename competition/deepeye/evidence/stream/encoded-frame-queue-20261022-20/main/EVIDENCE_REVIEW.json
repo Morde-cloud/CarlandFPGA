@@ -1,0 +1,6911 @@
+{
+  "at_utc": "2026-10-21T17:47:06.176750+00:00",
+  "author_all_files_rehashed": 723,
+  "author_final_artifacts_rehashed": 233,
+  "accepted_runs": [
+    {
+      "name": "standalone-01",
+      "result_sha256": "729aa77ed1f871ac774a7ef46495076e043ef7818cd9ce1d09237579216c726f",
+      "result": {
+        "status": "PASS",
+        "mode": "standalone",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "kind": "standalone",
+        "edges": 562178,
+        "checked_edges": 562177,
+        "mismatches": 0,
+        "examples": [],
+        "vector_coverage": {
+          "initial": 2,
+          "admissions": 2843,
+          "retirements": 2617,
+          "simultaneous_allocate_retire": 81,
+          "simultaneous_input_retire": 193,
+          "full_admission_attempts": 3968,
+          "fault_edges": 146,
+          "all_2048_framing_combinations": 542392,
+          "full_credit_and_simultaneous": 1728,
+          "invalid_descriptors_and_poison": 425,
+          "early_missing_last": 3647,
+          "abort_phases": 10200,
+          "long_stalls": 3784
+        },
+        "trace_raw_sha256": "06dcf29d939b2b541e58a8b6d61bd70242855b1ba784142859438384be8170df",
+        "trace_bytes": 49922732,
+        "trace_gzip_sha256": "a69ade0434e1b94cde9e44993081aa417dd1bbab085dc5f87d76c881e7c48e1f",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 36324,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 43768,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 39608,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 61396,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "sat2-01",
+      "result_sha256": "ba123ea797073c89a5d93ea6a5d2912c8d638bfdc71dff2c519df9c70c6079c2",
+      "result": {
+        "status": "PASS",
+        "mode": "sat2",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "kind": "standalone",
+        "edges": 358,
+        "checked_edges": 357,
+        "mismatches": 0,
+        "examples": [],
+        "vector_coverage": {
+          "initial": 2,
+          "admissions": 66,
+          "retirements": 44,
+          "simultaneous_allocate_retire": 0,
+          "simultaneous_input_retire": 0,
+          "full_admission_attempts": 0,
+          "fault_edges": 22,
+          "saturation_real_transactions": 356
+        },
+        "trace_raw_sha256": "91c72b62255196e952491e5e8c68c928f571c41e92384428ff82f6e25b066319",
+        "trace_bytes": 30678,
+        "trace_gzip_sha256": "d2c39f64dee1a31c2a49a588a0de820f0f7640848119b32b00c8323fdd67197b",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 36492,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 39228,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 23452,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 20076,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "sat3-01",
+      "result_sha256": "e038159ecb7082983649fff218078be1f35e1ee41ab1a0762a284b16daf2def7",
+      "result": {
+        "status": "PASS",
+        "mode": "sat3",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "kind": "standalone",
+        "edges": 358,
+        "checked_edges": 357,
+        "mismatches": 0,
+        "examples": [],
+        "vector_coverage": {
+          "initial": 2,
+          "admissions": 66,
+          "retirements": 44,
+          "simultaneous_allocate_retire": 0,
+          "simultaneous_input_retire": 0,
+          "full_admission_attempts": 0,
+          "fault_edges": 22,
+          "saturation_real_transactions": 356
+        },
+        "trace_raw_sha256": "843e51f9f877468685c71a797c11dae4eefe09c48b8c2003cfbdaa490aac6624",
+        "trace_bytes": 30678,
+        "trace_gzip_sha256": "44e98e246e01cb681f02f109d61d9378e697c9925b3530ce77a3315c3c603e3c",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 13096,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 10116,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 45160,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 36988,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "composition-01",
+      "result_sha256": "d9e000fd5c3d5108b8f756f77d6f41006aa876464eb0e2ea5fd3a0031123e1ef",
+      "result": {
+        "status": "PASS",
+        "mode": "composition",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "kind": "composition",
+        "edges": 130783,
+        "mismatches": 0,
+        "examples": [],
+        "admissions": 14,
+        "retired": 11,
+        "two_complete_while_stalled_edges": 93148,
+        "full_backpressure_edges": 93423,
+        "RAW": 5,
+        "Rice": 7,
+        "source_errors": 2,
+        "full256": 3,
+        "aborted_phases": 3,
+        "trace_raw_sha256": "4ea831c8750644de2411c4b06f068b25c5666fd46e513afb5e68b8167974de54",
+        "trace_bytes": 16498331,
+        "trace_gzip_sha256": "769470f720f5650b5fb355a9f2882ff25cb4d02229fda3f66021da2d8366b846",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 54500,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 60884,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 44164,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 13216,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "guard0-02",
+      "result_sha256": "bb95d015264a5c83b2ec3d3777a189b7bc98c2b9bbcd2d37cdb82c0ab39f90b9",
+      "result": {
+        "status": "PASS",
+        "mode": "guard0",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "guard_width": 0,
+        "own_fatal": "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=0",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 42952,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 62376,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 47020,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 44104,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "guard1-02",
+      "result_sha256": "2876e8e825c5b0a8ceb65507b9e2d97523032f837e88737196084b8b473ab62b",
+      "result": {
+        "status": "PASS",
+        "mode": "guard1",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "guard_width": 1,
+        "own_fatal": "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=1",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 57900,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 47100,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 47916,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 40656,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "guard33-02",
+      "result_sha256": "b60c591c674b328ba13a8c322035d0a14392447b627bae603c4214ba80122308",
+      "result": {
+        "status": "PASS",
+        "mode": "guard33",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "guard_width": 33,
+        "own_fatal": "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=33",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 56436,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 7800,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 49552,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 45104,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "mutants-control-01",
+      "result_sha256": "e74a1315f8016929cca3a1068a616f9cac2fae94d9f2ceecbc577208d35067cb",
+      "result": {
+        "status": "PASS",
+        "mode": "mutants",
+        "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+        "kind": "standalone",
+        "edges": 35,
+        "checked_edges": 34,
+        "mismatches": 0,
+        "examples": [],
+        "vector_coverage": {
+          "initial": 2,
+          "admissions": 4,
+          "retirements": 2,
+          "simultaneous_allocate_retire": 0,
+          "simultaneous_input_retire": 0,
+          "full_admission_attempts": 0,
+          "fault_edges": 0,
+          "early_metadata_visibility_and_cancel_invalidation": 33
+        },
+        "trace_raw_sha256": "0b21b68a8dccbd7127048adca02d171e9217908b5c77ecbdc759acf7221a3bf5",
+        "trace_bytes": 2965,
+        "trace_gzip_sha256": "7bc4f32d57beafb09400adaf1116ba3915fe59cd087ad54cc9cf589661c31370",
+        "final_source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 18792,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 44996,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 35528,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 17300,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "mutant-early_metadata-02",
+      "result_sha256": "f24980c2d64be1cb7668bf85f0b6fe85c6b4848d5b683416669ad1f6727e031a",
+      "result": {
+        "status": "EXPECTED_BEHAVIORAL_REJECTION",
+        "mode": "mutants",
+        "source_sha256": "5bcdf5bcb2aeead18dbd5e37e4a3c903aae83cb6f2d3c1d604e51c8fa23f0045",
+        "kind": "standalone",
+        "edges": 35,
+        "checked_edges": 34,
+        "mismatches": 11,
+        "examples": [
+          {
+            "edge": 3,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 0,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 0,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 4,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 5,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 6,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 7,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 8,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 14,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                3
+              ],
+              "bits": [
+                0,
+                24
+              ],
+              "k": [
+                0,
+                13
+              ],
+              "raw": [
+                0,
+                1
+              ],
+              "e": [
+                0,
+                11
+              ],
+              "count": [
+                0,
+                9
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 15,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                3
+              ],
+              "bits": [
+                0,
+                24
+              ],
+              "k": [
+                0,
+                13
+              ],
+              "raw": [
+                0,
+                1
+              ],
+              "e": [
+                0,
+                11
+              ],
+              "count": [
+                0,
+                9
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 16,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 3,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 3,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                3
+              ],
+              "bits": [
+                0,
+                24
+              ],
+              "k": [
+                0,
+                13
+              ],
+              "raw": [
+                0,
+                1
+              ],
+              "e": [
+                0,
+                11
+              ],
+              "count": [
+                0,
+                9
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 26,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 2,
+              "bits": 16,
+              "k": 6,
+              "raw": 0,
+              "e": 10,
+              "count": 6,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                2
+              ],
+              "bits": [
+                0,
+                16
+              ],
+              "k": [
+                0,
+                6
+              ],
+              "e": [
+                0,
+                10
+              ],
+              "count": [
+                0,
+                6
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 27,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 5,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 2,
+              "bits": 16,
+              "k": 6,
+              "raw": 0,
+              "e": 10,
+              "count": 6,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 5,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                2
+              ],
+              "bits": [
+                0,
+                16
+              ],
+              "k": [
+                0,
+                6
+              ],
+              "e": [
+                0,
+                10
+              ],
+              "count": [
+                0,
+                6
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          }
+        ],
+        "vector_coverage": {
+          "initial": 2,
+          "admissions": 4,
+          "retirements": 2,
+          "simultaneous_allocate_retire": 0,
+          "simultaneous_input_retire": 0,
+          "full_admission_attempts": 0,
+          "fault_edges": 0,
+          "early_metadata_visibility_and_cancel_invalidation": 33
+        },
+        "numeric_examples": [
+          {
+            "edge": 3,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 0,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 0,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 4,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 5,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 6,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 7,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 8,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 4,
+              "bits": 32,
+              "k": 4,
+              "raw": 0,
+              "e": 12,
+              "count": 12,
+              "error": 0,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                4
+              ],
+              "bits": [
+                0,
+                32
+              ],
+              "k": [
+                0,
+                4
+              ],
+              "e": [
+                0,
+                12
+              ],
+              "count": [
+                0,
+                12
+              ],
+              "tag": [
+                0,
+                44269
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 14,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                3
+              ],
+              "bits": [
+                0,
+                24
+              ],
+              "k": [
+                0,
+                13
+              ],
+              "raw": [
+                0,
+                1
+              ],
+              "e": [
+                0,
+                11
+              ],
+              "count": [
+                0,
+                9
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 15,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                3
+              ],
+              "bits": [
+                0,
+                24
+              ],
+              "k": [
+                0,
+                13
+              ],
+              "raw": [
+                0,
+                1
+              ],
+              "e": [
+                0,
+                11
+              ],
+              "count": [
+                0,
+                9
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 16,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 3,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 3,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                3
+              ],
+              "bits": [
+                0,
+                24
+              ],
+              "k": [
+                0,
+                13
+              ],
+              "raw": [
+                0,
+                1
+              ],
+              "e": [
+                0,
+                11
+              ],
+              "count": [
+                0,
+                9
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 26,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 2,
+              "bits": 16,
+              "k": 6,
+              "raw": 0,
+              "e": 10,
+              "count": 6,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                2
+              ],
+              "bits": [
+                0,
+                16
+              ],
+              "k": [
+                0,
+                6
+              ],
+              "e": [
+                0,
+                10
+              ],
+              "count": [
+                0,
+                6
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 27,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 5,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 2,
+              "bits": 16,
+              "k": 6,
+              "raw": 0,
+              "e": 10,
+              "count": 6,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 5,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "bytes": [
+                0,
+                2
+              ],
+              "bits": [
+                0,
+                16
+              ],
+              "k": [
+                0,
+                6
+              ],
+              "e": [
+                0,
+                10
+              ],
+              "count": [
+                0,
+                6
+              ],
+              "tag": [
+                0,
+                33059
+              ],
+              "omv": [
+                0,
+                1
+              ]
+            }
+          }
+        ],
+        "trace_raw_sha256": "562f98877eafd293e4da28968e2b1ad30db34446c7b721f9d130ffb3f2ecb27d",
+        "trace_bytes": 2965,
+        "trace_gzip_sha256": "d7b49f94983f823c4d32ead36f9bdfd7232a98fb33e4b90dc60f1dbc98ac4c59",
+        "final_source_sha256": "5bcdf5bcb2aeead18dbd5e37e4a3c903aae83cb6f2d3c1d604e51c8fa23f0045"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 11520,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 30244,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 45760,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 37088,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "name": "mutant-ignore_cancel-02",
+      "result_sha256": "c6e5982f9e74d5f880443f13f8c009e867ef07094bd8e2144c7b66e5abfb107e",
+      "result": {
+        "status": "EXPECTED_BEHAVIORAL_REJECTION",
+        "mode": "mutants",
+        "source_sha256": "e34ff3bd3c0de131cc87a45d856c48b58f42928a0540e97fa9cbe4abd8e90c01",
+        "kind": "standalone",
+        "edges": 35,
+        "checked_edges": 34,
+        "mismatches": 25,
+        "examples": [
+          {
+            "edge": 10,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 11,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 12,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "ir": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 13,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "ir": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 14,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 1,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                1,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "event": [
+                0,
+                1
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 15,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 16,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 3,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                3,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 17,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "bytes": [
+                3,
+                0
+              ],
+              "bits": [
+                24,
+                0
+              ],
+              "k": [
+                13,
+                0
+              ],
+              "raw": [
+                1,
+                0
+              ],
+              "e": [
+                11,
+                0
+              ],
+              "count": [
+                9,
+                0
+              ],
+              "tag": [
+                33059,
+                0
+              ],
+              "omv": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 18,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 3,
+              "ov": 1,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "data": [
+                3,
+                0
+              ],
+              "ov": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 19,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 20,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 21,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 22,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 23,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 24,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 3,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 8,
+              "raw": 0,
+              "e": 8,
+              "count": 0,
+              "error": 3,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                3,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "k": [
+                8,
+                0
+              ],
+              "e": [
+                8,
+                0
+              ],
+              "error": [
+                3,
+                0
+              ],
+              "tag": [
+                44269,
+                0
+              ],
+              "omv": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 25,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 3,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                3,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 26,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 27,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 5,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                5,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 28,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 2,
+              "bits": 16,
+              "k": 6,
+              "raw": 0,
+              "e": 10,
+              "count": 6,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "bytes": [
+                2,
+                0
+              ],
+              "bits": [
+                16,
+                0
+              ],
+              "k": [
+                6,
+                0
+              ],
+              "e": [
+                10,
+                0
+              ],
+              "count": [
+                6,
+                0
+              ],
+              "tag": [
+                33059,
+                0
+              ],
+              "omv": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 29,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 201,
+              "ov": 1,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "data": [
+                201,
+                0
+              ],
+              "ov": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 30,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 1,
+              "data": 18,
+              "ov": 1,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "last": [
+                1,
+                0
+              ],
+              "data": [
+                18,
+                0
+              ],
+              "ov": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 31,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 32,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 33,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 34,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          }
+        ],
+        "vector_coverage": {
+          "initial": 2,
+          "admissions": 4,
+          "retirements": 2,
+          "simultaneous_allocate_retire": 0,
+          "simultaneous_input_retire": 0,
+          "full_admission_attempts": 0,
+          "fault_edges": 0,
+          "early_metadata_visibility_and_cancel_invalidation": 33
+        },
+        "numeric_examples": [
+          {
+            "edge": 10,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 11,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 12,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "ir": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 13,
+            "actual": {
+              "stat_fault": 0,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 1,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "receiving": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "ir": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 14,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 1,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 1,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                1,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "event": [
+                0,
+                1
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 15,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 16,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 3,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                3,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 17,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 3,
+              "bits": 24,
+              "k": 13,
+              "raw": 1,
+              "e": 11,
+              "count": 9,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "bytes": [
+                3,
+                0
+              ],
+              "bits": [
+                24,
+                0
+              ],
+              "k": [
+                13,
+                0
+              ],
+              "raw": [
+                1,
+                0
+              ],
+              "e": [
+                11,
+                0
+              ],
+              "count": [
+                9,
+                0
+              ],
+              "tag": [
+                33059,
+                0
+              ],
+              "omv": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 18,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 3,
+              "ov": 1,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "data": [
+                3,
+                0
+              ],
+              "ov": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 19,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 1,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 20,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 21,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "edge": 22,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 23,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 2,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                2,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 24,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 0,
+              "stat_in_bytes": 4,
+              "stat_meta": 3,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 8,
+              "raw": 0,
+              "e": 8,
+              "count": 0,
+              "error": 3,
+              "tag": 44269,
+              "omv": 1,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                3,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "k": [
+                8,
+                0
+              ],
+              "e": [
+                8,
+                0
+              ],
+              "error": [
+                3,
+                0
+              ],
+              "tag": [
+                44269,
+                0
+              ],
+              "omv": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 25,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 3,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                3,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 26,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 4,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                4,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 27,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 5,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 1,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 1,
+              "imr": 0
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                5,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "receiving": [
+                1,
+                0
+              ],
+              "ir": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 28,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 2,
+              "bits": 16,
+              "k": 6,
+              "raw": 0,
+              "e": 10,
+              "count": 6,
+              "error": 0,
+              "tag": 33059,
+              "omv": 1,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "bytes": [
+                2,
+                0
+              ],
+              "bits": [
+                16,
+                0
+              ],
+              "k": [
+                6,
+                0
+              ],
+              "e": [
+                10,
+                0
+              ],
+              "count": [
+                6,
+                0
+              ],
+              "tag": [
+                33059,
+                0
+              ],
+              "omv": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 29,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 201,
+              "ov": 1,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "data": [
+                201,
+                0
+              ],
+              "ov": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 30,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 1,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 1,
+              "last": 1,
+              "data": 18,
+              "ov": 1,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                1,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "last": [
+                1,
+                0
+              ],
+              "data": [
+                18,
+                0
+              ],
+              "ov": [
+                1,
+                0
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 31,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 32,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 33,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "edge": 34,
+            "actual": {
+              "stat_fault": 1,
+              "stat_aborted": 0,
+              "stat_retired": 0,
+              "stat_in_bytes": 2,
+              "stat_meta": 1,
+              "code": 2,
+              "event": 0,
+              "faulted": 1,
+              "receiving": 0,
+              "level": 1,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 0
+            },
+            "expected": {
+              "stat_fault": 0,
+              "stat_aborted": 2,
+              "stat_retired": 2,
+              "stat_in_bytes": 6,
+              "stat_meta": 4,
+              "code": 0,
+              "event": 0,
+              "faulted": 0,
+              "receiving": 0,
+              "level": 0,
+              "last": 0,
+              "data": 0,
+              "ov": 0,
+              "bytes": 0,
+              "bits": 0,
+              "k": 0,
+              "raw": 0,
+              "e": 0,
+              "count": 0,
+              "error": 0,
+              "tag": 0,
+              "omv": 0,
+              "ir": 0,
+              "imr": 1
+            },
+            "differing": {
+              "stat_fault": [
+                0,
+                1
+              ],
+              "stat_aborted": [
+                2,
+                0
+              ],
+              "stat_retired": [
+                2,
+                0
+              ],
+              "stat_in_bytes": [
+                6,
+                2
+              ],
+              "stat_meta": [
+                4,
+                1
+              ],
+              "code": [
+                0,
+                2
+              ],
+              "faulted": [
+                0,
+                1
+              ],
+              "level": [
+                0,
+                1
+              ],
+              "imr": [
+                1,
+                0
+              ]
+            }
+          }
+        ],
+        "trace_raw_sha256": "9c4c7c06a3999effd962b42cb29dff14815f09970d3dff1706ea04f2f853a01b",
+        "trace_bytes": 2965,
+        "trace_gzip_sha256": "f9f075854fa64571c6273792bd1f965aecefab788c49a5e45f9262fa3b10d2a3",
+        "final_source_sha256": "e34ff3bd3c0de131cc87a45d856c48b58f42928a0540e97fa9cbe4abd8e90c01"
+      },
+      "actual_commands": [
+        {
+          "command": "version",
+          "pid": 42376,
+          "exit": 0
+        },
+        {
+          "command": "vlib",
+          "pid": 49896,
+          "exit": 0
+        },
+        {
+          "command": "vlog",
+          "pid": 61600,
+          "exit": 0
+        },
+        {
+          "command": "vsim",
+          "pid": 51588,
+          "exit": 0
+        }
+      ]
+    }
+  ],
+  "accepted_actual_main_commands": 40,
+  "final_rtl_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+  "final_author_runner_sha256": "87ae65ac5e81af7e3355a24a368eed7af8c3a9df2af1b24b97d09f77463233e4",
+  "final_main_checker_sha256": "466f48aa8a7441f4727974e9ff8aa270a0747fd3a32da7d0bedec5a157d98d90",
+  "final_main_tb_sha256": "f38055deb7f6fdf21371bd5c702e1671ecbe871fdf7be2f1d63a3aa1d9e487c9",
+  "main_functional_top_prefix_sha256": "e2501ba833f5eaa2152ecee4d195eef7c521d1485f2b45eb68e3e632f9766440",
+  "runner_qualification_cases": 205,
+  "python_entrypoint_processes": 8,
+  "diagnostics_reclassification": "Current stricter checker re-read unchanged non-guard raw logs; not new vendor runs.",
+  "original_main_guard_runs": "guard*-01 retain39missing-port warnings and are superseded by guard*-02",
+  "all29_G05_B06_R03_board_system": "not_run"
+}

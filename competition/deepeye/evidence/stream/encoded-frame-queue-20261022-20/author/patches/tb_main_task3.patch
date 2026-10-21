@@ -1,0 +1,19 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+     task automatic accept_success_frame(input logic [15:0] tag,
+                                         input integer length,
+                                         input logic [7:0] seed,
+                                         output bit accepted);
+@@
+             commit_pending();
+         end
+     endtask
++
++    task automatic accept_error_frame(input logic [15:0] tag,
++                                      input logic [1:0] error);
++        push_error(tag, error, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0);
++        drive_meta(tag, error, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "error frame descriptor accepted");
++    endtask
+*** End Patch

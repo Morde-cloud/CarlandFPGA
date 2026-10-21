@@ -1,0 +1,9 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+         in_valid = 1'b0;
+         out_meta_ready = 1'b0;
+         out_ready = 1'b0;
++        #1;
+         check_val(in_meta_ready, 0, "small reset gates in_meta_ready");
+*** End Patch

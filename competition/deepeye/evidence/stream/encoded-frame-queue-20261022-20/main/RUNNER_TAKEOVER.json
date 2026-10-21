@@ -1,0 +1,13 @@
+{
+  "operation_id":"B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20",
+  "author_job":"child-a65d74a1ffed41f0a5a81cbb8555e189",
+  "author_terminal":"completed, terminal=true, stale=false, updated2026-10-21T17:32:09.876891Z",
+  "main_thread":"01a13b55-095b-7461-8dd5-5476a130bd82",
+  "main_turn":"01a15f55-937c-7e51-83d2-a19f6dc3e10c",
+  "reason":"Main reproduced165misaccepts among205frozen synthetic cases, while all12raw-log controls pass. Original parser ignores foreign plain/case-varied diagnostics and additional malformed structured rows. Main assumes released runner/doc write ownership only to correct qualification and describe it; RTL/TB remain unchanged.",
+  "original_runner_sha256":"0d48490c3c096eb9e421450c39222461acd3add536127f7a5e3f3e452560116d",
+  "fixtures_sha256":"e4b9d2f6358e600a998c2a9659099e9252531db945612bb3930fbcb5856598b4",
+  "originals":"runner-qualification-02/author_runner_original.py and untouched author directory",
+  "main_probe_correction":"Earlier CRLF normalization mistake is retained under runner-qualification and is not author rejection evidence.",
+  "limits":"Synthetic parser qualification; not vendor/RTL executions. Main is both repair implementer and evaluator; no independent second implementer review claimed. All formal cards not_run."
+}

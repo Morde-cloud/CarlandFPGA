@@ -1,0 +1,46 @@
+{
+  "at_utc": "2026-10-21T17:08:25.636345+00:00",
+  "author_RTL_read": false,
+  "choices": [
+    "publish success descriptor before complete byte sealing",
+    "ignore cancellation control invalidation while keeping abort gating"
+  ],
+  "criteria": "Isolated actual compiled RTL variants; concrete numeric post-reset public-port mismatches with tool exits0; compile/X/parser/timeout are not behavioral kills.",
+  "vectors": {
+    "edges": 35,
+    "input_raw_sha256": "a0cad95316a13e2c206fbec4c974a1118443eb4bb3e77e660f67e13be56bf7e3",
+    "expected_raw_sha256": "8a6b8498d946689298d87232bf53ee85f103fcf45241f236b22888f7a945671e",
+    "input_width": 71,
+    "output_width": 236,
+    "coverage": {
+      "initial": 2,
+      "admissions": 4,
+      "retirements": 2,
+      "simultaneous_allocate_retire": 0,
+      "simultaneous_input_retire": 0,
+      "full_admission_attempts": 0,
+      "fault_edges": 0,
+      "early_metadata_visibility_and_cancel_invalidation": 33
+    },
+    "byte_values": [
+      3,
+      18,
+      73,
+      76,
+      149,
+      201
+    ],
+    "final_stats": {
+      "stat_meta": 4,
+      "stat_in_bytes": 6,
+      "stat_retired": 2,
+      "stat_aborted": 2,
+      "stat_fault": 0
+    }
+  },
+  "files": {
+    "expected.hex.gz": "7b41b990615d7b9717cecec4501519004af09f8f6775e637e18dd3051542108a",
+    "inputs.hex.gz": "25b36caeed00c4bb4a9e7f878edbd67a02cab9717fe90084ff63a002879b9d17",
+    "vectors.json": "9c77c8cd77bd810d7ef371bda9cb9a6f17db0f274d7bdea91c8b345938fc972e"
+  }
+}

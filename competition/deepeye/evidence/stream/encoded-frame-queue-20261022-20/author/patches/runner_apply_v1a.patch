@@ -1,0 +1,520 @@
+*** Begin Patch
+*** Add File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tools/stream/run_encoded_frame_queue.py
++#!/usr/bin/env python3
++"""Strict fail-closed ModelSim runner for deepeye_encoded_frame_queue.
++
++Work: B-ENCODED-FRAME-QUEUE-RTL-20261022-20-v1
++Task: DEEPEYE-IMPLEMENTATION-20261014/v1
++Operation: B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20
++
++The runner requires a fresh output directory inside the author evidence
++directory.  Every compilation gets its own source snapshot and work library.
++Raw stdout and stderr are preserved separately, together with argv, cwd, true
++process exit status and timeout state.  Ordinary simulations must have exact
++structured markers, every selected case must pass, and all check-count and
++counter summaries must agree.  Guard simulations must emit exactly the
++module's own fatal for STAT_W 0, 1 or 33, with no unrelated error or warning.
++"""
++
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import platform
++import re
++import shutil
++import subprocess
++import sys
++import time
++import traceback
++from datetime import datetime, timezone
++from pathlib import Path
++
++OPERATION_ID = "B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20"
++TASK_ID = "DEEPEYE-IMPLEMENTATION-20261014"
++TASK_VERSION = 1
++WORK_ID = "B-ENCODED-FRAME-QUEUE-RTL-20261022-20-v1"
++BASELINE_HEAD = "aef19351f1836b23f9a714bc5626db4eb4df98c5"
++MODEL = "deepseek-flash"
++REASONING_EFFORT = "max"
++
++TOOL_DIR_DEFAULT = Path(r"D:\modelsim1\win64")
++PRODUCT_ROOT = Path(__file__).resolve().parents[4]
++EVIDENCE_ROOT = (
++    PRODUCT_ROOT
++    / "competition/deepeye/evidence/stream/encoded-frame-queue-20261022-20/author"
++)
++
++SOURCE_REL = {
++    "queue": "competition/deepeye/fpga/stream/deepeye_encoded_frame_queue.sv",
++    "tb": "competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv",
++    "encoder": "competition/deepeye/fpga/codec/deepeye_block_encoder.sv",
++    "stream": "competition/deepeye/fpga/stream/deepeye_block_stream.sv",
++}
++
++PINNED_HASHES = {
++    "encoder": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
++    "stream": "c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
++}
++
++MAIN_CASES = [
++    "reset_idle",
++    "single_success",
++    "two_deep_stall",
++    "no_same_edge_bypass",
++    "full_old_level_no_credit",
++    "framing_boundaries",
++    "early_last_fault2",
++    "missing_last_fault2",
++    "invalid_framing_fault1",
++    "upstream_error_forward",
++    "fault_drains_older",
++    "fault_event_single_pulse",
++    "duplicate_aba_tags",
++    "cancel_empty",
++    "cancel_after_meta",
++    "cancel_partial_payload",
++    "cancel_sealed_output",
++    "cancel_partial_output",
++    "cancel_held_once",
++    "reset_priority_over_cancel",
++    "simultaneous_alloc_retire",
++    "simultaneous_seal_retire",
++    "pointer_wrap_many",
++]
++
++SMALL_CASES = ["saturation_statw2"]
++
++COMPOSE_CASES = [
++    "compose_two_raw_rice_stall",
++    "compose_error_and_cancel",
++    "compose_full_256",
++]
++
++MAIN_STATS = [
++    "final_level",
++    "final_stat_meta",
++    "final_stat_in_bytes",
++    "final_stat_retired",
++    "final_stat_aborted",
++    "final_stat_fault",
++]
++SMALL_STATS = [
++    "final_stat_meta",
++    "final_stat_in_bytes",
++    "final_stat_retired",
++    "final_stat_aborted",
++    "final_stat_fault",
++]
++COMPOSE_STATS = [
++    "final_queue_level",
++    "final_queue_stat_meta",
++    "final_queue_stat_in_bytes",
++    "final_queue_stat_retired",
++    "final_queue_stat_aborted",
++    "final_queue_stat_fault",
++]
++
++SUITES = {
++    "standalone": {
++        "kind": "ordinary",
++        "sources": ["queue", "tb"],
++        "modules": ["deepeye_encoded_frame_queue", "tb_encoded_frame_queue"],
++        "top": "tb_encoded_frame_queue",
++        "tb_begin": "encoded_frame_queue",
++        "cases": MAIN_CASES,
++        "min_checks": 10000,
++        "stats_keys": MAIN_STATS,
++        "zero_stats": ["final_level"],
++        "positive_stats": [
++            "final_stat_meta",
++            "final_stat_in_bytes",
++            "final_stat_retired",
++        ],
++    },
++    "small": {
++        "kind": "ordinary",
++        "sources": ["queue", "tb"],
++        "modules": ["deepeye_encoded_frame_queue", "tb_encoded_frame_queue_small"],
++        "top": "tb_encoded_frame_queue_small",
++        "tb_begin": "encoded_frame_queue_small",
++        "cases": SMALL_CASES,
++        "min_checks": 190,
++        "stats_keys": SMALL_STATS,
++        "zero_stats": [],
++        "positive_stats": [
++            "final_stat_meta",
++            "final_stat_in_bytes",
++            "final_stat_aborted",
++            "final_stat_fault",
++        ],
++    },
++    "compose": {
++        "kind": "ordinary",
++        "sources": ["encoder", "stream", "queue", "tb"],
++        "modules": [
++            "deepeye_block_encoder",
++            "deepeye_block_stream",
++            "deepeye_encoded_frame_queue",
++            "tb_encoded_frame_queue_compose",
++        ],
++        "top": "tb_encoded_frame_queue_compose",
++        "tb_begin": "encoded_frame_queue_compose",
++        "cases": COMPOSE_CASES,
++        "min_checks": 1000,
++        "stats_keys": COMPOSE_STATS,
++        "zero_stats": ["final_queue_level"],
++        "positive_stats": [
++            "final_queue_stat_meta",
++            "final_queue_stat_in_bytes",
++            "final_queue_stat_retired",
++        ],
++    },
++    "guard-0": {
++        "kind": "guard",
++        "sources": ["queue", "tb"],
++        "modules": ["deepeye_encoded_frame_queue", "tb_encoded_frame_queue_guard"],
++        "define": "0",
++        "top": "tb_encoded_frame_queue_guard",
++        "expected_fatal": "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=0",
++    },
++    "guard-1": {
++        "kind": "guard",
++        "sources": ["queue", "tb"],
++        "modules": ["deepeye_encoded_frame_queue", "tb_encoded_frame_queue_guard"],
++        "define": "1",
++        "top": "tb_encoded_frame_queue_guard",
++        "expected_fatal": "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=1",
++    },
++    "guard-33": {
++        "kind": "guard",
++        "sources": ["queue", "tb"],
++        "modules": ["deepeye_encoded_frame_queue", "tb_encoded_frame_queue_guard"],
++        "define": "33",
++        "top": "tb_encoded_frame_queue_guard",
++        "expected_fatal": "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=33",
++    },
++}
++
++SUITE_ORDER = ["standalone", "small", "compose", "guard-0", "guard-1", "guard-33"]
++
++TALLY_RE = re.compile(
++    r"^[ \t]*#?[ \t]*Errors:[ \t]*(\d+),[ \t]*Warnings:[ \t]*(\d+)[ \t]*$", re.M
++)
++ERROR_RE = re.compile(r"^[ \t]*#?[ \t]*\*\*[ \t]*Error", re.M)
++WARNING_RE = re.compile(r"^[ \t]*#?[ \t]*\*\*[ \t]*Warning", re.M)
++FATAL_RE = re.compile(r"^[ \t]*#?[ \t]*\*\*[ \t]*Fatal:[ \t]*(.*?)[ \t]*$", re.M)
++TB_BEGIN_RE = re.compile(r"^[ \t]*#?[ \t]*TB_BEGIN[ \t]+tb=([A-Za-z0-9_]+)[ \t]*$", re.M)
++TB_END_RE = re.compile(r"^[ \t]*#?[ \t]*TB_END[ \t]+(pass|fail)[ \t]*$", re.M)
++TB_SUMMARY_RE = re.compile(
++    r"^[ \t]*#?[ \t]*TB_SUMMARY[ \t]+cases=(\d+)[ \t]+pass=(\d+)[ \t]+fail=(\d+)"
++    r"[ \t]+checks=(\d+)[ \t]*$",
++    re.M,
++)
++CASE_BEGIN_RE = re.compile(
++    r"^[ \t]*#?[ \t]*CASE_BEGIN[ \t]+name=([A-Za-z0-9_]+)[ \t]*$", re.M
++)
++CASE_END_RE = re.compile(
++    r"^[ \t]*#?[ \t]*CASE_END[ \t]+name=([A-Za-z0-9_]+)[ \t]+status=(pass|fail)"
++    r"[ \t]+checks=(\d+)[ \t]*$",
++    re.M,
++)
++TB_STAT_RE = re.compile(
++    r"^[ \t]*#?[ \t]*TB_STAT[ \t]+([A-Za-z0-9_]+)=(\d+)[ \t]*$", re.M
++)
++
++CONSOLE_LINES: list[str] = []
++
++
++class SetupError(RuntimeError):
++    pass
++
++
++def utc_now() -> str:
++    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
++
++
++def log_line(text: str) -> None:
++    CONSOLE_LINES.append(text)
++    print(text, flush=True)
++
++
++def sha256_file(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as handle:
++        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def write_json(path: Path, value: object) -> None:
++    path.write_text(
++        json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
++        encoding="utf-8",
++    )
++
++
++def read_raw(path: Path) -> str:
++    return path.read_text(encoding="utf-8", errors="replace")
++
++
++def step_text(step_dir: Path) -> str:
++    return read_raw(step_dir / "stdout.txt") + "\n" + read_raw(step_dir / "stderr.txt")
++
++
++def add_check(checks: list[dict], name: str, ok: bool, detail: str = "") -> bool:
++    checks.append({"name": name, "pass": bool(ok), "detail": detail})
++    return bool(ok)
++
++
++def local_pass(checks: list[dict], start: int) -> bool:
++    return all(item["pass"] for item in checks[start:])
++
++
++def run_process(
++    argv: list[str], cwd: Path, step_dir: Path, timeout_s: int
++) -> dict:
++    step_dir.mkdir(parents=False, exist_ok=False)
++    started_at = utc_now()
++    write_json(
++        step_dir / "command.json",
++        {
++            "argv": [str(item) for item in argv],
++            "cwd": str(cwd),
++            "timeout_s": timeout_s,
++            "started_at": started_at,
++        },
++    )
++    stdout_path = step_dir / "stdout.txt"
++    stderr_path = step_dir / "stderr.txt"
++    stdout_path.write_bytes(b"")
++    stderr_path.write_bytes(b"")
++    start = time.monotonic()
++    returncode = None
++    timed_out = False
++    spawn_error = None
++    try:
++        with stdout_path.open("wb") as stdout_handle, stderr_path.open(
++            "wb"
++        ) as stderr_handle:
++            try:
++                process = subprocess.Popen(
++                    [str(item) for item in argv],
++                    cwd=str(cwd),
++                    stdout=stdout_handle,
++                    stderr=stderr_handle,
++                    shell=False,
++                )
++            except OSError as exc:
++                spawn_error = f"{type(exc).__name__}: {exc}"
++            else:
++                try:
++                    returncode = process.wait(timeout=timeout_s)
++                except subprocess.TimeoutExpired:
++                    timed_out = True
++                    process.kill()
++                    try:
++                        returncode = process.wait(timeout=10)
++                    except subprocess.TimeoutExpired:
++                        returncode = None
++    except OSError as exc:
++        spawn_error = f"{type(exc).__name__}: {exc}"
++    duration_s = round(time.monotonic() - start, 3)
++    record = {
++        "argv": [str(item) for item in argv],
++        "cwd": str(cwd),
++        "started_at": started_at,
++        "finished_at": utc_now(),
++        "duration_s": duration_s,
++        "timeout_s": timeout_s,
++        "timed_out": timed_out,
++        "returncode": returncode,
++        "spawn_error": spawn_error,
++    }
++    write_json(step_dir / "process.json", record)
++    return record
++
++
++def classify_process(
++    record: dict, checks: list[dict], prefix: str, expected_exit: int = 0
++) -> None:
++    add_check(
++        checks,
++        f"{prefix}-spawn",
++        record["spawn_error"] is None,
++        str(record["spawn_error"]),
++    )
++    add_check(checks, f"{prefix}-timeout", not record["timed_out"], "")
++    add_check(
++        checks,
++        f"{prefix}-exit",
++        record["returncode"] == expected_exit,
++        f"returncode={record['returncode']} expected={expected_exit}",
++    )
++
++
++def classify_compile(
++    text: str, spec: dict, checks: list[dict], prefix: str
++) -> bool:
++    start = len(checks)
++    tally = TALLY_RE.findall(text)
++    add_check(
++        checks,
++        f"{prefix}-tally-unique",
++        len(tally) == 1,
++        f"count={len(tally)} values={tally}",
++    )
++    if len(tally) == 1:
++        add_check(
++            checks,
++            f"{prefix}-tally-zero",
++            tally[0] == ("0", "0"),
++            f"values={tally[0]}",
++        )
++    add_check(
++        checks,
++        f"{prefix}-no-error",
++        ERROR_RE.search(text) is None and "Error loading design" not in text,
++        "",
++    )
++    add_check(
++        checks,
++        f"{prefix}-no-warning",
++        WARNING_RE.search(text) is None,
++        "",
++    )
++    top = spec["top"]
++    add_check(
++        checks,
++        f"{prefix}-top-present",
++        re.search(r"^[ \t]*" + re.escape(top) + r"[ \t]*$", text, re.M) is not None,
++        f"top={top}",
++    )
++    missing = [name for name in spec["modules"] if f"-- Compiling module {name}" not in text]
++    add_check(
++        checks,
++        f"{prefix}-modules",
++        not missing,
++        f"missing={missing}",
++    )
++    return local_pass(checks, start)
++
++
++def classify_ordinary(
++    text: str, spec: dict, checks: list[dict], prefix: str
++) -> dict:
++    start = len(checks)
++    tally = TALLY_RE.findall(text)
++    add_check(
++        checks,
++        f"{prefix}-tally-unique",
++        len(tally) == 1,
++        f"count={len(tally)} values={tally}",
++    )
++    if len(tally) == 1:
++        add_check(
++            checks,
++            f"{prefix}-tally-zero",
++            tally[0] == ("0", "0"),
++            f"values={tally[0]}",
++        )
++    add_check(
++        checks,
++        f"{prefix}-no-error",
++        ERROR_RE.search(text) is None and "Error loading design" not in text,
++        "",
++    )
++    add_check(
++        checks,
++        f"{prefix}-no-warning",
++        WARNING_RE.search(text) is None,
++        "",
++    )
++    add_check(
++        checks,
++        f"{prefix}-no-fatal",
++        FATAL_RE.search(text) is None,
++        "",
++    )
++    add_check(
++        checks,
++        f"{prefix}-no-check-fail-marker",
++        "TB_CHECK_FAIL" not in text,
++        "",
++    )
++
++    begins = TB_BEGIN_RE.findall(text)
++    add_check(
++        checks,
++        f"{prefix}-tb-begin-unique",
++        begins == [spec["tb_begin"]],
++        f"values={begins} expected={spec['tb_begin']}",
++    )
++    ends = TB_END_RE.findall(text)
++    add_check(
++        checks,
++        f"{prefix}-tb-end-pass",
++        ends == ["pass"],
++        f"values={ends}",
++    )
++
++    summary = TB_SUMMARY_RE.findall(text)
++    add_check(
++        checks,
++        f"{prefix}-summary-unique",
++        len(summary) == 1,
++        f"count={len(summary)} values={summary}",
++    )
++    summary_values = None
++    if len(summary) == 1:
++        summary_values = tuple(int(value) for value in summary[0])
++        cases, passed, failed, summary_checks = summary_values
++        add_check(
++            checks,
++            f"{prefix}-summary-counts",
++            cases == len(spec["cases"]) and passed == cases and failed == 0,
++            f"summary={summary_values} expected_cases={len(spec['cases'])}",
++        )
++        add_check(
++            checks,
++            f"{prefix}-summary-min-checks",
++            summary_checks >= spec["min_checks"],
++            f"checks={summary_checks} minimum={spec['min_checks']}",
++        )
++
++    case_begins = CASE_BEGIN_RE.findall(text)
++    case_ends = CASE_END_RE.findall(text)
++    add_check(
++        checks,
++        f"{prefix}-case-begin-sequence",
++        case_begins == spec["cases"],
++        f"begins={case_begins} expected={spec['cases']}",
++    )
++    add_check(
++        checks,
++        f"{prefix}-case-end-sequence",
++        [item[0] for item in case_ends] == spec["cases"],
++        f"ends={[item[0] for item in case_ends]}",
++    )
++    add_check(
++        checks,
++        f"{prefix}-case-all-pass",
++        all(item[1] == "pass" for item in case_ends),
++        f"statuses={[item[1] for item in case_ends]}",
++    )
++    case_checks = {item[0]: int(item[2]) for item in case_ends}
++    add_check(
++        checks,
++        f"{prefix}-case-checks-positive",
++        bool(case_checks) and all(value > 0 for value in case_checks.values()),
++        f"case_checks={case_checks}",
++    )
++    if summary_values is not None:
++        add_check(
++            checks,
++            f"{prefix}-case-check-sum",
++            sum(case_checks.values()) == summary_values[3],
++            f"sum={sum(case_checks.values())} summary={summary_values[3]}",
++        )
+*** End Patch

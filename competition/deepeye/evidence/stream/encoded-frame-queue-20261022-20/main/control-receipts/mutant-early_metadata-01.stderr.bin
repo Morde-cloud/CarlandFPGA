@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\stream\main_verify_encoded_frame_queue.py", line 231, in <module>
+    if __name__=="__main__":main()
+                            ^^^^^^
+  File "D:\pynq\CarlandFPGA\.local\worktrees\deepeye-implementation-20261014\competition\deepeye\tools\stream\main_verify_encoded_frame_queue.py", line 173, in main
+    b=path.read_bytes()
+      ^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "D:\python\one\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\compiled-mutations-02\\early_metadata.sv'

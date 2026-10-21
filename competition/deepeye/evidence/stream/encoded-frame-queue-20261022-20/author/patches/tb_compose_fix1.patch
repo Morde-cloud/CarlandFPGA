@@ -1,0 +1,104 @@
+*** Begin Patch
+*** Update File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+-    logic stream_meta_valid;
+-    logic stream_meta_ready;
++    logic stream_meta_valid;
+@@
+-    logic stream_m_valid;
+-    logic stream_m_ready;
++    logic stream_m_valid;
+@@
+-        .meta_ready(stream_meta_ready),
++        .meta_ready(queue_meta_ready),
+@@
+-        .m_ready(stream_m_ready),
++        .m_ready(queue_in_ready),
+@@
+-        .in_meta_ready(stream_meta_ready),
++        .in_meta_ready(queue_meta_ready),
+@@
+-        .in_ready(stream_m_ready),
++        .in_ready(queue_in_ready),
+@@
+     task automatic wait_queue_meta();
+         integer guard;
+         guard = 0;
+         @(negedge clk);
+         #1;
+@@
+         end
+         check_val(queue_out_meta_valid, 1, "queue metadata wait");
+     endtask
++
++    task automatic wait_queue_two_sealed();
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while (((queue_level !== 2'd2) || (queue_receiving !== 1'b0)) &&
++               (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(queue_level, 2, "two-slot queue level");
++        check_val(queue_receiving, 0, "second encoded frame sealed");
++    endtask
++
++    task automatic wait_stream_meta_stalled();
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((stream_meta_valid !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(stream_meta_valid, 1, "third frame reaches stream metadata");
++        check_val(queue_meta_ready, 0, "queue full backpressures metadata");
++    endtask
+@@
+         compose_reset(2);
+         samples[0] = 16'h1234;
+         send_block(1, 4'd0, 16'hC001);
++        check_val(cfg_ready, 1, "stream accepts work while first encodes");
+         samples[0] = 16'd1000;
+         samples[1] = 16'd1001;
+         samples[2] = 16'd1002;
+         samples[3] = 16'd1001;
+         send_block(4, 4'd0, 16'hC001);
+-        check_val(cfg_ready, 1, "stream accepts work while first encodes");
+-        @(negedge clk);
+-        #1;
+-        while (queue_level != 2) begin
+-            @(negedge clk);
+-            #1;
+-        end
++        wait_queue_two_sealed();
+         check_val(queue_level, 2, "two encoded frames retained while stalled");
+         check_val(queue_out_meta_valid, 1, "stalled head metadata visible");
+         check_val(queue_out_meta_tag, 16'hC001, "stalled head tag");
+         check_val(queue_meta_ready, 0, "full queue backpressures metadata");
+         samples[0] = 16'hABCD;
+         send_block(1, 4'd0, 16'hC003);
++        wait_stream_meta_stalled();
+         repeat (6) begin
+             @(negedge clk);
+             #1;
+             check_val(stream_meta_valid, 1, "third frame stalls at stream metadata");
+             check_val(queue_meta_ready, 0, "queue remains full while third stalls");
+@@
+         send_block(1, 4'd0, 16'hC103);
+         samples[0] = 16'h3333;
+         send_block(1, 4'd0, 16'hC104);
+-        @(negedge clk);
+-        #1;
+-        while (queue_level != 2) begin
+-            @(negedge clk);
+-            #1;
+-        end
++        wait_queue_two_sealed();
+         check_val(queue_level, 2, "compose cancel pre-level");
+*** End Patch

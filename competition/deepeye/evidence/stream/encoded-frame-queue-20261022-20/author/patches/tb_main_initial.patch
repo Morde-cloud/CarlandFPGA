@@ -1,0 +1,679 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+-`ifndef GUARD_W
++module tb_encoded_frame_queue;
++    localparam integer STAT_W = 32;
++    localparam integer MAX_FRAMES = 64;
++    localparam integer WAIT_LIMIT = 200000;
++
++    logic clk = 1'b0;
++    always #5 clk = ~clk;
++
++    logic rst = 1'b1;
++    logic cancel = 1'b0;
++
++    logic        in_meta_valid = 1'b0;
++    logic        in_meta_ready;
++    logic [15:0] in_meta_tag = 16'd0;
++    logic [1:0]  in_meta_error = 2'd0;
++    logic [7:0]  in_meta_count = 8'd0;
++    logic [3:0]  in_meta_e = 4'd0;
++    logic        in_meta_raw = 1'b0;
++    logic [3:0]  in_meta_k = 4'd0;
++    logic [11:0] in_meta_valid_bits = 12'd0;
++    logic [8:0]  in_meta_bytes = 9'd0;
++
++    logic       in_valid = 1'b0;
++    logic       in_ready;
++    logic [7:0] in_data = 8'd0;
++    logic       in_last = 1'b0;
++
++    logic        out_meta_valid;
++    logic        out_meta_ready = 1'b0;
++    logic [15:0] out_meta_tag;
++    logic [1:0]  out_meta_error;
++    logic [7:0]  out_meta_count;
++    logic [3:0]  out_meta_e;
++    logic        out_meta_raw;
++    logic [3:0]  out_meta_k;
++    logic [11:0] out_meta_valid_bits;
++    logic [8:0]  out_meta_bytes;
++
++    logic       out_valid;
++    logic       out_ready = 1'b0;
++    logic [7:0] out_data;
++    logic       out_last;
++
++    logic [1:0] level;
++    logic       receiving;
++    logic       faulted;
++    logic       fault_event;
++    logic [1:0] fault_code;
++    logic [31:0] stat_meta;
++    logic [31:0] stat_in_bytes;
++    logic [31:0] stat_retired;
++    logic [31:0] stat_aborted;
++    logic [31:0] stat_fault;
++
++    deepeye_encoded_frame_queue #(
++        .STAT_W(STAT_W)
++    ) dut (
++        .clk(clk),
++        .rst(rst),
++        .cancel(cancel),
++        .in_meta_valid(in_meta_valid),
++        .in_meta_ready(in_meta_ready),
++        .in_meta_tag(in_meta_tag),
++        .in_meta_error(in_meta_error),
++        .in_meta_count(in_meta_count),
++        .in_meta_e(in_meta_e),
++        .in_meta_raw(in_meta_raw),
++        .in_meta_k(in_meta_k),
++        .in_meta_valid_bits(in_meta_valid_bits),
++        .in_meta_bytes(in_meta_bytes),
++        .in_valid(in_valid),
++        .in_ready(in_ready),
++        .in_data(in_data),
++        .in_last(in_last),
++        .out_meta_valid(out_meta_valid),
++        .out_meta_ready(out_meta_ready),
++        .out_meta_tag(out_meta_tag),
++        .out_meta_error(out_meta_error),
++        .out_meta_count(out_meta_count),
++        .out_meta_e(out_meta_e),
++        .out_meta_raw(out_meta_raw),
++        .out_meta_k(out_meta_k),
++        .out_meta_valid_bits(out_meta_valid_bits),
++        .out_meta_bytes(out_meta_bytes),
++        .out_valid(out_valid),
++        .out_ready(out_ready),
++        .out_data(out_data),
++        .out_last(out_last),
++        .level(level),
++        .receiving(receiving),
++        .faulted(faulted),
++        .fault_event(fault_event),
++        .fault_code(fault_code),
++        .stat_meta(stat_meta),
++        .stat_in_bytes(stat_in_bytes),
++        .stat_retired(stat_retired),
++        .stat_aborted(stat_aborted),
++        .stat_fault(stat_fault)
++    );
++
++    int checks = 0;
++    int failures = 0;
++    int cases = 0;
++    int pass_cases = 0;
++    string current_case = "";
++    bit case_failed = 1'b0;
++    int case_checks = 0;
++
++    logic [15:0] exp_tag [0:MAX_FRAMES-1];
++    logic [1:0]  exp_error [0:MAX_FRAMES-1];
++    logic [7:0]  exp_count [0:MAX_FRAMES-1];
++    logic [3:0]  exp_e [0:MAX_FRAMES-1];
++    logic        exp_raw [0:MAX_FRAMES-1];
++    logic [3:0]  exp_k [0:MAX_FRAMES-1];
++    logic [11:0] exp_valid_bits [0:MAX_FRAMES-1];
++    logic [8:0]  exp_bytes [0:MAX_FRAMES-1];
++    logic [7:0]  exp_data [0:MAX_FRAMES-1][0:255];
++    int exp_head = 0;
++    int exp_tail = 0;
++
++    logic [15:0] pend_tag = 16'd0;
++    logic [1:0]  pend_error = 2'd0;
++    logic [7:0]  pend_count = 8'd0;
++    logic [3:0]  pend_e = 4'd0;
++    logic        pend_raw = 1'b0;
++    logic [3:0]  pend_k = 4'd0;
++    logic [11:0] pend_valid_bits = 12'd0;
++    logic [8:0]  pend_bytes = 9'd0;
++    logic [7:0]  pend_data [0:255];
++    int pend_index = 0;
++    bit pend_active = 1'b0;
++
++    task automatic check(input bit condition, input string message);
++        checks = checks + 1;
++        case_checks = case_checks + 1;
++        if (!condition) begin
++            failures = failures + 1;
++            case_failed = 1'b1;
++            $display("TB_CHECK_FAIL case=%s msg=%s time=%0t", current_case, message, $time);
++        end
++    endtask
++
++    task automatic check_val(input logic [63:0] actual,
++                             input logic [63:0] expected,
++                             input string message);
++        checks = checks + 1;
++        case_checks = case_checks + 1;
++        if (actual !== expected) begin
++            failures = failures + 1;
++            case_failed = 1'b1;
++            $display("TB_CHECK_FAIL case=%s msg=%s actual=%0d expected=%0d time=%0t",
++                     current_case, message, actual, expected, $time);
++        end
++    endtask
++
++    task automatic case_begin(input string name);
++        current_case = name;
++        case_failed = 1'b0;
++        case_checks = 0;
++        cases = cases + 1;
++        $display("CASE_BEGIN name=%s", name);
++    endtask
++
++    task automatic case_end();
++        if (!case_failed && (case_checks > 0)) begin
++            pass_cases = pass_cases + 1;
++            $display("CASE_END name=%s status=pass checks=%0d", current_case, case_checks);
++        end else begin
++            $display("CASE_END name=%s status=fail checks=%0d", current_case, case_checks);
++        end
++    endtask
++
++    task automatic do_reset(input integer cycles);
++        @(negedge clk);
++        rst = 1'b1;
++        cancel = 1'b0;
++        in_meta_valid = 1'b0;
++        in_valid = 1'b0;
++        out_meta_ready = 1'b0;
++        out_ready = 1'b0;
++        #1;
++        check_val(in_meta_ready, 0, "rst gates in_meta_ready");
++        check_val(in_ready, 0, "rst gates in_ready");
++        check_val(out_meta_valid, 0, "rst gates out_meta_valid");
++        check_val(out_valid, 0, "rst gates out_valid");
++        repeat (cycles) @(posedge clk);
++        #1;
++        check_val(level, 0, "reset level");
++        check_val(receiving, 0, "reset receiving");
++        check_val(faulted, 0, "reset faulted");
++        check_val(fault_event, 0, "reset fault_event");
++        check_val(fault_code, 0, "reset fault_code");
++        check_val(stat_meta, 0, "reset stat_meta");
++        check_val(stat_in_bytes, 0, "reset stat_in_bytes");
++        check_val(stat_retired, 0, "reset stat_retired");
++        check_val(stat_aborted, 0, "reset stat_aborted");
++        check_val(stat_fault, 0, "reset stat_fault");
++        check_val(out_meta_valid, 0, "reset out_meta_valid");
++        check_val(out_valid, 0, "reset out_valid");
++        @(negedge clk);
++        rst = 1'b0;
++        #1;
++        check_val(in_meta_ready, 1, "in_meta_ready after reset");
++        check_val(in_ready, 0, "in_ready after reset");
++    endtask
++
++    task automatic drive_meta(input logic [15:0] tag,
++                              input logic [1:0] error,
++                              input logic [7:0] count,
++                              input logic [3:0] e,
++                              input logic raw,
++                              input logic [3:0] k,
++                              input logic [11:0] valid_bits,
++                              input logic [8:0] bytes,
++                              output bit accepted);
++        @(negedge clk);
++        in_meta_valid = 1'b1;
++        in_meta_tag = tag;
++        in_meta_error = error;
++        in_meta_count = count;
++        in_meta_e = e;
++        in_meta_raw = raw;
++        in_meta_k = k;
++        in_meta_valid_bits = valid_bits;
++        in_meta_bytes = bytes;
++        #1;
++        accepted = (in_meta_ready === 1'b1);
++        @(posedge clk);
++        #1;
++        in_meta_valid = 1'b0;
++        in_meta_tag = 16'd0;
++        in_meta_error = 2'd0;
++        in_meta_count = 8'd0;
++        in_meta_e = 4'd0;
++        in_meta_raw = 1'b0;
++        in_meta_k = 4'd0;
++        in_meta_valid_bits = 12'd0;
++        in_meta_bytes = 9'd0;
++    endtask
++
++    task automatic drive_byte(input logic [7:0] data,
++                              input logic last,
++                              output bit accepted);
++        @(negedge clk);
++        in_valid = 1'b1;
++        in_data = data;
++        in_last = last;
++        #1;
++        accepted = (in_ready === 1'b1);
++        @(posedge clk);
++        #1;
++        in_valid = 1'b0;
++        in_data = 8'd0;
++        in_last = 1'b0;
++    endtask
++
++    task automatic push_error(input logic [15:0] tag,
++                              input logic [1:0] error,
++                              input logic [7:0] count,
++                              input logic [3:0] e,
++                              input logic raw,
++                              input logic [3:0] k,
++                              input logic [11:0] valid_bits,
++                              input logic [8:0] bytes);
++        check(exp_tail < MAX_FRAMES, "expected queue capacity");
++        exp_tag[exp_tail] = tag;
++        exp_error[exp_tail] = error;
++        exp_count[exp_tail] = count;
++        exp_e[exp_tail] = e;
++        exp_raw[exp_tail] = raw;
++        exp_k[exp_tail] = k;
++        exp_valid_bits[exp_tail] = valid_bits;
++        exp_bytes[exp_tail] = bytes;
++        exp_tail = exp_tail + 1;
++    endtask
++
++    task automatic begin_pending(input logic [15:0] tag,
++                                 input logic [7:0] count,
++                                 input logic [3:0] e,
++                                 input logic raw,
++                                 input logic [3:0] k,
++                                 input logic [11:0] valid_bits,
++                                 input logic [8:0] bytes);
++        pend_tag = tag;
++        pend_error = 2'd0;
++        pend_count = count;
++        pend_e = e;
++        pend_raw = raw;
++        pend_k = k;
++        pend_valid_bits = valid_bits;
++        pend_bytes = bytes;
++        pend_index = 0;
++        pend_active = 1'b1;
++    endtask
++
++    task automatic pending_byte(input logic [7:0] data);
++        check(pend_active && (pend_index < 256), "pending byte capacity");
++        pend_data[pend_index] = data;
++        pend_index = pend_index + 1;
++    endtask
++
++    task automatic commit_pending();
++        integer i;
++        check(exp_tail < MAX_FRAMES, "expected queue capacity");
++        exp_tag[exp_tail] = pend_tag;
++        exp_error[exp_tail] = 2'd0;
++        exp_count[exp_tail] = pend_count;
++        exp_e[exp_tail] = pend_e;
++        exp_raw[exp_tail] = pend_raw;
++        exp_k[exp_tail] = pend_k;
++        exp_valid_bits[exp_tail] = pend_valid_bits;
++        exp_bytes[exp_tail] = pend_bytes;
++        for (i = 0; i < 256; i = i + 1) begin
++            exp_data[exp_tail][i] = pend_data[i];
++        end
++        exp_tail = exp_tail + 1;
++        pend_active = 1'b0;
++    endtask
++
++    task automatic wait_meta();
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((out_meta_valid !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(out_meta_valid, 1, "out_meta_valid wait");
++    endtask
++
++    task automatic check_meta_expected();
++        if (exp_head >= exp_tail) begin
++            check(1'b0, "unexpected out_meta transaction");
++        end else begin
++            check_val(out_meta_tag, exp_tag[exp_head], "out_meta_tag");
++            check_val(out_meta_error, exp_error[exp_head], "out_meta_error");
++            check_val(out_meta_count, exp_count[exp_head], "out_meta_count");
++            check_val(out_meta_e, exp_e[exp_head], "out_meta_e");
++            check_val(out_meta_raw, exp_raw[exp_head], "out_meta_raw");
++            check_val(out_meta_k, exp_k[exp_head], "out_meta_k");
++            check_val(out_meta_valid_bits, exp_valid_bits[exp_head], "out_meta_valid_bits");
++            check_val(out_meta_bytes, exp_bytes[exp_head], "out_meta_bytes");
++        end
++    endtask
++
++    task automatic handshake_meta(input integer stall_cycles);
++        integer i;
++        check_val(out_meta_valid, 1, "meta valid at handshake point");
++        check_meta_expected();
++        for (i = 0; i < stall_cycles; i = i + 1) begin
++            @(negedge clk);
++            #1;
++            check_val(out_meta_valid, 1, "meta valid stable during stall");
++            check_meta_expected();
++        end
++        out_meta_ready = 1'b1;
++        @(posedge clk);
++        #1;
++        out_meta_ready = 1'b0;
++    endtask
++
++    task automatic wait_payload();
++        integer guard;
++        guard = 0;
++        @(negedge clk);
++        #1;
++        while ((out_valid !== 1'b1) && (guard < WAIT_LIMIT)) begin
++            @(negedge clk);
++            #1;
++            guard = guard + 1;
++        end
++        check_val(out_valid, 1, "out_valid wait");
++        check_val(out_meta_valid, 0, "out_meta_valid low during payload");
++    endtask
++
++    task automatic drain_payload(input integer stall_cycles);
++        integer i;
++        integer j;
++        for (i = 0; i < exp_bytes[exp_head]; i = i + 1) begin
++            wait_payload();
++            check_val(out_data, exp_data[exp_head][i], "out_data");
++            check_val(out_last, (i == (exp_bytes[exp_head] - 1)), "out_last");
++            for (j = 0; j < stall_cycles; j = j + 1) begin
++                @(negedge clk);
++                #1;
++                check_val(out_valid, 1, "payload valid stable during stall");
++                check_val(out_data, exp_data[exp_head][i], "payload stable data");
++                check_val(out_last, (i == (exp_bytes[exp_head] - 1)), "payload stable last");
++            end
++            out_ready = 1'b1;
++            @(posedge clk);
++            #1;
++            out_ready = 1'b0;
++        end
++    endtask
++
++    task automatic drain_one(input integer meta_stall, input integer payload_stall);
++        wait_meta();
++        check_meta_expected();
++        if (exp_head < exp_tail) begin
++            if (exp_error[exp_head] != 2'd0) begin
++                handshake_meta(meta_stall);
++                @(negedge clk);
++                #1;
++                check_val(out_valid, 0, "error frame emits no payload");
++                exp_head = exp_head + 1;
++            end else begin
++                handshake_meta(meta_stall);
++                drain_payload(payload_stall);
++                exp_head = exp_head + 1;
++            end
++        end
++    endtask
++
++    task automatic drain_all();
++        while (exp_head < exp_tail) begin
++            drain_one(0, 0);
++        end
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 0, "no extra out_meta after drain");
++        check_val(out_valid, 0, "no extra out_valid after drain");
++    endtask
++
++    task automatic check_invariant(input string message);
++        logic [63:0] rhs;
++        rhs = {32'd0, stat_retired} + {32'd0, stat_aborted} + {62'd0, level};
++        check_val({32'd0, stat_meta}, rhs, message);
++    endtask
++
++    task automatic accept_success_frame(input logic [15:0] tag,
++                                        input integer length,
++                                        input logic [7:0] seed,
++                                        output bit accepted);
++        integer i;
++        bit byte_ok;
++        drive_meta(tag, 2'd0, length[7:0], 4'd0, 1'b1, 4'd0,
++                   12'(length * 8), 9'(length), accepted);
++        check_val(accepted, 1, "success descriptor accepted");
++        if (accepted) begin
++            begin_pending(tag, length[7:0], 4'd0, 1'b1, 4'd0,
++                          12'(length * 8), 9'(length));
++            for (i = 0; i < length; i = i + 1) begin
++                pending_byte(seed + i[7:0]);
++                drive_byte(seed + i[7:0], (i == (length - 1)), byte_ok);
++                check_val(byte_ok, 1, "success payload byte accepted");
++            end
++            commit_pending();
++        end
++    endtask
++
++    initial begin
++        $display("TB_BEGIN tb=encoded_frame_queue");
++
++        case_begin("reset_idle");
++        do_reset(3);
++        check_val(stat_meta, 0, "idle stat_meta");
++        check_val(stat_in_bytes, 0, "idle stat_in_bytes");
++        check_val(stat_retired, 0, "idle stat_retired");
++        check_val(stat_aborted, 0, "idle stat_aborted");
++        check_val(stat_fault, 0, "idle stat_fault");
++        check_val(in_meta_ready, 1, "idle in_meta_ready");
++        check_val(in_ready, 0, "idle in_ready");
++        check_invariant("idle counter invariant");
++        case_end();
++
++        case_begin("single_success");
++        do_reset(2);
++        begin_pending(16'h1001, 8'd3, 4'd0, 1'b1, 4'd0, 12'd24, 9'd3);
++        drive_meta(16'h1001, 2'd0, 8'd3, 4'd0, 1'b1, 4'd0, 12'd24, 9'd3, accepted);
++        check_val(accepted, 1, "descriptor accepted");
++        check_val(in_ready, 0, "no payload on descriptor admission edge");
++        check_val(in_meta_ready, 0, "no second descriptor while receiving");
++        check_val(level, 1, "level after descriptor");
++        check_val(receiving, 1, "receiving after descriptor");
++        check_val(stat_meta, 1, "stat_meta after descriptor");
++        pending_byte(8'h10);
++        drive_byte(8'h10, 1'b0, byte_ok);
++        check_val(byte_ok, 1, "first payload byte accepted");
++        check_val(stat_in_bytes, 1, "stat_in_bytes first byte");
++        pending_byte(8'h20);
++        drive_byte(8'h20, 1'b0, byte_ok);
++        check_val(byte_ok, 1, "second payload byte accepted");
++        check_val(stat_in_bytes, 2, "stat_in_bytes second byte");
++        check_val(out_meta_valid, 0, "incomplete frame not visible");
++        pending_byte(8'h30);
++        drive_byte(8'h30, 1'b1, byte_ok);
++        check_val(byte_ok, 1, "final payload byte accepted");
++        check_val(stat_in_bytes, 3, "stat_in_bytes final byte");
++        check_val(receiving, 0, "receiving cleared on seal");
++        commit_pending();
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 1, "sealed frame visible");
++        check_invariant("single success sealed invariant");
++        drain_one(2, 2);
++        check_val(level, 0, "level after retire");
++        check_val(stat_retired, 1, "stat_retired after retire");
++        check_val(out_meta_valid, 0, "no metadata after retire");
++        check_val(out_valid, 0, "no payload after retire");
++        check_invariant("single success retired invariant");
++        case_end();
++
++        case_begin("two_deep_stall");
++        do_reset(2);
++        accept_success_frame(16'h2001, 2, 8'hA0, accepted);
++        check_val(level, 1, "first frame level");
++        accept_success_frame(16'h2002, 4, 8'hB0, accepted);
++        check_val(level, 2, "second frame level");
++        check_val(in_meta_ready, 0, "queue full blocks new metadata");
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 1, "head metadata visible while stalled");
++        check_val(out_meta_tag, 16'h2001, "head metadata tag stable");
++        repeat (8) begin
++            @(negedge clk);
++            #1;
++            check_val(out_meta_valid, 1, "head metadata remains valid");
++            check_val(out_meta_tag, 16'h2001, "head metadata stable");
++        end
++        check_invariant("two deep invariant");
++        drain_all();
++        check_val(level, 0, "two deep level after drain");
++        check_val(stat_retired, 2, "two deep retired count");
++        case_end();
++
++        case_begin("no_same_edge_bypass");
++        do_reset(2);
++        begin_pending(16'h3001, 8'd1, 4'd0, 1'b1, 4'd0, 12'd8, 9'd1);
++        drive_meta(16'h3001, 2'd0, 8'd1, 4'd0, 1'b1, 4'd0, 12'd8, 9'd1, accepted);
++        check_val(accepted, 1, "one byte descriptor accepted");
++        check_val(in_ready, 0, "metadata-to-payload same-edge blocked");
++        pending_byte(8'h5A);
++        drive_byte(8'h5A, 1'b1, byte_ok);
++        check_val(byte_ok, 1, "one byte payload accepted");
++        check_val(out_meta_valid, 0, "seal edge does not publish metadata");
++        commit_pending();
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 1, "metadata visible after seal edge");
++        check_meta_expected();
++        out_meta_ready = 1'b1;
++        out_ready = 1'b1;
++        #1;
++        check_val(out_valid, 0, "metadata-to-first-byte same-edge blocked");
++        @(posedge clk);
++        #1;
++        out_meta_ready = 1'b0;
++        out_ready = 1'b0;
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 0, "metadata deasserted after handshake");
++        check_val(out_valid, 1, "first payload visible after metadata edge");
++        check_val(out_data, 8'h5A, "first payload data");
++        check_val(out_last, 1, "first payload last");
++        out_ready = 1'b1;
++        @(posedge clk);
++        #1;
++        out_ready = 1'b0;
++        exp_head = exp_head + 1;
++        check_val(level, 0, "no bypass level after retire");
++        check_val(stat_retired, 1, "no bypass retired");
++        case_end();
++
++        case_begin("full_old_level_no_credit");
++        do_reset(2);
++        push_error(16'h4001, 2'd1, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0);
++        drive_meta(16'h4001, 2'd1, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "error frame accepted");
++        check_val(level, 1, "error frame level");
++        accept_success_frame(16'h4002, 1, 8'hC0, accepted);
++        check_val(level, 2, "full queue level");
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 1, "error head visible");
++        check_val(out_meta_tag, 16'h4001, "error head tag");
++        check_val(in_meta_ready, 0, "full queue blocks admission at old level two");
++        out_meta_ready = 1'b1;
++        in_meta_valid = 1'b1;
++        in_meta_tag = 16'h4003;
++        in_meta_error = 2'd0;
++        in_meta_count = 8'd1;
++        in_meta_e = 4'd0;
++        in_meta_raw = 1'b1;
++        in_meta_k = 4'd0;
++        in_meta_valid_bits = 12'd8;
++        in_meta_bytes = 9'd1;
++        #1;
++        check_val(in_meta_ready, 0, "simultaneous retire gives no old-level credit");
++        @(posedge clk);
++        #1;
++        out_meta_ready = 1'b0;
++        in_meta_valid = 1'b0;
++        check_val(level, 1, "retire reduced level while admission was blocked");
++        check_val(stat_retired, 1, "error metadata retired");
++        exp_head = exp_head + 1;
++        @(negedge clk);
++        #1;
++        check_val(in_meta_ready, 1, "one-cycle bubble then admission credit");
++        begin_pending(16'h4003, 8'd1, 4'd0, 1'b1, 4'd0, 12'd8, 9'd1);
++        drive_meta(16'h4003, 2'd0, 8'd1, 4'd0, 1'b1, 4'd0, 12'd8, 9'd1, accepted);
++        check_val(accepted, 1, "post-bubble descriptor accepted");
++        pending_byte(8'hC3);
++        drive_byte(8'hC3, 1'b1, byte_ok);
++        check_val(byte_ok, 1, "post-bubble payload accepted");
++        commit_pending();
++        check_val(level, 2, "post-bubble level");
++        drain_all();
++        check_val(level, 0, "full rule final level");
++        check_val(stat_retired, 3, "full rule retired count");
++        case_end();
++
++        case_begin("framing_boundaries");
++        for (integer bi = 0; bi < 4; bi = bi + 1) begin
++            logic [8:0] nbytes;
++            logic [11:0] lower_bits;
++            logic [11:0] upper_bits;
++            if (bi == 0) nbytes = 9'd1;
++            else if (bi == 1) nbytes = 9'd2;
++            else if (bi == 2) nbytes = 9'd255;
++            else nbytes = 9'd256;
++            lower_bits = 12'((8 * (nbytes - 1)) + 1);
++            upper_bits = 12'(8 * nbytes);
++            for (integer edge = 0; edge < 2; edge = edge + 1) begin
++                logic [11:0] vbits;
++                logic [15:0] ftag;
++                vbits = (edge == 0) ? lower_bits : upper_bits;
++                ftag = 16'h5000 + 16'(bi * 2 + edge);
++                do_reset(2);
++                begin_pending(ftag, nbytes[7:0], 4'd0, 1'b1, 4'd0, vbits, nbytes);
++                drive_meta(ftag, 2'd0, nbytes[7:0], 4'd0, 1'b1, 4'd0,
++                           vbits, nbytes, accepted);
++                check_val(accepted, 1, "boundary framing descriptor accepted");
++                for (integer j = 0; j < nbytes; j = j + 1) begin
++                    logic [7:0] bdata;
++                    bdata = 8'((j * 13 + bi * 7 + edge) & 255);
++                    pending_byte(bdata);
++                    drive_byte(bdata, (j == (nbytes - 1)), byte_ok);
++                    check_val(byte_ok, 1, "boundary payload byte accepted");
++                end
++                commit_pending();
++                check_val(level, 1, "boundary frame level");
++                drain_one(0, 0);
++                check_val(level, 0, "boundary frame retired");
++                check_val(stat_retired, 1, "boundary retired count");
++                check_invariant("boundary counter invariant");
++            end
++        end
++        case_end();
++
++        $display("TB_SUMMARY cases=%0d pass=%0d fail=%0d checks=%0d",
++                 cases, pass_cases, (cases - pass_cases), checks);
++        $display("TB_STAT cases=%0d", cases);
++        $display("TB_STAT checks=%0d", checks);
++        $display("TB_STAT failures=%0d", failures);
++        $display("TB_STAT final_level=%0d", level);
++        $display("TB_STAT final_stat_meta=%0d", stat_meta);
++        $display("TB_STAT final_stat_in_bytes=%0d", stat_in_bytes);
++        $display("TB_STAT final_stat_retired=%0d", stat_retired);
++        $display("TB_STAT final_stat_aborted=%0d", stat_aborted);
++        $display("TB_STAT final_stat_fault=%0d", stat_fault);
++        if ((failures == 0) && (pass_cases == cases)) begin
++            $display("TB_END pass");
++        end else begin
++            $display("TB_END fail");
++        end
++        $finish;
++    end
++
++endmodule
++
++`ifndef GUARD_W
+*** End Patch

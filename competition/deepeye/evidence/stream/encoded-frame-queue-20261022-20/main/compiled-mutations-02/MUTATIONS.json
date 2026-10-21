@@ -1,0 +1,18 @@
+[
+  {
+    "name": "early_metadata",
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\compiled-mutations-02\\early_metadata.sv",
+    "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+    "mutant_sha256": "5bcdf5bcb2aeead18dbd5e37e4a3c903aae83cb6f2d3c1d604e51c8fa23f0045",
+    "before": "(slot_status[head_q] == SLOT_SEAL) &&\n                            !slot_meta_done",
+    "after": "((slot_status[head_q] == SLOT_SEAL) || (slot_status[head_q] == SLOT_RECV)) &&\n                            !slot_meta_done"
+  },
+  {
+    "name": "ignore_cancel",
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\compiled-mutations-02\\ignore_cancel.sv",
+    "source_sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+    "mutant_sha256": "e34ff3bd3c0de131cc87a45d856c48b58f42928a0540e97fa9cbe4abd8e90c01",
+    "before": "end else if (cancel) begin",
+    "after": "end else if (1'b0 && cancel) begin"
+  }
+]

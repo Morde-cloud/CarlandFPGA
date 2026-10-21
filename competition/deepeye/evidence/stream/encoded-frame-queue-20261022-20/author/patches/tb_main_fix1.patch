@@ -1,0 +1,16 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+     int exp_head = 0;
+     int exp_tail = 0;
++
++    bit accepted = 1'b0;
++    bit byte_ok = 1'b0;
+@@
+         repeat (cycles) @(posedge clk);
+         #1;
++        exp_head = 0;
++        exp_tail = 0;
++        pend_active = 1'b0;
+         check_val(level, 0, "reset level");
+*** End Patch

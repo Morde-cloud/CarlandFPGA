@@ -1,0 +1,209 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+         end
+         case_end();
+ 
++        case_begin("early_last_fault2");
++        for (integer li = 0; li < 5; li = li + 1) begin
++            integer len;
++            if (li == 0) len = 2;
++            else if (li == 1) len = 3;
++            else if (li == 2) len = 4;
++            else if (li == 3) len = 8;
++            else len = 16;
++            for (integer pi = 0; pi < 3; pi = pi + 1) begin
++                integer pos;
++                integer j;
++                if (pi == 0) pos = 0;
++                else if (pi == 1) pos = ((len / 2) < (len - 1)) ? (len / 2) : 0;
++                else pos = len - 2;
++                do_reset(2);
++                drive_meta(16'h8000 + 16'(li * 3 + pi), 2'd0, len[7:0], 4'd0,
++                           1'b1, 4'd0, 12'(8 * len), 9'(len), accepted);
++                check_val(accepted, 1, "early-last descriptor accepted");
++                check_val(level, 1, "early-last reservation level");
++                check_val(receiving, 1, "early-last payload open");
++                for (j = 0; j <= pos; j = j + 1) begin
++                    drive_byte(8'((j * 5 + li * 11 + pi * 3) & 255),
++                               (j == pos), byte_ok);
++                    check_val(byte_ok, 1, "early-last byte accepted");
++                end
++                check_val(faulted, 1, "early last latches faulted");
++                check_val(fault_code, 2, "early last fault_code two");
++                check_val(fault_event, 1, "early last fault_event");
++                check_val(receiving, 0, "early last closes payload");
++                check_val(level, 1, "early last keeps reservation");
++                check_val(stat_meta, 1, "early last stat_meta");
++                check_val(stat_in_bytes, pos + 1, "early last byte count");
++                check_val(stat_fault, 1, "early last stat_fault");
++                check_val(out_meta_valid, 0, "early last never visible");
++                check_val(out_valid, 0, "early last no payload output");
++                @(negedge clk);
++                #1;
++                check_val(fault_event, 0, "early last event clears");
++                check_val(faulted, 1, "early last faulted sticky");
++                drive_meta(16'h8F00, 2'd0, 8'd1, 4'd0, 1'b1, 4'd0, 12'd8, 9'd1, accepted);
++                check_val(accepted, 0, "faulted rejects after early last");
++                do_cancel(1, 64'd1);
++                check_val(stat_meta, 1, "early last cancel preserves meta");
++                check_val(stat_in_bytes, pos + 1, "early last cancel preserves bytes");
++                check_val(stat_fault, 1, "early last cancel preserves fault");
++                check_val(stat_aborted, 1, "early last abort count");
++            end
++        end
++        case_end();
++
++        case_begin("missing_last_fault2");
++        for (integer mi = 0; mi < 4; mi = mi + 1) begin
++            integer mlen;
++            integer mj;
++            if (mi == 0) mlen = 1;
++            else if (mi == 1) mlen = 2;
++            else if (mi == 2) mlen = 255;
++            else mlen = 256;
++            do_reset(2);
++            drive_meta(16'h9000 + 16'(mi), 2'd0, mlen[7:0], 4'd0, 1'b1, 4'd0,
++                       12'(8 * mlen), 9'(mlen), accepted);
++            check_val(accepted, 1, "missing-last descriptor accepted");
++            for (mj = 0; mj < mlen; mj = mj + 1) begin
++                drive_byte(8'((mj * 7 + mi * 17) & 255), 1'b0, byte_ok);
++                check_val(byte_ok, 1, "missing-last byte accepted");
++            end
++            check_val(faulted, 1, "missing last latches faulted");
++            check_val(fault_code, 2, "missing last fault_code two");
++            check_val(fault_event, 1, "missing last fault_event");
++            check_val(receiving, 0, "missing last closes payload");
++            check_val(level, 1, "missing last keeps reservation");
++            check_val(stat_meta, 1, "missing last stat_meta");
++            check_val(stat_in_bytes, mlen, "missing last byte count");
++            check_val(stat_fault, 1, "missing last stat_fault");
++            check_val(out_meta_valid, 0, "missing last never visible");
++            check_val(out_valid, 0, "missing last no payload output");
++            @(negedge clk);
++            #1;
++            check_val(fault_event, 0, "missing last event clears");
++            do_cancel(1, 64'd1);
++            check_val(stat_in_bytes, mlen, "missing last cancel preserves bytes");
++        end
++        case_end();
++
++        case_begin("invalid_framing_fault1");
++        fault1_case(2'd0, 9'd0, 12'd0, 16'hA001);
++        fault1_case(2'd0, 9'd257, 12'd2048, 16'hA002);
++        fault1_case(2'd0, 9'd511, 12'd4088, 16'hA003);
++        fault1_case(2'd0, 9'd4, 12'd0, 16'hA004);
++        fault1_case(2'd0, 9'd4, 12'd24, 16'hA005);
++        fault1_case(2'd0, 9'd4, 12'd33, 16'hA006);
++        fault1_case(2'd0, 9'd256, 12'd2040, 16'hA007);
++        fault1_case(2'd0, 9'd256, 12'd2049, 16'hA008);
++        fault1_case(2'd1, 9'd1, 12'd0, 16'hA009);
++        fault1_case(2'd1, 9'd0, 12'd8, 16'hA00A);
++        fault1_case(2'd2, 9'd1, 12'd0, 16'hA00B);
++        fault1_case(2'd3, 9'd1, 12'd0, 16'hA00C);
++        case_end();
++
++        case_begin("upstream_error_forward");
++        error_forward_case(2'd1, 16'hB001);
++        error_forward_case(2'd2, 16'hB002);
++        error_forward_case(2'd3, 16'hB003);
++        do_reset(2);
++        push_error(16'hB010, 2'd1, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0);
++        drive_meta(16'hB010, 2'd1, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "consecutive error one accepted");
++        drain_one(0, 0);
++        push_error(16'hB011, 2'd2, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0);
++        drive_meta(16'hB011, 2'd2, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "consecutive error two accepted");
++        drain_one(0, 0);
++        check_val(stat_retired, 2, "consecutive errors retired");
++        check_val(stat_meta, 2, "consecutive errors stat_meta");
++        do_reset(2);
++        push_error(16'hB020, 2'd1, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0);
++        drive_meta(16'hB020, 2'd1, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "error before success accepted");
++        accept_success_frame(16'hB021, 2, 8'hD0, accepted);
++        check_val(level, 2, "error before success fills queue");
++        drain_one(2, 2);
++        check_val(level, 1, "error before success retires first");
++        push_error(16'hB022, 2'd2, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0);
++        drive_meta(16'hB022, 2'd2, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "error after success accepted");
++        check_val(level, 2, "error after success fills queue");
++        drain_all();
++        check_val(stat_retired, 3, "error success error retired");
++        check_val(stat_meta, 3, "error success error stat_meta");
++        check_val(stat_fault, 0, "upstream errors are not local faults");
++        case_end();
++
++        case_begin("fault_drains_older");
++        do_reset(2);
++        accept_success_frame(16'hC001, 2, 8'hE0, accepted);
++        check_val(level, 1, "older frame sealed level");
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 1, "older frame visible before fault");
++        check_val(out_meta_tag, 16'hC001, "older frame tag before fault");
++        drive_meta(16'hC002, 2'd0, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "fault descriptor accepted alongside older frame");
++        check_val(faulted, 1, "fault latched beside older frame");
++        check_val(fault_code, 1, "fault code one beside older frame");
++        check_val(level, 2, "fault reserved tail slot");
++        check_val(stat_meta, 2, "fault stat_meta");
++        check_val(stat_fault, 1, "fault stat_fault");
++        @(negedge clk);
++        #1;
++        check_val(out_meta_valid, 1, "older frame still drains after fault");
++        check_val(out_meta_tag, 16'hC001, "older frame tag still stable");
++        check_meta_expected();
++        drain_one(3, 3);
++        check_val(level, 1, "poisoned reservation remains after older drain");
++        check_val(stat_retired, 1, "older frame retired");
++        check_val(out_meta_valid, 0, "poisoned reservation not visible");
++        check_val(out_valid, 0, "poisoned reservation no payload");
++        check_val(in_meta_ready, 0, "faulted queue rejects new input");
++        do_cancel(1, 64'd1);
++        check_val(stat_meta, 2, "fault drain cancel preserves meta");
++        check_val(stat_retired, 1, "fault drain cancel preserves retired");
++        check_val(stat_fault, 1, "fault drain cancel preserves fault");
++        check_val(stat_aborted, 1, "fault drain abort counts poisoned slot");
++        case_end();
++
++        case_begin("fault_event_single_pulse");
++        do_reset(2);
++        drive_meta(16'hC101, 2'd0, 8'd0, 4'd0, 1'b1, 4'd0, 12'd0, 9'd0, accepted);
++        check_val(accepted, 1, "pulse fault descriptor accepted");
++        check_val(fault_event, 1, "pulse fault event first cycle");
++        for (integer pe = 0; pe < 4; pe = pe + 1) begin
++            @(negedge clk);
++            #1;
++            check_val(fault_event, 0, "pulse fault event clears");
++            drive_meta(16'hC110 + 16'(pe), 2'd0, 8'd1, 4'd0, 1'b1, 4'd0,
++                       12'd8, 9'd1, accepted);
++            check_val(accepted, 0, "pulse fault rejects input");
++            check_val(stat_fault, 1, "pulse fault tallied once");
++        end
++        do_cancel(1, 64'd1);
++        case_end();
++
++        case_begin("duplicate_aba_tags");
++        do_reset(2);
++        accept_success_frame(16'h6001, 2, 8'h11, accepted);
++        accept_success_frame(16'h6001, 3, 8'h21, accepted);
++        check_val(level, 2, "duplicate tags fill two slots");
++        drain_one(0, 0);
++        drain_one(0, 0);
++        check_val(stat_retired, 2, "duplicate tags retired two frames");
++        accept_success_frame(16'h6001, 1, 8'h31, accepted);
++        drain_one(0, 0);
++        accept_success_frame(16'h6002, 2, 8'h41, accepted);
++        drain_one(0, 0);
++        accept_success_frame(16'h6001, 4, 8'h51, accepted);
++        drain_one(0, 0);
++        check_val(stat_retired, 5, "ABA tags retired five frames");
++        check_val(level, 0, "ABA tags final level");
++        case_end();
++
+         $display("TB_SUMMARY cases=%0d pass=%0d fail=%0d checks=%0d",
+                  cases, pass_cases, (cases - pass_cases), checks);
+*** End Patch

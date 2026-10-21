@@ -1,0 +1,15 @@
+*** Begin Patch
+*** Update File: .local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv
+@@
+-            for (integer edge = 0; edge < 2; edge = edge + 1) begin
++            for (integer bed = 0; bed < 2; bed = bed + 1) begin
+                 logic [11:0] vbits;
+                 logic [15:0] ftag;
+-                vbits = (edge == 0) ? lower_bits : upper_bits;
+-                ftag = 16'h5000 + 16'(bi * 2 + edge);
++                vbits = (bed == 0) ? lower_bits : upper_bits;
++                ftag = 16'h5000 + 16'(bi * 2 + bed);
+@@
+-                    bdata = 8'((j * 13 + bi * 7 + edge) & 255);
++                    bdata = 8'((j * 13 + bi * 7 + bed) & 255);
+*** End Patch

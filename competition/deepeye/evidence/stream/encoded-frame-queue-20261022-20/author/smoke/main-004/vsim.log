@@ -1,0 +1,93 @@
+# vsim -c -do "run -all; quit -f" -l vsim.log tb_encoded_frame_queue 
+# Start time: 01:11:48 on Oct 22,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_encoded_frame_queue(fast)
+# run -all
+# TB_BEGIN tb=encoded_frame_queue
+# CASE_BEGIN name=reset_idle
+# CASE_END name=reset_idle status=pass checks=26
+# CASE_BEGIN name=single_success
+# CASE_END name=single_success status=pass checks=109
+# CASE_BEGIN name=two_deep_stall
+# CASE_END name=two_deep_stall status=pass checks=120
+# CASE_BEGIN name=no_same_edge_bypass
+# CASE_END name=no_same_edge_bypass status=pass checks=40
+# CASE_BEGIN name=full_old_level_no_credit
+# CASE_END name=full_old_level_no_credit status=pass checks=86
+# CASE_BEGIN name=framing_boundaries
+# CASE_END name=framing_boundaries status=pass checks=6504
+# CASE_BEGIN name=early_last_fault2
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=21771
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=21861
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=21951
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22041
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22141
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22241
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22331
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22441
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22551
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22641
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22771
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=22921
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=23011
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=23181
+# TB_CHECK_FAIL case=early_last_fault2 msg=early last event clears actual=1 expected=0 time=23411
+# CASE_END name=early_last_fault2 status=fail checks=908
+# CASE_BEGIN name=missing_last_fault2
+# TB_CHECK_FAIL case=missing_last_fault2 msg=missing last event clears actual=1 expected=0 time=23501
+# TB_CHECK_FAIL case=missing_last_fault2 msg=missing last event clears actual=1 expected=0 time=23591
+# TB_CHECK_FAIL case=missing_last_fault2 msg=missing last event clears actual=1 expected=0 time=26211
+# TB_CHECK_FAIL case=missing_last_fault2 msg=missing last event clears actual=1 expected=0 time=28841
+# CASE_END name=missing_last_fault2 status=fail checks=714
+# CASE_BEGIN name=invalid_framing_fault1
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=28911
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=28991
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29071
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29151
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29231
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29311
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29391
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29471
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29551
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29631
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29711
+# TB_CHECK_FAIL case=invalid_framing_fault1 msg=fault_event clears after one cycle actual=1 expected=0 time=29791
+# CASE_END name=invalid_framing_fault1 status=fail checks=660
+# CASE_BEGIN name=upstream_error_forward
+# CASE_END name=upstream_error_forward status=pass checks=408
+# CASE_BEGIN name=fault_drains_older
+# CASE_END name=fault_drains_older status=pass checks=142
+# CASE_BEGIN name=fault_event_single_pulse
+# TB_CHECK_FAIL case=fault_event_single_pulse msg=pulse fault event clears actual=1 expected=0 time=30641
+# CASE_END name=fault_event_single_pulse status=fail checks=51
+# CASE_BEGIN name=duplicate_aba_tags
+# CASE_END name=duplicate_aba_tags status=pass checks=194
+# TB_SUMMARY cases=13 pass=9 fail=4 checks=9962
+# TB_STAT cases=13
+# TB_STAT checks=9962
+# TB_STAT failures=32
+# TB_STAT final_level=0
+# TB_STAT final_stat_meta=5
+# TB_STAT final_stat_in_bytes=12
+# TB_STAT final_stat_retired=5
+# TB_STAT final_stat_aborted=0
+# TB_STAT final_stat_fault=0
+# TB_END fail
+# ** Note: $finish    : D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv(1081)
+#    Time: 31106 ns  Iteration: 0  Instance: /tb_encoded_frame_queue
+# End time: 01:11:49 on Oct 22,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

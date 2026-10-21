@@ -1,0 +1,201 @@
+*** Begin Patch
+*** Add File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/stream/encoded_frame_queue_candidate.md
++# deepeye_encoded_frame_queue candidate
++
++Status: candidate-only internal RTL. This document describes an implementation
++candidate, not a public ABI, register map, codec format, board result or system
++acceptance. Work `B-ENCODED-FRAME-QUEUE-RTL-20261022-20-v1`; operation
++`B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20`; task
++`DEEPEYE-IMPLEMENTATION-20261014/v1`; contract
++`DEEPEYE-HUMAN-LOCK-20261014/revision1` (H01-H15), requirements SHA256
++`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`; design
++`1011259415a0916054eb580687612580bc1e5f09`; baseline head
++`aef19351f1836b23f9a714bc5626db4eb4df98c5`.
++
++## Storage and boundary
++
++- Single clock, synchronous active-high `rst` and `cancel`.
++- Exactly two payload banks of `256 x 8` bits: 4096 payload bits (512 bytes).
++- Exactly two descriptor records. No dynamic, unbounded or externally addressed
++  storage is introduced.
++- The file contains only internal candidate RTL ports. There is no public
++  message type, public enum, TRACE header, CRC, source/tick/session/profile
++  field, register map, BOOT source, motion authority or board claim.
++- `fault_code` is a local two-bit diagnostic code, not a public enum:
++  `0` none, `1` invalid descriptor framing, `2` accepted-byte last/length
++  mismatch, `3` reserved.
++
++## Internal ports
++
++| Direction | Name | Width |
++|---|---|---:|
++| input | `clk` | 1 |
++| input | `rst` | 1 |
++| input | `cancel` | 1 |
++| input | `in_meta_valid` | 1 |
++| output | `in_meta_ready` | 1 |
++| input | `in_meta_tag` | 16 |
++| input | `in_meta_error` | 2 |
++| input | `in_meta_count` | 8 |
++| input | `in_meta_e` | 4 |
++| input | `in_meta_raw` | 1 |
++| input | `in_meta_k` | 4 |
++| input | `in_meta_valid_bits` | 12 |
++| input | `in_meta_bytes` | 9 |
++| input | `in_valid` | 1 |
++| output | `in_ready` | 1 |
++| input | `in_data` | 8 |
++| input | `in_last` | 1 |
++| output | `out_meta_valid` | 1 |
++| input | `out_meta_ready` | 1 |
++| output | `out_meta_tag` | 16 |
++| output | `out_meta_error` | 2 |
++| output | `out_meta_count` | 8 |
++| output | `out_meta_e` | 4 |
++| output | `out_meta_raw` | 1 |
++| output | `out_meta_k` | 4 |
++| output | `out_meta_valid_bits` | 12 |
++| output | `out_meta_bytes` | 9 |
++| output | `out_valid` | 1 |
++| input | `out_ready` | 1 |
++| output | `out_data` | 8 |
++| output | `out_last` | 1 |
++| output | `level` | 2 |
++| output | `receiving` | 1 |
++| output | `faulted` | 1 |
++| output | `fault_event` | 1 |
++| output | `fault_code` | 2 |
++| output | `stat_meta` | `STAT_W` |
++| output | `stat_in_bytes` | `STAT_W` |
++| output | `stat_retired` | `STAT_W` |
++| output | `stat_aborted` | `STAT_W` |
++| output | `stat_fault` | `STAT_W` |
++
++`STAT_W` defaults to 32 and is legal from 2 through 32. It controls only the
++five diagnostic counters. Values outside that range elaborate with the module's
++own simulation-time fatal
++`DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=<decimal>`; the initial block
++is enclosed in an explicit synthesis translate-off/on region. A guard fatal is
++evidence of parameter rejection, never a compile failure or ordinary PASS.
++
++## Handshake and visibility
++
++- Every ready/valid decision uses pre-edge state. `rst` or `cancel` drives
++  `in_meta_ready`, `in_ready`, `out_meta_valid` and `out_valid` low and
++  suppresses every transfer on that edge. Reset has priority over cancel.
++- Admission is `in_meta_ready iff !faulted && !receiving && level < 2` on the
++  old state. A simultaneous retire does not create credit when old `level == 2`;
++  the resulting one-cycle full-queue bubble is intentional.
++- One accepted descriptor immediately reserves the tail slot and increments
++  `level` and `stat_meta`. Only one input payload can be open.
++- No input-to-output same-edge bypass, no descriptor-to-first-payload
++  acceptance, and no output-metadata-to-first-output-byte delivery.
++- A success frame becomes visible only after its final accepted payload byte
++  seals it. Its metadata handshake precedes its payload. An upstream-error
++  frame retires on its metadata handshake and never emits payload.
++- `out_last` is generated from the sealed byte length. Metadata and payload
++  remain stable while their valid is asserted and ready is low. Frames do not
++  interleave. Duplicate tags are legal and are not slot identities.
++
++## Framing and faults
++
++- `in_meta_error == 0`: legal only for `bytes` in 1..256 and
++  `8*(bytes-1) < valid_bits <= 8*bytes`, computed with sufficient unsigned
++  width. The descriptor fields are stored and transported unchanged.
++- `in_meta_error != 0`: legal only with `bytes == 0` and `valid_bits == 0`.
++  The descriptor is sealed immediately and forwarded unchanged with no payload.
++  Code 3 is accepted as an opaque injected code; this queue assigns it no
++  producer or public meaning.
++- Any other descriptor reserves a slot but poisons it, latches `faulted`,
++  pulses `fault_event` once, sets `fault_code=1`, and increments `stat_fault`
++  once. The poisoned slot is never exposed and no payload is accepted for it.
++- Each accepted payload byte increments `stat_in_bytes`, including an offending
++  byte. At accepted index `i`, `in_last` must equal `(i == bytes-1)`. An early
++  last or a missing last at the declared final byte poisons the reservation,
++  sets `fault_code=2`, and increments `stat_fault` once. Accepted indices are
++  always 0..255; there is no out-of-bounds write, implicit drain or guessed
++  re-synchronization.
++- `faulted` is sticky until reset/cancel and disables only new input. Older
++  sealed frames may still drain in order. The poisoned reservation is retained
++  until explicit cancellation. Silence is not a timeout.
++- Cancel gates all ready/valid low on its edge, discards every allocated slot
++  (sealed, partially output, partial input or poisoned), adds the pre-edge
++  `level` to `stat_aborted` with saturation, preserves the other counters, and
++  clears local fault/control state. Held cancel cannot count an old slot twice.
++  Reset clears data-flow control and all counters.
++- Counters saturate at `2**STAT_W - 1` and never affect data flow. Before
++  saturation and between resets,
++  `stat_meta == stat_retired + stat_aborted + level`.
++
++## Composition with the op09 stream
++
++The composition fixture instantiates the unchanged op09 `deepeye_block_stream`,
++which already instantiates the pinned op08 `deepeye_block_encoder`, plus this
++queue. There is no second encoder in series. The fixture demonstrates two
++complete encoded frames retained while the consumer metadata is stalled,
++backpressure at the stream metadata when both queue slots are allocated, fresh
++RAW and Rice frames, source errors 1 and 2, duplicate tags, cancellation and a
++full 256-byte encoded payload. It introduces no new public codec format.
++
++## Verification evidence
++
++Final actual ModelSim run:
++
++- Result: `competition/deepeye/evidence/stream/encoded-frame-queue-20261022-20/author/run-final-01/RUN_RESULT.json`
++  SHA256 `b7ff221457005f407eac32e037d288c43ee4a1db56aae289d29d65aae7669a23`.
++- Runner result: PASS; 218 runner checks, 0 failed; six suites.
++- `standalone`: 23 cases, 23 pass, 0 fail, 10,949 TB checks. Final
++  `level=0`, `stat_meta=8`, `stat_in_bytes=7`, `stat_retired=8`,
++  `stat_aborted=0`, `stat_fault=0`.
++- `small` (`STAT_W=2`): 1 case, 1 pass, 195 TB checks. Final
++  `stat_meta=3`, `stat_in_bytes=1`, `stat_retired=1`, `stat_aborted=3`,
++  `stat_fault=3`, demonstrating public-port saturation.
++- `compose`: 3 cases, 3 pass, 1,102 TB checks. Final queue level 0,
++  retired 1, in-bytes 256, no local fault.
++- `guard-0`, `guard-1`, `guard-33`: each compile clean and emit exactly
++  `DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=0`, `=1` and `=33`,
++  respectively, with `Errors: 1, Warnings: 0`; no unrelated error or warning.
++- Toolchain: ModelSim SE-64 10.7, vsim 10.7 Simulator 2017.12,
++  vlog 10.7 Compiler 2017.12, from `D:/modelsim1/win64`.
++- The runner records each compilation's source snapshot, argv, cwd, separate
++  raw stdout/stderr, true process exit and timeout state. It requires fresh
++  output, exact `TB_BEGIN`/`TB_END` markers, a complete unique structured
++  summary, every selected case to pass, case-check sums to agree, zero
++  `Errors`/`Warnings`, and exact guard-fatal identity. It is not a synthetic
++  process seam.
++
++Delivered source hashes:
++
++- `competition/deepeye/fpga/stream/deepeye_encoded_frame_queue.sv`:
++  `68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a`.
++- `competition/deepeye/tests/rtl/stream/tb_encoded_frame_queue.sv`:
++  `cca5d51e34caa64b2c7d80b6d7f8c36c4aa729d0905981beb4c0afbae50455ef`.
++- `competition/deepeye/tools/stream/run_encoded_frame_queue.py`:
++  `0d48490c3c096eb9e421450c39222461acd3add536127f7a5e3f3e452560116d`.
++- Pinned encoder `870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5`;
++  pinned stream `c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4`;
++  both verified unchanged by the runner.
++
++Preserved failed or superseded attempts are under the author evidence
++`smoke/` directory and were not overwritten. `compose-001` exposed testbench
++fixture defects (undriven observation nets, misplaced checks, fixed-cycle
++sampling and cancellation before the second frame sealed); it failed 22 checks
++and was corrected under a new `compose-002` attempt. `main-001` through
++`main-005` were retained testbench-correction attempts before `main-006`
++passed. `small-001` retained a sampling failure before `small-002` passed.
++`runner-smoke-01` validated the ordinary and guard runner branches before the
++final six-suite run.
++
++## Limits
++
++- This is RTL simulation only. No synthesis, implementation, timing, resource,
++  board or system result is claimed. All29/G05/B06/R03/board/system remain
++  `not_run`.
++- The author-directed TB is useful evidence but is not independent product
++  acceptance. The product main owns the frozen descriptor/byte model,
++  exhaustive 2048 framing combinations, at least 1000 ring wraps, exact
++  op08/op09 composition expectations, isolated RTL mutants and final review.
++- The author did not read or import main oracle/vectors.
++- No commit, push, peer/group publication, credential, service, configuration,
++  SQL, queue or physical-board action was performed.
+*** End Patch

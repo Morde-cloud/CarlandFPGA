@@ -1,0 +1,713 @@
+{
+  "actual_head": "aef19351f1836b23f9a714bc5626db4eb4df98c5",
+  "artifact_count": 41,
+  "artifact_hashes": {
+    "CONSOLE.txt": "884694d257cce81917ccf3487d9159a656c4b5c6bd716ce6c5d430bba7b9f0fc",
+    "RUN_INVOCATION.json": "63ac9bf0604e99af600f34a5ba0af83c7a64718bb19a0c516ffb2540227eeb45",
+    "guard-33/source_snapshot.json": "83d14c4cb6a058697ee2f51da272cd2f0651df2678e193be5919ca41510ef86e",
+    "guard-33/sources/deepeye_encoded_frame_queue.sv": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+    "guard-33/sources/tb_encoded_frame_queue.sv": "cca5d51e34caa64b2c7d80b6d7f8c36c4aa729d0905981beb4c0afbae50455ef",
+    "guard-33/steps/01-vlib/process.json": "d0fe1feed45134ec20908522640aadbb6760c22f0ad1214a27199be843890c07",
+    "guard-33/steps/01-vlib/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "guard-33/steps/01-vlib/stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "guard-33/steps/02-vlog/process.json": "c4aa6b71ab102fbab0caf0ccc233823c9fe5f18d1001db167fe0996b92d0fc5a",
+    "guard-33/steps/02-vlog/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "guard-33/steps/02-vlog/stdout.txt": "1e54798f4954b454376c195aca055a7016ad4b9eb299dbb11d426580a5b59226",
+    "guard-33/steps/03-vsim/process.json": "250e6f09bdb75c89ad02af180e0fb151bdcd45bcf0cf9cb2e80341e9b9cabbcf",
+    "guard-33/steps/03-vsim/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "guard-33/steps/03-vsim/stdout.txt": "582cf41f07e372919ad0bae1d96a3af7174cf4d43f2e69b81b4611d13894ece1",
+    "pinned_hashes.json": "2aa1d95b1501f6c36ac22a675c2f6c7ba3242db35c522cfb46a0118171b12714",
+    "setup/git-head/process.json": "8c1f2b2270028c905e8d30a72fe1e835f3e0baad66cbe29e8c72c86c828e56a4",
+    "setup/git-head/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "setup/git-head/stdout.txt": "d1dc5ed4aa357a5f31c601d9bb41b57a44a86a00cc0745be7ca596db7e6cbb6e",
+    "setup/git-status/process.json": "e5cf375bd6df433dde45ce1ff2c1c888bd63bb36b7f11bcf64b0728a7b11a428",
+    "setup/git-status/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "setup/git-status/stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_manifest.json": "57e1278bdd3b8a3460ecafcda5164ffefa2c02b4f4296050108ec795529376fe",
+    "standalone/source_snapshot.json": "3f542156f8ffee9eccdba93dfe9b834a12042c9e11aa2676d1a7e3a990bd5df7",
+    "standalone/sources/deepeye_encoded_frame_queue.sv": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+    "standalone/sources/tb_encoded_frame_queue.sv": "cca5d51e34caa64b2c7d80b6d7f8c36c4aa729d0905981beb4c0afbae50455ef",
+    "standalone/steps/01-vlib/process.json": "f2295a7956f6c12c87fb5ef26d9d2b03a98a7aa025c619633457a32f005a5d78",
+    "standalone/steps/01-vlib/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "standalone/steps/01-vlib/stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "standalone/steps/02-vlog/process.json": "90b7eb0f73ab3b53fb027d773f24d4126f5c7efee51bce69fc924d3b59e27e1c",
+    "standalone/steps/02-vlog/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "standalone/steps/02-vlog/stdout.txt": "07592fbbac68cbd1c9e0315c9f006c244193a6a3bded3069dedd908059cb3da6",
+    "standalone/steps/03-vsim/process.json": "c6aaa858d856ebcaec866a2ab4582010b889154f80405044d879129613bf498f",
+    "standalone/steps/03-vsim/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "standalone/steps/03-vsim/stdout.txt": "fc0ef4b40badb303dd51b7f0dddd598e5305173a471ce83080879b24288fbe31",
+    "toolchain.json": "102582e04109cda71c581d425e53d0e96e584013d1627363245eee775f7ec48d",
+    "toolchain/vlog.exe-version/process.json": "2cb9ed09b25bd82789b586cdba3ca3e042566592d8e6221b336121c9bef627c7",
+    "toolchain/vlog.exe-version/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "toolchain/vlog.exe-version/stdout.txt": "caeea70cb2a6da2e9f39bd8bf328d511f82b59b36b613eb447ce36face28ae12",
+    "toolchain/vsim.exe-version/process.json": "dd4d7978b0f95c34def73226716dc6da3098d8281c0a8c65218e0dbbfd09d9a6",
+    "toolchain/vsim.exe-version/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "toolchain/vsim.exe-version/stdout.txt": "caeea70cb2a6da2e9f39bd8bf328d511f82b59b36b613eb447ce36face28ae12"
+  },
+  "artifact_manifest": "ARTIFACTS.json",
+  "artifact_manifest_sha256": "09badc2f1f1553e6efc91a02cb9dabe0fc1a3229e081b8434b3074488f7f2fc8",
+  "baseline_head": "aef19351f1836b23f9a714bc5626db4eb4df98c5",
+  "checks_failed": 1,
+  "checks_run": 87,
+  "elapsed_s": 0.468,
+  "finished_at": "2026-10-21T17:44:21.962895Z",
+  "global_checks": [
+    {
+      "detail": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_encoded_frame_queue.sv",
+      "name": "source-exists-queue",
+      "pass": true
+    },
+    {
+      "detail": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\stream\\tb_encoded_frame_queue.sv",
+      "name": "source-exists-tb",
+      "pass": true
+    },
+    {
+      "detail": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\codec\\deepeye_block_encoder.sv",
+      "name": "source-exists-encoder",
+      "pass": true
+    },
+    {
+      "detail": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_block_stream.sv",
+      "name": "source-exists-stream",
+      "pass": true
+    },
+    {
+      "detail": "actual=870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5 expected=870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+      "name": "pinned-hash-encoder",
+      "pass": true
+    },
+    {
+      "detail": "actual=c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4 expected=c8f8c0d99769efc64a91402ee23e7157368ff90ec765db5c413f02546715fff4",
+      "name": "pinned-hash-stream",
+      "pass": true
+    },
+    {
+      "detail": "returncode=0",
+      "name": "git-head-process",
+      "pass": true
+    },
+    {
+      "detail": "actual=aef19351f1836b23f9a714bc5626db4eb4df98c5 expected=aef19351f1836b23f9a714bc5626db4eb4df98c5",
+      "name": "git-head-baseline",
+      "pass": true
+    },
+    {
+      "detail": "$fatal(1, \"DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=%0d\", STAT_W);",
+      "name": "guard-static-exact-fatal",
+      "pass": true
+    },
+    {
+      "detail": "off_index=10151 fatal_index=10220",
+      "name": "guard-static-translate-off",
+      "pass": true
+    },
+    {
+      "detail": "fatal_index=10220 on_index=10323",
+      "name": "guard-static-translate-on",
+      "pass": true
+    },
+    {
+      "detail": "D:\\modelsim1\\win64\\vlib.exe",
+      "name": "tool-exists-vlib.exe",
+      "pass": true
+    },
+    {
+      "detail": "D:\\modelsim1\\win64\\vlog.exe",
+      "name": "tool-exists-vlog.exe",
+      "pass": true
+    },
+    {
+      "detail": "D:\\modelsim1\\win64\\vsim.exe",
+      "name": "tool-exists-vsim.exe",
+      "pass": true
+    },
+    {
+      "detail": "Model Technology synthetic version seam",
+      "name": "tool-version-vlog.exe",
+      "pass": true
+    },
+    {
+      "detail": "Model Technology synthetic version seam",
+      "name": "tool-version-vsim.exe",
+      "pass": true
+    }
+  ],
+  "limits": [
+    "RTL simulation only; no synthesis, implementation, timing or board result.",
+    "Author-directed tests are not independent main acceptance.",
+    "All29/G05/B06/R03/board/system remain not_run."
+  ],
+  "model": "synthetic-process-seam-not-inference",
+  "operation_id": "B-DEEPEYE-ENCODED-FRAME-QUEUE-20261022-20",
+  "out_dir": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run",
+  "product_root": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014",
+  "reasoning_effort": "not-applicable",
+  "schema": 1,
+  "started_at": "2026-10-21T17:44:21.836519Z",
+  "status": "fail",
+  "suites": {
+    "guard-33": {
+      "checks": [
+        {
+          "detail": "source=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_encoded_frame_queue.sv snapshot=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33\\sources\\deepeye_encoded_frame_queue.sv",
+          "name": "source-snapshot-queue-hash",
+          "pass": true
+        },
+        {
+          "detail": "source=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\stream\\tb_encoded_frame_queue.sv snapshot=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33\\sources\\tb_encoded_frame_queue.sv",
+          "name": "source-snapshot-tb-hash",
+          "pass": true
+        },
+        {
+          "detail": "None",
+          "name": "vlib-spawn",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "vlib-timeout",
+          "pass": true
+        },
+        {
+          "detail": "returncode=0 expected=0",
+          "name": "vlib-exit",
+          "pass": true
+        },
+        {
+          "detail": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33\\work",
+          "name": "vlib-work-directory",
+          "pass": true
+        },
+        {
+          "detail": "None",
+          "name": "vlog-spawn",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "vlog-timeout",
+          "pass": true
+        },
+        {
+          "detail": "returncode=0 expected=0",
+          "name": "vlog-exit",
+          "pass": true
+        },
+        {
+          "detail": "[]",
+          "name": "compile-strict-lines",
+          "pass": true
+        },
+        {
+          "detail": "count=1 values=[('0', '0')]",
+          "name": "compile-tally-unique",
+          "pass": true
+        },
+        {
+          "detail": "values=('0', '0')",
+          "name": "compile-tally-zero",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "compile-no-error",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "compile-no-warning",
+          "pass": true
+        },
+        {
+          "detail": "top=tb_encoded_frame_queue_guard",
+          "name": "compile-top-present",
+          "pass": true
+        },
+        {
+          "detail": "missing=[]",
+          "name": "compile-modules",
+          "pass": true
+        },
+        {
+          "detail": "None",
+          "name": "vsim-spawn",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "vsim-timeout",
+          "pass": true
+        },
+        {
+          "detail": "returncode=17 expected=0",
+          "name": "vsim-exit",
+          "pass": false
+        },
+        {
+          "detail": "[]",
+          "name": "guard-strict-lines",
+          "pass": true
+        },
+        {
+          "detail": "count=1 values=['DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=33']",
+          "name": "guard-fatal-unique",
+          "pass": true
+        },
+        {
+          "detail": "actual='DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=33' expected='DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=33'",
+          "name": "guard-fatal-exact",
+          "pass": true
+        },
+        {
+          "detail": "count=1 values=[('1', '0')]",
+          "name": "guard-tally-unique",
+          "pass": true
+        },
+        {
+          "detail": "values=('1', '0') expected=(1, 0)",
+          "name": "guard-tally-guard",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "guard-no-unrelated-error",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "guard-no-warning",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "guard-no-unexpected-no-fatal",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "guard-no-pass-claim",
+          "pass": true
+        }
+      ],
+      "compile_pass": true,
+      "finished_at": "2026-10-21T17:44:21.962895Z",
+      "kind": "guard",
+      "run": {
+        "classification_pass": true,
+        "fatal": [
+          "DEEPEYE_ENCODED_FRAME_QUEUE_INVALID_PARAM STAT_W=33"
+        ],
+        "tally": [
+          [
+            "1",
+            "0"
+          ]
+        ]
+      },
+      "source_snapshot": [
+        {
+          "bytes": 16640,
+          "key": "queue",
+          "sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+          "snapshot_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33\\sources\\deepeye_encoded_frame_queue.sv",
+          "source_mtime_ns": 1792602444412277200,
+          "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_encoded_frame_queue.sv"
+        },
+        {
+          "bytes": 92362,
+          "key": "tb",
+          "sha256": "cca5d51e34caa64b2c7d80b6d7f8c36c4aa729d0905981beb4c0afbae50455ef",
+          "snapshot_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33\\sources\\tb_encoded_frame_queue.sv",
+          "source_mtime_ns": 1792603115530146300,
+          "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\stream\\tb_encoded_frame_queue.sv"
+        }
+      ],
+      "started_at": "2026-10-21T17:44:21.912885Z",
+      "status": "fail",
+      "suite": "guard-33",
+      "vlib": {
+        "argv": [
+          "D:\\modelsim1\\win64\\vlib.exe",
+          "work"
+        ],
+        "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33",
+        "returncode": 0,
+        "spawn_error": null,
+        "synthetic_vendor_seam": true,
+        "timed_out": false,
+        "timeout_s": 180
+      },
+      "vlog": {
+        "argv": [
+          "D:\\modelsim1\\win64\\vlog.exe",
+          "-sv",
+          "-work",
+          "work",
+          "+define+GUARD_W=33",
+          "sources/deepeye_encoded_frame_queue.sv",
+          "sources/tb_encoded_frame_queue.sv"
+        ],
+        "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33",
+        "returncode": 0,
+        "spawn_error": null,
+        "synthetic_vendor_seam": true,
+        "timed_out": false,
+        "timeout_s": 180
+      },
+      "vsim": {
+        "argv": [
+          "D:\\modelsim1\\win64\\vsim.exe",
+          "-c",
+          "-do",
+          "run -all; quit -f",
+          "-l",
+          "vsim.log",
+          "tb_encoded_frame_queue_guard"
+        ],
+        "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\guard-33",
+        "returncode": 17,
+        "spawn_error": null,
+        "synthetic_vendor_seam": true,
+        "timed_out": false,
+        "timeout_s": 180
+      }
+    },
+    "standalone": {
+      "checks": [
+        {
+          "detail": "source=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_encoded_frame_queue.sv snapshot=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone\\sources\\deepeye_encoded_frame_queue.sv",
+          "name": "source-snapshot-queue-hash",
+          "pass": true
+        },
+        {
+          "detail": "source=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\stream\\tb_encoded_frame_queue.sv snapshot=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone\\sources\\tb_encoded_frame_queue.sv",
+          "name": "source-snapshot-tb-hash",
+          "pass": true
+        },
+        {
+          "detail": "None",
+          "name": "vlib-spawn",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "vlib-timeout",
+          "pass": true
+        },
+        {
+          "detail": "returncode=0 expected=0",
+          "name": "vlib-exit",
+          "pass": true
+        },
+        {
+          "detail": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone\\work",
+          "name": "vlib-work-directory",
+          "pass": true
+        },
+        {
+          "detail": "None",
+          "name": "vlog-spawn",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "vlog-timeout",
+          "pass": true
+        },
+        {
+          "detail": "returncode=0 expected=0",
+          "name": "vlog-exit",
+          "pass": true
+        },
+        {
+          "detail": "[]",
+          "name": "compile-strict-lines",
+          "pass": true
+        },
+        {
+          "detail": "count=1 values=[('0', '0')]",
+          "name": "compile-tally-unique",
+          "pass": true
+        },
+        {
+          "detail": "values=('0', '0')",
+          "name": "compile-tally-zero",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "compile-no-error",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "compile-no-warning",
+          "pass": true
+        },
+        {
+          "detail": "top=tb_encoded_frame_queue",
+          "name": "compile-top-present",
+          "pass": true
+        },
+        {
+          "detail": "missing=[]",
+          "name": "compile-modules",
+          "pass": true
+        },
+        {
+          "detail": "None",
+          "name": "vsim-spawn",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "vsim-timeout",
+          "pass": true
+        },
+        {
+          "detail": "returncode=0 expected=0",
+          "name": "vsim-exit",
+          "pass": true
+        },
+        {
+          "detail": "[]",
+          "name": "run-strict-lines",
+          "pass": true
+        },
+        {
+          "detail": "count=1 values=[('0', '0')]",
+          "name": "run-tally-unique",
+          "pass": true
+        },
+        {
+          "detail": "values=('0', '0')",
+          "name": "run-tally-zero",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "run-no-error",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "run-no-warning",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "run-no-fatal",
+          "pass": true
+        },
+        {
+          "detail": "",
+          "name": "run-no-check-fail-marker",
+          "pass": true
+        },
+        {
+          "detail": "values=['encoded_frame_queue'] expected=encoded_frame_queue",
+          "name": "run-tb-begin-unique",
+          "pass": true
+        },
+        {
+          "detail": "values=['pass']",
+          "name": "run-tb-end-pass",
+          "pass": true
+        },
+        {
+          "detail": "count=1 values=[('23', '23', '0', '10949')]",
+          "name": "run-summary-unique",
+          "pass": true
+        },
+        {
+          "detail": "summary=(23, 23, 0, 10949) expected_cases=23",
+          "name": "run-summary-counts",
+          "pass": true
+        },
+        {
+          "detail": "checks=10949 minimum=10000",
+          "name": "run-summary-min-checks",
+          "pass": true
+        },
+        {
+          "detail": "begins=['reset_idle', 'single_success', 'two_deep_stall', 'no_same_edge_bypass', 'full_old_level_no_credit', 'framing_boundaries', 'early_last_fault2', 'missing_last_fault2', 'invalid_framing_fault1', 'upstream_error_forward', 'fault_drains_older', 'fault_event_single_pulse', 'duplicate_aba_tags', 'cancel_empty', 'cancel_after_meta', 'cancel_partial_payload', 'cancel_sealed_output', 'cancel_partial_output', 'cancel_held_once', 'reset_priority_over_cancel', 'simultaneous_alloc_retire', 'simultaneous_seal_retire', 'pointer_wrap_many'] expected=['reset_idle', 'single_success', 'two_deep_stall', 'no_same_edge_bypass', 'full_old_level_no_credit', 'framing_boundaries', 'early_last_fault2', 'missing_last_fault2', 'invalid_framing_fault1', 'upstream_error_forward', 'fault_drains_older', 'fault_event_single_pulse', 'duplicate_aba_tags', 'cancel_empty', 'cancel_after_meta', 'cancel_partial_payload', 'cancel_sealed_output', 'cancel_partial_output', 'cancel_held_once', 'reset_priority_over_cancel', 'simultaneous_alloc_retire', 'simultaneous_seal_retire', 'pointer_wrap_many']",
+          "name": "run-case-begin-sequence",
+          "pass": true
+        },
+        {
+          "detail": "ends=['reset_idle', 'single_success', 'two_deep_stall', 'no_same_edge_bypass', 'full_old_level_no_credit', 'framing_boundaries', 'early_last_fault2', 'missing_last_fault2', 'invalid_framing_fault1', 'upstream_error_forward', 'fault_drains_older', 'fault_event_single_pulse', 'duplicate_aba_tags', 'cancel_empty', 'cancel_after_meta', 'cancel_partial_payload', 'cancel_sealed_output', 'cancel_partial_output', 'cancel_held_once', 'reset_priority_over_cancel', 'simultaneous_alloc_retire', 'simultaneous_seal_retire', 'pointer_wrap_many']",
+          "name": "run-case-end-sequence",
+          "pass": true
+        },
+        {
+          "detail": "statuses=['pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass']",
+          "name": "run-case-all-pass",
+          "pass": true
+        },
+        {
+          "detail": "case_checks={'reset_idle': 26, 'single_success': 109, 'two_deep_stall': 120, 'no_same_edge_bypass': 40, 'full_old_level_no_credit': 86, 'framing_boundaries': 6504, 'early_last_fault2': 908, 'missing_last_fault2': 714, 'invalid_framing_fault1': 660, 'upstream_error_forward': 408, 'fault_drains_older': 142, 'fault_event_single_pulse': 51, 'duplicate_aba_tags': 194, 'cancel_empty': 68, 'cancel_after_meta': 79, 'cancel_partial_payload': 87, 'cancel_sealed_output': 86, 'cancel_partial_output': 105, 'cancel_held_once': 73, 'reset_priority_over_cancel': 113, 'simultaneous_alloc_retire': 63, 'simultaneous_seal_retire': 81, 'pointer_wrap_many': 232}",
+          "name": "run-case-checks-positive",
+          "pass": true
+        },
+        {
+          "detail": "sum=10949 summary=10949",
+          "name": "run-case-check-sum",
+          "pass": true
+        },
+        {
+          "detail": "names=['cases', 'checks', 'failures', 'final_level', 'final_stat_meta', 'final_stat_in_bytes', 'final_stat_retired', 'final_stat_aborted', 'final_stat_fault']",
+          "name": "run-stat-unique",
+          "pass": true
+        },
+        {
+          "detail": "actual=['cases', 'checks', 'failures', 'final_level', 'final_stat_aborted', 'final_stat_fault', 'final_stat_in_bytes', 'final_stat_meta', 'final_stat_retired'] expected=['cases', 'checks', 'failures', 'final_level', 'final_stat_aborted', 'final_stat_fault', 'final_stat_in_bytes', 'final_stat_meta', 'final_stat_retired']",
+          "name": "run-stat-complete",
+          "pass": true
+        },
+        {
+          "detail": "failures=0",
+          "name": "run-stat-failures-zero",
+          "pass": true
+        },
+        {
+          "detail": "stat_cases=23 summary_cases=23",
+          "name": "run-stat-cases-match",
+          "pass": true
+        },
+        {
+          "detail": "stat_checks=10949 summary_checks=10949",
+          "name": "run-stat-checks-match",
+          "pass": true
+        },
+        {
+          "detail": "final_level=0",
+          "name": "run-stat-zero-final_level",
+          "pass": true
+        },
+        {
+          "detail": "positive_keys=['final_stat_meta', 'final_stat_in_bytes', 'final_stat_retired'] values={'cases': 23, 'checks': 10949, 'failures': 0, 'final_level': 0, 'final_stat_meta': 8, 'final_stat_in_bytes': 7, 'final_stat_retired': 8, 'final_stat_aborted': 0, 'final_stat_fault': 0}",
+          "name": "run-stat-positive",
+          "pass": true
+        }
+      ],
+      "compile_pass": true,
+      "finished_at": "2026-10-21T17:44:21.911886Z",
+      "kind": "ordinary",
+      "run": {
+        "case_checks": {
+          "cancel_after_meta": 79,
+          "cancel_empty": 68,
+          "cancel_held_once": 73,
+          "cancel_partial_output": 105,
+          "cancel_partial_payload": 87,
+          "cancel_sealed_output": 86,
+          "duplicate_aba_tags": 194,
+          "early_last_fault2": 908,
+          "fault_drains_older": 142,
+          "fault_event_single_pulse": 51,
+          "framing_boundaries": 6504,
+          "full_old_level_no_credit": 86,
+          "invalid_framing_fault1": 660,
+          "missing_last_fault2": 714,
+          "no_same_edge_bypass": 40,
+          "pointer_wrap_many": 232,
+          "reset_idle": 26,
+          "reset_priority_over_cancel": 113,
+          "simultaneous_alloc_retire": 63,
+          "simultaneous_seal_retire": 81,
+          "single_success": 109,
+          "two_deep_stall": 120,
+          "upstream_error_forward": 408
+        },
+        "classification_pass": true,
+        "stats": {
+          "cases": 23,
+          "checks": 10949,
+          "failures": 0,
+          "final_level": 0,
+          "final_stat_aborted": 0,
+          "final_stat_fault": 0,
+          "final_stat_in_bytes": 7,
+          "final_stat_meta": 8,
+          "final_stat_retired": 8
+        },
+        "summary": [
+          23,
+          23,
+          0,
+          10949
+        ]
+      },
+      "source_snapshot": [
+        {
+          "bytes": 16640,
+          "key": "queue",
+          "sha256": "68f9b655794a722a5cb285ac1c87749ea7acea7dcd6c1650536d1f1094c2e76a",
+          "snapshot_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone\\sources\\deepeye_encoded_frame_queue.sv",
+          "source_mtime_ns": 1792602444412277200,
+          "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\stream\\deepeye_encoded_frame_queue.sv"
+        },
+        {
+          "bytes": 92362,
+          "key": "tb",
+          "sha256": "cca5d51e34caa64b2c7d80b6d7f8c36c4aa729d0905981beb4c0afbae50455ef",
+          "snapshot_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone\\sources\\tb_encoded_frame_queue.sv",
+          "source_mtime_ns": 1792603115530146300,
+          "source_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\stream\\tb_encoded_frame_queue.sv"
+        }
+      ],
+      "started_at": "2026-10-21T17:44:21.859686Z",
+      "status": "pass",
+      "suite": "standalone",
+      "vlib": {
+        "argv": [
+          "D:\\modelsim1\\win64\\vlib.exe",
+          "work"
+        ],
+        "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone",
+        "returncode": 0,
+        "spawn_error": null,
+        "synthetic_vendor_seam": true,
+        "timed_out": false,
+        "timeout_s": 180
+      },
+      "vlog": {
+        "argv": [
+          "D:\\modelsim1\\win64\\vlog.exe",
+          "-sv",
+          "-work",
+          "work",
+          "sources/deepeye_encoded_frame_queue.sv",
+          "sources/tb_encoded_frame_queue.sv"
+        ],
+        "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone",
+        "returncode": 0,
+        "spawn_error": null,
+        "synthetic_vendor_seam": true,
+        "timed_out": false,
+        "timeout_s": 180
+      },
+      "vsim": {
+        "argv": [
+          "D:\\modelsim1\\win64\\vsim.exe",
+          "-c",
+          "-do",
+          "run -all; quit -f",
+          "-l",
+          "vsim.log",
+          "tb_encoded_frame_queue"
+        ],
+        "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\stream\\encoded-frame-queue-20261022-20\\main\\runner-entrypoint-01\\last-failed\\run\\standalone",
+        "returncode": 0,
+        "spawn_error": null,
+        "synthetic_vendor_seam": true,
+        "timed_out": false,
+        "timeout_s": 180
+      }
+    }
+  },
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ENCODED-FRAME-QUEUE-RTL-20261022-20-v1"
+}

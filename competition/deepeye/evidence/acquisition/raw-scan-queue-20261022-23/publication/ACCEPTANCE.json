@@ -1,0 +1,86 @@
+{
+  "at_utc": "2026-10-22T14:06:15.127830+00:00",
+  "task_id": "B-MAIN-CONTINUATION-20261019",
+  "task_version": 1,
+  "actual_thread": "01a154de-abd8-7590-b9a3-2819249458e3",
+  "actual_turn": "01a163e4-3491-7a92-ab87-84fc008ff707",
+  "review_work": "B-OP23-REPAIR03-CANDIDATE-REVIEW-20261022-v1",
+  "product_task": "DEEPEYE-IMPLEMENTATION-20261014",
+  "product_task_version": 1,
+  "product_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "product_return_turn": "01a163d3-1800-7c33-85ab-412ed71953a5",
+  "parent_work": "B-LOCAL-RAW-SCAN-QUEUE-CONTINUE-20261022-v1",
+  "product_operation": "B-DEEPEYE-RAW-SCAN-QUEUE-20261022-23",
+  "decision": "ACCEPT",
+  "acceptance_scope": "Exact internal raw scan queue increment and repaired simulation/parser evidence runner; local candidate accepted, remote publication not yet verified.",
+  "consumed": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\raw-scan-queue-20261022-23\\repair03-review\\REPAIR03_CONSUMED.json",
+    "bytes": 5807,
+    "sha256": "b37c03068a7005b611f5c89125005b66c4d3508066785a436f140e7d0759d90d"
+  },
+  "accepted_source_hashes": {
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\acquisition\\deepeye_raw_scan_queue.sv": "630e14803d82b3379517d91626de4ad7e7d3c509ad14363b3164031a5f633ee4",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\acquisition\\tb_raw_scan_queue.sv": "e38944f5340cd4f17c9f6a2481ed4150cf82d3902031dec3ac7f6db3790f0ad0",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\acquisition\\run_raw_scan_queue.py": "9a06a7a368313dc96b6941fdaa8dfc4bcda27ed426bf5e75e00e2a1072b39996",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\acquisition\\raw_scan_queue_candidate.md": "57f81585986e785277a4b5ecceebc6720fe5dfac341b68f368e9d731506b3ee9"
+  },
+  "original_scope_sha256": "a8a48893e71f9642d8cbbdf7c5c23b06f8dfc24c37554cab13421776be33ddc1",
+  "closed_findings": [
+    "OP23-GUARD-CLAMP01",
+    "OP23-RUNNER-TRACE01",
+    "OP23-RUNNER-COUNT01",
+    "OP23-RUNNER-UNKNOWN-WIDTH01"
+  ],
+  "basis": [
+    "Previous repair02 coordinator verification of3383 artifacts, exact permitted parameter fallback diffs, unchanged frozen original oracle and raw30-case/87836-edge evidence.",
+    "Exact six-line repair03 insertion preserves all other module source and X/Z symbolic values.",
+    "Independent review recomputed45412 frozen width expectations and checked saved old/new outcomes.",
+    "Coordinator independently reran original five exact fixtures against final source; two invalid mixed-width words reject through direct and real CLI, three controls pass.",
+    "Actual unchanged normal-main composition receipts return0/1/1 with fifteen clearly identified synthetic emitter processes and30rawstreams."
+  ],
+  "publication_authorization": {
+    "status": "CONTINUE_EXISTING_OP23_PUBLICATION_ONLY",
+    "instruction": "B-OP23-LOCAL-ACCEPT-PUBLISH-20261022-v1",
+    "main_work": "B-RAW-SCAN-QUEUE-PUBLISH-20261022-23-v1",
+    "product_operation": "B-DEEPEYE-RAW-SCAN-QUEUE-20261022-23",
+    "exact_instruction": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\raw-scan-queue-20261022-23\\repair03-review\\OP23_PUBLICATION_INSTRUCTION.md",
+      "bytes": 7954,
+      "sha256": "a24a3a1cd585fbd8c99abbf153995b8ddfd5d05ace60526a082deec8e4d23241"
+    },
+    "target_PR": "https://github.com/carolwjade/CarlandFPGA/pull/30",
+    "baseline_head": "94571d2cd9a68bd030c878c406f19a1be6ec53d7",
+    "new_executor": false,
+    "source_edits_authorized": false,
+    "next_event": "Actual PUBLISHED_COMPLETED_REVIEW or concrete failure with exact source/head/request/manifest hashes."
+  },
+  "publication_complete": false,
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "all29_and_B02_B03_G05_B06_R03": "not_run",
+  "full_product_simulation_synthesis_implementation_timing_CDC_RDC_board_system": "not_run",
+  "board": "A-only",
+  "public_ABI_sourceclock_DMA_PS_freshness_ENABLE_motion_authority": false
+}

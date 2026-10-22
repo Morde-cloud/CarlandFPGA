@@ -1,0 +1,1668 @@
+{
+  "at_utc": "2026-10-22T05:04:13.516063+00:00",
+  "status": "independent main simulation passed; author terminal and runner review still pending",
+  "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+  "frozen_sha256": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+  "healthy_edges": 165149,
+  "guard_cases": [
+    "guard-SEQ_W-1",
+    "guard-SEQ_W-33",
+    "guard-TICK_W-0",
+    "guard-TICK_W-65",
+    "guard-TAG_W-0",
+    "guard-TAG_W-65",
+    "guard-STAT_W-1",
+    "guard-STAT_W-33"
+  ],
+  "actual_commands": 72,
+  "actual_runs": 18,
+  "raw_artifacts_rehashed": 452,
+  "runs": [
+    {
+      "case": "main64",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 73042,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 66712
+    },
+    {
+      "case": "seq2",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 5710,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 5181
+    },
+    {
+      "case": "seq3",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 7794,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 7265
+    },
+    {
+      "case": "seq4",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 11962,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 11433
+    },
+    {
+      "case": "seq16",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 65560,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 65557
+    },
+    {
+      "case": "stat2",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 499,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 3
+    },
+    {
+      "case": "stat3",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 499,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 7
+    },
+    {
+      "case": "width1",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "edges": 83,
+      "mismatches": 0,
+      "unknowns": 0,
+      "public_conservation_edges": 81
+    },
+    {
+      "case": "guard-SEQ_W-1",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: SEQ_W out of range"
+    },
+    {
+      "case": "guard-SEQ_W-33",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: SEQ_W out of range"
+    },
+    {
+      "case": "guard-TICK_W-0",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: TICK_W out of range"
+    },
+    {
+      "case": "guard-TICK_W-65",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: TICK_W out of range"
+    },
+    {
+      "case": "guard-TAG_W-0",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: TAG_W out of range"
+    },
+    {
+      "case": "guard-TAG_W-65",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: TAG_W out of range"
+    },
+    {
+      "case": "guard-STAT_W-1",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: STAT_W out of range"
+    },
+    {
+      "case": "guard-STAT_W-33",
+      "status": "PASS",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "own_fatal": "deepeye_sample_scan_capture: STAT_W out of range"
+    },
+    {
+      "case": "seq2",
+      "status": "EXPECTED_BEHAVIORAL_REJECTION",
+      "source_sha256": "f652fd75db9c6b96e8157b8c727cce77349d0df7d0b519a319136f3ff7d3c4a5",
+      "edges": 5710,
+      "mismatches": 11772,
+      "unknowns": 0,
+      "public_conservation_edges": 5181
+    },
+    {
+      "case": "seq2",
+      "status": "EXPECTED_BEHAVIORAL_REJECTION",
+      "source_sha256": "c016f5854e0e838c41439f0cdca54418ce68d12e6f52c61909337c10141c6a58",
+      "edges": 5710,
+      "mismatches": 44108,
+      "unknowns": 0,
+      "public_conservation_edges": 5181
+    }
+  ],
+  "commands": [
+    {
+      "run": "main64-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "b1a18acea4f63b91930a087cdc1cfc1e08507c3af4f1aa6662c3b02358b20b70"
+    },
+    {
+      "run": "main64-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "3c43f240dbbb7ef39078b692e518789199e2d2f45e307c3cf9466e5f05f85a62"
+    },
+    {
+      "run": "main64-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\main64-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\main64-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "97582eeb8a8c96883700a0ee765c77d46d1cb223ba1677d9692f5c0d84c0bcd0"
+    },
+    {
+      "run": "main64-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\main64-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\main64-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\main64-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\main64-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "97352ca132fbb0160cef5bb43387005123aaef7d3ab1ee33d6a2371b92e20632"
+    },
+    {
+      "run": "seq2-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "f01e77c777f7f66129fb12d4ebcd863fa5fd5de5e53965f44084d61b6a20a283"
+    },
+    {
+      "run": "seq2-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "45b0e96b7fdabb11952df5d22ad7d65be28af50e3263972e53e65000216c5360"
+    },
+    {
+      "run": "seq2-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq2-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq2-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "4860f89da80bb1c7ab54580d1255496dfbd60b30b84d292837044bc92352c068"
+    },
+    {
+      "run": "seq2-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq2-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq2-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=2",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq2-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq2-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "18242fc27e55feabb0fbe2cbcc373963dc09f82e0214b35c127aa0c65c27f081"
+    },
+    {
+      "run": "seq3-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "0a314bcc2355f014c0dee3134fb6ad0c32455c267867c0ff3373ed7ac87d6a3a"
+    },
+    {
+      "run": "seq3-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "e2cfc4045aef57bc69ad253044a21f0d6ad4085cbc2064fffb19466001bce450"
+    },
+    {
+      "run": "seq3-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq3-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq3-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "5a974b11643dc3cf4f9eee993d19e6cb743f29f2e09a69f1ad8d550287774a0a"
+    },
+    {
+      "run": "seq3-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq3-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq3-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=3",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq3-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq3-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "f023eec34e33ce0ed027cf3ffd0910defa39649617eda2e8aeb06dd01e091973"
+    },
+    {
+      "run": "seq4-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "07fa19b42770ea7c02c6421dabbbf58999e214625ba0f157fc9bfc917204dc4e"
+    },
+    {
+      "run": "seq4-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "038b7625947a50910a63df8d4db6d62ec02cd0e9f6ff5f8fc805f392f73a0a9b"
+    },
+    {
+      "run": "seq4-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq4-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq4-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "ba9de46e6cf7f1a893688adbdcfcebfef9e79119c3de672fdd3ab1a675994e96"
+    },
+    {
+      "run": "seq4-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq4-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq4-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=4",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq4-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq4-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "75091257c717cd92fe78043e5e830b022a63f9984a402799628d5c33a87e8635"
+    },
+    {
+      "run": "seq16-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "222c1591eeca69ce3e62b8c35a7da4d16d925fe89957564e837f0fe41ba8f305"
+    },
+    {
+      "run": "seq16-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "c2186829d0b46d25088ded8a01eee69ce151f912f011b37b09e264252777f6b0"
+    },
+    {
+      "run": "seq16-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq16-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq16-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "178a8a2a4b8cb6d83b227240a843d8c205a6786a96d65440d780926d07ec377d"
+    },
+    {
+      "run": "seq16-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq16-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq16-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=16",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq16-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\seq16-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "d6d95044efcea2c5d73700e588eaa02dde01a09e414f8bf3c83f6d8f2eed4d09"
+    },
+    {
+      "run": "stat2-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "ee01fd91b48acd40803441544bcba43004534d480ffb861e563f540a9c60e212"
+    },
+    {
+      "run": "stat2-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "dff1311d0b51415b1159ed888ecbcc9ceed881d4a50bddc45e857981a7cb9e89"
+    },
+    {
+      "run": "stat2-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat2-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat2-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "a747a7c8874a89c13ef2685b34ca33614a6482077b52eea69966484571a7caeb"
+    },
+    {
+      "run": "stat2-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat2-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat2-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=2",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat2-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat2-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "89e0ab146377be51f3bba2dfd511bbcef7df9aab3de592ca4a81623745378ded"
+    },
+    {
+      "run": "stat3-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "7c96536ff0f871e81a891f6f59d72524e586441d828d4c1aa0da1657943139ec"
+    },
+    {
+      "run": "stat3-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "80a0fe6aab65bf474a8445a15a735337a4da93b67e4739dedb3bcbab1fa234ff"
+    },
+    {
+      "run": "stat3-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat3-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat3-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "62fbf4ba37da897aeccc09163a9a8563aa775af42c0666c1b2ac801a1bbfaf72"
+    },
+    {
+      "run": "stat3-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat3-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat3-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=3",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat3-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\stat3-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "2db90bc8bfab40164cdd9d4388105fc2337468c9a75ef1bc913b01a337fbb5ab"
+    },
+    {
+      "run": "width1-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "74909348eb3cdd9c6cc48ccad10029a02fb4c8d3dce15388dfacccee134b2bf3"
+    },
+    {
+      "run": "width1-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "7a966d9a9f4b238a6dd538b7dea1f3ad03dab9762b20a3739c5e7efc211047bd"
+    },
+    {
+      "run": "width1-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\width1-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\width1-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "362fedd019c9a1bf1a314cada6906f33eda2dcd240111c24ae10b390c131d1b0"
+    },
+    {
+      "run": "width1-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\width1-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\width1-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=1",
+        "-gTAG_W=1",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\width1-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\width1-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "a1ea18d46907fa709f027385ef7408544890fc0a94d45bd480fef61861f99046"
+    },
+    {
+      "run": "guard-SEQ_W-1-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "a9f5517827325e5d3cf7bb0a7651d1a97882e9bb725681649ef73aac89b10b98"
+    },
+    {
+      "run": "guard-SEQ_W-1-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "5f025b3808f71a9bb318b6a1d0a09ec4ed094c3054f8d4ab3aabddf706dac930"
+    },
+    {
+      "run": "guard-SEQ_W-1-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-1-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-1-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "f547a281dbae5ebfc44ceff6366023c74b6e371a5c8bbc7a09e3ff0f4a5e9db3"
+    },
+    {
+      "run": "guard-SEQ_W-1-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-1-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-1-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=1",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "78d1f3d5917a33a477c33e906d8a246fa24f185c9e48806c8deedb7a233cb8e4"
+    },
+    {
+      "run": "guard-SEQ_W-33-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "dfdae2a51b16cfa185379c392cce0d5176ff5355ae0d6e09bf1d3de3f0df0d2a"
+    },
+    {
+      "run": "guard-SEQ_W-33-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "89d1e55fd761fb929489fd79560c3b34f53e6058d7ff3b5033c194f61124d5a9"
+    },
+    {
+      "run": "guard-SEQ_W-33-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-33-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-33-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "f1108e3333e6c00b80b7604c5cc65e237793dee395f984450dfcd1a3e5749603"
+    },
+    {
+      "run": "guard-SEQ_W-33-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-33-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-SEQ_W-33-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=33",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "4efdf23b095b928b2dd4693fd516799b720e63e60296da1e747aa14fb94e94e3"
+    },
+    {
+      "run": "guard-TICK_W-0-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "96a64ab76a27659b94f8794ee27f0c52bfe6f52dd933d7e995c652f72825f94f"
+    },
+    {
+      "run": "guard-TICK_W-0-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "dd1c554a151e1cc5019f549723e15ea65b6477f9060c310417aaff3cdf19f6b3"
+    },
+    {
+      "run": "guard-TICK_W-0-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-0-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-0-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "271416160d915c1d85e1ab5470d3cb3a4e072e714fdd799d60d4004badcf0d02"
+    },
+    {
+      "run": "guard-TICK_W-0-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-0-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-0-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=0",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "a490c476c431f98b46ea3a2ff4a88f36eca144b84f1cb059d17ddd5bd06b4918"
+    },
+    {
+      "run": "guard-TICK_W-65-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "2eb97e3587fd220864ac85a079119c396c0a172b6d6a7272f05e31b5e37a6ee0"
+    },
+    {
+      "run": "guard-TICK_W-65-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "cf153fc687aa5bd3b123671bd77ea89c17a6b6f2ba8db970c4d4be3f7a1575df"
+    },
+    {
+      "run": "guard-TICK_W-65-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-65-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-65-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "56b70d4ed84fdc7f253ce9fc15c75c771659a3e43dcd617d77e46c0275962cc5"
+    },
+    {
+      "run": "guard-TICK_W-65-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-65-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TICK_W-65-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=65",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "369b6a365cc6865990230b9390a4442cc111692bf7ed4c32df7521ff3700c21e"
+    },
+    {
+      "run": "guard-TAG_W-0-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "9203a97b691c8d7543a089310e8aef096dbe7da418c98b9e3d7105b534989884"
+    },
+    {
+      "run": "guard-TAG_W-0-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "fdbd4fb0e678f27a12b5a2bb0a9b3fc8d97171fa22e48447f9669c441886d830"
+    },
+    {
+      "run": "guard-TAG_W-0-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-0-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-0-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "c4ceccd339b026e3e58a6141593794137d6978a41d46bed490d8870ccc05ff10"
+    },
+    {
+      "run": "guard-TAG_W-0-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-0-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-0-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=0",
+        "-gSTAT_W=32",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "0053569346a89e0c23cb53a0857401392c21be71b8b362333ab68410eceda446"
+    },
+    {
+      "run": "guard-TAG_W-65-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "359c6c57f08bff6814823926ebbe10b1c79762c8a0dad99d8977dc5d56bf904e"
+    },
+    {
+      "run": "guard-TAG_W-65-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "47a93884dcc6adf9f29380e1bc0da4e70ae5371595b45e4273f1514d4e3ba1b5"
+    },
+    {
+      "run": "guard-TAG_W-65-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-65-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-65-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "ef1a16861797775d1abcb32a5c4282e474cce2971c47acbfc37b345360527559"
+    },
+    {
+      "run": "guard-TAG_W-65-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-65-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-TAG_W-65-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=65",
+        "-gSTAT_W=32",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "fe726bd65f889033449830ab5284bb8f23dffe929c43751be0080cac3058922b"
+    },
+    {
+      "run": "guard-STAT_W-1-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "f7ba6cb04b2144b7ef3be0f869dd728e17bfd3864f68927f2c88bfd1b1501a1a"
+    },
+    {
+      "run": "guard-STAT_W-1-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "4bf7d9239ecb243b9fbaaec73856deb9643d640b5002a6189daee14b9025aabd"
+    },
+    {
+      "run": "guard-STAT_W-1-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-1-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-1-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "e24e5f357acbca730b172a466c7221e0d8833c4310a7bedb01ac5be44e8f6c77"
+    },
+    {
+      "run": "guard-STAT_W-1-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-1-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-1-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=1",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "5f1b87c4721d6e7c572590b2712826e40f2cd0df6f7d5f954d730f14d0915fde"
+    },
+    {
+      "run": "guard-STAT_W-33-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "4ccf9431da81713614d381777a95a6220c15a86d3106f44daa120928e916e687"
+    },
+    {
+      "run": "guard-STAT_W-33-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "d8a03c9c547365b20c5e90a97ad75c09fe2fb46686fd0ab5e81e461826d3bcf3"
+    },
+    {
+      "run": "guard-STAT_W-33-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-33-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-33-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "97277822acb77b275b39dd42be85ef42807cd18f3cd85bed2a3b163b768e6ab9"
+    },
+    {
+      "run": "guard-STAT_W-33-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-33-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\guard-STAT_W-33-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=32",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=33",
+        "main_guard_sample_scan_capture"
+      ],
+      "exit_code": 0,
+      "sha256": "6df2292f4af7eca9cffa10116af1690f93c35993c808ee73d253dcd491a7d8b8"
+    },
+    {
+      "run": "mutant-wrong-channel-mix-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "ed70c49b981b55b277b58e66bbdc40f0f7fb61b80735c24dc290266722d2916d"
+    },
+    {
+      "run": "mutant-wrong-channel-mix-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "5aeb27c019195642abb5836a8eca28de813ac43d96c4716d6583661977f3972a"
+    },
+    {
+      "run": "mutant-wrong-channel-mix-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-wrong-channel-mix-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-wrong-channel-mix-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "00f3ccd5edaa6294525c0de24921bd68c9f23c33ca1efc699a7635e246e14339"
+    },
+    {
+      "run": "mutant-wrong-channel-mix-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-wrong-channel-mix-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-wrong-channel-mix-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=2",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-wrong-channel-mix-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-wrong-channel-mix-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "62d8bb17ea7f29185555ed53c6016c1d982c77cb055138949edfb1d915fb5b51"
+    },
+    {
+      "run": "mutant-ordinal-plus-two-01",
+      "command": "version",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "sha256": "2e24a6cf3dd72fc5df69e1e8fb01beb47a4a8e29be4f31950e13b2d9afeae20f"
+    },
+    {
+      "run": "mutant-ordinal-plus-two-01",
+      "command": "vlib",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlib.exe",
+        "lib"
+      ],
+      "exit_code": 0,
+      "sha256": "0fa58ed2a15e4f071f53ee2d51fef7b2b9fafcccfa34a85eacc9b9bd3e0674d7"
+    },
+    {
+      "run": "mutant-ordinal-plus-two-01",
+      "command": "vlog",
+      "argv": [
+        "D:\\modelsim1\\win64\\vlog.exe",
+        "-sv",
+        "-work",
+        "lib",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-ordinal-plus-two-01\\inputs\\deepeye_sample_scan_capture.sv",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-ordinal-plus-two-01\\inputs\\main_tb_sample_scan_capture.sv"
+      ],
+      "exit_code": 0,
+      "sha256": "ca6486ac203b158bd54e4332930f3581041f5bf49e0151588d42305c18d6a29f"
+    },
+    {
+      "run": "mutant-ordinal-plus-two-01",
+      "command": "vsim",
+      "argv": [
+        "D:\\modelsim1\\win64\\vsim.exe",
+        "-c",
+        "-work",
+        "lib",
+        "-l",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-ordinal-plus-two-01\\sim.transcript.txt",
+        "-wlf",
+        "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-ordinal-plus-two-01\\sim.wlf",
+        "-do",
+        "run -all; quit -f",
+        "-gSEQ_W=2",
+        "-gTICK_W=64",
+        "-gTAG_W=64",
+        "-gSTAT_W=32",
+        "main_tb_sample_scan_capture",
+        "+INPUT=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-ordinal-plus-two-01\\inputs\\vectors.hex",
+        "+TRACE=D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\mutant-ordinal-plus-two-01\\trace.txt"
+      ],
+      "exit_code": 0,
+      "sha256": "529ac58dbfa34f00708fbe3a7990f3972360cf777fa8268b91e03907ae12a34d"
+    }
+  ],
+  "artifacts": {
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/RESULT.json": "d28af0b957823e279636426948333510c6abcc39175b2450331918dcd66ecb42",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/sim.transcript.txt": "c394319a8738f28435cf0e63b6ed016ae4f018e2a9eefa684de460c9f4d9035a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/trace.txt.gz": "da47ce012f0cf2658967f315419a3f367270451e1105a5aedcf27b6332a8bad8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/version.command.json": "b1a18acea4f63b91930a087cdc1cfc1e08507c3af4f1aa6662c3b02358b20b70",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/version.intent.json": "58451c35e4bf38709d7991ab100e95ebe23f980a5a97950aa4d0ac83255e2886",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlib.command.json": "3c43f240dbbb7ef39078b692e518789199e2d2f45e307c3cf9466e5f05f85a62",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlib.intent.json": "c126d471a04353ebb7f273b5a3e7e5bfd8f3bbecf76a45b344ecc4d404158e6c",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlog.command.json": "97582eeb8a8c96883700a0ee765c77d46d1cb223ba1677d9692f5c0d84c0bcd0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlog.intent.json": "60ad491a1861ae66f06373272d799d5c220c43617915209eae63f03cb880184d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vlog.stdout.txt": "73a88f64e485b5aee2491139204926865aa1b50111fccd64935623f06b72298b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vsim.command.json": "97352ca132fbb0160cef5bb43387005123aaef7d3ab1ee33d6a2371b92e20632",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vsim.intent.json": "e5adcb92281b423a0af1af2099278f636e76f179eb1d533667493abdd7a400e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/vsim.stdout.txt": "4cf8ed464d8e2dd2ef8162e2ea8bd5ff26be7f64391095bc14114b00c0b97eb3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/inputs/expected.json.gz": "398fde1aaac3624f8eb9f6d7cc53fa22b1ba75aaf7fc7daa77fe43355ee48909",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/main64-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/RESULT.json": "33a6251a839fe789d1901433f087adffb4e3c5f7f56696d392b8264ec52294b1",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/sim.transcript.txt": "2dddcac5d6af4c20d312487cb30881d3e700ba005f710ab48f0b76c325d089e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/trace.txt.gz": "325165bd81db70566ea8aa5e9a372b6f0c8321174875de4bb3456d8b501eb7f9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/version.command.json": "f01e77c777f7f66129fb12d4ebcd863fa5fd5de5e53965f44084d61b6a20a283",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/version.intent.json": "8a3f9746e18956f34e48cd39bc0c9e76202c294e04d5e80497e66a5b9b7a5c29",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlib.command.json": "45b0e96b7fdabb11952df5d22ad7d65be28af50e3263972e53e65000216c5360",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlib.intent.json": "c45ecb90da2a651ddb05584df95fdfb735b8ec76affb6ed98580aef5dec5f2b4",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlog.command.json": "4860f89da80bb1c7ab54580d1255496dfbd60b30b84d292837044bc92352c068",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlog.intent.json": "3599140a21da305ddcb77756af3996ce9bc550d476c0c7f573b4470a4bb7b51a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vlog.stdout.txt": "bfc8ff19ce2592802ee85fdcc53b910fe632991eb286bbb640f83a17118f9748",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vsim.command.json": "18242fc27e55feabb0fbe2cbcc373963dc09f82e0214b35c127aa0c65c27f081",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vsim.intent.json": "fb4f1625bdf6a453c25114ffdcf6a1f4038f169f85bf265ae4b08ff918358658",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/vsim.stdout.txt": "7bf4275cba45c7ae7d41a41053769bd2b086e2ed3c58f42ca8280d11a5021bd2",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/inputs/expected.json.gz": "d0b8d436d2ab90e55a59a8ba50184461bb77b0051826c0913bc3bf212d49df6d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq2-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/RESULT.json": "91f2f901e27336a8aee338d1427b93396840f6c8553e852d41b08c8828a22999",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/sim.transcript.txt": "9fd2dc8ab6fcd0b747025bb72198b3e98472f63e019bd23166ec991591c773ae",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/trace.txt.gz": "634f79c489bb736eec6b2498b09bab845a81effd7a07fa71fd6f71e563f26597",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/version.command.json": "0a314bcc2355f014c0dee3134fb6ad0c32455c267867c0ff3373ed7ac87d6a3a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/version.intent.json": "0e1a7c1f99a0d08e0a9d1b5caf8e07e74c8c337f4b20fc9e3b24685744ae38b8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlib.command.json": "e2cfc4045aef57bc69ad253044a21f0d6ad4085cbc2064fffb19466001bce450",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlib.intent.json": "1d16782e258a190084c6d47bbcb972ede9cfe1ff3037e5b319bd7bc7593f2ca9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlog.command.json": "5a974b11643dc3cf4f9eee993d19e6cb743f29f2e09a69f1ad8d550287774a0a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlog.intent.json": "1ba41a65325b57df7e335575c44f518d3c586982702543dca196df5d133ca03f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vlog.stdout.txt": "fc8b0c421eb9fc053b0be88bdad45f72dcff9edef6c2f0a33b730a993722b203",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vsim.command.json": "f023eec34e33ce0ed027cf3ffd0910defa39649617eda2e8aeb06dd01e091973",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vsim.intent.json": "9a7773fd820b9fa0378203f92f8a9877a5b12658213576ee34573874a7b03d63",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/vsim.stdout.txt": "aaad0cd94d98d12b064bc65b12b00df2e4b4d9bc702b6e9978cd4f4d06527161",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/inputs/expected.json.gz": "30c4ba337e5cb45177cfccbffd8056e5f8a29f1f12e65fd2890fbc439c71d308",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq3-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/RESULT.json": "906e54b9420962072bb8bc2c61d2afcd10c33da19ffa00e858b96e27e8a80b89",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/sim.transcript.txt": "bfca8a6ea272e3798fa7dae47b8ecd33e9c2d711f33e0fa562a9ddaeeb88b402",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/trace.txt.gz": "e4202f7fc513e27e964e7bb5f75e3aa5d2e12cd2fec16e7bde4d4002e32f7349",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/version.command.json": "07fa19b42770ea7c02c6421dabbbf58999e214625ba0f157fc9bfc917204dc4e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/version.intent.json": "0a220948000893bb1f5bfb3ef15caa9cbfa84fafe9acc746ac1d85831bf577b6",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlib.command.json": "038b7625947a50910a63df8d4db6d62ec02cd0e9f6ff5f8fc805f392f73a0a9b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlib.intent.json": "cd7b43d7378423b5b2730540dde50c838546b44fc418df64b7bbe23fd020eadc",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlog.command.json": "ba9de46e6cf7f1a893688adbdcfcebfef9e79119c3de672fdd3ab1a675994e96",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlog.intent.json": "55e18cfbdf0507320d4efd2f6a9d3e323515e953f8a8f86da0d95c6af4dc6194",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vlog.stdout.txt": "66a721299c86d27893c19f81cba4148b35a0b6d9aac100ad1b37a272517f3a72",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vsim.command.json": "75091257c717cd92fe78043e5e830b022a63f9984a402799628d5c33a87e8635",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vsim.intent.json": "77c86023554d12fc37e83c052707676bf51dd03fb11fc9d6f5004321b350e934",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/vsim.stdout.txt": "899156e16db61c609f79e6920f36e838da611ee671caef827f3904ca27b60c00",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/inputs/expected.json.gz": "bed20b59566ac97f306d4a3d328d55460ab523afa95710ab05af5c71164b8e27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq4-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/RESULT.json": "bfb0e0941372156ab61cd2a6310ddd5e9ac69ff6b8f3717cf50bf88b7d2398fb",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/sim.transcript.txt": "e51c787c879b4d948fe5cc37d1bd4c1803a42947f11e4cc9e558dcb5b016b06d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/trace.txt.gz": "675d79ba93b2f608dd60957d654fbe93234b270f3776156a0fe85337f4cf4bac",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/version.command.json": "222c1591eeca69ce3e62b8c35a7da4d16d925fe89957564e837f0fe41ba8f305",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/version.intent.json": "4e5013e97e2173f1c32444eb543524482c0312d080cad68edb216788a07c5f32",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlib.command.json": "c2186829d0b46d25088ded8a01eee69ce151f912f011b37b09e264252777f6b0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlib.intent.json": "8108d3bf328bba48e731bfe1ecc4d0b97298ad0f7c022c748db75c3700ca5abf",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlog.command.json": "178a8a2a4b8cb6d83b227240a843d8c205a6786a96d65440d780926d07ec377d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlog.intent.json": "273872b4c8039c30be8dd43ad818980a4e2143ec6cea1e3f49f428360fa28065",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vlog.stdout.txt": "8f6ad16847f8eaf1130bda4219f44f0cc0f4aaad45dd599ee4edcae9637d7762",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vsim.command.json": "d6d95044efcea2c5d73700e588eaa02dde01a09e414f8bf3c83f6d8f2eed4d09",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vsim.intent.json": "08826e7bebb2138e65df357096691901ab6bcf779e4048e51eb3a973651901c3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/vsim.stdout.txt": "d256e3366e67d22b5908dcea60e7b838e6c9e554372c9fd1da186744b899d775",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/inputs/expected.json.gz": "9c68b09eafafb24a33a13aa796076e10501351f86279b2f612a82eb3f70a4469",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/seq16-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/RESULT.json": "28a593d773349f05891042311afdfbee2f7bddb191bf156246276f2f0f27cfa0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/sim.transcript.txt": "cd8824257d652dc95bdbb098a16170a0a55bc50f7921f78345af62c452a648b0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/trace.txt.gz": "06e81e9918fdb0d40a2a5c130dfc492a0f4f6bbd750abf273ca86ef8a1a1538e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/version.command.json": "ee01fd91b48acd40803441544bcba43004534d480ffb861e563f540a9c60e212",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/version.intent.json": "ecda591bd04822973565f476fd96a812e2c06d6f9e4d3f009d1b1798f4383041",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlib.command.json": "dff1311d0b51415b1159ed888ecbcc9ceed881d4a50bddc45e857981a7cb9e89",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlib.intent.json": "3c94e67c509bde4cbee80562e8e78a15af2d9e8874dbd50aa532b9a9eea5092f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlog.command.json": "a747a7c8874a89c13ef2685b34ca33614a6482077b52eea69966484571a7caeb",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlog.intent.json": "f5f37a3af538285f9f166e2ece5e3004f016eec2977468a6d130dab3c9b3f0e7",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vlog.stdout.txt": "5df79878a6c0cbd009122fc7b11f65a8970eecaf2b3bf75a352def907d0f7b68",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vsim.command.json": "89e0ab146377be51f3bba2dfd511bbcef7df9aab3de592ca4a81623745378ded",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vsim.intent.json": "55bb3cd8ddf97bb195d76f9f03383fbaa0a613bac2b767c43dd1780a85c5558b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/vsim.stdout.txt": "2f5d3fcad943c21fcb5ffcee2a81472ad67c008ecd39f2df5e75cbb08e1cc93a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/inputs/expected.json.gz": "8a56f0aff75acdb8925c255b25d55e45b5e62eb93213f26d3f0aa9289c0c1a71",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat2-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/RESULT.json": "fef40a293a08319ac45562100e4e2f1033b30229716f48f6bd7adff25bb2c083",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/sim.transcript.txt": "ad96e7c58792799ff82d068ade71d4c3f7491ca1fe76fb7e2cf976a63bef62b9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/trace.txt.gz": "98c9c1102196b8225b5e9b74cea77c45f8317175599a01fbe7e128a1552daf1e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/version.command.json": "7c96536ff0f871e81a891f6f59d72524e586441d828d4c1aa0da1657943139ec",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/version.intent.json": "d264a265af664fe53c03c7e56be8b66b06de97f20622482b8940a408b61c904e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlib.command.json": "80a0fe6aab65bf474a8445a15a735337a4da93b67e4739dedb3bcbab1fa234ff",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlib.intent.json": "1b81b11291dc86693ce9283f13633f45ca3695e9a6a45a20007f94b02dcec4a2",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlog.command.json": "62fbf4ba37da897aeccc09163a9a8563aa775af42c0666c1b2ac801a1bbfaf72",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlog.intent.json": "3db8deb9eb8459c4c55b2e94b74bd91bb383f45b43c99cb667940da8e8d6db89",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vlog.stdout.txt": "e439e6ddbeac49af75cd21061f90f6cd61e74e244c3910149805193fc2a4f974",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vsim.command.json": "2db90bc8bfab40164cdd9d4388105fc2337468c9a75ef1bc913b01a337fbb5ab",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vsim.intent.json": "a80a45c314127b79ebaa9331f51cfe7108f1dd1c4d28ae4a25eb710de08551e4",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/vsim.stdout.txt": "5595d0da5722ec5af2704152a706060474384575c09fe936ec2195e4e000c97e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/inputs/expected.json.gz": "741f25fc33074e7b2df51f5dcceb162d190f4c375d879829b3a697ea9fea58f6",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/stat3-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/RESULT.json": "d8597c44608b098489e90488d2f817787f294ceb926eed8d2ea8a9f11b1cfcd5",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/sim.transcript.txt": "f38e2fd25e8c03337889e352e1ee9efc3c9e70661536f4f0a8adb89b63bd37f2",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/trace.txt.gz": "df39a0d1c018e17605c58ac10c107a0534049d7f6ee24b0bd760a24f23fcaf41",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/version.command.json": "74909348eb3cdd9c6cc48ccad10029a02fb4c8d3dce15388dfacccee134b2bf3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/version.intent.json": "416568bdc6f20e6c90d66cf5b350a1141e1cd8c669b0a10f8daa7871819fb64e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlib.command.json": "7a966d9a9f4b238a6dd538b7dea1f3ad03dab9762b20a3739c5e7efc211047bd",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlib.intent.json": "5d1695a6e3c27089d150dc11c525b8b47e7f631bacbf604c98645a9ffa6cd4f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlog.command.json": "362fedd019c9a1bf1a314cada6906f33eda2dcd240111c24ae10b390c131d1b0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlog.intent.json": "8bd36ef4c99079d24afbf7ba1170445e8c9d71fdadbb14b0d7159fab8574ab16",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vlog.stdout.txt": "2b57f491ce850e4bde9c20df2b53f352548ee20d22a7c06609e784b62790e65f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vsim.command.json": "a1ea18d46907fa709f027385ef7408544890fc0a94d45bd480fef61861f99046",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vsim.intent.json": "3ed781542b63ef4e09b45ae5b462d0f58fa924e7b0fa80d8d2ec360d62e81cc7",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/vsim.stdout.txt": "1bcc053f358a29668c322719f3d3fef4ec563e1b7e92186c2a1c032e81c29b12",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/inputs/expected.json.gz": "855511b58ca54bf90ec6eb23b8e60a2541e5a50c932791067d5d87d1a67a650d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/width1-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/RESULT.json": "12ba80409ea7b2ae7dd8025287c7c75780a5dabaf41d42efd4f420685d7801a9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/sim.transcript.txt": "93e51af439662b4addc369adede3a7168be506c154270136929253490c506450",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/version.command.json": "a9f5517827325e5d3cf7bb0a7651d1a97882e9bb725681649ef73aac89b10b98",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/version.intent.json": "ad179bdea2e7ddde7615a818371bd450142782fe66e25af9dff4891a41f6c1ed",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlib.command.json": "5f025b3808f71a9bb318b6a1d0a09ec4ed094c3054f8d4ab3aabddf706dac930",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlib.intent.json": "5bcf27d155829c80caa17ea5d0015458e9bb6642c57b570ae136e751563235fd",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlog.command.json": "f547a281dbae5ebfc44ceff6366023c74b6e371a5c8bbc7a09e3ff0f4a5e9db3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlog.intent.json": "dc21d2d77595a6d21911c57014d16964e1f9070344f229d50aaeeea1d2832342",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vlog.stdout.txt": "881fccc36be942b9f9749a3759aa5ed3b7fd69f19cf727af40390b0ab7c5ea43",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vsim.command.json": "78d1f3d5917a33a477c33e906d8a246fa24f185c9e48806c8deedb7a233cb8e4",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vsim.intent.json": "afc3118103466bf35bcc79f62b4959e89d242d54767a906d24309f4e6e56fb10",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/vsim.stdout.txt": "48b43ad940ecacfbb44592d585a7bcd41217693a8beb6d4e7db6fc9934e842ea",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-1-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/RESULT.json": "9df9e52cfcea88247cc4bdd0dde0ac042475b3567c72bbcd40377a8e8484abae",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/sim.transcript.txt": "37bb4e1d07fbd57052068725216cf008b4f02ff0464dc2122056b416a7bd416b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/version.command.json": "dfdae2a51b16cfa185379c392cce0d5176ff5355ae0d6e09bf1d3de3f0df0d2a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/version.intent.json": "8597f5d51794f65feef94cade3a0d481904aedc30572252c9ca0946b182b3e15",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlib.command.json": "89d1e55fd761fb929489fd79560c3b34f53e6058d7ff3b5033c194f61124d5a9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlib.intent.json": "e37b982ecc357dd86ac726416a10d7e985824e5a63ab5ffe1ba80c394ca5e86a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlog.command.json": "f1108e3333e6c00b80b7604c5cc65e237793dee395f984450dfcd1a3e5749603",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlog.intent.json": "393a11b87ea05cf41f95ca84efbc2aded8a16028c055d8a11c97f1a792527339",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vlog.stdout.txt": "70f4d82fc077150e08d0febb2744530d5650ab5c3d596a879cfd9dcf4fd99c0b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vsim.command.json": "4efdf23b095b928b2dd4693fd516799b720e63e60296da1e747aa14fb94e94e3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vsim.intent.json": "dbe59e9dab9c478ef83c472509d31b96166bb4570a868b0f6863bc669d47f03e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/vsim.stdout.txt": "50faa80e0db1eacb9c0f2515e8af1102d92b2502fcfaf3efe7953bf6e3e524fd",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-SEQ_W-33-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/RESULT.json": "2290a82218bc6114a3bbb68e07e90a0a2c612e3dada7dee9b5dbcf20bade4479",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/sim.transcript.txt": "6b880c5b473deb018b6362c097bd8e0439c3997482468170ca4b864ba03e1431",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/version.command.json": "96a64ab76a27659b94f8794ee27f0c52bfe6f52dd933d7e995c652f72825f94f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/version.intent.json": "f87c2ee918fafac05d11df6a916874024a1a33cc9fb86c5f46e496febe100360",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlib.command.json": "dd1c554a151e1cc5019f549723e15ea65b6477f9060c310417aaff3cdf19f6b3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlib.intent.json": "47890019a6af365209a464c92b9731c2bbcf194e96a2333bc955a5c6c8726d96",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlog.command.json": "271416160d915c1d85e1ab5470d3cb3a4e072e714fdd799d60d4004badcf0d02",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlog.intent.json": "b8429e4453e9cdc74c747732fab1e017c15842cbe61b244cec606633ffe8d1dd",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vlog.stdout.txt": "98710290c05ddbf897ca567a3d3e14d09c9a2e9c579a0c25ee3b522f88475578",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vsim.command.json": "a490c476c431f98b46ea3a2ff4a88f36eca144b84f1cb059d17ddd5bd06b4918",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vsim.intent.json": "4fc8fff03b95bd3c058672df41aa2fc8fa061cae32b8a4280d50b214b1887cc1",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/vsim.stdout.txt": "6fa804b387eebd81b4a1b5e74297621d4fc20483ba38986dd913cace6709d564",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-0-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/RESULT.json": "85475498b981336d0500f0660baf5c55c21c870af03cbe3430d13f58e84478d5",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/sim.transcript.txt": "3fd25a5cbe331cb2c2c50d8c0b167b1fa9ac29edf5817e7792e30d6ffbe65d18",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/version.command.json": "2eb97e3587fd220864ac85a079119c396c0a172b6d6a7272f05e31b5e37a6ee0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/version.intent.json": "685c093761d20d1a54cc13603dd07abaf06aacbd9a5fea409e4fff3e0cfe6199",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlib.command.json": "cf153fc687aa5bd3b123671bd77ea89c17a6b6f2ba8db970c4d4be3f7a1575df",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlib.intent.json": "d6f43ee450527da47144352c308eb4759572eb7c72fe632ca95c0032b7a8262a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlog.command.json": "56b70d4ed84fdc7f253ce9fc15c75c771659a3e43dcd617d77e46c0275962cc5",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlog.intent.json": "fd0b654bdab8219a37898931c6e7499fe7db9d202600eefa0582c731e1fb833e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vlog.stdout.txt": "cf4a1b7857d55c00e805bc8ec3ec5d3635f5d3d88b78b2fd876f2f2c2d961ec4",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vsim.command.json": "369b6a365cc6865990230b9390a4442cc111692bf7ed4c32df7521ff3700c21e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vsim.intent.json": "90e4429ca27dd5d591dc7172fcba5210b72ff4e20153d338db2d71eb29fa807b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/vsim.stdout.txt": "935bcbc5c0ad15193afe3d45e031372cfed6bad79ea3f5defb9014d6277640ec",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TICK_W-65-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/RESULT.json": "7ef37e061056faec175bf45ca3ff004d74e05b27cf9f6c9bb2e16170d327fb6b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/sim.transcript.txt": "aed6bb4e740208bb081eabd951dc85ff1fbfe9ef6a6c5548877ae71625f70f7f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/version.command.json": "9203a97b691c8d7543a089310e8aef096dbe7da418c98b9e3d7105b534989884",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/version.intent.json": "001ae00b19d8df08fb025fa7f94094f063949c0f1fcf0c8f7744cfc9feaac225",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlib.command.json": "fdbd4fb0e678f27a12b5a2bb0a9b3fc8d97171fa22e48447f9669c441886d830",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlib.intent.json": "64ca885b2de8b0ac3191db483974636f278df71d92473f3e6d88ed5398f7b411",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlog.command.json": "c4ceccd339b026e3e58a6141593794137d6978a41d46bed490d8870ccc05ff10",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlog.intent.json": "08fc0618f315c2f96bdb5cde35866c5989588644f5f791a47ea2476ba0e79223",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vlog.stdout.txt": "dfb1c497cbc3d4f3fa8b653f28c6f126929f4b15a0a73c0202bd91477f50f874",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vsim.command.json": "0053569346a89e0c23cb53a0857401392c21be71b8b362333ab68410eceda446",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vsim.intent.json": "03eba3a272bb582d69f3947e15f0f86bd66826eaaf55c0bc73ffb57152eed4d2",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/vsim.stdout.txt": "66f78aa14b69875a248008e64e6cd9a0271903a04a30ffc408fa05db342b844c",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-0-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/RESULT.json": "d8b09c9e7adcfe6f8f06d0a0bc86625936f306ae9f6260eedb5c39184dd3532c",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/sim.transcript.txt": "ee4308d2c59fbc7e610ff706cbfa2a86e45c5364dcec5c63bae24472513969aa",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/version.command.json": "359c6c57f08bff6814823926ebbe10b1c79762c8a0dad99d8977dc5d56bf904e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/version.intent.json": "3aaa60778efec85fcc30644e224949bff6df88828e5db402a9866466a6192a08",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlib.command.json": "47a93884dcc6adf9f29380e1bc0da4e70ae5371595b45e4273f1514d4e3ba1b5",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlib.intent.json": "acea682f70f3b969c12fc13e43ba4c9d8e30f48dd11cb0602d5f4204cafcc4a3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlog.command.json": "ef1a16861797775d1abcb32a5c4282e474cce2971c47acbfc37b345360527559",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlog.intent.json": "18b578460e21462757b262058c8030ed54ceb68427e197e2bd06a9abcc6ba9bd",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vlog.stdout.txt": "8abebd50e86e02e4ab697714d2e073af8bd715794cd2db32f3fd5ec09a582546",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vsim.command.json": "fe726bd65f889033449830ab5284bb8f23dffe929c43751be0080cac3058922b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vsim.intent.json": "21845c5f00f41444c1c72cf3efb26c42ebfc982d5b637d40eb06171823e961d9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/vsim.stdout.txt": "2c3603c61de2aa1213febc6a4b57891b18089df66044ec0cea965478077fac6f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-TAG_W-65-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/RESULT.json": "ada0a60dd2cab4c2e1bf7f584cc5e571f5be881793c2f87374bf52bad5d67601",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/sim.transcript.txt": "2cf6be3d702b5985458e3ca35438a7f65a9634619b465f46c28a615b0ba8adef",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/version.command.json": "f7ba6cb04b2144b7ef3be0f869dd728e17bfd3864f68927f2c88bfd1b1501a1a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/version.intent.json": "aafb4b894d417789a7b126dd2d0013170428b122d8624cf7b78ce166979899ee",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlib.command.json": "4bf7d9239ecb243b9fbaaec73856deb9643d640b5002a6189daee14b9025aabd",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlib.intent.json": "9d494c13ec48b9325b445a4b1699ffcbe176ff8d9e8280be6f8ad6f8f03bac7a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlog.command.json": "e24e5f357acbca730b172a466c7221e0d8833c4310a7bedb01ac5be44e8f6c77",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlog.intent.json": "46e87e9830118508b911cc7b90dcae33cc802c2b50605654147b4a765555c838",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vlog.stdout.txt": "a34478934280b5d210ceac1db805d7f00666607227d900b085e730421a64156d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vsim.command.json": "5f1b87c4721d6e7c572590b2712826e40f2cd0df6f7d5f954d730f14d0915fde",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vsim.intent.json": "897c47728086932f55c431ba24729263101826e30a54d8924cbf5bcd01741e71",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/vsim.stdout.txt": "a78c8362c6edc69682cf3c4b9ed59d7b48ddc31f21a2c6e1d60e7abbe7284117",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-1-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/INPUTS.json": "27e0aac007c1c14f1cda4165d50adc8288f4fa9e4a724c33ea0ebb3f365ed9f0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/RESULT.json": "dbbf129b55e4b7fc72cbefd0aaf66d8f9ad3224a51916a3db06da17afabb93d6",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/sim.transcript.txt": "cb35822821b9bd4650f145bae4c9512637df7d4e1b9d3c3e4572a148c7be9065",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/version.command.json": "4ccf9431da81713614d381777a95a6220c15a86d3106f44daa120928e916e687",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/version.intent.json": "86a1d948d076d173461c0473c144dee65ddda86873b4af39910b09c2ba900b00",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlib.command.json": "d8a03c9c547365b20c5e90a97ad75c09fe2fb46686fd0ab5e81e461826d3bcf3",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlib.intent.json": "d0c866281e12b431dfb959a5f875227a14c79e0b0b3a9c0b18d525a68c895718",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlog.command.json": "97277822acb77b275b39dd42be85ef42807cd18f3cd85bed2a3b163b768e6ab9",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlog.intent.json": "7fd79d8f747e064620d766902727791980c28e62a8a89fd7e0a042a0d630a365",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vlog.stdout.txt": "2650bf2251a06bdb4b41ddcd759944cda18de69274a4834cce57e7bf5a5bbb38",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vsim.command.json": "6df2292f4af7eca9cffa10116af1690f93c35993c808ee73d253dcd491a7d8b8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vsim.intent.json": "b0b02c3c95212c493b8cf8ad0aa3f7b491497599ce174ce36000f698e02e2ac8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/vsim.stdout.txt": "27d3bfe7d2b6a75ef0d7b96c627596f2a1074c2ab0a85dc77c4dca2ef1e38051",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/inputs/deepeye_sample_scan_capture.sv": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/guard-STAT_W-33-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/INPUTS.json": "40300e7339fdade11626d8f49506727c89e7f8ec15e5a4a2ed7bfce2e2df7da5",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/RESULT.json": "e01f9873331fc8d6fe89f9ff1c11e88396b705fe4696ef961704525333f40f4b",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/sim.transcript.txt": "5b95d809b55bbf02556c642c0aeaf780f3ecbd3fab997f8aa2dbffb11710b634",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/trace.txt.gz": "042616b597b5b94214e7275523921c9ee1473fd95f0ba6bb174199be021525b0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/version.command.json": "ed70c49b981b55b277b58e66bbdc40f0f7fb61b80735c24dc290266722d2916d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/version.intent.json": "04eabc2c1b3ce6914eaa388432c198ea06064d6efb0385e626c72f9c6d565761",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlib.command.json": "5aeb27c019195642abb5836a8eca28de813ac43d96c4716d6583661977f3972a",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlib.intent.json": "4d7d15a699b71e7cbc70acf68610be07096e5a013bb3afdb49c935cdc586ed9e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlog.command.json": "00f3ccd5edaa6294525c0de24921bd68c9f23c33ca1efc699a7635e246e14339",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlog.intent.json": "70cb2b3e89cd776e0691a4cbea7a48001d01dbac18b20c93ec5b363a59834206",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vlog.stdout.txt": "b4d35e5f3735f480be2b996aca07a5f0853d2dc7eefe02da647b839234ec39da",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vsim.command.json": "62d8bb17ea7f29185555ed53c6016c1d982c77cb055138949edfb1d915fb5b51",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vsim.intent.json": "5f6ab6282fba2efe81da1b1ae1f3ca2b436b30b5352217628aff94aedb3a51ea",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/vsim.stdout.txt": "d12417a05b45edc373d7b25e627f6c87dc35157c25792af548df7ad844fe5b7f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/inputs/deepeye_sample_scan_capture.sv": "f652fd75db9c6b96e8157b8c727cce77349d0df7d0b519a319136f3ff7d3c4a5",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/inputs/expected.json.gz": "d0b8d436d2ab90e55a59a8ba50184461bb77b0051826c0913bc3bf212d49df6d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-wrong-channel-mix-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/INPUTS.json": "cc3b97e6c3b3325fa0ae9bd3282f9b16b8b0893ef06eaacd89bd537d4a0c45a1",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/RESULT.json": "1df913990656ff90c85793d764368370bf2bf26348d7da8eb39df34306ad9a5c",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/sim.transcript.txt": "71c38e7521b3d8e2f3711a6054fa97cde07d580ba3c4a315b928c6fc049d8544",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/trace.txt.gz": "adbeb52587ec81630a1ec61fd10f476c9d43098b0d59b13c8609c8a5886ac4b1",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/version.command.json": "2e24a6cf3dd72fc5df69e1e8fb01beb47a4a8e29be4f31950e13b2d9afeae20f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/version.intent.json": "df5f476e47519460b00fe7b23d659d383f9aba62d33184d1614b06975a228baf",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/version.stdout.txt": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlib.command.json": "0fa58ed2a15e4f071f53ee2d51fef7b2b9fafcccfa34a85eacc9b9bd3e0674d7",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlib.intent.json": "5091a9b51893b923a8f41974acdf00db04ba3a0f0996d22a0a6e9faacd099ebc",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlib.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlog.command.json": "ca6486ac203b158bd54e4332930f3581041f5bf49e0151588d42305c18d6a29f",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlog.intent.json": "1949858190366cd302bf8ec50c51dc7ab2c2d1acbc6e73ad75f37ebff923a411",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlog.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vlog.stdout.txt": "8f866345e9eff8bcc6c1567f48f5b874f521cbebc7aa745a43ac4fb469b084ca",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vsim.command.json": "529ac58dbfa34f00708fbe3a7990f3972360cf777fa8268b91e03907ae12a34d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vsim.intent.json": "48eb42f9947126082ea5cbf35000b652e1a88d2e4cf27b70e33cdbc60719cb18",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vsim.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/vsim.stdout.txt": "644ea81e3a14bc6c77fa6c917d5c0847be85d0a3bdc57f794dcc7fcacc56ede0",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/inputs/deepeye_sample_scan_capture.sv": "c016f5854e0e838c41439f0cdca54418ce68d12e6f52c61909337c10141c6a58",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/inputs/expected.json.gz": "d0b8d436d2ab90e55a59a8ba50184461bb77b0051826c0913bc3bf212d49df6d",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/inputs/FREEZE.json": "739dc0dc264c66901eeacc437d9e6c6bccfb88b106e0f4cec77810f7f613b460",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/inputs/freeze21.py": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/inputs/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutant-ordinal-plus-two-01/inputs/verifier.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40"
+  },
+  "limitations": [
+    "STAT_W32 saturation not exercised at maximum",
+    "SEQ_W32 namespace only bounded coverage",
+    "simulation only; no physical sampling/clock/ADC/source authority",
+    "all29/B02/G05/B06/R03/fullproduct/synthesis/implementation/CDC_RDC/board/system not_run"
+  ]
+}

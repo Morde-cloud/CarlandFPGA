@@ -1,0 +1,407 @@
+{
+  "failed": [
+    "seq3_conditions",
+    "seq4_conditions",
+    "stat2_saturation"
+  ],
+  "missing": [],
+  "ok": false,
+  "reasons": [
+    "failed cases: ['seq3_conditions', 'seq4_conditions', 'stat2_saturation']"
+  ],
+  "results": {
+    "abort_matrix": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "abort_matrix",
+        "checks": 2035,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 23
+      }
+    },
+    "directed": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "directed",
+        "checks": 407,
+        "discarded": 6,
+        "errors": 0,
+        "events": 14,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 1,
+        "partial_len": 0,
+        "retired": 2,
+        "scans": 3,
+        "windows": 1
+      }
+    },
+    "exhaustive6": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "exhaustive6",
+        "checks": 467347,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 4097
+      }
+    },
+    "mutant_loss": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_loss",
+        "checks": 65,
+        "discarded": 2,
+        "errors": 0,
+        "events": 2,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    },
+    "mutant_mix": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_mix",
+        "checks": 93,
+        "discarded": 4,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 3,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    },
+    "quality_lanes": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "quality_lanes",
+        "checks": 65584,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4096,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1024,
+        "scans": 1024,
+        "windows": 1
+      }
+    },
+    "random20k": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "random20k",
+        "checks": 280214,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 23
+      }
+    },
+    "seq16_window": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "seq16_window",
+        "checks": 454,
+        "discarded": 0,
+        "errors": 0,
+        "events": 65536,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 16384,
+        "scans": 16384,
+        "windows": 1
+      }
+    },
+    "seq2_conditions": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "seq2_conditions",
+        "checks": 461,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 5
+      }
+    },
+    "seq3_conditions": {
+      "classification": null,
+      "mismatches": null,
+      "ok": false,
+      "reasons": [
+        "expected exactly one SAMPLE_SCAN_PASS, found 0",
+        "SAMPLE_SCAN_MISMATCH present",
+        "unexpected simulator fatal",
+        "tool summary reports 1 errors",
+        "testbench errors=1",
+        "stats retired expected=1 actual=0",
+        "stats occupied expected=0 actual=1"
+      ],
+      "stats": {
+        "armed": 1,
+        "case": "seq3_conditions",
+        "checks": 414,
+        "discarded": 0,
+        "errors": 1,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 1,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 1,
+        "windows": 3
+      }
+    },
+    "seq4_conditions": {
+      "classification": null,
+      "mismatches": null,
+      "ok": false,
+      "reasons": [
+        "expected exactly one SAMPLE_SCAN_PASS, found 0",
+        "SAMPLE_SCAN_MISMATCH present",
+        "unexpected simulator fatal",
+        "tool summary reports 1 errors",
+        "testbench errors=1",
+        "stats retired expected=1 actual=0",
+        "stats occupied expected=0 actual=1"
+      ],
+      "stats": {
+        "armed": 1,
+        "case": "seq4_conditions",
+        "checks": 434,
+        "discarded": 0,
+        "errors": 1,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 1,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 1,
+        "windows": 2
+      }
+    },
+    "stat2_saturation": {
+      "classification": null,
+      "mismatches": null,
+      "ok": false,
+      "reasons": [
+        "expected exactly one SAMPLE_SCAN_PASS, found 0",
+        "SAMPLE_SCAN_MISMATCH present",
+        "unexpected simulator fatal",
+        "tool summary reports 1 errors",
+        "testbench errors=3"
+      ],
+      "stats": {
+        "armed": 0,
+        "case": "stat2_saturation",
+        "checks": 804,
+        "discarded": 3,
+        "errors": 3,
+        "events": 3,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 3,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 3,
+        "windows": 3
+      }
+    },
+    "stat3_saturation": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "stat3_saturation",
+        "checks": 1417,
+        "discarded": 7,
+        "errors": 0,
+        "events": 7,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 7,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 7,
+        "windows": 3
+      }
+    },
+    "tag64_flush": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "tag64_flush",
+        "checks": 324,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 3
+      }
+    },
+    "tick16_pack": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "tick16_pack",
+        "checks": 132,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 1
+      }
+    },
+    "tick1_pack": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "tick1_pack",
+        "checks": 111,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 1
+      }
+    }
+  },
+  "selected": [
+    "directed",
+    "exhaustive6",
+    "quality_lanes",
+    "tag64_flush",
+    "abort_matrix",
+    "seq2_conditions",
+    "seq3_conditions",
+    "seq4_conditions",
+    "stat2_saturation",
+    "stat3_saturation",
+    "tick16_pack",
+    "tick1_pack",
+    "mutant_mix",
+    "mutant_loss",
+    "seq16_window",
+    "random20k"
+  ],
+  "unexpected": []
+}

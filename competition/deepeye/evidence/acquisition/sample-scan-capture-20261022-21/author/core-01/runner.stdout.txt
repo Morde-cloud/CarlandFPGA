@@ -1,0 +1,37 @@
+CASE directed PASS classification=pass
+CASE exhaustive6 PASS classification=pass
+CASE quality_lanes PASS classification=pass
+CASE tag64_flush PASS classification=pass
+CASE abort_matrix PASS classification=pass
+CASE seq2_conditions PASS classification=pass
+CASE seq3_conditions FAIL classification=None
+  expected exactly one SAMPLE_SCAN_PASS, found 0
+  SAMPLE_SCAN_MISMATCH present
+  unexpected simulator fatal
+  tool summary reports 1 errors
+  testbench errors=1
+  stats retired expected=1 actual=0
+  stats occupied expected=0 actual=1
+CASE seq4_conditions FAIL classification=None
+  expected exactly one SAMPLE_SCAN_PASS, found 0
+  SAMPLE_SCAN_MISMATCH present
+  unexpected simulator fatal
+  tool summary reports 1 errors
+  testbench errors=1
+  stats retired expected=1 actual=0
+  stats occupied expected=0 actual=1
+CASE stat2_saturation FAIL classification=None
+  expected exactly one SAMPLE_SCAN_PASS, found 0
+  SAMPLE_SCAN_MISMATCH present
+  unexpected simulator fatal
+  tool summary reports 1 errors
+  testbench errors=3
+CASE stat3_saturation PASS classification=pass
+CASE tick16_pack PASS classification=pass
+CASE tick1_pack PASS classification=pass
+CASE mutant_mix PASS classification=pass
+CASE mutant_loss PASS classification=pass
+CASE seq16_window PASS classification=pass
+CASE random20k PASS classification=pass
+SAMPLE_SCAN_RUN_FAIL
+FAIL failed cases: ['seq3_conditions', 'seq4_conditions', 'stat2_saturation']

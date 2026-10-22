@@ -1,0 +1,70 @@
+{
+  "case_arg": null,
+  "expected_stats": null,
+  "kind": "guard",
+  "name": "guard_tag_w_65",
+  "params": {},
+  "result": {
+    "classification": "dut_guard_rejected",
+    "ok": true,
+    "reasons": []
+  },
+  "schema": 1,
+  "source": {
+    "rtl_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\final-all-01\\results\\cases\\guard_tag_w_65\\inputs\\deepeye_sample_scan_capture.sv",
+      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d"
+    },
+    "source_rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\acquisition\\deepeye_sample_scan_capture.sv",
+      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d"
+    },
+    "source_tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\acquisition\\tb_sample_scan_capture.sv",
+      "sha256": "bf240773bc9a7e15683194e0d7418b1bf07f4e1b6f54267264223e161e47f393"
+    },
+    "tb_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\final-all-01\\results\\cases\\guard_tag_w_65\\inputs\\tb_sample_scan_capture.sv",
+      "sha256": "bf240773bc9a7e15683194e0d7418b1bf07f4e1b6f54267264223e161e47f393"
+    }
+  },
+  "vlog": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-floatparameters",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\final-all-01\\results\\cases\\guard_tag_w_65\\inputs\\deepeye_sample_scan_capture.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\final-all-01\\results\\cases\\guard_tag_w_65\\inputs\\tb_sample_scan_capture.sv"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\final-all-01\\results\\cases\\guard_tag_w_65",
+    "elapsed_seconds": 0.125,
+    "exit": 0,
+    "stderr_path": "vlog.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vlog.stdout.bin",
+    "stdout_sha256": "190df8efd117cf6923c5704487204b69a67398b0223aad657e99358cfb2081ef",
+    "timed_out": false
+  },
+  "vsim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-lib",
+      "work",
+      "-do",
+      "run -all; quit -f",
+      "-gGUARD_SELECT=5",
+      "tb_sample_scan_capture_guard"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\final-all-01\\results\\cases\\guard_tag_w_65",
+    "elapsed_seconds": 1.61,
+    "exit": 0,
+    "stderr_path": "vsim.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vsim.stdout.bin",
+    "stdout_sha256": "ee4f0d9f9b878fcfb311946b119caf45061420a4de00f179c8b1de4292865b3f",
+    "timed_out": false
+  }
+}

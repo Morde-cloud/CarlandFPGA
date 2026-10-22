@@ -1,0 +1,28 @@
+Reading D:/modelsim1/tcl/vsim/pref.tcl
+
+# 10.7
+
+# vsim -c -lib work -do "run -all; quit -f" tb_sample_scan_capture "+CASE=directed" 
+# Start time: 12:58:37 on Oct 22,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  ModelSim SE-64 10.7 Dec  7 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.tb_sample_scan_capture(fast)
+# Loading work.deepeye_sample_scan_capture(fast)
+# ** Error (suppressible): (vsim-7061) D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv(297): Variable 'partial_tick_q[0]' driven in an always_ff block, may not be driven by any other process. See D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv(219).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sample_scan_capture/dut File: D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv
+# Error loading design
+# End time: 12:58:38 on Oct 22,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

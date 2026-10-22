@@ -1,0 +1,253 @@
+{
+  "runner_sha256": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+  "parser_process_cases": 49,
+  "literal_finite_strings": 4096,
+  "cases": [
+    {
+      "case": "ordinaryclean",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "case": "exactownfatal",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "case": "nonzeroexit-1None",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit-1deepeye_sample_scan_capture: SEQ_W out of range",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit1None",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit1deepeye_sample_scan_capture: SEQ_W out of range",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit2None",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit2deepeye_sample_scan_capture: SEQ_W out of range",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit3None",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit3deepeye_sample_scan_capture: SEQ_W out of range",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit127None",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "nonzeroexit127deepeye_sample_scan_capture: SEQ_W out of range",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "timeoutNone",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "timeoutdeepeye_sample_scan_capture: SEQ_W out of range",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:** Error: compile failed",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:** Warning: port size",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:** Fatal: foreign",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:Errors: 1, Warnings: 0",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:Errors: 0, Warnings: 1",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:Errors: 00, Warnings: 0",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:Errors: -1, Warnings: 0",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:warning",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:error",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:FATAL: hidden failure",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "diagnostic:Errors: 0, Warnings: 0 trailing",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:NOT_** Fatal: deepeye_sample_scan_capture: SEQ_W o",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: SEQ_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: SEQ_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: SEQ_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: SEQ_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: SEQ_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: TAG_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "guardnegative:# ** Fatal: deepeye_sample_scan_capture: SEQ_W out",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "goodmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "case": "goodmarker:'# MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "case": "goodmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32\\r\\n'",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "case": "goodmarker:'unrelated\\nMAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "case": "badmarker:''",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32\\nMAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'NOT_MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32 junk'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=18 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=32 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=017 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32\\nMAIN_SAMPLE_SCAN_DONE edges=18 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=17 SEQ_W=32 TICK_W=64 TAG_W=64 '",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "case": "badmarker:'MAIN_SAMPLE_SCAN_DONE edges=-17 SEQ_W=32 TICK_W=64 TAG_W=64 STAT_W=32'",
+      "accepted": false,
+      "expected": false
+    }
+  ],
+  "scope": "Synthetic classifier checks and independent frozen-string audit only; not actual vendor runs."
+}

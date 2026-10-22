@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "generated_utc": "2026-10-22T05:19:44Z",
+  "status": "author_candidate_complete_main_acceptance_pending",
+  "task": "DEEPEYE-IMPLEMENTATION-20261014/v1",
+  "work_id": "B-SAMPLE-SCAN-CAPTURE-RTL-20261022-21-v1",
+  "operation_id": "B-DEEPEYE-SAMPLE-SCAN-CAPTURE-20261022-21",
+  "product_director_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "worktree": "D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014",
+  "baseline_head": "7317b6ac3f8f19059031c46f8c4d2b0f9a8e9c06",
+  "frozen_design": {
+    "commit": "1011259415a0916054eb580687612580bc1e5f09",
+    "tree": "9d468881b0eda0e3bea7782a33a5527df8f02543",
+    "subject": "docs: seal revision1 final taskbook bytes"
+  },
+  "human_contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_schema": "json-array/ensure_ascii=False/sort_keys=True/separators=(',',':')/utf8",
+    "requirements_count": 15,
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "ids": [
+      "H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08",
+      "H09", "H10", "H11", "H12", "H13", "H14", "H15"
+    ],
+    "verification_stdout_sha256": "30fc062a5b220018efd5a665b5bea2f413785f92572c34b21150c22264b08524",
+    "verification_exit": 0
+  },
+  "author_files": {
+    "competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv": {
+      "bytes": 17174,
+      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d"
+    },
+    "competition/deepeye/fpga/acquisition/sample_scan_capture_candidate.md": {
+      "bytes": 6819,
+      "sha256": "98c1748815deb873915ce7d85ae59af308467258b7a2dfd767f33ae4ab9f31ac"
+    },
+    "competition/deepeye/tests/rtl/acquisition/tb_sample_scan_capture.sv": {
+      "bytes": 72464,
+      "sha256": "bf240773bc9a7e15683194e0d7418b1bf07f4e1b6f54267264223e161e47f393"
+    },
+    "competition/deepeye/tools/acquisition/run_sample_scan_capture.py": {
+      "bytes": 38882,
+      "sha256": "fa88d077a0bce30904a35b98cc11d2759a002233022b7bae1739c905334b5333"
+    },
+    "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/author/AUTHOR_REPORT.md": {
+      "bytes": 14808,
+      "sha256": "04dd80196367169188f4b80b8fda1730d8e332b5f77bc417ab51cd7f5786789c"
+    }
+  },
+  "final_run": {
+    "evidence": "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/author/final-all-01",
+    "command": "python.exe -B -X utf8 competition/deepeye/tools/acquisition/run_sample_scan_capture.py --root <worktree> --out <author>/final-all-01/results --modelsim D:/modelsim1/win64 --suite all",
+    "cwd": "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/author",
+    "exit": 0,
+    "marker": "SAMPLE_SCAN_RUN_PASS",
+    "stdout_sha256": "c653347b0791d35d0b0c4d60db9bd124436b48059bd8ffe401b6657f2090b671",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "summary_sha256": "fe71e75dc89cb94e50f6d846370a019c9d45cc0583bad3f4c3f2f75592b42627",
+    "selected_cases": 27,
+    "core_cases": 16,
+    "guard_cases": 9,
+    "mutant_cases": 2,
+    "core_checks": 820621,
+    "failed": [],
+    "missing": [],
+    "unexpected": [],
+    "create_no_window": true
+  },
+  "toolchain": {
+    "modelsim_root": "D:/modelsim1/win64",
+    "vlog": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017",
+    "vsim": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017",
+    "python": "3.12.9"
+  },
+  "author_reviews": {
+    "runner_helpers": {
+      "path": "focused-review-01",
+      "exit": 0,
+      "stdout_sha256": "b4548d80274ad6c4334448560b304b90599ad6b2b47a52d7486a0fdee77f983d",
+      "result": "RUNNER_HELPER_REVIEW_PASS checks=78"
+    },
+    "exhaustive_math": {
+      "path": "exhaustive-math-01",
+      "exit": 0,
+      "stdout_sha256": "4b1412c214022ec6eb084f938c8245e2e898d0fe5e48ce93f8e6d3c3efa5b8f0",
+      "result": "EXHAUSTIVE_MATH_PASS windows=4096 scans=48 discarded=22656 order_errors=18432 partial_end=1728"
+    },
+    "final_evidence_audit": {
+      "path": "final-audit-03",
+      "exit": 0,
+      "stdout_sha256": "93f2c31faa1113086d144e6453b92c0e848b28098166d73a1a83bab25c854eb1",
+      "result": "FINAL_AUTHOR_AUDIT_PASS cases=27 core=16 guards=9 mutants=2"
+    }
+  },
+  "preserved_corrections": [
+    "core-01: same-edge retirement oracle errors and saturated-counter explicit comparisons",
+    "coverage-recheck-01: two overreaching added schedule assertions",
+    "final-audit-01: summary prefix omission",
+    "final-audit-02: CRLF normalization omission"
+  ],
+  "not_run": [
+    "synthesis",
+    "implementation",
+    "timing",
+    "resource analysis",
+    "CDC/RDC",
+    "physical board",
+    "full product/system integration",
+    "all 29 formal cards/G05/B06/R03",
+    "public ABI/BOOT/clock/source/physical TTL/ENABLE/motion grant"
+  ],
+  "boundary": {
+    "board_authority": "A-only",
+    "publication_by_author": false,
+    "staged_or_committed_by_author": false,
+    "main_owned_dirs_read_or_modified": false,
+    "service_config_credentials_queues_leases_sql_touched": false,
+    "feishu_peer_messages_sent": false
+  }
+}

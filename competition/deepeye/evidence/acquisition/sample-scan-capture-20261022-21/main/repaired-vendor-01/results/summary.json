@@ -1,0 +1,84 @@
+{
+  "failed": [],
+  "missing": [],
+  "ok": true,
+  "reasons": [],
+  "results": {
+    "directed": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "directed",
+        "checks": 507,
+        "discarded": 6,
+        "errors": 0,
+        "events": 14,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 1,
+        "partial_len": 0,
+        "retired": 2,
+        "scans": 3,
+        "windows": 1
+      }
+    },
+    "guard_healthy": {
+      "classification": "guard_healthy",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_seq_w_1": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "mutant_loss_undercount_rejected": {
+      "classification": "mutant_rejected",
+      "mismatches": [
+        [
+          "stat_discarded",
+          2,
+          1
+        ],
+        [
+          "mutant_loss_discarded",
+          2,
+          1
+        ]
+      ],
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_loss",
+        "checks": 65,
+        "discarded": 1,
+        "errors": 2,
+        "events": 2,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    }
+  },
+  "selected": [
+    "directed",
+    "guard_seq_w_1",
+    "guard_healthy",
+    "mutant_loss_undercount_rejected"
+  ],
+  "unexpected": []
+}

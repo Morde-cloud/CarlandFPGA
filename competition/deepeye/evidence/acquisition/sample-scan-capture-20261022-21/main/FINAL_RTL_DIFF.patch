@@ -1,0 +1,54 @@
+--- initial_9eadd35c
++++ final_fc8064a1
+@@ -8,33 +8,33 @@
+     input  logic                       rst,
+     input  logic                       stop,
+     input  logic                       rearm,
+-    input  logic [TAG_W-1:0]           rearm_tag,
++    input  logic [((TAG_W < 1) ? 1 : (TAG_W > 64) ? 64 : TAG_W)-1:0] rearm_tag,
+     input  logic                       sample_strobe,
+     input  logic [1:0]                 sample_channel,
+     input  logic [15:0]                sample_data,
+-    input  logic [TICK_W-1:0]          sample_tick,
++    input  logic [((TICK_W < 1) ? 1 : (TICK_W > 64) ? 64 : TICK_W)-1:0] sample_tick,
+     input  logic [7:0]                 sample_quality,
+     input  logic                       out_ready,
+     output logic                       out_valid,
+     output logic [63:0]                out_data,
+-    output logic [4*TICK_W-1:0]        out_ticks,
++    output logic [4*((TICK_W < 1) ? 1 : (TICK_W > 64) ? 64 : TICK_W)-1:0] out_ticks,
+     output logic [31:0]                out_quality,
+-    output logic [SEQ_W-1:0]           out_first_seq,
+-    output logic [SEQ_W-1:0]           out_last_seq,
+-    output logic [TAG_W-1:0]           out_tag,
++    output logic [((SEQ_W < 2) ? 2 : (SEQ_W > 32) ? 32 : SEQ_W)-1:0] out_first_seq,
++    output logic [((SEQ_W < 2) ? 2 : (SEQ_W > 32) ? 32 : SEQ_W)-1:0] out_last_seq,
++    output logic [((TAG_W < 1) ? 1 : (TAG_W > 64) ? 64 : TAG_W)-1:0] out_tag,
+     output logic                       armed,
+     output logic [2:0]                 partial_len,
+-    output logic [SEQ_W-1:0]           next_seq,
++    output logic [((SEQ_W < 2) ? 2 : (SEQ_W > 32) ? 32 : SEQ_W)-1:0] next_seq,
+     output logic                       seq_exhausted,
+     output logic                       order_error_event,
+     output logic                       overrun_event,
+     output logic                       seq_exhaust_event,
+-    output logic [STAT_W-1:0]          stat_events,
+-    output logic [STAT_W-1:0]          stat_scans,
+-    output logic [STAT_W-1:0]          stat_retired,
+-    output logic [STAT_W-1:0]          stat_discarded_samples,
+-    output logic [STAT_W-1:0]          stat_order_errors,
+-    output logic [STAT_W-1:0]          stat_overruns
++    output logic [((STAT_W < 2) ? 2 : (STAT_W > 32) ? 32 : STAT_W)-1:0] stat_events,
++    output logic [((STAT_W < 2) ? 2 : (STAT_W > 32) ? 32 : STAT_W)-1:0] stat_scans,
++    output logic [((STAT_W < 2) ? 2 : (STAT_W > 32) ? 32 : STAT_W)-1:0] stat_retired,
++    output logic [((STAT_W < 2) ? 2 : (STAT_W > 32) ? 32 : STAT_W)-1:0] stat_discarded_samples,
++    output logic [((STAT_W < 2) ? 2 : (STAT_W > 32) ? 32 : STAT_W)-1:0] stat_order_errors,
++    output logic [((STAT_W < 2) ? 2 : (STAT_W > 32) ? 32 : STAT_W)-1:0] stat_overruns
+ );
+ 
+     localparam int SEQ_EFF_W  = (SEQ_W  < 2 ) ? 2  : (SEQ_W  > 32) ? 32 : SEQ_W;
+@@ -382,4 +382,4 @@
+     assign stat_order_errors      = stat_order_errors_q;
+     assign stat_overruns          = stat_overruns_q;
+ 
+-endmodule+endmodule

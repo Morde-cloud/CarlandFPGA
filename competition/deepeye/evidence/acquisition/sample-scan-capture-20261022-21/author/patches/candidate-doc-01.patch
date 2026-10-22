@@ -1,0 +1,147 @@
+*** Begin Patch
+*** Add File: competition/deepeye/fpga/acquisition/sample_scan_capture_candidate.md
++# DeepEye four-channel sample-scan capture candidate
++
++Status: author candidate under DEEPEYE-IMPLEMENTATION-20261014/v1. Product
++decisions, independent acceptance and publication remain with the registered
++product main. This document does not claim a public ABI, board result or
++physical acquisition authority.
++
++## Scope
++
++`deepeye_sample_scan_capture.sv` is a one-clock event collector for four input
++positions numbered 0 through 3. The positions are not physical pins, ADC
++channels or calibrated sources. `sample_data` is a 16-bit container and does
++not assert 16-bit ADC precision. `sample_tick` and `sample_quality` are opaque
++transport values: zero, repeated, decreasing or wrapped values are preserved
++without interpretation. The local event ordinal is not the public ABI
++`sample_id`.
++
++The module has no input ready. Every asserted `sample_strobe` at an armed
++ordinary clock edge is one observed event. Output backpressure cannot stop
++front-end observation or ordinals. There is no missing-strobe timeout.
++
++## Parameters and interface
++
++| Parameter | Default | Supported |
++|---|---:|---:|
++| `SEQ_W` | 32 | 2..32 |
++| `TICK_W` | 64 | 1..64 |
++| `TAG_W` | 32 | 1..64 |
++| `STAT_W` | 32 | 2..32 |
++
++Inputs: `clk`, `rst`, `stop`, `rearm`, `rearm_tag[TAG_W-1:0]`,
++`sample_strobe`, `sample_channel[1:0]`, `sample_data[15:0]`,
++`sample_tick[TICK_W-1:0]`, `sample_quality[7:0]`, `out_ready`.
++
++Outputs: `out_valid`, `out_data[63:0]`,
++`out_ticks[4*TICK_W-1:0]`, `out_quality[31:0]`,
++`out_first_seq[SEQ_W-1:0]`, `out_last_seq[SEQ_W-1:0]`,
++`out_tag[TAG_W-1:0]`, `armed`, `partial_len[2:0]`,
++`next_seq[SEQ_W-1:0]`, `seq_exhausted`, `order_error_event`,
++`overrun_event`, `seq_exhaust_event`, and six `STAT_W`-bit counters.
++
++Channel 0 occupies the least-significant lane of every packed output.
++`out_valid` says only that one complete record is available for transport. It
++does not certify fresh, live or physically valid acquisition. Inactive output
++payload is unspecified.
++
++## Parameter legality
++
++Port declarations use legal clamped effective widths so an illegal parameter
++can compile and reach the actual module guard instead of failing on a negative
++range. The effective widths are bounded ternaries over `SEQ_W`, `TICK_W`,
++`TAG_W` and `STAT_W`. Under `ifndef SYNTHESIS`, the module emits exactly one of:
++
++```text
++deepeye_sample_scan_capture: SEQ_W out of range
++deepeye_sample_scan_capture: TICK_W out of range
++deepeye_sample_scan_capture: TAG_W out of range
++deepeye_sample_scan_capture: STAT_W out of range
++```
++
++Each invalid case was compiled and reached an exact `$fatal(1, "...")` from
++this module with no compiler warning. Synthesis exclusion is intentional;
++out-of-range parameters are not a supported synthesized configuration.
++
++## Abort and window rules
++
++Priority is `rst > stop > rearm > ordinary edge`. Any asserted abort input
++combinations immediately qualifies `out_valid` low and inhibits sample intake
++and output retirement on that edge. Reset and stop clear partial state, the
++complete slot, tag, ordinals, event pulses and counters and leave `armed=0`.
++Rearm performs the same clear, stores exactly `rearm_tag`, sets `next_seq=0`
++and `armed=1`. Same-tag rearm is legal and flushes every old record and partial.
++
++## Scan assembly
++
++A valid scan is four consecutive observed events with channels 0,1,2,3 in
++that exact order. The first event captures its ordinal; a completed record's
++`out_last_seq` is exactly `out_first_seq + 3`. Each lane preserves the event's
++data, raw tick and raw quality.
++
++At empty partial state, channel 0 starts a scan. Channels 1 through 3 are
++orphan events: one order-error pulse, one order-error count and one discarded
++sample. From partial length 1 through 3, only the matching channel extends the
++scan; length 3 matching channel 3 completes it. A wrong channel causes one
++order error and discards the previously collected prefix. If that wrong
++channel is 0, it simultaneously starts a new prefix. Otherwise the current
++event is lost too. A terminal event is processed through these order rules
++before namespace exhaustion is applied, so a terminal new prefix is discarded
++and counted once.
++
++`SEQ_W=2` supplies four events, ordinals 0..3, exactly one complete window.
++The event at `2**SEQ_W-1` is processed, then `armed` clears, `seq_exhausted`
++becomes sticky, `next_seq` holds the maximum ordinal and no further event is
++accepted until explicit rearm. A partial at exhaustion is discarded in full.
++An already complete output record remains transportable.
++
++## Output slot and accounting
++
++There is one complete-result slot in addition to the bounded partial. A new
++completion is registered into the slot and cannot be retired on its completion
++edge. If the old slot is full and retiring, the old record retires and the new
++record refills atomically. If it is full and not retiring, the new complete
++scan is dropped, the old payload remains stable, one overrun pulse is emitted,
++and four samples plus one overrun are counted. Order checking and ordinals
++continue under backpressure.
++
++All six counters saturate at `2**STAT_W-1`; additions are widened before
++saturation and saturation cannot affect data flow. Within a window and before
++saturation:
++
++```text
++stat_events = 4 * (stat_retired + occupied_complete_slot)
++            + partial_len + stat_discarded_samples
++stat_scans  = stat_retired + occupied_complete_slot + stat_overruns
++```
++
++Slot occupancy is internal state; `out_valid` is additionally abort-qualified.
++Counters do not accumulate across reset, stop or rearm boundaries.
++
++## Author verification
++
++The scoped runner uses actual ModelSim SE-64 10.7 from `D:/modelsim1/win64`.
++Source inputs are snapshotted per case. Every attempt records argv, cwd, raw
++stdout/stderr bytes and hashes, exit status, timeout state and elapsed time.
++Final author evidence is under:
++
++`competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/author/`
++
++The final author run passed the directed, exhaustive 4,096-string sweep,
++quality/lane, tag flush, abort matrix, `SEQ_W=2/3/4`, `STAT_W=2/3`, tick
++packing, `SEQ_W=16` 65,536-event, and 20,000-edge randomized cases. It also
++rejected each of eight invalid parameter values with the exact module fatal,
++ran the healthy guard control, and behaviorally rejected two compiled RTL
++mutants with concrete numeric public-port mismatches. This is author evidence,
++not the independent product-main acceptance.
++
++## Explicit non-claims
++
++Synthesis, implementation, timing, CDC/RDC, physical ADC/XADC protocol, pins,
++clock rate, source heartbeat, public `sample_id`, DMA/PS endpoint, full
++product/system integration, formal cards and physical board results are
++`not_run`. Machine A alone may operate the board. No result here establishes a
++public ABI, boot/clock/source/PHY/TTL/enable/motion grant, calibrated timing or
++physical acquisition liveness.
+*** End Patch

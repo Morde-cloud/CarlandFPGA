@@ -1,0 +1,327 @@
+{
+  "at_utc": "2026-10-22T04:52:07.917036+00:00",
+  "independence": "Written and frozen before author dispatch/RTL existence; imports no author code or historical oracle. Event/loss ledger and literal controls.",
+  "model_sha256": "374a2e8bbe5d6910404ce25207968a6a5fa18a1c17c63411061fc3d86e1bb3e8",
+  "literal_controls": 12,
+  "fields": [
+    "out_valid",
+    "out_data",
+    "out_ticks",
+    "out_quality",
+    "out_first_seq",
+    "out_last_seq",
+    "out_tag",
+    "armed",
+    "partial_len",
+    "next_seq",
+    "seq_exhausted",
+    "order_error_event",
+    "overrun_event",
+    "seq_exhaust_event",
+    "stat_events",
+    "stat_scans",
+    "stat_retired",
+    "stat_discarded_samples",
+    "stat_order_errors",
+    "stat_overruns"
+  ],
+  "inputs": [
+    "rst",
+    "stop",
+    "rearm",
+    "rearm_tag",
+    "sample_strobe",
+    "sample_channel",
+    "sample_data",
+    "sample_tick",
+    "sample_quality",
+    "out_ready"
+  ],
+  "cases": {
+    "main64": {
+      "params": {
+        "seq": 32,
+        "tick": 64,
+        "tag": 64,
+        "stat": 32
+      },
+      "edges": 73042,
+      "labels": [
+        [
+          1,
+          "empty/short prefixes"
+        ],
+        [
+          9103,
+          "4096 exhaustive channel strings length6"
+        ],
+        [
+          41871,
+          "ready patterns; at least two correct scans under each period"
+        ],
+        [
+          43131,
+          "long stall and gap no timeout"
+        ],
+        [
+          45038,
+          "every quality value in every lane, 64 tag bits, opaque ticks"
+        ],
+        [
+          47342,
+          "all abort combinations, held abort, each partial and old full slot"
+        ],
+        [
+          48042,
+          "25000 independent randomized edges seed2026102221"
+        ]
+      ],
+      "counter_maxima": [
+        516,
+        101,
+        10,
+        507,
+        386,
+        99
+      ],
+      "coincident_flags": [],
+      "vectors_sha256": "3c7647916d66b565a8affb15b64b08362b3cafb9a74564e8aa9b612ac96bef41",
+      "expected_sha256": "398fde1aaac3624f8eb9f6d7cc53fa22b1ba75aaf7fc7daa77fe43355ee48909"
+    },
+    "seq2": {
+      "params": {
+        "seq": 2,
+        "tick": 64,
+        "tag": 64,
+        "stat": 32
+      },
+      "edges": 5710,
+      "labels": [
+        [
+          1,
+          "every four-event terminal tail, with orphan prefix; drain and unarmed strobe"
+        ],
+        [
+          5633,
+          "complete last scan / terminal overrun"
+        ],
+        [
+          5647,
+          "abort at terminal ordinal all combinations"
+        ]
+      ],
+      "counter_maxima": [
+        4,
+        1,
+        1,
+        4,
+        4,
+        0
+      ],
+      "coincident_flags": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "vectors_sha256": "eb3606e72b8ac273c4ddbd024d09f86eb69b3d4a5f495c00f0cca3b6a31d5543",
+      "expected_sha256": "d0b8d436d2ab90e55a59a8ba50184461bb77b0051826c0913bc3bf212d49df6d"
+    },
+    "seq3": {
+      "params": {
+        "seq": 3,
+        "tick": 64,
+        "tag": 64,
+        "stat": 32
+      },
+      "edges": 7794,
+      "labels": [
+        [
+          1,
+          "every four-event terminal tail, with orphan prefix; drain and unarmed strobe"
+        ],
+        [
+          7681,
+          "complete last scan / terminal overrun"
+        ],
+        [
+          7703,
+          "abort at terminal ordinal all combinations"
+        ]
+      ],
+      "counter_maxima": [
+        8,
+        2,
+        2,
+        8,
+        8,
+        1
+      ],
+      "coincident_flags": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "vectors_sha256": "41c7331f5e96ffb43501addbe34a57b95c6767390371884f976ebfb76813208c",
+      "expected_sha256": "30c4ba337e5cb45177cfccbffd8056e5f8a29f1f12e65fd2890fbc439c71d308"
+    },
+    "seq4": {
+      "params": {
+        "seq": 4,
+        "tick": 64,
+        "tag": 64,
+        "stat": 32
+      },
+      "edges": 11962,
+      "labels": [
+        [
+          1,
+          "every four-event terminal tail, with orphan prefix; drain and unarmed strobe"
+        ],
+        [
+          11777,
+          "complete last scan / terminal overrun"
+        ],
+        [
+          11815,
+          "abort at terminal ordinal all combinations"
+        ]
+      ],
+      "counter_maxima": [
+        16,
+        4,
+        4,
+        16,
+        16,
+        3
+      ],
+      "coincident_flags": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "vectors_sha256": "beebecd87cf02139b68bbad3271f177b3cd1c795745494b8f6eed0c8641d7477",
+      "expected_sha256": "bed20b59566ac97f306d4a3d328d55460ab523afa95710ab05af5c71164b8e27"
+    },
+    "seq16": {
+      "params": {
+        "seq": 16,
+        "tick": 64,
+        "tag": 64,
+        "stat": 32
+      },
+      "edges": 65560,
+      "labels": [
+        [
+          2,
+          "all65536 actual events; no seeded ordinal"
+        ]
+      ],
+      "counter_maxima": [
+        65536,
+        16384,
+        16384,
+        0,
+        0,
+        0
+      ],
+      "coincident_flags": [],
+      "vectors_sha256": "a5f550882ffd1e274a3d205c8fc7c93f049b660fd95b96a159e99dce76d6efe2",
+      "expected_sha256": "9c68b09eafafb24a33a13aa796076e10501351f86279b2f612a82eb3f70a4469"
+    },
+    "stat2": {
+      "params": {
+        "seq": 32,
+        "tick": 64,
+        "tag": 64,
+        "stat": 2
+      },
+      "edges": 499,
+      "labels": [
+        [
+          2,
+          "all six counters saturate by transactions; data flow continues"
+        ]
+      ],
+      "counter_maxima": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "coincident_flags": [],
+      "vectors_sha256": "45f3ab11a5eb3423cf33f68b2142662a657082cb3326186bcd04f582bdbba500",
+      "expected_sha256": "8a56f0aff75acdb8925c255b25d55e45b5e62eb93213f26d3f0aa9289c0c1a71"
+    },
+    "stat3": {
+      "params": {
+        "seq": 32,
+        "tick": 64,
+        "tag": 64,
+        "stat": 3
+      },
+      "edges": 499,
+      "labels": [
+        [
+          2,
+          "all six counters saturate by transactions; data flow continues"
+        ]
+      ],
+      "counter_maxima": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "coincident_flags": [],
+      "vectors_sha256": "45f3ab11a5eb3423cf33f68b2142662a657082cb3326186bcd04f582bdbba500",
+      "expected_sha256": "741f25fc33074e7b2df51f5dcceb162d190f4c375d879829b3a697ea9fea58f6"
+    },
+    "width1": {
+      "params": {
+        "seq": 32,
+        "tick": 1,
+        "tag": 1,
+        "stat": 32
+      },
+      "edges": 83,
+      "labels": [],
+      "counter_maxima": [
+        80,
+        20,
+        20,
+        0,
+        0,
+        0
+      ],
+      "coincident_flags": [],
+      "vectors_sha256": "5bd9d513a1e6b5641f0eeafca8aebec09ed038afd1a443a608dcd08a6b727096",
+      "expected_sha256": "855511b58ca54bf90ec6eb23b8e60a2541e5a50c932791067d5d87d1a67a650d"
+    }
+  },
+  "fatal_contract": {
+    "SEQ_W": "deepeye_sample_scan_capture: SEQ_W out of range",
+    "TICK_W": "deepeye_sample_scan_capture: TICK_W out of range",
+    "TAG_W": "deepeye_sample_scan_capture: TAG_W out of range",
+    "STAT_W": "deepeye_sample_scan_capture: STAT_W out of range"
+  }
+}

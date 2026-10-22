@@ -1,0 +1,144 @@
+{
+  "failed": [],
+  "missing": [],
+  "ok": true,
+  "reasons": [],
+  "results": {
+    "mutant_loss_undercount_rejected": {
+      "classification": "mutant_rejected",
+      "mismatches": [
+        [
+          "mutant_loss_discarded",
+          2,
+          1
+        ],
+        [
+          "stat_discarded",
+          2,
+          1
+        ]
+      ],
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_loss",
+        "checks": 65,
+        "discarded": 1,
+        "errors": 2,
+        "events": 2,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    },
+    "mutant_wrong_channel_mix_rejected": {
+      "classification": "mutant_rejected",
+      "mismatches": [
+        [
+          "mutant_mix_discarded",
+          4,
+          0
+        ],
+        [
+          "mutant_mix_order_errors",
+          3,
+          0
+        ],
+        [
+          "mutant_mix_scans",
+          0,
+          1
+        ],
+        [
+          "mutant_mix_valid",
+          0,
+          1
+        ],
+        [
+          "order_error_event",
+          1,
+          0
+        ],
+        [
+          "out_valid",
+          0,
+          1
+        ],
+        [
+          "partial_len",
+          0,
+          2
+        ],
+        [
+          "partial_len",
+          0,
+          3
+        ],
+        [
+          "stat_discarded",
+          2,
+          0
+        ],
+        [
+          "stat_discarded",
+          3,
+          0
+        ],
+        [
+          "stat_discarded",
+          4,
+          0
+        ],
+        [
+          "stat_order_errors",
+          1,
+          0
+        ],
+        [
+          "stat_order_errors",
+          2,
+          0
+        ],
+        [
+          "stat_order_errors",
+          3,
+          0
+        ],
+        [
+          "stat_scans",
+          0,
+          1
+        ]
+      ],
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_mix",
+        "checks": 93,
+        "discarded": 0,
+        "errors": 17,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 1,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 1,
+        "windows": 1
+      }
+    }
+  },
+  "selected": [
+    "mutant_wrong_channel_mix_rejected",
+    "mutant_loss_undercount_rejected"
+  ],
+  "unexpected": []
+}

@@ -1,0 +1,599 @@
+{
+  "status": "EXPECTED_BEHAVIORAL_REJECTION",
+  "case": "seq2",
+  "params": {
+    "seq": 2,
+    "tick": 64,
+    "tag": 64,
+    "stat": 32
+  },
+  "source_sha256": "57b42a674fa29ff2bdc29c322edd8e111da33a28df890eb9a97a594725be30e0",
+  "edges": 5710,
+  "mismatches": 44108,
+  "unknowns": 0,
+  "numeric_examples": [
+    {
+      "edge": 2,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 1,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 7fff 8000000000000000 22 0"
+    },
+    {
+      "edge": 3,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 1,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 8000 7fffffffffffffff 33 0"
+    },
+    {
+      "edge": 3,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 2,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 8000 7fffffffffffffff 33 0"
+    },
+    {
+      "edge": 4,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 2,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 ffff 100000000 44 0"
+    },
+    {
+      "edge": 4,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 ffff 100000000 44 0"
+    },
+    {
+      "edge": 5,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "seq_exhaust_event",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "stat_discarded_samples",
+      "expected": 4,
+      "actual": 3,
+      "token": "00000003",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "seq_exhaust_event",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "stat_discarded_samples",
+      "expected": 4,
+      "actual": 3,
+      "token": "00000003",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "order_error_event",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "stat_events",
+      "expected": 4,
+      "actual": 5,
+      "token": "00000005",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "stat_order_errors",
+      "expected": 3,
+      "actual": 4,
+      "token": "00000004",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "order_error_event",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "stat_events",
+      "expected": 4,
+      "actual": 5,
+      "token": "00000005",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "stat_order_errors",
+      "expected": 3,
+      "actual": 4,
+      "token": "00000004",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    }
+  ],
+  "examples": [
+    {
+      "edge": 2,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 1,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 7fff 8000000000000000 22 0"
+    },
+    {
+      "edge": 3,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 1,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 8000 7fffffffffffffff 33 0"
+    },
+    {
+      "edge": 3,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 2,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 8000 7fffffffffffffff 33 0"
+    },
+    {
+      "edge": 4,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 2,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 ffff 100000000 44 0"
+    },
+    {
+      "edge": 4,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 ffff 100000000 44 0"
+    },
+    {
+      "edge": 5,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "seq_exhaust_event",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 5,
+      "phase": "post",
+      "field": "stat_discarded_samples",
+      "expected": 4,
+      "actual": 3,
+      "token": "00000003",
+      "input": "0 0 0 ffffffffffffffff 1 0 4f26 ffffffff 55 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "seq_exhaust_event",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "pre",
+      "field": "stat_discarded_samples",
+      "expected": 4,
+      "actual": 3,
+      "token": "00000003",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "order_error_event",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "stat_events",
+      "expected": 4,
+      "actual": 5,
+      "token": "00000005",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 6,
+      "phase": "post",
+      "field": "stat_order_errors",
+      "expected": 3,
+      "actual": 4,
+      "token": "00000004",
+      "input": "0 0 0 ffffffffffffffff 1 0 0 ffffffffffffffff 66 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "armed",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "partial_len",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "next_seq",
+      "expected": 3,
+      "actual": 2,
+      "token": "2",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "seq_exhausted",
+      "expected": 1,
+      "actual": 0,
+      "token": "0",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "order_error_event",
+      "expected": 0,
+      "actual": 1,
+      "token": "1",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "stat_events",
+      "expected": 4,
+      "actual": 5,
+      "token": "00000005",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    },
+    {
+      "edge": 7,
+      "phase": "pre",
+      "field": "stat_order_errors",
+      "expected": 3,
+      "actual": 4,
+      "token": "00000004",
+      "input": "0 0 0 ffffffffffffffff 1 1 1 fffffffffffffff8 77 0"
+    }
+  ],
+  "public_conservation_edges": 5181,
+  "trace_sha256": "244e172d501dfa7c9e46add797967cfe94f8f9310443eca70a8bd66bbd1c2206",
+  "trace_bytes": 2431350,
+  "trace_gzip_sha256": "adbeb52587ec81630a1ec61fd10f476c9d43098b0d59b13c8609c8a5886ac4b1",
+  "ended": "2026-10-22T05:23:11.459185+00:00"
+}

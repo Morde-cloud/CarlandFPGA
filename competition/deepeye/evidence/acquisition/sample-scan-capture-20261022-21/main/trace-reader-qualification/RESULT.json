@@ -1,0 +1,410 @@
+{
+  "runner_sha256": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40",
+  "cases": [
+    {
+      "name": "literal-three-edges",
+      "expected_acceptance": true,
+      "accepted": true,
+      "result": {
+        "edges": 3,
+        "mismatches": 0,
+        "unknowns": 0,
+        "numeric_examples": [],
+        "examples": [],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "9f40bb098794224f5004e680ae8fb78ffa058b331d06de239d191fb1ae705b25"
+    },
+    {
+      "name": "missing-last-row",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(('trace shape', 2, ''))"
+      },
+      "trace_sha256": "baa1ccd3166443f476506ea4479fbacd9cb81686b2d0b112a9fec7959481c4e8"
+    },
+    {
+      "name": "extra-row",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError('extra trace rows')"
+      },
+      "trace_sha256": "825a0719082f3e50c6d1f772c289333c0f2586bd7aa33fb19725a1584255157c"
+    },
+    {
+      "name": "wrong-prefix",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(('trace shape', 1, 'X 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0\\n'))"
+      },
+      "trace_sha256": "1abc72f24703b3fb1b0c26f174ada6dd17a2011c8bde8c673d67289d11a33bb0"
+    },
+    {
+      "name": "duplicate-index",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(('trace shape', 2, 'S 1 0 0 0 0 1 1 7 3 5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 1 0 0 1 1 0\\n'))"
+      },
+      "trace_sha256": "bb2c15bd3d41f203e41f767c262edc1bf7b9c066d8b4b7f4c0f18a48efe7241b"
+    },
+    {
+      "name": "wrong-input",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(('stimulus mismatch', 2))"
+      },
+      "trace_sha256": "349f8f29c613ebebbac07f4acaf0ed3982e5c99f5cde3a5de7657caecacd3209"
+    },
+    {
+      "name": "unknown-input",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(\"invalid literal for int() with base 16: 'x'\")"
+      },
+      "trace_sha256": "2c2fa4ca4116db3d651f170de766dd6d44f8ebe52d9f7bcf54bcf4761ec1b716"
+    },
+    {
+      "name": "unknown-control",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "edges": 3,
+        "mismatches": 1,
+        "unknowns": 1,
+        "numeric_examples": [],
+        "examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "armed",
+            "expected": 1,
+            "actual": null,
+            "token": "x",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "public_conservation_edges": 0
+      },
+      "trace_sha256": "0cea0d31385f96c10dc0566f7ca34fb1eb6ad8c28318eb5e3496d2027da2cb07"
+    },
+    {
+      "name": "wrong-ordinal",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "edges": 3,
+        "mismatches": 1,
+        "unknowns": 0,
+        "numeric_examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "next_seq",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "next_seq",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "43b9b4eb7531a0ef8a5b64baaea6d41baad355fbce1fcf813e228ac9face6478"
+    },
+    {
+      "name": "lost-not-counted",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "edges": 3,
+        "mismatches": 2,
+        "unknowns": 0,
+        "numeric_examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "stat_discarded_samples",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          },
+          {
+            "edge": 2,
+            "field": "conservation",
+            "expected": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            "actual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        "examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "stat_discarded_samples",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          },
+          {
+            "edge": 2,
+            "field": "conservation",
+            "expected": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            "actual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "91556cfa36b93a483b5e40585104097eb1a2b5163b73b067bb1a97b9b2fef2d6"
+    },
+    {
+      "name": "dropped-fault-pulse",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "edges": 3,
+        "mismatches": 1,
+        "unknowns": 0,
+        "numeric_examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "order_error_event",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "examples": [
+          {
+            "edge": 2,
+            "phase": "post",
+            "field": "order_error_event",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "09fd909be822faadac216530bd42700218a94f8b9d03450c5edbe3d443631988"
+    },
+    {
+      "name": "wrong-pre-armed",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "edges": 3,
+        "mismatches": 1,
+        "unknowns": 0,
+        "numeric_examples": [
+          {
+            "edge": 2,
+            "phase": "pre",
+            "field": "armed",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "examples": [
+          {
+            "edge": 2,
+            "phase": "pre",
+            "field": "armed",
+            "expected": 1,
+            "actual": 0,
+            "token": "0",
+            "input": "0 0 0 0 1 1 7 3 5 0"
+          }
+        ],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "fcac2868d80a68ad1127cc9f3c5b232d73dd81b497ca991cd2eb7b9d3c33b2a3"
+    },
+    {
+      "name": "pre-reset-valid",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "edges": 3,
+        "mismatches": 1,
+        "unknowns": 0,
+        "numeric_examples": [
+          {
+            "edge": 0,
+            "phase": "pre",
+            "field": "out_valid",
+            "expected": 0,
+            "actual": 1,
+            "token": "1",
+            "input": "1 0 0 0 0 0 0 0 0 0"
+          }
+        ],
+        "examples": [
+          {
+            "edge": 0,
+            "phase": "pre",
+            "field": "out_valid",
+            "expected": 0,
+            "actual": 1,
+            "token": "1",
+            "input": "1 0 0 0 0 0 0 0 0 0"
+          }
+        ],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "30bcf0f55782b5b31b24d8aabc80968978a427d35dfd60bb17178b83445709cf"
+    },
+    {
+      "name": "inactive-payload-dontcare",
+      "expected_acceptance": true,
+      "accepted": true,
+      "result": {
+        "edges": 3,
+        "mismatches": 0,
+        "unknowns": 0,
+        "numeric_examples": [],
+        "examples": [],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "1e93c42981b82f03ba800b03cc1643aa91d826a764e49d950817de41e65029b8"
+    },
+    {
+      "name": "extra-column",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(('trace shape', 2, 'S 2 0 0 0 0 1 1 7 3 5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 1 0 0 1 1 0 0\\n'))"
+      },
+      "trace_sha256": "aa1ae2d88e0926063aba7aa1cada55452b045354dca04c7891e3eb69b00f46f3"
+    },
+    {
+      "name": "missing-column",
+      "expected_acceptance": false,
+      "accepted": false,
+      "result": {
+        "exception": "ValueError(('trace shape', 2, 'S 2 0 0 0 0 1 1 7 3 5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 1 0 0 1 1\\n'))"
+      },
+      "trace_sha256": "f708555183cf97b65318929c6d771d3c4f095669cb264f0641bea045c9cf461e"
+    },
+    {
+      "name": "crlf-reader",
+      "expected_acceptance": true,
+      "accepted": true,
+      "result": {
+        "edges": 3,
+        "mismatches": 0,
+        "unknowns": 0,
+        "numeric_examples": [],
+        "examples": [],
+        "public_conservation_edges": 1
+      },
+      "trace_sha256": "a40f228543a3a4c8f22b5f552ba14879a8ae12fd891bda8bfddf88c076935b15"
+    }
+  ],
+  "scope": "17 synthetic reader controls, not vendor RTL evidence"
+}

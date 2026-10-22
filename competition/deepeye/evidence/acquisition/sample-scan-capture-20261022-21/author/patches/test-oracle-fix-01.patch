@@ -1,0 +1,44 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/acquisition/tb_sample_scan_capture.sv
+@@
+             begin_window(32'h00000033);
+             drive_scan(1'b1, 16'h3400, 64'h3400000000000000, 8'h51);
+             check64("seq3_final_events", 4, dut.stat_events);
+             check64("seq3_final_scans", 1, dut.stat_scans);
+-            check64("seq3_final_retired", 1, dut.stat_retired);
++            check64("seq3_final_completion_not_bypassed", 0, dut.stat_retired);
++            check64("seq3_final_occupied", 1, dut.out_valid);
+             check64("seq3_final_armed", 1, dut.armed);
+             check64("seq3_final_next", 4, dut.next_seq);
++            idle_cycle(1'b1);
++            check64("seq3_final_retired", 1, dut.stat_retired);
++            check64("seq3_final_retired_valid", 0, dut.out_valid);
+             emit_and_finish();
+@@
+             drive_scan(1'b1, 16'h4400, 64'h4400000000000000, 8'h61);
+             check64("seq4_final_events", 4, dut.stat_events);
+             check64("seq4_final_scans", 1, dut.stat_scans);
+-            check64("seq4_final_retired", 1, dut.stat_retired);
++            check64("seq4_final_completion_not_bypassed", 0, dut.stat_retired);
++            check64("seq4_final_occupied", 1, dut.out_valid);
++            idle_cycle(1'b1);
++            check64("seq4_final_retired", 1, dut.stat_retired);
++            check64("seq4_final_retired_valid", 0, dut.out_valid);
+             emit_and_finish();
+@@
+             drive_scan(1'b0, 16'h5700, 64'h5700000000000000, 8'h61);
+             drive_scan(1'b0, 16'h5800, 64'h5800000000000000, 8'h62);
+             drive_scan(1'b0, 16'h5900, 64'h5900000000000000, 8'h63);
+-            check64("stat2_pre_overrun2_events", 12, dut.stat_events);
++            check64("stat2_pre_overrun2_events_saturated", 3, dut.stat_events);
+             check64("stat2_pre_overrun2_scans", 3, dut.stat_scans);
+             check64("stat2_pre_overrun2_overruns", 2, dut.stat_overruns);
+-            check64("stat2_pre_overrun2_discarded", 8, dut.stat_discarded_samples);
+-            check64("stat2_pre_overrun2_identity_scans", 3, dut.stat_retired + (dut.out_valid ? 1 : 0) + dut.stat_overruns);
+-            check64("stat2_pre_overrun2_identity_events", 12, 4 * (dut.stat_retired + (dut.out_valid ? 1 : 0)) + dut.partial_len + dut.stat_discarded_samples);
++            check64("stat2_pre_overrun2_discarded_saturated", 3, dut.stat_discarded_samples);
++            check64("stat2_pre_overrun2_model_events", 12, m_events);
++            check64("stat2_pre_overrun2_model_discarded", 8, m_discarded);
++            check64("stat2_pre_overrun2_model_identity_scans", m_scans, m_retired + m_slot_valid + m_overruns);
++            check64("stat2_pre_overrun2_model_identity_events", m_events, 4 * (m_retired + m_slot_valid) + m_partial_len + m_discarded);
+*** End Patch

@@ -1,0 +1,97 @@
+{
+  "case_arg": "directed",
+  "expected_stats": {
+    "armed": 1,
+    "discarded": 6,
+    "events": 14,
+    "exhausted": 0,
+    "occupied": 0,
+    "order_errors": 1,
+    "overruns": 1,
+    "partial_len": 0,
+    "retired": 2,
+    "scans": 3
+  },
+  "kind": "simulation",
+  "name": "directed",
+  "params": {},
+  "result": {
+    "classification": "pass",
+    "ok": true,
+    "reasons": [],
+    "stats": {
+      "armed": 1,
+      "case": "directed",
+      "checks": 407,
+      "discarded": 6,
+      "errors": 0,
+      "events": 14,
+      "exhausted": 0,
+      "occupied": 0,
+      "order_errors": 1,
+      "overruns": 1,
+      "partial_len": 0,
+      "retired": 2,
+      "scans": 3,
+      "windows": 1
+    }
+  },
+  "schema": 1,
+  "source": {
+    "rtl_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\run\\cases\\directed\\inputs\\deepeye_sample_scan_capture.sv",
+      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d"
+    },
+    "source_rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\acquisition\\deepeye_sample_scan_capture.sv",
+      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d"
+    },
+    "source_tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\acquisition\\tb_sample_scan_capture.sv",
+      "sha256": "bf240773bc9a7e15683194e0d7418b1bf07f4e1b6f54267264223e161e47f393"
+    },
+    "tb_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\run\\cases\\directed\\inputs\\tb_sample_scan_capture.sv",
+      "sha256": "bf240773bc9a7e15683194e0d7418b1bf07f4e1b6f54267264223e161e47f393"
+    }
+  },
+  "vlog": {
+    "argv": [
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\SYNTHETIC_VENDOR_NOT_EXECUTABLE\\vlog.exe",
+      "-sv",
+      "-floatparameters",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\run\\cases\\directed\\inputs\\deepeye_sample_scan_capture.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\run\\cases\\directed\\inputs\\tb_sample_scan_capture.sv"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\run\\cases\\directed",
+    "elapsed_seconds": 0.0,
+    "exit": 0,
+    "stderr_path": "vlog.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vlog.stdout.bin",
+    "stdout_sha256": "4cce9b1e4d7e6deeb790bda01c4793f282882c4e50d2368f54bbbd455b41ad67",
+    "timed_out": false
+  },
+  "vsim": {
+    "argv": [
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\SYNTHETIC_VENDOR_NOT_EXECUTABLE\\vsim.exe",
+      "-c",
+      "-lib",
+      "work",
+      "-do",
+      "run -all; quit -f",
+      "tb_sample_scan_capture",
+      "+CASE=directed"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\main\\entry-final-01\\mixed-selection\\run\\cases\\directed",
+    "elapsed_seconds": 0.0,
+    "exit": 0,
+    "stderr_path": "vsim.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vsim.stdout.bin",
+    "stdout_sha256": "e8fd40aea5e77aabadff439c17fb55521de00d28b8d5cbd967e36a8750889d12",
+    "timed_out": false
+  }
+}

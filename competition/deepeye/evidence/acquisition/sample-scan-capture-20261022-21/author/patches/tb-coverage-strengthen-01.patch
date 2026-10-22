@@ -1,0 +1,95 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/acquisition/tb_sample_scan_capture.sv
+@@
+     task automatic run_directed();
+         logic [63:0] expected_data;
+         logic [4*TICK_W-1:0] expected_ticks;
+         logic [31:0] expected_quality;
++        int stall_cycle;
+@@
+-            idle_cycle(1'b0);
+-            idle_cycle(1'b0);
+-            idle_cycle(1'b0);
++            for (stall_cycle = 0; stall_cycle < 8; stall_cycle = stall_cycle + 1) begin
++                idle_cycle(1'b0);
++            end
+@@
+             check64("seq2_terminal_new_zero_discard", 4, dut.stat_discarded_samples);
+             check64("seq2_terminal_new_zero_errors", 3, dut.stat_order_errors);
+             check64("seq2_terminal_new_zero_partial", 0, dut.partial_len);
++            check64("seq2_terminal_new_zero_order_event", 1, dut.order_error_event);
++            check64("seq2_terminal_new_zero_exhaust_event", 1, dut.seq_exhaust_event);
+@@
+             check64("seq3_terminal_drop_scans", 2, dut.stat_scans);
+             check64("seq3_terminal_drop_exhaust", 1, dut.seq_exhaust_event);
++            check64("seq3_terminal_drop_overrun_event", 1, dut.overrun_event);
+@@
+             check64("seq3_partial_terminal_partial", 0, dut.partial_len);
+             check64("seq3_partial_terminal_exhaust", 1, dut.seq_exhaust_event);
++            check64("seq3_partial_terminal_order_event", 1, dut.order_error_event);
+@@
+             check64("seq4_terminal_new_zero_errors", 11, dut.stat_order_errors);
+             check64("seq4_terminal_new_zero_partial", 0, dut.partial_len);
++            check64("seq4_terminal_new_zero_order_event", 1, dut.order_error_event);
++            check64("seq4_terminal_new_zero_exhaust_event", 1, dut.seq_exhaust_event);
+@@
+     task automatic run_random20k();
+         int edge_index;
++        int rearm_count;
++        int abort_count;
++        int error_count;
++        int stall_count;
++        int completion_count;
++        int overrun_count;
++        int scan_before;
+         logic [31:0] random_state;
+@@
+             random_state = 32'h1a2b3c4d;
++            rearm_count = 0;
++            abort_count = 0;
++            error_count = 0;
++            stall_count = 0;
++            completion_count = 0;
++            overrun_count = 0;
+@@
+                 tag_value[31:0] = random_value;
+                 if (random_value[15:6] == 10'd0) begin
++                    rearm_count = rearm_count + 1;
+                     begin_window(tag_value);
+                 end else if (random_value[21:12] == 10'd0) begin
++                    abort_count = abort_count + 1;
+                     if (random_value[0]) begin
+@@
+                     if (TICK_W > 32) begin
+                         tick_value[63:32] = random_value2;
+                     end
++                    scan_before = m_scans;
++                    if (m_slot_valid && !random_value[4]) begin
++                        stall_count = stall_count + 1;
++                    end
+                     send_ordinary(random_value[3],
+@@
+                                   random_value[23:16] ^ random_value2[7:0],
+                                   random_value[4]);
++                    if (m_order_error_event) begin
++                        error_count = error_count + 1;
++                    end
++                    if (m_overrun_event) begin
++                        overrun_count = overrun_count + 1;
++                    end
++                    if (m_scans > scan_before) begin
++                        completion_count = completion_count + 1;
++                    end
+                 end
+             end
+ 
++            check64("random_edges", 20000, edge_index);
++            check64("random_rearm_present", 1, (rearm_count > 0) ? 1 : 0);
++            check64("random_abort_present", 1, (abort_count > 0) ? 1 : 0);
++            check64("random_order_error_present", 1, (error_count > 0) ? 1 : 0);
++            check64("random_stall_present", 1, (stall_count > 0) ? 1 : 0);
++            check64("random_completion_present", 1, (completion_count > 0) ? 1 : 0);
++            check64("random_overrun_present", 1, (overrun_count > 0) ? 1 : 0);
+             $display("SAMPLE_SCAN_RANDOM edges=20000 seed=00000001a2b3c4d final_state=%08h windows=%0d",
+                      random_state, windows);
+*** End Patch

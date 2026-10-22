@@ -1,0 +1,41 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tests/rtl/acquisition/tb_sample_scan_capture.sv
+@@
+             check64("exhaustive_order_errors", 18432, agg_order_errors);
+             check64("exhaustive_partial_end", 1728, agg_partial_end);
+ 
++            begin_window(32'h0000e001);
++            idle_cycle(1'b0);
++            check64("exhaustive_empty_events", 0, dut.stat_events);
++            check64("exhaustive_empty_scans", 0, dut.stat_scans);
++            check64("exhaustive_empty_discarded", 0, dut.stat_discarded_samples);
++            check64("exhaustive_empty_partial", 0, dut.partial_len);
++            check64("exhaustive_empty_valid", 0, dut.out_valid);
++
++            begin_window(32'h0000e002);
++            drive_partial(1, 16'hE100, 64'hE100000000000000, 8'hE1);
++            check64("exhaustive_prefix1_events", 1, dut.stat_events);
++            check64("exhaustive_prefix1_partial", 1, dut.partial_len);
++            check64("exhaustive_prefix1_scans", 0, dut.stat_scans);
++            check64("exhaustive_prefix1_discarded", 0, dut.stat_discarded_samples);
++            check64("exhaustive_prefix1_valid", 0, dut.out_valid);
++
++            begin_window(32'h0000e003);
++            drive_partial(2, 16'hE200, 64'hE200000000000000, 8'hE2);
++            check64("exhaustive_prefix2_events", 2, dut.stat_events);
++            check64("exhaustive_prefix2_partial", 2, dut.partial_len);
++            check64("exhaustive_prefix2_scans", 0, dut.stat_scans);
++            check64("exhaustive_prefix2_discarded", 0, dut.stat_discarded_samples);
++            check64("exhaustive_prefix2_valid", 0, dut.out_valid);
++
++            begin_window(32'h0000e004);
++            drive_partial(3, 16'hE300, 64'hE300000000000000, 8'hE3);
++            check64("exhaustive_prefix3_events", 3, dut.stat_events);
++            check64("exhaustive_prefix3_partial", 3, dut.partial_len);
++            check64("exhaustive_prefix3_scans", 0, dut.stat_scans);
++            check64("exhaustive_prefix3_discarded", 0, dut.stat_discarded_samples);
++            check64("exhaustive_prefix3_valid", 0, dut.out_valid);
++
+             begin_window({TAG_W{1'b1}});
+             drive_scan(1'b0, 16'hA000, '0, 8'hA0);
+*** End Patch

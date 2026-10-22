@@ -1,0 +1,584 @@
+{
+  "failed": [],
+  "missing": [],
+  "ok": true,
+  "reasons": [],
+  "results": {
+    "abort_matrix": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "abort_matrix",
+        "checks": 2035,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 23
+      }
+    },
+    "directed": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "directed",
+        "checks": 507,
+        "discarded": 6,
+        "errors": 0,
+        "events": 14,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 1,
+        "partial_len": 0,
+        "retired": 2,
+        "scans": 3,
+        "windows": 1
+      }
+    },
+    "exhaustive6": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "exhaustive6",
+        "checks": 467525,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 4101
+      }
+    },
+    "guard_healthy": {
+      "classification": "guard_healthy",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_seq_w_1": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_seq_w_33": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_stat_w_1": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_stat_w_33": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_tag_w_0": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_tag_w_65": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_tick_w_0": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "guard_tick_w_65": {
+      "classification": "dut_guard_rejected",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": null
+    },
+    "mutant_loss": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_loss",
+        "checks": 65,
+        "discarded": 2,
+        "errors": 0,
+        "events": 2,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    },
+    "mutant_loss_undercount_rejected": {
+      "classification": "mutant_rejected",
+      "mismatches": [
+        [
+          "mutant_loss_discarded",
+          2,
+          1
+        ],
+        [
+          "stat_discarded",
+          2,
+          1
+        ]
+      ],
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_loss",
+        "checks": 65,
+        "discarded": 1,
+        "errors": 2,
+        "events": 2,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 1,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    },
+    "mutant_mix": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_mix",
+        "checks": 93,
+        "discarded": 4,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 3,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 0,
+        "windows": 1
+      }
+    },
+    "mutant_wrong_channel_mix_rejected": {
+      "classification": "mutant_rejected",
+      "mismatches": [
+        [
+          "mutant_mix_discarded",
+          4,
+          0
+        ],
+        [
+          "mutant_mix_order_errors",
+          3,
+          0
+        ],
+        [
+          "mutant_mix_scans",
+          0,
+          1
+        ],
+        [
+          "mutant_mix_valid",
+          0,
+          1
+        ],
+        [
+          "order_error_event",
+          1,
+          0
+        ],
+        [
+          "out_valid",
+          0,
+          1
+        ],
+        [
+          "partial_len",
+          0,
+          2
+        ],
+        [
+          "partial_len",
+          0,
+          3
+        ],
+        [
+          "stat_discarded",
+          2,
+          0
+        ],
+        [
+          "stat_discarded",
+          3,
+          0
+        ],
+        [
+          "stat_discarded",
+          4,
+          0
+        ],
+        [
+          "stat_order_errors",
+          1,
+          0
+        ],
+        [
+          "stat_order_errors",
+          2,
+          0
+        ],
+        [
+          "stat_order_errors",
+          3,
+          0
+        ],
+        [
+          "stat_scans",
+          0,
+          1
+        ]
+      ],
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "mutant_mix",
+        "checks": 93,
+        "discarded": 0,
+        "errors": 17,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 1,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 0,
+        "scans": 1,
+        "windows": 1
+      }
+    },
+    "quality_lanes": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "quality_lanes",
+        "checks": 65584,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4096,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1024,
+        "scans": 1024,
+        "windows": 1
+      }
+    },
+    "random20k": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "random20k",
+        "checks": 280220,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 23
+      }
+    },
+    "seq16_window": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "seq16_window",
+        "checks": 454,
+        "discarded": 0,
+        "errors": 0,
+        "events": 65536,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 16384,
+        "scans": 16384,
+        "windows": 1
+      }
+    },
+    "seq2_conditions": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "seq2_conditions",
+        "checks": 463,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 5
+      }
+    },
+    "seq3_conditions": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "seq3_conditions",
+        "checks": 433,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 3
+      }
+    },
+    "seq4_conditions": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "seq4_conditions",
+        "checks": 452,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 2
+      }
+    },
+    "stat2_saturation": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "stat2_saturation",
+        "checks": 806,
+        "discarded": 3,
+        "errors": 0,
+        "events": 3,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 3,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 3,
+        "windows": 3
+      }
+    },
+    "stat3_saturation": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 0,
+        "case": "stat3_saturation",
+        "checks": 1417,
+        "discarded": 7,
+        "errors": 0,
+        "events": 7,
+        "exhausted": 1,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 7,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 7,
+        "windows": 3
+      }
+    },
+    "tag64_flush": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "tag64_flush",
+        "checks": 324,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 3
+      }
+    },
+    "tick16_pack": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "tick16_pack",
+        "checks": 132,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 1
+      }
+    },
+    "tick1_pack": {
+      "classification": "pass",
+      "mismatches": null,
+      "ok": true,
+      "reasons": [],
+      "stats": {
+        "armed": 1,
+        "case": "tick1_pack",
+        "checks": 111,
+        "discarded": 0,
+        "errors": 0,
+        "events": 4,
+        "exhausted": 0,
+        "occupied": 0,
+        "order_errors": 0,
+        "overruns": 0,
+        "partial_len": 0,
+        "retired": 1,
+        "scans": 1,
+        "windows": 1
+      }
+    }
+  },
+  "selected": [
+    "directed",
+    "exhaustive6",
+    "quality_lanes",
+    "tag64_flush",
+    "abort_matrix",
+    "seq2_conditions",
+    "seq3_conditions",
+    "seq4_conditions",
+    "stat2_saturation",
+    "stat3_saturation",
+    "tick16_pack",
+    "tick1_pack",
+    "mutant_mix",
+    "mutant_loss",
+    "seq16_window",
+    "random20k",
+    "guard_seq_w_1",
+    "guard_seq_w_33",
+    "guard_tick_w_0",
+    "guard_tick_w_65",
+    "guard_tag_w_0",
+    "guard_tag_w_65",
+    "guard_stat_w_1",
+    "guard_stat_w_33",
+    "guard_healthy",
+    "mutant_wrong_channel_mix_rejected",
+    "mutant_loss_undercount_rejected"
+  ],
+  "unexpected": []
+}

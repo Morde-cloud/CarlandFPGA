@@ -1,0 +1,25 @@
+{
+  "at_utc": "2026-10-22T05:02:35.688430+00:00",
+  "mutants": {
+    "wrong-channel-mix": {
+      "path": "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutants/wrong-channel-mix/deepeye_sample_scan_capture.sv",
+      "before": "end else if (sample_channel == partial_len_q[1:0]) begin",
+      "after": "end else if (1'b1) begin",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "mutant_sha256": "f652fd75db9c6b96e8157b8c727cce77349d0df7d0b519a319136f3ff7d3c4a5",
+      "case": "seq2",
+      "healthy_control": "seq2-01",
+      "expected_detection": "concrete numeric postreset public output difference; compile errors, warnings, X and timeouts do not count"
+    },
+    "ordinal-plus-two": {
+      "path": "competition/deepeye/evidence/acquisition/sample-scan-capture-20261022-21/main/mutants/ordinal-plus-two/deepeye_sample_scan_capture.sv",
+      "before": "next_seq_q <= next_seq_q + 1'b1;",
+      "after": "next_seq_q <= next_seq_q + 2'd2;",
+      "source_sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76",
+      "mutant_sha256": "c016f5854e0e838c41439f0cdca54418ce68d12e6f52c61909337c10141c6a58",
+      "case": "seq2",
+      "healthy_control": "seq2-01",
+      "expected_detection": "concrete numeric postreset public output difference; compile errors, warnings, X and timeouts do not count"
+    }
+  }
+}

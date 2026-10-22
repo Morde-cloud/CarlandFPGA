@@ -1,0 +1,100 @@
+{
+  "case_arg": "seq2_conditions",
+  "expected_stats": {
+    "armed": 0,
+    "discarded": 0,
+    "events": 4,
+    "exhausted": 1,
+    "occupied": 0,
+    "order_errors": 0,
+    "overruns": 0,
+    "partial_len": 0,
+    "retired": 1,
+    "scans": 1
+  },
+  "kind": "simulation",
+  "name": "seq2_conditions",
+  "params": {
+    "SEQ_W": 2
+  },
+  "result": {
+    "classification": "pass",
+    "ok": true,
+    "reasons": [],
+    "stats": {
+      "armed": 0,
+      "case": "seq2_conditions",
+      "checks": 461,
+      "discarded": 0,
+      "errors": 0,
+      "events": 4,
+      "exhausted": 1,
+      "occupied": 0,
+      "order_errors": 0,
+      "overruns": 0,
+      "partial_len": 0,
+      "retired": 1,
+      "scans": 1,
+      "windows": 5
+    }
+  },
+  "schema": 1,
+  "source": {
+    "rtl_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\runner-smoke-02\\cases\\seq2_conditions\\inputs\\deepeye_sample_scan_capture.sv",
+      "sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76"
+    },
+    "source_rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\acquisition\\deepeye_sample_scan_capture.sv",
+      "sha256": "9eadd35c3cdeedd00560c9d79b66a77a9bb06ab42a6b25ef7a70ded831e46b76"
+    },
+    "source_tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\acquisition\\tb_sample_scan_capture.sv",
+      "sha256": "9a62cf268e88163d93bd91bd54bc85240c4293c66972b45e7b7ff267191b1a71"
+    },
+    "tb_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\runner-smoke-02\\cases\\seq2_conditions\\inputs\\tb_sample_scan_capture.sv",
+      "sha256": "9a62cf268e88163d93bd91bd54bc85240c4293c66972b45e7b7ff267191b1a71"
+    }
+  },
+  "vlog": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-floatparameters",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\runner-smoke-02\\cases\\seq2_conditions\\inputs\\deepeye_sample_scan_capture.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\runner-smoke-02\\cases\\seq2_conditions\\inputs\\tb_sample_scan_capture.sv"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\runner-smoke-02\\cases\\seq2_conditions",
+    "elapsed_seconds": 0.125,
+    "exit": 0,
+    "stderr_path": "vlog.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vlog.stdout.bin",
+    "stdout_sha256": "5cf6a05a4424cbb73879b63abaf61847427ac14829b9cc617d50f241dc48b8bc",
+    "timed_out": false
+  },
+  "vsim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-lib",
+      "work",
+      "-do",
+      "run -all; quit -f",
+      "-gSEQ_W=2",
+      "tb_sample_scan_capture",
+      "+CASE=seq2_conditions"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\runner-smoke-02\\cases\\seq2_conditions",
+    "elapsed_seconds": 1.656,
+    "exit": 0,
+    "stderr_path": "vsim.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vsim.stdout.bin",
+    "stdout_sha256": "6b6df5ad6d9434d5d4e4076eef28423fc8d169cace7f0f077b2ab9e540a79073",
+    "timed_out": false
+  }
+}

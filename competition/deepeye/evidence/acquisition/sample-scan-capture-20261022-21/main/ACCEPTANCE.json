@@ -1,0 +1,99 @@
+{
+  "at_utc": "2026-10-22T05:27:57.549297+00:00",
+  "decision": "ACCEPT bounded internal sample-scan RTL/digital simulation and qualified runner only",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-SAMPLE-SCAN-CAPTURE-20261022-21",
+  "director_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "director_turn": "01a161eb-20f4-7870-b061-4dd81697e728",
+  "contract": {
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "all_requirements_read": true,
+    "design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "source_hashes": {
+    "competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d",
+    "competition/deepeye/fpga/acquisition/sample_scan_capture_candidate.md": "f1b6e64611b971cd79afcb64baf07c86c4a97e2eec5c7d625274b8d786d8367d",
+    "competition/deepeye/tests/rtl/acquisition/tb_sample_scan_capture.sv": "bf240773bc9a7e15683194e0d7418b1bf07f4e1b6f54267264223e161e47f393",
+    "competition/deepeye/tools/acquisition/run_sample_scan_capture.py": "99748d791432cd0090e92b1e383670200fc3ead59ad3a6795af72f876e6d6b66",
+    "competition/deepeye/tests/rtl/acquisition/main_tb_sample_scan_capture.sv": "45dfbdf1bab5b3788cad418ec259ea35028f41146013080620cdbc5c10f4936e",
+    "competition/deepeye/tools/acquisition/main_verify_sample_scan_capture.py": "f4b4290398df1f4d9a8f2327020fee7fe30f5f7d17e17df9a2338dfdbe7f8d40"
+  },
+  "independent_main": {
+    "final_source_edges": 165149,
+    "guards": 8,
+    "compiled_mutants": 2,
+    "mutant_checked_field_differences": [
+      11772,
+      44108
+    ],
+    "final_source_commands": 72,
+    "final_source_runs": 18,
+    "initial_source_separate_commands": 72,
+    "new_repaired_runner_vendor_cases": 4,
+    "new_repaired_runner_vendor_commands": 10,
+    "independent_finite_strings": 4096,
+    "main_classifier_probes": 49,
+    "trace_reader_probes": 17,
+    "author_runner_probes": 92,
+    "author_final_runner_false_accepts_before": 40,
+    "after": 0,
+    "python_entry_processes": 8,
+    "python_entry_vendor_seam": "synthetic, not vendor runs"
+  },
+  "author_saved_evidence": {
+    "cases": 27,
+    "core_checks": 820621,
+    "commands": 56,
+    "local_files_audited": 2676,
+    "reclassification": "strictly passed; not new vendor executions"
+  },
+  "review_independence": "Ledger and165149inputs frozen before author dispatch/first RTL read. Main later inspected runner before92probe freeze and implemented/reviewed correction itself; separate coordinator review pending.",
+  "retained_failures": [
+    "author smoke/initial TB/coverage/audit failures",
+    "private initial normalized-Git-diff assumption",
+    "main candidate composer expected6 functions rather than5 and dependent absent-source probe",
+    "40falseaccepts in final original runner,44 in earlier inspected snapshot"
+  ],
+  "limits": [
+    "32bit ordinal namespace bounded only; maximum STAT_W32 saturation not executed",
+    "opaque tick/quality/rawuint16 containers; no ADC/rate/clock/calibration/freshness claim",
+    "original author manifest/report refers to old runner/doc; exact originals retained under main/author-terminal; final handoff binds corrected files",
+    "local generated artifacts and raw equivalents omitted from publication are explicitly inventoried"
+  ],
+  "not_run": [
+    "all29",
+    "B02",
+    "G05",
+    "B06",
+    "R03",
+    "full_product_simulation",
+    "synthesis",
+    "implementation",
+    "timing",
+    "CDC_RDC",
+    "board",
+    "system",
+    "coordinator_independent_review"
+  ],
+  "hardware_enable_eligible": false,
+  "board_operator": "A"
+}

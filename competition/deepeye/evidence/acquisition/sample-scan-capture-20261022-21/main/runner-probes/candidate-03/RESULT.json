@@ -1,0 +1,1841 @@
+{
+  "runner_sha256": "99748d791432cd0090e92b1e383670200fc3ead59ad3a6795af72f876e6d6b66",
+  "cases": 92,
+  "disagreements": 0,
+  "unsafe_accepts": 0,
+  "false_rejects": 0,
+  "results": [
+    {
+      "name": "clean-lf",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "clean-crlf",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-exit--1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "simulation exit must be0"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-exit-1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "simulation exit must be0"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-exit-2",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "simulation exit must be0"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-exit-127",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "simulation exit must be0"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-** Error: runtime failure",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: runtime failure"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-** Error: runtime failure",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: runtime failure"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-error: runtime failure",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: error: runtime failure"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-error: runtime failure",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: error: runtime failure"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-ERROR: runtime failure",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ERROR: runtime failure"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-ERROR: runtime failure",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ERROR: runtime failure"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-warning: uncertain",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: warning: uncertain"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-warning: uncertain",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: warning: uncertain"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-** Warning: uncertain",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Warning: uncertain"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-** Warning: uncertain",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Warning: uncertain"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-** Fatal: unexpected",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: unexpected"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-** Fatal: unexpected",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: unexpected"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-fatal: unexpected",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: fatal: unexpected"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-fatal: unexpected",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: fatal: unexpected"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-FATAL: unexpected",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: FATAL: unexpected"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-FATAL: unexpected",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: FATAL: unexpected"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-Errors: 1, Warnings: 0",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-Errors: 1, Warnings: 0",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "diagnostic summary on stderr",
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-Errors: 0, Warnings: 1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-Errors: 0, Warnings: 1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "diagnostic summary on stderr",
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-Errors: 0, Warnings: 0",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-Errors: 0, Warnings: 0",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "diagnostic summary on stderr",
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stdout-Errors: 0, Warnings: 0 trailing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: Errors: 0, Warnings: 0 trailing"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "sim-stderr-Errors: 0, Warnings: 0 trailing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: Errors: 0, Warnings: 0 trailing"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "substring-pass",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "malformed structured marker: NOT_SAMPLE_SCAN_PASS",
+          "pass marker not unique"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "duplicate-pass",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "pass marker not unique"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "trailing-pass",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "malformed structured marker: SAMPLE_SCAN_PASS junk",
+          "pass marker not unique"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "malformed-extra-pass",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "malformed structured marker: NOT_SAMPLE_SCAN_PASS"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "duplicate-stats",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "stats not unique",
+          "invalid stats: expected exactly one SAMPLE_SCAN_STATS line, found 2"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "name": "conflicting-stats",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "stats not unique",
+          "invalid stats: expected exactly one SAMPLE_SCAN_STATS line, found 2"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "name": "malformed-extra-stats",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "malformed structured marker: NOT_SAMPLE_SCAN_STATS broken"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "trailing-stats",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: SAMPLE_SCAN_STATS contains malformed key=value text"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "name": "missing-stats-key",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: SAMPLE_SCAN_STATS key mismatch missing=['scans'] extra=[]"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "name": "duplicate-stats-key",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: duplicate SAMPLE_SCAN_STATS key events"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "name": "wrong-case",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "wrong case"
+        ],
+        "stats": {
+          "case": "wrong",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "no-checks",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "failed/empty testbench"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 0,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "no-windows",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "failed/empty testbench"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 0,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "tb-errors",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "failed/empty testbench"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 6,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 1
+        }
+      }
+    },
+    {
+      "name": "wrong-loss",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "inconsistent stats discarded",
+          "event conservation mismatch: events=14 rhs=13"
+        ],
+        "stats": {
+          "case": "directed",
+          "occupied": 0,
+          "retired": 2,
+          "checks": 407,
+          "events": 14,
+          "order_errors": 1,
+          "scans": 3,
+          "armed": 1,
+          "windows": 1,
+          "discarded": 5,
+          "overruns": 1,
+          "exhausted": 0,
+          "partial_len": 0,
+          "errors": 0
+        }
+      }
+    },
+    {
+      "name": "wrong-occupied",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: occupied outside 0..1"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "name": "compile-clean",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "result": {
+        "ok": true,
+        "reasons": []
+      }
+    },
+    {
+      "name": "compile-exit--1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "name": "compile-exit-1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "name": "compile-exit-2",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "name": "compile-exit-127",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-** Error: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-** Error: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-error: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: error: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-error: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: error: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-fatal: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: fatal: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-fatal: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: fatal: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-warning: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: warning: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-warning: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: warning: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-** Fatal: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-** Fatal: compiler",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: compiler"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-Errors: 0, Warnings: 0 trailing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: Errors: 0, Warnings: 0 trailing"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-Errors: 0, Warnings: 0 trailing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: Errors: 0, Warnings: 0 trailing"
+        ]
+      }
+    },
+    {
+      "name": "compile-stdout-Errors: 0, Warnings: 1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ]
+      }
+    },
+    {
+      "name": "compile-stderr-Errors: 0, Warnings: 1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "diagnostic summary on stderr",
+          "nonunique/inconsistent error-warning summary"
+        ]
+      }
+    },
+    {
+      "name": "actual-own-fatal-exit0",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "foreign-guard-exit--1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "guard process must exit0 on verified run-all/quit-f route"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "foreign-guard-exit-1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "guard process must exit0 on verified run-all/quit-f route"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "foreign-guard-exit-2",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "guard process must exit0 on verified run-all/quit-f route"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "foreign-guard-exit-127",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "guard process must exit0 on verified run-all/quit-f route"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-missing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary",
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-substring",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: NOT_** Fatal: deepeye_sample_scan_capture: SEQ_W out of range",
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-duplicate",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary",
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-wrongfamily",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: deepeye_sample_scan_capture: TAG_W out of range",
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-trailing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: deepeye_sample_scan_capture: SEQ_W out of range junk",
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-anotherfatal",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: another"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-guard-tb-error",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: bad"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-guard-tally-zero",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-guard-tally-two",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-guard-pass",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected normal/mismatch marker in guard"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-stderr-error: runtime",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: error: runtime"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-stderr-** Error: runtime",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: runtime"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-stderr-warning: runtime",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: warning: runtime"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "guard-stderr-Errors: 0, Warnings: 1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "diagnostic summary on stderr",
+          "nonunique/inconsistent error-warning summary"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "name": "aggregate-good",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "selected": [
+          "directed"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "name": "aggregate-empty",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "empty or duplicate selection"
+        ],
+        "selected": [],
+        "missing": [],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "name": "aggregate-duplicate",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "empty or duplicate selection"
+        ],
+        "selected": [
+          "directed",
+          "directed"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "name": "aggregate-missing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "directed"
+        ],
+        "missing": [
+          "directed"
+        ],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "name": "aggregate-extra",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "directed"
+        ],
+        "missing": [],
+        "unexpected": [
+          "extra"
+        ],
+        "failed": []
+      }
+    },
+    {
+      "name": "aggregate-failed",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "directed"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": [
+          "directed"
+        ]
+      }
+    },
+    {
+      "name": "aggregate-missing-ok",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "directed"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": [
+          "directed"
+        ]
+      }
+    },
+    {
+      "name": "aggregate-truthy",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "directed"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": [
+          "directed"
+        ]
+      }
+    }
+  ],
+  "scope": "synthetic pure classifiers, not vendor execution"
+}

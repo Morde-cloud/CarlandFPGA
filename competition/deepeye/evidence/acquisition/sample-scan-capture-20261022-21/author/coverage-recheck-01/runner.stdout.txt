@@ -1,0 +1,17 @@
+CASE directed PASS classification=pass
+CASE seq2_conditions PASS classification=pass
+CASE seq3_conditions PASS classification=pass
+CASE seq4_conditions FAIL classification=None
+  expected exactly one SAMPLE_SCAN_PASS, found 0
+  SAMPLE_SCAN_MISMATCH present
+  unexpected simulator fatal
+  tool summary reports 1 errors
+  testbench errors=1
+CASE random20k FAIL classification=None
+  expected exactly one SAMPLE_SCAN_PASS, found 0
+  SAMPLE_SCAN_MISMATCH present
+  unexpected simulator fatal
+  tool summary reports 1 errors
+  testbench errors=1
+SAMPLE_SCAN_RUN_FAIL
+FAIL failed cases: ['seq4_conditions', 'random20k']

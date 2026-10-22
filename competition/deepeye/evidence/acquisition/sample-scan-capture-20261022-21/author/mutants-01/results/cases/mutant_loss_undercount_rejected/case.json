@@ -1,0 +1,103 @@
+{
+  "case_arg": "mutant_loss",
+  "expected_stats": null,
+  "kind": "mutant",
+  "name": "mutant_loss_undercount_rejected",
+  "params": {},
+  "result": {
+    "classification": "mutant_rejected",
+    "mismatches": [
+      [
+        "mutant_loss_discarded",
+        2,
+        1
+      ],
+      [
+        "stat_discarded",
+        2,
+        1
+      ]
+    ],
+    "ok": true,
+    "reasons": [],
+    "stats": {
+      "armed": 1,
+      "case": "mutant_loss",
+      "checks": 65,
+      "discarded": 1,
+      "errors": 2,
+      "events": 2,
+      "exhausted": 0,
+      "occupied": 0,
+      "order_errors": 1,
+      "overruns": 0,
+      "partial_len": 0,
+      "retired": 0,
+      "scans": 0,
+      "windows": 1
+    }
+  },
+  "schema": 1,
+  "source": {
+    "mutation": {
+      "anchor_count": 1,
+      "anchor_new": "discard_order_c       = {1'b0, partial_len_q};",
+      "anchor_old": "discard_order_c       = {1'b0, partial_len_q} + 4'd1;"
+    },
+    "rtl_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\mutants-01\\results\\cases\\mutant_loss_undercount_rejected\\inputs\\deepeye_sample_scan_capture.sv",
+      "sha256": "9c2e27c05c2cdc84055175b0c4fd4bfce48820516129784ebab77e8355b73525"
+    },
+    "source_rtl": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\acquisition\\deepeye_sample_scan_capture.sv",
+      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d"
+    },
+    "source_tb": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tests\\rtl\\acquisition\\tb_sample_scan_capture.sv",
+      "sha256": "fa9dc2b39cc8431ef40f6f5544d9d4b7789e3c62a4cfac0a4b6d87de5efd5c66"
+    },
+    "tb_input": {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\mutants-01\\results\\cases\\mutant_loss_undercount_rejected\\inputs\\tb_sample_scan_capture.sv",
+      "sha256": "fa9dc2b39cc8431ef40f6f5544d9d4b7789e3c62a4cfac0a4b6d87de5efd5c66"
+    }
+  },
+  "vlog": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vlog.exe",
+      "-sv",
+      "-floatparameters",
+      "-work",
+      "work",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\mutants-01\\results\\cases\\mutant_loss_undercount_rejected\\inputs\\deepeye_sample_scan_capture.sv",
+      "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\mutants-01\\results\\cases\\mutant_loss_undercount_rejected\\inputs\\tb_sample_scan_capture.sv"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\mutants-01\\results\\cases\\mutant_loss_undercount_rejected",
+    "elapsed_seconds": 0.125,
+    "exit": 0,
+    "stderr_path": "vlog.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vlog.stdout.bin",
+    "stdout_sha256": "3a07697419b4592866b886df436f4abb608776afc250358386e4bf0b6b0c8c4f",
+    "timed_out": false
+  },
+  "vsim": {
+    "argv": [
+      "D:\\modelsim1\\win64\\vsim.exe",
+      "-c",
+      "-lib",
+      "work",
+      "-do",
+      "run -all; quit -f",
+      "tb_sample_scan_capture",
+      "+CASE=mutant_loss"
+    ],
+    "cwd": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\acquisition\\sample-scan-capture-20261022-21\\author\\mutants-01\\results\\cases\\mutant_loss_undercount_rejected",
+    "elapsed_seconds": 1.672,
+    "exit": 0,
+    "stderr_path": "vsim.stderr.bin",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_path": "vsim.stdout.bin",
+    "stdout_sha256": "3098093be1b494a4f14dc6616ddce7e7e744b52dfa5ec1eec416e8c45b11b4c5",
+    "timed_out": false
+  }
+}

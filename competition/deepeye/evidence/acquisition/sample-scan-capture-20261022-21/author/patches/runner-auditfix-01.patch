@@ -1,0 +1,35 @@
+*** Begin Patch
+*** Update File: competition/deepeye/tools/acquisition/run_sample_scan_capture.py
+@@
+ FATAL_BODY_RE = re.compile(
+     r"deepeye_sample_scan_capture: (SEQ_W|TICK_W|TAG_W|STAT_W) out of range"
+ )
++DUT_FATAL_LINE_RE = re.compile(
++    r"^(?:# )?\*\* Fatal: "
++    r"(deepeye_sample_scan_capture: (?:SEQ_W|TICK_W|TAG_W|STAT_W) out of range)"
++    r"[ \t]*$",
++    re.MULTILINE,
++)
+@@
+     if "** Fatal" in stdout or "** Fatal" in stderr:
+         reasons.append("unexpected simulator fatal")
++    if ERROR_RE.search(stdout + "\n" + stderr):
++        reasons.append("simulation emitted ** Error")
+     if WARNING_RE.search(stdout + "\n" + stderr):
+         reasons.append("simulation emitted ** Warning")
+@@
+-    fatal_bodies = FATAL_BODY_RE.findall(combined)
++    fatal_lines = DUT_FATAL_LINE_RE.findall(combined)
+@@
+-        if fatal_bodies:
+-            reasons.append(f"healthy control produced guard fatal {fatal_bodies}")
++        if fatal_lines:
++            reasons.append(f"healthy control produced guard fatal {fatal_lines}")
+@@
+-    if fatal_bodies != [expected_family]:
+-        reasons.append(f"fatal family expected=[{expected_family}] actual={fatal_bodies}")
+-    if expected_message not in combined:
+-        reasons.append("exact expected DUT fatal message absent")
++    if fatal_lines != [expected_message]:
++        reasons.append(f"exact fatal line expected=[{expected_message}] actual={fatal_lines}")
+*** End Patch

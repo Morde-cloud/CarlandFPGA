@@ -1,0 +1,959 @@
+{
+  "at_utc": "2026-10-22T06:31:46.776056+00:00",
+  "source_sha256": "a47dcfb493316f23578d4b10e8d832e3bc48512377e4df07c54f27ec11081547",
+  "original_source_sha256": "99748d791432cd0090e92b1e383670200fc3ead59ad3a6795af72f876e6d6b66",
+  "fixture_sha256": "6e7d9c5911bd98873ffeaa48391da53d36a86c5b2042b05eaa57697b5fa29433",
+  "scope": "Fresh pure-function tests using previously frozen coordinator literals, not independent new stimulus or vendor execution",
+  "cases": 43,
+  "mismatches": [],
+  "rows": [
+    {
+      "id": "compile_clean",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": []
+      }
+    },
+    {
+      "id": "compile_nonzero",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "id": "compile_none",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "id": "compile_bool",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "compile exit must be0"
+        ]
+      }
+    },
+    {
+      "id": "compile_stderr_error",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: rejected"
+        ]
+      }
+    },
+    {
+      "id": "compile_hidden_fatal",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** FATAL: rejected"
+        ]
+      }
+    },
+    {
+      "id": "compile_duplicate_summary",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonunique/inconsistent error-warning summary"
+        ]
+      }
+    },
+    {
+      "id": "compile_malformed_summary",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: Errors: 00, Warnings: 0",
+          "nonunique/inconsistent error-warning summary"
+        ]
+      }
+    },
+    {
+      "id": "compile_warning",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: WARNING: rejected"
+        ]
+      }
+    },
+    {
+      "id": "simulation_clean",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_CRLF",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_wrong_case",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "wrong case"
+        ],
+        "stats": {
+          "case": "wrong",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_empty_checks",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "failed/empty testbench"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 0,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_empty_windows",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "failed/empty testbench"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 0,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_duplicate_stats",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "stats not unique",
+          "invalid stats: expected exactly one SAMPLE_SCAN_STATS line, found 2"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "id": "simulation_missing_key",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: SAMPLE_SCAN_STATS key mismatch missing=['occupied'] extra=[]"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "id": "simulation_extra_key",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: SAMPLE_SCAN_STATS key mismatch missing=[] extra=['extra']"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "id": "simulation_X_count",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "invalid stats: non-negative decimal required for checks"
+        ],
+        "stats": null
+      }
+    },
+    {
+      "id": "simulation_missing_pass",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "pass marker not unique"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_stderr_marker",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "structured marker on stderr"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_foreign_error",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: corrupted"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_exit1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "simulation exit must be0"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "simulation_contradicted_stats",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "inconsistent stats events",
+          "event conservation mismatch: events=15 rhs=14"
+        ],
+        "stats": {
+          "case": "directed",
+          "errors": 0,
+          "checks": 100,
+          "armed": 1,
+          "events": 15,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        }
+      }
+    },
+    {
+      "id": "guard_exact",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "id": "guard_healthy",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "classification": "guard_healthy"
+      }
+    },
+    {
+      "id": "guard_wrong_family",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Fatal: deepeye_sample_scan_capture: TAG_W out of range",
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "id": "guard_twice",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "own fatal not exact and unique"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "id": "guard_foreign",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: wrong"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "id": "guard_body_alive",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "guard body unexpectedly ran"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "id": "guard_exit1",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "guard process must exit0 on verified run-all/quit-f route"
+        ],
+        "classification": "dut_guard_rejected"
+      }
+    },
+    {
+      "id": "mutant_numeric",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "stats": {
+          "case": "mutant",
+          "errors": 1,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        },
+        "mismatches": [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ],
+        "classification": "mutant_rejected"
+      }
+    },
+    {
+      "id": "mutant_X",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "nonnumeric/malformed mutant mismatch",
+          "required concrete mismatch absent"
+        ],
+        "stats": {
+          "case": "mutant",
+          "errors": 1,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        },
+        "mismatches": [],
+        "classification": "mutant_rejected"
+      }
+    },
+    {
+      "id": "mutant_equal",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "equal values do not prove mismatch",
+          "required concrete mismatch absent"
+        ],
+        "stats": {
+          "case": "mutant",
+          "errors": 1,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        },
+        "mismatches": [
+          [
+            "next_seq",
+            1,
+            1
+          ]
+        ],
+        "classification": "mutant_rejected"
+      }
+    },
+    {
+      "id": "mutant_wrong_count",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "mismatch count differs from errors"
+        ],
+        "stats": {
+          "case": "mutant",
+          "errors": 2,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 2,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        },
+        "mismatches": [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ],
+        "classification": "mutant_rejected"
+      }
+    },
+    {
+      "id": "mutant_missing_required",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "required concrete mismatch absent"
+        ],
+        "stats": {
+          "case": "mutant",
+          "errors": 1,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        },
+        "mismatches": [
+          [
+            "armed",
+            1,
+            2
+          ]
+        ],
+        "classification": "mutant_rejected"
+      }
+    },
+    {
+      "id": "mutant_extra_error",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "unexpected diagnostic: ** Error: other"
+        ],
+        "stats": {
+          "case": "mutant",
+          "errors": 1,
+          "checks": 100,
+          "armed": 1,
+          "events": 14,
+          "retired": 2,
+          "occupied": 0,
+          "order_errors": 1,
+          "windows": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "scans": 3,
+          "exhausted": 0,
+          "discarded": 6
+        },
+        "mismatches": [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ],
+        "classification": "mutant_rejected"
+      }
+    },
+    {
+      "id": "aggregate_all",
+      "expected_ok": true,
+      "actual_ok": true,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": true,
+        "reasons": [],
+        "selected": [
+          "x"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "id": "aggregate_empty",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "empty or duplicate selection"
+        ],
+        "selected": [],
+        "missing": [],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "id": "aggregate_duplicate",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "empty or duplicate selection"
+        ],
+        "selected": [
+          "x",
+          "x"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "id": "aggregate_missing",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "x"
+        ],
+        "missing": [
+          "x"
+        ],
+        "unexpected": [],
+        "failed": []
+      }
+    },
+    {
+      "id": "aggregate_extra",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "x"
+        ],
+        "missing": [],
+        "unexpected": [
+          "z"
+        ],
+        "failed": []
+      }
+    },
+    {
+      "id": "aggregate_numeric_truthy",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "x"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": [
+          "x"
+        ]
+      }
+    },
+    {
+      "id": "aggregate_failed",
+      "expected_ok": false,
+      "actual_ok": false,
+      "agrees": true,
+      "error": null,
+      "result": {
+        "ok": false,
+        "reasons": [
+          "missing/extra/nonpassing selected results"
+        ],
+        "selected": [
+          "x"
+        ],
+        "missing": [],
+        "unexpected": [],
+        "failed": [
+          "x"
+        ]
+      }
+    }
+  ],
+  "unchanged_functions": [
+    "_lines",
+    "_strict_diagnostics",
+    "_structured_rows",
+    "_case",
+    "_guard",
+    "_mutant",
+    "_result",
+    "_count_lines",
+    "_summary_counts",
+    "_zero_summary",
+    "classify_compile",
+    "parse_stats",
+    "_mismatch_tokens",
+    "_identity_reasons",
+    "classify_simulation_output",
+    "classify_guard_output",
+    "classify_mutant_output",
+    "aggregate_results",
+    "sha256_file",
+    "_write_json",
+    "_run_hidden",
+    "_persist_invocation",
+    "select_cases",
+    "_snapshot_inputs",
+    "run_case",
+    "_parse_args",
+    "main"
+  ],
+  "changed_functions": [
+    "_tool_version"
+  ],
+  "missing_functions": [],
+  "added_functions": [
+    "_version_failure_reasons",
+    "_version_output_bytes"
+  ],
+  "original_global_nodes_preserved": true,
+  "new_global_nodes": []
+}

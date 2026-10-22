@@ -1,0 +1,105 @@
+{
+  "at_utc": "2026-10-22T06:11:17.095981+00:00",
+  "decision": "REVISE",
+  "identity": {
+    "task_id": "B-MAIN-CONTINUATION-20261019",
+    "task_version": 1,
+    "work_id": "B-OP21-COORDINATOR-REVIEW-20261022-v1",
+    "actual_thread": "01a154de-abd8-7590-b9a3-2819249458e3",
+    "actual_turn": "01a1621f-0a3e-7b81-a611-a86b4a8378cd",
+    "model": "gpt-6-astra",
+    "effort": "ultra"
+  },
+  "product": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+    "actual_completed_turn": "01a161eb-20f4-7870-b061-4dd81697e728",
+    "parent_work": "B-LOCAL-SAMPLE-SCAN-CONTINUE-20261022-v1",
+    "operation_id": "B-DEEPEYE-SAMPLE-SCAN-CAPTURE-20261022-21",
+    "base": "7317b6ac3f8f19059031c46f8c4d2b0f9a8e9c06",
+    "source": "52cd7b0795d13316a8106273b182d9c9c8b3f601",
+    "head": "cd007dc8190b7c2d911d2be6c1136aabab3518e5",
+    "request_sha256": "94fcbf9936d1adf13a111d92e6d951bc63693af1c2c1f48f46e631d9e9bdd7c9",
+    "pr": "https://github.com/carolwjade/CarlandFPGA/pull/30",
+    "comment_id": 6333596052
+  },
+  "contract": {
+    "id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "consumed": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\COMPLETED_REVIEW_CONSUMED.json",
+    "sha256": "10a4a8d4ce70fd4af966e8f983ea0ff018a8f3efcf5e09a6e3f8ddb5d81c9cd6",
+    "bytes": 23209
+  },
+  "reason": "P2 OP21-TOOLCHECK-ERROR01: exact final author runner accepts an exit0 ModelSim 10.7 version banner containing an explicit Error on either stream; a fresh actual Python entry with synthetic vendor seam still runs cases, returns0 and records summary.ok=true. Fail-closed preflight acceptance is not met.",
+  "finding": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\FINDING_OP21_TOOLCHECK_ERROR01.json",
+    "sha256": "518af72fb7ddd3c315fbca19dd41726a5842ca33d344074f549036f92a9559f4",
+    "bytes": 3531
+  },
+  "source_file": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\acquisition\\run_sample_scan_capture.py",
+    "sha256": "99748d791432cd0090e92b1e383670200fc3ead59ad3a6795af72f876e6d6b66",
+    "bytes": 36049
+  },
+  "source_lines": [
+    611,
+    614
+  ],
+  "retained_observations": {
+    "rtl": "No blocking RTL defect found in independent semantic review. Exact final-source internal digital observations remain recorded; coordinator ran no vendor or old RTL suite. Overall op21 acceptance is withheld solely for the runner preflight defect.",
+    "main_final_runs": 18,
+    "main_final_commands": 72,
+    "healthy_public_edges": 165149,
+    "parameter_guards": 8,
+    "numeric_mutants": 2,
+    "mutant_field_differences": [
+      11772,
+      44108
+    ],
+    "field_differences_are_not_case_counts": true,
+    "author_core_checks": 820621,
+    "author_checks_with_mutants": 820779,
+    "simulator_counts_are_not_formal_card_acceptance": true
+  },
+  "required_repair": "Only tool-version preflight validation and failure propagation, new focused tests/evidence and a new source operation/request/manifest. Freeze independent expected matrix before author patch; preserve old red evidence. No old RTL/vendor suite or publisher replay.",
+  "accepted_scope": null,
+  "not_run": [
+    "all29",
+    "B02",
+    "G05",
+    "B06",
+    "R03",
+    "full_product",
+    "synthesis",
+    "implementation",
+    "timing",
+    "CDC_RDC",
+    "board",
+    "system"
+  ],
+  "board": "A-only",
+  "next_action": "A separate repair CONTINUE authorizes one Flash/max assignment by the same sole product director; no second root or unrelated next increment."
+}

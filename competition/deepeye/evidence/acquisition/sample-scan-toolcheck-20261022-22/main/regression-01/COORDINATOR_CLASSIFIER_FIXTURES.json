@@ -1,0 +1,792 @@
+{
+  "at_utc": "2026-10-22T05:49:09.332011+00:00",
+  "runner_sha256": "99748d791432cd0090e92b1e383670200fc3ead59ad3a6795af72f876e6d6b66",
+  "method": "New literal fixtures from scope/error invariants; no product92case corpus imported; pure classifier functions only.",
+  "cases": [
+    {
+      "id": "compile_clean",
+      "fn": "classify_compile",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "compile_nonzero",
+      "fn": "classify_compile",
+      "args": [
+        1,
+        "Errors: 0, Warnings: 0\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_none",
+      "fn": "classify_compile",
+      "args": [
+        null,
+        "Errors: 0, Warnings: 0\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_bool",
+      "fn": "classify_compile",
+      "args": [
+        false,
+        "Errors: 0, Warnings: 0\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_stderr_error",
+      "fn": "classify_compile",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "** Error: rejected\n"
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_hidden_fatal",
+      "fn": "classify_compile",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n** FATAL: rejected\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_duplicate_summary",
+      "fn": "classify_compile",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\nErrors: 0, Warnings: 0\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_malformed_summary",
+      "fn": "classify_compile",
+      "args": [
+        0,
+        "Errors: 00, Warnings: 0\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "compile_warning",
+      "fn": "classify_compile",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\nWARNING: rejected\n",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_clean",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "simulation_CRLF",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\r\nSAMPLE_SCAN_PASS\r\nErrors: 0, Warnings: 0\r\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "simulation_wrong_case",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=wrong checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_empty_checks",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=0 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_empty_windows",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=0 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_duplicate_stats",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_missing_key",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_extra_key",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 extra=0 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_X_count",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=x errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_missing_pass",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_stderr_marker",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nErrors: 0, Warnings: 0\n",
+        "SAMPLE_SCAN_PASS\n",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_foreign_error",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n** Error: corrupted\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_exit1",
+      "fn": "classify_simulation_output",
+      "args": [
+        1,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "simulation_contradicted_stats",
+      "fn": "classify_simulation_output",
+      "args": [
+        0,
+        "SAMPLE_SCAN_STATS case=directed checks=100 errors=0 windows=1 events=15 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_PASS\nErrors: 0, Warnings: 0\n",
+        "",
+        "directed",
+        {
+          "events": 14,
+          "scans": 3,
+          "retired": 2,
+          "discarded": 6,
+          "order_errors": 1,
+          "overruns": 1,
+          "partial_len": 0,
+          "occupied": 0,
+          "armed": 1,
+          "exhausted": 0
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "guard_exact",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "** Fatal: deepeye_sample_scan_capture: SEQ_W out of range\nErrors: 1, Warnings: 0\n",
+        "",
+        "SEQ_W",
+        "deepeye_sample_scan_capture: SEQ_W out of range"
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "guard_healthy",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "GUARD_CONTROL_ALIVE\nErrors: 0, Warnings: 0\n",
+        "",
+        "HEALTHY",
+        ""
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "guard_wrong_family",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "** Fatal: deepeye_sample_scan_capture: TAG_W out of range\nErrors: 1, Warnings: 0\n",
+        "",
+        "SEQ_W",
+        "deepeye_sample_scan_capture: SEQ_W out of range"
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "guard_twice",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "** Fatal: deepeye_sample_scan_capture: SEQ_W out of range\nErrors: 1, Warnings: 0\n** Fatal: deepeye_sample_scan_capture: SEQ_W out of range\n",
+        "",
+        "SEQ_W",
+        "deepeye_sample_scan_capture: SEQ_W out of range"
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "guard_foreign",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "** Fatal: deepeye_sample_scan_capture: SEQ_W out of range\nErrors: 1, Warnings: 0\n",
+        "** Error: wrong\n",
+        "SEQ_W",
+        "deepeye_sample_scan_capture: SEQ_W out of range"
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "guard_body_alive",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "** Fatal: deepeye_sample_scan_capture: SEQ_W out of range\nErrors: 1, Warnings: 0\nGUARD_CONTROL_ALIVE\n",
+        "",
+        "SEQ_W",
+        "deepeye_sample_scan_capture: SEQ_W out of range"
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "guard_exit1",
+      "fn": "classify_guard_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        1,
+        "** Fatal: deepeye_sample_scan_capture: SEQ_W out of range\nErrors: 1, Warnings: 0\n",
+        "",
+        "SEQ_W",
+        "deepeye_sample_scan_capture: SEQ_W out of range"
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "mutant_numeric",
+      "fn": "classify_mutant_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "SAMPLE_SCAN_STATS case=mutant checks=100 errors=1 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_MISMATCH field=next_seq expected=1 actual=2\n** Fatal: tb_sample_scan_capture: case failed\nErrors: 1, Warnings: 0\n",
+        "",
+        "mutant",
+        [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ]
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "mutant_X",
+      "fn": "classify_mutant_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "SAMPLE_SCAN_STATS case=mutant checks=100 errors=1 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_MISMATCH field=next_seq expected=1 actual=x\n** Fatal: tb_sample_scan_capture: case failed\nErrors: 1, Warnings: 0\n",
+        "",
+        "mutant",
+        [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ]
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "mutant_equal",
+      "fn": "classify_mutant_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "SAMPLE_SCAN_STATS case=mutant checks=100 errors=1 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_MISMATCH field=next_seq expected=1 actual=1\n** Fatal: tb_sample_scan_capture: case failed\nErrors: 1, Warnings: 0\n",
+        "",
+        "mutant",
+        [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ]
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "mutant_wrong_count",
+      "fn": "classify_mutant_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "SAMPLE_SCAN_STATS case=mutant checks=100 errors=2 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=2 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_MISMATCH field=next_seq expected=1 actual=2\n** Fatal: tb_sample_scan_capture: case failed\nErrors: 1, Warnings: 0\n",
+        "",
+        "mutant",
+        [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ]
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "mutant_missing_required",
+      "fn": "classify_mutant_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "SAMPLE_SCAN_STATS case=mutant checks=100 errors=1 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_MISMATCH field=armed expected=1 actual=2\n** Fatal: tb_sample_scan_capture: case failed\nErrors: 1, Warnings: 0\n",
+        "",
+        "mutant",
+        [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ]
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "mutant_extra_error",
+      "fn": "classify_mutant_output",
+      "args": [
+        0,
+        "Errors: 0, Warnings: 0\n",
+        "",
+        0,
+        "SAMPLE_SCAN_STATS case=mutant checks=100 errors=1 windows=1 events=14 scans=3 retired=2 discarded=6 order_errors=1 overruns=1 partial_len=0 occupied=0 armed=1 exhausted=0\nSAMPLE_SCAN_MISMATCH field=next_seq expected=1 actual=2\n** Fatal: tb_sample_scan_capture: case failed\nErrors: 1, Warnings: 0\n** Error: other\n",
+        "",
+        "mutant",
+        [
+          [
+            "next_seq",
+            1,
+            2
+          ]
+        ]
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "aggregate_all",
+      "fn": "aggregate_results",
+      "args": [
+        [
+          "x"
+        ],
+        {
+          "x": {
+            "ok": true
+          }
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": true
+    },
+    {
+      "id": "aggregate_empty",
+      "fn": "aggregate_results",
+      "args": [
+        [],
+        {}
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "aggregate_duplicate",
+      "fn": "aggregate_results",
+      "args": [
+        [
+          "x",
+          "x"
+        ],
+        {
+          "x": {
+            "ok": true
+          }
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "aggregate_missing",
+      "fn": "aggregate_results",
+      "args": [
+        [
+          "x"
+        ],
+        {}
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "aggregate_extra",
+      "fn": "aggregate_results",
+      "args": [
+        [
+          "x"
+        ],
+        {
+          "x": {
+            "ok": true
+          },
+          "z": {
+            "ok": true
+          }
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "aggregate_numeric_truthy",
+      "fn": "aggregate_results",
+      "args": [
+        [
+          "x"
+        ],
+        {
+          "x": {
+            "ok": 1
+          }
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    },
+    {
+      "id": "aggregate_failed",
+      "fn": "aggregate_results",
+      "args": [
+        [
+          "x"
+        ],
+        {
+          "x": {
+            "ok": false
+          }
+        }
+      ],
+      "kwargs": {},
+      "expected_ok": false
+    }
+  ]
+}

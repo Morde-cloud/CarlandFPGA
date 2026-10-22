@@ -1,0 +1,717 @@
+{
+  "cases": [
+    {
+      "id": "vlog-real-crlf",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vlog-lf",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vlog-prefix-spaces",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vlog-banner-stderr",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vlog-zero-tally-out",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vlog-zero-tally-err",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vlog-stdout-diagnostic-00",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-01",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-02",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-03",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-04",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-05",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-06",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-07",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-08",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-09",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-10",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-11",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-12",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-13",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-14",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-15",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-16",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-17",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stdout-diagnostic-18",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-00",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-01",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-02",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-03",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-04",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-05",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-06",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-07",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-08",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-09",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-10",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-11",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-12",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-13",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-14",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-15",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-16",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-17",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-stderr-diagnostic-18",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-missing",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-bare-substring",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-generic-old-probe",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-wrong-tool",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-wrong-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-older-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-wrong-role",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-wrong-edition",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-leading-text",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-trailing-text",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-duplicate",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-conflict-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-conflict-tool",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-release-missing",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-embedded-newline",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-split-error",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-cross-stream-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-cross-stream-duplicate",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-exit7",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-exit-none",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-timeout",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-exception-OSError",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-exception-FileNotFoundError",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vlog-exception-TimeoutExpired",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-real-crlf",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vsim-lf",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vsim-prefix-spaces",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vsim-banner-stderr",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vsim-zero-tally-out",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vsim-zero-tally-err",
+      "expected_exit": 0,
+      "expected_case_vendor_calls": 8
+    },
+    {
+      "id": "vsim-stdout-diagnostic-00",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-01",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-02",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-03",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-04",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-05",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-06",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-07",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-08",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-09",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-10",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-11",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-12",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-13",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-14",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-15",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-16",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-17",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stdout-diagnostic-18",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-00",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-01",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-02",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-03",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-04",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-05",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-06",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-07",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-08",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-09",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-10",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-11",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-12",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-13",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-14",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-15",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-16",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-17",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-stderr-diagnostic-18",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-missing",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-bare-substring",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-generic-old-probe",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-wrong-tool",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-wrong-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-older-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-wrong-role",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-wrong-edition",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-leading-text",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-trailing-text",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-duplicate",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-conflict-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-conflict-tool",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-release-missing",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-embedded-newline",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-split-error",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-cross-stream-version",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-cross-stream-duplicate",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-exit7",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-exit-none",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-timeout",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-exception-OSError",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-exception-FileNotFoundError",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    },
+    {
+      "id": "vsim-exception-TimeoutExpired",
+      "expected_exit": "nonzero",
+      "expected_case_vendor_calls": 0
+    }
+  ],
+  "selection": [
+    "directed",
+    "guard_seq_w_1",
+    "guard_healthy",
+    "mutant_loss_undercount_rejected"
+  ],
+  "fixture_hashes": {
+    "entry-fixtures\\directed\\vlog.stdout.bin": "1f109685ff4b8346790e7750c4c091b2e3856efcee98351c61028ef46cda189d",
+    "entry-fixtures\\directed\\vlog.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\directed\\vlog.invocation.json": "6e81798d8eed6a07d7ead2e32e96448590db180465daf2e9b3a36872dc60dac1",
+    "entry-fixtures\\directed\\vsim.stdout.bin": "7f26c92953d471884123b4755e10f3794f301c9f9311af032e4f0221f900a146",
+    "entry-fixtures\\directed\\vsim.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\directed\\vsim.invocation.json": "1ea403209b6eda3d437147d0942f6adde14bfc7f230563b7322fd133c22a40f8",
+    "entry-fixtures\\guard_seq_w_1\\vlog.stdout.bin": "da5a01be880049eec477ae47c53a660415af9fe4fefe9cd8b450c03e326bfa7f",
+    "entry-fixtures\\guard_seq_w_1\\vlog.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\guard_seq_w_1\\vlog.invocation.json": "f1f340917111110a3d0fc0252cbeb47afe085f8f39fd944ab9dc1be5c1078e27",
+    "entry-fixtures\\guard_seq_w_1\\vsim.stdout.bin": "381f6af46a0a1fc1caabbafca5bf92f4a6109ed564e65b7ebdf29adb10757faa",
+    "entry-fixtures\\guard_seq_w_1\\vsim.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\guard_seq_w_1\\vsim.invocation.json": "6b7db8af19a355739aaf5b8ad4483195d4e1474b90f431c282c558f07801c777",
+    "entry-fixtures\\guard_healthy\\vlog.stdout.bin": "2825de9f61b7d8c8b77bd1312789f3e102cd9f62abf585ccbaf67f80251a577c",
+    "entry-fixtures\\guard_healthy\\vlog.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\guard_healthy\\vlog.invocation.json": "ae6eff4267cbdd5e3b48f78fbd20a97a7c3fedb44360ded411ad833d0fb06bd8",
+    "entry-fixtures\\guard_healthy\\vsim.stdout.bin": "f818e498d610bd0214b4872e28bde81af7f33ff7c2eb0dabfd629616b41b3ec8",
+    "entry-fixtures\\guard_healthy\\vsim.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\guard_healthy\\vsim.invocation.json": "6ec8addcc1fef2b01b48d2e6c72b228395b02c72b93e047d4799804df666d22b",
+    "entry-fixtures\\mutant_loss_undercount_rejected\\vlog.stdout.bin": "79bbbcaa61b61b5b6dc7522c1cab801bd546fd5de1f1e04e3b11a45dcfcf2abd",
+    "entry-fixtures\\mutant_loss_undercount_rejected\\vlog.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\mutant_loss_undercount_rejected\\vlog.invocation.json": "48823c670d81d9935fa7ce992c4d48ba67195649100c5ca5dea94b1df4876f0b",
+    "entry-fixtures\\mutant_loss_undercount_rejected\\vsim.stdout.bin": "25c5c873aa9cda6f5e03f0470b84b3f72b7c0c13d91eb7f036a376d06e1693cc",
+    "entry-fixtures\\mutant_loss_undercount_rejected\\vsim.stderr.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-fixtures\\mutant_loss_undercount_rejected\\vsim.invocation.json": "2dddde8d2edb43b36be7118228bc4008da2f9e146030f25250362dad7379eca5"
+  },
+  "scope": "Fresh Python entry for every row, only _run_hidden seam substituted; known-good saved compile/simulation bytes replayed as explicit synthetic controls. Not vendor executions."
+}

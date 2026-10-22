@@ -1,0 +1,48 @@
+{
+  "at_utc": "2026-10-22T05:51:43.852013+00:00",
+  "id": "OP21-TOOLCHECK-ERROR01",
+  "priority": "P2",
+  "title": "Version command Error diagnostics can produce overall runner success",
+  "source": "competition/deepeye/tools/acquisition/run_sample_scan_capture.py",
+  "source_sha256": "99748d791432cd0090e92b1e383670200fc3ead59ad3a6795af72f876e6d6b66",
+  "source_line": 611,
+  "source_commit": "52cd7b0795d13316a8106273b182d9c9c8b3f601",
+  "evidence": [
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\version-controls-01\\FROZEN.json",
+      "sha256": "c2b03f9b058bd97b9e81d0a8032d689bc36d5f07648493f2c12dc7ed4509bbb8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\version-controls-01\\RESULT.json",
+      "sha256": "8bcbecddda8bafe1e8ed04ffa44211cfec5aa7d8ff690912f03a58aa81467480"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\version-entry-01\\FROZEN.json",
+      "sha256": "185f35ece6c6eb3baae8f0a047297e749e761ed4d21ac091b2c0ce51eccafdd8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\version-entry-01\\RESULT.json",
+      "sha256": "2b0cfa129cde05847604006cf528014e08e5b3d1cf57a027517e589ad00620ad"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\classifier-controls-01\\RESULT.json",
+      "sha256": "076d6aa36c37292815a59a21b3348c6418ac228a74993c45fff28e37c1e7feae"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\MUTANT_SEMANTIC_REVIEW.json",
+      "sha256": "e0deb41747451eefe1743e741888f73bc77e7eb68d03ed3cfb63f75f5c34a948"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-continuation-20261019-v1\\sample-scan-capture-20261022-21\\SEMANTIC_REVIEW.md",
+      "sha256": "51db9665c2c3aa78357a3c09a82463b07b01b68058647beeae59e8309821d0c7"
+    }
+  ],
+  "reproduction": "Actual _tool_version accepts stdout or stderr explicitError at exit0 and10.7banner. Actual Python main under documented synthetic vendor seam continues case work and returns0/summary.oktrue; healthy process also returns0. No actual vendor failure or hardware execution claimed.",
+  "required_change": "Only tool-version preflight/failure propagation; reject both-stream diagnostics and incorrect banners; fail before case execution and preserve raw evidence. Newsourceoperation/manifest. ExistingRTL observations retained and no oldsuite replay.",
+  "desktop_fact_consumed": {
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\main-self-check-20261016-01a140be\\op21-result-review-20261022-v1\\DELIVERY_VERIFICATION.json",
+    "sha256": "2d18c5ad4424fccb81ebf1aab5f5e73c1ee37c8474cd00790c48b6877e8e964b",
+    "meaning": "Desktop two read-only GETs and source/manifest/request verification are delivery facts, not semantic acceptance. No duplicate desktop audit was assigned."
+  },
+  "current_decision_state": "Final REVISE pending remaining mechanical audit terminal consumption; no repair dispatch yet"
+}

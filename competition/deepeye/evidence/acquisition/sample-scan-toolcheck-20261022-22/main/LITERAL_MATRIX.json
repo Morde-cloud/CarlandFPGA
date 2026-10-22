@@ -1,0 +1,1365 @@
+{
+  "scope": "Synthetic query results, literal independent expectations; no author test import",
+  "cases": [
+    {
+      "id": "vlog-real-crlf",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vlog-lf",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vlog-prefix-spaces",
+      "tool": "vlog",
+      "stdout": " \t# Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017 \t\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vlog-banner-stderr",
+      "tool": "vlog",
+      "stdout": "",
+      "stderr": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vlog-zero-tally-out",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vlog-zero-tally-err",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vlog-stdout-diagnostic-00",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n** Error: license failed\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-01",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nError: failed\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-02",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\neRrOr: failed\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-03",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n** Warning: incompatible\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-04",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nwarning: retry\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-05",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nFaTaL: stopped\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-06",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n# ** Error: bad\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-07",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 1, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-08",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 1\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-09",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: x, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-10",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: -1, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-11",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 0, Warnings:\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-12",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0 junk\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-13",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0\nErrors: 1, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-14",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0\nErrors: 0, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-15",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nERRORS: 0, WARNINGS: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-16",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nWarnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-17",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nError code=0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stdout-diagnostic-18",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n** Fatal: hidden\u0000tail\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-00",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "** Error: license failed\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-01",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Error: failed\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-02",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "eRrOr: failed\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-03",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "** Warning: incompatible\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-04",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "warning: retry\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-05",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "FaTaL: stopped\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-06",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "# ** Error: bad\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-07",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 1, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-08",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 1\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-09",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: x, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-10",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: -1, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-11",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings:\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-12",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0 junk\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-13",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0\nErrors: 1, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-14",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0\nErrors: 0, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-15",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "ERRORS: 0, WARNINGS: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-16",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-17",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Error code=0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-stderr-diagnostic-18",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "** Fatal: hidden\u0000tail\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-missing",
+      "tool": "vlog",
+      "stdout": "",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-bare-substring",
+      "tool": "vlog",
+      "stdout": "a random 10.7 hint\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-generic-old-probe",
+      "tool": "vlog",
+      "stdout": "ModelSim SE-64 10.7 / 2017.12\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-wrong-tool",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-wrong-version",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.70 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-older-version",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.6 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-wrong-role",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-wrong-edition",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim PE vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-leading-text",
+      "tool": "vlog",
+      "stdout": "not Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-trailing-text",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017 junk\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-duplicate",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nModel Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-conflict-version",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nModel Technology ModelSim SE-64 vlog 2020.4 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-conflict-tool",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\nModel Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-release-missing",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-embedded-newline",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog\n10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-split-error",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n** Error\n: failure\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-cross-stream-version",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Model Technology ModelSim SE-64 vlog 10.6 Compiler 2017.12 Dec  7 2017\r\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-cross-stream-duplicate",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-exit7",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 7,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-exit-none",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": null,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-timeout",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": null,
+      "timed_out": true,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-exception-OSError",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": "OSError",
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-exception-FileNotFoundError",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": "FileNotFoundError",
+      "expected_ok": false
+    },
+    {
+      "id": "vlog-exception-TimeoutExpired",
+      "tool": "vlog",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": "TimeoutExpired",
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-real-crlf",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vsim-lf",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vsim-prefix-spaces",
+      "tool": "vsim",
+      "stdout": " \t# Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017 \t\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vsim-banner-stderr",
+      "tool": "vsim",
+      "stdout": "",
+      "stderr": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vsim-zero-tally-out",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vsim-zero-tally-err",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": true
+    },
+    {
+      "id": "vsim-stdout-diagnostic-00",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n** Error: license failed\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-01",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nError: failed\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-02",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\neRrOr: failed\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-03",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n** Warning: incompatible\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-04",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nwarning: retry\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-05",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nFaTaL: stopped\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-06",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n# ** Error: bad\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-07",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 1, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-08",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 1\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-09",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: x, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-10",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: -1, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-11",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 0, Warnings:\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-12",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0 junk\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-13",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0\nErrors: 1, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-14",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nErrors: 0, Warnings: 0\nErrors: 0, Warnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-15",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nERRORS: 0, WARNINGS: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-16",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nWarnings: 0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-17",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nError code=0\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stdout-diagnostic-18",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n** Fatal: hidden\u0000tail\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-00",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "** Error: license failed\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-01",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Error: failed\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-02",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "eRrOr: failed\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-03",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "** Warning: incompatible\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-04",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "warning: retry\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-05",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "FaTaL: stopped\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-06",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "# ** Error: bad\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-07",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 1, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-08",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 1\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-09",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: x, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-10",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: -1, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-11",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings:\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-12",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0 junk\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-13",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0\nErrors: 1, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-14",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Errors: 0, Warnings: 0\nErrors: 0, Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-15",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "ERRORS: 0, WARNINGS: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-16",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Warnings: 0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-17",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Error code=0\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-stderr-diagnostic-18",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "** Fatal: hidden\u0000tail\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-missing",
+      "tool": "vsim",
+      "stdout": "",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-bare-substring",
+      "tool": "vsim",
+      "stdout": "a random 10.7 hint\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-generic-old-probe",
+      "tool": "vsim",
+      "stdout": "ModelSim SE-64 10.7 / 2017.12\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-wrong-tool",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-wrong-version",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.70 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-older-version",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.6 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-wrong-role",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-wrong-edition",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim PE vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-leading-text",
+      "tool": "vsim",
+      "stdout": "not Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-trailing-text",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017 junk\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-duplicate",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nModel Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-conflict-version",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nModel Technology ModelSim SE-64 vsim 2020.4 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-conflict-tool",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\nModel Technology ModelSim SE-64 vlog 10.7 Compiler 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-release-missing",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-embedded-newline",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim\n10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-split-error",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n** Error\n: failure\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-cross-stream-version",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Model Technology ModelSim SE-64 vsim 10.6 Simulator 2017.12 Dec  7 2017\r\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-cross-stream-duplicate",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "exit": 0,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-exit7",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 7,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-exit-none",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": null,
+      "timed_out": false,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-timeout",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": null,
+      "timed_out": true,
+      "exception": null,
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-exception-OSError",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": "OSError",
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-exception-FileNotFoundError",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": "FileNotFoundError",
+      "expected_ok": false
+    },
+    {
+      "id": "vsim-exception-TimeoutExpired",
+      "tool": "vsim",
+      "stdout": "Model Technology ModelSim SE-64 vsim 10.7 Simulator 2017.12 Dec  7 2017\r\n",
+      "stderr": "",
+      "exit": 0,
+      "timed_out": false,
+      "exception": "TimeoutExpired",
+      "expected_ok": false
+    }
+  ]
+}

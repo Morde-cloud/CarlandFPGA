@@ -595,10 +595,26 @@ def _tool_version(modelsim_dir: Path, out: Path) -> tuple[dict[str, Any], list[s
     version_dir.mkdir()
     for tool in ("vlog", "vsim"):
         executable = modelsim_dir / f"{tool}.exe"
-        invocation = _run_hidden([str(executable), "-version"], version_dir, 30)
+        argv = [str(executable), "-version"]
+        started = time.monotonic()
+        try:
+            invocation = _run_hidden(argv, version_dir, 30)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            invocation = {
+                "argv": argv,
+                "cwd": str(version_dir),
+                "exit": None,
+                "timed_out": isinstance(exc, subprocess.TimeoutExpired),
+                "elapsed_seconds": round(time.monotonic() - started, 6),
+                "stdout_bytes": _version_output_bytes(getattr(exc, "stdout", b"")),
+                "stderr_bytes": _version_output_bytes(getattr(exc, "stderr", b"")),
+                "exception_type": type(exc).__name__,
+                "exception_message": str(exc),
+            }
         invocation = _persist_invocation(version_dir, tool, invocation)
         text = invocation["stdout_text"] + "\n" + invocation["stderr_text"]
-        versions[tool] = {
+        tool_reasons = _version_failure_reasons(tool, invocation)
+        entry: dict[str, Any] = {
             "path": str(executable),
             "exit": invocation["exit"],
             "timed_out": invocation["timed_out"],
@@ -607,13 +623,86 @@ def _tool_version(modelsim_dir: Path, out: Path) -> tuple[dict[str, Any], list[s
             "stdout_sha256": invocation["stdout_sha256"],
             "stderr_sha256": invocation["stderr_sha256"],
             "text": text.strip(),
+            "ok": not tool_reasons,
+            "reasons": tool_reasons,
         }
-        if invocation["timed_out"] or invocation["exit"] != 0:
-            reasons.append(f"{tool} -version did not complete cleanly")
-        if "10.7" not in text:
-            reasons.append(f"{tool} is not the verified ModelSim 10.7 toolchain")
+        if "exception_type" in invocation:
+            entry["exception_type"] = invocation["exception_type"]
+            entry["exception_message"] = invocation["exception_message"]
+        versions[tool] = entry
+        reasons.extend(tool_reasons)
     _write_json(out / "tool_versions.json", versions)
     return versions, reasons
+
+
+def _version_output_bytes(value: Any) -> bytes:
+    if value is None:
+        return b""
+    if isinstance(value, bytes):
+        return value
+    if isinstance(value, str):
+        return value.encode("utf-8", errors="replace")
+    return bytes(value)
+
+
+def _version_failure_reasons(tool: str, invocation: dict[str, Any]) -> list[str]:
+    reasons: list[str] = []
+    exception_type = invocation.get("exception_type")
+    if exception_type:
+        message = str(invocation.get("exception_message") or "")
+        reasons.append(f"{tool} -version raised {exception_type}: {message}".rstrip())
+    if invocation.get("timed_out"):
+        reasons.append(f"{tool} -version timed out")
+    exit_code = invocation.get("exit")
+    if type(exit_code) is not int or exit_code != 0:
+        reasons.append(f"{tool} -version exit was {exit_code!r}, expected 0")
+
+    banners = {
+        "vlog": re.compile(
+            r"Model[ \t]+Technology[ \t]+ModelSim[ \t]+SE-64[ \t]+vlog[ \t]+10\.7[ \t]+"
+            r"Compiler[ \t]+2017\.12[ \t]+Dec[ \t]+7[ \t]+2017"
+        ),
+        "vsim": re.compile(
+            r"Model[ \t]+Technology[ \t]+ModelSim[ \t]+SE-64[ \t]+vsim[ \t]+10\.7[ \t]+"
+            r"Simulator[ \t]+2017\.12[ \t]+Dec[ \t]+7[ \t]+2017"
+        ),
+    }
+    banner_re = banners[tool]
+    banner_count = 0
+    summary_count = 0
+    for stream_name in ("stdout", "stderr"):
+        text = invocation[f"{stream_name}_text"]
+        for raw_line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+            line = raw_line.strip()
+            if not line:
+                continue
+            candidate = line
+            if candidate.startswith("# "):
+                candidate = candidate[2:].strip()
+            if banner_re.fullmatch(candidate):
+                banner_count += 1
+                continue
+            if line == "Errors: 0, Warnings: 0":
+                summary_count += 1
+                continue
+            if re.search(r"(?i)\b(?:error|fatal|warning)s?\b", line):
+                reasons.append(
+                    f"{tool} -version {stream_name} contains an explicit "
+                    "Error/Fatal/Warning diagnostic"
+                )
+            else:
+                reasons.append(f"{tool} -version {stream_name} contains unrecognized text")
+    if banner_count != 1:
+        reasons.append(
+            f"{tool} -version printed {banner_count} verified "
+            f"ModelSim 10.7 {tool} banners; exactly one is required"
+        )
+    if summary_count > 1:
+        reasons.append(
+            f"{tool} -version printed {summary_count} zero Errors/Warnings "
+            "summaries; at most one is allowed"
+        )
+    return reasons
 
 
 def run_case(

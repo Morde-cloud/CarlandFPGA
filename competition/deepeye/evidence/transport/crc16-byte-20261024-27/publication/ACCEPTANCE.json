@@ -1,0 +1,25 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-CRC16-BYTE-20261024-27",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "status": "accepted_pure_binary_crc_simulation_only",
+  "rtl_sha256": "8594bad79593a5ff5a63761c3b4f5f83adc70ebcfdd5aec178de3aba1f313d6f",
+  "direct_binascii_pairs": 16777216,
+  "actual_ModelSim_pairs": 16777216,
+  "actual_compiled_behavioral_mutants": 3,
+  "author_cases": 7,
+  "author_checks": 198437,
+  "main_runner_probes": 11,
+  "author_parser_negative_probes": 6,
+  "main_qualification": "main/qualification-01/RESULT.json and main/exhaustive-01/RESULT.json under operation evidence",
+  "limits": "Both author sampled library and main exhaustive oracle use standard binascii; main separately froze and checked full table before inspecting source. No parser/ABI/authorization/physical result.",
+  "formal": "All29/B04/R03/synthesis/implementation/timing/CDC_RDC/board/system not_run",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "history_notes": [
+    "First table generator completed its loop but failed while looking for binascii.__file__; original failure remains. Fresh second full generation is the accepted freeze.",
+    "Author initial compilation failure and unsupported vlib -version exit1 are retained. Actual compilation/simulation exits are separately recorded.",
+    "Author runner originally accepted inconsistent per-case check totals. Main preserved red fixture and original runner, repaired aggregate qualification, tested six synthetic negatives and one saved positive, then executed one new real CLI suite.",
+    "No full packet coverage/CRC error detection guarantee or physical acceptance is implied by complete binary update coverage."
+  ]
+}

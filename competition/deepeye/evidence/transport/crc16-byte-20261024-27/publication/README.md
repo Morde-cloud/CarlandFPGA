@@ -1,0 +1,7 @@
+# B-DEEPEYE-CRC16-BYTE-20261024-27
+
+Pure combinational CRC16/CCITT-FALSE update: arbitrary binary16bit state and8bit data, eight MSB-first polynomial1021 steps. Caller owns seed, framing, byte order and validation policy. Main independently froze a library-derived table before reading author RTL, checked all16777216 seed/byte pairs directly against binascii, then actually simulated all16777216 pairs and9 known-message prefixes. Three compiled behavioral mutants fail with numeric public-output contradictions. Author seven cases/198437 checks remain separately attributed; sampled author and exhaustive main checks share the binascii library, not an algorithmically distinct CRC implementation.
+
+SOURCE_BINDING pins final files, including the qualified author runner. RAW_INDEX hashes all archive members; failed attempts and original accepted-negative log remain. Final author parser qualification is six synthetic negatives, one saved real positive and one new actual CLI simulation. The original author RESULT predates that runner fix.
+
+Reproduce main_verify_crc16_byte.py using --rtl, --tb, --table from archived main/oracle-02/oracle.hex, and a fresh --out plus --tools ModelSim directory. Table hash364ef72ec21a070f1f8c4641f171b53bb488c0ca3c1b06d4704cd532f562ce66 is required. All29/B04/R03/fullproduct/synthesis/implementation/timing/CDC_RDC/board/system remain not_run. A alone operates physical board. H01-H15 canonical c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 remains fixed.

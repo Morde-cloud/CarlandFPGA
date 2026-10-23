@@ -1,0 +1,136 @@
+{
+  "artifacts": [
+    "competition/deepeye/fpga/codec/deepeye_block_encoder.sv",
+    "competition/deepeye/fpga/codec/encoder_remainder_adoption.md",
+    "competition/deepeye/tests/rtl/codec/main_tb_encoder_adoption_stream.sv",
+    "competition/deepeye/tools/codec/run_encoder_remainder_adoption.py",
+    "competition/deepeye/tools/codec/main_verify_encoder_adoption_stream.py",
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/README.md",
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/SOURCE_BINDING.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json": {
+      "sha256": "72b9c37a1f46f102c730ca369f824bc904504f30ba159689e1afa8677f0f6488",
+      "size": 4889
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/BUNDLE_MANIFEST.json": {
+      "sha256": "3efdcdcf2f2e08a578cc65007ab33fd3c417fde87be36b2bb2835e6a4c639876",
+      "size": 277
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/RAW_INDEX.json": {
+      "sha256": "bafcf1cca2568eef3a8f181e71b1e5eca9f43cb62b179c45b17b19fe55385224",
+      "size": 54676
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/README.md": {
+      "sha256": "9cebe54ec67a225b6bb4b881a7c6c8f06257107019d10ef75eab3ee5280e3d81",
+      "size": 2021
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/SOURCE_BINDING.json": {
+      "sha256": "ae511c683abe33bdbf1d995424a3e50a0bfd946317a9a78b93d9432865cc82cc",
+      "size": 1292
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/raw-evidence.tar.gz": {
+      "sha256": "fa40341b5ec277dbf2402f3cf754e3e0a1d07121c39c92b1ea838d447e57f5f6",
+      "size": 6192938
+    },
+    "competition/deepeye/fpga/codec/deepeye_block_encoder.sv": {
+      "sha256": "4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532",
+      "size": 21517
+    },
+    "competition/deepeye/fpga/codec/encoder_remainder_adoption.md": {
+      "sha256": "29fa5f60e57354681a074536d38cf1a789c3ed71d1b12ede22b517fb4dc8eeef",
+      "size": 3810
+    },
+    "competition/deepeye/tests/rtl/codec/main_tb_encoder_adoption_stream.sv": {
+      "sha256": "188bada220dcc505db08203002d70fe10c85866284f5549c6392101958df33b9",
+      "size": 22756
+    },
+    "competition/deepeye/tools/codec/main_verify_encoder_adoption_stream.py": {
+      "sha256": "04fc9410263128f97e1d481ac02c7224e89c1bcb309da54e945b5336849b8736",
+      "size": 4553
+    },
+    "competition/deepeye/tools/codec/run_encoder_remainder_adoption.py": {
+      "sha256": "3e78896595d5880fee772f1c392c12f7fd2a316b4fe792342a007659fb57aef2",
+      "size": 14957
+    }
+  },
+  "request": {
+    "code_commit": "8d69443de35585b8b8e4f8bbd499b1406f23421d",
+    "expected_result": "Production core adoption verified only in bounded simulation and two integrated OOC tops. Internal block payload<=256B is not productionTRACE<=32B or publicABI. No BOOT/TTL/sourcefreshness/controlauthority/physical grant. All29/B01/B03/B06/R03/fullproduct/implementation/timingclosure/CDC_RDC/board/system not_run; physicalboardAonly.",
+    "operation_id": "B-DEEPEYE-ENCODER-REMAINDER-ADOPTION-20261024-37",
+    "requester": "node-b",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify all 301 raw members and exact source binding, including preserved failed wrapper DCP export and explicit short-path recovery.",
+      "Fresh main independent frozen-old-chain comparison:130783 edges,4054242 public port comparisons; actual compiled sample-capture mutant rejected cycle1099. Old stimulus/reference and common queue reuse disclosed.",
+      "Author12commands exit0,297valid/6invalid/24abort/24recovery,505112trace rows and3terminal negatives. Shared adopted arithmetic comparator is not independent old-chain proof.",
+      "Three actual synthesis attempts at same Vivado2026.1,xc7z020clg400-1,maxThreads2,post-synthesis10ns: original stream complete; original wrapper synthesis but failed DCP export; explicit wrapper-only recovery complete. Two DCPs independently reopened. WNS+0.491ns and+0.389ns,9/11warnings andZPS7-1 retained. No I/O timing closure or route.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ]
+  },
+  "request_hash": "bfc7acb48d479f5f2eafa378fc9ce21666f02fc4211439cca0ed177be1562e26",
+  "schema_version": 1,
+  "stages": {
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "bounded_integrated_rtl_simulation": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "integrated_ooc_diagnostic": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "main_independent_public_history": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "saved_raw_and_runner_qualification": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-adoption-20261024-37/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# B-DEEPEYE-ENCODER-REMAINDER-20261024-36
+
+Separate encoder candidate replaces predictor reconstruction multiply with x+E-Euclidean_remainder and captures the accepted sample. Original production encoder remains unchanged. Main proof and1966035 feasible transitions precede inspection;1559 reused independent bit-string cases ran anew with3184107cycles/41393378publicendpoint comparisons. Two compiled candidate mutants produce numeric counterexamples. Author original9commands and505112tracerows retained; originalparser14falseaccepts fixed offline, author134/main22negative probes pass.
+
+One actual candidate Vivado2026.1 OOC synthesis and one independent DCP reopen: same post-synthesis10nsdiagnostic WNS+0.561ns vsoriginal-4.379ns; LUT1616 vs1604, FF2355 vs2337, DSP0 vs1. All10warnings andZPS7-1 warning remain,35input/53output timing delays missing. No place/route or full B06 timing closure. The original main driver retained warning_bearing=0 default; independent per-run review corrects it to1 while preserving original receipt. Initial outputguard failure happened before vendor launch.
+
+Author doc is retained as pre-synthesis author scope; newer main acceptance and raw OOC evidence above supersede only its no-synthesis status. Restore archived author/main beneath this operation evidence folder and repository-support at worktree root to access all exact transitive references. Frozen history reuse is explicit.
+
+Read ACCEPTANCE.json and archived main/final-audit-02/RESULT.json. Private native leases are excluded/scanned. Candidate promotion and same-commit integrated stream/queue qualification are subsequent work. No ABI/BOOT/TTL/sourcefreshness/controlauthority or production TRACE claim. All29/B01/B03/B06/R03/implementation/timingclosure/CDC_RDC/board/system remainnot_run; A-onlyboard. H01-H15 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 fixed.

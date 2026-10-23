@@ -1,0 +1,138 @@
+{
+  "main_math_feasible_cases": 1966035,
+  "main_cases": 1559,
+  "main_cycles": 3184107,
+  "main_port_comparisons": 41393378,
+  "author_original_commands": 9,
+  "author_original_cases": 297,
+  "author_trace_rows": 505112,
+  "author_repair_negatives": 134,
+  "acceptance_notes": [
+    "Candidate only; original production encoder and operation35 dependencies remain unchanged.",
+    "Main independent proof and bitstring reference reuse with fresh execution; arithmetic sweep not full2^32 space. Original author oracle reuses publishedgolden, separately disclosed.",
+    "Author trace records original payload and candidate ready/valid, not candidate payload; live main miter checked candidate payload. Parser tied to current exactTB grammar.",
+    "Original main failednegativefixture and initialOOCdirectoryguard failure retained; no vendor replay. One fresh candidate synthesis and one actual DCP readback.",
+    "OOC candidate WNS+0.561ns vsoriginal-4.379ns underpost-synthesis10nsdiagnostic only; LUT+12 FF+18 DSP1to0. PS7DRCwarning and10warnings retained, I/Oconstraintsincomplete. OOCdriver warning_bearing summarydefault0 corrected byper-run independentrecord to1; originalreceiptpreserved.",
+    "All29/B01/B03/B06/R03/implementation/timingclosure/CDC_RDC/board/system remainnot_run; physicalboardAonly."
+  ],
+  "status": "accepted_candidate_software_and_ooc_diagnostic_only",
+  "operation_id": "B-DEEPEYE-ENCODER-REMAINDER-20261024-36",
+  "compiled_mutants": 2,
+  "main_parser_negatives": 22,
+  "verified_records": 558,
+  "candidate": {
+    "resources": {
+      "Slice LUTs": 1616,
+      "Slice Registers": 2355,
+      "Block RAM Tile": 0,
+      "DSPs": 0
+    },
+    "timing": {
+      "WNS": "0.561",
+      "TNS": "0.000",
+      "setup_failing_endpoints": "0",
+      "setup_endpoints": "3727",
+      "WHS": "0.250",
+      "THS": "0.000",
+      "hold_failing_endpoints": "0",
+      "hold_endpoints": "3727",
+      "WPWS": "3.750",
+      "TPWS": "0.000",
+      "pulse_failing_endpoints": "0",
+      "pulse_endpoints": "2499"
+    },
+    "drc": [
+      [
+        "ZPS7-1",
+        "Warning"
+      ]
+    ],
+    "warnings": 10,
+    "checks": {
+      "no_clock": "0",
+      "constant_clock": "0",
+      "pulse_width_clock": "0",
+      "unconstrained_internal_endpoints": "0",
+      "no_input_delay": "35",
+      "no_output_delay": "53",
+      "multiple_clock": "0",
+      "generated_clocks": "0",
+      "loops": "0",
+      "partial_input_delay": "0",
+      "partial_output_delay": "0",
+      "latch_loops": "0"
+    }
+  },
+  "baseline": {
+    "top": "deepeye_block_encoder",
+    "run_dir": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\build\\ooc-20261024-33\\author\\main-execution-01\\runs\\03_deepeye_block_encoder",
+    "source_sha256": "870bc5dcfe9a3a82124cf5d305082964b9a6ebf3447c13f1a92ec052a591d8a5",
+    "pid": 49932,
+    "process_sha256": "9f6b75d8fcba2c5256a79710c340596a9b092766e1303be02393f3e68dff6aa1",
+    "dcp_sha256": "ad4501549305b9991fd7316e301537a89f4a680bcb3f09cd65e6175917c3567a",
+    "port_count": 89,
+    "clock_ports": [
+      "clk"
+    ],
+    "warnings": 10,
+    "drc": [
+      [
+        "DPIP-1",
+        "Warning"
+      ],
+      [
+        "DPIP-1",
+        "Warning"
+      ],
+      [
+        "DPOP-1",
+        "Warning"
+      ],
+      [
+        "DPOP-2",
+        "Warning"
+      ],
+      [
+        "ZPS7-1",
+        "Warning"
+      ]
+    ],
+    "utilization": {
+      "Slice LUTs": 1604,
+      "Slice Registers": 2337,
+      "Block RAM Tile": 0,
+      "DSPs": 1
+    },
+    "timing": {
+      "WNS": "-4.379",
+      "TNS": "-122.377",
+      "setup_failing_endpoints": "32",
+      "setup_endpoints": "3724",
+      "WHS": "0.250",
+      "THS": "0.000",
+      "hold_failing_endpoints": "0",
+      "hold_endpoints": "3724",
+      "WPWS": "3.750",
+      "TPWS": "0.000",
+      "pulse_failing_endpoints": "0",
+      "pulse_endpoints": "2481"
+    },
+    "check_timing": {
+      "no_clock": "0",
+      "constant_clock": "0",
+      "pulse_width_clock": "0",
+      "unconstrained_internal_endpoints": "0",
+      "no_input_delay": "35",
+      "no_output_delay": "53",
+      "multiple_clock": "0",
+      "generated_clocks": "0",
+      "loops": "0",
+      "partial_input_delay": "0",
+      "partial_output_delay": "0",
+      "latch_loops": "0"
+    }
+  },
+  "actual_candidate_synthesis": 1,
+  "actual_dcp_reopen": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

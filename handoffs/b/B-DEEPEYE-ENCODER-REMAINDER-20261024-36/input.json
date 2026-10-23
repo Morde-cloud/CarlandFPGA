@@ -1,0 +1,89 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-ENCODER-REMAINDER-20261024-36",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "4afcddb9fb6637f74dca2e8e78a676517d80bf3a",
+    "test_steps": [
+      "Verify all418rawmembers and sourcebinding. Original production encoder remains unchanged; candidate exact hash bound.",
+      "Main preinspection algebra +1966035 feasible transitions, notfull2^32;1559 reused independentbytecases newlyexecuted/3184107cycles/41393378publiccompares;2compiledmutants numericreject.",
+      "Author9commands/505112trace rows, parser14falseaccepts repaired;134authornegatives and22mainnegatives reject. No vendor rerun fromparserrepair; trace unrecorded candidatepayload limits explicit.",
+      "Review one actual candidate OOC and one actual DCP reopen at Vivado2026.1/xc7z020clg400-1/maxThreads2/samepost-synthesis10nsclock. WNS+0.561ns versus baseline-4.379ns; LUT1616vs1604,FF2355vs2337,DSP0vs1. All10warnings/ZPS7-1 retained and I/Odelays incomplete. Originaldriver aggregate warning_bearing default0 corrected to1 inmainreview, notrewritten.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonicalc229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 fixed."
+    ],
+    "expected_result": "Separatecandidate software andOOCdiagnostic only; no productionadoption, samecommitintegratedstream build or100MHztimingclosure. No ABI/BOOT/TTL/controlauthority. All29/B01/B03/B06/R03/implementation/CDC_RDC/board/system not_run. PhysicalboardAonly. OriginalOOC33 encoderfailure retained."
+  },
+  "artifacts": [
+    "competition/deepeye/fpga/codec/deepeye_block_encoder_remainder_candidate.sv",
+    "competition/deepeye/fpga/codec/encoder_remainder_candidate.md",
+    "competition/deepeye/tests/rtl/codec/tb_encoder_remainder_candidate.sv",
+    "competition/deepeye/tests/rtl/codec/main_tb_encoder_remainder.sv",
+    "competition/deepeye/tools/codec/run_encoder_remainder_candidate.py",
+    "competition/deepeye/tools/codec/main_verify_encoder_remainder.py",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/README.md",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/SOURCE_BINDING.json"
+  ],
+  "stages": {
+    "bounded_candidate_rtl_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json"
+    },
+    "main_independent_public_history": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json"
+    },
+    "saved_raw_and_runner_qualification": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json"
+    },
+    "candidate_ooc_diagnostic": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json"
+    },
+    "synthesis": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    }
+  }
+}

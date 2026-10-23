@@ -1,0 +1,141 @@
+{
+  "artifacts": [
+    "competition/deepeye/fpga/codec/deepeye_block_encoder_remainder_candidate.sv",
+    "competition/deepeye/fpga/codec/encoder_remainder_candidate.md",
+    "competition/deepeye/tests/rtl/codec/tb_encoder_remainder_candidate.sv",
+    "competition/deepeye/tests/rtl/codec/main_tb_encoder_remainder.sv",
+    "competition/deepeye/tools/codec/run_encoder_remainder_candidate.py",
+    "competition/deepeye/tools/codec/main_verify_encoder_remainder.py",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/README.md",
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/SOURCE_BINDING.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json": {
+      "sha256": "c9c8a332e0446933479b8031b65b5814eadbf919593917ceccd61487b5299913",
+      "size": 4486
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/BUNDLE_MANIFEST.json": {
+      "sha256": "f94154822fd6c09631ff15f0e7b294fd42531902e80532fb9527cf27f03f8646",
+      "size": 277
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/RAW_INDEX.json": {
+      "sha256": "636fe05d3db83842902b8243bc435077b923d0d7d0dee89d8494f5f8b1d160d6",
+      "size": 79537
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/README.md": {
+      "sha256": "a36f887572a44d18d9ffd7229a65d1841bcc8ebc8611016fc2bce9bbfb6e8850",
+      "size": 1889
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/SOURCE_BINDING.json": {
+      "sha256": "e6ee9cffc9e57bdd021ac3327b8761826fd841d8fbf2ee02f288d017303fc629",
+      "size": 1451
+    },
+    "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/raw-evidence.tar.gz": {
+      "sha256": "a7f20f73f4ec879762eb992583f51a059fdfb8a76e0904f08b1b8a8cf0321f57",
+      "size": 4250374
+    },
+    "competition/deepeye/fpga/codec/deepeye_block_encoder_remainder_candidate.sv": {
+      "sha256": "9cd6f8347139b19db318ef2e0a349784e452f9703773afebae689875bc180018",
+      "size": 21507
+    },
+    "competition/deepeye/fpga/codec/encoder_remainder_candidate.md": {
+      "sha256": "65f732cf8db9f79163af77fb67768f8234e95d691391ca8d66397c45c4f6d5fe",
+      "size": 4463
+    },
+    "competition/deepeye/tests/rtl/codec/main_tb_encoder_remainder.sv": {
+      "sha256": "894a759c08362bb391e43e0b635ad25793b49f03a73180e28f5c2337c9af2520",
+      "size": 8741
+    },
+    "competition/deepeye/tests/rtl/codec/tb_encoder_remainder_candidate.sv": {
+      "sha256": "f772f6bae060e8585d24f969aec9a2f70847768bb6a27c7bc1d9d85344236772",
+      "size": 15751
+    },
+    "competition/deepeye/tools/codec/main_verify_encoder_remainder.py": {
+      "sha256": "5d0cee5a65c0ff47195fefbc095082974de2343d6c641c215b7cc7553c06abcc",
+      "size": 4570
+    },
+    "competition/deepeye/tools/codec/run_encoder_remainder_candidate.py": {
+      "sha256": "559a315f4c0d7a5f51912a66d207629e5defe282930d05390bce913dffb7db43",
+      "size": 31305
+    }
+  },
+  "request": {
+    "code_commit": "4afcddb9fb6637f74dca2e8e78a676517d80bf3a",
+    "expected_result": "Separatecandidate software andOOCdiagnostic only; no productionadoption, samecommitintegratedstream build or100MHztimingclosure. No ABI/BOOT/TTL/controlauthority. All29/B01/B03/B06/R03/implementation/CDC_RDC/board/system not_run. PhysicalboardAonly. OriginalOOC33 encoderfailure retained.",
+    "operation_id": "B-DEEPEYE-ENCODER-REMAINDER-20261024-36",
+    "requester": "node-b",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify all418rawmembers and sourcebinding. Original production encoder remains unchanged; candidate exact hash bound.",
+      "Main preinspection algebra +1966035 feasible transitions, notfull2^32;1559 reused independentbytecases newlyexecuted/3184107cycles/41393378publiccompares;2compiledmutants numericreject.",
+      "Author9commands/505112trace rows, parser14falseaccepts repaired;134authornegatives and22mainnegatives reject. No vendor rerun fromparserrepair; trace unrecorded candidatepayload limits explicit.",
+      "Review one actual candidate OOC and one actual DCP reopen at Vivado2026.1/xc7z020clg400-1/maxThreads2/samepost-synthesis10nsclock. WNS+0.561ns versus baseline-4.379ns; LUT1616vs1604,FF2355vs2337,DSP0vs1. All10warnings/ZPS7-1 retained and I/Odelays incomplete. Originaldriver aggregate warning_bearing default0 corrected to1 inmainreview, notrewritten.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonicalc229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 fixed."
+    ]
+  },
+  "request_hash": "2be13168ab1bf78feba3677a4a61c3c08e5e01ce2f0d24f3cdaf82c92e34ec74",
+  "schema_version": 1,
+  "stages": {
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "bounded_candidate_rtl_simulation": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "candidate_ooc_diagnostic": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "main_independent_public_history": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "saved_raw_and_runner_qualification": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "log": "competition/deepeye/evidence/codec/encoder-remainder-20261024-36/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    }
+  }
+}

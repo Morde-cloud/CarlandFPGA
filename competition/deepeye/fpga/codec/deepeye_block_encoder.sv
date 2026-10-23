@@ -1,6 +1,8 @@
 // deepeye_block_encoder - bounded one-block uint16 inner-codec encoder candidate.
 //
-// Work: B-BLOCK-ENCODER-RTL-20261018-08-v1
+// Work: B-ENCODER-REMAINDER-ADOPTION-20261024-37-v1
+// Derived from B-BLOCK-ENCODER-RTL-20261018-08-v1; main-approved identity.
+// Adopted equivalent reconstruction; full integrated timing/board acceptance remains open.
 // Task: DEEPEYE-IMPLEMENTATION-20261014/v1
 // Contract: DEEPEYE-HUMAN-LOCK-20261014/revision1 (H01-H15), requirements
 // SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
@@ -107,6 +109,7 @@ module deepeye_block_encoder (
     logic [7:0]  load_idx;
     logic [7:0]  cur_idx;
     logic        cur_last;
+    logic [15:0] cur_sample;
 
     logic        div_neg;
     logic [16:0] div_mag;
@@ -145,7 +148,7 @@ module deepeye_block_encoder (
     logic [17:0] q_bits;
     logic [17:0] q_abs;
     logic [17:0] z_calc;
-    logic signed [23:0] prod;
+    logic [5:0]  r_euclid;
     logic signed [24:0] y_ext;
     logic [15:0] y_clamped;
     logic [12:0] raw_bits_calc;
@@ -186,8 +189,12 @@ module deepeye_block_encoder (
         end else begin
             z_calc = (q_abs << 1) - 18'd1;
         end
-        prod = $signed(q_bits) * $signed({1'b0, d_calc});
-        y_ext = $signed({9'b0, p_q}) + prod;
+        // p + floor((x-p+E)/d)*d = x + E - r_euclid.
+        r_euclid = (div_neg && (div_rem != 6'd0))
+                   ? ({1'b0, d_calc} - div_rem) : div_rem;
+        y_ext = $signed({9'b0, cur_sample})
+                + $signed({21'b0, cfg_e_q})
+                - $signed({19'b0, r_euclid});
         if (y_ext < 0) begin
             y_clamped = 16'd0;
         end else if (y_ext > 25'sd65535) begin
@@ -222,6 +229,7 @@ module deepeye_block_encoder (
             load_idx        <= 8'd0;
             cur_idx         <= 8'd0;
             cur_last        <= 1'b0;
+            cur_sample      <= 16'd0;
             div_neg         <= 1'b0;
             div_mag         <= 17'd0;
             div_rem         <= 6'd0;
@@ -314,6 +322,7 @@ module deepeye_block_encoder (
                             end
                         end else begin
                             x_mem[load_idx[6:0]] <= s_data;
+                            cur_sample <= s_data;
                             cur_idx  <= load_idx;
                             cur_last <= s_last;
                             div_neg  <= n_signed[17];

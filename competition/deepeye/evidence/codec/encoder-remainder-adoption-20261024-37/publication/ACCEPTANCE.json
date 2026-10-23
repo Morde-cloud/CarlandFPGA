@@ -1,0 +1,134 @@
+{
+  "status": "ACCEPTED_BOUNDED_PRODUCTION_ADOPTION_AND_OOC_DIAGNOSTICS",
+  "operation_id": "B-DEEPEYE-ENCODER-REMAINDER-ADOPTION-20261024-37",
+  "production_sha256": "4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "main_edges": 130783,
+  "main_public_comparisons": 4054242,
+  "main_commands": 8,
+  "main_compiled_mutants": 1,
+  "main_mutant_rejection_cycle": 1099,
+  "author_commands": 12,
+  "author_valid_cases": 297,
+  "author_trace_rows": 505112,
+  "author_terminal_negative_probes": 3,
+  "actual_synthesis_attempts": 3,
+  "complete_final_top_artifacts": 2,
+  "actual_dcp_reopens": 2,
+  "failed_attempts_retained": [
+    "Original wrapper synthesis completed; DCP export exceeded Windows260-byte path; exit1; no checkpoint.",
+    "Original main driver aggregation then raised int(None) TypeError.",
+    "Fresh explicit wrapper-only short-path recovery succeeded without RTL/tool/Tcl changes; successful stream not rerun."
+  ],
+  "acceptance_notes": [
+    "Main37 compares actual adopted core through unchanged stream/wrapper with independently namespaced frozen old core/stream. Stimulus/math/reference and common queue reused explicitly.",
+    "Author comparator shares adopted candidate arithmetic; it is not independent old-chain proof. Strict saved-run checker and all297fixture cases are reused.",
+    "Main software receipt predated observed author completion; this terminal audit now confirms actual completion and preserved raw evidence.",
+    "Two independent DCP reopens reproduce resources and timing; same post-synthesis10nsdiagnostic only. ZPS7-1/warnings/I/O timing gaps retained. No place/route or calibrated physical claim.",
+    "Internal block payload may reach256B; no production TRACE<=32B or public ABI claim.",
+    "All29/B01/B03/B06/R03/fullproduct/implementation/timingclosure/CDC_RDC/board/system not_run. A-only physical board."
+  ],
+  "ooc_rows": [
+    {
+      "top": "deepeye_block_stream",
+      "run_dir": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\evidence\\codec\\encoder-remainder-adoption-20261024-37\\main\\integrated-ooc-01\\runs\\01_deepeye_block_stream",
+      "dcp_sha256": "2f0b70890b8c1f59c2603acce64eab60ec9804b0ffaa4f4c8d6dd46df5ae0cc1",
+      "ports": 284,
+      "clocks": [
+        "clk"
+      ],
+      "resources": {
+        "Slice LUTs": 3529,
+        "Slice Registers": 6731,
+        "Block RAM Tile": 0,
+        "DSPs": 0
+      },
+      "timing": {
+        "WNS": "0.491",
+        "TNS": "0.000",
+        "setup_failing_endpoints": "0",
+        "setup_endpoints": "10380",
+        "WHS": "0.250",
+        "THS": "0.000",
+        "hold_failing_endpoints": "0",
+        "hold_endpoints": "10380",
+        "WPWS": "3.750",
+        "TPWS": "0.000",
+        "pulse_failing_endpoints": "0",
+        "pulse_endpoints": "6875"
+      },
+      "drc": [
+        [
+          "ZPS7-1",
+          "Warning"
+        ]
+      ],
+      "warnings": 9,
+      "check_timing": {
+        "no_clock": "0",
+        "constant_clock": "0",
+        "pulse_width_clock": "0",
+        "unconstrained_internal_endpoints": "0",
+        "no_input_delay": "51",
+        "no_output_delay": "232",
+        "multiple_clock": "0",
+        "generated_clocks": "0",
+        "loops": "0",
+        "partial_input_delay": "0",
+        "partial_output_delay": "0",
+        "latch_loops": "0"
+      }
+    },
+    {
+      "top": "deepeye_buffered_block_stream",
+      "run_dir": "D:\\pynq\\CarlandFPGA\\.local\\b37r1\\runs\\01_deepeye_buffered_block_stream",
+      "dcp_sha256": "0e92b98a6a04ffda3ec9e20162cc65de7bedb32cd37a4f2c395ba53f3b736076",
+      "ports": 451,
+      "clocks": [
+        "clk"
+      ],
+      "resources": {
+        "Slice LUTs": 5932,
+        "Slice Registers": 11160,
+        "Block RAM Tile": 0,
+        "DSPs": 0
+      },
+      "timing": {
+        "WNS": "0.389",
+        "TNS": "0.000",
+        "setup_failing_endpoints": "0",
+        "setup_endpoints": "23411",
+        "WHS": "0.250",
+        "THS": "0.000",
+        "hold_failing_endpoints": "0",
+        "hold_endpoints": "23411",
+        "WPWS": "3.750",
+        "TPWS": "0.000",
+        "pulse_failing_endpoints": "0",
+        "pulse_endpoints": "11304"
+      },
+      "drc": [
+        [
+          "ZPS7-1",
+          "Warning"
+        ]
+      ],
+      "warnings": 11,
+      "check_timing": {
+        "no_clock": "0",
+        "constant_clock": "0",
+        "pulse_width_clock": "0",
+        "unconstrained_internal_endpoints": "0",
+        "no_input_delay": "51",
+        "no_output_delay": "399",
+        "multiple_clock": "0",
+        "generated_clocks": "0",
+        "loops": "0",
+        "partial_input_delay": "0",
+        "partial_output_delay": "0",
+        "latch_loops": "0"
+      }
+    }
+  ],
+  "verified_records": 147
+}

@@ -1,0 +1,31 @@
+{
+  "status": "accepted_bounded_uart_rx_simulation_only",
+  "operation_id": "B-DEEPEYE-UART-RX-20261023-25",
+  "author_suites": 15,
+  "author_processes_rehashed": 48,
+  "main_positive_configurations": 7,
+  "main_clock_edges": 17267015,
+  "main_port_checks": 241738210,
+  "main_guards": 9,
+  "compiled_mutants": 3,
+  "additional_legal_confirmation": 1,
+  "raw_main_hash_checks": 252,
+  "qualified_author_parser_saved_positives": 9,
+  "qualified_author_parser_synthetic_negatives": 99,
+  "main_qualified_cli_new_suites": 1,
+  "main_independence": "absolute-time public-port oracle frozen before author source read; no author tests or internal DUT state used",
+  "repairs": [
+    "main illegal-STAT_W guard port clamp, legal oracle behavior unchanged; original warning failure retained",
+    "main raw summary Windows path normalization corrected with saved bytes only; original summary retained",
+    "inflated_summary author runner defect reproduced and repaired after actual author terminal; all original normal logs reclassified plus new actual CLI suite"
+  ],
+  "limits": [
+    "author own audit is not independent",
+    "ModelSim onerror console warning retained, no warning-free console claim",
+    "main original legal runs use prior guard-only TB port declaration; same RTL and legal widths, one new legal run confirmed final TB",
+    "all29/B04/R03/fullproduct/synthesis/implementation/timing/CDC_RDC/board/system not_run",
+    "no oscillator/metastability/RS485 physical/slot scheduler/public ABI/BOOT/source clock/motion authorization"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "physical_board_owner": "A"
+}

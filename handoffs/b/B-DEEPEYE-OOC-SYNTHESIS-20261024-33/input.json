@@ -1,0 +1,79 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-OOC-SYNTHESIS-20261024-33",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "d4368116b00e5263afde591ab2059120abaf55b0",
+    "test_steps": [
+      "Verify all427 indexed raw members and19exact RTL dependency pins atbbfb11439b35e0866a6d2486f3857b92ed6cf529; original failed child/main attempts remain retained.",
+      "Review original fullrun18complete/1pre-source argumentfailure, then one explicit mailbox-only recovery.19actualsynthesizedtops,18successfultops not rerun.",
+      "Independently check originalPROCESS pids/exit/rawhash/report/DCP paths. Main verified158recordedfiles andactually reopened4DCPs; ports/clocks/resource/timing summaries agree.",
+      "Preserve actual failed10ns setup timing: encoder-4.379ns and block_stream-4.349ns WNS; I/O delays unknown, CRCunconstrained, PS7/DSP warning findingsnotwaived.",
+      "Review harness-only dualclock fix,16adapted offline classifier tests/144 malformedmarkerprobes; no RTL change.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirementsc229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ],
+    "expected_result": "Nineteen distinct bounded OOC synthesis artifacts with preserved warning/timing failures; no whole-design/timingclosure/CDC/physical/system acceptance. All29formal/B06/R03 not_run. A-onlyboard."
+  },
+  "artifacts": [
+    "competition/deepeye/tools/build/run_ooc_qualification.py",
+    "competition/deepeye/fpga/build_qualification/ooc_qualification.tcl",
+    "competition/deepeye/fpga/build_qualification/README.md",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/README.md",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/REPORT_SUMMARY.json",
+    "competition/deepeye/evidence/build/ooc-20261024-33/publication/SOURCE_BINDING.json"
+  ],
+  "stages": {
+    "bounded_ooc_synthesis_artifacts": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/build/ooc-20261024-33/publication/ACCEPTANCE.json"
+    },
+    "checkpoint_reopen": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/build/ooc-20261024-33/publication/ACCEPTANCE.json"
+    },
+    "raw_record_verification": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/build/ooc-20261024-33/publication/ACCEPTANCE.json"
+    },
+    "synthesis": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/build/ooc-20261024-33/publication/REPORT_SUMMARY.json"
+    },
+    "timing": {
+      "status": "failed",
+      "log": "competition/deepeye/evidence/build/ooc-20261024-33/publication/REPORT_SUMMARY.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-WIRE-PARSER-20261024-29",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "82d376dc3df9bf384407f733b9d8b8f2e3a848c2",
+    "test_steps": [
+      "Verify all1238 raw indexed members and exact SOURCE_BINDING. Original failing RTL and author/main log-parser negatives remain retained.",
+      "Review frozen public-history byte oracle: 127018 clocks/4572648 port checks, 3 exact parameter guards and3 actual compiled numeric mutants. Distinguish original proposal runs from final-source runs by hashes.",
+      "Review final author21 cases/3258 checks, actual raw process receipts and strict runner qualification. Author self-audits are not independent acceptance.",
+      "Main classifier guard-marker correction uses saved real logs and synthetic negatives; its first duplicate-header test was malformed, retained as failed main evidence, then corrected without rewriting history.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirementsc229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ],
+    "expected_result": "Bounded opaque version3 byte framing and handshake simulation only. All29/B04/R03/fullproduct/synth/impl/timing/CDC_RDC/board/system not_run. No semantic ABI/type/profile/source/session/BOOT/TTL/replay/control/physical authority. Board A-only."
+  },
+  "artifacts": [
+    "competition/deepeye/fpga/transport/deepeye_wire_parser.sv",
+    "competition/deepeye/fpga/transport/wire_parser_candidate.md",
+    "competition/deepeye/tests/rtl/transport/tb_wire_parser.sv",
+    "competition/deepeye/tests/rtl/transport/main_tb_wire_parser.sv",
+    "competition/deepeye/tools/transport/run_wire_parser.py",
+    "competition/deepeye/tools/transport/main_generate_wire_vectors.py",
+    "competition/deepeye/tools/transport/main_verify_wire.py",
+    "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/README.md",
+    "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/SOURCE_BINDING.json"
+  ],
+  "stages": {
+    "bounded_wire_rtl_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/ACCEPTANCE.json"
+    },
+    "main_independent_public_history": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/ACCEPTANCE.json"
+    },
+    "saved_raw_and_runner_qualification": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/transport/wire-parser-20261024-29/publication/ACCEPTANCE.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B04": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "accepted_bounded_uart_tx_rtl_only",
+  "operation_id": "B-DEEPEYE-UART-TX-20261023-24",
+  "author_suites": 14,
+  "author_ordinary_checks": 68101,
+  "author_processes_rehashed": 45,
+  "main_positive_configurations": 7,
+  "main_clock_edges": 17172643,
+  "main_port_checks": 103035851,
+  "main_parameter_guards": 9,
+  "actual_compiled_behavioral_mutants": 3,
+  "saved_evidence_audit_checks": 219,
+  "synthetic_classifier_probes": 31,
+  "main_independence": "absolute elapsed-time integer division and input latched byte, frozen before author RTL read; public ports only",
+  "repairs": [
+    "author parser CRLF and TB aggregate corrected before final author run",
+    "main Git-HEAD context qualification fix to author runner; RTL/TB unchanged",
+    "main expected-mutant fatal-tally classification corrected using saved logs; no vendor replay"
+  ],
+  "limits": [
+    "author own audit is not another independent reviewer",
+    "ModelSim console issued onerror-command warning, with0 ordinary error/warning tallies; preserved, no claim of a warning-free console",
+    "all29/B04/R03/synth/implementation/timing/CDC_RDC/board/system remain not_run",
+    "no RS485 direction/guard/RX/public framing/scheduler/pin/calibrated baud/source/motion authority"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "physical_board_owner": "A"
+}

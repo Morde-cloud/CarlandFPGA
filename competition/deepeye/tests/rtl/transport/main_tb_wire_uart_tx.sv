@@ -1,0 +1,102 @@
+`timescale 1ns/1ps
+module main_tb_wire_uart_tx;
+parameter integer CLOCK_HZ=64,BAUD=4,PRE_CYCLES=0,POST_CYCLES=0,STAT_W=32;
+localparam integer SW=(STAT_W<2)?2:((STAT_W>32)?32:STAT_W);
+reg clk=0;always #5 clk=~clk;
+reg rst;
+reg cancel;
+reg cfg_valid;
+reg [7:0] cfg_type;
+reg [7:0] cfg_epoch;
+reg [15:0] cfg_seq;
+reg [31:0] cfg_tick;
+reg [5:0] cfg_len;
+reg p_valid;
+reg [7:0] p_data;
+reg p_last;
+wire cfg_ready;
+wire p_ready;
+wire tx;
+wire de;
+wire busy;
+wire receiving;
+wire faulted;
+wire fault_event;
+wire [1:0] fault_code;
+wire [SW-1:0] stat_admitted;
+wire [SW-1:0] stat_sent;
+wire [SW-1:0] stat_aborted;
+reg pre_cfg_ready;
+reg pre_p_ready;
+reg pre_tx;
+reg pre_de;
+reg pre_busy;
+reg pre_receiving;
+reg pre_faulted;
+reg pre_fault_event;
+reg [1:0] pre_fault_code;
+reg [31:0] pre_stat_admitted;
+reg [31:0] pre_stat_sent;
+reg [31:0] pre_stat_aborted;
+reg post_cfg_ready;
+reg post_p_ready;
+reg post_tx;
+reg post_de;
+reg post_busy;
+reg post_receiving;
+reg post_faulted;
+reg post_fault_event;
+reg [1:0] post_fault_code;
+reg [31:0] post_stat_admitted;
+reg [31:0] post_stat_sent;
+reg [31:0] post_stat_aborted;
+deepeye_wire_uart_tx #(.CLOCK_HZ(CLOCK_HZ),.BAUD(BAUD),.PRE_CYCLES(PRE_CYCLES),.POST_CYCLES(POST_CYCLES),.STAT_W(STAT_W)) dut(.*);
+reg [294:0] row;
+integer fd,got,nrepeat,i,cycles=0,checks=0;
+task automatic eq(input string field,input logic[255:0] actual,input logic[255:0] expected);begin checks++;if(actual!==expected)begin $display("MAIN_MISMATCH cycle=%0d field=%s got=%0h expected=%0h",cycles,field,actual,expected);$fatal(1,"main numeric mismatch");end end endtask
+initial begin
+rst=1;
+cancel=0;
+cfg_valid=0;
+cfg_type=0;
+cfg_epoch=0;
+cfg_seq=0;
+cfg_tick=0;
+cfg_len=0;
+p_valid=0;
+p_data=0;
+p_last=0;
+$display("MAIN_BEGIN clock=%0d baud=%0d pre=%0d post=%0d stat=%0d",CLOCK_HZ,BAUD,PRE_CYCLES,POST_CYCLES,STAT_W);
+fd=$fopen("vectors.rle","r");if(!fd)$fatal(1,"missing vectors");
+while(!$feof(fd))begin
+got=$fscanf(fd,"%d %h\n",nrepeat,row);if(got==2)begin
+if(nrepeat<1)$fatal(1,"invalid repeat");for(i=0;i<nrepeat;i++)begin
+@(negedge clk);{rst,cancel,cfg_valid,cfg_type,cfg_epoch,cfg_seq,cfg_tick,cfg_len,p_valid,p_data,p_last,pre_cfg_ready,pre_p_ready,pre_tx,pre_de,pre_busy,pre_receiving,pre_faulted,pre_fault_event,pre_fault_code,pre_stat_admitted,pre_stat_sent,pre_stat_aborted,post_cfg_ready,post_p_ready,post_tx,post_de,post_busy,post_receiving,post_faulted,post_fault_event,post_fault_code,post_stat_admitted,post_stat_sent,post_stat_aborted}=row;#1;
+eq("pre_cfg_ready",cfg_ready,pre_cfg_ready);
+eq("pre_p_ready",p_ready,pre_p_ready);
+eq("pre_tx",tx,pre_tx);
+eq("pre_de",de,pre_de);
+eq("pre_busy",busy,pre_busy);
+eq("pre_receiving",receiving,pre_receiving);
+eq("pre_faulted",faulted,pre_faulted);
+eq("pre_fault_event",fault_event,pre_fault_event);
+eq("pre_fault_code",fault_code,pre_fault_code);
+eq("pre_stat_admitted",stat_admitted,pre_stat_admitted);
+eq("pre_stat_sent",stat_sent,pre_stat_sent);
+eq("pre_stat_aborted",stat_aborted,pre_stat_aborted);
+@(posedge clk);#1;cycles++;
+eq("post_cfg_ready",cfg_ready,post_cfg_ready);
+eq("post_p_ready",p_ready,post_p_ready);
+eq("post_tx",tx,post_tx);
+eq("post_de",de,post_de);
+eq("post_busy",busy,post_busy);
+eq("post_receiving",receiving,post_receiving);
+eq("post_faulted",faulted,post_faulted);
+eq("post_fault_event",fault_event,post_fault_event);
+eq("post_fault_code",fault_code,post_fault_code);
+eq("post_stat_admitted",stat_admitted,post_stat_admitted);
+eq("post_stat_sent",stat_sent,post_stat_sent);
+eq("post_stat_aborted",stat_aborted,post_stat_aborted);
+end end else if(!$feof(fd))$fatal(1,"invalid vector row");end
+$fclose(fd);$display("MAIN_STATS cycles=%0d checks=%0d",cycles,checks);$display("MAIN_PASS");$finish;end
+endmodule

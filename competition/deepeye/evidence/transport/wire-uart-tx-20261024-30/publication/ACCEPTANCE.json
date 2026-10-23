@@ -1,0 +1,24 @@
+{
+  "main_cycles": 5627750,
+  "main_port_checks": 135066000,
+  "main_guards": 11,
+  "compiled_behavioral_mutants": 4,
+  "final_author_cases": 16,
+  "final_author_checks": 6280,
+  "author_unique_processes": 11,
+  "status": "accepted_bounded_wire_uart_tx_simulation_only",
+  "operation_id": "B-DEEPEYE-WIRE-UART-TX-20261024-30",
+  "main_runner_probes": 223,
+  "main_oracle": "Frozen before source inspection; struct+binascii full wire bytes and absolute clock/bit deadlines, independent of observed starts or author models.",
+  "history": [
+    "Original author runner admitted seven warning/marker-order defects. Main red bytes, repaired runner and one fresh actual CLI are retained.",
+    "Initial main negative harness could not locate relative author log; later CRLF move attempts created duplicates. The corrected single-marker order probes and all originals are retained.",
+    "Main classifier originally accepted a single early tally and malformed fatal. Strengthened ordered protocol, seven qualification probes and19 saved actual-run reclassifications; no vendor rerun claimed."
+  ],
+  "limits": [
+    "Opaque byte-to-UART same-clock transport only; no physical/electrical/oscillator/CDC, semantic type/BOOT/TTL/replay/control authority.",
+    "All29/B04/R03/fullproduct/synthesis/implementation/timing/CDC_RDC/board/system not_run; physical board A-only.",
+    "Author vlib-version exit1 is preserved and separately classified. Other ten actual commands exit0."
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

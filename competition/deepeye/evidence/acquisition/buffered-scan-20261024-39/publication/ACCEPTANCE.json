@@ -1,0 +1,28 @@
+{
+  "status": "PASS_BOUNDED_CAPTURE_QUEUE_COMPOSITION",
+  "operation_id": "B-DEEPEYE-BUFFERED-SCAN-CAPTURE-20261024-39",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "main_cycles": 13600,
+  "main_public_trace_rows": 27200,
+  "main_public_comparisons": 523218,
+  "main_record_retirements": 402,
+  "main_compiled_mutants": 4,
+  "main_actual_commands": 23,
+  "main_simulations": 5,
+  "author_cycles": 3801,
+  "author_public_trace_rows": 7602,
+  "author_public_port_comparisons": 182448,
+  "author_control_combinations": 64,
+  "runner_repair_saved_cases": 93,
+  "main_additional_negative_probes": 23,
+  "protected_repair_files_unchanged": 247,
+  "repaired_runner_sha256": "f5a9aa7e1d9d93d9147a1d84fba43c75dc1688c30cf3246dd2aa9b90e18d350d",
+  "source_review": "Fixed constants and direct wiring only; no new FSM/memory/arithmetic/clock/provenance. Independent main deque/history oracle frozen before author39 source inspection. Author reuse of existing stage RTL/model disclosed.",
+  "limitations": [
+    "Fixed32bit sequence exhaustion/saturation not reached or forced.",
+    "Original author unsupported vlib-version and absolute-library-load failures retained. Main initial CRLF summary-parser failure before simulation retained.",
+    "Original author runner accepted5false termination logs. New explicit repair onlychecker/provenance;93savedcases plus23main negatives pass. No new vendor run during repair.",
+    "Local ModelSim10.7 transcript grammar qualified. Default retained attempt03 source snapshot and currentTB both pinned; moved source must be explicitly declared. Not arbitrary transcript provenance authentication.",
+    "No39synthesis/implementation/timingclosure/CDC_RDC/board/system; separate43diagnostic in progress, not included. All29formal/B01/B03/B06/R03/fullproductnot_run; A-onlyboard."
+  ]
+}

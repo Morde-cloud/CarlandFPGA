@@ -1,0 +1,131 @@
+{
+  "artifacts": [
+    "competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv",
+    "competition/deepeye/fpga/codec/trace_payload_candidate.md",
+    "competition/deepeye/tests/rtl/codec/tb_trace_payload_candidate.sv",
+    "competition/deepeye/tools/codec/run_trace_payload_candidate.py",
+    "competition/deepeye/tests/rtl/codec/main_tb_trace_payload_candidate.sv",
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/README.md",
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/SOURCE_BINDING.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/ACCEPTANCE.json": {
+      "sha256": "597f741059b763d998fb30687dc360761288d47e4ad95c27bf10e4c97d682f75",
+      "size": 7977
+    },
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/BUNDLE_MANIFEST.json": {
+      "sha256": "0915a5a64700c11a191dc20c7455b4f80ac79365829d406cdd200b7f7ecf103d",
+      "size": 278
+    },
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/RAW_INDEX.json": {
+      "sha256": "04430b9ce1e63c49ca09a59c52fdd5a5fe8cf70abb6d79fc5e21ea4aa019695d",
+      "size": 53115
+    },
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/README.md": {
+      "sha256": "5ab6dd6bbe784dc7956b9c52a52e50fa136ceb73e37ac9071df1782c1088a85b",
+      "size": 2753
+    },
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/SOURCE_BINDING.json": {
+      "sha256": "a4d7f5ebec9dd83cf4c2fa54f6465fc0fb2dd96a2e28ab7101a8cde11e0b5632",
+      "size": 2060
+    },
+    "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/raw-evidence.tar.gz": {
+      "sha256": "548dd57d24050fdb2f40c4487c89ae93231596172791490dd73bd48385a93d35",
+      "size": 5466059
+    },
+    "competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv": {
+      "sha256": "fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6",
+      "size": 12241
+    },
+    "competition/deepeye/fpga/codec/trace_payload_candidate.md": {
+      "sha256": "9ccdc3d3a084b5a45e8618ad9776d31d641b2ada1ce3f9155cafdf1f615c33e3",
+      "size": 5235
+    },
+    "competition/deepeye/tests/rtl/codec/main_tb_trace_payload_candidate.sv": {
+      "sha256": "4c0f839a9f56c5b016acb6d1e1edbe9c14656dc69d069b95014da48cf113f561",
+      "size": 5190
+    },
+    "competition/deepeye/tests/rtl/codec/tb_trace_payload_candidate.sv": {
+      "sha256": "6cd065e03695f345f7540cd0107e9f3acbb72ff12b131ca8cbae204f03b50dfa",
+      "size": 11881
+    },
+    "competition/deepeye/tools/codec/run_trace_payload_candidate.py": {
+      "sha256": "f7a100a2f49ef028b6bec375fc66e86093203e1e74b6ede3f5352a2156e9439f",
+      "size": 27700
+    }
+  },
+  "request": {
+    "code_commit": "879f0af84aba596e11185df86f6722999e640673",
+    "expected_result": "Bounded candidate payload RTL simulation only. Operation38 synthesis/implementation/timing/CDC_RDC/board/system not_run. Earlier OOC results retain original scope. All29/B01/B03/B06/R03/fullproduct not_run; physicalboardAonly.",
+    "operation_id": "B-DEEPEYE-TRACE-PAYLOAD-RTL-20261024-38",
+    "requester": "node-b",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify all 297 raw members and exact source binding, including original author false acceptance and main audit failures.",
+      "Fresh main independently written bitstring/field reference:746cases,804872public rows,23128comparisons,10445byte handshakes. Actual compiled byte-tie and anchor-endian mutants rejected at41765 and537. Three ModelSim runs,12vendor commands.",
+      "Author two full ModelSim runs,30recorded commands including Git reads; final1629cases/710abort-recovery pairs/282264rows. Expected bytes reuse pinned golden. Original early-metadata false accept retained and repaired;16author+14main negative saved-log probes reject.",
+      "Candidate payload<=32B only; exact E/RAW/Rice/original-value byte ties/anchor/tick/mask/held/padding. No publicABI, outerwire, splitting, scheduler, sourceclock or motion grant; A owns public freeze.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ]
+  },
+  "request_hash": "d2faf0334d332f61041ed3946c9ff7192ec91b6ec54a194970f1b99ea62e7b51",
+  "schema_version": 1,
+  "stages": {
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "bounded_candidate_payload_simulation": {
+      "log": "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "main_independent_public_history": {
+      "log": "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "saved_raw_and_runner_qualification": {
+      "log": "competition/deepeye/evidence/codec/trace-payload-20261024-38/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    }
+  }
+}

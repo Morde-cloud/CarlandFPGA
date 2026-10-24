@@ -1,0 +1,101 @@
+{
+  "artifacts": [
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/README.md",
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/SOURCE_BINDING.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/ACCEPTANCE.json": {
+      "sha256": "da673b1fc5de1722673bae17dbea90632dcb647d55fa0728787c56bc7f5b443e",
+      "size": 1872
+    },
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/BUNDLE_MANIFEST.json": {
+      "sha256": "daff3eaf7d40a2f9bc4e555f8631a6d9194bcba3e479e464992a1d0c6bb77766",
+      "size": 275
+    },
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/RAW_INDEX.json": {
+      "sha256": "c1e9cfce50b27e562675b53b003ca19a02f81e333c7fc235ba874dcc408ff235",
+      "size": 8237
+    },
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/README.md": {
+      "sha256": "4fad028a29d62a8f2a700ef9526098a6ec14de3f8cda7dc7e89d795902c52082",
+      "size": 1683
+    },
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/SOURCE_BINDING.json": {
+      "sha256": "aa8fe34585b4e4bd580e4377845f9a51c32bfd127fe1693a06126a0a9629d996",
+      "size": 889
+    },
+    "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/raw-evidence.tar.gz": {
+      "sha256": "ec259ec005110d19a67de9a00918d3c1fc9294583be93550e4a24802c26f76f6",
+      "size": 881437
+    }
+  },
+  "request": {
+    "code_commit": "aa8ef78c7af2976175275808cc7b839447fba68e",
+    "expected_result": "Bounded OOC artifacts verified; diagnostic timing NOT met, no waivers. No publicABI/type7/BOOT/sourceclock/runtime/motion/boardgrant. Implementation/timingclosure/CDC_RDC/board/system/all29/B01/B06/R03/fullproductnot_run; physicalboardAonly.",
+    "operation_id": "B-DEEPEYE-TRACE-PAYLOAD-OOC-20261024-40",
+    "requester": "node-b",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify 54 indexed raw members and all source bindings; actual B RTL source879f0af84aba596e11185df86f6722999e640673 remains unchanged.",
+      "One Vivado2026.1 OOC run plus independent main exactDCP reopen:2273LUT/2743FF/0BRAM/2DSP,WNS-4.073ns at10ns diagnostic. SevenDRCwarnings and265input/53output delay gaps retained. No timing closure. Worstpath spanDSP plus widened endpointcarry.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ]
+  },
+  "request_hash": "a6cb42bfe0b0ba09b48f662757dbb0d38f3c1bd6436df273755239582619612e",
+  "schema_version": 1,
+  "stages": {
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "bounded_ooc_artifacts": {
+      "log": "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "candidate_ooc_10ns_timing": {
+      "log": "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/ACCEPTANCE.json",
+      "status": "failed"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "log": "competition/deepeye/evidence/codec/trace-payload-ooc-20261024-40/publication/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    }
+  }
+}

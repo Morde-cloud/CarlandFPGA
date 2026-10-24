@@ -1,0 +1,87 @@
+{
+  "status": "PASS_BOUNDED_UART_CANDIDATE_MAIN_REVIEW",
+  "operation_id": "B-DEEPEYE-TRACE-UART-CANDIDATE-20261024-49",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "utc": "2026-10-24T15:20:03.744511+00:00",
+  "source_sha256": "8aec895f3f3d71254d63cc6b4e73dd866cb81f2c42b24a54e11b2b3dd52f08b0",
+  "runner_sha256": "703a27803926ea7d045a04cdaef078134dc58997c2ef736318ea9bd4029451df",
+  "main_positive": {
+    "normal": 212,
+    "recovery": 192,
+    "abort": 192,
+    "cycles": 1368346,
+    "pre_post_rows": 2736692,
+    "uart_starts": 21156,
+    "uart_complete_bytes": 20996,
+    "uart_interrupted_bytes": 160,
+    "independent_postedge_wave_checks": 726954
+  },
+  "main_compiled_mutants": [
+    {
+      "name": "early-result",
+      "status": "REJECTED_BY_ACTUAL_PUBLIC_TESTBENCH",
+      "expected_reason": "postedge_early_result",
+      "rtl_sha256": "d8787a1e35b2c079b76deef4799e49e7dbc7e8dac484d073b448e7bb9260245c",
+      "trace_sha256": "187c408465d21a1d95c49012b65b9c9fd9380e05eb5eddbfff72efc4706e9b9f",
+      "process_exit": 0,
+      "note": "ModelSim error footer and exact main assertion, OS zero is not success."
+    },
+    {
+      "name": "ignore-uart-cancel",
+      "status": "REJECTED_BY_ACTUAL_PUBLIC_TESTBENCH",
+      "expected_reason": "synchronous_abort_idle",
+      "rtl_sha256": "573818cba91c8cbd724342882f893f3b92b331a406b9683be44c43143c76d49a",
+      "trace_sha256": "f63ad91ba1d0dfd8f7e48fa349afe3f279f05b200d5763189353c53acc2df75e",
+      "process_exit": 0,
+      "note": "ModelSim error footer and exact main assertion, OS zero is not success."
+    }
+  ],
+  "main_vendor_commands": 13,
+  "main_simulations": 6,
+  "author_vendor_commands": 13,
+  "author_artifacts_verified": 213,
+  "saved_negative_rejections": 700,
+  "new_main_negative_probes": 140,
+  "author_reused_negative_probes": 560,
+  "main_positive_log_cases": 17,
+  "independent_default_saved_trace": {
+    "cycles": 3645935,
+    "waveform_checks": 3645845,
+    "decoded_bytes": 35,
+    "cfg": 1,
+    "reports": 1,
+    "crc16": 6687,
+    "bytes_hex": "a55a030715a7390001efcdab0108020100efcdab8940e2010001efcdab785634121f1a",
+    "trace_sha256": "44a083158bdbe32322431faaada4ee8c34e280b2e633d8a088ae8c721d808fb0",
+    "reuse": "Author actual default simulation/raw trace; main separately scores bits and CRC. Payload fixture reused as disclosed; not a new vendor run."
+  },
+  "identity": {
+    "agent_id": "01a16a34-b419-7942-9a7b-2b033142446b",
+    "turn_id": "01a16d78-a6ee-7413-8953-fa9374aeefe3",
+    "model": "gpt-6.1-sol",
+    "effort": "max"
+  },
+  "static_diff": "Only structural same-clock composition. Six pinned dependencies unchanged; both result-valid and inner result-ready wait UART idle. Config also waits UART idle. TX directly inherited synchronous-reset output. No added state/FIFO/policy. Fault guard remains structurally unreachable through legal fixed inputs; no forced coverage.",
+  "preserved_failures": [
+    "Author original guard qualification required nonzero OS exit; actual DUT guard/footer was valid with OS0. One correction, first failure intact, no completed simulation replay.",
+    "Main first score parsed initial unknown PRE as int. Exact first reset PRE exception only; original frozen score/result/trace retained, first simulation rescored; remaining three simulations executed once."
+  ],
+  "scope": "Bounded local simulated UART and saved evidence only. Local success after final stop interval, not remote acceptance. Cancel cannot recall emitted bits/bytes/frames. Public type7 remains candidate, no actual baud/clock/source/auth/BOOT/control/motion/board grant.",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design": "1011259415a0916054eb580687612580bc1e5f09",
+  "all29": "not_run",
+  "B01": "not_run",
+  "B03": "not_run",
+  "B06": "not_run",
+  "R03": "not_run",
+  "board": "not_run; A only",
+  "review_evidence": {
+    "main\\author-audit-01\\RESULT.json": "35f6693eda9003d5354ef5f234fee882f058849acd6a2be3e9d1dd7c3344dc71",
+    "main\\positive-resume-01\\RESULT.json": "699f000b907525a4121b01b567c1eebf710928cce499af4e3a1068ce0207d565",
+    "main\\compiled-mutants-01\\RESULT.json": "8f426818a3f6d0fbd1bd14fd4a617b241ecbdde97e6f52ebb77a6696a7548d9c",
+    "main\\score-repair-01\\DECISION.json": "13c4108ba4439dc40ec57a62dff7a28a0c858a45d7aa36bb4317abfcf27666f0"
+  },
+  "publication_scope": "All29formal/B01/B03/B06/R03/fullproduct/place-route/implementation/timingclosure/CDC_RDC/board/system remain not_run. No publicABI/type7enable/BOOT/clock/baud/sourceauth/runtime/motion grant. Physicalboard A only. H01-H15 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and frozen1011259415a0916054eb580687612580bc1e5f09 unchanged.50OOC remains separate and is not claimed in49 or51."
+}

@@ -1,0 +1,81 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-TRACE-UART-CANDIDATE-20261024-49",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "7a9aae99ab0f9bf72ccffa7f10a4386cb0247911",
+    "test_steps": [
+      "Verify 280 indexed original raw artifacts, exact source/dependency pins, originalprocess receipts and preserved failures.",
+      "Structural same-clock TRACE frame-to-UART candidate connects unchanged45framing and24UART. Configuration and both sides of result handshake wait UARTidle. Success follows the complete final stop interval locally; it is not remote acceptance. Reset/cancel are synchronous at TX, immediately mask handshakes, and cannot recall emitted bits/bytes/frames. No new FIFO/scheduler/statepolicy.\n\nMain preinspection-frozen public-port oracle passed four ratios2/1,5/2,7/2,16/3:212normal+192recovery+192abort,1368346cycles/2736692rows,20996completebytes,726954postedgebit checks. Two actualcompiled mutants (earlyreport,UARTignorescancel) rejected;13mainvendorcommands/6simulations. Main initial first-PREunknown parsing failure retained; exact initialresetrow exception and existing completedtrace reused, no simulationreplay.\n\nAuthor13vendorcommands include five validsimulations and two actual DUT parameter guards.345operations/4142525cycles/8399decodedbytes. Default100MHz/9600 actual35byteframe independently rescored bymain over3645935cycles with CRC and exactstopboundary. Source/fixture reuse disclosed; no new payloadproof.213authorartifacts and actual13processreceipts rehashed.560authornegative recipes regenerated plus140newmainprobes allreject;17mainpositive grammar cases. Originalguardqualifier wrongly expectednonzeroOSexit, repaired once; actualOS0/Error1 evidence and failedattempt retained, completedsimulationsnotreplayed. Unreachablewirefaultguard notforced. Onlyboundedsoftware/simulationcandidate accepted.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ],
+    "expected_result": "All29formal/B01/B03/B06/R03/fullproduct/place-route/implementation/timingclosure/CDC_RDC/board/system remain not_run. No publicABI/type7enable/BOOT/clock/baud/sourceauth/runtime/motion grant. Physicalboard A only. H01-H15 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and frozen1011259415a0916054eb580687612580bc1e5f09 unchanged.50OOC remains separate and is not claimed in49 or51."
+  },
+  "artifacts": [
+    "competition/deepeye/fpga/codec/deepeye_trace_uart_candidate.sv",
+    "competition/deepeye/fpga/codec/trace_uart_candidate.md",
+    "competition/deepeye/tests/rtl/codec/tb_trace_uart_candidate.sv",
+    "competition/deepeye/tools/codec/run_trace_uart_candidate.py",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/raw-evidence.tar.gz.part00",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/raw-evidence.tar.gz.part01",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/README.md",
+    "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/SOURCE_BINDING.json"
+  ],
+  "stages": {
+    "bounded_uart_candidate_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/ACCEPTANCE.json"
+    },
+    "main_independent_public_uart_history": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/ACCEPTANCE.json"
+    },
+    "saved_log_qualification": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/ACCEPTANCE.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+# B-DEEPEYE-TRACE-UART-CANDIDATE-20261024-49
+
+Exact source/evidence commit 7a9aae99ab0f9bf72ccffa7f10a4386cb0247911. Read competition/deepeye/evidence/codec/trace-uart-candidate-20261024-49/publication/README.md, ACCEPTANCE.json and SOURCE_BINDING.json. All29formal/B01/B03/B06/R03/fullproduct/place-route/implementation/timingclosure/CDC_RDC/board/system remain not_run. No publicABI/type7enable/BOOT/clock/baud/sourceauth/runtime/motion grant. Physicalboard A only. H01-H15 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and frozen1011259415a0916054eb580687612580bc1e5f09 unchanged.50OOC remains separate and is not claimed in49 or51.

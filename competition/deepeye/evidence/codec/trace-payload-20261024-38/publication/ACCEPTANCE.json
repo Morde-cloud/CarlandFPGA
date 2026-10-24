@@ -1,0 +1,177 @@
+{
+  "status": "ACCEPTED_BOUNDED_TRACE_PAYLOAD_CANDIDATE_SIMULATION",
+  "operation_id": "B-DEEPEYE-TRACE-PAYLOAD-RTL-20261024-38",
+  "source_sha256": {
+    "fpga/codec/deepeye_trace_payload_candidate.sv": "fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6",
+    "fpga/codec/trace_payload_candidate.md": "9ccdc3d3a084b5a45e8618ad9776d31d641b2ada1ce3f9155cafdf1f615c33e3",
+    "tests/rtl/codec/tb_trace_payload_candidate.sv": "6cd065e03695f345f7540cd0107e9f3acbb72ff12b131ca8cbae204f03b50dfa",
+    "tools/codec/run_trace_payload_candidate.py": "f7a100a2f49ef028b6bec375fc66e86093203e1e74b6ede3f5352a2156e9439f"
+  },
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "main": {
+    "status": "PASS",
+    "mutant": false,
+    "score": {
+      "cases": 746,
+      "trace_rows": 804872,
+      "public_comparisons": 23128,
+      "byte_handshakes": 10445,
+      "complete_cfg_sample_meta_byte_history": true
+    },
+    "trace_sha256": "5a5f5d28e1a1718b7c7cd38b16300186d7f9279fb3c02729833fa1053a0bb874",
+    "rtl_sha256": "fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6",
+    "tb_sha256": "4c0f839a9f56c5b016acb6d1e1edbe9c14656dc69d069b95014da48cf113f561",
+    "commands": 4
+  },
+  "main_actual_commands": [
+    {
+      "path": "main\\positive-01\\version.command.json",
+      "sha256": "b8b4a6dd80bfc7951cd151cad90b79a7bebe477dfb164d344dd4e696d8f48c31",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-01\\vlib.command.json",
+      "sha256": "d526dfae4e7561fc2b170945719f5575961cca984caf19c1bdcd8f88be3545db",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-01\\vlog.command.json",
+      "sha256": "0ea24a9c952a2952a77b1cde184a78cf473854e84aca892c98581214981b07a9",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-01\\vsim.command.json",
+      "sha256": "d6d08786541879d3df34775f15ef11683486d4e89ec1579eeb7c0270d06a1abc",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-byte-tie-rice\\version.command.json",
+      "sha256": "d1361432f794df379a2b72608afac5ed3242ee433d339573841acdf8161a3d56",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-byte-tie-rice\\vlib.command.json",
+      "sha256": "62e4267a19a9cb0fbec656ae6997419a3457b854c9d5eb057dce112698f65574",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-byte-tie-rice\\vlog.command.json",
+      "sha256": "bc360c11179f89f75b9fc452adce37fea86d0c69c8841dd605a86ccad4ad6309",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-byte-tie-rice\\vsim.command.json",
+      "sha256": "193613b779009422b8fc588da54f69f4cbc7ad865cfd204161f8c5ffa0105a8c",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-rice-anchor-endian\\version.command.json",
+      "sha256": "c3cac6c1411a4c940966ff4f07afc5f56ac385d79363dd0548a76220a2286da5",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-rice-anchor-endian\\vlib.command.json",
+      "sha256": "7befc0a4af2a9c87c9f93b8a278c55f4eabb9bb7b83223d0aa26ddc588768fdf",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-rice-anchor-endian\\vlog.command.json",
+      "sha256": "c89ab041573ce0b87ecf4851b9c387fff8bdf0f72e76900f7369c4bf42d8718f",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-rice-anchor-endian\\vsim.command.json",
+      "sha256": "76aa98281ab40fd7aea741761ed5e89ff3f03bd86af7f1ba21affcfa5e479da0",
+      "exit_code": 0
+    }
+  ],
+  "main_compiled_mutants": {
+    "actual_compiled_mutants": 2,
+    "rows": [
+      {
+        "name": "byte-tie-rice",
+        "exit_code": 0,
+        "result": {
+          "status": "EXPECTED_COMPILED_REJECTION",
+          "mutant": true,
+          "cycle": 41765,
+          "case": 36,
+          "reason": "payload_value",
+          "trace_sha256": "cdcf90da39ce8040f1348ec5c8763cfba7b42475dfec92f327296fad3a49d5e3",
+          "rtl_sha256": "45e88189c2fefa3275d5e5e3c284b1eed3984c618096eef3ff01ebb8e8dbb98b",
+          "tb_sha256": "4c0f839a9f56c5b016acb6d1e1edbe9c14656dc69d069b95014da48cf113f561",
+          "commands": 4
+        },
+        "mutant_sha256": "45e88189c2fefa3275d5e5e3c284b1eed3984c618096eef3ff01ebb8e8dbb98b"
+      },
+      {
+        "name": "rice-anchor-endian",
+        "exit_code": 0,
+        "result": {
+          "status": "EXPECTED_COMPILED_REJECTION",
+          "mutant": true,
+          "cycle": 537,
+          "case": 3,
+          "reason": "payload_value",
+          "trace_sha256": "5f43b23fd5dfcf7a970db1981d00e8a59715f568e9f021fbf84efceefe7de01e",
+          "rtl_sha256": "213f5dcab2baaf847838c669f5da5bbf2f88e273adf97d12f25ab98a25330c88",
+          "tb_sha256": "4c0f839a9f56c5b016acb6d1e1edbe9c14656dc69d069b95014da48cf113f561",
+          "commands": 4
+        },
+        "mutant_sha256": "213f5dcab2baaf847838c669f5da5bbf2f88e273adf97d12f25ab98a25330c88"
+      }
+    ],
+    "production_unchanged": true
+  },
+  "author_recorded_commands": 30,
+  "author_full_modelsim_runs": 2,
+  "author_cases": 1629,
+  "author_completed": 919,
+  "author_abort_recovery_pairs": 710,
+  "author_trace_rows": 282264,
+  "author_functional_coverage": {
+    "ordinary_cases": 209,
+    "manual_literal_vectors": 8,
+    "ordinary_error_codes": {
+      "0": 123,
+      "3": 54,
+      "1": 27,
+      "2": 5
+    },
+    "ordinary_success_raw": 62,
+    "ordinary_success_rice": 61,
+    "success_payload_lengths": [
+      21,
+      23,
+      25,
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "count_and_quality_boundaries": "fixtures include manual, TC01 two ties/E>0 originals,41/42 point,held1/65535/65536,long origin,end overflow,stride/count,early/missinglast,error2-before-budget",
+    "abort_strategy": "two byte modes x 171 post-last offsets x reset/cancel, config/partial division/idle/output boundaries, each followed by fresh recovery; no DUT hierarchy acceptance oracle"
+  },
+  "author_parser_negatives": 16,
+  "main_saved_checker_negatives": 14,
+  "failed_evidence_preserved": [
+    "Author initial checker accepted forged early stalled metadata; repaired checker rejects same saved fixture. Both actual full simulation attempts preserved; RTL unchanged.",
+    "Main author-audit-01 failed on metadata key rtl; author-audit-02 uses exact source-path key, without product reexecution.",
+    "Main final-audit-01 incorrectly required zero simulator errors for intentional mutants. Final-audit-02 requires exactly one MAIN38_NUMERIC_FAILURE and one error for each mutant, zero errors for positive; no product rerun."
+  ],
+  "source_review": [
+    "Fixed finite FSM/32-byte private payload, original128x16 samples, unchanged inner core; full payload validation before metadata; exact LE fields and Rice anchor swap.",
+    "Widened index/tick endpoint arithmetic, E/count/stride/quality/origin checks; error priority config then sample/core then budget.",
+    "Core cancel on rejected transaction, synchronous reset/discard, atomic configuration and stable stalled outputs. No new clock domain or authority."
+  ],
+  "acceptance_notes": [
+    "Main independently wrote Python bitstring arithmetic and field packing from fixed specification before author source inspection; no import of B golden. Existing protocol specification reused.",
+    "Post-writing crosscheck to pinned golden and eight literal manual vectors disclosed; main actual 746 RTL scenarios, complete public histories, two actual compiled mutants.",
+    "Author expected values reuse pinned golden and eight published literal vectors; final1629-case stimulus and tests are not an independent oracle.",
+    "Single already-selected uniform block only; <=32B output/error behavior is candidate payload simulation, not production TRACE/publicABI, splitting, scheduler, outer wire or authenticated source.",
+    "Operation38 synthesis/implementation/timing/CDC_RDC/board/system not_run. Prior operations actual OOC evidence remains unchanged.",
+    "All29/B01/B03/B06/R03/fullproduct not_run; physicalboardAonly."
+  ],
+  "verified_records": 269
+}

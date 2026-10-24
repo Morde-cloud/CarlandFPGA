@@ -1,0 +1,13 @@
+# B-DEEPEYE-TRACE-PAYLOAD-RTL-20261024-38
+
+Adds one complete, already-selected uniform block candidate payload in RTL, bounded to32bytes. Implements existing candidate E/RAW/Rice, original-value byte ties, little-endian anchor, index/tick/mask/held origin and padding rules. Uses unchanged reviewed encoder. Rejects invalid configuration, sample length/core errors and excess budget before output; synchronous reset/cancel and stalled outputs covered.
+
+Main wrote a separate Python bitstring/field reference before author source inspection, without importing B golden. Fresh ModelSim SE-64 10.7 run:746cases,804872 public trace rows,23128 comparisons,10445 byte handshakes. Two actual compiled mutants rejected: byte tie at cycle41765/case36; Rice anchor endian at537/case3. Three main simulations and12actual vendor commands. Preinspection specification, vectors, oracle, exact TB, inputs, full traces and commands are archived. Post-writing crosscheck to the pinned golden and8literal vectors is disclosed.
+
+Author ran two actual full simulations with30recorded commands, including read-only Git queries. Final1629cases comprise209ordinary,710abort and710recovery cases;919completed and282264post-reset trace rows. Author expected bytes reuse the pinned golden and8published literals. Initial checker falsely accepted forged early stalled metadata; original fixture retained, checker repaired and new full run performed. RTL unchanged across attempts.16author negative probes plus14main saved-checker negatives reject as expected.
+
+Main rehashed269evidence records. Two audit-script failures remain: wrong metadata key, then treating intentional mutant fatal as unexpected. Fresh audit scripts corrected these assumptions against existing raw evidence; no product reruns. Positive simulation has0errors; each intentional mutant has exactly1MAIN38_NUMERIC_FAILURE and1error.
+
+Archive restores author/main beneath this evidence directory. repository-support restores exact dependencies beneath worktree root. main-control contains frozen main scripts with original absolute paths and retained failures; these need path adaptation on another node, not a portable-run claim. All known lease values scanned and private files excluded.
+
+Candidate payload simulation only: no segmentation, outer wire/CRC/UART, scheduler, BOOT, authenticated acquisition, clock/TTL or movement permission; A retains public ABI ownership. Operation38 synthesis/implementation/timing/CDC_RDC/board/system not_run; earlier measured OOC results keep their original scope. All29/B01/B03/B06/R03/fullproduct not_run. PhysicalboardAonly. H01-H15 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and design1011259415a0916054eb580687612580bc1e5f09 fixed.

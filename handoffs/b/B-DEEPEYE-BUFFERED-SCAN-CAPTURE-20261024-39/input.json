@@ -1,0 +1,83 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-BUFFERED-SCAN-CAPTURE-20261024-39",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "05e70705176f67a92b157c9af985bc1e110a040e",
+    "test_steps": [
+      "Verify all 582 raw members, exact five source files and two read-only stage dependencies; original failures retained.",
+      "Main reference frozen before author39 source inspection:13600cycles/27200rows/523218public comparisons/402retirements;4actual compiled wiring mutants rejected;23actual commands include3initial commands before CRLF summary-checker failure.",
+      "Original author3801cycles/7602rows/182448comparisons/64control combinations. Main found5false accepts in termination qualifier. Exact saved repair93cases rerun by main plus23new independent negative probes and extraLF positive,247protected files unchanged.",
+      "Fixed stateless capture-to-depth4queue wiring only. Stop/rearm capture-only; queue_cancel queue-only; reset both. No new policy/provenance/clock/control/ABI. Fixed32bit sequence exhaustion/saturation not reached.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ],
+    "expected_result": "Bounded capture-queue RTL simulation and repaired saved-log qualification only. No39synthesis/implementation/timingclosure/CDC_RDC/board/system. Separate43OOC not included. All29/B01/B03/B06/R03/fullproductnot_run; physicalboardAonly."
+  },
+  "artifacts": [
+    "competition/deepeye/fpga/acquisition/deepeye_buffered_scan_capture.sv",
+    "competition/deepeye/fpga/acquisition/buffered_scan_capture_candidate.md",
+    "competition/deepeye/tests/rtl/acquisition/tb_buffered_scan_capture.sv",
+    "competition/deepeye/tools/acquisition/run_buffered_scan_capture.py",
+    "competition/deepeye/tests/rtl/acquisition/main_tb_buffered_scan_capture.sv",
+    "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/raw-evidence.tar.gz",
+    "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/README.md",
+    "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/SOURCE_BINDING.json"
+  ],
+  "stages": {
+    "bounded_capture_queue_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/ACCEPTANCE.json"
+    },
+    "main_independent_public_history": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/ACCEPTANCE.json"
+    },
+    "saved_raw_and_runner_qualification": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/acquisition/buffered-scan-20261024-39/publication/ACCEPTANCE.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "timing": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    }
+  }
+}

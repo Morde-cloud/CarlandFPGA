@@ -1,0 +1,68 @@
+{
+  "status": "OOC_ARTIFACTS_VERIFIED_TIMING_NOT_MET",
+  "operation_id": "B-DEEPEYE-TRACE-PAYLOAD-OOC-20261024-40",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "resources": {
+    "Slice LUTs": 2273,
+    "Slice Registers": 2743,
+    "Block RAM Tile": 0,
+    "DSPs": 2
+  },
+  "timing": {
+    "WNS": "-4.073",
+    "TNS": "-351.521",
+    "setup_failing_endpoints": "95",
+    "setup_endpoints": "5055",
+    "WHS": "0.250",
+    "THS": "0.000",
+    "hold_failing_endpoints": "0",
+    "hold_endpoints": "5055",
+    "WPWS": "3.750",
+    "TPWS": "0.000",
+    "pulse_failing_endpoints": "0",
+    "pulse_endpoints": "2955"
+  },
+  "drc": [
+    [
+      "DPIP-1",
+      "Warning"
+    ],
+    [
+      "DPIP-1",
+      "Warning"
+    ],
+    [
+      "DPOP-1",
+      "Warning"
+    ],
+    [
+      "DPOP-1",
+      "Warning"
+    ],
+    [
+      "DPOP-2",
+      "Warning"
+    ],
+    [
+      "DPOP-2",
+      "Warning"
+    ],
+    [
+      "ZPS7-1",
+      "Warning"
+    ]
+  ],
+  "actual_synthesis_runs": 1,
+  "actual_main_dcp_reopens": 1,
+  "dcp_sha256": "261b1d5a5363596659366277437e80206f4ccc7dbfb851fc011fef2785a1ff7e",
+  "main_process_exit": 0,
+  "source_sha256": {
+    "deepeye_trace_payload_candidate.sv": "fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6",
+    "deepeye_block_encoder.sv": "4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532",
+    "ooc_qualification.tcl": "54a4d66787d2fbfe78636d1fe14f6eb448fcec1529a6f2f068c8377addec33a9"
+  },
+  "critical_paths_sha256": "50b4ae5bcc602daeded3db0b062840cb8cfd2d7f63b804278864ab572d7da5f1",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "scope": "One10ns post-synthesis OOC diagnostic; -4.073ns does not meet timing. 7unwaivedDRC/I/Ogaps retained. No route/implementation/CDC_RDC/board/system; all29/B01/B06/R03not_run.",
+  "verified_author_files": 32
+}

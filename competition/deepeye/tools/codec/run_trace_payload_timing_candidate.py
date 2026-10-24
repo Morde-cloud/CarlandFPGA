@@ -1,0 +1,372 @@
+#!/usr/bin/env python3
+"""Author-only ModelSim evidence for main42 staged preflight timing candidate.
+Expected payloads explicitly reuse the pinned offline trace_candidate model.
+No main oracle, vendor build, public ABI enable, source authenticity or authority.
+"""
+from __future__ import annotations
+import argparse
+from collections import Counter
+from datetime import datetime, timezone
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import random
+import re
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+sys.dont_write_bytecode=True
+TASK='DEEPEYE-IMPLEMENTATION-20261014'
+WORK='B-TRACE-PAYLOAD-PIPELINE-20261024-42-v1'
+OP='B-DEEPEYE-TRACE-PAYLOAD-PIPELINE-20261024-42'
+BASE='bf60e80927ed38511d30ffe96ebd419fae0a275c'
+SPEC_HASH='1db67ba822c5daeec8cb664d6fda49b8e9fb0a9ef78d4c717b8dde57af4a2bfd'
+PINS={
+ 'fpga/codec/deepeye_block_encoder.sv':'4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532',
+ 'golden/codec/trace_candidate.py':'a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642',
+ 'golden/codec/trace_candidate_layout.json':'0de9a9a303ed691c645beba2ba9d39c7eb2261a8df336ea321f5055a07436e9c',
+ 'golden/codec/trace_candidate_vectors.json':'e9fb59aa20324ebdeffb25ac89f43e42a085b3d49cec3ee9104ff551d9409bf2',
+ 'golden/codec/TRACE_CANDIDATE.md':'f702db7239082570a26856091a3131293b7df610c76d7af830415ed40a08d56b',
+ 'golden/codec/codec_reference.py':'2e24e01c7e8cc9a010f9c0f26d94091b33676b7394f0f7344ca5bf938fefbfd5'}
+U32=(1<<32)-1; U64=(1<<64)-1
+CFG_KEYS=('count','e','session','channel','index','tick','istride','tstride','flags','source')
+SUMMARY_KEYS=('cases','complete','errors','aborts','recovery','cycles','cfg','samples','meta','data',
+              'cfgstall','samplestall','metastall','datastall','reset','cancel')
+CONTRACT={'id':'DEEPEYE-HUMAN-LOCK-20261014','revision':1,'ids':['H%02d'%i for i in range(1,16)],
+ 'pin':'f5989cd5defce561f9ba98e6b18fc2682945f0a2',
+ 'requirements_sha256':'c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804',
+ 'design_commit':'1011259415a0916054eb580687612580bc1e5f09'}
+def utc():return datetime.now(timezone.utc).isoformat()
+def sha(path):
+ h=hashlib.sha256()
+ with Path(path).open('rb') as f:
+  for x in iter(lambda:f.read(1<<20),b''):h.update(x)
+ return h.hexdigest()
+def save(path,obj):Path(path).write_text(json.dumps(obj,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+def require(ok,why):
+ if not ok:raise ValueError(why)
+def load(name,path):
+ spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+
+def cfg_for(values,e=0,**kwargs):
+ n=len(values)
+ c=dict(count=n,e=e,session=0x01020304,channel=0,index=7,tick=100000,
+        istride=1 if n>1 else 0,tstride=10 if n>1 else 0,flags=8,source=100000)
+ c.update(kwargs);return c
+def bad_config(c):
+ n=c['count'];v=bool(c['flags']&8);sat=bool(c['flags']&4);held=bool(c['flags']&2)
+ return (not 1<=n<=128 or c['e'] not in (0,1,2,4,8) or
+  (n==1 and (c['istride']!=0 or c['tstride']!=0)) or
+  (n>1 and (c['istride']==0 or c['tstride']==0 or c['index']+(n-1)*c['istride']>U32 or c['tick']+(n-1)*c['tstride']>U64)) or
+  (not v and (sat or held or c['source']!=0)) or
+  (v and ((held and c['source']>=c['tick']) or (not held and c['source']!=c['tick']))))
+def points_for(c,values):
+ v=bool(c['flags']&8);held=bool(c['flags']&2)
+ return [dict(index=c['index']+i*c['istride'],tick_ms=c['tick']+i*c['tstride'],
+  value=values[i] if v else None,valid=v,saturated=bool(c['flags']&4),held=held,
+  source_fault=bool(c['flags']&1),source_tick_ms=(c['source'] if held else c['tick']+i*c['tstride']) if v else None)
+  for i in range(c['count'])]
+
+def build_cases(model,vectors):
+ cases=[]
+ def add(label,values,c=None,kind=0,which=0,delay=0,bad_lasts=None):
+  c=dict(c if c is not None else cfg_for(values));error=0;payload=b'';reason=None
+  if bad_config(c):error=1
+  elif bad_lasts is not None:error=2
+  else:
+   try:payload=model.encode_payload(points_for(c,values),dict(session=c['session'],config_epoch=0,e=c['e']),c['channel'])
+   except model.TraceError as exc:
+    require('budget' in str(exc) or 'uint8' in str(exc),'unexpected fixture model rejection '+str(exc))
+    error=3;reason=str(exc)
+  full=[[x,int(i==c['count']-1)] for i,x in enumerate(values)] if c['flags']&8 and error!=1 else []
+  if bad_lasts is not None:full=[[values[i],int(last)] for i,last in enumerate(bad_lasts)]
+  if kind in (1,7,8):full=[]
+  if kind==2:full=full[:2]
+  if kind not in (0,6):require(error==0,'abort fixture must fit')
+  rec=dict(id=len(cases),label=label,kind=kind,which=which,delay=delay,cfg=c,samples=full,
+           error=error,payload_hex=payload.hex(),meta_tick=(c['tick']&U32) if error==0 else 0,model_rejection=reason)
+  cases.append(rec);return rec
+ # Eight published manual vectors: compare literal bytes as well as regenerated bytes.
+ for vector in vectors['manual_vectors']['vectors']:
+  pts=vector['points'];first=pts[0];n=len(pts)
+  c=cfg_for([p['value'] or 0 for p in pts],vector['binding']['e'],session=vector['binding']['session'],
+    channel=vector['channel'],index=first['index'],tick=first['tick_ms'],
+    istride=pts[1]['index']-first['index'] if n>1 else 0,tstride=pts[1]['tick_ms']-first['tick_ms'] if n>1 else 0,
+    flags=int(first['valid'])*8+int(first['saturated'])*4+int(first['held'])*2+int(first['source_fault']),
+    source=first['source_tick_ms'] if first['valid'] else 0)
+  r=add('published_'+vector['name'],[p['value'] or 0 for p in pts],c)
+  require(r['payload_hex']==vector['payload_hex'],'manual vector mismatch '+vector['name'])
+ rng=random.Random(0x2026102438)
+ for e in (0,1,2,4,8):
+  for values in ([0],[0x1234],[65535],[0,64],[0,2048,4096],[0,(2*e+1)*64-e],
+                 [0x1234,0x5678,0x9abc],[1234]*2,[1234]*7,[1234]*41,[1234]*42,[0,65535]*64,
+                 [100+i for i in range(8)],[65000-i for i in range(8)]):
+   add('matrix_e%d_n%d_%d'%(e,len(values),len(cases)),list(values),cfg_for(values,e,channel=e%4))
+  for n in (1,2,3,4,7,16,127,128):
+   values=[rng.randrange(65536) for _ in range(n)];add('random_e%d_n%d'%(e,n),values,cfg_for(values,e))
+ for n in (1,2,3,4,24,25,26,40,41,42,127,128):
+  vals=[1234]*n
+  add('fresh_equal_%d'%n,vals)
+  add('short_equal_%d'%n,vals,cfg_for(vals,flags=10,source=99999))
+  add('long_equal_%d'%n,vals,cfg_for(vals,flags=10,source=1))
+ for flags in range(16):
+  vals=[1234,1234];source=99999 if flags&2 else 100000
+  if not flags&8:source=0
+  add('quality_%d'%flags,vals,cfg_for(vals,flags=flags,source=source,channel=flags%4))
+ for age in (1,65535,65536,U64):
+  add('held_age_%d'%age,[0x1234],cfg_for([0x1234],tick=age,source=0,flags=10))
+ add('held_long_absolute',[0x1234],cfg_for([0x1234],tick=U64,source=U64-65536,flags=11))
+ for channel in range(4):
+  add('invalid128_ch%d'%channel,[0]*128,cfg_for([0]*128,flags=1,source=0,channel=channel))
+ configs=[('count0',dict(count=0)),('count129',dict(count=129)),('count255',dict(count=255)),
+  ('E3',dict(e=3)),('E5',dict(e=5)),('E15',dict(e=15)),
+  ('single_indexstride',dict(istride=1)),('single_tickstride',dict(tstride=1)),
+  ('fresh_origin',dict(source=99999)),('held_equal',dict(flags=10,source=100000)),
+  ('held_future',dict(flags=10,source=100001)),('held_underflow',dict(flags=10,tick=0,source=1)),
+  ('invalid_origin',dict(flags=0,source=1)),('invalid_sat',dict(flags=4,source=0)),('invalid_held',dict(flags=2,source=0))]
+ for name,changes in configs:add(name,[1],cfg_for([1],**changes))
+ for name,changes in [('zero_indexstride',dict(istride=0)),('zero_tickstride',dict(tstride=0)),
+  ('index_overflow',dict(index=U32)),('tick_overflow',dict(tick=U64,source=U64)),
+  ('end_limits',dict(index=U32-1,tick=U64-1,source=U64-1,tstride=1)),
+  ('maxstrides',dict(istride=65535,tstride=65535))]:
+  add(name,[0x1234,0x1234],cfg_for([0,0],**changes))
+ span=127*65535
+ for name,extra in [('span_exact',{}),('span_index_over',dict(index=U32-span+1)),('span_tick_over',dict(tick=U64-span+1))]:
+  c=cfg_for([0]*128,flags=0,source=0,index=U32-span,tick=U64-span,istride=65535,tstride=65535);c.update(extra)
+  add(name,[0]*128,c)
+ add('session_zero_rollover',[0x1234,0x1234],cfg_for([0,0],session=0,tick=(1<<32)-5,source=(1<<32)-5))
+ for label,values,lasts,c in [
+  ('early_last',[1,2,3],[1],cfg_for([1,2,3])),
+  ('missing_last',[1,2],[0,0],cfg_for([1,2])),
+  ('single_missing',[1],[0],cfg_for([1])),
+  ('error2_before_budget',[1]*128,[1],cfg_for([1]*128)),
+  ('error2_before_longbudget',[1,2],[1],cfg_for([1,2],flags=10,source=1))]:add(label,values,c,bad_lasts=lasts)
+ def abort(label,values,c,kind,which,delay=0):
+  add(label,values,c,kind,which,delay)
+  add('recovery_'+label,[0x1234],cfg_for([0x1234],e=8),kind=6)
+ for which in range(2):
+  abort('span_edge_%d'%which,[1,2],cfg_for([1,2]),8,which)
+  abort('idle_%d'%which,[1],cfg_for([1]),7,which)
+  for delay in range(5):abort('cfg_%d_%d'%(which,delay),[1,2],cfg_for([1,2]),1,which,delay)
+  for delay in (0,7,16):abort('partial_div_%d_%d'%(which,delay),[0,64,128],cfg_for([0,64,128]),2,which,delay)
+  for pattern,vals in enumerate(([1234,1234],[0,64])):
+   for delay in range(171):abort('phase_%d_%d_%d'%(which,pattern,delay),list(vals),cfg_for(vals),3,which,delay)
+   for kind in (4,5):abort('output_%d_%d_%d'%(which,pattern,kind),list(vals),cfg_for(vals),kind,which)
+ return cases
+
+def write_cases(path,cases):
+ with path.open('w',encoding='ascii',newline='\n') as f:
+  f.write(str(len(cases))+'\n')
+  for x in cases:
+   c=x['cfg'];data=bytes.fromhex(x['payload_hex'])
+   f.write(('%d %d %d %d %d %d %d %08x %x %08x %016x %04x %04x %x %016x %d %d %08x\n') %
+    (x['id'],x['kind'],x['which'],x['delay'],len(x['samples']),c['count'],c['e'],c['session'],c['channel'],
+     c['index'],c['tick'],c['istride'],c['tstride'],c['flags'],c['source'],x['error'],len(data),x['meta_tick']))
+   for value,last in x['samples']:f.write('%04x %d\n'%(value,last))
+   f.write(' '.join('%02x'%b for b in data)+'\n')
+
+DEC=r'(0|[1-9][0-9]*)'
+TRACE=re.compile(' '.join([DEC,DEC,r'([01]{2})',r'([01]{2})',r'([0-9a-f]{2})',r'([0-9a-f])',
+ r'([0-9a-f]{8})',r'([0-3])',r'([0-9a-f]{8})',r'([0-9a-f]{16})',r'([0-9a-f]{4})',r'([0-9a-f]{4})',
+ r'([0-9a-f])',r'([0-9a-f]{16})',r'([01]{2})',r'([0-9a-f]{4})',r'([01])',r'([01]{2})',
+ r'([0-3])',r'([0-3][0-9a-f])',r'([0-9a-f]{8})',r'([01]{2})',r'([0-9a-f]{2})',r'([01])']))
+def check_saved(transcript,trace_rows,cases,finish_line):
+ require(not re.search(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]|TP_FAIL|\*\*\s+(?:Error|Fatal|Warning)\b',transcript),'failure/control/diagnostic')
+ lines=transcript.splitlines();at=next((i for i,s in enumerate(lines) if 'TP_' in s),None)
+ require(at is not None,'missing records');body=lines[at:]
+ require(len(body)==len(cases)+6,'record/terminal count or placement')
+ parsed_summary=re.fullmatch('# TP_SUMMARY '+' '.join(k+'='+DEC for k in SUMMARY_KEYS),body[len(cases)])
+ require(parsed_summary is not None,'summary grammar/duplicates')
+ summary=dict(zip(SUMMARY_KEYS,map(int,parsed_summary.groups())))
+ require(body[len(cases)+1]=='# TP_DONE trace_payload_timing_candidate PASS','done grammar')
+ finish,clock,end,diag=body[-4:]
+ require(re.fullmatch(r'# \*\* Note: \$finish    : [^\r\n]+[/\\]tb_trace_payload_timing_candidate\.sv\('+str(finish_line)+r'\)',finish) is not None,'finish grammar')
+ tm=re.fullmatch(r'#    Time: '+DEC+r' ns  Iteration: 1  Instance: /tb_trace_payload_timing_candidate',clock)
+ require(tm is not None,'finish time/instance')
+ for token in ('$finish','Iteration:','Instance:','# End time:','Errors:','Warnings:'):
+  require(sum(s.count(token) for s in lines)==1,'terminal uniqueness '+token)
+ require(diag=='# Errors: 0, Warnings: 0','diagnostics')
+ date=r'([0-9]{2}:[0-9]{2}:[0-9]{2} on [A-Z][a-z]{2} [1-9][0-9]?,[0-9]{4})'
+ starts=[s for s in lines[:at] if s.startswith('# Start time:')];require(len(starts)==1,'start uniqueness')
+ sm=re.fullmatch('# Start time: '+date,starts[0]);em=re.fullmatch('# End time: '+date+r', Elapsed time: ([0-9]+):([0-5][0-9]):([0-5][0-9])',end)
+ require(sm is not None and em is not None,'time grammar')
+ require((datetime.strptime(em[1],'%H:%M:%S on %b %d,%Y')-datetime.strptime(sm[1],'%H:%M:%S on %b %d,%Y')).total_seconds()==int(em[2])*3600+int(em[3])*60+int(em[4]),'elapsed conflict')
+ totals=Counter({k:0 for k in SUMMARY_KEYS});previous=3;idx=-1;active=None;counts=Counter();aborted=False
+ previous_metadata=None;previous_data=None;cfg_cycle=None
+ def finish_case():
+  if active is None:return
+  kind=active['kind'];is_abort=kind not in (0,6)
+  expected=dict(cfg=int(kind!=7),samples=len(active['samples']),meta=1 if not is_abort or kind in (4,5) else 0,
+                data=len(bytes.fromhex(active['payload_hex'])) if not is_abort else int(kind==5),
+                reset=int(is_abort and active['which']==0),cancel=int(is_abort and active['which']==1))
+  for k,v in expected.items():require(counts[k]==v,'case%d %s observed=%d expected=%d'%(active['id'],k,counts[k],v))
+  wanted='# TP_CASE id=%d kind=%d error=%d bytes=%d tick=%08x cfg=%d samples=%d meta=%d data=%d PASS'%(
+   active['id'],kind,active['error'],len(bytes.fromhex(active['payload_hex'])),active['meta_tick'],counts['cfg'],counts['samples'],counts['meta'],counts['data'])
+  require(body[idx]==wanted,'case record grammar/value/order')
+  totals['cases']+=1;totals['aborts']+=int(is_abort);totals['complete']+=int(not is_abort)
+  totals['recovery']+=int(kind==6);totals['errors']+=int(not is_abort and active['error']!=0)
+ for row_number,line in enumerate(trace_rows,1):
+  require(type(line) is str and line.endswith('\n'),'trace truncation')
+  s=line[:-1];s=s[:-1] if s.endswith('\r') else s;m=TRACE.fullmatch(s)
+  require(m is not None,'trace grammar/width row%d'%row_number);v=m.groups();cycle,identity=int(v[0]),int(v[1])
+  require(cycle==previous+1,'trace cycle continuity');previous=cycle
+  if active is None or active['id']!=identity:
+   finish_case();idx+=1;require(idx<len(cases) and cases[idx]['id']==identity,'trace case order')
+   active=cases[idx];counts=Counter();aborted=False;cfg_cycle=None
+  rc,cfg,sample,meta,data=v[2],v[3],v[14],v[17],v[21]
+  require(rc=='00' or cfg[1]+sample[1]+meta[0]+data[0]+v[23]=='00000','reset gating')
+  require(not aborted or (meta[0]+data[0]=='00'),'phantom after abort')
+  if rc!='00':cfg_cycle=None
+  if cfg_cycle is not None and cycle>cfg_cycle and cycle<=cfg_cycle+3 and rc=='00':require(cfg[1]+sample[1]+meta[0]+data[0]=='0000','preflight public gating')
+  if cfg=='11':
+   cfg_cycle=cycle
+   observed=[int(z,16) for z in v[4:14]]
+   require(observed==[active['cfg'][k] for k in CFG_KEYS],'atomic cfg fields')
+  if sample=='11':
+   require(counts['cfg']==1 and counts['samples']<len(active['samples']),'unexpected sample')
+   require([int(v[15],16),int(v[16])]==active['samples'][counts['samples']],'sample value/last')
+  observed_meta=(int(v[18],16),int(v[19],16),int(v[20],16))
+  if rc=='00' and previous_metadata is not None:require(meta[0]=='1' and observed_meta==previous_metadata,'metadata stall stability')
+  if rc=='00' and previous_data is not None:require(data[0]=='1' and (v[22],v[23])==previous_data,'data stall stability')
+  if meta[0]=='1':
+   require(counts['cfg']==1 and counts['samples']==len(active['samples']),'metadata before planned input completion')
+   if active['error']==0 and active['cfg']['flags']&8:require(counts['samples']==active['cfg']['count'],'success before all block samples')
+   require(observed_meta==(active['error'],len(bytes.fromhex(active['payload_hex'])),active['meta_tick']),'metadata fixture')
+  else:require(observed_meta==(0,0,0),'metadata masking')
+  payload=bytes.fromhex(active['payload_hex'])
+  if data[0]=='1':
+   pos=counts['data'];require(counts['meta']==1 and active['error']==0 and pos<len(payload),'unexpected bytes')
+   require(int(v[22],16)==payload[pos] and int(v[23])==int(pos==len(payload)-1),'byte/last fixture')
+  else:require(v[22]=='00' and v[23]=='0','data mask/last')
+  previous_metadata=observed_meta if meta=='10' and rc=='00' else None
+  previous_data=(v[22],v[23]) if data=='10' and rc=='00' else None
+  changes=dict(cfg=int(cfg=='11'),samples=int(sample=='11'),meta=int(meta=='11'),data=int(data=='11'),
+   cfgstall=int(cfg=='10'),samplestall=int(sample=='10'),metastall=int(meta=='10'),datastall=int(data=='10'),reset=int(rc[0]),cancel=int(rc[1]))
+  counts.update(changes);totals.update(changes)
+  if rc!='00':aborted=True
+ finish_case();require(idx==len(cases)-1 and previous>3,'trace missing cases')
+ totals['cycles']=previous
+ for k in SUMMARY_KEYS:require(summary[k]==totals[k],'summary %s observed=%d expected=%d'%(k,summary[k],totals[k]))
+ require(int(tm[1])==previous*10,'finish clock mismatch')
+ return dict(summary=summary,trace_rows=previous-3,first_cycle=4,last_cycle=previous,finish_ns=int(tm[1]))
+
+def main():
+ ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--modelsim-home',type=Path,required=True)
+ for name in ('thread-id','turn-id','job-id'):ap.add_argument('--'+name,required=True)
+ args=ap.parse_args();p=Path(__file__).resolve().parents[2];w=p.parents[1];author=p/'evidence/codec/trace-payload-pipeline-20261024-42/author';out=args.output.resolve()
+ require(out.is_relative_to(author.resolve()) and out!=author.resolve() and not out.exists(),'output alias/existing/outside ownership')
+ out.mkdir(parents=True)
+ for sub in ('inputs','logs','negative-parser'):(out/sub).mkdir()
+ result=dict(task_id=TASK,task_version=1,work_id=WORK,operation_id=OP,contract=CONTRACT,spec_sha256=SPEC_HASH,
+  thread_id=args.thread_id,turn_id=args.turn_id,job_id=args.job_id,pid=os.getpid(),argv=[sys.executable]+sys.argv,cwd=str(Path.cwd()),
+  python_version=sys.version,started_utc=utc(),status='running',commands=[],sources={},source_base=BASE,
+  reused_model='trace_candidate.encode_payload supplied uniform synthetic points; published literal manual bytes also checked. No main oracle imported.',
+  limitations=['Candidate only, one caller-selected block; no public ABI enable, splitting, transport, BOOT, source authentication or control authority.',
+   'Expected bytes reuse pinned offline software model; main independent review remains required.','No Vivado/CDC/physical-board or system acceptance.'],
+  formal_29='not_run',B01='not_run',B03='not_run',B06='not_run',R03='not_run',synthesis='not_run',implementation='not_run',timing_closure='not_run',CDC='not_run',board='not_run',system='not_run',final_acceptance='not_run')
+ def run(name,argv,cwd=out,timeout=120):
+  rec=dict(name=name,argv=[str(a) for a in argv],cwd=str(cwd),pid=None,started_utc=utc(),stdout='logs/'+name+'.stdout.txt',stderr='logs/'+name+'.stderr.txt',exit_code=None)
+  result['commands'].append(rec);save(out/'RESULT.json',result);t=time.monotonic()
+  with (out/rec['stdout']).open('wb') as stdout,(out/rec['stderr']).open('wb') as stderr:
+   try:
+    proc=subprocess.Popen(rec['argv'],cwd=cwd,stdout=stdout,stderr=stderr,shell=False);rec['pid']=proc.pid;save(out/'RESULT.json',result)
+    try:rec['exit_code']=proc.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:rec['timed_out']=True;proc.kill();rec['exit_code']=proc.wait();raise RuntimeError('timeout '+name)
+   finally:
+    rec.update(finished_utc=utc(),duration_seconds=time.monotonic()-t,stdout_sha256=sha(out/rec['stdout']),stderr_sha256=sha(out/rec['stderr']));save(out/'RESULT.json',result)
+  require(rec['exit_code']==0,name+' exit '+str(rec['exit_code']));return (out/rec['stdout']).read_bytes()
+ code=1;protected={}
+ try:
+  spec=author/'MAIN_SPEC.md';require(sha(spec)==SPEC_HASH,'spec hash mismatch');shutil.copyfile(spec,out/'inputs/MAIN_SPEC.md')
+  result['source_head']=run('git_head',['git','rev-parse','HEAD'],cwd=w).decode().strip()
+  contract=json.loads(run('contract',['git','show',CONTRACT['pin']+':docs/competition/deepeye-2026/immutable_scope.json'],cwd=w))
+  require(hashlib.sha256(json.dumps(contract['requirements'],ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()==CONTRACT['requirements_sha256'],'contract mismatch')
+  for i,(rel,digest) in enumerate(PINS.items()):
+   src=p/rel;require(sha(src)==digest,'dependency drift '+rel);protected[str(src)]=digest
+   blob=run('git_pin_%d'%i,['git','show',BASE+':competition/deepeye/'+rel],cwd=w)
+   require(hashlib.sha256(blob).hexdigest()==digest and blob==src.read_bytes(),'fixed Git pin mismatch '+rel)
+   target=out/'inputs'/src.name;shutil.copyfile(src,target);result['sources'][rel]=dict(path=str(src),sha256=digest,snapshot=str(target.relative_to(out)),protected=True)
+  dirty=w/'handoffs/b/B-DEEPEYE-CODEC-20261016-01/input.json';protected[str(dirty)]=sha(dirty)
+  for rel,digest in {'fpga/codec/deepeye_trace_payload_candidate.sv': 'fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6', 'tests/rtl/codec/tb_trace_payload_candidate.sv': '6cd065e03695f345f7540cd0107e9f3acbb72ff12b131ca8cbae204f03b50dfa', 'tools/codec/run_trace_payload_candidate.py': 'f7a100a2f49ef028b6bec375fc66e86093203e1e74b6ede3f5352a2156e9439f'}.items():
+   require(sha(p/rel)==digest,"original38 dependency drift "+rel);protected[str(p/rel)]=digest
+  for rel in ('fpga/codec/deepeye_trace_payload_timing_candidate.sv','fpga/codec/trace_payload_timing_candidate.md','tests/rtl/codec/tb_trace_payload_timing_candidate.sv','tools/codec/run_trace_payload_timing_candidate.py'):
+   src=p/rel;target=out/'inputs'/src.name;shutil.copyfile(src,target);result['sources'][rel]=dict(path=str(src),sha256=sha(src),snapshot=str(target.relative_to(out)),protected=False)
+  model=load('pinned_trace_candidate',out/'inputs/trace_candidate.py');vectors=json.loads((out/'inputs/trace_candidate_vectors.json').read_bytes())
+  cases=build_cases(model,vectors);save(out/'cases.json',cases);write_cases(out/'cases.txt',cases)
+  result['preflight_edge_cases']={edge:[dict(id=c['id'],which=c['which'],label=c['label']) for c in cases if
+   (edge=='SPAN' and c['label'].startswith('span_edge_')) or
+   (edge=='ENDPOINT' and c['label'] in ('cfg_0_0','cfg_1_0')) or
+   (edge=='CHECK' and c['label'] in ('cfg_0_1','cfg_1_1'))] for edge in ('SPAN','ENDPOINT','CHECK')}
+  result['case_coverage']=dict(total=len(cases),manual=len(vectors['manual_vectors']['vectors']),kinds=dict(Counter(c['kind'] for c in cases)),
+   expected_errors=dict(Counter(c['error'] for c in cases if c['kind'] in (0,6))),seed='0x2026102438',
+   cfg_fields=list(CFG_KEYS),cases_json_sha256=sha(out/'cases.json'),stimulus_sha256=sha(out/'cases.txt'))
+  home=args.modelsim_home.resolve();exe={n:home/(n+'.exe') for n in ('vlib','vmap','vlog','vsim')}
+  require(all(f.is_file() for f in exe.values()),'missing ModelSim');result['tools']={n:dict(path=str(f),sha256=sha(f)) for n,f in exe.items()}
+  for n in ('vlog','vsim'):result['tools'][n]['version']=run(n+'_version',[exe[n],'-version']).decode().strip()
+  run('vmap_init',[exe['vmap'],'-c']);run('vlib',[exe['vlib'],out/'work']);run('vmap_work',[exe['vmap'],'work',out/'work'])
+  run('vlog',[exe['vlog'],'-sv','-work','work',out/'inputs/deepeye_block_encoder.sv',out/'inputs/deepeye_trace_payload_timing_candidate.sv',out/'inputs/tb_trace_payload_timing_candidate.sv'])
+  dofile=out/'run.do';dofile.write_text('onerror {quit -f -code 2}\nonbreak {quit -f -code 3}\nrun -all\nquit -f -code 0\n',encoding='ascii')
+  print('START ModelSim cases=%d'%len(cases),flush=True)
+  text=run('vsim',[exe['vsim'],'-c','-t','1ns','-l',out/'transcript.txt','-wlf',out/'simulation.wlf','work.tb_trace_payload_timing_candidate',
+   '+INPUT='+(out/'cases.txt').as_posix(),'+TRACE='+(out/'public_ports.txt').as_posix(),'-do',dofile],timeout=600).decode('utf-8',errors='strict')
+  tb_lines=(out/'inputs/tb_trace_payload_timing_candidate.sv').read_text().splitlines();finish_line=next(i+1 for i,s in enumerate(tb_lines) if '$fclose(trace_fd);$display("TP_DONE' in s)
+  with (out/'public_ports.txt').open('r',encoding='ascii',newline='') as rows:result['reconciliation']=check_saved(text,rows,cases,finish_line)
+  parsed=text.splitlines();done=parsed.index('# TP_DONE trace_payload_timing_candidate PASS');case_at=next(i for i,s in enumerate(parsed) if s.startswith('# TP_CASE '));summary_at=next(i for i,s in enumerate(parsed) if s.startswith('# TP_SUMMARY '))
+  bads={'missing_done':parsed[:done]+parsed[done+1:],'duplicate_done':parsed[:done]+[parsed[done]]+parsed[done:],
+   'suffix_done':parsed[:done]+[parsed[done]+' suffix']+parsed[done+1:],'prefix_done':parsed[:done]+['prefix '+parsed[done]]+parsed[done+1:],
+   'conflicting_done':parsed[:done]+['# TP_DONE trace_payload_timing_candidate FAIL']+parsed[done+1:],
+   'truncated_terminal':parsed[:-1],'missing_case':parsed[:case_at]+parsed[case_at+1:],
+   'duplicate_case':parsed[:case_at]+[parsed[case_at]]+parsed[case_at:],
+   'summary_conflict':parsed[:summary_at]+[parsed[summary_at].replace('cfg='+str(result['reconciliation']['summary']['cfg']),'cfg=999999')]+parsed[summary_at+1:]}
+  probes=[]
+  for n,lines in bads.items():
+   bad='\n'.join(lines)+'\n';path=out/'negative-parser'/(n+'.stdout.txt');path.write_bytes(bad.encode())
+   try:
+    with (out/'public_ports.txt').open('r',encoding='ascii',newline='') as rows:check_saved(bad,rows,cases,finish_line)
+   except ValueError as exc:probes.append(dict(name=n,accepted=False,error=str(exc),sha256=sha(path)))
+   else:raise RuntimeError('false parser accept '+n)
+  trace_lines=(out/'public_ports.txt').read_bytes().decode('ascii').splitlines(keepends=True)
+  first_data=next(i for i,s in enumerate(trace_lines) if s.split()[21][0]=='1')
+  for name,mutation in [('unknown',dict(row=0,column=2,value='x0')),
+                         ('wrong_byte',dict(row=first_data,column=22,value='ff')),
+                         ('drop_row',dict(drop=1)),('duplicate_row',dict(duplicate=0)),
+                         ('truncated',dict(trim_last=True))]:
+   def edited_rows():
+    for i,line in enumerate(trace_lines):
+     if i==mutation.get('drop') or mutation.get('trim_last') and i==len(trace_lines)-1:continue
+     if i==mutation.get('row'):
+      cols=line.split();cols[mutation['column']]=mutation['value'];yield ' '.join(cols)+'\n'
+     else:yield line
+     if i==mutation.get('duplicate'):yield line
+   try:check_saved(text,edited_rows(),cases,finish_line)
+   except ValueError as exc:probes.append(dict(name='trace_'+name,accepted=False,error=str(exc),recipe=mutation))
+   else:raise RuntimeError('false trace parser accept '+name)
+  save(out/'negative-parser/trace_mutations.json',[p for p in probes if 'recipe' in p])
+  for field,column,masked in [('metadata',17,{18:'0',19:'00',20:'00000000'}),('data',21,{22:'00',23:'0'})]:
+   at=next(i+1 for i,s in enumerate(trace_lines[:-1]) if s.split()[column]=='10' and trace_lines[i+1].split()[column]=='10')
+   cols=trace_lines[at].split();cols[column]='00'
+   for j,value in masked.items():cols[j]=value
+   replacement=' '.join(cols)+'\n';counter='metastall' if field=='metadata' else 'datastall'
+   count=result['reconciliation']['summary'][counter]
+   altered=text.replace(counter+'='+str(count),counter+'='+str(count-1))
+   try:check_saved(altered,(replacement if i==at else s for i,s in enumerate(trace_lines)),cases,finish_line)
+   except ValueError as exc:probes.append(dict(name=field+'_valid_dropped_during_stall',accepted=False,error=str(exc),
+     recipe=dict(row=at+1,replacement=replacement,summary_field=counter,delta=-1)))
+   else:raise RuntimeError('false accept: dropped stalled '+field)
+  save(out/'negative-parser/trace_mutations.json',[p for p in probes if 'recipe' in p])
+  result['parser_negatives']=probes;result['public_trace_sha256']=sha(out/'public_ports.txt')
+  result['status']='author_bounded_pass';code=0;print('PASS '+json.dumps(result['reconciliation']['summary'],sort_keys=True),flush=True)
+ except Exception as exc:
+  result['status']='failed';result['error']=str(exc);result['traceback']=traceback.format_exc();(out/'failure.txt').write_text(result['traceback'],encoding='utf-8');print(result['traceback'],file=sys.stderr,flush=True)
+ finally:
+  result['source_hashes_after']={rel:sha(info['path']) for rel,info in result['sources'].items()};result['source_drift']=[rel for rel,info in result['sources'].items() if result['source_hashes_after'][rel]!=info['sha256']]
+  result['protected_hashes_before']=protected;result['protected_hashes_after']={name:sha(name) for name in protected};result['protected_drift']=[name for name,digest in protected.items() if result['protected_hashes_after'][name]!=digest]
+  if result['source_drift'] or result['protected_drift']:result['status']='failed';result['error']='source/protected drift';code=1
+  result['exit_code']=code;result['finished_utc']=utc();save(out/'RESULT.json',result)
+  save(out/'artifact_hashes.json',{f.relative_to(out).as_posix():sha(f) for f in sorted(out.rglob('*')) if f.is_file() and f.name!='artifact_hashes.json'})
+ print('RESULT '+str(out/'RESULT.json'),flush=True);return code
+if __name__=='__main__':raise SystemExit(main())

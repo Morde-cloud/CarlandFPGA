@@ -1,0 +1,44 @@
+{
+  "status": "OOC_ARTIFACTS_VERIFIED_DIAGNOSTIC_TIMING_MET",
+  "operation_id": "B-DEEPEYE-BUFFERED-SCAN-OOC-20261024-43",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "resources": {
+    "Slice LUTs": 625,
+    "Slice Registers": 1111,
+    "Block RAM Tile": 0,
+    "DSPs": 0
+  },
+  "timing": {
+    "WNS": "3.632",
+    "TNS": "0.000",
+    "setup_failing_endpoints": "0",
+    "setup_endpoints": "4375",
+    "WHS": "0.189",
+    "THS": "0.000",
+    "hold_failing_endpoints": "0",
+    "hold_endpoints": "4375",
+    "WPWS": "3.750",
+    "TPWS": "0.000",
+    "pulse_failing_endpoints": "0",
+    "pulse_endpoints": "1711"
+  },
+  "drc": [
+    [
+      "ZPS7-1",
+      "Warning"
+    ]
+  ],
+  "actual_synthesis_runs": 1,
+  "actual_main_dcp_reopens": 1,
+  "dcp_sha256": "0cdf897736d30c5e3e3cb98a68de068ec21770b6c5e323707c67cd2776b9f19c",
+  "main_process_exit": 0,
+  "source_sha256": {
+    "fpga/acquisition/deepeye_buffered_scan_capture.sv": "c8a540db8122b8f5520582a0f1fa9be0c43cb54a62f03c7c4edc893906f28411",
+    "fpga/acquisition/deepeye_sample_scan_capture.sv": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d",
+    "fpga/acquisition/deepeye_raw_scan_queue.sv": "630e14803d82b3379517d91626de4ad7e7d3c509ad14363b3164031a5f633ee4"
+  },
+  "critical_paths_sha256": "1208902e5942dca47f27142c0935cb1c1ee495581214a27cc917f0fba666b7f6",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "scope": "One10ns post-synthesis OOC diagnostic; +3.632ns positive slack, not timingclosure. 7synthesiswarnings/1ZPS7-1DRC and128input/779outputdelay gaps retained. No route/implementation/CDC_RDC/board/system; all29/B01/B06/R03not_run.",
+  "verified_records": 45
+}

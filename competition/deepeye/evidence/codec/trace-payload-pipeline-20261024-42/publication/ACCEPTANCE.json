@@ -1,0 +1,401 @@
+{
+  "status": "ACCEPTED_BOUNDED_PIPELINED_TRACE_CANDIDATE",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-TRACE-PIPELINE-MAIN-REVIEW-20261024-42-v1",
+  "operation_id": "B-DEEPEYE-TRACE-PAYLOAD-PIPELINE-20261024-42",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "at_utc": "2026-10-24T08:51:53.216604+00:00",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_sha256": {
+    "fpga/codec/deepeye_trace_payload_timing_candidate.sv": "0d5ba11fe199708f8376c718bbf3484431adc8dd6e847666451b1b5e873cec7b",
+    "fpga/codec/trace_payload_timing_candidate.md": "482a689e3ccb6414bddc33713905078f481fb6da873f272d591ecccd2dd8cb0a",
+    "tests/rtl/codec/tb_trace_payload_timing_candidate.sv": "3fc43224345d583fd9551c67bfc323059ac68a4812d0afda038d7b967034d6d9",
+    "tools/codec/run_trace_payload_timing_candidate.py": "7c57ce02efc012fed4192f51479187d07a5fbca109b3dcaf4da862b0c068e9ff"
+  },
+  "source_review": [
+    "Exact main-selected staging: SPAN registers24bit products,65bitage and basic_bad; ENDPOINT registers33/65bit endpoint carries; CHECK consumes both. Valid-count span fits24bits; invalid count0 remains basicbad.",
+    "State0..10 retained, SPAN11/ENDPOINT12 added. All new registers reset/cancel initialized; existing synchronous CLEAR protocol unchanged. No sample/core admission in new preflight stages.",
+    "Other payload/core logic unchanged; held-age threshold, LEanchor, byte-tie original samples, padding, error ordering and output holding retain prior rule. Main read exact fullsource and four-source diff; hashed originals unchanged."
+  ],
+  "main_positive": {
+    "status": "PASS",
+    "mutant": false,
+    "score": {
+      "cases": 746,
+      "preflight_aborts": 36,
+      "trace_rows": 806616,
+      "public_comparisons": 23128,
+      "byte_handshakes": 10445,
+      "complete_cfg_sample_meta_byte_history": true
+    },
+    "trace_sha256": "3bedfd3fedfff711d85d02c617a79df690ab28632ae5de37060b56c4737bbf4c",
+    "rtl_sha256": "0d5ba11fe199708f8376c718bbf3484431adc8dd6e847666451b1b5e873cec7b",
+    "tb_sha256": "a22ba46a651b5c16320c3515231921fe7d6a993cf24b193daf73f538dcf69858",
+    "commands": 4
+  },
+  "main_commands": [
+    {
+      "path": "main\\positive-01\\version.command.json",
+      "sha256": "1eb011d8dd3d0645ea09d21af297787f517b89ce71330e0e1d88de74290d8d39",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-01\\vlib.command.json",
+      "sha256": "b883b142000c597cf17be4f4b781344ede95ca8b99d3703c60ce0b9c40371024",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-01\\vlog.command.json",
+      "sha256": "0c657471b67c18753c11e2513405db321913d6345320e8fd99bd18ff42f6bafc",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-01\\vsim.command.json",
+      "sha256": "d73e1c74f11d029a057482f298dca0fe4c412e0eea4c4000e6c5b6ea707907ad",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-02\\version.command.json",
+      "sha256": "8086ec3dc5e61d4d0006d8fd2301e508ca1428d71226e82f35e08d01e65bc059",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-02\\vlib.command.json",
+      "sha256": "79365c9e4bc157896b0aef9e04181d749cdb4c66ecf069d1a192bea1b8585026",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-02\\vlog.command.json",
+      "sha256": "2cdce7901b83953d72ddd044b6fe8ff2867f5c9e63ef95e89aff9de43dccc5a1",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-02\\vsim.command.json",
+      "sha256": "b3fcc317b2af15abfcea6b1605d09b041d2097ff5db9d7f45da04cf06c5a5f8b",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-03\\version.command.json",
+      "sha256": "fd2214208a220538f1f826ad880dbb989f831f10ac37b078c75abe1e12f39852",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-03\\vlib.command.json",
+      "sha256": "2bf541fb47c675e0c933b8746f8cb8ae44b58b82e22a4f3cec84c00e6ba30cd1",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-03\\vlog.command.json",
+      "sha256": "6b596c00e66bb7491615d6d2aca026a86c14e2c3edd04845c6e6ad53e86bfeab",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\positive-03\\vsim.command.json",
+      "sha256": "f215f6df47509f47cb8b6d682d1360be005860476664c5e17770da1c5e6cbc56",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-omit-index-carry\\version.command.json",
+      "sha256": "79cf08210792378569e61ab69347464053ec852b174247ed7adbb979f9063631",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-omit-index-carry\\vlib.command.json",
+      "sha256": "1de111d41fb524eabb415f40f69df202852b9039685a239b3fb07dd097c1074f",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-omit-index-carry\\vlog.command.json",
+      "sha256": "524f290042a99589250c8feeded74068d87ce11f8ddf8ff46df360dfa0caff4c",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-omit-index-carry\\vsim.command.json",
+      "sha256": "4831baf7e1deda95c15ffd6d3efadf6d39adf93f5671beda30f2ae4eca392798",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-zero-registered-age\\version.command.json",
+      "sha256": "8c765641577e85b623b2f38e89b9a390ed74d4219e4352d9f6576feb43a2b0f5",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-zero-registered-age\\vlib.command.json",
+      "sha256": "e1ac3971e680ba85cd85a915ef559939c95ac60c297a8f8d62e42ceb7a2434c3",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-zero-registered-age\\vlog.command.json",
+      "sha256": "bef6b21b5b2f19795e6c37147f70bc30b8d9cbd26585bcfcdf64058b63623cdd",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-zero-registered-age\\vsim.command.json",
+      "sha256": "5bfa8ab677f2f7bf48fb74217adef445f27f8e596983801f681861c3f1a008d6",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-ignore-cancel-state\\version.command.json",
+      "sha256": "5de9629859344f49395e9a673f12353ace6b7545d4a9325594e9b31d842ab874",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-ignore-cancel-state\\vlib.command.json",
+      "sha256": "f8a3ad72b21615ce6a379b833bd319d64dee59e1f11f84580c0d6ca380dc6ef7",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-ignore-cancel-state\\vlog.command.json",
+      "sha256": "19ae62d2bcc9387bd4b5f00a9b18f07b0a6b5ac4691d0ad5dcfd55db61d08502",
+      "exit_code": 0
+    },
+    {
+      "path": "main\\mutant-ignore-cancel-state\\vsim.command.json",
+      "sha256": "001715be0aa97b5f8ceba52ab39a44f3b207d04c31157235bc4992986f710a19",
+      "exit_code": 0
+    }
+  ],
+  "main_actual_vendor_commands": 24,
+  "main_actual_simulations": 6,
+  "main_compiled_mutants": {
+    "status": "THREE_ACTUAL_COMPILED_MUTANTS_REJECTED",
+    "actual_compiled_mutants": 3,
+    "rows": [
+      {
+        "name": "omit-index-carry",
+        "cycle": 256066,
+        "case": 312,
+        "reason": "badcfg_accepted_sample",
+        "original_result": {
+          "status": "EXPECTED_COMPILED_REJECTION",
+          "mutant": true,
+          "cycle": 256066,
+          "case": 312,
+          "reason": "badcfg_accepted_sample",
+          "trace_sha256": "4ed077a756ca05ae71463497594cee9676d1ca44769102fe01810b4677b6556c",
+          "rtl_sha256": "2b2061b4ed8a0325ecb3529045f5f48a24614dcef17876eeb92901a09288d732",
+          "tb_sha256": "a22ba46a651b5c16320c3515231921fe7d6a993cf24b193daf73f538dcf69858",
+          "commands": 4
+        },
+        "commands": [
+          {
+            "path": "mutant-omit-index-carry\\version.command.json",
+            "sha256": "79cf08210792378569e61ab69347464053ec852b174247ed7adbb979f9063631"
+          },
+          {
+            "path": "mutant-omit-index-carry\\vlib.command.json",
+            "sha256": "1de111d41fb524eabb415f40f69df202852b9039685a239b3fb07dd097c1074f"
+          },
+          {
+            "path": "mutant-omit-index-carry\\vlog.command.json",
+            "sha256": "524f290042a99589250c8feeded74068d87ce11f8ddf8ff46df360dfa0caff4c"
+          },
+          {
+            "path": "mutant-omit-index-carry\\vsim.command.json",
+            "sha256": "4831baf7e1deda95c15ffd6d3efadf6d39adf93f5671beda30f2ae4eca392798"
+          }
+        ],
+        "trace_sha256": "4ed077a756ca05ae71463497594cee9676d1ca44769102fe01810b4677b6556c",
+        "mutant_sha256": "2b2061b4ed8a0325ecb3529045f5f48a24614dcef17876eeb92901a09288d732",
+        "tb_sha256": "a22ba46a651b5c16320c3515231921fe7d6a993cf24b193daf73f538dcf69858"
+      },
+      {
+        "name": "zero-registered-age",
+        "cycle": 213574,
+        "case": 185,
+        "reason": "payload_value",
+        "original_result": {
+          "status": "EXPECTED_COMPILED_REJECTION",
+          "mutant": true,
+          "cycle": 213574,
+          "case": 185,
+          "reason": "payload_value",
+          "trace_sha256": "72815645e9741dc84d81172dc7b50e504232d73a583b84ed19b794976cc89f7b",
+          "rtl_sha256": "74e1051ddc70b8c6713c4c6b0822f9784e4dc3d70b22867307aeecbf44c6c463",
+          "tb_sha256": "a22ba46a651b5c16320c3515231921fe7d6a993cf24b193daf73f538dcf69858",
+          "commands": 4
+        },
+        "commands": [
+          {
+            "path": "mutant-zero-registered-age\\version.command.json",
+            "sha256": "8c765641577e85b623b2f38e89b9a390ed74d4219e4352d9f6576feb43a2b0f5"
+          },
+          {
+            "path": "mutant-zero-registered-age\\vlib.command.json",
+            "sha256": "e1ac3971e680ba85cd85a915ef559939c95ac60c297a8f8d62e42ceb7a2434c3"
+          },
+          {
+            "path": "mutant-zero-registered-age\\vlog.command.json",
+            "sha256": "bef6b21b5b2f19795e6c37147f70bc30b8d9cbd26585bcfcdf64058b63623cdd"
+          },
+          {
+            "path": "mutant-zero-registered-age\\vsim.command.json",
+            "sha256": "5bfa8ab677f2f7bf48fb74217adef445f27f8e596983801f681861c3f1a008d6"
+          }
+        ],
+        "trace_sha256": "72815645e9741dc84d81172dc7b50e504232d73a583b84ed19b794976cc89f7b",
+        "mutant_sha256": "74e1051ddc70b8c6713c4c6b0822f9784e4dc3d70b22867307aeecbf44c6c463",
+        "tb_sha256": "a22ba46a651b5c16320c3515231921fe7d6a993cf24b193daf73f538dcf69858"
+      },
+      {
+        "name": "ignore-cancel-state",
+        "cycle": 8,
+        "case": -100,
+        "reason": "preflight_stale_after_abort",
+        "original_result": {
+          "status": "FAILED",
+          "mutant": true,
+          "error": "AssertionError()"
+        },
+        "commands": [
+          {
+            "path": "mutant-ignore-cancel-state\\version.command.json",
+            "sha256": "5de9629859344f49395e9a673f12353ace6b7545d4a9325594e9b31d842ab874"
+          },
+          {
+            "path": "mutant-ignore-cancel-state\\vlib.command.json",
+            "sha256": "f8a3ad72b21615ce6a379b833bd319d64dee59e1f11f84580c0d6ca380dc6ef7"
+          },
+          {
+            "path": "mutant-ignore-cancel-state\\vlog.command.json",
+            "sha256": "19ae62d2bcc9387bd4b5f00a9b18f07b0a6b5ac4691d0ad5dcfd55db61d08502"
+          },
+          {
+            "path": "mutant-ignore-cancel-state\\vsim.command.json",
+            "sha256": "001715be0aa97b5f8ceba52ab39a44f3b207d04c31157235bc4992986f710a19"
+          }
+        ],
+        "trace_sha256": "bf8d84a5879c0a01b4c90daf1331ab1dbe5ebde747075ea587bd58f918b80c8d",
+        "mutant_sha256": "cd7948bc5a365faf67ff6be6dc0f251d60f296024c5e35d23b54f842ac8a5829",
+        "tb_sha256": "a22ba46a651b5c16320c3515231921fe7d6a993cf24b193daf73f538dcf69858"
+      }
+    ],
+    "production_unchanged": true,
+    "reconciliation": "First mutant driver classified index/age correctly; third actual compiled mutant was also rejected by new preflight check at cycle8/case-100. Original main parser regex accepted only unsigned case IDs and therefore emitted FAILED. This saved-byte reconciliation accepts signed case IDs and independently verifies exact fatal/summary/command hashes; original failed audit unchanged. No new compile or simulation."
+  },
+  "author_functional": {
+    "actual_runs": 1,
+    "fix_cycles": 0,
+    "status": "author_bounded_pass",
+    "cases": 1633,
+    "completed": 921,
+    "errors": 86,
+    "abort_cases": 712,
+    "recovery_cases": 712,
+    "postreset_trace_rows": 285189,
+    "parser_negative_probes": 16,
+    "exit_code": 0,
+    "verified_artifacts": 77,
+    "preflight_edge_cases": [
+      {
+        "edge": "SPAN",
+        "which": 0,
+        "id": 209,
+        "cfg_to_abort": 1
+      },
+      {
+        "edge": "ENDPOINT",
+        "which": 0,
+        "id": 213,
+        "cfg_to_abort": 2
+      },
+      {
+        "edge": "CHECK",
+        "which": 0,
+        "id": 215,
+        "cfg_to_abort": 3
+      },
+      {
+        "edge": "SPAN",
+        "which": 1,
+        "id": 921,
+        "cfg_to_abort": 1
+      },
+      {
+        "edge": "ENDPOINT",
+        "which": 1,
+        "id": 925,
+        "cfg_to_abort": 2
+      },
+      {
+        "edge": "CHECK",
+        "which": 1,
+        "id": 927,
+        "cfg_to_abort": 3
+      }
+    ]
+  },
+  "author_commands": 15,
+  "main_saved_checker_negatives": 14,
+  "ooc": {
+    "status": "OOC_ARTIFACTS_VERIFIED_DIAGNOSTIC_TIMING_MET",
+    "operation_id": "B-DEEPEYE-TRACE-PAYLOAD-PIPELINE-20261024-42",
+    "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+    "resources": {
+      "Slice LUTs": 2288,
+      "Slice Registers": 2810,
+      "Block RAM Tile": 0,
+      "DSPs": 2
+    },
+    "timing": {
+      "WNS": "0.556",
+      "TNS": "0.000",
+      "setup_failing_endpoints": "0",
+      "setup_endpoints": "5207",
+      "WHS": "0.250",
+      "THS": "0.000",
+      "hold_failing_endpoints": "0",
+      "hold_endpoints": "5207",
+      "WPWS": "3.750",
+      "TPWS": "0.000",
+      "pulse_failing_endpoints": "0",
+      "pulse_endpoints": "3024"
+    },
+    "drc": [
+      [
+        "DPIP-1",
+        "Warning"
+      ],
+      [
+        "DPIP-1",
+        "Warning"
+      ],
+      [
+        "DPOP-2",
+        "Warning"
+      ],
+      [
+        "ZPS7-1",
+        "Warning"
+      ]
+    ],
+    "actual_synthesis_runs": 1,
+    "actual_main_dcp_reopens": 1,
+    "dcp_sha256": "a1e1e859c55fbd0be585c4f7030091d634dd3ce201542242400eb974e6cc2aec",
+    "main_process_exit": 0,
+    "source_sha256": {
+      "fpga/codec/deepeye_trace_payload_timing_candidate.sv": "0d5ba11fe199708f8376c718bbf3484431adc8dd6e847666451b1b5e873cec7b",
+      "fpga/codec/trace_payload_timing_candidate.md": "482a689e3ccb6414bddc33713905078f481fb6da873f272d591ecccd2dd8cb0a",
+      "tests/rtl/codec/tb_trace_payload_timing_candidate.sv": "3fc43224345d583fd9551c67bfc323059ac68a4812d0afda038d7b967034d6d9",
+      "tools/codec/run_trace_payload_timing_candidate.py": "7c57ce02efc012fed4192f51479187d07a5fbca109b3dcaf4da862b0c068e9ff"
+    },
+    "critical_paths_sha256": "cb11120367359a20d5e1789280c9fc46724d13a1c8391d7c8d2628915cc50e71",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "scope": "One10ns post-synthesis OOC diagnostic; +0.556ns has positive diagnostic slack. 4unwaivedDRC/I/Ogaps retained; not timingclosure. Original40 WNS-4.073ns preserved. No route/implementation/CDC_RDC/board/system; all29/B01/B06/R03not_run."
+  },
+  "failed_main_evidence_preserved": [
+    "positive01 immediate reset-release combinational check at30ns failed; no product change.",
+    "positive02 incorrectly demanded ready during existing CLEAR cycle at65ns; corrected bounded public driver and retained originals.",
+    "First inline correction command failed Python parse before execution.",
+    "Third actual mutant rejected atcycle8/case-100 but original unsigned-case regex failed classification; offline signed-case reconciliation preserved original FAILED result, no new simulation."
+  ],
+  "scope": "Main accepts separate42 candidate for subsequent B-owned bounded integration, retaining38 unchanged. One uniform selected block<=32B, same tested bytes/error priority with two extra internal config cycles. This is not cycle-equivalence, public ABI/type7 adoption or hardware enable.",
+  "limitations": [
+    "Author oracle reuses pinned golden; main reuses unchanged independent38bitstring oracle/746cases. New36preflight abort tests written before42source inspection, with two disclosed main timing corrections afterward.",
+    "New actual42bytes all match same independent expectations as38; operation41Cdecoder execution remains bound to38, not relabeled as a new42Crun.",
+    "One actual Vivado2026.1 OOC run and one main DCP reopen;10ns diagnostic +0.556ns versus40 -4.073ns; +15LUT/+67FF,2DSP unchanged. Four unwaivedDRC and I/Odelay gaps remain.",
+    "No place/route/implementation/timingclosure/CDC_RDC/board/system/publicABI/BOOT/authenticated clock/motion. All29/B01/B03/B06/R03/fullproductnot_run; A-onlyphysicalboard."
+  ],
+  "verified_records": 313
+}

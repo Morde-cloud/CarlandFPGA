@@ -1,0 +1,3 @@
+# B-DEEPEYE-TRACE-UART-LOOPBACK-20261024-52
+
+Exact source/evidence commit c04c63e057b31bb295f4d3836da0e032f32a2708. Read competition/deepeye/evidence/transport/trace-uart-loopback-20261024-52/publication/README.md, ACCEPTANCE.json and SOURCE_BINDING.json. Bounded same-clock digital UART loopback only. All29formal/B01/B03/B06/R03/fullproduct/implementation/place-route/timingclosure/CDC_RDC/board/system not_run. Existing50OOC retains its own scope; no new synthesis here. No publicABI/BOOT/sourceclock/physicalbaud/motion authority. H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonical c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804, design1011259415a0916054eb580687612580bc1e5f09 unchanged; A-only board.

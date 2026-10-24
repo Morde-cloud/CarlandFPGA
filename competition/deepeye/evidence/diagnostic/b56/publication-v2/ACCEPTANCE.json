@@ -1,0 +1,68 @@
+{
+  "status": "ACCEPTED_MINIMAL_PRIVATE_PL_DIAGNOSTIC_HANDOFF",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "work_id": "B-LIVE-OBS-INTEGRATION-20261023-v1",
+  "operation_id": "B-DEEPEYE-PRIVATE-PL-DIAGNOSTIC-20261025-56",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "design_commit": "1011259415a0916054eb580687612580bc1e5f09",
+  "build_manifest_sha256": "e906b1517d328e05b123346ea71c0c5c7c6552be7baa31dde2eb42833f0ef13a",
+  "bit_sha256": "8455b5f8648ff913926c7f55495c5e2ed7328e92a312558eed131f3edb0d11db",
+  "hwh_sha256": "aa0ce7094eb0f1ed6a12684713cefe3a1635ef8c32af9fc32f8e1cc3cbef3ee1",
+  "routed_dcp_sha256": "614ab02a3c7798d652714eb9f79cc8db2b9ee9ca0a4277b7f79d7f6216b46fc9",
+  "actual_build": "Vivado2026.1 full synth/place/route/bitstream exit0, whole job96 processes observed empty before close",
+  "timing": {
+    "clock_MHz": 100,
+    "setup_WNS_ns": 0.47,
+    "hold_WHS_ns": 0.029,
+    "pulse_width_slack_ns": 3.75,
+    "failing_endpoints": 0,
+    "unconstrained_internal_endpoints": 0,
+    "missing_input_output_delays": 0
+  },
+  "drc_violations": 0,
+  "methodology_violations": 0,
+  "fully_routed_nets": 5017,
+  "routing_errors": 0,
+  "resources": {
+    "LUT": 1840,
+    "FF": 3332,
+    "latches": 0
+  },
+  "private_ip": {
+    "base": "0x43c00000",
+    "instance": "private_diag_0",
+    "range": 4096,
+    "source": "same completed run BD mapping and generated HWH; no assumed host base",
+    "vlnv": "carlandfpga.local:diagnostic:deepeye_private_axi_diag:1.0"
+  },
+  "verified_full_build_files": 316,
+  "receiver_selected_files": 80,
+  "author_RTL_checks": 8694,
+  "main_independent_RTL_checks": 2050,
+  "main_collector_actual_RTL": {
+    "transactions": 518,
+    "checks": 2484,
+    "scans": 3,
+    "lanes": 12
+  },
+  "collector_author_tests": {
+    "passed": 35,
+    "skipped": 1
+  },
+  "collector_final_actual_package_offline_exit": 0,
+  "retained_failures": [
+    "r1 automatic64KiB vs4KiB and readonlyresetparameter",
+    "r2 interface object paths vsnames",
+    "r3 PS interface member ports vszeroportassertion",
+    "r4 Windows260byte generatedfile path; allwholejobs terminal before corrections"
+  ],
+  "scope": "Private source4/software_fixture/topology2. Original opaque host QPCtick64 passes actual PL capture/queue/lane into held result;STOP retires session/pipeline. No public ABI/BOOT/freshness/ADC/CNN/PWM/motion/physicalIO authority.",
+  "remaining": "A independently reviews and runs one bounded board operation under its own authority using exact manifest and original A ledger/QPC ticks. Real board/PYNQ runtime, PC-AI/live end-to-end and final video not established by offline package.",
+  "all29formal": "not_run",
+  "R03": "not_run",
+  "full_H12": "not_run",
+  "board": "not_run; A-only",
+  "publication_scope": "Private source4/software_fixture/topology2 digital diagnostic only. Actual bounded private synthesis/place-route/timing/bitstream completed; NOT full product implementation or physical execution. H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonical c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; frozen1011259415a0916054eb580687612580bc1e5f09 unchanged. All29formal/R03/fullH12/fullproduct/board/system not_run. PublicABI/BOOT/freshness/ADC/CNN/PWM/motion remain separate; A-only board."
+}

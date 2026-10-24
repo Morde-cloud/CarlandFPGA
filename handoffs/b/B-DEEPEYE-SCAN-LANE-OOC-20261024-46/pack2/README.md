@@ -1,0 +1,3 @@
+# B-DEEPEYE-SCAN-LANE-OOC-20261024-46
+
+Exact source/evidence commit 5d092b8bd629a7ab5570682779c7a090862f480a. Read competition/deepeye/evidence/acquisition/scan-lane-ooc-20261024-46/publication/README.md, ACCEPTANCE.json and SOURCE_BINDING.json. All29formal/B01/B03/B06/R03/fullproduct/place-route/implementation/timingclosure/CDC_RDC/board/system remain not_run. Bounded OOC46/47 is real and separate. No publicABI/type7enable/BOOT/clock/sourceauth/runtime/motion grant. Physicalboard A only. H01-H15 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and frozen1011259415a0916054eb580687612580bc1e5f09 unchanged.

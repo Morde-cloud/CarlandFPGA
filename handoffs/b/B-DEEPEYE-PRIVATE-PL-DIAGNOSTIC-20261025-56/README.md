@@ -1,0 +1,3 @@
+# B-DEEPEYE-PRIVATE-PL-DIAGNOSTIC-20261025-56
+
+Exact source/evidence commit 222546acbb66bcd5ebde7d8cbe55c929173ae9b4. Read competition/deepeye/evidence/diagnostic/b56/publication-v2/README.md, ACCEPTANCE.json and SOURCE_BINDING.json. Private source4/software_fixture/topology2 digital diagnostic only. Actual bounded private synthesis/place-route/timing/bitstream completed; NOT full product implementation or physical execution. H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonical c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; frozen1011259415a0916054eb580687612580bc1e5f09 unchanged. All29formal/R03/fullH12/fullproduct/board/system not_run. PublicABI/BOOT/freshness/ADC/CNN/PWM/motion remain separate; A-only board.

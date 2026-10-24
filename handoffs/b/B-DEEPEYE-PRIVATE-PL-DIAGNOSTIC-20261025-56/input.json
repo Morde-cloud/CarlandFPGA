@@ -1,0 +1,108 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-PRIVATE-PL-DIAGNOSTIC-20261025-56",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "222546acbb66bcd5ebde7d8cbe55c929173ae9b4",
+    "test_steps": [
+      "Verify 2304 indexed original raw artifacts, exact source/dependency pins, originalprocess receipts and preserved failures.",
+      "Original B-LIVE-OBS-INTEGRATION-20261023-v1 minimal PS/AXI-MMIO package requested by A comment6384721115. Actual PL capture/queue/lane with opaque original QPCtick64, distinct held result_valid, per-session identity and STOP.53author8694checks/main2050checks;55author35passed1Windows-symlinkskip; main actualcollector-toRTL518transactions/2484checks/12lanes.54whole-jobrepair4realprocesscases+3faultcases, main8gate negatives.56actualVivado2026.1 fullbuild on xc7z020clg400-1,100MHz WNS0.470ns/WHS0.029ns,0DRC/0methodology/5017fullyroutednets,1840LUT3332FF. Main316fullbuildfiles and final realpackage offlinecollector exit0 verified.96owned processes terminal; four prior actualfailedattempts preserved. Original private sources and all formal boundaries retained.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ],
+    "expected_result": "Private source4/software_fixture/topology2 digital diagnostic only. Actual bounded private synthesis/place-route/timing/bitstream completed; NOT full product implementation or physical execution. H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonical c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; frozen1011259415a0916054eb580687612580bc1e5f09 unchanged. All29formal/R03/fullH12/fullproduct/board/system not_run. PublicABI/BOOT/freshness/ADC/CNN/PWM/motion remain separate; A-only board."
+  },
+  "artifacts": [
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part00",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part01",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part02",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part03",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part04",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part05",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part06",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part07",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/raw-evidence.tar.gz.part08",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/README.md",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/SOURCE_BINDING.json",
+    "competition/deepeye/evidence/diagnostic/b56/publication-v2/WARNING_REVIEW.json",
+    "competition/deepeye/fpga/diagnostic/deepeye_private_axi_diag.sv",
+    "competition/deepeye/fpga/diagnostic/private_axi_diag.md",
+    "competition/deepeye/tests/rtl/diagnostic/tb_private_axi_diag.sv",
+    "competition/deepeye/tools/diagnostic/run_private_axi_diag.py",
+    "competition/deepeye/fpga/diagnostic/build_private_diag.tcl",
+    "competition/deepeye/tools/diagnostic/build_private_diag.py",
+    "competition/deepeye/docs/private_diag_build.md",
+    "competition/deepeye/tools/diagnostic/collect_private_diag.py",
+    "competition/deepeye/tests/diagnostic/test_collect_private_diag.py",
+    "competition/deepeye/docs/private_diag_capture.md"
+  ],
+  "stages": {
+    "private_diagnostic_synthesis": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "private_diagnostic_place_route": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "private_diagnostic_timing": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "private_diagnostic_bitstream": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "private_AXI_RTL_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "collector_software_RTL_interop": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "collector_actual_package_offline": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/b56/publication-v2/ACCEPTANCE.json"
+    },
+    "full_product_implementation": {
+      "status": "not_run"
+    },
+    "full_product_timing": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "full_product_synthesis": {
+      "status": "not_run"
+    }
+  }
+}

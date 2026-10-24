@@ -1,0 +1,3 @@
+# B-DEEPEYE-TRACE-UART-OOC-20261024-50
+
+Exact source/evidence commit 0b2716074482c1070dbeaf20c22e1182d1703a9a. Read competition/deepeye/evidence/codec/trace-uart-ooc-20261024-50/publication/README.md, ACCEPTANCE.json and SOURCE_BINDING.json. Only one real bounded OOC and independent exactDCP reopen; positive10nsdiagnosticWNS is not timingclosure. All29formal/B01/B03/B06/R03/fullproduct/implementation/place-route/CDC_RDC/board/system remain not_run. No physicalbaud/clock/source/ABI/motion grant; physicalboard A-only. H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 canonical c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804, design1011259415a0916054eb580687612580bc1e5f09 unchanged.

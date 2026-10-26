@@ -257,3 +257,26 @@ The build adds a placement physical-optimization pass, then the same routing,
 DRC, no-loop and min/max timing gates. No clock, IO, CDC exception or gate is
 weakened. Arithmetic/simulation qualification does not prove route timing;
 only the new exact-source execution can establish that result.
+
+
+## Main R6 slot-data factoring after actual R5 failure
+
+R5 actual route still failed setup: WNS -4.849ns/TNS -11739.450ns,
+4154 endpoints, hold +.038ns. Its full original evidence and terminal process
+are retained. The worst path was halted through capture-output masking,
+wide join-data selection and validation into the shared576-bit payload enable;
+80percent of the14.377ns path was routing. No R5 bitstream was produced.
+
+R6 keeps validity as the eligibility authority. Filled slots select their
+immutable stored payload; empty slots look ahead at raw capture payload,
+which is ineligible until cap_valid sets the slot's valid bit. Duplicate
+capture on a filled slot still faults, so its payload cannot become eligible.
+The private payload bank now updates on each nonreset edge, with filled slots
+selecting themselves; reset still clears every bit. STOP/TTL/retirement and
+new commands clear validity exactly as before, independently of irrelevant
+empty-slot data. A successful full join uses the same three accepted payloads.
+All arithmetic functions, public ports, control assignments, timestamps,
+deadlines, fault priority, CDC chains and result latency remain unchanged.
+Private invalid-slot values intentionally need not match older candidates.
+Bounded independent public-output and valid-slot equivalence is required;
+no physical constraint or formal acceptance gate is relaxed.

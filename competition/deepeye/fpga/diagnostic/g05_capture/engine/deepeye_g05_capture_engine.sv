@@ -125,10 +125,16 @@ module deepeye_g05_capture_engine (
     endfunction
     always_comb begin
         joined_valid = join_valid_q;
-        joined_periods = join_periods_q;
-        joined_highs = join_highs_q;
-        joined_starts = join_starts_q;
-        joined_ends = join_ends_q;
+        // A filled slot keeps its immutable payload. An empty slot may look
+        // ahead at raw capture data, but joined_valid alone grants eligibility.
+        // This keeps reset/STOP/rearm masks out of the wide data comparator.
+        // A second capture for a filled slot is still an immediate fault below.
+        for (integer i=0; i<3; i=i+1) begin
+            joined_periods[32*i +: 32] = join_valid_q[i] ? join_periods_q[32*i +: 32] : cap_period[i];
+            joined_highs[32*i +: 32] = join_valid_q[i] ? join_highs_q[32*i +: 32] : cap_high0[i];
+            joined_starts[64*i +: 64] = join_valid_q[i] ? join_starts_q[64*i +: 64] : cap_start[i];
+            joined_ends[64*i +: 64] = join_valid_q[i] ? join_ends_q[64*i +: 64] : cap_end[i];
+        end
         capture_bad = 1'b0;
         if (capture_enabled_q) begin
             if (|(cap_incoherent | cap_period_overflow | cap_witness_overflow | cap_overrun))
@@ -145,10 +151,6 @@ module deepeye_g05_capture_engine (
                         (previous_join_q && cap_start[i] != previous_ends_q[64*i +: 64]))
                         capture_bad = 1'b1;
                     joined_valid[i] = 1'b1;
-                    joined_periods[32*i +: 32] = cap_period[i];
-                    joined_highs[32*i +: 32] = cap_high0[i];
-                    joined_starts[64*i +: 64] = cap_start[i];
-                    joined_ends[64*i +: 64] = cap_end[i];
                 end
             end
         end
@@ -227,6 +229,20 @@ module deepeye_g05_capture_engine (
     assign cap_rearm = rearm_wait_q && rearm_left_q == 3'd1 && !rst && !stop && !halted;
     assign cap_stop = stop || halted || pending_q || (!capture_enabled_q && !cap_rearm);
 
+    // Only validity/control state retires on STOP/fault/command transitions.
+    // Empty-slot data is unobservable and can track the raw input continuously;
+    // filled-slot data selects itself. Thus the wide payload bank needs no
+    // capture-fault-derived shared enable, while reset still clears every bit.
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            join_periods_q <= 0; join_highs_q <= 0;
+            join_starts_q <= 0; join_ends_q <= 0;
+        end else begin
+            join_periods_q <= joined_periods; join_highs_q <= joined_highs;
+            join_starts_q <= joined_starts; join_ends_q <= joined_ends;
+        end
+    end
+
     always_ff @(posedge clk) begin
         accepted <= 0; rejected <= 0; applied <= 0;
         if (rst) begin
@@ -237,8 +253,7 @@ module deepeye_g05_capture_engine (
             pending_period_q <= 0; active_period_q <= 0;
             pending_highs_q <= 0; active_highs_q <= 0;
             pending_ttl_q <= 0; pending_tag_q <= 0; watchdog_q <= 0;
-            join_valid_q <= 0; join_periods_q <= 0; join_highs_q <= 0;
-            join_starts_q <= 0; join_ends_q <= 0; previous_ends_q <= 0; previous_join_q <= 0;
+            join_valid_q <= 0; previous_ends_q <= 0; previous_join_q <= 0;
             result_valid <= 0; result_seq <= 0; result_tag <= 0; result_tick <= 0;
             result_periods <= 0; result_highs <= 0; result_starts <= 0; result_ends <= 0;
         end else begin
@@ -298,8 +313,6 @@ module deepeye_g05_capture_engine (
                             watchdog_q <= next_watchdog[63:0];
                         end else begin
                             join_valid_q <= joined_valid;
-                            join_periods_q <= joined_periods; join_highs_q <= joined_highs;
-                            join_starts_q <= joined_starts; join_ends_q <= joined_ends;
                         end
                     end
                 end

@@ -90,7 +90,23 @@ module deepeye_g05_capture_engine (
     logic [95:0] joined_periods, joined_highs;
     logic [191:0] joined_starts, joined_ends;
     logic capture_bad, joined_good;
-    logic [63:0] min_start, max_start, min_end, max_end;
+    // Exact unsigned distance <=2, with no full-width min/max/subtract cascade.
+    // For equal high groups only low-bit 0/3 pairs differ by three. Adjacent
+    // high groups require low(a)>=low(b)+2. The widened increment forbids wrap.
+    function automatic logic near_two64(input logic [63:0] a, input logic [63:0] b);
+        logic [62:0] ah_next, bh_next;
+        begin
+            ah_next = {1'b0,a[63:2]} + 63'd1;
+            bh_next = {1'b0,b[63:2]} + 63'd1;
+            near_two64 = ((a[63:2] == b[63:2]) &&
+                          !((a[1:0] == 2'd0 && b[1:0] == 2'd3) ||
+                            (a[1:0] == 2'd3 && b[1:0] == 2'd0))) ||
+                         ((ah_next == {1'b0,b[63:2]}) &&
+                          ({1'b0,a[1:0]} >= ({1'b0,b[1:0]} + 3'd2))) ||
+                         ((bh_next == {1'b0,a[63:2]}) &&
+                          ({1'b0,b[1:0]} >= ({1'b0,a[1:0]} + 3'd2)));
+        end
+    endfunction
     always_comb begin
         joined_valid = join_valid_q;
         joined_periods = join_periods_q;
@@ -120,16 +136,14 @@ module deepeye_g05_capture_engine (
                 end
             end
         end
-        min_start = joined_starts[63:0]; max_start = joined_starts[63:0];
-        min_end = joined_ends[63:0]; max_end = joined_ends[63:0];
-        for (integer j=1; j<3; j=j+1) begin
-            if (joined_starts[64*j +: 64] < min_start) min_start = joined_starts[64*j +: 64];
-            if (joined_starts[64*j +: 64] > max_start) max_start = joined_starts[64*j +: 64];
-            if (joined_ends[64*j +: 64] < min_end) min_end = joined_ends[64*j +: 64];
-            if (joined_ends[64*j +: 64] > max_end) max_end = joined_ends[64*j +: 64];
-        end
+        // For three unsigned values, max-min<=2 iff every unordered pair is near.
         if (capture_enabled_q && (&joined_valid) &&
-            ((max_start-min_start)>64'd2 || (max_end-min_end)>64'd2)) capture_bad = 1'b1;
+            (!near_two64(joined_starts[63:0], joined_starts[127:64]) ||
+             !near_two64(joined_starts[63:0], joined_starts[191:128]) ||
+             !near_two64(joined_starts[127:64], joined_starts[191:128]) ||
+             !near_two64(joined_ends[63:0], joined_ends[127:64]) ||
+             !near_two64(joined_ends[63:0], joined_ends[191:128]) ||
+             !near_two64(joined_ends[127:64], joined_ends[191:128]))) capture_bad = 1'b1;
         joined_good = capture_enabled_q && (&joined_valid) && !capture_bad;
     end
 
@@ -188,7 +202,13 @@ module deepeye_g05_capture_engine (
     // Main revision1 permits A+5 or later. Use A+7: the event observed at
     // A+1 sets six, flushing three FFs plus up to two ticks of pin skew and
     // the primitive's sampling edge before taking a shared baseline.
-    assign cap_rearm = rearm_wait_q && rearm_left_q == 3'd1 && !rst && !stop && !halted && failure_now == 0;
+    // Rearm is scheduled solely by registered state and external reset/STOP.
+    // failure_now consumes capture out_valid, which is masked by rearm/stop;
+    // feeding it back here formed a combinational loop. Terminal failure still
+    // wins the engine's same-edge sequential branch and immediately stops PWM.
+    // If due on this internal rearm edge, halted suppresses capture next cycle;
+    // no record or command is made eligible by this internal baseline action.
+    assign cap_rearm = rearm_wait_q && rearm_left_q == 3'd1 && !rst && !stop && !halted;
     assign cap_stop = stop || halted || pending_q || (!capture_enabled_q && !cap_rearm);
 
     always_ff @(posedge clk) begin

@@ -203,3 +203,34 @@ version is preserved per run. No RTL or existing bench changed for run-04.
 The private author RESULT and evidence manifest provide exact source hashes,
 commands, raw logs and limitations. Main owns independent acceptance of these
 bytes before synthesis or hardware use; these are author simulation results.
+
+
+## Main R4 structural repair after actual R3 failure
+
+The original R3 routed candidate failed 100MHz setup (WNS -12.767ns,
+TNS -33053.863ns, 5958 endpoints) and had one LUTLP-1 combinational loop.
+Its original source, reports and terminal process remain preserved; no R3
+bitstream was generated. Prior passing digital tests were not timing proof.
+
+Main removed capture-derived `failure_now` from the internal rearm schedule:
+rearm still depends on registered countdown and reset/STOP/halted. The original
+feedback travelled through capture out_valid (masked by rearm/stop), join and
+fault logic back into rearm. A simultaneous terminal failure still wins the
+unchanged engine sequential branch and immediately stops PWM. An internal
+baseline pulse on that edge cannot produce a public record; halted suppresses
+capture next cycle. All registers, event edge definitions, fault priority,
+command/TTL rules and fixed read-only primitives are retained.
+
+The 64-bit start/end skew test now checks all three unordered pair distances.
+For a=4A+u and b=4B+v, equal high groups reject only low pairs0/3; adjacent high
+groups require preceding-low>=following-low+2. A widened63-bit high increment
+retains carry, preventing max-to-zero alias. Larger high-group separation is
+at least five counts. Thus pairwise distance<=2 is exactly equivalent to the
+previous max-min<=2 for known unsigned values; no tolerance is widened.
+
+The full-composition runner pins this revised engine. The private arithmetic
+oracle and new rearm-boundary comparison have their own evidence and do not
+replace full composition or actual synthesis/route. The build now explicitly
+rejects LUTLP-1 even though Vivado classifies it as Critical Warning. No clock
+period, IO delay, false-path scope, board ownership or formal gate is relaxed.
+Only the exact subsequent build receipt can establish new physical-tool results.

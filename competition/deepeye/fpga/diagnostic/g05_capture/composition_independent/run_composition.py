@@ -22,7 +22,7 @@ PINS={
  'fpga/control3d/deepeye_pwm_coherent_capture.sv':'4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456',
  'fpga/diagnostic/g05_capture/mapper/deepeye_g05_command_map.sv':'51f2ef228bf531e1476fd59e4068a2f1ad0b83110601104d3d1ad6764948beb4',
  'fpga/diagnostic/g05_capture/mapper/deepeye_g05_curvature_rom.svh':'d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c',
- 'fpga/diagnostic/g05_capture/engine/deepeye_g05_capture_engine.sv':'6bc6db70e3c9e7d1e1f69846b2321ca561e5330c655d2e419cad64a6f7a15c2b',
+ 'fpga/diagnostic/g05_capture/engine/deepeye_g05_capture_engine.sv':'73c581fa6ffddcbcd92247bd06f6eed5170a6f67d4a5307fe1de4897a257a5cd',
  'fpga/diagnostic/g05_capture/axi/deepeye_g05_axi.sv':'e4016741b8d127c363b6b2ff691798869e0071336d392d3481a017eab2ff97af'}
 CONTRACT='c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804'
 CASES={0:'full_capture_latch_read_stall_duplicate_stop_reset',1:'identity_staging_changed_duplicate',
@@ -88,7 +88,7 @@ def main():
     require(len(set(selected))==len(selected) and set(selected)<=set(CASES),'unique known cases only')
     out=EVIDENCE/args.attempt;out.mkdir(parents=True,exist_ok=False)
     result={'status':'failed','task':'DEEPEYE-IMPLEMENTATION-20261014/v1',
-        'work_id':'B-G05-REAL-COMPOSITION-REVIEW-20261026-59-v1','requirements_sha256':CONTRACT,
+        'work_id':'B-G05-ENGINE-R4-COMPOSITION-20261026-59-v1','requirements_sha256':CONTRACT,
         'commands':[],'cases':[],'selected_cases':selected,'production_pins':PINS,
         'scope':'real RTL composition simulation; external pins are synthetic fixtures; no board or G05 acceptance'}
     try:

@@ -312,6 +312,11 @@ proc full_build {config} {
     check_timing -verbose -file [file join $run_root reports route_check_timing.txt]
     report_utilization -file [file join $run_root reports route_utilization.txt]
     report_drc -file [file join $run_root reports route_drc.txt]
+    # LUTLP-1 is a Critical Warning, not Error, but a private diagnostic with a
+    # combinational loop is never a valid deliverable even if slack looks good.
+    foreach violation [get_drc_violations] {
+        require {![string match {LUTLP-1*} [get_property NAME $violation]]} "combinational loop: $violation"
+    }
     report_clocks -file [file join $run_root reports route_clocks.txt]
     report_route_status -file [file join $run_root reports route_status.txt]
     report_cdc -details -file [file join $run_root reports route_cdc.txt]

@@ -1,0 +1,77 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-COLLECTOR-MEMORY-20261026-57",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "3c8b978fd6d8434a031b85ac2277599be1b3cdf2",
+    "test_steps": [
+      "Verify 126 indexed original raw artifacts, exact source/dependency pins, originalprocess receipts and preserved failures.",
+      "Changed Reader allocates verified stat_size+1, retaining existing maximum/total/identity/snapshot guards. New main12 controls RED2fail then GREEN12pass; independent9 groups and real original-package24reads passed; maximum request4045776bytes instead of class ceiling268435457. Windows source evidence, not ARM rerun or proof of original failing file.",
+      "H01-H15 DEEPEYE-HUMAN-LOCK-20261014/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09 unchanged."
+    ],
+    "expected_result": "H01-H15/revision1 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; frozen1011259415a0916054eb580687612580bc1e5f09 unchanged. A alone operates the board. All29/R03/fullH12 remain not_run."
+  },
+  "artifacts": [
+    "competition/deepeye/tools/diagnostic/collect_private_diag.py",
+    "competition/deepeye/tests/diagnostic/test_collect_private_diag_memory.py",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/raw-evidence.tar.gz.part00",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/raw-evidence.tar.gz.part01",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/raw-evidence.tar.gz.part02",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/README.md",
+    "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/SOURCE_BINDING.json"
+  ],
+  "stages": {
+    "new_reader_controls": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/ACCEPTANCE.json"
+    },
+    "independent_new_reader_controls": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/ACCEPTANCE.json"
+    },
+    "changed_source_actual_package_offline": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/collector-memory-20261026-57/publication/ACCEPTANCE.json"
+    },
+    "full_product_implementation": {
+      "status": "not_run"
+    },
+    "full_product_timing": {
+      "status": "not_run"
+    },
+    "CDC_RDC": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "B01": {
+      "status": "not_run"
+    },
+    "B03": {
+      "status": "not_run"
+    },
+    "B06": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "full_product": {
+      "status": "not_run"
+    },
+    "full_product_synthesis": {
+      "status": "not_run"
+    }
+  }
+}

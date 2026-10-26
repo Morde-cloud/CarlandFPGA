@@ -205,7 +205,9 @@ class Reader:
             identity = (stat.st_dev, stat.st_ino)
             require(identity not in self.identities and stat.st_nlink == 1, "input path/hardlink alias")
             require(0 < stat.st_size <= limit and self.total + stat.st_size <= MAX_SELECTED_TOTAL, "input size limit")
-            data = f.read(limit + 1)
+            # Size is already bounded; one sentinel byte detects growth without
+            # requesting the whole file-class limit on memory-constrained hosts.
+            data = f.read(stat.st_size + 1)
             after = os.fstat(f.fileno())
         require(len(data) == stat.st_size and len(data) <= limit and
                 (stat.st_size, stat.st_mtime_ns, stat.st_ino) ==

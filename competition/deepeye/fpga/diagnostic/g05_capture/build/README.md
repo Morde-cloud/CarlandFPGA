@@ -169,3 +169,25 @@ artifact hash. Same-run paired bit/HWH, DCPs, raw synthesis run inventory and an
 exact unique run completion marker are required. Failures remain in place with
 automatic_retry=false. No synthesis, implementation, bitstream, physical-board
 or formal product acceptance is claimed by this preparation.
+# Constraint checks after synthesis
+
+The package XDC contains only twelve declarative assignments. Procedural checks
+run in the build Tcl after `open_run synth_1`: each of the six exact port names
+must have the intended direction, package pin, LVCMOS33, bonded pin and bank34.
+An unsupported procedural XDC warning in R2 was a real failed constraint
+application and is retained; the new checks do not waive it.
+
+For CDC stages2/3, the checker separately verifies a unique direct previous-FF
+Q driver on D and the previous-FF C timing startpoint returned by Vivado.
+`all_fanin -startpoints_only` is a timing query, not a Q-net driver query. All
+nine exact FF names, ASYNC_REG, actual100MHz clocks, distinct chains, and the
+sole external-input-to-first-D exception remain mandatory. Intervening logic,
+extra drivers or wrong launch registers are rejected. The FPGA RTL is unchanged.
+
+The original R2 full build failed before route/bit; a top-only checkpoint query
+contained four unresolved black boxes, and an expanded linked-netlist query
+timed out after preserving the pitch-chain facts. These historical runs are
+not promoted to passing builds. Each new build must execute the complete
+checks and retain its own reports. External propagation/skew and board timing
+remain unmeasured.
+

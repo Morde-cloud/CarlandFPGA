@@ -16,6 +16,31 @@ proc busparam {interface name value} {
     set p [ipx::add_bus_parameter $name $interface]
     set_property value $value $p
 }
+proc check_g05_ports {report_path} {
+    set rows [list "port\tdirection\tpackage_pin\tiostandard\tbank\tbonded"]
+    set errors {}
+    foreach {name pin direction} {yaw_pwm_o W14 OUT pitch_pwm_o Y14 OUT speed_pwm_o T11 OUT yaw_capture_i V16 IN pitch_capture_i W16 IN speed_capture_i V12 IN} {
+        set port [get_ports -quiet $name]
+        if {[llength $port] != 1} {lappend errors "missing/duplicate port $name"; continue}
+        set actual_pin [get_property PACKAGE_PIN $port]
+        set actual_direction [get_property DIRECTION $port]
+        set standard [get_property IOSTANDARD $port]
+        set bank missing; set bonded missing
+        if {$actual_pin ne ""} {
+            set package [get_package_pins -quiet $actual_pin]
+            if {[llength $package] == 1} {
+                set bank [get_property BANK $package]
+                set bonded [get_property IS_BONDED $package]
+            }
+        }
+        lappend rows "$name\t$actual_direction\t$actual_pin\t$standard\t$bank\t$bonded"
+        if {$actual_direction ne $direction || $actual_pin ne $pin || $standard ne "LVCMOS33" || $bank ne "34" || $bonded ne "1"} {
+            lappend errors "wrong exact G05 package allocation: $name"
+        }
+    }
+    putfile $report_path [join $rows \n]
+    require {[llength $errors] == 0} [join $errors {; }]
+}
 proc ddr_tsv {value} {
     return [string map [list \\ \\\\ \t \\t \r \\r \n \\n] $value]
 }
@@ -275,6 +300,7 @@ proc full_build {config} {
     }
     putfile [file join $run_root SYNTHESIS_RUNS.tsv] [join $synthesis_inventory \n]
     open_run synth_1
+    check_g05_ports [file join $run_root reports exact_g05_package_pins.tsv]
     source [file join $run_root inputs g05_cdc.tcl]
     apply_g05_cdc $cdc_bindings [file join $run_root reports cdc_exact_bindings.txt]
     write_checkpoint [file join $run_root artifacts g05_diag_synth.dcp]

@@ -1,14 +1,14 @@
-# Six scalar PL package allocations only, selected from A commit5c192f34.
-# Input/output flight time and physical cross-channel skew remain unmeasured.
-# No invented IO delays, external clocks, or unrelated J3/analog/RS485 pins.
-foreach {name pin direction} {
-    yaw_pwm_o W14 OUT pitch_pwm_o Y14 OUT speed_pwm_o T11 OUT
-    yaw_capture_i V16 IN pitch_capture_i W16 IN speed_capture_i V12 IN
-} {
-    set port [get_ports -quiet $name]
-    if {[llength $port] != 1 || [get_property DIRECTION $port] ne $direction} {
-        error "missing/wrong-direction exact G05 scalar port: $name"
-    }
-    set_property PACKAGE_PIN $pin $port
-    set_property IOSTANDARD LVCMOS33 $port
-}
+# Declarative package constraints; procedural validation belongs in build_g05.tcl.
+# A candidate5c192f34: bank34 LVCMOS33; external delays/skew remain unmeasured.
+set_property PACKAGE_PIN W14 [get_ports {yaw_pwm_o}]
+set_property IOSTANDARD LVCMOS33 [get_ports {yaw_pwm_o}]
+set_property PACKAGE_PIN Y14 [get_ports {pitch_pwm_o}]
+set_property IOSTANDARD LVCMOS33 [get_ports {pitch_pwm_o}]
+set_property PACKAGE_PIN T11 [get_ports {speed_pwm_o}]
+set_property IOSTANDARD LVCMOS33 [get_ports {speed_pwm_o}]
+set_property PACKAGE_PIN V16 [get_ports {yaw_capture_i}]
+set_property IOSTANDARD LVCMOS33 [get_ports {yaw_capture_i}]
+set_property PACKAGE_PIN W16 [get_ports {pitch_capture_i}]
+set_property IOSTANDARD LVCMOS33 [get_ports {pitch_capture_i}]
+set_property PACKAGE_PIN V12 [get_ports {speed_capture_i}]
+set_property IOSTANDARD LVCMOS33 [get_ports {speed_capture_i}]

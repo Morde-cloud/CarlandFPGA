@@ -67,15 +67,22 @@ module deepeye_g05_capture_engine (
     logic [2:0] cap_witness_overflow, cap_overrun;
     logic [31:0] cap_period [0:2], cap_high0 [0:2], cap_high1 [0:2], cap_high2 [0:2];
     logic [63:0] cap_start [0:2], cap_end [0:2], cap_tag [0:2];
+    logic [31:0] cap_start_raw [0:2], cap_end_raw [0:2];
     genvar channel;
     generate for (channel=0; channel<3; channel=channel+1) begin : g_external
-        deepeye_pwm_coherent_capture #(.COUNT_W(32), .WITNESS_W(64), .TAG_W(64)) u_capture (
+        // Production mapper bounds every active window to <=1200000000 ticks.
+        // Rearm resets the local witness; STOP/expiry clears it. A 32-bit
+        // witness is therefore sufficient, with conservative overflow fault
+        // for unsupported much-longer count-level diagnostic windows.
+        assign cap_start[channel] = {32'd0,cap_start_raw[channel]};
+        assign cap_end[channel] = {32'd0,cap_end_raw[channel]};
+        deepeye_pwm_coherent_capture #(.COUNT_W(32), .WITNESS_W(32), .TAG_W(64)) u_capture (
             .clk(clk), .rst(rst), .stop(cap_stop), .rearm(cap_rearm),
             .sample_levels({3{capture_level_q[channel]}}), .window_tag(active_tag_q),
             .out_ready(1'b1), .armed(cap_armed[channel]), .out_valid(cap_valid[channel]),
             .out_period(cap_period[channel]), .out_high0(cap_high0[channel]),
             .out_high1(cap_high1[channel]), .out_high2(cap_high2[channel]),
-            .out_start(cap_start[channel]), .out_end(cap_end[channel]), .out_tag(cap_tag[channel]),
+            .out_start(cap_start_raw[channel]), .out_end(cap_end_raw[channel]), .out_tag(cap_tag[channel]),
             .incoherent_event(cap_incoherent[channel]), .period_overflow_event(cap_period_overflow[channel]),
             .witness_overflow_event(cap_witness_overflow[channel]), .overrun_event(cap_overrun[channel]),
             .incoherent_seen(), .period_overflow_seen(), .witness_overflow_seen(), .overrun_seen(), .fault_count()
@@ -123,6 +130,26 @@ module deepeye_g05_capture_engine (
                           ({1'b0,b[1:0]} >= ({1'b0,a[1:0]} + 3'd2)));
         end
     endfunction
+    // Compare all data alternatives before choosing by the three slot flags.
+    // These kept one-bit predicates keep a late slot/control flag out of the
+    // wide witness arithmetic, without adding a clock or changing tolerance.
+    (* keep = "TRUE" *) logic [3:0] start_near_choices [0:2], end_near_choices [0:2];
+    logic [2:0] selected_start_near, selected_end_near;
+    genvar pair_index;
+    generate for (pair_index=0; pair_index<3; pair_index=pair_index+1) begin : g_pair_check
+        localparam integer A = (pair_index==2) ? 1 : 0;
+        localparam integer B = (pair_index==0) ? 1 : 2;
+        assign start_near_choices[pair_index][0] = near_two64(cap_start[A], cap_start[B]);
+        assign start_near_choices[pair_index][1] = near_two64(cap_start[A], join_starts_q[64*B +: 64]);
+        assign start_near_choices[pair_index][2] = near_two64(join_starts_q[64*A +: 64], cap_start[B]);
+        assign start_near_choices[pair_index][3] = near_two64(join_starts_q[64*A +: 64], join_starts_q[64*B +: 64]);
+        assign end_near_choices[pair_index][0] = near_two64(cap_end[A], cap_end[B]);
+        assign end_near_choices[pair_index][1] = near_two64(cap_end[A], join_ends_q[64*B +: 64]);
+        assign end_near_choices[pair_index][2] = near_two64(join_ends_q[64*A +: 64], cap_end[B]);
+        assign end_near_choices[pair_index][3] = near_two64(join_ends_q[64*A +: 64], join_ends_q[64*B +: 64]);
+        assign selected_start_near[pair_index] = start_near_choices[pair_index][{join_valid_q[A],join_valid_q[B]}];
+        assign selected_end_near[pair_index] = end_near_choices[pair_index][{join_valid_q[A],join_valid_q[B]}];
+    end endgenerate
     always_comb begin
         joined_valid = join_valid_q;
         // A filled slot keeps its immutable payload. An empty slot may look
@@ -156,12 +183,7 @@ module deepeye_g05_capture_engine (
         end
         // For three unsigned values, max-min<=2 iff every unordered pair is near.
         if (capture_enabled_q && (&joined_valid) &&
-            (!near_two64(joined_starts[63:0], joined_starts[127:64]) ||
-             !near_two64(joined_starts[63:0], joined_starts[191:128]) ||
-             !near_two64(joined_starts[127:64], joined_starts[191:128]) ||
-             !near_two64(joined_ends[63:0], joined_ends[127:64]) ||
-             !near_two64(joined_ends[63:0], joined_ends[191:128]) ||
-             !near_two64(joined_ends[127:64], joined_ends[191:128]))) capture_bad = 1'b1;
+            (!(&selected_start_near) || !(&selected_end_near))) capture_bad = 1'b1;
         joined_good = capture_enabled_q && (&joined_valid) && !capture_bad;
     end
 

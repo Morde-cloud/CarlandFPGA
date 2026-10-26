@@ -280,3 +280,30 @@ deadlines, fault priority, CDC chains and result latency remain unchanged.
 Private invalid-slot values intentionally need not match older candidates.
 Bounded independent public-output and valid-slot equivalence is required;
 no physical constraint or formal acceptance gate is relaxed.
+
+
+## Main R7 production-bounded witnesses and late predicate selection
+
+R6 retained bounded public behavior but actual100MHz route failed WNS-3.176ns,
+TNS-5239.777ns/2551endpoints, hold+.019ns. The 12-LUT critical path still ran
+from join-valid through selected wide timestamps and back to join-valid;
+84.7percent was routing. Original failed artifacts remain; no bit was produced.
+
+Current private capture instances use WITNESS_W32, explicitly zero-extended
+into the unchanged64-bit record. The fixed production mapper permits at most
+12000ms*100000ticks/ms=1200000000ticks per actual application. Rearm atapply+7
+resets the witness; pending retains oldTTL, and STOP/expiry retires regardless
+of capture input. Even adding32conservative edges staysbelow2^31. A new apply
+starts a new witness origin. Global cycle/deadline counters remain64-bit.
+The earlier WITNESS_W64 row describes the original candidate, superseded here.
+Unsupported count-only windows reaching2^32localticks now conservatively fault;
+generic64-count-core equivalence is explicitly not claimed. No authorized
+production lifetime, record field, source profile or physical timing is changed.
+
+For each unordered channel pair, four independent one-bit near-two predicates
+compare raw/raw, raw/stored, stored/raw and stored/stored witnesses. A late
+two-bit valid selector chooses the predicate. This is algebraically equal to
+comparing the R6 selected payloads, without sending late valid flags through
+wide timestamp arithmetic. All three arithmetic function bodies, control and
+payload-register blocks, STOP/TTL priority, timestamps and latency are unchanged.
+New bounded independent validation and actual full-route timing remain required.

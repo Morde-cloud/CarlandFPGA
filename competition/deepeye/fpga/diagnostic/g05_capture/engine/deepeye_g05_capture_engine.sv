@@ -230,10 +230,25 @@ module deepeye_g05_capture_engine (
         else if (monitor_q && !pending_q && !atom_applied && edge_tick >= watchdog_q && !joined_good)
             failure_now = 8'd4;
     end
-    assign cfg_ready = !rst && !stop && !halted && !pending_q && failure_now == 0;
+    // Fault presence is a parallel reduction, not a decode of priority reason.
+    // The reason encoder above is retained verbatim for the fault evidence FF.
+    logic failure_any, command_offer;
+    assign failure_any = cycle_tick == TMAX || old_ttl_due || observed_ttl_due ||
+        pending_arith_bad || observed_arith_bad ||
+        (atom_applied && (!pending_q || atom_period != pending_period_q ||
+         {atom_high2,atom_high1,atom_high0} != pending_highs_q || atom_tag != pending_tag_q)) ||
+        atom_rejected || capture_bad ||
+        (joined_good && (result_seq == 32'hffffffff || next_watchdog[64])) ||
+        (monitor_q && !pending_q && !atom_applied && edge_tick >= watchdog_q && !joined_good);
+    assign command_offer = cfg_valid && !rst && !stop && !halted && !pending_q;
+    assign cfg_ready = !rst && !stop && !halted && !pending_q && !failure_any;
     assign handshake = cfg_valid && cfg_ready;
-    assign atom_cfg_valid = handshake && counts_legal && !accept_arith_bad;
-    assign atom_stop = stop || halted || failure_now != 0 || (handshake && (!counts_legal || accept_arith_bad));
+    // When failure_any is high atom_stop is high. The immutable PWM primitive
+    // gates cfg_ready/apply_now by stop and its sequential STOP branch wins.
+    // Therefore passing the offer here does not permit an acceptance, while
+    // avoiding a second failure-dependent path through PWM payload admission.
+    assign atom_cfg_valid = command_offer && counts_legal && !accept_arith_bad;
+    assign atom_stop = stop || halted || failure_any || (command_offer && (!counts_legal || accept_arith_bad));
     assign running = atom_running && !halted;
     assign pending = pending_q;
     // Expose actual new identity immediately with the primitive's event, then
@@ -289,10 +304,10 @@ module deepeye_g05_capture_engine (
                     deadline_tick <= observed_deadline[63:0];
                     active_tag_q <= atom_tag;
                 end
-                if (stop || failure_now != 0 || (handshake && (!counts_legal || accept_arith_bad))) begin
+                if (stop || failure_any || (handshake && (!counts_legal || accept_arith_bad))) begin
                     halted <= 1;
                     if (stop) fault_code <= 8'd6;
-                    else if (failure_now != 0) fault_code <= failure_now;
+                    else if (failure_any) fault_code <= failure_now;
                     else if (!counts_legal) fault_code <= 8'd1;
                     else fault_code <= 8'd5;
                     rejected <= handshake && (!counts_legal || accept_arith_bad);

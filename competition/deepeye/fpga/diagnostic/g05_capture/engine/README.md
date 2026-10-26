@@ -307,3 +307,19 @@ comparing the R6 selected payloads, without sending late valid flags through
 wide timestamp arithmetic. All three arithmetic function bodies, control and
 payload-register blocks, STOP/TTL priority, timestamps and latency are unchanged.
 New bounded independent validation and actual full-route timing remain required.
+
+
+## Main R8 STOP dominance and parallel fault presence
+
+R7 actual route failed WNS-4.881ns/TNS-7571.121ns (2710 endpoints), hold+.032ns.
+The 21-level critical path continued from stored witnesses through the fault
+reason priority encoder and command admission into PWM application. No bit.
+R8 keeps the reason encoder but derives fault presence from the parallel OR
+of its exact conditions. The PWM offer no longer repeats the failure gate:
+when a failure exists, its STOP input already disables cfg_ready and apply_now
+and wins the immutable primitive's sequential branch. External engine cfg_ready
+and handshake retain the failure gate. The STOP invalid-command branch may use
+the ungated offer because failure itself already forces STOP. Binary algebra
+therefore preserves every effective transfer/application/retirement edge.
+No pipeline, tolerance, TTL, result field or timestamp change is introduced.
+Independent public-port simulation and actual full-route timing remain gates.

@@ -120,14 +120,14 @@ module deepeye_g05_capture_engine (
     // For equal high groups only low-bit 0/3 pairs differ by three. Adjacent
     // high groups require low(a)>=low(b)+2; successor64 never wraps.
     function automatic logic near_two64(input logic [63:0] a, input logic [63:0] b);
+        logic [64:0] difference;
         begin
-            near_two64 = ((a[63:2] == b[63:2]) &&
-                          !((a[1:0] == 2'd0 && b[1:0] == 2'd3) ||
-                            (a[1:0] == 2'd3 && b[1:0] == 2'd0))) ||
-                         (successor64({2'b0,a[63:2]}, {2'b0,b[63:2]}) &&
-                          ({1'b0,a[1:0]} >= ({1'b0,b[1:0]} + 3'd2))) ||
-                         (successor64({2'b0,b[63:2]}, {2'b0,a[63:2]}) &&
-                          ({1'b0,b[1:0]} >= ({1'b0,a[1:0]} + 3'd2)));
+            // Zero extension makes the signed range exactly -(2^64-1)..2^64-1.
+            // Positive residues 0,1,2 or negative residues -1,-2 are the only
+            // accepted values. No unsigned endpoint can wrap into this set.
+            difference = {1'b0,a} - {1'b0,b};
+            near_two64 = ((~|difference[64:2]) && difference[1:0] != 2'd3) ||
+                         (&difference[64:1]);
         end
     endfunction
     // Compare all data alternatives before choosing by the three slot flags.

@@ -323,3 +323,16 @@ the ungated offer because failure itself already forces STOP. Binary algebra
 therefore preserves every effective transfer/application/retirement edge.
 No pipeline, tolerance, TTL, result field or timestamp change is introduced.
 Independent public-port simulation and actual full-route timing remain gates.
+
+
+## Main R9 exact widened difference
+
+R8 preserves all155 independently simulated scenarios but actual route failed
+WNS-3.444ns/TNS-4946.542ns (2114endpoints), hold+.038ns. The critical path
+passed through the byte-successor near comparator and failure/handshake gates.
+R9 changes only near_two64's arithmetic body. A single zeroextended65-bit
+subtraction represents all unsigned64 differences without aliasing. Its bit
+test accepts residues0,1,2,-1,-2 only, exactly absolute difference<=2. The
+32-bit wrapper remains zeroextended. This replaces wide replicated byte-case
+successor networks, retaining tolerance, payloads, all state and every edge.
+Independent actual arithmetic vectors and full-route timing remain required.

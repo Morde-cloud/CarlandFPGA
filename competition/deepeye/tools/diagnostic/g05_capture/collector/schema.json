@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private G05 collector revision59 operation inputs",
+  "description": "Documentation schema; pinned parent Python validation is authoritative. Duplicate keys, float/exponent numbers and nonfinite values are rejected before semantic checks. No sample here authorizes hardware.",
+  "oneOf": [{"$ref": "#/$defs/fixture"}, {"$ref": "#/$defs/authorization"}],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "identifier": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,128}$"},
+    "command": {
+      "type": "object", "additionalProperties": false,
+      "required": ["command_id", "tag", "profile", "yaw", "pitch", "speed", "ttl_ms"],
+      "properties": {
+        "command_id": {"type": "integer", "minimum": 1, "maximum": 4294967295},
+        "tag": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "profile": {"enum": [1, 2]},
+        "yaw": {"type": "integer", "minimum": -15000, "maximum": 15000},
+        "pitch": {"type": "integer", "minimum": -15000, "maximum": 15000},
+        "speed": {"type": "integer", "minimum": 0, "maximum": 20},
+        "ttl_ms": {"type": "integer", "minimum": 1, "maximum": 12000}
+      },
+      "if": {"properties": {"profile": {"const": 1}}},
+      "then": {"properties": {"ttl_ms": {"maximum": 3000}}},
+      "$comment": "Exact parent additionally enforces combined curvature and zero-speed axes. Commands strictly increase IDs and share one profile."
+    },
+    "fixture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "task_id", "task_version", "requirements_sha256", "operation_id", "run_id", "nonce", "session", "expected_build_manifest_sha256", "commands"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "task_id": {"const": "DEEPEYE-IMPLEMENTATION-20261014"},
+        "task_version": {"const": 1},
+        "requirements_sha256": {"const": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"},
+        "operation_id": {"$ref": "#/$defs/identifier"},
+        "run_id": {"$ref": "#/$defs/hash"},
+        "nonce": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+        "session": {"type": "integer", "minimum": 1, "maximum": 4294967295},
+        "expected_build_manifest_sha256": {"$ref": "#/$defs/hash"},
+        "commands": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"$ref": "#/$defs/command"}}
+      },
+      "$comment": "run_id and nonce must additionally be nonzero. Manifest hash matches exact original manifest bytes."
+    },
+    "authorization": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "task_id", "task_version", "requirements_sha256", "node_id", "action", "authorized", "build_reviewed", "fresh_operation", "reset_confirmed", "confirmed_board_clock_hz", "operation_id", "run_id", "nonce", "session", "expected_build_manifest_sha256", "source_commit", "fixture_sha256", "reset_operation_id", "issued_unix_s", "expires_unix_s"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "task_id": {"const": "DEEPEYE-IMPLEMENTATION-20261014"},
+        "task_version": {"const": 1},
+        "requirements_sha256": {"const": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"},
+        "node_id": {"const": "A"},
+        "action": {"const": "execute_g05_private_diagnostic"},
+        "authorized": {"const": true},
+        "build_reviewed": {"const": true},
+        "fresh_operation": {"const": true},
+        "reset_confirmed": {"const": true},
+        "confirmed_board_clock_hz": {"const": 100000000},
+        "operation_id": {"$ref": "#/$defs/identifier"},
+        "run_id": {"$ref": "#/$defs/hash"},
+        "nonce": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+        "session": {"type": "integer", "minimum": 1, "maximum": 4294967295},
+        "expected_build_manifest_sha256": {"$ref": "#/$defs/hash"},
+        "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "fixture_sha256": {"$ref": "#/$defs/hash"},
+        "reset_operation_id": {"$ref": "#/$defs/identifier"},
+        "issued_unix_s": {"type": "integer", "minimum": 1},
+        "expires_unix_s": {"type": "integer", "minimum": 1}
+      },
+      "$comment": "All operation fields must match exact validated inputs. Reset ID differs from operation ID; issued<=now<expires<=issued+900. This is local caller authorization, not a cryptographic node identity."
+    }
+  }
+}

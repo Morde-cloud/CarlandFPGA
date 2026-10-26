@@ -16,6 +16,62 @@ proc busparam {interface name value} {
     set p [ipx::add_bus_parameter $name $interface]
     set_property value $value $p
 }
+proc ddr_tsv {value} {
+    return [string map [list \\ \\\\ \t \\t \r \\r \n \\n] $value]
+}
+proc check_ddr72 {ps literal_ddr expected_ddr report_dir stage} {
+    require {$stage in {after_board_fclk after_validate}} {unknown DDR check stage}
+    set errors {}
+    set expected_keys [lsort [dict keys $expected_ddr]]
+    set literal_keys [lsort [dict keys $literal_ddr]]
+    if {[llength $expected_keys] != 72 || $literal_keys ne $expected_keys} {
+        lappend errors {expected/literal DDR tables must have the same exact72 keys}
+    }
+    set actual_keys {}
+    if {[catch {list_property $ps} properties]} {
+        lappend errors "DDR property inventory failed: $properties"
+    } else {
+        foreach key $properties {
+            if {[string match CONFIG.PCW_UIPARAM_DDR_* $key]} {lappend actual_keys $key}
+        }
+        set actual_keys [lsort $actual_keys]
+        if {$actual_keys ne $expected_keys} {lappend errors {actual DDR key set differs from expected72}}
+    }
+    set actual [dict create]
+    set differences [dict create]
+    set rows [list "key\tboard_literal\tresolved_expected\tactual\tresult"]
+    set diff_rows $rows
+    foreach key [lsort -unique [concat $expected_keys $actual_keys]] {
+        set board_value <missing>; set expected <missing>; set value <missing>; set result exact
+        if {[dict exists $literal_ddr $key]} {set board_value [dict get $literal_ddr $key]}
+        if {[dict exists $expected_ddr $key]} {set expected [dict get $expected_ddr $key]} else {set result unexpected_key}
+        if {$key ni $actual_keys} {
+            set result missing_key
+        } elseif {[catch {get_property $key $ps} value]} {
+            set result read_error
+        } elseif {$value ne $expected} {
+            set result mismatch
+        }
+        dict set actual $key $value
+        if {$result ne "exact"} {lappend errors "$key: $result"}
+        set row "[ddr_tsv $key]\t[ddr_tsv $board_value]\t[ddr_tsv $expected]\t[ddr_tsv $value]\t$result"
+        lappend rows $row
+        if {$result ne "exact" || $value ne $board_value} {
+            dict set differences $key [dict create board_literal $board_value resolved_expected $expected actual $value result $result]
+            lappend diff_rows $row
+        }
+    }
+    # Export every value/difference before raising, not just the first mismatch.
+    # Tcl list encoding preserves raw values/errors losslessly; TSV is a view.
+    set evidence [dict create stage $stage comparison exact_string_no_numeric_tolerance \
+        literal_ddr $literal_ddr expected_ddr $expected_ddr actual_ddr $actual \
+        actual_keys $actual_keys differences $differences errors $errors]
+    putfile [file join $report_dir ${stage}_ddr72.tcl] [list set ddr_stage_evidence $evidence]
+    putfile [file join $report_dir ${stage}_ddr72.tsv] [join $rows \n]
+    putfile [file join $report_dir ${stage}_ddr_differences.tsv] [join $diff_rows \n]
+    require {[llength $errors] == 0} "DDR72 mismatch at $stage: [join $errors {; }]"
+    return $evidence
+}
 proc package_private {sources root} {
     create_project diag_pack [file join $root packaging_project] -part xc7z020clg400-1
     add_files -norecurse $sources
@@ -136,14 +192,7 @@ proc full_build {config} {
         CONFIG.PCW_EN_CLK1_PORT 0 CONFIG.PCW_EN_CLK2_PORT 0 CONFIG.PCW_EN_CLK3_PORT 0 \
         CONFIG.PCW_EN_RST1_PORT 0 CONFIG.PCW_EN_RST2_PORT 0 CONFIG.PCW_EN_RST3_PORT 0] $ps
     source [file join $run_root inputs ddr_expected.tcl]
-    dict for {key expected} $expected_ddr {
-        set actual [get_property $key $ps]
-        if {[string is double -strict $actual] && [string is double -strict $expected]} {
-            require {abs(double($actual)-double($expected)) < 0.0001} "preset DDR mismatch: $key=$actual expected=$expected"
-        } else {
-            require {$actual eq $expected} "preset DDR mismatch: $key=$actual expected=$expected"
-        }
-    }
+    check_ddr72 $ps $literal_ddr $expected_ddr [file join $run_root reports] after_board_fclk
     report_property $ps -file [file join $run_root reports ps7_properties.txt]
     set interconnect [create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_gp0]
     set_property -dict [list CONFIG.NUM_SI 1 CONFIG.NUM_MI 1] $interconnect
@@ -196,7 +245,13 @@ proc full_build {config} {
     foreach name {yaw_pwm_o pitch_pwm_o speed_pwm_o yaw_capture_i pitch_capture_i speed_capture_i} {lappend allowed [get_bd_ports $name]}
     require {[lsort [get_bd_ports]] eq [lsort $allowed]} {unexpected top PL port}
     putfile [file join $run_root reports external_ports.txt] [lsort $allowed]
-    validate_bd_design
+    set validation_code [catch {validate_bd_design} validation_message validation_options]
+    # Retain a post-validation table even when validate_bd_design itself fails.
+    set ddr_code [catch {check_ddr72 $ps $literal_ddr $expected_ddr [file join $run_root reports] after_validate} ddr_message ddr_options]
+    putfile [file join $run_root reports bd_validation_status.tcl] [list set bd_validation_status \
+        [dict create return_code $validation_code message $validation_message options $validation_options]]
+    if {$validation_code != 0} {return -options $validation_options $validation_message}
+    if {$ddr_code != 0} {return -options $ddr_options $ddr_message}
     require {[get_property CONFIG.C_EXT_RESET_HIGH $reset] == 0} {PS reset did not propagate as active low}
     require {[get_property CONFIG.POLARITY [get_bd_pins rst_fclk0/ext_reset_in]] eq "ACTIVE_LOW"} {reset pin polarity mismatch}
     report_property $reset -file [file join $run_root reports reset_properties.txt]

@@ -39,6 +39,12 @@ IO_HASHES={'candidate-pinmap.json':'4d1887278b2f84475997a323f1601258fddd4b0e5a14
     'candidate.xdc':'2877efc625c96b869b979ca8589518a066f61666868c0a9d73f5ac000628ac75'}
 HELPER_SHA='3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3'
 PHYSICAL_UNKNOWNS=['external_output_propagation','input_flight_time','physical_cross_channel_skew']
+DDR_VENDOR_REL='data/PS/7series/data/zynqconfig/ddr/ddr_preset.xml'
+DDR_VENDOR_SHA='73566a941b442804a9c6b0eb42385b6c1cb82f12e354c138f8868005b91c52ed'
+DDR_SELECTOR={'param':'pcw_uiparam_ddr_partno','name':'MT41J256M16 RE-125','strength':'8'}
+DDR_PREFIX='CONFIG.PCW_UIPARAM_DDR_'
+DDR_MODEL_KEYS=frozenset('DRAM_WIDTH DEVICE_CAPACITY SPEED_BIN BANK_ADDR_COUNT ROW_ADDR_COUNT COL_ADDR_COUNT CL CWL T_RCD T_RP T_RC T_RAS_MIN T_FAW'.split())
+DDR_OVERRIDES={'T_RC':('50.625','48.91'),'T_RCD':('13.125','7'),'T_RP':('13.125','7')}
 
 
 def load(path):
@@ -57,6 +63,108 @@ def literal(value):
     value=str(value).replace('\\','/')
     require(not any(c in value for c in '{}\n\r\x00'),'unsafe Tcl literal')
     return '{'+value+'}'
+
+
+def _resolve_ddr_tables(board_raw,vendor_raw,*,test_fixture):
+    """Structural parser; production callers must use resolve_ddr(), never this helper."""
+    parsed_inputs=[]
+    vendor_declaration=b'<!DOCTYPE presets PUBLIC "presets" "presets.dtd" >'
+    for index,raw in enumerate((board_raw,vendor_raw)):
+        require(type(raw) is bytes and 0<len(raw)<=1048576,'bounded DDR XML bytes required')
+        # The pinned vendor XML contains this exact external declaration. Keep
+        # raw evidence intact, but remove it from the parser copy: no DTD fetch.
+        parsed=raw.replace(vendor_declaration,b'',1) if index==1 else raw
+        require(b'<!DOCTYPE' not in parsed.upper() and b'<!ENTITY' not in parsed.upper(),'DDR XML unexpected DTD/entity forbidden')
+        parsed_inputs.append(parsed)
+    board=ET.fromstring(parsed_inputs[0])
+    require(board.tag=='ip_presets','board preset root')
+    presets=board.findall("./ip_preset[@preset_proc_name='ps7_preset']")
+    require(len(presets)==1,'unique PS7 board preset required')
+    ips=presets[0].findall("./ip[@name='processing_system7']")
+    require(len(ips)==1,'unique board PS7 IP required')
+    params={}
+    for p in ips[0].findall('./user_parameters/user_parameter'):
+        require(set(p.attrib)=={'name','value'} and p.get('name') not in params,'duplicate/malformed board parameter')
+        params[p.attrib['name']]=p.attrib['value']
+    require(len(params)==771,'exact771 raw board parameters required')
+    raw_ddr={k:v for k,v in params.items() if k.startswith(DDR_PREFIX)}
+    require(len(raw_ddr)==72,'exact72 literal board DDR parameters required')
+    require(raw_ddr.get(DDR_PREFIX+'PARTNO')==DDR_SELECTOR['name'],'board named model mismatch')
+    vendor=ET.fromstring(parsed_inputs[1])
+    require(vendor.tag=='presets','vendor DDR preset root')
+    # Search by name first so a duplicate with a changed selector/strength is
+    # rejected too, rather than silently selecting one of two same-name entries.
+    matches=[p for p in vendor.findall('./preset') if p.get('name')==DDR_SELECTOR['name']]
+    require(len(matches)==1 and matches[0].attrib==DDR_SELECTOR,'unique exact named DDR selector/strength required')
+    selected=matches[0];sets={};disabled=[]
+    for entry in selected:
+        require(entry.tag in ('set','disable'),'unexpected named-model entry')
+        expected={'param','value'} if entry.tag=='set' else {'param'}
+        require(set(entry.attrib)==expected and len(entry)==0,'malformed named-model entry')
+        name=entry.attrib['param']
+        require(name.startswith('pcw_uiparam_ddr_') and name==name.lower(),'model parameter naming')
+        key='CONFIG.'+name.upper()
+        if entry.tag=='set':
+            require(key not in sets,'duplicate model set entry');sets[key]=entry.attrib['value']
+        else:
+            require(key not in disabled,'duplicate model disable entry');disabled.append(key)
+    expected_keys={DDR_PREFIX+k for k in DDR_MODEL_KEYS}
+    require(len(sets)==13 and set(sets)==expected_keys,'exact13 named-model set keys required')
+    require(len(disabled)==13 and set(disabled)==set(sets),'same13 unique set/disable entries required')
+    require(set(sets)<=set(raw_ddr),'named model must be board DDR key subset')
+    differences={k:{'board_literal':raw_ddr[k],'named_model':v} for k,v in sets.items() if raw_ddr[k]!=v}
+    expected_diff={DDR_PREFIX+k:{'board_literal':old,'named_model':new} for k,(old,new) in DDR_OVERRIDES.items()}
+    require(differences==expected_diff,'exact three main-decided DDR differences required; no additional change')
+    require(sum(raw_ddr[k]==v for k,v in sets.items())==10,'ten unchanged model values required')
+    resolved={**raw_ddr,**sets}
+    require(len(resolved)==72 and all(resolved[k]==raw_ddr[k] for k in raw_ddr if k not in expected_diff),'nonoverride DDR changed')
+    return {'schema':1,'scope':'synthetic_parser_fixture_not_build_authority' if test_fixture else 'pinned_named_model_resolution_not_physical_proof',
+        'board_sha256':hashlib.sha256(board_raw).hexdigest(),'vendor_ddr_sha256':hashlib.sha256(vendor_raw).hexdigest(),
+        'selector':dict(DDR_SELECTOR),'selected_entry_xml':ET.tostring(selected,encoding='unicode'),
+        'raw_board_parameters':params,'literal_ddr':raw_ddr,'model_set':sets,'model_disable':sorted(disabled),
+        'resolved_ddr':resolved,'differences':differences,'counts':{'raw_board':771,'literal_ddr':72,'resolved_ddr':72,'model_set':13,'model_disable':13,'model_unchanged':10,'overrides':3},
+        'units':{'T_RC':'ns explicitly named in installed parameter metadata','T_RP':'clock cycles explicitly described',
+                 'T_RCD':'unit unproven; installed node does not explicitly name a unit','T_RAS_MIN':'metadata name says ns but description also says cycles'},
+        'conversion':'none; retain exact raw string values',
+        'xml_parse_policy':'remove only exact pinned vendor PUBLIC declaration from parser copy; never load DTD; raw snapshot unchanged',
+        'requirements_sha256':CONTRACT,'frozen_design':DESIGN}
+
+
+def resolve_ddr(board_raw,vendor_raw):
+    """Production entry always enforces both immutable source hashes."""
+    require(hashlib.sha256(board_raw).hexdigest()==BOARD_HASHES['preset.xml'],'TUL board preset hash mismatch')
+    require(hashlib.sha256(vendor_raw).hexdigest()==DDR_VENDOR_SHA,'installed vendor DDR preset hash mismatch')
+    return _resolve_ddr_tables(board_raw,vendor_raw,test_fixture=False)
+
+
+def resolve_ddr_test_fixture(board_raw,vendor_raw):
+    """Explicit mutated-XML parser control only; cannot be selected by the build CLI."""
+    return _resolve_ddr_tables(board_raw,vendor_raw,test_fixture=True)
+
+
+def ddr_expected_text(resolution):
+    return ''.join('set '+var+' [dict create '+' '.join(literal(k)+' '+literal(v) for k,v in sorted(resolution[key].items()))+']\n'
+                   for var,key in (('literal_ddr','literal_ddr'),('expected_ddr','resolved_ddr')))
+
+
+def write_ddr_inputs(board_snapshot,vendor_source,inputs):
+    copy(vendor_source,inputs/'vendor_ddr_preset.xml',DDR_VENDOR_SHA)
+    resolution=resolve_ddr(Path(board_snapshot).read_bytes(),(inputs/'vendor_ddr_preset.xml').read_bytes())
+    write_json(inputs/'ps7_preset_parameters.json',resolution['raw_board_parameters'])
+    write_json(inputs/'ddr_literal.json',resolution['literal_ddr'])
+    write_json(inputs/'ddr_resolved.json',resolution['resolved_ddr'])
+    write_json(inputs/'ddr_resolution.json',resolution)
+    with (inputs/'ddr_expected.tcl').open('x',encoding='utf-8',newline='\n') as f:f.write(ddr_expected_text(resolution))
+    return resolution
+
+
+def verify_ddr_inputs(inputs):
+    resolution=resolve_ddr((inputs/'board_repo/pynq-z2/A.0/preset.xml').read_bytes(),(inputs/'vendor_ddr_preset.xml').read_bytes())
+    for name,key in (('ps7_preset_parameters.json','raw_board_parameters'),('ddr_literal.json','literal_ddr'),('ddr_resolved.json','resolved_ddr')):
+        require(load(inputs/name)==resolution[key],'generated DDR table changed: '+name)
+    require(load(inputs/'ddr_resolution.json')==resolution,'DDR provenance changed')
+    require((inputs/'ddr_expected.tcl').read_bytes()==ddr_expected_text(resolution).encode('utf-8'),'executable DDR table changed')
+    return resolution
 
 
 def hash_map(value,keys):
@@ -131,16 +239,8 @@ def prepare(args,out):
     for name,value in BOARD_HASHES.items():copy(args.board_dir/name,out/'inputs/board_repo/pynq-z2/A.0'/name,value)
     board=ET.parse(args.board_dir/'board.xml').getroot()
     require(board.get('vendor')=='tul.com.tw' and board.find("./components/component[@name='part0']").get('part_name')==PART,'TUL board identity')
-    preset=ET.parse(args.board_dir/'preset.xml').getroot()
-    ps=preset.find("./ip_preset[@preset_proc_name='ps7_preset']/ip[@name='processing_system7']")
-    require(ps is not None,'PS7 board preset absent')
-    params={p.get('name'):p.get('value') for p in ps.findall('./user_parameters/user_parameter')}
-    require(len(params)==771,'TUL preset parameter count')
-    # Compare the entire original DDR setting family after applying the board preset.
-    ddr={k:v for k,v in params.items() if k.startswith('CONFIG.PCW_UIPARAM_DDR_')}
-    require(len(ddr)>=7,'DDR preset parameters absent')
-    (out/'inputs/ddr_expected.tcl').write_text('set expected_ddr [dict create '+' '.join(literal(k)+' '+literal(v) for k,v in sorted(ddr.items()))+']\n',encoding='utf-8')
-    write_json(out/'inputs/ps7_preset_parameters.json',params)
+    resolution=write_ddr_inputs(out/'inputs/board_repo/pynq-z2/A.0/preset.xml',args.tool_root/DDR_VENDOR_REL,out/'inputs')
+    params=resolution['raw_board_parameters'];ddr=resolution['resolved_ddr']
     tools={name:record(args.tool_root/name) for name in TOOL_HASHES}
     require(all(tools[n]['sha256']==h for n,h in TOOL_HASHES.items()),'installed tool hash changed')
     ips={}
@@ -160,6 +260,7 @@ def prepare(args,out):
     summary={'status':'prepared_only','source_acceptance':'not_claimed','full_build_executed':False,
         'tooling':tooling,'readonly_primitives':dependencies,'tools':tools,'installed_components_read_only':ips,
         'board_hashes':BOARD_HASHES,'io_hashes':IO_HASHES,'preset_parameter_count':len(params),'ddr_parameter_count':len(ddr),
+        'ddr_model_resolution':{'vendor_sha256':DDR_VENDOR_SHA,'selector':DDR_SELECTOR,'counts':resolution['counts'],'differences':resolution['differences']},
         'missing_build_inputs':['main accepted exact commit and six-file source/hash map','main accepted tooling hashes',
             'exact reviewed three-stage CDC pin bindings','separate new work/operation full-build authorization'],
         'unmeasured_physical_inputs':PHYSICAL_UNKNOWNS,'runtime_vivado_catalog':'not_queried',
@@ -208,6 +309,8 @@ def build(args,out,a,auth,prepared):
         require(digest(out/'inputs'/name)==a['build_files'][FPGA+name],'actual executable Tcl/XDC copy changed')
     for name,value in TOOL_HASHES.items():require(digest(args.tool_root/name)==value,'tool changed')
     for name,value in BOARD_HASHES.items():require(digest(out/'inputs/board_repo/pynq-z2/A.0'/name)==value,'board snapshot changed')
+    require(digest(args.tool_root/DDR_VENDOR_REL)==DDR_VENDOR_SHA,'installed vendor DDR input changed')
+    verify_ddr_inputs(out/'inputs')
     launch_inputs={p.relative_to(out).as_posix():record(p) for p in sorted((out/'inputs').rglob('*')) if p.is_file()}
     write_json(out/'LAUNCH_INPUTS.json',launch_inputs)
     process=run_owned(argv,out,args.timeout_seconds,out/'inputs/windows_job.py')

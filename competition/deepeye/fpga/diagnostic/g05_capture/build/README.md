@@ -1,4 +1,4 @@
-# G05 build preparation — no build performed
+# G05 build preparation and pinned DDR resolution
 
 Task DEEPEYE-IMPLEMENTATION-20261014/v1; preparation work
 B-G05-BUILD-PREP-20261026-59-v1. Main01a13b55-095b-7461-8dd5-5476a130bd82 owns
@@ -18,7 +18,7 @@ Run the new `build_g05.py --out <new-directory> --contract-json <fixed-contract>
 The default mode is `prepare`; it cannot call Vivado. It hashes installed
 Vivado2026.1 executable files without launching them, checks the original TUL
 board/preset/pins/image hashes and 771 preset parameters, and records the full
-DDR parameter family. It snapshots these inputs, the eight new tooling files,
+DDR parameter family and the pinned installed named-memory model below. It snapshots these inputs, the eight tooling files,
 and only the two immutable control3d primitives. It does not snapshot or claim
 acceptance of changing mapper/engine/AXI sources. Missing acceptance/CDC/build
 authorization are explicit in PREPARATION.json. The generated acceptance
@@ -63,12 +63,75 @@ created in offline preparation.
 
 The new project lives at `<run>/g05_diag/project`, BD `g05_diag`, top
 `g05_diag_wrapper`; IP `carlandfpga.local:diagnostic:deepeye_g05_axi:1.0`, instance
-`g05_diag_0`. The unchanged TUL preset configures DDR; FCLK0 is100MHz. Reset comes
+`g05_diag_0`. The unchanged TUL preset and pinned named-model resolution configure DDR; FCLK0 is100MHz. Reset comes
 from PS FCLK_RESET0_N via proc_sys_reset; its derived active-low parameter and
 pin polarity are checked after BD validation. A new 4KiB aperture is allocated
 and discovered from BD/HWH; no old overlay base or private offset0x2c is reused.
 
 ## Timing and HWH guards
+
+### DDR check repair, work B-G05-DDR-CHECK-REPAIR-20261026-59-v1
+
+Main's original R1 stopped before synthesis/bitstream when the literal TUL
+T_RC=50.625 differed from the installed named-model value48.91. R1 and its
+failure/process evidence remain unchanged. This repair runs only new offline
+XML and mocked Tcl controls; a fresh R2 needs main's independent acceptance,
+updated tooling hashes and separate authorization. It does not accept DDR or
+physical-board behavior.
+
+Production resolution requires both exact source hashes:
+
+- TUL preset.xml: `18528f84aea4da503cdb3104f7706fabfb3b6ad09b78b25199cc316afa4c8cfe`.
+- Installed `data/PS/7series/data/zynqconfig/ddr/ddr_preset.xml` under the selected
+  Vivado root: `73566a941b442804a9c6b0eb42385b6c1cb82f12e354c138f8868005b91c52ed`.
+
+The one named entry must have selector `pcw_uiparam_ddr_partno`, exact name
+`MT41J256M16 RE-125`, and strength8. Its13 unique set keys must be the same13
+unique disable keys, all in the board's72 DDR keys. Ten values must match the
+board literals; exactly these three may differ:
+
+| Field | TUL literal | Named model |
+|---|---|---|
+| T_RC | 50.625 | 48.91 |
+| T_RCD | 13.125 | 7 |
+| T_RP | 13.125 | 7 |
+
+No unit conversion or numeric tolerance is applied. T_RC has explicit ns
+metadata; T_RP is described in clock cycles; T_RCD's unit remains unproven.
+T_RAS_MIN is unchanged, but its metadata name says ns while its description
+also says cycles. These gaps are recorded, not resolved by inference.
+
+Preparation keeps all771 raw board parameters in `ps7_preset_parameters.json`,
+all72 literals in `ddr_literal.json`, all72 resolved values in
+`ddr_resolved.json`, and complete selected-entry/count/difference/source-hash
+provenance in `ddr_resolution.json`. It copies the raw vendor XML to
+`inputs/vendor_ddr_preset.xml`. Before launch, both raw source snapshots and
+every generated DDR table are reverified; the installed vendor hash is checked
+again. The copies are included in `LAUNCH_INPUTS.json` and the existing
+postprocess hash verification. The eight-file tooling acceptance list is
+unchanged; the new `test_ddr_resolution.py` is a separate targeted test source.
+The exact public DOCTYPE declaration in the pinned vendor XML is removed only
+from the parser copy; no DTD is fetched or loaded. The raw XML stays intact.
+Unexpected declarations and entity definitions are rejected.
+
+The Tcl gate checks all72 exact strings after board/FCLK configuration and
+again immediately after `validate_bd_design`, before target generation. Each
+reached stage writes `<stage>_ddr72.tcl` (lossless Tcl data), a complete TSV,
+and a differences TSV before raising a mismatch. Differences include the
+three accepted changes from board literals as well as any unexpected result.
+Missing/extra keys, unreadable properties, altered values or inventory errors
+fail closed. A failed validation still gets the second table, and its original
+error is retained separately in `bd_validation_status.tcl`. An earlier gate
+failure stops execution: a later unreached stage has no fabricated table.
+
+Run the new offline controls with the same Python used for preparation:
+`test_ddr_resolution.py --inputs <directory-with-tul_preset.xml-and-vendor_ddr_preset.xml>
+--tcl <build_g05.tcl> --output <new-directory>`.
+The explicit mutated-XML parser helper bypasses digest checks only for labeled
+test fixtures; no CLI option selects it for preparation/build. Tests use a
+local Tcl interpreter with mocked properties and never invoke Vivado.
+
+### Existing timing and HWH requirements
 
 Only package/IOSTANDARD constraints are initially added. After synthesis the
 CDC Tcl resolves every supplied pin exactly, verifies ASYNC_REG sequential

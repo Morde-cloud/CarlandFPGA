@@ -83,27 +83,43 @@ module deepeye_g05_capture_engine (
     end endgenerate
 
     function automatic logic near_two(input logic [31:0] a, input logic [31:0] b);
-        near_two = (a >= b) ? ((a-b) <= 32'd2) : ((b-a) <= 32'd2);
+        near_two = near_two64({32'd0,a}, {32'd0,b});
     endfunction
 
     logic [2:0] joined_valid;
     logic [95:0] joined_periods, joined_highs;
     logic [191:0] joined_starts, joined_ends;
     logic capture_bad, joined_good;
-    // Exact unsigned distance <=2, with no full-width min/max/subtract cascade.
-    // For equal high groups only low-bit 0/3 pairs differ by three. Adjacent
-    // high groups require low(a)>=low(b)+2. The widened increment forbids wrap.
-    function automatic logic near_two64(input logic [63:0] a, input logic [63:0] b);
-        logic [62:0] ah_next, bh_next;
+    // Exact nonwrapping successor, expressed as eight independent byte cases.
+    // Below the incremented byte a must be FF and b zero; above it bytes
+    // must match. The local nine-bit addition rejects carry past the last byte.
+    // This avoids a serial 62-bit carry chain in the joined-witness comparator.
+    function automatic logic successor64(input logic [63:0] a, input logic [63:0] b);
+        logic [7:0] equal_bytes, a_full, b_zero, local_step, cases;
         begin
-            ah_next = {1'b0,a[63:2]} + 63'd1;
-            bh_next = {1'b0,b[63:2]} + 63'd1;
+            for (integer j=0; j<8; j=j+1) begin
+                equal_bytes[j] = a[8*j +: 8] == b[8*j +: 8];
+                a_full[j] = &a[8*j +: 8];
+                b_zero[j] = ~|b[8*j +: 8];
+                local_step[j] = ({1'b0,a[8*j +: 8]} + 9'd1) == {1'b0,b[8*j +: 8]};
+            end
+            for (integer j=0; j<8; j=j+1)
+                cases[j] = local_step[j] &&
+                    (&(equal_bytes | (8'hff >> (7-j)))) &&
+                    (&(a_full | (8'hff << j))) && (&(b_zero | (8'hff << j)));
+            successor64 = |cases;
+        end
+    endfunction
+    // For equal high groups only low-bit 0/3 pairs differ by three. Adjacent
+    // high groups require low(a)>=low(b)+2; successor64 never wraps.
+    function automatic logic near_two64(input logic [63:0] a, input logic [63:0] b);
+        begin
             near_two64 = ((a[63:2] == b[63:2]) &&
                           !((a[1:0] == 2'd0 && b[1:0] == 2'd3) ||
                             (a[1:0] == 2'd3 && b[1:0] == 2'd0))) ||
-                         ((ah_next == {1'b0,b[63:2]}) &&
+                         (successor64({2'b0,a[63:2]}, {2'b0,b[63:2]}) &&
                           ({1'b0,a[1:0]} >= ({1'b0,b[1:0]} + 3'd2))) ||
-                         ((bh_next == {1'b0,a[63:2]}) &&
+                         (successor64({2'b0,b[63:2]}, {2'b0,a[63:2]}) &&
                           ({1'b0,b[1:0]} >= ({1'b0,a[1:0]} + 3'd2)));
         end
     endfunction

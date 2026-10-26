@@ -306,6 +306,9 @@ proc full_build {config} {
     write_checkpoint [file join $run_root artifacts g05_diag_synth.dcp]
     opt_design
     place_design
+    # Placement-based physical optimization preserves RTL/clock/IO constraints.
+    # The actual post-route timing/DRC gates below remain mandatory.
+    phys_opt_design -directive AggressiveExplore
     route_design
     write_checkpoint [file join $run_root artifacts g05_diag_routed.dcp]
     report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -file [file join $run_root reports route_timing_summary.txt]

@@ -234,3 +234,26 @@ replace full composition or actual synthesis/route. The build now explicitly
 rejects LUTLP-1 even though Vivado classifies it as Critical Warning. No clock
 period, IO delay, false-path scope, board ownership or formal gate is relaxed.
 Only the exact subsequent build receipt can establish new physical-tool results.
+
+
+## Main R5 arithmetic after actual R4 timing failure
+
+R4 removed the loop (actual routed check: zero loops), but failed 100MHz
+setup with WNS -6.687ns, TNS -18588.086ns and6256 endpoints; hold +.044ns.
+The full original failure and closed96-process job are retained, with no bit.
+The worst path was rearm_wait through selected joined witnesses and the
+62-bit successor carry chain into PWM reset, 30logic levels/17CARRY4 cells.
+
+R5 expresses nonwrapping successor as eight byte cases: exactly one byte
+increments using nine bits, all lower bytes go FF->00, all higher bytes match.
+Each possible carry stopping byte is a separate, disjoint case. MAX->0 cannot
+match any case. The high-group near-two argument above remains exact; the
+32-bit distance test uses the same helper after zero extension. All engine
+sequential statements, CDC chains, deadline/STOP priorities, ports, rearm and
+tolerances are byte-for-byte unchanged fromR4. Four-state exhaustive semantic
+equivalence is not claimed; digital operation remains gated by reset/identity.
+
+The build adds a placement physical-optimization pass, then the same routing,
+DRC, no-loop and min/max timing gates. No clock, IO, CDC exception or gate is
+weakened. Arithmetic/simulation qualification does not prove route timing;
+only the new exact-source execution can establish that result.

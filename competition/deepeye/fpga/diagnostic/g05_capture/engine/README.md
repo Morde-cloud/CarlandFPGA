@@ -351,3 +351,22 @@ checks, exact watchdog boundaries and STOP/TTL priority. No new public latency
 or accepted lifetime is introduced. Independent invariant/boundary simulation
 and actual route remain required; arbitrary injected private states need not
 satisfy the reset-started invariant and are not an equivalence claim.
+
+
+## Main R11 private synchronous STOP factoring
+
+R10 route failed WNS-3.655ns/TNS-5213.075ns (2218 endpoints), hold+.016ns.
+The critical path runs from capture-end comparison through STOP-dependent PWM
+selections (19levels,13.255ns). R11 binds a new private PWM module included in
+this engine file. Its source is the immutable atomic PWM body with only its
+module name and two inner sequential predicates changed: apply_now is replaced
+by pending&&(!running||boundary), transfer_now by cfg_valid&&!pending. Both
+occur exclusively beneath the existing outer synchronous rst||stop branch.
+For defined binary values that branch already establishes rst=stop=0, so all
+register assignments, priority, external signals and cycle timing are exact.
+The original public PWM source is unchanged; its historical acceptance is not
+automatically transferred to this new private implementation. The original
+internal observer equations remain. No combinational output mask, delayed
+STOP, new state or relaxed clock constraint is introduced. This is a two-state
+inductive argument, not arbitrary X/Z reset/control equivalence. Independent
+primitive/composition traces and actual route remain required.

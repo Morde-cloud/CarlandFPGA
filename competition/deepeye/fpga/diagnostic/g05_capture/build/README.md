@@ -191,3 +191,14 @@ not promoted to passing builds. Each new build must execute the complete
 checks and retain its own reports. External propagation/skew and board timing
 remain unmeasured.
 
+
+
+## R12 packaged immutable PWM reference
+
+R11 stopped before synthesis because hierarchy-driven IP import omitted the
+unused original atomic PWM reference. R12 explicitly adds only that accepted
+file to synthesis/simulation file groups, preserving the exact six-source set
+and existing byte-by-byte verification. The G05-private STOP-factored PWM body
+is inside engine.sv; the immutable original file is retained as a reference,
+not claimed as instantiated hardware. No missing-input gate is relaxed. All
+source/config/CDC/timing/DRC checks remain mandatory for the next actual build.

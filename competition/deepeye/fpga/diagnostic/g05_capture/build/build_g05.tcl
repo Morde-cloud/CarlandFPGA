@@ -156,6 +156,21 @@ proc package_private {sources root} {
             busparam $interface POLARITY ACTIVE_LOW
         }
     }
+    # Preserve the exact original PWM reference as a declared package input.
+    # The G05-private factored body is in the engine; hierarchy import omits
+    # this now-unused reference. It is not claimed as an instantiated core.
+    set original_pwm [one [lsearch -all -inline $sources */deepeye_atomic_pwm.sv] {fixed original PWM reference}]
+    set reference_name src/deepeye_atomic_pwm.sv
+    set reference_path [file join $root packaged_ip $reference_name]
+    if {![file exists $reference_path]} {file copy -- $original_pwm $reference_path}
+    foreach group_name {xilinx_anylanguagesynthesis xilinx_anylanguagebehavioralsimulation} {
+        set group [one [ipx::get_file_groups $group_name -of_objects $core] "package $group_name group"]
+        set reference [ipx::get_files $reference_name -of_objects $group]
+        if {[llength $reference] == 0} {
+            set reference [ipx::add_file $reference_name $group]
+            set_property type systemVerilogSource $reference
+        } else {one $reference {single original PWM reference entry}}
+    }
     ipx::create_xgui_files $core
     ipx::update_checksums $core
     ipx::check_integrity $core

@@ -24,6 +24,9 @@ module deepeye_g05_capture_engine (
     logic rearm_wait_q;
     logic [2:0] rearm_left_q;
     logic [31:0] pending_period_q, active_period_q;
+    // Exact period-derived constants, updated beside their source period.
+    // 3*(2^32-1)+16 < 2^34; reset period0 requires span16.
+    logic [33:0] pending_first_span_q, active_next_span_q;
     logic [95:0] pending_highs_q, active_highs_q;
     logic [63:0] pending_ttl_q, pending_tag_q, active_tag_q, watchdog_q;
     logic [2:0] join_valid_q;
@@ -200,12 +203,12 @@ module deepeye_g05_capture_engine (
     assign accept_deadline = accept_base + {1'b0,cfg_ttl_ticks};
     assign accept_watchdog = accept_base + ({33'd0,cfg_period} * 65'd3) + 65'd16;
     assign pending_deadline = {1'b0,edge_tick} + {1'b0,pending_ttl_q};
-    assign pending_watchdog = {1'b0,edge_tick} + ({33'd0,pending_period_q} * 65'd3) + 65'd16;
+    assign pending_watchdog = {1'b0,edge_tick} + {31'd0,pending_first_span_q};
     // atom_applied is registered: its observed pre-edge cycle_tick IS the
     // previous edge on which PWM actually changed; do not use edge_tick here.
     assign observed_deadline = {1'b0,cycle_tick} + {1'b0,pending_ttl_q};
-    assign observed_watchdog = {1'b0,cycle_tick} + ({33'd0,pending_period_q} * 65'd3) + 65'd16;
-    assign next_watchdog = {1'b0,edge_tick} + ({33'd0,active_period_q} * 65'd2) + 65'd16;
+    assign observed_watchdog = {1'b0,cycle_tick} + {31'd0,pending_first_span_q};
+    assign next_watchdog = {1'b0,edge_tick} + {31'd0,active_next_span_q};
     assign counts_legal = cfg_period >= 32'd32 && cfg_ttl_ticks != 0 &&
         cfg_highs[31:0] != 0 && cfg_highs[31:0] < cfg_period &&
         cfg_highs[63:32] != 0 && cfg_highs[63:32] < cfg_period &&
@@ -288,6 +291,7 @@ module deepeye_g05_capture_engine (
             pending_q <= 0; lifetime_q <= 0; monitor_q <= 0; capture_enabled_q <= 0;
             rearm_wait_q <= 0; rearm_left_q <= 0;
             pending_period_q <= 0; active_period_q <= 0;
+            pending_first_span_q <= 34'd16; active_next_span_q <= 34'd16;
             pending_highs_q <= 0; active_highs_q <= 0;
             pending_ttl_q <= 0; pending_tag_q <= 0; watchdog_q <= 0;
             join_valid_q <= 0; previous_ends_q <= 0; previous_join_q <= 0;
@@ -318,6 +322,7 @@ module deepeye_g05_capture_engine (
                     accepted <= 1;
                     pending_q <= 1;
                     pending_period_q <= cfg_period; pending_highs_q <= cfg_highs;
+                    pending_first_span_q <= ({2'b0,cfg_period} * 34'd3) + 34'd16;
                     pending_ttl_q <= cfg_ttl_ticks; pending_tag_q <= cfg_tag;
                     // Old output/deadline remain active until actual apply.
                     result_valid <= 0; join_valid_q <= 0; previous_join_q <= 0;
@@ -326,6 +331,7 @@ module deepeye_g05_capture_engine (
                 end else if (atom_applied) begin
                     pending_q <= 0; lifetime_q <= 1; monitor_q <= 1;
                     active_period_q <= atom_period;
+                    active_next_span_q <= {1'b0,atom_period,1'b0} + 34'd16;
                     active_highs_q <= {atom_high2,atom_high1,atom_high0};
                     watchdog_q <= observed_watchdog[63:0];
                     rearm_wait_q <= 1; rearm_left_q <= 6;

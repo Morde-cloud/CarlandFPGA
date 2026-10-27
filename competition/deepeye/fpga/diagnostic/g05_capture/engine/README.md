@@ -336,3 +336,18 @@ test accepts residues0,1,2,-1,-2 only, exactly absolute difference<=2. The
 32-bit wrapper remains zeroextended. This replaces wide replicated byte-case
 successor networks, retaining tolerance, payloads, all state and every edge.
 Independent actual arithmetic vectors and full-route timing remain required.
+
+
+## Main R10 exact cached watchdog spans
+
+R9 actual route still failed WNS-3.660ns/TNS-5967.238ns (2666endpoints),
+hold+.040ns. The critical path moved to3*pending_period+16 followed by a
+65-bit absolute watchdog sum and overflow-driven PWM reset (16CARRY4).
+R10 stores a34-bit first span3*pending_period+16 and next span2*active_period+16.
+Each updates in exactly the same branch as its source period; reset initializes
+period0/span16. These spans fit34bits even at period2^32-1, and thereafter equal
+the original expressions inductively. The same65-bit sums retain all overflow
+checks, exact watchdog boundaries and STOP/TTL priority. No new public latency
+or accepted lifetime is introduced. Independent invariant/boundary simulation
+and actual route remain required; arbitrary injected private states need not
+satisfy the reset-started invariant and are not an equivalence claim.

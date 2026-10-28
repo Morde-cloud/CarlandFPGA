@@ -84,6 +84,20 @@ module deepeye_g05_axi (
         .result_tag(result_tag),.result_tick(result_tick),.result_periods(result_periods),
         .result_highs(result_highs),.result_starts(result_starts),.result_ends(result_ends));
 
+    // Data preparation is independent of command admission. On every edge
+    // the bank snapshots the same pre-edge mapper/staging values used by a
+    // legal COMMIT. cfg_valid remains the sole unchanged admission pulse;
+    // engine consumes this bank only on a later edge with cfg_valid high.
+    // Unqualified payload changes do not expose registers or renew a TTL.
+    always_ff @(posedge clk) begin : payload_bank
+        if(rst) begin
+            cfg_period<=0;cfg_highs<=0;cfg_ttl<=0;cfg_tag<=0;
+        end else begin
+            cfg_period<=map_period;cfg_highs<={map_speed,map_pitch,map_yaw};
+            cfg_ttl<=map_ttl;cfg_tag<={staged[5],staged[6]};
+        end
+    end
+
     always_ff @(posedge clk) begin : control
         integer i,idx;
         logic read_ok;
@@ -98,7 +112,6 @@ module deepeye_g05_axi (
             profile_locked<=0;latch_valid<=0;inflight<=0;wrapper_fault<=0;
             last_cmd<=0;last_tag<=0;submitted_profile<=0;submitted_speed<=0;
             submitted_yaw<=0;submitted_pitch<=0;submitted_ttl<=0;
-            cfg_period<=0;cfg_highs<=0;cfg_ttl<=0;cfg_tag<=0;
             for(i=0;i<13;i=i+1)identity[i]<=0;
             for(i=0;i<7;i=i+1)staged[i]<=0;
             for(i=0;i<32;i=i+1)latched[i]<=0;
@@ -134,9 +147,7 @@ module deepeye_g05_axi (
                                         retired<=1;stop_pulse<=1;latch_valid<=0;command_fresh<=0;
                                         wrapper_fault<=8'd1;
                                     end else if(!inflight&&!eng_pending&&cfg_ready&&!latch_valid)begin
-                                        cfg_valid<=1;cfg_period<=map_period;
-                                        cfg_highs<={map_speed,map_pitch,map_yaw};cfg_ttl<=map_ttl;
-                                        cfg_tag<={staged[5],staged[6]};inflight<=1;
+                                        cfg_valid<=1;inflight<=1;
                                         last_cmd<=staged[5];last_tag<=staged[6];
                                         submitted_yaw<=staged[0][15:0];submitted_pitch<=staged[1][15:0];
                                         submitted_profile<=staged[2][7:0];submitted_speed<=staged[3][7:0];

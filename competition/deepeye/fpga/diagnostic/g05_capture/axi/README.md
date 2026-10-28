@@ -124,3 +124,18 @@ issued AXI R response still stays stable under backpressure; it cannot remain
 eligible merely because its bytes were returned. The second live status check
 and A's external operation/generation ledger are mandatory. No result or flag
 here establishes source freshness, physical calibration or motion permission.
+
+
+## Main R13 unqualified payload preparation
+
+R12 route still failed WNS-2.671ns/TNS-3634.927ns (1982 endpoints), hold+.034ns.
+Its worst path ends at the cfg_ttl bank CE after external-capture fault and
+COMMIT admission logic. R13 prepares cfg_period/highs/ttl/tag every clock in a
+separate resettable bank. Complete legal COMMIT, cfg_valid, inflight, identity,
+STOP and every control-state update remain unchanged. On each COMMIT edge,
+both implementations snapshot exactly the same pre-edge mapper/staging bytes;
+the engine samples them on the next cfg_valid edge. Unqualified private bank
+contents may differ and are never a public observation, fault source or TTL
+renewal. Engine pending/active snapshots remain immutable. No stage, latency
+or protocol permission is added; independent public-port equivalence and
+actual route remain required. The mapper and engine sources are unchanged.

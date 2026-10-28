@@ -354,7 +354,7 @@ def import_runtime():
 
 def check_overlay(overlay,mapping):
     ips=overlay.ip_dict
-    require(type(ips) is dict,'actual ip_dict missing')
+    require(isinstance(ips, dict),'actual ip_dict missing')
     matches=[(key,item) for key,item in ips.items() if key.strip('/')==mapping['instance'] or
              (type(item) is dict and (str(item.get('fullpath','')).strip('/')==mapping['instance'] or item.get('type')==mapping['vlnv']))]
     require(len(matches)==1,'actual G05 ip_dict identity ambiguous/missing')

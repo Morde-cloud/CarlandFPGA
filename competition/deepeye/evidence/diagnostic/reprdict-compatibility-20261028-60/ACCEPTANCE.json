@@ -1,0 +1,32 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-REPRDICT-COMPATIBILITY-20261028-60",
+  "main": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "accepted": true,
+  "scope": "Two-line outer ip_dict subclass compatibility only. Inner identity/value guards unchanged. Fresh offline source controls, not board/package/G05/fullH12 acceptance.",
+  "source_files": {
+    "competition/deepeye/tools/diagnostic/collect_private_diag.py": "edb72b615815a8956ec1f1fbe051a984c7a4e60f29edb4ec255213125b257fbf",
+    "competition/deepeye/tools/diagnostic/g05_capture/collector/collector.py": "8b9823449b6d286c2e0922dc0cc62624b86d0dc4a6bdceec70d349be125badf8",
+    "competition/deepeye/tools/diagnostic/test_reprdict_compatibility.py": "d7cd48a85aa95b6910958c4b5e797512e7f2fc7bb9b2b937f55e16acc2cde929"
+  },
+  "author_files_rehashed": 48,
+  "author_red": {
+    "tests": 26,
+    "errors": 2,
+    "exit": 1
+  },
+  "author_green": {
+    "tests": 26,
+    "exit": 0
+  },
+  "main_checks": 350,
+  "main_original_subclass_negative_controls": 4,
+  "main_exit": 0,
+  "a_compatibility_function_ast_exact_equal": true,
+  "a_source_commit": "8b6e130c9d760ed9b4a935d8d5f6090203fa73b6",
+  "a_source_sha256": "723435f542b050405d8a6286a806a6561fbb613e6608ebf5f84407c7418407e6",
+  "g05_package_repins": "pending qualified G05 build; no package-ready claim",
+  "hardware_executed": false
+}

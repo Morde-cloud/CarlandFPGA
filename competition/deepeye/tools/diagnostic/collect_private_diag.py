@@ -383,7 +383,7 @@ class PynqRuntime:
 
 def check_overlay(overlay, validated):
     ips = overlay.ip_dict
-    require(type(ips) is dict, "PYNQ ip_dict missing")
+    require(isinstance(ips, dict), "PYNQ ip_dict missing")
     matches = [(key, item) for key, item in ips.items() if key.strip("/") == INSTANCE or
                (type(item) is dict and str(item.get("fullpath", "")).strip("/") == INSTANCE)]
     require(len(matches) == 1, "PYNQ private instance ambiguous/missing")

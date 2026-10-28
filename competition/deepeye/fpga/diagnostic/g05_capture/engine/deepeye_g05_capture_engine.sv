@@ -100,37 +100,50 @@ module deepeye_g05_capture_engine (
     logic [95:0] joined_periods, joined_highs;
     logic [191:0] joined_starts, joined_ends;
     logic capture_bad, joined_good;
-    // Exact nonwrapping successor, expressed as eight independent byte cases.
-    // Below the incremented byte a must be FF and b zero; above it bytes
-    // must match. The local nine-bit addition rejects carry past the last byte.
-    // This avoids a serial 62-bit carry chain in the joined-witness comparator.
+    // R15B exact nonwrapping successor in sixteen independent four-bit groups.
+    // Below the incremented group a must be F and b zero; above it groups
+    // must match. Local Boolean prefixes reject wrap past the last group.
+    // This avoids serial carry inside either the group or the whole witness.
     function automatic logic successor64(input logic [63:0] a, input logic [63:0] b);
-        logic [7:0] equal_bytes, a_full, b_zero, local_step, cases;
+        logic [15:0] equal_groups, a_full, b_zero, local_step, cases;
+        logic [3:0] av, bv;
         begin
-            for (integer j=0; j<8; j=j+1) begin
-                equal_bytes[j] = a[8*j +: 8] == b[8*j +: 8];
-                a_full[j] = &a[8*j +: 8];
-                b_zero[j] = ~|b[8*j +: 8];
-                local_step[j] = ({1'b0,a[8*j +: 8]} + 9'd1) == {1'b0,b[8*j +: 8]};
+            for (integer j=0; j<16; j=j+1) begin
+                av = a[4*j +: 4];
+                bv = b[4*j +: 4];
+                equal_groups[j] = av == bv;
+                a_full[j] = &av;
+                b_zero[j] = ~|bv;
+                // Four-bit nonwrapping successor, direct Boolean prefixes.
+                // No data-dependent + or - carry chain is used.
+                local_step[j] = (bv[0] == !av[0]) &&
+                                (bv[1] == (av[1] ^ av[0])) &&
+                                (bv[2] == (av[2] ^ (av[1] & av[0]))) &&
+                                (bv[3] == (av[3] ^ (&av[2:0]))) && !(&av);
             end
-            for (integer j=0; j<8; j=j+1)
+            for (integer j=0; j<16; j=j+1)
                 cases[j] = local_step[j] &&
-                    (&(equal_bytes | (8'hff >> (7-j)))) &&
-                    (&(a_full | (8'hff << j))) && (&(b_zero | (8'hff << j)));
+                    (&(equal_groups | (16'hffff >> (15-j)))) &&
+                    (&(a_full | (16'hffff << j))) &&
+                    (&(b_zero | (16'hffff << j)));
             successor64 = |cases;
         end
     endfunction
     // For equal high groups only low-bit 0/3 pairs differ by three. Adjacent
     // high groups require low(a)>=low(b)+2; successor64 never wraps.
     function automatic logic near_two64(input logic [63:0] a, input logic [63:0] b);
-        logic [64:0] difference;
+        logic same_group, a_low_ahead, b_low_ahead;
         begin
-            // Zero extension makes the signed range exactly -(2^64-1)..2^64-1.
-            // Positive residues 0,1,2 or negative residues -1,-2 are the only
-            // accepted values. No unsigned endpoint can wrap into this set.
-            difference = {1'b0,a} - {1'b0,b};
-            near_two64 = ((~|difference[64:2]) && difference[1:0] != 2'd3) ||
-                         (&difference[64:1]);
+            same_group = a[63:2] == b[63:2];
+            a_low_ahead = (a[1:0] == 2'd2 && b[1:0] == 2'd0) ||
+                          (a[1:0] == 2'd3 && !b[1]);
+            b_low_ahead = (b[1:0] == 2'd2 && a[1:0] == 2'd0) ||
+                          (b[1:0] == 2'd3 && !a[1]);
+            near_two64 =
+                (same_group && !((a[1:0] == 2'd0 && b[1:0] == 2'd3) ||
+                                 (a[1:0] == 2'd3 && b[1:0] == 2'd0))) ||
+                (successor64({2'b0,a[63:2]}, {2'b0,b[63:2]}) && a_low_ahead) ||
+                (successor64({2'b0,b[63:2]}, {2'b0,a[63:2]}) && b_low_ahead);
         end
     endfunction
     // Compare all data alternatives before choosing by the three slot flags.

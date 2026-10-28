@@ -1,0 +1,103 @@
+{
+  "artifacts": [
+    "competition/deepeye/tools/diagnostic/collect_private_diag.py",
+    "competition/deepeye/tools/diagnostic/g05_capture/collector/collector.py",
+    "competition/deepeye/tools/diagnostic/test_reprdict_compatibility.py",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/EXECUTOR_RECEIPT.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/raw-evidence.tar.gz.part00",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/README.md"
+  ],
+  "files": {
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json": {
+      "sha256": "fabb8876db641680fac1ff9cd8cbb27f88889ff65c2f6ec2780b86bea51f9f20",
+      "size": 1491
+    },
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/BUNDLE_MANIFEST.json": {
+      "sha256": "7ccce09e0dc7710ce121adcf3772a9bb90809d9ae0c7d5f4414e3637cb046b13",
+      "size": 428
+    },
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/EXECUTOR_RECEIPT.json": {
+      "sha256": "cadb80b58e5b82b5931c2df08cc0c6eab9e2578ba09ae1b0f50a054af2894798",
+      "size": 460
+    },
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/RAW_INDEX.json": {
+      "sha256": "3f1710ebc9ade773052aa21ed1b2362bcaa99dc4dbb88b4d2c7bacc8a612671c",
+      "size": 10187
+    },
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/README.md": {
+      "sha256": "21ae2f1847c8ce53966d6fa85748e065ffb3cb371ffbdcf8668d5add0cdba540",
+      "size": 921
+    },
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/raw-evidence.tar.gz.part00": {
+      "sha256": "71205acb6e1251d00352defc74f920a6182136d8a65dd3ece75e26e68720b8df",
+      "size": 81998
+    },
+    "competition/deepeye/tools/diagnostic/collect_private_diag.py": {
+      "sha256": "edb72b615815a8956ec1f1fbe051a984c7a4e60f29edb4ec255213125b257fbf",
+      "size": 29878
+    },
+    "competition/deepeye/tools/diagnostic/g05_capture/collector/collector.py": {
+      "sha256": "8b9823449b6d286c2e0922dc0cc62624b86d0dc4a6bdceec70d349be125badf8",
+      "size": 28675
+    },
+    "competition/deepeye/tools/diagnostic/test_reprdict_compatibility.py": {
+      "sha256": "d7cd48a85aa95b6910958c4b5e797512e7f2fc7bb9b2b937f55e16acc2cde929",
+      "size": 8268
+    }
+  },
+  "request": {
+    "code_commit": "881244db23f8c63fdd75a0e5a927665a062e546f",
+    "expected_result": "Only outer dictionary subclass compatibility accepted. G05/timing/package/board/fullH12/all29 remain incomplete. H01-H15/revision1 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "operation_id": "B-DEEPEYE-REPRDICT-COMPATIBILITY-20261028-60",
+    "requester": "node-b",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify exact source pins and indexed raw artifacts; no old tests or hardware operations are requested.",
+      "Author26 RED2errors/exit1 then GREEN26/exit0; main350 fresh controls plus4 original subclass negatives, exit0.",
+      "Read A compatibility reference8b6e130c9d760ed9b4a935d8d5f6090203fa73b6, exact check_overlay AST equal to canonical B correction."
+    ]
+  },
+  "request_hash": "d00b2823917c5035dea45f60106e23e6b724c1f68d33cb43576b1f7fe2fa696a",
+  "schema_version": 1,
+  "stages": {
+    "G05": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "fullH12": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "independent_main_controls": {
+      "log": "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "new_reprdict_software_controls": {
+      "log": "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    }
+  }
+}

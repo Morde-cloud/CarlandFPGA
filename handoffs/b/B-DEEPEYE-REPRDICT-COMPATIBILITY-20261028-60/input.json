@@ -1,0 +1,63 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-REPRDICT-COMPATIBILITY-20261028-60",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "881244db23f8c63fdd75a0e5a927665a062e546f",
+    "test_steps": [
+      "Verify exact source pins and indexed raw artifacts; no old tests or hardware operations are requested.",
+      "Author26 RED2errors/exit1 then GREEN26/exit0; main350 fresh controls plus4 original subclass negatives, exit0.",
+      "Read A compatibility reference8b6e130c9d760ed9b4a935d8d5f6090203fa73b6, exact check_overlay AST equal to canonical B correction."
+    ],
+    "expected_result": "Only outer dictionary subclass compatibility accepted. G05/timing/package/board/fullH12/all29 remain incomplete. H01-H15/revision1 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+  },
+  "artifacts": [
+    "competition/deepeye/tools/diagnostic/collect_private_diag.py",
+    "competition/deepeye/tools/diagnostic/g05_capture/collector/collector.py",
+    "competition/deepeye/tools/diagnostic/test_reprdict_compatibility.py",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/EXECUTOR_RECEIPT.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/raw-evidence.tar.gz.part00",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/README.md"
+  ],
+  "stages": {
+    "new_reprdict_software_controls": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json"
+    },
+    "independent_main_controls": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/reprdict-compatibility-20261028-60/ACCEPTANCE.json"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "fullH12": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    }
+  }
+}

@@ -269,6 +269,39 @@ module deepeye_g05_capture_engine (
     assign cap_rearm = rearm_wait_q && rearm_left_q == 3'd1 && !rst && !stop && !halted;
     assign cap_stop = stop || halted || pending_q || (!capture_enabled_q && !cap_rearm);
 
+    // R14 private payload banks. These registers are speculative unless the
+    // unchanged control path qualifies and uses them. No failure, capture_bad,
+    // or joined_good term gates their update; reset still clears every bit.
+    // A legal handshake and a qualifying atom application retain the original
+    // priorities, while a fault/STOP retires the bank before any later use.
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            pending_period_q <= 0; pending_highs_q <= 0;
+            pending_first_span_q <= 34'd16;
+            pending_ttl_q <= 0; pending_tag_q <= 0;
+            active_period_q <= 0; active_highs_q <= 0;
+            active_next_span_q <= 34'd16;
+            watchdog_q <= 0; previous_ends_q <= 0;
+        end else begin
+            if (!halted && command_offer) begin
+                pending_period_q <= cfg_period; pending_highs_q <= cfg_highs;
+                pending_first_span_q <= ({2'b0,cfg_period} * 34'd3) + 34'd16;
+                pending_ttl_q <= cfg_ttl_ticks; pending_tag_q <= cfg_tag;
+            end
+            if (!halted && !command_offer) begin
+                if (atom_applied) begin
+                    active_period_q <= atom_period;
+                    active_next_span_q <= {1'b0,atom_period,1'b0} + 34'd16;
+                    active_highs_q <= {atom_high2,atom_high1,atom_high0};
+                    watchdog_q <= observed_watchdog[63:0];
+                end else if (capture_enabled_q && (&joined_valid)) begin
+                    watchdog_q <= next_watchdog[63:0];
+                    previous_ends_q <= joined_ends;
+                end
+            end
+        end
+    end
+
     // Only validity/control state retires on STOP/fault/command transitions.
     // Empty-slot data is unobservable and can track the raw input continuously;
     // filled-slot data selects itself. Thus the wide payload bank needs no
@@ -290,11 +323,7 @@ module deepeye_g05_capture_engine (
             applied_tick <= 0; deadline_tick <= 0; active_tag_q <= 0;
             pending_q <= 0; lifetime_q <= 0; monitor_q <= 0; capture_enabled_q <= 0;
             rearm_wait_q <= 0; rearm_left_q <= 0;
-            pending_period_q <= 0; active_period_q <= 0;
-            pending_first_span_q <= 34'd16; active_next_span_q <= 34'd16;
-            pending_highs_q <= 0; active_highs_q <= 0;
-            pending_ttl_q <= 0; pending_tag_q <= 0; watchdog_q <= 0;
-            join_valid_q <= 0; previous_ends_q <= 0; previous_join_q <= 0;
+            join_valid_q <= 0; previous_join_q <= 0;
             result_valid <= 0; result_seq <= 0; result_tag <= 0; result_tick <= 0;
             result_periods <= 0; result_highs <= 0; result_starts <= 0; result_ends <= 0;
         end else begin
@@ -321,19 +350,12 @@ module deepeye_g05_capture_engine (
                 end else if (handshake) begin
                     accepted <= 1;
                     pending_q <= 1;
-                    pending_period_q <= cfg_period; pending_highs_q <= cfg_highs;
-                    pending_first_span_q <= ({2'b0,cfg_period} * 34'd3) + 34'd16;
-                    pending_ttl_q <= cfg_ttl_ticks; pending_tag_q <= cfg_tag;
                     // Old output/deadline remain active until actual apply.
                     result_valid <= 0; join_valid_q <= 0; previous_join_q <= 0;
                     capture_enabled_q <= 0; monitor_q <= 0;
                     rearm_wait_q <= 0; rearm_left_q <= 0;
                 end else if (atom_applied) begin
                     pending_q <= 0; lifetime_q <= 1; monitor_q <= 1;
-                    active_period_q <= atom_period;
-                    active_next_span_q <= {1'b0,atom_period,1'b0} + 34'd16;
-                    active_highs_q <= {atom_high2,atom_high1,atom_high0};
-                    watchdog_q <= observed_watchdog[63:0];
                     rearm_wait_q <= 1; rearm_left_q <= 6;
                     capture_enabled_q <= 0; join_valid_q <= 0; previous_join_q <= 0;
                     result_valid <= 0;
@@ -351,9 +373,8 @@ module deepeye_g05_capture_engine (
                             result_tag <= active_tag_q; result_tick <= edge_tick;
                             result_periods <= joined_periods; result_highs <= joined_highs;
                             result_starts <= joined_starts; result_ends <= joined_ends;
-                            previous_ends_q <= joined_ends; previous_join_q <= 1;
+                            previous_join_q <= 1;
                             join_valid_q <= 0;
-                            watchdog_q <= next_watchdog[63:0];
                         end else begin
                             join_valid_q <= joined_valid;
                         end

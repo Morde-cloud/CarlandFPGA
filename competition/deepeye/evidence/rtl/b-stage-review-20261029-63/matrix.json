@@ -1,0 +1,118 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-SUCCESSOR-INDEPENDENT-REVIEW-20261029-63-v1",
+  "owner_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "baseline_head": "056844e02e49f5047edb2151a838947dd8cdf409",
+  "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "human_requirements": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "cards": [
+    {
+      "id": "B01",
+      "retained_scope": "Inner encoder/buffered block/TRACE framing/UART candidates; independent fixed C decoder byte checks retained",
+      "operation_suffixes": "08,35-38,41,42,45,48,49,51,52",
+      "remaining": "Public source/tick/clock/format plus live codec composition and fixed C/A acceptance",
+      "next_owner_boundary": "A public ABI and topology; C receiver/decoder; B integration after freeze",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "B02",
+      "retained_scope": "Scan sample ordering/queues/lane candidates; B56 source4 fixture; original A P-v4 limited physical receipt",
+      "operation_suffixes": "21,23,39,44,46,56,57,58,60",
+      "remaining": "Actual XADC/clock/calibration/DMA/PS and600s acquisition still absent from accepted product",
+      "next_owner_boundary": "A measured hardware facts/actual board; B selected final acquisition integration",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "B03",
+      "retained_scope": "Finite raw and encoded queues/backpressure/reset/abort and isolated OOC reports retained",
+      "operation_suffixes": "06,09,20,23,35,37,39,43",
+      "remaining": "Full chosen topology CDC/RDC/reset/clock/timing validation remains",
+      "next_owner_boundary": "A shared topology/clock/reset boundary; B integrated design",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "B04",
+      "retained_scope": "CRC/parser/serializer/UART and digital candidate loopback fixtures retained",
+      "operation_suffixes": "24-34,49,51,52",
+      "remaining": "Production Q0/Q1/Q2 scheduler, BOOT/grants/retry accounting and real wire performance unaccepted; no claim that UART alone implements scheduler",
+      "next_owner_boundary": "A public slot/guard/BOOT/profile; C endpoint; B scheduler/integration; A physical line measurement",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "B05",
+      "retained_scope": "Software/session/TTL candidates/register proposals; B56 scoped STOP; G05 bounded safety predicates",
+      "operation_suffixes": "02,07,10,11,56,61,62",
+      "remaining": "Production session/observation/BOOT/control TTL/config/gain binding and fault/enable/100trial board gates unaccepted",
+      "next_owner_boundary": "A public interface and calibration; B chosen control integration; A physical gain/fault evidence",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "B06",
+      "retained_scope": "B56 standalone100MHz diagnostic implementation passes only its original scope; G05 R17/R18/R19 actually FAIL",
+      "operation_suffixes": "56,61,62,65",
+      "remaining": "No qualified G05 or combined-product bit/HWH. R17-19 WNS -2.740/-1.761/-2.304ns. No50MHz code/build and no blind fourth100MHz trial",
+      "next_owner_boundary": "A selects conditional clock/profile/decoder option or reviewed structural-latency plan, and same-build topology; B then implements/verifies once authorized",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "G01",
+      "retained_scope": "Editable procedural drill/five closed obstacle kinds/12 edges; original622checks/45meshes/11actual renders, scoped A adoption retained",
+      "operation_suffixes": "03",
+      "remaining": "Material-only correction64 accepted for B source after actual622checks/0failures, geometry byte equality and main11-image review. Full integrated G01/game-grade/physics/UI/export remains unaccepted.",
+      "next_owner_boundary": "B material correction; A final integrated3D/authority/UI and exact asset adoption",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    },
+    {
+      "id": "G05",
+      "retained_scope": "Triple atomic PWM/external digital capture candidates; source62 conditional source/AXI proofs; timing failure preserved",
+      "operation_suffixes": "12-19,61,62,65",
+      "remaining": "New same-build passing timing/bit/HWH, real3output external captures/command causal binding and both complete H12 paths remain",
+      "next_owner_boundary": "A public clock/profile/BOOT/tick/action retirement and actual board; B integrated candidate; C broker interop",
+      "root_acceptance": "unaccepted/not_run",
+      "defer_does_not_imply_pass": true
+    }
+  ],
+  "fresh_reconciliation": {
+    "at_utc": "2026-10-29T14:53:14Z",
+    "inbox": "authenticated resident read-only; no new task after original A Gen4 notice",
+    "github": "PR24/25/30/31 and bounded comments/issues GET successful; PR30head unchanged",
+    "feishu": "bounded real API read successful; no new shared owner decision",
+    "limits": "No member-presence polling; no claim of invisible/deleted history or permanent Desktop wake"
+  },
+  "hard_gates_retained": [
+    "all H01-H15",
+    "both PC_DIRECT and FPGA-output complete paths",
+    "final1%/100ms",
+    "final game-grade3D/UI/render/edit/camera/volume collision/equal gates/complete passage/hidden truth/device-bounded causal observations/substantive PC AI",
+    "final video/export/reproduction",
+    "A-only physical board"
+  ],
+  "build_replay": false,
+  "project_complete": false
+}

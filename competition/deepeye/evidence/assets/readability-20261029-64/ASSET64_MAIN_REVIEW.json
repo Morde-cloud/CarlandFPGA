@@ -1,0 +1,289 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ASSET-READABILITY-20261029-64-v1",
+  "reviewer_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T15:08:04.833184+00:00",
+  "decision": "Accept only material readability improvement for B source adoption and A review",
+  "exact_baseline": "056844e02e49f5047edb2151a838947dd8cdf409",
+  "source_files": [
+    {
+      "path": "competition/deepeye/simulator/assets/LICENSES.md",
+      "before_sha256": "f0b9ffe3daa2a168eaa510efa8c92d698e39260833aafa8161231f6168ba9959",
+      "candidate_sha256": "f0b9ffe3daa2a168eaa510efa8c92d698e39260833aafa8161231f6168ba9959",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/assets/scene_catalog.json",
+      "before_sha256": "d75c0369c48a629aec5ab693d321f59db42078955c9878e2a0a9d13cd7b35795",
+      "candidate_sha256": "d75c0369c48a629aec5ab693d321f59db42078955c9878e2a0a9d13cd7b35795",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/tests/test_asset_contract.gd",
+      "before_sha256": "0a7479ffe3a8f12f55f673dfcfec38329e45193fe91c54331fe81c50461c596e",
+      "candidate_sha256": "0a7479ffe3a8f12f55f673dfcfec38329e45193fe91c54331fe81c50461c596e",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/tests/test_asset_contract.gd.uid",
+      "before_sha256": "14efc743fd8a5a90c19e0596c8065a1cd789335b3c37bb5d6a329f73da6cbf50",
+      "candidate_sha256": "14efc743fd8a5a90c19e0596c8065a1cd789335b3c37bb5d6a329f73da6cbf50",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/world/asset_library.gd",
+      "before_sha256": "9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce",
+      "candidate_sha256": "9eb1f49fe6cfdf28e2a4e4cfc1783be6d4266ba5c86c7f346ca4182f765e2cce",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/world/asset_library.gd.uid",
+      "before_sha256": "0bb3d1ed877ef62e32c1bad57ad01d9a90772a4a22073aff030bd9db3d6eef4d",
+      "candidate_sha256": "0bb3d1ed877ef62e32c1bad57ad01d9a90772a4a22073aff030bd9db3d6eef4d",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/world/drill_geometry.gd",
+      "before_sha256": "e31473155bde0457a3481cc78b9c2947bbbc26228dfb4bd4e4e7190c136c8acc",
+      "candidate_sha256": "98a9ea21b5744b54ac39444ccc52786bbc308e6d0922a72a0c729c43786f1da2",
+      "changed": true
+    },
+    {
+      "path": "competition/deepeye/simulator/world/drill_geometry.gd.uid",
+      "before_sha256": "7cf1f58d56903dee992e7880c2e4243285b4a6b451004e9cd83626a6f61099a1",
+      "candidate_sha256": "7cf1f58d56903dee992e7880c2e4243285b4a6b451004e9cd83626a6f61099a1",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/world/frame_geometry.gd",
+      "before_sha256": "acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5",
+      "candidate_sha256": "acb273369cc82b6c0186c8372fccd869083c64676d3b9c6d1d30b739c74d84c5",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/world/frame_geometry.gd.uid",
+      "before_sha256": "6058ac651912e1387ab7a319c70627fddfb0d571be5d089e2a0f057ba6f7d0f4",
+      "candidate_sha256": "6058ac651912e1387ab7a319c70627fddfb0d571be5d089e2a0f057ba6f7d0f4",
+      "changed": false
+    },
+    {
+      "path": "competition/deepeye/simulator/world/obstacle_geometry.gd",
+      "before_sha256": "1bac63c23fd991667748fa3554d31a34a9e90946b67bef635a187967955c00ce",
+      "candidate_sha256": "cce0176cca3dfaef7aee45568721c840bed0179a562c056764c50f52ec05d6b9",
+      "changed": true
+    },
+    {
+      "path": "competition/deepeye/simulator/world/obstacle_geometry.gd.uid",
+      "before_sha256": "359ae06087402995ff8b26c942555a6762b0df3d2970939adb349e3a13919512",
+      "candidate_sha256": "359ae06087402995ff8b26c942555a6762b0df3d2970939adb349e3a13919512",
+      "changed": false
+    }
+  ],
+  "source_delta": "Exactly three existing material parameter expressions, two files. All other source and runtime snapshot bytes identical; no geometry/collision/transform/authority modification.",
+  "actual_commands": [
+    {
+      "name": "import",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+        "--headless",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+      "tool_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_expected_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_match": true,
+      "pid": 888,
+      "started_utc": "2026-10-29T15:03:02.103024+00:00",
+      "finished_utc": "2026-10-29T15:03:05.380137+00:00",
+      "duration_s": 3.277,
+      "timeout_s": 60,
+      "timed_out": false,
+      "exit": 0,
+      "stdout_path": "evidence/candidate-r1/attempt-1/logs/import.stdout.txt",
+      "stderr_path": "evidence/candidate-r1/attempt-1/logs/import.stderr.txt",
+      "stdout_sha256": "e081e80e80e8916799257e8957c778dd9d2a51ef155519b304ff8d287d78d196",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1744,
+      "stderr_bytes": 0
+    },
+    {
+      "name": "tests",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+        "--headless",
+        "--script",
+        "res://tests/test_asset_contract.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+      "tool_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_expected_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_match": true,
+      "pid": 19632,
+      "started_utc": "2026-10-29T15:03:05.583656+00:00",
+      "finished_utc": "2026-10-29T15:03:06.067397+00:00",
+      "duration_s": 0.484,
+      "timeout_s": 60,
+      "timed_out": false,
+      "exit": 0,
+      "stdout_path": "evidence/candidate-r1/attempt-1/logs/tests.stdout.txt",
+      "stderr_path": "evidence/candidate-r1/attempt-1/logs/tests.stderr.txt",
+      "stdout_sha256": "db972c99d154d241a0d49dd1b586512866b16205b244cd54d48aa002a8a577cc",
+      "stderr_sha256": "f214b82fd6fa9f9b69d2a3b2cde48773590918c14e425fefef5d3219a43607bf",
+      "stdout_bytes": 1360,
+      "stderr_bytes": 491
+    },
+    {
+      "name": "export",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+        "--headless",
+        "--script",
+        "res://export_asset_meshes.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+      "tool_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_expected_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_match": true,
+      "pid": 53440,
+      "started_utc": "2026-10-29T15:03:06.206530+00:00",
+      "finished_utc": "2026-10-29T15:03:06.601210+00:00",
+      "duration_s": 0.395,
+      "timeout_s": 60,
+      "timed_out": false,
+      "exit": 0,
+      "stdout_path": "evidence/candidate-r1/attempt-1/logs/export.stdout.txt",
+      "stderr_path": "evidence/candidate-r1/attempt-1/logs/export.stderr.txt",
+      "stdout_sha256": "6e21defb34a6e75a3fc34f65dc7a75c4849d36e2e1324c24527b373542302330",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 97,
+      "stderr_bytes": 0
+    },
+    {
+      "name": "render",
+      "argv": [
+        "D:\\pynq\\CarlandFPGA\\.local\\tools\\godot\\4.7.2-stable\\Godot_v4.7.2-stable_win64.exe",
+        "--path",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+        "--rendering-method",
+        "gl_compatibility",
+        "--rendering-driver",
+        "opengl3",
+        "--position",
+        "-3200,120",
+        "--resolution",
+        "1280x720",
+        "--script",
+        "res://render/render_capture.gd"
+      ],
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\asset-readability\\work\\candidate-round-1-project",
+      "tool_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_expected_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "tool_match": true,
+      "pid": 20972,
+      "started_utc": "2026-10-29T15:03:07.507475+00:00",
+      "finished_utc": "2026-10-29T15:03:09.908704+00:00",
+      "duration_s": 2.401,
+      "timeout_s": 60,
+      "timed_out": false,
+      "exit": 0,
+      "stdout_path": "evidence/candidate-r1/attempt-1/logs/render.stdout.txt",
+      "stderr_path": "evidence/candidate-r1/attempt-1/logs/render.stderr.txt",
+      "stdout_sha256": "060409283c4d3639a787277a85e356ddad537fe7642333b9e69f919360d889c4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 6237,
+      "stderr_bytes": 0
+    }
+  ],
+  "engine_checks": 622,
+  "engine_failures": 0,
+  "geometry_export_sha256": "7720cf598e74c8af7f2b32de421b3289ebfaddf3b5aa96c31af64bee80dcfc97",
+  "geometry_byte_equal_old": true,
+  "images": [
+    {
+      "file": "01_drill_actual_scale_oblique.png",
+      "sha256": "9cecb26c41677597db9e37b6dcf3a302e94c51f542419f5e837aa92156dd39a7",
+      "bytes": 42196,
+      "main_viewed": true
+    },
+    {
+      "file": "02_drill_head_detail_6blades_18studs.png",
+      "sha256": "e382ae5e30a0836bf5fe865202ec0392894b4e0011b08f1df3ee1c3274efbaac",
+      "bytes": 40067,
+      "main_viewed": true
+    },
+    {
+      "file": "03_obstacle_kind_gallery_5kinds.png",
+      "sha256": "86990e95c070558e6219227d0a8901a20380d009ec2925df94b75ecf33a039d9",
+      "bytes": 45998,
+      "main_viewed": true
+    },
+    {
+      "file": "04_world_overview_30obstacles_drill_frame.png",
+      "sha256": "a05fca70a0c9454e467956d8e13b39519ddd8a7896def77aca9ade053978f0fd",
+      "bytes": 57226,
+      "main_viewed": true
+    },
+    {
+      "file": "05_world_alt_angle_hollow_edge_cube.png",
+      "sha256": "7d1e1254a90d12afe5ebca5cd4a621c84ed6ef6779c62c98a648eae1e6292782",
+      "bytes": 55946,
+      "main_viewed": true
+    },
+    {
+      "file": "06_drill_axis_minus_x.png",
+      "sha256": "f3ceb6cc4a2fde7f0bc6f822079facf8e7dd9fc0a405e82bcf31496273e04db2",
+      "bytes": 36026,
+      "main_viewed": true
+    },
+    {
+      "file": "06_drill_axis_minus_y.png",
+      "sha256": "3b546006c667721905a83ead5422760901f554699a9f3da9a28cbd972f23e5f1",
+      "bytes": 35733,
+      "main_viewed": true
+    },
+    {
+      "file": "06_drill_axis_minus_z.png",
+      "sha256": "2c7d3337fac1db3b0809c7fe9d26a347ab8750ff5c0f37d006e1af4822f70448",
+      "bytes": 19557,
+      "main_viewed": true
+    },
+    {
+      "file": "06_drill_axis_plus_x.png",
+      "sha256": "72b4969e867cd650ab5373bab90540c1a3ebdbfb0ea9bd4bc5522a53062e1a7b",
+      "bytes": 35180,
+      "main_viewed": true
+    },
+    {
+      "file": "06_drill_axis_plus_y.png",
+      "sha256": "fe7a32f4d3be8258af20b9f71fb3151e7e39c3b99c6dedf2a1f0f9194ef23b82",
+      "bytes": 40843,
+      "main_viewed": true
+    },
+    {
+      "file": "06_drill_axis_plus_z.png",
+      "sha256": "69d1f8207fac730a423321f0591e2af5dc0fbaff0a9f8712b6000f91bbf7b226",
+      "bytes": 29910,
+      "main_viewed": true
+    }
+  ],
+  "visual_findings": [
+    "Main personally viewed all11 new images. Six blade groups and light cutter studs separate more clearly from the drill head in oblique/head/side views.",
+    "Void is visibly separated from dark background in gallery and30-instance views; casing unchanged.",
+    "Axial and distant views occlude components. Counts/containment come from unchanged exported meshes and original/new engine checks, not screenshot counting.",
+    "Plain procedural forms/flat lighting and isolated inspection fixture remain final-game-quality limitations; no full G01/gameplay/performance acceptance."
+  ],
+  "tooling_history": "Worker baseline metadata incorrectly used43 shapes instead of18 exported shapes; old record preserved, corrected baseline repeated. One malformed diff header preserved. No candidate engine failure or timeout. Reused test source prints legacy op03 identity; this new operation is bound by exact source/command/time/PID receipts.",
+  "root_G01": "not_run",
+  "system": "not_run",
+  "board": "not_run",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

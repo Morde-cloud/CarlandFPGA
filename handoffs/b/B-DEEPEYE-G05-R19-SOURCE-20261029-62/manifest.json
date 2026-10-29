@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "request": {
+    "operation_id": "B-DEEPEYE-G05-R19-SOURCE-20261029-62",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "1c9e9a6375d54640152334e40b99e59c25e03f2e",
+    "test_steps": [
+      "Read exact R17/R18/R19 source diff and bounded binary predicate proofs, original focused ModelSim port transcripts, mutations and actual process exit evidence. No old suite rerun requested.",
+      "Verify all three selected raw evidence bundles using their exact BUNDLE_MANIFEST hashes; review source/control scope independently.",
+      "Read all three actual failed100MHz route reports, source pins, original nonzero exits and empty/closed Jobs. Decide the existing conditional clock/topology boundary once on originalPR30; do not enable or run board from this source-only packet."
+    ],
+    "expected_result": "Source-only bounded conditional equivalence review; implementation timingFAILED/noqualifiednewbitHWH. H01–H15/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 and fullH12/final1%100ms gates preserved; all29formalnot_run."
+  },
+  "request_hash": "c466b0b7836d4ecb725f36bf936b436ec336c3e5ba48e4556107a5f391363720",
+  "artifacts": [
+    "competition/deepeye/fpga/diagnostic/g05_capture/engine/deepeye_g05_capture_engine.sv",
+    "competition/deepeye/fpga/diagnostic/g05_capture/axi/deepeye_g05_axi.sv",
+    "competition/deepeye/tools/diagnostic/g05_capture/review_bundle.py",
+    "competition/deepeye/docs/g05_r19_source_checkpoint_20261029.md",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/BUNDLES_MAIN_ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/INTEGRATION_AUDIT_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R17_BUILD_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R18_BUILD_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_BUILD_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_DESIGN.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_SOURCE_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/README.md",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/SOURCE.diff"
+  ],
+  "files": {
+    "competition/deepeye/docs/g05_r19_source_checkpoint_20261029.md": {
+      "sha256": "52713cc6416f9f6b30c804f3465497ccb00a5ad5e6eb33e2a4cf7f00b8721cb7",
+      "size": 6509
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/BUNDLES_MAIN_ACCEPTANCE.json": {
+      "sha256": "a13e8d2558cf27bf3d148005240bcd84ef006dd6ee46e9fa1ee81abdb7498077",
+      "size": 2750
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/INTEGRATION_AUDIT_MAIN_REVIEW.json": {
+      "sha256": "3d452b0ac71d32dd39eaa920ebc002ec49bcaf389d704ac663592dc8c8cc0c05",
+      "size": 3808
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R17_BUILD_MAIN_AUDIT.json": {
+      "sha256": "6bacb62ff22bc1958aa2cedd3c68cd94082f5bbdd07fd02f7caad1397cf8fd21",
+      "size": 1302
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R18_BUILD_MAIN_AUDIT.json": {
+      "sha256": "2c6b421e7c4b1ffcabda0d253c03161f41f196588bd060a8ffbed0c143119137",
+      "size": 1303
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_BUILD_MAIN_AUDIT.json": {
+      "sha256": "a2b777b6a0a8e8926f9e8ddbd0e4282782de15ff845df4b48b14f1ab29508f0c",
+      "size": 1303
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_DESIGN.json": {
+      "sha256": "9c7d386f975aba5c21f7afd20f18269eeed2827f07ca20f4338e799972165300",
+      "size": 3387
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_REVIEW.json": {
+      "sha256": "631cf1da4215bbf25a2266486a0221dea1b2078d11d78fda4e7a169c34820723",
+      "size": 3348
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_SOURCE_MAIN_REVIEW.json": {
+      "sha256": "fe9987b7ec04bf023be5f843b28772881028ec1a0b1fb3851b8b9f0a08b54e8c",
+      "size": 1465
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/README.md": {
+      "sha256": "52713cc6416f9f6b30c804f3465497ccb00a5ad5e6eb33e2a4cf7f00b8721cb7",
+      "size": 6509
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/SOURCE.diff": {
+      "sha256": "a3909f993dc2ef4da57a8c448fb700673c18b345e14ab0e8eeda65be74828196",
+      "size": 15156
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/BUNDLE_MANIFEST.json": {
+      "sha256": "6cf87518e7c792fb95a0e08873987e13502d9cba779b0b6da5bd44595d2e5168",
+      "size": 605
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/RAW_INDEX.json": {
+      "sha256": "dd7c98df59f56292d4131d36bd2771723b6bd1f75c122667a055cf78fccb436c",
+      "size": 43803
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/raw-evidence.blobs.tar.gz.part000": {
+      "sha256": "6ba5f55a9ed708bd6c69b8c0e8e4662f0d3d78337919c7919afd074f52f0200e",
+      "size": 425022
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/BUNDLE_MANIFEST.json": {
+      "sha256": "264b3e6e0af62f58c286211c758cba470a027e910b7ba73aabb3ec42fc2da456",
+      "size": 603
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/RAW_INDEX.json": {
+      "sha256": "8e0bfe0c79fa6af05ecbcd702be2611f65d16a235642fe388b9eae607a6d7535",
+      "size": 16257
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/raw-evidence.blobs.tar.gz.part000": {
+      "sha256": "d8f79b01b2546c38a0e80f2ade90900ae47c94dba7360240ea2ed49f17f0f299",
+      "size": 145064
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/BUNDLE_MANIFEST.json": {
+      "sha256": "88260308054b2e6d1c2e017d4af93d6feb9bd73d362588a0c3c7127a34bacc81",
+      "size": 605
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/RAW_INDEX.json": {
+      "sha256": "b5940aa37e3f7b3ebb3c91571c516cd58223630f6bc9fb145d9253324dfc936a",
+      "size": 37827
+    },
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/raw-evidence.blobs.tar.gz.part000": {
+      "sha256": "2546735145bf48998525e73df8cd0c8762aa668b49dc733ed7d27845516e31d2",
+      "size": 245185
+    },
+    "competition/deepeye/fpga/diagnostic/g05_capture/axi/deepeye_g05_axi.sv": {
+      "sha256": "2868b681735f2f0225f952a1a5120be222c1e122a42074d27f122871198eb12d",
+      "size": 15778
+    },
+    "competition/deepeye/fpga/diagnostic/g05_capture/engine/deepeye_g05_capture_engine.sv": {
+      "sha256": "eb076f97008fbc9f85a916784ef086d2b34b1baa9ac178fcd7a8b0c4cf389d99",
+      "size": 31541
+    },
+    "competition/deepeye/tools/diagnostic/g05_capture/review_bundle.py": {
+      "sha256": "d0f6e1f32602605f6565e78b67f867150a894e9b4beff30a3f99d12bf5cfeba5",
+      "size": 16343
+    }
+  },
+  "stages": {
+    "focused_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_REVIEW.json"
+    },
+    "implementation": {
+      "status": "failed",
+      "log": "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_BUILD_MAIN_AUDIT.json"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "fullH12": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    }
+  }
+}

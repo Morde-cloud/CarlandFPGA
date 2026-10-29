@@ -1,0 +1,32 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-R19-SOURCE-INDEPENDENT-MAIN-REVIEW-20261029-59-v1",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "candidate_axi_sha256": "2868b681735f2f0225f952a1a5120be222c1e122a42074d27f122871198eb12d",
+  "remaining_old_control_tokens_exact_equal": true,
+  "moved_registers": [
+    "command_fresh",
+    "cfg_valid",
+    "inflight",
+    "s_axi_bresp",
+    "profile_locked",
+    "last_cmd",
+    "last_tag",
+    "submitted_yaw",
+    "submitted_pitch",
+    "submitted_profile",
+    "submitted_speed",
+    "submitted_ttl"
+  ],
+  "new_state_bits": 0,
+  "metadata_reset_and_RHS_pairs_exact_equal": true,
+  "fresh_transition_contexts": 229376,
+  "admit_inflight_contexts": 1572864,
+  "write_response_contexts": 786432,
+  "binary_compositional_argument": "Equalreset+equalmovedbanktransitions for arbitrarybinarypredicates/addressclasses; allothercontroltokens andinput/outputportsidentical => samepublic/engineportsequence inductively. Abstractcasepartition uses actualdisjointCONTROL/identity/stage addresses andopcodevalues. No formaltool/XZ/SEU/physicalclaim.",
+  "engine_mapper_clock_TTL_latency_changed": false,
+  "scope": "Main source/algebra acceptance only; realfocusedpublicAXI RTL/mutant mustcomplete before anybuild",
+  "build_authorized": false,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

@@ -1,0 +1,50 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-FPGA-EXEC-COMPOSITION-AUDIT-MAIN-REVIEW-20261029-v1",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "controller_child_job": "child-27077005676848f7946a96bcdb122d7f",
+  "controller_child_work_id": "B-FPGA-EXEC-COMPOSITION-INPUT-AUDIT-20261029-v1",
+  "actual_child_thread": "01a18790-ec9c-7b13-9d12-8e4290357d4b",
+  "actual_child_turn": "01a187a0-63b6-7b30-bb27-bc6b80a1ca39",
+  "controller_terminal": "completed/nonstale",
+  "provider_model_effort": "deepseek/deepseek-flash/max",
+  "status": "CORE_SOURCE_AND_VECTOR_FACTS_ACCEPTED_WITH_MAIN_CORRECTIONS",
+  "audited_B_head": "6a5c41d4e2684a2105c6ce68a4e4f35ea36d1ac6",
+  "artifact_files_rehashed": 4,
+  "committed_core_files_rehashed": 25,
+  "vectors": [
+    {
+      "name": "raw_single_LE_anchor",
+      "payload_sha256": "92ac8946decfca2e1f7b7f63898912fd867fba6369eab21749b7922ff442df33",
+      "frame_sha256": "d51d1ba677c2785812b8f4fa1b7750c0260ee7e39c36f7d2e0519833d2d98bd1",
+      "CRC_independent_stdlib_verified": true,
+      "scope": "offline softwarefixture only; not actuallivecompression or board"
+    },
+    {
+      "name": "rice_three_flat",
+      "payload_sha256": "b33afd405a5ea4288ed4b451141e2a01eb6e6a6dbd0c550c264b4d53c853104f",
+      "frame_sha256": "c9bdc62e513a44dce265b17b1f51823b445e391ce74a85925883af8b33dd9602",
+      "CRC_independent_stdlib_verified": true,
+      "scope": "offline softwarefixture only; not actuallivecompression or board"
+    }
+  ],
+  "main_corrections": [
+    "Absence of a complete top applies only to audited Bhead6a; A/C current branches/runtime integration were not globally audited.",
+    "AUDIT graph arrows around buffered_block_stream must be read as composition/containment, not all modules in one serial chain. Main will select topology, not adopt this text as a frozen graph.",
+    "B56 has previous limited A physical P-v4 evidence on its exact unchangedpair and A-testedcollector. This sourceaudit runs no board; do not erase those prior scoped A results or upgrade them into fullG05/H12.",
+    "The lack of a livehostcontroller means no complete liveacq/codec/PCdecision/G05 closedloop established by this Bsourceaudit. Existing bounded PYNQ collectors/A runtime work still exist.",
+    "Trace golden fixtures use tick_ms fields; rawB56QPC64 and G05PLcycles cannot silently enter that timebase. cfg_tick_stride is16bits and perblocklinearity/qualityuniformity matter; A must own measuredmapping/profile/BOOT semantics.",
+    "R17actualroute subsequentlyfailed WNS-2.740ns; newR18 source582a3955ef482fea0738dbd51b3fb29069da4096 is LOCAL/running, not a qualifiedbit. Topology facts persist but engine/source pins are head-specific.",
+    "Child invented a local descriptive workID and reused oldturn metadata in JOB.json. Canonical controller work/job/currentturn above bind this mainreview; originalmetadata preserved and not promoted as canonicaloperation62.",
+    "Child wrote a plainpathlist into OS Temp outside ownership, disclosed inJOB/AUDIT; main did not execute the54KB reproducer or claim zero externalfilesystemwrites. No trackedproduct file change is established."
+  ],
+  "shared_dependencies": [
+    "Single samebuild source4/codec/G05 topology and privateinterfaces",
+    "Bounded perchannelblock assembly, originaltrigger/tick/quality provenance",
+    "Actualencodedbytes through selectedhosttransport/semanticdecoder",
+    "A authoritativeBOOT/clock/source/action/retirement bindings andphysicalproof"
+  ],
+  "acceptance": "Static inputfacts and two independentlyCRC/byte-reviewed examples only; no oldtest rerun/no hardware/profile grant",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

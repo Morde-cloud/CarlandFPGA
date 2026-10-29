@@ -1,0 +1,110 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-R19-MAIN-REVIEW-20261029-59-v1",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "candidate_axi_sha256": "2868b681735f2f0225f952a1a5120be222c1e122a42074d27f122871198eb12d",
+  "candidate_engine_sha256": "eb076f97008fbc9f85a916784ef086d2b34b1baa9ac178fcd7a8b0c4cf389d99",
+  "status": "ACCEPTED_FOR_ONE_NEW_100MHZ_BUILD",
+  "accepted_for_one_build": true,
+  "actual_positive_exit": 0,
+  "actual_mutant_exit": 3,
+  "child_job": "child-4e23246191be4739ae3ce8348a3d060c",
+  "child_work_id": "B-G05-R19-AXI-FOCUSED-TWIN-20261029-59-v1",
+  "controller_terminal": "completed/nonstale",
+  "actual_child_thread": "01a187d7-bcce-7f53-9e2e-035c10121e20",
+  "actual_child_turn": "01a187d7-bdb0-7bc2-bb96-dc316c85da55",
+  "provider_model_effort": "deepseek/deepseek-flash/max",
+  "files_main_rehashed": 75,
+  "original_stages": [
+    {
+      "stage": "run-01/negative/02-neg-vlib",
+      "pid": 21288,
+      "exit": 0
+    },
+    {
+      "stage": "run-01/negative/04-neg-vlog",
+      "pid": 45268,
+      "exit": 0
+    },
+    {
+      "stage": "run-01/negative/05-vsim",
+      "pid": 38564,
+      "exit": 3
+    },
+    {
+      "stage": "run-01/positive/01-pos-vlib",
+      "pid": 42396,
+      "exit": 0
+    },
+    {
+      "stage": "run-01/positive/03-pos-vlog",
+      "pid": 49104,
+      "exit": 0
+    },
+    {
+      "stage": "run-01/positive/05-vsim",
+      "pid": 640,
+      "exit": 0
+    },
+    {
+      "stage": "run-01/versions/03-vsim-version",
+      "pid": 52684,
+      "exit": 0
+    },
+    {
+      "stage": "run-01/versions/04-vlog-version",
+      "pid": 6092,
+      "exit": 0
+    }
+  ],
+  "public_samples": 2366,
+  "public_output_bits": 44,
+  "public_transcript_rows": 631,
+  "bus_kind_counts": {
+    "AR": 68,
+    "R": 68,
+    "W": 165,
+    "AW": 165,
+    "B": 165
+  },
+  "bus_stats": {
+    "cases": 8,
+    "checks": 1079,
+    "samples": 2366,
+    "pos": 1183,
+    "neg": 1183,
+    "writes": 165,
+    "reads": 68,
+    "aw": 165,
+    "w": 165,
+    "b": 165,
+    "ar": 68,
+    "r": 68,
+    "b_ok": 145,
+    "b_slverr": 20,
+    "r_ok": 65,
+    "r_slverr": 3,
+    "fresh_bits": 7,
+    "begin_guards": 2,
+    "admit": 3,
+    "duplicate": 1,
+    "invalid_retire": 2,
+    "busy_fresh": 3,
+    "held_b": 5,
+    "held_r": 11,
+    "resets": 9,
+    "fixture1": 1,
+    "fixture2": 1,
+    "fixture5": 1,
+    "fixture6": 1,
+    "fixture7": 1,
+    "cycles": 1189,
+    "errors": 0
+  },
+  "source_case_partition_sha256": "fe9987b7ec04bf023be5f843b28772881028ec1a0b1fb3851b8b9f0a08b54e8c",
+  "negative": "Solefresh-bit-setto0 mutation, offeredRVALID/data old0x2000/new0 afterARaddr028/cycle227, beforeRhandshake; actualexit3/noPASS",
+  "scope": "Stubbedmapper/engine AXItransport/control evidence plus arbitrarybinarycase sourceinduction. Not realwaveform/TTL/board/timing proof. Realengine/map/PWM unchanged fromR18 source; inherited2965scalar+18realengine publictwin evidence reused, not rerun.",
+  "coverage_gap": "Stubfixture4 not reached; fixture5 asserts samehalted-condition input with differentunchangedfaultcode. No claimedphysical/errorcodecoverage expansion.",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

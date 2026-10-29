@@ -202,41 +202,38 @@ module deepeye_g05_capture_engine (
     end
 
     logic [63:0] edge_tick;
-    logic cycle_at_max;
-    logic [64:0] observed_deadline, observed_watchdog, next_watchdog;
+    logic [64:0] accept_base, accept_deadline, accept_watchdog;
+    logic [64:0] pending_deadline, pending_watchdog, observed_deadline, observed_watchdog;
+    logic [64:0] next_watchdog;
     logic counts_legal, accept_arith_bad, pending_arith_bad, observed_arith_bad;
-    logic old_ttl_due, observed_ttl_due, monitor_ttl_due, handshake;
+    logic old_ttl_due, observed_ttl_due, handshake;
     logic [7:0] failure_now;
-
-    // Candidate-only combinational replacement for the deadline/watchdog
-    // arithmetic and comparisons. All state, priorities and public ports stay
-    // in this module. The helper is a pure Boolean cone, not a pipeline stage.
-    deepeye_g05_deadline_arithmetic u_deadline_arith (
-        .cycle_tick(cycle_tick), .cfg_ttl_ticks(cfg_ttl_ticks),
-        .cfg_period(cfg_period), .pending_ttl_q(pending_ttl_q),
-        .pending_first_span_q(pending_first_span_q),
-        .active_next_span_q(active_next_span_q),
-        .deadline_tick(deadline_tick), .watchdog_q(watchdog_q),
-        .pending_q(pending_q), .lifetime_q(lifetime_q),
-        .monitor_q(monitor_q), .atom_applied(atom_applied),
-        .edge_tick(edge_tick), .cycle_at_max(cycle_at_max),
-        .observed_deadline(observed_deadline),
-        .observed_watchdog(observed_watchdog),
-        .next_watchdog(next_watchdog),
-        .accept_arith_bad(accept_arith_bad),
-        .pending_arith_bad(pending_arith_bad),
-        .observed_arith_bad(observed_arith_bad),
-        .old_ttl_due(old_ttl_due), .observed_ttl_due(observed_ttl_due),
-        .monitor_ttl_due(monitor_ttl_due)
-    );
-
+    assign edge_tick = (cycle_tick == TMAX) ? TMAX : cycle_tick + 64'd1;
+    // Earliest application is the edge after the accepting edge.
+    assign accept_base = {1'b0,cycle_tick} + 65'd2;
+    assign accept_deadline = accept_base + {1'b0,cfg_ttl_ticks};
+    assign accept_watchdog = accept_base + ({33'd0,cfg_period} * 65'd3) + 65'd16;
+    assign pending_deadline = {1'b0,edge_tick} + {1'b0,pending_ttl_q};
+    assign pending_watchdog = {1'b0,edge_tick} + {31'd0,pending_first_span_q};
+    // atom_applied is registered: its observed pre-edge cycle_tick IS the
+    // previous edge on which PWM actually changed; do not use edge_tick here.
+    assign observed_deadline = {1'b0,cycle_tick} + {1'b0,pending_ttl_q};
+    assign observed_watchdog = {1'b0,cycle_tick} + {31'd0,pending_first_span_q};
+    assign next_watchdog = {1'b0,edge_tick} + {31'd0,active_next_span_q};
     assign counts_legal = cfg_period >= 32'd32 && cfg_ttl_ticks != 0 &&
         cfg_highs[31:0] != 0 && cfg_highs[31:0] < cfg_period &&
         cfg_highs[63:32] != 0 && cfg_highs[63:32] < cfg_period &&
         cfg_highs[95:64] != 0 && cfg_highs[95:64] < cfg_period;
+    assign accept_arith_bad = accept_deadline[64] || accept_watchdog[64];
+    assign pending_arith_bad = pending_q && !atom_applied && (pending_deadline[64] || pending_watchdog[64]);
+    assign observed_arith_bad = atom_applied && (observed_deadline[64] || observed_watchdog[64]);
+    // The old deadline still gates the ACTUAL applying edge. Once an actual
+    // application has occurred, its delayed notification retires the old TTL.
+    assign old_ttl_due = lifetime_q && !atom_applied && edge_tick >= deadline_tick;
+    assign observed_ttl_due = atom_applied && !observed_arith_bad && edge_tick >= observed_deadline[63:0];
     always_comb begin
         failure_now = 0;
-        if (cycle_at_max) failure_now = 8'd5;
+        if (cycle_tick == TMAX) failure_now = 8'd5;
         else if (old_ttl_due || observed_ttl_due) failure_now = 8'd2;
         else if (pending_arith_bad || observed_arith_bad) failure_now = 8'd5;
         else if (atom_applied && (!pending_q || atom_period != pending_period_q ||
@@ -244,19 +241,19 @@ module deepeye_g05_capture_engine (
             failure_now = 8'd3;
         else if (atom_rejected || capture_bad) failure_now = 8'd3;
         else if (joined_good && (result_seq == 32'hffffffff || next_watchdog[64])) failure_now = 8'd5;
-        else if (monitor_ttl_due && !joined_good)
+        else if (monitor_q && !pending_q && !atom_applied && edge_tick >= watchdog_q && !joined_good)
             failure_now = 8'd4;
     end
     // Fault presence is a parallel reduction, not a decode of priority reason.
     // The reason encoder above is retained verbatim for the fault evidence FF.
     logic failure_any, command_offer;
-    assign failure_any = cycle_at_max || old_ttl_due || observed_ttl_due ||
+    assign failure_any = cycle_tick == TMAX || old_ttl_due || observed_ttl_due ||
         pending_arith_bad || observed_arith_bad ||
         (atom_applied && (!pending_q || atom_period != pending_period_q ||
          {atom_high2,atom_high1,atom_high0} != pending_highs_q || atom_tag != pending_tag_q)) ||
         atom_rejected || capture_bad ||
         (joined_good && (result_seq == 32'hffffffff || next_watchdog[64])) ||
-        (monitor_ttl_due && !joined_good);
+        (monitor_q && !pending_q && !atom_applied && edge_tick >= watchdog_q && !joined_good);
     assign command_offer = cfg_valid && !rst && !stop && !halted && !pending_q;
     // R17 public payload enable. With joined_good true, capture_bad and
     // the missing-join watchdog term are false. With command_offer false,
@@ -266,7 +263,7 @@ module deepeye_g05_capture_engine (
     (* keep = "TRUE" *) logic result_payload_ce;
     assign result_payload_ce = !rst && !stop && !halted &&
         !command_offer && !atom_applied && joined_good &&
-        !(cycle_at_max || old_ttl_due || observed_ttl_due ||
+        !(cycle_tick == TMAX || old_ttl_due || observed_ttl_due ||
           pending_arith_bad || observed_arith_bad || atom_rejected ||
           result_seq == 32'hffffffff || next_watchdog[64]);
     assign cfg_ready = !rst && !stop && !halted && !pending_q && !failure_any;
@@ -418,158 +415,6 @@ module deepeye_g05_capture_engine (
             end
         end
     end
-endmodule
-
-// Candidate-only combinational deadline cone. This module changes no state and
-// creates no pipeline stage. It is the isolated replacement for the original
-// 65-bit sums, overflow bits, saturated increment and unsigned comparisons.
-// Task DEEPEYE-IMPLEMENTATION-20261014/v1, work
-// B-G05-DEADLINE-CONE-20261030-70-v1. H01-H15/revision1 SHA256
-// c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
-module deepeye_g05_deadline_arithmetic (
-    input logic [63:0] cycle_tick,
-    input logic [63:0] cfg_ttl_ticks,
-    input logic [31:0] cfg_period,
-    input logic [63:0] pending_ttl_q,
-    input logic [33:0] pending_first_span_q,
-    input logic [33:0] active_next_span_q,
-    input logic [63:0] deadline_tick,
-    input logic [63:0] watchdog_q,
-    input logic pending_q, lifetime_q, monitor_q, atom_applied,
-    output logic [63:0] edge_tick,
-    output logic cycle_at_max,
-    output logic [64:0] accept_base,
-    output logic [64:0] accept_deadline,
-    output logic [64:0] accept_watchdog,
-    output logic [64:0] pending_deadline,
-    output logic [64:0] pending_watchdog,
-    output logic [64:0] observed_deadline,
-    output logic [64:0] observed_watchdog,
-    output logic [64:0] next_watchdog,
-    output logic accept_arith_bad,
-    output logic pending_arith_bad,
-    output logic observed_arith_bad,
-    output logic old_ttl_due,
-    output logic observed_ttl_due,
-    output logic monitor_ttl_due
-);
-    localparam logic [63:0] TMAX = 64'hffffffffffffffff;
-    logic [64:0] cycle_increment, cfg_three, accept_watchdog_base;
-
-    // Exact 65-bit sum. Nine parallel byte groups each form generate and
-    // propagate terms. A Kogge-Stone prefix carries across groups; the local
-    // byte sums are selected by that carry. The upper seven zero-extension
-    // bits make bit64 the exact modulo-2^65 result and overflow bit used by
-    // the original checked additions.
-    function automatic logic [64:0] add65_cla(
-        input logic [64:0] a, input logic [64:0] b
-    );
-        logic [71:0] ax, bx, sum0, sum1, result;
-        logic [8:0] group_g, group_p, prefix_g, prefix_p, carry_in;
-        logic [8:0] byte_sum0;
-        begin
-            ax = {7'b0, a};
-            bx = {7'b0, b};
-            for (integer gi=0; gi<9; gi=gi+1) begin
-                byte_sum0 = {1'b0,ax[8*gi +: 8]} + {1'b0,bx[8*gi +: 8]};
-                sum0[8*gi +: 8] = byte_sum0[7:0];
-                sum1[8*gi +: 8] = byte_sum0[7:0] + 8'd1;
-                group_g[gi] = byte_sum0[8];
-                group_p[gi] = &(ax[8*gi +: 8] ^ bx[8*gi +: 8]);
-            end
-            prefix_g = group_g;
-            prefix_p = group_p;
-            for (integer stage=1; stage<9; stage=stage*2) begin
-                for (integer gi=8; gi>=0; gi=gi-1) begin
-                    if (gi >= stage) begin
-                        prefix_g[gi] = prefix_g[gi] |
-                            (prefix_p[gi] & prefix_g[gi-stage]);
-                        prefix_p[gi] = prefix_p[gi] & prefix_p[gi-stage];
-                    end
-                end
-            end
-            carry_in[0] = 1'b0;
-            for (integer gi=1; gi<9; gi=gi+1)
-                carry_in[gi] = prefix_g[gi-1];
-            for (integer gi=0; gi<9; gi=gi+1)
-                result[8*gi +: 8] = carry_in[gi] ?
-                    sum1[8*gi +: 8] : sum0[8*gi +: 8];
-            add65_cla = result[64:0];
-        end
-    endfunction
-
-    // Unsigned >=. Eight byte comparisons are combined high-priority pairwise,
-    // giving a balanced three-level tree rather than a serial 64-bit subtract.
-    function automatic logic uge64_tree(
-        input logic [63:0] a, input logic [63:0] b
-    );
-        logic [7:0] eq0, gt0;
-        logic [3:0] eq1, gt1;
-        logic [1:0] eq2, gt2;
-        logic eq3, gt3;
-        begin
-            for (integer gi=0; gi<8; gi=gi+1) begin
-                eq0[gi] = (a[8*gi +: 8] == b[8*gi +: 8]);
-                gt0[gi] = (a[8*gi +: 8] >  b[8*gi +: 8]);
-            end
-            for (integer gi=0; gi<4; gi=gi+1) begin
-                eq1[gi] = eq0[2*gi+1] & eq0[2*gi];
-                gt1[gi] = gt0[2*gi+1] |
-                    (eq0[2*gi+1] & gt0[2*gi]);
-            end
-            for (integer gi=0; gi<2; gi=gi+1) begin
-                eq2[gi] = eq1[2*gi+1] & eq1[2*gi];
-                gt2[gi] = gt1[2*gi+1] |
-                    (eq1[2*gi+1] & gt1[2*gi]);
-            end
-            eq3 = eq2[1] & eq2[0];
-            gt3 = gt2[1] | (eq2[1] & gt2[0]);
-            uge64_tree = gt3 | eq3;
-        end
-    endfunction
-
-    assign cycle_increment = add65_cla({1'b0,cycle_tick}, 65'd1);
-    assign cycle_at_max = cycle_increment[64];
-    assign edge_tick = cycle_at_max ? TMAX : cycle_increment[63:0];
-
-    assign accept_base = add65_cla({1'b0,cycle_tick}, 65'd2);
-    assign accept_deadline = add65_cla(accept_base, {1'b0,cfg_ttl_ticks});
-    // 3*cfg_period, then +16 exactly as the original left-associated sum.
-    assign cfg_three = add65_cla(
-        {32'd0,cfg_period,1'b0}, {33'd0,cfg_period});
-    assign accept_watchdog_base = add65_cla(accept_base, cfg_three);
-    assign accept_watchdog = add65_cla(accept_watchdog_base, 65'd16);
-
-    assign pending_deadline = add65_cla(
-        {1'b0,edge_tick}, {1'b0,pending_ttl_q});
-    assign pending_watchdog = add65_cla(
-        {1'b0,edge_tick}, {31'd0,pending_first_span_q});
-    // atom_applied is registered, so its pre-edge cycle is the application
-    // edge. These two sums are also retained as exact public evidence values.
-    assign observed_deadline = add65_cla(
-        {1'b0,cycle_tick}, {1'b0,pending_ttl_q});
-    assign observed_watchdog = add65_cla(
-        {1'b0,cycle_tick}, {31'd0,pending_first_span_q});
-    assign next_watchdog = add65_cla(
-        {1'b0,edge_tick}, {31'd0,active_next_span_q});
-
-    assign accept_arith_bad = accept_deadline[64] || accept_watchdog[64];
-    assign pending_arith_bad = pending_q && !atom_applied &&
-        (pending_deadline[64] || pending_watchdog[64]);
-    assign observed_arith_bad = atom_applied &&
-        (observed_deadline[64] || observed_watchdog[64]);
-
-    // The old command's compare is unchanged in meaning.
-    assign old_ttl_due = lifetime_q && !atom_applied &&
-        uge64_tree(edge_tick, deadline_tick);
-    // Under !observed_arith_bad, c+ttl<2^64 and edge_tick=sat(c+1).
-    // For c<TMAX that is c+1>=c+ttl iff ttl<=1; for c=TMAX only ttl=0 avoids
-    // overflow and also satisfies ttl<=1. Thus this is the exact binary-value
-    // replacement for the guarded 64-bit compare, including zero TTL states.
-    assign observed_ttl_due = atom_applied && !observed_arith_bad &&
-        (~|pending_ttl_q[63:1]);
-    assign monitor_ttl_due = monitor_q && !pending_q && !atom_applied &&
-        uge64_tree(edge_tick, watchdog_q);
 endmodule
 
 // G05 private STOP-factored copy of immutable atomic PWM SHA256

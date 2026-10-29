@@ -1,0 +1,15 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-DEADLINE-CONE-MAIN-20261030-70-v1",
+  "owner": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T17:02:45.608956+00:00",
+  "preliminary_candidate_sha256": "8745485976d6a95f6deef8441dbbf8a77427a103530c899d435ca588efbe6d30",
+  "byte_carry_select_cases": 131072,
+  "all9group_generate_propagate_vectors": 262144,
+  "all8byte_lexicographic_cases": 6561,
+  "total": 399777,
+  "elapsed_seconds": 1.5749264999758452,
+  "proof": "Exhaustive binary local8bit addition/carry-select and carry generate/propagate. Exhaustive all18booleanbits verifies descending in-place prefix against sequential carry recurrence. Byte composition induction preserves modulo2^65, including originaldoubleoverflow. Exhaustive validgt/eqstates confirms lexicographic high-byte priority. Main independently derived guarded observedTTL simplification earlier.",
+  "limits": "Mathematical algorithm checks tied to preliminary source snapshot only. Final source identity, actual RTL runs and unchanged sequential/public integration must still be reviewed. No4state/formal-tool/timing/board/sourceadoption/build authorization."
+}

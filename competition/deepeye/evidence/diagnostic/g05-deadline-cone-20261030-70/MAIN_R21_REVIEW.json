@@ -1,0 +1,70 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-FULL-BUILD-20261030-70-R21-v1",
+  "operation_id": "B-G05-FULL-BUILD-20261030-70-R21",
+  "quality_main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T17:35:41.256763+00:00",
+  "tested_source_commit": "d0c9af304d86928af7d947e8ea38977b8b39e9b3",
+  "candidate_sha256": "8745485976d6a95f6deef8441dbbf8a77427a103530c899d435ca588efbe6d30",
+  "status": "failed_no_qualified_package",
+  "final_100MHz_timing": {
+    "WNS_ns": -2.327,
+    "TNS_ns": -2370.436,
+    "setup_failing_endpoints": 1657,
+    "setup_total_endpoints": 16663,
+    "WHS_ns": 0.02,
+    "THS_ns": 0.0,
+    "hold_failing_endpoints": 0
+  },
+  "critical_path": {
+    "source": "g05_diag_i/g05_diag_0/inst/engine_i/g_external[1].u_capture/slot_end_q_reg[0]/C",
+    "destination": "g05_diag_i/g05_diag_0/inst/engine_i/result_starts_reg[128]/CE",
+    "data_path_delay": "11.871ns  (logic 4.295ns (36.181%)  route 7.576ns (63.819%))",
+    "logic_levels": "25  (CARRY4=14 LUT2=1 LUT3=1 LUT4=3 LUT5=2 LUT6=4)"
+  },
+  "original_inventory_rehashed_files": 352,
+  "inventory_sha256": "5a1778ae3ce3b69e3033aad18cdab94fa268d181321df22f0b1f8e77cf5ca5ce",
+  "source_snapshot_files_checked": 15,
+  "process": {
+    "original_pid": 53532,
+    "started_at_utc": "2026-10-29T17:12:37.694297+00:00",
+    "completed_at_utc": "2026-10-29T17:30:36.303147+00:00",
+    "exit_code": 1,
+    "elapsed_seconds": 1078.6089999999967,
+    "timed_out": false,
+    "job_terminal_confirmed": true,
+    "job_empty_observed_before_close": true,
+    "job_closed": true
+  },
+  "observations": {
+    "check_timing_counts": {
+      "no_clock": 0,
+      "constant_clock": 0,
+      "pulse_width_clock": 0,
+      "unconstrained_internal_endpoints": 0,
+      "no_input_delay": 3,
+      "no_output_delay": 3,
+      "multiple_clock": 0,
+      "generated_clocks": 0,
+      "loops": 0,
+      "partial_input_delay": 0,
+      "partial_output_delay": 0,
+      "latch_loops": 0
+    },
+    "exact_CDC_bindings": "9existingFFpins/3three-stagechains, externaltofirstDonlyfalsepath",
+    "DRC_error_critical_rows": 0,
+    "DRC_warning_rows": 2,
+    "physical_unknowns": "3externalPWMoutputdelays/propagation, inputflighttime andcrosschannelskew unmeasured; no full externalG05/B06 timing acceptance"
+  },
+  "same_build_pair": {},
+  "source_choice": "restore original100MHz mapper/engine/builddriver in newcommit 6f3468965470015e66775e65ade61bcd56b799e3 to honor existingAsource-only boundary; candidatecommits/evidence remainimmutable, no qualifiedartifactrelease",
+  "restore_baseline": true,
+  "no_automatic_retry": true,
+  "collector_default_repinned": false,
+  "board": "not_run; Aonly",
+  "root_full_G05_B06_H12_system_acceptance": false,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "artifact_release_authorized": false,
+  "scope_correction": "A6500172372/14:58Z and peer14:59Z authorized additive50source/designonly, explicitly no new simulation/route/build. ReceiptprecededR20/R21; Boverlooked it. Mainselfacceptance couldnotexpand thisboundary. Actualresults retained; no moreexecution. Newsource-only72 fulfills originalrequest."
+}

@@ -1,0 +1,20 @@
+{
+  "results": [
+    {
+      "candidate_vectors": 100502,
+      "bits_each": 591,
+      "vendor_exit": 0,
+      "trace_sha256": "ed9ee43f7c2c91ebb5d9a834bde68a313c543382e37fb6f08344d41dcf768412"
+    },
+    {
+      "real_source_mutant": "uge64_tree >= changed to >",
+      "detected": true,
+      "failure": "{'index': 0, 'input': (0, 0, 32, 0, 16, 16, 1, 1, 6), 'actual_hex': '0000000000000000800000000000000040000000000000002000000000000003900000000000000004000000000000002200000000000000000000000000000008000000000000000440', 'expected_hex': '0x800000000000000040000000000000002000000000000003900000000000000004000000000000002200000000000000000000000000000008000000000000000445'}",
+      "vendor_exit": 0,
+      "trace_sha256": "1a4142b3e36913b29a43130dce7c74019904da136f8d863368b1cc807e8a03c2"
+    }
+  ],
+  "source_sha256": "8745485976d6a95f6deef8441dbbf8a77427a103530c899d435ca588efbe6d30",
+  "main_oracle_reference": "Original65bit modulo arithmetic and guarded direct unsignedcomparisons; unboundedPython integers independent of prefix/bytealgorithm",
+  "proof_limits": "Exactbinary591bit purehelper cut only; finalcandidateidentity and unchangedstateintegration still required. No4state/formal/timing/board claim."
+}

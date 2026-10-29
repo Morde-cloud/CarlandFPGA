@@ -1,0 +1,49 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-Q012-OOC-20261030-71-v1",
+  "operation_id": "B-DEEPEYE-Q012-OOC-20261030-71",
+  "quality_main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "source_commit": "d0c9af304d86928af7d947e8ea38977b8b39e9b3",
+  "source_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+  "decision": "Accept defaultparameter OOC synthesis elaboration/resource evidence only",
+  "tool": "Vivado2026.1 build6511674",
+  "parameters": {
+    "DESC_W": 64,
+    "CREDIT_W": 16,
+    "DEPTH": 4,
+    "MAX_Q0_BURST": 4,
+    "MAX_NON_Q2_BURST": 8,
+    "STAT_W": 32
+  },
+  "resources": {
+    "LUT": 492,
+    "LUT_logic": 324,
+    "LUT_memory": 168,
+    "FF": 223,
+    "latch": 0,
+    "DSP": 0,
+    "BRAM": 0
+  },
+  "DRC": "One ZPS7-1 PS7required warning for intentionallystandaloneOOCcore; noerror/critical inreport. FullsystemDRCnotaccepted.",
+  "timing_report_only": {
+    "clock_mhz": 100,
+    "preplacement_WNS_ns": 2.831,
+    "preplacement_TNS_ns": 0.0,
+    "limits": "Synthesized estimate with unconstrainedexternalIO; no placement/route/full-link timingclosure."
+  },
+  "original_files_rehashed": 15,
+  "original_job": "Exit0; no timeout; terminal/empty/closed proved by ownedJob accounting",
+  "synthesized_checkpoint_sha256": "32e1cc1ea4904d4c24d64f1491ab5a5a0b57de7b0d95ba3243607d7934e48cdd",
+  "simulation_scope": "Operation66 qualifies adoptedsource atits5testedparameterconfigs; this OOCdefaultparameter build does not retroactively expand thatsimulationcoverage.",
+  "no_claim": [
+    "implementation/route",
+    "physicaltiming/latency",
+    "publicwire/calendar/BOOT",
+    "fullB04",
+    "CDC/formal",
+    "board",
+    "runtimeauthorization"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

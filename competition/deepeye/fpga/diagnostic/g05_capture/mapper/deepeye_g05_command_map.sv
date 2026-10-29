@@ -10,15 +10,21 @@ module deepeye_g05_command_map (
     output logic [63:0] ttl_ticks, curvature_sum, curvature_limit
 );
     logic signed [63:0] yaw_wide, pitch_wide;
-    logic [63:0] yaw_squared, pitch_squared;
+    // Exact binary range: each signed16 square <=2^30, sum <=2^31.
+    // Keep the public64-bit result, but bound multiplier/add widths explicitly.
+    logic signed [31:0] yaw_math, pitch_math;
+    logic [31:0] yaw_squared, pitch_squared, sum32;
 
     always_comb begin
         // Widen BEFORE multiplication, including the -32768 input.
         yaw_wide = {{48{yaw_q[15]}}, yaw_q};
         pitch_wide = {{48{pitch_q[15]}}, pitch_q};
-        yaw_squared = $unsigned(yaw_wide * yaw_wide);
-        pitch_squared = $unsigned(pitch_wide * pitch_wide);
-        curvature_sum = yaw_squared + pitch_squared;
+        yaw_math = {{16{yaw_q[15]}}, yaw_q};
+        pitch_math = {{16{pitch_q[15]}}, pitch_q};
+        yaw_squared = $unsigned(yaw_math * yaw_math);
+        pitch_squared = $unsigned(pitch_math * pitch_math);
+        sum32 = yaw_squared + pitch_squared;
+        curvature_sum = {32'd0, sum32};
         `include "deepeye_g05_curvature_rom.svh"
 
         reject_bits[0] = !((profile_id == 8'd1) || (profile_id == 8'd2));

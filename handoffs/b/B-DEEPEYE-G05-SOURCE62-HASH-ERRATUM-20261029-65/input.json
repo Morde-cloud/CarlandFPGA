@@ -1,0 +1,72 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-G05-SOURCE62-HASH-ERRATUM-20261029-65",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "1c9e9a6375d54640152334e40b99e59c25e03f2e",
+    "test_steps": [
+      "Verify this new envelope with unchanged project standard handoff.py verify; preserve original62 mismatch and prior bytes.",
+      "Review the original exact source62 artifacts under their original source/simulation/failed-implementation scope; no build or board replay requested.",
+      "Return same-PR bounded feedback using this operation_id/request_hash and actual tested head; no final acceptance inferred."
+    ],
+    "expected_result": "Standard-tool-compatible new review envelope for unchanged source62 artifacts. Original62 hash-compatibility defect retained. R17/R18/R19 timing failed; no qualified new bit/HWH; G05/fullH12/all29formal unaccepted. H01-H15/revision1 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; design1011259415a0916054eb580687612580bc1e5f09; A-only physical board."
+  },
+  "artifacts": [
+    "competition/deepeye/fpga/diagnostic/g05_capture/engine/deepeye_g05_capture_engine.sv",
+    "competition/deepeye/fpga/diagnostic/g05_capture/axi/deepeye_g05_axi.sv",
+    "competition/deepeye/tools/diagnostic/g05_capture/review_bundle.py",
+    "competition/deepeye/docs/g05_r19_source_checkpoint_20261029.md",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/BUNDLES_MAIN_ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/closed-source/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/INTEGRATION_AUDIT_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R17_BUILD_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r18-build/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R18_BUILD_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/r19/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_BUILD_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_DESIGN.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_SOURCE_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/README.md",
+    "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/SOURCE.diff",
+    "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/.gitattributes",
+    "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/ARTIFACT_INTEGRITY.json",
+    "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/HASH_ERRATUM_FINDING.json",
+    "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/README.md",
+    "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/source62-standard-verify.stderr.txt",
+    "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/source62-standard-verify.stdout.txt"
+  ],
+  "stages": {
+    "original62_standard_envelope": {
+      "status": "failed",
+      "log": "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/source62-standard-verify.stderr.txt"
+    },
+    "selected_original_artifact_integrity": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/rtl/source62-hash-erratum-20261029-65/ARTIFACT_INTEGRITY.json"
+    },
+    "implementation": {
+      "status": "failed",
+      "log": "competition/deepeye/evidence/diagnostic/g05-r19-source-20261029-62/R19_BUILD_MAIN_AUDIT.json"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "fullH12": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    }
+  }
+}

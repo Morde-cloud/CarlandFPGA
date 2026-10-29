@@ -1,0 +1,16 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-SOURCE62-HASH-ERRATUM-20261029-65-v1",
+  "at_utc": "2026-10-29T14:58:19.185794+00:00",
+  "finding": "Original source62 declared request hash uses ensure_ascii=False; standard handoff.py uses default ensure_ascii=True",
+  "original_operation": "B-DEEPEYE-G05-R19-SOURCE-20261029-62",
+  "original_request_hash": "c466b0b7836d4ecb725f36bf936b436ec336c3e5ba48e4556107a5f391363720",
+  "standard_request_hash_for_original_request": "fcd005fe6b5df4e8a9afe39b1211233f11b171b7a6190a36a031cd597de21fe6",
+  "original_manifest_sha256": "c2e84eb2a21015a0a61f7aded28abd69b059874054238e5a13bedf69ac4d1653",
+  "initial_main_command_exit_code": 1,
+  "initial_assertion": "AssertionError: handoffs/b/B-DEEPEYE-G05-R19-SOURCE-20261029-62/manifest.json",
+  "cause_evidence": ".local/deployment/node-b/evidence/resume-20261029-08/publication62/verify_remote.py:32 explicitly verifies ensure_ascii=False",
+  "scope": "Contract requirements hashing intentionally uses ensure_ascii=False and is separately correct. Source bytes and original failure reports not invalidated by envelope incompatibility. No hardware operation involved.",
+  "recovery": "New operation65 standard-tool-generated envelope; original62 remains immutable. No replay or substitute acceptance."
+}

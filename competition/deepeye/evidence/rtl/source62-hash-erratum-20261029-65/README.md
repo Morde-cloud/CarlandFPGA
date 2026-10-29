@@ -1,0 +1,7 @@
+# Source62 request-hash erratum
+
+Original operation B-DEEPEYE-G05-R19-SOURCE-20261029-62 remains immutable. Its declared c466b0b7836d4ecb725f36bf936b436ec336c3e5ba48e4556107a5f391363720 is the literal-Unicode JSON hash. The standard handoff tool uses Python default ensure_ascii=True; the same original request hashes to fcd005fe6b5df4e8a9afe39b1211233f11b171b7a6190a36a031cd597de21fe6 and the original standard verify actually exits1/request_hash mismatch. The old remote byte readback did not establish standard-tool compatibility.
+
+This new operation uses the unchanged standard create/verify tool and a new operation identity. It references the exact original source and all23 original manifest-referenced artifact files, newly rehashed here. It adds no source optimization, build, board operation, relaxed gate or physical acceptance. R17/R18/R19 remain timing FAILED/no qualified new bit/HWH; G05/fullH12/all29formal remain unaccepted. The old request must not be silently relabelled; new A/C feedback should bind the new operation/request/manifest and actual tested head.
+
+DEEPEYE-HUMAN-LOCK-20261014/revision1 H01-H15 requirements c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804, fixed contractf5989cd5defce561f9ba98e6b18fc2682945f0a2 and design1011259415a0916054eb580687612580bc1e5f09 stay unchanged. Contract requirements intentionally use ensure_ascii=False; this is a separate hash contract and it was correctly verified. Only A operates the physical board.

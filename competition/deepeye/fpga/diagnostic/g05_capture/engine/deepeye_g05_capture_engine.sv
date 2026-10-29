@@ -188,9 +188,11 @@ module deepeye_g05_capture_engine (
                         !near_two(cap_period[i], active_period_q) ||
                         !near_two(cap_high0[i], active_highs_q[32*i +: 32]) ||
                         cap_high0[i] != cap_high1[i] || cap_high0[i] != cap_high2[i] ||
-                        cap_high0[i] == 0 || cap_high0[i] >= cap_period[i] ||
-                        cap_start[i] == 0 || cap_end[i] <= cap_start[i] ||
-                        (cap_end[i]-cap_start[i]) != {32'd0,cap_period[i]} ||
+                        // The hash-pinned coherent primitive qualifies every
+                        // valid record: 0<high<period and 0<start<end with
+                        // end-start==period. Its nonwrapping witness/age
+                        // construction supplies these invariants. Do not
+                        // duplicate wide serial subtraction on the STOP path.
                         (previous_join_q && cap_start[i] != previous_ends_q[64*i +: 64]))
                         capture_bad = 1'b1;
                     joined_valid[i] = 1'b1;

@@ -98,20 +98,70 @@ module deepeye_g05_axi (
         end
     end
 
+    // R19 exact write predicates: qualify each bank directly, retaining all
+    // old priority/rejection rules and the engine's same-edge cfg_ready gate.
+    wire write_issue = aw_full && w_full && !s_axi_bvalid;
+    wire write_wellformed = (aw_addr[1:0]==0) && (w_strb==4'hf);
+    wire write_control = write_issue && write_wellformed && (aw_addr==12'h00c);
+    wire write_stage = write_issue && write_wellformed &&
+        (aw_addr>=12'h200) && (aw_addr<=12'h218) && live;
+    wire write_identity = write_issue && write_wellformed &&
+        (aw_addr>=12'h100) && (aw_addr<=12'h130) && !bound && !retired && !eng_halted;
+    wire commit_context = write_control && (w_data==32'd2) && live && (&command_fresh);
+    wire commit_duplicate = stage_encoding_ok && map_legal && (last_cmd!=0) && exact_duplicate;
+    wire commit_bad = !stage_encoding_ok || !map_legal || (staged[5]==0) ||
+        (staged[5]<=last_cmd) || (profile_locked && (staged[2][7:0]!=submitted_profile));
+    wire commit_slot = !inflight && !eng_pending && !latch_valid;
+    (* keep = "TRUE" *) wire command_admit = commit_context && !commit_duplicate &&
+        !commit_bad && commit_slot && cfg_ready;
+    wire write_stop = write_control && (w_data==32'd3);
+    (* keep = "TRUE" *) wire fresh_clear = write_stop ||
+        (commit_context && (commit_duplicate || commit_bad || (commit_slot && cfg_ready)));
+    wire any_run_direct = |{identity[0],identity[1],identity[2],identity[3],
+        identity[4],identity[5],identity[6],identity[7]};
+    wire any_nonce_direct = |{identity[8],identity[9],identity[10],identity[11]};
+    wire begin_ok = !bound && !retired && !eng_halted && (&identity_fresh) &&
+        any_run_direct && any_nonce_direct && (identity[12]!=0);
+    wire write_success = write_identity || write_stage ||
+        (write_control && (((w_data==32'd1) && begin_ok) ||
+         ((w_data==32'd2) && commit_context && (commit_duplicate || command_admit)) ||
+         (w_data==32'd3) || ((w_data==32'd4) && latest_eligible && !latch_valid) ||
+         ((w_data==32'd5) && live && latch_valid)));
+
+    always_ff @(posedge clk) begin : exact_command_banks
+        if(rst) begin
+            command_fresh<=0;cfg_valid<=0;inflight<=0;s_axi_bresp<=0;
+            profile_locked<=0;last_cmd<=0;last_tag<=0;
+            submitted_profile<=0;submitted_speed<=0;
+            submitted_yaw<=0;submitted_pitch<=0;submitted_ttl<=0;
+        end else begin
+            cfg_valid<=command_admit;
+            if(fresh_clear)command_fresh<=0;
+            else if(write_stage)command_fresh[(aw_addr-12'h200)>>2]<=1;
+            if(write_issue)s_axi_bresp<=write_success?2'b00:2'b10;
+            if(command_admit)begin
+                inflight<=1;last_cmd<=staged[5];last_tag<=staged[6];
+                submitted_yaw<=staged[0][15:0];submitted_pitch<=staged[1][15:0];
+                submitted_profile<=staged[2][7:0];submitted_speed<=staged[3][7:0];
+                submitted_ttl<=staged[4][15:0];profile_locked<=1;
+            end else if(eng_accepted||eng_rejected||eng_halted||write_stop)inflight<=0;
+        end
+    end
+
     always_ff @(posedge clk) begin : control
         integer i,idx;
         logic read_ok;
         logic [31:0] read_value;
         logic any_run,any_nonce;
         stop_pulse<=0;
-        cfg_valid<=0;
+        
         if(rst) begin
             aw_full<=0;w_full<=0;aw_addr<=0;w_data<=0;w_strb<=0;
-            s_axi_bvalid<=0;s_axi_bresp<=0;s_axi_rvalid<=0;s_axi_rdata<=0;s_axi_rresp<=0;
-            identity_fresh<=0;command_fresh<=0;bound<=0;retired<=0;
-            profile_locked<=0;latch_valid<=0;inflight<=0;wrapper_fault<=0;
-            last_cmd<=0;last_tag<=0;submitted_profile<=0;submitted_speed<=0;
-            submitted_yaw<=0;submitted_pitch<=0;submitted_ttl<=0;
+            s_axi_bvalid<=0;s_axi_rvalid<=0;s_axi_rdata<=0;s_axi_rresp<=0;
+            identity_fresh<=0;bound<=0;retired<=0;
+            latch_valid<=0;wrapper_fault<=0;
+            
+            
             for(i=0;i<13;i=i+1)identity[i]<=0;
             for(i=0;i<7;i=i+1)staged[i]<=0;
             for(i=0;i<32;i=i+1)latched[i]<=0;
@@ -120,11 +170,10 @@ module deepeye_g05_axi (
             if(s_axi_rvalid&&s_axi_rready)s_axi_rvalid<=0;
             if(s_axi_awvalid&&s_axi_awready)begin aw_full<=1;aw_addr<=s_axi_awaddr;end
             if(s_axi_wvalid&&s_axi_wready)begin w_full<=1;w_data<=s_axi_wdata;w_strb<=s_axi_wstrb;end
-            if(eng_accepted||eng_rejected||eng_halted)inflight<=0;
             if(eng_halted||eng_rejected)begin retired<=1;latch_valid<=0;end
 
             if(aw_full&&w_full&&!s_axi_bvalid)begin
-                aw_full<=0;w_full<=0;s_axi_bvalid<=1;s_axi_bresp<=2'b10;
+                aw_full<=0;w_full<=0;s_axi_bvalid<=1;
                 if((aw_addr[1:0]==0)&&(w_strb==4'hf))begin
                     if(aw_addr==12'h00c)begin
                         case(w_data)
@@ -134,31 +183,31 @@ module deepeye_g05_axi (
                                 for(i=8;i<12;i=i+1)any_nonce=any_nonce|(|identity[i]);
                                 if(!bound&&!retired&&!eng_halted&&(&identity_fresh)&&
                                    any_run&&any_nonce&&(identity[12]!=0))begin
-                                    bound<=1;identity_fresh<=0;s_axi_bresp<=0;
+                                    bound<=1;identity_fresh<=0;
                                 end
                             end
                             32'd2:begin // COMMIT; exact current duplicate never re-applies.
                                 if(live&&(&command_fresh))begin
                                     if(stage_encoding_ok&&map_legal&&(last_cmd!=0)&&exact_duplicate)begin
-                                        command_fresh<=0;s_axi_bresp<=0;
+                                        
                                     end else if(!stage_encoding_ok||!map_legal||(staged[5]==0)||
                                         (staged[5]<=last_cmd)||
                                         (profile_locked&&(staged[2][7:0]!=submitted_profile)))begin
-                                        retired<=1;stop_pulse<=1;latch_valid<=0;command_fresh<=0;
+                                        retired<=1;stop_pulse<=1;latch_valid<=0;
                                         wrapper_fault<=8'd1;
                                     end else if(!inflight&&!eng_pending&&cfg_ready&&!latch_valid)begin
-                                        cfg_valid<=1;inflight<=1;
-                                        last_cmd<=staged[5];last_tag<=staged[6];
-                                        submitted_yaw<=staged[0][15:0];submitted_pitch<=staged[1][15:0];
-                                        submitted_profile<=staged[2][7:0];submitted_speed<=staged[3][7:0];
-                                        submitted_ttl<=staged[4][15:0];profile_locked<=1;
-                                        command_fresh<=0;latch_valid<=0;s_axi_bresp<=0;
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        latch_valid<=0;
                                     end
                                 end
                             end
                             32'd3:begin // STOP is valid even before BEGIN.
-                                stop_pulse<=1;retired<=1;latch_valid<=0;inflight<=0;
-                                command_fresh<=0;s_axi_bresp<=0;
+                                stop_pulse<=1;retired<=1;latch_valid<=0;
+                                
                             end
                             32'd4:begin // LATCH one complete latest record.
                                 if(latest_eligible&&!latch_valid)begin
@@ -178,18 +227,18 @@ module deepeye_g05_axi (
                                         latched[25+2*i]<=result_ends[i*64+32+:32];
                                     end
                                     latched[30]<=identity[12];latched[31]<=32'h47303544;
-                                    latch_valid<=1;s_axi_bresp<=0;
+                                    latch_valid<=1;
                                 end
                             end
                             32'd5:begin
-                                if(live&&latch_valid)begin latch_valid<=0;s_axi_bresp<=0;end
+                                if(live&&latch_valid)begin latch_valid<=0;end
                             end
                             default:begin retired<=1;stop_pulse<=1;latch_valid<=0;wrapper_fault<=8'd2;end
                         endcase
                     end else if((aw_addr>=12'h100)&&(aw_addr<=12'h130)&&!bound&&!retired&&!eng_halted)begin
-                        idx=(aw_addr-12'h100)>>2;identity[idx]<=w_data;identity_fresh[idx]<=1;s_axi_bresp<=0;
+                        idx=(aw_addr-12'h100)>>2;identity[idx]<=w_data;identity_fresh[idx]<=1;
                     end else if((aw_addr>=12'h200)&&(aw_addr<=12'h218)&&live)begin
-                        idx=(aw_addr-12'h200)>>2;staged[idx]<=w_data;command_fresh[idx]<=1;s_axi_bresp<=0;
+                        idx=(aw_addr-12'h200)>>2;staged[idx]<=w_data;
                     end
                 end
             end

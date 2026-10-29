@@ -1,0 +1,64 @@
+{
+  "request": {
+    "operation_id": "B-DEEPEYE-G05-R16-SOURCE-20261029-61",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "requester": "node-b",
+    "code_commit": "e86cd21d7f8ea8b031505dc3dc4f61e568a02436",
+    "test_steps": [
+      "Review the exact R14/R15B/R16 source diff, fixedprimitive induction and preserved focused raw simulation/process evidence; no old suite rerun requested.",
+      "Verify474 selected raw files/357 content-addressed blobs; portable review_bundle byte restoration only.",
+      "Read actual R16 routedfailure WNS-4.600ns/TNS-4783.280ns/1849setupfails, originalexit1 andemptyownedJob. Do not enable, importPYNQ or runboard from this packet."
+    ],
+    "expected_result": "Source-only conditional fixedprimitive/binary reachable equivalence and bounded RTL review. TimingFAILED/noqualifiedbitHWH. H01-H15 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 andbothfullH12remainmandatory; all29formalnot_run."
+  },
+  "artifacts": [
+    "competition/deepeye/fpga/diagnostic/g05_capture/engine/deepeye_g05_capture_engine.sv",
+    "competition/deepeye/tools/diagnostic/g05_capture/review_bundle.py",
+    "competition/deepeye/docs/g05_r16_source_checkpoint_20261029.md",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/BUNDLE_MANIFEST.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/raw-evidence.blobs.tar.gz.part000",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/raw-evidence.blobs.tar.gz.part001",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/raw-evidence.blobs.tar.gz.part002",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/raw-evidence.blobs.tar.gz.part003",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/raw-evidence.blobs.tar.gz.part004",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/raw-evidence.blobs.tar.gz.part005",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/bundle/RAW_INDEX.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/BUNDLE_MAIN_ACCEPTANCE.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/R16_BUILD_SELECTED.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/R16_FAILURE_MAIN_AUDIT.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/R16_MAIN_REVIEW.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/README.md",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/SELECTED_ORIGINALS.json",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/SOURCE.diff",
+    "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/SOURCE_ACCEPTANCE.json"
+  ],
+  "stages": {
+    "focused_simulation": {
+      "status": "passed",
+      "log": "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/R16_MAIN_REVIEW.json"
+    },
+    "implementation": {
+      "status": "failed",
+      "log": "competition/deepeye/evidence/diagnostic/g05-r16-source-20261029-61/R16_FAILURE_MAIN_AUDIT.json"
+    },
+    "board": {
+      "status": "not_run"
+    },
+    "system": {
+      "status": "not_run"
+    },
+    "R03": {
+      "status": "not_run"
+    },
+    "G05": {
+      "status": "not_run"
+    },
+    "fullH12": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    }
+  }
+}

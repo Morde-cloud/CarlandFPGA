@@ -1,0 +1,136 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-R16-INVARIANTS-MAIN-REVIEW-20261029-59-v1",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "status": "ACCEPTED_SOURCE_REDUCTION_FOR_ONE_BUILD",
+  "candidate_sha256": "b1f4458507d5cc0e7948d03874c885d4d1973035a276a8228f85277e55952b83",
+  "primitive_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456",
+  "source_argument": "Conditional source proof for the fixed primitive4baddfc3 only, no arbitrary corrupted internal state/SEU claim. On rearm tick=0,partial_valid=0,previous sampled. A first common rise stores partial_start=witness_now>=1 andage=0. While the partial survives no rise, tick and age both advance1, maintaining age=tick-partial_start. A closingcommon rise computes elapsed=oldage+1=witness_now-partial_start. Only coherent_candidate with fall_seen==all and each0<high<elapsed publishes slot_period=elapsed,slot_start=partial_start,slot_end=witness_now and savedhighs. Thus end>start>0,end-start==period,0<high<period. Subsetrise aborts without publishing. COUNT_MAX outranks increment and restarts a fresh partial onlyatgenuinecommonrise; WITNESS_MAX outranks all candidates and never wraps. Transport retirement clears allslotfields andvalid together; ifheld, oldvalidpayload is unchanged. STOP/reset/rearm maskvalid andclearstate. Therefore these five boolean error terms are alwaysfalse when this engine reads cap_valid from this exact primitive. Removing them in engine does not change observable binary pin behavior. Keep allprimitive fault event checks, near(expected period/high),tag,duplicate,consecutive-frame andcrosschannel checks unchanged. Production remains direct3FFperpin, no new pipeline/delay/clock/TTL/ABI. If primitive hashchanges this reduction is not authorized.",
+  "bounded_property_evidence": {
+    "cycles": 43950,
+    "qualified_records": 4068,
+    "instances": {
+      "2": 1535,
+      "1": 1328,
+      "3": 1205
+    },
+    "raw_samples_checked_by_TB": 26727,
+    "records_main_independently_parsed": 4068,
+    "held_checks": 20675
+  },
+  "artifacts_rehashed": 133,
+  "actual_v2_vendor_commands": [
+    {
+      "stage": "00-vsim-version",
+      "original_pid": 34136,
+      "exit": 0
+    },
+    {
+      "stage": "01-vlib-positive",
+      "original_pid": 44204,
+      "exit": 0
+    },
+    {
+      "stage": "02-vlib-mutant",
+      "original_pid": 18008,
+      "exit": 0
+    },
+    {
+      "stage": "03-vlog-positive",
+      "original_pid": 27960,
+      "exit": 0
+    },
+    {
+      "stage": "04-vsim-positive",
+      "original_pid": 37704,
+      "exit": 0
+    },
+    {
+      "stage": "05-vlog-mutant",
+      "original_pid": 46220,
+      "exit": 0
+    },
+    {
+      "stage": "06-vsim-mutant",
+      "original_pid": 55532,
+      "exit": 3
+    }
+  ],
+  "negative": "soleperiodbit mutation caught atfirstrecord; actualexit3,noPASS",
+  "failures_retained": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-G05-R16-PRIMITIVE-INVARIANTS-20261029-59-v1",
+    "failures": [
+      {
+        "id": "preflight-attempt-01",
+        "status": "PRESERVED_RUNNER_FAILURE",
+        "vendor_launched": false,
+        "command": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe -B -X utf8 D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\evidence\\g05-capture-20261026-59\\engine-r16-proof\\scripts\\preflight_compile.py",
+        "exit_code": 1,
+        "error": "FileNotFoundError WinError 3 before the first work-directory mkdir",
+        "evidence": "preflight/compile-01/ATTEMPT_01.json"
+      },
+      {
+        "id": "preflight-edit-attempt-01",
+        "status": "FAILED_BEFORE_SOURCE_WRITE",
+        "vendor_launched": false,
+        "error": "preflight injection point absent",
+        "evidence": "preflight/compile-01/PATCH_ATTEMPT_01.json"
+      },
+      {
+        "id": "acceptance-run-01-positive",
+        "status": "PRESERVED_TEST_COVERAGE_FAILURE",
+        "vendor_commands_completed": 5,
+        "positive_vsim_exit_code": 3,
+        "invariant_failures": 0,
+        "cause": "The v1 directed 4-bit held-slot sequence did not create a genuine small overrun; the final coverage guard observed small_overrun=0 against min=1 and stopped with R16_FAIL.",
+        "evidence": "execution/FAILURE.json"
+      },
+      {
+        "id": "freeze-acceptance-v2-first-invocation",
+        "status": "PRESERVED_CONTROL_FAILURE",
+        "vendor_launched": false,
+        "exit_code": 1,
+        "cause": "Receipt path omitted '.receipt' before '.json'; no acceptance freeze was written by that invocation.",
+        "evidence": "freeze/FREEZE_ACCEPTANCE_V2_ATTEMPT01.txt"
+      },
+      {
+        "id": "acceptance-v2-postprocess",
+        "status": "PRESERVED_POSTPROCESS_FAILURE_AFTER_SUCCESSFUL_SIMULATION",
+        "vendor_commands_completed": 7,
+        "exit_code": 1,
+        "positive_vsim_exit_code": 0,
+        "mutant_vsim_exit_code": 3,
+        "cause": "Parser expected marker at column zero; ModelSim prefixes transcript lines with '# '. No vendor command was rerun.",
+        "evidence": "execution/attempts/run-02/FAILURE.json"
+      }
+    ],
+    "pre_run_rejected_freeze": {
+      "path": "freeze/INPUT_FREEZE_ACCEPTANCE_02.json",
+      "sha256": "aac573102849aec7a54c5f82c61d7d47c5bc9c36ff568bc5de46e33434d6048a",
+      "reason": "It mapped the corrective run to run-01 libraries; rejected before any v2 vendor command.",
+      "replacement": "freeze/INPUT_FREEZE_ACCEPTANCE_02B.json"
+    },
+    "automatic_replay": false
+  },
+  "limits": "Conditional fixedprimitive/binary reachable source proof plus bounded RTL witness, not formal/SEU/arbitrary corruptstate/board/timing acceptance; repeatedheld relation checks depend on inspectedbench,4kCSV independently parsed",
+  "main_integration": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-G05-R16-INTEGRATION-MAIN-CONTROLS-20261029-59-v1",
+    "status": "PASS_FINITE12_INTEGRATION",
+    "candidate_sha256": "b1f4458507d5cc0e7948d03874c885d4d1973035a276a8228f85277e55952b83",
+    "checks": 124,
+    "public_samples": 1320,
+    "actual_exit": 0,
+    "original_owned_jobs_empty": true,
+    "trace_byte_equal_to_R14_main": true,
+    "raw_trace_sha256": "77b9f0224791a47ab83f5b052320d8eeeff51665748042c9df4c45379783a36b",
+    "arithmetic_helper_full_domain": "unchanged R15B helpers reuse accepted127781RTLvectors; new primitive invariant witness pending DeepSeek",
+    "clock_timing_board": "not accepted"
+  },
+  "accepted_for_one_build": true,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

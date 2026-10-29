@@ -1,0 +1,20 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-G05-R16-SOURCE-20261029-61",
+  "main_thread": "01a13b55-095b-7461-8dd5-5476a130bd82",
+  "source_commit": "e86cd21d7f8ea8b031505dc3dc4f61e568a02436",
+  "engine_sha256": "b1f4458507d5cc0e7948d03874c885d4d1973035a276a8228f85277e55952b83",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+  "scope": "Conditional fixedprimitive reachable-binary-state source equivalence and bounded RTL behavior only",
+  "r14": "10 private speculative payload banks/21 assignments; same control/validity/public state; observed163 twin cases/35176 samples and1008 private differences only whilehalted. Main independent12 cases/124checks/1320samples.",
+  "r15b": "Only successor64/near_two64 helper bodies; nibble Boolean nonwrapping successor and high/low exact distance partition;127781 actual observed RTL vectors. Original child compile failure and negativeFatal/exit0 preserved; main splitvlib recovery and separate negative-only $stop exit3. No positive rerun.",
+  "r16": "Five predicates guaranteed by sole upstream primitive4baddfc3 removed; allprimitive events, expected counts, tags, continuity and crosschannel guards retained.43950cycles/4068 rawrecords/26727validsamples/20675heldchecks; soleperiodbit mutant actualexit3.",
+  "new_main_integration": "12cases/124checks/1320public samples, actualexit0; trace identical prior main control.",
+  "implementation": "R14 andR15B failed; one authorized new R16 100MHz build is separately running at packet creation. No timing/bit/HWH acceptance from this source packet.",
+  "hardware": "not_run; A-only",
+  "formal29": "not_run",
+  "source_reduction_invalid_if_primitive_changes": true,
+  "source_model_limits": "No arbitrary corruptstate/SEU/fourstate physical/formal-tool equivalence claim. Negative/prefight/parser failures disclosed in original logs."
+}

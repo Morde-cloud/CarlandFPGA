@@ -194,7 +194,7 @@ static func _material_matrix() -> StandardMaterial3D:
     return _standard_material(Color(0.52, 0.53, 0.55), 0.85, 0.42)
 
 static func _material_pdc_blade() -> StandardMaterial3D:
-    return _standard_material(Color(0.07, 0.07, 0.08), 0.35, 0.14)
+    return _standard_material(Color(0.22, 0.24, 0.29), 0.35, 0.34)
 
 static func _material_pdc_stud() -> StandardMaterial3D:
-    return _standard_material(Color(0.12, 0.12, 0.14), 0.60, 0.06)
+    return _standard_material(Color(0.55, 0.5, 0.42), 0.45, 0.28)

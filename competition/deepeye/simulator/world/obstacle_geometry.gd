@@ -259,7 +259,7 @@ static func _material_fault() -> StandardMaterial3D:
     return _opaque_material(Color(0.55, 0.42, 0.30), 0.0, 0.78)
 
 static func _material_void() -> StandardMaterial3D:
-    return _opaque_material(Color(0.05, 0.05, 0.07), 0.05, 0.95)
+    return _opaque_material(Color(0.14, 0.155, 0.19), 0.0, 0.9)
 
 static func _material_casing() -> StandardMaterial3D:
     return _opaque_material(Color(0.62, 0.64, 0.68), 0.95, 0.18)

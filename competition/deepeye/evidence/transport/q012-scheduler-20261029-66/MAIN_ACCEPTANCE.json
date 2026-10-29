@@ -1,0 +1,194 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-BOUNDED-Q012-SCHEDULER-20261029-66-v1",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T16:41:19.792514+00:00",
+  "decision": "Accept new single-clock bounded3queue descriptor core, with main input-ready fix; no publicwire/calendar/runtime/board or root-card acceptance",
+  "author_completed": {
+    "job_id": "child-0decbd94ac4e4376a1b640a77d3642ac",
+    "work_id": "B-BOUNDED-Q012-SCHEDULER-20261029-66-v1",
+    "status": "completed",
+    "stale": false,
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "reasoning_effort": "max",
+    "thread_id": "01a1885d-6638-7273-a006-6e9c0ac2c739",
+    "turn_id": "01a1885d-6793-7381-b18e-743f56a8bb7b",
+    "finished": "2026-10-29T16:33:13.324412Z",
+    "text": "**结论**\n- 作者侧最终运行 `evidence/run-20261030-q012-v5/`：`author_pass`，仅代表作者 ModelSim 证据，不代表主验收。\n- 6/6 用例通过，共 2,846 行；覆盖 DEPTH 1/2/3/4、wrap、同队列 enq/fire 合并、满队列回压、opaque 位、零成本/class3 拒绝、credit 边界、held offer、flush/reset、mask/enable、两级 fairness（含 Q1 仍有 backlog 时 Q2 优先）、`STAT_W=2` 饱和。\n- 公开 replay 8/8 行通过；另以 `DEPTH=2`、`STAT_W=2` 的公开 replay probe 4/4 行通过。\n- 负向 mutant 在 cycle 3 真实失败：`AUTHOR_CHECK_FAIL`、`** Fatal: public-port mismatch`，期望 `flushed_count=2`，实际 `0`。\n- `root/synthesis/implementation/CDC/formal/board/product_integration = not_run`；`runtime_authorization = not_granted`。\n\n**关键哈希**\n- 合同 canonical requirements SHA256：`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`，复核匹配 H01-H15。\n- RTL：`f426c9fa64d346fd369a8281184dea44313e44dea8a5979759d67c2cb9fb6b9c`\n- 生成 mutant：`e3eb19858c82b46f6afcb0937ab8a84ef09d3035ba70e43624198dfffff186c1`\n- 最终 `RESULT.json`：`af2401c5c0b2ebeff4d23baf32af5977db250bd1e9ceae06c0eea5ffcae43686`\n- 公开 replay CSV：`dd0b1da6895fc59ab7c226e6d15ff95f18fdbcd3bbdc8a7d05ef63a4046c76c0`\n\n**产物**\n- `resume-66/q012-author/rtl/deepeye_q012_scheduler.sv`\n- `resume-66/q012-author/tb/tb_q012_author_check.sv`\n- `resume-66/q012-author/tb/tb_q012_public_csv.sv`\n- `resume-66/q012-author/runner/run_author.py`\n- `resume-66/q012-author/runner/generate_author_cases.py`\n- `resume-66/q012-author/runner/make_mutant.py`\n- `resume-66/q012-author/mutants/q012_flush_mutant.sv`\n- `resume-66/q012-author/README.md`\n- `resume-66/q012-author/evidence/run-20261030-q012-v5/RESULT.json`\n- `resume-66/q012-author/evidence/run-20261030-q012-v5/COMMANDS.json`\n- `resume-66/q012-author/evidence/run-20261030-q012-v5/COMMANDS.md`\n- `resume-66/q012-author/evidence/run-20261030-q012-v5/processes/`（PID、argv、start/end、exit、raw stdout/stderr、source hash）\n- `resume-66/q012-author/evidence/run-20261030-q012-v5/logs/`（ModelSim transcript）\n\n**复现**\n```powershell\ncd .local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-66\\q012-author\npython -B runner\\run_author.py --attempt-dir evidence\\run-<new-name>\n```\n\n公开 CSV 入口（主线自备独立 stimuli/golden，不读取 `main-golden/`）：\n```powershell\npython -B runner\\run_author.py `\n  --attempt-dir evidence\\public-<new-name> `\n  --public-csv <inputs.csv> `\n  --output-csv evidence\\public-<new-name>\\trace.csv `\n  --param DEPTH=2 --param STAT_W=2\n```\n\n**失败与修复记录**\n- `run-20261030-q012-v1`：TB plusarg 路径寄存器仅 128 字符，ModelSim 截断长路径；已扩宽至 4096 位并保留失败日志。\n- `run-20261030-q012-v2`：include-time mutant wrapper 未被 ModelSim 重命名；改为由 `make_mutant.py` 生成 standalone mutant，仅在隔离库中强制 `flushed_count=0`。真实 RTL 未改。\n- `evidence/manual/attempt0`–`attempt3`：作者模型/生成器期望修正，均已保留。\n- 最终统计：`rtl_repair_iterations=0`；2 次 harness/runner 修正；1 次 Q2-over-Q1 directed coverage 增补（RTL 未改）。v3/v4 为中间通过版本，仍保留。\n\n**歧义/边界**\n- 同时 `rst` 与 `flush` 时按 reset 优先，统计清零；flush 单独保留 accepted/sent 并饱和累加丢弃数。\n- `out_class/out_desc/out_cost` 在无 offer 的稳定周期为零；`rst/flush` 高电平期间组合数据可能保留旧 offer，但 `out_valid=0`，数据按 don't-care 处理。\n- `in_valid=0` 时 `in_ready` 仍由 `in_class` 目标队列是否满决定；这是“chosen queue full”的保守实现，已列入 `RESULT.json` 的 ambiguity。\n- ModelSim 10.7 的 `-do` 脚本在 `$fatal` 后仍可能返回 exit 0；因此通过/失败同时依据 `AUTHOR_CHECK_PASS/FAIL` 与 `** Fatal` transcript token，原始 exit/PID/argv 均已保留。\n- 未读取或写入 `main-golden/`；未写产品树/旧证据；未 Git commit、未远程发布；未使用 SQL/队列/服务凭据/FPGA 板/Vivado/collector；未创建新 main，未发群或 peer 消息。\n\n无 `[需桌面回合]` 或 `[需本人操作]` 请求；主可独立审查源码、公开端口 trace 和 mutant 负向控制后决定采用与验收。"
+  },
+  "author_final_source_sha256": "f426c9fa64d346fd369a8281184dea44313e44dea8a5979759d67c2cb9fb6b9c",
+  "adopted_source_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+  "author_history": "Originalsourcef426 had6authorcases andtool/harnessrepair history/v1-v5 retained. Main discovered idlecost0ready mismatch atcycle2867 on ownfrozenoracle. Author6casePASS is not advertised for adoptednewsource.",
+  "main_source_delta": "Only in_ready rawclass/cost format predicate independentofin_valid, FIFO/credits/fairness/cancel/stats unchanged",
+  "original_main_failure": "run01-author-source/FAILURE.json; all5oldtoolJobs terminalempty; no replay",
+  "main_verification": [
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 1782,
+        "sent": [
+          741,
+          441,
+          372
+        ],
+        "flush_with_offer": 11,
+        "load_refused_held": 67,
+        "invalid": 753,
+        "full_backpressure": 3871,
+        "credits_exact_fire": 72,
+        "zero_credit_nonempty": 1672,
+        "held_mask_enable_change": 58,
+        "stat_saturation": 2262
+      },
+      "all_compared": true,
+      "depth": 1,
+      "stat_w": 8,
+      "trace_sha256": "1869182caa10c1f75a8c497d12f180dd3149b1e8a0cdba1b92ca945f1725eca8",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2059,
+        "sent": [
+          972,
+          323,
+          315
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 80,
+        "invalid": 753,
+        "full_backpressure": 3553,
+        "credits_exact_fire": 74,
+        "zero_credit_nonempty": 1568,
+        "held_mask_enable_change": 65,
+        "stat_saturation": 2282
+      },
+      "all_compared": true,
+      "depth": 2,
+      "stat_w": 8,
+      "trace_sha256": "6b783cdbab3ad512ab6075583a2298f6726d89cf79f7f7bb0a6fd315376b5845",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2278,
+        "sent": [
+          983,
+          327,
+          313
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 78,
+        "invalid": 753,
+        "full_backpressure": 3294,
+        "credits_exact_fire": 80,
+        "zero_credit_nonempty": 1674,
+        "held_mask_enable_change": 62,
+        "stat_saturation": 2298
+      },
+      "all_compared": true,
+      "depth": 3,
+      "stat_w": 8,
+      "trace_sha256": "8f7bdecbdda3a602ec8a6d2bb78a42d4035d9f9166f34ab91e01068262d14d76",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2479,
+        "sent": [
+          986,
+          342,
+          310
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 77,
+        "invalid": 753,
+        "full_backpressure": 3046,
+        "credits_exact_fire": 73,
+        "zero_credit_nonempty": 1641,
+        "held_mask_enable_change": 66,
+        "stat_saturation": 2318
+      },
+      "all_compared": true,
+      "depth": 4,
+      "stat_w": 8,
+      "trace_sha256": "fb40457626b5397476a4c338bc2bc4a857df856ad01eab1bbb8303818ecd25a9",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2479,
+        "sent": [
+          986,
+          342,
+          310
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 77,
+        "invalid": 753,
+        "full_backpressure": 3046,
+        "credits_exact_fire": 73,
+        "zero_credit_nonempty": 1641,
+        "held_mask_enable_change": 66,
+        "stat_saturation": 7063
+      },
+      "all_compared": true,
+      "depth": 4,
+      "stat_w": 2,
+      "trace_sha256": "51ae3a268aef44cb29e6bd41ad11bb5fb0da8b717e02cd535306fb12d17940b5",
+      "vendor_exit": 0
+    }
+  ],
+  "main_public_samples": 71650,
+  "main_qualified_configs": [
+    [
+      1,
+      8
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      3,
+      8
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      4,
+      2
+    ]
+  ],
+  "real_negative": {
+    "kind": "Real RTL parameter/configuration mutation only: MAX_Q0_BURST999 instead of expected3; no source-mutation claim",
+    "vendor_exit": 0,
+    "independent_checker_expected_failure": true,
+    "first_failure": "{'cycle': 52, 'phase': 1, 'field': 4, 'got': 0, 'expected': 1, 'input': {'rst': 0, 'flush': 0, 'enable': 1, 'iv': 0, 'cls': 0, 'desc': 11957078760383053877, 'cost': 1, 'lv': 0, 'lval': 0, 'mask': 7, 'ordy': 1}}",
+    "trace_sha256": "a1cf476f77001a685cf7c56e79c60c4854278f6284a91720b6b036145dff9ee2"
+  },
+  "original_main_jobs_terminal": 5,
+  "new_main_jobs_terminal_empty": 20,
+  "critical_limits": [
+    "Descriptor admission/reservation only; eligiblemask/creditload/source/TTL/actualbytecost/guard/calendar remain caller-bound, no publicBOOT policy or newauthority.",
+    "enable/mask gate newreservations; heldoffer must be canceled viaflush/reset. Alreadyaccepteddownstreamwork is not recalled.",
+    "Packet-count fairness only wheneligibleheadfitscredit anddownstreamserves. No wallclocklatency/300or9600/physicalline proof.",
+    "Only testedDEPTH1,2,3,4 andSTAT8plusDEPTH4STAT2; no blanketotherparameter/CDC/RDC/synth/implementation/board claim."
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "B04": "not_run",
+  "board": "not_run"
+}

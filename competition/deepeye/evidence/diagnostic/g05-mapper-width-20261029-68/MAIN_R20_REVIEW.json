@@ -1,0 +1,78 @@
+{
+  "at_utc": "2026-10-29T16:50:41.605161+00:00",
+  "automatic_retry": false,
+  "clock_mhz": 100,
+  "critical_path": {
+    "data_delay_ns": 10.78,
+    "destination": "engine_i/u_pwm/pending_tag_q_reg[23]/R",
+    "interpretation": "Deadline/saturated tick failure path into high-fanout immediate PWM stop; exact predicate restructuring is future separate work, no latency/TTL/clock change authorized by this failed result.",
+    "logic_delay_ns": 2.726,
+    "logic_levels": 15,
+    "route_delay_ns": 8.054,
+    "source": "engine_i/cycle_tick_reg[36]/Q"
+  },
+  "decision": "FAILED timing qualification; no accepted bit/HWH or collector repin/default run",
+  "final_report": {
+    "THS_ns": 0.0,
+    "TNS_ns": -1073.908,
+    "WHS_ns": 0.015,
+    "WNS_ns": -1.722,
+    "hold_failing_endpoints": 0,
+    "setup_failing_endpoints": 1206,
+    "setup_total_endpoints": 16690
+  },
+  "immutable_source_snapshots_checked": 15,
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "no_claim": [
+    "100MHz timing closure",
+    "qualifiedsamebuildbitHWH",
+    "fullG05/B06",
+    "Q012synthesis/implementation",
+    "board",
+    "fullH12",
+    "formal29cards",
+    "publicclock/ABIdecision",
+    "runtimegrant"
+  ],
+  "observed_scoped_checks": {
+    "CDC": "3info input chains with9exactFFpins; external-to-firstDonlyfalsepath",
+    "DDR": "both72rowtables retained; three resolved differences exact",
+    "DRC": "6DPOP warnings,0error/critical; no blanket full-system DRC acceptance",
+    "external_unknowns": "3captureinputfalsepaths and3PWMoutputs without outputdelay; propagation/flighttime/skew unmeasured",
+    "internal_unconstrained_endpoints": 0,
+    "resources": {
+      "FF": 5791,
+      "LUT": 5234,
+      "latch": 0
+    },
+    "route_errors": 0
+  },
+  "operation_id": "B-G05-FULL-BUILD-20261030-68-R20",
+  "private_failure_manifest_rehashed_files": 352,
+  "private_failure_manifest_sha256": "aeff47b182cefc301fe98a9f90f449647f59e1151d8e96d6338fa541caaec7c4",
+  "process": {
+    "elapsed_seconds": 736.7970000000205,
+    "exit_code": 1,
+    "final_active_processes": 0,
+    "job_closed": true,
+    "job_empty_observed_before_close": true,
+    "job_terminal_confirmed": true,
+    "original_pid": 4108,
+    "outer_python_pid": 45700,
+    "owned_job_cleanup": "TerminateJobObject attempted on launcher_nonzero_exit; final active0, no unrelated process termination",
+    "timed_out": false,
+    "timeout_seconds": 1200,
+    "total_processes": 97
+  },
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "router_estimate_only": {
+    "TNS_ns": -1080.543,
+    "WNS_ns": -1.726
+  },
+  "source_commit": "0d8397f2af048f59e9b1a261cc80a0671d0942dd",
+  "source_optimization_acceptance": "Arithmeticwidth candidate equivalence separately passed165180x325bits; this failed timing result does not refute binaryfunctional equivalence or establish physical improvement.",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "vendor": "Vivado2026.1 build6511674",
+  "work_id": "B-G05-FULL-BUILD-20261030-68-R20-v1"
+}

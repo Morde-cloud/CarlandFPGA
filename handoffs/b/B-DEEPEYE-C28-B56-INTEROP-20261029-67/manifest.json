@@ -1,0 +1,94 @@
+{
+  "artifacts": [
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/.gitattributes",
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/MAIN_INTEROP_REVIEW.json",
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/MAIN_QUANTIZER_CHECK.json",
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/README.md",
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/raw/.gitattributes",
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/raw/BUNDLE_INDEX.json",
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/raw/raw-evidence.tar.gz.part000",
+    "handoffs/b/B-DEEPEYE-C28-B56-INTEROP-20261029-67/.gitattributes",
+    "handoffs/b/B-DEEPEYE-C28-B56-INTEROP-20261029-67/SCOPE.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/MAIN_INTEROP_REVIEW.json": {
+      "sha256": "c6ba509f639ae190e2844fffce0e31c916260d6b22ee25cb776d4f1976e35130",
+      "size": 4215
+    },
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/MAIN_QUANTIZER_CHECK.json": {
+      "sha256": "b91126fa929cbf85ef4d2c12fa420afa648c4007a1b28dcade232c9295b17b23",
+      "size": 2091
+    },
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/README.md": {
+      "sha256": "8e06579eaba1e64fb766d086c9b749a52e623c35cd6af913a50c810ba3b79c39",
+      "size": 2808
+    },
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/raw/BUNDLE_INDEX.json": {
+      "sha256": "e6c08f567886cf5410b8c4039245cc24363ad7647a34b7ef8e2fdb124f68c0d6",
+      "size": 22590
+    },
+    "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "25a7019fe442db8be5c0e4880ade1f328c6be22023ca6eb2c1a929ba302c90b8",
+      "size": 321594
+    },
+    "handoffs/b/B-DEEPEYE-C28-B56-INTEROP-20261029-67/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-DEEPEYE-C28-B56-INTEROP-20261029-67/SCOPE.json": {
+      "sha256": "9b5edd31b8e78e0b0d24bbd3203dd64a984c020ffb106cc31b655325d7f5267e",
+      "size": 775
+    }
+  },
+  "request": {
+    "code_commit": "0d8397f2af048f59e9b1a261cc80a0671d0942dd",
+    "expected_result": "Offline source-bound checks pass; actual raw records rejected without clipping; missing mappings remain blockers.",
+    "operation_id": "B-DEEPEYE-C28-B56-INTEROP-20261029-67",
+    "requester": "B",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify fixed C28/A producer source hashes and original manifest identities.",
+      "Inspect run04 23-vector refusal checks and retained run03 failure.",
+      "Inspect 16,384 independent quantizer round-trips and original A 80-word/eight-group parser."
+    ]
+  },
+  "request_hash": "9ea4163c5e7eb83b49e4ae249c39f99b0338baeeab3394aed052eeb25a16c49f",
+  "schema_version": 1,
+  "stages": {
+    "board": {
+      "status": "not_run"
+    },
+    "formal_cards": {
+      "status": "not_run"
+    },
+    "full_H12": {
+      "status": "not_run"
+    },
+    "live_adapter": {
+      "status": "not_run"
+    },
+    "offline_interop_refusal": {
+      "log": "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/MAIN_INTEROP_REVIEW.json",
+      "status": "passed"
+    },
+    "public_wire_interoperability": {
+      "status": "not_run"
+    },
+    "quantizer_roundtrip": {
+      "log": "competition/deepeye/evidence/rtl/c28-b56-interop-20261029-67/MAIN_QUANTIZER_CHECK.json",
+      "status": "passed"
+    },
+    "runtime_integration": {
+      "status": "not_run"
+    }
+  }
+}

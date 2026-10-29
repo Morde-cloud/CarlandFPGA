@@ -1,0 +1,18 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-MAPPER-WIDTH-20261029-68-v1",
+  "owner_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T15:58:12.952775+00:00",
+  "source_baseline_sha256": "51f2ef228bf531e1476fd59e4068a2f1ad0b83110601104d3d1ad6764948beb4",
+  "candidate_sha256": "2c647351be0f9a050695a9346d5a70802d640aa3fee11a635a94397461c8d600",
+  "decision": "Only source arithmetic-width candidate; no clock/pipeline/interface/admission/latency change and no build authorized",
+  "binary_proof": [
+    "For every signed16 q, -32768<=q<=32767, so0<=q*q<=2^30. Explicit signed32 multiplication truncated to32bits preserves this exact nonnegative product.",
+    "For any two such inputs, 0<=yaw^2+pitch^2<=2^31; unsigned32 addition cannot overflow. Zero-extension to64 yields exactly the original unsigned64 product sum.",
+    "Original yaw_wide/pitch_wide64 and all bounds/high/TTL/ROM/control expressions are unchanged. Thus all known-binary mapper outputs identical if SystemVerilog implementation follows declared width; real twin test still required.",
+    "No4state/XZ/formal equivalence, synthesis/timing/physical claim. R19failures retain originalsource and newcandidate not qualifiedbit."
+  ],
+  "exhaustive_scalar_checks": 65536,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

@@ -1,0 +1,74 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-BUILD-DIRECTOR-SUCCESSOR-20261030-69-v1",
+  "at_utc": "2026-10-29T16:31:32.563676+00:00",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_previous_guard_issue": "Current human-designated successor was refused by old literal; obsolete director still admitted in old synthetic fixture mode.",
+  "source_delta": "Exactly one MAIN literal updated; every source/hash/CDC/separate authorization/fixture refusal/build-default guard unchanged.",
+  "checks": [
+    {
+      "case": "baseline-old-fixture",
+      "result": "expected_acceptance_in_fixture_mode_only"
+    },
+    {
+      "case": "baseline-rejects-real-successor-fixture",
+      "result": "expected_refusal",
+      "reason": "main exact source acceptance required"
+    },
+    {
+      "case": "new-accepts-designated-successor-fixture",
+      "result": "expected_acceptance_in_fixture_mode_only"
+    },
+    {
+      "case": "new-rejects-released-old-director",
+      "result": "expected_refusal",
+      "reason": "main exact source acceptance required"
+    },
+    {
+      "case": "new-real-mode-refuses-synthetic-source-acceptance",
+      "result": "expected_refusal",
+      "reason": "synthetic acceptance cannot authorize a build"
+    },
+    {
+      "case": "new-authorizer-fixture-only",
+      "result": "expected_acceptance_in_fixture_mode_only"
+    },
+    {
+      "case": "new-rejects-old-authorizer",
+      "result": "expected_refusal",
+      "reason": "separate exact main full-build authorization required"
+    },
+    {
+      "case": "new-real-mode-refuses-synthetic-authorization",
+      "result": "expected_refusal",
+      "reason": "synthetic authorization cannot authorize a build"
+    },
+    {
+      "case": "new-refuses-authorized",
+      "result": "expected_refusal",
+      "reason": "separate exact main full-build authorization required"
+    },
+    {
+      "case": "new-refuses-source_acceptance_sha256",
+      "result": "expected_refusal",
+      "reason": "separate exact main full-build authorization required"
+    },
+    {
+      "case": "new-refuses-source_commit",
+      "result": "expected_refusal",
+      "reason": "separate exact main full-build authorization required"
+    },
+    {
+      "case": "new-refuses-physical_unknowns_acknowledged",
+      "result": "expected_refusal",
+      "reason": "separate exact main full-build authorization required"
+    }
+  ],
+  "count": 12,
+  "python": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+  "real_build_authorized_or_executed": false,
+  "board_or_services_or_mesh_registry_changed": false,
+  "authority": "Existing human successor ASSIGNMENT/RELEASE/STARTED; no new role or credential grant.",
+  "decision": "Accept exact literal update for authorized current main; hypothetical future successors require a new explicit human handoff and code review."
+}

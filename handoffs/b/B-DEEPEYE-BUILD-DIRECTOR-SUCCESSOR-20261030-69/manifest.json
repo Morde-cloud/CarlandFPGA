@@ -1,0 +1,75 @@
+{
+  "artifacts": [
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/.gitattributes",
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/MAIN_GUARD_REVIEW.json",
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/README.md",
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/raw/.gitattributes",
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/raw/BUNDLE_INDEX.json",
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/raw/raw-evidence.tar.gz.part000",
+    "handoffs/b/B-DEEPEYE-BUILD-DIRECTOR-SUCCESSOR-20261030-69/.gitattributes",
+    "handoffs/b/B-DEEPEYE-BUILD-DIRECTOR-SUCCESSOR-20261030-69/SCOPE.json"
+  ],
+  "files": {
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/MAIN_GUARD_REVIEW.json": {
+      "sha256": "66c48d5d402f79874a7041f0bdbf98fcf53a7b85a8b5c3dac2df0488c460b087",
+      "size": 2917
+    },
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/README.md": {
+      "sha256": "7dab6a1771ab8e0befd3387734d2e626ff7b77eb3f8f6e13d1d6ee557e5f6c8a",
+      "size": 893
+    },
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/raw/BUNDLE_INDEX.json": {
+      "sha256": "6b7063d907d18afc25f87653a3a4d9b9720e8b0d9df4dcc6cfc0671fd149fbf5",
+      "size": 3520
+    },
+    "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "4586d1a30b48af50bc6449483d6823642c4b63ee1fe3a5fea80bccb07f31d2a1",
+      "size": 20768
+    },
+    "handoffs/b/B-DEEPEYE-BUILD-DIRECTOR-SUCCESSOR-20261030-69/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-DEEPEYE-BUILD-DIRECTOR-SUCCESSOR-20261030-69/SCOPE.json": {
+      "sha256": "3fe1468ba0cd098df958aa05ced6284ea083e8dcc74afe5af674e3d78716b1d0",
+      "size": 784
+    }
+  },
+  "request": {
+    "code_commit": "0d8397f2af048f59e9b1a261cc80a0671d0942dd",
+    "expected_result": "Focused build guard checks pass; all source/hash/authorization and physical-unknown gates retained.",
+    "operation_id": "B-DEEPEYE-BUILD-DIRECTOR-SUCCESSOR-20261030-69",
+    "requester": "B",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Compare driver baseline/candidate; only existing quality-main identity literal changes.",
+      "Inspect twelve focused synthetic parser checks; synthetic fixtures cannot authorize a build."
+    ]
+  },
+  "request_hash": "30fac35890677b4038ca183dbcca302fcb8eda688df13d87e366d68cca741cac",
+  "schema_version": 1,
+  "stages": {
+    "board": {
+      "status": "not_run"
+    },
+    "focused_guard_checks": {
+      "log": "competition/deepeye/evidence/rtl/build-director-successor-20261030-69/MAIN_GUARD_REVIEW.json",
+      "status": "passed"
+    },
+    "root_cards": {
+      "status": "not_run"
+    },
+    "runtime": {
+      "status": "not_run"
+    }
+  }
+}

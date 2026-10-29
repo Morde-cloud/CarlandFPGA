@@ -1,0 +1,82 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-C28-B56-SOURCE-INTEROP-20261029-67-v1",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T16:09:59.827113+00:00",
+  "A_producer_sha256": "6a5f70a6acdaa6de52fc72d678d452956861370e1d143b70219ced107c5a04c9",
+  "C_decoder_sha256": "70b317681fee8c9182c342fe8d2f94eaecc957c62231a74a080d213bb5e0eab4",
+  "quantized_center_roundtrips": 16384,
+  "all_four_channels_all4096_codes": true,
+  "rolling_record_sha256": "b4f926bd1445b0978b85f33417937e76616c672119dad0a9780ad4cbbd3aa950",
+  "invalid_cases": [
+    {
+      "raw": [
+        17,
+        4095,
+        32769,
+        65280
+      ],
+      "outcome": "rejected",
+      "reason": "count: integer bound"
+    },
+    {
+      "raw": [
+        -1,
+        0,
+        0,
+        0
+      ],
+      "outcome": "rejected",
+      "reason": "count: integer bound"
+    },
+    {
+      "raw": [
+        4096,
+        0,
+        0,
+        0
+      ],
+      "outcome": "rejected",
+      "reason": "count: integer bound"
+    },
+    {
+      "raw": [
+        true,
+        0,
+        0,
+        0
+      ],
+      "outcome": "rejected",
+      "reason": "count: integer bound"
+    },
+    {
+      "raw": [
+        1,
+        2,
+        3
+      ],
+      "outcome": "rejected",
+      "reason": "four counts required"
+    },
+    {
+      "raw": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "outcome": "rejected",
+      "reason": "four counts required"
+    }
+  ],
+  "original_b56_tuple_request_refusal": "count: integer bound",
+  "disabled_fixture_remains_STOP_no_authority": true,
+  "input_unchanged": true,
+  "limits": [
+    "Only pinned A quantizer and C inverse, not full sensor kernel/planner performance/physical calibration.",
+    "The B56 tuple is a known diagnostic input, not a12bit ADC observation. No clipping, rescaling or new source identity invented.",
+    "No actual QPC-to-ms clock mapping, pose, source/trigger authentication or live fullH12 chain established. Both final paths/hard gates remain unaccepted."
+  ]
+}

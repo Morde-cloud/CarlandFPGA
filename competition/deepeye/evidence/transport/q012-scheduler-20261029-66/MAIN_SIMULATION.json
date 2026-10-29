@@ -1,0 +1,158 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-BOUNDED-Q012-SCHEDULER-20261029-66-v1",
+  "reviewer_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "start": {
+    "at_utc": "2026-10-29T16:26:13.948111+00:00",
+    "source_original": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-66\\main-golden\\source-ready-fixed.sv",
+    "source_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+    "source_snapshot_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+    "reference_sha256": "b79901c3de93d31f51dcb9e96e668055df695cb9d43da9d2c35fc8bdbe788711",
+    "tb_sha256": "6c59df73f4eb72c2ef16367a2be2f74a17ca2e2c683285b15da6ae6c06c33bc4",
+    "vectors_sha256": "a510207600fbacfc3612f2e5b10f066f20e04a740c9e7eb23050a6be198c0a4d",
+    "tool_hashes": {
+      "vsim.exe": "a5fb4747c8c06b1f3ad5b5f9ae6240ab6e28598cdf6058aa6f5139d0732303cf",
+      "vlog.exe": "6342a4ffe784fadafc15f0e9c25738b421624cf89668f84b114b07b43fc686f6",
+      "vlib.exe": "128a99858b689f4d535ffdff4a35342ea166a681c201887bb980179680b9b57e"
+    },
+    "helper_sha256": "17da77d63ba9977f99a8db9cbe794c3f866defd074bbfb40a8bc5360b77a0c00",
+    "original_helper_sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692",
+    "helper_delta": "Optional cwd override only in signature, launch cwd and matching receipt; suspended whole Job and own temp unchanged."
+  },
+  "cases": [
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 1782,
+        "sent": [
+          741,
+          441,
+          372
+        ],
+        "flush_with_offer": 11,
+        "load_refused_held": 67,
+        "invalid": 753,
+        "full_backpressure": 3871,
+        "credits_exact_fire": 72,
+        "zero_credit_nonempty": 1672,
+        "held_mask_enable_change": 58,
+        "stat_saturation": 2262
+      },
+      "all_compared": true,
+      "depth": 1,
+      "stat_w": 8,
+      "trace_sha256": "1869182caa10c1f75a8c497d12f180dd3149b1e8a0cdba1b92ca945f1725eca8",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2059,
+        "sent": [
+          972,
+          323,
+          315
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 80,
+        "invalid": 753,
+        "full_backpressure": 3553,
+        "credits_exact_fire": 74,
+        "zero_credit_nonempty": 1568,
+        "held_mask_enable_change": 65,
+        "stat_saturation": 2282
+      },
+      "all_compared": true,
+      "depth": 2,
+      "stat_w": 8,
+      "trace_sha256": "6b783cdbab3ad512ab6075583a2298f6726d89cf79f7f7bb0a6fd315376b5845",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2278,
+        "sent": [
+          983,
+          327,
+          313
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 78,
+        "invalid": 753,
+        "full_backpressure": 3294,
+        "credits_exact_fire": 80,
+        "zero_credit_nonempty": 1674,
+        "held_mask_enable_change": 62,
+        "stat_saturation": 2298
+      },
+      "all_compared": true,
+      "depth": 3,
+      "stat_w": 8,
+      "trace_sha256": "8f7bdecbdda3a602ec8a6d2bb78a42d4035d9f9166f34ab91e01068262d14d76",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2479,
+        "sent": [
+          986,
+          342,
+          310
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 77,
+        "invalid": 753,
+        "full_backpressure": 3046,
+        "credits_exact_fire": 73,
+        "zero_credit_nonempty": 1641,
+        "held_mask_enable_change": 66,
+        "stat_saturation": 2318
+      },
+      "all_compared": true,
+      "depth": 4,
+      "stat_w": 8,
+      "trace_sha256": "fb40457626b5397476a4c338bc2bc4a857df856ad01eab1bbb8303818ecd25a9",
+      "vendor_exit": 0
+    },
+    {
+      "cycles": 7165,
+      "public_samples": 14330,
+      "coverage": {
+        "accepted": 2479,
+        "sent": [
+          986,
+          342,
+          310
+        ],
+        "flush_with_offer": 9,
+        "load_refused_held": 77,
+        "invalid": 753,
+        "full_backpressure": 3046,
+        "credits_exact_fire": 73,
+        "zero_credit_nonempty": 1641,
+        "held_mask_enable_change": 66,
+        "stat_saturation": 7063
+      },
+      "all_compared": true,
+      "depth": 4,
+      "stat_w": 2,
+      "trace_sha256": "51ae3a268aef44cb29e6bd41ad11bb5fb0da8b717e02cd535306fb12d17940b5",
+      "vendor_exit": 0
+    }
+  ],
+  "mutant": {
+    "kind": "Real RTL parameter/configuration mutation only: MAX_Q0_BURST999 instead of expected3; no source-mutation claim",
+    "vendor_exit": 0,
+    "independent_checker_expected_failure": true,
+    "first_failure": "{'cycle': 52, 'phase': 1, 'field': 4, 'got': 0, 'expected': 1, 'input': {'rst': 0, 'flush': 0, 'enable': 1, 'iv': 0, 'cls': 0, 'desc': 11957078760383053877, 'cost': 1, 'lv': 0, 'lval': 0, 'mask': 7, 'ordy': 1}}",
+    "trace_sha256": "a1cf476f77001a685cf7c56e79c60c4854278f6284a91720b6b036145dff9ee2"
+  },
+  "limits": "Only new single-clock packet descriptor scheduler simulation; no wire timing/grant/BOOT/ABI/synthesis/implementation/CDC/board/root-card acceptance"
+}

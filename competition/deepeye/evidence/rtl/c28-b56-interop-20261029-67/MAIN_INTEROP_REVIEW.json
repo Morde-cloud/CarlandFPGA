@@ -1,0 +1,101 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-C28-B56-SOURCE-INTEROP-20261029-67-v1",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-29T16:40:25.815897+00:00",
+  "decision": "Accept only fixed-source offline interoperability/rejection evidence and concrete missing bindings; no liveC28 adapter or publicwire protocol acceptance",
+  "rehashed_worker_artifacts": 115,
+  "C28_manifest_standard_request_verified": true,
+  "C28_manifest_files": 11,
+  "A_original_receipt_identity": {
+    "schema": 1,
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "operation_id": "A-PRIVATE-PL-CAPTURE-20261026-v4",
+    "request_hash": "465fc5373ab574b1f9c737812e7330cf40b2086a8bcf2fd650ca58bfff867e6f",
+    "tested_commit": "8b6e130c9d760ed9b4a935d8d5f6090203fa73b6",
+    "collector_sha256": "723435f542b050405d8a6286a806a6561fbb613e6608ebf5f84407c7418407e6",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "stage": "real_private_source4_digital_PL_capture",
+    "status": "passed_scoped_diagnostic",
+    "expected_values": [
+      17,
+      4095,
+      32769,
+      65280
+    ],
+    "observed_values": [
+      17,
+      4095,
+      32769,
+      65280
+    ],
+    "cleanup": {
+      "active_tag": 0,
+      "attempted": true,
+      "confirmed": true,
+      "status": 0
+    }
+  },
+  "A_archive_raw_byte_checked": true,
+  "A_original_returned_words": 80,
+  "A_original_double_read_groups": 8,
+  "A_values": [
+    17,
+    4095,
+    32769,
+    65280
+  ],
+  "A_opaque_qualities": [
+    2,
+    17,
+    128,
+    254
+  ],
+  "actual_new_worker_vectors": 23,
+  "worker_exit": 0,
+  "main_independent_quantizer_checks": 16384,
+  "conversion": {
+    "b56_fixture": "REJECTED",
+    "b_collector_actual_rtl_replay": "REJECTED",
+    "b_collector_reason_codes": [
+      "count_out_of_range",
+      "missing_a_count_calibration_mapping",
+      "missing_c28_quality_mapping",
+      "missing_adc_em_pose_tick_association",
+      "missing_c28_binding_identity"
+    ],
+    "c28_observation_produced": false,
+    "clipped": false,
+    "real_a_pv4": "REJECTED",
+    "reason_codes": [
+      "count_out_of_range",
+      "missing_a_count_calibration_mapping",
+      "missing_c28_quality_mapping",
+      "missing_adc_em_pose_tick_association",
+      "missing_c28_binding_identity"
+    ]
+  },
+  "declared_missing": [
+    "A-authorized 16-bit raw value to C28 12-bit count calibration/mapping for A P-v4 and B collector records",
+    "B opaque per-lane uint8 quality to C28 packed valid/saturated/held/fault quality mapping",
+    "C28 adc_tick_ms/em_tick_ms/own-pose/EM-origin association from original host QPC ns in A P-v4 and B collector records",
+    "C28 run/build/boot/session/config/source identity and board/source-record hashes",
+    "transport, timing, pose and executed-action trust",
+    "actual ADC/FORCE/sim_em_v2 signals; A P-v4 and B56 are source4 software fixtures, and B collector is actual-RTL software-fake transaction replay",
+    "physical B collector/ADC capture, physical board execution, full H12 and formal acceptance"
+  ],
+  "limitations": [
+    "A board evidence retains originalP-v4 operation465fc.../tested8b6e... scope; B did not operate board or re-run collector.",
+    "B collector raw records are an actualRTL/software-fake transaction replay, not ADC/physical acquisition. Its original failedintent is preserved, not passed.",
+    "BC28 custom binary container is a B-owned test fixture only; passing it is not actual publicABI/wire protocol interoperability. Actual C entryrecommend_json exercised only as declaredsoftwarefixture with authorizationnone.",
+    "Current actual raw16values/opaquequality/QPC lack A-approved count calibration, quality mapping, tick/pose/EM-origin and full binding. No clipping or source relabel.",
+    "run03 missed an independent calibration-mapping refusal reason,22/23; run04 correctedthat helper and23/23. All priorrecords retained."
+  ],
+  "runtime_authorization": "none",
+  "board": "not_run",
+  "fullH12": "not_run",
+  "formal_cards": "not_run",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+}

@@ -259,6 +259,17 @@ module deepeye_g05_capture_engine (
         (joined_good && (result_seq == 32'hffffffff || next_watchdog[64])) ||
         (monitor_q && !pending_q && !atom_applied && edge_tick >= watchdog_q && !joined_good);
     assign command_offer = cfg_valid && !rst && !stop && !halted && !pending_q;
+    // R17 public payload enable. With joined_good true, capture_bad and
+    // the missing-join watchdog term are false. With command_offer false,
+    // handshake and its invalid-count branch cannot preempt publication.
+    // Keep every other fault guard, reset/STOP, halt and application priority.
+    // This is exactly the old payload-write predicate, not speculative data.
+    (* keep = "TRUE" *) logic result_payload_ce;
+    assign result_payload_ce = !rst && !stop && !halted &&
+        !command_offer && !atom_applied && joined_good &&
+        !(cycle_tick == TMAX || old_ttl_due || observed_ttl_due ||
+          pending_arith_bad || observed_arith_bad || atom_rejected ||
+          result_seq == 32'hffffffff || next_watchdog[64]);
     assign cfg_ready = !rst && !stop && !halted && !pending_q && !failure_any;
     assign handshake = cfg_valid && cfg_ready;
     // When failure_any is high atom_stop is high. The immutable PWM primitive
@@ -331,6 +342,20 @@ module deepeye_g05_capture_engine (
         end
     end
 
+    // Public result payload retains exactly its old write/reset/hold behavior.
+    // A dedicated direct enable avoids the shared priority/handshake cone.
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            result_seq <= 0; result_tag <= 0; result_tick <= 0;
+            result_periods <= 0; result_highs <= 0; result_starts <= 0; result_ends <= 0;
+        end else if (result_payload_ce) begin
+            result_seq <= result_seq + 1'b1;
+            result_tag <= active_tag_q; result_tick <= edge_tick;
+            result_periods <= joined_periods; result_highs <= joined_highs;
+            result_starts <= joined_starts; result_ends <= joined_ends;
+        end
+    end
+
     always_ff @(posedge clk) begin
         accepted <= 0; rejected <= 0; applied <= 0;
         if (rst) begin
@@ -339,8 +364,7 @@ module deepeye_g05_capture_engine (
             pending_q <= 0; lifetime_q <= 0; monitor_q <= 0; capture_enabled_q <= 0;
             rearm_wait_q <= 0; rearm_left_q <= 0;
             join_valid_q <= 0; previous_join_q <= 0;
-            result_valid <= 0; result_seq <= 0; result_tag <= 0; result_tick <= 0;
-            result_periods <= 0; result_highs <= 0; result_starts <= 0; result_ends <= 0;
+            result_valid <= 0;
         end else begin
             cycle_tick <= edge_tick;
             if (!halted) begin
@@ -384,10 +408,7 @@ module deepeye_g05_capture_engine (
                     end
                     if (capture_enabled_q) begin
                         if (joined_good) begin
-                            result_valid <= 1; result_seq <= result_seq + 1'b1;
-                            result_tag <= active_tag_q; result_tick <= edge_tick;
-                            result_periods <= joined_periods; result_highs <= joined_highs;
-                            result_starts <= joined_starts; result_ends <= joined_ends;
+                            result_valid <= 1;
                             previous_join_q <= 1;
                             join_valid_q <= 0;
                         end else begin

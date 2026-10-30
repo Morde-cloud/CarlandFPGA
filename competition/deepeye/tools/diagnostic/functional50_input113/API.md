@@ -135,10 +135,13 @@ uint16 data and are never truncated or relabelled. No legacy adapter,
 `to_fake_plan103`, old commit fabrication, Host103 import, or fake/current
 mapping is created.
 
-`staging_shape_ready` is data-shape-only. It is true only when at least one
-lane is valid, every valid raw value is at most 4095, and both tag and 128-bit
-build ID are nonzero. It never means current admission, monotonic device tag,
-loaded build, authenticated boot, physical readiness, or acceptance.
+`staging_shape_ready` describes the accepted neutral uint16 record only and
+requires nonzero tag and 128-bit build ID. Values above4095 and all-invalid
+records remain valid neutral shapes. Its label is
+`NEUTRAL_UINT16_DATA_SHAPE_ONLY`; it does not assert94/codec/Host103 payload
+admissibility. A future specific adapter must validate its profile separately.
+It never means current admission, monotonic device tag, loaded build,
+authenticated boot, physical readiness, or acceptance.
 
 `physical_start(...)` returns exactly:
 
@@ -179,7 +182,7 @@ directory, with a nonexistent output directory whose parent already exists:
 python test_input113.py --output <FRESH_TEST_OUTPUT>
 ```
 
-The runner defines 33 in-memory cases, sets `sys.dont_write_bytecode=true`
+The runner defines 34 in-memory cases, sets `sys.dont_write_bytecode=true`
 before importing the candidate, creates only the supplied output directory with
 exclusive `parents=False` semantics, writes only `RESULT.json`, and refuses an
 existing output. It uses no subprocess, network, fixture import, board, MMIO,
@@ -187,7 +190,8 @@ overlay, SSH, SQL, service, credential, or publication path. Case summaries and
 an embedded overall exit status are retained in `RESULT.json`.
 
 Expected exit status: `0` all cases pass; `1` a case fails or the 60 second
-runtime bound is exceeded; `2` setup/output refusal. The serialized result is
+post-return runtime check is exceeded; `2` setup/output refusal. That check
+does not interrupt a hung case; a main-owned Job supervisor is required. The serialized result is
 bounded below 4 MiB. A later main-owned execution assignment must choose a fresh
 output directory and run it once under supervision.
 

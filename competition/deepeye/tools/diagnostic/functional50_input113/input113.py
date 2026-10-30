@@ -460,7 +460,8 @@ def _qpc_sum(origin, tick_us, remainder_ns, path):
     return total
 
 
-def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, companions):
+def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, companion_bytes):
+    companions = companion_bytes
     if type(request_bytes) is not bytes:
         _refuse("REQUEST_TYPE")
     if type(source_scan_bytes) is not bytes:
@@ -561,8 +562,7 @@ def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, compan
                                        separators=(",", ":")).encode("utf-8")
     valid_values = [item["raw_sample_uint16"] for item in lanes if item["mapped_flags"]["valid"]]
     legacy_numeric = all(value <= 4095 for value in valid_values)
-    staging_shape = (bool(valid_values) and all(value <= 4095 for value in valid_values)
-                     and lineage["tag"] != 0 and lineage["build_id_hex128"] != "0" * 32)
+    staging_shape = lineage["tag"] != 0 and lineage["build_id_hex128"] != "0" * 32
     provenance = dict(envelope["provenance"])
     provenance.update({"authenticated": False, "declared_only": True})
     integrity = {
@@ -590,7 +590,7 @@ def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, compan
         "legacy_mapping_created": False,
         "source_fault_is_opaque": True,
         "staging_shape_ready": staging_shape,
-        "staging_shape_label": "DATA_SHAPE_ONLY",
+        "staging_shape_label": "NEUTRAL_UINT16_DATA_SHAPE_ONLY",
         "a_mapping_required_before_original_semantic_binding": True,
         "source_numerical_association_verified": False,
     }

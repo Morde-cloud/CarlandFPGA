@@ -1,6 +1,6 @@
 {
   "schema": "B117_SOURCE_PINS_V1",
-  "state": "SOURCE_READY_PENDING_MAIN_REVIEW",
+  "state": "MAIN119_CORRECTED_PENDING_FIRST118_SOFTWARE_TEST",
   "acceptance": false,
   "self_acceptance": false,
   "task": {
@@ -202,5 +202,20 @@
     "No loaded FPGA build, physical provider, MMIO, ADC, motion, or clock authentication",
     "No either-H12 physical evidence, original29 completion, final 100MHz/1pct/100ms result, or H01-H15 product acceptance",
     "No board, Git, network, vendor, service, SQL, credential, or publication action"
-  ]
+  ],
+  "main119_correction": {
+    "work_id": "B-DEEPEYE-ORIGINAL-INPUT-CORRECTION-20261031-119",
+    "original_source_commit": "c1dc23b5b0052fbabf585b22911449eb63f30d3f",
+    "decision_sha256": "3448851c901a1a6320a18eec1175f7cd60478d563f7751f1a90bd948119435d0",
+    "source117_actual_terminal_completed": true,
+    "runtime_conversation_id": "01a18e07-7bd3-76e1-af24-45a66974a116",
+    "changes": [
+      "documented companion_bytes keyword",
+      "neutraluint16 shape separatefrom legacyuint12 andphysicalauthority; allinvalidrecords preserved",
+      "actualoversizecompanion negativeinput; properJSONsurrogateescape",
+      "newfocusedboundarygroupandactualexecutionphaselabel"
+    ],
+    "expected_focused_groups": 34,
+    "candidate_runs_before_freeze": 0
+  }
 }

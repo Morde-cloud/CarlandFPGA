@@ -1,0 +1,81 @@
+{
+  "schema": "HOST103_A_INTERFACE_GAPS_V1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": "v1",
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-BOUNDED-HOST-20261031-103",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "design_freeze": "1011259415a0916054eb580687612580bc1e5f09",
+  "status": "SOURCE_ONLY_MAIN_REVIEW_PENDING",
+  "physical_start_status": "A_ORIGINAL_PROVIDER_UNAVAILABLE",
+  "physical_command": null,
+  "generic_provider_callback_supported": false,
+  "caller_verified_boolean_supported": false,
+  "available_execution_kind": "SOFTWARE_FAKE_CSR",
+  "physical_result": false,
+  "current_source_eligible": false,
+  "core_ran": false,
+  "command": null,
+  "action_status": "STOP",
+  "acceptance": false,
+  "source_ready_scope": {
+    "scan_count": 1,
+    "arm_count": 1,
+    "collection_count": 1,
+    "frame_count_max": 4,
+    "normal_wire_bytes_max": 252,
+    "failure_retained_bytes_max": 4096,
+    "trace_cancel_count_max": 1,
+    "cleanup_requires_owned_arm_attempt": true,
+    "pre_arm_refusal_cleanup_writes": 0,
+    "pre_arm_refusal_automatic_collections": 0,
+    "g05_writes_including_stop": 0,
+    "operational_seconds": 10,
+    "cleanup_seconds": 2,
+    "nominal_parent_seconds": 15,
+    "hung_mmio_hard_bound_established": false,
+    "work_evidence_bytes": 6291456,
+    "cleanup_evidence_bytes": 1048576,
+    "final_evidence_bytes": 1048576
+  },
+  "builder_reference": {
+    "source_commit": "262a1f207db877fa7ee791293285be96898d4851",
+    "source_sha256": "69e6f04a3300f52c4f22ab50b646425dc15baf2a0b4759dcf6b8c329ae7692e6",
+    "qualified_same_run_pair_available": false,
+    "source_fix_or_failure_receipt_is_pair_proof": false
+  },
+  "missing_interfaces": [
+    {
+      "id": "A_QUALIFIED_SAME_RUN_PAIR",
+      "owner": "A_AND_MAIN",
+      "required_original_evidence": "Qualified BIT/HWH with same-run closure, source and tested commit, operation/request identities, manifest hashes, BUILD_ID, timing/DRC/CDC evidence and exact two-window topology.",
+      "substitutes_rejected": "Builder source hash, fixture pair, HWH-only metadata or failed build receipt."
+    },
+    {
+      "id": "A_ORIGINAL_LOAD_CLOCK_PRODUCER",
+      "owner": "A",
+      "required_original_evidence": "Reviewed original producer implementation and finite invocation contract, actual device and machine-boot observation, load operation, installed API/source versions, actual PS clock observation and custody to the qualified pair.",
+      "substitutes_rejected": "Constructible caller handle, generic callback, verified boolean, copied receipt, echoed identity, cached metadata or hardware constant alone."
+    },
+    {
+      "id": "A_BOUNDED_MMIO_EFFECT_SEMANTICS",
+      "owner": "A",
+      "required_original_evidence": "Actual read/write blocking and AXI error behavior, finite-call or owned watchdog mechanism, call intent/outcome association and explicit unknown-effect treatment when completion cannot be observed.",
+      "substitutes_rejected": "Loop timeout, nominal 15-second parent timeout or process kill presented as a guarantee that MMIO returned or FPGA stopped."
+    },
+    {
+      "id": "A_ONE_ORIGINAL_SCAN_SELECTION",
+      "owner": "A",
+      "required_original_evidence": "One frozen original four-lane record, exact uint63 origin/acquisition/source timestamps and nanosecond remainders, quality/null/validzero fields and all required complete companions linked to its source/profile.",
+      "substitutes_rejected": "Software first104 fixture selection, fixture session/tag/trigger or historical hashes presented as a current A selection or production Root/BOOT authority."
+    },
+    {
+      "id": "MAIN_REVIEW_FREEZE_AND_SOFTWARE_START",
+      "owner": "MAIN",
+      "required_original_evidence": "Main review, exact source manifest freeze and explicit START for one new focused SOFTWARE_FAKE_CSR control attempt.",
+      "substitutes_rejected": "CODE_READY, prepared commands or source-only inspection presented as runtime authorization or test success."
+    }
+  ],
+  "production_root_boot_or_h12_authority": "UNAVAILABLE; this interface grants none",
+  "future_g05_action": "Separate A electrical/wiring review and explicit selection required; current code performs no G05 writes."
+}

@@ -56,6 +56,9 @@ class Plan:
         self._build = copy.deepcopy(build_binding)
 
     def facts(self):
+        return validated_plan(self)._facts()
+
+    def _facts(self):
         return {'status': 'TRACE94_REPRESENTABLE_DATA', 'scan': copy.deepcopy(self._scan),
                 'lineage': copy.deepcopy(self._lineage), 'association': copy.deepcopy(self._association),
                 'declared_provenance': copy.deepcopy(self._provenance),
@@ -72,7 +75,8 @@ def prepare_bytes(request_bytes, source_scan_bytes, companion_bytes, *, build_bi
     # Invalid object types are rejected without invoking caller methods. Exact
     # byte arguments, including refused input, are retained without reserializing.
     need(type(request_bytes) is bytes and type(source_scan_bytes) is bytes, 'EXACT_BYTES_REQUIRED')
-    need(type(companion_bytes) in (list, tuple) and all(type(x) is bytes for x in companion_bytes), 'EXACT_COMPANION_BYTES_REQUIRED')
+    need(type(companion_bytes) in (list, tuple) and len(companion_bytes) == 4 and
+         all(type(x) is bytes for x in companion_bytes), 'EXACT_FOUR_COMPANION_BYTES_REQUIRED')
     original = OriginalBytes(request_bytes, source_scan_bytes, tuple(companion_bytes))
     try:
         n = input113.normalize_external_original_scan_v1(request_bytes, source_scan_bytes, original.companions)
@@ -103,6 +107,19 @@ def prepare_normalized(normalized, *, build_binding):
     return prepare_bytes(normalized.request_bytes, normalized.source_bytes,
                          normalized.companion_bytes, build_binding=build_binding)
 
+def validated_plan(plan):
+    """Rebuild consumer state from original bytes, never from mutable caches.
+
+    This rechecks representability and declared relationships. It does not
+    authenticate those bytes or grant any producer, clock or physical authority.
+    """
+    need(type(plan) is Plan and type(plan.original) is OriginalBytes, 'PREPARED_PLAN_REQUIRED')
+    original = plan.original
+    prepared = prepare_bytes(original.request, original.source, original.companions,
+                             build_binding=plan._build)
+    need(prepared.plan is not None, 'PLAN_ORIGINAL_BYTES_REFUSED: ' + str(prepared.reason))
+    return prepared.plan
+
 def correlate_collected(plan, wire, companions, result_rows):
     """Correlate complete raw E4 frames to this plan, not to historic fixtures.
 
@@ -110,8 +127,10 @@ def correlate_collected(plan, wire, companions, result_rows):
     private transport wrapper (payload revision2 -> parser revision1 only).
     No synthetic legacy source identity or profile is constructed.
     """
-    need(type(plan) is Plan and type(wire) is bytes, 'EXACT_PLAN_AND_WIRE')
-    need(type(companions) in (tuple, list) and all(type(x) is bytes for x in companions), 'EXACT_COMPANION_BYTES_REQUIRED')
+    plan = validated_plan(plan)
+    need(type(wire) is bytes, 'EXACT_WIRE_BYTES_REQUIRED')
+    need(type(companions) in (tuple, list) and len(companions) <= 4 and
+         all(type(x) is bytes for x in companions), 'BOUNDED_COMPANION_BYTES_REQUIRED')
     retained = {'wire': wire, 'companions': tuple(companions), 'original': plan.original}
     facts = {'authority_not_evaluated': AUTHORITY, 'retained': retained,
              'wire_bytes': len(wire), 'mandatory_companion_bytes': sum(map(len, companions)),
@@ -125,12 +144,16 @@ def correlate_collected(plan, wire, companions, result_rows):
         need(type(result_rows) in (list, tuple) and len(result_rows) == 4, 'FOUR_RESULT_ROWS_REQUIRED')
         frames = []; offset = 0; previous_id = None; previous_end = None
         for lane, row in zip(plan._scan['lanes'], result_rows):
-            need(type(row) is dict and all(type(row.get(k)) is int and 0 <= row[k] <= U32 for k in ('id','bytes','error','rx_before','rx_end')), 'RESULT_FIELDS')
+            need(type(row) is dict and 5 <= len(row) <= 9 and
+                 all(type(k) is str for k in row) and
+                 all(type(row.get(k)) is int and 0 <= row[k] <= U32 for k in ('id','bytes','error','rx_before','rx_end')), 'RESULT_FIELDS')
             need(set(row) <= {'id','bytes','error','rx_before','rx_end','refusal','status','channel','frame_seq'} and
                  all(type(v) is int and 0 <= v <= U32 for v in row.values()), 'BOUNDED_RESULT_ROW')
             need(('channel' not in row or row['channel'] == lane['channel']) and
                  ('frame_seq' not in row or row['frame_seq'] == lane['frame_seq']), 'RESULT_CHANNEL_SEQUENCE')
             need(row['error'] == 0 and row['id'] > 0 and (previous_id is None or row['id'] == previous_id + 1), 'RESULT_ID_ERROR')
+            need(row.get('refusal', 0) == 0 and
+                 ('status' not in row or row['status'] & 0x10 and not row['status'] & 4), 'RESULT_REFUSAL_STATUS')
             need(row['rx_end'] == row['rx_before'] + row['bytes'] and (previous_end is None or row['rx_before'] == previous_end), 'RESULT_RX_ASSOCIATION')
             previous_id, previous_end = row['id'], row['rx_end']
             need(len(wire) - offset >= 14, 'TRUNCATED_HEADER')

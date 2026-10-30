@@ -14,7 +14,7 @@ def run(out):
     out.mkdir(parents=False, exist_ok=False)
     rows = []
     try:
-        from adapter128 import prepare_bytes, prepare_normalized, correlate_collected, Refused, digest
+        from adapter128 import prepare_bytes, prepare_normalized, correlate_collected, Refused, digest, OriginalBytes
         from reducer128 import Reducer, LIMITS
         from dependencies128 import input113, codec
 
@@ -59,6 +59,16 @@ def run(out):
             req,source,bodies,binding = data
             raw = json.dumps(req,ensure_ascii=False,separators=(',',':')).encode()
             return prepare_bytes(raw,source,bodies,build_binding=binding)
+
+        def retain(name, preparation, wire, facts):
+            directory=out/name;directory.mkdir(exist_ok=False)
+            files={'request.bin':preparation.original.request,
+                   'source.bin':preparation.original.source,'wire.bin':wire}
+            files.update({'companion%d.bin'%i:b for i,b in enumerate(preparation.original.companions)})
+            for filename,raw in files.items():
+                with (directory/filename).open('xb') as stream:stream.write(raw)
+            with (directory/'facts.json').open('x',encoding='utf-8') as stream:
+                json.dump(facts,stream,ensure_ascii=False,sort_keys=True,separators=(',',':'))
 
         def frames_for(plan):
             # New generated software control data using the unchanged codec.
@@ -152,7 +162,7 @@ def run(out):
                 check(p.original.source==d[1] and p.original.companions==d[2],'refusal bytes '+mode)
 
         def case_frames():
-            for values in ((1,0,None,4095),(345,1234,2048,17),(None,None,None,None)):
+            for sample,values in enumerate(((1,0,None,4095),(345,1234,2048,17),(None,None,None,None))):
                 p=prepare(original(values));check(p.plan is not None,'variable numerical mapping')
                 frames,result_rows=frames_for(p.plan);wire=b''.join(frames)
                 out=correlate_collected(p.plan,wire,p.original.companions,result_rows)
@@ -160,6 +170,7 @@ def run(out):
                 check([x['point']['value'] for x in out['frames']]==list(values),'null and valid zero distinct')
                 check(out['mandatory_companion_bytes']==sum(map(len,p.original.companions)),'full companion cost')
                 check(out['semantic_association']=='OPAQUE_NOT_VERIFIED','opaque is not semantic pass')
+                retain('correlation%d'%sample,p,wire,{k:v for k,v in out.items() if k!='retained'})
                 for damaged in (wire[:-1],wire+b'\x00',bytes([wire[0]^1])+wire[1:],wire[:-1]+bytes([wire[-1]^1])):
                     bad=correlate_collected(p.plan,damaged,p.original.companions,result_rows)
                     check(bad['status']=='REFUSED_WITH_ORIGINAL_BYTES' and bad['retained']['wire']==damaged,'damaged raw retained')
@@ -178,6 +189,8 @@ def run(out):
             r.begin_cleanup();calls+=drive(r,t);refused(r.begin_cleanup)
             check(t.commands.count(1)==1 and t.commands.count(2)==t.commands.count(3)==t.commands.count(4)==4 and t.commands.count(5)==1,'one-use commands')
             check(all(x['window']=='TRACE_HWH_RELATIVE' for x in calls),'TRACE-only offsets')
+            saved=r.snapshot();saved.pop('original');saved['confirmed_wire_prefix_hex']=saved.pop('confirmed_wire_prefix').hex()
+            retain('one_sequence',p,bytes(r.prefix),saved)
 
         def case_prearm():
             for scenario in ('dirty','wrap','identity'):
@@ -219,10 +232,33 @@ def run(out):
             p=prepare(original())
             for field,limit,stall in (('polls',1,True),('csr',2,False),('writes',1,False),('work_evidence',16384,False)):
                 limits=dict(LIMITS);limits[field]=limit;r=Reducer(p.plan,limits=limits);t=Transcript(p.plan,stall=stall);r.begin();drive(r,t)
-                check(r.failed and r.counts[field if field!='work_evidence' else 'csr']>=0,'bounded '+field)
+                check(r.failed and all(r.counts[k] <= limits[k] for k in r.counts) and
+                      r.evidence_reserved['work'] <= limits['work_evidence'], 'bounded '+field)
             r=Reducer(p.plan);r.begin();check(r.advance(phase_elapsed_ns=LIMITS['work_ns']) is None and r.failed and r.counts['csr']==0,'deadline before effects')
 
-        for name,fn in [('external_no_legacy_shape',case_external),('prewrite_representability_and_raw_refusals',case_refusals),('fourframe_crc_bytes_and_opaque_companions',case_frames),('one_scan_collect_and_consumed_interfaces',case_sequence),('prearm_dirty_identity_counter_headroom',case_prearm),('unknown_notattempted_error_and_owned_cleanup',case_unknown),('stable_call_identity_no_replay',case_identity),('finite_poll_call_write_evidence_time_budgets',case_budgets)]:
+        def case_consumer_snapshot():
+            p=prepare(original());frames,result_rows=frames_for(p.plan);wire=b''.join(frames)
+            p.plan._scan['lanes'][0]['raw_sample_uint16']=65535
+            p.plan._lineage['operation_id']='MUTATED-CACHE'
+            facts=p.plan.facts();check(facts['scan']['lanes'][0]['raw_sample_uint16']==4095 and
+                                     facts['lineage']['operation_id']=='CONTROL128-OP','facts rebuilt from original bytes')
+            r=Reducer(p.plan);check(r.plan._scan['lanes'][0]['raw_sample_uint16']==4095 and
+                                  r.operation_id=='CONTROL128-OP','reducer rebuilt from original bytes')
+            check(correlate_collected(p.plan,wire,p.original.companions,result_rows)['status']=='FOUR_FRAME_CORRELATION_CONSISTENT','correlation uses original snapshot')
+            changed=json.loads(p.original.request);changed['scan']['lanes'][0]['raw_sample_uint16']=65535
+            p.plan.original=OriginalBytes(json.dumps(changed,separators=(',',':')).encode(),p.original.source,p.original.companions)
+            refused(lambda:Reducer(p.plan));refused(p.plan.facts)
+            p=prepare(original());refused(lambda:prepare_bytes(p.original.request,p.original.source,p.original.companions+(b'extra',),build_binding=original()[3]))
+            for key,value in [('refusal',1),('status',4)]:
+                rows=[dict(x) for x in result_rows];rows[0][key]=value
+                check(correlate_collected(p.plan,wire,p.original.companions,rows)['status']=='REFUSED_WITH_ORIGINAL_BYTES','inconsistent '+key)
+            r=Reducer(p.plan);t=Transcript(p.plan);r.begin()
+            def nonzero_refusal(i,a):
+                if i['kind']=='read' and i['offset']==0x04c:a['value']=1
+                return a
+            drive(r,t,nonzero_refusal);check(r.failed and not r.completed and t.commands.count(4)==0,'nonzero refusal never ACKed as success')
+
+        for name,fn in [('external_no_legacy_shape',case_external),('prewrite_representability_and_raw_refusals',case_refusals),('fourframe_crc_bytes_and_opaque_companions',case_frames),('one_scan_collect_and_consumed_interfaces',case_sequence),('prearm_dirty_identity_counter_headroom',case_prearm),('unknown_notattempted_error_and_owned_cleanup',case_unknown),('stable_call_identity_no_replay',case_identity),('finite_poll_call_write_evidence_time_budgets',case_budgets),('consumer_original_snapshot_and_result_refusal',case_consumer_snapshot)]:
             try:fn();rows.append({'name':name,'passed':True})
             except Exception as exc:rows.append({'name':name,'passed':False,'error':type(exc).__name__+': '+str(exc),'traceback':traceback.format_exc()})
         code=0 if all(x['passed'] for x in rows) else 1

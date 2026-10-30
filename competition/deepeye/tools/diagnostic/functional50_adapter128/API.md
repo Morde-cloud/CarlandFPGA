@@ -30,7 +30,7 @@ Both return `Preparation(status, reason, original, plan,
 authority_not_evaluated)`. `original` retains exact request/source/four full
 companion byte strings. `original.inventory()` is metadata, never a substitute
 for those bodies. Refusals return `REFUSED_WITH_ORIGINAL_BYTES` and `plan=None`.
-Non-byte arguments are type-refused without invoking caller methods.
+Non-byte arguments and companion input cardinality other than four are structurally refused before materializing their containers, without invoking caller methods. Ordinary byte-data refusals retain the complete original bodies.
 
 No historic104 commit, `SOFTWARE_FAKE_CSR` kind, fake plan, invented source
 identity, or reconstructed legacy profile is needed. Provenance classes remain
@@ -210,7 +210,7 @@ eligibility cannot be inferred from JSON, hashes, wire correlation or this API.
 ## Prepared test entry, not run
 
 `python -B test_adapter128.py --out <absolute-new-directory>` uses exclusive
-mkdir with an existing parent. It runs eight newly affected groups defined in
+mkdir with an existing parent. It runs nine newly affected groups defined in
 `TEST_PLAN.md`, writes structured `RESULT.json` with group results/overall exit,
 exact source hashes and dependency pins, and emits a short stdout receipt.
 The main-owned supervisor captures raw stdout/stderr. Normal exit0, any failed
@@ -218,3 +218,11 @@ group/import exit1, existing output exit2. No retry/subprocess/old-suite/board
 operation. Expected result stays below512KiB, stdout is bounded, and no need
 to increase main's15s/512MiB/native16/sample16/1MiB supervision was identified
 by source inspection. This is a source estimate, not measured execution.
+
+## Main130 pre-runtime correction
+
+After actual author128 release, main preserved the exact original source commit437717d4d833450d1466030b8ce0034bf69f44db. Consumers now re-normalize retained original byte arguments and build binding when producing facts, constructing the reducer and correlating frames. Mutable cached scan/lineage dictionaries are not another input route; consumer state is reconstructed from original bytes. This is consistency only, not authenticity or durable ownership. Changed original bytes must independently satisfy the same representability checks.
+
+Companion containers are bounded before traversal/copy. Correlation preserves a short supplied set as a mismatch refusal, while more than four is a structural refusal. Result-row field count is bounded. Nonzero refusal or an inconsistent supplied result status is rejected; the reducer never ACKs a nonzero-refusal result as success. Main added one affected boundary group and tightened logical budget assertions. No candidate runtime occurred during this correction phase; first129 remains main-selected after exact source freeze.
+
+The new focused test also retains three exact software sample bundles and one complete compact intent/observation transcript for independent saved-byte review. All are explicitly synthetic data; no board or current-source claim.

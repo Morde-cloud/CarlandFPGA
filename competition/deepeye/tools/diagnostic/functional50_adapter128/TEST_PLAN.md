@@ -28,3 +28,7 @@ They do not import Host103 or input113's old test suite. The unchanged normalize
 and codec are runtime dependencies, not old-group replay. All individual group
 results and failures persist; no automatic retry of failed groups. A partial
 test process killed by the supervisor is not a passing RESULT.
+
+9. Main130: reconstruct facts/reducer/correlation from original bytes despite mutated cache; reject unrepresentable replacement original bytes and oversized companion cardinality; reject inconsistent result refusal/status before successful ACK.
+
+First129 retains three generated numerical correlation samples as exact request/source/four companion/wire binary files plus returned facts, and one compact full intent/observation sequence snapshot. These are newly generated software transcript evidence, not physical or old RTL results. Main can independently inspect CRC, byte accounting, original null/zero/quality/time and command ownership without rerunning a candidate.

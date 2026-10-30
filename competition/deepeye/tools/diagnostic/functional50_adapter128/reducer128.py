@@ -1,6 +1,6 @@
 """Bounded TRACE-relative intent/reducer; A alone persists and executes effects."""
 import copy
-from adapter128 import Plan, Refused, need, U32, AUTHORITY
+from adapter128 import Plan, Refused, need, U32, AUTHORITY, validated_plan
 
 LIMITS = {'csr':65536, 'polls':2048, 'writes':128, 'pops':4096, 'pop_stages':4096,
           'cleanup_polls':256, 'work_ns':10000000000, 'cleanup_ns':2000000000,
@@ -21,8 +21,7 @@ class Reducer:
     All offsets are relative to the HWH-selected TRACE window, never G05.
     """
     def __init__(self, plan, *, limits=None):
-        need(type(plan) is Plan, 'PREPARED_PLAN_REQUIRED')
-        self.plan = copy.deepcopy(plan)
+        self.plan = validated_plan(plan)
         need(limits is None or type(limits) is dict, 'PLAIN_LIMITS_REQUIRED')
         self.limits = dict(LIMITS if limits is None else limits)
         need(set(self.limits) == set(LIMITS), 'LIMIT_KEYS')
@@ -221,7 +220,8 @@ class Reducer:
                 row[key] = yield read(off,'result '+key)
             row['channel'] = lane['channel']; row['frame_seq'] = lane['frame_seq']
             self.results.append(row)
-            need(row['id'] == previous_id+1 and row['error'] == 0 and 0 < row['bytes'] <= 63, 'RESULT_ID_ERROR_LENGTH')
+            need(row['id'] == previous_id+1 and row['error'] == 0 and row['refusal'] == 0 and
+                 0 < row['bytes'] <= 63, 'RESULT_ID_ERROR_LENGTH_REFUSAL')
             need(row['rx_before'] == previous_end and row['rx_end'] == row['rx_before']+row['bytes'] and row['rx_end'] <= U32, 'RESULT_RX_CONTINUITY')
             need(row['status'] & 0x10 and not row['status'] & 4, 'RESULT_VISIBLE_RX_IDLE')
             previous_id = row['id']; previous_end = row['rx_end']

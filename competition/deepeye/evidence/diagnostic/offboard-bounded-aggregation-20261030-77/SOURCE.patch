@@ -1,0 +1,1087 @@
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/.gitattributes b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/README.md b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/README.md
+new file mode 100644
+index 0000000..d41026e
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/README.md
+@@ -0,0 +1,220 @@
++# B77 bounded three-scan aggregation
++
++`DEEPEYE-IMPLEMENTATION-20261014/v1`, work/operation
++`B-DEEPEYE-OFFBOARD-BOUNDED-AGGREGATION-20261030-77`.
++Main design: `resume-74/AGGREGATE77_MAIN_DESIGN.md`. This is new work after
++B74 source `4264eb954bb4c26cea80689e5c3bb68b9040b2b3` / evidence head
++`d2f3d120c982147fa6a1aaa095a53c2918a4019f`. B74 remains sealed.
++
++## Executable composition
++
++The explicitly named SYNTHETIC fixture instantiates unchanged raw
++`buffered_scan_capture -> scan_lane_stream`, then the new twelve-slot
++collector and triplet adapter, then unchanged `trace_block_uart_50mhz`
++(`payload_1us -> trace_payload_candidate -> one block_encoder -> serializer
++-> UART`). No second encoder or already encoded input is present. The three
++scans contain twelve original uint16 samples, including values above
++32767 and 4095. Each of four frames contains three samples with original
++index stride 4. The bounded raw worst case is 25 metadata + 6 code = 31
++payload bytes, within the unchanged 32-byte limit.
++
++The collector stores all twelve raw values, original QPCs, opaque qualities
++and three original native first/last scan sequence pairs. It enforces lane
++order, one nonzero tag, nonwrapping scan/index progression, uint63 original
++time, relative uint32 microsecond range, constant per-channel quality and
++regular nonzero uint16 microsecond stride. This first contract supports only
++fresh, valid data with supplied held=false semantics; source QPC equals each
++original acquisition QPC. Unsupported held, changed quality, irregular time
++or identity is refused without successful output.
++
++`batch_seal` is the fixture/Root completeness boundary, not authentication:
++
++* Seal during COLLECT refuses code 7, including overlap with the final valid
++  lane. Seal and every input handshake are mutually exclusive by contract;
++  an overlapped offer is consumed as refusal, not as a successful record.
++* Only a later seal in FULL, after twelve accepted records, opens output.
++  FULL and all output phases hold input ready low. A thirteenth/new input
++  remains upstream and is neither silently dropped nor replayed.
++* Each offered triplet stays stable until adapter acceptance. The adapter
++  separately handshakes its descriptor, exactly three raw samples and result
++  retirement. The collector advances only on retirement and admits no new
++  collection until all four results retire and a fresh rearm occurs.
++* Cancel flushes collector/adapter/codec/UART and disarms capture. Release
++  does not rearm. Explicit fixture rearm also clears upstream queue/lane
++  state; no pending old lane is relabelled as new work. Local quiescence is
++  not motion STOP, host ACK or world-action retirement. Emitted bytes remain
++  emitted and a partial frame is invalid.
++
++Lifecycle repair 3 adds a shared fixture `path_cancel = cancel || !enabled`
++to capture/queue/lane/collector/adapter. Gate withdrawal invalidates the old
++local data epoch. Restoring enabled alone leaves everything disarmed; after
++quiescence and gate restoration the owner must explicitly assert both capture
++and collector rearm with a fresh tag. A busy collector rearm keeps REFUSED 9
++and combinationally cancels adapter/downstream work on the same edge, before
++result/retire can handshake. Capture/lane remnants can remain blocked during
++REFUSED 9; they are not a fresh epoch or quiescence. Recovery is explicit
++cancel until quiescent, release cancel, then fresh capture+collector rearm/tag.
++Do not use collector-only rearm to relabel blocked old input. This is an owner
++protocol at a synthetic seam, not authenticated Root control or motion STOP.
++
++Clock 50 MHz / UART 5 Mbaud and fixture enable are explicit synthetic
++parameters. No production module or default gate was edited. All fourteen
++unchanged dependencies in `dependency_pins.json` were byte-compared with the
++fixed B74 source via read-only Git object access, and hashed before/after
++execution. Production remains hold/profile/transport/BAUD closed; the
++original 100 MHz path is untouched.
++
++## New private host contract
++
++`tools/diagnostic/offboard_aggregate77/multipoint_decoder.py` implements
++`B77_THREE_POINT_COMPANION_V1`, profile
++`B77-PRIVATE-THREE-FRESH-RELATIVE1US-V1`. The unchanged fixed TRACE decoder
++(`a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642`)
++alone interprets the code section. Old B74 singleton decoder and wrappers
++are unchanged.
++
++The companion contains the original uint63 origin, original receiver QPC,
++complete stable host context, and exactly three records. Every record retains
++channel/index, native tag/first/last sequence, original acquisition/source
++QPC, exact remainder, opaque uint8 quality, original uint16 value, valid/held
++flags and full original per-sample identity. The separate binding contains
++profile/session/view/frame sequence/E/channel and the complete companion hash.
++Each actually serialized envelope also includes original now-QPC. Hashes
++associate these synthetic records; they authenticate no BOOT, ADC or Root
++receipt. The actual decoded value comes from RTL bytes and is checked against
++the independent original raw input. It is never overwritten with a companion
++value. Source age is computed in original ns against the unchanged 100 ms
++threshold. Results remain structural STOP/core_ran=false/command=null.
++
++## Actual focused execution
++
++Evidence root:
++`.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/aggregate-worker/`.
++Its `RESULT.json` records selected source/evidence hashes, exact argv/cwd,
++tool versions/binary hashes, stdout/stderr, exits and whole-Job closure.
++
++* Attempt 01 compiled without warnings and actually emitted four triplets,
++  but overall failed because two runtime port-width warnings violated the
++  strict log rule. This failure and its exact source/logs remain preserved.
++* Repair 1 added an explicit 10-bit remainder net; modulo 1000 is always
++  0..999. Attempt 02 passed all fourteen new RTL modes and twelve actual
++  decoder rejection processes. Normal execution: 12 actual input lanes,
++  4 collector blocks, 4 three-point frames, 18,396 cycles, 4 retirements,
++  16,900 UART backpressure stall cycles; serializer and independently sampled
++  external UART match byte-for-byte. The recorded packed block values,
++  original QPCs/qualities/native identities are independently compared with
++  all twelve original fixture records by the host control.
++* Repair 2, found by final review, rejects Python's False==0 at binding E and
++  record channel fields using strict integer checks. Attempt 03 ran software
++  only over the saved actual attempt 02 bytes: final decoder positive plus
++  two additional boolean rejection processes. No RTL was rerun for this
++  type-only change. Attempt 02's original twelve negative outcomes retain
++  its exact prior decoder hash; attempt 03 pins the final decoder hash.
++* Main independently audited the original twelve points/CRC/Rice/RAW/identity
++  and byte cost, then found two lifecycle gaps: enabled withdrawal cleared
++  only the adapter and could strand WAIT_RETIRE, and busy rearm REFUSED 9
++  could leave accepted downstream work running. Repair 3 implements the
++  shared cancellation and same-edge invalid-rearm cancellation above.
++  Attempt 04 compiled this **changed final HDL source** and ran only the three
++  new lifecycle controls below. It did not repeat the closed fourteen-mode
++  group or semantic software controls. Those earlier claims remain bound to
++  attempt 02/03 snapshots, not to a claimed full rerun on the final source.
++
++Attempts 02, 03 and 04 each exited 0, with unchanged source snapshots, no timeout,
++and original suspended Windows Jobs observed terminal and empty before
++handle close. Exact pre-commit source snapshots are the execution provenance;
++no later source commit is claimed tested. Three deterministic repairs were
++used, reaching the main's limit; no additional retry is authorized on failure.
++
++|RTL mode|New focused control|Actual result|
++|---|---|---|
++|0|Four true triplets, offer/result/UART stalls|173 UART = serializer bytes, 4 retirements|
++|1|Per-channel quality changes|Refusal 5 at count 6, zero bytes|
++|2|Irregular original ns time|Refusal 6 at count 8, zero bytes|
++|3|Held input|Refusal 1, zero bytes|
++|4|Changed native tag|Refusal 2 at count 4, zero bytes|
++|5|Reset native sequence mid-batch|Refusal 3 at count 4, zero bytes|
++|6|Original uint63 overflow|Refusal 4, zero bytes|
++|7|Seal incomplete collection|Refusal 7 at count 8, zero bytes|
++|8|Seal overlaps last lane|Refusal 7 at count 11, zero bytes|
++|9|Thirteenth/new input before and during output|Held until explicit cancel; four prior triplets retire|
++|10|Cancel before seal|Zero bytes, empty/disarmed, no automatic replay|
++|11|Cancel during UART|3 received bytes + partial fourth symbol, 4 serializer admissions, 1 abort, 0 retirements|
++|12|Intentional fixture fatal|Actual native exit 4|
++|13|Dedicated runner success|Actual native exit 0|
++
++The table above is attempt 02's original source coverage. Attempt 04's new
++coverage, with zero compiler/simulator errors or warnings, is:
++
++|RTL mode|Final-source lifecycle control|Actual result|
++|---|---|---|
++|14|Gate withdrawal in WAIT_RETIRE after downstream descriptor acceptance|Quiescent, abort 1, retirement 0, wire bytes 0|
++|15|Gate restore without rearm for 6,000 clocks, then fresh rearm|No replay/armed/result/retirement; explicit tag 18 rearm enters empty collection|
++|16|Busy rearm during fourth symbol after 3 received bytes, result ready high|REFUSED 9 retained, serializer 4/received 3/abort 1/retirement 0, no further bytes or success for 6,000 clocks; explicit cancel cleanup|
++
++The UART observer records whether cancellation occurred anywhere within a
++symbol, including a one-edge invalid rearm. A canceled partial symbol is not
++misreported as a valid byte. Emitted prefixes remain in the evidence.
++
++The twelve strict decoder negatives actually exit 2: CRC, partial frame,
++count, metadata, full identity, quality, time, uint63 overflow, nonwrap index,
++held record, changed original value and missing record. The two later boolean
++negatives also exit 2. The stale source control preserves its original ns
++times and reports source_age_100ms_met=false with STOP and no command.
++This is focused evidence, not exhaustive branch/CDC/timing/physical proof.
++
++## Complete byte cost
++
++|Channel|Coding|Wire|Mandatory serialized companion|Total bytes|
++|---|---|---:|---:|---:|
++|0|Rice|42|3696|3738|
++|1|Rice|42|3696|3738|
++|2|Rice|44|3692|3736|
++|3|RAW|45|3694|3739|
++|Total||173|14778|14951|
++
++Wire cost is 48 header + 8 CRC + 100 payload metadata + 17 stored code bytes.
++It requires 1,730 UART 8N1 bits, excluding the mandatory companion transport.
++Companions are actually serialized canonical UTF-8 files and counted in full,
++per frame. Their physical transport/rate is not approved or measured. Raw
++values alone are 24 bytes; the complete canonical synthetic input fixture is
++11,839 bytes, with original context/quality/time/identity included. Neither
++denominator establishes a production compression ratio. The complete cost is
++14,951 bytes; final 1%/100ms is not met or claimed passed.
++
++## Reproduction and retained gaps
++
++Use existing Python/ModelSim only, under a new explicit operation and a fresh
++owned evidence directory:
++
++```powershell
++& .local/venv/Scripts/python.exe -B competition/deepeye/tools/diagnostic/offboard_aggregate77/prepare77.py
++& .local/venv/Scripts/python.exe -B competition/deepeye/tools/diagnostic/offboard_aggregate77/run77.py --out <fresh-owned-directory>
++```
++
++The `--saved-source` option performs only the final strict type/positive
++software controls over already saved mode0 bytes. `--lifecycle-only` compiles
++the current source and runs only modes 14–16. The runner retains the
++pinned suspended-launch whole-Job helper, 30 s command and 180 s Job deadlines,
++100,000-clock fixture bounds and a polled 32 MiB cap across all attempt files.
++It propagates RTL fatal through an integer completion flag/Tcl macro with
++`+acc`; negative CLI exits are checked. No waveform logging is requested.
++
++General held/invalid/changing-quality/irregular aggregation, authenticated
++Root inputs, production activation, continuous batch scheduling, stateful
++anti-replay, physical companion transport, synthesis/implementation/timing,
++real ADC/BOOT/board, ACK/action retirement, both complete H12 paths and every
++formal acceptance gate remain open. No planner/C/Root call, board/SSH,
++Vivado build, clock setter, collector repin, service/SQL/queue/credential or
++Git mutation occurred. A alone operates the physical board. A's stale actual
++source/C3=null and R20/R21/original 100 MHz failures are not replaced by this
++synthetic evidence.
++
++H01–H15 retain `DEEPEYE-HUMAN-LOCK-20261014/revision1`, requirements SHA256
++`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`,
++pin `f5989cd5defce561f9ba98e6b18fc2682945f0a2`, freeze
++`1011259415a0916054eb580687612580bc1e5f09`. Full 3D/UI, hollow edge cube,
++solid collisions, free camera/layout/faces/equal gates and full passage,
++hidden truth, device-bounded causal observations, substantive online 3D PC AI,
++both complete H12 paths and all final gates remain required. Parent quality
++main/A independently review and own acceptance and Git/PR handoff.
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_SYNTHETIC_aggregate77.sv b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_SYNTHETIC_aggregate77.sv
+new file mode 100644
+index 0000000..ccf19c2
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_SYNTHETIC_aggregate77.sv
+@@ -0,0 +1,65 @@
++// Explicitly SYNTHETIC fixture enable and clock50MHz/baud5M only.
++`default_nettype none
++module deepeye_SYNTHETIC_aggregate77(
++ input wire logic clk,rst,cancel,capture_rearm,collect_rearm,seal,enabled,
++ input wire logic [31:0] rearm_tag,
++ input wire logic sample_strobe,input wire logic [1:0] sample_channel,
++ input wire logic [15:0] sample_data,input wire logic [63:0] sample_qpc,
++ input wire logic [7:0] sample_quality,
++ input wire logic semantics_valid,valid_sample,held,
++ input wire logic offer_allowed,result_ready,
++ output logic tx,result_valid,output logic [2:0] result_error,
++ output logic [5:0] result_bytes,
++ output logic refused,output logic [3:0] refusal_code,count,
++ output logic quiescent,aborted
++);
++ logic cap_valid,cap_ready,lane_valid,lane_ready;
++ logic [63:0] cap_data;logic [255:0] cap_ticks;
++ logic [31:0] cap_quality,cap_first,cap_last,cap_tag;
++ logic armed;logic [2:0] partial_len,queue_level;
++ logic [1:0] lane_channel;logic [15:0] lane_data;logic [63:0] lane_qpc;
++ logic [7:0] lane_quality;logic [31:0] lane_first,lane_last,lane_tag;
++ logic block_valid,block_ready,adapter_ready,retire,busy,collector_quiet;
++ logic [1:0] channel;logic [47:0] data;
++ logic [191:0] qpcs;logic [23:0] qualities;
++ logic [95:0] firsts,lasts;logic [31:0] tag,first_index;
++ logic [62:0] origin;logic [63:0] stride_ns;logic [15:0] stride_us;
++ wire path_cancel=cancel || !enabled;
++ logic invalid_rearm;
++ wire adapter_cancel=path_cancel || invalid_rearm;
++ deepeye_buffered_scan_capture capture_i(
++  .clk(clk),.rst(rst),.stop(path_cancel),.rearm(capture_rearm),.queue_cancel(path_cancel||capture_rearm),
++  .sample_strobe(sample_strobe),.rearm_tag(rearm_tag),.sample_channel(sample_channel),
++  .sample_data(sample_data),.sample_tick(sample_qpc),.sample_quality(sample_quality),
++  .out_ready(cap_ready),.out_valid(cap_valid),.out_data(cap_data),.out_ticks(cap_ticks),
++  .out_quality(cap_quality),.out_first_seq(cap_first),.out_last_seq(cap_last),.out_tag(cap_tag),
++  .capture_armed(armed),.capture_partial_len(partial_len),.capture_next_seq(),.capture_seq_exhausted(),
++  .capture_order_error_event(),.capture_overrun_event(),.capture_seq_exhaust_event(),
++  .capture_stat_events(),.capture_stat_scans(),.capture_stat_retired(),.capture_stat_discarded_samples(),
++  .capture_stat_order_errors(),.capture_stat_overruns(),.queue_level(queue_level),
++  .queue_stat_accepted(),.queue_stat_retired(),.queue_stat_aborted());
++ deepeye_scan_lane_stream lane_i(
++  .clk(clk),.rst(rst),.cancel(path_cancel||capture_rearm),.in_valid(cap_valid),.in_ready(cap_ready),
++  .in_data(cap_data),.in_ticks(cap_ticks),.in_quality(cap_quality),.in_first_seq(cap_first),
++  .in_last_seq(cap_last),.in_tag(cap_tag),.out_valid(lane_valid),.out_ready(lane_ready),
++  .out_channel(lane_channel),.out_data(lane_data),.out_tick(lane_qpc),.out_quality(lane_quality),
++  .out_first_seq(lane_first),.out_last_seq(lane_last),.out_tag(lane_tag),.out_last());
++ deepeye_aggregate12_candidate collector_i(
++  .clk(clk),.rst(rst),.cancel(path_cancel),.rearm(collect_rearm),.seal(seal),.origin_qpc_ns(63'd9007199254740993),
++  .s_valid(lane_valid),.s_ready(lane_ready),.s_channel(lane_channel),.s_data(lane_data),
++  .s_qpc_ns(lane_qpc),.s_quality(lane_quality),.s_tag(lane_tag),.s_first_seq(lane_first),.s_last_seq(lane_last),
++  .semantics_valid(semantics_valid),.valid_sample(valid_sample),.held(held),
++  .out_valid(block_valid),.out_ready(block_ready),.retire(retire),.out_channel(channel),.out_data(data),
++  .out_qpcs(qpcs),.out_qualities(qualities),.out_first_seqs(firsts),.out_last_seqs(lasts),
++  .out_tag(tag),.out_first_index(first_index),.out_origin_qpc_ns(origin),
++  .out_stride_ns(stride_ns),.out_stride_us(stride_us),.refused(refused),.refusal_code(refusal_code),.quiescent(collector_quiet),.invalid_rearm(invalid_rearm),.count(count));
++ assign block_ready=adapter_ready && offer_allowed;
++ deepeye_aggregate_uart_candidate adapter_i(
++  .clk(clk),.rst(rst),.cancel(adapter_cancel),.enabled(enabled),.block_valid(block_valid&&offer_allowed),.block_ready(adapter_ready),
++  .block_channel(channel),.block_data(data),.block_qpcs(qpcs),.block_qualities(qualities),
++  .block_tag(tag),.block_first_index(first_index),.block_origin(origin),.block_stride_ns(stride_ns),.block_stride_us(stride_us),
++  .tx(tx),.result_valid(result_valid),.result_ready(result_ready),.result_error(result_error),.result_bytes(result_bytes),
++  .retire(retire),.aborted(aborted),.busy(busy));
++ assign quiescent=collector_quiet && !armed && partial_len==0 && queue_level==0 && !cap_valid && !lane_valid && !busy;
++endmodule
++`default_nettype wire
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate12_candidate.sv b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate12_candidate.sv
+new file mode 100644
+index 0000000..3010199
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate12_candidate.sv
+@@ -0,0 +1,98 @@
++// B77 main-selected 12 raw slots -> four genuine fresh channel triplets.
++// SYNTHETIC/offboard candidate, no authentication or production enable.
++`default_nettype none
++module deepeye_aggregate12_candidate(
++ input wire logic clk,rst,cancel,rearm,seal,
++ input wire logic [62:0] origin_qpc_ns,
++ input wire logic s_valid, output logic s_ready,
++ input wire logic [1:0] s_channel,
++ input wire logic [15:0] s_data,
++ input wire logic [63:0] s_qpc_ns,
++ input wire logic [7:0] s_quality,
++ input wire logic [31:0] s_tag,s_first_seq,s_last_seq,
++ input wire logic semantics_valid,valid_sample,held,
++ output logic out_valid,input wire logic out_ready,retire,
++ output logic [1:0] out_channel,
++ output logic [47:0] out_data,
++ output logic [191:0] out_qpcs,
++ output logic [23:0] out_qualities,
++ output logic [95:0] out_first_seqs,out_last_seqs,
++ output logic [31:0] out_tag,out_first_index,
++ output logic [62:0] out_origin_qpc_ns,
++ output logic [63:0] out_stride_ns,
++ output logic [15:0] out_stride_us,
++ output logic refused,output logic [3:0] refusal_code,
++ output logic quiescent,invalid_rearm,output logic [3:0] count
++);
++ localparam logic [2:0] DISARMED=0,COLLECT=1,FULL=2,OFFER=3,WAIT_RETIRE=4,REFUSED=5;
++ logic [2:0] state;
++ logic [15:0] values[0:11];
++ logic [63:0] qpcs[0:11];
++ logic [7:0] qualities[0:11];
++ logic [31:0] firsts[0:2],lasts[0:2],tag_q,base_seq;
++ logic [62:0] origin_q;
++ logic [1:0] channel_q;
++ logic bad; logic [3:0] code;
++ logic [64:0] expected_first,rel,delta,expected_qpc;
++ integer scan_no,ch;
++ always_comb begin
++  scan_no=count>>2; ch=count&3;
++  expected_first={33'd0,base_seq}+((count>>2)*65'd4);
++  rel={1'b0,s_qpc_ns}-{2'd0,origin_q};
++  delta=(count>=4)?{1'b0,s_qpc_ns}-{1'b0,qpcs[ch]}:65'd0;
++  expected_qpc=(count>=8)?{1'b0,qpcs[ch]}+(({1'b0,qpcs[ch+4]}-{1'b0,qpcs[ch]})*65'd2):65'd0;
++  bad=0;code=0;
++  if(!semantics_valid || !valid_sample || held)begin bad=1;code=1;end
++  else if(s_channel!=ch || s_tag==0 || (count!=0 && s_tag!=tag_q))begin bad=1;code=2;end
++  else if(({1'b0,s_first_seq}+33'd3)!={1'b0,s_last_seq} ||
++          (count==0 && ({1'b0,s_first_seq}+33'd11)>33'h0ffffffff) ||
++          (count!=0 && (expected_first[64:32]!=0 || s_first_seq!=expected_first[31:0])))begin bad=1;code=3;end
++  else if(s_qpc_ns[63] || s_qpc_ns<{1'b0,origin_q} || rel/65'd1000>65'h0ffffffff)begin bad=1;code=4;end
++  else if(count>=4 && s_quality!=qualities[ch])begin bad=1;code=5;end
++  else if(count>=4 && (s_qpc_ns<=qpcs[ch] || delta%65'd1000!=0 || delta==0 ||
++            (count<8 && delta>65'd65535000) ||
++            (count>=8 && (expected_qpc[64:63]!=0 || {1'b0,s_qpc_ns}!=expected_qpc))))begin bad=1;code=6;end
++  s_ready=(state==COLLECT) && !rst && !cancel;
++  out_valid=(state==OFFER) && !rst && !cancel;
++  out_channel=channel_q;out_tag=tag_q;out_origin_qpc_ns=origin_q;
++  out_first_index=base_seq+channel_q;
++  out_stride_ns=qpcs[channel_q+4]-qpcs[channel_q];out_stride_us=out_stride_ns/1000;
++  out_data={values[channel_q+8],values[channel_q+4],values[channel_q]};
++  out_qpcs={qpcs[channel_q+8],qpcs[channel_q+4],qpcs[channel_q]};
++  out_qualities={qualities[channel_q+8],qualities[channel_q+4],qualities[channel_q]};
++  out_first_seqs={firsts[2],firsts[1],firsts[0]};out_last_seqs={lasts[2],lasts[1],lasts[0]};
++  refused=(state==REFUSED);quiescent=(state==DISARMED)&&count==0;
++  // Refuse busy rearm locally AND let the owner cancel accepted downstream
++  // work on this same edge. Refusal alone cannot recall an adapter's offer.
++  invalid_rearm=rearm && state!=DISARMED && state!=REFUSED && !rst && !cancel;
++ end
++ always_ff @(posedge clk)begin
++  if(rst || cancel)begin state<=DISARMED;count<=0;channel_q<=0;refusal_code<=0;tag_q<=0;base_seq<=0;origin_q<=0;end
++  else if(rearm)begin
++   if(state==DISARMED || state==REFUSED)begin state<=COLLECT;count<=0;channel_q<=0;refusal_code<=0;origin_q<=origin_qpc_ns;end
++   else begin state<=REFUSED;refusal_code<=9;end
++  end else if(seal && state==COLLECT)begin state<=REFUSED;refusal_code<=7;end
++  else begin
++   case(state)
++    COLLECT:if(s_valid && s_ready)begin
++     if(bad)begin state<=REFUSED;refusal_code<=code;end
++     else begin
++      values[count]<=s_data;qpcs[count]<=s_qpc_ns;qualities[count]<=s_quality;
++      if(ch==0)begin firsts[scan_no]<=s_first_seq;lasts[scan_no]<=s_last_seq;end
++      if(count==0)begin tag_q<=s_tag;base_seq<=s_first_seq;end
++      count<=count+1;
++      if(count==11)state<=FULL;
++     end
++    end
++    FULL:if(seal)begin state<=OFFER;channel_q<=0;end
++    OFFER:if(out_valid && out_ready)state<=WAIT_RETIRE;
++    WAIT_RETIRE:if(retire)begin
++     if(channel_q==3)begin state<=DISARMED;count<=0;end
++     else begin channel_q<=channel_q+1;state<=OFFER;end
++    end
++    default:;
++   endcase
++  end
++ end
++endmodule
++`default_nettype wire
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate_uart_candidate.sv b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate_uart_candidate.sv
+new file mode 100644
+index 0000000..f35ecc6
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate_uart_candidate.sv
+@@ -0,0 +1,62 @@
++// One latched triplet, three original raw samples, unchanged B73 wrapper.
++`default_nettype none
++module deepeye_aggregate_uart_candidate(
++ input wire logic clk,rst,cancel,enabled,
++ input wire logic block_valid,output logic block_ready,
++ input wire logic [1:0] block_channel,
++ input wire logic [47:0] block_data,
++ input wire logic [191:0] block_qpcs,
++ input wire logic [23:0] block_qualities,
++ input wire logic [31:0] block_tag,block_first_index,
++ input wire logic [62:0] block_origin,
++ input wire logic [63:0] block_stride_ns,
++ input wire logic [15:0] block_stride_us,
++ output logic tx,result_valid,input wire logic result_ready,
++ output logic [2:0] result_error,output logic [5:0] result_bytes,
++ output logic retire,aborted,busy
++);
++ localparam logic [2:0] IDLE=0,DESCRIBE=1,SAMPLES=2,RESULT=3;
++ logic [2:0] state;
++ logic [47:0] data_q;logic [63:0] first_q,stride_q;
++ logic [62:0] origin_q;logic [7:0] quality_q;logic [1:0] channel_q,sample_no;
++ logic [31:0] index_q;logic [15:0] stride_us_q;
++ logic blk_ready,s_ready,res_valid;logic [3:0] refusal;
++ wire [63:0] relative_ns=first_q-{1'b0,origin_q};
++ // Explicit destination width; mathematical modulo1000 is always0..999.
++ wire [9:0] remainder_ns=relative_ns%64'd1000;
++ assign block_ready=state==IDLE && enabled && !rst && !cancel;
++ assign result_valid=res_valid && state==RESULT && !rst && !cancel;
++ assign retire=result_valid && result_ready;
++ assign busy=state!=IDLE;
++ deepeye_trace_block_uart_50mhz_candidate #(.CLOCK_HZ(50000000),.BAUD(5000000)) uart_i(
++  .clk(clk),.rst(rst),.cancel(cancel),.profile_v2_authorized(enabled),.transport_allowed(enabled),
++  .blk_valid(state==DESCRIBE),.blk_ready(blk_ready),.blk_count(8'd3),.blk_e(4'd0),
++  .blk_session(32'h12345678),.blk_channel(channel_q),.blk_first_index(index_q),.blk_index_stride(16'd4),
++  .blk_first_qpc_ns(first_q),.blk_first_tick_us(relative_ns/64'd1000),.blk_first_remainder_ns(remainder_ns),
++  .blk_tick_stride_ns(stride_q),.blk_tick_stride_us(stride_us_q),.blk_origin_qpc_ns(origin_q),
++  .blk_origin_tick_us(64'd0),.blk_origin_remainder_ns(10'd0),.blk_raw_quality(quality_q),
++  .blk_semantics_valid(1'b1),.blk_valid_sample(1'b1),.blk_saturated(1'b0),.blk_held(1'b0),.blk_source_fault(1'b0),
++  .blk_source_qpc_ns(first_q),.blk_source_tick_us(relative_ns/64'd1000),.blk_source_remainder_ns(remainder_ns),
++  .cfg_epoch(8'd9),.cfg_seq(16'd300+{14'd0,channel_q}),
++  .s_valid(state==SAMPLES),.s_ready(s_ready),.s_data(data_q[16*sample_no+:16]),.s_last(sample_no==2),
++  .tx(tx),.result_valid(res_valid),.result_ready(result_ready && state==RESULT),
++  .result_error(result_error),.result_bytes(result_bytes),.last_refusal_code(refusal),
++  .cancel_active(),.transaction_aborted(aborted),.busy(),.wire_faulted(),.transport_profile_unset());
++ always_ff @(posedge clk)begin
++  if(rst || cancel || !enabled)begin state<=IDLE;sample_no<=0;data_q<=0;first_q<=0;origin_q<=0;stride_q<=0;stride_us_q<=0;quality_q<=0;channel_q<=0;index_q<=0;end
++  else case(state)
++   IDLE:if(block_valid && block_ready)begin
++    data_q<=block_data;first_q<=block_qpcs[63:0];quality_q<=block_qualities[7:0];
++    origin_q<=block_origin;stride_q<=block_stride_ns;stride_us_q<=block_stride_us;
++    channel_q<=block_channel;index_q<=block_first_index;state<=DESCRIBE;sample_no<=0;
++   end
++   DESCRIBE:if(blk_ready)state<=SAMPLES;
++   SAMPLES:if(res_valid)state<=RESULT;else if(s_ready)begin
++    if(sample_no==2)state<=RESULT;else sample_no<=sample_no+1;
++   end
++   RESULT:if(retire)state<=IDLE;
++   default:state<=IDLE;
++  endcase
++ end
++endmodule
++`default_nettype wire
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/dependency_pins.json b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/dependency_pins.json
+new file mode 100644
+index 0000000..816430d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/dependency_pins.json
+@@ -0,0 +1,61 @@
++{
++  "source": "4264eb954bb4c26cea80689e5c3bb68b9040b2b3",
++  "files": {
++    "competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv": {
++      "sha256": "fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d",
++      "bytes": 17174
++    },
++    "competition/deepeye/fpga/acquisition/deepeye_raw_scan_queue.sv": {
++      "sha256": "630e14803d82b3379517d91626de4ad7e7d3c509ad14363b3164031a5f633ee4",
++      "bytes": 6642
++    },
++    "competition/deepeye/fpga/acquisition/deepeye_buffered_scan_capture.sv": {
++      "sha256": "c8a540db8122b8f5520582a0f1fa9be0c43cb54a62f03c7c4edc893906f28411",
++      "bytes": 3890
++    },
++    "competition/deepeye/fpga/acquisition/deepeye_scan_lane_stream.sv": {
++      "sha256": "b3c9d2024d9325191538cf08fec9a652ff8ff0ae316ec9af96078f85cf5be3cc",
++      "bytes": 1720
++    },
++    "competition/deepeye/fpga/codec/deepeye_block_encoder.sv": {
++      "sha256": "4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532",
++      "bytes": 21517
++    },
++    "competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv": {
++      "sha256": "fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6",
++      "bytes": 12241
++    },
++    "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv": {
++      "sha256": "5ebe65dfe0844aab62365e8664507f153cb75ff47b3c8d4e10f45356e94147a8",
++      "bytes": 10545
++    },
++    "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv": {
++      "sha256": "41ea63819c892ec67fe92d6e9338a771d5f93f60d0976e895f18bc97966283d2",
++      "bytes": 11766
++    },
++    "competition/deepeye/fpga/transport/deepeye_crc16_byte.sv": {
++      "sha256": "8594bad79593a5ff5a63761c3b4f5f83adc70ebcfdd5aec178de3aba1f313d6f",
++      "bytes": 1875
++    },
++    "competition/deepeye/fpga/transport/deepeye_wire_serializer.sv": {
++      "sha256": "efc6082f6f5dff215b100f718b12d87d4c6467db7b968a24f846802dc6a19885",
++      "bytes": 9705
++    },
++    "competition/deepeye/fpga/transport/deepeye_uart_tx.sv": {
++      "sha256": "5076286e4dd1598aeb2c78281bec83020c85d0711dcee9b985088ac707353c47",
++      "bytes": 6811
++    },
++    "competition/deepeye/golden/codec/trace_candidate.py": {
++      "sha256": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642",
++      "bytes": 40546
++    },
++    "competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py": {
++      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692",
++      "bytes": 11126
++    },
++    "fpga_mesh/windows_job.py": {
++      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3",
++      "bytes": 3679
++    }
++  }
++}
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_aggregate77/tb_SYNTHETIC_aggregate77.sv b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/tb_SYNTHETIC_aggregate77.sv
+new file mode 100644
+index 0000000..84aaf7c
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_aggregate77/tb_SYNTHETIC_aggregate77.sv
+@@ -0,0 +1,160 @@
++`timescale 1ns/1ps
++module tb_SYNTHETIC_aggregate77;
++ logic clk=0,rst=1,cancel=0,capture_rearm=0,collect_rearm=0,seal=0,enabled=1;
++ logic [31:0] rearm_tag=17;
++ logic sample_strobe=0;logic [1:0] sample_channel=0;logic [15:0] sample_data=0;
++ logic [63:0] sample_qpc=0;logic [7:0] sample_quality=0;
++ logic semantics_valid=1,valid_sample=1,held=0,offer_allowed=0,result_ready=0;
++ wire tx,result_valid,refused,quiescent,aborted;wire [2:0] result_error;
++ wire [5:0] result_bytes;wire [3:0] refusal_code,count;
++ deepeye_SYNTHETIC_aggregate77 dut(.*);
++ always #10 clk=~clk;
++ integer completed=0,cycles=0,mode=0,uart_n=0,serial_n=0,aborts=0,stalls=0,retired=0;
++ integer fd_uart,fd_serial,fd_events,fd_blocks,fd_lanes;string outdir;
++ logic [7:0] rx,previous;logic was_stalled=0;
++ logic uart_symbol_aborted=0;
++ logic [15:0] raw[0:11];logic [7:0] quality[0:3];
++ localparam logic [63:0] ORIGIN=64'd9007199254740993;
++ always @(posedge clk)begin
++  cycles=cycles+1;if(cycles>100000)$fatal(1,"B77 cycle deadline state=%0d count=%0d adapter=%0d",dut.collector_i.state,count,dut.adapter_i.state);
++  if(dut.adapter_i.uart_i.serializer_out_valid && dut.adapter_i.uart_i.serializer_out_ready)begin
++   $fdisplay(fd_serial,"%02x",dut.adapter_i.uart_i.serializer_out_data);serial_n=serial_n+1;
++  end
++  if(dut.adapter_cancel)uart_symbol_aborted=1;
++  if(!rst && !dut.adapter_cancel)begin
++   if(was_stalled && dut.adapter_i.uart_i.serializer_out_valid && dut.adapter_i.uart_i.serializer_out_data!==previous)$fatal(1,"B77 UART backpressure unstable");
++   was_stalled=dut.adapter_i.uart_i.serializer_out_valid && !dut.adapter_i.uart_i.serializer_out_ready;
++   previous=dut.adapter_i.uart_i.serializer_out_data;if(was_stalled)stalls=stalls+1;
++  end else was_stalled=0;
++  if(aborted)aborts=aborts+1;
++  if(dut.retire)retired=retired+1;
++  if(dut.lane_valid && dut.lane_ready)$fdisplay(fd_lanes,"%0d %0d %0d %0d %0d %0d %0d",dut.lane_channel,dut.lane_data,dut.lane_qpc,dut.lane_quality,dut.lane_tag,dut.lane_first,dut.lane_last);
++  if(dut.block_valid && dut.block_ready)$fdisplay(fd_blocks,"%0d %012x %048x %06x %024x %024x %0d %0d %0d %0d",dut.channel,dut.data,dut.qpcs,dut.qualities,dut.firsts,dut.lasts,dut.tag,dut.first_index,dut.stride_ns,dut.stride_us);
++ end
++ initial forever begin
++  @(negedge tx);uart_symbol_aborted=0;repeat(15)@(posedge clk);#1;
++  for(integer b=0;b<8;b=b+1)begin rx[b]=tx;repeat(10)@(posedge clk);#1;end
++  if(!uart_symbol_aborted && !dut.adapter_cancel)begin if(tx!==1)$fatal(1,"UART stop");$fdisplay(fd_uart,"%02x",rx);uart_n=uart_n+1;end
++ end
++ task automatic step(input integer n);repeat(n)@(negedge clk);endtask
++ task automatic scan(input integer sn);
++  for(integer c=0;c<4;c=c+1)begin
++   sample_channel=c;sample_data=raw[sn*4+c];sample_qpc=ORIGIN+64'd10000123+sn*64'd10000000+c*64'd1007;
++   sample_quality=quality[c];
++   if(mode==1 && sn==1 && c==2)sample_quality=sample_quality^8'h01;
++   if(mode==2 && sn==2 && c==0)sample_qpc=sample_qpc+1;
++   if(mode==6 && sn==0 && c==0)sample_qpc=64'h8000000000000000;
++   sample_strobe=1;step(1);sample_strobe=0;step(1);
++  end
++  step(6);
++ endtask
++ task automatic expect_refusal(input integer code);
++  while(!refused)step(1);
++  if(refusal_code!=code || uart_n!=0 || serial_n!=0)$fatal(1,"B77 refusal expected%0d actual%0d bytes%0d",code,refusal_code,uart_n);
++  $fdisplay(fd_events,"REFUSED %0d COUNT %0d",refusal_code,count);
++ endtask
++ task automatic flush;
++  cancel=1;step(120);if(!quiescent)$fatal(1,"B77 cancel not quiescent");
++  cancel=0;step(20);if(count!=0 || dut.lane_ready || result_valid)$fatal(1,"B77 cancel replay");
++ endtask
++ task automatic output_four;
++  logic [47:0] saved_data;logic [191:0] saved_qpcs;logic [95:0] saved_firsts;
++  seal=1;step(1);seal=0;
++  while(!dut.block_valid)step(1);
++  saved_data=dut.data;saved_qpcs=dut.qpcs;saved_firsts=dut.firsts;
++  step(12);
++  if(dut.data!==saved_data || dut.qpcs!==saved_qpcs || dut.firsts!==saved_firsts || count!=12 || dut.lane_ready)$fatal(1,"B77 output offer unstable");
++  $fdisplay(fd_events,"COLLECTOR_BACKPRESSURE_STABLE");offer_allowed=1;
++  for(integer c=0;c<4;c=c+1)begin
++   while(!result_valid)step(1);
++   if(result_error!=0)$fatal(1,"B77 wrapper result%0d",result_error);
++   step(10);if(!result_valid || dut.lane_ready)$fatal(1,"B77 result backpressure");
++   $fdisplay(fd_events,"RESULT %0d %0d",c,result_bytes);
++   result_ready=1;step(1);result_ready=0;step(2);
++  end
++  if(retired!=4 || count!=0 || dut.lane_ready || uart_n!=serial_n || stalls==0)$fatal(1,"B77 retirement/cost");
++ endtask
++ initial begin
++  if(!$value$plusargs("OUT=%s",outdir))$fatal(1,"OUT required");if(!$value$plusargs("MODE=%d",mode))mode=0;
++  fd_uart=$fopen({outdir,"/uart.hex"},"w");fd_serial=$fopen({outdir,"/serializer.hex"},"w");fd_events=$fopen({outdir,"/events.txt"},"w");
++  fd_blocks=$fopen({outdir,"/blocks.txt"},"w");fd_lanes=$fopen({outdir,"/lanes.txt"},"w");
++  if(!fd_uart||!fd_serial||!fd_events||!fd_blocks||!fd_lanes)$fatal(1,"file open");
++  raw[0]=32769;raw[1]=65280;raw[2]=4096;raw[3]=65535;
++  raw[4]=32770;raw[5]=65279;raw[6]=5000;raw[7]=0;
++  raw[8]=32771;raw[9]=65278;raw[10]=6000;raw[11]=65535;
++  quality[0]=128;quality[1]=254;quality[2]=85;quality[3]=163;
++  step(5);rst=0;capture_rearm=1;collect_rearm=1;step(1);capture_rearm=0;collect_rearm=0;step(2);
++  if(mode==12)$fatal(1,"B77_INTENTIONAL_RUNNER_NEGATIVE");
++  if(mode>=14 && mode<=16)begin
++   scan(0);scan(1);scan(2);while(count!=12)step(1);
++   seal=1;step(1);seal=0;offer_allowed=1;
++   while(dut.collector_i.state!=4 || !dut.adapter_i.uart_i.transaction_active_q)step(1);
++   if(mode==16)begin
++    while(uart_n<3)step(1);step(20);
++    result_ready=1;collect_rearm=1;step(1);collect_rearm=0;
++    if(!refused || refusal_code!=9)$fatal(1,"busy rearm not refused9");
++    step(6000);
++    if(retired!=0 || result_valid || dut.adapter_i.busy || aborts!=1 || uart_n!=3 || serial_n!=4 || !refused || refusal_code!=9)
++     $fatal(1,"busy rearm old effect retired or resumed uart%0d serial%0d abort%0d retire%0d",uart_n,serial_n,aborts,retired);
++    $fdisplay(fd_events,"BUSY_REARM_REFUSED9 UART %0d SERIAL %0d ABORT %0d RETIRED %0d STABLE_CLOCKS 6000",uart_n,serial_n,aborts,retired);
++    flush();
++   end else begin
++    enabled=0;result_ready=1;step(120);
++    if(!quiescent || count!=0 || result_valid || retired!=0 || dut.armed || aborts!=1)$fatal(1,"gate withdrawal did not flush accepted WAIT_RETIRE");
++    $fdisplay(fd_events,"GATE_WITHDRAW_WAIT_RETIRE QUIESCENT ABORT %0d RETIRED %0d",aborts,retired);
++    if(mode==15)begin
++     enabled=1;step(6000);
++     if(!quiescent || count!=0 || dut.armed || result_valid || retired!=0 || uart_n!=0 || serial_n!=0 || dut.lane_ready)
++      $fatal(1,"gate restore replayed old epoch");
++     $fdisplay(fd_events,"GATE_RESTORE_NO_REPLAY CLOCKS 6000 UART %0d SERIAL %0d RETIRED %0d",uart_n,serial_n,retired);
++     rearm_tag=18;capture_rearm=1;collect_rearm=1;step(1);capture_rearm=0;collect_rearm=0;step(3);
++     if(!dut.armed || count!=0 || !dut.lane_ready || result_valid || uart_n!=0)$fatal(1,"fresh explicit rearm invalid");
++     $fdisplay(fd_events,"FRESH_REARM TAG 18 COUNT 0 NO_OLD_PAYLOAD");flush();
++    end
++   end
++  end else if(mode==13)begin $fdisplay(fd_events,"RUNNER_SUCCESS");end
++  else if(mode==3)begin held=1;scan(0);expect_refusal(1);end
++  else if(mode==4 || mode==5)begin
++   scan(0);while(count<4)step(1);
++   if(mode==4)rearm_tag=18;capture_rearm=1;step(1);capture_rearm=0;step(2);scan(1);
++   expect_refusal(mode==4?2:3);
++  end else if(mode==7)begin scan(0);scan(1);while(count<8)step(1);seal=1;step(1);seal=0;expect_refusal(7);end
++  else begin
++   scan(0);if(!refused)scan(1);if(!refused)begin
++    if(mode==8)begin
++     // Third scan creates four queued lanes. Seal is mutually exclusive with
++     // every lane handshake; simultaneous last lane is explicitly refused.
++     fork
++      scan(2);
++      begin while(count!=11)step(1);seal=1;step(1);seal=0;end
++     join
++    end else scan(2);
++   end
++   case(mode)
++    0:begin while(count!=12)step(1);output_four();end
++    1:expect_refusal(5);
++    2:expect_refusal(6);
++    6:expect_refusal(4);
++    8:expect_refusal(7);
++    9:begin
++     while(count!=12)step(1);scan(0);step(10);
++     if(!dut.lane_valid || dut.lane_ready || count!=12)$fatal(1,"B77 thirteenth lane not held");
++     $fdisplay(fd_events,"THIRTEENTH_BACKPRESSURED");output_four();
++     if(!dut.lane_valid || dut.lane_ready)$fatal(1,"B77 pending input replay");flush();
++    end
++    10:begin while(count!=12)step(1);flush();if(uart_n!=0)$fatal(1,"B77 preseal emitted");end
++    11:begin
++     while(count!=12)step(1);seal=1;step(1);seal=0;offer_allowed=1;
++     while(uart_n<3)step(1);step(20);flush();
++     if(aborts!=1 || retired!=0)$fatal(1,"B77 abort/retirement");
++     $fdisplay(fd_events,"PARTIAL_CANCEL %0d %0d ABORT %0d",uart_n,serial_n,aborts);
++    end
++    default:$fatal(1,"unknown mode");
++   endcase
++  end
++  $fdisplay(fd_events,"DONE %0d UART %0d SERIAL %0d RETIRED %0d STALLS %0d",cycles,uart_n,serial_n,retired,stalls);
++  $fclose(fd_uart);$fclose(fd_serial);$fclose(fd_events);
++  $fclose(fd_blocks);$fclose(fd_lanes);
++  completed=1;$display("B77_DONE mode=%0d cycles=%0d uart=%0d serial=%0d",mode,cycles,uart_n,serial_n);$finish;
++ end
++endmodule
+diff --git a/competition/deepeye/golden/diagnostic/offboard_aggregate77/.gitattributes b/competition/deepeye/golden/diagnostic/offboard_aggregate77/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/offboard_aggregate77/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/golden/diagnostic/offboard_aggregate77/SYNTHETIC_raw12.json b/competition/deepeye/golden/diagnostic/offboard_aggregate77/SYNTHETIC_raw12.json
+new file mode 100644
+index 0000000..26b67e0
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/offboard_aggregate77/SYNTHETIC_raw12.json
+@@ -0,0 +1 @@
++{"context":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","session_id":"SYNTHETIC-B77-RAW12","tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3"},"evidence_kind":"SYNTHETIC_FIXTURE","note":"All identities are synthetic labels, not actual ADC/BOOT/authentication. tested_commit labels source dependency, execution uses exact snapshots.","now_qpc_ns":9007199304740993,"origin_qpc_ns":9007199254740993,"receiver_qpc_ns":9007199294740993,"records":[{"acquisition_qpc_ns":9007199264741116,"channel":0,"held":false,"index":0,"native_first_seq":0,"native_last_seq":3,"native_tag":17,"original_value":32769,"raw_quality":128,"remainder_ns":123,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":0,"capture_sha256":"87f014f1e3be6f8de9f3b8da68e6f69a98339e903af0ea4023e2a4aeed78ed74","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":0,"source_record_sha256":"f13fae116202f2bb9698172daf97e37e5f6b863a7cce7867b24177df737040bd","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199264741116,"valid":true},{"acquisition_qpc_ns":9007199264742123,"channel":1,"held":false,"index":1,"native_first_seq":0,"native_last_seq":3,"native_tag":17,"original_value":65280,"raw_quality":254,"remainder_ns":130,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":0,"capture_sha256":"87f014f1e3be6f8de9f3b8da68e6f69a98339e903af0ea4023e2a4aeed78ed74","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":1,"source_record_sha256":"44d1509990491ac7135f48e4e6065d0f4cb7da5d09f96d56c8e2f02cce70270d","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199264742123,"valid":true},{"acquisition_qpc_ns":9007199264743130,"channel":2,"held":false,"index":2,"native_first_seq":0,"native_last_seq":3,"native_tag":17,"original_value":4096,"raw_quality":85,"remainder_ns":137,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":0,"capture_sha256":"87f014f1e3be6f8de9f3b8da68e6f69a98339e903af0ea4023e2a4aeed78ed74","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":2,"source_record_sha256":"7c415ea5f5f16de3600906bc0bc7fe8b8ec1fa33ee2db3864587bbec2652664d","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199264743130,"valid":true},{"acquisition_qpc_ns":9007199264744137,"channel":3,"held":false,"index":3,"native_first_seq":0,"native_last_seq":3,"native_tag":17,"original_value":65535,"raw_quality":163,"remainder_ns":144,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":0,"capture_sha256":"87f014f1e3be6f8de9f3b8da68e6f69a98339e903af0ea4023e2a4aeed78ed74","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":3,"source_record_sha256":"dca5d6af600987b774683c4fb13636cde16d3ff03cf8387719ed51d9daf9375a","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199264744137,"valid":true},{"acquisition_qpc_ns":9007199274741116,"channel":0,"held":false,"index":4,"native_first_seq":4,"native_last_seq":7,"native_tag":17,"original_value":32770,"raw_quality":128,"remainder_ns":123,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":1,"capture_sha256":"e55787ce75f9e3d06e146b4fb77acfe109b8307a060b3e3ec372c8b37fd67502","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":4,"source_record_sha256":"07664778488f137d64c295b12c0d1e42a7faa83750587a2527b173fbd167cb49","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199274741116,"valid":true},{"acquisition_qpc_ns":9007199274742123,"channel":1,"held":false,"index":5,"native_first_seq":4,"native_last_seq":7,"native_tag":17,"original_value":65279,"raw_quality":254,"remainder_ns":130,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":1,"capture_sha256":"e55787ce75f9e3d06e146b4fb77acfe109b8307a060b3e3ec372c8b37fd67502","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":5,"source_record_sha256":"949b803e99a46c10312756fc41cd13d730fc3e0f6250d0343d053835b62dddad","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199274742123,"valid":true},{"acquisition_qpc_ns":9007199274743130,"channel":2,"held":false,"index":6,"native_first_seq":4,"native_last_seq":7,"native_tag":17,"original_value":5000,"raw_quality":85,"remainder_ns":137,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":1,"capture_sha256":"e55787ce75f9e3d06e146b4fb77acfe109b8307a060b3e3ec372c8b37fd67502","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":6,"source_record_sha256":"ecfefa42d87894f2f7ebdacf6ba9113b58b05f4e6ac9b2c3ff134bb769ef0d1f","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199274743130,"valid":true},{"acquisition_qpc_ns":9007199274744137,"channel":3,"held":false,"index":7,"native_first_seq":4,"native_last_seq":7,"native_tag":17,"original_value":0,"raw_quality":163,"remainder_ns":144,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":1,"capture_sha256":"e55787ce75f9e3d06e146b4fb77acfe109b8307a060b3e3ec372c8b37fd67502","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":7,"source_record_sha256":"5d8db8c797fb479c21c01fb6cd77daad4dc33c057b6ade5880bbc520c6207f7c","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199274744137,"valid":true},{"acquisition_qpc_ns":9007199284741116,"channel":0,"held":false,"index":8,"native_first_seq":8,"native_last_seq":11,"native_tag":17,"original_value":32771,"raw_quality":128,"remainder_ns":123,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":2,"capture_sha256":"89e26679f0cc19b5ab63f02a473e9b6b65b6a3a548bd287a06c4d3c6400ba41e","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":8,"source_record_sha256":"4e7ba5c6ff79b18cf345a144d7c0f89f84881d2aec9eb91297be662c7182fe81","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199284741116,"valid":true},{"acquisition_qpc_ns":9007199284742123,"channel":1,"held":false,"index":9,"native_first_seq":8,"native_last_seq":11,"native_tag":17,"original_value":65278,"raw_quality":254,"remainder_ns":130,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":2,"capture_sha256":"89e26679f0cc19b5ab63f02a473e9b6b65b6a3a548bd287a06c4d3c6400ba41e","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":9,"source_record_sha256":"d72cf8993510aa9aed49951cecb543b948637989483d65da2ef31da750eb9344","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199284742123,"valid":true},{"acquisition_qpc_ns":9007199284743130,"channel":2,"held":false,"index":10,"native_first_seq":8,"native_last_seq":11,"native_tag":17,"original_value":6000,"raw_quality":85,"remainder_ns":137,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":2,"capture_sha256":"89e26679f0cc19b5ab63f02a473e9b6b65b6a3a548bd287a06c4d3c6400ba41e","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":10,"source_record_sha256":"66eb82cf4bbff07201c02c4d80c9e6e5e1dd82b2b8f78ae29826169600a19a63","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199284743130,"valid":true},{"acquisition_qpc_ns":9007199284744137,"channel":3,"held":false,"index":11,"native_first_seq":8,"native_last_seq":11,"native_tag":17,"original_value":65535,"raw_quality":163,"remainder_ns":144,"source_identity":{"build_manifest_sha256":"7676767676767676767676767676767676767676767676767676767676767676","capture_seq":2,"capture_sha256":"89e26679f0cc19b5ab63f02a473e9b6b65b6a3a548bd287a06c4d3c6400ba41e","clock_domain_id":"SYNTHETIC-ORIGINAL-QPC-NS","generation":1,"kernel_boot_id":"SYNTHETIC-NO-REAL-BOOT","operation_id":"B77-SYNTHETIC-NOT-ADC","request_hash":"7777777777777777777777777777777777777777777777777777777777777777","request_seq":1,"session_id":"SYNTHETIC-B77-RAW12","source_admission_index":11,"source_record_sha256":"942d2f3e86bb3ce151180f56717add0f304b8a849e685b74450e27f231a64f02","tag":17,"tested_commit":"4264eb954bb4c26cea80689e5c3bb68b9040b2b3","trigger_id":77},"source_qpc_ns":9007199284744137,"valid":true}],"schema":"B77_SYNTHETIC_RAW12_V1"}
+diff --git a/competition/deepeye/tools/diagnostic/offboard_aggregate77/.gitattributes b/competition/deepeye/tools/diagnostic/offboard_aggregate77/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_aggregate77/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/offboard_aggregate77/multipoint_decoder.py b/competition/deepeye/tools/diagnostic/offboard_aggregate77/multipoint_decoder.py
+new file mode 100644
+index 0000000..69b46d3
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_aggregate77/multipoint_decoder.py
+@@ -0,0 +1,105 @@
++"""Private B77 three-point fresh-only semantic contract; no planner/control.
++
++The unchanged fixed TRACE parser owns code interpretation. Hashes associate
++synthetic records; they do not authenticate Root/BOOT/ADC or release movement.
++"""
++import sys
++sys.dont_write_bytecode=True
++import binascii,hashlib,importlib.util,json,re,struct
++from pathlib import Path
++PROFILE='B77-PRIVATE-THREE-FRESH-RELATIVE1US-V1'
++FIXED_PATH='competition/deepeye/golden/codec/trace_candidate.py'
++FIXED_SHA='a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642'
++U63=(1<<63)-1;U32=(1<<32)-1
++STABLE={'operation_id','kernel_boot_id','session_id','clock_domain_id','request_hash','tested_commit','build_manifest_sha256'}
++IDENTITY=STABLE|{'source_record_sha256','capture_sha256','tag','generation','trigger_id','request_seq','capture_seq','source_admission_index'}
++RECORD={'channel','index','native_tag','native_first_seq','native_last_seq','acquisition_qpc_ns','source_qpc_ns','remainder_ns','raw_quality','original_value','valid','held','source_identity'}
++class Rejected(ValueError):pass
++def need(ok,why):
++    if not ok:raise Rejected(why)
++def canonical(obj):return json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False).encode('utf-8')
++def digest(obj):return hashlib.sha256(canonical(obj)).hexdigest()
++def uint(x,maxval,label):need(type(x)is int and 0<=x<=maxval,label);return x
++def obj(x,keys,label):need(type(x)is dict and set(x)==keys,label);return x
++def plain(x,depth=0,budget=None):
++    if budget is None:budget=[4096]
++    budget[0]-=1;need(depth<=12 and budget[0]>=0,'bounded JSON')
++    need(type(x)in(type(None),bool,int,str,list,dict),'plain JSON types')
++    if type(x)is str:need(len(x)<=192,'string bound')
++    if type(x)is list:
++        need(len(x)<=12,'list bound')
++        for y in x:plain(y,depth+1,budget)
++    if type(x)is dict:
++        need(len(x)<=32 and all(type(k)is str for k in x),'dictionary bound')
++        for k,y in x.items():plain(k,depth+1,budget);plain(y,depth+1,budget)
++def identity(x):
++    obj(x,IDENTITY,'full per-sample identity')
++    for k in ['operation_id','kernel_boot_id','session_id','clock_domain_id']:
++        need(type(x[k])is str and 1<=len(x[k])<=192 and all(32<=ord(c)<=126 for c in x[k]),'identity text')
++    for k in ['request_hash','build_manifest_sha256','source_record_sha256','capture_sha256','tested_commit']:
++        need(type(x[k])is str and re.fullmatch('[0-9a-f]{%d}'%(40 if k=='tested_commit' else 64),x[k])is not None,'identity hash')
++    for k in IDENTITY-STABLE-{'source_record_sha256','capture_sha256'}:uint(x[k],U32,'identity '+k)
++    need(all(x[k]>0 for k in ['tag','generation','request_seq']),'nonzero identity')
++def fixed(root):
++    p=Path(root)/FIXED_PATH;raw=p.read_bytes();need(hashlib.sha256(raw).hexdigest()==FIXED_SHA,'fixed decoder hash')
++    s=importlib.util.spec_from_file_location('_b77_fixed_trace',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
++def decode(packet,*,companion=None,binding=None,now_qpc_ns=None,repo_root=None,enabled=False):
++    need(type(enabled)is bool,'enabled bool')
++    stop=dict(status='STOP',core_ran=False,command=None,authorization='none',authentication='NOT_ESTABLISHED_BY_JSON_OR_HASHES')
++    if not enabled:return dict(stop,input_status='DISABLED')
++    if companion is None or binding is None or now_qpc_ns is None or repo_root is None:return dict(stop,input_status='INPUT_UNAVAILABLE')
++    need(type(packet)is bytes and 39<=len(packet)<=46,'bounded full packet')
++    plain(companion);plain(binding)
++    obj(companion,{'schema','evidence_kind','profile','origin_qpc_ns','context','receiver_qpc_ns','records'},'companion contract')
++    need(companion['schema']=='B77_THREE_POINT_COMPANION_V1' and companion['profile']==PROFILE and companion['evidence_kind']=='SYNTHETIC_FIXTURE','private companion/profile')
++    obj(binding,{'profile','session_handle','view_handle','frame_seq','e','channel','companion_sha256'},'binding contract')
++    need(binding['profile']==PROFILE,'private binding profile')
++    need(uint(binding['e'],8,'integer E')==0,'lossless private binding')
++    need(binding['companion_sha256']==digest(companion),'complete companion binding')
++    session=uint(binding['session_handle'],U32,'session handle');view=uint(binding['view_handle'],255,'view handle')
++    seq=uint(binding['frame_seq'],65535,'nonwrapping frame sequence');channel=uint(binding['channel'],3,'channel')
++    origin=uint(companion['origin_qpc_ns'],U63,'original origin')
++    receiver=uint(companion['receiver_qpc_ns'],U63,'original receiver QPC');now=uint(now_qpc_ns,U63,'now QPC')
++    context=obj(companion['context'],STABLE,'complete stable host context')
++    records=companion['records'];need(type(records)is list and len(records)==3,'exactly three original records')
++    for r in records:
++        obj(r,RECORD,'original sample record');identity(r['source_identity'])
++        need(all(r['source_identity'][k]==context[k] for k in STABLE),'stable source identity association')
++        need(r['valid'] is True and r['held'] is False,'fresh valid only; held unsupported')
++        need(uint(r['channel'],3,'integer record channel')==channel,'channel association')
++        for k in ['index','native_tag','native_first_seq','native_last_seq']:uint(r[k],U32,k)
++        need(r['native_tag']==r['source_identity']['tag'] and r['native_tag']>0,'native full tag association')
++        need(r['native_first_seq']+3==r['native_last_seq'] and r['index']==r['native_first_seq']+channel,'native scan/index association')
++        q=uint(r['acquisition_qpc_ns'],U63,'original acquisition QPC');s=uint(r['source_qpc_ns'],U63,'original source QPC')
++        need(origin<=q<=receiver<=now and s==q,'original fresh clock ordering')
++        need(type(r['remainder_ns'])is int and r['remainder_ns']==(q-origin)%1000,'original remainder')
++        uint(r['raw_quality'],255,'opaque uint8 quality');uint(r['original_value'],65535,'original uint16 value')
++    first=records[0]
++    need(all(r['raw_quality']==first['raw_quality'] and r['native_tag']==first['native_tag'] for r in records),'uniform quality/tag')
++    stride=records[1]['acquisition_qpc_ns']-first['acquisition_qpc_ns']
++    need(1000<=stride<=65535000 and stride%1000==0,'regular nonzero uint16 microsecond stride')
++    for i,r in enumerate(records):
++        need(r['index']==first['index']+4*i and r['native_first_seq']==first['native_first_seq']+4*i,'nonwrapping native/index stride4')
++        need(r['acquisition_qpc_ns']==first['acquisition_qpc_ns']+stride*i,'regular original ns progression')
++        need((r['acquisition_qpc_ns']-origin)//1000<=U32,'relative tick overflow')
++    magic,version,kind,length,epoch,sequence,tick=struct.unpack_from('<2sBBBBHI',packet)
++    need(magic==b'\xa5\x5a' and version==3 and kind==0xe4,'private E4 wire header')
++    need(len(packet)==14+length and length<=32 and epoch==view and sequence==seq,'wire length/identity')
++    need(int.from_bytes(packet[-2:],'little')==binascii.crc_hqx(packet[2:-2],0xffff),'CRC')
++    payload=packet[12:-2];need(payload[0]==2,'relative1us payload revision2')
++    parsed=fixed(repo_root).decode_payload(b'\x01'+payload[1:],dict(session=session,config_epoch=view,e=0))
++    need(parsed['count']==3 and parsed['channel']==channel and parsed['index_stride']==4 and parsed['tick_stride_ms']==stride//1000,'three-point coding metadata')
++    need(parsed['valid'] and not parsed['held'] and not parsed['saturated'] and not parsed['source_fault'],'fresh wire flags')
++    need(parsed['first_tick_ms']==tick,'outer exact first relative tick')
++    points=[]
++    for r,p in zip(records,parsed['points']):
++        need(p['index']==r['index'] and p['tick_ms']==(r['acquisition_qpc_ns']-origin)//1000,'exact original sample association')
++        need(p['source_tick_ms']==p['tick_ms'],'fresh source coding association')
++        need(p['value']==r['original_value'],'actual decoded raw value mismatch')
++        points.append(dict(index=p['index'],channel=channel,decoded_value=p['value'],original_value=r['original_value'],
++            original_acquisition_qpc_ns=r['acquisition_qpc_ns'],original_source_qpc_ns=r['source_qpc_ns'],
++            origin_qpc_ns=origin,remainder_ns=r['remainder_ns'],raw_quality_uint8=r['raw_quality'],source_identity=r['source_identity'],
++            native_tag=r['native_tag'],native_first_seq=r['native_first_seq'],native_last_seq=r['native_last_seq'],source_age_ns=now-r['source_qpc_ns']))
++    return dict(stop,input_status='TRANSPORT_STRUCTURAL_ONLY',profile=PROFILE,points=points,context=context,
++        source_age_100ms_met=all(p['source_age_ns']<=100_000_000 for p in points),
++        coding_ledger=parsed['ledger'],mode=parsed['mode'],frame_sha256=hashlib.sha256(packet).hexdigest())
+diff --git a/competition/deepeye/tools/diagnostic/offboard_aggregate77/prepare77.py b/competition/deepeye/tools/diagnostic/offboard_aggregate77/prepare77.py
+new file mode 100644
+index 0000000..0023a8a
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_aggregate77/prepare77.py
+@@ -0,0 +1,41 @@
++"""Author synthetic raw12 fixture and pin unchanged dependencies to B74 source."""
++import sys
++sys.dont_write_bytecode=True
++import hashlib,json,subprocess
++from pathlib import Path
++P=Path(__file__).resolve().parents[3];ROOT=P.parents[1]
++BASE='4264eb954bb4c26cea80689e5c3bb68b9040b2b3'
++def canonical(x):return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
++def digest(x):return hashlib.sha256(canonical(x)).hexdigest()
++def main():
++    fixed=[P/f'fpga/acquisition/{n}.sv' for n in ['deepeye_sample_scan_capture','deepeye_raw_scan_queue','deepeye_buffered_scan_capture','deepeye_scan_lane_stream']]
++    fixed += [P/f'fpga/codec/{n}.sv' for n in ['deepeye_block_encoder','deepeye_trace_payload_candidate']]
++    fixed += [P/f'fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/{n}.sv' for n in ['deepeye_trace_block_payload_1us_candidate','deepeye_trace_block_uart_50mhz_candidate']]
++    fixed += [P/f'fpga/transport/{n}.sv' for n in ['deepeye_crc16_byte','deepeye_wire_serializer','deepeye_uart_tx']]
++    fixed += [P/'golden/codec/trace_candidate.py',P/'tools/diagnostic/g05_capture/build/owned_process.py',ROOT/'fpga_mesh/windows_job.py']
++    pins={}
++    for f in fixed:
++        rel=f.relative_to(ROOT).as_posix();raw=f.read_bytes()
++        original=subprocess.run(['git','show',BASE+':'+rel],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=True,timeout=10).stdout
++        assert raw==original,('dependency differs from fixed source',rel)
++        pins[rel]=dict(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw))
++    (P/'fpga/diagnostic/offboard_aggregate77/dependency_pins.json').write_text(json.dumps(dict(source=BASE,files=pins),indent=2)+'\n')
++    origin=9007199254740993
++    values=[32769,65280,4096,65535,32770,65279,5000,0,32771,65278,6000,65535]
++    quality=[128,254,85,163]
++    context=dict(operation_id='B77-SYNTHETIC-NOT-ADC',kernel_boot_id='SYNTHETIC-NO-REAL-BOOT',session_id='SYNTHETIC-B77-RAW12',
++      clock_domain_id='SYNTHETIC-ORIGINAL-QPC-NS',request_hash='77'*32,tested_commit=BASE,build_manifest_sha256='76'*32)
++    records=[]
++    for i,value in enumerate(values):
++        sn,ch=divmod(i,4);q=origin+10000123+sn*10000000+ch*1007
++        r=dict(channel=ch,index=i,native_tag=17,native_first_seq=4*sn,native_last_seq=4*sn+3,
++          acquisition_qpc_ns=q,source_qpc_ns=q,remainder_ns=(q-origin)%1000,raw_quality=quality[ch],original_value=value,valid=True,held=False)
++        r['source_identity']=dict(context,source_record_sha256=digest(r),capture_sha256=digest(dict(scan=sn,values=values[sn*4:sn*4+4])),
++          tag=17,generation=1,trigger_id=77,request_seq=1,capture_seq=sn,source_admission_index=i)
++        records.append(r)
++    f=dict(schema='B77_SYNTHETIC_RAW12_V1',evidence_kind='SYNTHETIC_FIXTURE',origin_qpc_ns=origin,
++      context=context,receiver_qpc_ns=origin+40000000,now_qpc_ns=origin+50000000,records=records,
++      note='All identities are synthetic labels, not actual ADC/BOOT/authentication. tested_commit labels source dependency, execution uses exact snapshots.')
++    (P/'golden/diagnostic/offboard_aggregate77/SYNTHETIC_raw12.json').write_bytes(canonical(f)+b'\n')
++    print(json.dumps(dict(fixed_dependencies=len(pins),synthetic_records=12,requirements='c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804')))
++if __name__=='__main__':main()
+diff --git a/competition/deepeye/tools/diagnostic/offboard_aggregate77/run77.py b/competition/deepeye/tools/diagnostic/offboard_aggregate77/run77.py
+new file mode 100644
+index 0000000..60e5929
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_aggregate77/run77.py
+@@ -0,0 +1,104 @@
++"""New B77 finite offboard controls, never the sealed B74 suite.
++
++Native commands descend from the pinned suspended Windows Job helper.
++30s per command /180s whole Job /32MiB total attempt files polled per command.
++"""
++from __future__ import annotations
++import sys
++sys.dont_write_bytecode=True
++import argparse,datetime,hashlib,importlib.util,json,subprocess,time
++from pathlib import Path
++P=Path(__file__).resolve().parents[3];ROOT=P.parents[1]
++HDL=P/'fpga/diagnostic/offboard_aggregate77';TOOLS=P/'tools/diagnostic/offboard_aggregate77'
++MODEL=Path('D:/modelsim1/win64')
++def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
++def save(p,x):Path(p).write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
++def command(out,name,args,cwd,expected=0):
++    folder=out/'commands';folder.mkdir(exist_ok=True)
++    r=dict(argv=list(map(str,args)),cwd=str(cwd),started_utc=utc(),timeout_seconds=30,expected_exit=expected)
++    with (folder/(name+'.stdout.bin')).open('xb')as so,(folder/(name+'.stderr.bin')).open('xb')as se:
++        proc=subprocess.Popen(r['argv'],cwd=cwd,stdout=so,stderr=se,stdin=subprocess.DEVNULL,shell=False,creationflags=subprocess.CREATE_NO_WINDOW)
++        r['pid']=proc.pid;save(folder/(name+'.STARTED.json'),r)
++        try:
++            deadline=time.monotonic()+30
++            while proc.poll()is None:
++                if time.monotonic()>deadline:raise TimeoutError('B77 command deadline')
++                if sum(f.stat().st_size for f in out.rglob('*')if f.is_file())>32*1024*1024:raise RuntimeError('B77 whole attempt32MiB output cap')
++                time.sleep(.05)
++            r['exit_code']=proc.returncode
++        except BaseException as e:
++            r['error']=repr(e);proc.kill();r['exit_code']=proc.wait(timeout=5);raise
++        finally:
++            r.update(ended_utc=utc(),stdout_sha256=sha(folder/(name+'.stdout.bin')),stderr_sha256=sha(folder/(name+'.stderr.bin')))
++            save(folder/(name+'.json'),r)
++    assert r['exit_code']==expected,(name,r)
++    return r
++def pin_data():return json.loads((HDL/'dependency_pins.json').read_text())['files']
++def sources():
++    fixed=[ROOT/r for r in pin_data()if r.endswith('.sv')]
++    return fixed+[HDL/n for n in ['deepeye_aggregate12_candidate.sv','deepeye_aggregate_uart_candidate.sv','deepeye_SYNTHETIC_aggregate77.sv','tb_SYNTHETIC_aggregate77.sv']]
++def inner(out,saved=None,lifecycle=False):
++    sim=out/'sim';sim.mkdir();reports=[]
++    if saved is not None:
++        reports.append(command(out,'semantic-positive',[sys.executable,'-B',TOOLS/'semantic77_controls.py','--source',saved,'--out',out/'semantic'],sim))
++        for name in ['boolean_e','boolean_channel']:
++            reports.append(command(out,'negative-'+name,[sys.executable,'-B',TOOLS/'semantic77_controls.py','--source',saved,'--negative',name],sim,2))
++            assert 'expected_rejection'in(out/'commands'/('negative-'+name+'.stdout.bin')).read_text()
++        save(out/'INNER_RESULT.json',dict(status='B77_saved_bytes_strict_type_controls_passed',commands=reports,completed_utc=utc()))
++        return
++    for name in ['vlog','vsim']:reports.append(command(out,name+'-version',[MODEL/(name+'.exe'),'-version'],sim))
++    reports.append(command(out,'vmap-local',[MODEL/'vmap.exe','-c'],sim));reports.append(command(out,'vlib',[MODEL/'vlib.exe','work'],sim))
++    reports.append(command(out,'vlog',[MODEL/'vlog.exe','-sv','-work','work',*sources()],sim))
++    for mode in ([14,15,16]if lifecycle else range(14)):
++        d=out/f'mode{mode}';d.mkdir();do=d/'run.do'
++        do.write_text('onerror {quit -code 3 -force}\nonbreak {\nif {[examine -radix decimal /tb_SYNTHETIC_aggregate77/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n}\nrun -all\nif {[examine -radix decimal /tb_SYNTHETIC_aggregate77/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n',encoding='ascii')
++        reports.append(command(out,f'vsim-mode{mode}',[MODEL/'vsim.exe','-c','-voptargs=+acc','-onfinish','stop','-wlf',d/'wave.wlf','-l',d/'modelsim.log',
++          'work.tb_SYNTHETIC_aggregate77','+OUT='+d.as_posix(),'+MODE='+str(mode),'-do','do '+do.as_posix()],sim,4 if mode==12 else 0))
++        log=(d/'modelsim.log').read_text(encoding='utf-8')
++        if mode==12:assert '** Fatal: B77_INTENTIONAL_RUNNER_NEGATIVE'in log and 'B77_DONE'not in log
++        else:assert 'B77_DONE mode='+str(mode)in log and '** Fatal:'not in log and '** Error:'not in log and 'Errors: 0, Warnings: 0'in log
++    if lifecycle:
++        save(out/'INNER_RESULT.json',dict(status='B77_lifecycle_controls_passed',commands=reports,completed_utc=utc()))
++        return
++    reports.append(command(out,'semantic-positive',[sys.executable,'-B',TOOLS/'semantic77_controls.py','--source',out,'--out',out/'semantic'],sim))
++    for name in ['crc','partial','count','metadata','identity','quality','time','overflow','nonwrap','held','value','missing']:
++        reports.append(command(out,'negative-'+name,[sys.executable,'-B',TOOLS/'semantic77_controls.py','--source',out,'--negative',name],sim,2))
++        text=(out/'commands'/('negative-'+name+'.stdout.bin')).read_text();assert 'expected_rejection'in text and 'FALSE_ACCEPT'not in text
++    save(out/'INNER_RESULT.json',dict(status='B77_bounded_synthetic_controls_passed',commands=reports,completed_utc=utc()))
++def outer(out,saved=None,lifecycle=False):
++    out.mkdir(parents=True,exist_ok=False)
++    for r,v in pin_data().items():assert sha(ROOT/r)==v['sha256'],('fixed dependency pin',r)
++    files=list(dict.fromkeys(sources()+[ROOT/r for r in pin_data()]+list(HDL.glob('*.json'))+list(TOOLS.glob('*.py'))+list((P/'golden/diagnostic/offboard_aggregate77').glob('*.json'))))
++    snapshot=out/'source';snapshot.mkdir();before={}
++    for f in files:
++        rel=f.relative_to(ROOT);target=snapshot/rel;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(f.read_bytes())
++        before[str(rel)]=dict(sha256=sha(f),bytes=f.stat().st_size,snapshot=str(target))
++    save(out/'SOURCE_BEFORE.json',before)
++    spec=importlib.util.spec_from_file_location('_b77_owned_process',P/'tools/diagnostic/g05_capture/build/owned_process.py');owned=importlib.util.module_from_spec(spec);spec.loader.exec_module(owned)
++    jobout=out/'owned_job';jobout.mkdir()
++    argv=[sys.executable,'-B',str(Path(__file__).resolve()),'--inner','--out',str(out)]
++    if saved is not None:
++        argv+=['--saved-source',str(saved)]
++        save(out/'SAVED_INPUT_HASHES.json',{str(f):sha(f)for f in(saved/'mode0').iterdir()if f.is_file()and f.suffix!='.wlf'})
++    if lifecycle:argv+=['--lifecycle-only']
++    process=owned.run_owned(argv,jobout,180,snapshot/'fpga_mesh/windows_job.py')
++    after={str(f.relative_to(ROOT)):sha(f)for f in files};save(out/'SOURCE_AFTER.json',after)
++    result=dict(schema='B77_EXECUTION_RESULT_V1',status='failed_preserved',evidence_kind='SYNTHETIC_FIXTURE',
++      task_id='DEEPEYE-IMPLEMENTATION-20261014',task_version=1,work_id='B-DEEPEYE-OFFBOARD-BOUNDED-AGGREGATION-20261030-77',
++      requirements_sha256='c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804',requirements_ids=[f'H{i:02d}'for i in range(1,16)],
++      source_label='actual uncommitted source snapshots, no later commit claimed tested',process=process,software_saved_source=str(saved)if saved else None,lifecycle_only=lifecycle,
++      sources_unchanged=all(before[r]['sha256']==h for r,h in after.items()),
++      tool_binaries={str(MODEL/(n+'.exe')):sha(MODEL/(n+'.exe'))for n in ['vmap','vlib','vlog','vsim']},
++      python=dict(executable=sys.executable,version=sys.version,sha256=sha(sys.executable)),
++      board='not_run; A only',Vivado='not_run',production='unchanged closed',acceptance='parent quality main/A only')
++    try:
++        owned.require_owned_success(process);assert process['job_closed']and result['sources_unchanged']
++        if not lifecycle:result['semantic']=json.loads((out/'semantic/RESULT.json').read_text())
++        assert(out/'INNER_RESULT.json').exists()
++        result['status']='B77_bounded_synthetic_controls_passed'
++    finally:save(out/'RESULT.json',result)
++    print(json.dumps(dict(status=result['status'],result=str(out/'RESULT.json'))))
++if __name__=='__main__':
++    a=argparse.ArgumentParser();a.add_argument('--out',type=Path,required=True);a.add_argument('--inner',action='store_true');a.add_argument('--saved-source',type=Path);a.add_argument('--lifecycle-only',action='store_true');n=a.parse_args()
++    (inner if n.inner else outer)(n.out.resolve(),n.saved_source,n.lifecycle_only)
+diff --git a/competition/deepeye/tools/diagnostic/offboard_aggregate77/semantic77_controls.py b/competition/deepeye/tools/diagnostic/offboard_aggregate77/semantic77_controls.py
+new file mode 100644
+index 0000000..36c881d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_aggregate77/semantic77_controls.py
+@@ -0,0 +1,83 @@
++"""New B77 controls: actual four triplet RTL frames to strict host decoder."""
++import sys
++sys.dont_write_bytecode=True
++import argparse,binascii,copy,hashlib,json
++from pathlib import Path
++import multipoint_decoder as m
++P=Path(__file__).resolve().parents[3];ROOT=P.parents[1]
++INPUT=P/'golden/diagnostic/offboard_aggregate77/SYNTHETIC_raw12.json'
++def load(p):return json.loads(p.read_text())
++def sha(raw):return hashlib.sha256(raw).hexdigest()
++def fixture():return load(INPUT)
++def split_frames(out):
++    wire=bytes.fromhex((out/'mode0/uart.hex').read_text());serial=bytes.fromhex((out/'mode0/serializer.hex').read_text());assert wire==serial
++    packets=[];at=0
++    while at<len(wire):
++        assert wire[at:at+2]==b'\xa5\x5a';n=14+wire[at+4];p=wire[at:at+n];assert len(p)==n
++        packets.append(p);at+=n
++    assert len(packets)==4
++    return packets
++def companion(ch):
++    f=fixture();c=dict(schema='B77_THREE_POINT_COMPANION_V1',evidence_kind='SYNTHETIC_FIXTURE',profile=m.PROFILE,
++      origin_qpc_ns=f['origin_qpc_ns'],context=f['context'],receiver_qpc_ns=f['receiver_qpc_ns'],records=[copy.deepcopy(r) for r in f['records'] if r['channel']==ch])
++    b=dict(profile=m.PROFILE,session_handle=0x12345678,view_handle=9,frame_seq=300+ch,e=0,channel=ch,companion_sha256=m.digest(c))
++    return c,b,f['now_qpc_ns']
++def decode(p,c,b,now):return m.decode(p,companion=c,binding=b,now_qpc_ns=now,repo_root=ROOT,enabled=True)
++def with_crc(p):return p[:-2]+binascii.crc_hqx(p[2:-2],0xffff).to_bytes(2,'little')
++def negative(name,source):
++    p=split_frames(source)[0];c,b,now=companion(0)
++    if name=='crc':p=p[:-1]+bytes([p[-1]^1])
++    elif name=='partial':p=bytes.fromhex((source/'mode11/uart.hex').read_text())
++    elif name=='count':p=bytearray(p);p[15]=2;p=with_crc(bytes(p))
++    elif name=='metadata':p=bytearray(p);p[33]=5;p=with_crc(bytes(p))
++    elif name=='identity':c['records'][1]['source_identity']['session_id']='WRONG-SYNTHETIC-SESSION'
++    elif name=='quality':c['records'][1]['raw_quality']^=1
++    elif name=='time':c['records'][1]['acquisition_qpc_ns']+=1;c['records'][1]['source_qpc_ns']+=1;c['records'][1]['remainder_ns']+=1
++    elif name=='overflow':c['records'][2]['acquisition_qpc_ns']=1<<63
++    elif name=='nonwrap':c['records'][2]['index']=1<<32
++    elif name=='held':c['records'][1]['held']=True
++    elif name=='value':c['records'][0]['original_value']=1
++    elif name=='missing':c['records'].pop()
++    elif name=='boolean_e':b['e']=False
++    elif name=='boolean_channel':c['records'][0]['channel']=False
++    else:raise ValueError(name)
++    b['companion_sha256']=m.digest(c)
++    try:decode(p,c,b,now)
++    except ValueError as e:print(json.dumps(dict(expected_rejection=name,reason=str(e))));return 2
++    print(json.dumps(dict(FALSE_ACCEPT=name)));return 0
++def positive(source,out):
++    out.mkdir();f=fixture();packets=split_frames(source)
++    # Exact actual input lane stream and collector triplet provenance.
++    lines=(source/'mode0/lanes.txt').read_text().splitlines();assert len(lines)==12
++    for r,line in zip(f['records'],lines):
++        assert list(map(int,line.split()))==[r[k] for k in ['channel','original_value','acquisition_qpc_ns','raw_quality','native_tag','native_first_seq','native_last_seq']]
++    blocks=(source/'mode0/blocks.txt').read_text().splitlines();assert len(blocks)==4
++    records=[]
++    for ch,(packet,line) in enumerate(zip(packets,blocks)):
++        c,b,now=companion(ch);rs=c['records'];v=line.split()
++        assert int(v[0])==ch
++        def packed(key,width):return sum(r[key]<<(width*i) for i,r in enumerate(rs))
++        assert [int(x,16) for x in v[1:6]]==[packed('original_value',16),packed('acquisition_qpc_ns',64),packed('raw_quality',8),packed('native_first_seq',32),packed('native_last_seq',32)]
++        assert list(map(int,v[6:]))==[17,ch,10000000,10000]
++        result=decode(packet,c,b,now);assert len(result['points'])==3 and not result['core_ran'] and result['command']is None
++        assert [p['decoded_value'] for p in result['points']]==[r['original_value'] for r in rs]
++        envelope=dict(evidence_kind='SYNTHETIC_FIXTURE',binding=b,companion=c,now_qpc_ns=now)
++        raw=m.canonical(envelope);(out/f'companion{ch}.json').write_bytes(raw);(out/f'wire{ch}.bin').write_bytes(packet)
++        artifact=dict(schema='B77_SEMANTIC_FIXTURE_V1',evidence_kind='SYNTHETIC_FIXTURE',wire_frame_hex=packet.hex(),wire_sha256=sha(packet),wire_bytes=len(packet),
++          companion_canonical_bytes=raw.decode(),companion_sha256=sha(raw),companion_length=len(raw),semantic_view=result,
++          source_input_file=str(INPUT),source_input_sha256=sha(INPUT.read_bytes()),
++          decoder_pins={str(Path(m.__file__)):sha(Path(m.__file__).read_bytes()),m.FIXED_PATH:m.FIXED_SHA},
++          total_serialized_bytes=len(packet)+len(raw))
++        (out/f'semantic{ch}.json').write_bytes(m.canonical(artifact)+b'\n');records.append(artifact)
++    c,b,now=companion(0);stale=decode(packets[0],c,b,now+100000000);assert not stale['source_age_100ms_met'] and stale['command']is None
++    assert sorted(p['index'] for r in records for p in r['semantic_view']['points'])==list(range(12))
++    ledger=dict(schema='B77_AGGREGATE_RESULT_V1',evidence_kind='SYNTHETIC_FIXTURE',frames=4,points=12,
++      wire_bytes=sum(r['wire_bytes'] for r in records),mandatory_companion_bytes=sum(r['companion_length'] for r in records),
++      total_serialized_bytes=sum(r['total_serialized_bytes'] for r in records),raw_value_bytes=24,
++      complete_synthetic_input_canonical_bytes=len(m.canonical(f)),source_age_stale_control=stale,
++      per_frame=[dict(wire_bytes=r['wire_bytes'],companion_bytes=r['companion_length'],mode=r['semantic_view']['mode'],coding_ledger=r['semantic_view']['coding_ledger']) for r in records],
++      compression_target='NOT_MET_OR_CLAIMED',acceptance='synthetic bounded fresh-only triplets; no ADC/BOOT/authentication/fullH12/final acceptance')
++    (out/'RESULT.json').write_bytes(m.canonical(ledger)+b'\n');print(json.dumps(ledger));return 0
++if __name__=='__main__':
++    a=argparse.ArgumentParser();a.add_argument('--source',type=Path,required=True);a.add_argument('--out',type=Path);a.add_argument('--negative');n=a.parse_args()
++    sys.exit(negative(n.negative,n.source)if n.negative else positive(n.source,n.out))

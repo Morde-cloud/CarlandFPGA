@@ -1,0 +1,32 @@
+{
+  "schema": "B103_MAIN_FAILURE_AND_B110_FIX_REVIEW_V1",
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "failed_work_id": "B-DEEPEYE-FUNCTIONAL50-ONEBUILD-20261031-103",
+  "request_hash": "1115011dbb3de691bfdba08463e48cbe92543b6b3f7efd89bec5f531f65b04d5",
+  "prelaunch_manifest_sha256": "e5170139d5c526b625816325c3553961c28173dae75b30365261641b6af13111",
+  "failed_source_commit": "d258a146d5fc6e0878c3f2324d334558ffa23dd5",
+  "envelope_result_sha256": "dcbb2b0d2fc7d6c1789489495ef13e2ba863d30d93a43df23f5abcad51376c15",
+  "actual_native_launcher_exit": 1,
+  "elapsed_seconds": 1.110000000000582,
+  "actual_empty_closed": true,
+  "failure": {
+    "artifacts_accepted": false,
+    "at_utc": "2026-10-30T17:47:46.388655+00:00",
+    "automatic_retry": false,
+    "error": "TypeError: unsupported operand type(s) for /: 'dict' and 'str'"
+  },
+  "failure_files_verified": 50,
+  "actual_vendor_invocations": 0,
+  "vendor_evidence": "TypeError in run_vivado first expression before load_module/mkdir/run_owned. Inputmanifest/snapshot complete; no vivado directory/process marker or artifact. Function source independently read, no rerun.",
+  "wrapper_oneuse_claim_consumed": true,
+  "A26_recovery_scope": "Do not reuse103claim/output. No vendor attempt occurred; next explicitvendorlaunch scope to be reconciled with A after concrete110fix.",
+  "fix_work_id": "B-DEEPEYE-FUNCTIONAL50-BUILDER-CALL-FIX-20261031-110",
+  "fix_scope": "One call argument inputs -> inputs[\"inputs\"], restbytes identical. No runtime test/vendor pass inferred. Existing99T scopedcontrols remain; no suite replay.",
+  "builder_before_sha256": "a6cdd7f67f82fb035ee333921735fe215b1ad5d942362a960eac46fd469b5184",
+  "builder_after_sha256": "69e6f04a3300f52c4f22ab50b646425dc15baf2a0b4759dcf6b8c329ae7692e6",
+  "at_utc": "2026-10-30T17:51:13.486793+00:00",
+  "remaining": "newexactsource/closure/request/manifest/oneuseidentity and explicitrecovery scope; independentA28Host103 continues. Allproductformal/boardgates unmet."
+}

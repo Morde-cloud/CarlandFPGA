@@ -1,0 +1,98 @@
+{
+  "schema": "B103_MAIN_CLOCK_CDC_SOURCE_REVIEW_V1",
+  "reviewed_by": "main",
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-ONEBUILD-20261031-103",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "reviewed_at_utc": "2026-10-30T17:34:34.299219+00:00",
+  "files": [
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\g05_capture\\additive50_source_candidate\\rtl\\deepeye_g05_axi_50mhz_candidate.sv",
+      "bytes": 16077,
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\g05_capture\\additive50_source_candidate\\rtl\\deepeye_g05_capture_engine_50mhz.sv",
+      "bytes": 33796,
+      "sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\functional50_build98\\functional50_cdc.tcl",
+      "bytes": 8436,
+      "sha256": "0d7f290fae04119ef2c31088e0f5fa5349266a991c74f1b59ac6fc75b3d6d4be"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\functional50_build98\\functional50_ports.xdc",
+      "bytes": 1090,
+      "sha256": "8077171590fe8c3a09d1e670c72207e241b63bf92a8c601bbcdff20fabef40b0"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\functional50_build98\\build_functional50.tcl",
+      "bytes": 34100,
+      "sha256": "8fe52bd2d6c5933050dd87b4be1c028991f2838f59a6f987e147cd8c10da9e2a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\functional50_build98\\functional50_contract.py",
+      "bytes": 24034,
+      "sha256": "dc299999508f6899ccff6e5d7950af3e3d258c6dbff914b0e748055ba73535cf"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\functional50_build98\\verify_functional50_closure.py",
+      "bytes": 10250,
+      "sha256": "8bbee0428f3b05c390d5033a36b809155929412256f3265ed035b3d21211703b"
+    }
+  ],
+  "actual_prior_evidence": [
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\BOARD50_99S_MAIN_SOURCE_REVIEW.json",
+      "bytes": 26669,
+      "sha256": "fc63113173f218df52a37446aa21114c1f1209a577d29d4e5c2181ea59ebcc3f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\BOARD50_99T_MAIN_REVIEW.json",
+      "bytes": 2088,
+      "sha256": "f25ee79c769c0daaddb3f7d313ba14592cef01d3d815163e2bf69409b6058d78"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\BOARD50_FUNCTIONAL95_MAIN_COMPOSITE_REVIEW.json",
+      "bytes": 2916,
+      "sha256": "7fb285c5b127486e65e4f5c9fdec88a3f1476fc06f810d8843aa08150b427413"
+    }
+  ],
+  "source_findings": [
+    "PS7 FCLK0 direct 50MHz; FCLK1-3 disabled; GP0 and both 4KiB slaves/interconnect/reset share FCLK0. No PL oscillator or 100MHz substitution. Actual generated clock and reset propagation are future vendor checks.",
+    "G05 AXI wrapper routes separate yaw/pitch/speed inputs into capture_async_i. Engine has three distinct vector stages capture_meta_q -> capture_sync_q -> capture_level_q, each ASYNC_REG TRUE; each bit has a single direct source chain. Review does not invent synthesized cell names.",
+    "CDC policy fixed ACTUAL_NETLIST_THREE_FF_V1, exactly three scalar ports/three stages/20ns. Prelaunch cdc_bindings must remain null.",
+    "One synthesis discovers actual endpoints. Every cell must be sequential ASYNC_REG with a single actual20ns clock. Guard checks all9 distinct D pins/cells share same clock, external-only first-stage source, exact one fanout, direct Q-to-D next-stage connection, and expected timing startpoint. All graph checks precede exceptions.",
+    "Exactly3 external-port-to-first-D false paths are applied once. Stages2/3, internal digitalTX/RX and AXI remain timed. Routed graph revalidation uses same9 literal names and apply_exceptions0. No name guessing or retarget/retry.",
+    "Actual binding JSON retains run_id/build_id/stage; strict Python verifier rejects changed/missing graph and extra/wildcard/through/option XDC exceptions. Literal vector bracket names are validated; unrelated timing exceptions are not authorized.",
+    "Six fixed package pins/LVCMOS33 bank34 unchanged. TUL DDR72 preset checks and active-low reset propagation checks remain. Actual build must produce same-run setup/hold/pulsewidth/unconstrained/DRC/CDC/RDC/clock reports and exact BIT/HWH. Source review and Tcl function tests do not establish netlist/timing or board success."
+  ],
+  "decision": "Source policy accepted for the single conditional A26 build after107 actual resource controls and exact source/request/manifest freeze. No vendor launch by this bookkeeping action.",
+  "limitations": [
+    "Actual Vivado API/netlist/clock/CDC/routed timing remains unexecuted in this build. Fail closed without automatic retry if any predicate fails.",
+    "B103 is selected50MHz diagnostic only; fullH12/all29/currentRootBOOT/production/final100MHz/1pct100ms acceptance remains unmet.",
+    "A alone operates physical board; G05 wiring/electrical and actual PSclock/loadedbuild gates remain separate."
+  ],
+  "one_build_consumed": false,
+  "board_touched": false
+}

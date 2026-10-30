@@ -1,0 +1,75 @@
+{
+  "status": "NEW106_SAVED104_SEMANTICS_VERIFIED",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "checker_source_commit": "7c5476a500bf6ea72f94b5cdeae86126f50d6f1f",
+  "original104_rtl_commit": "7ab2614a3996e51983b81856cfc5bb9fcb026ba0",
+  "rehashed_paths": 222,
+  "checker_source_git_bytes": 4,
+  "actual_new_checker_exit": 0,
+  "whole_job_exit": 0,
+  "job_terminal_empty_closed": true,
+  "no_ModelSim_reexecution": true,
+  "old104_status": "FAILED preserved",
+  "populations": {
+    "fresh": 4,
+    "held": 3,
+    "invalid": 1,
+    "valid_zero": 1
+  },
+  "wire_bytes": 300,
+  "companion_bytes": 135214,
+  "cancel_prefix_bytes": 1,
+  "all_bytes": 135515,
+  "host_controls": [
+    {
+      "case": "disabled_default",
+      "result": {
+        "authorization": "none",
+        "command": null,
+        "core_ran": false,
+        "input_status": "DISABLED",
+        "source_only": true,
+        "status": "STOP"
+      }
+    },
+    {
+      "case": "missing_input",
+      "result": {
+        "authorization": "none",
+        "command": null,
+        "core_ran": false,
+        "input_status": "INPUT_UNAVAILABLE",
+        "source_only": true,
+        "status": "STOP"
+      }
+    },
+    {
+      "case": "invalid_None_to_zero",
+      "reason": "invalid data remains null",
+      "refused": true
+    },
+    {
+      "case": "wrong_original_index",
+      "reason": "original index association, not frame sequence",
+      "refused": true
+    },
+    {
+      "case": "wrong_binding_sequence",
+      "reason": "outer identity/length",
+      "refused": true
+    },
+    {
+      "accepted": false,
+      "case": "changed_wire_value",
+      "decoded_value": 3012,
+      "original_value": 3011
+    },
+    {
+      "case": "bad_crc",
+      "reason": "CRC",
+      "refused": true
+    }
+  ],
+  "main_review_not_formal_acceptance": true
+}

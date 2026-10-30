@@ -1,0 +1,61 @@
+{
+  "completed": true,
+  "scope": "A26 focused top-level functional diagnostic dependency reviewed via actual104 compile/simulation and NEW106 saved-data checker; not old104wholeJobpass or newRTLrerun",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "source94": {
+    "path": "fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+    "bytes": 44406,
+    "sha256": "d7f9526e17b8e899eddd35c590a7d2028c429ebed6a1151675c70c9d520d69f1"
+  },
+  "rtl_source_commit": "7ab2614a3996e51983b81856cfc5bb9fcb026ba0",
+  "checker_source_commit": "7c5476a500bf6ea72f94b5cdeae86126f50d6f1f",
+  "actual_rtl_result_sha256": "3e2630ba3ca0a28c23b7e50cee98db7e9f780ec8263af0158930312c81e8b3f1",
+  "actual_95_result_sha256": "e9f67b6bb8926f1dc0f71806f5ca21972635c768fbf0d756b028350129fb39d2",
+  "test_plan_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\BOARD50_104_MAIN_ASSIGNMENT.md",
+  "test_plan_sha256": "baf43a20c3365a162fde3c519543f0bc71c83f3ff2ea682304dd7a065e3d8af6",
+  "original104_overall": "FAILED remains; compile0/simulation0/checker1",
+  "recovery106": "NEWsaved-data checker0/Job0, correctedclassification/unchangedoriginalRTLbytes, separatecommit/logs",
+  "independent_reviews": [
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\main-verification104\\INDEPENDENT_SAVED_BYTES.json",
+      "sha256": "c1a21c77000932ce9d2195f4564e2f3a3e6cecb0a9b24be65a32fa9785d554d9"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\main-verification106\\INDEPENDENT_SAVED_RESULT.json",
+      "sha256": "68dfc08aa6a765d4257d47b3e4e522252495dc63ba4f3bdabbde85800136855c"
+    }
+  ],
+  "functional_scope": "50MHz/1Mbaud actualdigitalTX/RX4096FIFO publicAXI/staging isolation/reset/order/stalls/error/freshness/8frames2originalA18records/300POP+1partialcancel/strictdecode andoriginalquality/null/validzero/time/fullcompanioncost",
+  "not_dynamic_coverage": [
+    "4096FIFO-full and32bitcounterwrap outside legal fourlane workload"
+  ],
+  "remaining": [
+    "107actualresourceenvelopechecks/mainreview",
+    "frozenclosure/request/manifest/oneusebuild103",
+    "actualnewVivado/synth/route/CDC/timing/BIT-HWH",
+    "Aonlyphysicalboard",
+    "allfullH12/all29/currentRootBOOT/production/final100MHz/1pct100ms/formalacceptance"
+  ],
+  "one_build_consumed": false,
+  "at_utc": "2026-10-30T17:27:56.536018+00:00"
+}

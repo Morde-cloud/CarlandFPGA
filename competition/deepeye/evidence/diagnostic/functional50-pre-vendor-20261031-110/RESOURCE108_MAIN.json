@@ -1,0 +1,87 @@
+{
+  "schema": "B108_MAIN_SAVED_RESOURCE_REVIEW_V1",
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-PROCESS-GUARD-20261031-108",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_commit": "d258a146d5fc6e0878c3f2324d334558ffa23dd5",
+  "worker_result_sha256": "50349c265a66d167fa5a9c962dfea5e5ad5874dfd57e4e0b34119fccdf5a48e7",
+  "raw_driver_result_sha256": "daeaa8b71ac3fc89276dbb76c003c14983639ee4d7b38e635b4cad109299f1fa",
+  "actual_driver_exit": 0,
+  "actual_driver_elapsed_seconds": 2.2340000000040163,
+  "cases": [
+    {
+      "case": "benign_native16_sample16",
+      "native_exit": 0,
+      "status": "completed",
+      "stop_reason": null,
+      "native_process_limit_configured": 16,
+      "sampled_threshold": 16,
+      "actual_peak_accounting": 9,
+      "sampled_overshoot": 0,
+      "peak_committed_bytes": 37613568,
+      "elapsed_seconds": 1.6710000000020955,
+      "actual_empty_closed": true,
+      "result_sha256": "df541f705e3e1fdd793047b08714d05fb4ae6f3edf149ddbb419af8a438d7163"
+    },
+    {
+      "case": "guard_native16_sample8",
+      "native_exit": 3758096468,
+      "status": "failed",
+      "stop_reason": "sampled_aggregate_process_limit",
+      "native_process_limit_configured": 16,
+      "sampled_threshold": 8,
+      "actual_peak_accounting": 9,
+      "sampled_overshoot": 1,
+      "peak_committed_bytes": 34164736,
+      "elapsed_seconds": 0.5,
+      "actual_empty_closed": true,
+      "result_sha256": "959e12f04975a19f3b0832df7d84e690dacc33599dd984669c24f340378a7d98"
+    }
+  ],
+  "resource_policy_accepted_for103": true,
+  "hard_aggregate_OS_process_cap_proved": false,
+  "main_decision": "Two NEW actual sampled-processguard controls passed. Accept explicit monitored aggregate64 threshold plus configurednative64 flag for ONE bounded103build; possible samplingovershoot is part of declared policy. Actual8threshold violation caused originalJob termination/empty-before-close, no claimnative8limit enforced.",
+  "unchanged107_evidence": {
+    "main_review_sha256": "256911129f0d24e827f629ebd2775910f5080a36a5c7a0c92dd6c7a877e5f82d",
+    "valid_scope": "Prior actual caps/memoryreadback/nestedcleanup/nativeexit7/outputoverflow/shorttimeout evidence retained; code diff reviewed, no oldthreecontrols rerun. Original aggregate9/native8 anomaly remains unqualified OS hardbound."
+  },
+  "build_policy": {
+    "nominal_total_seconds": 7260,
+    "live_budget_seconds": 7245,
+    "inner_seconds": 7200,
+    "native_committed_memory_bytes": 8589934592,
+    "native_process_flag": 64,
+    "sampled_aggregate_process_threshold": 64,
+    "sampled_output_bytes": 2147483648,
+    "sample_seconds": 1,
+    "drain_seconds": 5,
+    "terminate_seconds": 5,
+    "launcher_wait_seconds": 5
+  },
+  "limitations": [
+    "Sampling can overshoot and host timing is not hard real-time.",
+    "Native Job committed memory readback/configuration is verified; no8GiB memory stress or residentRAM guarantee.",
+    "Actual vendor tool execution/netlist/timing/pair/board/fullproduct acceptance remains unperformed."
+  ],
+  "A26_one_build_consumed": false,
+  "at_utc": "2026-10-30T17:45:12.019583+00:00"
+}

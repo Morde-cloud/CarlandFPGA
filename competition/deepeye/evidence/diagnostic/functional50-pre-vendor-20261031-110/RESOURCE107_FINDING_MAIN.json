@@ -1,0 +1,118 @@
+{
+  "schema": "B107_MAIN_SAVED_EVIDENCE_REVIEW_V1",
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_commit": "39fe7c460ba0c15245bb13287cbedabffad3400c",
+  "worker_result_sha256": "4ae8e5caa99d767183ea0fda0594bfe38debcb4a9f2786591542a1a86d754d9c",
+  "actual_driver_exit": 0,
+  "actual_driver_elapsed": 4.780999999995402,
+  "cases": [
+    {
+      "case": "nested",
+      "exit": 0,
+      "stop_reason": null,
+      "max_active_accounting": 9,
+      "peak_committed_bytes": 38072320,
+      "elapsed_seconds": 1.4689999999973224,
+      "empty_closed": true,
+      "result_sha256": "1ed19eec3bb664fcd4f1400fc1905a811bdb953042999137e5d31bcce177b56e"
+    },
+    {
+      "case": "nonzero",
+      "exit": 7,
+      "stop_reason": "launcher_nonzero_exit",
+      "max_active_accounting": 3,
+      "peak_committed_bytes": 12431360,
+      "elapsed_seconds": 0.23399999999674037,
+      "empty_closed": true,
+      "result_sha256": "c092110986da06b344e06a09358727fdc490af38a5a7fb3f2ec1f4453c2e8747"
+    },
+    {
+      "case": "output",
+      "exit": 3758096468,
+      "stop_reason": "sampled_output_limit",
+      "max_active_accounting": 3,
+      "peak_committed_bytes": 12509184,
+      "elapsed_seconds": 0.5939999999973224,
+      "empty_closed": true,
+      "result_sha256": "875d84243f3758ab5af7d4ef9a57400a335f3f0d33901ff38790f4c0f5bde604"
+    },
+    {
+      "case": "timeout",
+      "exit": 3758096468,
+      "stop_reason": "live_work_deadline_with_cleanup_reserve",
+      "max_active_accounting": 3,
+      "peak_committed_bytes": 12066816,
+      "elapsed_seconds": 2.4060000000026776,
+      "empty_closed": true,
+      "result_sha256": "a1d92c84c517a2225f9963dccbecb4c8a1587fdd293da57fd301bc17d452e010"
+    }
+  ],
+  "observed_limit_anomaly": [
+    {
+      "case": "nested",
+      "sample": {
+        "accounting": {
+          "active_processes": 9,
+          "returned_bytes": 48,
+          "total_processes": 9,
+          "total_terminated_processes": 0
+        },
+        "aggregate_remaining_seconds": 11.5,
+        "elapsed_seconds": 0.5,
+        "launcher_exit": null,
+        "limits": {
+          "active_process_limit": 8,
+          "flags": 8712,
+          "job_memory_limit": 536870912,
+          "peak_job_committed_bytes": 33861632,
+          "peak_process_committed_bytes": 12304384,
+          "returned_bytes": 144
+        },
+        "output_bytes": 7464
+      }
+    },
+    {
+      "case": "nested",
+      "sample": {
+        "accounting": {
+          "active_processes": 9,
+          "returned_bytes": 48,
+          "total_processes": 9,
+          "total_terminated_processes": 0
+        },
+        "aggregate_remaining_seconds": 11.453000000001339,
+        "elapsed_seconds": 0.5469999999986612,
+        "launcher_exit": null,
+        "limits": {
+          "active_process_limit": 8,
+          "flags": 8712,
+          "job_memory_limit": 536870912,
+          "peak_job_committed_bytes": 36687872,
+          "peak_process_committed_bytes": 12304384,
+          "returned_bytes": 144
+        },
+        "output_bytes": 7464
+      }
+    }
+  ],
+  "resource_qualification": false,
+  "main_conclusion": "Actual4case commands and cleanup verified; driver0 did not assert aggregate process upperbound. Two actual parent accounting samples9 with native limit8/terminated0 prevent claim of enforced hard aggregate8 cap. Cause not established. Original107 sources/raw unchanged.",
+  "next_explicit_work": "108 separate sampled actual-active-count guard plus recorded native flags; no107 retry and no vendor until newfocusedcontrols/mainreview. Build nominal64 sampled aggregate threshold may overshoot between samples; must not call it proved OS hard aggregate64. Memory remains class9 Job commit cap with native readback, not stress-proven/resident-RAM.",
+  "docs": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/nested-jobs",
+      "read": "2026-10-31 local",
+      "finding": "Parent resource accounting includes child jobs; child resource restrictions and parent termination documented."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information",
+      "read": "2026-10-31 local",
+      "finding": "Native flag specifies association limit; remarks allow active count until termination/handles closed. This does not explain or erase observed9/terminated0."
+    }
+  ],
+  "A26_one_build_consumed": false,
+  "at_utc": "2026-10-30T17:38:22.701890+00:00"
+}

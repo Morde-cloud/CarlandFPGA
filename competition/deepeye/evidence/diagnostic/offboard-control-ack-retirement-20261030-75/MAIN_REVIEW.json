@@ -1,0 +1,42 @@
+{
+  "status": "scoped_main_review_passed",
+  "operation_id": "B-DEEPEYE-OFFBOARD-CONTROL-ACK-RETIREMENT-20261030-75",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_files": [
+    {
+      "path": "competition/deepeye/tools/diagnostic/offboard_control75/bounded_owned.py",
+      "sha256": "a866e3d833a39619db1e0aecb04a78e0be615b24ad645fa3464c7b5bf8514434",
+      "bytes": 12148
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/offboard_control75/control_adapter.py",
+      "sha256": "725c375b1e30b725b83bdabd12891d98b7a09241b645b1b8c463a518ba797b7d",
+      "bytes": 17616
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/offboard_control75/README.md",
+      "sha256": "84e4ff22c1f4bdf4f770020b7b6b16c7e06ce13c352a19a99f1e717234ae272c",
+      "bytes": 7853
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/offboard_control75/run_focused.py",
+      "sha256": "9925d04cc162fe6f464bd306c7951406918333ed22843f7c009c29f06f664438",
+      "bytes": 15542
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/offboard_control75/tb_offboard_control75.sv",
+      "sha256": "2b4893ed0e367c7983a6fb8e8ee006df7be884effff690a7e44767088d60d0ee",
+      "bytes": 4849
+    },
+    {
+      "path": "competition/deepeye/golden/diagnostic/offboard_control75/test_controls.py",
+      "sha256": "e6c91899bc7e4c013ac7bbfc04f4976aa6ff25e820c5e9307bdb569800397db5",
+      "bytes": 9725
+    }
+  ],
+  "selected_raw_files_verified": 45,
+  "independent_audit": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\main-verification75\\independent-control.json",
+  "decision": "Accept for focused synthetic software/RTL stage handoff only. Exact snapshot evidence; no later commit claimed executed. Production defaults held, actual Root/BOOT/calibration/host ACK/action retirement/board unavailable. Full cards/H12/1pct100ms/original100MHz unaccepted.",
+  "failures_preserved": "B74 attempts01-05 (04 valid raw bytes despite runner failure); B75 functional01 tuple-before-intent failure, as applicable.",
+  "root_authority": "A09/A10 continuation; human all B independent tasks; same main/task/version; no owner transfer until native terminal and actual Jobs closed"
+}

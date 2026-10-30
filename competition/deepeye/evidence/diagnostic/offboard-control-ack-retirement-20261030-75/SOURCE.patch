@@ -1,0 +1,1151 @@
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_control75/.gitattributes b/competition/deepeye/fpga/diagnostic/offboard_control75/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_control75/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_control75/tb_offboard_control75.sv b/competition/deepeye/fpga/diagnostic/offboard_control75/tb_offboard_control75.sv
+new file mode 100644
+index 0000000..95f0844
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_control75/tb_offboard_control75.sv
+@@ -0,0 +1,84 @@
++`timescale 1ns/1ps
++// SYNTHETIC_FIXTURE only. Actual unchanged mapper/AXI/engine/capture, 50MHz.
++// External fixture mirrors public output pins on the falling edge. No force,
++// internal drive, stubs, clock/period override, or production wrapper activation.
++module tb_offboard_control75;
++    logic s_axi_aclk=0; always #10 s_axi_aclk=~s_axi_aclk;
++    logic s_axi_aresetn=0;
++    logic [11:0] s_axi_awaddr=0,s_axi_araddr=0;
++    logic [2:0] s_axi_awprot=0,s_axi_arprot=0;
++    logic s_axi_awvalid=0,s_axi_wvalid=0,s_axi_bready=0,s_axi_arvalid=0,s_axi_rready=0;
++    logic [31:0] s_axi_wdata=0; logic [3:0] s_axi_wstrb=15;
++    wire s_axi_awready,s_axi_wready,s_axi_bvalid,s_axi_arready,s_axi_rvalid;
++    wire [1:0] s_axi_bresp,s_axi_rresp; wire [31:0] s_axi_rdata;
++    wire g05_50_candidate_yaw_pwm_o,g05_50_candidate_pitch_pwm_o,g05_50_candidate_speed_pwm_o;
++    logic g05_50_candidate_yaw_capture_i=0,g05_50_candidate_pitch_capture_i=0,g05_50_candidate_speed_capture_i=0;
++    wire [2:0] pwm={g05_50_candidate_speed_pwm_o,g05_50_candidate_pitch_pwm_o,g05_50_candidate_yaw_pwm_o};
++    deepeye_g05_axi_50mhz_candidate dut(.*);
++    integer completion_status=0,raw,stim,code,op,a,b,c,lines=0,assertions=0;
++    integer negative=0; longint unsigned total=0;
++    string stim_path,trace_path;
++    task automatic ck(input bit ok,input string why);
++        assertions++;
++        if(!ok)begin $fdisplay(raw,"FAIL,%s",why);$fflush(raw);$fatal(1,"B75_FAIL %s",why);end
++    endtask
++    always @(negedge s_axi_aclk)begin
++        {g05_50_candidate_speed_capture_i,g05_50_candidate_pitch_capture_i,g05_50_candidate_yaw_capture_i}=s_axi_aresetn?pwm:3'b0;
++    end
++    // These are observation-only internal event taps, accompanied by actual
++    // public readback. No internal signal is driven by the fixture.
++    always @(posedge s_axi_aclk)begin
++        total<=total+1;
++        #1;
++        if(raw && s_axi_aresetn)begin
++            if(dut.eng_accepted)$fdisplay(raw,"ACCEPTED,%0d,%0d,%0d",dut.cycle_tick,dut.cfg_tag[63:32],dut.cfg_tag[31:0]);
++            if(dut.eng_applied)$fdisplay(raw,"APPLIED,%0d,%0d,%0d,%0d",dut.applied_tick,dut.deadline_tick,dut.active_tag[63:32],dut.active_tag[31:0]);
++        end
++        if(total>6000000)$fatal(1,"B75 cycle bound");
++    end
++    always @(pwm)if(raw)$fdisplay(raw,"PWM,%0d,%0d",$time,pwm);
++    task automatic wr(input logic[11:0] address,input logic[31:0] value,input integer resp);
++        integer n;
++        @(negedge s_axi_aclk);s_axi_awaddr=address;s_axi_wdata=value;s_axi_awvalid=1;s_axi_wvalid=1;
++        @(posedge s_axi_aclk);ck(s_axi_awready&&s_axi_wready,"AXI write ready");
++        @(negedge s_axi_aclk);s_axi_awvalid=0;s_axi_wvalid=0;
++        n=0;while(!s_axi_bvalid&&n<20)begin @(negedge s_axi_aclk);n++;end
++        ck(s_axi_bvalid&&s_axi_bresp==resp,"AXI write response");
++        $fdisplay(raw,"WRITE,%0d,%0d,%0d",address,value,s_axi_bresp);
++        s_axi_bready=1;@(negedge s_axi_aclk);s_axi_bready=0;
++    endtask
++    task automatic rd(input logic[11:0] address,input integer resp);
++        integer n;
++        @(negedge s_axi_aclk);s_axi_araddr=address;s_axi_arvalid=1;
++        @(posedge s_axi_aclk);ck(s_axi_arready,"AXI read ready");
++        @(negedge s_axi_aclk);s_axi_arvalid=0;
++        n=0;while(!s_axi_rvalid&&n<20)begin @(negedge s_axi_aclk);n++;end
++        ck(s_axi_rvalid&&s_axi_rresp==resp,"AXI read response");
++        if(address==0)ck(s_axi_rdata==(negative?32'h0:32'h47303550),"actual G05P magic oracle");
++        $fdisplay(raw,"READ,%0d,%0d,%0d",address,s_axi_rdata,s_axi_rresp);
++        s_axi_rready=1;@(negedge s_axi_aclk);s_axi_rready=0;
++    endtask
++    initial begin
++        if(!$value$plusargs("STIM=%s",stim_path))$fatal(1,"missing STIM");
++        if(!$value$plusargs("TRACE=%s",trace_path))$fatal(1,"missing TRACE");
++        code=$value$plusargs("NEGATIVE=%d",negative);
++        raw=$fopen(trace_path,"w");stim=$fopen(stim_path,"r");
++        if(!raw||!stim)$fatal(1,"fixture open failure");
++        repeat(5)@(negedge s_axi_aclk);s_axi_aresetn=1;repeat(4)@(negedge s_axi_aclk);
++        while(!$feof(stim))begin
++            code=$fscanf(stim,"%d %d %d %d\n",op,a,b,c);
++            ck(code==4,"stimulus parse");lines++;ck(lines<=512,"bounded stimulus");
++            case(op)
++                0:wr(a,b,c);
++                1:rd(a,c);
++                2:begin ck(a>=0&&a<=5000000,"finite wait");repeat(a)@(negedge s_axi_aclk);end
++                3:$fdisplay(raw,"PINS,%0d,%0d",dut.cycle_tick,pwm);
++                default:ck(0,"unknown stimulus opcode");
++            endcase
++        end
++        ck(lines>0,"nonempty test");
++        $fdisplay(raw,"END,%0d,%0d",lines,assertions);$fclose(stim);$fclose(raw);raw=0;
++        completion_status=1;$display("B75_PASS lines=%0d assertions=%0d",lines,assertions);$finish;
++    end
++    initial begin #120000200; $fatal(1,"B75 simulation deadline");end
++endmodule
+diff --git a/competition/deepeye/golden/diagnostic/offboard_control75/.gitattributes b/competition/deepeye/golden/diagnostic/offboard_control75/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/offboard_control75/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/golden/diagnostic/offboard_control75/test_controls.py b/competition/deepeye/golden/diagnostic/offboard_control75/test_controls.py
+new file mode 100644
+index 0000000..0075aa7
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/offboard_control75/test_controls.py
+@@ -0,0 +1,146 @@
++"""Focused software controls for B75; synthetic consistency, never Root proof."""
++import copy
++import importlib.util
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++
++PRODUCT = Path(__file__).resolve().parents[3]
++ADAPTER = PRODUCT/'tools/diagnostic/offboard_control75/control_adapter.py'
++spec=importlib.util.spec_from_file_location('b75_adapter',ADAPTER)
++m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
++CONTEXT=dict(operation_id='SYNTHETIC-B75-long-operation-not-truncated',kernel_boot_id='SYNTHETIC-boot-1',
++    session_id='full-original-session-string',generation=(1<<62)+123,epoch=(1<<61)+3,
++    trigger_id=(1<<60)+5,clock_domain_id='original-synthetic-QPC',action_id='original-synthetic-action',
++    request_hash='a'*64,build_manifest_sha256='b'*64,source_record_sha256='c'*64,capture_sha256='d'*64,
++    tested_commit='e'*40,tag=(1<<60)+15,request_seq=17,capture_seq=19,source_admission_index=23)
++DECISION=dict(yaw_q=100,pitch_q=-200,profile=1,speed=20,ttl_ms=100)
++NOW=(1<<62)+54321
++
++
++def queued():
++    a=m.ControlAdapter.synthetic_fixture(CONTEXT)
++    k=a.queue(original_source_qpc_ns=NOW-99,now_qpc_ns=NOW,decision=DECISION)
++    return a,k
++
++
++def association(a,k):
++    r=a.records[k]
++    return dict(context=r['context'],identity_words=r['identity_words'],command_id=r['command_id'],transport_tag=r['transport_tag'])
++
++
++def capture(a,k,seq=1):
++    r=a.records[k]; d=r['decision']; w=[0]*32
++    w[0:6]=[seq,r['command_id'],r['transport_tag'],d['speed']<<8|d['profile'],(d['pitch_q']&65535)<<16|(d['yaw_q']&65535),d['ttl_ms']]
++    for i,v in [(6,100),(8,5000100),(10,2000110)]:w[i]=v
++    w[12:18]=[1000000]*3+[125800,123400,35000]
++    for i in range(3):w[18+2*i]=1000000;w[24+2*i]=2000000
++    w[30:]=[r['identity_words'][12],0x47303550]
++    return w
++
++
++class Controls(unittest.TestCase):
++    def setUp(self):self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
++    def tearDown(self):self.temp.cleanup()
++    def sent(self):
++        a,k=queued();a.send_once(k,now_qpc_ns=NOW,intent_path=self.root/'intent',send=lambda regs:None)
++        return a,k
++    def applied(self):
++        a,k=self.sent();a.digital_fact(k,**association(a,k),fact='ACCEPTED')
++        a.digital_fact(k,**association(a,k),fact='APPLIED',applied_tick=100,deadline_tick=5000100)
++        return a,k
++    def test_default_production_unavailable(self):
++        a=m.ControlAdapter();self.assertIsNone(a.production_input(real_BOOT=True,calibration=True)['command'])
++        with self.assertRaises(m.Refused):a.queue(original_source_qpc_ns=NOW,now_qpc_ns=NOW,decision=DECISION)
++    def test_full_context_separate_handle_no_lowbits(self):
++        a,k=queued();old=a.identity_words;new=dict(CONTEXT,generation=CONTEXT['generation']+(1<<32))
++        a.new_epoch(new);self.assertTrue(set(old).isdisjoint(a.identity_words));self.assertEqual(a.bindings[0]['context'],CONTEXT)
++        self.assertEqual(a.records[k]['state'],'CANCELLED_UNSENT')
++    def test_unknown_before_sideeffect_and_no_replay(self):
++        a,k=queued();seen=[]
++        def fail(regs):
++            self.assertEqual(a.records[k]['state'],'SEND_UNKNOWN')
++            self.assertEqual(json.loads((self.root/'intent').read_text())['state'],'SEND_UNKNOWN')
++            seen.append(regs);raise OSError('synthetic transport outcome unknown')
++        with self.assertRaises(OSError):a.send_once(k,now_qpc_ns=NOW,intent_path=self.root/'intent',send=fail)
++        with self.assertRaises(m.Refused):a.send_once(k,now_qpc_ns=NOW,intent_path=self.root/'retry',send=fail)
++        self.assertEqual(len(seen),1)
++    def test_duplicate_intent_path_is_not_replayed(self):
++        a,k=queued();(self.root/'intent').write_bytes(b'old unknown intent')
++        with self.assertRaises(FileExistsError):a.send_once(k,now_qpc_ns=NOW,intent_path=self.root/'intent',send=lambda _:self.fail('replay'))
++        self.assertEqual(a.records[k]['state'],'SEND_UNKNOWN')
++    def test_stale_at_queue_and_before_send(self):
++        a,k=queued()
++        with self.assertRaises(m.Refused):a.queue(original_source_qpc_ns=NOW-100000001,now_qpc_ns=NOW,decision=DECISION)
++        with self.assertRaises(m.Refused):a.send_once(k,now_qpc_ns=NOW+100000000,intent_path=self.root/'intent',send=lambda _:self.fail('stale send'))
++        self.assertFalse(a.records[k]['send_attempted'])
++    def test_wrong_identity_rejected(self):
++        a,k=self.sent();x=association(a,k);x['context']=dict(CONTEXT,session_id='other')
++        with self.assertRaises(m.Refused):a.digital_fact(k,**x,fact='ACCEPTED')
++        x=association(a,k);x['transport_tag']+=1
++        with self.assertRaises(m.Refused):a.digital_fact(k,**x,fact='ACCEPTED')
++    def test_repeat_result_and_ack_never_renew_TTL(self):
++        a,k=self.applied();w=capture(a,k)
++        for _ in range(2):a.digital_fact(k,**association(a,k),fact='CAPTURED',words=w)
++        ack=self.ack(a,k)
++        for _ in range(2):a.original_receipt(k,ack)
++        self.assertEqual(a.records[k]['deadline_tick'],5000100)
++        a.digital_fact(k,**association(a,k),fact='APPLIED',applied_tick=100,deadline_tick=5000100)
++        self.assertEqual(a.records[k]['state'],'DIGITAL_CAPTURED')
++        with self.assertRaises(m.Refused):a.digital_fact(k,**association(a,k),fact='APPLIED',applied_tick=101,deadline_tick=5000101)
++        w[15]+=1
++        with self.assertRaises(m.Refused):a.digital_fact(k,**association(a,k),fact='CAPTURED',words=w)
++    def ack(self,a,k):
++        r=a.records[k];return dict(kind='HOST_RECEIPT_ACK',evidence_kind=m.SYNTHETIC,context=r['context'],command_id=r['command_id'],transport_tag=r['transport_tag'],receipt_id='synthetic-original-receipt')
++    def retired(self,a,k):
++        return dict(self.ack(a,k),kind='ORIGINAL_ACTION_RETIRED',action_id='synthetic-original-action',world_motion_stopped=True)
++    def test_ack_lost_stop_is_not_action_retirement(self):
++        a,k=self.applied();a.digital_fact(k,**association(a,k),fact='STOP',terminal_status=3,pwm=0,fault=6,tick=200)
++        self.assertTrue(a.records[k]['stop_required']);self.assertIsNone(a.records[k]['host_receipt_ack'])
++        with self.assertRaises(m.Refused):a.retire_original_action(k,self.retired(a,k))
++        a.original_receipt(k,self.ack(a,k));a.retire_original_action(k,self.retired(a,k))
++        self.assertFalse(a.records[k]['stop_required'])
++    def test_new_boot_invalidates_without_inventing_stop(self):
++        a,k=self.applied();a.new_epoch(dict(CONTEXT,kernel_boot_id='new-synthetic-BOOT'))
++        self.assertEqual(a.records[k]['state'],'STOP_REQUIRED');self.assertIsNone(a.records[k]['digital_stop'])
++        with self.assertRaises(m.Refused):a.digital_fact(k,**association(a,k),fact='CAPTURED',words=capture(a,k))
++        # Exact old STOP evidence is still necessary and can reconcile old work.
++        a.digital_fact(k,**association(a,k),fact='STOP',terminal_status=3,pwm=0,fault=6,tick=201)
++        self.assertTrue(a.records[k]['stop_required'])
++        other=a.queue(original_source_qpc_ns=NOW,now_qpc_ns=NOW,decision=DECISION)
++        with self.assertRaises(m.Refused):a.send_once(other,now_qpc_ns=NOW,intent_path=self.root/'new-epoch',send=lambda _:self.fail('old retirement unresolved'))
++    def test_queued_held_cancel_and_data_quiescent(self):
++        a,k=queued();a.hold(k);a.cancel(k,'explicit cancel')
++        with self.assertRaises(m.Refused):a.send_once(k,now_qpc_ns=NOW,intent_path=self.root/'intent',send=lambda _:None)
++        self.assertIsNone(a.records[k]['digital_stop']);self.assertIsNone(a.records[k]['original_action_retirement'])
++    def test_expiry_is_digital_only(self):
++        a,k=self.applied();a.digital_fact(k,**association(a,k),fact='STOP',terminal_status=3,pwm=0,fault=2,tick=5000100)
++        self.assertIsNone(a.records[k]['host_receipt_ack']);self.assertTrue(a.records[k]['stop_required'])
++    def test_source73_structural_view_retained(self):
++        a=m.ControlAdapter();view=dict(status='STOP',core_ran=False,command=None,source_identity=CONTEXT,
++            points=[dict(original_acquisition_qpc_ns=NOW,original_source_qpc_ns=NOW-99,decoded_value=65535)])
++        out=a.ingest_semantic(dict(schema='B74_SEMANTIC_FIXTURE_V1',evidence_kind=m.SYNTHETIC,semantic_view=view))
++        self.assertEqual(out['structural_observation'],view);self.assertIsNone(out['command'])
++    def test_strict_handle_type_and_schema(self):
++        a,k=self.sent();x=association(a,k);x['identity_words']=list(x['identity_words']);x['identity_words'][0]=True
++        with self.assertRaises(m.Refused):a.digital_fact(k,**x,fact='ACCEPTED')
++        with self.assertRaises(m.Refused):m.ControlAdapter.synthetic_fixture(dict(operation_id='partial'))
++        external=a.context;external['session_id']='changed outside'
++        self.assertEqual(a.context,CONTEXT)
++    def test_capacities_refuse_without_eviction(self):
++        a,k=queued()
++        for _ in range(m.MAX_RECORDS-1):a.queue(original_source_qpc_ns=NOW,now_qpc_ns=NOW,decision=DECISION)
++        with self.assertRaises(m.Refused):a.queue(original_source_qpc_ns=NOW,now_qpc_ns=NOW,decision=DECISION)
++        self.assertEqual(len(a.records),m.MAX_RECORDS)
++        for i in range(m.MAX_BINDINGS-1):a.new_epoch(dict(CONTEXT,epoch=i))
++        with self.assertRaises(m.Refused):a.new_epoch(dict(CONTEXT,epoch=99))
++        self.assertEqual(len(a.bindings),m.MAX_BINDINGS)
++        a,k=self.applied()
++        for seq in range(1,m.MAX_CAPTURES+1):a.digital_fact(k,**association(a,k),fact='CAPTURED',words=capture(a,k,seq))
++        with self.assertRaises(m.Refused):a.digital_fact(k,**association(a,k),fact='CAPTURED',words=capture(a,k,m.MAX_CAPTURES+1))
++        self.assertEqual(len(a.records[k]['captures']),m.MAX_CAPTURES)
++
++
++if __name__=='__main__':unittest.main(verbosity=2)
+diff --git a/competition/deepeye/tools/diagnostic/offboard_control75/.gitattributes b/competition/deepeye/tools/diagnostic/offboard_control75/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_control75/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/offboard_control75/README.md b/competition/deepeye/tools/diagnostic/offboard_control75/README.md
+new file mode 100644
+index 0000000..b5a91f4
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_control75/README.md
+@@ -0,0 +1,127 @@
++# Private offboard control seam B75
++
++This additive host adapter and finite fixture reuse the existing B73 50 MHz
++mapper, capture engine, rearm logic and AXI wrapper without edits. This is a
++synthetic consistency/functional interface, with no production issuer, transport
++opening, planner, hidden-world input or motion authority. `ControlAdapter()`
++always reports `INPUT_UNAVAILABLE`, `command=None`, `core_ran=False`; providing
++JSON claims named BOOT/calibration does not change that. The explicit
++`synthetic_fixture(context)` path exercises supplied commands only.
++
++Contract DEEPEYE-HUMAN-LOCK-20261014/revision1: H01, H02, H03, H04, H05, H06,
++H07, H08, H09, H10, H11, H12, H13, H14, H15 remain mandatory. Requirements SHA256
++`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`, pin
++`f5989cd5defce561f9ba98e6b18fc2682945f0a2`, freeze
++`1011259415a0916054eb580687612580bc1e5f09`. Full game-grade 3D/UI, hollow
++edge-only cube, volume collisions, free camera/layouts/gates, hidden truth,
++causal bounded observations, online 3D decision-making, substantive PC AI and
++both complete H12 paths remain required. This work accepts none of those gates.
++Original 100 MHz, final 1%/100ms, and R20/R21 failures remain unchanged. Only A
++operates the board. No synthesis, route, build, board, SSH or service is run.
++
++## Identity and clocks
++
++The fixed synthetic context schema contains the source73 original identity
++fields `operation_id`, `kernel_boot_id`, `session_id`, `clock_domain_id`,
++`request_hash`, `build_manifest_sha256`, `source_record_sha256`, `capture_sha256`,
++`tested_commit`, `tag`, `generation`, `trigger_id`, `request_seq`, `capture_seq`,
++`source_admission_index`, plus full original `epoch` and `action_id` for this
++control fixture. Strings and uint63 integers are retained without truncation.
++Context properties return detached copies. There is no real Root action issuer
++for this schema yet, and matching JSON is not authentication.
++
++Each context receives thirteen separately issued nonzero uint32 words. They are
++an injective allocation within this bounded adapter lifetime, not a context hash,
++truncation or generation low bits. A separate monotonically issued command ID
++and transport tag bind a request to its complete original context. Allocation
++does not wrap or silently reuse words. Capacities are 8 context bindings, 16
++command records and 16 captures per record. Exhaustion refuses without eviction.
++This in-memory fixture has no restart/resume issuer. Restart recovery is
++unavailable; a fresh instance is not permission to replay an old side effect.
++
++Original uint63 source/acquisition QPC stays separate from uint64 PL edge ticks.
++Queue/send recheck the original source age against 100,000,000ns. Applying-edge
++TTL is the engine's actual applying edge plus `ttl_ms * 50000`; a receipt time
++never becomes a source time or PL origin. Duplicate application/result/receipt
++cannot renew TTL or regress captured state. The source73 structural view from a
++`B74_SEMANTIC_FIXTURE_V1` wrapper is retained with its original identity/points,
++`STOP`, `core_ran=False` and no command. It cannot release the production gate.
++
++## Executable register/frame mapping
++
++The G05P candidate's real magic/layout are `0x47303550`/2. AXI words are 32 bits,
++aligned, full write strobes. This software uses caller-supplied register pairs;
++it creates no MMIO/board connection. The synthetic stimulus serializes those
++actual pairs as lines `0 address value expected_bresp`, reads as
++`1 address 0 expected_rresp`, waits as `2 cycles 0 0`, and a final public PWM
++observation as `3 0 0 0`. This file protocol is a test fixture, not a public ABI.
++
++| Register | Actual function |
++| --- | --- |
++| `0x100..0x130` | thirteen issued identity words; written fresh before BEGIN |
++| `0x00c=1` | BEGIN, binding a fresh candidate session |
++| `0x200..0x218` | yaw int16 bits, pitch int16 bits, profile uint8, speed uint8, TTL uint16, command ID, transport tag |
++| `0x00c=2` | commit request; successful AXI response alone is not engine acceptance |
++| `0x008` | bound/retired/running/pending/latest/latch/inflight bits 0..6 |
++| `0x014,0x018` | last command ID / active transport tag |
++| `0x040..0x04c` | actual applied tick low/high and nonrenewed deadline low/high |
++| `0x00c=4` | latch a real eligible capture |
++| `0x300..0x37c` | 32-word immutable capture bank |
++| `0x00c=5` | release the PL latch; **not** original host receipt ACK |
++| `0x00c=3` | digital STOP/retire; terminal fault 6 (expiry is fault 2) |
++
++Capture words 0..5 contain result sequence, command ID, tag, speed/profile,
++pitch/yaw and TTL. Words 6..11 hold uint64 apply/deadline/result ticks. Words
++12..17 are measured periods and highs; 18..23 and 24..29 are three uint64 start
++and end witnesses. Words 30..31 echo issued epoch handle and magic. The adapter
++checks actual observed words against the original request and full host binding;
++it never substitutes expected words. The bench taps engine accepted/applied
++events for observation only and also reads actual public register timestamps,
++identity and captures. It drives no internal signals and uses no stubs.
++
++## Lifecycle and retirement
++
++QUEUED and HELD are unsent. `send_once` first sets sticky SEND_UNKNOWN, exclusively
++writes and fsyncs its intent, then invokes the supplied side-effect callback.
++Intent write failure or callback failure remains unknown; a second send is
++refused. A callback return does not assert digital acceptance. Acceptance,
++application and capture enter as separate exact downstream facts. The bench's
++deliberately duplicated commit is a labelled RTL idempotence probe, not a host
++adapter retry policy.
++
++Cancel/new BOOT/epoch invalidate queued, held and downstream eligibility.
++Unsent work is cancelled; attempted work becomes STOP_REQUIRED. Exact old-context
++digital STOP evidence can reconcile old work after identity invalidation, but
++does not establish world-motion STOP. New-context sends remain refused while
++invalidated side effects await original retirement. Data-path quiescence has
++no role in this proof. A genuine original host receipt and separate original
++action retirement record are still needed. Fixture-only typed records test
++that seam; no actual A records are generated or authenticated here.
++
++A's aeac source time book still has original ADC ticks 0/470, late EM source age
++473,319,100ns and null C3; actual action association/continuous valid span remain
++unavailable. This adapter neither invents them nor changes that source clock.
++
++## Focused execution
++
++Run from an isolated source checkout with a fresh evidence directory:
++
++```powershell
++python -B -X utf8 competition/deepeye/tools/diagnostic/offboard_control75/run_focused.py --out <new-control-worker-directory> --job-helper D:/pynq/CarlandFPGA/fpga_mesh/windows_job.py
++```
++
++The runner snapshots and hashes selected code, verifies frozen dependency pins,
++then uses separate Windows Jobs/libraries and 60s command/180s simulation caps,
++2MiB live output cap, at most 512 stimulus operations and 6,000,000 simulated
++cycles. It preserves versions, argv, raw output, traces, exit codes and terminal
++Job accounting/closure. Any failure stops the operation; no retry loop exists.
++`bounded_owned.py` is a scoped derivative of the existing Job runner, adding
++live bounded output/deadline polling while retaining its Job accounting.
++
++Planned cases are actual normal request→accepted→applied→capture→duplicate→STOP,
++wrong identity write rejection and actual short TTL expiry, plus software
++wrong identity/stale/duplicate/ACK-lost/new-BOOT/cancel/no-replay/capacity controls.
++Separate software and RTL negative cases must exit nonzero. Exact executed
++results are in the operation RESULT and raw files, never inferred from this
++document. Tests use source snapshots before any later commit; a later commit
++is not represented as already tested.
+diff --git a/competition/deepeye/tools/diagnostic/offboard_control75/bounded_owned.py b/competition/deepeye/tools/diagnostic/offboard_control75/bounded_owned.py
+new file mode 100644
+index 0000000..0e4ebef
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_control75/bounded_owned.py
+@@ -0,0 +1,214 @@
++# B75 scoped derivation of g05_capture/build/owned_process.py.
++# Only the launcher wait adds a live 2MiB output budget and bounded polling.
++# Original Windows Job creation/accounting/closure is retained unchanged.
++"""Pinned Win32 whole-job helper copied into new G05 scope; no build CLI/import side effects."""
++import ctypes
++from ctypes import wintypes
++import datetime as dt
++import hashlib,json,os,subprocess,time,types
++from pathlib import Path
++CREATE_SUSPENDED=0x00000004
++HELPER_SHA="3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
++def utc():
++    return dt.datetime.now(dt.timezone.utc).isoformat()
++
++def digest(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++def record(path):
++    p = Path(path).resolve()
++    return {"path": str(p), "bytes": p.stat().st_size, "sha256": digest(p)}
++
++def write_json(path, value):
++    with Path(path).open("x", encoding="utf-8", newline="\n") as f:
++        json.dump(value, f, ensure_ascii=False, sort_keys=True, indent=2)
++        f.write("\n")
++
++def require(test, message):
++    if not test:
++        raise RuntimeError(message)
++
++class _WinJobAccounting:
++    """Query/terminate only the still-open job created for this launch."""
++
++    def __init__(self, job):
++        class BasicAccounting(ctypes.Structure):
++            _fields_ = [(name, ctypes.c_longlong) for name in (
++                "TotalUserTime", "TotalKernelTime", "ThisPeriodTotalUserTime", "ThisPeriodTotalKernelTime")]
++            _fields_ += [(name, wintypes.DWORD) for name in (
++                "TotalPageFaultCount", "TotalProcesses", "ActiveProcesses", "TotalTerminatedProcesses")]
++        self.job, self.info_type = job, BasicAccounting
++        self.query_api = job.kernel.QueryInformationJobObject
++        self.query_api.argtypes = [wintypes.HANDLE, ctypes.c_int, wintypes.LPVOID,
++                                   wintypes.DWORD, ctypes.POINTER(wintypes.DWORD)]
++        self.query_api.restype = wintypes.BOOL
++        self.terminate_api = job.kernel.TerminateJobObject
++        self.terminate_api.argtypes = [wintypes.HANDLE, wintypes.UINT]
++        self.terminate_api.restype = wintypes.BOOL
++
++    def query(self):
++        require(self.job.handle is not None, "job was closed before terminal observation")
++        info, length = self.info_type(), wintypes.DWORD()
++        if not self.query_api(self.job.handle, 1, ctypes.byref(info), ctypes.sizeof(info), ctypes.byref(length)):
++            raise ctypes.WinError(ctypes.get_last_error())
++        require(length.value == ctypes.sizeof(info), "incomplete job basic accounting")
++        return {"active_processes": int(info.ActiveProcesses), "total_processes": int(info.TotalProcesses),
++                "total_terminated_processes": int(info.TotalTerminatedProcesses), "returned_bytes": length.value}
++
++    def terminate(self):
++        require(self.job.handle is not None, "job was closed before explicit termination")
++        if not self.terminate_api(self.job.handle, 0xE0000054):
++            raise ctypes.WinError(ctypes.get_last_error())
++
++def _sample_owned_job(accounting, result, phase):
++    event = {"at_utc": utc(), "phase": phase}
++    try:
++        counts = accounting.query()
++        require(counts["active_processes"] >= 0 and counts["total_processes"] >= counts["active_processes"],
++                "invalid job accounting counts")
++        event.update(counts)
++        return counts
++    except Exception as exc:
++        event["error"] = f"{type(exc).__name__}: {exc}"
++        result["job_query_failed"] = True  # Sticky: later zero cannot erase this failure.
++        return None
++    finally:
++        result.setdefault("job_accounting", []).append(event)
++
++def _wait_owned_job_empty(accounting, result, phase, seconds):
++    deadline = time.monotonic() + seconds
++    while True:
++        counts = _sample_owned_job(accounting, result, phase)
++        if counts is None:
++            return False
++        if counts["active_processes"] == 0:
++            return True
++        remaining = deadline - time.monotonic()
++        if remaining <= 0:
++            return False
++        time.sleep(min(0.05, remaining))
++
++def _finish_owned_job(accounting, result, reason, drain_seconds, terminate_seconds):
++    """Keep the job open through bounded draining and explicit failure cleanup."""
++    empty = False
++    if reason is None:
++        empty = _wait_owned_job_empty(accounting, result, "after_launcher_exit", drain_seconds)
++        if not empty:
++            reason = "job_accounting_failure" if result.get("job_query_failed") else "descendants_did_not_finish"
++    if reason is not None:
++        result["owned_job_error"] = reason
++        termination = {"attempted": True, "reason": reason, "at_utc": utc(), "exit_code_requested": "0xE0000054"}
++        try:
++            accounting.terminate()
++            termination["api_succeeded"] = True
++        except Exception as exc:
++            termination.update({"api_succeeded": False, "error": f"{type(exc).__name__}: {exc}"})
++            result["job_termination_failed"] = True
++        result["job_termination"] = termination
++        empty = _wait_owned_job_empty(accounting, result, "after_explicit_termination", terminate_seconds)
++    else:
++        result["job_termination"] = {"attempted": False, "reason": "natural_job_completion"}
++    result["job_empty_observed_before_close"] = empty
++    result["job_terminal_confirmed"] = bool(empty and not result.get("job_query_failed")
++                                              and not result.get("job_termination_failed"))
++    result["job_terminal_state"] = "confirmed" if result["job_terminal_confirmed"] else "unknown"
++
++def require_owned_success(process):
++    require(process.get("exit_code") == 0 and process.get("launcher_exit_confirmed") is True
++            and process.get("termination_confirmed") is True and process.get("job_terminal_confirmed") is True
++            and not process.get("timed_out") and not process.get("process_error")
++            and not process.get("owned_job_error") and not process.get("job_close_error"),
++            "launcher success and whole owned-job terminal proof are both required")
++
++def run_owned(argv, out, timeout, helper_path, *, job_drain_seconds=5.0, job_terminate_seconds=5.0):
++    require(os.name == "nt", "Windows native job containment is required")
++    require(digest(helper_path) == HELPER_SHA, "Windows job helper hash mismatch")
++    module = types.ModuleType("private_diag_windows_job")
++    exec(compile(helper_path.read_bytes(), str(helper_path), "exec"), module.__dict__)
++    require(0 < timeout and 0 < job_drain_seconds <= 30 and 0 < job_terminate_seconds <= 30,
++            "finite positive process/job wait bounds required")
++    work, temp = out / "work", out / "tmp"
++    work.mkdir(exist_ok=False)
++    temp.mkdir(exist_ok=False)
++    (out / "user_data").mkdir(exist_ok=False)
++    env = os.environ.copy()
++    overrides = {"TEMP": str(temp), "TMP": str(temp), "TMPDIR": str(temp),
++                 "XILINX_LOCAL_USER_DATA": str(out / "user_data"), "PYTHONDONTWRITEBYTECODE": "1"}
++    env.update(overrides)
++    flags = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP | CREATE_SUSPENDED
++    result = {"argv": argv, "command_line": subprocess.list2cmdline(argv), "cwd": str(work),
++              "started_at_utc": utc(), "timeout_seconds": timeout, "creationflags": flags,
++              "hidden": True, "shell": False, "wrapper_pid": os.getpid(),
++              "environment_overrides": overrides, "terminal": "redirected binary stdout/stderr; no window",
++              "helper": record(helper_path), "timed_out": False, "job_attached_before_resume": False,
++              "job_drain_seconds": job_drain_seconds, "job_terminate_seconds": job_terminate_seconds,
++              "job_terminal_confirmed": False, "job_terminal_state": "unknown"}
++    process = job = accounting = None
++    reason = None
++    start = time.monotonic()
++    try:
++        with (out / "process.stdout.bin").open("xb") as stdout, (out / "process.stderr.bin").open("xb") as stderr:
++            try:
++                job = module.WindowsJob()
++                accounting = _WinJobAccounting(job)
++                process = subprocess.Popen(argv, cwd=work, env=env, stdin=subprocess.DEVNULL,
++                                           stdout=stdout, stderr=stderr, shell=False, creationflags=flags)
++                result["original_pid"] = process.pid
++                write_json(out / "PROCESS_STARTED.json", result)
++                job.attach_and_resume(process)
++                result["job_attached_before_resume"] = True
++                if _sample_owned_job(accounting, result, "after_attach") is None:
++                    reason = "job_accounting_failure"
++                else:
++                    try:
++                        # B75 addition: finite output and wall deadline while the
++                        # original owned Job remains open. No unrelated PID action.
++                        deadline = time.monotonic() + timeout
++                        while process.poll() is None:
++                            monitored = list(out.glob("*.csv")) + list(out.glob("*.log")) + [out/"process.stdout.bin", out/"process.stderr.bin"]
++                            if sum(p.stat().st_size for p in monitored if p.exists()) > 2*1024*1024:
++                                raise RuntimeError("B75 output budget exceeded")
++                            remaining = deadline-time.monotonic()
++                            if remaining <= 0:
++                                raise subprocess.TimeoutExpired(argv, timeout)
++                            time.sleep(min(.025, remaining))
++                        if process.returncode != 0:
++                            reason = "launcher_nonzero_exit"
++                    except subprocess.TimeoutExpired:
++                        reason = "launcher_timeout"
++                        result["timed_out"] = True
++                        write_json(out / "TIMEOUT.json", {"at_utc": utc(), "original_pid": process.pid,
++                                   "action": "TerminateJobObject on original open job, then observe ActiveProcesses=0"})
++            except BaseException as exc:
++                reason = "process_error"
++                result["process_error"] = f"{type(exc).__name__}: {exc}"
++            finally:
++                if accounting is not None:
++                    _finish_owned_job(accounting, result, reason, job_drain_seconds, job_terminate_seconds)
++                if process is not None and process.poll() is None and not result["job_attached_before_resume"]:
++                    # Only our original suspended Popen handle; no PID search or unrelated process.
++                    result["unattached_launcher_cleanup"] = "terminate original Popen handle; whole-job state remains unknown"
++                    process.kill()
++                if job is not None:
++                    result["job_close_called_at_utc"] = utc()
++                    try:
++                        job.close()  # Only after all terminal-accounting observations.
++                        result["job_closed"] = job.handle is None
++                    except Exception as exc:
++                        result["job_close_error"] = f"{type(exc).__name__}: {exc}"
++                if process is not None:
++                    try:
++                        process.wait(timeout=5)
++                    except subprocess.TimeoutExpired:
++                        result["launcher_wait_unconfirmed"] = True
++    finally:
++        launcher_exited = process is not None and process.poll() is not None
++        result.update({"completed_at_utc": utc(), "elapsed_seconds": time.monotonic() - start,
++                       "exit_code": process.poll() if process is not None else None,
++                       "launcher_exit_confirmed": launcher_exited,
++                       "termination_confirmed": bool(result["job_attached_before_resume"] and launcher_exited
++                                                      and result["job_terminal_confirmed"]),
++                       "stdout": record(out / "process.stdout.bin"),
++                       "stderr": record(out / "process.stderr.bin")})
++        write_json(out / "PROCESS.json", result)
++    return result
+diff --git a/competition/deepeye/tools/diagnostic/offboard_control75/control_adapter.py b/competition/deepeye/tools/diagnostic/offboard_control75/control_adapter.py
+new file mode 100644
+index 0000000..ca228e3
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_control75/control_adapter.py
+@@ -0,0 +1,304 @@
++"""B75 private, offboard control seam. No planner, transport opening or authority.
++
++H01-H15, DEEPEYE-HUMAN-LOCK-20261014/revision1, requirements SHA256
++c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
++Production Root/BOOT/calibration integration is unavailable. Synthetic records
++exercise lifecycle consistency only; their JSON is never authentication.
++"""
++from __future__ import annotations
++import copy
++import json
++import os
++import re
++from pathlib import Path
++
++U32 = (1 << 32) - 1
++U63 = (1 << 63) - 1
++U64 = (1 << 64) - 1
++AGE_NS = 100_000_000
++SYNTHETIC = 'SYNTHETIC_FIXTURE'
++MAX_RECORDS = 16
++MAX_BINDINGS = 8
++MAX_CAPTURES = 16
++TEXT_CONTEXT = {'operation_id', 'kernel_boot_id', 'session_id', 'clock_domain_id', 'action_id'}
++HASH_CONTEXT = {'request_hash', 'build_manifest_sha256', 'source_record_sha256', 'capture_sha256'}
++INT_CONTEXT = {'tag', 'generation', 'trigger_id', 'request_seq', 'capture_seq', 'source_admission_index', 'epoch'}
++
++
++class Refused(ValueError):
++    pass
++
++
++def need(ok, message):
++    if not ok:
++        raise Refused(message)
++
++
++def uint(v, cap=U63):
++    need(type(v) is int and 0 <= v <= cap, 'bounded integer required')
++    return v
++
++
++def canonical(value):
++    """Bounded plain JSON only; retain exact strings and full integers."""
++    count = [0]
++    def check(v, depth=0):
++        count[0] += 1
++        need(depth <= 12 and count[0] <= 4096, 'bounded context required')
++        need(type(v) in (dict, list, str, int, bool, type(None)), 'plain data required')
++        if type(v) is dict:
++            need(len(v) <= 64 and all(type(k) is str for k in v), 'plain keys required')
++            for k, x in v.items(): check(k, depth+1); check(x, depth+1)
++        elif type(v) is list:
++            need(len(v) <= 64, 'bounded list required')
++            for x in v: check(x, depth+1)
++        elif type(v) is str: need(len(v) <= 1024, 'bounded string required')
++        elif type(v) is int: need(-U63 <= v <= U63, 'full integer range required')
++    check(value)
++    raw = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
++    need(len(raw) <= 32768, 'bounded serialized context required')
++    return raw
++
++
++def durable_record(path, value):
++    """Exclusive intent publication, flushed before caller performs a side effect."""
++    raw = canonical(value)
++    with Path(path).open('xb') as f:
++        need(f.write(raw) == len(raw), 'short intent write')
++        f.flush()
++        os.fsync(f.fileno())
++
++
++class ControlAdapter:
++    """One bounded trusted host fixture; transport handles never authenticate it.
++
++    The default instance has no production issuer. It cannot issue a command.
++    Only synthetic_fixture() opens the separately labelled test path. Memory
++    stores no replay action. Exclusive intent files fence later processes from
++    repeating a send with the same intent path; restart recovery is unavailable.
++    """
++    def __init__(self):
++        self.kind = 'PRODUCTION_UNAVAILABLE'
++        self._context = None
++        self._identity_words = None
++        self._next_handle = 1
++        self._next_command = 1
++        self.records = {}
++        self.bindings = []
++        self.now_high = None
++        self.semantic_observation = None
++
++    @classmethod
++    def synthetic_fixture(cls, context):
++        obj = cls()
++        obj.kind = SYNTHETIC
++        obj._bind(context)
++        return obj
++
++    @property
++    def context(self):
++        return copy.deepcopy(self._context)
++
++    @property
++    def identity_words(self):
++        return self._identity_words
++
++    def _bind(self, context):
++        need(type(context) is dict and set(context) == TEXT_CONTEXT | HASH_CONTEXT | INT_CONTEXT | {'tested_commit'},
++             'fixed full original context schema required')
++        raw = canonical(context)
++        for k in TEXT_CONTEXT:
++            need(type(context[k]) is str and 1 <= len(context[k]) <= 1024, 'full original context text required')
++        for k in HASH_CONTEXT | {'tested_commit'}:
++            need(type(context[k]) is str and re.fullmatch('[0-9a-f]{%d}' % (40 if k == 'tested_commit' else 64), context[k]) is not None,
++                 'exact full context hash/commit required')
++        for k in INT_CONTEXT: uint(context[k])
++        need(len(self.bindings) < MAX_BINDINGS, 'binding capacity exhausted; never evict')
++        need(self._next_handle + 12 <= U32, 'handle exhaustion; never wrap')
++        words = tuple(range(self._next_handle, self._next_handle+13))
++        self._next_handle += 13
++        self._context = json.loads(raw)
++        self._identity_words = words
++        self.bindings.append(dict(context=copy.deepcopy(self.context), identity_words=list(words)))
++
++    def _now(self, now):
++        uint(now)
++        need(self.now_high is None or now >= self.now_high, 'original QPC regression')
++        self.now_high = now
++
++    def ingest_semantic(self, artifact):
++        """Retain the B74/source73 structural observation; never run a core."""
++        canonical(artifact)
++        need(type(artifact) is dict and artifact.get('schema') == 'B74_SEMANTIC_FIXTURE_V1', 'B74 schema required')
++        view = artifact.get('semantic_view')
++        need(type(view) is dict and view.get('status') == 'STOP' and view.get('core_ran') is False and view.get('command') is None,
++             'structural STOP view required')
++        need(type(view.get('source_identity')) is dict and type(view.get('points')) is list and 1 <= len(view['points']) <= 32,
++             'original source_identity and points required')
++        for point in view['points']:
++            uint(point['original_acquisition_qpc_ns'])
++            if point['original_source_qpc_ns'] is not None: uint(point['original_source_qpc_ns'])
++        self.semantic_observation = copy.deepcopy(artifact)
++        return dict(status='INPUT_UNAVAILABLE', command=None, core_ran=False,
++                    structural_observation=copy.deepcopy(view), authentication='unavailable')
++
++    def production_input(self, **untrusted_claims):
++        # No real Root registry/BOOT/calibration/action issuer has been supplied.
++        return dict(status='INPUT_UNAVAILABLE', command=None, core_ran=False,
++                    missing=['real_BOOT', 'calibration', 'original_Root_action_and_receipt_binding'],
++                    data_path_quiescent_is_motion_stop=False)
++
++    def queue(self, *, original_source_qpc_ns, now_qpc_ns, decision):
++        need(self.kind == SYNTHETIC, 'production INPUT_UNAVAILABLE')
++        need(len(self.records) < MAX_RECORDS, 'record capacity exhausted; never evict')
++        self._now(now_qpc_ns)
++        source = uint(original_source_qpc_ns)
++        need(0 <= now_qpc_ns-source <= AGE_NS, 'original source outside 100ms')
++        need(type(decision) is dict and set(decision) == {'yaw_q','pitch_q','profile','speed','ttl_ms'}, 'explicit supplied command required')
++        y,p,profile,speed,ttl = (decision[k] for k in ('yaw_q','pitch_q','profile','speed','ttl_ms'))
++        need(all(type(x) is int for x in (y,p,profile,speed,ttl)), 'integer command required')
++        need(profile in (1,2) and -15000 <= y <= 15000 and -15000 <= p <= 15000 and 0 <= speed <= 20,
++             'mapper input domain')
++        need(1 <= ttl <= (3000 if profile == 1 else 12000), 'mapper TTL domain')
++        need(self._next_command <= U32 and self._next_handle <= U32, 'command/handle exhaustion; never wrap')
++        key = self._next_command; self._next_command += 1
++        tag = self._next_handle; self._next_handle += 1
++        self.records[key] = dict(key=key, context=copy.deepcopy(self.context), identity_words=list(self.identity_words),
++            command_id=key, transport_tag=tag, decision=copy.deepcopy(decision), source_qpc_ns=source,
++            queued_qpc_ns=now_qpc_ns, state='QUEUED', eligible=True, send_attempted=False,
++            digital_accepted=False, applied_tick=None, deadline_tick=None, captures={},
++            digital_stop=None, host_receipt_ack=None, original_action_retirement=None,
++            stop_required=False, invalidated=False, evidence_kind=self.kind)
++        return key
++
++    def hold(self, key):
++        r = self.records[key]; need(r['state'] == 'QUEUED', 'only queued work can be held')
++        r['state'] = 'HELD'
++
++    def request_registers(self, key):
++        r = self.records[key]; d = r['decision']
++        need(r['eligible'] and not r['send_attempted'], 'old/sent request cannot be replayed')
++        stage = [d['yaw_q'] & 65535, d['pitch_q'] & 65535, d['profile'], d['speed'],
++                 d['ttl_ms'], r['command_id'], r['transport_tag']]
++        return [(0x200+4*i, value) for i,value in enumerate(stage)] + [(0x00c, 2)]
++
++    def begin_registers(self):
++        need(self.kind == SYNTHETIC, 'production INPUT_UNAVAILABLE')
++        return [(0x100+4*i, v) for i,v in enumerate(self.identity_words)] + [(0x00c, 1)]
++
++    def send_once(self, key, *, now_qpc_ns, intent_path, send):
++        r = self.records[key]
++        self._now(now_qpc_ns)
++        need(r['state'] in ('QUEUED','HELD') and r['eligible'] and not r['send_attempted'], 'no automatic replay')
++        need(not any(old['invalidated'] and old['stop_required'] for old in self.records.values()),
++             'STOP_REQUIRED for original invalidated side effects; no new downstream send')
++        if not 0 <= now_qpc_ns-r['source_qpc_ns'] <= AGE_NS:
++            r.update(state='CANCELLED_STALE', eligible=False)
++            raise Refused('original source expired before send')
++        regs = self.request_registers(key)
++        # Sticky even if intent I/O or the callback fails. No inferred rollback.
++        r.update(state='SEND_UNKNOWN', send_attempted=True, stop_required=True)
++        durable_record(intent_path, dict(evidence_kind=self.kind, state='SEND_UNKNOWN', record=r,
++                                        registers=[list(pair) for pair in regs]))
++        send(regs)  # A return is transport information, not digital acceptance.
++        return None
++
++    def _exact(self, key, context, words, command_id, tag):
++        r = self.records[key]
++        need(type(words) in (tuple,list) and len(words) == 13 and
++             all(type(v) is int and 0 < v <= U32 for v in words), '13 strictly typed issued uint32 handles required')
++        need(canonical(context) == canonical(r['context']) and list(words) == r['identity_words'] and
++             type(command_id) is int and 0 < command_id <= U32 and command_id == r['command_id'] and
++             type(tag) is int and 0 < tag <= U32 and tag == r['transport_tag'],
++             'exact original identity/issued handle association required')
++        return r
++
++    def digital_fact(self, key, *, context, identity_words, command_id, transport_tag, fact, **data):
++        r = self._exact(key, context, identity_words, command_id, transport_tag)
++        need(r['send_attempted'], 'no downstream fact before a send attempt')
++        if fact == 'STOP':
++            need(set(data)=={'terminal_status','pwm','fault','tick'}, 'exact terminal fields required')
++            uint(data['terminal_status'],127);uint(data['pwm'],7);uint(data['fault'],255);uint(data['tick'],U64)
++            need(data['terminal_status'] & 2 and not data['terminal_status'] & 0x7c and
++                 data['pwm'] == 0 and data['fault'] in (2,6), 'exact digital STOP/expiry evidence required')
++            if r['digital_stop'] is not None: need(r['digital_stop'] == data, 'changed terminal evidence')
++            r['digital_stop'] = copy.deepcopy(data)
++            r['eligible'] = False; r['state'] = 'DIGITAL_STOPPED'
++            return
++        need(r['eligible'], 'new BOOT/epoch/cancel invalidates downstream eligibility')
++        if fact == 'ACCEPTED':
++            need(not data, 'acceptance has no substituted host timestamp')
++            r['digital_accepted'] = True
++            if r['applied_tick'] is None: r['state'] = 'DIGITAL_ACCEPTED'
++        elif fact == 'APPLIED':
++            need(set(data)=={'applied_tick','deadline_tick'}, 'actual digital edge fields only')
++            need(r['digital_accepted'], 'digital acceptance required')
++            a,d = uint(data['applied_tick'],U64), uint(data['deadline_tick'],U64)
++            need(d == a+r['decision']['ttl_ms']*50000, 'TTL must originate at actual applying edge')
++            need(r['applied_tick'] in (None,a) and r['deadline_tick'] in (None,d), 'duplicate cannot renew applying-edge TTL')
++            if r['applied_tick'] is None:
++                r.update(applied_tick=a, deadline_tick=d, state='DIGITAL_APPLIED')
++        elif fact == 'CAPTURED':
++            need(set(data)=={'words'}, 'actual capture bank only')
++            need(r['applied_tick'] is not None, 'actual application required')
++            words = data['words']; need(type(words) is list and len(words) == 32, '32-word latched capture required')
++            for v in words: uint(v,U32)
++            d = r['decision']; u64=lambda i: words[i] | (words[i+1] << 32)
++            need(words[1:3] == [r['command_id'],r['transport_tag']] and
++                 words[3] == (d['speed'] << 8)|d['profile'] and
++                 words[4] == ((d['pitch_q'] & 65535) << 16)|(d['yaw_q'] & 65535) and words[5] == d['ttl_ms'] and
++                 words[30:] == [r['identity_words'][12],0x47303550], 'capture exact command/context required')
++            need(u64(6) == r['applied_tick'] and u64(8) == r['deadline_tick'] and
++                 r['applied_tick']+2_000_000 <= u64(10) < r['deadline_tick'], 'capture original time/TTL required')
++            expected = [125000+8*d['yaw_q'],125000+8*d['pitch_q'],25000+500*d['speed']]
++            need(words[12:15] == [1_000_000]*3 and all(abs(x-y)<=1 for x,y in zip(words[15:18],expected)), 'actual selected 50MHz mapping')
++            need(all(u64(24+2*i)-u64(18+2*i) == 1_000_000 for i in range(3)), 'complete capture witnesses required')
++            seq=words[0]; need(seq>0, 'nonzero capture sequence')
++            old = r['captures'].get(str(seq))
++            need(old is None or old == words, 'repeated result changed')
++            need(old is not None or not r['captures'] or seq > max(map(int,r['captures'])), 'stale capture sequence')
++            need(old is not None or len(r['captures']) < MAX_CAPTURES, 'capture capacity exhausted; never evict')
++            r['captures'][str(seq)] = list(words); r['state'] = 'DIGITAL_CAPTURED'
++        else: raise Refused('unknown digital fact')
++
++    def cancel(self, key, reason):
++        r=self.records[key]; need(type(reason) is str and 1 <= len(reason) <= 1024, 'bounded cancel reason required')
++        need(r['original_action_retirement'] is None, 'already retired original action')
++        r['eligible']=False; r['state']='STOP_REQUIRED' if r['send_attempted'] else 'CANCELLED_UNSENT'
++        r['stop_required']=r['send_attempted']; r['invalidated']=True; r['cancel_reason']=reason
++
++    def new_epoch(self, context):
++        need(self.kind == SYNTHETIC, 'production INPUT_UNAVAILABLE')
++        need(canonical(context) != canonical(self.context), 'actual new full context required')
++        # Validate/capacity-check the new binding before invalidating old work.
++        trial=ControlAdapter(); trial._bind(context)
++        need(len(self.bindings) < MAX_BINDINGS and self._next_handle+12 <= U32, 'binding/handle capacity exhausted')
++        for key,r in self.records.items():
++            if r['eligible']: self.cancel(key,'new BOOT/epoch')
++        self._bind(context)
++
++    def original_receipt(self, key, record):
++        r=self.records[key]
++        need(type(record) is dict and set(record) == {'kind','evidence_kind','context','command_id','transport_tag','receipt_id'}, 'original receipt fields required')
++        need(record['kind']=='HOST_RECEIPT_ACK' and record['evidence_kind']==self.kind==SYNTHETIC and
++             type(record['receipt_id']) is str and record['receipt_id'], 'separate original host receipt required')
++        self._exact(key,record['context'],r['identity_words'],record['command_id'],record['transport_tag'])
++        need(r['send_attempted'], 'receipt before send')
++        need(r['host_receipt_ack'] is None or r['host_receipt_ack']==record, 'changed original receipt')
++        r['host_receipt_ack']=copy.deepcopy(record)
++
++    def retire_original_action(self, key, record):
++        r=self.records[key]
++        need(type(record) is dict and set(record)=={'kind','evidence_kind','context','command_id','transport_tag','receipt_id','action_id','world_motion_stopped'}, 'original action fields required')
++        need(record['kind']=='ORIGINAL_ACTION_RETIRED' and record['evidence_kind']==self.kind==SYNTHETIC and
++             record['world_motion_stopped'] is True and type(record['action_id']) is str and record['action_id'], 'explicit original action retirement required')
++        self._exact(key,record['context'],r['identity_words'],record['command_id'],record['transport_tag'])
++        need(r['digital_stop'] is not None and r['host_receipt_ack'] is not None and
++             record['receipt_id']==r['host_receipt_ack']['receipt_id'], 'digital STOP and exact original receipt still required')
++        need(r['original_action_retirement'] is None or r['original_action_retirement']==record, 'changed original action retirement')
++        r['original_action_retirement']=copy.deepcopy(record); r['stop_required']=False; r['state']='ORIGINAL_ACTION_RETIRED'
++
++    def snapshot(self):
++        return copy.deepcopy(dict(evidence_kind=self.kind, production=self.production_input(), bindings=self.bindings,
++            records=self.records, structural_observation=self.semantic_observation,
++            motion_authorized=False, actual_board='not_run', original_Root_action_records='unavailable'))
+diff --git a/competition/deepeye/tools/diagnostic/offboard_control75/run_focused.py b/competition/deepeye/tools/diagnostic/offboard_control75/run_focused.py
+new file mode 100644
+index 0000000..a84aa5f
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_control75/run_focused.py
+@@ -0,0 +1,219 @@
++"""One NEW finite B75 operation. Fresh directory mandatory; no retry loop.
++
++Runs source-hashed software and actual unchanged 50MHz RTL, not the old suites.
++Every subprocess owns a separate Windows Job, stdout/stderr and terminal proof.
++"""
++from __future__ import annotations
++import argparse
++import hashlib
++import importlib.util
++import json
++import os
++from pathlib import Path
++import re
++import shutil
++import sys
++import traceback
++
++PRODUCT=Path(__file__).resolve().parents[3]
++RTL='fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/'
++PINS={
++ RTL+'deepeye_g05_profile_50mhz.sv':'8ec9bf0415e2ce5e87d2a793260bf635664f16584e2cb842df1fefba75e64307',
++ RTL+'deepeye_g05_command_map_50mhz.sv':'8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1',
++ RTL+'deepeye_g05_curvature_rom_50mhz.svh':'d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c',
++ RTL+'deepeye_g05_capture_engine_50mhz.sv':'fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a',
++ RTL+'deepeye_g05_axi_50mhz_candidate.sv':'99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a',
++ 'fpga/control3d/deepeye_pwm_coherent_capture.sv':'4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456'}
++CONTRACT='c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804'
++
++
++def need(ok, message):
++    if not ok: raise RuntimeError(message)
++
++
++def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
++def save(p,value):
++    with Path(p).open('x',encoding='utf-8',newline='\n') as f:json.dump(value,f,ensure_ascii=False,indent=2);f.write('\n')
++def load_module(name,path):
++    spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
++
++
++def make_stimulus(module,out,case):
++    """Host adapter emits the very register writes consumed by actual RTL."""
++    context=dict(operation_id='SYNTHETIC-B75-actual-RTL-'+out.parent.name+'-'+case,kernel_boot_id='SYNTHETIC-BOOT-NOT-AUTHENTICATED',
++        session_id='full-original-fixture-session-not-truncated',clock_domain_id='original-synthetic-QPC',
++        action_id='synthetic-original-action-unavailable-in-real-Root',request_hash='a'*64,
++        build_manifest_sha256='b'*64,source_record_sha256='c'*64,capture_sha256='d'*64,tested_commit='e'*40,
++        tag=(1<<60)+15,generation=(1<<62)+123,epoch=(1<<61)+3,trigger_id=(1<<60)+5,
++        request_seq=17,capture_seq=19,source_admission_index=23)
++    now=(1<<62)+54321
++    adapter=module.ControlAdapter.synthetic_fixture(context)
++    decision=dict(yaw_q=100,pitch_q=-200,profile=1,speed=20,ttl_ms=100 if case=='normal' else 1)
++    key=adapter.queue(original_source_qpc_ns=now-99,now_qpc_ns=now,decision=decision)
++    adapter.hold(key)
++    rows=[]
++    def wr(address,value,response=0):rows.append((0,address,value,response))
++    def rd(address,response=0):rows.append((1,address,0,response))
++    def wait(n):rows.append((2,n,0,0))
++    rd(0);rd(4)
++    for address,value in adapter.begin_registers():wr(address,value)
++    for i in range(13):rd(0x100+4*i)
++    sent=[]
++    def transport(regs):
++        need(adapter.records[key]['state']=='SEND_UNKNOWN','intent state before transport')
++        sent.extend(regs)
++        for address,value in regs:wr(address,value)
++    adapter.send_once(key,now_qpc_ns=now,intent_path=out/'SEND_UNKNOWN_INTENT.json',send=transport)
++    wait(20)
++    for address in (0x008,0x014,0x018,0x040,0x044,0x048,0x04c):rd(address)
++    if case=='normal':
++        wait(2_000_100)
++        wr(0x00c,4)
++        for i in range(32):rd(0x300+4*i)
++        # Deliberate fixture-only duplicate tests RTL idempotence. This is NOT
++        # an automatic adapter resend; send_once itself refuses a retry.
++        for address,value in sent:wr(address,value)
++        for address in (0x040,0x044,0x048,0x04c):rd(address)
++        for i in range(32):rd(0x300+4*i)
++        # Wrong identity attempt cannot mutate a bound bank.
++        wr(0x100,0x77777777,2);rd(0x100)
++        wr(0x00c,3);wait(10)
++    else:wait(50_100)
++    for address in (0x008,0x010,0x014,0x018,0x040,0x044,0x048,0x04c):rd(address)
++    rows.append((3,0,0,0))
++    (out/'stimulus.txt').write_text(''.join('%d %d %d %d\n'%row for row in rows),encoding='ascii')
++    save(out/'HOST_REQUEST.json',dict(evidence_kind=module.SYNTHETIC,context=context,original_source_qpc_ns=now-99,
++        original_now_qpc_ns=now,source_age_ns=99,identity_words=list(adapter.identity_words),
++        request_registers=sent,decision=decision,adapter_send_calls=1,
++        fixture_only_duplicate=(case=='normal'),action_retirement_available=False))
++    return adapter,key
++
++
++def ingest_trace(adapter,key,path):
++    """Only actual trace facts are admitted. No expected capture is substituted."""
++    text=path.read_text('ascii');need(len(text)<2*1024*1024,'trace budget')
++    rows=[line.split(',') for line in text.splitlines()]
++    need(len([r for r in rows if r[0]=='END'])==1 and not any(r[0]=='FAIL' for r in rows),'exact completed trace required')
++    r=adapter.records[key];assoc=dict(context=r['context'],identity_words=r['identity_words'],command_id=r['command_id'],transport_tag=r['transport_tag'])
++    regs={};captures=[];bank=None;events=[];applied=[];deadlines=[];pins=[]
++    for row in rows:
++        if row[0]=='READ':
++            address,value,resp=map(int,row[1:]);need(resp==0,'all selected public readbacks must succeed')
++            regs[address]=value
++            if address==0x300:bank=[];captures.append(bank)
++            if 0x300 <= address <= 0x37c:
++                need(bank is not None and address==0x300+4*len(bank),'complete ordered capture bank')
++                bank.append(value)
++            if address==0x044:applied.append(regs[0x040]|value<<32)
++            if address==0x04c:deadlines.append(regs[0x048]|value<<32)
++        elif row[0]=='ACCEPTED':
++            tick,cmd,tag=map(int,row[1:]);need((cmd,tag)==(r['command_id'],r['transport_tag']),'accepted issued command identity')
++            adapter.digital_fact(key,**assoc,fact='ACCEPTED');events.append(dict(fact='ACCEPTED',engine_tick=tick))
++        elif row[0]=='APPLIED':
++            a,d,cmd,tag=map(int,row[1:]);need((cmd,tag)==(r['command_id'],r['transport_tag']),'applied issued command identity')
++            adapter.digital_fact(key,**assoc,fact='APPLIED',applied_tick=a,deadline_tick=d)
++            events.append(dict(fact='APPLIED',actual_applying_edge=a,actual_deadline=d))
++        elif row[0]=='PINS':pins.append(tuple(map(int,row[1:])))
++    need(regs[0]==0x47303550 and regs[4]==2,'actual G05P/layout2 readback')
++    need([regs[0x100+4*i] for i in range(13)]==r['identity_words'],'exact public identity bank echo')
++    need(regs[0x014]==r['command_id'] and regs[0x018]==r['transport_tag'],'public active command/tag echo')
++    need(len(events)==2 and events[0]['fact']=='ACCEPTED' and events[1]['fact']=='APPLIED','exact single engine acceptance/application')
++    need(applied and all(x==r['applied_tick'] for x in applied) and deadlines and all(x==r['deadline_tick'] for x in deadlines),
++         'public readbacks preserve actual applying-edge TTL; no duplicate renewal')
++    for words in captures:adapter.digital_fact(key,**assoc,fact='CAPTURED',words=words)
++    need(len(pins)==1,'one final pin observation')
++    tick,pwm=pins[0]
++    adapter.digital_fact(key,**assoc,fact='STOP',terminal_status=regs[8],pwm=pwm,fault=regs[0x10]&255,tick=tick)
++    need(r['host_receipt_ack'] is None and r['original_action_retirement'] is None and r['stop_required'],
++         'digital STOP must not fabricate original receipt/action retirement')
++    return dict(engine_events=events,public_applied_readbacks=applied,public_deadline_readbacks=deadlines,
++        actual_latched_capture_banks=captures,terminal_status=regs[8],terminal_fault=regs[0x10],
++        final_pin_tick=tick,final_pwm=pwm,adapter=adapter.snapshot())
++
++
++def main():
++    ap=argparse.ArgumentParser();ap.add_argument('--out',required=True);ap.add_argument('--job-helper',required=True)
++    ap.add_argument('--model-home',default='D:/modelsim1/win64')
++    args=ap.parse_args();out=Path(args.out).resolve();out.mkdir(parents=True,exist_ok=False)
++    result=dict(status='failed_preserved',evidence_kind='SYNTHETIC_FIXTURE',task_id='DEEPEYE-IMPLEMENTATION-20261014',
++        task_version=1,work_id='B-DEEPEYE-OFFBOARD-CONTROL-ACK-RETIREMENT-20261030-75',
++        requirements_sha256=CONTRACT,requirements_ids=['H%02d'%i for i in range(1,16)],
++        contract_pin='f5989cd5defce561f9ba98e6b18fc2682945f0a2',freeze='1011259415a0916054eb580687612580bc1e5f09',
++        declared_base_head='d201499c513cf7172bd121c0e874fce3991bb175',source_base='0a35e06248073564baab65706c6c30d89069db54',
++        tested_commit=None,tested_source='exact precommit snapshot hashes; no later commit tested',commands=[],cases=[],
++        actual_Root_BOOT_calibration_action_receipt='unavailable',board='not_run',synthesis='not_run',implementation='not_run',
++        original_100MHz_gate='retained',final_1pct_100ms_gate='retained; not accepted',R20_R21_failures='unchanged',
++        complete_H12_and_all_formal_gates='not accepted',motion_authorized=False)
++    try:
++        snap=out/'snapshot';snap.mkdir()
++        selected=list(PINS)
++        for folder in ('tools/diagnostic/offboard_control75','fpga/diagnostic/offboard_control75','golden/diagnostic/offboard_control75'):
++            selected += [p.relative_to(PRODUCT).as_posix() for p in (PRODUCT/folder).glob('*') if p.is_file()]
++        for name in selected:
++            source=PRODUCT/name;dest=snap/name;dest.parent.mkdir(parents=True,exist_ok=True)
++            if name in PINS:need(sha(source)==PINS[name],'frozen dependency changed: '+name)
++            shutil.copyfile(source,dest)
++        result['snapshot_files']={n:dict(bytes=(snap/n).stat().st_size,sha256=sha(snap/n)) for n in sorted(selected)}
++        shutil.copyfile(args.job_helper,out/'windows_job.snapshot.py')
++        helper=load_module('b75_owned',snap/'tools/diagnostic/offboard_control75/bounded_owned.py')
++        module=load_module('b75_adapter',snap/'tools/diagnostic/offboard_control75/control_adapter.py')
++        model=Path(args.model_home).resolve()
++        def run(label,argv,timeout=60,expect=0):
++            directory=out/label;directory.mkdir()
++            r=helper.run_owned([str(x) for x in argv],directory,timeout,out/'windows_job.snapshot.py')
++            result['commands'].append(dict(label=label,exit_code=r['exit_code'],pid=r.get('original_pid'),
++                timeout=r['timed_out'],job_terminal_confirmed=r['job_terminal_confirmed'],job_closed=r.get('job_closed'),
++                evidence=str(directory/'PROCESS.json')))
++            print(json.dumps(result['commands'][-1]),flush=True)
++            need(r['termination_confirmed'] and r['job_terminal_confirmed'] and r.get('job_closed') and not r['timed_out'],label+' process closure failed')
++            need(r['exit_code']==expect if expect is not None else r['exit_code']!=0,label+' unexpected exit')
++            return directory,r
++        software,_=run('01-software-controls',[sys.executable,'-B','-X','utf8',snap/'golden/diagnostic/offboard_control75/test_controls.py'])
++        output=(software/'process.stderr.bin').read_text('utf-8')
++        need(re.search(r'Ran 14 tests\b',output) is not None and '\nOK\n' in output,'exact software control completion')
++        negative_code="import importlib.util; s=importlib.util.spec_from_file_location('a',"+repr(str(snap/'tools/diagnostic/offboard_control75/control_adapter.py'))+"); a=importlib.util.module_from_spec(s);s.loader.exec_module(a); a.ControlAdapter().queue(original_source_qpc_ns=1,now_qpc_ns=1,decision={})"
++        neg,_=run('02-software-negative-refusal',[sys.executable,'-B','-c',negative_code],expect=1)
++        need('production INPUT_UNAVAILABLE' in (neg/'process.stderr.bin').read_text('utf-8'),'negative control must fail for actual refusal')
++        run('03-vlog-version',[model/'vlog.exe','-version'])
++        run('04-vsim-version',[model/'vsim.exe','-version'])
++        library=out/'library';ini=out/'modelsim.ini'
++        ini.write_text('[Library]\nwork = '+library.as_posix()+'\nothers = '+model.parent.as_posix()+'/modelsim.ini\n',encoding='ascii')
++        os.environ['MODELSIM']=str(ini);os.environ['PYTHONDONTWRITEBYTECODE']='1'
++        run('05-vlib',[model/'vlib.exe',library])
++        sources=[snap/name for name in PINS if name.endswith('.sv')]
++        bench=snap/'fpga/diagnostic/offboard_control75/tb_offboard_control75.sv'
++        run('06-compile',[model/'vlog.exe','-sv','-work','work','+incdir+'+str(snap/RTL),*sources,bench])
++        do=out/'run.do';do.write_text('onerror {quit -code 1}\nonbreak {\n if {[catch {examine -radix decimal sim:/tb_offboard_control75/completion_status} done]} {quit -code 3}\n if {$done == 1} {quit -code 0}\n quit -code 2\n}\nonfinish stop\nrun -all\nquit -code 4\n',encoding='ascii')
++        for case in ('normal','expiry'):
++            fixture=out/('input-'+case);fixture.mkdir()
++            adapter,key=make_stimulus(module,fixture,case)
++            label='07-sim-'+case;directory=out/label
++            argv=[model/'vsim.exe','-c','-voptargs=+acc','-lib','work','tb_offboard_control75',
++                '+STIM='+(fixture/'stimulus.txt').as_posix(),'+TRACE='+(directory/'ports.csv').as_posix(),'-do',do,'-l',directory/'transcript.log']
++            directory,_=run(label,argv,timeout=180)
++            transcript=(directory/'transcript.log').read_text('utf-8',errors='replace')
++            markers=re.findall(r'^# B75_PASS lines=(\d+) assertions=(\d+)\s*$',transcript,re.M)
++            need(len(markers)==1 and not re.search(r'\*\* (?:Error|Fatal):|B75_FAIL',transcript),'unique exact completion without simulation error')
++            view=ingest_trace(adapter,key,directory/'ports.csv')
++            need((len(view['actual_latched_capture_banks'])==2 if case=='normal' else not view['actual_latched_capture_banks']), 'case capture count')
++            need(view['terminal_fault']==(6 if case=='normal' else 2),'actual STOP/TTL expiry cause')
++            save(directory/'ADAPTER_READBACK.json',view)
++            result['cases'].append(dict(case=case,status='passed',actual_capture_banks=len(view['actual_latched_capture_banks']),
++                digital_stop=True,host_receipt_ack=False,original_action_retirement=False,readback=str(directory/'ADAPTER_READBACK.json')))
++        label='08-rtl-negative-oracle';directory=out/label
++        run(label,[model/'vsim.exe','-c','-voptargs=+acc','-lib','work','tb_offboard_control75',
++            '+STIM='+(out/'input-normal/stimulus.txt').as_posix(),'+TRACE='+(directory/'ports.csv').as_posix(),
++            '+NEGATIVE=1','-do',do,'-l',directory/'transcript.log'],expect=2)
++        need('B75_FAIL actual G05P magic oracle' in (directory/'transcript.log').read_text('utf-8',errors='replace'),'actual negative oracle not reached')
++        need(all(sha(PRODUCT/n)==row['sha256'] for n,row in result['snapshot_files'].items()),'source changed during test')
++        result['status']='focused_passed_main_review_pending'
++    except BaseException:
++        result['failure']=traceback.format_exc()
++    finally:
++        save(out/'RESULT.json',result)
++        save(out/'FILE_MANIFEST.json',{p.relative_to(out).as_posix():dict(bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(out.rglob('*')) if p.is_file()})
++        print(json.dumps(dict(status=result['status'],out=str(out),failure=result.get('failure'))),flush=True)
++    return 0 if result['status']=='focused_passed_main_review_pending' else 1
++
++
++if __name__=='__main__':raise SystemExit(main())

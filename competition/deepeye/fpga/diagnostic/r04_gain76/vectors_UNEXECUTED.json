@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "status": "UNEXECUTED",
+  "execution": "No compile, simulation, synthesis, implementation, network, board or measurement action.",
+  "scope": "Digital interface and pin-edge observations only; no analog or ADC claim.",
+  "assumptions": {
+    "clock_hz": 100000000,
+    "half_period_ticks": 100,
+    "cs_guard_ticks": 100,
+    "normal_sck_rising_edges": 16
+  },
+  "vectors": [
+    {"id": "V01_GAIN_1", "tag": "0x00000001", "command": {"enable": true, "gain_code": 0}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000000", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
+    {"id": "V02_GAIN_2", "tag": "0x00000002", "command": {"enable": true, "gain_code": 1}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000001", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
+    {"id": "V03_GAIN_4", "tag": "0x00000004", "command": {"enable": true, "gain_code": 2}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000010", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
+    {"id": "V04_GAIN_8", "tag": "0x00000008", "command": {"enable": true, "gain_code": 4}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000100", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
+    {"id": "V05_ILLEGAL_3", "tag": "0x00000033", "command": {"enable": true, "gain_code": 3}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
+    {"id": "V06_ILLEGAL_5", "tag": "0x00000035", "command": {"enable": true, "gain_code": 5}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
+    {"id": "V07_ILLEGAL_6", "tag": "0x00000036", "command": {"enable": true, "gain_code": 6}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
+    {"id": "V08_ILLEGAL_7", "tag": "0x00000037", "command": {"enable": true, "gain_code": 7}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
+    {"id": "V09_HELD_RESULT", "tag": "0x00000060", "command": {"enable": true, "gain_code": 1}, "stimulus": {"result_ready_low_clocks": 5, "then_ready_high_clocks": 1}, "expect": {"result_valid_stable_while_backpressured": true, "error_and_tag_stable": true, "cmd_ready_while_held": false, "cleared_after_ready": true}},
+    {"id": "V10_ENABLE_GATE", "tag": "0x00000070", "stimulus": {"enable": false, "cmd_valid": true, "gain_code": 1, "hold_clocks": 4, "then_enable": true}, "expect": {"cmd_ready_while_disabled": false, "accepted_while_disabled": 0, "cs_toggles_while_disabled": 0, "accepted_after_enable": 1}},
+    {"id": "V11_CANCEL_BEFORE_FIRST_RISE", "tag": "0x00000080", "command": {"enable": true, "gain_code": 2}, "cancel": {"phase": "S_CS_SETUP", "ticks_after_command": 50}, "expect": {"sck_rising_edges": 0, "next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}, "automatic_retry": false}},
+    {"id": "V12_CANCEL_ON_HIGH", "tag": "0x00000090", "command": {"enable": true, "gain_code": 4}, "cancel": {"phase": "S_SCK_HIGH", "ticks_after_first_rise": 50}, "expect": {"sck_rising_edges": 1, "next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}, "automatic_retry": false}},
+    {"id": "V13_CANCEL_AFTER_FALL", "tag": "0x000000A0", "command": {"enable": true, "gain_code": 0}, "cancel": {"phase": "S_SCK_LOW", "ticks_after_first_fall": 50}, "expect": {"sck_rising_edges": 1, "no_second_rise": true, "next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}}},
+    {"id": "V14_DISABLE_MIDFRAME", "tag": "0x000000B0", "command": {"enable": true, "gain_code": 1}, "disable": {"phase": "S_SCK_HIGH", "ticks_after_first_rise": 20}, "expect": {"next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}, "result_drainable_while_disabled": true}},
+    {"id": "V15_RESET_ACTIVE", "tag": "0x000000C0", "command": {"enable": true, "gain_code": 1}, "reset": {"phase": "S_SCK_HIGH", "ticks_after_first_rise": 20}, "expect": {"next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result_valid": false, "result_tag_preserved": false, "next_command_blocked_ticks": 100, "caller_must_invalidate_outstanding_context": true}},
+    {"id": "V16_RESULT_AND_GAP", "tag": "0x000000D0", "stimulus": {"result_ready": true, "hold_next_cmd_valid": true, "next_gain_code": 0}, "expect": {"completed_result_visible_one_clock": true, "next_handshake_before_cs_gap_end": false, "cs_high_gap_at_least_ticks": 100, "second_frame_sck_rising_edges": 16}}
+  ],
+  "not_covered": [
+    "Compilation, lint, simulation, formal and synthesis",
+    "3.3 V electrical timing, level shifting, isolation and A-owned board operation",
+    "Analog gain settling, actual device gain, A0/A3 independent ADC readback and 5% accuracy",
+    "Eight-level measurement and local overrange-to-G1 implementation",
+    "Pinout, top-level integration, clock constraints, CDC/RDC and timing closure"
+  ]
+}

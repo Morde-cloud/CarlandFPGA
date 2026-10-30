@@ -1,0 +1,2172 @@
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain80/.gitattributes b/competition/deepeye/fpga/diagnostic/r04_gain80/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain80/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain80/README.md b/competition/deepeye/fpga/diagnostic/r04_gain80/README.md
+new file mode 100644
+index 0000000..0722675
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain80/README.md
+@@ -0,0 +1,80 @@
++# R04 local-overrange safety-arbiter candidate
++
++Status: `CANDIDATE_SOURCE_ONLY`, `UNEXECUTED`, `R04_NOT_PASSED`. This is a
++standalone seam, not integration, simulation evidence, pinout, timing closure,
++ADC/calibration evidence, or a physical-safety claim. It directly instantiates
++the adopted `r04_gain76/deepeye_mcp6s21_write_candidate.sv` unchanged and adds
++no encoder. Contract: `DEEPEYE-HUMAN-LOCK-20261014/revision1`, H01-H15,
++requirements SHA256 `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`,
++pin `f5989cd5defce561f9ba98e6b18fc2682945f0a2`.
++
++## Interface and ownership
++
++`enable`, `cancel`, `rst`, and `arm` control admission. `arm` is accepted only
++on a 0-to-1 pulse after reset/disable/cancel. `cancel`, `disable`, and `reset`
++assert the master cancel input; enable recovery never auto-arms.
++
++`reserved_safety_tag` is latched by a successful arm. A host handshake is
++`host_valid && host_ready`; accepted host tags must be nonzero and different
++from the latched safety tag. Gain legality remains the original r04_gain76
++master's decision: this wrapper does not add an encoder or silently remap gain.
++
++The host result is one fixed held slot: `host_result_valid/ready/error/tag`.
++The safety result is a separate fixed held slot:
++`safety_result_valid/ready/error/tag`. Neither slot is a queue, evicts, or
++overwrites; payloads are meaningful only while `valid=1`. A full host slot
++forbids another host request but does not block safety fallback. Results never
++become gain measurements.
++
++## Overrange policy
++
++`overrange` is only a candidate seam for an externally decided ADC hardware
++flag; this source does not infer threshold, calibration, fake ADC data, or a
++stimulus change. The first asserted cycle sets `inhibit` and combinationally
++blocks a same-cycle host handshake. If a host frame is already in flight, the
++wrapper cancels it and waits for the original tag's digital terminal result,
++then stores that result in the host slot and drains the master result.
++
++After the original transaction is terminal and the master is ready, one new
++explicit `gain_code=0` (G1) command is sent with the reserved safety tag; this path
++has priority over host traffic. Sustained overrange never repeats fallback.
++Returning `overrange` low does not clear `inhibit`. A later rising `arm` pulse
++clears it only when overrange is low, the master is idle, and both result slots
++are drained. There is no automatic retry or replay of an old host request.
++
++## Digital result meaning
++
++`error=0` means only that the 16-edge digital frame completed. `error=1` means
++the command was refused or aborted, or its digital transaction ended in error.
++An abort after some edges may already have affected analog state; the resulting
++gain is unknown. Neither result proves CS/register state, settling, `RESULT`, or
++that a real gain took effect. R04's actual ADC, calibration, 8-level sweep,
++5% analog accuracy, settling and physical evidence remain unsatisfied.
++
++## Identity and terminal faults
++
++`sticky_fault` latches and blocks all restarts for a reserved tag of zero, a
++tag that changes after arm, a host attempt using the reserved tag, a mismatch
++between a master result tag and the recorded owner/tag, or an unsolicited master
++result. No success result is fabricated on a mismatch. Reset clears this stored
++fault but does not acknowledge or recover an interrupted analog state.
++
++A valid reserved safety tag has not been supplied by the product/protocol
++owner. **Blocker:** until one is assigned, zero or colliding identities are not
++usable; production integration must remain disabled (`enable=0`, unarmed).
++
++## Reset, assumptions, and evidence
++
++Reset is synchronous and destroys wrapper slots/context exactly as the 76 master
++semantics destroy its result. There is no post-reset ACK. Host software must
++separately retain a persistent UNKNOWN state for a reset or aborted transaction.
++
++The assumed clock is 100 MHz only because the adopted 76 candidate assumes it;
++this wrapper does not create a clock constraint or alter its divider. `overrange`
++is assumed synchronous to `clk`; no CDC proof is provided. `spi_cs_n`, `spi_sck`
++and `spi_si` are bare candidate ports with no pins, level shifting, isolation,
++clocksetter, 100 MHz timing, final 1% / 100 ms target, full H12, or all-29-card
++acceptance. All H01-H15 requirements and acceptance remain unchanged.
++
++`vectors_UNEXECUTED.json` records manual expectations only. No compile, simulation,
++test, import, synthesis, implementation, board, ADC, or network action was performed; main review required.
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv b/competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv
+new file mode 100644
+index 0000000..6a8a517
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv
+@@ -0,0 +1,220 @@
++`default_nettype none
++
++// CANDIDATE-ONLY finite safety wrapper around the adopted r04_gain76 master.
++// Task DEEPEYE-IMPLEMENTATION-20261014/v1; work B-R04-LOCAL-OVERRANGE-SOURCE-20261030-80.
++// H01-H15 requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
++// SOURCE_ONLY: no compile, simulation, ADC, pinout, clock constraint, board or analog proof.
++
++module deepeye_mcp6s21_safety_arbiter_candidate (
++    input wire logic        clk,
++    input wire logic        rst,
++    input wire logic        enable,
++    input wire logic        arm,
++    input wire logic        cancel,
++    input wire logic        overrange,
++    input wire logic [31:0] reserved_safety_tag,
++    input wire logic        host_valid,
++    output logic        host_ready,
++    input wire logic [2:0]  host_gain_code,
++    input wire logic [31:0] host_tag,
++    output logic        host_result_valid,
++    input wire logic        host_result_ready,
++    output logic        host_result_error,
++    output logic [31:0] host_result_tag,
++    output logic        safety_result_valid,
++    input wire logic        safety_result_ready,
++    output logic        safety_result_error,
++    output logic [31:0] safety_result_tag,
++    output logic        armed,
++    output logic        inhibit,
++    output logic        sticky_fault,
++    output logic        spi_cs_n,
++    output logic        spi_sck,
++    output logic        spi_si
++);
++
++    logic        m_cancel, m_cmd_valid, m_cmd_ready;
++    logic        m_result_valid, m_result_ready, m_result_error;
++    logic [2:0]  m_cmd_gain;
++    logic [31:0] m_cmd_tag, m_result_tag;
++
++    logic        armed_q, inhibit_q, sticky_fault_q, host_gate_q, arm_q;
++    logic        host_inflight_q, safety_inflight_q, fallback_pending_q;
++    logic [31:0] host_inflight_tag_q, safety_inflight_tag_q, safety_tag_q;
++    logic        host_result_valid_q, host_result_error_q;
++    logic [31:0] host_result_tag_q;
++    logic        safety_result_valid_q, safety_result_error_q;
++    logic [31:0] safety_result_tag_q;
++
++    logic arm_rise, arm_space_ok, arm_fire, host_tag_ok, host_eligible;
++    logic host_fire, fallback_choose, master_fire, host_match, safety_match;
++    logic tag_changed, bad_host_tag, arm_zero_tag, master_tag_bad, identity_fault;
++
++    assign armed         = armed_q;
++    assign inhibit       = inhibit_q;
++    assign sticky_fault  = sticky_fault_q;
++    assign host_result_valid = host_result_valid_q;
++    assign host_result_error = host_result_error_q;
++    assign host_result_tag   = host_result_tag_q;
++    assign safety_result_valid = safety_result_valid_q;
++    assign safety_result_error = safety_result_error_q;
++    assign safety_result_tag   = safety_result_tag_q;
++
++    assign arm_rise = arm && !arm_q;
++    assign arm_space_ok = enable && !cancel && !overrange && !sticky_fault_q &&
++                          !host_inflight_q && !safety_inflight_q &&
++                          !host_result_valid_q && !safety_result_valid_q &&
++                          !fallback_pending_q && m_cmd_ready;
++    assign arm_fire = arm_rise && (!armed_q || inhibit_q) && arm_space_ok;
++    assign host_tag_ok = (host_tag != 32'd0) && (host_tag != safety_tag_q);
++    assign host_eligible = enable && !rst && !cancel && !overrange && armed_q && host_gate_q &&
++                           !inhibit_q && !sticky_fault_q && !host_inflight_q &&
++                           !safety_inflight_q && !host_result_valid_q &&
++                           !safety_result_valid_q && !fallback_pending_q && m_cmd_ready;
++    assign host_ready = host_eligible && host_tag_ok && !tag_changed && !master_tag_bad;
++    assign host_fire = host_valid && host_ready;
++
++    assign fallback_choose = fallback_pending_q && armed_q && !host_inflight_q &&
++                             !safety_inflight_q && !safety_result_valid_q;
++    assign m_cmd_valid = enable && !rst && !cancel && !sticky_fault_q && !identity_fault &&
++                         (fallback_choose || host_fire);
++    assign m_cmd_gain = fallback_choose ? 3'd0 : host_gain_code;
++    assign m_cmd_tag = fallback_choose ? safety_tag_q : host_tag;
++    assign master_fire = m_cmd_valid && m_cmd_ready;
++    assign m_cancel = rst || !enable || cancel || sticky_fault_q ||
++                      (host_inflight_q && (overrange || inhibit_q));
++
++    assign host_match = host_inflight_q && !safety_inflight_q &&
++                        (m_result_tag == host_inflight_tag_q) && !host_result_valid_q;
++    assign safety_match = safety_inflight_q && !host_inflight_q &&
++                          (m_result_tag == safety_inflight_tag_q) &&
++                          !safety_result_valid_q;
++    assign m_result_ready = m_result_valid && !sticky_fault_q && !identity_fault &&
++                            (host_match || safety_match);
++
++    assign tag_changed = armed_q && (reserved_safety_tag != safety_tag_q);
++    assign bad_host_tag = host_valid && host_eligible && !host_tag_ok;
++    assign arm_zero_tag = arm_fire && (reserved_safety_tag == 32'd0);
++    assign master_tag_bad = m_result_valid && !sticky_fault_q &&
++                            !host_match && !safety_match;
++    assign identity_fault = tag_changed || bad_host_tag || arm_zero_tag || master_tag_bad;
++
++    always_ff @(posedge clk) begin
++        arm_q <= arm;
++
++        if (host_result_valid_q && host_result_ready)
++            host_result_valid_q <= 1'b0;
++        if (safety_result_valid_q && safety_result_ready)
++            safety_result_valid_q <= 1'b0;
++
++        if (rst) begin
++            armed_q              <= 1'b0;
++            inhibit_q            <= 1'b0;
++            sticky_fault_q       <= 1'b0;
++            host_gate_q          <= 1'b0;
++            host_inflight_q      <= 1'b0;
++            safety_inflight_q    <= 1'b0;
++            fallback_pending_q   <= 1'b0;
++            host_inflight_tag_q  <= 32'd0;
++            safety_inflight_tag_q<= 32'd0;
++            safety_tag_q         <= 32'd0;
++            host_result_valid_q  <= 1'b0;
++            host_result_error_q  <= 1'b0;
++            host_result_tag_q    <= 32'd0;
++            safety_result_valid_q<= 1'b0;
++            safety_result_error_q<= 1'b0;
++            safety_result_tag_q  <= 32'd0;
++        end else if (identity_fault || sticky_fault_q) begin
++            sticky_fault_q       <= 1'b1;
++            inhibit_q            <= 1'b1;
++            armed_q              <= 1'b0;
++            host_gate_q          <= 1'b0;
++            fallback_pending_q   <= 1'b0;
++        end else begin
++            if (m_result_valid) begin
++                if (host_match) begin
++                    host_result_valid_q <= 1'b1;
++                    host_result_error_q <= m_result_error;
++                    host_result_tag_q   <= m_result_tag;
++                    host_inflight_q     <= 1'b0;
++                end else if (safety_match) begin
++                    safety_result_valid_q <= 1'b1;
++                    safety_result_error_q <= m_result_error;
++                    safety_result_tag_q   <= m_result_tag;
++                    safety_inflight_q     <= 1'b0;
++                end
++            end
++
++            if (master_fire) begin
++                if (fallback_choose) begin
++                    safety_inflight_q    <= 1'b1;
++                    safety_inflight_tag_q<= safety_tag_q;
++                    fallback_pending_q   <= 1'b0;
++                end else begin
++                    host_inflight_q     <= 1'b1;
++                    host_inflight_tag_q <= host_tag;
++                end
++            end
++
++            if (arm_fire) begin
++                armed_q        <= 1'b1;
++                inhibit_q      <= 1'b0;
++                host_gate_q    <= 1'b0;
++                fallback_pending_q <= 1'b0;
++                safety_tag_q   <= reserved_safety_tag;
++            end
++
++            if (!armed_q || !enable || cancel || inhibit_q || sticky_fault_q)
++                host_gate_q <= 1'b0;
++            else if (!host_valid)
++                host_gate_q <= 1'b1;
++
++            if (overrange && !inhibit_q) begin
++                inhibit_q <= 1'b1;
++                if (reserved_safety_tag == 32'd0) begin
++                    sticky_fault_q     <= 1'b1;
++                    armed_q            <= 1'b0;
++                    host_gate_q        <= 1'b0;
++                    fallback_pending_q <= 1'b0;
++                end else if (armed_q) begin
++                    if (host_inflight_q && (host_inflight_tag_q == safety_tag_q)) begin
++                        sticky_fault_q     <= 1'b1;
++                        armed_q            <= 1'b0;
++                        host_gate_q        <= 1'b0;
++                        fallback_pending_q <= 1'b0;
++                    end else if (!safety_inflight_q && !safety_result_valid_q) begin
++                        fallback_pending_q <= 1'b1;
++                    end
++                end
++            end
++
++            if (!enable || cancel) begin
++                armed_q            <= 1'b0;
++                host_gate_q        <= 1'b0;
++                fallback_pending_q <= 1'b0;
++            end
++        end
++    end
++
++    deepeye_mcp6s21_write_candidate master (
++        .clk(clk),
++        .rst(rst),
++        .enable(enable),
++        .cancel(m_cancel),
++        .cmd_valid(m_cmd_valid),
++        .cmd_ready(m_cmd_ready),
++        .gain_code(m_cmd_gain),
++        .tag(m_cmd_tag),
++        .accepted(),
++        .aborted(),
++        .result_valid(m_result_valid),
++        .result_ready(m_result_ready),
++        .result_error(m_result_error),
++        .result_tag(m_result_tag),
++        .spi_cs_n(spi_cs_n),
++        .spi_sck(spi_sck),
++        .spi_si(spi_si)
++    );
++endmodule
++
++`default_nettype wire
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain80/vectors_UNEXECUTED.json b/competition/deepeye/fpga/diagnostic/r04_gain80/vectors_UNEXECUTED.json
+new file mode 100644
+index 0000000..f5c2aae
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain80/vectors_UNEXECUTED.json
+@@ -0,0 +1,396 @@
++{
++  "schema": "deepeye-r04-gain80-vectors/v1",
++  "status": "UNEXECUTED_SOURCE_ONLY",
++  "executed": false,
++  "simulation_run": false,
++  "tests_run": false,
++  "pass_claimed": false,
++  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
++  "task_version": 1,
++  "work_id": "B-R04-LOCAL-OVERRANGE-SOURCE-20261030-80",
++  "candidate": "deepeye_mcp6s21_safety_arbiter_candidate.sv",
++  "reference_master": "r04_gain76/deepeye_mcp6s21_write_candidate.sv",
++  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
++  "clock_assumption": "100 MHz wrapper source assumption only; no clock constraint or timing proof",
++  "manual_symbols": {
++    "tagA": "0x000000A1",
++    "tagB": "0x000000B2",
++    "tagC": "0x000000C3",
++    "tagS": "0x53414645",
++    "gain0": "3'd0",
++    "gain4": "3'd4"
++  },
++  "oracle_scope": "Manual interface/state expectations derived from the written finite-state rules. They are not logical equivalence, simulation, synthesis, timing, electrical, ADC, calibration, or board results.",
++  "global_invariants": [
++    "Only one master transaction may be in flight; host and safety in-flight ownership are mutually exclusive.",
++    "host_result and safety_result are fixed held slots; nothing is evicted or overwritten.",
++    "A full host slot blocks a new host request but never blocks the safety fallback command.",
++    "Any master result with the wrong tag or no recorded owner is a sticky fault; it is never stored as success.",
++    "No vector proves analog gain, ADC value, settling, CS/register state, 16-edge electrical behavior, or a physical safety property."
++  ],
++  "vectors": [
++    {
++      "id": "V01_RESET_SAFE_DESTROYS_CONTEXT",
++      "focus": "reset boundary",
++      "stimulus": [
++        "Assume held slots and an active master transaction from a prior run, then hold rst=1 for at least one clk edge.",
++        "Set arm=1 while rst is held, then deassert rst with arm still high."
++      ],
++      "expected": [
++        "rst is applied to the 76 master and master_cancel is asserted by the wrapper.",
++        "After reset edges, spi_cs_n is high, spi_sck and spi_si are low, both result valid bits are 0, both slots/tags are cleared, armed=0, inhibit=0, sticky_fault=0, and no post-reset ACK appears.",
++        "Because arm_q observed the held arm level during reset, the post-reset held-high arm is not a new rising pulse; the wrapper remains unarmed.",
++        "Host software must retain its own persistent UNKNOWN state for the destroyed transaction."
++      ],
++      "not_proven": "No claim that the interrupted analog state is known or restored."
++    },
++    {
++      "id": "V02_ENABLE_DOES_NOT_ARM",
++      "focus": "admission default",
++      "stimulus": [
++        "From reset, set enable=1, arm=0, cancel=0, overrange=0.",
++        "Hold host_valid=1 with tagA and gain4 for many cycles."
++      ],
++      "expected": [
++        "armed remains 0 and host_ready remains 0.",
++        "No master command is issued and no SPI transaction starts.",
++        "Both result slots remain empty."
++      ],
++      "not_proven": "No inference that an external integrator will default enable low; that is an integration requirement."
++    },
++    {
++      "id": "V03_ARM_REQUIRES_ALL_PRECONDITIONS",
++      "focus": "arm gating",
++      "stimulus": [
++        "Pulse arm while cancel=1.",
++        "Pulse arm while overrange=1.",
++        "Pulse arm while either result slot is full.",
++        "Pulse arm while the 76 master is in its post-reset/high-guard state with m_cmd_ready=0."
++      ],
++      "expected": [
++        "Each pulse is ignored: armed stays 0 and no command qualification opens.",
++        "overrange latches inhibit even when arm is ignored.",
++        "A new rising arm pulse is required after all preconditions later become true."
++      ],
++      "not_proven": "No exact edge count or timing is claimed for the master guard."
++    },
++    {
++      "id": "V04_ARM_OLD_HELD_VALID_NOT_REPLAYED",
++      "focus": "arm and host_valid=0 boundary",
++      "stimulus": [
++        "With empty slots, overrange=0, master ready, and host_valid=1 held from before the arm cycle, pulse arm.",
++        "Keep host_valid=1 for many cycles, then drive host_valid=0 for one cycle, then assert host_valid with tagA/gain4."
++      ],
++      "expected": [
++        "The arm pulse can set armed=1 and clear inhibit, but host_gate remains 0 because no post-arm host_valid=0 has been observed.",
++        "host_ready remains 0 and the old held host_valid cannot handshake or replay.",
++        "Only the later host_valid=0 cycle opens host_gate; the subsequent fresh host_valid assertion can handshake if all other gates are eligible."
++      ],
++      "not_proven": "No exhaustive proof of all upstream valid/ready protocol violations."
++    },
++    {
++      "id": "V05_NORMAL_HOST_GAIN4",
++      "focus": "normal host transfer and held result",
++      "stimulus": [
++        "Arm safely, observe host_valid=0, then assert host_valid=1, host_tag=tagA, host_gain_code=gain4.",
++        "Hold host_result_ready=0 after the result appears."
++      ],
++      "expected": [
++        "host_valid && host_ready transfers exactly one request and records tagA as the host in-flight owner.",
++        "The wrapper presents gain4 and tagA to the unchanged 76 master; the wrapper adds no encoder.",
++        "On the master's digital terminal result, host_result_valid becomes 1 with error=0 and tag=tagA; safety_result_valid remains 0.",
++        "The host result remains held and unchanged while host_result_ready=0, and no new host request is accepted."
++      ],
++      "not_proven": "error=0 is digital frame completion only; no analog gain or ADC measurement is proven."
++    },
++    {
++      "id": "V06_ILLEGAL_GAIN_DELEGATED_TO_76",
++      "focus": "gain legality ownership",
++      "stimulus": [
++        "After safe arm, assert host_valid=1, host_tag=tagA, host_gain_code=3'd3."
++      ],
++      "expected": [
++        "The wrapper performs the tag check and may hand the transfer to the 76 master.",
++        "The 76 master, not the wrapper, refuses the illegal gain and returns its held digital error with tagA.",
++        "host_result_valid=1, host_result_error=1, host_result_tag=tagA; no wrapper success or analog claim is made."
++      ],
++      "not_proven": "The wrapper does not independently re-encode or establish an SPI waveform for illegal gains."
++    },
++    {
++      "id": "V07_HOST_ZERO_TAG_FAULTS",
++      "focus": "host identity",
++      "stimulus": [
++        "After safe arm and host_gate opening, assert host_valid=1 with host_tag=0 and any gain."
++      ],
++      "expected": [
++        "host_ready=0 and no master command is issued.",
++        "sticky_fault becomes 1 and inhibit becomes 1; armed is cleared and host_gate closes.",
++        "No result is fabricated and the condition persists until reset."
++      ],
++      "not_proven": "Reset does not repair the lost external transaction context."
++    },
++    {
++      "id": "V08_HOST_RESERVED_TAG_COLLISION",
++      "focus": "colliding tags",
++      "stimulus": [
++        "Arm with reserved_safety_tag=tagS, observe host_valid=0, then assert host_valid=1 with host_tag=tagS."
++      ],
++      "expected": [
++        "host_ready=0 because the host tag equals the latched safety tag.",
++        "sticky_fault=1, inhibit=1, armed=0, host_gate=0; no master command and no fallback identity is fabricated.",
++        "No host or safety result slot is written by the rejected attempt."
++      ],
++      "not_proven": "No claim that an upstream host cannot violate the tag contract."
++    },
++    {
++      "id": "V09_HOST_RESULT_BACKPRESSURE",
++      "focus": "host held-result backpressure",
++      "stimulus": [
++        "Complete a normal host transaction so host_result_valid=1 with tagA.",
++        "Hold host_result_ready=0 and assert host_valid=1 with tagB.",
++        "After one or more cycles, pulse host_result_ready=1 while host_valid may remain high."
++      ],
++      "expected": [
++        "While the host slot is full, host_ready remains 0 and no new host command is accepted.",
++        "The held host error/tag payload stays stable and is never overwritten.",
++        "After the host result-ready edge clears the slot, a still-asserted valid may handshake on the next eligible cycle; this is normal backpressure, not replay of the armed pre-arm request."
++      ],
++      "not_proven": "No unbounded queue or bypass is provided."
++    },
++    {
++      "id": "V10_OVERRANGE_SAME_CYCLE_HOST_BLOCK",
++      "focus": "overrange first arrival",
++      "stimulus": [
++        "Arm safely and open host_gate, then drive overrange=1 in the same cycle as host_valid=1 with tagA/gain4.",
++        "Keep overrange high after the edge."
++      ],
++      "expected": [
++        "host_ready is 0 in that cycle because the combinational host path includes !overrange; no host handshake occurs.",
++        "inhibit becomes 1 at the edge and fallback becomes pending for the safety owner.",
++        "No host result is created for the blocked attempt; the fallback gain0 command can be sent only after the 76 master is ready."
++      ],
++      "not_proven": "No threshold, ADC sample, or calibration source is modeled."
++    },
++    {
++      "id": "V11_HOST_INFLIGHT_OVERRANGE_CANCEL_AND_DRAIN",
++      "focus": "host in-flight cancellation",
++      "stimulus": [
++        "Accept host tagA mid-frame, then assert overrange=1 before the normal digital terminal result.",
++        "Keep the host result slot empty and do not consume the host result."
++      ],
++      "expected": [
++        "master_cancel is asserted for the in-flight host owner while overrange/inhibit applies.",
++        "The 76 master returns its digital terminal/error result with tagA; the wrapper stores it in the host slot, sets host_inflight=0, and drains that master result.",
++        "The host result slot holds tagA/error and is not overwritten by fallback.",
++        "After the original result is drained and the master is ready, exactly one gain0 safety command is issued with tagS; its result goes only to the safety slot."
++      ],
++      "not_proven": "An abort may already have affected analog state; the eventual gain remains unknown and no CS/register success is inferred."
++    },
++    {
++      "id": "V12_HOST_SLOT_HELD_DOES_NOT_BLOCK_SAFETY",
++      "focus": "independent fixed slots",
++      "stimulus": [
++        "Leave a normal host result tagA held in the host slot with host_result_ready=0.",
++        "With no host transaction in flight, assert overrange=1 and keep the host slot full."
++      ],
++      "expected": [
++        "inhibit latches and fallback becomes pending without waiting for host_result_ready.",
++        "Once the 76 master is ready, the safety tagS/gain0 command is issued even though the host slot is full.",
++        "The safety result is stored only in safety_result_valid/error/tag while the host tagA payload remains byte-for-byte stable.",
++        "No host slot overwrite or eviction occurs."
++      ],
++      "not_proven": "This does not prove analog recovery or an ADC overrange threshold."
++    },
++    {
++      "id": "V13_SUSTAINED_OVERRANGE_NO_DUPLICATE_FALLBACK",
++      "focus": "single fallback per episode",
++      "stimulus": [
++        "After V11 or V12 has issued fallback and stored its safety result, hold overrange=1 for many cycles with both slots held.",
++        "Toggle unrelated host controls while the safety tag remains valid."
++      ],
++      "expected": [
++        "No additional gain0 command is issued and fallback_pending remains 0.",
++        "No new safety result replaces the held one; no host request is admitted while inhibit is high.",
++        "The original host/safety result slots remain stable."
++      ],
++      "not_proven": "No claim about repeated real ADC events beyond the provided overrange input."
++    },
++    {
++      "id": "V14_OVERRANGE_LOW_KEEPS_INHIBIT",
++      "focus": "level deassertion",
++      "stimulus": [
++        "After an overrange episode, drive overrange=0 and drain both result slots.",
++        "Do not pulse arm."
++      ],
++      "expected": [
++        "inhibit remains 1, armed remains 0, and host_ready remains 0.",
++        "No automatic host replay, fallback retry, or command qualification occurs."
++      ],
++      "not_proven": "Low overrange is not itself evidence that the analog input is safe."
++    },
++    {
++      "id": "V15_REARM_REQUIRES_DRAINED_SLOTS",
++      "focus": "explicit re-arm boundary",
++      "stimulus": [
++        "After overrange is low, leave one result slot full and pulse arm.",
++        "Then consume the remaining result and issue a new rising arm pulse while overrange=0 and the master is idle."
++      ],
++      "expected": [
++        "The first arm pulse is ignored; inhibit stays 1 and armed stays 0.",
++        "The later valid pulse sets armed=1, clears inhibit, clears fallback state, and keeps host_gate=0 until a post-arm host_valid=0 cycle is observed.",
++        "No old host request is restarted."
++      ],
++      "not_proven": "Explicit arm is an external operator/controller action and is not validated as a human safety authorization."
++    },
++    {
++      "id": "V16_CANCEL_HOST_INFLIGHT",
++      "focus": "cancel boundary",
++      "stimulus": [
++        "With no overrange, accept host tagA mid-frame, then assert cancel=1 for one or more cycles.",
++        "Deassert cancel while keeping enable=1."
++      ],
++      "expected": [
++        "master_cancel is asserted and the 76 master returns a digital error terminal for tagA when the operation is active.",
++        "The wrapper stores tagA/error in the host slot and clears host_inflight; no safety fallback is pending solely because of cancel.",
++        "armed is cleared, enable recovery does not auto-arm, and the held result remains until consumed."
++      ],
++      "not_proven": "Cancel does not guarantee analog state or eliminate a partial-frame effect."
++    },
++    {
++      "id": "V17_DISABLE_DURING_FALLBACK_NO_RETRY",
++      "focus": "fallback failure/refusal",
++      "stimulus": [
++        "Issue fallback tagS/gain0, then assert enable=0 (or cancel) while the safety transaction is active.",
++        "Return enable=1 and leave overrange low, but do not pulse arm."
++      ],
++      "expected": [
++        "master_cancel is asserted; the 76 master returns its digital terminal/error for tagS.",
++        "The wrapper stores the safety result with tagS and error, clears safety in-flight, and performs no automatic retry.",
++        "inhibit remains 1, armed remains 0, and host_ready remains 0 until slots are drained and a new explicit safe arm occurs."
++      ],
++      "not_proven": "A failed fallback is not converted to success and its analog effect is unknown."
++    },
++    {
++      "id": "V18_CANCEL_DROPS_UNSENT_FALLBACK",
++      "focus": "no replay of pending safety request",
++      "stimulus": [
++        "Overrange latches while a host result slot is held and the master is temporarily not ready, so fallback is pending but not yet sent.",
++        "Assert cancel before m_cmd_ready becomes 1, then deassert cancel and hold enable=1 without a new arm pulse."
++      ],
++      "expected": [
++        "fallback_pending is cleared on cancel; no safety command is sent after cancel deasserts.",
++        "inhibit remains 1 and armed remains 0.",
++        "A later explicit arm is required after overrange is low and both slots are drained; the dropped fallback is not automatically retried."
++      ],
++      "not_proven": "This records a conservative unfulfilled fallback behavior, not a safety-complete product."
++    },
++    {
++      "id": "V19_MASTER_RESULT_TAG_MISMATCH",
++      "focus": "owner/tag strictness",
++      "stimulus": [
++        "Accept host tagA, then force the observed master result_valid=1 with tagB (or another tag unequal to tagA)."
++      ],
++      "expected": [
++        "No host or safety result slot is written and master_result_ready is not asserted by the wrapper.",
++        "sticky_fault=1 and inhibit=1; armed is cleared and all command admission closes.",
++        "The mismatch is not converted into a digital or analog success, and the master result remains an explicit fault witness."
++      ],
++      "not_proven": "A forced tag mismatch is an interface fault; no claim is made about the real device's tag generation."
++    },
++    {
++      "id": "V20_UNSOLICITED_MASTER_RESULT",
++      "focus": "no owner identity",
++      "stimulus": [
++        "With no host or safety transaction in flight, force master result_valid=1 with any tag."
++      ],
++      "expected": [
++        "sticky_fault=1, inhibit=1, armed=0; no result is accepted or stored.",
++        "No fallback or host command is issued while faulted."
++      ],
++      "not_proven": "No protocol recovery is implemented."
++    },
++    {
++      "id": "V21_ZERO_SAFETY_TAG_BLOCKS_ARM",
++      "focus": "missing reserved identity",
++      "stimulus": [
++        "From reset with overrange=0, empty slots, and master ready, pulse arm while reserved_safety_tag=0."
++      ],
++      "expected": [
++        "The arm is refused; sticky_fault=1 and inhibit=1, armed=0 and host_gate=0.",
++        "No host or safety command can start; production integration remains disabled until a distinct nonzero reserved tag is supplied and reset/recovery is separately reviewed."
++      ],
++      "not_proven": "No legal reserved tag has been assigned by the product/protocol owner; this is a documented blocker."
++    },
++    {
++      "id": "V22_SAFETY_TAG_CHANGE_AFTER_ARM",
++      "focus": "identity stability",
++      "stimulus": [
++        "Arm with tagS latched, then change reserved_safety_tag to tagC before any overrange or host handshake."
++      ],
++      "expected": [
++        "The next clk edge raises sticky_fault and inhibit; armed is cleared and host_ready is 0.",
++        "No fallback with the changed or old identity is started after the fault."
++      ],
++      "not_proven": "The input is expected to be static by contract; no dynamic reconfiguration protocol is defined."
++    },
++    {
++      "id": "V23_BOTH_FIXED_SLOTS_NO_OVERWRITE",
++      "focus": "two-slot independence",
++      "stimulus": [
++        "Hold a host result tagA in its slot and trigger fallback while the host slot remains full; allow the safety result tagS to complete.",
++        "Keep both result_ready inputs low for many cycles."
++      ],
++      "expected": [
++        "Both valid bits are 1 simultaneously; host payload remains tagA and safety payload remains tagS.",
++        "No queue growth, eviction, or cross-slot overwrite occurs.",
++        "Each slot clears only with its own valid && ready handshake."
++      ],
++      "not_proven": "No throughput or timing closure claim is made."
++    },
++    {
++      "id": "V24_RESET_MIDFLIGHT_NO_ACK",
++      "focus": "destructive reset",
++      "stimulus": [
++        "Start a host transaction or safety fallback, then assert rst=1 while it is active; deassert rst afterward."
++      ],
++      "expected": [
++        "master_cancel and master reset force safe SPI outputs; the master destroys its active result/context.",
++        "Wrapper in-flight bits and both slots are cleared; no result and no ACK is produced for the interrupted owner.",
++        "Post-reset armed=0 and host_ready=0; external host must preserve UNKNOWN and must not reuse the old action."
++      ],
++      "not_proven": "Reset does not restore the PGA to a measured gain and does not prove physical safety."
++    },
++    {
++      "id": "V25_ARM_DURING_LAST_RESULT_DRAIN",
++      "focus": "arm/result-ready same-edge priority",
++      "stimulus": [
++        "Leave a result valid in one slot, then pulse arm in a cycle where its ready is also asserted, so the slot is empty only after the edge."
++      ],
++      "expected": [
++        "arm_space_ok observes the pre-edge full slot and ignores the arm pulse; inhibit stays 1 and armed stays 0.",
++        "After the slot clears, a new rising arm pulse is required; the consumed pulse is not retried automatically."
++      ],
++      "not_proven": "No automatic re-arm policy is provided."
++    },
++    {
++      "id": "V26_FALLBACK_DIGITAL_TERMINAL_ONLY",
++      "focus": "result semantics",
++      "stimulus": [
++        "Trigger one fallback with tagS/gain0 and observe either a normal 76 digital completion or its error/cancel terminal.",
++        "Consume the safety result through safety_result_valid && safety_result_ready."
++      ],
++      "expected": [
++        "error=0 means only digital frame completion; error=1 means refused or aborted.",
++        "Inhibit remains set after the result is consumed; no host request is admitted without a new safe arm.",
++        "No result is labeled as measured gain, ADC value, settled output, or physical safety success."
++      ],
++      "not_proven": "R04 ADC/calibration/5%/8-level/settling evidence remains absent."
++    }
++  ],
++  "blocked_or_missing": [
++    "No legal reserved_safety_tag has been assigned by the product/protocol owner.",
++    "No real ADC overrange flag, threshold, calibration, input fixture, or settling model exists.",
++    "No pin mapping, level shifting, isolation, clock constraint, timing closure, synthesis, implementation, or board evidence exists.",
++    "No H12, 100 MHz timing, final 1%/100 ms target, all-29-card, or overall H01-H15 acceptance is claimed."
++  ]
++}
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain82/.gitattributes b/competition/deepeye/fpga/diagnostic/r04_gain82/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain82/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain82/tb_r04_gain82.sv b/competition/deepeye/fpga/diagnostic/r04_gain82/tb_r04_gain82.sv
+new file mode 100644
+index 0000000..d2ab455
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain82/tb_r04_gain82.sv
+@@ -0,0 +1,698 @@
++`timescale 1ns/1ps
++
++// NEW82 focused digital test. External SPI pins and public result ports only.
++// A RED run is expected to fail the old 80 source at explicit arm recovery.
++
++module tb_r04_gain82;
++    logic clk = 0;
++    always #5 clk = ~clk;
++
++    logic        rst = 1;
++    logic        enable = 0;
++    logic        arm = 0;
++    logic        cancel = 0;
++    logic        overrange = 0;
++    logic [31:0] reserved_safety_tag = 32'h00000099;
++    logic        host_valid = 0;
++    logic [2:0]  host_gain_code = 0;
++    logic [31:0] host_tag = 0;
++    logic        host_result_ready = 0;
++    logic        safety_result_ready = 0;
++
++    wire         host_ready;
++    wire         host_result_valid;
++    wire         host_result_error;
++    wire [31:0]  host_result_tag;
++    wire         safety_result_valid;
++    wire         safety_result_error;
++    wire [31:0]  safety_result_tag;
++    wire         armed;
++    wire         inhibit;
++    wire         sticky_fault;
++    wire         spi_cs_n;
++    wire         spi_sck;
++    wire         spi_si;
++
++    deepeye_mcp6s21_safety_arbiter_candidate dut (.*);
++
++    localparam [31:0] TAG_H11 = 32'h00000011;
++    localparam [31:0] TAG_H12 = 32'h00000012;
++    localparam [31:0] TAG_H21 = 32'h00000021;
++    localparam [31:0] TAG_H22 = 32'h00000022;
++    localparam [31:0] TAG_H31 = 32'h00000031;
++    localparam [31:0] TAG_H44 = 32'h00000044;
++    localparam [31:0] TAG_H55 = 32'h00000055;
++    localparam [31:0] TAG_H66 = 32'h00000066;
++    localparam [31:0] TAG_H77 = 32'h00000077;
++    localparam [31:0] TAG_SAFE = 32'h00000099;
++    localparam [31:0] TAG_ALT  = 32'h0000009A;
++    localparam [15:0] W_4000 = 16'h4000;
++    localparam [15:0] W_4001 = 16'h4001;
++    localparam [15:0] W_4002 = 16'h4002;
++    localparam [15:0] W_4004 = 16'h4004;
++
++    integer fd;
++    integer cycle = 0;
++    integer starts = 0;
++    integer frames = 0;
++    integer checks = 0;
++    integer failures = 0;
++    integer red_mode = 0;
++    integer case_id = 0;
++    integer edges = 0;
++    integer last_edges = 0;
++    logic [15:0] observed = 0;
++    logic [15:0] last_word = 0;
++    bit prev_cs = 1;
++    bit prev_sck = 0;
++    integer completion_status = 0;
++
++    task automatic ck(input bit okay, input string why);
++        checks++;
++        if (!okay) begin
++            failures++;
++            $fdisplay(fd, "FAIL,%0d,%s", cycle, why);
++            $fflush(fd);
++            $fatal(1, "R04_NEW82 %s", why);
++        end
++    endtask
++
++    task automatic clocks(input integer count);
++        repeat (count) @(negedge clk);
++    endtask
++
++    task automatic wait_starts(input integer target, input string why);
++        integer n;
++        n = 0;
++        while (starts < target && n < 20000) begin
++            clocks(1);
++            n++;
++        end
++        ck(starts >= target, why);
++    endtask
++
++    task automatic wait_frames(input integer target, input string why);
++        integer n;
++        n = 0;
++        while (frames < target && n < 20000) begin
++            clocks(1);
++            n++;
++        end
++        ck(frames >= target, why);
++    endtask
++
++    task automatic wait_host_ready(input string why);
++        integer n;
++        n = 0;
++        while (!host_ready && n < 3000) begin
++            clocks(1);
++            n++;
++        end
++        ck(host_ready, why);
++    endtask
++
++    task automatic send_host(input [31:0] tag, input [2:0] gain, input string why);
++        host_tag = tag;
++        host_gain_code = gain;
++        wait_host_ready(why);
++        host_valid = 1;
++        $fdisplay(fd, "HOST_DRIVE,%0d,%0d,%0d", case_id, cycle, tag);
++        clocks(1);
++        host_valid = 0;
++        clocks(1);
++    endtask
++
++    task automatic wait_host_result(input bit want_error, input [31:0] want_tag, input string why);
++        integer n;
++        n = 0;
++        while (!host_result_valid && n < 7000) begin
++            clocks(1);
++            n++;
++        end
++        ck(host_result_valid, why);
++        ck(host_result_error == want_error && host_result_tag == want_tag, why);
++        $fdisplay(fd, "HOST_RESULT,%0d,%0d,%0d,%0d", case_id, cycle, host_result_error, host_result_tag);
++    endtask
++
++    task automatic wait_safety_result(input bit want_error, input [31:0] want_tag, input string why);
++        integer n;
++        n = 0;
++        while (!safety_result_valid && n < 7000) begin
++            clocks(1);
++            n++;
++        end
++        ck(safety_result_valid, why);
++        ck(safety_result_error == want_error && safety_result_tag == want_tag, why);
++        $fdisplay(fd, "SAFETY_RESULT,%0d,%0d,%0d,%0d", case_id, cycle, safety_result_error, safety_result_tag);
++    endtask
++
++    task automatic drain_host;
++        host_result_ready = 1;
++        clocks(1);
++        host_result_ready = 0;
++        clocks(1);
++        ck(!host_result_valid, "host result drained");
++    endtask
++
++    task automatic drain_safety;
++        safety_result_ready = 1;
++        clocks(1);
++        safety_result_ready = 0;
++        clocks(1);
++        ck(!safety_result_valid, "safety result drained");
++    endtask
++
++    task automatic check_complete_frame(
++        input integer start_base,
++        input integer frame_base,
++        input [15:0] expected_word,
++        input string why
++    );
++        wait_starts(start_base + 1, why);
++        wait_frames(frame_base + 1, why);
++        ck(starts == start_base + 1, why);
++        ck(frames == frame_base + 1, why);
++        ck(last_edges == 16, why);
++        ck(last_word == expected_word, why);
++        $fdisplay(fd, "WORD,%0d,%0d,%04x", case_id, cycle, last_word);
++    endtask
++
++    task automatic check_partial_frame(
++        input integer start_base,
++        input integer frame_base,
++        input integer min_edges,
++        input string why
++    );
++        wait_starts(start_base + 1, why);
++        wait_frames(frame_base + 1, why);
++        ck(starts == start_base + 1, why);
++        ck(frames == frame_base + 1, why);
++        ck(last_edges >= min_edges && last_edges < 16, why);
++        $fdisplay(fd, "PARTIAL,%0d,%0d,%0d", case_id, cycle, last_edges);
++    endtask
++
++    task automatic reset_all;
++        rst = 1;
++        enable = 0;
++        arm = 0;
++        cancel = 0;
++        overrange = 0;
++        reserved_safety_tag = TAG_SAFE;
++        host_valid = 0;
++        host_gain_code = 0;
++        host_tag = 0;
++        host_result_ready = 0;
++        safety_result_ready = 0;
++        clocks(5);
++        rst = 0;
++        enable = 1;
++        clocks(250);
++        ck(!armed && !inhibit && !sticky_fault, "reset context clear");
++        ck(!host_result_valid && !safety_result_valid, "reset result slots clear");
++        ck(spi_cs_n && !spi_sck && !spi_si, "reset SPI pins safe");
++    endtask
++
++    task automatic arm_safe;
++        arm = 0;
++        clocks(2);
++        ck(!host_valid, "safe arm requires host_valid low");
++        arm = 1;
++        clocks(1);
++        arm = 0;
++        clocks(4);
++        ck(armed && !inhibit && !sticky_fault, "safe initial arm");
++        ck(!host_result_valid && !safety_result_valid, "arm result slots drained");
++    endtask
++
++    task automatic arm_pulse;
++        arm = 0;
++        clocks(2);
++        arm = 1;
++        clocks(1);
++        arm = 0;
++        clocks(2);
++    endtask
++
++    always @(posedge clk) begin
++        #1;
++        cycle++;
++        if (fd) begin
++            if (prev_cs && !spi_cs_n) begin
++                starts++;
++                ck(!spi_sck, "SCK high at CS fall");
++                edges = 0;
++                observed = 0;
++                $fdisplay(fd, "CS_LOW,%0d,%0d", case_id, cycle);
++            end
++            if (!prev_sck && spi_sck) begin
++                ck(!spi_cs_n, "SCK rise outside CS");
++                observed = {observed[14:0], spi_si};
++                edges++;
++                $fdisplay(fd, "RISE,%0d,%0d,%0d,%0d", case_id, cycle, edges, spi_si);
++            end
++            if (!prev_cs && spi_cs_n) begin
++                frames++;
++                last_edges = edges;
++                last_word = observed;
++                $fdisplay(fd, "FRAME,%0d,%0d,%0d,%04x", case_id, cycle, last_edges, last_word);
++            end
++            prev_cs = spi_cs_n;
++            prev_sck = spi_sck;
++            if (cycle > 180000)
++                $fatal(1, "R04_NEW82 cycle deadline");
++        end
++    end
++
++    task automatic case_recovery(input integer expect_red);
++        integer s0, f0;
++        case_id = 1;
++        $fdisplay(fd, "CASE_BEGIN,%0d,recovery,expect_red=%0d", case_id, expect_red);
++        reset_all();
++        arm_safe();
++
++        s0 = starts;
++        f0 = frames;
++        send_host(TAG_H11, 3'd4, "recovery host ready");
++        check_complete_frame(s0, f0, W_4004, "host word 4004");
++        wait_host_result(0, TAG_H11, "normal host result tag 11");
++
++        repeat (20) clocks(1);
++        ck(host_result_valid && !host_result_error && host_result_tag == TAG_H11,
++           "host result held stable");
++        ck(!host_ready, "held host result blocks host ready");
++        host_valid = 1;
++        host_tag = TAG_H12;
++        host_gain_code = 3'd1;
++        clocks(1);
++        ck(!host_ready, "held host result blocks new handshake");
++        host_valid = 0;
++        clocks(1);
++
++        s0 = starts;
++        f0 = frames;
++        overrange = 1;
++        wait_safety_result(0, TAG_SAFE, "fallback result tag 99");
++        check_complete_frame(s0, f0, W_4000, "fallback word 4000 despite host backpressure");
++        ck(host_result_valid && !host_result_error && host_result_tag == TAG_H11,
++           "host held slot preserved through fallback");
++        repeat (400) clocks(1);
++        ck(starts == s0 + 1 && frames == f0 + 1, "one fallback under sustained overrange");
++
++        drain_host();
++        drain_safety();
++        overrange = 0;
++        repeat (260) clocks(1);
++        arm_pulse();
++
++        if (expect_red) begin
++            if (armed && inhibit && !sticky_fault && starts == s0 + 1 && frames == f0 + 1) begin
++                $fdisplay(fd, "RED_CONFIRMED,%0d,%0d,%0d", cycle, starts, frames);
++                completion_status = 2;
++                $display("R04_NEW82_RED_CONFIRMED cycles=%0d", cycle);
++                $fclose(fd);
++                fd = 0;
++                $finish;
++            end else begin
++                ck(1'b0, "RED did not reproduce expected old-source recovery failure");
++            end
++        end else begin
++            ck(armed && !inhibit && !sticky_fault, "explicit arm recovers inhibit");
++            ck(starts == s0 + 1 && frames == f0 + 1, "recovery arm issued no SPI");
++        end
++        $fdisplay(fd, "CASE_END,%0d,recovery", case_id);
++    endtask
++
++    task automatic case_master_guard;
++        integer s0, f0;
++        case_id = 2;
++        $fdisplay(fd, "CASE_BEGIN,%0d,master_guard", case_id);
++        reset_all();
++        arm_safe();
++
++        s0 = starts;
++        f0 = frames;
++        overrange = 1;
++        wait_safety_result(0, TAG_SAFE, "guard fallback tag 99");
++        check_complete_frame(s0, f0, W_4000, "guard fallback word 4000");
++        overrange = 0;
++        drain_safety();
++        ck(!host_result_valid && !safety_result_valid, "guard both slots drained");
++
++        arm_pulse();
++        clocks(3);
++        ck(inhibit && armed && starts == s0 + 1 && frames == f0 + 1,
++           "arm blocked until master idle");
++
++        repeat (200) clocks(1);
++        ck(inhibit && armed && !host_ready && starts == s0 + 1 && frames == f0 + 1,
++           "master idle does not auto arm");
++
++        arm_pulse();
++        ck(armed && !inhibit && !sticky_fault, "explicit arm after master idle");
++        ck(starts == s0 + 1 && frames == f0 + 1, "master guard arm issued no SPI");
++        $fdisplay(fd, "CASE_END,%0d,master_guard", case_id);
++    endtask
++
++    task automatic case_release_boundaries;
++        integer s0, f0;
++        case_id = 3;
++        $fdisplay(fd, "CASE_BEGIN,%0d,release_boundaries", case_id);
++        reset_all();
++        arm_safe();
++
++        s0 = starts;
++        f0 = frames;
++        send_host(TAG_H21, 3'd2, "release host ready");
++        check_complete_frame(s0, f0, W_4002, "host word 4002");
++        wait_host_result(0, TAG_H21, "release host result tag 21");
++
++        s0 = starts;
++        f0 = frames;
++        overrange = 1;
++        wait_safety_result(0, TAG_SAFE, "release fallback tag 99");
++        check_complete_frame(s0, f0, W_4000, "release fallback word 4000");
++        repeat (500) clocks(1);
++        ck(starts == s0 + 1 && frames == f0 + 1, "sustained overrange one fallback");
++
++        overrange = 0;
++        repeat (200) clocks(1);
++        ck(inhibit && armed && starts == s0 + 1 && frames == f0 + 1 && !host_ready,
++           "release does not auto recover");
++
++        arm_pulse();
++        clocks(3);
++        ck(inhibit && armed && starts == s0 + 1, "arm blocked by full slots");
++        drain_host();
++        arm_pulse();
++        clocks(3);
++        ck(inhibit && armed && starts == s0 + 1, "arm blocked by safety slot");
++        drain_safety();
++        overrange = 1;
++
++        arm_pulse();
++        clocks(3);
++        ck(inhibit && armed && starts == s0 + 1, "arm blocked by asserted overrange");
++        ck(!host_ready, "host remains blocked while inhibit");
++
++        overrange = 0;
++        repeat (200) clocks(1);
++        ck(inhibit && armed && starts == s0 + 1 && !host_ready,
++           "release after drains does not auto arm");
++
++        host_valid = 1;
++        host_tag = TAG_H55;
++        host_gain_code = 3'd1;
++        clocks(2);
++        ck(!host_ready, "host blocked before safe recovery");
++        arm_pulse();
++        ck(armed && !inhibit && !sticky_fault, "held host valid does not block explicit recovery");
++        repeat (20) clocks(1);
++        ck(!host_ready && starts == s0 + 1 && frames == f0 + 1,
++           "old held host valid not replayed after arm");
++
++        host_valid = 0;
++        clocks(3);
++        s0 = starts;
++        f0 = frames;
++        send_host(TAG_H31, 3'd1, "fresh host after recovery");
++        check_complete_frame(s0, f0, W_4001, "fresh host word 4001");
++        wait_host_result(0, TAG_H31, "fresh host result tag 31");
++        $fdisplay(fd, "CASE_END,%0d,release_boundaries", case_id);
++    endtask
++
++    task automatic case_host_cancel_7edges;
++        integer s0, f0, s1, f1, n;
++        case_id = 4;
++        $fdisplay(fd, "CASE_BEGIN,%0d,host_cancel_7edges", case_id);
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        f0 = frames;
++        send_host(TAG_H22, 3'd2, "cancel host ready");
++        n = 0;
++        while (edges < 7 && n < 6000) begin
++            clocks(1);
++            n++;
++        end
++        ck(edges >= 7 && !spi_cs_n && starts == s0 + 1, "host reaches seven native edges");
++        overrange = 1;
++        clocks(1);
++        wait_host_result(1, TAG_H22, "host cancel keeps original tag/error");
++        check_partial_frame(s0, f0, 7, "host frame aborted before sixteen edges");
++        ck(host_result_valid && host_result_error && host_result_tag == TAG_H22,
++           "host cancel terminal retained");
++
++        s1 = starts;
++        f1 = frames;
++        wait_safety_result(0, TAG_SAFE, "post-cancel fallback tag 99");
++        check_complete_frame(s1, f1, W_4000, "post-cancel fallback word 4000");
++        ck(host_result_valid && host_result_error && host_result_tag == TAG_H22,
++           "host abort slot preserved through fallback");
++        repeat (400) clocks(1);
++        ck(starts == s1 + 1 && frames == f1 + 1, "post-cancel one fallback only");
++        $fdisplay(fd, "CASE_END,%0d,host_cancel_7edges", case_id);
++    endtask
++
++    task automatic case_fallback_cancel_disable;
++        integer s0, f0, n;
++        case_id = 5;
++        $fdisplay(fd, "CASE_BEGIN,%0d,fallback_cancel_disable", case_id);
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        f0 = frames;
++        overrange = 1;
++        n = 0;
++        while ((spi_cs_n || edges < 3) && n < 6000) begin
++            clocks(1);
++            n++;
++        end
++        ck(!spi_cs_n && edges >= 3 && starts == s0 + 1, "fallback active before cancel");
++        cancel = 1;
++        clocks(1);
++        wait_safety_result(1, TAG_SAFE, "canceled fallback error tag 99");
++        check_partial_frame(s0, f0, 3, "fallback canceled before sixteen edges");
++        cancel = 0;
++        repeat (500) clocks(1);
++        ck(starts == s0 + 1 && frames == f0 + 1 && spi_cs_n,
++           "canceled fallback not retried");
++        ck(inhibit && !armed, "cancel closes arm and keeps inhibit");
++
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        f0 = frames;
++        overrange = 1;
++        n = 0;
++        while ((spi_cs_n || edges < 3) && n < 6000) begin
++            clocks(1);
++            n++;
++        end
++        ck(!spi_cs_n && edges >= 3 && starts == s0 + 1, "fallback active before disable");
++        enable = 0;
++        clocks(1);
++        wait_safety_result(1, TAG_SAFE, "disabled fallback error tag 99");
++        check_partial_frame(s0, f0, 3, "fallback disabled before sixteen edges");
++        enable = 1;
++        repeat (500) clocks(1);
++        ck(starts == s0 + 1 && frames == f0 + 1 && spi_cs_n,
++           "disabled fallback not retried");
++        ck(inhibit && !armed, "disable closes arm and keeps inhibit");
++        $fdisplay(fd, "CASE_END,%0d,fallback_cancel_disable", case_id);
++    endtask
++
++    task automatic case_same_cycle_overrange;
++        integer s0, f0;
++        case_id = 6;
++        $fdisplay(fd, "CASE_BEGIN,%0d,same_cycle_overrange", case_id);
++        reset_all();
++        arm_safe();
++        host_valid = 0;
++        clocks(3);
++        s0 = starts;
++        f0 = frames;
++        host_valid = 1;
++        host_tag = TAG_H44;
++        host_gain_code = 3'd1;
++        overrange = 1;
++        ck(!host_ready, "same-cycle overrange blocks host handshake");
++        clocks(1);
++        host_valid = 0;
++        clocks(1);
++        ck(!host_result_valid, "blocked same-cycle host has no result");
++        wait_safety_result(0, TAG_SAFE, "same-cycle fallback tag 99");
++        check_complete_frame(s0, f0, W_4000, "same-cycle fallback word 4000");
++        ck(starts == s0 + 1 && frames == f0 + 1, "same-cycle host emitted no frame");
++        $fdisplay(fd, "CASE_END,%0d,same_cycle_overrange", case_id);
++    endtask
++
++    task automatic case_tag_faults;
++        integer s0;
++        case_id = 7;
++        $fdisplay(fd, "CASE_BEGIN,%0d,tag_faults", case_id);
++
++        reset_all();
++        reserved_safety_tag = 32'd0;
++        clocks(2);
++        s0 = starts;
++        arm = 1;
++        clocks(1);
++        arm = 0;
++        clocks(3);
++        ck(sticky_fault && inhibit && !armed, "zero safety tag faults");
++        host_valid = 1;
++        host_tag = TAG_H44;
++        host_gain_code = 3'd1;
++        clocks(3);
++        ck(!host_ready, "zero safety tag blocks host");
++        host_valid = 0;
++        repeat (200) clocks(1);
++        ck(starts == s0 && spi_cs_n, "zero safety tag emits no SPI");
++
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        host_valid = 1;
++        host_tag = 32'd0;
++        host_gain_code = 3'd1;
++        clocks(1);
++        ck(!host_ready, "zero host tag immediately refused");
++        clocks(2);
++        ck(sticky_fault && inhibit && !armed, "zero host tag faults");
++        host_valid = 0;
++        repeat (200) clocks(1);
++        ck(starts == s0 && spi_cs_n, "zero host tag emits no SPI");
++
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        host_valid = 1;
++        host_tag = TAG_SAFE;
++        host_gain_code = 3'd1;
++        clocks(1);
++        ck(!host_ready, "colliding host tag immediately refused");
++        clocks(2);
++        ck(sticky_fault && inhibit && !armed, "colliding host tag faults");
++        host_valid = 0;
++        repeat (200) clocks(1);
++        ck(starts == s0 && spi_cs_n, "colliding host tag emits no SPI");
++
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        reserved_safety_tag = TAG_ALT;
++        clocks(2);
++        ck(sticky_fault && inhibit && !armed, "changed safety tag faults");
++        host_valid = 1;
++        host_tag = TAG_H55;
++        host_gain_code = 3'd1;
++        clocks(2);
++        ck(!host_ready, "changed safety tag blocks host");
++        host_valid = 0;
++        repeat (200) clocks(1);
++        ck(starts == s0 && spi_cs_n, "changed safety tag emits no SPI");
++        $fdisplay(fd, "CASE_END,%0d,tag_faults", case_id);
++    endtask
++
++    task automatic case_reset_destructive;
++        integer s0, f0, s1, f1, n;
++        case_id = 8;
++        $fdisplay(fd, "CASE_BEGIN,%0d,reset_destructive", case_id);
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        f0 = frames;
++        send_host(TAG_H66, 3'd4, "reset host ready");
++        n = 0;
++        while (edges < 5 && n < 6000) begin
++            clocks(1);
++            n++;
++        end
++        ck(edges >= 5 && !spi_cs_n && starts == s0 + 1, "reset host frame active");
++        rst = 1;
++        clocks(3);
++        ck(spi_cs_n && !spi_sck && !spi_si, "reset forces safe SPI pins");
++        ck(!host_result_valid && !safety_result_valid, "reset destroys both result slots");
++        ck(!armed && !inhibit && !sticky_fault && !host_ready, "reset returns unarmed");
++        rst = 0;
++        enable = 1;
++        host_valid = 1;
++        host_tag = TAG_H77;
++        host_gain_code = 3'd1;
++        clocks(2);
++        s1 = starts;
++        f1 = frames;
++        repeat (300) clocks(1);
++        ck(starts == s1 && frames == f1, "reset does not replay host");
++        ck(!host_result_valid && !safety_result_valid && !armed && !host_ready,
++           "post-reset context remains unavailable");
++        host_valid = 0;
++
++        reset_all();
++        arm_safe();
++        s0 = starts;
++        f0 = frames;
++        send_host(TAG_H66, 3'd4, "held-slot reset host ready");
++        check_complete_frame(s0, f0, W_4004, "held-slot reset host word 4004");
++        wait_host_result(0, TAG_H66, "held-slot reset host result tag 66");
++        s0 = starts;
++        f0 = frames;
++        overrange = 1;
++        wait_safety_result(0, TAG_SAFE, "held-slot reset fallback tag 99");
++        check_complete_frame(s0, f0, W_4000, "held-slot reset fallback word 4000");
++        ck(host_result_valid && safety_result_valid, "both result slots held before reset");
++
++        rst = 1;
++        clocks(3);
++        ck(spi_cs_n && !spi_sck && !spi_si, "held-slot reset safe SPI pins");
++        ck(!host_result_valid && !safety_result_valid, "reset destroys both held slots");
++        ck(!armed && !inhibit && !sticky_fault && !host_ready, "held-slot reset unarmed");
++        overrange = 0;
++        rst = 0;
++        enable = 1;
++        clocks(250);
++        ck(!armed && !inhibit && !sticky_fault && !host_ready,
++           "held-slot reset has no automatic recovery");
++        ck(!host_result_valid && !safety_result_valid, "held-slot reset leaves no ACK");
++        $fdisplay(fd, "CASE_END,%0d,reset_destructive", case_id);
++    endtask
++
++    string out;
++    integer found;
++    initial begin
++        if (!$value$plusargs("OUT=%s", out))
++            $fatal(1, "OUT required");
++        red_mode = 0;
++        found = $value$plusargs("RED=%d", red_mode);
++        fd = $fopen(out, "w");
++        if (!fd)
++            $fatal(1, "cannot open OUT");
++        $fdisplay(fd, "HEADER,task=DEEPEYE-IMPLEMENTATION-20261014/v1,work=B-R04-OVERRANGE-FUNCTIONAL-20261030-82,red=%0d", red_mode);
++        $fdisplay(fd, "CONTRACT,H01-H15,c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804");
++        $fdisplay(fd, "EXTERNAL_ONLY,SPI_CS_SCK_SI_AND_PUBLIC_RESULTS");
++
++        case_recovery(red_mode);
++        if (red_mode)
++            $fatal(1, "RED mode returned without terminal classification");
++
++        case_master_guard();
++        case_release_boundaries();
++        case_host_cancel_7edges();
++        case_fallback_cancel_disable();
++        case_same_cycle_overrange();
++        case_tag_faults();
++        case_reset_destructive();
++
++        completion_status = 1;
++        $fdisplay(fd, "GREEN_DONE,%0d,%0d,%0d,%0d", cycle, starts, frames, checks);
++        $display("R04_NEW82_GREEN_PASS cycles=%0d checks=%0d", cycle, checks);
++        $fclose(fd);
++        fd = 0;
++        $finish;
++    end
++
++    initial begin
++        #2000000;
++        $fatal(1, "R04_NEW82 wall simulation bound");
++    end
++endmodule
+diff --git a/competition/deepeye/tools/diagnostic/r04_gain82/.gitattributes b/competition/deepeye/tools/diagnostic/r04_gain82/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_gain82/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/r04_gain82/run_r04_gain82.py b/competition/deepeye/tools/diagnostic/r04_gain82/run_r04_gain82.py
+new file mode 100644
+index 0000000..97c7636
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_gain82/run_r04_gain82.py
+@@ -0,0 +1,416 @@
++"""NEW82 bounded R04 safety-wrapper controls; no board, analog, or R04 claim."""
++import argparse
++import datetime as dt
++import hashlib
++import importlib.util
++import json
++import os
++import re
++import subprocess
++import sys
++import time
++import traceback
++from pathlib import Path
++
++ROOT = Path("D:/pynq/CarlandFPGA")
++W = ROOT / ".local/worktrees/deepeye-implementation-20261014"
++P = ROOT / ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74"
++TOOLS = Path("D:/modelsim1/win64")
++ARCHIVE = P / "safety82-original80"
++OUTPUT_LIMIT = 8 * 1024 * 1024
++COMMAND_LIMIT = 25
++JOB_LIMIT = 150
++TASK_ID = "DEEPEYE-IMPLEMENTATION-20261014"
++TASK_VERSION = 1
++WORK_ID = "B-R04-OVERRANGE-FUNCTIONAL-20261030-82"
++REQUIREMENTS_SHA256 = "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
++MASTER_SHA256 = "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
++ORIGINAL_RTL_SHA256 = "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036"
++ORIGINAL_README_SHA256 = "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
++ORIGINAL_VECTORS_SHA256 = "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
++OWNED_PROCESS_SHA256 = "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
++WINDOWS_JOB_SHA256 = "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
++OLD_LINE = b"    assign arm_fire = arm_rise && !armed_q && arm_space_ok;\n"
++NEW_LINE = b"    assign arm_fire = arm_rise && (!armed_q || inhibit_q) && arm_space_ok;\n"
++
++
++def utc():
++    return dt.datetime.now(dt.timezone.utc).isoformat()
++
++
++def digest_bytes(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def record(path):
++    path = Path(path).resolve()
++    raw = path.read_bytes()
++    return {"path": str(path), "bytes": len(raw), "sha256": digest_bytes(raw)}
++
++
++def write_json(path, value):
++    with Path(path).open("x", encoding="utf-8", newline="\n") as stream:
++        json.dump(value, stream, ensure_ascii=False, sort_keys=True, indent=2)
++        stream.write("\n")
++
++
++def require(test, message):
++    if not test:
++        raise RuntimeError(message)
++
++
++def output_bytes(out):
++    return sum(path.stat().st_size for path in Path(out).rglob("*") if path.is_file())
++
++
++def source_specs():
++    return {
++        "dut80.sv": W / "competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv",
++        "master76.sv": W / "competition/deepeye/fpga/diagnostic/r04_gain76/deepeye_mcp6s21_write_candidate.sv",
++        "tb82.sv": W / "competition/deepeye/fpga/diagnostic/r04_gain82/tb_r04_gain82.sv",
++        "README80.md": W / "competition/deepeye/fpga/diagnostic/r04_gain80/README.md",
++        "vectors80_UNEXECUTED.json": W / "competition/deepeye/fpga/diagnostic/r04_gain80/vectors_UNEXECUTED.json",
++        "runner.py": Path(__file__).resolve(),
++        "owned_process.py": W / "competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py",
++        "windows_job.py": W / "fpga_mesh/windows_job.py",
++        "immutable_scope_pinned.json": P / "immutable_scope_pinned.json",
++        "SAFETY82_MAIN_REVIEW.json": P / "SAFETY82_MAIN_REVIEW.json",
++    }
++
++
++def verify_contract(path):
++    raw = Path(path).read_bytes()
++    value = json.loads(raw.decode("utf-8"))
++    ids = [item["id"] for item in value["requirements"]]
++    expected_ids = [f"H{number:02d}" for number in range(1, 16)]
++    require(ids == expected_ids, "pinned H01-H15 IDs changed")
++    canonical = json.dumps(value["requirements"], ensure_ascii=False, sort_keys=True,
++                           separators=(",", ":")).encode("utf-8")
++    actual = digest_bytes(canonical)
++    require(actual == REQUIREMENTS_SHA256, "fixed requirements SHA256 mismatch")
++    return {"requirements_sha256": actual, "requirements_ids": ids,
++            "contract_id": value.get("contract_id"), "revision": value.get("revision")}
++
++
++def verify_source(phase):
++    paths = source_specs()
++    archive_rtl = (ARCHIVE / "deepeye_mcp6s21_safety_arbiter_candidate.sv").read_bytes()
++    archive_readme = (ARCHIVE / "README.md").read_bytes()
++    archive_vectors = (ARCHIVE / "vectors_UNEXECUTED.json").read_bytes()
++    require(digest_bytes(archive_rtl) == ORIGINAL_RTL_SHA256, "original80 RTL archive changed")
++    require(digest_bytes(archive_readme) == ORIGINAL_README_SHA256, "original80 README archive changed")
++    require(digest_bytes(archive_vectors) == ORIGINAL_VECTORS_SHA256, "original80 vectors archive changed")
++    require(archive_rtl.count(OLD_LINE) == 1, "original80 arm_fire line missing or ambiguous")
++    expected_repaired = archive_rtl.replace(OLD_LINE, NEW_LINE)
++    current = paths["dut80.sv"].read_bytes()
++    require((paths["README80.md"]).read_bytes() == archive_readme, "README80 changed without authorization")
++    require((paths["vectors80_UNEXECUTED.json"]).read_bytes() == archive_vectors,
++            "vectors80 changed without authorization")
++    require((paths["master76.sv"]).read_bytes() and digest_bytes(paths["master76.sv"].read_bytes()) == MASTER_SHA256,
++            "readonly master76 hash changed")
++    if phase == "red":
++        require(digest_bytes(current) == ORIGINAL_RTL_SHA256 and current == archive_rtl,
++                "RED requires exact original80 source")
++        relation = "exact_original80_archive"
++    else:
++        require(current == expected_repaired and digest_bytes(current) != ORIGINAL_RTL_SHA256,
++                "GREEN requires only the selected arm_fire line repair")
++        relation = "original80_archive_plus_only_arm_fire_inhibit_guard"
++    return {
++        "phase_relation": relation,
++        "archive_rtl": record(ARCHIVE / "deepeye_mcp6s21_safety_arbiter_candidate.sv"),
++        "expected_repaired_sha256": digest_bytes(expected_repaired),
++        "only_authorized_rtl_line_changed": current == expected_repaired,
++    }
++
++
++def snapshot(out, phase):
++    out.mkdir(parents=True, exist_ok=False)
++    relation = verify_source(phase)
++    snap = out / "source"
++    snap.mkdir()
++    pins = {}
++    specs = source_specs()
++    for name, path in specs.items():
++        raw = path.read_bytes()
++        (snap / name).write_bytes(raw)
++        pins[name] = {"original": str(path.resolve()), "snapshot": str((snap / name).resolve()),
++                      "bytes": len(raw), "sha256": digest_bytes(raw)}
++    require(pins["master76.sv"]["sha256"] == MASTER_SHA256, "master76 snapshot mismatch")
++    require(pins["owned_process.py"]["sha256"] == OWNED_PROCESS_SHA256, "owned_process helper hash mismatch")
++    require(pins["windows_job.py"]["sha256"] == WINDOWS_JOB_SHA256, "windows_job helper hash mismatch")
++    contract = verify_contract(snap / "immutable_scope_pinned.json")
++    references = {
++        "r04_gain78_runner_read_only": record(W / "competition/deepeye/tools/diagnostic/r04_gain78/run_focused.py"),
++        "r04_gain78_tb_read_only": record(W / "competition/deepeye/fpga/diagnostic/r04_gain78/tb_r04_gain78.sv"),
++    }
++    return snap, pins, relation, contract, references
++
++
++def tool_pins():
++    return {name: record(TOOLS / (name + ".exe")) for name in ("vmap", "vlib", "vlog", "vsim")}
++
++
++def command(out_root, command_dir, name, argv, cwd, expected_exit):
++    argv = [str(value) for value in argv]
++    cwd = Path(cwd)
++    row = {"argv": argv, "cwd": str(cwd), "expected_exit": expected_exit,
++           "timeout_seconds": COMMAND_LIMIT, "started_at_utc": utc()}
++    started = time.monotonic()
++    timed_out = False
++    output_exceeded = False
++    with (command_dir / (name + ".stdout.bin")).open("xb") as stdout, \
++            (command_dir / (name + ".stderr.bin")).open("xb") as stderr:
++        process = subprocess.Popen(argv, cwd=cwd, stdin=subprocess.DEVNULL, stdout=stdout,
++                                   stderr=stderr, shell=False, creationflags=subprocess.CREATE_NO_WINDOW)
++        row["pid"] = process.pid
++        row["started_at_utc"] = utc()
++        write_json(command_dir / (name + ".STARTED.json"), row)
++        while process.poll() is None:
++            if time.monotonic() - started >= COMMAND_LIMIT:
++                timed_out = True
++                process.kill()
++            if output_bytes(out_root) >= OUTPUT_LIMIT:
++                output_exceeded = True
++                process.kill()
++            time.sleep(0.02)
++        row["exit_code"] = process.poll()
++        row["elapsed_seconds"] = time.monotonic() - started
++        row["timed_out"] = timed_out
++        row["output_limit_exceeded"] = output_exceeded
++        row["completed_at_utc"] = utc()
++    row["stdout"] = record(command_dir / (name + ".stdout.bin"))
++    row["stderr"] = record(command_dir / (name + ".stderr.bin"))
++    write_json(command_dir / (name + ".json"), row)
++    require(not timed_out, f"native command timeout: {name}")
++    require(not output_exceeded, f"native command output limit: {name}")
++    require(row["exit_code"] == expected_exit, f"native exit mismatch: {name} {row['exit_code']}")
++    return row
++
++
++def combined_text(command_dir, name):
++    values = []
++    for suffix in ("stdout.bin", "stderr.bin"):
++        values.append((command_dir / (name + "." + suffix)).read_text(encoding="utf-8", errors="replace"))
++    return "\n".join(values)
++
++
++def marker_checks(phase, transcript, pins_text):
++    all_text = transcript + "\n" + pins_text
++    require("FAIL," not in pins_text, "bench failure marker present")
++    require("** Fatal:" not in all_text, "fatal simulator marker present")
++    if phase == "red":
++        checks = {
++            "red_confirmed": "RED_CONFIRMED" in pins_text and "R04_NEW82_RED_CONFIRMED" in transcript,
++            "host_word_4004": re.search(r"(?m)^WORD,1,\d+,4004$", pins_text) is not None,
++            "fallback_word_4000": re.search(r"(?m)^WORD,1,\d+,4000$", pins_text) is not None,
++            "host_tag_0x11": re.search(r"(?m)^HOST_RESULT,1,\d+,0,17$", pins_text) is not None,
++            "safety_tag_0x99": re.search(r"(?m)^SAFETY_RESULT,1,\d+,0,153$", pins_text) is not None,
++            "no_green_claim": "GREEN_DONE" not in pins_text and "R04_NEW82_GREEN_PASS" not in transcript,
++        }
++    else:
++        checks = {
++            "green_done": "GREEN_DONE" in pins_text and "R04_NEW82_GREEN_PASS" in transcript,
++            "all_eight_cases": all(pins_text.count(f"CASE_BEGIN,{case_id},") == 1 and
++                                   pins_text.count(f"CASE_END,{case_id},") == 1
++                                   for case_id in range(1, 9)),
++            "host_word_4004": re.search(r"(?m)^WORD,\d+,\d+,4004$", pins_text) is not None,
++            "host_word_4002": re.search(r"(?m)^WORD,\d+,\d+,4002$", pins_text) is not None,
++            "host_word_4001": re.search(r"(?m)^WORD,\d+,\d+,4001$", pins_text) is not None,
++            "fallback_word_4000": re.search(r"(?m)^WORD,\d+,\d+,4000$", pins_text) is not None,
++            "host_tag_0x11": re.search(r"(?m)^HOST_RESULT,\d+,\d+,0,17$", pins_text) is not None,
++            "host_tag_0x21": re.search(r"(?m)^HOST_RESULT,\d+,\d+,0,33$", pins_text) is not None,
++            "host_tag_0x31": re.search(r"(?m)^HOST_RESULT,\d+,\d+,0,49$", pins_text) is not None,
++            "host_abort_0x22": re.search(r"(?m)^HOST_RESULT,\d+,\d+,1,34$", pins_text) is not None,
++            "safety_tag_0x99": re.search(r"(?m)^SAFETY_RESULT,\d+,\d+,0,153$", pins_text) is not None,
++            "safety_abort_0x99": re.search(r"(?m)^SAFETY_RESULT,\d+,\d+,1,153$", pins_text) is not None,
++            "no_red_claim": "RED_CONFIRMED" not in pins_text,
++        }
++    bad = [name for name, okay in checks.items() if not okay]
++    require(not bad, "marker checks failed: " + ",".join(bad))
++    return checks
++
++
++def run_inner(out, phase):
++    snap = out / "source"
++    sim = out / "sim"
++    commands = out / "commands"
++    sim.mkdir(exist_ok=False)
++    commands.mkdir(exist_ok=False)
++    pins_before = {name: record(snap / name) for name in source_specs()}
++    rows = []
++    for tool in ("vlog", "vsim", "vmap"):
++        rows.append(command(out, commands, tool + "-version", [TOOLS / (tool + ".exe"), "-version"], sim, 0))
++    rows.append(command(out, commands, "vlib-version-probe", [TOOLS / "vlib.exe", "-version"], sim, 1))
++    rows.append(command(out, commands, "vmap", [TOOLS / "vmap.exe", "-c"], sim, 0))
++    rows.append(command(out, commands, "vlib", [TOOLS / "vlib.exe", "work"], sim, 0))
++    rows.append(command(out, commands, "compile", [TOOLS / "vlog.exe", "-sv", "-work", "work",
++        snap / "master76.sv", snap / "dut80.sv", snap / "tb82.sv"], sim, 0))
++    compile_text = combined_text(commands, "compile")
++    require("Errors: 0, Warnings: 0" in compile_text and "** Warning:" not in compile_text,
++            "compile did not report zero errors and zero warnings")
++
++    run_dir = out / ("red" if phase == "red" else "green")
++    run_dir.mkdir()
++    dofile = run_dir / "run.do"
++    dofile.write_text("onerror {quit -code 3 -force}\n"
++                      "onbreak {\n"
++                      "if {[examine -radix decimal /tb_r04_gain82/completion_status] == 1} {quit -code 0 -force}\n"
++                      "quit -code 4 -force\n"
++                      "}\n"
++                      "run -all\n"
++                      "quit -code 4 -force\n", encoding="utf-8", newline="\n")
++    sim_argv = [TOOLS / "vsim.exe", "-c", "-voptargs=+acc", "-onfinish", "stop",
++                "-l", run_dir / "modelsim.log", "work.tb_r04_gain82",
++                "+OUT=" + (run_dir / "pins.csv").as_posix()]
++    if phase == "red":
++        sim_argv.append("+RED=1")
++    sim_argv.extend(["-do", "do " + dofile.as_posix()])
++    expected = 4 if phase == "red" else 0
++    sim_row = command(out, commands, phase + "-vsim", sim_argv, sim, expected)
++    transcript = combined_text(commands, phase + "-vsim")
++    if (run_dir / "modelsim.log").exists():
++        transcript += "\n" + (run_dir / "modelsim.log").read_text(encoding="utf-8", errors="replace")
++    pins_text = (run_dir / "pins.csv").read_text(encoding="utf-8", errors="replace")
++    markers = marker_checks(phase, transcript, pins_text)
++    pins_after = {name: record(snap / name) for name in source_specs()}
++    require(pins_before == pins_after, "executed snapshot source changed during run")
++    result = {
++        "status": "RED_CONFIRMED_OLD_SOURCE_RECOVERY_BUG" if phase == "red" else "GREEN_PASS",
++        "phase": phase, "oracle_nonzero": phase == "red", "vsim_exit": sim_row["exit_code"],
++        "compile_zero_errors_warnings": True, "markers": markers,
++        "source_snapshot_before": pins_before, "source_snapshot_after": pins_after,
++        "tool_binary_sha256": tool_pins(), "commands": rows,
++        "vlib_version_note": "vlib has no -version support; usage probe exit 1 preserved; binary hash and ModelSim 10.7 family banners recorded",
++        "pins": str((run_dir / "pins.csv").resolve()),
++        "modelsim_log": str((run_dir / "modelsim.log").resolve()),
++        "not_analog": True, "r04_status": "NOT_PASSED",
++    }
++    write_json(out / "INNER_RESULT.json", result)
++    print(json.dumps({"phase": phase, "status": result["status"], "vsim_exit": sim_row["exit_code"]}))
++    return 2 if phase == "red" else 0
++
++
++def job_terminal(job):
++    return bool(job.get("job_attached_before_resume") is True
++                and job.get("launcher_exit_confirmed") is True
++                and job.get("job_empty_observed_before_close") is True
++                and job.get("job_terminal_confirmed") is True
++                and job.get("job_terminal_state") == "confirmed"
++                and job.get("job_closed") is True
++                and not job.get("timed_out")
++                and not job.get("process_error")
++                and not job.get("job_query_failed")
++                and not job.get("job_termination_failed")
++                and not job.get("job_close_error"))
++
++
++def run_outer(out, phase):
++    snap, pins_before, relation, contract, references = snapshot(out, phase)
++    invocation = {"argv": [str(value) for value in sys.argv], "cwd": str(Path.cwd()),
++                  "python": sys.version, "started_at_utc": utc(), "phase": phase,
++                  "job_limit_seconds": JOB_LIMIT, "command_limit_seconds": COMMAND_LIMIT,
++                  "output_limit_bytes": OUTPUT_LIMIT}
++    write_json(out / "INVOCATION.json", invocation)
++    write_json(out / "SOURCE_BEFORE.json", {
++        "schema": "deepeye-r04-gain82-source-pins/v1", "phase": phase,
++        "candidate_relation": relation, "contract": contract, "files": pins_before,
++        "readonly_template_references": references,
++        "tool_binaries": tool_pins(),
++    })
++    spec = importlib.util.spec_from_file_location("r04_gain82_owned", snap / "owned_process.py")
++    module = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(module)
++    job_dir = out / "job"
++    job_dir.mkdir()
++    argv = [str(sys.executable), "-B", str(snap / "runner.py"), "--phase", phase,
++            "--inner", "--out", str(out)]
++    job = module.run_owned(argv, job_dir, JOB_LIMIT, snap / "windows_job.py",
++                           job_drain_seconds=5, job_terminate_seconds=5)
++    write_json(out / "JOB_RESULT.json", job)
++    require(job_terminal(job), "whole owned Job did not reach terminal-empty-closed")
++    after = {}
++    specs = source_specs()
++    for name, path in specs.items():
++        after[name] = record(path)
++    require(all(after[name]["sha256"] == pins_before[name]["sha256"] for name in specs),
++            "source changed across measured run")
++    require(all(record(snap / name)["sha256"] == after[name]["sha256"] for name in specs),
++            "snapshot differs from post-run source")
++    inner_path = out / "INNER_RESULT.json"
++    require(inner_path.exists(), "inner result missing")
++    inner = json.loads(inner_path.read_text(encoding="utf-8"))
++    if phase == "red":
++        require(job.get("exit_code") == 2 and job.get("owned_job_error") == "launcher_nonzero_exit",
++                "RED launcher did not preserve deliberate nonzero")
++        require(inner.get("status") == "RED_CONFIRMED_OLD_SOURCE_RECOVERY_BUG",
++                "RED status mismatch")
++    else:
++        module.require_owned_success(job)
++        require(job.get("exit_code") == 0 and job.get("owned_job_error") is None,
++                "GREEN launcher did not complete naturally")
++        require(inner.get("status") == "GREEN_PASS", "GREEN status mismatch")
++    after_relation = verify_source(phase)
++    result = {
++        "schema": "deepeye-r04-gain82-focused-result/v1",
++        "task_id": TASK_ID, "task_version": TASK_VERSION, "work_id": WORK_ID,
++        "thread_id": "01a18ce6-e447-7ba0-80be-09e9a58e4278",
++        "job_id": "child-7c042de9d616469488cde6de0542f950",
++        "instance_id": "deepseek-b-83", "requirements_sha256": REQUIREMENTS_SHA256,
++        "contract": contract, "phase": phase, "inner": inner, "job": job,
++        "job_terminal_empty_closed": job_terminal(job),
++        "source_before": pins_before, "source_after": after,
++        "source_relation_before": relation, "source_relation_after": after_relation,
++        "source_changed_during_run": False,
++        "status": "RED_CONFIRMED_OLD_SOURCE_RECOVERY_BUG" if phase == "red" else "GREEN_PASS",
++        "execution_kind": "SYNTHETIC_DIGITAL_SEAM_WITH_ACTUAL_76_MASTER",
++        "physical_adc": "unavailable", "overrange_provenance": "external flag absent",
++        "analog_gain": "unknown", "r04": "NOT_PASSED", "full_h12": "NOT_PASSED",
++        "all_29": "NOT_PASSED", "clock_100mhz": "engineering assumption only",
++        "board": "not_run; A only", "git": "not_run; main owns",
++        "not_run": ["natural master-result wrong-tag path without forcing internals",
++                    "physical ADC/calibration/threshold and overrange provenance",
++                    "analog gain/register/RESULT/settling effect",
++                    "synthesis/place/route/timing/pins/clock constraints/board"],
++        "completed_at_utc": utc(), "output_bytes_before_result": output_bytes(out),
++    }
++    require(result["output_bytes_before_result"] < OUTPUT_LIMIT - 65536,
++            "bounded output lacks RESULT headroom")
++    write_json(out / "RESULT.json", result)
++    require(output_bytes(out) <= OUTPUT_LIMIT, "final evidence exceeds 8 MiB")
++    print(json.dumps({"status": result["status"], "job_terminal": job_terminal(job),
++                      "result": str((out / "RESULT.json").resolve())}))
++    return 20 if phase == "red" else 0
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--phase", choices=("red", "green"), required=True)
++    parser.add_argument("--out", type=Path, required=True)
++    parser.add_argument("--inner", action="store_true")
++    args = parser.parse_args()
++    out = args.out.resolve()
++    try:
++        if args.inner:
++            return run_inner(out, args.phase)
++        return run_outer(out, args.phase)
++    except Exception:
++        error = traceback.format_exc()
++        print(error, file=sys.stderr)
++        if out.exists() and not (out / "INNER_FAILURE.json").exists() and args.inner:
++            try:
++                write_json(out / "INNER_FAILURE.json", {"at_utc": utc(), "phase": args.phase,
++                                                       "error": error})
++            except Exception:
++                pass
++        elif out.exists() and not (out / "RESULT.json").exists():
++            try:
++                write_json(out / "OUTER_FAILURE.json", {"at_utc": utc(), "phase": args.phase,
++                                                        "error": error})
++            except Exception:
++                pass
++        return 1
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/competition/deepeye/tools/diagnostic/r04_gain82/summarize_r04_gain82.py b/competition/deepeye/tools/diagnostic/r04_gain82/summarize_r04_gain82.py
+new file mode 100644
+index 0000000..455594b
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_gain82/summarize_r04_gain82.py
+@@ -0,0 +1,305 @@
++"""Assemble NEW82 evidence without modifying RTL, bench, runner, or run artifacts."""
++import datetime as dt
++import difflib
++import hashlib
++import json
++from pathlib import Path
++
++ROOT = Path("D:/pynq/CarlandFPGA")
++W = ROOT / ".local/worktrees/deepeye-implementation-20261014"
++P = ROOT / ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74"
++BOX = P / "safety-worker82"
++RED = BOX / "RUN_RED_BASELINE_V3"
++GREEN = BOX / "RUN_GREEN_V2"
++RESULT = BOX / "RESULT.json"
++MANIFEST = BOX / "FILES_SHA256.json"
++REQUIREMENTS_SHA256 = "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
++
++
++def utc():
++    return dt.datetime.now(dt.timezone.utc).isoformat()
++
++
++def sha(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def record(path):
++    path = Path(path).resolve()
++    raw = path.read_bytes()
++    return {"path": str(path), "bytes": len(raw), "sha256": sha(raw)}
++
++
++def load(path):
++    return json.loads(Path(path).read_text(encoding="utf-8"))
++
++
++def write_json(path, value):
++    with Path(path).open("x", encoding="utf-8", newline="\n") as stream:
++        json.dump(value, stream, ensure_ascii=False, sort_keys=True, indent=2)
++        stream.write("\n")
++
++
++def require(test, message):
++    if not test:
++        raise RuntimeError(message)
++
++
++def commands(run):
++    rows = []
++    for path in sorted((run / "commands").glob("*.json")):
++        if path.name.endswith(".STARTED.json"):
++            continue
++        item = load(path)
++        rows.append({
++            "name": path.stem, "argv": item["argv"], "cwd": item["cwd"],
++            "exit_code": item["exit_code"], "expected_exit": item["expected_exit"],
++            "timeout_seconds": item["timeout_seconds"], "timed_out": item["timed_out"],
++            "stdout": item["stdout"], "stderr": item["stderr"],
++        })
++    return rows
++
++
++def job_summary(run):
++    path = run / "JOB_RESULT.json"
++    job = load(path)
++    return {
++        "record": record(path),
++        "exit_code": job.get("exit_code"), "owned_job_error": job.get("owned_job_error"),
++        "launcher_exit_confirmed": job.get("launcher_exit_confirmed"),
++        "job_attached_before_resume": job.get("job_attached_before_resume"),
++        "job_empty_observed_before_close": job.get("job_empty_observed_before_close"),
++        "job_terminal_confirmed": job.get("job_terminal_confirmed"),
++        "job_terminal_state": job.get("job_terminal_state"), "job_closed": job.get("job_closed"),
++        "timed_out": job.get("timed_out"), "job_termination": job.get("job_termination"),
++        "job_accounting": job.get("job_accounting"),
++    }
++
++
++def recovery_slice(text):
++    start = text.index("    task automatic case_recovery")
++    end = text.index("    task automatic case_master_guard", start)
++    return text[start:end]
++
++
++def failed_attempt(name, cause):
++    root = BOX / name
++    item = {"name": name, "cause": cause, "directory": str(root.resolve()), "preserved": True}
++    for filename in ("JOB_RESULT.json", "INNER_FAILURE.json", "OUTER_FAILURE.json",
++                     "red/pins.csv", "red/modelsim.log", "green/pins.csv", "green/modelsim.log"):
++        path = root / filename
++        if path.exists():
++            item[filename] = record(path)
++    return item
++
++
++def main():
++    require(not RESULT.exists(), "RESULT.json already exists")
++    require(not MANIFEST.exists(), "FILES_SHA256.json already exists")
++    red_result = load(RED / "RESULT.json")
++    green_result = load(GREEN / "RESULT.json")
++    require(red_result["status"] == "RED_CONFIRMED_OLD_SOURCE_RECOVERY_BUG", "RED status changed")
++    require(green_result["status"] == "GREEN_PASS", "GREEN status changed")
++    require(red_result["job_terminal_empty_closed"] is True, "RED Job not terminal")
++    require(green_result["job_terminal_empty_closed"] is True, "GREEN Job not terminal")
++    require(green_result["source_before"]["dut80.sv"]["sha256"] ==
++            green_result["source_after"]["dut80.sv"]["sha256"] ==
++            "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d",
++            "GREEN DUT source pin mismatch")
++    require(green_result["source_after"]["master76.sv"]["sha256"] ==
++            "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd",
++            "master76 changed")
++
++    red_tb = (RED / "source/tb82.sv").read_text(encoding="utf-8")
++    green_tb = (GREEN / "source/tb82.sv").read_text(encoding="utf-8")
++    red_recovery = recovery_slice(red_tb).encode("utf-8")
++    green_recovery = recovery_slice(green_tb).encode("utf-8")
++    require(red_recovery == green_recovery, "RED/GREEN recovery control code differs")
++    diff = list(difflib.unified_diff(red_tb.splitlines(), green_tb.splitlines(),
++                                     fromfile="red-v3", tofile="green-v2", lineterm=""))
++    plus = [line for line in diff if line.startswith("+") and not line.startswith("+++")]
++    minus = [line for line in diff if line.startswith("-") and not line.startswith("---")]
++    require(len(plus) == 1 and len(minus) == 1 and "case_id = 6" in minus[0]
++            and "case_id = 7" in plus[0], "unexpected RED/GREEN testbench difference")
++
++    deliverables = {
++        "rtl80_current": record(W / "competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv"),
++        "readme80_unchanged": record(W / "competition/deepeye/fpga/diagnostic/r04_gain80/README.md"),
++        "vectors80_unexecuted_unchanged": record(W / "competition/deepeye/fpga/diagnostic/r04_gain80/vectors_UNEXECUTED.json"),
++        "tb82": record(W / "competition/deepeye/fpga/diagnostic/r04_gain82/tb_r04_gain82.sv"),
++        "runner82": record(W / "competition/deepeye/tools/diagnostic/r04_gain82/run_r04_gain82.py"),
++        "summary82": record(Path(__file__).resolve()),
++        "master76_readonly": record(W / "competition/deepeye/fpga/diagnostic/r04_gain76/deepeye_mcp6s21_write_candidate.sv"),
++        "started82": record(BOX / "STARTED.json"),
++        "main_review82": record(P / "SAFETY82_MAIN_REVIEW.json"),
++        "immutable_scope_pinned": record(P / "immutable_scope_pinned.json"),
++    }
++    archive = {
++        "rtl80_original": record(P / "safety82-original80/deepeye_mcp6s21_safety_arbiter_candidate.sv"),
++        "readme80_original": record(P / "safety82-original80/README.md"),
++        "vectors80_original": record(P / "safety82-original80/vectors_UNEXECUTED.json"),
++    }
++    evidence = {
++        "red_v3_result": record(RED / "RESULT.json"),
++        "red_v3_source_before": record(RED / "SOURCE_BEFORE.json"),
++        "red_v3_pins": record(RED / "red/pins.csv"),
++        "red_v3_modelsim_log": record(RED / "red/modelsim.log"),
++        "red_v3_compile_stdout": record(RED / "commands/compile.stdout.bin"),
++        "red_v3_vsim_stdout": record(RED / "commands/red-vsim.stdout.bin"),
++        "green_v2_result": record(GREEN / "RESULT.json"),
++        "green_v2_source_before": record(GREEN / "SOURCE_BEFORE.json"),
++        "green_v2_pins": record(GREEN / "green/pins.csv"),
++        "green_v2_modelsim_log": record(GREEN / "green/modelsim.log"),
++        "green_v2_compile_stdout": record(GREEN / "commands/compile.stdout.bin"),
++        "green_v2_vsim_stdout": record(GREEN / "commands/green-vsim.stdout.bin"),
++    }
++    failures = [
++        failed_attempt("RUN_RED_BASELINE_V1",
++                       "Before compile/sim: local vlib has no -version support and returns usage exit 1; preserved harness failure."),
++        failed_attempt("RUN_RED_BASELINE_V2",
++                       "Compile/sim reached, but bench waited host_ready before presenting a nonzero host tag; no RED oracle result."),
++        failed_attempt("RUN_GREEN_V1",
++                       "All 438 bench assertions passed, but output-labeled tag_faults with duplicate case id 6; runner classification rejected the duplicate label."),
++    ]
++    tool_banners = {}
++    for name in ("vlog-version", "vsim-version", "vmap-version", "vlib-version-probe"):
++        tool_banners[name] = (GREEN / "commands" / (name + ".stdout.bin")).read_text(
++            encoding="utf-8", errors="replace").strip()
++    result = {
++        "schema": "deepeye-r04-gain82-final-result/v1",
++        "status": "FOCUSED_DIGITAL_GREEN_PASS_PENDING_MAIN_INDEPENDENT_REVIEW",
++        "task_id": "DEEPEYE-IMPLEMENTATION-20261014", "task_version": 1,
++        "work_id": "B-R04-OVERRANGE-FUNCTIONAL-20261030-82",
++        "thread_id": "01a18ce6-e447-7ba0-80be-09e9a58e4278",
++        "job_id": "child-7c042de9d616469488cde6de0542f950", "instance_id": "deepseek-b-83",
++        "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
++        "ownership": [
++            ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/safety-worker82",
++            "competition/deepeye/fpga/diagnostic/r04_gain80",
++            "competition/deepeye/fpga/diagnostic/r04_gain82",
++            "competition/deepeye/tools/diagnostic/r04_gain82",
++        ],
++        "prior_source_work": "B-R04-LOCAL-OVERRANGE-SOURCE-20261030-80",
++        "requirements_sha256": REQUIREMENTS_SHA256,
++        "requirements_verified": [f"H{number:02d}" for number in range(1, 16)],
++        "contract_revision": 1, "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
++        "tested_commit": None,
++        "source_identity": "Exact local source snapshots only; Git HEAD was not used as evidence and no Git action was performed.",
++        "selected_repair": {
++            "file": "competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv",
++            "line": 68,
++            "before": "assign arm_fire = arm_rise && !armed_q && arm_space_ok;",
++            "after": "assign arm_fire = arm_rise && (!armed_q || inhibit_q) && arm_space_ok;",
++            "only_change_relative_to_original80": True,
++            "arm_space_ok_unchanged": True, "tag_changed_policy_unchanged": True,
++        },
++        "source_hashes": {
++            "before_original80": "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036",
++            "after_fixed80": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d",
++            "master76_readonly": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd",
++            "tb82_red_v3": red_result["source_before"]["tb82.sv"]["sha256"],
++            "tb82_green_v2": green_result["source_before"]["tb82.sv"]["sha256"],
++            "runner82": green_result["source_before"]["runner.py"]["sha256"],
++        },
++        "source_control_equivalence": {
++            "recovery_task_identical_red_green": True,
++            "recovery_task_bytes": len(red_recovery),
++            "recovery_task_sha256": sha(red_recovery),
++            "full_tb_diff_plus_lines": len(plus), "full_tb_diff_minus_lines": len(minus),
++            "full_tb_diff_explanation": "Only tag_faults case_id logging changed 6->7 after baseline; the executed recovery control is byte-identical.",
++            "diff": diff,
++        },
++        "baseline_red": {
++            "run": str(RED.resolve()), "status": red_result["status"],
++            "vsim_deliberate_exit": red_result["inner"]["vsim_exit"],
++            "compile_zero_errors_warnings": red_result["inner"]["compile_zero_errors_warnings"],
++            "markers": red_result["inner"]["markers"], "job": job_summary(RED),
++            "commands": commands(RED),
++        },
++        "green": {
++            "run": str(GREEN.resolve()), "status": green_result["status"],
++            "vsim_exit": green_result["inner"]["vsim_exit"],
++            "compile_zero_errors_warnings": green_result["inner"]["compile_zero_errors_warnings"],
++            "markers": green_result["inner"]["markers"], "job": job_summary(GREEN),
++            "commands": commands(GREEN), "tool_binary_sha256": green_result["inner"]["tool_binary_sha256"],
++            "tool_banners": tool_banners,
++            "checks": 438, "cycles": 44656, "starts": 14, "frames": 14,
++        },
++        "failed_attempts": failures,
++        "repairs_used": [
++            "Record vlib -version as unsupported usage probe with expected exit 1.",
++            "Bench drives host tag/gain before waiting host_ready.",
++            "Bench assigns unique tag_faults case id 7 (logging only).",
++        ],
++        "acceptance_evidence": {
++            "actual_76_master_instantiated_no_stub": True,
++            "external_observation_only_spi_cs_sck_si_and_public_results": True,
++            "normal_words_observed_4004_4002_4001_fallback_4000": True,
++            "host_result_backpressure_did_not_block_one_shot_gain0": True,
++            "sustained_overrange_no_repeated_fallback": True,
++            "release_no_auto_arm": True,
++            "explicit_rising_arm_requires_both_slots_drained_overrange0_master_idle": True,
++            "post_arm_host_valid0_observation_required": True,
++            "old_held_host_valid_not_replayed": True,
++            "active_host_cancel_keeps_original_tag_error_then_one_fallback": True,
++            "fallback_cancel_or_disable_no_retry": True,
++            "same_cycle_overrange_blocks_host_handshake": True,
++            "zero_colliding_changed_tag_sticky_fault_blocks_spi": True,
++            "reset_destroys_result_context_without_ack": True,
++            "job_terminal_empty_closed_red_and_green": True,
++            "bounded_each_command_25s_whole_job_150s_output_below_8mib": True,
++        },
++        "manual_corner_reasoning": {
++            "arm_recovery": "Original RED left armed_q=1 and inhibit_q=1 after fallback and drains, so !armed_q blocked the explicit pulse. The selected fix permits only a rising arm when either unarmed or inhibited; every arm_space_ok guard still applies.",
++            "cancel_disable": "cancel or enable=0 drives master cancel, clears armed/fallback_pending and host gate, returns a digital abort/error for an active original tag, and never retries automatically.",
++            "fallback_with_held_host_slot": "fallback_choose does not depend on host_result_valid_q; the host slot is preserved, the safety slot is independent, and fallback_pending clears when the single safety command fires.",
++            "colliding_or_changed_tags": "zero/equal host tag is not eligible, changed reserved tag while armed raises sticky identity fault, and no success payload is synthesized.",
++            "same_cycle_overrange": "host_ready is combinationally false while overrange is high, so no host handshake is recorded; inhibit latches at the next edge.",
++            "reset": "reset destroys master and wrapper slots/context, drives safe SPI pins and produces no post-reset ACK. Host must retain persistent UNKNOWN, especially for an aborted partial frame.",
++        },
++        "digital_meaning": {
++            "error0": "16-edge digital frame completed; not proof of CS/register/RESULT, settling, analog gain, ADC effect, or safety.",
++            "error1": "digital command refused/aborted or ended in error; a partial 16-edge abort may already have affected analog state, whose value remains UNKNOWN.",
++        },
++        "blocker": {
++            "reserved_safety_tag": "No production reserved tag was assigned. Test tag 0x99 is synthetic only; zero/collision must fault. Production integration remains disabled and unarmed.",
++            "physical_adc_and_overrange": "The overrange source/calibration/threshold/electrical provenance are not provided; only a candidate external-flag seam was tested.",
++        },
++        "not_run": [
++            "natural master-result wrong-tag mismatch; it was not forced and is not evidenced",
++            "physical ADC, calibration, threshold, overrange provenance, fake-ADC rejection on hardware",
++            "analog gain, settling, 8-level sweep, 5 percent accuracy, ADC readback, register/RESULT effect",
++            "R04, full H12, all-29-card acceptance, final 1 percent / 100 ms target",
++            "100 MHz timing closure or clock constraints; 100 MHz remains an engineering assumption",
++            "pinout, clocksetter, electrical level shifting, board, SSH, synthesis, implementation, bitstream",
++            "old r04_gain78 suite replay, Git operations, services, SQL, queues, credentials, collector repin, Root planner",
++        ],
++        "unavailable_or_unaccepted": {
++            "physical_adc": "unavailable", "overrange_provenance": "external flag absent",
++            "analog_gain_actual": "unknown", "R04": "NOT_PASSED", "full_H12": "NOT_PASSED",
++            "all_29": "NOT_PASSED", "100MHz_timing": "not established", "board": "not_run; A only",
++        },
++        "source80_unexecuted_vectors": "The original vectors_UNEXECUTED.json remains byte-identical and unexecuted as metadata; it is not a PASS. NEW82 execution evidence is separate.",
++        "deliverables": deliverables, "original80_archive": archive, "evidence": evidence,
++        "operator_actions_required": [], "desktop_round_required": [], "human_action_required": [],
++        "main_action": "Independent review and acceptance remain main-owned; no group report was sent.",
++        "completed_at_utc": utc(),
++    }
++    write_json(RESULT, result)
++
++    manifest_files = []
++    for path in sorted(BOX.rglob("*")):
++        if path.is_file() and path.resolve() != MANIFEST.resolve():
++            manifest_files.append(record(path))
++    manifest = {
++        "schema": "deepeye-r04-gain82-file-manifest/v1", "generated_at_utc": utc(),
++        "root": str(BOX.resolve()), "excludes_itself": str(MANIFEST.resolve()),
++        "file_count": len(manifest_files), "files": manifest_files,
++    }
++    write_json(MANIFEST, manifest)
++    print(json.dumps({"result": record(RESULT), "manifest": record(MANIFEST),
++                      "manifest_files": len(manifest_files)}, indent=2))
++
++
++if __name__ == "__main__":
++    main()

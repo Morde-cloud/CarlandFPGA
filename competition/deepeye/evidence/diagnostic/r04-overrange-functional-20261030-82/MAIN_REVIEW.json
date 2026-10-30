@@ -1,0 +1,1358 @@
+{
+  "status": "scoped_main_review_passed",
+  "operation_id": "B-DEEPEYE-R04-OVERRANGE-FUNCTIONAL-20261030-82",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "work_id": "B-R04-OVERRANGE-FUNCTIONAL-20261030-82",
+  "worker_job_id": "child-7c042de9d616469488cde6de0542f950",
+  "worker_thread_id": "01a18ce6-e447-7ba0-80be-09e9a58e4278",
+  "worker_actual_terminal": "completed/stale=false; supported completion event, no ownership transfer before terminal",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_files": {
+    "competition/deepeye/fpga/diagnostic/r04_gain80/README.md": {
+      "bytes": 4545,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\README.md",
+      "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+    },
+    "competition/deepeye/fpga/diagnostic/r04_gain80/deepeye_mcp6s21_safety_arbiter_candidate.sv": {
+      "bytes": 9538,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\deepeye_mcp6s21_safety_arbiter_candidate.sv",
+      "sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d"
+    },
+    "competition/deepeye/tools/diagnostic/r04_gain82/run_r04_gain82.py": {
+      "bytes": 21469,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\r04_gain82\\run_r04_gain82.py",
+      "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19"
+    },
+    "competition/deepeye/tools/diagnostic/r04_gain82/summarize_r04_gain82.py": {
+      "bytes": 17636,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\r04_gain82\\summarize_r04_gain82.py",
+      "sha256": "66bf49b8c6fb86b0f85c341e775d4258cab667d020ed64cef8b3d4b59a3555d0"
+    },
+    "competition/deepeye/fpga/diagnostic/r04_gain82/tb_r04_gain82.sv": {
+      "bytes": 24014,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain82\\tb_r04_gain82.sv",
+      "sha256": "41b2bc8b57b27438a28dd189f2129333dbdee3353178f72d50a195b27bb19ff1"
+    },
+    "competition/deepeye/fpga/diagnostic/r04_gain80/vectors_UNEXECUTED.json": {
+      "bytes": 21092,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\vectors_UNEXECUTED.json",
+      "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+    }
+  },
+  "selected_raw_files": [
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\FILES_SHA256.json",
+      "bytes": 103700,
+      "sha256": "f658501c4ca981794c8e903a77e5f2c44a81183c685f8f94ae297ae924b43f5b"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RESULT.json",
+      "bytes": 47090,
+      "sha256": "646ba24cf2ac93851db2c5fb2b3ed4eb2139c5611afca69a71ced7d0cb2a37d8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\compile.json",
+      "bytes": 1674,
+      "sha256": "2adac6dffa09e29586b9957871106d207cbe133fb81168fcd2f3a091b36b38ef"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\compile.STARTED.json",
+      "bytes": 886,
+      "sha256": "120c9eefe81558b2bb3546562426e3c8801a7b0be367d5a8226b92ef8e40dfc3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\compile.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\compile.stdout.bin",
+      "bytes": 853,
+      "sha256": "e4a24b6cda93046b173b956ea0960d4706fd5a23c7e506319ee4eb277365fba5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\green-vsim.json",
+      "bytes": 1731,
+      "sha256": "bb88437ba08798c25818a47a14824343883ed5ae9c128f1fb81f4d7c33e98f93"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\green-vsim.STARTED.json",
+      "bytes": 937,
+      "sha256": "2ba70855ef012fbd9c963366f2f183e6aac382aed6010955287b123cd01f0e7e"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\green-vsim.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\green-vsim.stdout.bin",
+      "bytes": 2249,
+      "sha256": "235120711a5ca0e6f582b07b5f03e50b5b2e66eb27d664689620a3c1c0bdf5d2"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib-version-probe.json",
+      "bytes": 1164,
+      "sha256": "874c81bab37821f3beb04e1bec2bbd7ee6e1b013db71af7715eda1cc666be8cb"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib-version-probe.STARTED.json",
+      "bytes": 354,
+      "sha256": "2f7ca1ebe8768f766f3b8631ab80f99a0b32f5fc9b67971ca00c5d72fa2eeb4a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib-version-probe.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib-version-probe.stdout.bin",
+      "bytes": 290,
+      "sha256": "05fe090e741f1c155ac12f3b0e3b8c71173a9bd65a0bfbb10bdac19c9e551d9a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib.json",
+      "bytes": 1130,
+      "sha256": "7d609c87d76d7970192a591d43d1e844ff97900160227ed7adf17a3ac89588e8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib.STARTED.json",
+      "bytes": 350,
+      "sha256": "1b149045b7298bf9a503feb59426f614bd503fc967d5cb6329dd8df94ded99df"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlib.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlog-version.json",
+      "bytes": 1151,
+      "sha256": "04fd61959875de616f1e8559d08f8211d2ab0e3442903105d75621d82278aeaa"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlog-version.STARTED.json",
+      "bytes": 354,
+      "sha256": "8c2cc278a96bac8174ae081fa0ca9104f9c96738910b8e3ae529e679a4caf25f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlog-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vlog-version.stdout.bin",
+      "bytes": 72,
+      "sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap-version.json",
+      "bytes": 1152,
+      "sha256": "85c3096dcc11908bffc617a9e3d12528c7bfd48727d1c58067368391bcda8671"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap-version.STARTED.json",
+      "bytes": 354,
+      "sha256": "99c256ff7e4ba4975fcb508d851ee38fdd1af6a969bd88d4f398983b76b484e7"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap-version.stdout.bin",
+      "bytes": 83,
+      "sha256": "af0e3fe5f5352bf36389dc8312d99cac96afdfd797d1b9d5ea5a1c27dac0f818"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap.json",
+      "bytes": 1128,
+      "sha256": "e92aa60093b165e37c56149d1a472ea7807ec5b847cefe7dcee6f4c402f23c61"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap.STARTED.json",
+      "bytes": 347,
+      "sha256": "fd270a950edf231390d82e6ef33e05786678e653536608648f729d2bd98416e5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vmap.stdout.bin",
+      "bytes": 153,
+      "sha256": "55342c337cc9b7ea311bf0cd1ca4ac5e11d7f2ee09f95d35c10b15fe977c6e4a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vsim-version.json",
+      "bytes": 1149,
+      "sha256": "d78e19d6296b22ce9fc94e359abc5fc058bf247931f65f6e9c78a3cd174a1dba"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vsim-version.STARTED.json",
+      "bytes": 354,
+      "sha256": "82ee4fb42a05093d14ee1763a12ec344301d073582451f54d52883262dc650e8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vsim-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\commands\\vsim-version.stdout.bin",
+      "bytes": 73,
+      "sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\green\\modelsim.log",
+      "bytes": 2197,
+      "sha256": "d22e39647f33af975351bc2291bf21340869dcca6d201bfb7f5fe0fc24df685c"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\green\\pins.csv",
+      "bytes": 5253,
+      "sha256": "fc06f02e2f9647d65e1bf447b29a6aa6563fa2fd645ca0f5c225b0e74d82d19f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\green\\run.do",
+      "bytes": 181,
+      "sha256": "8af73d6d14a28714d69223c522f030cdc68a0201206ad46712cabfb66de78fbb"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\INNER_FAILURE.json",
+      "bytes": 1234,
+      "sha256": "7cb1c58c27ba787868fd1872ce4ff52c4159ad7649da3a91e02b009f0d76ed85"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\INVOCATION.json",
+      "bytes": 663,
+      "sha256": "e411ae911f06bd59dae65d00e2d3f73a128db8af93d8befd416dc7382244bb6e"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\job\\PROCESS.json",
+      "bytes": 4169,
+      "sha256": "0ecdcc5ff105f35039e1a6cf9adb8a6b520aec247a620e4ecbab1cada439f697"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\job\\process.stderr.bin",
+      "bytes": 1086,
+      "sha256": "b1f3fed7e6a26ddbb1925cd8431c482bc1238a8f81a2cff9fba09c21e45639a5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\job\\process.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\job\\PROCESS_STARTED.json",
+      "bytes": 2517,
+      "sha256": "2fc2a94d57fa360b8e61bea936c8410fdd71f6e949392a2ae5df9684924542d5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\JOB_RESULT.json",
+      "bytes": 4169,
+      "sha256": "0ecdcc5ff105f35039e1a6cf9adb8a6b520aec247a620e4ecbab1cada439f697"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\OUTER_FAILURE.json",
+      "bytes": 886,
+      "sha256": "3358e995832a7409b8eefd6c7a8d977529735ac6bad272f16797d74395feb919"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\sim\\modelsim.ini",
+      "bytes": 97978,
+      "sha256": "bd33fdf7e92c7879828207a30b7808f587434be9fb310b2bc8256687bc6d91cc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\dut80.sv",
+      "bytes": 9538,
+      "sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\immutable_scope_pinned.json",
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\master76.sv",
+      "bytes": 6514,
+      "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\owned_process.py",
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\README80.md",
+      "bytes": 4545,
+      "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\runner.py",
+      "bytes": 21469,
+      "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\SAFETY82_MAIN_REVIEW.json",
+      "bytes": 3323,
+      "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\tb82.sv",
+      "bytes": 24014,
+      "sha256": "ffd3a497761f1d440bd8aa296b2d46ce4d7d4f8e7a57163f4ae3922f99a6b80a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\vectors80_UNEXECUTED.json",
+      "bytes": 21092,
+      "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\source\\windows_job.py",
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V1\\SOURCE_BEFORE.json",
+      "bytes": 7404,
+      "sha256": "0d9554015e926afeb1548a798b12c49cfbbbb44ec487ae6391eb69c2f673f21d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\compile.json",
+      "bytes": 1674,
+      "sha256": "e84074e69f2c4f1b7e35a7fb85ddc1453cb3a75b562d04788c283b0c34cd7f26"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\compile.STARTED.json",
+      "bytes": 886,
+      "sha256": "2addafa53df92e38ff91f5e5ad1f6e578af50d3aab092040577032f356a4cee3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\compile.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\compile.stdout.bin",
+      "bytes": 853,
+      "sha256": "dfed09838e5ff2ddcc9647737e2366dff8b83147b7bc6d57d4786c92bf678569"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\green-vsim.json",
+      "bytes": 1731,
+      "sha256": "8679cab84c5f1bc354f6caaeb61dbcb90908aae0db39115bdb18e483c17f739e"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\green-vsim.STARTED.json",
+      "bytes": 937,
+      "sha256": "9b8cabda6c4e486d0d1222c44ec354c7a25fef8065d3aa307bb42797d5f2e2a2"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\green-vsim.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\green-vsim.stdout.bin",
+      "bytes": 2249,
+      "sha256": "d566f6e09db38a2257e0e8a4c68fabcbc25d2cd25c9a6e9e15cafee49414cfe6"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib-version-probe.json",
+      "bytes": 1164,
+      "sha256": "e9d2295f28bc43b4d48fe52e239d5d4f61296a49d09a3df6d865e2ebc346ba3a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib-version-probe.STARTED.json",
+      "bytes": 353,
+      "sha256": "a1dbffd793f92cc094ec1efa09c3cfb0a9279d3a6856805d2fdd38dfba955ab4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib-version-probe.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib-version-probe.stdout.bin",
+      "bytes": 290,
+      "sha256": "05fe090e741f1c155ac12f3b0e3b8c71173a9bd65a0bfbb10bdac19c9e551d9a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib.json",
+      "bytes": 1127,
+      "sha256": "447d1253619e5433548e009a284a84677241250bce35891945a3a94a229c32f4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib.STARTED.json",
+      "bytes": 349,
+      "sha256": "205f7d48873c6074ea7115bb9267e8a62beb5102343e49cebc9f34ff4480bb8f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlib.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlog-version.json",
+      "bytes": 1151,
+      "sha256": "617feddb5b4ccda009b9d6aa51e55212127d18fb77cd5f640878c1bc3bd2ba5a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlog-version.STARTED.json",
+      "bytes": 354,
+      "sha256": "8daff1c8f2b89d705d8f645ef13899285b94f95185dab6ea8d3652a8fcb8d331"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlog-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vlog-version.stdout.bin",
+      "bytes": 72,
+      "sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap-version.json",
+      "bytes": 1152,
+      "sha256": "bf1410465e5b17008788a3329b9033e3399b0b7a929bac1d70363e7967baf6a2"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap-version.STARTED.json",
+      "bytes": 354,
+      "sha256": "2371157033df8b5016069bed696f2f1fa376e8f7d4a3ea259c861813e84eabc6"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap-version.stdout.bin",
+      "bytes": 83,
+      "sha256": "af0e3fe5f5352bf36389dc8312d99cac96afdfd797d1b9d5ea5a1c27dac0f818"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap.json",
+      "bytes": 1130,
+      "sha256": "4e8864ad4a04bbbcc0ed2402dd2dd97e1dcf1d3b487be8ec967c7051d32f4086"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap.STARTED.json",
+      "bytes": 348,
+      "sha256": "55279217dc3b320e4deea03bf5c74b0d229099bff2f87a58285b18538b20bd91"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vmap.stdout.bin",
+      "bytes": 153,
+      "sha256": "55342c337cc9b7ea311bf0cd1ca4ac5e11d7f2ee09f95d35c10b15fe977c6e4a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vsim-version.json",
+      "bytes": 1151,
+      "sha256": "88a59e5c2187175da9bd3b6ee8b322c05d75bfd235ff0ac52d91f42c036f2451"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vsim-version.STARTED.json",
+      "bytes": 354,
+      "sha256": "56ec3d0485a36860a7f748d66aac0770c183e9124a69e9f32a3577282af823c8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vsim-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\commands\\vsim-version.stdout.bin",
+      "bytes": 73,
+      "sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\green\\modelsim.log",
+      "bytes": 2197,
+      "sha256": "6a8abe2329f2b02563b7bb238c50123fda286a2dfea2bd3e78d6db1713de33fc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\green\\pins.csv",
+      "bytes": 5253,
+      "sha256": "a4c84c65df02096694d68221375f2acc0b0c265b5ec35250217ce0894cdf8c44"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\green\\run.do",
+      "bytes": 181,
+      "sha256": "8af73d6d14a28714d69223c522f030cdc68a0201206ad46712cabfb66de78fbb"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\INNER_RESULT.json",
+      "bytes": 17678,
+      "sha256": "941279b70b208f365fc03d49b5e33d08bd8421673c01ef58b29ed6d2128b98cd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\INVOCATION.json",
+      "bytes": 663,
+      "sha256": "f8f5d910196e6090a01d94332f43c10b430dde14bd0278d1d300ee700a895381"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\PROCESS.json",
+      "bytes": 4225,
+      "sha256": "9408492892ee841092bf0ee404d11d1ee627761a6cc78a2a55062e54aac73610"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\process.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\process.stdout.bin",
+      "bytes": 60,
+      "sha256": "3abfaac7de40c92ea22addc3285f379104f18af29d2ade711dbc76be320d4885"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\PROCESS_STARTED.json",
+      "bytes": 2517,
+      "sha256": "fff67921483d010bd4e08c443ab20b69471e4221f668baa281f9270090d83abd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\JOB_RESULT.json",
+      "bytes": 4225,
+      "sha256": "9408492892ee841092bf0ee404d11d1ee627761a6cc78a2a55062e54aac73610"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\RESULT.json",
+      "bytes": 33610,
+      "sha256": "999edda8bb6e2f691913b8a7fc2c45c460e4e60ba2bc317787f1b55dc4f00543"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\sim\\modelsim.ini",
+      "bytes": 97978,
+      "sha256": "bd33fdf7e92c7879828207a30b7808f587434be9fb310b2bc8256687bc6d91cc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\dut80.sv",
+      "bytes": 9538,
+      "sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\immutable_scope_pinned.json",
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\master76.sv",
+      "bytes": 6514,
+      "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\owned_process.py",
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\README80.md",
+      "bytes": 4545,
+      "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\runner.py",
+      "bytes": 21469,
+      "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\SAFETY82_MAIN_REVIEW.json",
+      "bytes": 3323,
+      "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\tb82.sv",
+      "bytes": 24014,
+      "sha256": "41b2bc8b57b27438a28dd189f2129333dbdee3353178f72d50a195b27bb19ff1"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\vectors80_UNEXECUTED.json",
+      "bytes": 21092,
+      "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\windows_job.py",
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\SOURCE_BEFORE.json",
+      "bytes": 7404,
+      "sha256": "afc6322c35fec42d19d879e8fc30dd3c42244dc6daed25fee23992ff1e1b1402"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlib-version.json",
+      "bytes": 1173,
+      "sha256": "77b84d7af3c756b7abfcf9d7282a2765ca1e35f619a2a491f14ab9d6b249cc1b"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlib-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "a3a8c3e4c365089f2ed3f9104dadb82087782a69fa0d5766699a818735b00d88"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlib-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlib-version.stdout.bin",
+      "bytes": 290,
+      "sha256": "05fe090e741f1c155ac12f3b0e3b8c71173a9bd65a0bfbb10bdac19c9e551d9a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlog-version.json",
+      "bytes": 1172,
+      "sha256": "64cf7b40db9e6917224191b9a822c3b757821a8e8dea244745b5a0083c5698d7"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlog-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "7fb72082feaae761464139b3b31fd201c3cc8bb2153057c7b193d51854c69d1c"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlog-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vlog-version.stdout.bin",
+      "bytes": 72,
+      "sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vmap-version.json",
+      "bytes": 1172,
+      "sha256": "8b7d85e35eb4d8454ae13d1c6939d0b29c8d7532874d3f58443d843266696669"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vmap-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "a46f3a3d4fadf238e63e81c81987185538b49a9e4c482eb0525fa149ac5f5b17"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vmap-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vmap-version.stdout.bin",
+      "bytes": 83,
+      "sha256": "af0e3fe5f5352bf36389dc8312d99cac96afdfd797d1b9d5ea5a1c27dac0f818"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vsim-version.json",
+      "bytes": 1171,
+      "sha256": "581e61f5da51001bdb4e313c562baa59420131a7a3feb62c7b4ce72420cd2fe7"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vsim-version.STARTED.json",
+      "bytes": 360,
+      "sha256": "7a624e0692a7c47cde13718606aba425ad0e6197eff87b33449c49a5af9a4c15"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vsim-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\commands\\vsim-version.stdout.bin",
+      "bytes": 73,
+      "sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\INNER_FAILURE.json",
+      "bytes": 1485,
+      "sha256": "2d1cdb5965a59e462155e12a5a0794359550d999dc2c9256cd67a381e0c3aecc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\INVOCATION.json",
+      "bytes": 666,
+      "sha256": "7fc538744f6ec23f727d24d87fd3c75ecdaa042479da76c12d81f781690028b4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\job\\PROCESS.json",
+      "bytes": 4249,
+      "sha256": "0b50b8ec1c0ecfbb6e8eba3501b8e4e22fd8de117c4ce646537cd07c45bc662a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\job\\process.stderr.bin",
+      "bytes": 1333,
+      "sha256": "c24465d93980a0eb410f3cc8e9b6efaffe4dd3dd20c418f1c7c0147e0eaa41fc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\job\\process.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\job\\PROCESS_STARTED.json",
+      "bytes": 2583,
+      "sha256": "1713832e6e1b89eba9e72cef355fdea203a04b352d9074445dfb4530ef0cb4f7"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\JOB_RESULT.json",
+      "bytes": 4249,
+      "sha256": "0b50b8ec1c0ecfbb6e8eba3501b8e4e22fd8de117c4ce646537cd07c45bc662a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\OUTER_FAILURE.json",
+      "bytes": 884,
+      "sha256": "0945206f368250b5d54a82a1c9d1d2af19048fc4a63815f577982253fe0064c7"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\dut80.sv",
+      "bytes": 9523,
+      "sha256": "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\immutable_scope_pinned.json",
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\master76.sv",
+      "bytes": 6514,
+      "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\owned_process.py",
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\README80.md",
+      "bytes": 4545,
+      "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\runner.py",
+      "bytes": 21227,
+      "sha256": "f5aa2b08a286005eb3b73df87392bea62e2da4bc37adcf33e71263d4849c207a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\SAFETY82_MAIN_REVIEW.json",
+      "bytes": 3323,
+      "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\tb82.sv",
+      "bytes": 24014,
+      "sha256": "cc7e048ab295559edda19def309e21bab270f51a9e88ec441b3883e8defb65b5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\vectors80_UNEXECUTED.json",
+      "bytes": 21092,
+      "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\source\\windows_job.py",
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V1\\SOURCE_BEFORE.json",
+      "bytes": 7446,
+      "sha256": "f258578ebec34de2a111fc5e0531238bf8f54f7e599073aec7f876d4d6975044"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\compile.json",
+      "bytes": 1716,
+      "sha256": "e74c2624a99c190dd3c7a484870f464cc54ae87b743414be965b877cce602dfc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\compile.STARTED.json",
+      "bytes": 914,
+      "sha256": "21fdc2ef99a8e799591f6b83afb4b0f219f86454655d39bdad69a470eeaac085"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\compile.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\compile.stdout.bin",
+      "bytes": 874,
+      "sha256": "814285772dabd3241118b38424f94b3d4c5dffe097d83501e782936dd8c648f5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\red-vsim.json",
+      "bytes": 1775,
+      "sha256": "29e5ac3c09083d8ab8cc19f241c411da0254c4f3cc7a3eab8062907046a1ef38"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\red-vsim.STARTED.json",
+      "bytes": 973,
+      "sha256": "56befd54903586fb993252efd0544e4ab64714c6afbb5863c04c7d5b228bb3bd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\red-vsim.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\red-vsim.stdout.bin",
+      "bytes": 2488,
+      "sha256": "c0664dacafb79a4bbbe235e5e9856a281cbacb7b20b4d381634ef6d5966ed12d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib-version-probe.json",
+      "bytes": 1183,
+      "sha256": "4ff064753b59d2a3114e66aa97121061d80db11a61fa0a690e8b09a971328eaa"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib-version-probe.STARTED.json",
+      "bytes": 360,
+      "sha256": "51fead77d7c83295e4d252eb3f7859c95ebdd9c07f0d8958b268fda1b68f9d66"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib-version-probe.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib-version-probe.stdout.bin",
+      "bytes": 290,
+      "sha256": "05fe090e741f1c155ac12f3b0e3b8c71173a9bd65a0bfbb10bdac19c9e551d9a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib.json",
+      "bytes": 1151,
+      "sha256": "086a035bffbcaf6c2b5a52674c6438c79bda15e826767b906bc1528c19ccf18d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib.STARTED.json",
+      "bytes": 357,
+      "sha256": "8e25e15cfbd5948135ef8a9b4c6420365c6a06fb9ac97544d38f53fe336a0ab7"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlib.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlog-version.json",
+      "bytes": 1172,
+      "sha256": "81e71a28ec4adddc77e88496e666ebca060dcbcbd9e52c5c8f4707bb03d8bb6a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlog-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "85dee70b73def1de968f4e6d47b2b9b2ffd19942d938a92846db3ac04d1a808a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlog-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vlog-version.stdout.bin",
+      "bytes": 72,
+      "sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap-version.json",
+      "bytes": 1173,
+      "sha256": "016e4176b814fea8e031a80f564a9ce2a9b7f2d514195f25b86ac38f846e5e04"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "9b0f0ff972edcc77adb5f837d441530a581224088bd1ed897977db037be92b22"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap-version.stdout.bin",
+      "bytes": 83,
+      "sha256": "af0e3fe5f5352bf36389dc8312d99cac96afdfd797d1b9d5ea5a1c27dac0f818"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap.json",
+      "bytes": 1151,
+      "sha256": "dfd69a45ab09ee007c3d8c601a6ac11929aae2b0b4c1f3c0d364b66a1d785a46"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap.STARTED.json",
+      "bytes": 355,
+      "sha256": "a4c65a43a7ab9c2c0df466922da585bbde8ca1a0c320f67b99665bfe0905534a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vmap.stdout.bin",
+      "bytes": 153,
+      "sha256": "55342c337cc9b7ea311bf0cd1ca4ac5e11d7f2ee09f95d35c10b15fe977c6e4a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vsim-version.json",
+      "bytes": 1172,
+      "sha256": "497e0b8ccd20e5342af51f608d9bf5e488df2a7b081be2f3794a7f50669cfdcc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vsim-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "fc2e83dc9297f870bcd91b79f0666dd7f46b557b64c4d2fbe0b18d24c8257e9d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vsim-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\commands\\vsim-version.stdout.bin",
+      "bytes": 73,
+      "sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\INNER_FAILURE.json",
+      "bytes": 1265,
+      "sha256": "7391a25d65210af471aaecebdd515047c8a4e0e95dd63c9f608796c7b4643043"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\INVOCATION.json",
+      "bytes": 666,
+      "sha256": "d69c7f82f57befe155f25ab7c7ced513d2975438c10f2eadd8680e4c114e847b"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\job\\PROCESS.json",
+      "bytes": 4249,
+      "sha256": "eb3982b0aa83b8f36c471a33179121acd7cd261f6d340e67aba6ecb8088a5a5f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\job\\process.stderr.bin",
+      "bytes": 1119,
+      "sha256": "e118f8c332fc8e52c75a7ab14a89569bd84bd865c9235f748c4baef5e2d1f99b"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\job\\process.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\job\\PROCESS_STARTED.json",
+      "bytes": 2583,
+      "sha256": "66791ffc997b68213d5c3e28f533542a5b7c4d73abcd4ae438c0651add0869e9"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\JOB_RESULT.json",
+      "bytes": 4249,
+      "sha256": "eb3982b0aa83b8f36c471a33179121acd7cd261f6d340e67aba6ecb8088a5a5f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\OUTER_FAILURE.json",
+      "bytes": 884,
+      "sha256": "63d5d7cf2be5983ccd6eb26f1200f27a2e53fb4bf45b048ee0e715cd61206583"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\red\\modelsim.log",
+      "bytes": 2436,
+      "sha256": "5275b644a7d8b6ee6ce22853ff2bef9d5f8cbc65d1c71a08fe1853aa2e0d95d5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\red\\pins.csv",
+      "bytes": 296,
+      "sha256": "c4069181e05b1a51857519a6ea98d1e1b3de86ddbaa4fad82548515d2159b857"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\red\\run.do",
+      "bytes": 181,
+      "sha256": "8af73d6d14a28714d69223c522f030cdc68a0201206ad46712cabfb66de78fbb"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\sim\\modelsim.ini",
+      "bytes": 97978,
+      "sha256": "bd33fdf7e92c7879828207a30b7808f587434be9fb310b2bc8256687bc6d91cc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\dut80.sv",
+      "bytes": 9523,
+      "sha256": "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\immutable_scope_pinned.json",
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\master76.sv",
+      "bytes": 6514,
+      "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\owned_process.py",
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\README80.md",
+      "bytes": 4545,
+      "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\runner.py",
+      "bytes": 21469,
+      "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\SAFETY82_MAIN_REVIEW.json",
+      "bytes": 3323,
+      "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\tb82.sv",
+      "bytes": 24014,
+      "sha256": "cc7e048ab295559edda19def309e21bab270f51a9e88ec441b3883e8defb65b5"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\vectors80_UNEXECUTED.json",
+      "bytes": 21092,
+      "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\source\\windows_job.py",
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V2\\SOURCE_BEFORE.json",
+      "bytes": 7446,
+      "sha256": "5acb7bc7217100ae0ea7cdf432611667cb016c92a235b1bd6efd96c371fe7273"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\compile.json",
+      "bytes": 1716,
+      "sha256": "1bdda0937975cb3c16b7d2f8857292289f1fab2bc0291d4749c0fc12bdf443e8"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\compile.STARTED.json",
+      "bytes": 914,
+      "sha256": "a02c6c059b0d42fdd3c32f22b21b03b6628e3418127c25dccb3ce0f0c6d4f7d4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\compile.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\compile.stdout.bin",
+      "bytes": 874,
+      "sha256": "a6edd4d1eb9c08296215ce8616644ed31cb4a7d68d85b5e0a450b18de0ecb286"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\red-vsim.json",
+      "bytes": 1776,
+      "sha256": "7082dd0bdb6776b78d6ca8d5ac3fab4f3528e3dfa4c179c8053aa4ac10f7368d"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\red-vsim.STARTED.json",
+      "bytes": 973,
+      "sha256": "0c33a615d85b08e3bdeb3022ff7e4964d55788e553548b034eeb4fdabfb0c001"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\red-vsim.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\red-vsim.stdout.bin",
+      "bytes": 2280,
+      "sha256": "902b4a576f1fb1c9b31240b86eb446d9102aabdcf70ba5bba77b8d8b4b6315a1"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib-version-probe.json",
+      "bytes": 1185,
+      "sha256": "a58cb5a431ad1327ea26f653e32be94909a72834ea4161ae01188e091d19f907"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib-version-probe.STARTED.json",
+      "bytes": 361,
+      "sha256": "ccc437c064a8ddf3d46efa474b5b5fc84e7592a8d1471df1281b3776af3141ef"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib-version-probe.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib-version-probe.stdout.bin",
+      "bytes": 290,
+      "sha256": "05fe090e741f1c155ac12f3b0e3b8c71173a9bd65a0bfbb10bdac19c9e551d9a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib.json",
+      "bytes": 1151,
+      "sha256": "92abbc927b6de728c9955a65d63cf04c203ab6aa8f79446bdaab5c8bb729b250"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib.STARTED.json",
+      "bytes": 357,
+      "sha256": "bd1e7d3edb97dafb89b30e137a19725648cdef5bf04c3072a1fbe81ae1567439"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlib.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlog-version.json",
+      "bytes": 1172,
+      "sha256": "d22f135574c70734b2e61200e57c74a8393511e42e5ff8efcc014aa13dd9ae5b"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlog-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "b5522b52083581dec06da342c68bb278c017fad66acfd96bb59076d37c4491cc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlog-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vlog-version.stdout.bin",
+      "bytes": 72,
+      "sha256": "450cbd4d529ae1b7171936b09c40fb69418692c325bfe1ccdb2f41e2be0da677"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap-version.json",
+      "bytes": 1172,
+      "sha256": "a1f2147d76ef5d1bef184e3968ea6c97ac736ee096d50868a6ab44026f7ed630"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "d875679a67f1670e59fd2c63cc6e3a59d6ddd7dce19d2f9dee462f4dc632e8ac"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap-version.stdout.bin",
+      "bytes": 83,
+      "sha256": "af0e3fe5f5352bf36389dc8312d99cac96afdfd797d1b9d5ea5a1c27dac0f818"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap.json",
+      "bytes": 1151,
+      "sha256": "a4e0de26c839c8cc1f91e8a04f0d14ad3bd3bfdf1707811eb0bdab5db089c129"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap.STARTED.json",
+      "bytes": 355,
+      "sha256": "a94cab57e7bd37d36f2a90359369ff29a37aa2d8f53bb86a65f807eb7af50e03"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vmap.stdout.bin",
+      "bytes": 153,
+      "sha256": "55342c337cc9b7ea311bf0cd1ca4ac5e11d7f2ee09f95d35c10b15fe977c6e4a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vsim-version.json",
+      "bytes": 1172,
+      "sha256": "294ceebca50d5a44d7248836319406d7671712747d4075d514bdb788a675f7d0"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vsim-version.STARTED.json",
+      "bytes": 361,
+      "sha256": "7a92604d303530b6956b7871f0f30b90bec5367c6b56bbc22a144c6adfebd0ef"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vsim-version.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\commands\\vsim-version.stdout.bin",
+      "bytes": 73,
+      "sha256": "68964a09257980c917b9d6d2da28be34ecc0ce9c4921777f689c9467703bad27"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\INNER_RESULT.json",
+      "bytes": 17828,
+      "sha256": "5b55ab2ccd49a9b492dbb10a5a90d739e73313f978ccededd586e4121929b039"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\INVOCATION.json",
+      "bytes": 666,
+      "sha256": "56caad53be8caadb81f482a526b918a6a83d6ebb2aeeb6849d9a7aeeb32e032a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\job\\PROCESS.json",
+      "bytes": 4247,
+      "sha256": "7de7c0ea38bc542f00c5d03cc54a0c8ce396dbc4f839d8e3392a408aceee9285"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\job\\process.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\job\\process.stdout.bin",
+      "bytes": 85,
+      "sha256": "3ddb28a840550ef7bc0098ca628a375f18a1d73c4bebdfd81c59a993a10fd595"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\job\\PROCESS_STARTED.json",
+      "bytes": 2583,
+      "sha256": "dafc62841231aed3434161c181f19a7e1e438b7ac6269347312c4e637166a2e4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\JOB_RESULT.json",
+      "bytes": 4247,
+      "sha256": "7de7c0ea38bc542f00c5d03cc54a0c8ce396dbc4f839d8e3392a408aceee9285"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\red\\modelsim.log",
+      "bytes": 2228,
+      "sha256": "66fbe37f2aabdabe8b1ec105eec38dfd2ea889219b3d279ab30ce79a16bf6b15"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\red\\pins.csv",
+      "bytes": 1026,
+      "sha256": "6c3abec3f0fd41f174f459f0b33da725af1822fc6ff2c959b26dc999ae68b4a4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\red\\run.do",
+      "bytes": 181,
+      "sha256": "8af73d6d14a28714d69223c522f030cdc68a0201206ad46712cabfb66de78fbb"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\RESULT.json",
+      "bytes": 33803,
+      "sha256": "809f0079ef2616b5d5dfbf854b1a5756dca3d3b58c21004e1dbf5bbdfbbbf18f"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\sim\\modelsim.ini",
+      "bytes": 97978,
+      "sha256": "bd33fdf7e92c7879828207a30b7808f587434be9fb310b2bc8256687bc6d91cc"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\dut80.sv",
+      "bytes": 9523,
+      "sha256": "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\immutable_scope_pinned.json",
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\master76.sv",
+      "bytes": 6514,
+      "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\owned_process.py",
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\README80.md",
+      "bytes": 4545,
+      "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\runner.py",
+      "bytes": 21469,
+      "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\SAFETY82_MAIN_REVIEW.json",
+      "bytes": 3323,
+      "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\tb82.sv",
+      "bytes": 24014,
+      "sha256": "ffd3a497761f1d440bd8aa296b2d46ce4d7d4f8e7a57163f4ae3922f99a6b80a"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\vectors80_UNEXECUTED.json",
+      "bytes": 21092,
+      "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\source\\windows_job.py",
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_RED_BASELINE_V3\\SOURCE_BEFORE.json",
+      "bytes": 7446,
+      "sha256": "d5d9db9a716c89b7d3fa8839935101f2e51bcf473cb0fee721a87072b6ac30a1"
+    },
+    {
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\STARTED.json",
+      "bytes": 4897,
+      "sha256": "3763802523cd3388283e9478016d8d85356eb0f43a55f9073ed3776e3eab99d8"
+    }
+  ],
+  "independent_audit": "main-verification82/INDEPENDENT.json",
+  "decision": "Accept ONLY focused synthetic digital safety-arbitration stage. Main independently hashed333 files and decoded original SPI bits/edges/results. Same reviewed recovery task proves actual oldsource RED then selected one-line inhibited-rearm fix. Green8cases438checks14frames; no source beyond snapshots claimed executed.",
+  "failures_preserved": [
+    "RED_V1 unsupported vlib version probe before compilation",
+    "RED_V2 producer tag was not set before waiting ready, not product RED",
+    "GREEN_V1 checks passed but duplicate case-id marker made runner fail; GREEN_V2 corrects label only"
+  ],
+  "exits": {
+    "actual_baseline_red_vsim": 4,
+    "actual_baseline_red_launcher": 2,
+    "green_v2_vsim": 0,
+    "green_v2_launcher": 0
+  },
+  "not_accepted": [
+    "physical ADC/overrange provenance",
+    "analog gain/settling/5pct/8levels",
+    "production reserved tag/electrical level",
+    "natural master-result wrong-tag injection",
+    "100MHz timing/bitHWH",
+    "R04/fullH12/formal acceptance"
+  ],
+  "test_boundary": "Public-pin bytes independently reconstructed. Continuous unlogged held-state claims use reviewed public-port assertions, not an invented waveform. Original80 README/vectors remain source-only; wrapper is uninstantiated, default production disabled/unarmed; reserved0x99 is synthetic fixture only."
+}

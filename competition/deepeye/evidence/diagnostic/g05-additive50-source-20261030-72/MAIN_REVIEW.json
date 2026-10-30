@@ -1,0 +1,72 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-G05-ADDITIVE50-SOURCE-20261030-72",
+  "work_id": "B-G05-ADDITIVE50-MAIN-POSTREVIEW-20261030-R2",
+  "quality_main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-30T03:07:38.762293+00:00",
+  "source_commit": "2de41e214c6861c645fa7f8d205ed6b30ef1d073",
+  "decision": "Ready for A source/design review only; not executable release or product acceptance",
+  "source_only": true,
+  "candidate_executed": false,
+  "static_scope": "Exact source/dependency/hash/read-only named-port audit of12 instance sites, nine selected source files, Python AST only. Not compiler/elaborator/width/behavior/CDC proof.",
+  "independent_review": {
+    "source": "9f1bec003733ce582db21df326590f89e957da36",
+    "worker": "child-bb0858d8809245619ac3d41d473a5a99",
+    "finding_disposition": [
+      "Producer valid depended on ready: main R2 changes only this predicate plus hold-until-handshake comment; no behavioral test.",
+      "Unlatched Root association uses external producer hold-until-ready contract; no invented mismatch timeout. Lane already holds pending data.",
+      "Trace cancel tied low; no global capture/G05/trace STOP, host/Root receipt ACK or retry. Explicit unresolved integration gaps.",
+      "Only singleton top/host; raw quality mapping/calibration, exact freshness evidence, full Root identity/source/poses/actions remain absent.",
+      "Worker integration prose has a containment-order typo: actual data direction is raw->UART wrapper->payload adapter->trace_payload_candidate(one encoder)->serializer/UART. Source instance graph is authoritative.",
+      "Baseline commit974583f is original content; actual restoration was6f3468965470015e66775e65ade61bcd56b799e3. R1 source was local, not yet remotely published when review wrote published. Worker originals preserved."
+    ]
+  },
+  "default_closed": [
+    "SOURCE_REVIEW_HOLD=1",
+    "profile_v2_authorized=0",
+    "transport_allowed=0",
+    "BAUD=0/unset",
+    "host enabled=False; always core_ran=false/routeNONE/commandNone"
+  ],
+  "unchanged": [
+    "Original100MHz mapper/engine/builddriver bytes",
+    "Original100MHz final gate and profiles/vectors",
+    "H01-H15; both full H12 routes; final1pct/100ms"
+  ],
+  "unaccepted": [
+    "50MHz profile/PSclock/reset/baud/pins/AXIaperture/publicABI",
+    "Root provenance/quality/BOOT/session/source/admission/poses/action retirement",
+    "FullG05/B06/H12/29formal gates and system/board acceptance"
+  ],
+  "authority": "Original A6500172372 source/design-only decision; no simulation/unit tests/synthesis/route/build/clocksetter/board permission",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+  "recovery": "Original two Flash source jobs interrupted;22partial files retained without replay; main explicit R1/R2 recovery with disjoint new static-doc job.",
+  "future_checks_after_separate_A_release": [
+    "Review actual PS/AXI common-clock/reset topology and compile order",
+    "Elaborate/width-check selected names and all pinned dependencies",
+    "Exercise handshake stall/association mismatch/cancel/refusal/backpressure",
+    "Check mapper endpoints/rearm/expiry/watchdog and full original100MHz regression",
+    "Private E4/rev2 time/quality/fullidentity refusal and fixed C29 boundary tests",
+    "Only then any explicitly released synthesis/implementation; A alone board"
+  ]
+}

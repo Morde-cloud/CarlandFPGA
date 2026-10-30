@@ -1,0 +1,20 @@
+{
+  "job_id": "child-bb0858d8809245619ac3d41d473a5a99",
+  "instance_id": "deepseek-b-78",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-ADDITIVE50-STATIC-PORT-DOC-RECOVERY-20261030-R1",
+  "status": "completed",
+  "terminal": true,
+  "stale": false,
+  "created_at": "2026-10-30T02:39:04.218140Z",
+  "updated_at": "2026-10-30T03:07:27.299529Z",
+  "thread_id": "01a18aac-d605-78c2-82d3-e291fa50aebb",
+  "turn_id": "01a18aac-d6e3-7e11-9c17-527013ae0f74",
+  "turn_status": "completed",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "reasoning_effort": "max",
+  "final": "**Delivery**\n- Work `B-G05-ADDITIVE50-STATIC-PORT-DOC-RECOVERY-20261030-R1` completed under parent `01a18824-4172-74e2-a13f-f3e3d1e3ed99`.\n- `INTEGRATION_SOURCE_CONTRACT.md:1` — SHA256 `02aee8d5db7a26a6a72d1eb2e16189a2d32976bd75735d08ad28672a85cc0904`\n- `STATIC_PORT_REVIEW.md:1` — SHA256 `e96268e9e104cfeaeea28d1dbd61f31c12982ce949caa0127f419ef653a0530c`\n- `static_port_review.json:1` — SHA256 `a0df5b78b5be92fef3db51c403f06ef10cc9ff1b25da9e08f2e68524d98ebf6f`\n- The owned directory contains only these three files.\n\n**Verification**\n- Prior jobs were not resumed or replayed. Authority body matched `3f36d48aa5655f42f8b4756ad7c03af0bb3fce022d753fa3e7ea435d72c7aa34`.\n- H01–H15 canonical requirements matched `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`; raw scope matched `6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4`.\n- READY revision 2 matched `e2501e7f…5549c`, source commit `9f1bec003733ce582db21df326590f89e957da36`; all nine selected files and all 13 committed dependencies matched their Git blobs.\n- All 17 module cards matched actual declared port names, including the 77-port integration top.\n- All 16 C29 source files matched their manifest; manifest SHA256 is `0936cae30ac1a6fcbcc651c889f4e3ab24c7a9cd7c9ebbbce2ac51242701903c`.\n\n**Remaining Gaps**\n- S1: `trace_blk_valid`, `assoc_ready`, and `lane_ready` derive from `trace_blk_ready`; association metadata lacks registered holding/timeout.\n- S2: no global STOP, host ACK, Root receipt ACK, retry, or G05-to-trace STOP propagation.\n- S3–S6: Root private binding is absent; raw quality is dropped; selected top is singleton-only; exact 100 ms freshness is host-only.\n- C29 lacks Root configuration, poses, actions, and admission tail, requiring `INPUT_UNAVAILABLE`, `STOP`, and `core_ran=false`.\n- Both H12 routes remain unactivated. Final `1% / 100 ms` and `100 MHz` gates are unchanged; physical-board authority remains A-only.\n- No candidate import/call, generator, decoder, simulation, test, build, synthesis, route, MMIO, service, or board operation was performed. Nothing is product-accepted. No blocker or desktop/human escalation is needed.",
+  "pool_reclaimed_to_zero": true
+}

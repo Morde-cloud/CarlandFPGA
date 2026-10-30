@@ -1,0 +1,66 @@
+diff --git a/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl b/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl
+index 931a808..18c69f6 100644
+--- a/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl
++++ b/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl
+@@ -174,6 +174,39 @@ proc f50_check_unconstrained {report_path} {
+         {missing/ambiguous same-run unconstrained endpoint inventory}
+     require {[expr {wide([lindex $counts 0])}] == 0} {unconstrained internal endpoints remain; reports preserved}
+ }
++proc f50_read_source_bytes {path context} {
++    # Capture the actual call boundary before reading. Metadata is diagnostic,
++    # never a substitute for opening/reading or the exact-byte checks below.
++    set intent [dict create context $context path $path]
++    foreach property {exists isfile readable size} {
++        set code [catch [list file $property $path] value]
++        dict set intent file_$property [list $code $value]
++    }
++    puts [list F50_SOURCE_READ_BEGIN $intent]
++    flush stdout
++    set channel ""
++    set step open
++    if {[catch {
++        set channel [open $path rb]
++        set step read
++        set data [read $channel]
++        set step close
++        close $channel
++        set channel ""
++    } message options]} {
++        # Retain the original error even when the vendor returns an empty
++        # message. Cleanup never reopens or retries the failed read.
++        catch {
++            puts stderr [list F50_SOURCE_READ_ERROR $context $path $step $message $options]
++            flush stderr
++        }
++        if {$channel ne "" && $step eq "read"} {catch {close $channel}}
++        return -options $options $message
++    }
++    puts [list F50_SOURCE_READ_END $context $path [string length $data]]
++    flush stdout
++    return $data
++}
+ proc package_ip {sources root core_name top_name display description header_name parameter_name parameter_width} {
+     create_project "pack_$core_name" [file join $root "packaging_$core_name"] -part xc7z020clg400-1
+     add_files -norecurse $sources
+@@ -253,8 +286,8 @@ proc package_ip {sources root core_name top_name display description header_name
+             require {[dict exists $expected $base]} "unexpected packaged RTL/header: $name"
+             set actual [file normalize [file join $packaged_root $name]]
+             require {[string first "$packaged_root/" $actual] == 0} {packaged source escaped snapshot}
+-            set a [open $actual rb]; set actual_bytes [read $a]; close $a
+-            set b [open [dict get $expected $base] rb]; set original_bytes [read $b]; close $b
++            set actual_bytes [f50_read_source_bytes $actual [list packaged $core_name $name]]
++            set original_bytes [f50_read_source_bytes [dict get $expected $base] [list original $core_name $base]]
+             require {$actual_bytes eq $original_bytes} "packaged bytes changed: $base"
+             dict set found $base $actual
+         }
+@@ -507,8 +540,10 @@ if {[catch {
+     full_build [file normalize [lindex $argv 0]]
+ } message options]} {
+     puts stderr "FUNCTIONAL50_FAILED: $message"
++    puts stderr [list FUNCTIONAL50_ERROR_OPTIONS $options]
+     if {[info exists run_root]} {
+         catch {putfile [file join $run_root TCL_ERROR.txt] [dict get $options -errorinfo]}
++        catch {putfile [file join $run_root TCL_ERROR_OPTIONS.tcl] [list set functional50_error_options $options]}
+     }
+     catch {close_project}
+     exit 1

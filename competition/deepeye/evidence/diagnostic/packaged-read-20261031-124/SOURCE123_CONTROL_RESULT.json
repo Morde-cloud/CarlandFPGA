@@ -1,0 +1,46 @@
+{
+  "scope": "FOCUSED_PLAIN_TCL_DIAGNOSTIC_HELPER_ONLY",
+  "source_commit": "ada601ceac77493d92cff698be462c2cdaf5c29a",
+  "source_sha256": "cf40f040c7647443990dc2e5cac2acfb66f28728fc4df7faf698fdbe87f63ad5",
+  "tcl_version": "8.6.15",
+  "case_count": 5,
+  "all_passed": true,
+  "test_exit": 0,
+  "elapsed_seconds": 0.046999999998661224,
+  "cases": [
+    {
+      "case": "exact_binary_and_literal_context",
+      "exit": 0,
+      "bytes": 9,
+      "logs": "((('F50_SOURCE_READ_BEGIN', <dict object: 'context {context [literal] ;} path {D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin} file_exists {0 1} file_isfile {0 1} file_readable {0 1} file_size {0 9}'>),), (('F50_SOURCE_READ_END', 'context [literal] ;', <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin'>, 9),))"
+    },
+    {
+      "case": "actual_missing_file",
+      "exit": 1,
+      "errorcode": "('POSIX', 'ENOENT', 'no such file or directory')",
+      "message": "couldn't open \"D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin\": no such file or directory",
+      "logs": "((('F50_SOURCE_READ_BEGIN', <dict object: 'context {context [literal] ;} path D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin file_exists {0 0} file_isfile {0 0} file_readable {0 0} file_size {1 {could not read \"D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin\": no such file or directory}}'>),), (<channel object: 'stderr'>, ('F50_SOURCE_READ_ERROR', 'context [literal] ;', <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin'>, <cmdName object: 'open'>, 'couldn\\'t open \"D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin\": no such file or directory', ('-code', 1, '-level', 0, '-errorstack', ('INNER', (<instname object: 'invokeStk1'>, <cmdName object: 'open'>, <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin'>, 'rb'), 'CALL', (<cmdName object: 'f50_read_source_bytes'>, <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin'>, 'context [literal] ;')), '-errorcode', ('POSIX', 'ENOENT', 'no such file or directory'), '-errorinfo', 'couldn\\'t open \"D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/missing.bin\": no such file or directory\\n    while executing\\n\"open $path rb\"', '-errorline', 14))))"
+    },
+    {
+      "case": "blank_open_original_error_preserved_one_call",
+      "exit": 1,
+      "open_calls": 1,
+      "logs": "((('F50_SOURCE_READ_BEGIN', <dict object: 'context {context [literal] ;} path {D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin} file_exists {0 1} file_isfile {0 1} file_readable {0 1} file_size {0 9}'>),), (<channel object: 'stderr'>, ('F50_SOURCE_READ_ERROR', 'context [literal] ;', 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin', <cmdName object: 'open'>, '', ('-errorcode', ('F50', 'INJECTED', 'BLANK_OPEN'), '-code', 1, '-level', 0, '-errorstack', ('INNER', (<instname object: 'invokeStk1'>, <cmdName object: 'open'>, 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin', 'rb'), 'CALL', (<cmdName object: 'f50_read_source_bytes'>, 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin', 'context [literal] ;')), '-errorinfo', '\\n    while executing\\n\"open $path rb\"', '-errorline', 14))))"
+    },
+    {
+      "case": "read_error_original_options_and_single_cleanup",
+      "exit": 1,
+      "cleanup_close_calls": 1,
+      "logs": "((('F50_SOURCE_READ_BEGIN', <dict object: 'context {context [literal] ;} path {D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin} file_exists {0 1} file_isfile {0 1} file_readable {0 1} file_size {0 9}'>),), (<channel object: 'stderr'>, ('F50_SOURCE_READ_ERROR', 'context [literal] ;', <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin'>, <cmdName object: 'read'>, 'read failure', ('-errorcode', ('F50', 'INJECTED', 'READ'), '-code', 1, '-level', 0, '-errorstack', ('INNER', (<instname object: 'invokeStk1'>, <cmdName object: 'read'>, <channel object: 'file1dcb7cce6b0'>), 'CALL', (<cmdName object: 'f50_read_source_bytes'>, <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin'>, 'context [literal] ;')), '-errorinfo', 'read failure\\n    while executing\\n\"read $channel\"', '-errorline', 16))))"
+    },
+    {
+      "case": "ambiguous_close_not_replayed",
+      "exit": 1,
+      "close_calls": 1,
+      "logs": "((('F50_SOURCE_READ_BEGIN', <dict object: 'context {context [literal] ;} path {D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin} file_exists {0 1} file_isfile {0 1} file_readable {0 1} file_size {0 9}'>),), (<channel object: 'stderr'>, ('F50_SOURCE_READ_ERROR', 'context [literal] ;', <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin'>, <cmdName object: 'close'>, '', ('-errorcode', ('F50', 'INJECTED', 'CLOSE_UNKNOWN'), '-code', 1, '-level', 0, '-errorstack', ('INNER', (<instname object: 'invokeStk1'>, <cmdName object: 'close'>, <channel object: 'file1dcb5c5cd90'>), 'CALL', (<cmdName object: 'f50_read_source_bytes'>, <path object: 'D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-75/diagnostic123/focused-control-01/binary [literal] ; fixture.bin'>, 'context [literal] ;')), '-errorinfo', '\\n    while executing\\n\"close $channel\"', '-errorline', 18))))"
+    }
+  ],
+  "vendor_validation": false,
+  "root_cause116_proven": false,
+  "formal_acceptance": false
+}

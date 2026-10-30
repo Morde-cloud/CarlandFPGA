@@ -1,0 +1,21 @@
+{
+  "kind": "ADDITIVE_MAIN_ORCHESTRATION_ERROR_RECONCILIATION",
+  "script_sha256": "2874f7accd5dc677e65fea1b3afcef1de6b239695b32759ea01055a8456d791e",
+  "actual_tool_exit": 1,
+  "actual_tool_error": "LookupError: unknown encoding: utf8-sig",
+  "original_raw_tool_receipt": "Current main tool history before manifest116/launch116; not separately captured to disk at that time",
+  "failure_preceded_first_write_by_source_order": true,
+  "expected_two_mutation_outputs_absent": true,
+  "core21file_manifest_actual_verified": true,
+  "six_optional_control_artifacts_not_in_manifest": [
+    "BUILD116_VENDOR_PROCESS_INVENTORY.json",
+    "BUILD116_PRELAUNCH_SELECTED_SCRIPTS.json",
+    "BUILD116_AUTHORITY_BINDING_PLAN.md",
+    "prepare116_once.py",
+    "launch116_once.py",
+    "manifest116_once.py"
+  ],
+  "main_error": "Parent tool orchestration continued to core manifest creation and launch after optional binder exit1, without stopping/inspecting that return first. This was incorrect dependent-command handling.",
+  "scope": "Core21/A36-bound launch checks actually passed. Supplement did not pass and is not a prelaunch claim. No retroactive alteration to old manifest/claim/output.",
+  "prospective_correction": "Inspect each prerequisite exit before dependent operation; never compose failure-tolerant dependent mutations. Preserve old script and failed attempt."
+}

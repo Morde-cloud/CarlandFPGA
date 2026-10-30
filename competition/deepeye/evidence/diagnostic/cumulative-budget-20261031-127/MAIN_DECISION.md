@@ -1,0 +1,11 @@
+# B126 cumulative remaining budget compatibility
+
+Task DEEPEYE-IMPLEMENTATION-20261014/v1; work B-DEEPEYE-DECREASING-BUILD-BUDGET-20261031-126; actual main01a18824-4172-74e2-a13f-f3e3d1e3ed99. H01-H15/r1 fixedc229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804 remains. A alone board. All formal unmet gates remain.
+
+Main owns ONLY new competition/deepeye/tools/diagnostic/functional50_envelope126/ and resume-75/envelope126-main/. No active executor owns these paths. Existing108 and all old snapshots/pins/evidence remain unchanged;121 private source proposal is independent.
+
+A37 explicitly requires each new wrapper/inner cap to fit remaining cumulative7260s, including actual11615.172s. Source108 validate_limits accepts build limits ONLY exactly equal to its7260s BUILD_LIMITS, so the proposed7244s125 wrapper would refuse before launching. Do not monkeypatch its BUILD_LIMITS, relabel a build as software, ignore this validation, reuse7260s, or reset cumulative consumption.
+
+Prepare new126 by exact copy of108 and a minimal validation change: for build mode all fields except wall_seconds remain exactly equal to BUILD_LIMITS; wall_seconds must be finite positive and <=7260, and the existing strictly-positive live budget after unchanged5+5+5cleanup still applies. No native flags/caps, process accounting, output guard, timing/cleanup implementation or termination semantics change. Add a declaration recording the exact108 parent hash and reduced-time scope. One pure-function software control may test acceptance of exactbaseline/7244 and refusal of increasedtime, exhaustedcleanup, changedmode/caps/sampling/cleanup/nonfinite/bool. No process/vendor/oldresource suites run.
+
+This is a proposed tightening needed to obey the new cumulative requirement, not a waived A37 resource restriction. Update the concrete125 source proposal after scoped commit; A's explicit diagnostic selection must include this precise time-cap adaptation. No new vendor authorization or physical permission is created by126. Actual future launch must independently recompute consumed time from preserved prior outerRESULTs, bind the remaining cap and new innercap in approval/request/manifest, and assert no attempts or resource escalation.

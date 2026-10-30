@@ -1,0 +1,100 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-DECREASING-BUILD-BUDGET-20261031-126",
+  "source_commit": "41ef61a60871c305c79492854214f42658d83db0",
+  "source_sha256": "e7fc71922b53ceacb479543f68d91ca1002a668e820dc2a79c40d75f6be6ba52",
+  "focused_cases": 14,
+  "passed": true,
+  "exit_code": 0,
+  "elapsed_seconds": 0.0,
+  "cases": [
+    {
+      "case": "unchanged_baseline",
+      "expected_accept": true,
+      "actual_accept": true,
+      "reason": null
+    },
+    {
+      "case": "remaining7244",
+      "expected_accept": true,
+      "actual_accept": true,
+      "reason": null
+    },
+    {
+      "case": "increase7261",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "cleanup_exhausts15",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "positive live-work budget after cleanup reservation"
+    },
+    {
+      "case": "nonfinite",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "finite positive wall_seconds"
+    },
+    {
+      "case": "booltime",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "finite positive wall_seconds"
+    },
+    {
+      "case": "memory_smaller_not_selected",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "memory_bigger",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "native_process_change",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "sample_process_change",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "output_change",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "sampling_change",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "cleanup_change",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "build time may only decrease; every other main build limit stays exact"
+    },
+    {
+      "case": "mode_change",
+      "expected_accept": false,
+      "actual_accept": false,
+      "reason": "explicit build/software_test mode only"
+    }
+  ],
+  "no_module_initialization_or_native_process_or_vendor": true,
+  "old108_bytes_untouched": true,
+  "formal_acceptance": false
+}

@@ -15,47 +15,47 @@ module deepeye_integration_50mhz_candidate #(
 ) (
     // One common proposed PS fabric clock. All synchronous logic below uses
     // this clock. No PL-generated clock or clock-domain crossing is added here.
-    input logic fclk50_candidate,
-    input logic peripheral_aresetn_candidate,
+    input wire logic fclk50_candidate,
+    input wire logic peripheral_aresetn_candidate,
 
     // Existing raw acquisition source interface. sample_tick is the original
     // uint64 source QPC_ns supplied by Root; sample_quality is opaque uint8.
-    input logic sample_strobe,
-    input logic [1:0] sample_channel,
-    input logic [15:0] sample_data,
-    input logic [63:0] sample_tick,
-    input logic [7:0] sample_quality,
+    input wire logic sample_strobe,
+    input wire logic [1:0] sample_channel,
+    input wire logic [15:0] sample_data,
+    input wire logic [63:0] sample_tick,
+    input wire logic [7:0] sample_quality,
     // Root-owned synchronous DATA-PATH cancellation only. This disarms raw
     // capture and flushes queued/lane/sample/codec/serializer/UART state.
     // It is not G05/PC motion STOP, a host ACK, or a retired world action.
-    input logic source_cancel,
-    input logic capture_stop,
-    input logic capture_rearm,
-    input logic [31:0] capture_rearm_tag,
-    input logic queue_cancel,
-    input logic lane_cancel,
+    input wire logic source_cancel,
+    input wire logic capture_stop,
+    input wire logic capture_rearm,
+    input wire logic [31:0] capture_rearm_tag,
+    input wire logic queue_cancel,
+    input wire logic lane_cancel,
 
     // Root-owned association sideband for one lane/sample block. Full host
     // session strings and source hashes stay in the Root receipt, not here.
-    input logic assoc_valid, output logic assoc_ready,
-    input logic [31:0] assoc_tag,
-    input logic [31:0] assoc_first_seq, assoc_last_seq,
-    input logic [1:0] assoc_channel,
-    input logic [31:0] assoc_session, assoc_first_index,
-    input logic [7:0] assoc_count,
-    input logic [3:0] assoc_e,
-    input logic [15:0] assoc_index_stride, assoc_tick_stride_us,
-    input logic [63:0] assoc_first_qpc_ns, assoc_first_tick_us,
-    input logic [9:0] assoc_first_remainder_ns,
-    input logic [63:0] assoc_tick_stride_ns,
-    input logic [62:0] assoc_origin_qpc_ns,
-    input logic [63:0] assoc_origin_tick_us,
-    input logic [9:0] assoc_origin_remainder_ns,
-    input logic assoc_semantics_valid,
-    input logic assoc_valid_sample, assoc_saturated, assoc_held, assoc_source_fault,
-    input logic [63:0] assoc_source_qpc_ns, assoc_source_tick_us,
-    input logic [9:0] assoc_source_remainder_ns,
-    input logic [7:0] assoc_epoch, input logic [15:0] assoc_seq,
+    input wire logic assoc_valid, output logic assoc_ready,
+    input wire logic [31:0] assoc_tag,
+    input wire logic [31:0] assoc_first_seq, assoc_last_seq,
+    input wire logic [1:0] assoc_channel,
+    input wire logic [31:0] assoc_session, assoc_first_index,
+    input wire logic [7:0] assoc_count,
+    input wire logic [3:0] assoc_e,
+    input wire logic [15:0] assoc_index_stride, assoc_tick_stride_us,
+    input wire logic [63:0] assoc_first_qpc_ns, assoc_first_tick_us,
+    input wire logic [9:0] assoc_first_remainder_ns,
+    input wire logic [63:0] assoc_tick_stride_ns,
+    input wire logic [62:0] assoc_origin_qpc_ns,
+    input wire logic [63:0] assoc_origin_tick_us,
+    input wire logic [9:0] assoc_origin_remainder_ns,
+    input wire logic assoc_semantics_valid,
+    input wire logic assoc_valid_sample, assoc_saturated, assoc_held, assoc_source_fault,
+    input wire logic [63:0] assoc_source_qpc_ns, assoc_source_tick_us,
+    input wire logic [9:0] assoc_source_remainder_ns,
+    input wire logic [7:0] assoc_epoch, input wire logic [15:0] assoc_seq,
 
     // Existing lane stream. Top consumes one lane only when a matching Root
     // association is present; no first/last capture sequence is relabelled as
@@ -76,24 +76,24 @@ module deepeye_integration_50mhz_candidate #(
     output logic [31:0] capture_discarded_samples,
 
     // G05 private AXI4-Lite candidate. PS assigns the actual aperture externally.
-    input logic [11:0] s_axi_awaddr, input logic [2:0] s_axi_awprot,
-    input logic s_axi_awvalid, output logic s_axi_awready,
-    input logic [31:0] s_axi_wdata, input logic [3:0] s_axi_wstrb,
-    input logic s_axi_wvalid, output logic s_axi_wready,
+    input wire logic [11:0] s_axi_awaddr, input wire logic [2:0] s_axi_awprot,
+    input wire logic s_axi_awvalid, output logic s_axi_awready,
+    input wire logic [31:0] s_axi_wdata, input wire logic [3:0] s_axi_wstrb,
+    input wire logic s_axi_wvalid, output logic s_axi_wready,
     output logic [1:0] s_axi_bresp, output logic s_axi_bvalid,
-    input logic s_axi_bready,
-    input logic [11:0] s_axi_araddr, input logic [2:0] s_axi_arprot,
-    input logic s_axi_arvalid, output logic s_axi_arready,
+    input wire logic s_axi_bready,
+    input wire logic [11:0] s_axi_araddr, input wire logic [2:0] s_axi_arprot,
+    input wire logic s_axi_arvalid, output logic s_axi_arready,
     output logic [31:0] s_axi_rdata, output logic [1:0] s_axi_rresp,
-    output logic s_axi_rvalid, input logic s_axi_rready,
+    output logic s_axi_rvalid, input wire logic s_axi_rready,
 
     // Logical 50G05 candidate connector. These are not approved PYNQ pins.
     output logic g05_50_candidate_yaw_pwm_o,
     output logic g05_50_candidate_pitch_pwm_o,
     output logic g05_50_candidate_speed_pwm_o,
-    input logic g05_50_candidate_yaw_capture_i,
-    input logic g05_50_candidate_pitch_capture_i,
-    input logic g05_50_candidate_speed_capture_i
+    input wire logic g05_50_candidate_yaw_capture_i,
+    input wire logic g05_50_candidate_pitch_capture_i,
+    input wire logic g05_50_candidate_speed_capture_i
 );
     // Common reset: asynchronous assertion, two-cycle synchronous release.
     (* ASYNC_REG = "TRUE" *) logic [1:0] trace_reset_release_q;

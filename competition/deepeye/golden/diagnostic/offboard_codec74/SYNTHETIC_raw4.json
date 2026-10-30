@@ -1,0 +1,30 @@
+{
+  "schema": "B74_SYNTHETIC_RAW4_V1",
+  "evidence_kind": "SYNTHETIC_FIXTURE",
+  "origin_qpc_ns": 9007199254740993,
+  "raw_uint16": [32769, 65280, 4096, 65535],
+  "opaque_quality_uint8": [128, 254, 85, 163],
+  "acquisition_qpc_ns": [9007199264741116, 9007199274741123, 9007199284741130, 9007199294741137],
+  "source_qpc_ns": [9007199264741116, 9007199274741123, 9007199282740674, 9007199294741137],
+  "sample_indices": [1000, 1001, 1002, 1003],
+  "mapped_flags_by_channel": {
+    "0": {"valid": true, "saturated": false, "held": false, "source_fault": false},
+    "1": {"valid": true, "saturated": true, "held": false, "source_fault": false},
+    "2": {"valid": true, "saturated": false, "held": true, "source_fault": false},
+    "3": {"valid": true, "saturated": false, "held": false, "source_fault": true}
+  },
+  "source_identity": {
+    "operation_id": "B74-SYNTHETIC-NOT-ADC-OR-BOOT",
+    "kernel_boot_id": "SYNTHETIC-NO-REAL-BOOT",
+    "session_id": "SYNTHETIC-SESSION-RAW4-74",
+    "clock_domain_id": "SYNTHETIC-ORIGINAL-QPC-NS",
+    "request_hash": "7474747474747474747474747474747474747474747474747474747474747474",
+    "build_manifest_sha256": "7373737373737373737373737373737373737373737373737373737373737373",
+    "source_record_sha256": "7171717171717171717171717171717171717171717171717171717171717171",
+    "capture_sha256": "7272727272727272727272727272727272727272727272727272727272727272",
+    "tested_commit": "0a35e06248073564baab65706c6c30d89069db54",
+    "tag": 17, "generation": 1, "trigger_id": 74, "request_seq": 1,
+    "capture_seq": 1, "source_admission_index": 0
+  },
+  "identity_note": "All identity fields are synthetic labels, not authenticated receipts. tested_commit labels the reused B73 source only; execution uses recorded uncommitted source snapshots."
+}

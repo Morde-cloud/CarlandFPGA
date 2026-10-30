@@ -1,0 +1,1707 @@
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv
+index 6fe1b3f..e902dbb 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv
+@@ -15,47 +15,47 @@ module deepeye_integration_50mhz_candidate #(
+ ) (
+     // One common proposed PS fabric clock. All synchronous logic below uses
+     // this clock. No PL-generated clock or clock-domain crossing is added here.
+-    input logic fclk50_candidate,
+-    input logic peripheral_aresetn_candidate,
++    input wire logic fclk50_candidate,
++    input wire logic peripheral_aresetn_candidate,
+ 
+     // Existing raw acquisition source interface. sample_tick is the original
+     // uint64 source QPC_ns supplied by Root; sample_quality is opaque uint8.
+-    input logic sample_strobe,
+-    input logic [1:0] sample_channel,
+-    input logic [15:0] sample_data,
+-    input logic [63:0] sample_tick,
+-    input logic [7:0] sample_quality,
++    input wire logic sample_strobe,
++    input wire logic [1:0] sample_channel,
++    input wire logic [15:0] sample_data,
++    input wire logic [63:0] sample_tick,
++    input wire logic [7:0] sample_quality,
+     // Root-owned synchronous DATA-PATH cancellation only. This disarms raw
+     // capture and flushes queued/lane/sample/codec/serializer/UART state.
+     // It is not G05/PC motion STOP, a host ACK, or a retired world action.
+-    input logic source_cancel,
+-    input logic capture_stop,
+-    input logic capture_rearm,
+-    input logic [31:0] capture_rearm_tag,
+-    input logic queue_cancel,
+-    input logic lane_cancel,
++    input wire logic source_cancel,
++    input wire logic capture_stop,
++    input wire logic capture_rearm,
++    input wire logic [31:0] capture_rearm_tag,
++    input wire logic queue_cancel,
++    input wire logic lane_cancel,
+ 
+     // Root-owned association sideband for one lane/sample block. Full host
+     // session strings and source hashes stay in the Root receipt, not here.
+-    input logic assoc_valid, output logic assoc_ready,
+-    input logic [31:0] assoc_tag,
+-    input logic [31:0] assoc_first_seq, assoc_last_seq,
+-    input logic [1:0] assoc_channel,
+-    input logic [31:0] assoc_session, assoc_first_index,
+-    input logic [7:0] assoc_count,
+-    input logic [3:0] assoc_e,
+-    input logic [15:0] assoc_index_stride, assoc_tick_stride_us,
+-    input logic [63:0] assoc_first_qpc_ns, assoc_first_tick_us,
+-    input logic [9:0] assoc_first_remainder_ns,
+-    input logic [63:0] assoc_tick_stride_ns,
+-    input logic [62:0] assoc_origin_qpc_ns,
+-    input logic [63:0] assoc_origin_tick_us,
+-    input logic [9:0] assoc_origin_remainder_ns,
+-    input logic assoc_semantics_valid,
+-    input logic assoc_valid_sample, assoc_saturated, assoc_held, assoc_source_fault,
+-    input logic [63:0] assoc_source_qpc_ns, assoc_source_tick_us,
+-    input logic [9:0] assoc_source_remainder_ns,
+-    input logic [7:0] assoc_epoch, input logic [15:0] assoc_seq,
++    input wire logic assoc_valid, output logic assoc_ready,
++    input wire logic [31:0] assoc_tag,
++    input wire logic [31:0] assoc_first_seq, assoc_last_seq,
++    input wire logic [1:0] assoc_channel,
++    input wire logic [31:0] assoc_session, assoc_first_index,
++    input wire logic [7:0] assoc_count,
++    input wire logic [3:0] assoc_e,
++    input wire logic [15:0] assoc_index_stride, assoc_tick_stride_us,
++    input wire logic [63:0] assoc_first_qpc_ns, assoc_first_tick_us,
++    input wire logic [9:0] assoc_first_remainder_ns,
++    input wire logic [63:0] assoc_tick_stride_ns,
++    input wire logic [62:0] assoc_origin_qpc_ns,
++    input wire logic [63:0] assoc_origin_tick_us,
++    input wire logic [9:0] assoc_origin_remainder_ns,
++    input wire logic assoc_semantics_valid,
++    input wire logic assoc_valid_sample, assoc_saturated, assoc_held, assoc_source_fault,
++    input wire logic [63:0] assoc_source_qpc_ns, assoc_source_tick_us,
++    input wire logic [9:0] assoc_source_remainder_ns,
++    input wire logic [7:0] assoc_epoch, input wire logic [15:0] assoc_seq,
+ 
+     // Existing lane stream. Top consumes one lane only when a matching Root
+     // association is present; no first/last capture sequence is relabelled as
+@@ -76,24 +76,24 @@ module deepeye_integration_50mhz_candidate #(
+     output logic [31:0] capture_discarded_samples,
+ 
+     // G05 private AXI4-Lite candidate. PS assigns the actual aperture externally.
+-    input logic [11:0] s_axi_awaddr, input logic [2:0] s_axi_awprot,
+-    input logic s_axi_awvalid, output logic s_axi_awready,
+-    input logic [31:0] s_axi_wdata, input logic [3:0] s_axi_wstrb,
+-    input logic s_axi_wvalid, output logic s_axi_wready,
++    input wire logic [11:0] s_axi_awaddr, input wire logic [2:0] s_axi_awprot,
++    input wire logic s_axi_awvalid, output logic s_axi_awready,
++    input wire logic [31:0] s_axi_wdata, input wire logic [3:0] s_axi_wstrb,
++    input wire logic s_axi_wvalid, output logic s_axi_wready,
+     output logic [1:0] s_axi_bresp, output logic s_axi_bvalid,
+-    input logic s_axi_bready,
+-    input logic [11:0] s_axi_araddr, input logic [2:0] s_axi_arprot,
+-    input logic s_axi_arvalid, output logic s_axi_arready,
++    input wire logic s_axi_bready,
++    input wire logic [11:0] s_axi_araddr, input wire logic [2:0] s_axi_arprot,
++    input wire logic s_axi_arvalid, output logic s_axi_arready,
+     output logic [31:0] s_axi_rdata, output logic [1:0] s_axi_rresp,
+-    output logic s_axi_rvalid, input logic s_axi_rready,
++    output logic s_axi_rvalid, input wire logic s_axi_rready,
+ 
+     // Logical 50G05 candidate connector. These are not approved PYNQ pins.
+     output logic g05_50_candidate_yaw_pwm_o,
+     output logic g05_50_candidate_pitch_pwm_o,
+     output logic g05_50_candidate_speed_pwm_o,
+-    input logic g05_50_candidate_yaw_capture_i,
+-    input logic g05_50_candidate_pitch_capture_i,
+-    input logic g05_50_candidate_speed_capture_i
++    input wire logic g05_50_candidate_yaw_capture_i,
++    input wire logic g05_50_candidate_pitch_capture_i,
++    input wire logic g05_50_candidate_speed_capture_i
+ );
+     // Common reset: asynchronous assertion, two-cycle synchronous release.
+     (* ASYNC_REG = "TRUE" *) logic [1:0] trace_reset_release_q;
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv
+index 2304840..4cce829 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv
+@@ -12,31 +12,31 @@ module deepeye_trace_block_uart_50mhz_candidate #(
+     parameter integer BAUD = 0,
+     parameter integer STAT_W = 32
+ ) (
+-    input logic clk, rst, cancel,
+-    input logic profile_v2_authorized, transport_allowed,
++    input wire logic clk, rst, cancel,
++    input wire logic profile_v2_authorized, transport_allowed,
+ 
+-    input logic blk_valid, output logic blk_ready,
+-    input logic [7:0] blk_count, input logic [3:0] blk_e,
+-    input logic [31:0] blk_session, input logic [1:0] blk_channel,
+-    input logic [31:0] blk_first_index, input logic [15:0] blk_index_stride,
+-    input logic [63:0] blk_first_qpc_ns, blk_first_tick_us,
+-    input logic [9:0] blk_first_remainder_ns,
+-    input logic [63:0] blk_tick_stride_ns,
+-    input logic [15:0] blk_tick_stride_us,
+-    input logic [62:0] blk_origin_qpc_ns,
+-    input logic [63:0] blk_origin_tick_us,
+-    input logic [9:0] blk_origin_remainder_ns,
+-    input logic [7:0] blk_raw_quality,
+-    input logic blk_semantics_valid,
+-    input logic blk_valid_sample, blk_saturated, blk_held, blk_source_fault,
+-    input logic [63:0] blk_source_qpc_ns, blk_source_tick_us,
+-    input logic [9:0] blk_source_remainder_ns,
+-    input logic [7:0] cfg_epoch, input logic [15:0] cfg_seq,
+-    input logic s_valid, output logic s_ready,
+-    input logic [15:0] s_data, input logic s_last,
++    input wire logic blk_valid, output logic blk_ready,
++    input wire logic [7:0] blk_count, input wire logic [3:0] blk_e,
++    input wire logic [31:0] blk_session, input wire logic [1:0] blk_channel,
++    input wire logic [31:0] blk_first_index, input wire logic [15:0] blk_index_stride,
++    input wire logic [63:0] blk_first_qpc_ns, blk_first_tick_us,
++    input wire logic [9:0] blk_first_remainder_ns,
++    input wire logic [63:0] blk_tick_stride_ns,
++    input wire logic [15:0] blk_tick_stride_us,
++    input wire logic [62:0] blk_origin_qpc_ns,
++    input wire logic [63:0] blk_origin_tick_us,
++    input wire logic [9:0] blk_origin_remainder_ns,
++    input wire logic [7:0] blk_raw_quality,
++    input wire logic blk_semantics_valid,
++    input wire logic blk_valid_sample, blk_saturated, blk_held, blk_source_fault,
++    input wire logic [63:0] blk_source_qpc_ns, blk_source_tick_us,
++    input wire logic [9:0] blk_source_remainder_ns,
++    input wire logic [7:0] cfg_epoch, input wire logic [15:0] cfg_seq,
++    input wire logic s_valid, output logic s_ready,
++    input wire logic [15:0] s_data, input wire logic s_last,
+ 
+     output logic tx,
+-    output logic result_valid, input logic result_ready,
++    output logic result_valid, input wire logic result_ready,
+     output logic [2:0] result_error, output logic [5:0] result_bytes,
+     output logic [3:0] last_refusal_code,
+     // Shared cancellation level, not completion/health/authorization.
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_codec74/.gitattributes b/competition/deepeye/fpga/diagnostic/offboard_codec74/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_codec74/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_codec74/README.md b/competition/deepeye/fpga/diagnostic/offboard_codec74/README.md
+new file mode 100644
+index 0000000..3f743c4
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_codec74/README.md
+@@ -0,0 +1,137 @@
++# B74 bounded synthetic executable data path
++
++Task `DEEPEYE-IMPLEMENTATION-20261014/v1`, operation
++`B-DEEPEYE-OFFBOARD-CODEC-EXECUTABLE-20261030-74`. A09 supersedes A07's
++withdrawn encoder selection. Reuses B73/source
++`0a35e06248073564baab65706c6c30d89069db54`, PR30 head
++`d201499c513cf7172bd121c0e874fce3991bb175`.
++
++The separate `deepeye_SYNTHETIC_codec74_fixture` copies the existing top's
++data wiring and association predicate, omits G05, and exposes explicit fixture
++profile/transport/result-ready gates. Its clock 50 MHz/baud 5 M are simulation
++parameters only. It instantiates the existing buffered raw scan capture,
++scan lane stream, raw block payload adapter, **one** TRACE inner encoder,
++wire serializer and UART. There is no alternative encoder, double encoding,
++production `force`, planner invocation, clock setting, pin assignment or board
++operation. The production top retains hold 1/profile 0/transport 0/BAUD 0.
++
++The only edits to existing files are explicit `input wire logic` net
++declarations in the owned top and UART wrapper, required by ModelSim 10.7 with
++`default_nettype none`. Widths, directions, logic, parameters and gates are
++unchanged. The original host semantic decoder and payload adapter are unchanged.
++The default closed full production top was not simulated or released.
++
++## Actual evidence
++
++Local evidence root:
++`.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/codec-worker/`.
++See its `RESULT.json` for exact selected source hashes, tool hashes/versions,
++commands, stdout/stderr, exits and Windows Job receipts.
++
++* `attempt-04/mode0/`: actual four singleton frames from the same labelled
++  `SYNTHETIC_raw4.json` raw batch. Independent sampling of the external UART
++  line equals accepted serializer bytes. Four result stalls hold valid/data;
++  a wrong source tag stalls and preserves the raw lane. Mode0 completed
++  15,546 cycles and 150 bytes, but the overall attempt failed runner
++  qualification and remains failed.
++* `attempt-06/semantic/`: software-only positive execution over those saved
++  actual bytes. Four `B74_SEMANTIC_FIXTURE_V1` records wrap the existing strict
++  decoder view without renaming fields. Each includes exact wire hex/hash,
++  actually serialized canonical companion bytes/hash/length, original input
++  file/hash and decoder pins. Actual `decoded_value` values 32769, 65280, 4096,
++  65535 match independent original uint16 inputs. Original uint63 QPC above
++  2^53, fixed origin, remainder 123/130/137/144 ns, opaque quality 128/254/85/163,
++  source/trigger/sample identity and held source time are retained. The
++  decoder still returns structural STOP/core_ran=false/command=null.
++* `attempt-07/`: only previously unexecuted modes 1–3, dedicated runner
++  failure/success controls and ten decoder rejection CLI processes. No
++  repeated mode0. Cancel produces 5 received bytes, 6 serializer admissions,
++  one transaction abort, 514 UART backpressure cycles with byte stability,
++  and local empty/disarmed quiescence; release does not rearm/replay. Relative
++  uint32 tick and uint63 source overflow each refuse with result error 4,
++  refusal code 4 and zero wire bytes. Intentional RTL fatal exits 4; the separate
++  no-codec success exits 0. CRC, partial frame, full identity, opaque quality
++  overflow, flags mismatch, exact time, uint63 QPC, sequence nonwrap, index
++  mismatch and relative overflow each actually exit 2.
++
++Attempts 06 and 07 each exit 0 with their own exact before/after source snapshots
++unchanged, no timeout and whole Windows Job observed empty/terminal before
++handle close. Execution preceded any later source commit: **no later commit
++is claimed tested**. Mode0's exact source is attempt04's snapshot; subsequent
++bench completion/exit/stall-check refinements are in attempt07's snapshot.
++Only the negative branches of the semantic test driver changed after 06;
++its positive path and the existing semantic decoder did not change.
++
++Failures 01–05, every raw log and explicit repair decision remain preserved.
++01 was input-net compile failure.02/03 were a bench negedge polling bug that
++missed an already accepted descriptor's ready pulse;03 added diagnosis only.
++04/05 emitted the complete raw frames but failed Tcl completion qualification.
++The remaining runner uses an integer completed flag, visible with `+acc`,
++and a Tcl macro that propagates fatal failure. None of these overall failed
++attempts is relabelled passed.
++
++## Full serialized cost
++
++|Channel|Wire bytes|Mandatory companion bytes|Total|
++|---|---:|---:|---:|
++|0|37|1970|2007|
++|1|37|1970|2007|
++|2 held|39|1969|2008|
++|3|37|1970|2007|
++|Total|150|7879|8029|
++
++The 150 wire bytes include 48 outer header + 8 CRC + 86 payload metadata + 8 raw code
++bytes. The companions carry all required opaque quality, full identity and
++original ns timing/bindings, and are counted per frame without deduplication.
++UART's 150 bytes alone require 1500 bits under 8N1. No physical serialization
++format/rate is approved for the companions; 8029 is the serialized byte cost,
++not a physical latency measurement. The eight original raw value bytes are
++not a complete source-record denominator. This fixture does not meet or claim
++the final 1%/100ms compression target.
++
++## Reproduction under a new explicitly authorized operation
++
++Use the repository's existing Python and ModelSim installation; no install or
++service is needed. `prepare_fixture.py` regenerates the labelled test fixture
++and bench from the top's data wiring and `tb_body.sv.inc`. The runner's `full`
++phase compiles the new fixture and runs the small focused set. A `positive`
++phase uses previously saved mode0 bytes; `remaining` runs only modes 1–5 plus
++semantic negatives while reusing mode0 input hashes. Outputs must be a fresh,
++owned repository evidence directory; never reuse an old attempt directory.
++
++```powershell
++& .local/venv/Scripts/python.exe -B competition/deepeye/tools/diagnostic/offboard_codec74/prepare_fixture.py
++& .local/venv/Scripts/python.exe -B competition/deepeye/tools/diagnostic/offboard_codec74/run_codec74.py --out <fresh-owned-directory>
++```
++
++The actual commands and original cwd are recorded in each attempt's
++`commands/*.json`. Native commands descend from the existing pinned suspended
++Windows Job helper. Each command has 30 s, the whole Job 180 s, command records and
++stdout/stderr a 16 MiB limit, and each fixture 100,000 clocks maximum. Waveform
++logging is not requested. Whole-Job cleanup/terminal accounting is retained
++even for failures. The output cap is polled during commands and does not cap
++source snapshots or simulator library/WLF files; those are bounded here by
++the small fixed source set and finite simulation. Saved actual file sizes
++are in the final evidence manifest.
++
++## Remaining boundaries
++
++This is synthetic software/RTL evidence only. JSON labels/hashes are no source
++authentication, actual ADC, BOOT, calibration or Root action/receipt proof.
++Original source age is evaluated in exact ns; the stale control reports
++149999877 ns/100ms=false with STOP and no command. A companion value mismatch
++leaves actual decoded 32769 separate from original 1 and reports false match.
++This helper does not establish a new stateful multi-frame anti-replay receiver.
++Mandatory context transport, genuine aggregation, production activation,
++synthesis/implementation/timing, shared bandwidth, full host control/retirement
++and both complete H12 modes remain separate work/acceptance. A alone operates
++the board. No R20/R21/original 100MHz failure or formal gate is weakened.
++
++H01–H15 retain `DEEPEYE-HUMAN-LOCK-20261014/revision1`, pin
++`f5989cd5defce561f9ba98e6b18fc2682945f0a2`, canonical requirements SHA256
++`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`,
++freeze `1011259415a0916054eb580687612580bc1e5f09`. Full 3D/UI, hollow edge cube,
++solid collisions, free camera/layout/faces/equal gates and complete passage,
++hidden truth, device-bounded causal observations, online 3D/substantive PC AI,
++both H12 paths and every final formal gate remain required. Parent quality
++main/A perform independent acceptance and Git/PR handoff.
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_codec74/deepeye_SYNTHETIC_codec74_fixture.sv b/competition/deepeye/fpga/diagnostic/offboard_codec74/deepeye_SYNTHETIC_codec74_fixture.sv
+new file mode 100644
+index 0000000..283a293
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_codec74/deepeye_SYNTHETIC_codec74_fixture.sv
+@@ -0,0 +1,228 @@
++// SYNTHETIC_FIXTURE ONLY: copied B73 data wiring; no production enable.
++`default_nettype none
++module deepeye_SYNTHETIC_codec74_fixture #(
++    parameter integer CLOCK_HZ = 50000000,
++    parameter integer BAUD = 5000000,
++    parameter bit SOURCE_REVIEW_HOLD = 1'b0
++) (
++    // One common proposed PS fabric clock. All synchronous logic below uses
++    // this clock. No PL-generated clock or clock-domain crossing is added here.
++    input wire logic fclk50_candidate,
++    input wire logic peripheral_aresetn_candidate,
++
++    // Existing raw acquisition source interface. sample_tick is the original
++    // uint64 source QPC_ns supplied by Root; sample_quality is opaque uint8.
++    input wire logic sample_strobe,
++    input wire logic [1:0] sample_channel,
++    input wire logic [15:0] sample_data,
++    input wire logic [63:0] sample_tick,
++    input wire logic [7:0] sample_quality,
++    // Root-owned synchronous DATA-PATH cancellation only. This disarms raw
++    // capture and flushes queued/lane/sample/codec/serializer/UART state.
++    // It is not G05/PC motion STOP, a host ACK, or a retired world action.
++    input wire logic source_cancel,
++    input wire logic capture_stop,
++    input wire logic capture_rearm,
++    input wire logic [31:0] capture_rearm_tag,
++    input wire logic queue_cancel,
++    input wire logic lane_cancel,
++
++    // Root-owned association sideband for one lane/sample block. Full host
++    // session strings and source hashes stay in the Root receipt, not here.
++    input wire logic assoc_valid, output logic assoc_ready,
++    input wire logic [31:0] assoc_tag,
++    input wire logic [31:0] assoc_first_seq, assoc_last_seq,
++    input wire logic [1:0] assoc_channel,
++    input wire logic [31:0] assoc_session, assoc_first_index,
++    input wire logic [7:0] assoc_count,
++    input wire logic [3:0] assoc_e,
++    input wire logic [15:0] assoc_index_stride, assoc_tick_stride_us,
++    input wire logic [63:0] assoc_first_qpc_ns, assoc_first_tick_us,
++    input wire logic [9:0] assoc_first_remainder_ns,
++    input wire logic [63:0] assoc_tick_stride_ns,
++    input wire logic [62:0] assoc_origin_qpc_ns,
++    input wire logic [63:0] assoc_origin_tick_us,
++    input wire logic [9:0] assoc_origin_remainder_ns,
++    input wire logic assoc_semantics_valid,
++    input wire logic assoc_valid_sample, assoc_saturated, assoc_held, assoc_source_fault,
++    input wire logic [63:0] assoc_source_qpc_ns, assoc_source_tick_us,
++    input wire logic [9:0] assoc_source_remainder_ns,
++    input wire logic [7:0] assoc_epoch, input wire logic [15:0] assoc_seq,
++
++    // Existing lane stream. Top consumes one lane only when a matching Root
++    // association is present; no first/last capture sequence is relabelled as
++    // a per-channel acquisition index.
++    output logic trace_lane_ready,
++
++    // Unproduced Root-owned blocking UART boundary. Physical pin/profile unset.
++    output logic trace_uart_tx,
++    output logic trace_transaction_aborted,
++    output logic trace_result_valid, output logic [2:0] trace_result_error,
++    output logic [5:0] trace_result_bytes,
++    output logic [3:0] trace_refusal_code,
++    output logic trace_wire_faulted, trace_transport_profile_unset,
++    // Empty/disarmed internal data path; not source health or movement STOP.
++    // Root must record the cancellation and invalidate any partial wire frame.
++    output logic data_path_quiescent,
++    output logic capture_fault_event, capture_sequence_exhausted,
++    output logic [31:0] capture_discarded_samples,
++
++    input wire logic fixture_profile_enabled, fixture_transport_enabled,
++    input wire logic fixture_result_ready
++);
++    // Common reset: asynchronous assertion, two-cycle synchronous release.
++    (* ASYNC_REG = "TRUE" *) logic [1:0] trace_reset_release_q;
++    always_ff @(posedge fclk50_candidate or negedge peripheral_aresetn_candidate) begin
++        if (!peripheral_aresetn_candidate) trace_reset_release_q <= 2'b00;
++        else trace_reset_release_q <= {trace_reset_release_q[0],1'b1};
++    end
++    wire trace_rst = !trace_reset_release_q[1] || SOURCE_REVIEW_HOLD;
++
++    logic cap_out_valid, cap_out_ready;
++    logic [63:0] cap_out_data;
++    logic [255:0] cap_out_ticks;
++    logic [31:0] cap_out_quality, cap_out_first_seq, cap_out_last_seq, cap_out_tag;
++    logic cap_armed;
++    logic [2:0] cap_partial_len;
++    logic [31:0] cap_next_seq;
++    logic cap_seq_exhausted, cap_order_error_event, cap_overrun_event, cap_seq_exhaust_event;
++    logic [31:0] cap_stat_events, cap_stat_scans, cap_stat_retired;
++    logic [31:0] cap_stat_discarded_samples, cap_stat_order_errors, cap_stat_overruns;
++    logic [2:0] cap_queue_level;
++    logic [31:0] cap_queue_accepted, cap_queue_retired, cap_queue_aborted;
++
++    deepeye_buffered_scan_capture capture_i (
++        .clk(fclk50_candidate), .rst(trace_rst), .stop(capture_stop || source_cancel),
++        .rearm(capture_rearm), .queue_cancel(queue_cancel || source_cancel),
++        .sample_strobe(sample_strobe), .rearm_tag(capture_rearm_tag),
++        .sample_channel(sample_channel), .sample_data(sample_data),
++        .sample_tick(sample_tick), .sample_quality(sample_quality),
++        .out_ready(cap_out_ready), .out_valid(cap_out_valid), .out_data(cap_out_data),
++        .out_ticks(cap_out_ticks), .out_quality(cap_out_quality),
++        .out_first_seq(cap_out_first_seq), .out_last_seq(cap_out_last_seq),
++        .out_tag(cap_out_tag), .capture_armed(cap_armed),
++        .capture_partial_len(cap_partial_len), .capture_next_seq(cap_next_seq),
++        .capture_seq_exhausted(cap_seq_exhausted),
++        .capture_order_error_event(cap_order_error_event),
++        .capture_overrun_event(cap_overrun_event),
++        .capture_seq_exhaust_event(cap_seq_exhaust_event),
++        .capture_stat_events(cap_stat_events), .capture_stat_scans(cap_stat_scans),
++        .capture_stat_retired(cap_stat_retired),
++        .capture_stat_discarded_samples(cap_stat_discarded_samples),
++        .capture_stat_order_errors(cap_stat_order_errors),
++        .capture_stat_overruns(cap_stat_overruns),
++        .queue_level(cap_queue_level), .queue_stat_accepted(cap_queue_accepted),
++        .queue_stat_retired(cap_queue_retired), .queue_stat_aborted(cap_queue_aborted));
++
++    assign capture_fault_event = cap_order_error_event || cap_overrun_event || cap_seq_exhaust_event;
++    assign capture_sequence_exhausted = cap_seq_exhausted;
++    assign capture_discarded_samples = cap_stat_discarded_samples;
++
++    logic lane_valid, lane_ready, lane_last;
++    logic [1:0] lane_channel;
++    logic [15:0] lane_data;
++    logic [63:0] lane_tick;
++    logic [7:0] lane_quality;
++    logic [31:0] lane_first_seq, lane_last_seq, lane_tag;
++
++    deepeye_scan_lane_stream lane_i (
++        .clk(fclk50_candidate), .rst(trace_rst), .cancel(lane_cancel || source_cancel),
++        .in_valid(cap_out_valid), .in_ready(cap_out_ready), .in_data(cap_out_data),
++        .in_ticks(cap_out_ticks), .in_quality(cap_out_quality),
++        .in_first_seq(cap_out_first_seq), .in_last_seq(cap_out_last_seq),
++        .in_tag(cap_out_tag), .out_valid(lane_valid), .out_ready(lane_ready),
++        .out_channel(lane_channel), .out_data(lane_data), .out_tick(lane_tick),
++        .out_quality(lane_quality), .out_first_seq(lane_first_seq),
++        .out_last_seq(lane_last_seq), .out_tag(lane_tag), .out_last(lane_last));
++
++    logic trace_blk_valid, trace_blk_ready;
++    logic trace_s_valid, trace_s_ready;
++    logic trace_result_ready, trace_busy, trace_cancel_active;
++    logic sample_pending_q, source_cancelled_q;
++    wire assoc_match = !trace_rst && !source_cancel && !trace_cancel_active && !sample_pending_q && lane_valid && assoc_valid &&
++        (assoc_tag == lane_tag) &&
++        (assoc_first_seq == lane_first_seq) &&
++        (assoc_last_seq == lane_last_seq) &&
++        (assoc_channel == lane_channel) &&
++        (assoc_count == 8'd1) &&
++        (assoc_first_qpc_ns == lane_tick);
++    assign lane_ready = trace_blk_ready && assoc_match;
++    assign trace_lane_ready = lane_ready;
++    assign assoc_ready = trace_blk_ready && assoc_match;
++    // Producer valid is independent of downstream ready. Root must hold
++    // assoc_valid and every assoc_* field until assoc_valid && assoc_ready,
++    // or explicitly cancel the joined transaction. The lane stream holds its
++    // pending raw lane while stalled. No mismatch timeout is invented here.
++    assign trace_blk_valid = assoc_match;
++
++    logic [15:0] sample_data_q;
++    always_ff @(posedge fclk50_candidate) begin
++        if (trace_rst) source_cancelled_q <= 1'b0;
++        else if (source_cancel) source_cancelled_q <= 1'b1;
++        else if (capture_rearm) source_cancelled_q <= 1'b0;
++    end
++    always_ff @(posedge fclk50_candidate) begin
++        if (trace_rst || source_cancel || trace_cancel_active) begin
++            sample_pending_q <= 1'b0;
++            sample_data_q <= 16'd0;
++        end else begin
++            if (trace_blk_valid && trace_blk_ready) begin
++                sample_pending_q <= 1'b1;
++                sample_data_q <= lane_data;
++            end else if (trace_s_valid && trace_s_ready) begin
++                sample_pending_q <= 1'b0;
++            end else if (trace_result_valid) begin
++                // Refused descriptor produced no payload; drop its held sample.
++                sample_pending_q <= 1'b0;
++            end
++        end
++    end
++    assign trace_s_valid = sample_pending_q;
++
++    deepeye_trace_block_uart_50mhz_candidate #(
++        .CLOCK_HZ(CLOCK_HZ), .BAUD(BAUD), .STAT_W(32)
++    ) trace_i (
++        .clk(fclk50_candidate), .rst(trace_rst), .cancel(source_cancel),
++        // No public v2 semantic or transport profile is activated by this top.
++        .profile_v2_authorized(fixture_profile_enabled), .transport_allowed(fixture_transport_enabled),
++        .blk_valid(trace_blk_valid), .blk_ready(trace_blk_ready),
++        .blk_count(assoc_count), .blk_e(assoc_e), .blk_session(assoc_session),
++        .blk_channel(assoc_channel), .blk_first_index(assoc_first_index),
++        .blk_index_stride(assoc_index_stride),
++        .blk_first_qpc_ns(assoc_first_qpc_ns), .blk_first_tick_us(assoc_first_tick_us),
++        .blk_first_remainder_ns(assoc_first_remainder_ns),
++        .blk_tick_stride_ns(assoc_tick_stride_ns),
++        .blk_tick_stride_us(assoc_tick_stride_us),
++        .blk_origin_qpc_ns(assoc_origin_qpc_ns),
++        .blk_origin_tick_us(assoc_origin_tick_us),
++        .blk_origin_remainder_ns(assoc_origin_remainder_ns),
++        .blk_raw_quality(lane_quality), .blk_semantics_valid(assoc_semantics_valid),
++        .blk_valid_sample(assoc_valid_sample), .blk_saturated(assoc_saturated),
++        .blk_held(assoc_held), .blk_source_fault(assoc_source_fault),
++        .blk_source_qpc_ns(assoc_source_qpc_ns),
++        .blk_source_tick_us(assoc_source_tick_us),
++        .blk_source_remainder_ns(assoc_source_remainder_ns),
++        .cfg_epoch(assoc_epoch), .cfg_seq(assoc_seq),
++        .s_valid(trace_s_valid), .s_ready(trace_s_ready),
++        .s_data(sample_data_q), .s_last(1'b1),
++        .tx(trace_uart_tx), .result_valid(trace_result_valid),
++        .result_ready(trace_result_ready), .result_error(trace_result_error),
++        .result_bytes(trace_result_bytes), .last_refusal_code(trace_refusal_code),
++        .cancel_active(trace_cancel_active),
++        .transaction_aborted(trace_transaction_aborted),
++        .busy(trace_busy), .wire_faulted(trace_wire_faulted),
++        .transport_profile_unset(trace_transport_profile_unset));
++    assign trace_result_ready = fixture_result_ready;
++    // Qualify this indication only after an actual source_cancel edge. A
++    // merely disarmed capture can still hold a completed internal scan slot.
++    assign data_path_quiescent = source_cancelled_q && !trace_rst && !capture_rearm && !cap_armed
++        && (cap_partial_len == 0) && (cap_queue_level == 0) && !cap_out_valid
++        && !lane_valid && !sample_pending_q && !trace_busy;
++    // source_cancel beats capture_rearm at the capture primitive. Releasing
++    // cancel does not rearm it. Root must issue a fresh explicit rearm/tag and
++    // private transport binding; never replay an old descriptor automatically.
++    // Already emitted bytes cannot be recalled. Quiescence is a local digital
++    // observation only and says nothing about g05_i or a PC/world executor.
++
++endmodule
++`default_nettype wire
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_codec74/ports.json b/competition/deepeye/fpga/diagnostic/offboard_codec74/ports.json
+new file mode 100644
+index 0000000..fa30335
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_codec74/ports.json
+@@ -0,0 +1,292 @@
++[
++  [
++    "input",
++    "",
++    "fclk50_candidate"
++  ],
++  [
++    "input",
++    "",
++    "peripheral_aresetn_candidate"
++  ],
++  [
++    "input",
++    "",
++    "sample_strobe"
++  ],
++  [
++    "input",
++    "[1:0]",
++    "sample_channel"
++  ],
++  [
++    "input",
++    "[15:0]",
++    "sample_data"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "sample_tick"
++  ],
++  [
++    "input",
++    "[7:0]",
++    "sample_quality"
++  ],
++  [
++    "input",
++    "",
++    "source_cancel"
++  ],
++  [
++    "input",
++    "",
++    "capture_stop"
++  ],
++  [
++    "input",
++    "",
++    "capture_rearm"
++  ],
++  [
++    "input",
++    "[31:0]",
++    "capture_rearm_tag"
++  ],
++  [
++    "input",
++    "",
++    "queue_cancel"
++  ],
++  [
++    "input",
++    "",
++    "lane_cancel"
++  ],
++  [
++    "input",
++    "",
++    "assoc_valid"
++  ],
++  [
++    "output",
++    "",
++    "assoc_ready"
++  ],
++  [
++    "input",
++    "[31:0]",
++    "assoc_tag"
++  ],
++  [
++    "input",
++    "[31:0]",
++    "assoc_first_seq"
++  ],
++  [
++    "input",
++    "[31:0]",
++    "assoc_last_seq"
++  ],
++  [
++    "input",
++    "[1:0]",
++    "assoc_channel"
++  ],
++  [
++    "input",
++    "[31:0]",
++    "assoc_session"
++  ],
++  [
++    "input",
++    "[31:0]",
++    "assoc_first_index"
++  ],
++  [
++    "input",
++    "[7:0]",
++    "assoc_count"
++  ],
++  [
++    "input",
++    "[3:0]",
++    "assoc_e"
++  ],
++  [
++    "input",
++    "[15:0]",
++    "assoc_index_stride"
++  ],
++  [
++    "input",
++    "[15:0]",
++    "assoc_tick_stride_us"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "assoc_first_qpc_ns"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "assoc_first_tick_us"
++  ],
++  [
++    "input",
++    "[9:0]",
++    "assoc_first_remainder_ns"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "assoc_tick_stride_ns"
++  ],
++  [
++    "input",
++    "[62:0]",
++    "assoc_origin_qpc_ns"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "assoc_origin_tick_us"
++  ],
++  [
++    "input",
++    "[9:0]",
++    "assoc_origin_remainder_ns"
++  ],
++  [
++    "input",
++    "",
++    "assoc_semantics_valid"
++  ],
++  [
++    "input",
++    "",
++    "assoc_valid_sample"
++  ],
++  [
++    "input",
++    "",
++    "assoc_saturated"
++  ],
++  [
++    "input",
++    "",
++    "assoc_held"
++  ],
++  [
++    "input",
++    "",
++    "assoc_source_fault"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "assoc_source_qpc_ns"
++  ],
++  [
++    "input",
++    "[63:0]",
++    "assoc_source_tick_us"
++  ],
++  [
++    "input",
++    "[9:0]",
++    "assoc_source_remainder_ns"
++  ],
++  [
++    "input",
++    "[7:0]",
++    "assoc_epoch"
++  ],
++  [
++    "input",
++    "[15:0]",
++    "assoc_seq"
++  ],
++  [
++    "output",
++    "",
++    "trace_lane_ready"
++  ],
++  [
++    "output",
++    "",
++    "trace_uart_tx"
++  ],
++  [
++    "output",
++    "",
++    "trace_transaction_aborted"
++  ],
++  [
++    "output",
++    "",
++    "trace_result_valid"
++  ],
++  [
++    "output",
++    "[2:0]",
++    "trace_result_error"
++  ],
++  [
++    "output",
++    "[5:0]",
++    "trace_result_bytes"
++  ],
++  [
++    "output",
++    "[3:0]",
++    "trace_refusal_code"
++  ],
++  [
++    "output",
++    "",
++    "trace_wire_faulted"
++  ],
++  [
++    "output",
++    "",
++    "trace_transport_profile_unset"
++  ],
++  [
++    "output",
++    "",
++    "data_path_quiescent"
++  ],
++  [
++    "output",
++    "",
++    "capture_fault_event"
++  ],
++  [
++    "output",
++    "",
++    "capture_sequence_exhausted"
++  ],
++  [
++    "output",
++    "[31:0]",
++    "capture_discarded_samples"
++  ],
++  [
++    "input",
++    "",
++    "fixture_profile_enabled"
++  ],
++  [
++    "input",
++    "",
++    "fixture_transport_enabled"
++  ],
++  [
++    "input",
++    "",
++    "fixture_result_ready"
++  ]
++]
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_codec74/tb_SYNTHETIC_codec74.sv b/competition/deepeye/fpga/diagnostic/offboard_codec74/tb_SYNTHETIC_codec74.sv
+new file mode 100644
+index 0000000..5e0b93d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_codec74/tb_SYNTHETIC_codec74.sv
+@@ -0,0 +1,315 @@
++`timescale 1ns/1ps
++module tb_SYNTHETIC_codec74;
++logic  fclk50_candidate;
++logic  peripheral_aresetn_candidate;
++logic  sample_strobe;
++logic [1:0] sample_channel;
++logic [15:0] sample_data;
++logic [63:0] sample_tick;
++logic [7:0] sample_quality;
++logic  source_cancel;
++logic  capture_stop;
++logic  capture_rearm;
++logic [31:0] capture_rearm_tag;
++logic  queue_cancel;
++logic  lane_cancel;
++logic  assoc_valid;
++logic  assoc_ready;
++logic [31:0] assoc_tag;
++logic [31:0] assoc_first_seq;
++logic [31:0] assoc_last_seq;
++logic [1:0] assoc_channel;
++logic [31:0] assoc_session;
++logic [31:0] assoc_first_index;
++logic [7:0] assoc_count;
++logic [3:0] assoc_e;
++logic [15:0] assoc_index_stride;
++logic [15:0] assoc_tick_stride_us;
++logic [63:0] assoc_first_qpc_ns;
++logic [63:0] assoc_first_tick_us;
++logic [9:0] assoc_first_remainder_ns;
++logic [63:0] assoc_tick_stride_ns;
++logic [62:0] assoc_origin_qpc_ns;
++logic [63:0] assoc_origin_tick_us;
++logic [9:0] assoc_origin_remainder_ns;
++logic  assoc_semantics_valid;
++logic  assoc_valid_sample;
++logic  assoc_saturated;
++logic  assoc_held;
++logic  assoc_source_fault;
++logic [63:0] assoc_source_qpc_ns;
++logic [63:0] assoc_source_tick_us;
++logic [9:0] assoc_source_remainder_ns;
++logic [7:0] assoc_epoch;
++logic [15:0] assoc_seq;
++logic  trace_lane_ready;
++logic  trace_uart_tx;
++logic  trace_transaction_aborted;
++logic  trace_result_valid;
++logic [2:0] trace_result_error;
++logic [5:0] trace_result_bytes;
++logic [3:0] trace_refusal_code;
++logic  trace_wire_faulted;
++logic  trace_transport_profile_unset;
++logic  data_path_quiescent;
++logic  capture_fault_event;
++logic  capture_sequence_exhausted;
++logic [31:0] capture_discarded_samples;
++logic  fixture_profile_enabled;
++logic  fixture_transport_enabled;
++logic  fixture_result_ready;
++deepeye_SYNTHETIC_codec74_fixture dut(
++.fclk50_candidate(fclk50_candidate),
++.peripheral_aresetn_candidate(peripheral_aresetn_candidate),
++.sample_strobe(sample_strobe),
++.sample_channel(sample_channel),
++.sample_data(sample_data),
++.sample_tick(sample_tick),
++.sample_quality(sample_quality),
++.source_cancel(source_cancel),
++.capture_stop(capture_stop),
++.capture_rearm(capture_rearm),
++.capture_rearm_tag(capture_rearm_tag),
++.queue_cancel(queue_cancel),
++.lane_cancel(lane_cancel),
++.assoc_valid(assoc_valid),
++.assoc_ready(assoc_ready),
++.assoc_tag(assoc_tag),
++.assoc_first_seq(assoc_first_seq),
++.assoc_last_seq(assoc_last_seq),
++.assoc_channel(assoc_channel),
++.assoc_session(assoc_session),
++.assoc_first_index(assoc_first_index),
++.assoc_count(assoc_count),
++.assoc_e(assoc_e),
++.assoc_index_stride(assoc_index_stride),
++.assoc_tick_stride_us(assoc_tick_stride_us),
++.assoc_first_qpc_ns(assoc_first_qpc_ns),
++.assoc_first_tick_us(assoc_first_tick_us),
++.assoc_first_remainder_ns(assoc_first_remainder_ns),
++.assoc_tick_stride_ns(assoc_tick_stride_ns),
++.assoc_origin_qpc_ns(assoc_origin_qpc_ns),
++.assoc_origin_tick_us(assoc_origin_tick_us),
++.assoc_origin_remainder_ns(assoc_origin_remainder_ns),
++.assoc_semantics_valid(assoc_semantics_valid),
++.assoc_valid_sample(assoc_valid_sample),
++.assoc_saturated(assoc_saturated),
++.assoc_held(assoc_held),
++.assoc_source_fault(assoc_source_fault),
++.assoc_source_qpc_ns(assoc_source_qpc_ns),
++.assoc_source_tick_us(assoc_source_tick_us),
++.assoc_source_remainder_ns(assoc_source_remainder_ns),
++.assoc_epoch(assoc_epoch),
++.assoc_seq(assoc_seq),
++.trace_lane_ready(trace_lane_ready),
++.trace_uart_tx(trace_uart_tx),
++.trace_transaction_aborted(trace_transaction_aborted),
++.trace_result_valid(trace_result_valid),
++.trace_result_error(trace_result_error),
++.trace_result_bytes(trace_result_bytes),
++.trace_refusal_code(trace_refusal_code),
++.trace_wire_faulted(trace_wire_faulted),
++.trace_transport_profile_unset(trace_transport_profile_unset),
++.data_path_quiescent(data_path_quiescent),
++.capture_fault_event(capture_fault_event),
++.capture_sequence_exhausted(capture_sequence_exhausted),
++.capture_discarded_samples(capture_discarded_samples),
++.fixture_profile_enabled(fixture_profile_enabled),
++.fixture_transport_enabled(fixture_transport_enabled),
++.fixture_result_ready(fixture_result_ready)
++);
++// SYNTHETIC fixture clock50MHz / baud5M, no physical UART assertion.
++always #10 fclk50_candidate=~fclk50_candidate;
++localparam logic [62:0] ORIGIN=63'd9007199254740993;
++integer cycles=0, uart_n=0, serial_n=0, aborts=0, mode=0, k, i;
++integer completed=0;
++integer serializer_stalls=0;
++logic serializer_held=0;
++logic [7:0] serializer_held_data;
++integer uart_fd, serial_fd, events_fd;
++string outdir;
++logic [7:0] observed;
++logic [15:0] raw[0:3];
++logic [7:0] qual[0:3];
++logic [63:0] qpc[0:3];
++always @(posedge fclk50_candidate) begin
++    cycles=cycles+1;
++    if(cycles>100000) $fatal(1,"B74 bounded cycle deadline lane=%0d wrapper=%0d payload=%0d encoder=%0d pending=%0d meta=%0d",dut.lane_channel,dut.trace_i.state_q,dut.trace_i.payload_stage.payload_unit.state,dut.trace_i.payload_stage.payload_unit.inner_encoder.state,dut.sample_pending_q,dut.trace_i.payload_meta_valid);
++    if(dut.trace_i.serializer_out_valid && dut.trace_i.serializer_out_ready) begin
++        $fdisplay(serial_fd,"%02x",dut.trace_i.serializer_out_data); serial_n=serial_n+1;
++    end
++    if(trace_transaction_aborted) aborts=aborts+1;
++    if(!source_cancel && !dut.trace_rst) begin
++        if(serializer_held && dut.trace_i.serializer_out_valid &&
++           dut.trace_i.serializer_out_data!==serializer_held_data) $fatal(1,"serializer changed byte under backpressure");
++        serializer_held=dut.trace_i.serializer_out_valid && !dut.trace_i.serializer_out_ready;
++        serializer_held_data=dut.trace_i.serializer_out_data;
++        if(serializer_held) serializer_stalls=serializer_stalls+1;
++    end else serializer_held=0;
++end
++// Observe the external UART line independently of serializer data. Integer
++// ratio10 permits midpoint sampling at 1.5bit then every10clocks (8N1).
++initial forever begin
++    @(negedge trace_uart_tx);
++    repeat(15) @(posedge fclk50_candidate);
++    #1;
++    for(integer bitno=0;bitno<8;bitno=bitno+1) begin
++        observed[bitno]=trace_uart_tx;
++        repeat(10) @(posedge fclk50_candidate);
++        #1;
++    end
++    if(!source_cancel) begin
++        if(trace_uart_tx !== 1'b1) $fatal(1,"UART missing stop bit");
++        $fdisplay(uart_fd,"%02x",observed); uart_n=uart_n+1;
++    end
++end
++task automatic clocks(input integer n);
++    repeat(n) @(negedge fclk50_candidate);
++endtask
++task automatic rearm;
++    capture_rearm=1; clocks(1); capture_rearm=0; clocks(2);
++endtask
++task automatic scan;
++    for(integer ch=0;ch<4;ch=ch+1) begin
++        sample_channel=ch; sample_data=raw[ch]; sample_tick=qpc[ch]; sample_quality=qual[ch];
++        sample_strobe=1; clocks(1); sample_strobe=0; clocks(1);
++    end
++    clocks(5);
++endtask
++task automatic association(input integer ch);
++    assoc_tag=17; assoc_first_seq=0; assoc_last_seq=3; assoc_channel=ch;
++    assoc_session=32'h12345678; assoc_first_index=1000+ch;
++    assoc_count=1; assoc_e=0; assoc_index_stride=0; assoc_tick_stride_us=0;
++    assoc_tick_stride_ns=0; assoc_first_qpc_ns=qpc[ch];
++    assoc_first_tick_us=(qpc[ch]-ORIGIN)/1000;
++    assoc_first_remainder_ns=(qpc[ch]-ORIGIN)%1000;
++    assoc_origin_qpc_ns=ORIGIN; assoc_origin_tick_us=0; assoc_origin_remainder_ns=0;
++    assoc_semantics_valid=1; assoc_valid_sample=1;
++    assoc_saturated=(ch==1); assoc_held=(ch==2); assoc_source_fault=(ch==3);
++    assoc_source_qpc_ns=qpc[ch]-((ch==2)?64'd2000456:0);
++    assoc_source_tick_us=(assoc_source_qpc_ns-ORIGIN)/1000;
++    assoc_source_remainder_ns=(assoc_source_qpc_ns-ORIGIN)%1000;
++    assoc_epoch=7; assoc_seq=200+ch; assoc_valid=1;
++endtask
++task automatic accept_assoc;
++    // Sample ready on the SAME active edge that consumes valid. A negedge
++    // polling loop can miss the ready pulse after lane/wrapper advance.
++    do @(posedge fclk50_candidate); while(!assoc_ready);
++    @(negedge fclk50_candidate); assoc_valid=0;
++endtask
++task automatic result_ok(input integer expected_error);
++    while(!trace_result_valid) clocks(1);
++    if(trace_result_error!==expected_error) $fatal(1,"B74 unexpected result error %0d",trace_result_error);
++    $fdisplay(events_fd,"RESULT %0d %0d %0d",assoc_channel,trace_result_error,trace_result_bytes);
++    clocks(1);
++endtask
++initial begin
++    fclk50_candidate=0;
++peripheral_aresetn_candidate=0;
++sample_strobe=0;
++sample_channel=0;
++sample_data=0;
++sample_tick=0;
++sample_quality=0;
++source_cancel=0;
++capture_stop=0;
++capture_rearm=0;
++capture_rearm_tag=0;
++queue_cancel=0;
++lane_cancel=0;
++assoc_valid=0;
++assoc_tag=0;
++assoc_first_seq=0;
++assoc_last_seq=0;
++assoc_channel=0;
++assoc_session=0;
++assoc_first_index=0;
++assoc_count=0;
++assoc_e=0;
++assoc_index_stride=0;
++assoc_tick_stride_us=0;
++assoc_first_qpc_ns=0;
++assoc_first_tick_us=0;
++assoc_first_remainder_ns=0;
++assoc_tick_stride_ns=0;
++assoc_origin_qpc_ns=0;
++assoc_origin_tick_us=0;
++assoc_origin_remainder_ns=0;
++assoc_semantics_valid=0;
++assoc_valid_sample=0;
++assoc_saturated=0;
++assoc_held=0;
++assoc_source_fault=0;
++assoc_source_qpc_ns=0;
++assoc_source_tick_us=0;
++assoc_source_remainder_ns=0;
++assoc_epoch=0;
++assoc_seq=0;
++fixture_profile_enabled=0;
++fixture_transport_enabled=0;
++fixture_result_ready=0;
++    if(!$value$plusargs("OUT=%s",outdir)) $fatal(1,"OUT required");
++    if(!$value$plusargs("MODE=%d",mode)) mode=0;
++    uart_fd=$fopen({outdir,"/uart.hex"},"w");
++    serial_fd=$fopen({outdir,"/serializer.hex"},"w");
++    events_fd=$fopen({outdir,"/events.txt"},"w");
++    if(!uart_fd || !serial_fd || !events_fd) $fatal(1,"file open");
++    raw[0]=16'd32769; raw[1]=16'd65280; raw[2]=16'd4096; raw[3]=16'd65535;
++    qual[0]=8'h80; qual[1]=8'hfe; qual[2]=8'h55; qual[3]=8'ha3;
++    for(i=0;i<4;i=i+1) qpc[i]=ORIGIN+64'd10000123+i*64'd10000007;
++    fixture_profile_enabled=1; fixture_transport_enabled=1; fixture_result_ready=1;
++    capture_rearm_tag=17;
++    clocks(5); peripheral_aresetn_candidate=1; clocks(5); rearm(); scan();
++    if(mode==0) begin
++        for(k=0;k<4;k=k+1) begin
++            association(k);
++            if(k==0) begin
++                // Wrong raw association cannot consume the held lane.
++                assoc_tag=18; clocks(10);
++                if(assoc_ready || trace_lane_ready || uart_n!=0) $fatal(1,"wrong source identity consumed");
++                if(dut.lane_data!==raw[0] || dut.lane_quality!==qual[0]) $fatal(1,"backpressure changed lane");
++                $fdisplay(events_fd,"SOURCE_IDENTITY_REFUSED"); assoc_tag=17;
++            end
++            accept_assoc(); fixture_result_ready=0;
++            while(!trace_result_valid) clocks(1);
++            if(trace_result_error!=0) $fatal(1,"normal frame refused");
++            i=trace_result_bytes; clocks(10);
++            if(!trace_result_valid || trace_result_bytes!=i || assoc_ready) $fatal(1,"result backpressure lost");
++            $fdisplay(events_fd,"RESULT_BACKPRESSURE %0d",k);
++            fixture_result_ready=1; result_ok(0); clocks(3);
++        end
++        if(uart_n!=serial_n || uart_n!=150) $fatal(1,"wire count %0d %0d",uart_n,serial_n);
++    end else if(mode==1) begin
++        association(0); accept_assoc();
++        while(uart_n<5) clocks(1);
++        clocks(20); // Sixth symbol is now in flight; cancel cannot recall it.
++        source_cancel=1; clocks(120);
++        if(!data_path_quiescent || aborts!=1 || dut.cap_armed) $fatal(1,"cancel not quiescent/once");
++        if(serializer_stalls==0) $fatal(1,"no actual UART backpressure exercised");
++        $fdisplay(events_fd,"CANCEL_PARTIAL %0d %0d %0d STALLS %0d",uart_n,serial_n,aborts,serializer_stalls);
++        source_cancel=0; clocks(120);
++        if(trace_result_valid || assoc_ready || dut.cap_armed) $fatal(1,"cancel automatically resumed");
++    end else if(mode==2) begin
++        association(0); assoc_first_tick_us=64'h100000000;
++        accept_assoc(); result_ok(4); clocks(10);
++        if(trace_refusal_code!=4 || uart_n!=0 || serial_n!=0) $fatal(1,"relative uint32 overflow accepted");
++        $fdisplay(events_fd,"OVERFLOW_REFUSED");
++    end else if(mode==3) begin
++        association(0); assoc_source_qpc_ns=64'h8000000000000000;
++        accept_assoc(); result_ok(4); clocks(10);
++        if(trace_refusal_code!=4 || uart_n!=0) $fatal(1,"uint63 source overflow accepted");
++        $fdisplay(events_fd,"QPC_OVERFLOW_REFUSED");
++    end else if(mode==4) $fatal(1,"B74_INTENTIONAL_RUNNER_NEGATIVE");
++    else if(mode==5) begin
++        if(uart_n!=0 || serial_n!=0) $fatal(1,"dedicated runner success emitted unexpected data");
++        $fdisplay(events_fd,"RUNNER_SUCCESS_NO_CODEC_REPLAY");
++    end
++    else $fatal(1,"unknown fixture mode");
++    $fdisplay(events_fd,"DONE %0d %0d %0d",cycles,uart_n,serial_n);
++    $fclose(uart_fd); $fclose(serial_fd); $fclose(events_fd);
++    $display("B74_SYNTHETIC_DONE mode=%0d cycles=%0d uart=%0d serial=%0d",mode,cycles,uart_n,serial_n);
++    completed=1;
++    $finish;
++end
++
++endmodule
+diff --git a/competition/deepeye/fpga/diagnostic/offboard_codec74/tb_body.sv.inc b/competition/deepeye/fpga/diagnostic/offboard_codec74/tb_body.sv.inc
+new file mode 100644
+index 0000000..9709cbe
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/offboard_codec74/tb_body.sv.inc
+@@ -0,0 +1,150 @@
++// SYNTHETIC fixture clock50MHz / baud5M, no physical UART assertion.
++always #10 fclk50_candidate=~fclk50_candidate;
++localparam logic [62:0] ORIGIN=63'd9007199254740993;
++integer cycles=0, uart_n=0, serial_n=0, aborts=0, mode=0, k, i;
++integer completed=0;
++integer serializer_stalls=0;
++logic serializer_held=0;
++logic [7:0] serializer_held_data;
++integer uart_fd, serial_fd, events_fd;
++string outdir;
++logic [7:0] observed;
++logic [15:0] raw[0:3];
++logic [7:0] qual[0:3];
++logic [63:0] qpc[0:3];
++always @(posedge fclk50_candidate) begin
++    cycles=cycles+1;
++    if(cycles>100000) $fatal(1,"B74 bounded cycle deadline lane=%0d wrapper=%0d payload=%0d encoder=%0d pending=%0d meta=%0d",dut.lane_channel,dut.trace_i.state_q,dut.trace_i.payload_stage.payload_unit.state,dut.trace_i.payload_stage.payload_unit.inner_encoder.state,dut.sample_pending_q,dut.trace_i.payload_meta_valid);
++    if(dut.trace_i.serializer_out_valid && dut.trace_i.serializer_out_ready) begin
++        $fdisplay(serial_fd,"%02x",dut.trace_i.serializer_out_data); serial_n=serial_n+1;
++    end
++    if(trace_transaction_aborted) aborts=aborts+1;
++    if(!source_cancel && !dut.trace_rst) begin
++        if(serializer_held && dut.trace_i.serializer_out_valid &&
++           dut.trace_i.serializer_out_data!==serializer_held_data) $fatal(1,"serializer changed byte under backpressure");
++        serializer_held=dut.trace_i.serializer_out_valid && !dut.trace_i.serializer_out_ready;
++        serializer_held_data=dut.trace_i.serializer_out_data;
++        if(serializer_held) serializer_stalls=serializer_stalls+1;
++    end else serializer_held=0;
++end
++// Observe the external UART line independently of serializer data. Integer
++// ratio10 permits midpoint sampling at 1.5bit then every10clocks (8N1).
++initial forever begin
++    @(negedge trace_uart_tx);
++    repeat(15) @(posedge fclk50_candidate);
++    #1;
++    for(integer bitno=0;bitno<8;bitno=bitno+1) begin
++        observed[bitno]=trace_uart_tx;
++        repeat(10) @(posedge fclk50_candidate);
++        #1;
++    end
++    if(!source_cancel) begin
++        if(trace_uart_tx !== 1'b1) $fatal(1,"UART missing stop bit");
++        $fdisplay(uart_fd,"%02x",observed); uart_n=uart_n+1;
++    end
++end
++task automatic clocks(input integer n);
++    repeat(n) @(negedge fclk50_candidate);
++endtask
++task automatic rearm;
++    capture_rearm=1; clocks(1); capture_rearm=0; clocks(2);
++endtask
++task automatic scan;
++    for(integer ch=0;ch<4;ch=ch+1) begin
++        sample_channel=ch; sample_data=raw[ch]; sample_tick=qpc[ch]; sample_quality=qual[ch];
++        sample_strobe=1; clocks(1); sample_strobe=0; clocks(1);
++    end
++    clocks(5);
++endtask
++task automatic association(input integer ch);
++    assoc_tag=17; assoc_first_seq=0; assoc_last_seq=3; assoc_channel=ch;
++    assoc_session=32'h12345678; assoc_first_index=1000+ch;
++    assoc_count=1; assoc_e=0; assoc_index_stride=0; assoc_tick_stride_us=0;
++    assoc_tick_stride_ns=0; assoc_first_qpc_ns=qpc[ch];
++    assoc_first_tick_us=(qpc[ch]-ORIGIN)/1000;
++    assoc_first_remainder_ns=(qpc[ch]-ORIGIN)%1000;
++    assoc_origin_qpc_ns=ORIGIN; assoc_origin_tick_us=0; assoc_origin_remainder_ns=0;
++    assoc_semantics_valid=1; assoc_valid_sample=1;
++    assoc_saturated=(ch==1); assoc_held=(ch==2); assoc_source_fault=(ch==3);
++    assoc_source_qpc_ns=qpc[ch]-((ch==2)?64'd2000456:0);
++    assoc_source_tick_us=(assoc_source_qpc_ns-ORIGIN)/1000;
++    assoc_source_remainder_ns=(assoc_source_qpc_ns-ORIGIN)%1000;
++    assoc_epoch=7; assoc_seq=200+ch; assoc_valid=1;
++endtask
++task automatic accept_assoc;
++    // Sample ready on the SAME active edge that consumes valid. A negedge
++    // polling loop can miss the ready pulse after lane/wrapper advance.
++    do @(posedge fclk50_candidate); while(!assoc_ready);
++    @(negedge fclk50_candidate); assoc_valid=0;
++endtask
++task automatic result_ok(input integer expected_error);
++    while(!trace_result_valid) clocks(1);
++    if(trace_result_error!==expected_error) $fatal(1,"B74 unexpected result error %0d",trace_result_error);
++    $fdisplay(events_fd,"RESULT %0d %0d %0d",assoc_channel,trace_result_error,trace_result_bytes);
++    clocks(1);
++endtask
++initial begin
++    @@INIT@@
++    if(!$value$plusargs("OUT=%s",outdir)) $fatal(1,"OUT required");
++    if(!$value$plusargs("MODE=%d",mode)) mode=0;
++    uart_fd=$fopen({outdir,"/uart.hex"},"w");
++    serial_fd=$fopen({outdir,"/serializer.hex"},"w");
++    events_fd=$fopen({outdir,"/events.txt"},"w");
++    if(!uart_fd || !serial_fd || !events_fd) $fatal(1,"file open");
++    raw[0]=16'd32769; raw[1]=16'd65280; raw[2]=16'd4096; raw[3]=16'd65535;
++    qual[0]=8'h80; qual[1]=8'hfe; qual[2]=8'h55; qual[3]=8'ha3;
++    for(i=0;i<4;i=i+1) qpc[i]=ORIGIN+64'd10000123+i*64'd10000007;
++    fixture_profile_enabled=1; fixture_transport_enabled=1; fixture_result_ready=1;
++    capture_rearm_tag=17;
++    clocks(5); peripheral_aresetn_candidate=1; clocks(5); rearm(); scan();
++    if(mode==0) begin
++        for(k=0;k<4;k=k+1) begin
++            association(k);
++            if(k==0) begin
++                // Wrong raw association cannot consume the held lane.
++                assoc_tag=18; clocks(10);
++                if(assoc_ready || trace_lane_ready || uart_n!=0) $fatal(1,"wrong source identity consumed");
++                if(dut.lane_data!==raw[0] || dut.lane_quality!==qual[0]) $fatal(1,"backpressure changed lane");
++                $fdisplay(events_fd,"SOURCE_IDENTITY_REFUSED"); assoc_tag=17;
++            end
++            accept_assoc(); fixture_result_ready=0;
++            while(!trace_result_valid) clocks(1);
++            if(trace_result_error!=0) $fatal(1,"normal frame refused");
++            i=trace_result_bytes; clocks(10);
++            if(!trace_result_valid || trace_result_bytes!=i || assoc_ready) $fatal(1,"result backpressure lost");
++            $fdisplay(events_fd,"RESULT_BACKPRESSURE %0d",k);
++            fixture_result_ready=1; result_ok(0); clocks(3);
++        end
++        if(uart_n!=serial_n || uart_n!=150) $fatal(1,"wire count %0d %0d",uart_n,serial_n);
++    end else if(mode==1) begin
++        association(0); accept_assoc();
++        while(uart_n<5) clocks(1);
++        clocks(20); // Sixth symbol is now in flight; cancel cannot recall it.
++        source_cancel=1; clocks(120);
++        if(!data_path_quiescent || aborts!=1 || dut.cap_armed) $fatal(1,"cancel not quiescent/once");
++        if(serializer_stalls==0) $fatal(1,"no actual UART backpressure exercised");
++        $fdisplay(events_fd,"CANCEL_PARTIAL %0d %0d %0d STALLS %0d",uart_n,serial_n,aborts,serializer_stalls);
++        source_cancel=0; clocks(120);
++        if(trace_result_valid || assoc_ready || dut.cap_armed) $fatal(1,"cancel automatically resumed");
++    end else if(mode==2) begin
++        association(0); assoc_first_tick_us=64'h100000000;
++        accept_assoc(); result_ok(4); clocks(10);
++        if(trace_refusal_code!=4 || uart_n!=0 || serial_n!=0) $fatal(1,"relative uint32 overflow accepted");
++        $fdisplay(events_fd,"OVERFLOW_REFUSED");
++    end else if(mode==3) begin
++        association(0); assoc_source_qpc_ns=64'h8000000000000000;
++        accept_assoc(); result_ok(4); clocks(10);
++        if(trace_refusal_code!=4 || uart_n!=0) $fatal(1,"uint63 source overflow accepted");
++        $fdisplay(events_fd,"QPC_OVERFLOW_REFUSED");
++    end else if(mode==4) $fatal(1,"B74_INTENTIONAL_RUNNER_NEGATIVE");
++    else if(mode==5) begin
++        if(uart_n!=0 || serial_n!=0) $fatal(1,"dedicated runner success emitted unexpected data");
++        $fdisplay(events_fd,"RUNNER_SUCCESS_NO_CODEC_REPLAY");
++    end
++    else $fatal(1,"unknown fixture mode");
++    $fdisplay(events_fd,"DONE %0d %0d %0d",cycles,uart_n,serial_n);
++    $fclose(uart_fd); $fclose(serial_fd); $fclose(events_fd);
++    $display("B74_SYNTHETIC_DONE mode=%0d cycles=%0d uart=%0d serial=%0d",mode,cycles,uart_n,serial_n);
++    completed=1;
++    $finish;
++end
+diff --git a/competition/deepeye/golden/diagnostic/offboard_codec74/.gitattributes b/competition/deepeye/golden/diagnostic/offboard_codec74/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/offboard_codec74/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/golden/diagnostic/offboard_codec74/SYNTHETIC_raw4.json b/competition/deepeye/golden/diagnostic/offboard_codec74/SYNTHETIC_raw4.json
+new file mode 100644
+index 0000000..50200ad
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/offboard_codec74/SYNTHETIC_raw4.json
+@@ -0,0 +1,30 @@
++{
++  "schema": "B74_SYNTHETIC_RAW4_V1",
++  "evidence_kind": "SYNTHETIC_FIXTURE",
++  "origin_qpc_ns": 9007199254740993,
++  "raw_uint16": [32769, 65280, 4096, 65535],
++  "opaque_quality_uint8": [128, 254, 85, 163],
++  "acquisition_qpc_ns": [9007199264741116, 9007199274741123, 9007199284741130, 9007199294741137],
++  "source_qpc_ns": [9007199264741116, 9007199274741123, 9007199282740674, 9007199294741137],
++  "sample_indices": [1000, 1001, 1002, 1003],
++  "mapped_flags_by_channel": {
++    "0": {"valid": true, "saturated": false, "held": false, "source_fault": false},
++    "1": {"valid": true, "saturated": true, "held": false, "source_fault": false},
++    "2": {"valid": true, "saturated": false, "held": true, "source_fault": false},
++    "3": {"valid": true, "saturated": false, "held": false, "source_fault": true}
++  },
++  "source_identity": {
++    "operation_id": "B74-SYNTHETIC-NOT-ADC-OR-BOOT",
++    "kernel_boot_id": "SYNTHETIC-NO-REAL-BOOT",
++    "session_id": "SYNTHETIC-SESSION-RAW4-74",
++    "clock_domain_id": "SYNTHETIC-ORIGINAL-QPC-NS",
++    "request_hash": "7474747474747474747474747474747474747474747474747474747474747474",
++    "build_manifest_sha256": "7373737373737373737373737373737373737373737373737373737373737373",
++    "source_record_sha256": "7171717171717171717171717171717171717171717171717171717171717171",
++    "capture_sha256": "7272727272727272727272727272727272727272727272727272727272727272",
++    "tested_commit": "0a35e06248073564baab65706c6c30d89069db54",
++    "tag": 17, "generation": 1, "trigger_id": 74, "request_seq": 1,
++    "capture_seq": 1, "source_admission_index": 0
++  },
++  "identity_note": "All identity fields are synthetic labels, not authenticated receipts. tested_commit labels the reused B73 source only; execution uses recorded uncommitted source snapshots."
++}
+diff --git a/competition/deepeye/tools/diagnostic/offboard_codec74/.gitattributes b/competition/deepeye/tools/diagnostic/offboard_codec74/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_codec74/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/offboard_codec74/prepare_fixture.py b/competition/deepeye/tools/diagnostic/offboard_codec74/prepare_fixture.py
+new file mode 100644
+index 0000000..e28b851
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_codec74/prepare_fixture.py
+@@ -0,0 +1,55 @@
++"""Generate the explicitly synthetic B74 data-only harness from B73 wiring.
++
++This does not edit, instantiate, force, or release the production integration top.
++The generated fixture exposes gates solely for bounded simulation.
++"""
++from pathlib import Path
++import hashlib,json,re
++
++P=Path(__file__).resolve().parents[3]
++D=P/'fpga/diagnostic/offboard_codec74'
++BASE=P/'fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv'
++
++def main():
++    raw=BASE.read_bytes(); s=raw.decode()
++    # Preserve the exact data composition and association predicates. G05 is
++    # outside this work's simulation and is omitted, never replaced or enabled.
++    s=s[s.index('`default_nettype none'):]
++    s=s.replace('deepeye_integration_50mhz_candidate','deepeye_SYNTHETIC_codec74_fixture',1)
++    s=s.replace('parameter integer BAUD = 0','parameter integer BAUD = 5000000')
++    s=s.replace("parameter bit SOURCE_REVIEW_HOLD = 1'b1","parameter bit SOURCE_REVIEW_HOLD = 1'b0")
++    a=s.index('    // G05 private AXI4-Lite candidate.')
++    z=s.index(');',a)
++    s=s[:a]+'''    input logic fixture_profile_enabled, fixture_transport_enabled,
++    input wire logic fixture_result_ready
++'''+s[z:]
++    a=s.index('    deepeye_g05_axi_50mhz_candidate g05_i (')
++    s=s[:a]+'endmodule\n`default_nettype wire\n'
++    s=s.replace(".profile_v2_authorized(1'b0), .transport_allowed(1'b0)",
++                '.profile_v2_authorized(fixture_profile_enabled), .transport_allowed(fixture_transport_enabled)')
++    s=s.replace("assign trace_result_ready = 1'b1;",'assign trace_result_ready = fixture_result_ready;')
++    s='// SYNTHETIC_FIXTURE ONLY: copied B73 data wiring; no production enable.\n'+s
++    (D/'deepeye_SYNTHETIC_codec74_fixture.sv').write_text(s,encoding='utf-8',newline='\n')
++    s=s.replace('input logic','input wire logic')
++    (D/'deepeye_SYNTHETIC_codec74_fixture.sv').write_text(s,encoding='utf-8',newline='\n')
++    ports=s[s.index('    input wire logic fclk50_candidate'):s.index(');')]
++    ports=re.sub(r'//[^\n]*','',ports)
++    rows=[];direction=width=None
++    for part in ports.split(','):
++        part=part.strip()
++        m=re.fullmatch(r'(input|output)\s+(?:wire\s+)?logic\s*(\[[^]]+\])?\s*(\w+)',part)
++        if m: direction,width,name=m.groups()
++        else: name=part
++        rows.append((direction,width or '',name))
++    declarations='\n'.join('logic '+w+' '+n+';' for _,w,n in rows)
++    connections=',\n'.join('.'+n+'('+n+')' for _,_,n in rows)
++    init='\n'.join(n+"=0;" for d,_,n in rows if d=='input')
++    (D/'ports.json').write_text(json.dumps(rows,indent=2)+'\n')
++    template=(D/'tb_body.sv.inc').read_text()
++    tb='`timescale 1ns/1ps\nmodule tb_SYNTHETIC_codec74;\n'+declarations+'\n'
++    tb+='deepeye_SYNTHETIC_codec74_fixture dut(\n'+connections+'\n);\n'
++    tb+=template.replace('@@INIT@@',init)+'\nendmodule\n'
++    (D/'tb_SYNTHETIC_codec74.sv').write_text(tb,encoding='utf-8',newline='\n')
++    print(json.dumps({'synthetic_fixture_generated':True,'copied_source_sha256':hashlib.sha256(raw).hexdigest()}))
++
++if __name__=='__main__':main()
+diff --git a/competition/deepeye/tools/diagnostic/offboard_codec74/run_codec74.py b/competition/deepeye/tools/diagnostic/offboard_codec74/run_codec74.py
+new file mode 100644
+index 0000000..5873d18
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_codec74/run_codec74.py
+@@ -0,0 +1,126 @@
++"""Finite new B74 offboard compilation/simulation and semantic controls only.
++
++All native commands are descendants of one suspended-launch Windows Job.
++The pinned existing whole-Job helper proves terminal/empty/closed state.
++Each command has a30s timeout; the full Job has180s and16MiB output bound.
++Never installs, calls Vivado/board, changes services, or writes a Git index.
++"""
++from __future__ import annotations
++import sys
++sys.dont_write_bytecode=True
++import argparse,datetime,hashlib,importlib.util,json,os,shutil,subprocess,time
++from pathlib import Path
++P=Path(__file__).resolve().parents[3]
++ROOT=P.parents[1]
++HDL=P/'fpga/diagnostic/offboard_codec74'
++TOOLS=P/'tools/diagnostic/offboard_codec74'
++MODEL=Path('D:/modelsim1/win64')
++G05=P/'fpga/diagnostic/g05_capture/additive50_source_candidate/rtl'
++SOURCES=[P/f'fpga/acquisition/{n}.sv' for n in ['deepeye_sample_scan_capture','deepeye_raw_scan_queue','deepeye_buffered_scan_capture','deepeye_scan_lane_stream']]
++SOURCES += [P/'fpga/codec/deepeye_block_encoder.sv',P/'fpga/codec/deepeye_trace_payload_candidate.sv',
++  G05/'deepeye_trace_block_payload_1us_candidate.sv',G05/'deepeye_trace_block_uart_50mhz_candidate.sv']
++SOURCES += [P/f'fpga/transport/{n}.sv' for n in ['deepeye_crc16_byte','deepeye_wire_serializer','deepeye_uart_tx']]
++SOURCES += [HDL/'deepeye_SYNTHETIC_codec74_fixture.sv',HDL/'tb_SYNTHETIC_codec74.sv']
++def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
++def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
++def save(p,d):Path(p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++def command(out,name,args,cwd,expected=0):
++    r=dict(argv=list(map(str,args)),cwd=str(cwd),started_utc=utc(),timeout_seconds=30,expected_exit=expected)
++    with (out/(name+'.stdout.bin')).open('xb') as so,(out/(name+'.stderr.bin')).open('xb') as se:
++        proc=subprocess.Popen(r['argv'],cwd=cwd,stdout=so,stderr=se,stdin=subprocess.DEVNULL,shell=False,creationflags=subprocess.CREATE_NO_WINDOW)
++        r['pid']=proc.pid;save(out/(name+'.STARTED.json'),r)
++        try:
++            deadline=time.monotonic()+30
++            while proc.poll() is None:
++                if time.monotonic()>deadline:raise TimeoutError('finite native command deadline')
++                if sum(f.stat().st_size for f in out.rglob('*') if f.is_file())>16*1024*1024:raise RuntimeError('16MiB whole output bound')
++                time.sleep(.05)
++            r['exit_code']=proc.returncode
++        except BaseException as e:
++            r['error']=repr(e);proc.kill();r['exit_code']=proc.wait(timeout=5)
++            raise
++        finally:
++            r.update(ended_utc=utc(),stdout_sha256=sha(out/(name+'.stdout.bin')),stderr_sha256=sha(out/(name+'.stderr.bin')))
++            save(out/(name+'.json'),r)
++    assert r['exit_code']==expected,(name,r)
++    return r
++def inner(out,phase='full',saved=None):
++    commands=out/'commands';commands.mkdir();sim=out/'sim';sim.mkdir();reports=[]
++    if phase=='positive':
++        reports.append(command(commands,'semantic-positive',[sys.executable,'-B',TOOLS/'semantic_controls.py','--simdir',saved,'--out',out/'semantic'],sim))
++        save(out/'INNER_RESULT.json',dict(status='bounded_synthetic_semantic_positive_passed',commands=reports,completed_utc=utc()))
++        return
++    for tool in ['vlog','vsim']:
++        reports.append(command(commands,tool+'-version',[MODEL/(tool+'.exe'),'-version'],sim))
++    reports.append(command(commands,'vmap-local',[MODEL/'vmap.exe','-c'],sim))
++    reports.append(command(commands,'vlib',[MODEL/'vlib.exe','work'],sim))
++    reports.append(command(commands,'vlog',[MODEL/'vlog.exe','-sv','-work','work',*SOURCES],sim))
++    if phase=='remaining':
++        (out/'mode0').mkdir()
++        for name in ['uart.hex','serializer.hex','events.txt','modelsim.log']:
++            shutil.copyfile(saved/'mode0'/name,out/'mode0'/name)
++        save(out/'mode0/REUSED_SAVED_INPUT_NOT_RERUN.json',dict(source=str(saved/'mode0'),files={n:sha(saved/'mode0'/n) for n in ['uart.hex','serializer.hex','events.txt','modelsim.log']}))
++    for mode in ([1,2,3,4,5] if phase=='remaining' else range(6)):
++        dest=out/f'mode{mode}';dest.mkdir()
++        # Tcl quit code propagates actual assertion/fatal; no ModelSim
++        # -onfinish exit0 qualification loophole for negative/error cases.
++        dofile=dest/'run.do'
++        dofile.write_text('onerror {quit -code 3 -force}\nonbreak {\nif {[examine -radix decimal /tb_SYNTHETIC_codec74/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n}\nrun -all\nif {[examine -radix decimal /tb_SYNTHETIC_codec74/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n',encoding='ascii')
++        reports.append(command(commands,f'vsim-mode{mode}',[MODEL/'vsim.exe','-c','-voptargs=+acc','-onfinish','stop','-wlf',str(dest/'wave.wlf'),'-l',str(dest/'modelsim.log'),
++            'work.tb_SYNTHETIC_codec74','+OUT='+dest.as_posix(),'+MODE='+str(mode),'-do','do '+dofile.as_posix()],sim,expected=4 if mode==4 else 0))
++        log=(dest/'modelsim.log').read_text(encoding='utf-8')
++        if mode==4:
++            assert '** Fatal: B74_INTENTIONAL_RUNNER_NEGATIVE' in log and 'B74_SYNTHETIC_DONE' not in log
++        else:
++            assert 'B74_SYNTHETIC_DONE mode='+str(mode) in log and '** Fatal:' not in log and '** Error:' not in log and 'Errors: 0' in log
++    if phase!='remaining':
++        reports.append(command(commands,'semantic-positive',[sys.executable,'-B',TOOLS/'semantic_controls.py','--simdir',out,'--out',out/'semantic'],sim))
++    for case in ['crc','partial','identity','quality','quality_flags','time','u63_overflow','nonwrap','wrong_index','relative_overflow']:
++        reports.append(command(commands,'negative-'+case,[sys.executable,'-B',TOOLS/'semantic_controls.py','--simdir',out,'--negative',case],sim,expected=2))
++        text=(commands/('negative-'+case+'.stdout.bin')).read_text()
++        assert 'expected_rejection' in text and 'FALSE_ACCEPT' not in text
++    save(out/'INNER_RESULT.json',dict(status='bounded_synthetic_controls_passed',commands=reports,completed_utc=utc()))
++def outer(out,phase='full',saved=None):
++    out.mkdir(parents=True,exist_ok=False)
++    extra=[G05/'deepeye_integration_50mhz_candidate.sv',P/'golden/codec/trace_candidate.py',
++      P/'tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py',
++      P/'tools/diagnostic/g05_capture/build/owned_process.py',ROOT/'fpga_mesh/windows_job.py',
++      P/'golden/diagnostic/offboard_codec74/SYNTHETIC_raw4.json',HDL/'tb_body.sv.inc']+list(TOOLS.glob('*.py'))
++    files=list(dict.fromkeys(SOURCES+extra));snap=out/'source';snap.mkdir()
++    pins={}
++    for f in files:
++        rel=f.relative_to(ROOT);target=snap/rel;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(f.read_bytes())
++        pins[str(rel)]={'sha256':sha(f),'bytes':f.stat().st_size,'snapshot':str(target)}
++    save(out/'SOURCE_BEFORE.json',pins)
++    helper=snap/'fpga_mesh/windows_job.py'
++    spec=importlib.util.spec_from_file_location('b74_owned_process',P/'tools/diagnostic/g05_capture/build/owned_process.py')
++    m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
++    jobout=out/'owned_job';jobout.mkdir()
++    argv=[sys.executable,'-B',str(Path(__file__).resolve()),'--inner','--out',str(out),'--phase',phase]
++    if saved is not None:
++        argv+=['--saved-mode0',str(saved)]
++        save(out/'SAVED_MODE0_INPUTS.json',{str(f):sha(f) for f in (saved/'mode0').iterdir() if f.is_file()})
++    process=m.run_owned(argv,jobout,180,helper)
++    after={str(f.relative_to(ROOT)):sha(f) for f in files};save(out/'SOURCE_AFTER.json',after)
++    result=dict(status='failed_preserved',evidence_kind='SYNTHETIC_FIXTURE',process=process,
++      task_id='DEEPEYE-IMPLEMENTATION-20261014',task_version=1,work_id='B-DEEPEYE-OFFBOARD-CODEC-EXECUTABLE-20261030-74',
++      requirements_sha256='c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804',
++      requirements_ids=[f'H{i:02d}' for i in range(1,16)],
++      source_snapshot_kind='uncommitted exact file hashes; no later commit claimed tested',phase=phase,
++      tool_binaries={str(MODEL/(n+'.exe')):sha(MODEL/(n+'.exe')) for n in ['vmap','vlib','vlog','vsim']},
++      python=dict(executable=sys.executable,version=sys.version,sha256=sha(sys.executable)),
++      sources_unchanged=all(pins[r]['sha256']==h for r,h in after.items()),
++      board='not_run; A only',vivado='not_run',production_defaults='unchanged, hold/profile0/transport0/BAUD0',
++      aggregation='not_run; later operation',acceptance='not granted; quality main/A review required')
++    try:
++        m.require_owned_success(process)
++        assert process['job_closed'] and result['sources_unchanged']
++        assert (out/'INNER_RESULT.json').exists()
++        result['status']='bounded_synthetic_controls_passed'
++        if (out/'semantic/RESULT.json').exists():
++            result['semantic']=json.loads((out/'semantic/RESULT.json').read_text())
++    finally:save(out/'RESULT.json',result)
++    print(json.dumps({'status':result['status'],'result':str(out/'RESULT.json')}))
++if __name__=='__main__':
++    a=argparse.ArgumentParser();a.add_argument('--out',type=Path,required=True);a.add_argument('--inner',action='store_true');a.add_argument('--phase',choices=['full','positive','remaining'],default='full');a.add_argument('--saved-mode0',type=Path);n=a.parse_args()
++    (inner if n.inner else outer)(n.out.resolve(),n.phase,n.saved_mode0)
+diff --git a/competition/deepeye/tools/diagnostic/offboard_codec74/semantic_controls.py b/competition/deepeye/tools/diagnostic/offboard_codec74/semantic_controls.py
+new file mode 100644
+index 0000000..02faa6a
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/offboard_codec74/semantic_controls.py
+@@ -0,0 +1,121 @@
++"""B74: actual saved RTL UART bytes into the existing strict semantic decoder.
++
++Companion JSON is actually serialized to a file and counted in full for EACH
++frame, including opaque quality, ns time, binding and full original identity.
++No planner, Root API, board, network or command/control path is called.
++"""
++import sys
++sys.dont_write_bytecode=True
++import argparse,binascii,copy,hashlib,importlib.util,json
++from pathlib import Path
++
++P=Path(__file__).resolve().parents[3]
++HOST=P/'tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py'
++INPUT=P/'golden/diagnostic/offboard_codec74/SYNTHETIC_raw4.json'
++def sha(raw):return hashlib.sha256(raw).hexdigest()
++def canonical(obj):return json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False).encode('utf-8')
++def digest(obj):return sha(canonical(obj))
++def load_host():
++    spec=importlib.util.spec_from_file_location('b74_existing_host',HOST)
++    m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
++def fixture():return json.loads(INPUT.read_text(encoding='utf-8'))
++def companions(m,ch):
++    f=fixture();identity=f['source_identity'];origin=f['origin_qpc_ns']
++    acquisitions=[f['acquisition_qpc_ns'][ch]]; sources=[f['source_qpc_ns'][ch]]
++    values=[f['raw_uint16'][ch]];indices=[f['sample_indices'][ch]]
++    rawq={str(c):f['opaque_quality_uint8'][c] for c in range(4)}
++    mapped=f['mapped_flags_by_channel'];context=digest(identity)
++    p=dict(profile_id=m.PROFILE_ID,origin_mode=m.ORIGIN_MODE,origin_receipt_id='SYNTHETIC-ORIGIN-NOT-ROOT-AUTH',
++           origin_qpc_ns=origin,source_identity=identity,original_acquisition_qpc_ns=acquisitions,
++           original_source_qpc_ns=sources,original_values=values,original_indices=indices,
++           raw_quality_by_channel=rawq,mapped_flags_by_channel=mapped,
++           timestamp_record_sha256=digest(dict(origin_qpc_ns=origin,acquisition_qpc_ns=acquisitions,
++             source_qpc_ns=sources,original_values=values,original_indices=indices,source_context_sha256=context)),
++           quality_record_sha256=digest(dict(raw_quality_by_channel=rawq,mapped_flags_by_channel=mapped,source_context_sha256=context)),
++           receiver_qpc_ns=origin+50_000_000)
++    b=dict(kind='B_PRIVATE_TRANSPORT_BINDING_PROPOSED_V1',receipt_id='SYNTHETIC-BINDING-'+str(ch),
++           profile_id=m.PROFILE_ID,session_handle=0x12345678,view_handle=7,frame_seq=200+ch,e=0,
++           source_context_sha256=context)
++    return b,p,origin+60_000_000
++def frames(simdir):
++    wire=bytes.fromhex((simdir/'mode0/uart.hex').read_text())
++    serial=bytes.fromhex((simdir/'mode0/serializer.hex').read_text())
++    assert wire==serial,'External UART differs from accepted serializer bytes'
++    result=[];offset=0
++    while offset<len(wire):
++        assert wire[offset:offset+2]==b'\xa5\x5a'
++        n=14+wire[offset+4];frame=wire[offset:offset+n];assert len(frame)==n
++        result.append(frame);offset+=n
++    assert len(result)==4 and len(wire)==150
++    return result
++def crc(packet):
++    return packet[:-2]+binascii.crc_hqx(packet[2:-2],0xffff).to_bytes(2,'little')
++def decode(m,packet,b,p,now):
++    return m.decode_transport(packet,binding=b,profile=p,now_qpc_ns=now,enabled=True,repo_root=P.parents[1])
++def reject_case(name,simdir):
++    m=load_host();packet=frames(simdir)[0];b,p,now=companions(m,0)
++    if name=='crc':packet=packet[:-1]+bytes([packet[-1]^1])
++    elif name=='partial':packet=bytes.fromhex((simdir/'mode1/uart.hex').read_text())
++    elif name=='identity':b['source_context_sha256']='0'*64
++    elif name=='quality':p['raw_quality_by_channel']['0']=256
++    elif name=='quality_flags':
++        p['mapped_flags_by_channel']['0']['held']=True
++        p['quality_record_sha256']=digest(dict(raw_quality_by_channel=p['raw_quality_by_channel'],mapped_flags_by_channel=p['mapped_flags_by_channel'],source_context_sha256=b['source_context_sha256']))
++    elif name=='time':p['original_acquisition_qpc_ns'][0]+=1000
++    elif name=='u63_overflow':p['original_acquisition_qpc_ns'][0]=1<<63
++    elif name=='nonwrap':b['frame_seq']=65536
++    elif name=='wrong_index':p['original_indices'][0]+=1
++    elif name=='relative_overflow':
++        packet=bytearray(packet);packet[25:33]=(1<<32).to_bytes(8,'little');packet=crc(bytes(packet))
++    else:raise ValueError(name)
++    if name in ('time','wrong_index'):
++        p['timestamp_record_sha256']=digest(dict(origin_qpc_ns=p['origin_qpc_ns'],acquisition_qpc_ns=p['original_acquisition_qpc_ns'],
++          source_qpc_ns=p['original_source_qpc_ns'],original_values=p['original_values'],original_indices=p['original_indices'],source_context_sha256=b['source_context_sha256']))
++    try:decode(m,packet,b,p,now)
++    except (ValueError,AssertionError) as e:
++        print(json.dumps(dict(expected_rejection=name,error_type=type(e).__name__,reason=str(e))))
++        return 2  # Actual negative CLI process fails, no display-only pass.
++    print(json.dumps(dict(FALSE_ACCEPT=name)));return 0
++def run(simdir,out):
++    out.mkdir(exist_ok=False);m=load_host();packets=frames(simdir);f=fixture();records=[]
++    for ch,packet in enumerate(packets):
++        b,p,now=companions(m,ch);c=dict(evidence_kind='SYNTHETIC_FIXTURE',binding=b,profile=p,now_qpc_ns=now)
++        raw=canonical(c);(out/f'companion{ch}.json').write_bytes(raw)
++        (out/f'wire{ch}.bin').write_bytes(packet)
++        v=decode(m,packet,b,p,now);point=v['points'][0]
++        # decoded_value is from ACTUAL RTL bytes, not companion original_value.
++        assert point['decoded_value']==f['raw_uint16'][ch]
++        assert point['original_acquisition_qpc_ns']==f['acquisition_qpc_ns'][ch]
++        assert point['original_source_qpc_ns']==f['source_qpc_ns'][ch]
++        assert point['remainder_ns']==(f['acquisition_qpc_ns'][ch]-f['origin_qpc_ns'])%1000
++        assert v['raw_quality_uint8']=={str(i):f['opaque_quality_uint8'][i] for i in range(4)}
++        assert v['source_identity']==f['source_identity']
++        assert v['status']=='STOP' and v['core_ran'] is False and v['command'] is None
++        record=dict(schema='B74_SEMANTIC_FIXTURE_V1',evidence_kind='SYNTHETIC_FIXTURE',channel=ch,
++          wire_frame_hex=packet.hex(),wire_sha256=sha(packet),wire_bytes=len(packet),
++          companion_canonical_bytes=raw.decode('utf-8'),companion_sha256=sha(raw),companion_length=len(raw),
++          semantic_view=v,source_input_file=str(INPUT),source_input_sha256=sha(INPUT.read_bytes()),
++          decoder_source_pins={str(HOST):sha(HOST.read_bytes()),m.DECODER_PATH:m.DECODER_SHA256},
++          total_serialized_bytes=len(packet)+len(raw),production_release=False)
++        (out/f'semantic{ch}.json').write_bytes(canonical(record)+b'\n');records.append(record)
++    # Explicitly stale source retains the exact acquisition/source ns and STOP.
++    b,p,now=companions(m,0);stale=decode(m,packets[0],b,p,now+100_000_000)
++    assert stale['source_age_100ms_met'] is False and stale['command'] is None and not stale['core_ran']
++    # A companion cannot make a changed original value equal actual RTL output.
++    b,p,now=companions(m,0);p['original_values']=[1]
++    p['timestamp_record_sha256']=digest(dict(origin_qpc_ns=p['origin_qpc_ns'],acquisition_qpc_ns=p['original_acquisition_qpc_ns'],
++      source_qpc_ns=p['original_source_qpc_ns'],original_values=p['original_values'],original_indices=p['original_indices'],source_context_sha256=b['source_context_sha256']))
++    mismatch=decode(m,packets[0],b,p,now)
++    assert mismatch['points'][0]['decoded_value']==32769 and mismatch['points'][0]['original_value']==1
++    assert not mismatch['lossy_decoded_values_match_original']
++    ledger=dict(schema='B74_FOCUSED_SEMANTIC_RESULT_V1',evidence_kind='SYNTHETIC_FIXTURE',
++      frames=4,wire_bytes=sum(r['wire_bytes'] for r in records),
++      mandatory_companion_bytes=sum(r['companion_length'] for r in records),
++      total_serialized_bytes=sum(r['total_serialized_bytes'] for r in records),
++      original_raw_value_bytes=8,source_age_stale_refusal=stale,value_mismatch_control=mismatch,
++      compression_target='NOT_MET_OR_CLAIMED',board='not_run; A only',aggregation='not_run; later operation',
++      product_acceptance='pending quality main/A; no BOOT/authenticated ADC/production source gate proof')
++    (out/'RESULT.json').write_bytes(canonical(ledger)+b'\n');print(json.dumps(ledger));return 0
++if __name__=='__main__':
++    a=argparse.ArgumentParser();a.add_argument('--simdir',type=Path,required=True);a.add_argument('--out',type=Path);a.add_argument('--negative');n=a.parse_args()
++    sys.exit(reject_case(n.negative,n.simdir) if n.negative else run(n.simdir,n.out))

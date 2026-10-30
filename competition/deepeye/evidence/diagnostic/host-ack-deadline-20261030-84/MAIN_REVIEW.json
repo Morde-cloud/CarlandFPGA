@@ -1,0 +1,64 @@
+{
+  "status": "scoped_main_review_passed",
+  "operation_id": "B-DEEPEYE-HOST-ACK-DEADLINE-20261030-84",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_files": [
+    {
+      "path": "competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b",
+      "bytes": 4490
+    },
+    {
+      "path": "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084",
+      "bytes": 21090
+    },
+    {
+      "path": "competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473",
+      "bytes": 2508
+    },
+    {
+      "path": "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1",
+      "bytes": 9151
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558",
+      "bytes": 18026
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb",
+      "bytes": 9502
+    }
+  ],
+  "selected_raw_files_verified": 93,
+  "independent_audit": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\main-verification84\\INDEPENDENT.json",
+  "decision": "Accept ONLY focused pure synthetic host first-send/late-ACK deadline stage. Default production INPUT_UNAVAILABLE. No packet send/callback/clock/BOOT/capture freshness/world action authority or formal acceptance. Source snapshots, actual test exits and whole-Job closure audited independently; late ACK cannot extend original cap or prior shorter deadline.",
+  "failures_preserved": [
+    {
+      "attempt": "attempt-01",
+      "correction": "create attempt/job before run_owned",
+      "defect": "Job output parent was not created before run_owned",
+      "number": 1,
+      "scope": "harness"
+    },
+    {
+      "attempt": "attempt-02",
+      "correction": "construct the JSON backslash byte with bytes([92])",
+      "defect": "surrogate fixture construction raised UnicodeEncodeError",
+      "number": 2,
+      "scope": "test source"
+    },
+    {
+      "attempt": "attempt-02",
+      "correction": "handle an empty output operations array",
+      "defect": "empty operations array from a parse refusal was indexed",
+      "number": 3,
+      "scope": "evidence harness"
+    }
+  ],
+  "root_authority": "Human all B independent tasks; original83 actual terminal before transfer84; main LEASE84_MAIN_REVIEW.json selected fixes. No old75 suite replay. Fixed H01-H15/hash unchanged."
+}

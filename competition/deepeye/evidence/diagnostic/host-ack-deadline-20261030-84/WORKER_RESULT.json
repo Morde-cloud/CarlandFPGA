@@ -1,0 +1,1274 @@
+{
+  "actual_execution": {
+    "cli_case_results": [
+      {
+        "expected_exit": 3,
+        "expected_observed": true,
+        "input": {
+          "bytes": 433,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\production\\input.json",
+          "sha256": "8125f2dac1cea4ef92659dbe96aedd8cfd44c93f01ed96e0d6f4e236c2e51c24"
+        },
+        "input_receipt_observed": true,
+        "name": "production",
+        "observed": {
+          "code": null,
+          "final_reason": "PRODUCTION_INPUT_UNAVAILABLE",
+          "final_status": "INPUT_UNAVAILABLE",
+          "status": "INPUT_UNAVAILABLE"
+        },
+        "observed_exit": 3,
+        "stderr": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\production\\process.stderr.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 1887,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\production\\process.stdout.bin",
+          "sha256": "0913bacf8a9fe9e7f4a688dcb1bfdcc61d9597b3b33350d7ac1e34f29c0453f4"
+        }
+      },
+      {
+        "expected_exit": 0,
+        "expected_observed": true,
+        "input": {
+          "bytes": 1427,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\positive\\input.json",
+          "sha256": "115012962caa9edb5e16b2fee69ad3e33322039b389d8f54dfd015a8ed733f9a"
+        },
+        "input_receipt_observed": true,
+        "name": "positive",
+        "observed": {
+          "code": null,
+          "final_reason": "SYNTHETIC_STRUCTURAL_ONLY",
+          "final_status": "LEASE",
+          "status": "POSITIVE"
+        },
+        "observed_exit": 0,
+        "stderr": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\positive\\process.stderr.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 4113,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\positive\\process.stdout.bin",
+          "sha256": "f861242107eefd73a6bbd0a5545ecc7af89f8ba29918b4991b7ccb71dc4f3a97"
+        }
+      },
+      {
+        "expected_exit": 2,
+        "expected_observed": true,
+        "input": {
+          "bytes": 1008,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\missing_ack\\input.json",
+          "sha256": "1dd402ce4bcac7f9850868762f4ff50aeae96ace81de335d358fd3dd08a77cd5"
+        },
+        "input_receipt_observed": true,
+        "name": "missing_ack",
+        "observed": {
+          "code": "ACK_MISSING",
+          "final_reason": null,
+          "final_status": "REFUSED",
+          "status": "REFUSED"
+        },
+        "observed_exit": 2,
+        "stderr": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\missing_ack\\process.stderr.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 2200,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\missing_ack\\process.stdout.bin",
+          "sha256": "0a45407e5244c0fe16e10e0e84ee249aa70b5302f4a4aaeac4b8bcf5f79fee9a"
+        }
+      },
+      {
+        "expected_exit": 2,
+        "expected_observed": true,
+        "input": {
+          "bytes": 91,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\duplicate_key\\input.json",
+          "sha256": "cb9964e9814e57f478eba445a2e9f41573a3eb403ff95be50eef0f861c8c06ea"
+        },
+        "input_receipt_observed": true,
+        "name": "duplicate_key",
+        "observed": {
+          "code": "DUPLICATE_JSON_KEY",
+          "final_reason": null,
+          "final_status": null,
+          "status": "REFUSED"
+        },
+        "observed_exit": 2,
+        "stderr": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\duplicate_key\\process.stderr.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 799,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\duplicate_key\\process.stdout.bin",
+          "sha256": "c03779d19cb760ddbdf2e6d7cecdf48e22131e4995c55a4cfcb68754eeb893e8"
+        }
+      },
+      {
+        "expected_exit": 2,
+        "expected_observed": true,
+        "input": {
+          "bytes": 466,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\bool_as_int\\input.json",
+          "sha256": "6637876ad69be69915a08eb77a4131d0eac032060396e6520bbb93a38d5e7f31"
+        },
+        "input_receipt_observed": true,
+        "name": "bool_as_int",
+        "observed": {
+          "code": "SEQ_TYPE",
+          "final_reason": null,
+          "final_status": "REFUSED",
+          "status": "REFUSED"
+        },
+        "observed_exit": 2,
+        "stderr": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\bool_as_int\\process.stderr.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 1151,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\bool_as_int\\process.stdout.bin",
+          "sha256": "c594c9fdcf833fa75f7a8103e86ba54124d69c46c7bf4cad7cddce582cd6b67a"
+        }
+      },
+      {
+        "expected_exit": 3,
+        "expected_observed": true,
+        "input": {
+          "bytes": 1444,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\disabled_query\\input.json",
+          "sha256": "c0a182393f3613081402c468f1b398fe4b43f018855914a7b30698e9ae1b8ee3"
+        },
+        "input_receipt_observed": true,
+        "name": "disabled_query",
+        "observed": {
+          "code": null,
+          "final_reason": "LEDGER_DISABLED",
+          "final_status": "INPUT_UNAVAILABLE",
+          "status": "INPUT_UNAVAILABLE"
+        },
+        "observed_exit": 3,
+        "stderr": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\disabled_query\\process.stderr.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 4193,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\disabled_query\\process.stdout.bin",
+          "sha256": "bf2ada1a3e410442ae0d7e26f3772a1ff20b49fa78a38117d4715c27586fab2a"
+        }
+      }
+    ],
+    "job": {
+      "elapsed_seconds": 1.5930000000007567,
+      "exit_code": 0,
+      "job_attached_before_resume": true,
+      "job_closed": true,
+      "job_empty_observed_before_close": true,
+      "job_terminal_confirmed": true,
+      "job_terminal_state": "confirmed",
+      "raw_process_record": {
+        "bytes": 4094,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\PROCESS.json",
+        "sha256": "7e300256da2140d90778cd7005999df2c8fcd22c52c717a8e121840e641f4d92"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\process.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 574,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\process.stdout.bin",
+        "sha256": "1d56c2b34d6e51a80f9cee5c7fa470954868073d71e73f8ef80127e39af49594"
+      },
+      "timed_out": false
+    },
+    "limits": {
+      "artifact_limit_bytes": 8388608,
+      "cli_case_timeout_seconds": 3,
+      "outer_native_timeout_seconds": 25,
+      "suite_timeout_seconds": 10,
+      "whole_job_limit_seconds": 120
+    },
+    "python": {
+      "executable": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+      "record": {
+        "bytes": 275176,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "sha256": "3638cd6a1236660910fe5e278994d309c073fb4bb49ee061f48bd4ccaaa0a191"
+      },
+      "version": "3.12.9 (tags/v3.12.9:fdb8142, Feb  4 2025, 15:27:58) [MSC v.1942 64 bit (AMD64)]",
+      "version_info": [
+        3,
+        12,
+        9,
+        "final",
+        0
+      ]
+    },
+    "suite_results": [
+      {
+        "exit_code": 0,
+        "name": "host_lease83",
+        "reported_test_count": 31,
+        "stderr": {
+          "bytes": 4634,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease83.stderr.bin",
+          "sha256": "df1be9bd6be6d5d6fcbde48e0f464ef24b12f98f251c79f637226f111405cc24"
+        },
+        "stdout": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease83.stdout.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "name": "host_lease84_cli",
+        "reported_test_count": 12,
+        "stderr": {
+          "bytes": 1754,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease84_cli.stderr.bin",
+          "sha256": "dec1999dc726cf1c8910a1c6290fe1bd86b43676196c169fed5573db6ed0dc21"
+        },
+        "stdout": {
+          "bytes": 0,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease84_cli.stdout.bin",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "timed_out": false
+      }
+    ],
+    "tools": {
+      "job_helper": {
+        "bytes": 3679,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\fpga_mesh\\windows_job.py",
+        "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+      },
+      "owned_process": {
+        "bytes": 11126,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\g05_capture\\build\\owned_process.py",
+        "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+      },
+      "python": {
+        "bytes": 275176,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+        "sha256": "3638cd6a1236660910fe5e278994d309c073fb4bb49ee061f48bd4ccaaa0a191"
+      },
+      "runner": {
+        "bytes": 15781,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\execute84.py",
+        "sha256": "44a4c1bae835b9c95cb31c1d1b43b2ab580cfe9c9d4f5ebd0d0ce03a39b87232"
+      }
+    }
+  },
+  "artifact_audit_before_result": {
+    "bytes": 586727,
+    "files": 93,
+    "largest_file_bytes": 59530,
+    "limit_bytes": 8388608,
+    "within_8MiB": true
+  },
+  "attempt_history": {
+    "attempt-01": {
+      "receipt": {
+        "bytes": 607,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\FAILURE_RUNNER.json",
+        "sha256": "387431e1fe8d28d89854490890d19fcad9c8f83092011729abbcd87897e2b1f9"
+      },
+      "status": "failed_before_candidate_execution"
+    },
+    "attempt-02": {
+      "ledger_suite_observed": "Ran 31 tests; OK",
+      "receipt": {
+        "bytes": 1278,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\FAILURE_HARNESS_AND_TEST.json",
+        "sha256": "ec9d06ecc54b1fcfd59454ad400bc211e9a13c463f39c7f8371def633a7368a8"
+      },
+      "status": "failed_test_side_only"
+    },
+    "attempt-03": {
+      "inner_result": {
+        "bytes": 26443,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\INNER_RESULT.json",
+        "sha256": "562dd6932aaad7267f5b4a01065d525054fcdd1b66999f40d2d550dd5b81f4f3"
+      },
+      "run_envelope": {
+        "bytes": 32134,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\RUN_ENVELOPE.json",
+        "sha256": "3b7c7463b0cc465244f31b3869ba44ecdb45b2d3b979931a669da19b7ca01375"
+      },
+      "status": "expected_focused_observations"
+    }
+  },
+  "before_after_diff": {
+    "bytes": 59530,
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\SOURCE_DIFF_FROM_ORIGINAL83.patch",
+    "sha256": "8a17128c903995091b683d8166ca960b9f588b03ed1b001f9dc187cd5c55f435"
+  },
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "evidence_files": [
+    {
+      "bytes": 607,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\FAILURE_RUNNER.json",
+      "relative_to_lease_worker84": "attempt-01/FAILURE_RUNNER.json",
+      "sha256": "387431e1fe8d28d89854490890d19fcad9c8f83092011729abbcd87897e2b1f9"
+    },
+    {
+      "bytes": 4490,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+      "relative_to_lease_worker84": "attempt-01/source-before/competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+    },
+    {
+      "bytes": 21090,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+      "relative_to_lease_worker84": "attempt-01/source-before/competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+    },
+    {
+      "bytes": 2508,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+      "relative_to_lease_worker84": "attempt-01/source-before/competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+    },
+    {
+      "bytes": 9115,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+      "relative_to_lease_worker84": "attempt-01/source-before/competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "36f7eee5c98632f137a15d66ce7a558eedb791a25f8274bf8028ce790c9e5096"
+    },
+    {
+      "bytes": 18026,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+      "relative_to_lease_worker84": "attempt-01/source-before/competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+    },
+    {
+      "bytes": 9502,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+      "relative_to_lease_worker84": "attempt-01/source-before/competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+    },
+    {
+      "bytes": 3730,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-01\\SOURCE_BEFORE.json",
+      "relative_to_lease_worker84": "attempt-01/SOURCE_BEFORE.json",
+      "sha256": "ad1d48e99619155af973c17dc96ac96f7357b5b638b1e0030d3df0965fe3f7dd"
+    },
+    {
+      "bytes": 91,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\duplicate_key\\input.json",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/duplicate_key/input.json",
+      "sha256": "cb9964e9814e57f478eba445a2e9f41573a3eb403ff95be50eef0f861c8c06ea"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\duplicate_key\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/duplicate_key/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 799,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\duplicate_key\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/duplicate_key/process.stdout.bin",
+      "sha256": "05fd5c5f45cf4de58e52642d885b42a422173a31113ccb16139f39c847ffa1e0"
+    },
+    {
+      "bytes": 1008,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\missing_ack\\input.json",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/missing_ack/input.json",
+      "sha256": "1dd402ce4bcac7f9850868762f4ff50aeae96ace81de335d358fd3dd08a77cd5"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\missing_ack\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/missing_ack/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2200,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\missing_ack\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/missing_ack/process.stdout.bin",
+      "sha256": "94d1ca0fd842f6b30e5be19bb8be98d9605ad2c7c4c6cd53d08ded3f0cca971a"
+    },
+    {
+      "bytes": 1427,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\positive\\input.json",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/positive/input.json",
+      "sha256": "115012962caa9edb5e16b2fee69ad3e33322039b389d8f54dfd015a8ed733f9a"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\positive\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/positive/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4113,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\positive\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/positive/process.stdout.bin",
+      "sha256": "b907368866201871f4ed04f6e71ce6b48db9e22e1b258dacf3b140d0d5d06956"
+    },
+    {
+      "bytes": 433,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\production\\input.json",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/production/input.json",
+      "sha256": "8125f2dac1cea4ef92659dbe96aedd8cfd44c93f01ed96e0d6f4e236c2e51c24"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\production\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/production/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1887,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\cli-cases\\production\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/cli-cases/production/process.stdout.bin",
+      "sha256": "4b49d607bacf4e1ef5df0f3c65c4075d589b62c1ffadf026bc92dd4ba2f915a7"
+    },
+    {
+      "bytes": 4634,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\commands\\host_lease83.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/commands/host_lease83.stderr.bin",
+      "sha256": "089dee315889639b2a82b29a8ebdad21964ae506eb3c1a1b70de1605e5981c4f"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\commands\\host_lease83.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/commands/host_lease83.stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2591,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\commands\\host_lease84_cli.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/commands/host_lease84_cli.stderr.bin",
+      "sha256": "6f69870a52942eee6ddd061954497a9f13a117c421011edc67b56dad0edb5602"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\commands\\host_lease84_cli.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/commands/host_lease84_cli.stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1278,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\FAILURE_HARNESS_AND_TEST.json",
+      "relative_to_lease_worker84": "attempt-02/FAILURE_HARNESS_AND_TEST.json",
+      "sha256": "ec9d06ecc54b1fcfd59454ad400bc211e9a13c463f39c7f8371def633a7368a8"
+    },
+    {
+      "bytes": 4036,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\job\\PROCESS.json",
+      "relative_to_lease_worker84": "attempt-02/job/PROCESS.json",
+      "sha256": "c9c5a02b3135dd2b9391908f4735638fc51bd8811df1021dfe9a005d830bd65c"
+    },
+    {
+      "bytes": 37,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\job\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-02/job/process.stderr.bin",
+      "sha256": "4bf7c6bf1df87b5d2d38f5d677fda65ecc0ce074f4568db08bf1f5b53ce9ad2a"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\job\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-02/job/process.stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2392,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\job\\PROCESS_STARTED.json",
+      "relative_to_lease_worker84": "attempt-02/job/PROCESS_STARTED.json",
+      "sha256": "f3b0b05a21fc960dffa4cc6b11cf02a27d2999654a166c92dbf14e00b32a3bbe"
+    },
+    {
+      "bytes": 4568,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\RUN_ENVELOPE.json",
+      "relative_to_lease_worker84": "attempt-02/RUN_ENVELOPE.json",
+      "sha256": "de9a86a22ce0e9cef21160c4d51d5bbab7dbb1afbad0be2b2cd24c8e786c0ccf"
+    },
+    {
+      "bytes": 4490,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+      "relative_to_lease_worker84": "attempt-02/source-after/competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+    },
+    {
+      "bytes": 21090,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+      "relative_to_lease_worker84": "attempt-02/source-after/competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+    },
+    {
+      "bytes": 2508,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+      "relative_to_lease_worker84": "attempt-02/source-after/competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+    },
+    {
+      "bytes": 9115,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+      "relative_to_lease_worker84": "attempt-02/source-after/competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "36f7eee5c98632f137a15d66ce7a558eedb791a25f8274bf8028ce790c9e5096"
+    },
+    {
+      "bytes": 18026,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-after\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+      "relative_to_lease_worker84": "attempt-02/source-after/competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+    },
+    {
+      "bytes": 9502,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-after\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+      "relative_to_lease_worker84": "attempt-02/source-after/competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+    },
+    {
+      "bytes": 4490,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+      "relative_to_lease_worker84": "attempt-02/source-before/competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+    },
+    {
+      "bytes": 21090,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+      "relative_to_lease_worker84": "attempt-02/source-before/competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+    },
+    {
+      "bytes": 2508,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+      "relative_to_lease_worker84": "attempt-02/source-before/competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+    },
+    {
+      "bytes": 9115,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+      "relative_to_lease_worker84": "attempt-02/source-before/competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "36f7eee5c98632f137a15d66ce7a558eedb791a25f8274bf8028ce790c9e5096"
+    },
+    {
+      "bytes": 18026,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+      "relative_to_lease_worker84": "attempt-02/source-before/competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+    },
+    {
+      "bytes": 9502,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+      "relative_to_lease_worker84": "attempt-02/source-before/competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+    },
+    {
+      "bytes": 3723,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\SOURCE_AFTER.json",
+      "relative_to_lease_worker84": "attempt-02/SOURCE_AFTER.json",
+      "sha256": "75246c0695d8733dbd902fc0aedc5e833dc3dbd4278557b70335e2103b30f339"
+    },
+    {
+      "bytes": 3730,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-02\\SOURCE_BEFORE.json",
+      "relative_to_lease_worker84": "attempt-02/SOURCE_BEFORE.json",
+      "sha256": "d60ed57a9c4bab3d25139d27dd670813eaaa9c2fa62baeb2e4a33375edf7c87d"
+    },
+    {
+      "bytes": 466,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\bool_as_int\\input.json",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/bool_as_int/input.json",
+      "sha256": "6637876ad69be69915a08eb77a4131d0eac032060396e6520bbb93a38d5e7f31"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\bool_as_int\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/bool_as_int/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1151,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\bool_as_int\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/bool_as_int/process.stdout.bin",
+      "sha256": "c594c9fdcf833fa75f7a8103e86ba54124d69c46c7bf4cad7cddce582cd6b67a"
+    },
+    {
+      "bytes": 1444,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\disabled_query\\input.json",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/disabled_query/input.json",
+      "sha256": "c0a182393f3613081402c468f1b398fe4b43f018855914a7b30698e9ae1b8ee3"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\disabled_query\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/disabled_query/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4193,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\disabled_query\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/disabled_query/process.stdout.bin",
+      "sha256": "bf2ada1a3e410442ae0d7e26f3772a1ff20b49fa78a38117d4715c27586fab2a"
+    },
+    {
+      "bytes": 91,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\duplicate_key\\input.json",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/duplicate_key/input.json",
+      "sha256": "cb9964e9814e57f478eba445a2e9f41573a3eb403ff95be50eef0f861c8c06ea"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\duplicate_key\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/duplicate_key/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 799,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\duplicate_key\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/duplicate_key/process.stdout.bin",
+      "sha256": "c03779d19cb760ddbdf2e6d7cecdf48e22131e4995c55a4cfcb68754eeb893e8"
+    },
+    {
+      "bytes": 1008,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\missing_ack\\input.json",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/missing_ack/input.json",
+      "sha256": "1dd402ce4bcac7f9850868762f4ff50aeae96ace81de335d358fd3dd08a77cd5"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\missing_ack\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/missing_ack/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2200,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\missing_ack\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/missing_ack/process.stdout.bin",
+      "sha256": "0a45407e5244c0fe16e10e0e84ee249aa70b5302f4a4aaeac4b8bcf5f79fee9a"
+    },
+    {
+      "bytes": 1427,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\positive\\input.json",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/positive/input.json",
+      "sha256": "115012962caa9edb5e16b2fee69ad3e33322039b389d8f54dfd015a8ed733f9a"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\positive\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/positive/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4113,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\positive\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/positive/process.stdout.bin",
+      "sha256": "f861242107eefd73a6bbd0a5545ecc7af89f8ba29918b4991b7ccb71dc4f3a97"
+    },
+    {
+      "bytes": 433,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\production\\input.json",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/production/input.json",
+      "sha256": "8125f2dac1cea4ef92659dbe96aedd8cfd44c93f01ed96e0d6f4e236c2e51c24"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\production\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/production/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1887,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\cli-cases\\production\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/cli-cases/production/process.stdout.bin",
+      "sha256": "0913bacf8a9fe9e7f4a688dcb1bfdcc61d9597b3b33350d7ac1e34f29c0453f4"
+    },
+    {
+      "bytes": 4634,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease83.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/commands/host_lease83.stderr.bin",
+      "sha256": "df1be9bd6be6d5d6fcbde48e0f464ef24b12f98f251c79f637226f111405cc24"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease83.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/commands/host_lease83.stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1754,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease84_cli.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/commands/host_lease84_cli.stderr.bin",
+      "sha256": "dec1999dc726cf1c8910a1c6290fe1bd86b43676196c169fed5573db6ed0dc21"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\commands\\host_lease84_cli.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/commands/host_lease84_cli.stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 26443,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\INNER_RESULT.json",
+      "relative_to_lease_worker84": "attempt-03/INNER_RESULT.json",
+      "sha256": "562dd6932aaad7267f5b4a01065d525054fcdd1b66999f40d2d550dd5b81f4f3"
+    },
+    {
+      "bytes": 4094,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\PROCESS.json",
+      "relative_to_lease_worker84": "attempt-03/job/PROCESS.json",
+      "sha256": "7e300256da2140d90778cd7005999df2c8fcd22c52c717a8e121840e641f4d92"
+    },
+    {
+      "bytes": 0,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\process.stderr.bin",
+      "relative_to_lease_worker84": "attempt-03/job/process.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 574,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\process.stdout.bin",
+      "relative_to_lease_worker84": "attempt-03/job/process.stdout.bin",
+      "sha256": "1d56c2b34d6e51a80f9cee5c7fa470954868073d71e73f8ef80127e39af49594"
+    },
+    {
+      "bytes": 2391,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\job\\PROCESS_STARTED.json",
+      "relative_to_lease_worker84": "attempt-03/job/PROCESS_STARTED.json",
+      "sha256": "b949452a8d5eeab475f6b6e63531fb8f635ab5dd237d690b7db4bdd7d458931e"
+    },
+    {
+      "bytes": 32134,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\RUN_ENVELOPE.json",
+      "relative_to_lease_worker84": "attempt-03/RUN_ENVELOPE.json",
+      "sha256": "3b7c7463b0cc465244f31b3869ba44ecdb45b2d3b979931a669da19b7ca01375"
+    },
+    {
+      "bytes": 4490,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+      "relative_to_lease_worker84": "attempt-03/source-after/competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+    },
+    {
+      "bytes": 21090,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+      "relative_to_lease_worker84": "attempt-03/source-after/competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+    },
+    {
+      "bytes": 2508,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+      "relative_to_lease_worker84": "attempt-03/source-after/competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+    },
+    {
+      "bytes": 9151,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+      "relative_to_lease_worker84": "attempt-03/source-after/competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+    },
+    {
+      "bytes": 18026,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+      "relative_to_lease_worker84": "attempt-03/source-after/competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+    },
+    {
+      "bytes": 9502,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+      "relative_to_lease_worker84": "attempt-03/source-after/competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+    },
+    {
+      "bytes": 4490,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+      "relative_to_lease_worker84": "attempt-03/source-before/competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+    },
+    {
+      "bytes": 21090,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+      "relative_to_lease_worker84": "attempt-03/source-before/competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+    },
+    {
+      "bytes": 2508,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+      "relative_to_lease_worker84": "attempt-03/source-before/competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+    },
+    {
+      "bytes": 9151,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+      "relative_to_lease_worker84": "attempt-03/source-before/competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+    },
+    {
+      "bytes": 18026,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+      "relative_to_lease_worker84": "attempt-03/source-before/competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+    },
+    {
+      "bytes": 9502,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+      "relative_to_lease_worker84": "attempt-03/source-before/competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+    },
+    {
+      "bytes": 3723,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\SOURCE_AFTER.json",
+      "relative_to_lease_worker84": "attempt-03/SOURCE_AFTER.json",
+      "sha256": "d048a54aa949c5dd9df358c7ac56ed759bacd4f29a483dd1d51c65053bf1c5a0"
+    },
+    {
+      "bytes": 3730,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\SOURCE_BEFORE.json",
+      "relative_to_lease_worker84": "attempt-03/SOURCE_BEFORE.json",
+      "sha256": "75df60c73b74c4fa1230f910b525f55d1f1d078f6f3dd05bd4fe653a7722274b"
+    },
+    {
+      "bytes": 14420,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\before-source\\host_lease83.py",
+      "relative_to_lease_worker84": "before-source/host_lease83.py",
+      "sha256": "47c74ef42a85a1dce3e15646115bacfacd1dfb85d655f8b1a97068f2dfacf5f2"
+    },
+    {
+      "bytes": 4393,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\before-source\\README.md",
+      "relative_to_lease_worker84": "before-source/README.md",
+      "sha256": "94521a9f56058f3024bf75e562d253bedda2c17cf10553108e8999f6ceca0d3a"
+    },
+    {
+      "bytes": 11548,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\before-source\\test_host_lease83_UNEXECUTED.py",
+      "relative_to_lease_worker84": "before-source/test_host_lease83_UNEXECUTED.py",
+      "sha256": "e00012434bd3f14e006977f724cc99e4c044b8fc432a6a0b0de6c749516030bc"
+    },
+    {
+      "bytes": 15781,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\execute84.py",
+      "relative_to_lease_worker84": "execute84.py",
+      "sha256": "44a4c1bae835b9c95cb31c1d1b43b2ab580cfe9c9d4f5ebd0d0ce03a39b87232"
+    },
+    {
+      "bytes": 10801,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\finalize84.py",
+      "relative_to_lease_worker84": "finalize84.py",
+      "sha256": "57d777564d17cbef27200b41278c620d7d32cfb93f2820c56fb57c414ef7e5e6"
+    },
+    {
+      "bytes": 59530,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\SOURCE_DIFF_FROM_ORIGINAL83.patch",
+      "relative_to_lease_worker84": "SOURCE_DIFF_FROM_ORIGINAL83.patch",
+      "sha256": "8a17128c903995091b683d8166ca960b9f588b03ed1b001f9dc187cd5c55f435"
+    },
+    {
+      "bytes": 4554,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\STARTED.json",
+      "relative_to_lease_worker84": "STARTED.json",
+      "sha256": "9a8aaded0c97312544e609b75da33ff44d72ba3034770faf485040c1f2bada4f"
+    }
+  ],
+  "formal_pass": false,
+  "formal_test_pass": false,
+  "frozen_taskbook": "1011259415a0916054eb580687612580bc1e5f09",
+  "job_id": "child-d07760b266794125b508a48d1b186e02",
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "not_run_or_unmet": [
+    "No real host clock, capture, ACK authentication, USB/clock measurement or action retirement.",
+    "No production integration, packet send, callback, retry, board/SSH or physical run.",
+    "No network, service, SQL, queue, credential, Root/C call, Vivado, Git commit or publication.",
+    "B05, G05, full H12, all29 and physical acceptance remain unaccepted.",
+    "The 8 s delayed ACK, 12 s cap, capacity and terminal cases are synthetic structural facts only.",
+    "This does not complete H01-H15 or authorize motion/current-capture freshness.",
+    "No prior75/81/82 suite was replayed and no unrelated source was read."
+  ],
+  "notes": [
+    "RESULT.json itself is excluded from evidence_files to avoid a self-hash cycle.",
+    "Attempt-01 and attempt-02 are retained unchanged except for added private failure receipts.",
+    "Raw stdout/stderr and source snapshots remain under the private lease-worker84 evidence tree."
+  ],
+  "prior83": {
+    "job_id": "child-97850e82282241e4ac53a3e6d6413f3d",
+    "note": "Raw terminal completion text is not strict JSON; supplied controller facts are retained without rewriting the file.",
+    "supplied_terminal_facts": {
+      "stale": false,
+      "status": "completed",
+      "terminal": true
+    },
+    "terminal_file": {
+      "bytes": 4728,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease83-terminal.private.json",
+      "sha256": "a6b7d3a867d7819d29b9b2b13c30169195e2f62e0aed600b6170b1e1775d43b2"
+    }
+  },
+  "product_acceptance": false,
+  "repair_log": [
+    {
+      "attempt": "attempt-01",
+      "correction": "create attempt/job before run_owned",
+      "defect": "Job output parent was not created before run_owned",
+      "number": 1,
+      "scope": "harness"
+    },
+    {
+      "attempt": "attempt-02",
+      "correction": "construct the JSON backslash byte with bytes([92])",
+      "defect": "surrogate fixture construction raised UnicodeEncodeError",
+      "number": 2,
+      "scope": "test source"
+    },
+    {
+      "attempt": "attempt-02",
+      "correction": "handle an empty output operations array",
+      "defect": "empty operations array from a parse refusal was indexed",
+      "number": 3,
+      "scope": "evidence harness"
+    }
+  ],
+  "requirements_count": 15,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "schema": "host_lease84/result/v1",
+  "scoped_acceptance": "FOCUSED_SOURCE84_EVIDENCE_ONLY",
+  "selected_source_files": {
+    "competition/deepeye/golden/diagnostic/host_lease83/README.md": {
+      "bytes": 4490,
+      "lines": 85,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+      "relative_to_W": "competition/deepeye/golden/diagnostic/host_lease83/README.md",
+      "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+    },
+    "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py": {
+      "bytes": 21090,
+      "lines": 408,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+      "relative_to_W": "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py",
+      "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+    },
+    "competition/deepeye/golden/diagnostic/host_lease84/README.md": {
+      "bytes": 2508,
+      "lines": 64,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+      "relative_to_W": "competition/deepeye/golden/diagnostic/host_lease84/README.md",
+      "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+    },
+    "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py": {
+      "bytes": 9151,
+      "lines": 212,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+      "relative_to_W": "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py",
+      "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+    },
+    "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py": {
+      "bytes": 18026,
+      "lines": 379,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+      "relative_to_W": "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py",
+      "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+    },
+    "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py": {
+      "bytes": 9502,
+      "lines": 247,
+      "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+      "relative_to_W": "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py",
+      "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+    }
+  },
+  "source_snapshots": {
+    "attempt03_after": {
+      "phase": "after_execution",
+      "sources": {
+        "competition/deepeye/golden/diagnostic/host_lease83/README.md": {
+          "bytes": 4490,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+          "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py": {
+          "bytes": 21090,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+          "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/README.md": {
+          "bytes": 2508,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+          "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py": {
+          "bytes": 9151,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+          "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py": {
+          "bytes": 18026,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+          "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py": {
+          "bytes": 9502,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-after\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+          "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+        }
+      },
+      "tools": {
+        "job_helper": {
+          "bytes": 3679,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\fpga_mesh\\windows_job.py",
+          "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+        },
+        "owned_process": {
+          "bytes": 11126,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\g05_capture\\build\\owned_process.py",
+          "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+        },
+        "python": {
+          "bytes": 275176,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+          "sha256": "3638cd6a1236660910fe5e278994d309c073fb4bb49ee061f48bd4ccaaa0a191"
+        },
+        "runner": {
+          "bytes": 15781,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\execute84.py",
+          "sha256": "44a4c1bae835b9c95cb31c1d1b43b2ab580cfe9c9d4f5ebd0d0ce03a39b87232"
+        }
+      }
+    },
+    "attempt03_before": {
+      "phase": "before_execution",
+      "sources": {
+        "competition/deepeye/golden/diagnostic/host_lease83/README.md": {
+          "bytes": 4490,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+          "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py": {
+          "bytes": 21090,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+          "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/README.md": {
+          "bytes": 2508,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+          "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py": {
+          "bytes": 9151,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+          "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py": {
+          "bytes": 18026,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+          "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py": {
+          "bytes": 9502,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\attempt-03\\source-before\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+          "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+        }
+      },
+      "tools": {
+        "job_helper": {
+          "bytes": 3679,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\fpga_mesh\\windows_job.py",
+          "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+        },
+        "owned_process": {
+          "bytes": 11126,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\g05_capture\\build\\owned_process.py",
+          "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+        },
+        "python": {
+          "bytes": 275176,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+          "sha256": "3638cd6a1236660910fe5e278994d309c073fb4bb49ee061f48bd4ccaaa0a191"
+        },
+        "runner": {
+          "bytes": 15781,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\execute84.py",
+          "sha256": "44a4c1bae835b9c95cb31c1d1b43b2ab580cfe9c9d4f5ebd0d0ce03a39b87232"
+        }
+      }
+    },
+    "attempt03_before_equals_after": true,
+    "original83_archive": {
+      "README.md": {
+        "bytes": 4393,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease84-original83\\README.md",
+        "sha256": "94521a9f56058f3024bf75e562d253bedda2c17cf10553108e8999f6ceca0d3a"
+      },
+      "SOURCE83_RESULT.json": {
+        "bytes": 8441,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease84-original83\\SOURCE83_RESULT.json",
+        "sha256": "6f9fb320bf67ba5cade61cd59a8fee037152daa5f979abf8f73b24978c729ea8"
+      },
+      "SOURCE83_STARTED.json": {
+        "bytes": 3873,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease84-original83\\SOURCE83_STARTED.json",
+        "sha256": "075f83077cf0b98515e761ebc2bb53279c19fb4f5c61411648331638d33f730e"
+      },
+      "host_lease83.py": {
+        "bytes": 14420,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease84-original83\\host_lease83.py",
+        "sha256": "47c74ef42a85a1dce3e15646115bacfacd1dfb85d655f8b1a97068f2dfacf5f2"
+      },
+      "test_host_lease83_UNEXECUTED.py": {
+        "bytes": 11548,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease84-original83\\test_host_lease83_UNEXECUTED.py",
+        "sha256": "e00012434bd3f14e006977f724cc99e4c044b8fc432a6a0b0de6c749516030bc"
+      }
+    },
+    "original_before_edit_copies": {
+      "README.md": {
+        "bytes": 4393,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\before-source\\README.md",
+        "sha256": "94521a9f56058f3024bf75e562d253bedda2c17cf10553108e8999f6ceca0d3a"
+      },
+      "host_lease83.py": {
+        "bytes": 14420,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\before-source\\host_lease83.py",
+        "sha256": "47c74ef42a85a1dce3e15646115bacfacd1dfb85d655f8b1a97068f2dfacf5f2"
+      },
+      "test_host_lease83_UNEXECUTED.py": {
+        "bytes": 11548,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\before-source\\test_host_lease83_UNEXECUTED.py",
+        "sha256": "e00012434bd3f14e006977f724cc99e4c044b8fc432a6a0b0de6c749516030bc"
+      }
+    },
+    "phase_hashes": {
+      "after_cli_cases": {
+        "competition/deepeye/golden/diagnostic/host_lease83/README.md": {
+          "bytes": 4490,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+          "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py": {
+          "bytes": 21090,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+          "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/README.md": {
+          "bytes": 2508,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+          "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py": {
+          "bytes": 9151,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+          "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py": {
+          "bytes": 18026,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+          "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py": {
+          "bytes": 9502,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+          "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+        }
+      },
+      "after_tests": {
+        "competition/deepeye/golden/diagnostic/host_lease83/README.md": {
+          "bytes": 4490,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+          "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py": {
+          "bytes": 21090,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+          "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/README.md": {
+          "bytes": 2508,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+          "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py": {
+          "bytes": 9151,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+          "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py": {
+          "bytes": 18026,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+          "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py": {
+          "bytes": 9502,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+          "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+        }
+      },
+      "before_tests": {
+        "competition/deepeye/golden/diagnostic/host_lease83/README.md": {
+          "bytes": 4490,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\README.md",
+          "sha256": "7fe1d11f0f372bed9b523e669570749b726ea74489b6bca5bb11c1ff60c3d77b"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease83/test_host_lease83.py": {
+          "bytes": 21090,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease83\\test_host_lease83.py",
+          "sha256": "a70bd49dfb63848b988377d9157778deb3c67b68d55c239de5028cd8206d5084"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/README.md": {
+          "bytes": 2508,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\README.md",
+          "sha256": "e6d1829f469d8a9ff91f5941ac0098a9b69fd91796c4cc5a90c4b83a053df473"
+        },
+        "competition/deepeye/golden/diagnostic/host_lease84/test_host_lease84_CLI.py": {
+          "bytes": 9151,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\golden\\diagnostic\\host_lease84\\test_host_lease84_CLI.py",
+          "sha256": "0fc1a6f3fbe95aeda730fe2daa265e12a0b7772bde4360a66d18a2252142bfd1"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease83/host_lease83.py": {
+          "bytes": 18026,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease83\\host_lease83.py",
+          "sha256": "c19ec39a76560d98c016236821655e206038a53b2b302826aa8d18d0499a7558"
+        },
+        "competition/deepeye/tools/diagnostic/host_lease84/host_lease84_cli.py": {
+          "bytes": 9502,
+          "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\host_lease84\\host_lease84_cli.py",
+          "sha256": "c2491f8bba7d09ad25d163dd5c74385b1d199375fb3780f22e70e142841b98fb"
+        }
+      }
+    }
+  },
+  "started_receipt": {
+    "bytes": 4554,
+    "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\lease-worker84\\STARTED.json",
+    "sha256": "9a8aaded0c97312544e609b75da33ff44d72ba3034770faf485040c1f2bada4f"
+  },
+  "status": "FOCUSED_OBSERVATIONS_COMPLETE",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "thread_id": "01a18cd4-317f-72e0-8c29-352acbc2a98f",
+  "work_id": "B-HOST-ACK-DEADLINE-FUNCTIONAL-20261030-84"
+}

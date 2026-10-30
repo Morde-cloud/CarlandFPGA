@@ -1,0 +1,396 @@
+{
+  "schema": "deepeye-r04-gain80-vectors/v1",
+  "status": "UNEXECUTED_SOURCE_ONLY",
+  "executed": false,
+  "simulation_run": false,
+  "tests_run": false,
+  "pass_claimed": false,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-R04-LOCAL-OVERRANGE-SOURCE-20261030-80",
+  "candidate": "deepeye_mcp6s21_safety_arbiter_candidate.sv",
+  "reference_master": "r04_gain76/deepeye_mcp6s21_write_candidate.sv",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "clock_assumption": "100 MHz wrapper source assumption only; no clock constraint or timing proof",
+  "manual_symbols": {
+    "tagA": "0x000000A1",
+    "tagB": "0x000000B2",
+    "tagC": "0x000000C3",
+    "tagS": "0x53414645",
+    "gain0": "3'd0",
+    "gain4": "3'd4"
+  },
+  "oracle_scope": "Manual interface/state expectations derived from the written finite-state rules. They are not logical equivalence, simulation, synthesis, timing, electrical, ADC, calibration, or board results.",
+  "global_invariants": [
+    "Only one master transaction may be in flight; host and safety in-flight ownership are mutually exclusive.",
+    "host_result and safety_result are fixed held slots; nothing is evicted or overwritten.",
+    "A full host slot blocks a new host request but never blocks the safety fallback command.",
+    "Any master result with the wrong tag or no recorded owner is a sticky fault; it is never stored as success.",
+    "No vector proves analog gain, ADC value, settling, CS/register state, 16-edge electrical behavior, or a physical safety property."
+  ],
+  "vectors": [
+    {
+      "id": "V01_RESET_SAFE_DESTROYS_CONTEXT",
+      "focus": "reset boundary",
+      "stimulus": [
+        "Assume held slots and an active master transaction from a prior run, then hold rst=1 for at least one clk edge.",
+        "Set arm=1 while rst is held, then deassert rst with arm still high."
+      ],
+      "expected": [
+        "rst is applied to the 76 master and master_cancel is asserted by the wrapper.",
+        "After reset edges, spi_cs_n is high, spi_sck and spi_si are low, both result valid bits are 0, both slots/tags are cleared, armed=0, inhibit=0, sticky_fault=0, and no post-reset ACK appears.",
+        "Because arm_q observed the held arm level during reset, the post-reset held-high arm is not a new rising pulse; the wrapper remains unarmed.",
+        "Host software must retain its own persistent UNKNOWN state for the destroyed transaction."
+      ],
+      "not_proven": "No claim that the interrupted analog state is known or restored."
+    },
+    {
+      "id": "V02_ENABLE_DOES_NOT_ARM",
+      "focus": "admission default",
+      "stimulus": [
+        "From reset, set enable=1, arm=0, cancel=0, overrange=0.",
+        "Hold host_valid=1 with tagA and gain4 for many cycles."
+      ],
+      "expected": [
+        "armed remains 0 and host_ready remains 0.",
+        "No master command is issued and no SPI transaction starts.",
+        "Both result slots remain empty."
+      ],
+      "not_proven": "No inference that an external integrator will default enable low; that is an integration requirement."
+    },
+    {
+      "id": "V03_ARM_REQUIRES_ALL_PRECONDITIONS",
+      "focus": "arm gating",
+      "stimulus": [
+        "Pulse arm while cancel=1.",
+        "Pulse arm while overrange=1.",
+        "Pulse arm while either result slot is full.",
+        "Pulse arm while the 76 master is in its post-reset/high-guard state with m_cmd_ready=0."
+      ],
+      "expected": [
+        "Each pulse is ignored: armed stays 0 and no command qualification opens.",
+        "overrange latches inhibit even when arm is ignored.",
+        "A new rising arm pulse is required after all preconditions later become true."
+      ],
+      "not_proven": "No exact edge count or timing is claimed for the master guard."
+    },
+    {
+      "id": "V04_ARM_OLD_HELD_VALID_NOT_REPLAYED",
+      "focus": "arm and host_valid=0 boundary",
+      "stimulus": [
+        "With empty slots, overrange=0, master ready, and host_valid=1 held from before the arm cycle, pulse arm.",
+        "Keep host_valid=1 for many cycles, then drive host_valid=0 for one cycle, then assert host_valid with tagA/gain4."
+      ],
+      "expected": [
+        "The arm pulse can set armed=1 and clear inhibit, but host_gate remains 0 because no post-arm host_valid=0 has been observed.",
+        "host_ready remains 0 and the old held host_valid cannot handshake or replay.",
+        "Only the later host_valid=0 cycle opens host_gate; the subsequent fresh host_valid assertion can handshake if all other gates are eligible."
+      ],
+      "not_proven": "No exhaustive proof of all upstream valid/ready protocol violations."
+    },
+    {
+      "id": "V05_NORMAL_HOST_GAIN4",
+      "focus": "normal host transfer and held result",
+      "stimulus": [
+        "Arm safely, observe host_valid=0, then assert host_valid=1, host_tag=tagA, host_gain_code=gain4.",
+        "Hold host_result_ready=0 after the result appears."
+      ],
+      "expected": [
+        "host_valid && host_ready transfers exactly one request and records tagA as the host in-flight owner.",
+        "The wrapper presents gain4 and tagA to the unchanged 76 master; the wrapper adds no encoder.",
+        "On the master's digital terminal result, host_result_valid becomes 1 with error=0 and tag=tagA; safety_result_valid remains 0.",
+        "The host result remains held and unchanged while host_result_ready=0, and no new host request is accepted."
+      ],
+      "not_proven": "error=0 is digital frame completion only; no analog gain or ADC measurement is proven."
+    },
+    {
+      "id": "V06_ILLEGAL_GAIN_DELEGATED_TO_76",
+      "focus": "gain legality ownership",
+      "stimulus": [
+        "After safe arm, assert host_valid=1, host_tag=tagA, host_gain_code=3'd3."
+      ],
+      "expected": [
+        "The wrapper performs the tag check and may hand the transfer to the 76 master.",
+        "The 76 master, not the wrapper, refuses the illegal gain and returns its held digital error with tagA.",
+        "host_result_valid=1, host_result_error=1, host_result_tag=tagA; no wrapper success or analog claim is made."
+      ],
+      "not_proven": "The wrapper does not independently re-encode or establish an SPI waveform for illegal gains."
+    },
+    {
+      "id": "V07_HOST_ZERO_TAG_FAULTS",
+      "focus": "host identity",
+      "stimulus": [
+        "After safe arm and host_gate opening, assert host_valid=1 with host_tag=0 and any gain."
+      ],
+      "expected": [
+        "host_ready=0 and no master command is issued.",
+        "sticky_fault becomes 1 and inhibit becomes 1; armed is cleared and host_gate closes.",
+        "No result is fabricated and the condition persists until reset."
+      ],
+      "not_proven": "Reset does not repair the lost external transaction context."
+    },
+    {
+      "id": "V08_HOST_RESERVED_TAG_COLLISION",
+      "focus": "colliding tags",
+      "stimulus": [
+        "Arm with reserved_safety_tag=tagS, observe host_valid=0, then assert host_valid=1 with host_tag=tagS."
+      ],
+      "expected": [
+        "host_ready=0 because the host tag equals the latched safety tag.",
+        "sticky_fault=1, inhibit=1, armed=0, host_gate=0; no master command and no fallback identity is fabricated.",
+        "No host or safety result slot is written by the rejected attempt."
+      ],
+      "not_proven": "No claim that an upstream host cannot violate the tag contract."
+    },
+    {
+      "id": "V09_HOST_RESULT_BACKPRESSURE",
+      "focus": "host held-result backpressure",
+      "stimulus": [
+        "Complete a normal host transaction so host_result_valid=1 with tagA.",
+        "Hold host_result_ready=0 and assert host_valid=1 with tagB.",
+        "After one or more cycles, pulse host_result_ready=1 while host_valid may remain high."
+      ],
+      "expected": [
+        "While the host slot is full, host_ready remains 0 and no new host command is accepted.",
+        "The held host error/tag payload stays stable and is never overwritten.",
+        "After the host result-ready edge clears the slot, a still-asserted valid may handshake on the next eligible cycle; this is normal backpressure, not replay of the armed pre-arm request."
+      ],
+      "not_proven": "No unbounded queue or bypass is provided."
+    },
+    {
+      "id": "V10_OVERRANGE_SAME_CYCLE_HOST_BLOCK",
+      "focus": "overrange first arrival",
+      "stimulus": [
+        "Arm safely and open host_gate, then drive overrange=1 in the same cycle as host_valid=1 with tagA/gain4.",
+        "Keep overrange high after the edge."
+      ],
+      "expected": [
+        "host_ready is 0 in that cycle because the combinational host path includes !overrange; no host handshake occurs.",
+        "inhibit becomes 1 at the edge and fallback becomes pending for the safety owner.",
+        "No host result is created for the blocked attempt; the fallback gain0 command can be sent only after the 76 master is ready."
+      ],
+      "not_proven": "No threshold, ADC sample, or calibration source is modeled."
+    },
+    {
+      "id": "V11_HOST_INFLIGHT_OVERRANGE_CANCEL_AND_DRAIN",
+      "focus": "host in-flight cancellation",
+      "stimulus": [
+        "Accept host tagA mid-frame, then assert overrange=1 before the normal digital terminal result.",
+        "Keep the host result slot empty and do not consume the host result."
+      ],
+      "expected": [
+        "master_cancel is asserted for the in-flight host owner while overrange/inhibit applies.",
+        "The 76 master returns its digital terminal/error result with tagA; the wrapper stores it in the host slot, sets host_inflight=0, and drains that master result.",
+        "The host result slot holds tagA/error and is not overwritten by fallback.",
+        "After the original result is drained and the master is ready, exactly one gain0 safety command is issued with tagS; its result goes only to the safety slot."
+      ],
+      "not_proven": "An abort may already have affected analog state; the eventual gain remains unknown and no CS/register success is inferred."
+    },
+    {
+      "id": "V12_HOST_SLOT_HELD_DOES_NOT_BLOCK_SAFETY",
+      "focus": "independent fixed slots",
+      "stimulus": [
+        "Leave a normal host result tagA held in the host slot with host_result_ready=0.",
+        "With no host transaction in flight, assert overrange=1 and keep the host slot full."
+      ],
+      "expected": [
+        "inhibit latches and fallback becomes pending without waiting for host_result_ready.",
+        "Once the 76 master is ready, the safety tagS/gain0 command is issued even though the host slot is full.",
+        "The safety result is stored only in safety_result_valid/error/tag while the host tagA payload remains byte-for-byte stable.",
+        "No host slot overwrite or eviction occurs."
+      ],
+      "not_proven": "This does not prove analog recovery or an ADC overrange threshold."
+    },
+    {
+      "id": "V13_SUSTAINED_OVERRANGE_NO_DUPLICATE_FALLBACK",
+      "focus": "single fallback per episode",
+      "stimulus": [
+        "After V11 or V12 has issued fallback and stored its safety result, hold overrange=1 for many cycles with both slots held.",
+        "Toggle unrelated host controls while the safety tag remains valid."
+      ],
+      "expected": [
+        "No additional gain0 command is issued and fallback_pending remains 0.",
+        "No new safety result replaces the held one; no host request is admitted while inhibit is high.",
+        "The original host/safety result slots remain stable."
+      ],
+      "not_proven": "No claim about repeated real ADC events beyond the provided overrange input."
+    },
+    {
+      "id": "V14_OVERRANGE_LOW_KEEPS_INHIBIT",
+      "focus": "level deassertion",
+      "stimulus": [
+        "After an overrange episode, drive overrange=0 and drain both result slots.",
+        "Do not pulse arm."
+      ],
+      "expected": [
+        "inhibit remains 1, armed remains 0, and host_ready remains 0.",
+        "No automatic host replay, fallback retry, or command qualification occurs."
+      ],
+      "not_proven": "Low overrange is not itself evidence that the analog input is safe."
+    },
+    {
+      "id": "V15_REARM_REQUIRES_DRAINED_SLOTS",
+      "focus": "explicit re-arm boundary",
+      "stimulus": [
+        "After overrange is low, leave one result slot full and pulse arm.",
+        "Then consume the remaining result and issue a new rising arm pulse while overrange=0 and the master is idle."
+      ],
+      "expected": [
+        "The first arm pulse is ignored; inhibit stays 1 and armed stays 0.",
+        "The later valid pulse sets armed=1, clears inhibit, clears fallback state, and keeps host_gate=0 until a post-arm host_valid=0 cycle is observed.",
+        "No old host request is restarted."
+      ],
+      "not_proven": "Explicit arm is an external operator/controller action and is not validated as a human safety authorization."
+    },
+    {
+      "id": "V16_CANCEL_HOST_INFLIGHT",
+      "focus": "cancel boundary",
+      "stimulus": [
+        "With no overrange, accept host tagA mid-frame, then assert cancel=1 for one or more cycles.",
+        "Deassert cancel while keeping enable=1."
+      ],
+      "expected": [
+        "master_cancel is asserted and the 76 master returns a digital error terminal for tagA when the operation is active.",
+        "The wrapper stores tagA/error in the host slot and clears host_inflight; no safety fallback is pending solely because of cancel.",
+        "armed is cleared, enable recovery does not auto-arm, and the held result remains until consumed."
+      ],
+      "not_proven": "Cancel does not guarantee analog state or eliminate a partial-frame effect."
+    },
+    {
+      "id": "V17_DISABLE_DURING_FALLBACK_NO_RETRY",
+      "focus": "fallback failure/refusal",
+      "stimulus": [
+        "Issue fallback tagS/gain0, then assert enable=0 (or cancel) while the safety transaction is active.",
+        "Return enable=1 and leave overrange low, but do not pulse arm."
+      ],
+      "expected": [
+        "master_cancel is asserted; the 76 master returns its digital terminal/error for tagS.",
+        "The wrapper stores the safety result with tagS and error, clears safety in-flight, and performs no automatic retry.",
+        "inhibit remains 1, armed remains 0, and host_ready remains 0 until slots are drained and a new explicit safe arm occurs."
+      ],
+      "not_proven": "A failed fallback is not converted to success and its analog effect is unknown."
+    },
+    {
+      "id": "V18_CANCEL_DROPS_UNSENT_FALLBACK",
+      "focus": "no replay of pending safety request",
+      "stimulus": [
+        "Overrange latches while a host result slot is held and the master is temporarily not ready, so fallback is pending but not yet sent.",
+        "Assert cancel before m_cmd_ready becomes 1, then deassert cancel and hold enable=1 without a new arm pulse."
+      ],
+      "expected": [
+        "fallback_pending is cleared on cancel; no safety command is sent after cancel deasserts.",
+        "inhibit remains 1 and armed remains 0.",
+        "A later explicit arm is required after overrange is low and both slots are drained; the dropped fallback is not automatically retried."
+      ],
+      "not_proven": "This records a conservative unfulfilled fallback behavior, not a safety-complete product."
+    },
+    {
+      "id": "V19_MASTER_RESULT_TAG_MISMATCH",
+      "focus": "owner/tag strictness",
+      "stimulus": [
+        "Accept host tagA, then force the observed master result_valid=1 with tagB (or another tag unequal to tagA)."
+      ],
+      "expected": [
+        "No host or safety result slot is written and master_result_ready is not asserted by the wrapper.",
+        "sticky_fault=1 and inhibit=1; armed is cleared and all command admission closes.",
+        "The mismatch is not converted into a digital or analog success, and the master result remains an explicit fault witness."
+      ],
+      "not_proven": "A forced tag mismatch is an interface fault; no claim is made about the real device's tag generation."
+    },
+    {
+      "id": "V20_UNSOLICITED_MASTER_RESULT",
+      "focus": "no owner identity",
+      "stimulus": [
+        "With no host or safety transaction in flight, force master result_valid=1 with any tag."
+      ],
+      "expected": [
+        "sticky_fault=1, inhibit=1, armed=0; no result is accepted or stored.",
+        "No fallback or host command is issued while faulted."
+      ],
+      "not_proven": "No protocol recovery is implemented."
+    },
+    {
+      "id": "V21_ZERO_SAFETY_TAG_BLOCKS_ARM",
+      "focus": "missing reserved identity",
+      "stimulus": [
+        "From reset with overrange=0, empty slots, and master ready, pulse arm while reserved_safety_tag=0."
+      ],
+      "expected": [
+        "The arm is refused; sticky_fault=1 and inhibit=1, armed=0 and host_gate=0.",
+        "No host or safety command can start; production integration remains disabled until a distinct nonzero reserved tag is supplied and reset/recovery is separately reviewed."
+      ],
+      "not_proven": "No legal reserved tag has been assigned by the product/protocol owner; this is a documented blocker."
+    },
+    {
+      "id": "V22_SAFETY_TAG_CHANGE_AFTER_ARM",
+      "focus": "identity stability",
+      "stimulus": [
+        "Arm with tagS latched, then change reserved_safety_tag to tagC before any overrange or host handshake."
+      ],
+      "expected": [
+        "The next clk edge raises sticky_fault and inhibit; armed is cleared and host_ready is 0.",
+        "No fallback with the changed or old identity is started after the fault."
+      ],
+      "not_proven": "The input is expected to be static by contract; no dynamic reconfiguration protocol is defined."
+    },
+    {
+      "id": "V23_BOTH_FIXED_SLOTS_NO_OVERWRITE",
+      "focus": "two-slot independence",
+      "stimulus": [
+        "Hold a host result tagA in its slot and trigger fallback while the host slot remains full; allow the safety result tagS to complete.",
+        "Keep both result_ready inputs low for many cycles."
+      ],
+      "expected": [
+        "Both valid bits are 1 simultaneously; host payload remains tagA and safety payload remains tagS.",
+        "No queue growth, eviction, or cross-slot overwrite occurs.",
+        "Each slot clears only with its own valid && ready handshake."
+      ],
+      "not_proven": "No throughput or timing closure claim is made."
+    },
+    {
+      "id": "V24_RESET_MIDFLIGHT_NO_ACK",
+      "focus": "destructive reset",
+      "stimulus": [
+        "Start a host transaction or safety fallback, then assert rst=1 while it is active; deassert rst afterward."
+      ],
+      "expected": [
+        "master_cancel and master reset force safe SPI outputs; the master destroys its active result/context.",
+        "Wrapper in-flight bits and both slots are cleared; no result and no ACK is produced for the interrupted owner.",
+        "Post-reset armed=0 and host_ready=0; external host must preserve UNKNOWN and must not reuse the old action."
+      ],
+      "not_proven": "Reset does not restore the PGA to a measured gain and does not prove physical safety."
+    },
+    {
+      "id": "V25_ARM_DURING_LAST_RESULT_DRAIN",
+      "focus": "arm/result-ready same-edge priority",
+      "stimulus": [
+        "Leave a result valid in one slot, then pulse arm in a cycle where its ready is also asserted, so the slot is empty only after the edge."
+      ],
+      "expected": [
+        "arm_space_ok observes the pre-edge full slot and ignores the arm pulse; inhibit stays 1 and armed stays 0.",
+        "After the slot clears, a new rising arm pulse is required; the consumed pulse is not retried automatically."
+      ],
+      "not_proven": "No automatic re-arm policy is provided."
+    },
+    {
+      "id": "V26_FALLBACK_DIGITAL_TERMINAL_ONLY",
+      "focus": "result semantics",
+      "stimulus": [
+        "Trigger one fallback with tagS/gain0 and observe either a normal 76 digital completion or its error/cancel terminal.",
+        "Consume the safety result through safety_result_valid && safety_result_ready."
+      ],
+      "expected": [
+        "error=0 means only digital frame completion; error=1 means refused or aborted.",
+        "Inhibit remains set after the result is consumed; no host request is admitted without a new safe arm.",
+        "No result is labeled as measured gain, ADC value, settled output, or physical safety success."
+      ],
+      "not_proven": "R04 ADC/calibration/5%/8-level/settling evidence remains absent."
+    }
+  ],
+  "blocked_or_missing": [
+    "No legal reserved_safety_tag has been assigned by the product/protocol owner.",
+    "No real ADC overrange flag, threshold, calibration, input fixture, or settling model exists.",
+    "No pin mapping, level shifting, isolation, clock constraint, timing closure, synthesis, implementation, or board evidence exists.",
+    "No H12, 100 MHz timing, final 1%/100 ms target, all-29-card, or overall H01-H15 acceptance is claimed."
+  ]
+}

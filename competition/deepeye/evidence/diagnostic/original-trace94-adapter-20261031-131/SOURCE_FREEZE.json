@@ -1,0 +1,164 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "source_work_id": "B-DEEPEYE-ORIGINAL-TRACE94-ADAPTER-20261031-128",
+  "correction_work_id": "B-DEEPEYE-ADAPTER-CONSUMER-CORRECTIONS-20261031-130",
+  "execution_work_id": "B-DEEPEYE-ORIGINAL-TRACE94-ADAPTER-TEST-20261031-129",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_commit": "e671db73caaf69f50f51cea23c3fef082571f51e",
+  "original128_commit": "437717d4d833450d1466030b8ce0034bf69f44db",
+  "source_job_actual_terminal": true,
+  "main_static_review_accepted": true,
+  "runtime_authorized_once": true,
+  "focused_groups": 9,
+  "sources": {
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/.gitattributes": {
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/API.md": {
+      "bytes": 14817,
+      "sha256": "3b1e17b891cf9fcf0c69a67481c4b9313e9745577f61f5780b9b9a3a68aaa7fd"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/PINS.json": {
+      "bytes": 7955,
+      "sha256": "8be623efa24b996ee4a0f31ef0af74723a4af4d10dd610cdf24dd324a96ecb75"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/TEST_PLAN.md": {
+      "bytes": 2637,
+      "sha256": "b4a9ceb2979cc1689cfc09bfc4e767e03564d4954fe0bd441a038d1bf0904be4"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/adapter128.py": {
+      "bytes": 11320,
+      "sha256": "12d975c2841edb65ef427121d098cd6ed27f600edd922f1a63fc5d6b5908ea41"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/dependencies128.py": {
+      "bytes": 1013,
+      "sha256": "304f1552ce4126b9e6d15503273e7cfe0da4c3c1a7f5ef2db0deea0ecd9f2ba3"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/reducer128.py": {
+      "bytes": 15547,
+      "sha256": "590f004fb7ae9a743c4ac56d65663248dcf0223d218c02b93a78ce324f9aaf2d"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_adapter128/test_adapter128.py": {
+      "bytes": 21000,
+      "sha256": "dc9960f79554bc774f5da3c58448a632e06f1d1ebc5195dcb45f630f802351c6"
+    }
+  },
+  "dependencies": {
+    "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv": {
+      "bytes": 44406,
+      "sha256": "d7f9526e17b8e899eddd35c590a7d2028c429ebed6a1151675c70c9d520d69f1",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/fpga/diagnostic/functional50_board94/register_map.json": {
+      "bytes": 18005,
+      "sha256": "3ad9a9c1c6f7d69c173d471bb77ffcc6ead76490598a8da5efa0861600aa0c70",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/golden/codec/trace_candidate.py": {
+      "bytes": 40546,
+      "sha256": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_build98/functional50_contract.py": {
+      "bytes": 24034,
+      "sha256": "dc299999508f6899ccff6e5d7950af3e3d258c6dbff914b0e748055ba73535cf",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_host103/evidence103.py": {
+      "bytes": 3612,
+      "sha256": "e9e9458fb760a37ef117fda87041a6ba962a8763c4f9337eebc263bbb2aa0478",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_host103/fake_csr103.py": {
+      "bytes": 12203,
+      "sha256": "8e1b8e67bbcbac476c4e013e082265e859d36f8755c01a33e71c555c981eae88",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_host103/host103.py": {
+      "bytes": 15241,
+      "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/API.md": {
+      "bytes": 9768,
+      "sha256": "4db16afe8585004acdc8351b70751c70337e2b24ffdfdf4c40e672021c87df0c",
+      "reference_commit": "62088d8305d6d82c7ebf882a32ac258438173393"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/PINS.json": {
+      "bytes": 8261,
+      "sha256": "914fc7354868db6a89ff6352b0c2181c1fbf567cf960a699ee9d72a4b94237a5",
+      "reference_commit": "62088d8305d6d82c7ebf882a32ac258438173393"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/input113.py": {
+      "bytes": 28330,
+      "sha256": "95b46940767d3be4dbe3d885a4852119161ea5e4567ab3bda51798c39109ea49",
+      "reference_commit": "62088d8305d6d82c7ebf882a32ac258438173393"
+    },
+    "competition/deepeye/tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py": {
+      "bytes": 12535,
+      "sha256": "1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768",
+      "reference_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_envelope108/run_envelope108.py": {
+      "bytes": 16601,
+      "sha256": "e040b7056399571528462069a43829350c9775945dc898dbfb4fe23a9ba5d70c",
+      "reference_commit": "d258a146d5fc6e0878c3f2324d334558ffa23dd5"
+    },
+    "fpga_mesh/windows_job.py": {
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3",
+      "reference_commit": "d258a146d5fc6e0878c3f2324d334558ffa23dd5"
+    },
+    "competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py": {
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692",
+      "reference_commit": "d258a146d5fc6e0878c3f2324d334558ffa23dd5"
+    }
+  },
+  "limits": {
+    "mode": "software_test",
+    "wall_seconds": 15,
+    "memory_bytes": 536870912,
+    "active_processes": 16,
+    "sampled_active_processes": 16,
+    "output_bytes": 1048576,
+    "poll_seconds": 0.05,
+    "drain_seconds": 1.0,
+    "terminate_seconds": 1.0,
+    "launcher_wait_seconds": 1.0
+  },
+  "runner_sha256": "96a6e79f590035befe41aa3c2d96de2c24080e0fc3f3f9a480d8519ee88a470d",
+  "test_argv": [
+    "D:\\pynq\\CarlandFPGA\\.local\\venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\functional50_adapter128\\test_adapter128.py",
+    "--out",
+    "D:\\pynq\\CarlandFPGA\\.local\\vadapter129\\attempt-01"
+  ],
+  "main_correction_decision_sha256": "b23f4317f9fbc3714b13b9831e7c73b7f50b9f807eabd39d6ebc9b556e374702",
+  "vendor_board_model_PDE_runs": false,
+  "prior_candidate_runs": 0,
+  "at_utc": "2026-10-30T19:35:34.541027+00:00"
+}

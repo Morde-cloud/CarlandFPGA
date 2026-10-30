@@ -1,0 +1,44 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-G05-ADDITIVE50-MAIN-RECOVERY-20261030-R1",
+  "status": "HAND_AUTHORED_SOURCE_VECTORS_UNEXECUTED",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "original100_commit": "974583f228736e9789a6b12db29e0316fef30018",
+  "original100_mapper_sha256": "51f2ef228bf531e1476fd59e4068a2f1ad0b83110601104d3d1ad6764948beb4",
+  "ROM_sha256": "d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c",
+  "method": "Literal arithmetic/ROM reading and source branch review. No candidate, decoder, model, testbench, simulation or vendor tool was executed.",
+  "mapper_cases": [
+    {"input":{"profile":1,"yaw":0,"pitch":0,"speed":0,"ttl_ms":1},"expected50":{"legal":true,"reject":0,"period":1000000,"yaw_high":125000,"pitch_high":125000,"speed_high":25000,"ttl":50000,"curvature_sum":0},"original100":{"period":2000000,"yaw_high":250000,"pitch_high":250000,"speed_high":50000,"ttl":100000}},
+    {"input":{"profile":2,"yaw":2,"pitch":0,"speed":1,"ttl_ms":12000},"expected50":{"legal":true,"reject":0,"period":1000000,"yaw_high":125016,"pitch_high":125000,"speed_high":25500,"ttl":600000000,"curvature_sum":4,"ROM_limit":8}},
+    {"input":{"profile":2,"yaw":3,"pitch":0,"speed":1,"ttl_ms":1},"expected50":{"legal":false,"reject":8,"all_mapping_outputs_zero":true,"curvature_sum":9,"ROM_limit":8}},
+    {"input":{"profile":1,"yaw":358,"pitch":0,"speed":1,"ttl_ms":1},"expected50":{"legal":true,"reject":0,"period":1000000,"yaw_high":127864,"pitch_high":125000,"speed_high":25500,"ttl":50000,"curvature_sum":128164,"ROM_limit":128234},"original100_yaw_high":255728},
+    {"input":{"profile":1,"yaw":359,"pitch":0,"speed":1,"ttl_ms":1},"expected50":{"legal":false,"reject":8,"all_mapping_outputs_zero":true,"curvature_sum":128881,"ROM_limit":128234}},
+    {"input":{"profile":1,"yaw":-358,"pitch":0,"speed":1,"ttl_ms":1},"expected50":{"legal":true,"reject":0,"yaw_high":122136,"pitch_high":125000,"speed_high":25500,"ttl":50000},"original100_yaw_high":244272},
+    {"input":{"profile":1,"yaw":15000,"pitch":0,"speed":20,"ttl_ms":1},"expected50":{"legal":false,"reject":8,"all_mapping_outputs_zero":true,"curvature_sum":225000000,"ROM_limit":51293849},"note":"Being inside the angle bound does not bypass curvature legality."},
+    {"input":{"profile":1,"yaw":-32768,"pitch":-32768,"speed":20,"ttl_ms":1},"expected50":{"legal":false,"reject":10,"all_mapping_outputs_zero":true,"curvature_sum":2147483648}},
+    {"input":{"profile":0,"yaw":0,"pitch":0,"speed":0,"ttl_ms":1},"expected50":{"legal":false,"reject":1,"all_mapping_outputs_zero":true}},
+    {"input":{"profile":1,"yaw":0,"pitch":0,"speed":21,"ttl_ms":1},"expected50":{"legal":false,"reject":2,"all_mapping_outputs_zero":true}},
+    {"input":{"profile":1,"yaw":0,"pitch":0,"speed":0,"ttl_ms":0},"expected50":{"legal":false,"reject":4,"all_mapping_outputs_zero":true}},
+    {"input":{"profile":2,"yaw":0,"pitch":0,"speed":0,"ttl_ms":12001},"expected50":{"legal":false,"reject":4,"all_mapping_outputs_zero":true}},
+    {"input":{"profile":1,"yaw":1,"pitch":0,"speed":0,"ttl_ms":1},"expected50":{"legal":false,"reject":10,"all_mapping_outputs_zero":true}}
+  ],
+  "timing_source_cases": [
+    {"P":1000000,"first_watchdog_ticks":3000008,"later_watchdog_ticks":2000008,"first_ns":60000160,"later_ns":40000160},
+    {"actual_application_edge":"A","observed_flag":"A+1","rearm_counter_loaded":5,"counter_after_A_plus2":4,"counter_after_A_plus3":3,"counter_after_A_plus4":2,"counter_after_A_plus5":1,"rearm_baseline_edge":"A+6","capture_enabled_after":"A+6","first_new_eligible_edge":"A+7 or later only after a clean edge"},
+    {"fault_at":"A+6","expected":"Existing STOP/expiry priority wins; no qualifying capture publication"},
+    {"cycle_tick":"18446744073709551615","expected_fault_code":5,"expected":"Saturating nonwrapping tick and immediate fault; no new command admission"}
+  ],
+  "transport_source_cases": [
+    {"origin_qpc_ns":10000000000000003,"acquisition_qpc_ns":10000000010000003,"relative_tick_us":10000,"remainder_ns":0,"raw_10ms_stride_us":10000},
+    {"origin_qpc_ns":10000000000000003,"acquisition_qpc_ns":10000000010000010,"relative_tick_us":10000,"remainder_ns":7,"note":"Full original QPC remains exact above2^53."},
+    {"enabled":false,"expected":{"status":"STOP","input_status":"DISABLED","core_ran":false,"authorization":"none"}},
+    {"enabled":true,"Root_binding":null,"expected":{"status":"STOP","input_status":"INPUT_UNAVAILABLE","core_ran":false}},
+    {"outer_type":7,"expected":"Reject old type7; do not relabel its tick units"},
+    {"outer_type":8,"expected":"Reject FORCE8"},
+    {"outer_type":228,"payload_revision":1,"expected":"Reject old payload revision"},
+    {"raw_uint16_values":[17,4095,32769,65280],"expected":"Preserve exact transport values; not admissible as C29uint12 observations without the separate actual Root requirements"},
+    {"opaque_qpc_uint64":"18446744073709551615","expected":"C29/source profile rejects uint63 overflow; never truncate or wrap"}
+  ],
+  "execution": {"simulation":"not_run","unit_tests":"not_run","synthesis":"not_run","implementation":"not_run","clock_setter":"not_run","board":"not_run","product_acceptance":"not_run"}
+}

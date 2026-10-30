@@ -1,4 +1,4 @@
-// NEW102 recovery: focused public AXI -> unchanged74 codec/TX -> actual RX/FIFO.
+// NEW104 changed-source command-address regression; public AXI -> actual TX/RX/FIFO.
 // SOURCE/TEST FIXTURE ONLY. No board, BOOT, ADC, H12, publication or acceptance.
 `timescale 1ns/1ps
 `default_nettype none
@@ -88,9 +88,29 @@ module tb_deepeye_trace50_axi95;
     integer completed = 0;
     integer aw_first_count = 0;
     integer w_first_count = 0;
+    integer staging_monitor_checks = 0;
+    integer staging_opcode_checks = 0;
+    logic [7:0] staging_opcode_mask = 8'd0;
     always @(posedge s_axi_aclk) begin
         cycles = cycles + 1;
         if (cycles > 600000) $fatal(1, "B95 finite cycle deadline");
+        // Read-only monitor sampled on the SAME edge as register consumption.
+        // A staging write may update staging data but no decoded command or
+        // downstream command pulse may be true. Independent RX is unrestricted.
+        if (s_axi_aresetn && !dut.rst && dut.write_accept &&
+            dut.write_route_ok_c && dut.write_is_stage_c) begin
+            staging_monitor_checks = staging_monitor_checks + 1;
+            if ({dut.cmd_arm_c, dut.cmd_push_c, dut.cmd_bind_c, dut.cmd_ack_c,
+                 dut.cmd_cancel_c, dut.cmd_clear_fault_c, dut.cmd_clear_fifo_c,
+                 dut.cmd_pop_c, dut.ack_pulse_c, dut.push_pulse_c,
+                 dut.fifo_pop_fire, dut.fifo_clear_fire} !== 12'd0)
+                $fatal(1, "B104 staging generated command/pulse addr=%h data=%h",
+                       dut.aw_addr_q, dut.w_data_q);
+            if (dut.w_data_q >= 1 && dut.w_data_q <= 8) begin
+                staging_opcode_checks = staging_opcode_checks + 1;
+                staging_opcode_mask[dut.w_data_q-1] = 1'b1;
+            end
+        end
     end
 
     integer uart_n = 0;
@@ -536,6 +556,17 @@ module tb_deepeye_trace50_axi95;
             rd_ok(12'h018, 32'd7);
 
             wr_ok(12'h160, result_id);
+            // Fresh valid ACK preconditions exist here, but data4 written to
+            // the separate POP-id staging register must not consume the core.
+            wr_ok(12'h164, 32'd4);
+            rd_ok(12'h018, 32'd7);
+            rd_ok(12'h040, result_id);
+            rd_ok(12'h048, result_bytes);
+            rd_ok(12'h07c, result_end);
+            axi_read(12'h020, 3);
+            if (last_rresp !== 2'b00 || last_rdata[4] !== 1'b1)
+                $fatal(1, "B104 staged4 consumed visible result");
+            $fdisplay(events_fd, "NEGATIVE staging4_no_ack id=%0d", result_id);
             command(8'd4, 2'b00);
             wr_ok(12'h160, result_id);
             command(8'd4, 2'b10);
@@ -546,6 +577,33 @@ module tb_deepeye_trace50_axi95;
                       result_id, result_error, result_bytes, result_start,
                       result_end, uart_n);
             $fflush(events_fd);
+        end
+    endtask
+
+    task automatic stage_codes_without_commands;
+        logic [31:0] saved_state, saved_fifo, saved_pop, saved_discard, saved_result;
+        integer code;
+        begin
+            axi_read(12'h018, 2); saved_state = last_rdata;
+            axi_read(12'h030, 2); saved_fifo = last_rdata;
+            axi_read(12'h038, 2); saved_pop = last_rdata;
+            axi_read(12'h03c, 2); saved_discard = last_rdata;
+            axi_read(12'h040, 2); saved_result = last_rdata;
+            if (saved_state != 0 || saved_fifo == 0)
+                $fatal(1, "B104 staging-code test lacks stopped nonempty FIFO");
+            // POP would be eligible IF an explicit command8 were issued.
+            wr_ok(12'h164, saved_pop + 32'd1);
+            for (code = 1; code <= 8; code = code + 1) begin
+                wr_ok(12'h100, code);
+                rd_ok(12'h018, saved_state);
+                rd_ok(12'h030, saved_fifo);
+                rd_ok(12'h038, saved_pop);
+                rd_ok(12'h03c, saved_discard);
+                rd_ok(12'h040, saved_result);
+                $fdisplay(events_fd, "STAGE_CODE code=%0d fifo=%0d pop=%0d discard=%0d result=%0d state=%0d",
+                          code, saved_fifo, saved_pop, saved_discard, saved_result, saved_state);
+            end
+            $fdisplay(events_fd, "NEGATIVE staging_codes_no_command");
         end
     endtask
 
@@ -905,6 +963,14 @@ module tb_deepeye_trace50_axi95;
         wr_ok(12'h118, ORIGIN[31:0]);
         wr_ok(12'h11c, ORIGIN[63:32]);
         wr_ok(12'h120, 32'd1);
+        // All five first-sample fields are fresh; staging2 elsewhere must not
+        // pulse PUSH. Only the following real CMD2 consumes this sample.
+        wr_ok(12'h164, 32'd2);
+        rd_ok(12'h024, 32'd0);
+        rd_ok(12'h018, 32'd3);
+        rd_ok(12'h030, 32'd0);
+        rd_ok(12'h034, 32'd0);
+        $fdisplay(events_fd, "NEGATIVE staging2_no_push");
         command(8'd2, 2'b00);
         rd_ok(12'h024, 32'd1);
         wr_ok(12'h110, 32'd1);
@@ -1013,6 +1079,8 @@ module tb_deepeye_trace50_axi95;
         command(8'd1, 2'b10);
         rd_ok(12'h02c, 32'h9501);
         $fdisplay(events_fd, "NEGATIVE arm_nonempty_after_cancel");
+
+        stage_codes_without_commands();
 
         drain_fifo(146);
         if (popped_total != 146) $fatal(1, "B95 popped record0 total %0d", popped_total);
@@ -1174,6 +1242,11 @@ module tb_deepeye_trace50_axi95;
             $fatal(1, "B95 zero instance emitted UART activity");
         if (aw_first_count == 0 || w_first_count == 0)
             $fatal(1, "B95 both AXI write orders were not exercised");
+        if (staging_monitor_checks == 0 || staging_opcode_checks == 0 ||
+            staging_opcode_mask !== 8'hff)
+            $fatal(1, "B104 staging monitor/code coverage incomplete");
+        $fdisplay(events_fd, "STAGING_MONITOR checks=%0d opcode_checks=%0d mask=%02x",
+                  staging_monitor_checks, staging_opcode_checks, staging_opcode_mask);
         $fdisplay(events_fd, "BUS_ORDERS aw_first=%0d w_first=%0d",
                   aw_first_count, w_first_count);
 

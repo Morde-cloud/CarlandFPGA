@@ -1,0 +1,29 @@
+{
+  "schema":"B104_COMMAND_REGRESSION_PLAN_V1",
+  "task_id":"DEEPEYE-IMPLEMENTATION-20261014","task_version":1,
+  "work_id":"B-DEEPEYE-TRACE50-COMMAND-REGRESSION-20261031-104",
+  "requirements_sha256":"c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_ids":["H01","H02","H03","H04","H05","H06","H07","H08","H09","H10","H11","H12","H13","H14","H15"],
+  "contract_pin":"f5989cd5defce561f9ba98e6b18fc2682945f0a2","freeze":"1011259415a0916054eb580687612580bc1e5f09",
+  "main_fixed_source94_commit":"a2155bb588a519ba0ae0ebc8a7267e4a5c8ec0c5",
+  "main_fixed_source94_sha256":"d7f9526e17b8e899eddd35c590a7d2028c429ebed6a1151675c70c9d520d69f1",
+  "change":"Main command_known_c includes write_is_cmd_c, so every decoded command requires0x080. Child only prepares/regresses owned bench/checker, never modifies94.",
+  "new_public_regressions":[
+    "CANCEL/nonempty146byteFIFO: freshvalidnextPOPid, then stagecodes1..8at0x100. FIFO/pop/discard/result/state unchanged for everycode, including7/8. ExplicitCMD8 required.",
+    "ARMED firstsample allfivefieldsfresh: stage2at0x164, pushcount0/stateARMED/FIFO0/RX0 remain. RealCMD2 required.",
+    "Everyheldvalidresult after freshexpectedACKid: stage4at0x164. Resultid/bytes/end/state7/visiblevalid retained. RealCMD4 required."
+  ],
+  "passive_monitor":"Sameposedge acceptedvalidstagingwrite asserts all8cmdflags,ACK/PUSHpulses,FIFOPOP/CLEARfires exactlyfalse. Only hierarchicalREAD, no force/mocks/privatewrites. Counts/opcodemask recorded; ff andnonzero required.",
+  "retained_coverage":"All102publicAXIwriteorders/B/Rstalls/pendingAW-W-B-Rreset/ARM/PUSH/BIND/ACK/POP/adjacentnegatives/actualTX-RX-FIFO/twoA18records/8strictdecodedframes/partialcancel/no-replay/recovery retained. Old102failure unmodified.",
+  "record0":{"counts":[3011,1924,2002,null],"quality13":7,"local_quality":[1,1,1,0]},
+  "record9":{"counts":[2982,2021,1966,0],"quality13":1807,"local_quality":[5,5,5,1]},
+  "origin_qpc_ns":27001348289300,"origin_remainder_ns":300,"relative_acquisition_us":[0,90000],"relative_source_us":[0,50000,90000],
+  "expected_frames":8,"reference_complete_wire_bytes":300,"separate_cancel_prefix_bytes":1,
+  "runtime_gate":"SOURCE_PREP/CODE_READY first. MainFREEZE includes exactsource_commit containingallfour104files and fixed94ancestor. ExplicitSTART bindsfreezeSHA. run104 requires --freeze and --runtime-start files and readonlyGitHEADcheckinsideJob. No imports/tests/compile before release.",
+  "bounds":{"commands_seconds":25,"whole_job_seconds":120,"output_bytes":8388608,"HDL_cycles":600000,"attempts":1},
+  "helpers":{"owned_process_sha256":"1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692","windows_job_sha256":"3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"},
+  "compiler":"Main documented ModelSim -sv -svinputport=var; no source94 rewrites, defaultportability/Vivado/build proof.",
+  "failure_rule":"Firstunexpectedruntimefailure STOP/native_complete(error); no repair/retry/posthocexecution. Old102/othergroups not replayed.",
+  "gates":{"status":"STOP","command":null,"core_ran":false,"current_source_eligible":false},
+  "unproven":"ActualADC/RootBOOT/admission/nativeEM/currentcapture,physicalUART/board,CDC-metastability,timing/BIT/HWH,fullH12/final1pct100ms/allformalproductgates. Parentqualitymain alone owns acceptance/Git/publication/A26buildrelease."
+}

@@ -1,4 +1,4 @@
-"""NEW102 strict recovery checker; main correction, actual AXI/TX/RX/FIFO."""
+"""NEW104 changed-source command regression; strict actual AXI/TX/RX/FIFO."""
 from __future__ import annotations
 
 import argparse
@@ -45,7 +45,7 @@ EXPECTED_SCHEMA74_SHA = "935e0aac46a52a81999fc25775a9e88c6ed49c204c973aaf4db8a15
 EXPECTED_CORRECTION_SHA = "46aca72f0d4e10fb0bb7858a1328d15e9d7203dff2f5f94753041b39e3bc8396"
 
 SOURCE_PINS = {
-    "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv": "9697494e1694ba84708b40542fd8b4ee2544bd85bd763b1104e695441d57c6e7",
+    "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv": "d7f9526e17b8e899eddd35c590a7d2028c429ebed6a1151675c70c9d520d69f1",
     "competition/deepeye/fpga/diagnostic/functional50_board94/register_map.json": "3ad9a9c1c6f7d69c173d471bb77ffcc6ead76490598a8da5efa0861600aa0c70",
     "competition/deepeye/fpga/diagnostic/functional50_board94/README.md": "38ac64a6d28d0934c11a6d71706e56fd5638374b944040f85cc62c3448f9aace",
     "competition/deepeye/fpga/diagnostic/functional50_board94/vectors_UNEXECUTED.json": "64318aef4af48bb59d246b56a1d068f06935ef894c3523400448d2e8aa4e1dde",
@@ -252,6 +252,7 @@ def run(out):
         "dispatch": out / "inputs" / "BOARD50_95R1_DISPATCH_DECISION.json",
         "receipt": out / "inputs" / "BOARD50_95R1_DISPATCH_RECEIPT.json",
         "correction": out / "inputs" / "BOARD50_102_MAIN_QUALITY_CORRECTION.json",
+        "main104_freeze": out / "inputs" / "MAIN_FREEZE.json",
         "original_false_observation": out / "inputs" / "SPEC_OBSERVATION_QUALITY.json",
         "uart": out / "sim" / "uart.hex",
         "pop": out / "sim" / "pop.hex",
@@ -285,6 +286,9 @@ def run(out):
         entry = source_before.get(relative)
         need(entry is not None and entry["snapshot"]["sha256"] == pin,
              "SOURCE_BEFORE pin " + relative)
+    main104_freeze = load_json_strict(required["main104_freeze"].read_bytes())
+    need(main104_freeze["work_id"] == "B-DEEPEYE-TRACE50-COMMAND-REGRESSION-20261031-104",
+         "main104 frozen operation identity")
 
     scope = load_json_strict(required["scope"].read_bytes())
     requirements = scope.get("requirements")
@@ -559,6 +563,7 @@ def run(out):
             "tested_commit": SOURCE_RUNTIME_COMMIT,
             "tested_commit_scope": "A18 source-runtime label only; not the B execution source",
             "execution_source_pins": {
+                "source_commit": main104_freeze["source_commit"],
                 "source_manifest_sha256": build_manifest_sha256,
                 "source94_sha256": SOURCE_PINS[
                     "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv"],
@@ -801,10 +806,22 @@ def run(out):
         "wrong_and_duplicate_ack": 8,
         "stale_pop_id": 2,
         "duplicate_pop_id": 2,
+        "staging_codes_no_command": 1,
+        "staging2_no_push": 1,
+        "staging4_no_ack": 8,
     }
     for label, count in event_requirements.items():
         actual = events.count("NEGATIVE " + label)
         need(actual == count, "event negative count " + label + "=" + str(actual))
+    stage_rows = re.findall(r"^STAGE_CODE code=(\d+) fifo=(\d+) pop=(\d+) discard=(\d+) result=(\d+) state=(\d+)$",
+                            events, re.MULTILINE)
+    need(len(stage_rows) == 8, "all8 public staging-code observations")
+    need([int(row[0]) for row in stage_rows] == list(range(1, 9)), "ordered staging codes1..8")
+    need(all(list(map(int, row[1:])) == [146, 0, 0, 4, 0] for row in stage_rows),
+         "staging codes preserve nonempty FIFO/pop/discard/result/state")
+    monitor_match = re.search(r"^STAGING_MONITOR checks=(\d+) opcode_checks=(\d+) mask=ff$", events, re.MULTILINE)
+    need(monitor_match is not None and int(monitor_match.group(1)) >= 8 and
+         int(monitor_match.group(2)) >= 8, "passive staging monitor/all8opcode coverage")
     need("SCAN record=0 wire_bytes=146" in events, "record0 measured event")
     need("SCAN record=9 cumulative_wire_bytes=300" in events, "record9 measured event")
     need("DRAIN count=146" in events and "DRAIN count=154" in events,
@@ -869,17 +886,22 @@ def run(out):
         "axi_write_orders": {"aw_first": int(order_match.group(1)),
                               "w_first": int(order_match.group(2))},
         "result_end": start,
+        "staging_no_command": {"public_rows": stage_rows,
+                               "passive_checks": int(monitor_match.group(1)),
+                               "passive_opcode_checks": int(monitor_match.group(2)),
+                               "passive_opcode_mask": "ff"},
     }
     semantic = {
         "status": "FOCUSED_RUNTIME_CHECKS_COMPLETED_MAIN_REVIEW_PENDING",
         "scope": "actual historical A18 records 0/9 through source94 public AXI, unchanged74 codec/TX, unchanged RX/FIFO, 1 Mbaud digital simulation",
         "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
         "task_version": 1,
-        "work_id": "B-DEEPEYE-TRACE50-AXI-RECOVERY-20261031-102",
+        "work_id": "B-DEEPEYE-TRACE50-COMMAND-REGRESSION-20261031-104",
         "requirements_ids": ["H%02d" % i for i in range(1, 16)],
         "requirements_sha256": REQUIREMENTS,
         "freeze": FREEZE,
         "source_runtime_commit": SOURCE_RUNTIME_COMMIT,
+        "execution_source_commit": main104_freeze["source_commit"],
         "tested_commit_scope": "A18 original source-runtime label only; not the B execution source",
         "fixture_labels": ["FIXTURE95", "RETIRED_A70_AXI_TRANSPORT"],
         "frames": 8,

@@ -18,27 +18,16 @@ proc busparam {interface name value} {
     set_property value $value $p
 }
 proc expose_core_parameter {core name width} {
-    # Expose an RTL parameter as an IP component parameter so BD CONFIG.* works.
-    # The first authorized build must confirm the generated component.xml; this
-    # source does not claim that packaging was executed.
-    if {[llength [info commands ipx::infer_core_parameters]] > 0} {
-        catch {ipx::infer_core_parameters $core}
+    # package_project already infers both objects and the XGUI user->HDL map.
+    # Require that actual structure; never fabricate a replacement parameter.
+    require {$name eq "BUILD_ID" && $width == 128} {only the selected 128-bit BUILD_ID may be exposed}
+    set parameter [one [ipx::get_user_parameters $name -of_objects $core] "user parameter $name"]
+    set hdl_parameter [one [ipx::get_hdl_parameters $name -of_objects $core] "HDL parameter $name"]
+    foreach object [list $parameter $hdl_parameter] {
+        require {[get_property value_format $object] eq "bitString"} {BUILD_ID parameter must remain bitString}
+        require {[get_property value_bit_string_length $object] == $width} {BUILD_ID parameter width mismatch}
+        require {[regexp {^(0[xX])?0+$} [get_property value $object]]} {BUILD_ID inferred default must remain zero}
     }
-    set found {}
-    if {[llength [info commands ipx::get_parameters]] > 0} {
-        catch {set found [ipx::get_parameters -quiet $name -of_objects $core]}
-        if {[llength $found] == 0} {
-            catch {set found [ipx::get_parameters $name -of_objects $core]}
-        }
-    }
-    if {[llength $found] == 0} {
-        set parameter [ipx::add_parameter $name $core]
-    } else {
-        set parameter [one $found "core parameter $name"]
-    }
-    set_property value 0x0 $parameter
-    set_property value_format bitString $parameter
-    set_property value_bit_string_length $width $parameter
     return $parameter
 }
 proc check_functional50_ports {report_path} {

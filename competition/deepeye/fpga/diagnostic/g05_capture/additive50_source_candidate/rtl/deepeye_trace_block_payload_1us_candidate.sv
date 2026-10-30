@@ -127,7 +127,11 @@ module deepeye_trace_block_payload_1us_candidate (
                      && ((blk_e==0)||(blk_e==1)||(blk_e==2)||(blk_e==4)||(blk_e==8))
                      && cfg_time_ok && cfg_size_ok && !rst && !cancel;
 
-        payload_cfg_valid = blk_valid && blk_ready && cfg_block_ok;
+        // Independent producer-valid: never read blk_ready before its later
+        // procedural assignment in this always_comb block. Legal metadata is
+        // held by the caller until blk_valid && blk_ready; the inner encoder
+        // alone supplies cfg_ready. Illegal metadata is consumed as refusal.
+        payload_cfg_valid = blk_valid && !inflight_q && cfg_block_ok;
         blk_ready = !rst && !cancel && !inflight_q &&
                     (payload_cfg_ready || !cfg_block_ok);
         s_ready = payload_s_ready;

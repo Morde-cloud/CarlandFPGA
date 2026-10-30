@@ -39,6 +39,11 @@ module deepeye_trace_block_uart_50mhz_candidate #(
     output logic result_valid, input logic result_ready,
     output logic [2:0] result_error, output logic [5:0] result_bytes,
     output logic [3:0] last_refusal_code,
+    // Shared cancellation level, not completion/health/authorization.
+    output logic cancel_active,
+    // One registered pulse for a non-reset cancel of an accepted outstanding
+    // descriptor. Root retains its full accepted identity; no wire ACK implied.
+    output logic transaction_aborted,
     output logic busy, wire_faulted, transport_profile_unset
 );
     localparam bit CLOCK_VALID = (CLOCK_HZ == 50000000);
@@ -52,7 +57,7 @@ module deepeye_trace_block_uart_50mhz_candidate #(
     logic [7:0] epoch_q;
     logic [15:0] seq_q;
     logic [5:0] expected_total_q;
-    logic fault_report_pending_q;
+    logic fault_report_pending_q, transaction_active_q;
 
     logic adapter_blk_ready, adapter_refusal_valid, adapter_s_ready;
     logic [3:0] adapter_refusal_code;
@@ -72,6 +77,7 @@ module deepeye_trace_block_uart_50mhz_candidate #(
 
     wire candidate_cancel = cancel || !profile_v2_authorized || !transport_allowed || !CLOCK_VALID || !BAUD_VALID;
     wire enabled = !rst && !candidate_cancel;
+    assign cancel_active = candidate_cancel;
     wire serializer_cfg_valid = (state_q==WAIT_META) && payload_meta_valid &&
         (payload_meta_error==0) && serializer_cfg_ready && enabled;
     wire adapter_blk_valid = blk_valid && (state_q==IDLE) &&
@@ -136,6 +142,23 @@ module deepeye_trace_block_uart_50mhz_candidate #(
         .in_valid(serializer_out_valid && (state_q==WAIT_FRAME) && enabled),
         .in_ready(uart_in_ready), .in_data(serializer_out_data), .tx(tx),
         .busy(uart_busy), .stat_accepted(), .stat_completed(), .stat_aborted());
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            transaction_active_q <= 1'b0;
+            transaction_aborted <= 1'b0;
+        end else begin
+            transaction_aborted <= 1'b0;
+            if (candidate_cancel) begin
+                transaction_aborted <= transaction_active_q;
+                transaction_active_q <= 1'b0;
+            end else if (adapter_blk_valid && adapter_blk_ready) begin
+                transaction_active_q <= 1'b1;
+            end else if (result_valid && result_ready) begin
+                transaction_active_q <= 1'b0;
+            end
+        end
+    end
 
     always_ff @(posedge clk) begin
         if (rst || candidate_cancel) begin

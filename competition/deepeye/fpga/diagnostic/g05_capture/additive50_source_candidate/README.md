@@ -102,8 +102,9 @@ the transaction; the lane component holds its corresponding raw lane. There
 is no automatic mismatch timeout. This is a text correction, not behavioral
 verification. The original R1 snapshot and review remain preserved.
 
-The other gaps remain explicit. Trace cancel is tied low in this disabled
-minimum top; capture STOP and G05 STOP do not implement a common system STOP.
+The other gaps remain explicit. At R2, trace cancel was tied low in the disabled
+minimum top; capture STOP and G05 STOP did not implement a common system STOP.
+Source73 below adds local data-path cancellation; motion STOP remains separate.
 No host/Root receipt ACK or retry is connected, and a local result is consumed
 without that end-to-end acknowledgement. Raw quality needs Root's actual
 mapping; no payload quality field establishes health. Exact 100ms freshness
@@ -112,3 +113,31 @@ singleton is associated end to end. Full Root identity/time/source/pose/action
 records, control admission, both H12 paths and physical topology are absent.
 These gaps need A review and further authorized implementation; they are not
 closed by this static handoff.
+
+## Source73 cancellation and adapter lifetime update
+
+The new [data-path cancellation contract](CANCEL_CONTRACT.md) specifies a
+Root-owned synchronous `source_cancel` input across raw capture, queue,
+lane, pending sample and payload/serializer/UART. Its post-cancel
+`data_path_quiescent` output describes an empty/disarmed local data path.
+Reset and rearm revoke that indication. It is not motion STOP, source health,
+host ACK, action retirement, delivery or product acceptance. Already emitted
+bytes/full frames require Root invalidation of cancelled identities.
+
+The adapter's producer-valid equation no longer reads a ready variable that
+is assigned later in the same combinational procedure. Legal cfg_valid is
+independent of ready; refusal remains explicit. This is a source correction,
+not a reproduced test pass or liveness proof. The independent Flash audit
+inspected the exact unchanged72 base; main adjudicates its findings and the
+new source separately. New cancel scenarios are handwritten and unexecuted.
+
+The wrapper also exports the same cancellation level to the top pending
+state, addressing the audit's pre-sample-transfer gate-withdrawal finding.
+A local `trace_transaction_aborted` pulse records a non-reset cancellation
+of one accepted outstanding descriptor. It is not ACK/delivery/retirement;
+Root retains the accepted full identity. Reset invalidates context separately.
+
+All review hold/profile/transport/baud defaults remain closed. Global motion
+STOP/ACK/Root receipt/retry, complete source/QPC/identity/quality/pose/action
+context, both H12 routes and final physical/system gates remain open. A must
+review new ports and actual Root policy before any execution release.

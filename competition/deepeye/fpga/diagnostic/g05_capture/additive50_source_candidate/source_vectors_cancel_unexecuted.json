@@ -1,0 +1,93 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-ADDITIVE50-CANCEL-SOURCE-20261030-73",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "status": "UNEXECUTED_HANDWRITTEN_SCENARIOS",
+  "simulation": "not_run",
+  "tests": "not_run",
+  "cases": [
+    {
+      "id": "cancel_before_join",
+      "given": "source_cancel=1 and matching lane/association valid",
+      "proposed_expected": "No joined descriptor admission; all source stages cancel at next edge"
+    },
+    {
+      "id": "cancel_pending_raw",
+      "given": "accepted descriptor, pending raw sample, cancel before sample ready",
+      "proposed_expected": "Pending sample cleared; codec/serializer/UART cancelled; no success result inferred"
+    },
+    {
+      "id": "cancel_wait_metadata",
+      "given": "encoder waiting for metadata or refusal",
+      "proposed_expected": "Cancel retires local state by discard; Root must invalidate pending receipt"
+    },
+    {
+      "id": "cancel_partial_frame",
+      "given": "UART has emitted an arbitrary prefix or complete frame",
+      "proposed_expected": "Bytes cannot be recalled; receiver and Root must invalidate cancelled identity even if CRC-valid"
+    },
+    {
+      "id": "cancel_with_rearm",
+      "given": "source_cancel=1 and capture_rearm=1",
+      "proposed_expected": "Capture STOP wins; quiescent output held false while rearm asserted"
+    },
+    {
+      "id": "release_cancel",
+      "given": "source_cancel falls, no new capture_rearm",
+      "proposed_expected": "Capture remains disarmed; no automatic replay; post-cancel local quiescence may be observed"
+    },
+    {
+      "id": "rearm_after_cancel",
+      "given": "explicit new Root capture_rearm/tag after cancellation",
+      "proposed_expected": "Post-cancel indication revoked; new Root binding required before later admission"
+    },
+    {
+      "id": "capture_disarmed_with_held_slot",
+      "given": "capture became disarmed by fault/sequence exhaustion, no source_cancel edge",
+      "proposed_expected": "No post-cancel qualification; data_path_quiescent must not claim arbitrary idle"
+    },
+    {
+      "id": "cancel_g05_running",
+      "given": "data path cancelled while independently admitted G05 command remains active",
+      "proposed_expected": "Local quiescence says nothing about PWM or world movement; A must separately STOP/retire"
+    },
+    {
+      "id": "adapter_next_valid",
+      "given": "inflight clears with new legal blk_valid already high",
+      "proposed_expected": "Forwarded cfg_valid independent of procedural old blk_ready; acceptance still waits inner cfg_ready"
+    },
+    {
+      "id": "F1_gate_withdrawal",
+      "given": "Accepted descriptor, raw sample still pending; profile/transport gate withdraws before raw handshake",
+      "proposed_expected": "Shared cancel_active clears pending at cancelling edge; local abort pulse marks this outstanding descriptor; Root must invalidate its accepted identity, not ACK/retry it"
+    },
+    {
+      "id": "abort_held",
+      "given": "candidate_cancel held for multiple clock edges after an accepted outstanding transaction",
+      "proposed_expected": "One local transaction_aborted pulse at first non-reset cancelling edge; no repeated pulse after active latch clears"
+    },
+    {
+      "id": "abort_after_result",
+      "given": "Prior result valid/ready already retired the descriptor; later cancellation occurs",
+      "proposed_expected": "No abort pulse for the already retired descriptor; reset separately invalidates context without an abort pulse"
+    }
+  ]
+}

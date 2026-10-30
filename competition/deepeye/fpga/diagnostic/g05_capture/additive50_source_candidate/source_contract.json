@@ -1,7 +1,7 @@
 {
   "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
   "task_version": 1,
-  "operation_id": "B-DEEPEYE-G05-ADDITIVE50-SOURCE-20261030-72",
+  "operation_id": "B-DEEPEYE-ADDITIVE50-CANCEL-SOURCE-20261030-73",
   "original_A_work": "B-DEEPEYE-G05-ADDITIVE50-INTEGRATION-SOURCE-20261029-63",
   "A_decision_url": "https://github.com/carolwjade/CarlandFPGA/pull/30#issuecomment-6500172372",
   "A_body_sha256": "3f36d48aa5655f42f8b4756ad7c03af0bb3fce022d753fa3e7ea435d72c7aa34",
@@ -41,12 +41,16 @@
   "control": "hostalwaysrouteNONE/commandNone; noC29calls, Rootactualsource/poses/actions/receiptsstillmissing",
   "original100_commit": "0b7c12fbbf91a1bad0dc1755890f5c88d348479b",
   "C29_source": "2210ca5f32e4e806651a6b06d0e2d9710d78e773",
-  "post_review": "R2: producer-valid independent of ready; external association hold contract explicit; no candidate execution",
+  "post_review": "Source73: explicit localdata-pathcancel/post-cancel quiescence; independent adapter producer-valid; source-only unexecuted",
   "unresolved_integration": [
     "No global trace/capture/G05 STOP",
     "No host/Root receipt ACK or retry",
     "Only singleton top/host association",
     "Actual Root bindings, quality/calibration, QPC/source/poses/actions missing",
     "Both H12 routes unactivated; physical topology/baud/reset/build unreleased"
-  ]
+  ],
+  "previous_source_operation": "B-DEEPEYE-G05-ADDITIVE50-SOURCE-20261030-72",
+  "source_cancel": "Root synchronous input; flush/disarm data path; no G05/PC/worldSTOP, ACK or action retirement",
+  "data_path_quiescent": "post-cancelqualified empty/disarmed structural indication; reset/rearm revoke; not health/delivery/motion proof",
+  "new_vectors": "source_vectors_cancel_unexecuted.json"
 }

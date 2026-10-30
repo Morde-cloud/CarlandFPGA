@@ -25,6 +25,10 @@ module deepeye_integration_50mhz_candidate #(
     input logic [15:0] sample_data,
     input logic [63:0] sample_tick,
     input logic [7:0] sample_quality,
+    // Root-owned synchronous DATA-PATH cancellation only. This disarms raw
+    // capture and flushes queued/lane/sample/codec/serializer/UART state.
+    // It is not G05/PC motion STOP, a host ACK, or a retired world action.
+    input logic source_cancel,
     input logic capture_stop,
     input logic capture_rearm,
     input logic [31:0] capture_rearm_tag,
@@ -60,10 +64,14 @@ module deepeye_integration_50mhz_candidate #(
 
     // Unproduced Root-owned blocking UART boundary. Physical pin/profile unset.
     output logic trace_uart_tx,
+    output logic trace_transaction_aborted,
     output logic trace_result_valid, output logic [2:0] trace_result_error,
     output logic [5:0] trace_result_bytes,
     output logic [3:0] trace_refusal_code,
     output logic trace_wire_faulted, trace_transport_profile_unset,
+    // Empty/disarmed internal data path; not source health or movement STOP.
+    // Root must record the cancellation and invalidate any partial wire frame.
+    output logic data_path_quiescent,
     output logic capture_fault_event, capture_sequence_exhausted,
     output logic [31:0] capture_discarded_samples,
 
@@ -109,8 +117,8 @@ module deepeye_integration_50mhz_candidate #(
     logic [31:0] cap_queue_accepted, cap_queue_retired, cap_queue_aborted;
 
     deepeye_buffered_scan_capture capture_i (
-        .clk(fclk50_candidate), .rst(trace_rst), .stop(capture_stop),
-        .rearm(capture_rearm), .queue_cancel(queue_cancel),
+        .clk(fclk50_candidate), .rst(trace_rst), .stop(capture_stop || source_cancel),
+        .rearm(capture_rearm), .queue_cancel(queue_cancel || source_cancel),
         .sample_strobe(sample_strobe), .rearm_tag(capture_rearm_tag),
         .sample_channel(sample_channel), .sample_data(sample_data),
         .sample_tick(sample_tick), .sample_quality(sample_quality),
@@ -143,7 +151,7 @@ module deepeye_integration_50mhz_candidate #(
     logic [31:0] lane_first_seq, lane_last_seq, lane_tag;
 
     deepeye_scan_lane_stream lane_i (
-        .clk(fclk50_candidate), .rst(trace_rst), .cancel(lane_cancel),
+        .clk(fclk50_candidate), .rst(trace_rst), .cancel(lane_cancel || source_cancel),
         .in_valid(cap_out_valid), .in_ready(cap_out_ready), .in_data(cap_out_data),
         .in_ticks(cap_out_ticks), .in_quality(cap_out_quality),
         .in_first_seq(cap_out_first_seq), .in_last_seq(cap_out_last_seq),
@@ -154,9 +162,9 @@ module deepeye_integration_50mhz_candidate #(
 
     logic trace_blk_valid, trace_blk_ready;
     logic trace_s_valid, trace_s_ready;
-    logic trace_result_ready;
-    logic sample_pending_q;
-    wire assoc_match = !sample_pending_q && lane_valid && assoc_valid &&
+    logic trace_result_ready, trace_busy, trace_cancel_active;
+    logic sample_pending_q, source_cancelled_q;
+    wire assoc_match = !trace_rst && !source_cancel && !trace_cancel_active && !sample_pending_q && lane_valid && assoc_valid &&
         (assoc_tag == lane_tag) &&
         (assoc_first_seq == lane_first_seq) &&
         (assoc_last_seq == lane_last_seq) &&
@@ -174,7 +182,12 @@ module deepeye_integration_50mhz_candidate #(
 
     logic [15:0] sample_data_q;
     always_ff @(posedge fclk50_candidate) begin
-        if (trace_rst) begin
+        if (trace_rst) source_cancelled_q <= 1'b0;
+        else if (source_cancel) source_cancelled_q <= 1'b1;
+        else if (capture_rearm) source_cancelled_q <= 1'b0;
+    end
+    always_ff @(posedge fclk50_candidate) begin
+        if (trace_rst || source_cancel || trace_cancel_active) begin
             sample_pending_q <= 1'b0;
             sample_data_q <= 16'd0;
         end else begin
@@ -194,7 +207,7 @@ module deepeye_integration_50mhz_candidate #(
     deepeye_trace_block_uart_50mhz_candidate #(
         .CLOCK_HZ(CLOCK_HZ), .BAUD(BAUD), .STAT_W(32)
     ) trace_i (
-        .clk(fclk50_candidate), .rst(trace_rst), .cancel(1'b0),
+        .clk(fclk50_candidate), .rst(trace_rst), .cancel(source_cancel),
         // No public v2 semantic or transport profile is activated by this top.
         .profile_v2_authorized(1'b0), .transport_allowed(1'b0),
         .blk_valid(trace_blk_valid), .blk_ready(trace_blk_ready),
@@ -220,9 +233,21 @@ module deepeye_integration_50mhz_candidate #(
         .tx(trace_uart_tx), .result_valid(trace_result_valid),
         .result_ready(trace_result_ready), .result_error(trace_result_error),
         .result_bytes(trace_result_bytes), .last_refusal_code(trace_refusal_code),
-        .busy(), .wire_faulted(trace_wire_faulted),
+        .cancel_active(trace_cancel_active),
+        .transaction_aborted(trace_transaction_aborted),
+        .busy(trace_busy), .wire_faulted(trace_wire_faulted),
         .transport_profile_unset(trace_transport_profile_unset));
     assign trace_result_ready = 1'b1;
+    // Qualify this indication only after an actual source_cancel edge. A
+    // merely disarmed capture can still hold a completed internal scan slot.
+    assign data_path_quiescent = source_cancelled_q && !trace_rst && !capture_rearm && !cap_armed
+        && (cap_partial_len == 0) && (cap_queue_level == 0) && !cap_out_valid
+        && !lane_valid && !sample_pending_q && !trace_busy;
+    // source_cancel beats capture_rearm at the capture primitive. Releasing
+    // cancel does not rearm it. Root must issue a fresh explicit rearm/tag and
+    // private transport binding; never replay an old descriptor automatically.
+    // Already emitted bytes cannot be recalled. Quiescence is a local digital
+    // observation only and says nothing about g05_i or a PC/world executor.
 
     deepeye_g05_axi_50mhz_candidate g05_i (
         .s_axi_aclk(fclk50_candidate),

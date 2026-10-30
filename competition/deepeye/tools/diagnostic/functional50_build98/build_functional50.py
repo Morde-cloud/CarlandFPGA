@@ -738,7 +738,7 @@ def build_run(args, product_root, closure_path, out):
                                      "source94_structure": structure94, "git": git_info, "board_tools": board_tools, "single_build": True,
                                      "no_parallel_second_build": True, "no_network": True, "board_operator": "A"})
     inputs = prepare_inputs(out, closure, args, state)
-    process = run_vivado(out, inputs, args, state)
+    process = run_vivado(out, inputs["inputs"], args, state)
     manifest = verify_outputs(out, closure, state)
     result = {"schema": "FUNCTIONAL50_BUILD_RESULT_V1", "status": "completed_build_pending_main_review",
               "at_utc": utc(), "task_id": c.TASK_ID, "task_version": c.TASK_VERSION, "work_id": state["work_id"],

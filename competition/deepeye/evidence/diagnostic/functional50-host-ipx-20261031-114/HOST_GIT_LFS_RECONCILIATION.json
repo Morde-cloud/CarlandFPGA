@@ -1,0 +1,17 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-BOUNDED-HOST-20261031-103",
+  "actual_commit_completed": "b23e063da07ceb2ebcefd4af9ffc6dc80d4ff162",
+  "following_check_failed": "Exact Git blob SHA check for fixtures/frame000.bin after successful scoped18-file commit",
+  "cause_verified": "Root *.bin filter=lfs diff=lfs merge=lfs -text transforms four35-37byte fixture binaries to Git LFS pointer blobs. Actual frame000 pointer oid matches source402b77a254c730991bffc24462e9f3b0ce0c998b6263af566db248beb29efffb/37B.",
+  "source_live_bytes_unchanged": true,
+  "git_index_after_commit_empty": true,
+  "main_freeze_created": false,
+  "software_START_issued": false,
+  "candidate_runtime_attempts": 0,
+  "selected_remaining_work": "Same self-validating worker adds only host103/.gitattributes fixture-specific -filter -diff -merge -text; preserves original receipts and emits19-file R2. Main performs new scoped attribute+four-fixture renormalization commit, exact byte check and only then freeze/START.",
+  "do_not_replay": "freeze_host103_once.py; original successful commit stays, no amend/reset/rootattribute/globalconfig edits",
+  "formal_acceptance": false
+}

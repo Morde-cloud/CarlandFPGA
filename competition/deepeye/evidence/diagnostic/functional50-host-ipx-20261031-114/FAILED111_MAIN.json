@@ -1,0 +1,49 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-NEW-VENDOR-20261031-111",
+  "status": "ACTUAL_VENDOR_FAILED_DURING_TRACE_IP_PACKAGING",
+  "actual_vendor_invocations": 1,
+  "vendor_exit": 1,
+  "vendor_seconds": 22.875,
+  "outer_exit": 1,
+  "inner_and_outer_termination_confirmed": true,
+  "failure_manifest_files_independently_hashed": 91,
+  "source_snapshots_unchanged": true,
+  "stdout_sha256": "6efe6112472d5c672b8645b7aef23bc61c7d5cd5db62685a9b7d77b7ce839b59",
+  "outer_result_sha256": "1b9c27a474fd0cf7037108a0125d48b7f819052cc074bfd964d871316e9d4e67",
+  "inner_process_sha256": "6bdf04e7918d25361512ac68b684005267e0a0bf796b93d8e43433668d6cb8fe",
+  "component_sha256": "c829cc46008928938b79d83191644b4e25273f88ac6b1aa814958b35ebeae0dc",
+  "xgui_sha256": "40e9783e77ef1d310603edb0ae6ca90eb8e6cd53168819e22a6979f9f49ad9d3",
+  "actual_inferred_parameter_records": {
+    "user": {
+      "name": "BUILD_ID",
+      "value": "0x00000000000000000000000000000000",
+      "attributes": {
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}format": "bitString",
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}resolve": "user",
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}id": "PARAM_VALUE.BUILD_ID",
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}bitStringLength": "128"
+      }
+    },
+    "model": {
+      "name": "BUILD_ID",
+      "value": "0x00000000000000000000000000000000",
+      "attributes": {
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}format": "bitString",
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}resolve": "generated",
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}id": "MODELPARAM_VALUE.BUILD_ID",
+        "{http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009}bitStringLength": "128"
+      }
+    }
+  },
+  "root_cause": "Helper queries genericget_parameters then uses nonexistentgenericadd_parameter, although actual2026.1package_project already inferred one correctuser+HDL128bitBUILD_ID pair.",
+  "synthesis_or_implementation_completed": false,
+  "qualified_BIT_HWH": false,
+  "allowance": "Actualonevendor allowance consumed; no further vendorattempt authorized by this evidence review.",
+  "automatic_retry": false,
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "formal_acceptance": false,
+  "at_utc": "2026-10-30T18:26:43.985153+00:00"
+}

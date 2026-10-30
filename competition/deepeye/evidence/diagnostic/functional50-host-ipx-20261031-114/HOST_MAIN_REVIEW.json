@@ -1,0 +1,260 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-BOUNDED-HOST-20261031-103",
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "source_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f",
+  "decision": "SCOPED_HOST103_SOFTWARE_CONTROLS_ACCEPTED; physical provider/input integration and full product remain unfinished",
+  "actual_saved_files_verified": 137,
+  "actual_saved_bytes": 2003306,
+  "source_dependency_Git_blobs_verified": 34,
+  "actual_exits": {
+    "outer": 0,
+    "command": 0,
+    "ownedJob": 0
+  },
+  "command_seconds": 1.2030000000013388,
+  "ownedJob_seconds": 1.5,
+  "Job_empty_before_close_verified": true,
+  "focused_groups": 9,
+  "cases": {
+    "dirty_prearm": {
+      "effects": 14,
+      "commands": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "8": 0
+      },
+      "prefix_bytes": 0,
+      "unknown_effects": false,
+      "pending_byte": null,
+      "last_confirmed_pop_id": null,
+      "last_observed_unread_count": null,
+      "errors": [
+        "Refused: dirty device refused without cleanup"
+      ],
+      "result_sha256": "a978550ceb4c57d456ba18d8a6fd0520e1fb8769c5341fb01b0d87b0d9725e51"
+    },
+    "evidence": {
+      "effects": 258,
+      "commands": {
+        "1": 1,
+        "2": 4,
+        "3": 4,
+        "4": 4,
+        "5": 1,
+        "8": 19
+      },
+      "prefix_bytes": 19,
+      "unknown_effects": true,
+      "pending_byte": 52,
+      "last_confirmed_pop_id": 19,
+      "last_observed_unread_count": 127,
+      "errors": [
+        "Refused: work evidence budget"
+      ],
+      "result_sha256": "bfa37104e30dadac863a2302d45e548ab2c219a18c1ad3408f9fbfe4fed5dd7f"
+    },
+    "normal": {
+      "effects": 891,
+      "commands": {
+        "1": 1,
+        "2": 4,
+        "3": 4,
+        "4": 4,
+        "5": 1,
+        "8": 146
+      },
+      "prefix_bytes": 146,
+      "unknown_effects": false,
+      "pending_byte": null,
+      "last_confirmed_pop_id": 146,
+      "last_observed_unread_count": 0,
+      "errors": [],
+      "result_sha256": "9edec54bd65519c6365d8435e6f1335fadceeac27939499aa52a5482333e8e94"
+    },
+    "overflow": {
+      "effects": 577,
+      "commands": {
+        "1": 1,
+        "2": 4,
+        "3": 1,
+        "4": 0,
+        "5": 1,
+        "8": 101
+      },
+      "prefix_bytes": 100,
+      "unknown_effects": true,
+      "pending_byte": 0,
+      "last_confirmed_pop_id": 100,
+      "last_observed_unread_count": 3996,
+      "errors": [
+        "Refused: sticky fault",
+        "partial drain: cleanup evidence budget"
+      ],
+      "result_sha256": "ab024ac7bdd37e3c73e585c918c149dd3ba965190d98f1380a1b2aa36b0fda60"
+    },
+    "partial": {
+      "effects": 79,
+      "commands": {
+        "1": 1,
+        "2": 4,
+        "3": 1,
+        "4": 0,
+        "5": 1,
+        "8": 1
+      },
+      "prefix_bytes": 1,
+      "unknown_effects": false,
+      "pending_byte": null,
+      "last_confirmed_pop_id": 1,
+      "last_observed_unread_count": 0,
+      "errors": [
+        "Refused: unexpected CANCEL"
+      ],
+      "result_sha256": "251268450f0c94d65cbca09ea31012ca3f19e4650754633c150055ef52a03e53"
+    },
+    "time": {
+      "effects": 164,
+      "commands": {
+        "1": 1,
+        "2": 4,
+        "3": 4,
+        "4": 4,
+        "5": 1,
+        "8": 1
+      },
+      "prefix_bytes": 0,
+      "unknown_effects": true,
+      "pending_byte": 165,
+      "last_confirmed_pop_id": 0,
+      "last_observed_unread_count": 146,
+      "errors": [
+        "Refused: work time budget"
+      ],
+      "result_sha256": "950e57af6e65df83b17f1ac8205c0fbe05f9e1e34c18400060c8697ec2fa64be"
+    },
+    "unknown": {
+      "effects": 164,
+      "commands": {
+        "1": 1,
+        "2": 4,
+        "3": 4,
+        "4": 4,
+        "5": 1,
+        "8": 1
+      },
+      "prefix_bytes": 0,
+      "unknown_effects": true,
+      "pending_byte": 165,
+      "last_confirmed_pop_id": 0,
+      "last_observed_unread_count": 146,
+      "errors": [
+        "FakeUnknown: software-injected POP effect occurred; response lost"
+      ],
+      "result_sha256": "abbe69626945778ed118924a095480cb332c50a6ef95d201eac9d2d3e0cf9208"
+    },
+    "unknown_arm": {
+      "effects": 27,
+      "commands": {
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 1,
+        "8": 0
+      },
+      "prefix_bytes": 0,
+      "unknown_effects": true,
+      "pending_byte": null,
+      "last_confirmed_pop_id": 0,
+      "last_observed_unread_count": 0,
+      "errors": [
+        "FakeUnknown: software-injected ARM effect occurred; response lost"
+      ],
+      "result_sha256": "761aa9e5a271a70549ed787a9f3812b480759d4ac38de00bcc419e6321299da2"
+    },
+    "wrong_build": {
+      "effects": 7,
+      "commands": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "8": 0
+      },
+      "prefix_bytes": 0,
+      "unknown_effects": false,
+      "pending_byte": null,
+      "last_confirmed_pop_id": null,
+      "last_observed_unread_count": null,
+      "errors": [
+        "Refused: TRACE BUILD_ID"
+      ],
+      "result_sha256": "af841f3af3098bf79f3fa10738fee3337ac6862431a5b3ff7ebd894ce5aca9a3"
+    },
+    "wrong_identity": {
+      "effects": 1,
+      "commands": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "8": 0
+      },
+      "prefix_bytes": 0,
+      "unknown_effects": false,
+      "pending_byte": null,
+      "last_confirmed_pop_id": null,
+      "last_observed_unread_count": null,
+      "errors": [
+        "Refused: TRACE identity"
+      ],
+      "result_sha256": "156d284c1f1b5ecb914b67cc6ff5c038abb5a036495e295e05a354bf83933169"
+    }
+  },
+  "wire_bytes": 146,
+  "mandatory_companion_bytes": 67593,
+  "total_serialized_bytes": 67739,
+  "normal_values": [
+    3011,
+    1924,
+    2002,
+    null
+  ],
+  "raw_evidence_scope": "SOFTWARE_FAKE_CSR only; no new RTL/Vivado/board or live Root proof",
+  "no_runtime_replay_by_review": true,
+  "pending": [
+    "A33 generic original numerical-source input API",
+    "qualified same-run pair",
+    "genuine A load/clock/MMIO producer",
+    "A physical original scan selection",
+    "formal product H01-H15/H12/original29/final100MHz/1pct100ms"
+  ],
+  "physical_result": false,
+  "formal_acceptance": false,
+  "at_utc": "2026-10-30T18:21:38.862517+00:00"
+}

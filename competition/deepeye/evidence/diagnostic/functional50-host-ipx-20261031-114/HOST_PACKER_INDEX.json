@@ -1,0 +1,956 @@
+{
+  "schema": 1,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-HOST103-DELIVERY-PREP-20261031-112",
+  "package_kind": "HOST103_DELIVERY_PREP",
+  "source_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f",
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "scope": {
+    "package_only": true,
+    "evidence_class": "SOFTWARE_FAKE_CSR",
+    "acceptance": false,
+    "formal_acceptance": false,
+    "main_independent_raw_review": "PENDING",
+    "H01_H15_retained": true,
+    "H12_paths_retained": [
+      "PC_DIRECT",
+      "FPGA_OUTPUT"
+    ],
+    "original29_card_dag_retained": true,
+    "final_metric_markers_retained": {
+      "100MHz": true,
+      "1pct": true,
+      "100ms": true
+    },
+    "physical_source": false,
+    "loaded_pair": false,
+    "provider": null,
+    "current_eligibility": false,
+    "board_access": false,
+    "claim": "Packaging only; not product acceptance or physical evidence."
+  },
+  "parts": [
+    {
+      "name": "raw-host103.tar.gz",
+      "bytes": 340933,
+      "sha256": "e376e16784241c678b7c9b84314cbe0bcd95cda1a507ad2295c84c78a2e66acf"
+    }
+  ],
+  "members": [
+    {
+      "archive_path": "raw/COMMAND_RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/COMMAND_RESULT.json",
+      "bytes": 864,
+      "sha256": "6fc264591e96e8101e046d30110a9411cebfe0f42398c834f6e3dec502851e6a"
+    },
+    {
+      "archive_path": "raw/COMMAND_STARTED.json",
+      "source_path": ".local/vhost103/attempt-01/COMMAND_STARTED.json",
+      "bytes": 404,
+      "sha256": "6fca7688afe626c5aaa4799de09fbb70832821ee19f5b4ddaf8549c6362ddda0"
+    },
+    {
+      "archive_path": "raw/INNER_RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/INNER_RESULT.json",
+      "bytes": 35654,
+      "sha256": "3304906086535a8bff7d91adf190803720b2acea032a1fe44c32458f1a0f9f79"
+    },
+    {
+      "archive_path": "raw/JOB_RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/JOB_RESULT.json",
+      "bytes": 3373,
+      "sha256": "629c44744b10616317f35b5e5d9de85df2b7c09d96d35b3597e02cc60f0371e0"
+    },
+    {
+      "archive_path": "raw/MAIN_FREEZE.json",
+      "source_path": ".local/vhost103/attempt-01/MAIN_FREEZE.json",
+      "bytes": 4950,
+      "sha256": "c7a8e135fefd0859780b87dce8515175960f970828b72253f48aa8a679d8143f"
+    },
+    {
+      "archive_path": "raw/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/RESULT.json",
+      "bytes": 44122,
+      "sha256": "75e60ec29a848a6cf2d0ab54a0d20e8227e4b43128d50c2afe02fce6d5341e22"
+    },
+    {
+      "archive_path": "raw/SOURCE_AFTER.json",
+      "source_path": ".local/vhost103/attempt-01/SOURCE_AFTER.json",
+      "bytes": 23462,
+      "sha256": "3da1f1b8113945104468648bf1c97b92ed6e9600ca1f36d4dc0b7dc749fbc205"
+    },
+    {
+      "archive_path": "raw/SOURCE_BEFORE.json",
+      "source_path": ".local/vhost103/attempt-01/SOURCE_BEFORE.json",
+      "bytes": 23462,
+      "sha256": "3da1f1b8113945104468648bf1c97b92ed6e9600ca1f36d4dc0b7dc749fbc205"
+    },
+    {
+      "archive_path": "raw/controls.stderr.bin",
+      "source_path": ".local/vhost103/attempt-01/controls.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/controls.stdout.bin",
+      "source_path": ".local/vhost103/attempt-01/controls.stdout.bin",
+      "bytes": 108,
+      "sha256": "5ce4bbeeb3e44965853d293864df0da476aca4d8407ef8ba6750d862f1adacbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/SUMMARY.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/SUMMARY.json",
+      "bytes": 20486,
+      "sha256": "f38fd917f0b71ca48de0468875fdcfe30c0368db46bbdd0a19a54ee00f9384cb"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/RESULT.json",
+      "bytes": 1221,
+      "sha256": "a978550ceb4c57d456ba18d8a6fd0520e1fb8769c5341fb01b0d87b0d9725e51"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/collected-prefix.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/dirty_prearm/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/dirty_prearm/work.jsonl",
+      "bytes": 3893,
+      "sha256": "de09da2a897b0b0cd351905e2e717cd5348a5d61fb03c96592432e934129e8b2"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/RESULT.json",
+      "bytes": 1214,
+      "sha256": "bfa37104e30dadac863a2302d45e548ab2c219a18c1ad3408f9fbfe4fed5dd7f"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/cleanup.jsonl",
+      "bytes": 893,
+      "sha256": "fdc591b4af56c8a969acc473919310ded8b2eee79150ba588ff90a4ae14e587d"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/collected-prefix.bin",
+      "bytes": 19,
+      "sha256": "f2c25a65d3b37f952913dc6fa864ea9d9defcc92c3f57e6b53854c98d90c810e"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/evidence/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/evidence/work.jsonl",
+      "bytes": 70293,
+      "sha256": "d230b564fae92eea7d93e1bead70bf7956ea36831f92539b0daf9757b8d82646"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/RESULT.json",
+      "bytes": 8311,
+      "sha256": "9edec54bd65519c6365d8435e6f1335fadceeac27939499aa52a5482333e8e94"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/cleanup.jsonl",
+      "bytes": 900,
+      "sha256": "1dcd38a529c7cf1a334caaf84e9836ee4aa8edc6b50bbb50edf874b95c7db401"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/collected-prefix.bin",
+      "bytes": 146,
+      "sha256": "191afc3ead00a66ab63b0698517553d0eab8025f6c36f556b9c6322643edc56d"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/normal/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/normal/work.jsonl",
+      "bytes": 248612,
+      "sha256": "db6a19cb8a6368898189c6ef5cb315580937b403644daf5a0db430e1a3bae39e"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/RESULT.json",
+      "bytes": 1259,
+      "sha256": "ab024ac7bdd37e3c73e585c918c149dd3ba965190d98f1380a1b2aa36b0fda60"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/cleanup.jsonl",
+      "bytes": 143047,
+      "sha256": "e989515b63a917ce4ec85eb1c1e9052dcaf4804ea6a71364c986b3b3ead0784b"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/collected-prefix.bin",
+      "bytes": 100,
+      "sha256": "cd00e292c5970d3c5e2f0ffa5171e555bc46bfc4faddfb4a418b6840b86e79a3"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/overflow/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/overflow/work.jsonl",
+      "bytes": 18016,
+      "sha256": "04a93aba7ff9cd02a6177b57b48400c22a555a10c31e8134496e243cc87228af"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/RESULT.json",
+      "bytes": 1209,
+      "sha256": "251268450f0c94d65cbca09ea31012ca3f19e4650754633c150055ef52a03e53"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/cleanup.jsonl",
+      "bytes": 3373,
+      "sha256": "cbddcad988a88b89e6d33f429b220bc1dd04b9cf23a084a61957fa0835e06f58"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/collected-prefix.bin",
+      "bytes": 1,
+      "sha256": "6922e93e3827642ce4b883c756b31abf80036649d3614bf5fcb3adda43b8ea32"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/partial/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/partial/work.jsonl",
+      "bytes": 18280,
+      "sha256": "b2b234a9cb0690365d79aa6dccbbbbeb420d453fe6f9f892864b69c4ef8ae802"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/RESULT.json",
+      "bytes": 1208,
+      "sha256": "950e57af6e65df83b17f1ac8205c0fbe05f9e1e34c18400060c8697ec2fa64be"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/cleanup.jsonl",
+      "bytes": 887,
+      "sha256": "894001f157e46df92e360b6cc8ce321dd438dab392cb39e1cad41ad4ecbd05b5"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/collected-prefix.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/time/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/time/work.jsonl",
+      "bytes": 43976,
+      "sha256": "f25025b8826595882cba14e12b8158e9fb1ff2265307a9e9d2dd05dce4ccf9be"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/RESULT.json",
+      "bytes": 1248,
+      "sha256": "abbe69626945778ed118924a095480cb332c50a6ef95d201eac9d2d3e0cf9208"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/cleanup.jsonl",
+      "bytes": 887,
+      "sha256": "894001f157e46df92e360b6cc8ce321dd438dab392cb39e1cad41ad4ecbd05b5"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/collected-prefix.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown/work.jsonl",
+      "bytes": 44047,
+      "sha256": "b2c4d867fef7b4849871ffd0d5de36415a8f0d526ddc5796309882bbce9662b0"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/RESULT.json",
+      "bytes": 1244,
+      "sha256": "761aa9e5a271a70549ed787a9f3812b480759d4ac38de00bcc419e6321299da2"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/cleanup.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/cleanup.jsonl",
+      "bytes": 1997,
+      "sha256": "0471fbc02354991a027b72b661ebb6fed3574be72dc1764aec5e18cfc34db13c"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/collected-prefix.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/unknown_arm/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/unknown_arm/work.jsonl",
+      "bytes": 5598,
+      "sha256": "260ce5d695c28ae70adae7fa314c3d7ad00f757930dc3f06301c661e01e801e3"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong.hwh",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong.hwh",
+      "bytes": 34,
+      "sha256": "5241469fda52dd0fe993137a9c87f25cf50c42d541baba84e3a6be20e5352bec"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/RESULT.json",
+      "bytes": 1198,
+      "sha256": "af841f3af3098bf79f3fa10738fee3337ac6862431a5b3ff7ebd894ce5aca9a3"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/collected-prefix.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_build/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_build/work.jsonl",
+      "bytes": 2044,
+      "sha256": "a0efdd36ee6826726e95b58076ee42fcc44bad2c2da9ec584b0d5339eae251f2"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/REQUEST.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/REQUEST.json",
+      "bytes": 1565,
+      "sha256": "0ccb7fa23081f7394341e4068d09d8b859c2e2a9dd9bf7c3acec4e5be12ddcbb"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/RESULT.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/RESULT.json",
+      "bytes": 1197,
+      "sha256": "156d284c1f1b5ecb914b67cc6ff5c038abb5a036495e295e05a354bf83933169"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/collected-prefix.bin",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/collected-prefix.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/fake-cases/wrong_identity/work.jsonl",
+      "source_path": ".local/vhost103/attempt-01/fake-cases/wrong_identity/work.jsonl",
+      "bytes": 462,
+      "sha256": "b621dcd3b29ef6df9ecbd1d4b17f2dc5f18d4790a268cae02201d31f4f0f4ac2"
+    },
+    {
+      "archive_path": "raw/owned_job/PROCESS.json",
+      "source_path": ".local/vhost103/attempt-01/owned_job/PROCESS.json",
+      "bytes": 3289,
+      "sha256": "4d4e3cbeba3fb9cc81042ece2644eef0a1bc440e5fcb20f5ab3b800f21f19e28"
+    },
+    {
+      "archive_path": "raw/owned_job/PROCESS_STARTED.json",
+      "source_path": ".local/vhost103/attempt-01/owned_job/PROCESS_STARTED.json",
+      "bytes": 1773,
+      "sha256": "f79aebc7018c1a31b638d1f1c03393889a1b3f3404e522d06bac22dc2af0be5f"
+    },
+    {
+      "archive_path": "raw/owned_job/process.stderr.bin",
+      "source_path": ".local/vhost103/attempt-01/owned_job/process.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/owned_job/process.stdout.bin",
+      "source_path": ".local/vhost103/attempt-01/owned_job/process.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/fpga/diagnostic/functional50_board94/README.md",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/fpga/diagnostic/functional50_board94/README.md",
+      "bytes": 10356,
+      "sha256": "38ac64a6d28d0934c11a6d71706e56fd5638374b944040f85cc62c3448f9aace"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+      "bytes": 44406,
+      "sha256": "d7f9526e17b8e899eddd35c590a7d2028c429ebed6a1151675c70c9d520d69f1"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/fpga/diagnostic/functional50_board94/register_map.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/fpga/diagnostic/functional50_board94/register_map.json",
+      "bytes": 18005,
+      "sha256": "3ad9a9c1c6f7d69c173d471bb77ffcc6ead76490598a8da5efa0861600aa0c70"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl",
+      "bytes": 34100,
+      "sha256": "8fe52bd2d6c5933050dd87b4be1c028991f2838f59a6f987e147cd8c10da9e2a"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "bytes": 16077,
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/golden/codec/trace_candidate.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/golden/codec/trace_candidate.py",
+      "bytes": 40546,
+      "sha256": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py",
+      "bytes": 29312,
+      "sha256": "c9fd0714311d9ff38c38083e137aadca4e27c2992c057a1c304b1784e9b6e1a5"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_build98/build_functional50.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_build98/build_functional50.py",
+      "bytes": 53336,
+      "sha256": "69e6f04a3300f52c4f22ab50b646425dc15baf2a0b4759dcf6b8c329ae7692e6"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_build98/functional50_contract.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_build98/functional50_contract.py",
+      "bytes": 24034,
+      "sha256": "dc299999508f6899ccff6e5d7950af3e3d258c6dbff914b0e748055ba73535cf"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_build98/verify_functional50_closure.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_build98/verify_functional50_closure.py",
+      "bytes": 10250,
+      "sha256": "8bbee0428f3b05c390d5033a36b809155929412256f3265ed035b3d21211703b"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_build98/verify_functional50_hwh.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_build98/verify_functional50_hwh.py",
+      "bytes": 20081,
+      "sha256": "718848f15d822aa4139761854f40a6d9dbaf4e678f4f7313aed6f611aafb0f27"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/.gitattributes",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/.gitattributes",
+      "bytes": 70,
+      "sha256": "f10b7f3b6594d42683b372d47e8afd69f6266b1398791210b19cea1745ddea61"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/A_PROCEDURE.md",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/A_PROCEDURE.md",
+      "bytes": 9528,
+      "sha256": "de507426fad9278b73cd4d19cb918dee20ff182c11840cc89f0106ac208c9fda"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/PROOF_INTERFACE.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/PROOF_INTERFACE.json",
+      "bytes": 4336,
+      "sha256": "b7891acfcff58ff3d0747af324277737ac5b9197d052928d3de3c4af7ffacac5"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/cli103.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/cli103.py",
+      "bytes": 1675,
+      "sha256": "1313238f533c2c6c0a56fcd6ec55cd7dcf9de942274efee3e2fe23d2cc51cd5f"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/evidence103.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/evidence103.py",
+      "bytes": 3612,
+      "sha256": "e9e9458fb760a37ef117fda87041a6ba962a8763c4f9337eebc263bbb2aa0478"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fake_csr103.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fake_csr103.py",
+      "bytes": 12203,
+      "sha256": "8e1b8e67bbcbac476c4e013e082265e859d36f8755c01a33e71c555c981eae88"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion000.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion000.json",
+      "bytes": 16903,
+      "sha256": "3e340c1a8e8d9830ae41ea98441477371d660aad798506137aafe4cd1b9795de"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion001.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion001.json",
+      "bytes": 16903,
+      "sha256": "6e6e1ef517cee21452174e8e87ffde1c970b97fb850509a7cc40a5fff7aaa461"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion002.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion002.json",
+      "bytes": 16903,
+      "sha256": "b50ee60fdcd1b24deed6c25782e2a54a3d050998f41375bc7ab45195f7c4224b"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion003.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/companion003.json",
+      "bytes": 16884,
+      "sha256": "4e05ceb2ccb1e0c26573e58a93d15bbf1a0f5ddf1ef4d788493a16431d97bc4b"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame000.bin",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame000.bin",
+      "bytes": 37,
+      "sha256": "402b77a254c730991bffc24462e9f3b0ce0c998b6263af566db248beb29efffb"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame001.bin",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame001.bin",
+      "bytes": 37,
+      "sha256": "ed408ef3dc29409ac62d297d433c54c0a391280163ba482ac5f570fa21a57168"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame002.bin",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame002.bin",
+      "bytes": 37,
+      "sha256": "bc0773233b00711c758c9d93f3cee2cb4837ec973c7759781b7f26fc9b338bf6"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame003.bin",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/frame003.bin",
+      "bytes": 35,
+      "sha256": "3477ddac9d8e10347531a750fc6b87bc35c392bc16c60b1980bb15ab423513b8"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/pins.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/pins.json",
+      "bytes": 10718,
+      "sha256": "dd92df2e8d271b8efe68041299f8772d067e1e04f745988f725335029c6d272f"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/plan.json",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/fixtures/plan.json",
+      "bytes": 2127,
+      "sha256": "b4f9dc2fcc51a4dd557034e7d017be3069cb953fe2d94d4752ad3982c71c4805"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+      "bytes": 15241,
+      "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/run103.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/run103.py",
+      "bytes": 6339,
+      "sha256": "cbc4105b26cfc68577d40706369a2dcde963e8ebcbacdcc9a56a7c3643df1eb7"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_host103/test_host103.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_host103/test_host103.py",
+      "bytes": 7976,
+      "sha256": "7e6ff329078482e68ca888e92bdf087223230c387f2f724a1bd989a7cc306dfb"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/functional50_saved106/check106.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/functional50_saved106/check106.py",
+      "bytes": 53558,
+      "sha256": "8c2a5825f0245fb3ae12719db14b3283ceba0ddb5c32ee293f3a1a318f3466d1"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py",
+      "bytes": 12535,
+      "sha256": "1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768"
+    },
+    {
+      "archive_path": "raw/source/competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py",
+      "source_path": ".local/vhost103/attempt-01/source/competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py",
+      "bytes": 11126,
+      "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+    },
+    {
+      "archive_path": "raw/source/fpga_mesh/windows_job.py",
+      "source_path": ".local/vhost103/attempt-01/source/fpga_mesh/windows_job.py",
+      "bytes": 3679,
+      "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+    },
+    {
+      "archive_path": "worker/CODE_READY.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/CODE_READY.json",
+      "bytes": 5300,
+      "sha256": "ed08ded3571437f0db78fc4bd324d01bd8f45de5417c0da06e4f40f4005c3ae9"
+    },
+    {
+      "archive_path": "worker/CODE_READY_R2.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/CODE_READY_R2.json",
+      "bytes": 7352,
+      "sha256": "833235d78a456dedc2f880ff86e0d5d119a9d1f8b4132e5c8657a55bdab51634"
+    },
+    {
+      "archive_path": "worker/CODE_READY_R3.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/CODE_READY_R3.json",
+      "bytes": 12193,
+      "sha256": "ccfbc9cc187532c96a48894ef7a5de54b21e904a62f9600b76fc6e8e98a6dce5"
+    },
+    {
+      "archive_path": "worker/RESULT.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/RESULT.json",
+      "bytes": 116153,
+      "sha256": "09e445eabc7c40844c72964855da50caff55d8c3989c6d3eae50b5d5b6ff6a7e"
+    },
+    {
+      "archive_path": "worker/SOURCE_DIFF.patch",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/SOURCE_DIFF.patch",
+      "bytes": 144669,
+      "sha256": "0bfe20f9f0293754c8943cdafb501fdb8d1fbfb06dafeb9c25da1b9f9105f78a"
+    },
+    {
+      "archive_path": "worker/SOURCE_DIFF_R2.patch",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/SOURCE_DIFF_R2.patch",
+      "bytes": 144817,
+      "sha256": "c4e81cc6d151db7161b02c060e95a32f1eb48eb886dc80a4d8169df9b94f2363"
+    },
+    {
+      "archive_path": "worker/SOURCE_DIFF_R3.patch",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/SOURCE_DIFF_R3.patch",
+      "bytes": 144848,
+      "sha256": "47ee66f63acb971b6c05fca63714e079157a0813407b4c85437caecdc773ee77"
+    },
+    {
+      "archive_path": "worker/SOURCE_PINS_CODE_READY.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/SOURCE_PINS_CODE_READY.json",
+      "bytes": 20306,
+      "sha256": "319129a8bb5e00e17b76fd1097a84dcdb968002babb0776651a4eca7a35834cb"
+    },
+    {
+      "archive_path": "worker/SOURCE_PINS_CODE_READY_R2.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/SOURCE_PINS_CODE_READY_R2.json",
+      "bytes": 22793,
+      "sha256": "edd9c5d73a1660a8af8426a6acde2612ff06e9c7e41a184d669c0210904dc649"
+    },
+    {
+      "archive_path": "worker/SOURCE_PINS_CODE_READY_R3.json",
+      "source_path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host50-worker103/SOURCE_PINS_CODE_READY_R3.json",
+      "bytes": 27723,
+      "sha256": "a4badda9c2115775ccd812d88f49fa236bc0ed48d7d12a160829623fd65f1442"
+    }
+  ],
+  "counts": {
+    "parts": 1,
+    "raw_files": 137,
+    "raw_bytes": 2003306,
+    "worker_files": 10,
+    "worker_bytes": 646154,
+    "total_members": 147,
+    "total_logical_bytes": 2649460,
+    "compressed_bytes": 340933
+  },
+  "limits": {
+    "compressed_bytes_max": 10485760,
+    "logical_bytes_max": 20971520
+  }
+}

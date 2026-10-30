@@ -1,0 +1,23 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-BOUNDED-HOST-20261031-103",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "job_id": "child-a22cb398e4164eecbc279bdca7a9ec23",
+  "agent_id": "/root/retired_raw4_100",
+  "requirements_ids": ["H01","H02","H03","H04","H05","H06","H07","H08","H09","H10","H11","H12","H13","H14","H15"],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f",
+  "freeze": "HOST103_MAIN_FREEZE.json",
+  "freeze_sha256": "c7a8e135fefd0859780b87dce8515175960f970828b72253f48aa8a679d8143f",
+  "status": "MAIN_EXPLICIT_FIRST_SOFTWARE_START",
+  "command": ["D:/pynq/CarlandFPGA/.local/venv/Scripts/python.exe","-B","D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014/competition/deepeye/tools/diagnostic/functional50_host103/run103.py","--out","D:/pynq/CarlandFPGA/.local/vhost103/attempt-01","--main-freeze","D:/pynq/CarlandFPGA/.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/HOST103_MAIN_FREEZE.json"],
+  "allowed": "One frozen focused SOFTWARE_FAKE_CSR control attempt only;19 exact rawGit source bytes verified, original six implementation files unchanged by fixture-attribute reconciliation",
+  "bounds": {"command_seconds":25,"owned_job_seconds":120,"drain_seconds":5,"terminate_seconds":5,"attempt_output_bytes":8388608},
+  "no_retry": true,
+  "no_source_edits_during_or_after_attempt": true,
+  "after": "Preserve raw command/exit/stdout/stderr/Job counters/source beforeafter/actual caps. If fail, stop and native_complete failed with actual evidence; no local repair. If successful, native_complete with actual result, pending independent main review.",
+  "physical_result": false,
+  "current_source_eligible": false,
+  "formal_acceptance": false
+}

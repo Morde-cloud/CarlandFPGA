@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "status": "PACKAGED_SOFTWARE_FAKE_CSR_MAIN_REVIEW_PENDING",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-HOST103-DELIVERY-PREP-20261031-112",
+  "job_id": "child-178c924a66b249abbdb942d7182452a2",
+  "instance_id": "deepseek-b-82",
+  "route": "deepseek",
+  "model": "DeepSeek V4.1 Flash",
+  "reasoning_effort": "max",
+  "ownership": [
+    ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/host103-packet112"
+  ],
+  "acceptance": false,
+  "formal_acceptance": false,
+  "main_review": "PENDING_INDEPENDENT_RAW_REVIEW",
+  "package_scope": "DELIVERY_PREP_PACKAGING_ONLY",
+  "source_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f",
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "scope": {
+    "evidence_class": "SOFTWARE_FAKE_CSR",
+    "physical_source": false,
+    "loaded_pair": false,
+    "provider": null,
+    "current_eligibility": false,
+    "board_access": false,
+    "H01_H15_retained": true,
+    "H12_paths_retained": [
+      "PC_DIRECT",
+      "FPGA_OUTPUT"
+    ],
+    "original29_card_dag_retained": true,
+    "final_metric_markers_retained": {
+      "100MHz": true,
+      "1pct": true,
+      "100ms": true
+    },
+    "note": "Packaging only; not acceptance, physical evidence, or publication."
+  },
+  "actual_files": [
+    {
+      "name": "raw-host103.tar.gz",
+      "bytes": 340933,
+      "sha256": "e376e16784241c678b7c9b84314cbe0bcd95cda1a507ad2295c84c78a2e66acf"
+    },
+    {
+      "name": "BUNDLE_INDEX.json",
+      "bytes": 44755,
+      "sha256": "954531ce480e9417903e7289b2b38cf0f3c6d04f9e6b8c407ff5d07157e8c000"
+    },
+    {
+      "name": "PACKAGING_LOG.json",
+      "bytes": 5446,
+      "sha256": "aeb204ceb590bd07bd9c2f6fa81ff025e4fb9b259c7a9d7733d09743bf931aa5"
+    },
+    {
+      "name": "build_packet.py",
+      "bytes": 21480,
+      "sha256": "cf5427e14bd634defd4bfaa46071b8432623b72867fc620510242c179ee9000a"
+    },
+    {
+      "name": "STARTED.json",
+      "bytes": 2997,
+      "sha256": "9eae66e3779d904f9f8b40e3642240fd3fd8e0f439d1d01eed0ed1fe8d02611e"
+    }
+  ],
+  "part": {
+    "name": "raw-host103.tar.gz",
+    "bytes": 340933,
+    "sha256": "e376e16784241c678b7c9b84314cbe0bcd95cda1a507ad2295c84c78a2e66acf"
+  },
+  "index": {
+    "name": "BUNDLE_INDEX.json",
+    "bytes": 44755,
+    "sha256": "954531ce480e9417903e7289b2b38cf0f3c6d04f9e6b8c407ff5d07157e8c000"
+  },
+  "packaging_log": {
+    "name": "PACKAGING_LOG.json",
+    "bytes": 5446,
+    "sha256": "aeb204ceb590bd07bd9c2f6fa81ff025e4fb9b259c7a9d7733d09743bf931aa5"
+  },
+  "counts": {
+    "parts": 1,
+    "raw_files": 137,
+    "raw_bytes": 2003306,
+    "worker_files": 10,
+    "worker_bytes": 646154,
+    "total_members": 147,
+    "total_logical_bytes": 2649460,
+    "compressed_bytes": 340933
+  },
+  "checks": {
+    "raw_file_count_and_bytes": true,
+    "authoritative_raw_result_sha256": true,
+    "authoritative_worker_result_sha256": true,
+    "source_commit_exists": true,
+    "requirements_H01_H15_canonical_sha256": true,
+    "both_H12_paths": true,
+    "original29_card_dag": true,
+    "final_metric_markers": true,
+    "secret_and_assignment_scan_clean": true,
+    "deterministic_archive_rebuild_identical": true,
+    "gzip_mtime_zero": true,
+    "tar_mtime_uid_gid_zero": true,
+    "no_absolute_dotdot_or_symlink_members": true,
+    "reopened_membership_exact": true,
+    "reopened_bytes_exact_against_originals": true,
+    "reopened_sha256_exact_against_originals": true,
+    "only_allowlisted_worker_files": true,
+    "compressed_limit_10MiB": true,
+    "logical_limit_20MiB": true
+  },
+  "not_performed": [
+    "board access or physical operation",
+    "product imports or product tests",
+    "historical group retest or group re-audit",
+    "Git write, PR, publication, or Feishu message",
+    "acceptance decision",
+    "native API use"
+  ],
+  "completed_utc": "2026-10-30T18:22:35.374143+00:00"
+}

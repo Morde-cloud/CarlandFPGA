@@ -1,0 +1,26 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-NEW-VENDOR-20261031-111",
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "decision": "Main selects a NEW explicit one-use operation for the first actual offboard vendor build under existing authenticated A26/A28 authorization, after independently reviewing sealed103 failure and published110 fix. No second A approval checkpoint is required for the already authorized effect.",
+  "authority": {
+    "operation": "A-GEN4-B50-ONEBUILD-RELEASE-20261031-26",
+    "exact_effect": "one new bounded offboard synthesis/implementation/bitstream build after B-main checks below; no A checkpoint required between those checks and this one build",
+    "A28_reaffirmation": "still exactly ONE unconsumed build; start that one build immediately when recorded conditions pass; no further A checkpoint",
+    "human": "Current main continues authorized B tasks autonomously, inspect actual evidence and issue next work by dependencies; do not repeat failed/uncertain effects."
+  },
+  "scope_reconciliation": "103 consumed its local wrapper claim but FAILED before helper load/run_owned or any actual vendor invocation. Main verified raw failure, exact input/output manifest and empty/closed Job; effect is known, not uncertain. No synthesis/implementation effect occurred. Local wrapper claim consumption does not enlarge or cancel A's one actual vendor-build authorization. A26 selected architecture remains exactly unchanged.",
+  "explicit_new_work_not_automatic_replay": "Fix110 source262a committed/published/exactly remotely verified; only mapping-to-Path call repaired. New111 source snapshot/output/closure/BUILD_ID/request/manifest/claim, never reenter103 or reuse its output/claim. Main decides this recovery after actual failure review; no retry loop, sweep or alternate architecture.",
+  "source_commit": "262a1f207db877fa7ee791293285be96898d4851",
+  "builder_sha256": "69e6f04a3300f52c4f22ab50b646425dc15baf2a0b4759dcf6b8c329ae7692e6",
+  "previous_proposal_superseded_in_part": "BUILD111_RECOVERY_PROPOSAL.json and PR110 request suggested another A checkpoint. That was the B main's conservative interpretation, not a new explicit A/user condition. This additive decision corrects it without rewriting the historical request. A is informed through the authorized channel. All architecture/resource/no-retry/no-board restrictions remain.",
+  "prior_failure_preserved": ".local/b103 and .local/b103-envelope/r01 remain untouched; actual vendor invocation count0 and wrapper claimconsumed both retained.",
+  "next": "Prepare exact reviewed new source/closure/BUILD_ID/canonical request/manifest and verify before ONE first vendor attempt. Existing A selection evidence is referenced as A26, never relabeled as an A111 message.",
+  "file_ownership": [".local/b111/", ".local/b111-envelope/", "resume-74/build111-prelaunch/", "resume-74/BUILD111_*", "resume-74/*111*_once.py"],
+  "worker_overlap": "NONE: Host103 owns separate functional50_host103 software and its own runtime; no Vivado owner remains active after actual103 terminal.",
+  "automatic_retry": false,
+  "board_access": false,
+  "formal_acceptance": false
+}

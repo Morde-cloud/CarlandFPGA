@@ -1,0 +1,206 @@
+{
+  "schema": "B117_SOURCE_PINS_V1",
+  "state": "SOURCE_READY_PENDING_MAIN_REVIEW",
+  "acceptance": false,
+  "self_acceptance": false,
+  "task": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-DEEPEYE-ORIGINAL-INPUT-SOURCE-20261031-117",
+    "main_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "route": "ordinary DeepSeek Flash/max",
+    "app_thread_id": null
+  },
+  "contract": {
+    "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "revision": 1,
+    "pin_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "json_path": "docs/competition/deepeye-2026/immutable_scope.json",
+    "json_bytes": 6684,
+    "json_sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_serialization": "json.dumps(requirements, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "fixed_expected_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "requirements_sha256_match": true,
+    "full_H01_H15_retained": true,
+    "both_H12_paths_retained": [
+      "PC_DIRECT",
+      "FPGA_OUTPUT"
+    ],
+    "original29_retained": true,
+    "final_100MHz_1pct_100ms_retained": true
+  },
+  "reviewed_inputs": {
+    "proposal_md": {
+      "path": "P/input113-proposal/INTERFACE_PROPOSAL.md",
+      "bytes": 14632,
+      "sha256": "6e9df6137dd8aa142203dca7ba5a7a1b5532660c187499ef3acd4a5b3d94c065"
+    },
+    "proposal_json": {
+      "path": "P/input113-proposal/INTERFACE_PROPOSAL.json",
+      "bytes": 38970,
+      "sha256": "a1cbd9ef4c95acd938c7501fe70bfd4e812eddceab3df823d9ae89ee4c052981"
+    },
+    "main_decision": {
+      "path": "P/INPUT113_MAIN_DECISION.md",
+      "raw_bytes": 4251,
+      "raw_sha256": "602cb7c27f49e7adac66388bbd587146205f0eaca2903ba6db9c0eac9e7ebd24",
+      "lf_normalized_bytes": 4236,
+      "lf_normalized_sha256": "3da6077e33ad34a79b435be702cc215894ef18e02801d4598c473460e3a0fd67",
+      "precedence": "MAIN_DECISION_OVERRIDES_PROPOSAL"
+    },
+    "main_review": {
+      "path": "P/INPUT113_MAIN_REVIEW.json",
+      "raw_bytes": 3342,
+      "raw_sha256": "b76a734b529894c9eeefa9e8582d0275c99c53d480cb04a621bde9f28ce10bdd",
+      "canonicalization": "json.dumps(review, indent=2).encode('utf-8')",
+      "canonical_sha256": "992a4b3cbc62e6e80cfb3fb3d9c3d1f1f87c12b84e466b7d3b458f9b74bd35d6",
+      "canonical_sha256_match": true
+    }
+  },
+  "host103_source": {
+    "source_commit": "cb754311ec11bba5575b8dbf331f6c209b1fd49f",
+    "raw_evidence_root": "R/.local/vhost103/attempt-01",
+    "raw_file_count": 137,
+    "raw_byte_count": 2003306,
+    "raw_result_sha256": "75e60ec29a848a6cf2d0ab54a0d20e8227e4b43128d50c2afe02fce6d5341e22",
+    "worker_result": {
+      "path": "P/host50-worker103/RESULT.json",
+      "sha256": "09e445eabc7c40844c72964855da50caff55d8c3989c6d3eae50b5d5b6ff6a7e"
+    },
+    "evidence_class": "SOFTWARE_FAKE_CSR",
+    "physical_source_present": false,
+    "loaded_pair_present": false,
+    "physical_provider_present": false,
+    "current_eligibility_present": false
+  },
+  "readonly_dependency_pin_count": 11,
+  "readonly_dependency_pins": [
+    {
+      "base": "W",
+      "path": "docs/competition/deepeye-2026/immutable_scope.json",
+      "bytes": 6684,
+      "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+    },
+    {
+      "base": "P",
+      "path": "HOST103_MAIN_REVIEW.json",
+      "bytes": 6889,
+      "sha256": "16deb5151eabfe879b95980f58dac224a03e5f591796514014a480b6245ffe80"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+      "bytes": 15241,
+      "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/tools/diagnostic/functional50_host103/fake_csr103.py",
+      "bytes": 12203,
+      "sha256": "8e1b8e67bbcbac476c4e013e082265e859d36f8755c01a33e71c555c981eae88"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/tools/diagnostic/functional50_host103/PROOF_INTERFACE.json",
+      "bytes": 4336,
+      "sha256": "b7891acfcff58ff3d0747af324277737ac5b9197d052928d3de3c4af7ffacac5"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py",
+      "bytes": 29312,
+      "sha256": "c9fd0714311d9ff38c38083e137aadca4e27c2992c057a1c304b1784e9b6e1a5"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+      "bytes": 44406,
+      "sha256": "d7f9526e17b8e899eddd35c590a7d2028c429ebed6a1151675c70c9d520d69f1"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/fpga/diagnostic/functional50_board94/register_map.json",
+      "bytes": 18005,
+      "sha256": "3ad9a9c1c6f7d69c173d471bb77ffcc6ead76490598a8da5efa0861600aa0c70"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py",
+      "bytes": 12535,
+      "sha256": "1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/golden/codec/trace_candidate.py",
+      "bytes": 40546,
+      "sha256": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642"
+    },
+    {
+      "base": "W",
+      "path": "competition/deepeye/tools/diagnostic/functional50_host103/fixtures/pins.json",
+      "bytes": 10718,
+      "sha256": "dd92df2e8d271b8efe68041299f8772d067e1e04f745988f725335029c6d272f"
+    }
+  ],
+  "build111": {
+    "status": "TERMINAL_FAILED",
+    "active_vendor": false,
+    "new_build_allowed": false,
+    "vendor_invoked_by_work117": false,
+    "old_test_groups_rerun": false
+  },
+  "missing_a_inputs": {
+    "a_exporter_custody_schema_present": false,
+    "a_numerical_mapping_present": false,
+    "a_current_producer_present": false,
+    "a_authenticated_build_boot_present": false,
+    "qualified_bit_hwh_present": false,
+    "actual_load_clock_mmio_observation_present": false,
+    "physical_provider_present": false
+  },
+  "source_phase": {
+    "candidate_import": false,
+    "candidate_compile": false,
+    "candidate_execution": false,
+    "candidate_test_execution": false,
+    "tests_run": false,
+    "git_write": false,
+    "network": false,
+    "board_access": false,
+    "mmio": false,
+    "clock_or_overlay": false,
+    "ssh": false,
+    "service_or_sql": false,
+    "credential_use": false,
+    "publication": false,
+    "fake_legacy_mapping_created": false,
+    "physical_authority": false,
+    "product_acceptance": false
+  },
+  "nonclaims": [
+    "No source-tree or product acceptance",
+    "No candidate import, compile, test, runtime, or pass claim",
+    "No A original exporter, numerical mapping, current Root, or current BOOT",
+    "No loaded FPGA build, physical provider, MMIO, ADC, motion, or clock authentication",
+    "No either-H12 physical evidence, original29 completion, final 100MHz/1pct/100ms result, or H01-H15 product acceptance",
+    "No board, Git, network, vendor, service, SQL, credential, or publication action"
+  ]
+}

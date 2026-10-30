@@ -1,0 +1,290 @@
+diff --git a/competition/deepeye/tools/diagnostic/retired_raw4_101/.gitattributes b/competition/deepeye/tools/diagnostic/retired_raw4_101/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/retired_raw4_101/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/retired_raw4_101/run101.py b/competition/deepeye/tools/diagnostic/retired_raw4_101/run101.py
+new file mode 100644
+index 0000000..8e2a8b9
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/retired_raw4_101/run101.py
+@@ -0,0 +1,277 @@
++"""Main-selected path-only recovery: unchanged B100 sources, one bounded Job."""
++from __future__ import annotations
++import argparse
++import datetime
++import hashlib
++import importlib.util
++import json
++import subprocess
++import sys
++import time
++import traceback
++from pathlib import Path
++
++sys.dont_write_bytecode = True
++R = Path('D:/pynq/CarlandFPGA')
++P = R / '.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74'
++LIVE = R / '.local/worktrees/deepeye-implementation-20261014'
++EVIDENCE = P / 'retired-worker101'
++OUT = R / '.local/v101/attempt-01'
++OLD = P / 'retired-worker100/attempt100-01'
++TOOLS = Path('D:/modelsim1/win64')
++SELF_REL = 'competition/deepeye/tools/diagnostic/retired_raw4_101/run101.py'
++CHECK_REL = 'competition/deepeye/tools/diagnostic/retired_raw4_100/check100.py'
++HELPER = 'competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py'
++JOB_HELPER = 'fpga_mesh/windows_job.py'
++HELPER_SHA = '1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692'
++JOB_HELPER_SHA = '3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3'
++REQUIREMENTS = 'c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804'
++JOB = 'child-e6fa97c7dd8948d08243b9f9e2069f56'
++AGENT = '/root/retired_raw4_100'
++WORK = 'B-DEEPEYE-RETIRED70-RAW4-SHORTPATH-20261031-101'
++LIMIT = 8 * 1024 * 1024
++
++def need(ok, message):
++    if not ok:
++        raise RuntimeError(message)
++
++def utc():
++    return datetime.datetime.now(datetime.timezone.utc).isoformat()
++
++def sha(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++def record(path):
++    path = Path(path)
++    raw = path.read_bytes()
++    return {'path': str(path), 'bytes': len(raw), 'sha256': sha(raw)}
++
++def write(path, value):
++    with Path(path).open('x', encoding='utf8', newline='\n') as stream:
++        json.dump(value, stream, ensure_ascii=False, sort_keys=True, indent=2)
++        stream.write('\n')
++
++def size():
++    return sum(p.stat().st_size for p in OUT.rglob('*') if p.is_file())
++
++def short_path(path):
++    need(len(str(Path(path).resolve())) < 240, 'vendor/runtime path is not short: ' + str(path))
++    return str(Path(path).resolve())
++
++def verify_row(path, expected):
++    row = record(path)
++    need(row['bytes'] == expected['bytes'] and row['sha256'] == expected['sha256'], 'pinned bytes changed: ' + str(path))
++    return row
++
++def source_state(decision):
++    rows = {}
++    for rel, expected in decision['source100_unchanged_readonly'].items():
++        rows[rel] = {
++            'reviewed100': verify_row(Path(expected['path']), expected),
++            'live': verify_row(LIVE / rel, expected),
++            'snapshot': verify_row(OUT / 'source' / rel, expected),
++        }
++    rows[SELF_REL] = {'live': record(LIVE / SELF_REL), 'snapshot': record(OUT / 'source' / SELF_REL)}
++    need(rows[SELF_REL]['live']['sha256'] == rows[SELF_REL]['snapshot']['sha256'], '101 runner differs from its snapshot')
++    return rows
++
++def data_state():
++    return {p.relative_to(OUT).as_posix(): record(p)
++            for base in ('fixture', 'inputs', 'reused100')
++            for p in sorted((OUT / base).rglob('*')) if p.is_file()}
++
++def prepare():
++    OUT.mkdir(parents=True, exist_ok=False)
++    decision = json.loads((P / 'RETIRED101_MAIN_RECOVERY_DECISION.json').read_bytes())
++    need(decision['work_id'] == WORK and decision['new_short_attempt'] == str(OUT), 'exact assigned work/output')
++    contract = json.loads((P / 'immutable_scope_pinned.json').read_bytes())
++    actual = sha(json.dumps(contract['requirements'], ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode())
++    need(actual == REQUIREMENTS, 'fixed H01-H15 requirements hash')
++    need(len(decision['source100_unchanged_readonly']) == 23, 'exact 23 reviewed100 sources')
++    for rel, expected in decision['source100_unchanged_readonly'].items():
++        old = Path(expected['path'])
++        verify_row(old, expected)
++        verify_row(LIVE / rel, expected)
++        dest = OUT / 'source' / rel
++        short_path(dest)
++        dest.parent.mkdir(parents=True, exist_ok=True)
++        dest.write_bytes(old.read_bytes())
++    new_runner = OUT / 'source' / SELF_REL
++    new_runner.parent.mkdir(parents=True, exist_ok=True)
++    short_path(new_runner)
++    new_runner.write_bytes((LIVE / SELF_REL).read_bytes())
++    (OUT / 'fixture').mkdir()
++    need({p.relative_to(OLD).as_posix() for p in (OLD / 'fixture').iterdir()} ==
++         {Path(k).as_posix() for k in decision['reuse_fixture']}, 'exact reused fixture file set')
++    for rel, expected in decision['reuse_fixture'].items():
++        src = OLD / rel
++        verify_row(src, expected)
++        (OUT / rel).write_bytes(src.read_bytes())
++    (OUT / 'inputs').mkdir()
++    for p in (OLD / 'inputs').iterdir():
++        need(p.is_file(), 'original input evidence must be regular files')
++        (OUT / 'inputs' / p.name).write_bytes(p.read_bytes())
++    for name in ('RETIRED100_MAIN_REVIEW.json', 'RETIRED101_MAIN_RECOVERY_DECISION.json'):
++        (OUT / 'inputs' / name).write_bytes((P / name).read_bytes())
++    (OUT / 'reused100').mkdir()
++    references = {}
++    prefixes = ('00-python-version', '01-build-input', '02-default-input', '03-')
++    for p in sorted((OLD / 'commands').iterdir()):
++        if p.name.startswith(prefixes):
++            (OUT / 'reused100' / p.name).write_bytes(p.read_bytes())
++            references[p.name] = record(p)
++            if p.suffix == '.json' and not p.name.endswith('.STARTED.json'):
++                need(json.loads(p.read_bytes())['exit_code'] == 0, 'reused100 stage did not exit0')
++    for name in ('SOURCE_BEFORE.json', 'SOURCE_AFTER.json', 'INPUT_BEFORE.json', 'INPUT_AFTER.json', 'TOOL_BINARIES.json', 'RESULT.json'):
++        dest = OUT / 'reused100' / name
++        dest.write_bytes((OLD / name).read_bytes())
++        references[name] = record(OLD / name)
++    write(OUT / 'REUSED100_RECEIPTS.json', {'no_checks_reexecuted': True, 'references': references})
++    # Derive only the source list from the actual failed100 command receipt.
++    old_command = json.loads((OLD / 'commands/06-vlog.json').read_bytes())
++    need(old_command['argv'][:4] == [str(TOOLS / 'vlog.exe'), '-sv', '-work', 'work'], 'original compile command prefix')
++    rels = [Path(s).relative_to(OLD / 'source').as_posix() for s in old_command['argv'][4:]]
++    need(len(rels) == 13 and all(s in decision['source100_unchanged_readonly'] for s in rels), 'exact compile source membership')
++    write(OUT / 'COMPILE_PLAN.json', {'relative_sources': rels, 'source100_command': record(OLD / 'commands/06-vlog.json')})
++    tools = json.loads((OLD / 'TOOL_BINARIES.json').read_bytes())
++    for name, expected in tools.items():
++        verify_row(TOOLS / (name + '.exe'), expected)
++        short_path(TOOLS / (name + '.exe'))
++    write(OUT / 'TOOL_BINARIES.json', tools)
++    write(OUT / 'SOURCE_BEFORE.json', source_state(decision))
++    write(OUT / 'INPUT_BEFORE.json', data_state())
++    return decision
++
++def command(name, argv, cwd):
++    commands = OUT / 'commands'
++    argv = [str(v) for v in argv]
++    start = time.monotonic()
++    row = {'argv': argv, 'cwd': short_path(cwd), 'started': utc(), 'timeout_seconds': 25, 'expected_exit': 0}
++    stdout_path = commands / (name + '.stdout.bin')
++    stderr_path = commands / (name + '.stderr.bin')
++    with stdout_path.open('xb') as stdout, stderr_path.open('xb') as stderr:
++        process = subprocess.Popen(argv, cwd=cwd, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr,
++                                   shell=False, creationflags=subprocess.CREATE_NO_WINDOW)
++        row['pid'] = process.pid
++        write(commands / (name + '.STARTED.json'), row)
++        row['timed_out'] = False
++        row['output_limit_exceeded'] = False
++        while process.poll() is None:
++            if time.monotonic() - start >= 25:
++                row['timed_out'] = True
++                process.kill()
++            if size() > LIMIT - 131072:
++                row['output_limit_exceeded'] = True
++                process.kill()
++            time.sleep(.02)
++        row['exit_code'] = process.returncode
++    row.update(elapsed_seconds=time.monotonic()-start, ended=utc(), stdout=record(stdout_path), stderr=record(stderr_path))
++    write(commands / (name + '.json'), row)
++    need(not row['timed_out'] and not row['output_limit_exceeded'] and row['exit_code'] == 0, 'failed command ' + name)
++    return row
++
++def inner():
++    write(OUT / 'ATTEMPT_STARTED.json', {'job_id': JOB, 'agent_id': AGENT, 'work_id': WORK, 'utc': utc(), 'single_actual_attempt': True})
++    (OUT / 'commands').mkdir()
++    sim = OUT / 'sim'
++    sim.mkdir()
++    decision = json.loads((OUT / 'inputs/RETIRED101_MAIN_RECOVERY_DECISION.json').read_bytes())
++    for rel, expected in decision['source100_unchanged_readonly'].items():
++        verify_row(OUT / 'source' / rel, expected)
++    need(data_state() == json.loads((OUT / 'INPUT_BEFORE.json').read_bytes()), 'input snapshot changed before execution')
++    rels = json.loads((OUT / 'COMPILE_PLAN.json').read_bytes())['relative_sources']
++    command('01-vmap', [short_path(TOOLS / 'vmap.exe'), '-c'], sim)
++    command('02-vlib', [short_path(TOOLS / 'vlib.exe'), 'work'], sim)
++    command('03-vlog', [short_path(TOOLS / 'vlog.exe'), '-sv', '-work', 'work',
++                        *[short_path(OUT / 'source' / r) for r in rels]], sim)
++    log = (OUT / 'commands/03-vlog.stdout.bin').read_text(errors='replace')
++    need('Errors: 0' in log and '** Error:' not in log, 'compile log errors')
++    dest = OUT / 'mode0'
++    dest.mkdir()
++    dofile = OUT / 'run.do'
++    dofile.write_text('onerror {quit -code 3 -force}\nonbreak {\nif {[examine -radix decimal /tb_RETIRED_RAW4_100/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n}\nrun -all\nif {[examine -radix decimal /tb_RETIRED_RAW4_100/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n', encoding='ascii')
++    for path in (dest, dofile, OUT / 'fixture/records.hex', dest / 'wave.wlf', dest / 'modelsim.log'):
++        short_path(path)
++    command('04-vsim', [short_path(TOOLS / 'vsim.exe'), '-c', '-voptargs=+acc', '-onfinish', 'stop',
++                        '-wlf', dest / 'wave.wlf', '-l', dest / 'modelsim.log', 'work.tb_RETIRED_RAW4_100',
++                        '+OUT=' + dest.as_posix(), '+MEM=' + (OUT / 'fixture/records.hex').as_posix(),
++                        '-do', 'do ' + dofile.as_posix()], sim)
++    log = (dest / 'modelsim.log').read_text(errors='replace')
++    need('B100_SYNTHETIC_DONE mode=0' in log and 'Errors: 0' in log and '** Fatal:' not in log and '** Error:' not in log, 'exact simulation completion')
++    command('05-check100', [short_path(sys.executable), '-B', short_path(OUT / 'source' / CHECK_REL), '--out', short_path(OUT)], sim)
++    semantic = json.loads((OUT / 'SEMANTIC_RESULT.json').read_bytes())
++    write(OUT / 'INNER_RESULT.json', {'status': 'COMPLETED_CHECKS_MAIN_REVIEW_PENDING', 'utc': utc(), 'semantic': semantic})
++    return 0
++
++def terminal(job):
++    return all(job.get(k) is True for k in ('job_attached_before_resume', 'launcher_exit_confirmed',
++        'job_empty_observed_before_close', 'job_terminal_confirmed', 'job_closed')) and not any(job.get(k) for k in
++        ('timed_out', 'process_error', 'job_query_failed', 'job_termination_failed', 'job_close_error'))
++
++def outer():
++    decision = prepare()
++    helper = OUT / 'source' / HELPER
++    job_helper = OUT / 'source' / JOB_HELPER
++    need(sha(helper.read_bytes()) == HELPER_SHA and sha(job_helper.read_bytes()) == JOB_HELPER_SHA, 'pinned whole Job helpers')
++    spec = importlib.util.spec_from_file_location('b101_owned', helper)
++    owned = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(owned)
++    job_dir = OUT / 'owned_job'
++    job_dir.mkdir()
++    job = owned.run_owned([short_path(sys.executable), '-B', short_path(OUT / 'source' / SELF_REL), '--inner'],
++                          job_dir, 120, job_helper, job_drain_seconds=5, job_terminate_seconds=5)
++    write(OUT / 'JOB_RESULT.json', job)
++    after = source_state(decision)
++    write(OUT / 'SOURCE_AFTER.json', after)
++    inputs_after = data_state()
++    write(OUT / 'INPUT_AFTER.json', inputs_after)
++    stable = after == json.loads((OUT / 'SOURCE_BEFORE.json').read_bytes())
++    input_stable = inputs_after == json.loads((OUT / 'INPUT_BEFORE.json').read_bytes())
++    semantic_path = OUT / 'SEMANTIC_RESULT.json'
++    semantic = json.loads(semantic_path.read_bytes()) if semantic_path.exists() else None
++    ok = job.get('exit_code') == 0 and terminal(job) and stable and input_stable and (OUT / 'INNER_RESULT.json').exists()
++    commands = [json.loads(p.read_bytes()) for p in sorted((OUT / 'commands').glob('*.json')) if not p.name.endswith('.STARTED.json')]
++    result = {'status': 'COMPLETED_RUNTIME_MAIN_REVIEW_PENDING' if ok else 'FAILED_PRESERVED_NO_RETRY',
++        'job_id': JOB, 'agent_id': AGENT, 'task_id': 'DEEPEYE-IMPLEMENTATION-20261014', 'task_version': 1, 'work_id': WORK,
++        'requirements_ids': ['H%02d' % i for i in range(1,16)], 'requirements_sha256': REQUIREMENTS,
++        'freeze': decision['freeze'], 'same_reviewed100_source_count': 23, 'new_runner_source_count': 1,
++        'selected100_source_commit': 'b87784512e683c598f220b8d452bb68f100a3dcb',
++        'commit_note': 'Main source-only freeze matches six selected100 snapshot files; prior100 remained failed. This101 attempt records exact sources separately.',
++        'sources_unchanged': stable, 'inputs_unchanged': input_stable, 'source_before': record(OUT / 'SOURCE_BEFORE.json'),
++        'source_after': record(OUT / 'SOURCE_AFTER.json'), 'reused100_checks': record(OUT / 'REUSED100_RECEIPTS.json'),
++        'job': job, 'job_terminal_empty_closed': terminal(job), 'commands': commands, 'semantic': semantic,
++        'actual_wire_bytes': semantic['actual_wire_bytes'] if semantic else None,
++        'decoded_counts': semantic['counts'] if semantic else None,
++        'full_serialized_cost': semantic['cost'] if semantic else None,
++        'scope': 'retired numerical input through RTL simulation, no board or authority', 'acceptance': False,
++        'unmet_gates': {'actual_Root': 'UNAVAILABLE', 'original_EM_receipt': 'UNAVAILABLE', 'BOOT': 'UNAVAILABLE',
++            'admission': 'UNAVAILABLE', 'physical_ADC': 'NOT_RUN', 'board': 'NOT_RUN A_ONLY', 'synthesis': 'NOT_RUN',
++            'implementation': 'NOT_RUN', 'current_source_eligible': False, 'command': None, 'core_ran': False,
++            'status': 'STOP', 'full_H12': 'NOT_ACCEPTED', 'final_1percent_100ms': 'NOT_ACCEPTED',
++            'original_100MHz': 'NOT_ACCEPTED', 'all29': 'NOT_ACCEPTED', 'H01_H15_product_acceptance': 'NOT_ACCEPTED'}, 'utc': utc()}
++    result['evidence'] = {p.relative_to(OUT).as_posix(): record(p) for p in sorted(OUT.rglob('*')) if p.is_file()}
++    result['output_bytes_before_result'] = size()
++    write(OUT / 'RESULT.json', result)
++    need(size() <= LIMIT, 'total attempt output exceeds 8MiB')
++    (EVIDENCE / 'RESULT.json').write_bytes((OUT / 'RESULT.json').read_bytes())
++    print(json.dumps({'status': result['status'], 'result': record(EVIDENCE / 'RESULT.json'),
++                      'short_attempt': str(OUT), 'job_terminal_empty_closed': terminal(job), 'output_bytes': size()}))
++    return 0 if ok else 1
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--inner', action='store_true')
++    args = parser.parse_args()
++    try:
++        return inner() if args.inner else outer()
++    except Exception:
++        error = traceback.format_exc()
++        print(error, file=sys.stderr)
++        if OUT.exists():
++            name = 'INNER_FAILURE.json' if args.inner else 'OUTER_FAILURE.json'
++            if not (OUT / name).exists():
++                write(OUT / name, {'error': error, 'utc': utc(), 'no_retry': True})
++        return 1
++
++if __name__ == '__main__':
++    raise SystemExit(main())

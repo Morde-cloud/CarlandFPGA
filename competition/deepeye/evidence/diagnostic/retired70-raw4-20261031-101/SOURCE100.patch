@@ -1,0 +1,884 @@
+diff --git a/competition/deepeye/fpga/diagnostic/retired_raw4_100/.gitattributes b/competition/deepeye/fpga/diagnostic/retired_raw4_100/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/retired_raw4_100/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/retired_raw4_100/tb_RETIRED_RAW4_100.sv b/competition/deepeye/fpga/diagnostic/retired_raw4_100/tb_RETIRED_RAW4_100.sv
+new file mode 100644
+index 0000000..c32f4cd
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/retired_raw4_100/tb_RETIRED_RAW4_100.sv
+@@ -0,0 +1,355 @@
++`timescale 1ns/1ps
++module tb_RETIRED_RAW4_100;
++logic  fclk50_candidate;
++logic  peripheral_aresetn_candidate;
++logic  sample_strobe;
++logic [1:0] sample_channel;
++logic [15:0] sample_data;
++logic [63:0] sample_tick;
++logic [7:0] sample_quality;
++logic  source_cancel;
++logic  capture_stop;
++logic  capture_rearm;
++logic [31:0] capture_rearm_tag;
++logic  queue_cancel;
++logic  lane_cancel;
++logic  assoc_valid;
++logic  assoc_ready;
++logic [31:0] assoc_tag;
++logic [31:0] assoc_first_seq;
++logic [31:0] assoc_last_seq;
++logic [1:0] assoc_channel;
++logic [31:0] assoc_session;
++logic [31:0] assoc_first_index;
++logic [7:0] assoc_count;
++logic [3:0] assoc_e;
++logic [15:0] assoc_index_stride;
++logic [15:0] assoc_tick_stride_us;
++logic [63:0] assoc_first_qpc_ns;
++logic [63:0] assoc_first_tick_us;
++logic [9:0] assoc_first_remainder_ns;
++logic [63:0] assoc_tick_stride_ns;
++logic [62:0] assoc_origin_qpc_ns;
++logic [63:0] assoc_origin_tick_us;
++logic [9:0] assoc_origin_remainder_ns;
++logic  assoc_semantics_valid;
++logic  assoc_valid_sample;
++logic  assoc_saturated;
++logic  assoc_held;
++logic  assoc_source_fault;
++logic [63:0] assoc_source_qpc_ns;
++logic [63:0] assoc_source_tick_us;
++logic [9:0] assoc_source_remainder_ns;
++logic [7:0] assoc_epoch;
++logic [15:0] assoc_seq;
++logic  trace_lane_ready;
++logic  trace_uart_tx;
++logic  trace_transaction_aborted;
++logic  trace_result_valid;
++logic [2:0] trace_result_error;
++logic [5:0] trace_result_bytes;
++logic [3:0] trace_refusal_code;
++logic  trace_wire_faulted;
++logic  trace_transport_profile_unset;
++logic  data_path_quiescent;
++logic  capture_fault_event;
++logic  capture_sequence_exhausted;
++logic [31:0] capture_discarded_samples;
++logic  fixture_profile_enabled;
++logic  fixture_transport_enabled;
++logic  fixture_result_ready;
++
++deepeye_SYNTHETIC_codec74_fixture dut(
++.fclk50_candidate(fclk50_candidate),
++.peripheral_aresetn_candidate(peripheral_aresetn_candidate),
++.sample_strobe(sample_strobe),
++.sample_channel(sample_channel),
++.sample_data(sample_data),
++.sample_tick(sample_tick),
++.sample_quality(sample_quality),
++.source_cancel(source_cancel),
++.capture_stop(capture_stop),
++.capture_rearm(capture_rearm),
++.capture_rearm_tag(capture_rearm_tag),
++.queue_cancel(queue_cancel),
++.lane_cancel(lane_cancel),
++.assoc_valid(assoc_valid),
++.assoc_ready(assoc_ready),
++.assoc_tag(assoc_tag),
++.assoc_first_seq(assoc_first_seq),
++.assoc_last_seq(assoc_last_seq),
++.assoc_channel(assoc_channel),
++.assoc_session(assoc_session),
++.assoc_first_index(assoc_first_index),
++.assoc_count(assoc_count),
++.assoc_e(assoc_e),
++.assoc_index_stride(assoc_index_stride),
++.assoc_tick_stride_us(assoc_tick_stride_us),
++.assoc_first_qpc_ns(assoc_first_qpc_ns),
++.assoc_first_tick_us(assoc_first_tick_us),
++.assoc_first_remainder_ns(assoc_first_remainder_ns),
++.assoc_tick_stride_ns(assoc_tick_stride_ns),
++.assoc_origin_qpc_ns(assoc_origin_qpc_ns),
++.assoc_origin_tick_us(assoc_origin_tick_us),
++.assoc_origin_remainder_ns(assoc_origin_remainder_ns),
++.assoc_semantics_valid(assoc_semantics_valid),
++.assoc_valid_sample(assoc_valid_sample),
++.assoc_saturated(assoc_saturated),
++.assoc_held(assoc_held),
++.assoc_source_fault(assoc_source_fault),
++.assoc_source_qpc_ns(assoc_source_qpc_ns),
++.assoc_source_tick_us(assoc_source_tick_us),
++.assoc_source_remainder_ns(assoc_source_remainder_ns),
++.assoc_epoch(assoc_epoch),
++.assoc_seq(assoc_seq),
++.trace_lane_ready(trace_lane_ready),
++.trace_uart_tx(trace_uart_tx),
++.trace_transaction_aborted(trace_transaction_aborted),
++.trace_result_valid(trace_result_valid),
++.trace_result_error(trace_result_error),
++.trace_result_bytes(trace_result_bytes),
++.trace_refusal_code(trace_refusal_code),
++.trace_wire_faulted(trace_wire_faulted),
++.trace_transport_profile_unset(trace_transport_profile_unset),
++.data_path_quiescent(data_path_quiescent),
++.capture_fault_event(capture_fault_event),
++.capture_sequence_exhausted(capture_sequence_exhausted),
++.capture_discarded_samples(capture_discarded_samples),
++.fixture_profile_enabled(fixture_profile_enabled),
++.fixture_transport_enabled(fixture_transport_enabled),
++.fixture_result_ready(fixture_result_ready)
++);
++
++always #10 fclk50_candidate=~fclk50_candidate;
++localparam logic [62:0] ORIGIN = 63'd27001348289300;
++localparam logic [63:0] ORIGIN64 = {1'b0, ORIGIN};
++localparam [31:0] TAG = 32'h00000097;
++localparam [31:0] SESSION = 32'h97345678;
++localparam integer MAX_CYCLES = 600000;
++
++integer cycles=0, uart_n=0, serial_n=0, frame_n=0, aborts=0, mode=0;
++integer r, ch;
++integer uart_base, serial_base, uart_at_cancel, serial_at_cancel;
++integer serializer_stalls=0;
++logic serializer_held=0;
++logic [7:0] serializer_held_data;
++integer uart_fd, serial_fd, events_fd;
++string outdir, memfile;
++logic [15:0] input_words [0:139];
++logic [7:0] observed;
++integer completed=0;
++
++function automatic integer em_tick(input integer r);
++    em_tick = input_words[r*7+4];
++endfunction
++function automatic logic held(input integer r);
++    held = em_tick(r) < r * 10;
++endfunction
++function automatic logic c3_valid(input integer r);
++    c3_valid = input_words[r*7+5][3];
++endfunction
++function automatic logic [15:0] em_count(input integer ch, input integer r);
++    em_count = input_words[r*7+ch];
++endfunction
++function automatic logic [7:0] lane_quality(input integer ch, input integer r);
++    if (ch < 3) lane_quality = held(r) ? 8'h05 : 8'h01;
++    else lane_quality = c3_valid(r) ? 8'h01 : 8'h00;
++endfunction
++function automatic logic [12:0] global_quality(input integer r);
++    global_quality = input_words[r*7+5];
++endfunction
++
++always @(posedge fclk50_candidate) begin
++    cycles = cycles + 1;
++    if (cycles > MAX_CYCLES) $fatal(1, "B100 bounded cycle deadline mode=%0d state=%0d pending=%0d", mode, dut.trace_i.state_q, dut.sample_pending_q);
++    if (dut.trace_i.serializer_out_valid && dut.trace_i.serializer_out_ready) begin
++        $fdisplay(serial_fd, "%02x", dut.trace_i.serializer_out_data);
++        serial_n = serial_n + 1;
++        if (dut.trace_i.serializer_out_last) begin
++            frame_n = frame_n + 1;
++            $fdisplay(events_fd, "FRAME %0d %0d", frame_n, serial_n);
++        end
++    end
++    if (trace_transaction_aborted) aborts = aborts + 1;
++    if (!source_cancel && !dut.trace_rst) begin
++        if (serializer_held && dut.trace_i.serializer_out_valid &&
++            dut.trace_i.serializer_out_data !== serializer_held_data)
++            $fatal(1, "B100 serializer changed byte under backpressure");
++        serializer_held = dut.trace_i.serializer_out_valid && !dut.trace_i.serializer_out_ready;
++        serializer_held_data = dut.trace_i.serializer_out_data;
++        if (serializer_held) serializer_stalls = serializer_stalls + 1;
++    end else begin
++        serializer_held = 0;
++    end
++end
++
++initial forever begin
++    @(negedge trace_uart_tx);
++    repeat (15) @(posedge fclk50_candidate);
++    #1;
++    for (integer bitno = 0; bitno < 8; bitno = bitno + 1) begin
++        observed[bitno] = trace_uart_tx;
++        repeat (10) @(posedge fclk50_candidate);
++        #1;
++    end
++    if (!source_cancel) begin
++        if (trace_uart_tx !== 1'b1) $fatal(1, "B100 UART missing stop bit");
++        $fdisplay(uart_fd, "%02x", observed);
++        uart_n = uart_n + 1;
++    end
++end
++
++task automatic clocks(input integer n);
++    repeat (n) @(negedge fclk50_candidate);
++endtask
++task automatic rearm;
++    capture_rearm = 1; clocks(1); capture_rearm = 0; clocks(2);
++endtask
++task automatic scan_record(input integer r);
++    integer ch;
++    for (ch = 0; ch < 4; ch = ch + 1) begin
++        sample_channel = ch;
++        sample_data = (ch < 3) ? em_count(ch, r) : 16'd0;
++        sample_tick = ORIGIN64 + r * 64'd10000000;
++        sample_quality = lane_quality(ch, r);
++        sample_strobe = 1; clocks(1); sample_strobe = 0; clocks(1);
++    end
++    clocks(10);
++endtask
++task automatic association(input integer r, input integer ch);
++    assoc_tag = TAG;
++    assoc_first_seq = r * 4;
++    assoc_last_seq = r * 4 + 3;
++    assoc_channel = ch;
++    assoc_session = SESSION;
++    assoc_first_index = r;
++    assoc_count = 1;
++    assoc_e = 0;
++    assoc_index_stride = 0;
++    assoc_tick_stride_us = 0;
++    assoc_tick_stride_ns = 0;
++    assoc_first_qpc_ns = ORIGIN64 + r * 64'd10000000;
++    assoc_first_tick_us = r * 64'd10000;
++    assoc_first_remainder_ns = 0;
++    assoc_origin_qpc_ns = ORIGIN;
++    assoc_origin_tick_us = 0;
++    assoc_origin_remainder_ns = 0;
++    assoc_semantics_valid = 1;
++    assoc_valid_sample = (ch < 3) || c3_valid(r);
++    assoc_saturated = 0;
++    assoc_held = (ch < 3) ? held(r) : 1'b0;
++    assoc_source_fault = 1'b0;
++    if (assoc_valid_sample) begin
++        if (ch < 3 && held(r)) begin
++            assoc_source_qpc_ns = ORIGIN64 + em_tick(r) * 64'd1000000;
++            assoc_source_tick_us = em_tick(r) * 64'd1000;
++        end else begin
++            assoc_source_qpc_ns = assoc_first_qpc_ns;
++            assoc_source_tick_us = assoc_first_tick_us;
++        end
++        assoc_source_remainder_ns = 0;
++    end else begin
++        assoc_source_qpc_ns = 0;
++        assoc_source_tick_us = 0;
++        assoc_source_remainder_ns = 0;
++    end
++    assoc_epoch = 9;
++    assoc_seq = r * 4 + ch;
++    assoc_valid = 1;
++endtask
++task automatic accept_assoc;
++    do @(posedge fclk50_candidate); while (!assoc_ready);
++    @(negedge fclk50_candidate);
++    assoc_valid = 0;
++endtask
++task automatic wait_result;
++    while (!trace_result_valid) clocks(1);
++endtask
++task automatic result_ok(input integer expected_error);
++    wait_result;
++    if (trace_result_error !== expected_error)
++        $fatal(1, "B100 unexpected result error %0d", trace_result_error);
++    $fdisplay(events_fd, "RESULT %0d %0d %0d", assoc_channel, trace_result_error, trace_result_bytes);
++    clocks(1);
++endtask
++task automatic normal_frame(input integer r, input integer ch);
++    integer held_bytes;
++    association(r, ch);
++    if (r == 1 && ch == 0) begin
++        uart_base = uart_n;
++        assoc_tag = 18; clocks(10);
++        if (assoc_ready || trace_lane_ready || uart_n != uart_base)
++            $fatal(1, "B100 wrong identity consumed lane");
++        if (dut.lane_data !== em_count(ch,r) || dut.lane_quality !== 8'h05)
++            $fatal(1, "B100 wrong identity changed lane");
++        $fdisplay(events_fd, "WRONG_IDENTITY_REFUSED %0d %0d", r, ch);
++        assoc_tag = TAG;
++    end
++    fixture_result_ready = 0;
++    accept_assoc();
++    wait_result();
++    if (trace_result_error !== 0) $fatal(1, "B100 normal frame refused");
++    if (r == 0 && ch == 3) begin
++        held_bytes = trace_result_bytes;
++        clocks(10);
++        if (!trace_result_valid || trace_result_bytes != held_bytes || assoc_ready)
++            $fatal(1, "B100 result backpressure lost");
++        $fdisplay(events_fd, "RESULT_BACKPRESSURE %0d %0d %0d", r, ch, held_bytes);
++    end
++    fixture_result_ready = 1;
++    result_ok(0);
++    clocks(5);
++endtask
++
++initial begin
++    fclk50_candidate = 0;
++    peripheral_aresetn_candidate = 0;
++    sample_strobe = 0; sample_channel = 0; sample_data = 0; sample_tick = 0; sample_quality = 0;
++    source_cancel = 0; capture_stop = 0; capture_rearm = 0; capture_rearm_tag = 0;
++    queue_cancel = 0; lane_cancel = 0;
++    assoc_valid = 0; assoc_tag = 0; assoc_first_seq = 0; assoc_last_seq = 0;
++    assoc_channel = 0; assoc_session = 0; assoc_first_index = 0; assoc_count = 0;
++    assoc_e = 0; assoc_index_stride = 0; assoc_tick_stride_us = 0;
++    assoc_first_qpc_ns = 0; assoc_first_tick_us = 0; assoc_first_remainder_ns = 0;
++    assoc_tick_stride_ns = 0; assoc_origin_qpc_ns = 0; assoc_origin_tick_us = 0;
++    assoc_origin_remainder_ns = 0; assoc_semantics_valid = 0;
++    assoc_valid_sample = 0; assoc_saturated = 0; assoc_held = 0; assoc_source_fault = 0;
++    assoc_source_qpc_ns = 0; assoc_source_tick_us = 0; assoc_source_remainder_ns = 0;
++    assoc_epoch = 0; assoc_seq = 0;
++    fixture_profile_enabled = 0; fixture_transport_enabled = 0; fixture_result_ready = 0;
++    if (!$value$plusargs("OUT=%s", outdir)) $fatal(1, "OUT required");
++    if (!$value$plusargs("MEM=%s", memfile)) $fatal(1, "MEM required");
++    $readmemh(memfile, input_words);
++    uart_fd = $fopen({outdir, "/uart.hex"}, "w");
++    serial_fd = $fopen({outdir, "/serializer.hex"}, "w");
++    events_fd = $fopen({outdir, "/events.txt"}, "w");
++    if (!uart_fd || !serial_fd || !events_fd) $fatal(1, "B100 file open");
++    fixture_profile_enabled = 1; fixture_transport_enabled = 1; fixture_result_ready = 1;
++    capture_rearm_tag = TAG;
++    clocks(5); peripheral_aresetn_candidate = 1; clocks(5); rearm();
++
++    if (mode == 0) begin
++        for (r = 0; r < 20; r = r + 1) begin
++            scan_record(r);
++            for (ch = 0; ch < 4; ch = ch + 1) begin
++                normal_frame(r, ch);
++                if (ch == 3 && !c3_valid(r))
++                    $fdisplay(events_fd, "NULL_FRAME %0d %0d", r, ch);
++                else if (ch == 3 && c3_valid(r))
++                    $fdisplay(events_fd, "ZERO_FRAME %0d %0d", r, ch);
++                else if (held(r))
++                    $fdisplay(events_fd, "HELD_FRAME %0d %0d", r, ch);
++            end
++        end
++        clocks(100);
++        if (frame_n != 80) $fatal(1, "B100 mode0 frame count %0d", frame_n);
++        if (uart_n != serial_n) $fatal(1, "B100 UART/serializer mismatch %0d %0d", uart_n, serial_n);
++    end
++
++    $fdisplay(events_fd, "DONE %0d %0d %0d %0d", cycles, uart_n, serial_n, frame_n);
++    $fclose(uart_fd); $fclose(serial_fd); $fclose(events_fd);
++    $display("B100_SYNTHETIC_DONE mode=%0d cycles=%0d uart=%0d serial=%0d frames=%0d", mode, cycles, uart_n, serial_n, frame_n);
++    completed = 1;
++    $finish;
++end
++endmodule
+diff --git a/competition/deepeye/golden/diagnostic/retired_raw4_100/.gitattributes b/competition/deepeye/golden/diagnostic/retired_raw4_100/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/retired_raw4_100/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/golden/diagnostic/retired_raw4_100/README.md b/competition/deepeye/golden/diagnostic/retired_raw4_100/README.md
+new file mode 100644
+index 0000000..ac9de1f
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/retired_raw4_100/README.md
+@@ -0,0 +1 @@
++B100 retired historical transport fixture. H01-H15 fixed c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804. One new 80-frame run. No product acceptance, board or action authority. Namespace97 is intentional fixture identity, not work identity.
+diff --git a/competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py b/competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py
+index 575ede3..409143c 100644
+--- a/competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py
++++ b/competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py
+@@ -230,14 +230,59 @@ def _validate_record_quality(record, position):
+     }
+ 
+ 
++
++RETIRED_KIND = "RETIRED_A70_TRANSPORT_FIXTURE"
++RETIRED_COMMIT = "d0185d335747acb26439f40a8ce945f7f4eaa9af"
++RETIRED_TREE = "d2e6533d93efcc09e8dd1341e6cc5d741fe965a5"
++RETIRED_SHA = "63616e2915edc5a2ef6ed592e8f9830ce77a635aaf883ab964aa4dbd5fd1910c"
++RETIRED_ORIGIN = 27001348289300
++RETIRED_SESSION = 0x97345678
++RETIRED_VIEW = 9
++RETIRED_TAG = 0x97
++RETIRED_RECEIPT_SHA = '2386711ede83b59f9e384bd57f5d0ad80e26e3ab53745691f1995e91d57912c0'
++RETIRED_RECORDS_SHA = '5db4288646077ed124a1cb6e7919c2dc8ac72d486e1e0fd7dcd863066d54811a'
++RETIRED_RECEIPT_KEYS = {'record_completion_qpc_ns', 'original_operation_id', 'source_runtime_commit', 'retired', 'tree', 'git_oid', 'origin_qpc_ns', 'schema', 'missing_evidence', 'book_records', 'native_interval_atomic', 'sha256', 'bytes', 'commit'}
++
++def fixture_parameters(projection):
++    if projection["fixture_kind"] == RETIRED_KIND:
++        return RETIRED_SESSION, RETIRED_VIEW, RETIRED_TAG, 97
++    return SESSION, VIEW, TAG, 92
++
++def _validate_retired(projection):
++    receipt = _exact(projection["retired_source_receipt"], RETIRED_RECEIPT_KEYS, "retired receipt keys")
++    _need(projection["origin_qpc_ns"] == RETIRED_ORIGIN, "original retired origin")
++    _need(len(projection["records"]) == 20, "exact retired 20 records")
++    _need(digest(projection["records"]) == RETIRED_RECORDS_SHA, "original retired counts/time/quality/hash contradiction")
++    _need(digest(receipt) == RETIRED_RECEIPT_SHA, "original retired receipt contradiction")
++    previous = 0
++    for i, end in enumerate(receipt["record_completion_qpc_ns"]):
++        _uint(end, U63, "retired completion uint63")
++        _need(end >= RETIRED_ORIGIN + i * 10 * NS_PER_MS and end >= previous,
++              "retired completion ordering")
++        previous = end
++    for key in ("operation_id", "session_id", "transport_receipt_id"):
++        _need(projection["fixture_transport_identity"][key].startswith("FIXTURE-RETIRED97-"),
++              "explicit retired fixture namespace")
++
++def transport_input(projection=None, *, fixture_mode=None, build_manifest_sha256=None):
++    """Default closed; only explicit offline fixture modes may derive a model."""
++    if projection is None or fixture_mode is None:
++        return {"status": "STOP", "input_status": "INPUT_UNAVAILABLE", "command": None,
++                "core_ran": False, "current_source_eligible": False}
++    _need(fixture_mode in (FIXTURE_KIND, RETIRED_KIND), "explicit fixture mode")
++    _need(projection.get("fixture_kind") == fixture_mode, "fixture mode mismatch")
++    return derive_model(projection, build_manifest_sha256=build_manifest_sha256)
++
+ def validate_projection(projection):
+     _plain(projection)
+-    _exact(projection, PROJECTION_KEYS, "projection keys")
++    _need(type(projection) is dict, "projection keys")
++    retired = projection.get("fixture_kind") == RETIRED_KIND
++    _exact(projection, PROJECTION_KEYS | ({"retired_source_receipt"} if retired else set()), "projection keys")
+     _need(projection["schema"] == SCHEMA, "projection schema")
+-    _need(projection["fixture_kind"] == FIXTURE_KIND, "fixture kind must be the modelled public-contract label")
+-    _need(projection["pinned_commit"] == PINNED_COMMIT, "pinned source commit")
+-    _need(projection["pinned_tree"] == PINNED_TREE, "pinned source tree")
+-    _need(projection["pinned_blob_count"] == PINNED_BLOB_COUNT and
++    _need(projection["fixture_kind"] in (FIXTURE_KIND, RETIRED_KIND), "explicit fixture kind")
++    _need(projection["pinned_commit"] == (RETIRED_COMMIT if retired else PINNED_COMMIT), "pinned source commit")
++    _need(projection["pinned_tree"] == (RETIRED_TREE if retired else PINNED_TREE), "pinned source tree")
++    _need(projection["pinned_blob_count"] == (2 if retired else PINNED_BLOB_COUNT) and
+           type(projection["pinned_blob_count"]) is int, "pinned blob count")
+     _need(projection["time_basis"] == TIME_BASIS, "nominal time basis")
+     origin = _uint(projection["origin_qpc_ns"], U63, "original uint63 origin")
+@@ -248,8 +293,8 @@ def validate_projection(projection):
+     identity = _exact(projection["fixture_transport_identity"], IDENTITY_KEYS,
+                       "fixture transport identity keys")
+     _need(identity["kind"] == "B92_FIXTURE_TRANSPORT_IDENTITY_V1", "fixture identity kind")
+-    _need(identity["label"] == FIXTURE_KIND, "fixture identity label")
+-    _need(identity["kernel_boot_id"] == "MODELLED_SHAPES_FROM_PINNED_PUBLIC_CONTRACTS",
++    _need(identity["label"] == projection["fixture_kind"], "fixture identity label")
++    _need(identity["kernel_boot_id"] == projection["fixture_kind"],
+           "fixture kernel label")
+     _need(identity["clock_domain_id"] == "A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE",
+           "fixture clock-domain label")
+@@ -264,6 +309,8 @@ def validate_projection(projection):
+           "source note must not claim A Root")
+     records = projection["records"]
+     _need(type(records) is list and 1 <= len(records) <= MAX_RECORDS, "record count 1..20")
++    if retired:
++        _validate_retired(projection)
+     previous_em = None
+     previous_em_valid = False
+     previous_counts = None
+@@ -325,21 +372,31 @@ def validate_projection(projection):
+ 
+ def _derive_identity(projection, lanes, build_manifest_sha256):
+     _sha(build_manifest_sha256, 64, "build/source manifest hash")
++    session, view, tag, trigger = fixture_parameters(projection)
++    fixture_identity = projection["fixture_transport_identity"]
++    if projection["fixture_kind"] == FIXTURE_KIND:
++        # Preserve the original modelled mode's identity normalization exactly.
++        fixture_identity = {
++            "operation_id": "FIXTURE-RAW4-92-NOT-A-ROOT",
++            "kernel_boot_id": FIXTURE_KIND,
++            "session_id": "FIXTURE-SESSION-92",
++            "clock_domain_id": "A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE",
++        }
+     projection_sha = digest(projection)
+     capture_sha = sha256_bytes(canonical({"kind": "B92_FIXTURE_CAPTURE_V1", "lanes": lanes}))
+     identity = {
+-        "operation_id": "FIXTURE-RAW4-92-NOT-A-ROOT",
+-        "kernel_boot_id": "MODELLED_SHAPES_FROM_PINNED_PUBLIC_CONTRACTS",
+-        "session_id": "FIXTURE-SESSION-92",
+-        "clock_domain_id": "A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE",
++        "operation_id": fixture_identity["operation_id"],
++        "kernel_boot_id": fixture_identity["kernel_boot_id"],
++        "session_id": fixture_identity["session_id"],
++        "clock_domain_id": fixture_identity["clock_domain_id"],
+         "request_hash": projection_sha,
+         "build_manifest_sha256": build_manifest_sha256,
+         "source_record_sha256": projection_sha,
+         "capture_sha256": capture_sha,
+         "tested_commit": PINNED_COMMIT,
+-        "tag": TAG,
++        "tag": tag,
+         "generation": 1,
+-        "trigger_id": 92,
++        "trigger_id": trigger,
+         "request_seq": 1,
+         "capture_seq": 0,
+         "source_admission_index": 0,
+@@ -349,6 +406,7 @@ def _derive_identity(projection, lanes, build_manifest_sha256):
+ 
+ def derive_model(projection, *, build_manifest_sha256):
+     checked = validate_projection(projection)
++    session, view, tag, trigger = fixture_parameters(projection)
+     origin = checked["origin_qpc_ns"]
+     now = checked["evaluation_now_qpc_ns"]
+     receiver = checked["receiver_qpc_ns"]
+@@ -409,14 +467,14 @@ def derive_model(projection, *, build_manifest_sha256):
+                 "source_remainder_ns": source_remainder,
+                 "frame_seq": frame_seq,
+                 "assoc_seq": frame_seq,
+-                "assoc_epoch": VIEW,
+-                "assoc_session": SESSION,
+-                "assoc_tag": TAG,
++                "assoc_epoch": view,
++                "assoc_session": session,
++                "assoc_tag": tag,
+                 "assoc_e": E,
+                 "assoc_count": 1,
+                 "capture_first_seq": position * 4,
+                 "capture_last_seq": position * 4 + 3,
+-                "capture_tag": TAG,
++                "capture_tag": tag,
+                 "sample_data": count if valid else 0,
+                 "sample_quality": flags["derived_bytes"][channel],
+                 "expected_wire_bytes": expected_wire,
+@@ -426,10 +484,11 @@ def derive_model(projection, *, build_manifest_sha256):
+     identity_sha = digest(identity)
+     binding_base = {
+         "kind": "B_PRIVATE_TRANSPORT_BINDING_PROPOSED_V1",
+-        "receipt_id": "FIXTURE-TRANSPORT-92",
++        "receipt_id": (projection["fixture_transport_identity"]["transport_receipt_id"]
++                       if projection["fixture_kind"] == RETIRED_KIND else "FIXTURE-TRANSPORT-92"),
+         "profile_id": PROFILE_ID,
+-        "session_handle": SESSION,
+-        "view_handle": VIEW,
++        "session_handle": session,
++        "view_handle": view,
+         "e": E,
+         "source_context_sha256": identity_sha,
+     }
+@@ -493,7 +552,7 @@ def companion_for_lane(model, lane, *, decoder_pins):
+     }
+     companion = {
+         "schema": "B92_RAW4_COMPANION_V1",
+-        "evidence_kind": FIXTURE_KIND,
++        "evidence_kind": projection["fixture_kind"],
+         "fixture_transport_identity": projection["fixture_transport_identity"],
+         "authority": {
+             "actual_A_Root": "UNAVAILABLE",
+@@ -553,6 +612,14 @@ def companion_for_lane(model, lane, *, decoder_pins):
+         "binding": binding,
+         "profile": profile,
+     }
++    if projection["fixture_kind"] == RETIRED_KIND:
++        receipt = projection["retired_source_receipt"]
++        companion["retired_source_receipt"] = receipt
++        companion["retired_record_receipt"] = receipt["book_records"][lane["record_index"]]
++        companion["original_record_completion_qpc_ns"] = receipt["record_completion_qpc_ns"][lane["record_index"]]
++        companion["evaluation_clock_kind"] = "FIXTURE_EVALUATION_NOT_ACTUAL_CURRENT_CLOCK"
++        companion["receiver_clock_kind"] = "FIXTURE_RECEIVER_NOT_ACTUAL_TRANSPORT_RECEIPT"
++        companion["identity_kind"] = "FIXTURE_ONLY_NOT_ORIGINAL_ROOT_BOOT_CAPTURE_ADMISSION"
+     return companion
+ 
+ 
+diff --git a/competition/deepeye/tools/diagnostic/retired_raw4_100/.gitattributes b/competition/deepeye/tools/diagnostic/retired_raw4_100/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/retired_raw4_100/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/retired_raw4_100/check100.py b/competition/deepeye/tools/diagnostic/retired_raw4_100/check100.py
+new file mode 100644
+index 0000000..47c19cf
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/retired_raw4_100/check100.py
+@@ -0,0 +1,79 @@
++"""One focused check of actual retired-input UART bytes with unchanged decoders."""
++from __future__ import annotations
++import argparse, copy, importlib.util, json, struct, sys
++from pathlib import Path
++sys.dont_write_bytecode=True
++W=Path(__file__).resolve().parents[5]
++sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'causal_raw4_92'))
++import raw4_adapter92 as a
++HOST=W/'competition/deepeye/tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py'
++TRACE=W/'competition/deepeye/golden/codec/trace_candidate.py'
++def load(name,path,pin):
++    a._need(a.sha256_bytes(path.read_bytes())==pin,'unchanged decoder pin')
++    spec=importlib.util.spec_from_file_location(name,path);mod=importlib.util.module_from_spec(spec);sys.modules[name]=mod;spec.loader.exec_module(mod);return mod
++def frames(raw):
++    out=[];i=0
++    while i<len(raw):
++        a._need(len(raw)-i>=14,'complete outer header')
++        magic,version,kind,n,view,seq,tick=struct.unpack_from('<2sBBBBHI',raw,i)
++        a._need(magic==b'\xa5\x5a' and version==3 and kind==0xe4 and n<=32 and i+n+14<=len(raw),'outer frame bounds')
++        out.append(raw[i:i+n+14]);i+=n+14
++    return out
++def run(out):
++    host=load('b100_host',HOST,'1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768')
++    trace=load('b100_trace',TRACE,'a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642')
++    p=a.load_json_strict((out/'fixture/projection.json').read_bytes())
++    model=a.transport_input(p,fixture_mode=a.RETIRED_KIND,build_manifest_sha256=a.sha256_bytes((out/'SOURCE_BEFORE.json').read_bytes()))
++    pins={'host_sha256':a.sha256_bytes(HOST.read_bytes()),'trace_sha256':a.sha256_bytes(TRACE.read_bytes())}
++    uart=bytes.fromhex((out/'mode0/uart.hex').read_text());serial=bytes.fromhex((out/'mode0/serializer.hex').read_text())
++    a._need(uart==serial,'actual UART sampling equals serializer')
++    packets=frames(uart);a._need(len(packets)==80,'exact 80 singleton frames')
++    events=(out/'mode0/events.txt').read_text()
++    a._need(events.count('RESULT_BACKPRESSURE ')==1 and events.count('WRONG_IDENTITY_REFUSED ')==1,'single held result and wrong association stall')
++    dest=out/'decoded';dest.mkdir();rows=[];wl=[];cl=[];counts={'invalid':0,'valid_zero':0,'held':0,'fresh':0}
++    def decode(packet,c): return host.decode_transport(packet,binding=c['binding'],profile=c['profile'],now_qpc_ns=c['evaluation_now_qpc_ns'],enabled=True,repo_root=W)
++    for i,(packet,lane) in enumerate(zip(packets,model['lanes'])):
++        c=a.companion_for_lane(model,lane,decoder_pins=pins);cr=a.canonical(c)
++        (dest/('frame%03d.bin'%i)).write_bytes(packet);(dest/('companion%03d.json'%i)).write_bytes(cr)
++        v=decode(packet,c);point=v['points'][0]
++        raw=trace.decode_payload(bytes([1])+packet[13:-2],{'session':a.RETIRED_SESSION,'config_epoch':a.RETIRED_VIEW,'e':0})
++        rp=raw['points'][0]
++        header=struct.unpack_from('<2sBBBBHI',packet)
++        a._need(header[4:]==(a.RETIRED_VIEW,i,lane['first_tick_us']),'outer view/sequence/tick')
++        a._need(raw['count']==1 and len(raw['points'])==1,'actual singleton')
++        a._need((packet[13]&7)==0,'actual E0')
++        a._need(v['status']=='STOP' and v['core_ran'] is False and v['command'] is None,'structural STOP no action')
++        a._need(v['source_identity']==model['identity'] and v['frame_sha256']==a.sha256_bytes(packet),'exact source identity/frame')
++        a._need(point['decoded_value']==lane['count'] and point['original_value']==lane['count'] and rp['value']==lane['count'],'exact original counts/None')
++        a._need(point['index']==lane['acquisition_index'] and point['relative_tick_us']==lane['first_tick_us'] and point['remainder_ns']==0,'original relative acquisition')
++        a._need(point['original_acquisition_qpc_ns']==lane['acquisition_qpc_ns'] and point['original_source_qpc_ns']==lane['source_qpc_ns'],'exact original uint63 timestamp')
++        a._need(rp['source_tick_ms']==lane['source_tick_us'],'unchanged code-section decoder relative us')
++        flags=lane['record_flags'][lane['channel']]
++        a._need(all(rp[k]==flags[k] for k in ('valid','saturated','held','source_fault')),'actual flags')
++        a._need(v['raw_quality_uint8']=={str(k):lane['record_derived_bytes'][k] for k in range(4)},'all four opaque quality bytes')
++        a._need(point['byte_exact_value'] is True and v['lossy_decoded_values_match_original'] is True and v['c29_uint12_values_possible'] is True,'exact value proof')
++        a._need(c['current_source_eligible'] is False and c['authority']['current_source_eligible'] is False and c['retired_source_receipt']['retired'] is True,'retired remains ineligible')
++        if lane['valid_sample']:
++            a._need(point['source_age_ns']==model['evaluation_now_qpc_ns']-lane['source_qpc_ns'] and v['source_age_100ms_met'] is False,'fixture evaluation staleness')
++            counts['held' if lane['held'] else 'fresh']+=1
++            if lane['channel']==3: a._need(point['decoded_value']==0,'actual C3 valid zero');counts['valid_zero']+=1
++        else:
++            a._need(point['decoded_value'] is None and point['source_age_ns'] is None,'None cannot be data zero');counts['invalid']+=1
++        wl.append(len(packet));cl.append(len(cr));rows.append({'frame':i,'record':lane['record_index'],'channel':lane['channel'],'decoded':point,'raw_flags':flags,'quality13':lane['quality13_uint16'],'wire_bytes':len(packet),'companion_bytes':len(cr),'wire_sha256':a.sha256_bytes(packet),'companion_sha256':a.sha256_bytes(cr),'source_record_sha256':lane['source_record_sha256'],'status':v['status'],'core_ran':v['core_ran'],'command':v['command'],'current_source_eligible':False})
++    a._need(counts=={'invalid':9,'valid_zero':11,'held':48,'fresh':23},'actual decoded populations')
++    # New retired-input boundary: invalid original companion rewritten to zero is refused.
++    lane=model['lanes'][3];c=a.companion_for_lane(model,lane,decoder_pins=pins);c=copy.deepcopy(c)
++    c['profile']['original_values']=[0];pr=c['profile'];b=c['binding']
++    pr['timestamp_record_sha256']=a.digest({'origin_qpc_ns':pr['origin_qpc_ns'],'acquisition_qpc_ns':pr['original_acquisition_qpc_ns'],'source_qpc_ns':pr['original_source_qpc_ns'],'original_values':pr['original_values'],'original_indices':pr['original_indices'],'source_context_sha256':b['source_context_sha256']})
++    try: decode(packets[3],c)
++    except host.Rejected as exc:
++        a._need('invalid data remains null' in str(exc),'exact None-to-zero refusal');negative={'case':'retired_None_to_zero','refused':True,'reason':str(exc)}
++    else: raise RuntimeError('FALSE_ACCEPT retired None as zero')
++    default=host.decode_transport(b'',enabled=True)
++    a._need(default['input_status']=='INPUT_UNAVAILABLE' and default['command'] is None and default['core_ran'] is False,'unchanged host default unavailable')
++    cost=a.cost_summary(model,wl,cl)
++    result={'status':'FOCUSED_RUNTIME_CHECKS_COMPLETED_MAIN_REVIEW_PENDING','scope':'actual historical input RTL simulation; not board','frames':80,'counts':counts,'actual_wire_bytes':len(uart),'predicted_wire_bytes':3038,'wire_delta':len(uart)-3038,'cost':cost,'negative':negative,'default':default,'decoder_pins':pins,'origin_qpc_ns':model['origin_qpc_ns'],'origin_submicrosecond_ns':model['origin_qpc_ns']%1000,'relative_remainders_ns':[0],'quality13':sorted({l['quality13_uint16'] for l in model['lanes']}),'status_all':'STOP','core_ran':False,'command':None,'current_source_eligible':False,'full_Root_BOOT_admission_current_positive':False}
++    (dest/'FRAMES_INDEX.json').write_bytes(a.canonical(rows));(out/'SEMANTIC_RESULT.json').write_bytes(a.canonical(result))
++    print(json.dumps(result));return 0
++if __name__=='__main__':
++    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);raise SystemExit(run(p.parse_args().out))
+diff --git a/competition/deepeye/tools/diagnostic/retired_raw4_100/input100.py b/competition/deepeye/tools/diagnostic/retired_raw4_100/input100.py
+new file mode 100644
+index 0000000..034f8fb
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/retired_raw4_100/input100.py
+@@ -0,0 +1,88 @@
++"""Retired A70 input projection; default closed, no source-kernel execution."""
++from __future__ import annotations
++import argparse, copy, hashlib, json, math, sys
++from pathlib import Path
++sys.dont_write_bytecode = True
++sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'causal_raw4_92'))
++import raw4_adapter92 as a
++
++PIN = {'commit': 'd0185d335747acb26439f40a8ce945f7f4eaa9af',
++       'tree': 'd2e6533d93efcc09e8dd1341e6cc5d741fe965a5',
++       'git_oid': 'fad06cd889be3909d09cf93b3f5bb5813e7f514d', 'bytes': 82496,
++       'sha256': '63616e2915edc5a2ef6ed592e8f9830ce77a635aaf883ab964aa4dbd5fd1910c'}
++
++def read_original(raw):
++    a._need(type(raw) is bytes and len(raw) <= 100*1024, 'original input byte bound')
++    a._need(len(raw) == PIN['bytes'] and a.sha256_bytes(raw) == PIN['sha256'], 'fixed original input byte/hash')
++    a._need(hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest() == PIN['git_oid'], 'fixed Git blob')
++    value = a.load_json_strict(raw)
++    def plain(v, depth=0):
++        a._need(depth <= 16 and type(v) in (dict,list,str,int,float,bool,type(None)), 'private input plain types')
++        if type(v) is float: a._need(math.isfinite(v), 'private finite float')
++        if type(v) is dict:
++            for k,x in v.items(): a._need(type(k) is str, 'private key'); plain(x,depth+1)
++        if type(v) is list:
++            a._need(len(v) <= 128, 'private array bound')
++            for x in v: plain(x,depth+1)
++    plain(value)
++    return value
++
++def project(raw):
++    v = read_original(raw)
++    book = v['original_source_book']
++    a._need(v['source_origin_qpc_ns'] == a.RETIRED_ORIGIN and book['source_origin_qpc_ns'] == a.RETIRED_ORIGIN, 'original origin')
++    a._need(book['schema'] == 1 and book['native_interval_atomic'] is False and book['state'] == 'RETIRED', 'original book remains retired schema1')
++    a._need(len(v['records']) == len(book['samples']) == len(v['actual_record_end_qpc_ns']) == 20, 'exact 20 originals')
++    records = []
++    for i,(p,s) in enumerate(zip(v['records'],book['samples'])):
++        a._exact(p,set(a.PROFILE_METADATA)|{'adc_tick_ms','em_tick_ms','channel_counts','channel_values','quality'},'original nine fields')
++        a._need(all(p[k] == x for k,x in a.PROFILE_METADATA.items()),'original candidate profile')
++        a._need(p == s['payload'] and a.canonical(p).hex() == s['canonical_source_hex'] and a.digest(p) == s['source_sha256'], 'original canonical payload/book association')
++        a._need(s['source_count'] == i+1 and s['tick_ms'] == i*10 and s['nominal_qpc_ns'] == a.RETIRED_ORIGIN+i*10000000,'book count/time')
++        a._need(s['held_em_association'] == 'unavailable;original_native_em_association_not_implemented','missing original EM receipt retained')
++        a._need(a.RETIRED_ORIGIN+i*10000000 <= s['adc']['begin_qpc_ns'] <= s['adc']['end_qpc_ns'] <= s['finish_qpc_ns'] <= v['actual_record_end_qpc_ns'][i], 'actual ADC/finish/completion ordering')
++        a._need(type(p['channel_values']) is list and len(p['channel_values']) == 4,'original private value shape')
++        for ch,number in enumerate(p['channel_values']):
++            a._need((number is None) == (p['channel_counts'][ch] is None),'original null association')
++            if number is not None: a._need(type(number) in (int,float) and math.isfinite(number),'finite original number')
++        if i >= 9: a._need(p['channel_values'][3] > 0 and p['channel_counts'][3] == 0,'actual positive RMS valid count zero')
++        records.append({k:p[k] for k in ('adc_tick_ms','em_tick_ms','channel_counts','quality')}|{'source_record_sha256':a.digest(p)})
++    receipt=dict(PIN)
++    receipt.update(original_operation_id=v['original_operation_id'], source_runtime_commit=v['source_commit'],origin_qpc_ns=v['source_origin_qpc_ns'],schema=1,native_interval_atomic=False,retired=True,missing_evidence=v['missing_evidence'],record_completion_qpc_ns=v['actual_record_end_qpc_ns'],book_records=[{'source_count':s['source_count'],'nominal_qpc_ns':s['nominal_qpc_ns'],'finish_qpc_ns':s['finish_qpc_ns'],'observed_source_qpc_ns':s['observed_source_qpc_ns'],'opened_qpc_ns':s['opened_qpc_ns'],'adc':s['adc'],'held_em_association':s['held_em_association'],'source_record_sha256':s['source_sha256']} for s in book['samples']])
++    p={'schema':a.SCHEMA,'fixture_kind':a.RETIRED_KIND,'pinned_commit':a.RETIRED_COMMIT,'pinned_tree':a.RETIRED_TREE,'pinned_blob_count':2,'time_basis':a.TIME_BASIS,'origin_qpc_ns':a.RETIRED_ORIGIN,'evaluation_now_qpc_ns':a.RETIRED_ORIGIN+1200000000,'profile':dict(a.PROFILE_METADATA),'records':records,'retired_source_receipt':receipt,'fixture_transport_identity':{
++        'kind':'B92_FIXTURE_TRANSPORT_IDENTITY_V1','label':a.RETIRED_KIND,'operation_id':'FIXTURE-RETIRED97-NOT-A-ROOT','kernel_boot_id':a.RETIRED_KIND,'session_id':'FIXTURE-RETIRED97-SESSION','clock_domain_id':'A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE','transport_receipt_id':'FIXTURE-RETIRED97-TRANSPORT','source_note':'not A Root/admission/capture/BOOT/action proof; retired original numerical transport fixture','board':'not_run; A only'}}
++    a.validate_projection(p)
++    return p
++
++def boundaries(raw,p):
++    rows=[]
++    def refusal(name,fn):
++        try: fn()
++        except a.Rejected as e: rows.append({'case':name,'refused':True,'reason':str(e)}); return
++        raise RuntimeError('FALSE_ACCEPT '+name)
++    refusal('altered_original_byte',lambda:project(raw[:-1]+bytes([raw[-1]^1])))
++    for case in ('receipt_time','record_quality'):
++        q=copy.deepcopy(p)
++        if case=='receipt_time': q['retired_source_receipt']['record_completion_qpc_ns'][0]+=1
++        else: q['records'][1]['quality']=7
++        refusal(case,lambda:a.validate_projection(q))
++    closed=a.transport_input()
++    a._need(closed['input_status']=='INPUT_UNAVAILABLE' and closed['command'] is None and closed['core_ran'] is False and closed['current_source_eligible'] is False,'default closed')
++    rows.append({'case':'default','result':closed})
++    return rows
++
++def main():
++    ap=argparse.ArgumentParser();ap.add_argument('--fixture-mode');ap.add_argument('--input',type=Path);ap.add_argument('--out',type=Path);o=ap.parse_args()
++    if o.fixture_mode is None:
++        print(json.dumps(a.transport_input()));return 0
++    a._need(o.fixture_mode==a.RETIRED_KIND and o.input is not None and o.out is not None,'explicit retired fixture mode/input/output required')
++    raw=o.input.read_bytes();p=project(raw);checks=boundaries(raw,p)
++    o.out.mkdir(exist_ok=False)
++    (o.out/'projection.json').write_bytes(a.canonical(p))
++    words=[]
++    for r in p['records']: words.extend([0 if n is None else n for n in r['channel_counts']]+[r['em_tick_ms'],r['quality'],r['adc_tick_ms']])
++    (o.out/'records.hex').write_text(''.join('%04x\n'%n for n in words),encoding='ascii')
++    (o.out/'INPUT_RESULT.json').write_bytes(a.canonical({'input':PIN,'checks':checks,'records':20,'private_floats_transported':False,'current_source_eligible':False,'native_interval_atomic':False}))
++    print(json.dumps({'records':20,'fixed_input_verified_before_parse':True,'checks':checks}))
++    return 0
++if __name__=='__main__': raise SystemExit(main())
+diff --git a/competition/deepeye/tools/diagnostic/retired_raw4_100/run100.py b/competition/deepeye/tools/diagnostic/retired_raw4_100/run100.py
+new file mode 100644
+index 0000000..3585db5
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/retired_raw4_100/run100.py
+@@ -0,0 +1,117 @@
++"""One attempt, snapshot-only, suspended-before-attach Windows Job runtime."""
++from __future__ import annotations
++import argparse, datetime, hashlib, importlib.util, json, os, subprocess, sys, time, traceback
++from pathlib import Path
++sys.dont_write_bytecode=True
++W=Path(__file__).resolve().parents[5]
++ROOT=Path('D:/pynq/CarlandFPGA')
++P=ROOT/'.local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74'
++TOOLS=Path('D:/modelsim1/win64')
++REL='competition/deepeye/tools/diagnostic/retired_raw4_100/'
++BENCH='competition/deepeye/fpga/diagnostic/retired_raw4_100/tb_RETIRED_RAW4_100.sv'
++ADAPTER='competition/deepeye/tools/diagnostic/causal_raw4_92/raw4_adapter92.py'
++HELPER='competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py'
++JOBHELPER='fpga_mesh/windows_job.py'
++REQUIREMENTS='c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804'
++JOB='child-19bf374e4aef42ae9525052750f26b67'
++AGENT='/root/retired_raw4_100'
++WORK='B-DEEPEYE-RETIRED70-RAW4-RECOVERY-20261031-100'
++LIMIT=8*1024*1024
++# SOURCE_TABLES inserted by source preparation, never imported from the old runner.
++COMPILE_RELS = ['competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv', 'competition/deepeye/fpga/acquisition/deepeye_raw_scan_queue.sv', 'competition/deepeye/fpga/acquisition/deepeye_buffered_scan_capture.sv', 'competition/deepeye/fpga/acquisition/deepeye_scan_lane_stream.sv', 'competition/deepeye/fpga/codec/deepeye_block_encoder.sv', 'competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv', 'competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv', 'competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv', 'competition/deepeye/fpga/transport/deepeye_crc16_byte.sv', 'competition/deepeye/fpga/transport/deepeye_wire_serializer.sv', 'competition/deepeye/fpga/transport/deepeye_uart_tx.sv', 'competition/deepeye/fpga/diagnostic/offboard_codec74/deepeye_SYNTHETIC_codec74_fixture.sv', 'competition/deepeye/fpga/diagnostic/retired_raw4_100/tb_RETIRED_RAW4_100.sv']
++READONLY_EXPECTED = {'competition/deepeye/fpga/acquisition/deepeye_sample_scan_capture.sv': 'fc8064a11ac40b6ee59418994825f0fc550ee867954bd1f1ccd2c9464e52028d', 'competition/deepeye/fpga/acquisition/deepeye_raw_scan_queue.sv': '630e14803d82b3379517d91626de4ad7e7d3c509ad14363b3164031a5f633ee4', 'competition/deepeye/fpga/acquisition/deepeye_buffered_scan_capture.sv': 'c8a540db8122b8f5520582a0f1fa9be0c43cb54a62f03c7c4edc893906f28411', 'competition/deepeye/fpga/acquisition/deepeye_scan_lane_stream.sv': 'b3c9d2024d9325191538cf08fec9a652ff8ff0ae316ec9af96078f85cf5be3cc', 'competition/deepeye/fpga/codec/deepeye_block_encoder.sv': '4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532', 'competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv': 'fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6', 'competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv': '5ebe65dfe0844aab62365e8664507f153cb75ff47b3c8d4e10f45356e94147a8', 'competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv': '41ea63819c892ec67fe92d6e9338a771d5f93f60d0976e895f18bc97966283d2', 'competition/deepeye/fpga/transport/deepeye_crc16_byte.sv': '8594bad79593a5ff5a63761c3b4f5f83adc70ebcfdd5aec178de3aba1f313d6f', 'competition/deepeye/fpga/transport/deepeye_wire_serializer.sv': 'efc6082f6f5dff215b100f718b12d87d4c6467db7b968a24f846802dc6a19885', 'competition/deepeye/fpga/transport/deepeye_uart_tx.sv': '5076286e4dd1598aeb2c78281bec83020c85d0711dcee9b985088ac707353c47', 'competition/deepeye/fpga/diagnostic/offboard_codec74/deepeye_SYNTHETIC_codec74_fixture.sv': '409ee484113fa4006eb27e12554a4db57708df5e7dadf269548f546d03931a6a', 'competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv': '957f696429c39fed5c41dc83df88fa78ab2a294a57c1a834ef0f0ef81b7ae2dd', 'competition/deepeye/golden/codec/trace_candidate.py': 'a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642', 'competition/deepeye/tools/diagnostic/g05_capture/additive50_source_candidate/deepeye_transport50_source_candidate.py': '1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768', 'competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py': '1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692', 'fpga_mesh/windows_job.py': '3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3'}
++SELECTED=[REL+'run100.py',REL+'input100.py',REL+'check100.py',BENCH,ADAPTER,
++          'competition/deepeye/golden/diagnostic/retired_raw4_100/README.md']
++def need(ok,why):
++    if not ok: raise RuntimeError(why)
++def utc(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
++def sha(raw): return hashlib.sha256(raw).hexdigest()
++def record(p):
++    p=Path(p);r=p.read_bytes();return {'path':str(p),'bytes':len(r),'sha256':sha(r)}
++def write(p,v):
++    with Path(p).open('x',encoding='utf8',newline='\n') as f: json.dump(v,f,ensure_ascii=False,sort_keys=True,indent=2);f.write('\n')
++def size(out): return sum(p.stat().st_size for p in out.rglob('*') if p.is_file())
++def command(out,name,argv,cwd):
++    commands=out/'commands';started=time.monotonic();row={'argv':[str(x) for x in argv],'cwd':str(cwd),'started':utc(),'timeout_seconds':25,'expected_exit':0}
++    with (commands/(name+'.stdout.bin')).open('xb') as stdout,(commands/(name+'.stderr.bin')).open('xb') as stderr:
++        p=subprocess.Popen(row['argv'],cwd=cwd,stdin=subprocess.DEVNULL,stdout=stdout,stderr=stderr,shell=False,creationflags=subprocess.CREATE_NO_WINDOW)
++        row['pid']=p.pid;write(commands/(name+'.STARTED.json'),row)
++        row['timed_out']=False;row['output_limit_exceeded']=False
++        while p.poll() is None:
++            if time.monotonic()-started>=25: row['timed_out']=True;p.kill()
++            if size(out)>LIMIT-131072: row['output_limit_exceeded']=True;p.kill()
++            time.sleep(.02)
++        row['exit_code']=p.returncode
++    row.update(elapsed_seconds=time.monotonic()-started,ended=utc(),stdout=record(commands/(name+'.stdout.bin')),stderr=record(commands/(name+'.stderr.bin')))
++    write(commands/(name+'.json'),row)
++    need(not row['timed_out'] and not row['output_limit_exceeded'] and row['exit_code']==0,'failed command '+name)
++    return row
++def inner(out):
++    write(out/'ATTEMPT_STARTED.json',{'job_id':JOB,'agent_id':AGENT,'work_id':WORK,'utc':utc(),'single_actual_attempt':True})
++    (out/'commands').mkdir();sim=out/'sim';sim.mkdir()
++    for rel,expected in READONLY_EXPECTED.items(): need(sha((W/rel).read_bytes())==expected,'snapshot dependency '+rel)
++    c=json.loads((out/'inputs/immutable_scope_pinned.json').read_bytes())
++    need(sha(json.dumps(c['requirements'],ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())==REQUIREMENTS,'fixed H01-H15 hash')
++    command(out,'00-python-version',[sys.executable,'--version'],sim)
++    command(out,'01-build-input',[sys.executable,'-B',W/(REL+'input100.py'),'--fixture-mode','RETIRED_A70_TRANSPORT_FIXTURE','--input',out/'inputs/retired-source70.json','--out',out/'fixture'],sim)
++    command(out,'02-default-input',[sys.executable,'-B',W/(REL+'input100.py')],sim)
++    default=json.loads((out/'commands/02-default-input.stdout.bin').read_bytes())
++    need(default['input_status']=='INPUT_UNAVAILABLE' and default['command'] is None and default['core_ran'] is False,'default CLI closed')
++    for tool in ('vlog','vsim','vmap'): command(out,'03-'+tool+'-version',[TOOLS/(tool+'.exe'),'-version'],sim)
++    command(out,'04-vmap',[TOOLS/'vmap.exe','-c'],sim)
++    command(out,'05-vlib',[TOOLS/'vlib.exe','work'],sim)
++    command(out,'06-vlog',[TOOLS/'vlog.exe','-sv','-work','work',*[W/r for r in COMPILE_RELS]],sim)
++    log=(out/'commands/06-vlog.stdout.bin').read_text(errors='replace')
++    need('Errors: 0' in log and '** Error:' not in log,'compile log errors')
++    dest=out/'mode0';dest.mkdir()
++    do=out/'run.do'
++    do.write_text('onerror {quit -code 3 -force}\nonbreak {\nif {[examine -radix decimal /tb_RETIRED_RAW4_100/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n}\nrun -all\nif {[examine -radix decimal /tb_RETIRED_RAW4_100/completed] == 1} {quit -code 0 -force}\nquit -code 4 -force\n',encoding='ascii')
++    command(out,'07-vsim',[TOOLS/'vsim.exe','-c','-voptargs=+acc','-onfinish','stop','-wlf',dest/'wave.wlf','-l',dest/'modelsim.log','work.tb_RETIRED_RAW4_100','+OUT='+dest.as_posix(),'+MEM='+(out/'fixture/records.hex').as_posix(),'-do','do '+do.as_posix()],sim)
++    log=(dest/'modelsim.log').read_text(errors='replace')
++    need('B100_SYNTHETIC_DONE mode=0' in log and 'Errors: 0' in log and '** Fatal:' not in log and '** Error:' not in log,'exact simulation completion')
++    command(out,'08-check',[sys.executable,'-B',W/(REL+'check100.py'),'--out',out],sim)
++    write(out/'INNER_RESULT.json',{'status':'COMPLETED_CHECKS_MAIN_REVIEW_PENDING','utc':utc(),'semantic':json.loads((out/'SEMANTIC_RESULT.json').read_bytes())})
++    return 0
++def terminal(j):
++    return all(j.get(k) is True for k in ('job_attached_before_resume','launcher_exit_confirmed','job_empty_observed_before_close','job_terminal_confirmed','job_closed')) and not any(j.get(k) for k in ('timed_out','process_error','job_query_failed','job_termination_failed','job_close_error'))
++def outer(out):
++    out.mkdir(parents=True,exist_ok=False)
++    selected={r:W/r for r in set(SELECTED+COMPILE_RELS+list(READONLY_EXPECTED))}
++    before={}
++    for r,p in selected.items():
++        dst=out/'source'/r;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(p.read_bytes());before[r]={'live':record(p),'snapshot':record(dst)}
++    write(out/'SOURCE_BEFORE.json',before)
++    inputs=out/'inputs';inputs.mkdir()
++    pins=json.loads((P/'source-inputs/A18-retired-source70-r2/PINS.json').read_bytes())
++    files={'immutable_scope_pinned.json':P/'immutable_scope_pinned.json','retired-source70.json':Path(pins[0]['local']),'source-readme.md':Path(pins[1]['local']),'PINS.json':P/'source-inputs/A18-retired-source70-r2/PINS.json','RETIRED97_MAIN_DESIGN.md':P/'RETIRED97_MAIN_DESIGN.md','RETIRED100_MAIN_RECOVERY_DECISION.json':P/'RETIRED100_MAIN_RECOVERY_DECISION.json','A18_INDEPENDENT_DATA.json':P/'main-verification96/A18_INDEPENDENT_DATA.json','INDEPENDENT_SAVED_BYTES_R1.json':P/'main-verification92/INDEPENDENT_SAVED_BYTES_R1.json'}
++    for name,p in files.items(): (inputs/name).write_bytes(p.read_bytes())
++    write(out/'INPUT_BEFORE.json',{name:record(inputs/name) for name in files})
++    write(out/'TOOL_BINARIES.json',{n:record(TOOLS/(n+'.exe')) for n in ('vmap','vlib','vlog','vsim')})
++    for rel,expected in READONLY_EXPECTED.items(): need(before[rel]['snapshot']['sha256']==expected,'pinned dependency '+rel)
++    snap=out/'source'
++    spec=importlib.util.spec_from_file_location('b100_owned',snap/HELPER);owned=importlib.util.module_from_spec(spec);spec.loader.exec_module(owned)
++    jd=out/'owned_job';jd.mkdir()
++    job=owned.run_owned([sys.executable,'-B',str(snap/(REL+'run100.py')),'--inner','--out',str(out)],jd,120,snap/JOBHELPER,job_drain_seconds=5,job_terminate_seconds=5)
++    write(out/'JOB_RESULT.json',job)
++    after={r:{'live':record(p),'snapshot':record(snap/r)} for r,p in selected.items()};write(out/'SOURCE_AFTER.json',after)
++    write(out/'INPUT_AFTER.json',{name:record(inputs/name) for name in files})
++    stable=before==after
++    ir=out/'INNER_RESULT.json';sem=out/'SEMANTIC_RESULT.json';inner_result=json.loads(ir.read_bytes()) if ir.exists() else None
++    ok=job.get('exit_code')==0 and terminal(job) and stable and inner_result is not None
++    commands=[json.loads(p.read_bytes()) for p in sorted((out/'commands').glob('*.json')) if not p.name.endswith('.STARTED.json')]
++    result={'status':'COMPLETED_RUNTIME_MAIN_REVIEW_PENDING' if ok else 'FAILED_PRESERVED_NO_RETRY','job_id':JOB,'agent_id':AGENT,'task_id':'DEEPEYE-IMPLEMENTATION-20261014','task_version':1,'work_id':WORK,'requirements_ids':['H%02d'%i for i in range(1,16)],'requirements_sha256':REQUIREMENTS,'freeze':'1011259415a0916054eb580687612580bc1e5f09','source_runtime_commit':'4dc91fd24531b3df53fc916e8b7f509ad524592c','current_B_source_kind':'exact snapshot bytes; no later commit claimed tested','selected_sources':{r:before[r] for r in SELECTED},'sources_unchanged':stable,'job':job,'job_terminal_empty_closed':terminal(job),'commands':commands,'semantic':json.loads(sem.read_bytes()) if sem.exists() else None,'scope':'actual historical numerical input and RTL simulation only','unmet_gates':{'actual_Root':'UNAVAILABLE','original_EM_receipt':'UNAVAILABLE','BOOT':'UNAVAILABLE','admission':'UNAVAILABLE','physical_ADC':'NOT_RUN','board':'NOT_RUN A_ONLY','synthesis':'NOT_RUN','implementation':'NOT_RUN','current_source_eligible':False,'command':None,'core_ran':False,'status':'STOP','full_H12':'NOT_ACCEPTED','final_1percent_100ms':'NOT_ACCEPTED','original_100MHz':'NOT_ACCEPTED','all29':'NOT_ACCEPTED','H01_H15_product_acceptance':'NOT_ACCEPTED'},'utc':utc()}
++    result['evidence']={p.relative_to(out).as_posix():record(p) for p in sorted(out.rglob('*')) if p.is_file()}
++    result['output_bytes_before_result']=size(out);write(out/'RESULT.json',result)
++    need(size(out)<=LIMIT,'total output exceeds 8MiB')
++    print(json.dumps({'status':result['status'],'result':str(out/'RESULT.json'),'result_sha256':sha((out/'RESULT.json').read_bytes()),'job_terminal_empty_closed':terminal(job),'output_bytes':size(out)}))
++    return 0 if ok else 1
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--inner',action='store_true');o=p.parse_args();out=o.out.resolve()
++    try: return inner(out) if o.inner else outer(out)
++    except Exception:
++        error=traceback.format_exc();print(error,file=sys.stderr)
++        if out.exists():
++            name='INNER_FAILURE.json' if o.inner else 'OUTER_FAILURE.json'
++            if not (out/name).exists(): write(out/name,{'error':error,'utc':utc(),'no_retry':True})
++        return 1
++if __name__=='__main__': raise SystemExit(main())

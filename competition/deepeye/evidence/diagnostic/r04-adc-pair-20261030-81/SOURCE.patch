@@ -1,0 +1,452 @@
+diff --git a/competition/deepeye/golden/diagnostic/r04_adc79/.gitattributes b/competition/deepeye/golden/diagnostic/r04_adc79/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/r04_adc79/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/golden/diagnostic/r04_adc79/test_adc_pair_evaluator.py b/competition/deepeye/golden/diagnostic/r04_adc79/test_adc_pair_evaluator.py
+new file mode 100644
+index 0000000..239bb7f
+--- /dev/null
++++ b/competition/deepeye/golden/diagnostic/r04_adc79/test_adc_pair_evaluator.py
+@@ -0,0 +1,87 @@
++"""NEW81 source controls; pure synthetic math, no ADC/analog acceptance."""
++import copy,importlib.util,json,unittest
++from pathlib import Path
++P=Path(__file__).resolve().parents[3]
++s=importlib.util.spec_from_file_location('adc81',P/'tools/diagnostic/r04_adc79/adc_pair_evaluator.py')
++m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
++BASE=9007199254740993
++
++def fixture():
++    ctx=dict(tag=(1<<61)+9,epoch=(1<<60)+5,boot_id='original-BOOT-text',source_id='original-source-text',clock_id='original-QPC-ns',
++             operation_id='SYNTHETIC-R04-81',session_id='original-session-文本',request_hash='ab'*32,root_context=dict(generation=(1<<59)+3))
++    def record(i,t,a0):
++        return dict(sample_id=i,acquisition_qpc=BASE+t,source_qpc=BASE+t,context=copy.deepcopy(ctx),
++                    channel_indices=[0,1,2,3],channels=[a0,5000,6000,8192],quality=254,quality_eligible=True)
++    return dict(schema=m.SCHEMA,mode=m.MODE,now_qpc_ns=BASE+500,
++      calibration=dict(calibration_id='synthetic-calibration',full_scale_code=65535,a0_offset_code=0,a3_offset_code=0,qpc_hz=1000000000,clock_id=ctx['clock_id']),
++      digital_receipt=dict(spi_complete=True,digital_complete_qpc=BASE+200,context=copy.deepcopy(ctx)),
++      baseline_before=[record(1,100,8192)],after=[record(2,300,32768)])
++
++def evaluate(f):return m.evaluate_synthetic_fixture(json.dumps(f,ensure_ascii=False))
++
++class Controls(unittest.TestCase):
++    def test_low_before_A3_high_raw_after_is_valid_synthetic_only(self):
++        r=evaluate(fixture());self.assertEqual(r['status'],'SYNTHETIC_RATIO_AVAILABLE')
++        self.assertEqual((r['ratio_numerator'],r['ratio_denominator']),(32768,8192))
++        self.assertEqual((r['baseline_ratio_numerator'],r['baseline_ratio_denominator']),(8192,8192))
++        self.assertIsNone(r['measured_gain_actual']);self.assertFalse(r['physical_acceptance']);self.assertFalse(r['commands_emitted'])
++        raw=json.loads(r['record_ledger'][0]['canonical_json']);self.assertEqual(raw['acquisition_qpc'],BASE+100)
++        self.assertEqual(raw['context'],fixture()['baseline_before'][0]['context']);self.assertEqual(raw['quality'],254)
++    def test_now_age_not_only_acquisition_age(self):
++        f=fixture();f['now_qpc_ns']=BASE+100000101
++        self.assertEqual(evaluate(f)['reason'],'SOURCE_STALE_BEYOND_100MS')
++    def test_100ms_boundary_inclusive(self):
++        f=fixture();f['now_qpc_ns']=BASE+100000100
++        self.assertEqual(evaluate(f)['status'],'SYNTHETIC_RATIO_AVAILABLE')
++    def test_future_and_QPC_unit_domain(self):
++        f=fixture();f['now_qpc_ns']=BASE+299;self.assertEqual(evaluate(f)['status'],'REFUSED')
++        f=fixture();f['calibration']['qpc_hz']=1000;self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_valid_missing(self):
++        for key in ['calibration','digital_receipt','now_qpc_ns']:
++            f=fixture();f[key]=None;self.assertEqual(evaluate(f)['status'],'UNAVAILABLE')
++        f=fixture();f['after']=[];self.assertEqual(evaluate(f)['status'],'UNAVAILABLE')
++    def test_duplicate_even_without_receipt_or_after(self):
++        f=fixture();f['digital_receipt']=None;f['after']=[];f['baseline_before']*=2
++        self.assertEqual(evaluate(f)['reason'],'DUPLICATE_SAMPLE_ID')
++    def test_context_mismatch_even_missing_calibration(self):
++        f=fixture();f['calibration']=None;f['after'][0]['context']['root_context']['generation']+=1
++        self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_wrong_clock_even_without_receipt(self):
++        f=fixture();f['digital_receipt']=None;f['calibration']['clock_id']='other-original-clock'
++        self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_invalid_order(self):
++        for value in [BASE+199,BASE+200]:
++            f=fixture();f['after'][0]['acquisition_qpc']=value;f['after'][0]['source_qpc']=value
++            self.assertEqual(evaluate(f)['status'],'REFUSED')
++        f=fixture();f['after'][0]['source_qpc']=BASE+301;self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_opaque_quality_and_explicit_ineligible(self):
++        f=fixture();f['after'][0]['quality_eligible']=False;self.assertEqual(evaluate(f)['status'],'UNAVAILABLE')
++        f=fixture();f['after'][0]['quality_eligible']=1;self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_zero_A3_saturation_and_no_fake_ratio(self):
++        for index,value in [(3,0),(3,65535),(0,65535)]:
++            f=fixture();f['after'][0]['channels'][index]=value;r=evaluate(f)
++            self.assertEqual(r['status'],'UNAVAILABLE');self.assertIsNone(r['ratio_numerator'])
++    def test_only_A0_after_window_raw_code_not_corrected(self):
++        f=fixture();f['after'][0]['channels'][0]=15000;f['calibration']['a0_offset_code']=5000
++        self.assertEqual(evaluate(f)['status'],'SYNTHETIC_RATIO_AVAILABLE')
++        f=fixture();f['after'][0]['channels'][0]=8192;self.assertEqual(evaluate(f)['status'],'UNAVAILABLE')
++    def test_bool_float_overflow_rejected(self):
++        for value in [True,1.5,1<<63]:
++            f=fixture();f['after'][0]['acquisition_qpc']=value;self.assertEqual(evaluate(f)['status'],'REFUSED')
++        f=fixture();f['digital_receipt']['context']['tag']=True;self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_strict_channels_and_record_keys(self):
++        f=fixture();f['after'][0]['channel_indices']=[0,3];self.assertEqual(evaluate(f)['status'],'REFUSED')
++        f=fixture();f['after'][0]['unknown']=1;self.assertEqual(evaluate(f)['status'],'REFUSED')
++    def test_capacity_no_eviction(self):
++        f=fixture();f['after']*=16;self.assertEqual(evaluate(f)['reason'],'RECORD_CAPACITY_EXCEEDED')
++    def test_json_duplicates_nan_custom_text(self):
++        self.assertEqual(m.evaluate_synthetic_fixture('{"x":1,"x":2}')['status'],'REFUSED')
++        self.assertEqual(m.evaluate_synthetic_fixture('{"x":NaN}')['status'],'REFUSED')
++        self.assertEqual(m.evaluate_synthetic_fixture(object())['status'],'REFUSED')
++    def test_incomplete_digital_receipt_is_not_gain_application(self):
++        f=fixture();f['digital_receipt']['spi_complete']=False;self.assertEqual(evaluate(f)['status'],'UNAVAILABLE')
++    def test_production_unavailable(self):
++        r=m.production_entry();self.assertEqual(r['status'],'INPUT_UNAVAILABLE');self.assertIsNone(r['ratio_numerator'])
++        self.assertFalse(r['synthetic']);self.assertFalse(r['commands_emitted'])
++
++if __name__=='__main__':unittest.main(verbosity=2)
+diff --git a/competition/deepeye/tools/diagnostic/r04_adc79/.gitattributes b/competition/deepeye/tools/diagnostic/r04_adc79/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_adc79/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/r04_adc79/README.md b/competition/deepeye/tools/diagnostic/r04_adc79/README.md
+new file mode 100644
+index 0000000..d78855e
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_adc79/README.md
+@@ -0,0 +1,59 @@
++# R04 independent ADC pair seam, main81
++
++Task DEEPEYE-IMPLEMENTATION-20261014/v1; H01-H15/revision1 SHA256
++c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
++A alone board. ActualADC/calibration/settling/gain measurement unavailable;
++R04/all formal gates remain UNSATISFIED. This pure file evaluator opens no
++physical driver, callback, network, clock, Root source, planner or command path.
++
++The default production_entry returns INPUT_UNAVAILABLE with no ratio/command.
++The explicit SYNTHETIC_FIXTURE entry accepts plain bounded JSON text only,
++max65536input bytes and16total records. Floats/NaN/duplicate keys/custom objects,
++unknown root/record fields, bool-as-int, uint63 overflow and invalid timestamps
++are refused. Complete legal missing samples/receipt/calibration/currentQPC
++return unavailable. Every supplied independently decidable duplicate, context,
++clock, capacity and order contradiction is checked before missing returns.
++
++Schema deepeye.r04_adc_pair.v1 requires schema/mode/calibration/digital_receipt/
++baseline_before/after/now_qpc_ns. All times are original uint63 nanoseconds,
++qpc_hz must explicitly be1000000000 and clock IDs must match. The evaluator
++creates no timestamp/origin. A source is eligible only at original now-source
++<=100000000ns; acquisition freshness alone is insufficient. Future and regressed
++acquisitions are refused. Each baseline record precedes the original digital
++completion; after records follow it. That supplied receipt is a digital fact,
++never authentication, observed analog settling or actual gain application.
++
++Each original record carries sample_id/acquisition_qpc/source_qpc/context,
++channel_indices=[0,1,2,3],four raw uint16 channels,opaque uint8 quality and a
++separate explicit boolean quality_eligible. No arbitrary quality-bit semantics
++or uint12 clipping is invented. Context requires uint63 tag/epoch and original
++text boot_id/source_id/clock_id; all supplied bounded additional full context
++fields, strings and large integers are retained and compared exactly. JSON
++matching, tags and hashes cannot authenticate a Root or physical source.
++
++Explicit synthetic calibration carries an ID, full_scale_code and A0/A3 offsets.
++No real full scale or offset is assumed. A0 is the post-PGA channel, A3 the
++independent pre-PGA input. Raw saturation/ineligible quality/nonpositive
++corrected denominator cannot make a ratio. The20%-80% goal applies only to raw
++A0 AFTER adjustment, relative to the supplied full scale. A3 and the baseline
++may legitimately lie below20% when gain is needed. Exact corrected-code integer
++numerator/denominator is returned; no command gain substitutes for measurement.
++The deterministic selection is last baseline/first after; all input records
++remain in the canonical ledger. The entire original canonical input, serialized
++byte length and SHA are retained/counted, including context/calibration/receipt.
++
++NEW81 preserved original79 unexecuted source and repaired context text retention,
++original-now freshness, opaque-quality classification, missing-evidence order
++and the misplaced range target. Eighteen NEW software controls passed; four
++NEW CLI processes produced actual exits0/2/3/3 (synthetic ratio/refusal/stale/
++production unavailable). Each bounded Job was terminal/empty/closed. The main
++checked actual serialized input hashes, raw16/QPC>2^53/full context preservation
++and the exact example32768/8192 ratio. No old79 suite was run; source execution
++is pinned to exact precommit snapshots, never to a later commit.
++
++cli_adc_pair.py --input fixture.json --output result.json writes exclusively;
++exit0 means SYNTHETIC_RATIO_AVAILABLE only, exit2 REFUSED, exit3 unavailable.
++--production remains unavailable. measured_gain_actual=null,
++physical_acceptance=false and commands_emitted=false in every result. No physical
++voltage,8levels/5%,live SPI/ADC or real Root ACK is supplied. Integrating this seam
++with an original A-owned acquisition/calibration owner needs a new operation.
+diff --git a/competition/deepeye/tools/diagnostic/r04_adc79/adc_pair_evaluator.py b/competition/deepeye/tools/diagnostic/r04_adc79/adc_pair_evaluator.py
+new file mode 100644
+index 0000000..9559ed6
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_adc79/adc_pair_evaluator.py
+@@ -0,0 +1,249 @@
++"""Synthetic-only R04 ADC evaluator; no I/O, callbacks, hardware, commands, or physical measurement."""
++from hashlib import sha256
++import json
++
++SCHEMA = "deepeye.r04_adc_pair.v1"
++MODE = "SYNTHETIC_FIXTURE"
++MAX_JSON_BYTES, MAX_RECORDS = 65536, 16
++MAX_U63 = (1 << 63) - 1
++TOP = ("schema", "mode", "calibration", "digital_receipt", "baseline_before", "after", "now_qpc_ns")
++CTX = ("tag", "epoch", "boot_id", "source_id", "clock_id")
++CAL = ("calibration_id", "full_scale_code", "a0_offset_code", "a3_offset_code", "qpc_hz", "clock_id")
++RECEIPT = ("spi_complete", "digital_complete_qpc", "context")
++RECORD = ("sample_id", "acquisition_qpc", "source_qpc", "context", "channel_indices", "channels", "quality", "quality_eligible")
++
++class _Refused(Exception): code = "REFUSED"
++class _Unavailable(Exception): code = "UNAVAILABLE"
++
++def _canon(value):
++    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
++
++def _bad(_token):
++    raise _Refused("FLOAT_OR_NONFINITE_NUMBER")
++
++def _pairs(pairs):
++    out = {}
++    for key, value in pairs:
++        if key in out: raise _Refused("DUPLICATE_JSON_KEY")
++        out[key] = value
++    return out
++
++def _obj(value, keys, where):
++    if type(value) is not dict or set(value) != set(keys):
++        raise _Refused(where + ":EXACT_OBJECT_SCHEMA_REQUIRED")
++    return value
++
++def _arr(value, limit, where):
++    if type(value) is not list or len(value) > limit:
++        raise _Refused(where + ":BOUNDED_LIST_REQUIRED")
++    return value
++
++def _u(value, limit, where):
++    if type(value) is not int or value < 0 or value > limit:
++        raise _Refused(where + ":UNSIGNED_INTEGER_REQUIRED")
++    return value
++
++def _ctx(value):
++    if type(value) is not dict or not set(CTX).issubset(value) or len(value) > 32:
++        raise _Refused("context:COMPLETE_BOUNDED_OBJECT_REQUIRED")
++    context = value
++    for key in ("tag", "epoch"): _u(context[key], MAX_U63, "context." + key)
++    for key in ("boot_id", "source_id", "clock_id"):
++        _text(context[key], "context." + key)
++    budget = [512]
++    def plain(x, depth=0):
++        budget[0] -= 1
++        if depth > 8 or budget[0] < 0: raise _Refused("context:RESOURCE_BOUND")
++        if type(x) is dict:
++            if len(x) > 32: raise _Refused("context:OBJECT_BOUND")
++            for k, v in x.items(): _text(k, "context key"); plain(v, depth+1)
++        elif type(x) is list:
++            if len(x) > 32: raise _Refused("context:ARRAY_BOUND")
++            for v in x: plain(v, depth+1)
++        elif type(x) is str: _text(x, "context text")
++        elif type(x) is int: _u(x, MAX_U63, "context integer")
++        elif type(x) not in (bool, type(None)): raise _Refused("context:PLAIN_JSON_REQUIRED")
++    plain(context)
++    return context
++
++def _text(value, where):
++    if type(value) is not str or not 1 <= len(value) <= 1024: raise _Refused(where+":BOUNDED_ORIGINAL_TEXT_REQUIRED")
++    try: value.encode("utf-8")
++    except UnicodeError as exc: raise _Refused(where+":INVALID_UNICODE") from exc
++    return value
++
++def _cal(value):
++    c = _obj(value, CAL, "calibration")
++    ident = c["calibration_id"]
++    if type(ident) is not str or not 0 < len(ident) <= 128: raise _Refused("calibration_id:BOUNDED_STRING_REQUIRED")
++    try: ident.encode("utf-8")
++    except UnicodeError as exc: raise _Refused("calibration_id:INVALID_UNICODE") from exc
++    fs = _u(c["full_scale_code"], 65535, "full_scale_code")
++    if fs < 1: raise _Refused("full_scale_code:POSITIVE_REQUIRED")
++    for key in ("a0_offset_code", "a3_offset_code"):
++        if type(c[key]) is not int or not -65535 <= c[key] <= 65535:
++            raise _Refused(key + ":SIGNED_INTEGER_REQUIRED")
++    hz = _u(c["qpc_hz"], MAX_U63, "qpc_hz")
++    if hz != 1_000_000_000: raise _Refused("qpc_hz:ORIGINAL_NANOSECOND_CLOCK_REQUIRED")
++    return ident, fs, c["a0_offset_code"], c["a3_offset_code"], hz, _text(c["clock_id"], "calibration.clock_id")
++
++def _receipt(value):
++    r = _obj(value, RECEIPT, "digital_receipt")
++    if type(r["spi_complete"]) is not bool: raise _Refused("spi_complete:BOOLEAN_REQUIRED")
++    return r["spi_complete"], _u(r["digital_complete_qpc"], MAX_U63, "digital_complete_qpc"), _ctx(r["context"])
++
++def _record(value, where):
++    r = _obj(value, RECORD, where)
++    _u(r["sample_id"], MAX_U63, where + ".sample_id")
++    _u(r["acquisition_qpc"], MAX_U63, where + ".acquisition_qpc")
++    _u(r["source_qpc"], MAX_U63, where + ".source_qpc")
++    _ctx(r["context"])
++    indices = _arr(r["channel_indices"], 4, where + ".channel_indices")
++    if any(type(i) is not int for i in indices) or indices != [0, 1, 2, 3]:
++        raise _Refused(where + ":CHANNEL_INDICES_0_TO_3_REQUIRED")
++    channels = _arr(r["channels"], 4, where + ".channels")
++    if len(channels) != 4: raise _Refused(where + ":FOUR_RAW_CHANNELS_REQUIRED")
++    for channel in channels: _u(channel, 65535, where + ".channel")
++    _u(r["quality"], 255, where + ".quality")
++    if type(r["quality_eligible"]) is not bool: raise _Refused(where+":EXPLICIT_QUALITY_ELIGIBILITY_REQUIRED")
++    return r
++
++def _ledger(before, after):
++    entries, chunks = [], []
++    for phase, records in (("baseline_before", before), ("after", after)):
++        for record in records:
++            raw = _canon(record)
++            entries.append({"phase": phase, "sample_id": record["sample_id"], "canonical_json": raw,
++                            "canonical_length_bytes": len(raw.encode("ascii")),
++                            "sha256": sha256(raw.encode("ascii")).hexdigest()})
++            chunks.append(phase + "\n" + raw)
++    digest = sha256("\n".join(chunks).encode("ascii")).hexdigest() if chunks else None
++    return entries, digest
++
++def _out(status, reason, ledger=None, ledger_sha=None, receipt_sha=None, **extra):
++    result = {"status": status, "mode": MODE, "synthetic": True, "reason": reason,
++              "input_authentication": "not_established", "r04_status": "UNSATISFIED",
++              "ratio_numerator": None, "ratio_denominator": None,
++              "baseline_ratio_numerator": None, "baseline_ratio_denominator": None,
++              "measured_gain_actual": None, "physical_acceptance": False,
++              "adc_voltage_measured": False, "real_adc_or_calibration_available": False,
++              "eight_level_measurement_available": False, "five_percent_acceptance": False,
++              "settling_validated": False, "commands_emitted": False,
++              "record_ledger": ledger or [], "ledger_sha256": ledger_sha, "receipt_sha256": receipt_sha}
++    result.update(extra)
++    return result
++
++def production_entry():
++    result = _out("INPUT_UNAVAILABLE", "ROOT_BOOT_CALIBRATION_ADC_AND_CALLBACK_NOT_PROVIDED")
++    result.update({"mode": "PRODUCTION", "synthetic": False})
++    return result
++
++def _parse(text):
++    if type(text) is not str: raise _Refused("INPUT_NOT_PLAIN_JSON_TEXT")
++    try:
++        if len(text.encode("utf-8")) > MAX_JSON_BYTES: raise _Refused("INPUT_BYTES_EXCEEDED")
++        return json.loads(text, object_pairs_hook=_pairs, parse_float=_bad, parse_constant=_bad)
++    except _Refused:
++        raise
++    except (UnicodeError, json.JSONDecodeError, ValueError, RecursionError) as exc:
++        raise _Refused("INVALID_JSON") from exc
++
++def _measure(record, fs, a0_offset, a3_offset, target_window=False):
++    if not record["quality_eligible"]: raise _Unavailable("QUALITY_INELIGIBLE")
++    raw0, raw3 = record["channels"][0], record["channels"][3]
++    if raw0 >= fs or raw3 >= fs: raise _Unavailable("RAW_SATURATED_AT_FIXTURE_FULL_SCALE")
++    a0, a3 = raw0 - a0_offset, raw3 - a3_offset
++    if a3 <= 0: raise _Unavailable("A3_DENOMINATOR_NONPOSITIVE")
++    if a0 <= 0: raise _Unavailable("A0_NONPOSITIVE")
++    if target_window and not (20 * fs <= 100 * raw0 <= 80 * fs):
++        raise _Unavailable("A0_AFTER_OUTSIDE_20_80_PERCENT_FIXTURE_RANGE")
++    return a0, a3
++
++def _evaluate(document):
++    top = _obj(document, TOP, "root")
++    if top["schema"] != SCHEMA or top["mode"] != MODE:
++        raise _Refused("SCHEMA_OR_EXPLICIT_SYNTHETIC_MODE_REQUIRED")
++    before_raw = _arr(top["baseline_before"], MAX_RECORDS, "baseline_before")
++    after_raw = _arr(top["after"], MAX_RECORDS, "after")
++    if len(before_raw) + len(after_raw) > MAX_RECORDS: raise _Refused("RECORD_CAPACITY_EXCEEDED")
++    cal = None if top["calibration"] is None else _cal(top["calibration"])
++    receipt = None if top["digital_receipt"] is None else _receipt(top["digital_receipt"])
++    before = [_record(x, "baseline_before") for x in before_raw]
++    after = [_record(x, "after") for x in after_raw]
++    now = None if top["now_qpc_ns"] is None else _u(top["now_qpc_ns"], MAX_U63, "now_qpc_ns")
++    ledger, ledger_sha = _ledger(before, after)
++    receipt_sha = sha256(_canon(top["digital_receipt"]).encode("ascii")).hexdigest() if receipt is not None else None
++    all_records = before + after
++    context = receipt[2] if receipt is not None else (all_records[0]["context"] if all_records else None)
++    ids = set()
++    for record in all_records:
++        if record["sample_id"] in ids: raise _Refused("DUPLICATE_SAMPLE_ID")
++        ids.add(record["sample_id"])
++        if record["context"] != context: raise _Refused("TRANSACTION_CONTEXT_MISMATCH")
++        if record["source_qpc"] > record["acquisition_qpc"]: raise _Refused("SOURCE_QPC_AFTER_ACQUISITION_QPC")
++        if now is not None and record["acquisition_qpc"] > now: raise _Refused("ACQUISITION_AFTER_ORIGINAL_NOW")
++    for phase, records in (("baseline_before", before), ("after", after)):
++        prev_acq = prev_source = None
++        for record in records:
++            if prev_acq is not None and (record["acquisition_qpc"] <= prev_acq or record["source_qpc"] < prev_source):
++                raise _Refused("TIMESTAMP_REGRESSION_OR_WRAP")
++            prev_acq, prev_source = record["acquisition_qpc"], record["source_qpc"]
++            if receipt is not None and phase == "baseline_before" and (prev_acq >= receipt[1] or prev_source >= receipt[1]):
++                raise _Refused("BEFORE_NOT_BEFORE_DIGITAL_COMPLETE")
++            if receipt is not None and phase == "after" and (prev_acq <= receipt[1] or prev_source <= receipt[1]):
++                raise _Refused("AFTER_NOT_AFTER_DIGITAL_COMPLETE")
++    if before and after and before[-1]["acquisition_qpc"] >= after[0]["acquisition_qpc"]: raise _Refused("BASELINE_AFTER_ORDER")
++    if cal is not None and context is not None and cal[5] != context["clock_id"]: raise _Refused("CALIBRATION_CLOCK_MISMATCH")
++    if not before or not after:
++        return _out("UNAVAILABLE", "BOTH_SAMPLE_SETS_REQUIRED", ledger, ledger_sha, receipt_sha)
++    if receipt is None:
++        return _out("UNAVAILABLE", "DIGITAL_RECEIPT_UNAVAILABLE", ledger, ledger_sha, receipt_sha)
++    complete, digital_qpc, context = receipt
++    if not complete:
++        return _out("UNAVAILABLE", "DIGITAL_SPI_NOT_COMPLETE", ledger, ledger_sha, receipt_sha)
++    if cal is None:
++        return _out("UNAVAILABLE", "CALIBRATION_UNAVAILABLE", ledger, ledger_sha, receipt_sha)
++    if now is None:
++        return _out("UNAVAILABLE", "ORIGINAL_NOW_QPC_UNAVAILABLE", ledger, ledger_sha, receipt_sha)
++    calibration_id, fs, a0_offset, a3_offset, qpc_hz, clock_id = cal
++    if clock_id != context["clock_id"]: raise _Refused("CALIBRATION_CLOCK_MISMATCH")
++    freshness_limit = qpc_hz // 10
++    for record in before + after:
++        if now - record["source_qpc"] > freshness_limit:
++            return _out("UNAVAILABLE", "SOURCE_STALE_BEYOND_100MS", ledger, ledger_sha, receipt_sha)
++    try:
++        baseline_values = [_measure(x, fs, a0_offset, a3_offset) for x in before]
++        after_values = [_measure(x, fs, a0_offset, a3_offset, target_window=True) for x in after]
++    except _Unavailable as exc:
++        return _out("UNAVAILABLE", str(exc), ledger, ledger_sha, receipt_sha)
++    baseline_numerator, baseline_denominator = baseline_values[-1]
++    numerator, denominator = after_values[0]
++    return _out("SYNTHETIC_RATIO_AVAILABLE", "EXACT_INTEGER_RATIO_FROM_EXPLICIT_FIXTURE",
++                ledger, ledger_sha, receipt_sha, ratio_numerator=numerator,
++                ratio_denominator=denominator, baseline_ratio_numerator=baseline_numerator,
++                baseline_ratio_denominator=baseline_denominator,
++                baseline_selected_sample_id=before[-1]["sample_id"],
++                after_selected_sample_id=after[0]["sample_id"],
++                selection_rule="last_baseline_before_and_first_after",
++                sample_count_total=len(before) + len(after), digital_complete_qpc=digital_qpc,
++                qpc_hz=qpc_hz, calibration_id=calibration_id, fixture_full_scale_code=fs,
++                range_20_80_relative_to_fixture_full_scale=True,
++                baseline_independent=True, baseline_command_gain_used=False,
++                synthetic_structural_consistency=True,
++                ratio_scope="synthetic_corrected_code_ratio_not_analog_gain",
++                a0_after_raw=after[0]["channels"][0], a3_after_raw=after[0]["channels"][3],
++                a0_after_corrected=numerator, a3_after_corrected=denominator)
++
++def evaluate_synthetic_fixture(payload_text):
++    try:
++        document = _parse(payload_text)
++        result = _evaluate(document)
++        original_bytes = _canon(document).encode("ascii")
++        result.update(input_canonical_json=original_bytes.decode("ascii"), input_canonical_length_bytes=len(original_bytes),
++                      input_canonical_sha256=sha256(original_bytes).hexdigest(),
++                      record_ledger_canonical_bytes=sum(r["canonical_length_bytes"] for r in result["record_ledger"]))
++        return result
++    except _Refused as exc:
++        return _out("REFUSED", str(exc))
++    except _Unavailable as exc:
++        return _out("UNAVAILABLE", str(exc))
+diff --git a/competition/deepeye/tools/diagnostic/r04_adc79/cli_adc_pair.py b/competition/deepeye/tools/diagnostic/r04_adc79/cli_adc_pair.py
+new file mode 100644
+index 0000000..09ded8c
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_adc79/cli_adc_pair.py
+@@ -0,0 +1,19 @@
++"""Bounded synthetic file evaluator; status is a process result, never hardware I/O."""
++import argparse,json,sys
++from pathlib import Path
++from adc_pair_evaluator import evaluate_synthetic_fixture,production_entry,MAX_JSON_BYTES
++def main():
++    a=argparse.ArgumentParser();a.add_argument('--input',type=Path);a.add_argument('--production',action='store_true');a.add_argument('--output',type=Path,required=True);n=a.parse_args()
++    if n.production:
++        result=production_entry()
++    else:
++        if n.input is None:a.error('explicit synthetic input required')
++        with n.input.open('rb') as f:raw=f.read(MAX_JSON_BYTES+1)
++        if len(raw)>MAX_JSON_BYTES:raise ValueError('input byte limit')
++        result=evaluate_synthetic_fixture(raw.decode('utf-8'))
++    encoded=(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
++    if len(encoded)>1024*1024:raise ValueError('output byte limit')
++    with n.output.open('xb') as f:f.write(encoded)
++    print(json.dumps({'status':result['status'],'physical_acceptance':False,'commands_emitted':False}))
++    return 0 if result['status']=='SYNTHETIC_RATIO_AVAILABLE' else 2 if result['status']=='REFUSED' else 3
++if __name__=='__main__':sys.exit(main())

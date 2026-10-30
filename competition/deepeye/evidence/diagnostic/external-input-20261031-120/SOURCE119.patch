@@ -1,0 +1,220 @@
+diff --git a/competition/deepeye/tools/diagnostic/functional50_input113/API.md b/competition/deepeye/tools/diagnostic/functional50_input113/API.md
+index 047945d..5d74a07 100644
+--- a/competition/deepeye/tools/diagnostic/functional50_input113/API.md
++++ b/competition/deepeye/tools/diagnostic/functional50_input113/API.md
+@@ -135,10 +135,13 @@ uint16 data and are never truncated or relabelled. No legacy adapter,
+ `to_fake_plan103`, old commit fabrication, Host103 import, or fake/current
+ mapping is created.
+ 
+-`staging_shape_ready` is data-shape-only. It is true only when at least one
+-lane is valid, every valid raw value is at most 4095, and both tag and 128-bit
+-build ID are nonzero. It never means current admission, monotonic device tag,
+-loaded build, authenticated boot, physical readiness, or acceptance.
++`staging_shape_ready` describes the accepted neutral uint16 record only and
++requires nonzero tag and 128-bit build ID. Values above4095 and all-invalid
++records remain valid neutral shapes. Its label is
++`NEUTRAL_UINT16_DATA_SHAPE_ONLY`; it does not assert94/codec/Host103 payload
++admissibility. A future specific adapter must validate its profile separately.
++It never means current admission, monotonic device tag, loaded build,
++authenticated boot, physical readiness, or acceptance.
+ 
+ `physical_start(...)` returns exactly:
+ 
+@@ -179,7 +182,7 @@ directory, with a nonexistent output directory whose parent already exists:
+ python test_input113.py --output <FRESH_TEST_OUTPUT>
+ ```
+ 
+-The runner defines 33 in-memory cases, sets `sys.dont_write_bytecode=true`
++The runner defines 34 in-memory cases, sets `sys.dont_write_bytecode=true`
+ before importing the candidate, creates only the supplied output directory with
+ exclusive `parents=False` semantics, writes only `RESULT.json`, and refuses an
+ existing output. It uses no subprocess, network, fixture import, board, MMIO,
+@@ -187,7 +190,8 @@ overlay, SSH, SQL, service, credential, or publication path. Case summaries and
+ an embedded overall exit status are retained in `RESULT.json`.
+ 
+ Expected exit status: `0` all cases pass; `1` a case fails or the 60 second
+-runtime bound is exceeded; `2` setup/output refusal. The serialized result is
++post-return runtime check is exceeded; `2` setup/output refusal. That check
++does not interrupt a hung case; a main-owned Job supervisor is required. The serialized result is
+ bounded below 4 MiB. A later main-owned execution assignment must choose a fresh
+ output directory and run it once under supervision.
+ 
+diff --git a/competition/deepeye/tools/diagnostic/functional50_input113/PINS.json b/competition/deepeye/tools/diagnostic/functional50_input113/PINS.json
+index 49d9a7f..1774958 100644
+--- a/competition/deepeye/tools/diagnostic/functional50_input113/PINS.json
++++ b/competition/deepeye/tools/diagnostic/functional50_input113/PINS.json
+@@ -1,6 +1,6 @@
+ {
+   "schema": "B117_SOURCE_PINS_V1",
+-  "state": "SOURCE_READY_PENDING_MAIN_REVIEW",
++  "state": "MAIN119_CORRECTED_PENDING_FIRST118_SOFTWARE_TEST",
+   "acceptance": false,
+   "self_acceptance": false,
+   "task": {
+@@ -202,5 +202,20 @@
+     "No loaded FPGA build, physical provider, MMIO, ADC, motion, or clock authentication",
+     "No either-H12 physical evidence, original29 completion, final 100MHz/1pct/100ms result, or H01-H15 product acceptance",
+     "No board, Git, network, vendor, service, SQL, credential, or publication action"
+-  ]
++  ],
++  "main119_correction": {
++    "work_id": "B-DEEPEYE-ORIGINAL-INPUT-CORRECTION-20261031-119",
++    "original_source_commit": "c1dc23b5b0052fbabf585b22911449eb63f30d3f",
++    "decision_sha256": "3448851c901a1a6320a18eec1175f7cd60478d563f7751f1a90bd948119435d0",
++    "source117_actual_terminal_completed": true,
++    "runtime_conversation_id": "01a18e07-7bd3-76e1-af24-45a66974a116",
++    "changes": [
++      "documented companion_bytes keyword",
++      "neutraluint16 shape separatefrom legacyuint12 andphysicalauthority; allinvalidrecords preserved",
++      "actualoversizecompanion negativeinput; properJSONsurrogateescape",
++      "newfocusedboundarygroupandactualexecutionphaselabel"
++    ],
++    "expected_focused_groups": 34,
++    "candidate_runs_before_freeze": 0
++  }
+ }
+diff --git a/competition/deepeye/tools/diagnostic/functional50_input113/input113.py b/competition/deepeye/tools/diagnostic/functional50_input113/input113.py
+index 8b44d37..769de02 100644
+--- a/competition/deepeye/tools/diagnostic/functional50_input113/input113.py
++++ b/competition/deepeye/tools/diagnostic/functional50_input113/input113.py
+@@ -460,7 +460,8 @@ def _qpc_sum(origin, tick_us, remainder_ns, path):
+     return total
+ 
+ 
+-def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, companions):
++def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, companion_bytes):
++    companions = companion_bytes
+     if type(request_bytes) is not bytes:
+         _refuse("REQUEST_TYPE")
+     if type(source_scan_bytes) is not bytes:
+@@ -561,8 +562,7 @@ def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, compan
+                                        separators=(",", ":")).encode("utf-8")
+     valid_values = [item["raw_sample_uint16"] for item in lanes if item["mapped_flags"]["valid"]]
+     legacy_numeric = all(value <= 4095 for value in valid_values)
+-    staging_shape = (bool(valid_values) and all(value <= 4095 for value in valid_values)
+-                     and lineage["tag"] != 0 and lineage["build_id_hex128"] != "0" * 32)
++    staging_shape = lineage["tag"] != 0 and lineage["build_id_hex128"] != "0" * 32
+     provenance = dict(envelope["provenance"])
+     provenance.update({"authenticated": False, "declared_only": True})
+     integrity = {
+@@ -590,7 +590,7 @@ def normalize_external_original_scan_v1(request_bytes, source_scan_bytes, compan
+         "legacy_mapping_created": False,
+         "source_fault_is_opaque": True,
+         "staging_shape_ready": staging_shape,
+-        "staging_shape_label": "DATA_SHAPE_ONLY",
++        "staging_shape_label": "NEUTRAL_UINT16_DATA_SHAPE_ONLY",
+         "a_mapping_required_before_original_semantic_binding": True,
+         "source_numerical_association_verified": False,
+     }
+diff --git a/competition/deepeye/tools/diagnostic/functional50_input113/test_input113.py b/competition/deepeye/tools/diagnostic/functional50_input113/test_input113.py
+index 5267302..a9d1b28 100644
+--- a/competition/deepeye/tools/diagnostic/functional50_input113/test_input113.py
++++ b/competition/deepeye/tools/diagnostic/functional50_input113/test_input113.py
+@@ -31,7 +31,7 @@ RECEIVER = 1_010_000_000
+ EVALUATION = 1_050_000_000
+ BUILD = "0123456789abcdef" * 2
+ COMMIT = "0123456789abcdef0123456789abcdef01234567"
+-EXPECTED_CASES = 33
++EXPECTED_CASES = 34
+ MAX_REQUEST_BYTES = 262144
+ MAX_SOURCE_BYTES = 1048576
+ MAX_COMPANION_BYTES = 262144
+@@ -144,8 +144,8 @@ def case_base_synthetic_scan():
+           "invalid freshness classification")
+     check(result.mapping["legacy_host103_numeric_compatible"] is False, "65535 must not be legacy-compatible")
+     check(result.mapping["legacy_host103_numeric_compatibility_label"] == "NON_AUTHORITY", "legacy label")
+-    check(result.mapping["staging_shape_ready"] is False,
+-          "a valid uint16 above 4095 must not claim staging data-shape readiness")
++    check(result.mapping["staging_shape_ready"] is True,
++          "neutral uint16 data shape must remain separate from legacy uint12 compatibility")
+     check(result.authority["execution_route"] == "PURE_UNBOUND_DATA", "route mismatch")
+     check(result.authority["current_source_eligible"] is False, "current source authority invented")
+     check(result.authority["physical_start_authority"] is False, "physical authority invented")
+@@ -194,7 +194,7 @@ def case_nonfinite_rejected():
+ 
+ 
+ def case_surrogate_rejected():
+-    expect_refused("STRING_SURROGATE", raw=b'{"a":"\ud800"}')
++    expect_refused("STRING_SURROGATE", raw=b'{"a":"\\ud800"}')
+ 
+ 
+ def case_unknown_keys_rejected():
+@@ -425,7 +425,7 @@ def case_zero_tag_and_build_preserved():
+     request["lineage"]["build_id_hex128"] = "0" * 32
+     result = normalize(request)
+     check(result.mapping["staging_shape_ready"] is False, "zero tag/build admitted staging data shape")
+-    check(result.mapping["staging_shape_label"] == "DATA_SHAPE_ONLY", "staging label is not bounded")
++    check(result.mapping["staging_shape_label"] == "NEUTRAL_UINT16_DATA_SHAPE_ONLY", "staging label is not bounded")
+ 
+ 
+ def case_provenance_independent_labels():
+@@ -588,7 +588,7 @@ def case_boundary_widths_and_lengths():
+           "uint32 lane index boundary mismatch")
+ 
+     expect_refused("SOURCE_SIZE", source=b"X" * (MAX_SOURCE_BYTES + 1))
+-    oversized_companions = (COMPANIONS[0] + b"x", *COMPANIONS[1:])
++    oversized_companions = (b"X" * (MAX_COMPANION_BYTES + 1), *COMPANIONS[1:])
+     expect_refused("COMPANION_SIZE", companions=oversized_companions)
+ 
+ 
+@@ -625,6 +625,43 @@ def case_deterministic_refusal_no_echo():
+     check(observed[0] == observed[1], "equivalent JSON refusals were nondeterministic")
+ 
+ 
++def case_main_contract_boundaries():
++    request = base_request()
++    raw = encode(request)
++    result = normalize_external_original_scan_v1(
++        request_bytes=raw, source_scan_bytes=SOURCE, companion_bytes=COMPANIONS)
++    check(result.request_bytes == raw and result.companion_bytes == COMPANIONS,
++          "documented keyword call changed original bytes")
++    expect_refused("JSON_INTEGER_RANGE", raw=b'{"n":' + b"9" * 5000 + b"}")
++    expect_refused("JSON_INTEGER_RANGE", raw=b'{"n":9223372036854775808}')
++
++    request = base_request()
++    request["scan"]["origin_qpc_ns"] = MAX63 - 999
++    request["scan"]["acquisition_qpc_ns"] = MAX63
++    request["association"].update(receiver_qpc_ns=MAX63, evaluation_now_qpc_ns=MAX63)
++    for lane in request["scan"]["lanes"]:
++        lane.update(acquisition_qpc_ns=MAX63, acquisition_tick_us=0, acquisition_remainder_ns=999)
++        if lane["mapped_flags"]["valid"]:
++            lane.update(source_qpc_ns=MAX63, source_tick_us=0, source_remainder_ns=999)
++            lane["mapped_flags"]["held"] = False
++            lane["staged_quality_uint4"] &= ~4
++    result = normalize(request)
++    check(result.scan["acquisition_qpc_ns"] == MAX63 and
++          result.scan["lanes"][0]["freshness"]["age_ns"] == 0, "uint63 maximum exact time changed")
++
++    request = base_request()
++    for lane in request["scan"]["lanes"]:
++        lane.update(raw_sample_uint16=None, source_qpc_ns=None, source_tick_us=None,
++                    source_remainder_ns=None, staged_quality_uint4=8)
++        lane["mapped_flags"] = dict(valid=False, saturated=False, held=False, source_fault=True)
++    result = normalize(request)
++    check(result.mapping["valid_lane_count"] == 0 and result.mapping["staging_shape_ready"] is True,
++          "all-invalid neutral record was misclassified as malformed")
++    check(all(lane["raw_sample_uint16"] is None and lane["freshness"]["age_ns"] is None
++              for lane in result.scan["lanes"]), "invalid record gained data or age")
++    check(result.authority["physical_start_authority"] is False, "data shape enabled physical authority")
++
++
+ CASES = (
+     ("base_synthetic_scan", case_base_synthetic_scan),
+     ("empty_request", case_empty_request),
+@@ -659,6 +696,7 @@ CASES = (
+     ("output_metadata_and_hashes", case_output_metadata_and_hashes),
+     ("boundary_widths_and_lengths", case_boundary_widths_and_lengths),
+     ("deterministic_refusal_no_echo", case_deterministic_refusal_no_echo),
++    ("main_contract_boundaries", case_main_contract_boundaries),
+ )
+ 
+ 
+@@ -720,7 +758,7 @@ def main(argv=None):
+         "schema": "B117_FOCUSED_TEST_RESULT_V1",
+         "task_id": TASK_ID,
+         "requirements_sha256": REQ_SHA,
+-        "execution_phase": "FUTURE_FOCUSED_EXECUTION",
++        "execution_phase": "ACTUAL_FOCUSED_SOFTWARE_EXECUTION",
+         "software_only": True,
+         "physical_authority": False,
+         "product_acceptance": False,

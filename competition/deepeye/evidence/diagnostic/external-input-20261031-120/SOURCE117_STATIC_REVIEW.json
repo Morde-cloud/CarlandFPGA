@@ -1,0 +1,63 @@
+{
+  "work_id": "B-DEEPEYE-ORIGINAL-INPUT-SOURCE-20261031-117",
+  "actual_terminal": {
+    "job_id": "child-9acf9a60f6524614b409e875309e37bb",
+    "instance_id": "deepseek-b-82",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-DEEPEYE-ORIGINAL-INPUT-SOURCE-20261031-117",
+    "status": "completed",
+    "terminal": true,
+    "stale": false,
+    "created_at": "2026-10-30T18:33:43.569300Z",
+    "updated_at": "2026-10-30T18:52:24.773254Z",
+    "error": null,
+    "actual_runtime_conversation_id": "01a18e07-7bd3-76e1-af24-45a66974a116",
+    "app_surface_binding_verified": false
+  },
+  "source_files": {
+    "competition/deepeye/tools/diagnostic/functional50_input113/.gitattributes": {
+      "path": "competition/deepeye/tools/diagnostic/functional50_input113/.gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/API.md": {
+      "path": "competition/deepeye/tools/diagnostic/functional50_input113/API.md",
+      "bytes": 9491,
+      "sha256": "a8143df5d1ddedee306437ae303d262cc97a7d42242abb47a9fa82eabdf89345"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/input113.py": {
+      "path": "competition/deepeye/tools/diagnostic/functional50_input113/input113.py",
+      "bytes": 28372,
+      "sha256": "8c4648b106dc4a219b67555eb5c2f946f3c11e3eef3eb4fd19b76c30a54fbe2c"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/PINS.json": {
+      "path": "competition/deepeye/tools/diagnostic/functional50_input113/PINS.json",
+      "bytes": 7482,
+      "sha256": "62436123b683c44c8ecf4bb8b311e845d3ca51cea723da239f1ba573c291efc4"
+    },
+    "competition/deepeye/tools/diagnostic/functional50_input113/test_input113.py": {
+      "path": "competition/deepeye/tools/diagnostic/functional50_input113/test_input113.py",
+      "bytes": 34000,
+      "sha256": "a8be4e4b4ea715f09232d22d85f7305204c91883084d511ed16ed578ac0d5d0b"
+    }
+  },
+  "readonly_dependencies_verified": 11,
+  "syntax_ast_only": true,
+  "candidate_import_or_run": false,
+  "case_count": 33,
+  "status": "SOURCE_DELIVERY_VERIFIED_REQUIRES_MAIN119_CORRECTIONS_BEFORE_EXECUTION",
+  "findings": [
+    "Public function third keyword is companions but documented API says companion_bytes.",
+    "staging_shape_ready incorrectly couples neutral uint16 record to legacyuint12 compatibility and requiresvalidvalues; neutraldata shape must remain distinct, all-invalidrecordpreserved.",
+    "Oversized companion negativecase constructs only originalsmallbody+1 rather than limit+1; willnotreachintendedrefusal."
+  ],
+  "resolved_in_final_worker_source": [
+    "Finalworkeraddedbounded19digitintegerparser+ValueErrorconversion; preliminarybuiltinerrorfindingisresolvedbeforeanyruntime.",
+    "Finalworkeraddedprovenance/schema and explicit opaque lineagehash disclaimers to metadata."
+  ],
+  "historical_context_erratum": "CODE_READY.host103_context.main_independent_raw_review_pending=true is stale; original HOST103_MAIN_REVIEW.json already independentlyverified137raw/34Gitblobs. This worker cannot downgrade that actual history.",
+  "contract_hash": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "formal_acceptance": false,
+  "at_utc": "2026-10-30T18:54:06.423951+00:00"
+}

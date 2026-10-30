@@ -1,0 +1,506 @@
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/CANCEL_CONTRACT.md b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/CANCEL_CONTRACT.md
+new file mode 100644
+index 0000000..a6ba95d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/CANCEL_CONTRACT.md
+@@ -0,0 +1,138 @@
++# Additive50 data-path cancellation source proposal
++
++Task `DEEPEYE-IMPLEMENTATION-20261014/v1`; work
++`B-ADDITIVE50-CONTINUATION-20261030-73`; B owner
++`01a18824-4172-74e2-a13f-f3e3d1e3ed99`. This continues A's original
++`B-DEEPEYE-G05-ADDITIVE50-INTEGRATION-SOURCE-20261029-63` source/design-only
++decision. No test, simulation, compilation, build, clock setting, board
++operation, public ABI, control route or execution release follows.
++
++H01-H15 remain binding at contract
++`f5989cd5defce561f9ba98e6b18fc2682945f0a2`, requirements SHA256
++`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`,
++freeze `1011259415a0916054eb580687612580bc1e5f09`. Full game3D/UI,
++edge-only cube/solid collisions/free camera/layout/faces/equal gates/complete
++passage, hidden truth/causal observations/online3D/substantive PC AI and both
++H12 paths are preserved. Original100MHz and final1pct/100ms gates remain.
++
++## Concrete source change
++
++The minimum top gains a same-clock active-high `source_cancel` input. Root
++must drive it explicitly in the proposed fabric clock domain; it is not a
++new MMIO register or an external asynchronous input synchronizer.
++
++```mermaid
++flowchart LR
++  ROOT["Root source_cancel: synchronous, policy owned by A"] --> CAP["capture STOP: disarm + discard partial/held capture"]
++  ROOT --> QUEUE["raw queue cancel: flush entries"]
++  ROOT --> LANE["lane cancel: drop remaining lanes"]
++  ROOT --> SAMPLE["pending sample: clear"]
++  ROOT --> TRACE["payload / serializer / UART cancel"]
++  CAP --> EMPTY["post-cancel data_path_quiescent: local fact"]
++  QUEUE --> EMPTY
++  LANE --> EMPTY
++  SAMPLE --> EMPTY
++  TRACE --> EMPTY
++  EXEC["A G05 STOP / PC executor STOP"] --> WORLD["separate action retirement + actual world feedback"]
++```
++
++| Stage | Connection in the proposed top | Local consequence after a cancelling edge |
++| --- | --- | --- |
++| raw capture | `stop = capture_stop || source_cancel` | STOP takes priority over rearm; disarms and drops partial/held scan |
++| raw queue | `cancel = queue_cancel || source_cancel` | buffered entries are aborted |
++| lane stream | `cancel = lane_cancel || source_cancel` | remaining lanes are dropped |
++| association/sample | match is gated off; cancellation clears pending sample | no new descriptor/sample handshake during cancellation |
++| TRACE composition | `cancel = source_cancel` | payload, serializer and UART cancel via their existing common input |
++
++Existing `capture_stop`, `queue_cancel` and `lane_cancel` retain their local
++meanings. `source_cancel` provides one explicit data-path abort across them.
++It does **not** drive G05 STOP, revoke a PC action, or prove a simulator/world
++has stopped. No ACK receiver, Root receipt protocol or retry is implemented.
++
++## Local indication and recovery
++
++`data_path_quiescent` is qualified by a latch set only after a cancelling
++clock edge. It also requires reset released, no rearm request, capture
++disarmed/partial-empty, queue empty, no queue output, no lane output, no
++pending raw sample and TRACE not busy. Without the post-cancel latch a
++disarmed capture could still hold an internal completed scan that has not
++entered the raw queue; ordinary idle or fault state must not be called empty.
++Reset and a fresh rearm revoke this indication.
++
++This Boolean is a local structural observation. It is not a health flag,
++transport delivery/ACK, command retirement, acquisition/source authenticity,
++physical motion STOP or either H12 acceptance. Its behavior remains
++unexecuted and unverified. The default `SOURCE_REVIEW_HOLD=1` also holds this
++indication false.
++
++Releasing `source_cancel` does not rearm capture. Root must make a separate
++explicit rearm/tag and resolve all old operation/source/frame records. No
++old descriptor, sample, action or unknown result is retried automatically.
++Root must invalidate the cancelled binding/receipt and provide an explicitly
++associated fresh private transport view before later admission. The actual
++Root policy, retained records and cross-component confirmation are absent.
++
++Cancellation cannot recall bytes already emitted or a complete frame already
++received. UART returns to idle through its existing cancellation behavior;
++the receiver must discard partial frames and Root must reject cancelled
++operation/frame identities even if a full CRC-valid frame arrived earlier.
++Root must preserve prior error/status evidence before clearing local state.
++This proposal creates no authentication or protocol BOOT.
++
++## Adapter producer-valid correction
++
++The R2 adapter computed `payload_cfg_valid` by reading `blk_ready` before
++assigning `blk_ready` later in the same `always_comb` block. A procedural
++combinational block need not run again for changes to a variable it itself
++writes. When inflight state clears and a new descriptor is already valid,
++that ordering can expose ready while the forwarded valid still uses an old
++ready value. The UART wrapper currently serializes descriptors, which limits
++reachability in this minimum top; the generic adapter interface should not
++rely on that accidental spacing.
++
++The proposed equation is `blk_valid && !inflight_q && cfg_block_ok`.
++Producer-valid no longer depends on ready. Inner cfg_ready still determines
++acceptance; bad metadata is consumed through the existing explicit refusal
++path. This is static source reasoning, not a reproduced simulator failure
++or proof of all handshake timing.
++
++The sensitivity rule is also discussed in the primary
++[Accellera SV-BC archive](https://accellera.org/images/eda/sv-bc/1859.html).
++Its application to this adapter is main's static inference. No simulator
++result is claimed.
++
++## Independent finding F1: implicit gate withdrawal
++
++The independent audit examined unchanged72 base `b01d9fdb...`. Main accepts
++the specific scenario where profile/transport permission withdraws **before
++the pending raw sample handshake**. The UART wrapper cancels without a normal
++result, so the earlier top could retain a pending sample and block all later
++associations. The report's broader before-REPORT wording is not sufficient:
++once the raw sample has transferred, the top has already cleared that slot.
++The present top is default-closed; this is a latent activation-path concern.
++
++The wrapper now exports its actual `cancel_active` level, including explicit
++cancel, profile/transport withdrawal or invalid clock/baud. The top uses the
++same level to suppress descriptor admission and clear pending state at the
++cancelling edge. Raw queues are globally flushed only by explicit
++`source_cancel`; implicit wrapper cancellation is not called global STOP.
++
++The wrapper also records `transaction_aborted` as one registered local pulse
++when non-reset cancellation finds an accepted, outstanding transaction. An
++active latch is cleared by a consumed normal result or cancellation, so held
++cancel does not repeatedly report the same transaction. Reset clears this
++local account without an abort pulse; Root must invalidate reset context.
++The top exposes the pulse as `trace_transaction_aborted`. Root must retain
++the full identity from the original accepted association and correlate this
++local event with that single outstanding descriptor. It is not a wire ACK,
++delivery claim, source authentication, action retirement or automatic retry.
++All of these transition expectations remain unexecuted static reasoning.
++
++## Remaining work
++
++A must review the new ports, actual common-clock/reset topology and real
++Root cancellation/receipt/retirement policy before any bounded execution.
++Both H12 paths, global motion STOP/ACK, aggregation, actual source/QPC/full
++identity/quality/calibration/pose/action/admission records, physical link
++and final timing/compression/latency remain unaccepted. Handwritten cancel
++scenarios are proposed future checks only; every runtime stage is not_run.
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/README.md b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/README.md
+index b9a7bdd..4ab7d14 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/README.md
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/README.md
+@@ -102,8 +102,9 @@ the transaction; the lane component holds its corresponding raw lane. There
+ is no automatic mismatch timeout. This is a text correction, not behavioral
+ verification. The original R1 snapshot and review remain preserved.
+ 
+-The other gaps remain explicit. Trace cancel is tied low in this disabled
+-minimum top; capture STOP and G05 STOP do not implement a common system STOP.
++The other gaps remain explicit. At R2, trace cancel was tied low in the disabled
++minimum top; capture STOP and G05 STOP did not implement a common system STOP.
++Source73 below adds local data-path cancellation; motion STOP remains separate.
+ No host/Root receipt ACK or retry is connected, and a local result is consumed
+ without that end-to-end acknowledgement. Raw quality needs Root's actual
+ mapping; no payload quality field establishes health. Exact 100ms freshness
+@@ -112,3 +113,31 @@ singleton is associated end to end. Full Root identity/time/source/pose/action
+ records, control admission, both H12 paths and physical topology are absent.
+ These gaps need A review and further authorized implementation; they are not
+ closed by this static handoff.
++
++## Source73 cancellation and adapter lifetime update
++
++The new [data-path cancellation contract](CANCEL_CONTRACT.md) specifies a
++Root-owned synchronous `source_cancel` input across raw capture, queue,
++lane, pending sample and payload/serializer/UART. Its post-cancel
++`data_path_quiescent` output describes an empty/disarmed local data path.
++Reset and rearm revoke that indication. It is not motion STOP, source health,
++host ACK, action retirement, delivery or product acceptance. Already emitted
++bytes/full frames require Root invalidation of cancelled identities.
++
++The adapter's producer-valid equation no longer reads a ready variable that
++is assigned later in the same combinational procedure. Legal cfg_valid is
++independent of ready; refusal remains explicit. This is a source correction,
++not a reproduced test pass or liveness proof. The independent Flash audit
++inspected the exact unchanged72 base; main adjudicates its findings and the
++new source separately. New cancel scenarios are handwritten and unexecuted.
++
++The wrapper also exports the same cancellation level to the top pending
++state, addressing the audit's pre-sample-transfer gate-withdrawal finding.
++A local `trace_transaction_aborted` pulse records a non-reset cancellation
++of one accepted outstanding descriptor. It is not ACK/delivery/retirement;
++Root retains the accepted full identity. Reset invalidates context separately.
++
++All review hold/profile/transport/baud defaults remain closed. Global motion
++STOP/ACK/Root receipt/retry, complete source/QPC/identity/quality/pose/action
++context, both H12 routes and final physical/system gates remain open. A must
++review new ports and actual Root policy before any execution release.
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv
+index 01da031..6fe1b3f 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_integration_50mhz_candidate.sv
+@@ -25,6 +25,10 @@ module deepeye_integration_50mhz_candidate #(
+     input logic [15:0] sample_data,
+     input logic [63:0] sample_tick,
+     input logic [7:0] sample_quality,
++    // Root-owned synchronous DATA-PATH cancellation only. This disarms raw
++    // capture and flushes queued/lane/sample/codec/serializer/UART state.
++    // It is not G05/PC motion STOP, a host ACK, or a retired world action.
++    input logic source_cancel,
+     input logic capture_stop,
+     input logic capture_rearm,
+     input logic [31:0] capture_rearm_tag,
+@@ -60,10 +64,14 @@ module deepeye_integration_50mhz_candidate #(
+ 
+     // Unproduced Root-owned blocking UART boundary. Physical pin/profile unset.
+     output logic trace_uart_tx,
++    output logic trace_transaction_aborted,
+     output logic trace_result_valid, output logic [2:0] trace_result_error,
+     output logic [5:0] trace_result_bytes,
+     output logic [3:0] trace_refusal_code,
+     output logic trace_wire_faulted, trace_transport_profile_unset,
++    // Empty/disarmed internal data path; not source health or movement STOP.
++    // Root must record the cancellation and invalidate any partial wire frame.
++    output logic data_path_quiescent,
+     output logic capture_fault_event, capture_sequence_exhausted,
+     output logic [31:0] capture_discarded_samples,
+ 
+@@ -109,8 +117,8 @@ module deepeye_integration_50mhz_candidate #(
+     logic [31:0] cap_queue_accepted, cap_queue_retired, cap_queue_aborted;
+ 
+     deepeye_buffered_scan_capture capture_i (
+-        .clk(fclk50_candidate), .rst(trace_rst), .stop(capture_stop),
+-        .rearm(capture_rearm), .queue_cancel(queue_cancel),
++        .clk(fclk50_candidate), .rst(trace_rst), .stop(capture_stop || source_cancel),
++        .rearm(capture_rearm), .queue_cancel(queue_cancel || source_cancel),
+         .sample_strobe(sample_strobe), .rearm_tag(capture_rearm_tag),
+         .sample_channel(sample_channel), .sample_data(sample_data),
+         .sample_tick(sample_tick), .sample_quality(sample_quality),
+@@ -143,7 +151,7 @@ module deepeye_integration_50mhz_candidate #(
+     logic [31:0] lane_first_seq, lane_last_seq, lane_tag;
+ 
+     deepeye_scan_lane_stream lane_i (
+-        .clk(fclk50_candidate), .rst(trace_rst), .cancel(lane_cancel),
++        .clk(fclk50_candidate), .rst(trace_rst), .cancel(lane_cancel || source_cancel),
+         .in_valid(cap_out_valid), .in_ready(cap_out_ready), .in_data(cap_out_data),
+         .in_ticks(cap_out_ticks), .in_quality(cap_out_quality),
+         .in_first_seq(cap_out_first_seq), .in_last_seq(cap_out_last_seq),
+@@ -154,9 +162,9 @@ module deepeye_integration_50mhz_candidate #(
+ 
+     logic trace_blk_valid, trace_blk_ready;
+     logic trace_s_valid, trace_s_ready;
+-    logic trace_result_ready;
+-    logic sample_pending_q;
+-    wire assoc_match = !sample_pending_q && lane_valid && assoc_valid &&
++    logic trace_result_ready, trace_busy, trace_cancel_active;
++    logic sample_pending_q, source_cancelled_q;
++    wire assoc_match = !trace_rst && !source_cancel && !trace_cancel_active && !sample_pending_q && lane_valid && assoc_valid &&
+         (assoc_tag == lane_tag) &&
+         (assoc_first_seq == lane_first_seq) &&
+         (assoc_last_seq == lane_last_seq) &&
+@@ -174,7 +182,12 @@ module deepeye_integration_50mhz_candidate #(
+ 
+     logic [15:0] sample_data_q;
+     always_ff @(posedge fclk50_candidate) begin
+-        if (trace_rst) begin
++        if (trace_rst) source_cancelled_q <= 1'b0;
++        else if (source_cancel) source_cancelled_q <= 1'b1;
++        else if (capture_rearm) source_cancelled_q <= 1'b0;
++    end
++    always_ff @(posedge fclk50_candidate) begin
++        if (trace_rst || source_cancel || trace_cancel_active) begin
+             sample_pending_q <= 1'b0;
+             sample_data_q <= 16'd0;
+         end else begin
+@@ -194,7 +207,7 @@ module deepeye_integration_50mhz_candidate #(
+     deepeye_trace_block_uart_50mhz_candidate #(
+         .CLOCK_HZ(CLOCK_HZ), .BAUD(BAUD), .STAT_W(32)
+     ) trace_i (
+-        .clk(fclk50_candidate), .rst(trace_rst), .cancel(1'b0),
++        .clk(fclk50_candidate), .rst(trace_rst), .cancel(source_cancel),
+         // No public v2 semantic or transport profile is activated by this top.
+         .profile_v2_authorized(1'b0), .transport_allowed(1'b0),
+         .blk_valid(trace_blk_valid), .blk_ready(trace_blk_ready),
+@@ -220,9 +233,21 @@ module deepeye_integration_50mhz_candidate #(
+         .tx(trace_uart_tx), .result_valid(trace_result_valid),
+         .result_ready(trace_result_ready), .result_error(trace_result_error),
+         .result_bytes(trace_result_bytes), .last_refusal_code(trace_refusal_code),
+-        .busy(), .wire_faulted(trace_wire_faulted),
++        .cancel_active(trace_cancel_active),
++        .transaction_aborted(trace_transaction_aborted),
++        .busy(trace_busy), .wire_faulted(trace_wire_faulted),
+         .transport_profile_unset(trace_transport_profile_unset));
+     assign trace_result_ready = 1'b1;
++    // Qualify this indication only after an actual source_cancel edge. A
++    // merely disarmed capture can still hold a completed internal scan slot.
++    assign data_path_quiescent = source_cancelled_q && !trace_rst && !capture_rearm && !cap_armed
++        && (cap_partial_len == 0) && (cap_queue_level == 0) && !cap_out_valid
++        && !lane_valid && !sample_pending_q && !trace_busy;
++    // source_cancel beats capture_rearm at the capture primitive. Releasing
++    // cancel does not rearm it. Root must issue a fresh explicit rearm/tag and
++    // private transport binding; never replay an old descriptor automatically.
++    // Already emitted bytes cannot be recalled. Quiescence is a local digital
++    // observation only and says nothing about g05_i or a PC/world executor.
+ 
+     deepeye_g05_axi_50mhz_candidate g05_i (
+         .s_axi_aclk(fclk50_candidate),
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv
+index dd3d16f..9068081 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv
+@@ -127,7 +127,11 @@ module deepeye_trace_block_payload_1us_candidate (
+                      && ((blk_e==0)||(blk_e==1)||(blk_e==2)||(blk_e==4)||(blk_e==8))
+                      && cfg_time_ok && cfg_size_ok && !rst && !cancel;
+ 
+-        payload_cfg_valid = blk_valid && blk_ready && cfg_block_ok;
++        // Independent producer-valid: never read blk_ready before its later
++        // procedural assignment in this always_comb block. Legal metadata is
++        // held by the caller until blk_valid && blk_ready; the inner encoder
++        // alone supplies cfg_ready. Illegal metadata is consumed as refusal.
++        payload_cfg_valid = blk_valid && !inflight_q && cfg_block_ok;
+         blk_ready = !rst && !cancel && !inflight_q &&
+                     (payload_cfg_ready || !cfg_block_ok);
+         s_ready = payload_s_ready;
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv
+index a2f5682..2304840 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv
+@@ -39,6 +39,11 @@ module deepeye_trace_block_uart_50mhz_candidate #(
+     output logic result_valid, input logic result_ready,
+     output logic [2:0] result_error, output logic [5:0] result_bytes,
+     output logic [3:0] last_refusal_code,
++    // Shared cancellation level, not completion/health/authorization.
++    output logic cancel_active,
++    // One registered pulse for a non-reset cancel of an accepted outstanding
++    // descriptor. Root retains its full accepted identity; no wire ACK implied.
++    output logic transaction_aborted,
+     output logic busy, wire_faulted, transport_profile_unset
+ );
+     localparam bit CLOCK_VALID = (CLOCK_HZ == 50000000);
+@@ -52,7 +57,7 @@ module deepeye_trace_block_uart_50mhz_candidate #(
+     logic [7:0] epoch_q;
+     logic [15:0] seq_q;
+     logic [5:0] expected_total_q;
+-    logic fault_report_pending_q;
++    logic fault_report_pending_q, transaction_active_q;
+ 
+     logic adapter_blk_ready, adapter_refusal_valid, adapter_s_ready;
+     logic [3:0] adapter_refusal_code;
+@@ -72,6 +77,7 @@ module deepeye_trace_block_uart_50mhz_candidate #(
+ 
+     wire candidate_cancel = cancel || !profile_v2_authorized || !transport_allowed || !CLOCK_VALID || !BAUD_VALID;
+     wire enabled = !rst && !candidate_cancel;
++    assign cancel_active = candidate_cancel;
+     wire serializer_cfg_valid = (state_q==WAIT_META) && payload_meta_valid &&
+         (payload_meta_error==0) && serializer_cfg_ready && enabled;
+     wire adapter_blk_valid = blk_valid && (state_q==IDLE) &&
+@@ -137,6 +143,23 @@ module deepeye_trace_block_uart_50mhz_candidate #(
+         .in_ready(uart_in_ready), .in_data(serializer_out_data), .tx(tx),
+         .busy(uart_busy), .stat_accepted(), .stat_completed(), .stat_aborted());
+ 
++    always_ff @(posedge clk) begin
++        if (rst) begin
++            transaction_active_q <= 1'b0;
++            transaction_aborted <= 1'b0;
++        end else begin
++            transaction_aborted <= 1'b0;
++            if (candidate_cancel) begin
++                transaction_aborted <= transaction_active_q;
++                transaction_active_q <= 1'b0;
++            end else if (adapter_blk_valid && adapter_blk_ready) begin
++                transaction_active_q <= 1'b1;
++            end else if (result_valid && result_ready) begin
++                transaction_active_q <= 1'b0;
++            end
++        end
++    end
++
+     always_ff @(posedge clk) begin
+         if (rst || candidate_cancel) begin
+             state_q <= IDLE;
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_contract.json b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_contract.json
+index 660f5d6..87abfc3 100644
+--- a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_contract.json
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_contract.json
+@@ -1,7 +1,7 @@
+ {
+   "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+   "task_version": 1,
+-  "operation_id": "B-DEEPEYE-G05-ADDITIVE50-SOURCE-20261030-72",
++  "operation_id": "B-DEEPEYE-ADDITIVE50-CANCEL-SOURCE-20261030-73",
+   "original_A_work": "B-DEEPEYE-G05-ADDITIVE50-INTEGRATION-SOURCE-20261029-63",
+   "A_decision_url": "https://github.com/carolwjade/CarlandFPGA/pull/30#issuecomment-6500172372",
+   "A_body_sha256": "3f36d48aa5655f42f8b4756ad7c03af0bb3fce022d753fa3e7ea435d72c7aa34",
+@@ -41,12 +41,16 @@
+   "control": "hostalwaysrouteNONE/commandNone; noC29calls, Rootactualsource/poses/actions/receiptsstillmissing",
+   "original100_commit": "0b7c12fbbf91a1bad0dc1755890f5c88d348479b",
+   "C29_source": "2210ca5f32e4e806651a6b06d0e2d9710d78e773",
+-  "post_review": "R2: producer-valid independent of ready; external association hold contract explicit; no candidate execution",
++  "post_review": "Source73: explicit localdata-pathcancel/post-cancel quiescence; independent adapter producer-valid; source-only unexecuted",
+   "unresolved_integration": [
+     "No global trace/capture/G05 STOP",
+     "No host/Root receipt ACK or retry",
+     "Only singleton top/host association",
+     "Actual Root bindings, quality/calibration, QPC/source/poses/actions missing",
+     "Both H12 routes unactivated; physical topology/baud/reset/build unreleased"
+-  ]
++  ],
++  "previous_source_operation": "B-DEEPEYE-G05-ADDITIVE50-SOURCE-20261030-72",
++  "source_cancel": "Root synchronous input; flush/disarm data path; no G05/PC/worldSTOP, ACK or action retirement",
++  "data_path_quiescent": "post-cancelqualified empty/disarmed structural indication; reset/rearm revoke; not health/delivery/motion proof",
++  "new_vectors": "source_vectors_cancel_unexecuted.json"
+ }
+diff --git a/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_vectors_cancel_unexecuted.json b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_vectors_cancel_unexecuted.json
+new file mode 100644
+index 0000000..dd0ad60
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/source_vectors_cancel_unexecuted.json
+@@ -0,0 +1,93 @@
++{
++  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
++  "task_version": 1,
++  "operation_id": "B-DEEPEYE-ADDITIVE50-CANCEL-SOURCE-20261030-73",
++  "requirements_ids": [
++    "H01",
++    "H02",
++    "H03",
++    "H04",
++    "H05",
++    "H06",
++    "H07",
++    "H08",
++    "H09",
++    "H10",
++    "H11",
++    "H12",
++    "H13",
++    "H14",
++    "H15"
++  ],
++  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
++  "status": "UNEXECUTED_HANDWRITTEN_SCENARIOS",
++  "simulation": "not_run",
++  "tests": "not_run",
++  "cases": [
++    {
++      "id": "cancel_before_join",
++      "given": "source_cancel=1 and matching lane/association valid",
++      "proposed_expected": "No joined descriptor admission; all source stages cancel at next edge"
++    },
++    {
++      "id": "cancel_pending_raw",
++      "given": "accepted descriptor, pending raw sample, cancel before sample ready",
++      "proposed_expected": "Pending sample cleared; codec/serializer/UART cancelled; no success result inferred"
++    },
++    {
++      "id": "cancel_wait_metadata",
++      "given": "encoder waiting for metadata or refusal",
++      "proposed_expected": "Cancel retires local state by discard; Root must invalidate pending receipt"
++    },
++    {
++      "id": "cancel_partial_frame",
++      "given": "UART has emitted an arbitrary prefix or complete frame",
++      "proposed_expected": "Bytes cannot be recalled; receiver and Root must invalidate cancelled identity even if CRC-valid"
++    },
++    {
++      "id": "cancel_with_rearm",
++      "given": "source_cancel=1 and capture_rearm=1",
++      "proposed_expected": "Capture STOP wins; quiescent output held false while rearm asserted"
++    },
++    {
++      "id": "release_cancel",
++      "given": "source_cancel falls, no new capture_rearm",
++      "proposed_expected": "Capture remains disarmed; no automatic replay; post-cancel local quiescence may be observed"
++    },
++    {
++      "id": "rearm_after_cancel",
++      "given": "explicit new Root capture_rearm/tag after cancellation",
++      "proposed_expected": "Post-cancel indication revoked; new Root binding required before later admission"
++    },
++    {
++      "id": "capture_disarmed_with_held_slot",
++      "given": "capture became disarmed by fault/sequence exhaustion, no source_cancel edge",
++      "proposed_expected": "No post-cancel qualification; data_path_quiescent must not claim arbitrary idle"
++    },
++    {
++      "id": "cancel_g05_running",
++      "given": "data path cancelled while independently admitted G05 command remains active",
++      "proposed_expected": "Local quiescence says nothing about PWM or world movement; A must separately STOP/retire"
++    },
++    {
++      "id": "adapter_next_valid",
++      "given": "inflight clears with new legal blk_valid already high",
++      "proposed_expected": "Forwarded cfg_valid independent of procedural old blk_ready; acceptance still waits inner cfg_ready"
++    },
++    {
++      "id": "F1_gate_withdrawal",
++      "given": "Accepted descriptor, raw sample still pending; profile/transport gate withdraws before raw handshake",
++      "proposed_expected": "Shared cancel_active clears pending at cancelling edge; local abort pulse marks this outstanding descriptor; Root must invalidate its accepted identity, not ACK/retry it"
++    },
++    {
++      "id": "abort_held",
++      "given": "candidate_cancel held for multiple clock edges after an accepted outstanding transaction",
++      "proposed_expected": "One local transaction_aborted pulse at first non-reset cancelling edge; no repeated pulse after active latch clears"
++    },
++    {
++      "id": "abort_after_result",
++      "given": "Prior result valid/ready already retired the descriptor; later cancellation occurs",
++      "proposed_expected": "No abort pulse for the already retired descriptor; reset separately invalidates context without an abort pulse"
++    }
++  ]
++}

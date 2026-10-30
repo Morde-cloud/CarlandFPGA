@@ -1,0 +1,144 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ADDITIVE50-CONTINUATION-20261030-73",
+  "at_utc": "2026-10-30T03:27:11.952586+00:00",
+  "review": "Static source consistency only; not simulator/compiler/elaborator/test",
+  "selected_source_files": {
+    "rtl/deepeye_g05_axi_50mhz_candidate.sv": {
+      "size": 16077,
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a"
+    },
+    "rtl/deepeye_g05_capture_engine_50mhz.sv": {
+      "size": 33796,
+      "sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a"
+    },
+    "rtl/deepeye_g05_command_map_50mhz.sv": {
+      "size": 2377,
+      "sha256": "8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1"
+    },
+    "rtl/deepeye_g05_curvature_rom_50mhz.svh": {
+      "size": 1960,
+      "sha256": "d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c"
+    },
+    "rtl/deepeye_g05_profile_50mhz.sv": {
+      "size": 1794,
+      "sha256": "8ec9bf0415e2ce5e87d2a793260bf635664f16584e2cb842df1fefba75e64307"
+    },
+    "rtl/deepeye_integration_50mhz_candidate.sv": {
+      "size": 14880,
+      "sha256": "72fcb3c7f24bf72af55946622fad3a2f378a90fbdf2264eb248192780595e03a"
+    },
+    "rtl/deepeye_trace_block_payload_1us_candidate.sv": {
+      "size": 10545,
+      "sha256": "5ebe65dfe0844aab62365e8664507f153cb75ff47b3c8d4e10f45356e94147a8"
+    },
+    "rtl/deepeye_trace_block_uart_50mhz_candidate.sv": {
+      "size": 11631,
+      "sha256": "b153fa2d43374913ea84a501ce7aa713a0bdb9a4e05d143a5da715e274eea70d"
+    },
+    "host/deepeye_transport50_source_candidate.py": {
+      "size": 12535,
+      "sha256": "1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768"
+    }
+  },
+  "named_connection_observations": [
+    {
+      "file": "deepeye_g05_axi_50mhz_candidate.sv",
+      "module": "deepeye_g05_capture_engine_50mhz",
+      "instance": "engine_i",
+      "named_ports": 30,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_g05_axi_50mhz_candidate.sv",
+      "module": "deepeye_g05_command_map_50mhz",
+      "instance": "map_i",
+      "named_ports": 14,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_g05_capture_engine_50mhz.sv",
+      "module": "deepeye_pwm_coherent_capture",
+      "instance": "u_capture",
+      "named_ports": 25,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_g05_capture_engine_50mhz.sv",
+      "module": "deepeye_g05_stop_factored_pwm_50mhz",
+      "instance": "u_pwm",
+      "named_ports": 22,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_integration_50mhz_candidate.sv",
+      "module": "deepeye_buffered_scan_capture",
+      "instance": "capture_i",
+      "named_ports": 36,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_integration_50mhz_candidate.sv",
+      "module": "deepeye_scan_lane_stream",
+      "instance": "lane_i",
+      "named_ports": 21,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_integration_50mhz_candidate.sv",
+      "module": "deepeye_g05_axi_50mhz_candidate",
+      "instance": "g05_i",
+      "named_ports": 27,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_integration_50mhz_candidate.sv",
+      "module": "deepeye_trace_block_uart_50mhz_candidate",
+      "instance": "trace_i",
+      "named_ports": 47,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_trace_block_payload_1us_candidate.sv",
+      "module": "deepeye_trace_payload_candidate",
+      "instance": "payload_unit",
+      "named_ports": 31,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_trace_block_uart_50mhz_candidate.sv",
+      "module": "deepeye_uart_tx",
+      "instance": "uart",
+      "named_ports": 11,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_trace_block_uart_50mhz_candidate.sv",
+      "module": "deepeye_wire_serializer",
+      "instance": "serializer",
+      "named_ports": 28,
+      "missing_output_ports": []
+    },
+    {
+      "file": "deepeye_trace_block_uart_50mhz_candidate.sv",
+      "module": "deepeye_trace_block_payload_1us_candidate",
+      "instance": "payload_stage",
+      "named_ports": 44,
+      "missing_output_ports": []
+    }
+  ],
+  "python_AST": "Parsed only; candidate not imported/called; all function bodies remain unexecuted",
+  "source_findings": [
+    "One FCLK50 proposal feeds acquisition/codec/UART/AXI, with explicit unexecuted reset contract",
+    "Removed duplicate cap_out_ready driver; loader sample-phase stall corrected in source",
+    "Canonical50mapper retains original10064bitmath andROM; new constants/module names only",
+    "PrivateE4/rev2/relative1us source proposal; fullidentity and originaltime companion records mandatory",
+    "Defaultclosed source-review hold and fixed0profile/transport activation; no live control path"
+  ],
+  "limits": [
+    "Regex named-port audit does not prove syntax/elaboration, widths, behavioral correctness, deadlock freedom or CDC",
+    "No simulation/unit tests/synthesis/route/clock setting/board/Root acceptance performed",
+    "Source-only vectors remain proposed expected values, not execution evidence"
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-ADDITIVE50-CANCEL-SOURCE-20261030-73",
+  "work_id": "B-ADDITIVE50-CONTINUATION-20261030-73",
+  "quality_main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-10-30T03:27:49.272433+00:00",
+  "decision": "ready_for_source_design_review_only",
+  "base_commit": "b01d9fdb9e9090bdaae730e8f859e265b9f62943",
+  "candidate_executed": false,
+  "product_acceptance": false,
+  "formal_acceptance": false,
+  "scope": "Artifact/hash/AST/syntactic named-port review and symbolic source reasoning only",
+  "selected_source_files": {
+    "rtl/deepeye_g05_axi_50mhz_candidate.sv": {
+      "size": 16077,
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a"
+    },
+    "rtl/deepeye_g05_capture_engine_50mhz.sv": {
+      "size": 33796,
+      "sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a"
+    },
+    "rtl/deepeye_g05_command_map_50mhz.sv": {
+      "size": 2377,
+      "sha256": "8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1"
+    },
+    "rtl/deepeye_g05_curvature_rom_50mhz.svh": {
+      "size": 1960,
+      "sha256": "d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c"
+    },
+    "rtl/deepeye_g05_profile_50mhz.sv": {
+      "size": 1794,
+      "sha256": "8ec9bf0415e2ce5e87d2a793260bf635664f16584e2cb842df1fefba75e64307"
+    },
+    "rtl/deepeye_integration_50mhz_candidate.sv": {
+      "size": 14880,
+      "sha256": "72fcb3c7f24bf72af55946622fad3a2f378a90fbdf2264eb248192780595e03a"
+    },
+    "rtl/deepeye_trace_block_payload_1us_candidate.sv": {
+      "size": 10545,
+      "sha256": "5ebe65dfe0844aab62365e8664507f153cb75ff47b3c8d4e10f45356e94147a8"
+    },
+    "rtl/deepeye_trace_block_uart_50mhz_candidate.sv": {
+      "size": 11631,
+      "sha256": "b153fa2d43374913ea84a501ce7aa713a0bdb9a4e05d143a5da715e274eea70d"
+    },
+    "host/deepeye_transport50_source_candidate.py": {
+      "size": 12535,
+      "sha256": "1f4da870d9c885a3cc6156c30d2170e21001187392a59a19172c059c9ab0c768"
+    }
+  },
+  "independent_audit": {
+    "job_id": "child-7d7174234c4142c5ae023eb8af3efa2f",
+    "status": "completed",
+    "stale": false,
+    "reviewed_base": "b01d9fdb9e9090bdaae730e8f859e265b9f62943",
+    "reviewed_new_source": false,
+    "F1_disposition": "Accepted as latent activation-path risk; narrow to withdrawal BEFORE raw sample handshake. After raw transfer pending already clears, so beforeREPORT alone is insufficient. Add shared cancel_active to parent pending/admission gates and a single local non-reset outstanding-transaction aborted pulse. All intended transitions unexecuted."
+  },
+  "main_decisions": [
+    "Add explicit Root source_cancel path through raw capture STOP/queue cancel/lane cancel/sample clear/trace cancel; no G05/PC motion authority",
+    "Expose internal data_path_quiescent structural fact, not ACK/STOP/health/product proof",
+    "Remove adapter read-before-write of blk_ready from producer-valid equation; no ready-dependent valid",
+    "Preserve all default closed gates, old100MHz files, privateE4/rev2 semantics and fullH01-H15",
+    "Post-cancel qualification latch prevents false quiescence when a disarmed capture may still hold an internal completed scan; reset/rearm revoke the indication.",
+    "F1 accepted/narrowed to gate withdrawal before raw-sample handshake: expose shared wrapper cancel_active to clear pending at same cancellation edge; one local transaction_aborted pulse if accepted descriptor was still outstanding; reset has no abort pulse and Root must invalidate reset context."
+  ],
+  "manual_transition_reasoning": [
+    "Explicit source_cancel fans to captureSTOP/queue/lane/sample/TRACE cancels; STOP wins rearm in unchanged capture primitive",
+    "Post-cancel latch qualifies empty/disarmed local indication; reset/rearm revoke; merely disarmed internal held scan not called quiescent",
+    "Same candidate_cancel level clears wrapper and parent pending at cancelling edge; no payload sample handshake while cancelled",
+    "transaction_active_q records accepted outstanding descriptor; consumed result or non-reset cancellation clears it; heldcancel cannot repeatedly consume it; reset separately invalidates without abortpulse",
+    "No byte recall, global G05/PC/world STOP, wire ACK, receipt retirement or retry is inferred"
+  ],
+  "unexecuted_scenarios": 13,
+  "original100_path": "No changes to mapper/engine/builddriver/profiles/vectors/final100MHzgate; compare exact974baseline at adoption and handoff",
+  "default_closed": [
+    "SOURCE_REVIEW_HOLD=1",
+    "profile_v2_authorized=0",
+    "transport_allowed=0",
+    "BAUD=0",
+    "host core_ran=false/routeNONE/commandNone"
+  ],
+  "remaining": [
+    "Actual A common-clock/reset/topology/baud/pins/aperture release",
+    "Root full accepted/cancelled identity association and receipt/admission invalidation",
+    "Global G05/PC/world STOP and hostACK/retry/action retirement",
+    "Actual rawsource/QPC/quality/calibration/poses/actions/admissions/C29association",
+    "Singleton aggregation/fullG05/B06/bothH12/all29/final1pct100ms"
+  ],
+  "limits": [
+    "No compiler/elaboration/width/CDC/RDC/liveness/behavior proof",
+    "No candidate/test/simulation/vendor/clock/board run",
+    "Independent child reviewed BASE only; new source main static review only",
+    "Primary Accellera sensitivity discussion applied as main inference, not measured result"
+  ],
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "freeze": "1011259415a0916054eb580687612580bc1e5f09",
+  "authority": "OriginalA6500172372 SOURCE/DESIGNONLY; no newexecutionrelease; no oldactionreplay"
+}

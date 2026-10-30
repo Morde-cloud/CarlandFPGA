@@ -1,0 +1,45 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-ADDITIVE50-CONTINUATION-20261030-73",
+  "owner": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "base": "b01d9fdb9e9090bdaae730e8f859e265b9f62943",
+  "input_sha256": {
+    "deepeye_integration_50mhz_candidate.sv": "1918c7e0cdd2a5b366463a4f9685dde36f6d5b4966bc39263dee3e3698de9645",
+    "deepeye_trace_block_payload_1us_candidate.sv": "61b8e15a4cb816054b9d3c43121adb47851d54c60bbeaae10b09506ee3f45f9b",
+    "deepeye_trace_block_uart_50mhz_candidate.sv": "1f88e44de6dd88f50ed9e17e8db9c6c71f8b13806b695bfd28090cfa652dbd47"
+  },
+  "output_sha256": {
+    "deepeye_integration_50mhz_candidate.sv": "72fcb3c7f24bf72af55946622fad3a2f378a90fbdf2264eb248192780595e03a",
+    "deepeye_trace_block_payload_1us_candidate.sv": "5ebe65dfe0844aab62365e8664507f153cb75ff47b3c8d4e10f45356e94147a8",
+    "deepeye_trace_block_uart_50mhz_candidate.sv": "b153fa2d43374913ea84a501ce7aa713a0bdb9a4e05d143a5da715e274eea70d"
+  },
+  "scope": "Unexecuted source text changes only, independently audited base remains frozen until child terminal",
+  "decisions": [
+    "Add explicit Root source_cancel path through raw capture STOP/queue cancel/lane cancel/sample clear/trace cancel; no G05/PC motion authority",
+    "Expose internal data_path_quiescent structural fact, not ACK/STOP/health/product proof",
+    "Remove adapter read-before-write of blk_ready from producer-valid equation; no ready-dependent valid",
+    "Preserve all default closed gates, old100MHz files, privateE4/rev2 semantics and fullH01-H15",
+    "Post-cancel qualification latch prevents false quiescence when a disarmed capture may still hold an internal completed scan; reset/rearm revoke the indication.",
+    "F1 accepted/narrowed to gate withdrawal before raw-sample handshake: expose shared wrapper cancel_active to clear pending at same cancellation edge; one local transaction_aborted pulse if accepted descriptor was still outstanding; reset has no abort pulse and Root must invalidate reset context."
+  ],
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "unexecuted": true
+}

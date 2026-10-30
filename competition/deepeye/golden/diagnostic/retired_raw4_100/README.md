@@ -1,0 +1,1 @@
+B100 retired historical transport fixture. H01-H15 fixed c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804. One new 80-frame run. No product acceptance, board or action authority. Namespace97 is intentional fixture identity, not work identity.

@@ -230,14 +230,59 @@ def _validate_record_quality(record, position):
     }
 
 
+
+RETIRED_KIND = "RETIRED_A70_TRANSPORT_FIXTURE"
+RETIRED_COMMIT = "d0185d335747acb26439f40a8ce945f7f4eaa9af"
+RETIRED_TREE = "d2e6533d93efcc09e8dd1341e6cc5d741fe965a5"
+RETIRED_SHA = "63616e2915edc5a2ef6ed592e8f9830ce77a635aaf883ab964aa4dbd5fd1910c"
+RETIRED_ORIGIN = 27001348289300
+RETIRED_SESSION = 0x97345678
+RETIRED_VIEW = 9
+RETIRED_TAG = 0x97
+RETIRED_RECEIPT_SHA = '2386711ede83b59f9e384bd57f5d0ad80e26e3ab53745691f1995e91d57912c0'
+RETIRED_RECORDS_SHA = '5db4288646077ed124a1cb6e7919c2dc8ac72d486e1e0fd7dcd863066d54811a'
+RETIRED_RECEIPT_KEYS = {'record_completion_qpc_ns', 'original_operation_id', 'source_runtime_commit', 'retired', 'tree', 'git_oid', 'origin_qpc_ns', 'schema', 'missing_evidence', 'book_records', 'native_interval_atomic', 'sha256', 'bytes', 'commit'}
+
+def fixture_parameters(projection):
+    if projection["fixture_kind"] == RETIRED_KIND:
+        return RETIRED_SESSION, RETIRED_VIEW, RETIRED_TAG, 97
+    return SESSION, VIEW, TAG, 92
+
+def _validate_retired(projection):
+    receipt = _exact(projection["retired_source_receipt"], RETIRED_RECEIPT_KEYS, "retired receipt keys")
+    _need(projection["origin_qpc_ns"] == RETIRED_ORIGIN, "original retired origin")
+    _need(len(projection["records"]) == 20, "exact retired 20 records")
+    _need(digest(projection["records"]) == RETIRED_RECORDS_SHA, "original retired counts/time/quality/hash contradiction")
+    _need(digest(receipt) == RETIRED_RECEIPT_SHA, "original retired receipt contradiction")
+    previous = 0
+    for i, end in enumerate(receipt["record_completion_qpc_ns"]):
+        _uint(end, U63, "retired completion uint63")
+        _need(end >= RETIRED_ORIGIN + i * 10 * NS_PER_MS and end >= previous,
+              "retired completion ordering")
+        previous = end
+    for key in ("operation_id", "session_id", "transport_receipt_id"):
+        _need(projection["fixture_transport_identity"][key].startswith("FIXTURE-RETIRED97-"),
+              "explicit retired fixture namespace")
+
+def transport_input(projection=None, *, fixture_mode=None, build_manifest_sha256=None):
+    """Default closed; only explicit offline fixture modes may derive a model."""
+    if projection is None or fixture_mode is None:
+        return {"status": "STOP", "input_status": "INPUT_UNAVAILABLE", "command": None,
+                "core_ran": False, "current_source_eligible": False}
+    _need(fixture_mode in (FIXTURE_KIND, RETIRED_KIND), "explicit fixture mode")
+    _need(projection.get("fixture_kind") == fixture_mode, "fixture mode mismatch")
+    return derive_model(projection, build_manifest_sha256=build_manifest_sha256)
+
 def validate_projection(projection):
     _plain(projection)
-    _exact(projection, PROJECTION_KEYS, "projection keys")
+    _need(type(projection) is dict, "projection keys")
+    retired = projection.get("fixture_kind") == RETIRED_KIND
+    _exact(projection, PROJECTION_KEYS | ({"retired_source_receipt"} if retired else set()), "projection keys")
     _need(projection["schema"] == SCHEMA, "projection schema")
-    _need(projection["fixture_kind"] == FIXTURE_KIND, "fixture kind must be the modelled public-contract label")
-    _need(projection["pinned_commit"] == PINNED_COMMIT, "pinned source commit")
-    _need(projection["pinned_tree"] == PINNED_TREE, "pinned source tree")
-    _need(projection["pinned_blob_count"] == PINNED_BLOB_COUNT and
+    _need(projection["fixture_kind"] in (FIXTURE_KIND, RETIRED_KIND), "explicit fixture kind")
+    _need(projection["pinned_commit"] == (RETIRED_COMMIT if retired else PINNED_COMMIT), "pinned source commit")
+    _need(projection["pinned_tree"] == (RETIRED_TREE if retired else PINNED_TREE), "pinned source tree")
+    _need(projection["pinned_blob_count"] == (2 if retired else PINNED_BLOB_COUNT) and
           type(projection["pinned_blob_count"]) is int, "pinned blob count")
     _need(projection["time_basis"] == TIME_BASIS, "nominal time basis")
     origin = _uint(projection["origin_qpc_ns"], U63, "original uint63 origin")
@@ -248,8 +293,8 @@ def validate_projection(projection):
     identity = _exact(projection["fixture_transport_identity"], IDENTITY_KEYS,
                       "fixture transport identity keys")
     _need(identity["kind"] == "B92_FIXTURE_TRANSPORT_IDENTITY_V1", "fixture identity kind")
-    _need(identity["label"] == FIXTURE_KIND, "fixture identity label")
-    _need(identity["kernel_boot_id"] == "MODELLED_SHAPES_FROM_PINNED_PUBLIC_CONTRACTS",
+    _need(identity["label"] == projection["fixture_kind"], "fixture identity label")
+    _need(identity["kernel_boot_id"] == projection["fixture_kind"],
           "fixture kernel label")
     _need(identity["clock_domain_id"] == "A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE",
           "fixture clock-domain label")
@@ -264,6 +309,8 @@ def validate_projection(projection):
           "source note must not claim A Root")
     records = projection["records"]
     _need(type(records) is list and 1 <= len(records) <= MAX_RECORDS, "record count 1..20")
+    if retired:
+        _validate_retired(projection)
     previous_em = None
     previous_em_valid = False
     previous_counts = None
@@ -325,21 +372,31 @@ def validate_projection(projection):
 
 def _derive_identity(projection, lanes, build_manifest_sha256):
     _sha(build_manifest_sha256, 64, "build/source manifest hash")
+    session, view, tag, trigger = fixture_parameters(projection)
+    fixture_identity = projection["fixture_transport_identity"]
+    if projection["fixture_kind"] == FIXTURE_KIND:
+        # Preserve the original modelled mode's identity normalization exactly.
+        fixture_identity = {
+            "operation_id": "FIXTURE-RAW4-92-NOT-A-ROOT",
+            "kernel_boot_id": FIXTURE_KIND,
+            "session_id": "FIXTURE-SESSION-92",
+            "clock_domain_id": "A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE",
+        }
     projection_sha = digest(projection)
     capture_sha = sha256_bytes(canonical({"kind": "B92_FIXTURE_CAPTURE_V1", "lanes": lanes}))
     identity = {
-        "operation_id": "FIXTURE-RAW4-92-NOT-A-ROOT",
-        "kernel_boot_id": "MODELLED_SHAPES_FROM_PINNED_PUBLIC_CONTRACTS",
-        "session_id": "FIXTURE-SESSION-92",
-        "clock_domain_id": "A_ORIGINAL_NOMINAL_QPC_NS-FIXTURE",
+        "operation_id": fixture_identity["operation_id"],
+        "kernel_boot_id": fixture_identity["kernel_boot_id"],
+        "session_id": fixture_identity["session_id"],
+        "clock_domain_id": fixture_identity["clock_domain_id"],
         "request_hash": projection_sha,
         "build_manifest_sha256": build_manifest_sha256,
         "source_record_sha256": projection_sha,
         "capture_sha256": capture_sha,
         "tested_commit": PINNED_COMMIT,
-        "tag": TAG,
+        "tag": tag,
         "generation": 1,
-        "trigger_id": 92,
+        "trigger_id": trigger,
         "request_seq": 1,
         "capture_seq": 0,
         "source_admission_index": 0,
@@ -349,6 +406,7 @@ def _derive_identity(projection, lanes, build_manifest_sha256):
 
 def derive_model(projection, *, build_manifest_sha256):
     checked = validate_projection(projection)
+    session, view, tag, trigger = fixture_parameters(projection)
     origin = checked["origin_qpc_ns"]
     now = checked["evaluation_now_qpc_ns"]
     receiver = checked["receiver_qpc_ns"]
@@ -409,14 +467,14 @@ def derive_model(projection, *, build_manifest_sha256):
                 "source_remainder_ns": source_remainder,
                 "frame_seq": frame_seq,
                 "assoc_seq": frame_seq,
-                "assoc_epoch": VIEW,
-                "assoc_session": SESSION,
-                "assoc_tag": TAG,
+                "assoc_epoch": view,
+                "assoc_session": session,
+                "assoc_tag": tag,
                 "assoc_e": E,
                 "assoc_count": 1,
                 "capture_first_seq": position * 4,
                 "capture_last_seq": position * 4 + 3,
-                "capture_tag": TAG,
+                "capture_tag": tag,
                 "sample_data": count if valid else 0,
                 "sample_quality": flags["derived_bytes"][channel],
                 "expected_wire_bytes": expected_wire,
@@ -426,10 +484,11 @@ def derive_model(projection, *, build_manifest_sha256):
     identity_sha = digest(identity)
     binding_base = {
         "kind": "B_PRIVATE_TRANSPORT_BINDING_PROPOSED_V1",
-        "receipt_id": "FIXTURE-TRANSPORT-92",
+        "receipt_id": (projection["fixture_transport_identity"]["transport_receipt_id"]
+                       if projection["fixture_kind"] == RETIRED_KIND else "FIXTURE-TRANSPORT-92"),
         "profile_id": PROFILE_ID,
-        "session_handle": SESSION,
-        "view_handle": VIEW,
+        "session_handle": session,
+        "view_handle": view,
         "e": E,
         "source_context_sha256": identity_sha,
     }
@@ -493,7 +552,7 @@ def companion_for_lane(model, lane, *, decoder_pins):
     }
     companion = {
         "schema": "B92_RAW4_COMPANION_V1",
-        "evidence_kind": FIXTURE_KIND,
+        "evidence_kind": projection["fixture_kind"],
         "fixture_transport_identity": projection["fixture_transport_identity"],
         "authority": {
             "actual_A_Root": "UNAVAILABLE",
@@ -553,6 +612,14 @@ def companion_for_lane(model, lane, *, decoder_pins):
         "binding": binding,
         "profile": profile,
     }
+    if projection["fixture_kind"] == RETIRED_KIND:
+        receipt = projection["retired_source_receipt"]
+        companion["retired_source_receipt"] = receipt
+        companion["retired_record_receipt"] = receipt["book_records"][lane["record_index"]]
+        companion["original_record_completion_qpc_ns"] = receipt["record_completion_qpc_ns"][lane["record_index"]]
+        companion["evaluation_clock_kind"] = "FIXTURE_EVALUATION_NOT_ACTUAL_CURRENT_CLOCK"
+        companion["receiver_clock_kind"] = "FIXTURE_RECEIVER_NOT_ACTUAL_TRANSPORT_RECEIPT"
+        companion["identity_kind"] = "FIXTURE_ONLY_NOT_ORIGINAL_ROOT_BOOT_CAPTURE_ADMISSION"
     return companion
 
 

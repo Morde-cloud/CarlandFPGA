@@ -1,0 +1,518 @@
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain76/.gitattributes b/competition/deepeye/fpga/diagnostic/r04_gain76/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain76/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain76/CONTRACT.md b/competition/deepeye/fpga/diagnostic/r04_gain76/CONTRACT.md
+new file mode 100644
+index 0000000..3d107ea
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain76/CONTRACT.md
+@@ -0,0 +1,37 @@
++# MCP6S21 write-only gain-master candidate
++
++Status: `CANDIDATE_SOURCE_ONLY`, `UNEXECUTED`, `R04_NOT_PASSED`. This is a standalone seam, not integration, pinout, clock-setter, synthesis, timing-closure, electrical or board evidence. Product acceptance remains governed by `DEEPEYE-HUMAN-LOCK-20261014/revision1`, H01-H15, requirements SHA256 `c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`, pin `f5989cd5defce561f9ba98e6b18fc2682945f0a2`.
++
++## Vendor facts supplied by the main
++
++The main reported an actual reading of official Microchip DS21117B. This worker did not fetch the network or independently revalidate the PDF. For MCP6S21, the write-only device has no SO. It accepts SPI mode 0: CS low, SCK idle low, SI sampled on SCK rising, MSB first. A normal transfer holds CS low for exactly 16 SCK clocks. The write-gain instruction is `0x40`; data bytes `0x00`, `0x01`, `0x02`, `0x04` select G1, G2, G4, G8. Code 3 denotes G5 and is forbidden here; codes 5, 6, 7 are also refused by this candidate.
++
++The DS21117B limits supplied for review are: CS-high minimum 40 ns, first-SCK setup 40 ns, SCK high/low minimum 40 ns, final edge to CS-high 30 ns, SI setup 40 ns, SI hold 10 ns. These are datasheet table conditions, including the datasheet's higher-voltage/high-rate context, not a 3.3 V measurement. A must validate the actual selected device, supply, level shifting, isolation and PYNQ-Z2 electrical behavior.
++
++## Command and result interface
++
++`cmd_valid && cmd_ready` at a rising clock edge transfers one command. `cmd_ready` requires `enable=1`, `cancel=0`, idle, and an empty result slot. Legal commands pulse `accepted` for one clock after that edge. An illegal code still consumes the transfer so the sender cannot deadlock, but `accepted=0`, CS remains high, no SCK occurs, and the result slot immediately reports `result_error=1` with the supplied tag. Thus handshake, command acceptance and digital completion are distinct.
++
++Only one command may be in flight. `result_valid` is a held result until `result_valid && result_ready` at a clock edge. While `result_valid=1`, `result_error` and `result_tag` remain stable and `cmd_ready=0`; those payload fields are meaningful only while `result_valid=1`. A normal frame closes with `result_valid=1`, `result_error=0`; this means only that the digital frame finished, never that a gain took effect or that an ADC value is ready.
++
++`cancel` and `enable=0` abort an active frame at the next clock edge. They force CS high, SCK low and SI low, pulse `aborted`, create a held error result carrying the accepted tag, then hold CS high for the full guard before another command can be accepted. They do not replay or restart the command. Reset is synchronous and destructive: active reset forces the same safe pins, starts the same CS-high guard and may pulse `aborted`, but it clears the result slot and tag, so no post-reset result identifies the interrupted transaction.
++
++## Candidate timing and frame
++
++For the assumed 100 MHz source clock only, a local divider uses 100 ticks per SCK half period: 1 us low and 1 us high, or 500 kHz SCK. CS setup, final-edge hold and CS-high gap each use 100 ticks. These are conservative engineering assumptions from the main, not a clocksetter decision and not settling evidence.
++
++The frame is `{8'h40, 5'b00000, gain_code}` in MSB-first order. Normal operation produces 16 rising SCK edges, one CS-low interval, and no byte boundary inside it. SI changes only in SCK-low intervals before a rising edge; the final falling edge is followed by at least 100 ticks low before CS rises. The first bit is the zero MSB of `0x40`, pre-driven during CS setup.
++
++An aborted partial frame deliberately prioritizes safe pins over completing a valid 16-clock transfer. The device may ignore it or retain unspecified prior gain; this candidate makes no rollback, retry, analog-unknown-recovery or eventual-gain claim.
++
++## Required dependencies not implemented
++
++R04 requires independent ADC readback after A0 and before A3, plus gain-effect evidence. This module has no ADC path, A0/A3 capture, readback, settling model, calibrated ratio, multi-level sweep or 5% measurement. No 8-level or accuracy result is claimed.
++
++The required local overrange policy (explicitly request G1) is absent. A future owner must provide a priority arbitration seam that issues a new `gain_code=0` command after the current result is drained; this module neither infers overrange nor retries automatically. Fake ADC data and implicit gain changes are prohibited.
++
++Pins, physical CS/SCK/SI mapping, 3.3 V compatibility, bidirectional level shifting, isolation, external gain and reference behavior, device population, reset topology, SDC, CDC, timing closure and board programming remain A-owned or unassigned. No compile, lint, simulation, formal, synthesis, implementation, network, vendor-tool or board action was performed.
++
++## Review boundary
++
++`vectors_UNEXECUTED.json` is a bounded digital test plan only. It records expected interface and pin-edge observations; it contains no execution log, analog expectation, calibration data or pass claim. Main must review this source and separately authorize any simulation or integration work.
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain76/deepeye_mcp6s21_write_candidate.sv b/competition/deepeye/fpga/diagnostic/r04_gain76/deepeye_mcp6s21_write_candidate.sv
+new file mode 100644
+index 0000000..5bfe4af
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain76/deepeye_mcp6s21_write_candidate.sv
+@@ -0,0 +1,181 @@
++`default_nettype none
++
++// CANDIDATE-ONLY write-only MCP6S21 gain master seam.
++// Task: DEEPEYE-IMPLEMENTATION-20261014/v1; work B-R04-GAIN-PROTOCOL-SOURCE-20261030-76.
++// Contract: DEEPEYE-HUMAN-LOCK-20261014/revision1 (H01-H15), requirements SHA256
++// c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804; pin f5989cd5defce561f9ba98e6b18fc2682945f0a2.
++// No SO/readback, ADC access, pin/top/clock integration, analog result or physical-compliance claim.
++
++module deepeye_mcp6s21_write_candidate (
++    input wire logic        clk,
++    input wire logic        rst,
++    input wire logic        enable,
++    input wire logic        cancel,
++    input wire logic        cmd_valid,
++    output logic        cmd_ready,
++    input wire logic [2:0]  gain_code,
++    input wire logic [31:0] tag,
++    output logic        accepted,
++    output logic        aborted,
++    output logic        result_valid,
++    input wire logic        result_ready,
++    output logic        result_error,
++    output logic [31:0] result_tag,
++    output logic        spi_cs_n,
++    output logic        spi_sck,
++    output logic        spi_si
++);
++
++    localparam integer HALF_PERIOD_TICKS = 100;
++    localparam integer CS_GUARD_TICKS    = 100;
++
++    typedef enum logic [2:0] {
++        S_IDLE,
++        S_CS_SETUP,
++        S_SCK_HIGH,
++        S_SCK_LOW,
++        S_CS_HOLD,
++        S_CS_GAP
++    } state_t;
++
++    state_t      state;
++    logic [15:0] phase_count;
++    logic [3:0]  bit_index;
++    logic [15:0] shift_reg;
++    logic [31:0] active_tag;
++    logic        legal_gain;
++    logic        active;
++
++    assign legal_gain = (gain_code == 3'd0) || (gain_code == 3'd1) ||
++                        (gain_code == 3'd2) || (gain_code == 3'd4);
++    assign active = (state == S_CS_SETUP) || (state == S_SCK_HIGH) ||
++                    (state == S_SCK_LOW)  || (state == S_CS_HOLD);
++    assign cmd_ready = !rst && enable && !cancel && (state == S_IDLE) && !result_valid;
++
++    always_ff @(posedge clk) begin
++        accepted <= 1'b0;
++        aborted  <= 1'b0;
++
++        if (result_valid && result_ready)
++            result_valid <= 1'b0;
++
++        if (rst) begin
++            if (active)
++                aborted <= 1'b1;
++            state        <= S_CS_GAP;
++            phase_count  <= '0;
++            bit_index    <= '0;
++            shift_reg    <= '0;
++            active_tag   <= '0;
++            result_valid <= 1'b0;
++            result_error <= 1'b0;
++            result_tag   <= '0;
++            spi_cs_n     <= 1'b1;
++            spi_sck      <= 1'b0;
++            spi_si       <= 1'b0;
++        end else if (active && (!enable || cancel)) begin
++            state        <= S_CS_GAP;
++            phase_count  <= '0;
++            bit_index    <= '0;
++            spi_cs_n     <= 1'b1;
++            spi_sck      <= 1'b0;
++            spi_si       <= 1'b0;
++            aborted      <= 1'b1;
++            result_valid <= 1'b1;
++            result_error <= 1'b1;
++            result_tag   <= active_tag;
++        end else begin
++            case (state)
++                S_IDLE: begin
++                    spi_cs_n <= 1'b1;
++                    spi_sck  <= 1'b0;
++                    spi_si   <= 1'b0;
++                    if (cmd_valid && cmd_ready) begin
++                        if (legal_gain) begin
++                            shift_reg   <= {8'h40, 5'b00000, gain_code};
++                            active_tag  <= tag;
++                            phase_count <= '0;
++                            bit_index   <= '0;
++                            spi_cs_n    <= 1'b0;
++                            accepted    <= 1'b1;
++                            state       <= S_CS_SETUP;
++                        end else begin
++                            result_valid <= 1'b1;
++                            result_error <= 1'b1;
++                            result_tag   <= tag;
++                        end
++                    end
++                end
++
++                S_CS_SETUP: begin
++                    if (phase_count == CS_GUARD_TICKS-1) begin
++                        phase_count <= '0;
++                        spi_sck     <= 1'b1;
++                        state       <= S_SCK_HIGH;
++                    end else begin
++                        phase_count <= phase_count + 1'b1;
++                    end
++                end
++
++                S_SCK_HIGH: begin
++                    if (phase_count == HALF_PERIOD_TICKS-1) begin
++                        phase_count <= '0;
++                        spi_sck     <= 1'b0;
++                        if (bit_index == 4'd15) begin
++                            spi_si <= 1'b0;
++                            state  <= S_CS_HOLD;
++                        end else begin
++                            spi_si    <= shift_reg[14];
++                            shift_reg <= {shift_reg[14:0], 1'b0};
++                            bit_index <= bit_index + 1'b1;
++                            state     <= S_SCK_LOW;
++                        end
++                    end else begin
++                        phase_count <= phase_count + 1'b1;
++                    end
++                end
++
++                S_SCK_LOW: begin
++                    if (phase_count == HALF_PERIOD_TICKS-1) begin
++                        phase_count <= '0;
++                        spi_sck     <= 1'b1;
++                        state       <= S_SCK_HIGH;
++                    end else begin
++                        phase_count <= phase_count + 1'b1;
++                    end
++                end
++
++                S_CS_HOLD: begin
++                    if (phase_count == CS_GUARD_TICKS-1) begin
++                        phase_count  <= '0;
++                        spi_cs_n     <= 1'b1;
++                        result_valid <= 1'b1;
++                        result_error <= 1'b0;
++                        result_tag   <= active_tag;
++                        state        <= S_CS_GAP;
++                    end else begin
++                        phase_count <= phase_count + 1'b1;
++                    end
++                end
++
++                S_CS_GAP: begin
++                    if (phase_count == CS_GUARD_TICKS-1) begin
++                        phase_count <= '0;
++                        state       <= S_IDLE;
++                    end else begin
++                        phase_count <= phase_count + 1'b1;
++                    end
++                end
++
++                default: begin
++                    spi_cs_n <= 1'b1;
++                    spi_sck  <= 1'b0;
++                    spi_si   <= 1'b0;
++                    state    <= S_IDLE;
++                end
++            endcase
++        end
++    end
++endmodule
++
++`default_nettype wire
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain76/vectors_UNEXECUTED.json b/competition/deepeye/fpga/diagnostic/r04_gain76/vectors_UNEXECUTED.json
+new file mode 100644
+index 0000000..452b34a
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain76/vectors_UNEXECUTED.json
+@@ -0,0 +1,37 @@
++{
++  "schema": 1,
++  "status": "UNEXECUTED",
++  "execution": "No compile, simulation, synthesis, implementation, network, board or measurement action.",
++  "scope": "Digital interface and pin-edge observations only; no analog or ADC claim.",
++  "assumptions": {
++    "clock_hz": 100000000,
++    "half_period_ticks": 100,
++    "cs_guard_ticks": 100,
++    "normal_sck_rising_edges": 16
++  },
++  "vectors": [
++    {"id": "V01_GAIN_1", "tag": "0x00000001", "command": {"enable": true, "gain_code": 0}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000000", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
++    {"id": "V02_GAIN_2", "tag": "0x00000002", "command": {"enable": true, "gain_code": 1}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000001", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
++    {"id": "V03_GAIN_4", "tag": "0x00000004", "command": {"enable": true, "gain_code": 2}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000010", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
++    {"id": "V04_GAIN_8", "tag": "0x00000008", "command": {"enable": true, "gain_code": 4}, "expect": {"handshake": true, "accepted_pulse": 1, "frame": "0100000000000100", "sck_rising_edges": 16, "result": {"valid": true, "error": false}}},
++    {"id": "V05_ILLEGAL_3", "tag": "0x00000033", "command": {"enable": true, "gain_code": 3}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
++    {"id": "V06_ILLEGAL_5", "tag": "0x00000035", "command": {"enable": true, "gain_code": 5}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
++    {"id": "V07_ILLEGAL_6", "tag": "0x00000036", "command": {"enable": true, "gain_code": 6}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
++    {"id": "V08_ILLEGAL_7", "tag": "0x00000037", "command": {"enable": true, "gain_code": 7}, "expect": {"handshake": true, "accepted_pulse": 0, "cs_low": false, "sck_rising_edges": 0, "result": {"valid": true, "error": true}}},
++    {"id": "V09_HELD_RESULT", "tag": "0x00000060", "command": {"enable": true, "gain_code": 1}, "stimulus": {"result_ready_low_clocks": 5, "then_ready_high_clocks": 1}, "expect": {"result_valid_stable_while_backpressured": true, "error_and_tag_stable": true, "cmd_ready_while_held": false, "cleared_after_ready": true}},
++    {"id": "V10_ENABLE_GATE", "tag": "0x00000070", "stimulus": {"enable": false, "cmd_valid": true, "gain_code": 1, "hold_clocks": 4, "then_enable": true}, "expect": {"cmd_ready_while_disabled": false, "accepted_while_disabled": 0, "cs_toggles_while_disabled": 0, "accepted_after_enable": 1}},
++    {"id": "V11_CANCEL_BEFORE_FIRST_RISE", "tag": "0x00000080", "command": {"enable": true, "gain_code": 2}, "cancel": {"phase": "S_CS_SETUP", "ticks_after_command": 50}, "expect": {"sck_rising_edges": 0, "next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}, "automatic_retry": false}},
++    {"id": "V12_CANCEL_ON_HIGH", "tag": "0x00000090", "command": {"enable": true, "gain_code": 4}, "cancel": {"phase": "S_SCK_HIGH", "ticks_after_first_rise": 50}, "expect": {"sck_rising_edges": 1, "next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}, "automatic_retry": false}},
++    {"id": "V13_CANCEL_AFTER_FALL", "tag": "0x000000A0", "command": {"enable": true, "gain_code": 0}, "cancel": {"phase": "S_SCK_LOW", "ticks_after_first_fall": 50}, "expect": {"sck_rising_edges": 1, "no_second_rise": true, "next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}}},
++    {"id": "V14_DISABLE_MIDFRAME", "tag": "0x000000B0", "command": {"enable": true, "gain_code": 1}, "disable": {"phase": "S_SCK_HIGH", "ticks_after_first_rise": 20}, "expect": {"next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result": {"valid": true, "error": true}, "result_drainable_while_disabled": true}},
++    {"id": "V15_RESET_ACTIVE", "tag": "0x000000C0", "command": {"enable": true, "gain_code": 1}, "reset": {"phase": "S_SCK_HIGH", "ticks_after_first_rise": 20}, "expect": {"next_edge": {"cs_n": 1, "sck": 0, "si": 0}, "aborted_pulse": 1, "result_valid": false, "result_tag_preserved": false, "next_command_blocked_ticks": 100, "caller_must_invalidate_outstanding_context": true}},
++    {"id": "V16_RESULT_AND_GAP", "tag": "0x000000D0", "stimulus": {"result_ready": true, "hold_next_cmd_valid": true, "next_gain_code": 0}, "expect": {"completed_result_visible_one_clock": true, "next_handshake_before_cs_gap_end": false, "cs_high_gap_at_least_ticks": 100, "second_frame_sck_rising_edges": 16}}
++  ],
++  "not_covered": [
++    "Compilation, lint, simulation, formal and synthesis",
++    "3.3 V electrical timing, level shifting, isolation and A-owned board operation",
++    "Analog gain settling, actual device gain, A0/A3 independent ADC readback and 5% accuracy",
++    "Eight-level measurement and local overrange-to-G1 implementation",
++    "Pinout, top-level integration, clock constraints, CDC/RDC and timing closure"
++  ]
++}
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain78/.gitattributes b/competition/deepeye/fpga/diagnostic/r04_gain78/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain78/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain78/README.md b/competition/deepeye/fpga/diagnostic/r04_gain78/README.md
+new file mode 100644
+index 0000000..2f0fe34
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain78/README.md
+@@ -0,0 +1,41 @@
++# R04 digital SPI stage78
++
++H01-H15/revision1 requirements SHA256
++`c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804`.
++Frozen task1011259415a0916054eb580687612580bc1e5f09, board operator A only.
++
++Source76 was an unexecuted Flash source handoff. The main preserved its exact
++three original files/hashes, corrected the documentation's frame concatenation,
++qualified input net ports for ModelSim10.7 and gated ready during reset. The
++current master's bytes match the NEW78 executed frozen snapshot. The original
++76 CONTRACT/vectors retain their historical source-only status; the16 listed
++vectors were not run as that original suite. This document reports NEW78 only.
++
++The digital fixture assumes100MHz and observes CS/SCK/SI without an analog
++device model or SO signal. Four normal words4000/4001/4002/4004 each produced
++16rising SCK edges in MSB order,100clock setup/hold/CS gap and200clock SCK period.
++Codes3/5/6/7 produced held refusal results and no CS-low interval. Result slots
++held stable, ready stayed low during reset/cancel/disable. Five explicit new
++requests were aborted after0/7/16/4/3rising edges by cancel/disable/reset; reset
++deliberately destroys the transaction result/tag. No old request auto-replayed.
++An intentional wrong pin-byte oracle caused actual native vsim exit4; normal
++run exited0. The main independently reconstructed words/timing from saved pins.
++
++Attempt01 failed before the suspended launcher resumed: Path objects could not
++be serialized to the helper's JSON. Its truncated metadata is preserved; no
++Job/PID accounting is invented. The original unattached Popen was cleaned by
++the pinned helper, and process readback found no runner. Explicit repair
++converted argv to strings; NEW02 was the first real compilation/simulation.
++It exited0/no timeout with whole Job attached-before-resume/terminal/empty/closed.
++Commands, tool binaries/versions, source snapshots, negative traces and exits
++are in the operation evidence; no later source/evidence commit is claimed run.
++
++These timings are digital engineering assumptions, not3.3V/electrical/settling
++validation. A16edge abort may already affect analog gain and remains unknown.
++No GPIO/serial completion is a gain measurement. Actual A0/A3 acquisition,
++calibration/8levels/5% accuracy, local-overrange arbitration integration, pins,
++CDC/RDC/timing closure and physical board remain unaccepted dependencies. Source
++80 develops the separate priority seam; it cannot inherit this stage's pass.
++No Vivado synthesis/route/build, clocksetter, pin assignment, board/SSH, actual
++ADC, Root/planner or product control ran. Original100MHz/fullH12/all29 and all
++taskbook error/age requirements remain. R04 is NOT PASSED.
+diff --git a/competition/deepeye/fpga/diagnostic/r04_gain78/tb_r04_gain78.sv b/competition/deepeye/fpga/diagnostic/r04_gain78/tb_r04_gain78.sv
+new file mode 100644
+index 0000000..f1417f6
+--- /dev/null
++++ b/competition/deepeye/fpga/diagnostic/r04_gain78/tb_r04_gain78.sv
+@@ -0,0 +1,95 @@
++`timescale 1ns/1ps
++// NEW78 SYNTHETIC digital pin observations only. No analog device model/SO.
++module tb_r04_gain78;
++    logic clk=0; always #5 clk=~clk;
++    logic rst=1,enable=0,cancel=0,cmd_valid=0,result_ready=0;
++    logic [2:0] gain_code=0; logic [31:0] tag=0;
++    wire cmd_ready,accepted,aborted,result_valid,result_error,spi_cs_n,spi_sck,spi_si;
++    wire [31:0] result_tag;
++    deepeye_mcp6s21_write_candidate dut(.*);
++    integer completion_status=0,fd,cycle=0,edges=0,frames=0,accepts=0,aborts=0,checks=0;
++    integer negative=0,case_id=0,cs_fall=0,cs_rise=0,sck_edge=0,si_edge=0;
++    bit previous_cs=1,previous_sck=0,previous_si=0,normal_expected=0;
++    logic [15:0] observed=0,expected_word=0;
++    string out;
++    task automatic ck(input bit okay,input string why);
++        checks++; if(!okay)begin $fdisplay(fd,"FAIL,%0d,%s",cycle,why);$fflush(fd);$fatal(1,"R04_NEW78 %s",why);end
++    endtask
++    always @(posedge clk)begin
++        #1; cycle++;
++        if(fd)begin
++            ck(!(rst&&cmd_ready),"ready during reset");
++            ck(!((cancel||!enable)&&cmd_ready),"ready during cancelled/disabled gate");
++            if(accepted)begin accepts++;$fdisplay(fd,"ACCEPTED,%0d,%0d,%0d",case_id,cycle,tag);end
++            if(aborted)begin aborts++;$fdisplay(fd,"ABORT,%0d,%0d",case_id,cycle);end
++            if(previous_cs&&!spi_cs_n)begin
++                ck(!spi_sck,"clock high at CS fall");ck(cycle-cs_rise>=100,"CS high guard");
++                cs_fall=cycle;edges=0;observed=0;$fdisplay(fd,"CS_LOW,%0d,%0d",case_id,cycle);
++            end
++            if(!previous_sck&&spi_sck)begin
++                ck(!spi_cs_n,"SCK rise outside CS");ck(cycle-(edges==0?cs_fall:sck_edge)>=100,"SCK low/setup");
++                ck(cycle-si_edge>=4,"SI setup below40ns");
++                observed={observed[14:0],spi_si};edges++;
++                $fdisplay(fd,"RISE,%0d,%0d,%0d,%0d",case_id,cycle,edges,spi_si);
++            end
++            if(previous_sck&&!spi_sck&&!rst&&!cancel&&enable)ck(cycle-sck_edge>=100,"SCK high below1us");
++            if(previous_sck!=spi_sck)sck_edge=cycle;
++            if(previous_si!=spi_si)begin ck(!spi_sck,"SI changed with SCK high");si_edge=cycle;end
++            if(!previous_cs&&spi_cs_n)begin
++                frames++;cs_rise=cycle;
++                $fdisplay(fd,"FRAME,%0d,%0d,%0d,%0d,%0d",case_id,cycle,edges,observed,normal_expected);
++                if(normal_expected)begin
++                    ck(edges==16,"normal frame clock count");ck(cycle-sck_edge>=100,"last SCK to CS hold");
++                    ck(observed==(negative?expected_word^16'd1:expected_word),"independent pin byte oracle");
++                end
++            end
++            previous_cs=spi_cs_n;previous_sck=spi_sck;previous_si=spi_si;
++            if(cycle>180000)$fatal(1,"R04_NEW78 cycle deadline");
++        end
++    end
++    task automatic clocks(input integer n);repeat(n)@(negedge clk);endtask
++    task automatic ready;
++        integer n;n=0;while(!cmd_ready&&n<5000)begin clocks(1);n++;end
++        ck(cmd_ready,"bounded command ready");
++    endtask
++    task automatic issue(input integer code,input integer identity,input bit normal);
++        ready();case_id=identity;gain_code=code;tag=identity;expected_word=16'h4000|code;
++        normal_expected=normal;cmd_valid=1;clocks(1);cmd_valid=0;
++    endtask
++    task automatic result_check(input bit error,input integer identity);
++        integer n;logic [31:0] held_tag;bit held_error;
++        n=0;while(!result_valid&&n<5000)begin clocks(1);n++;end
++        ck(result_valid&&result_error==error&&result_tag==identity,"result identity/error");
++        held_tag=result_tag;held_error=result_error;
++        repeat(9)begin clocks(1);ck(result_valid&&result_tag==held_tag&&result_error==held_error&&!cmd_ready,"held result stability");end
++        $fdisplay(fd,"RESULT,%0d,%0d,%0d,%0d",case_id,cycle,result_error,result_tag);
++        result_ready=1;clocks(1);result_ready=0;clocks(1);
++        ck(!result_valid,"result handshake retirement");normal_expected=0;
++    endtask
++    integer code,old_frames,old_accepts;
++    initial begin
++        if(!$value$plusargs("OUT=%s",out))$fatal(1,"OUT required");
++        code=$value$plusargs("NEGATIVE=%d",negative);fd=$fopen(out,"w");if(!fd)$fatal(1,"open");
++        clocks(4);enable=1;cmd_valid=1;clocks(3);ck(!accepted&&!cmd_ready,"reset request not accepted");cmd_valid=0;rst=0;ready();
++        issue(0,100,1);result_check(0,100);
++        issue(1,101,1);result_check(0,101);
++        issue(2,102,1);result_check(0,102);
++        issue(4,104,1);result_check(0,104);
++        for(code=3;code<=7;code++)if(code!=4)begin
++            old_frames=frames;old_accepts=accepts;issue(code,200+code,0);result_check(1,200+code);
++            ck(frames==old_frames&&accepts==old_accepts&&spi_cs_n&&!spi_sck,"illegal code emitted frame");
++        end
++        // New explicit requests, cancellation at three distinct native phases.
++        issue(2,301,0);clocks(10);cancel=1;clocks(1);result_check(1,301);cancel=0;ready();
++        issue(4,302,0);while(edges<7)clocks(1);cancel=1;clocks(1);result_check(1,302);cancel=0;ready();
++        issue(1,303,0);while(edges<16||spi_sck)clocks(1);cancel=1;clocks(1);result_check(1,303);cancel=0;ready();
++        issue(2,304,0);while(edges<4)clocks(1);enable=0;clocks(1);result_check(1,304);enable=1;ready();
++        issue(4,305,0);while(edges<3)clocks(1);old_accepts=accepts;rst=1;clocks(2);
++        ck(spi_cs_n&&!spi_sck&&!spi_si&&!result_valid&&result_tag==0,"destructive reset safe/unavailable tag");
++        rst=0;ready();clocks(500);ck(accepts==old_accepts,"reset automatically replayed");
++        ck(aborts==5,"cancel/disable/reset abort count");
++        $fdisplay(fd,"DONE,%0d,%0d,%0d,%0d",cycle,frames,accepts,checks);$fclose(fd);fd=0;
++        completion_status=1;$display("R04_NEW78_PASS cycles=%0d",cycle);$finish;
++    end
++    initial begin #2000000;$fatal(1,"R04_NEW78 wall simulation bound");end
++endmodule
+diff --git a/competition/deepeye/tools/diagnostic/r04_gain78/.gitattributes b/competition/deepeye/tools/diagnostic/r04_gain78/.gitattributes
+new file mode 100644
+index 0000000..fa1385d
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_gain78/.gitattributes
+@@ -0,0 +1 @@
++* -text
+diff --git a/competition/deepeye/tools/diagnostic/r04_gain78/run_focused.py b/competition/deepeye/tools/diagnostic/r04_gain78/run_focused.py
+new file mode 100644
+index 0000000..2353b3c
+--- /dev/null
++++ b/competition/deepeye/tools/diagnostic/r04_gain78/run_focused.py
+@@ -0,0 +1,70 @@
++"""NEW78 finite standalone digital SPI controls; no board, analog model or SO."""
++import argparse,datetime,hashlib,importlib.util,json,subprocess,sys,time
++from pathlib import Path
++R=Path('D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014')
++TOOLS=Path('D:/modelsim1/win64')
++def sha(raw):return hashlib.sha256(raw).hexdigest()
++def save(p,o):p.write_bytes((json.dumps(o,indent=2)+'\n').encode())
++def command(out,name,args,cwd,expected=0):
++    row={'argv':list(map(str,args)),'cwd':str(cwd),'expected_exit':expected,'timeout_seconds':25}
++    started=time.monotonic()
++    with (out/(name+'.stdout.bin')).open('xb') as so,(out/(name+'.stderr.bin')).open('xb') as se:
++        p=subprocess.Popen(row['argv'],cwd=cwd,stdout=so,stderr=se,stdin=subprocess.DEVNULL,shell=False,creationflags=subprocess.CREATE_NO_WINDOW)
++        row['pid']=p.pid;save(out/(name+'.STARTED.json'),row)
++        try:
++            while p.poll() is None:
++                assert time.monotonic()-started<25,'native command deadline'
++                assert sum(f.stat().st_size for f in out.parent.rglob('*') if f.is_file())<8*1024*1024,'8MiB output limit'
++                time.sleep(.025)
++        finally:
++            row.update(exit_code=p.poll(),elapsed_seconds=time.monotonic()-started)
++            save(out/(name+'.json'),row)
++    assert row['exit_code']==expected,(name,row)
++    return row
++def inner(out):
++    sim=out/'sim';sim.mkdir();cmd=out/'commands';cmd.mkdir();rows=[]
++    for tool in ['vlog','vsim']:rows.append(command(cmd,tool+'-version',[TOOLS/(tool+'.exe'),'-version'],sim))
++    rows.append(command(cmd,'vmap',[TOOLS/'vmap.exe','-c'],sim))
++    rows.append(command(cmd,'vlib',[TOOLS/'vlib.exe','work'],sim))
++    rows.append(command(cmd,'compile',[TOOLS/'vlog.exe','-sv','-work','work',out/'source/dut.sv',out/'source/tb.sv'],sim))
++    compile_text=(cmd/'compile.stdout.bin').read_text(errors='replace')
++    assert 'Errors: 0, Warnings: 0' in compile_text
++    for name,negative,expected in [('positive',0,0),('negative',1,4)]:
++        dest=out/name;dest.mkdir();dofile=dest/'run.do'
++        dofile.write_text('onerror {quit -code 3 -force}\nonbreak {\nif {[examine -radix decimal /tb_r04_gain78/completion_status] == 1} {quit -code 0 -force}\nquit -code 4 -force\n}\nrun -all\nquit -code 4 -force\n')
++        rows.append(command(cmd,name,[TOOLS/'vsim.exe','-c','-voptargs=+acc','-onfinish','stop','-wlf',dest/'wave.wlf','-l',dest/'modelsim.log',
++          'work.tb_r04_gain78','+OUT='+(dest/'pins.csv').as_posix(),'+NEGATIVE='+str(negative),'-do','do '+dofile.as_posix()],sim,expected))
++        text=(dest/'modelsim.log').read_text(errors='replace')
++        assert ('R04_NEW78_PASS' in text and '** Fatal:' not in text) if not negative else '** Fatal: R04_NEW78 independent pin byte oracle' in text
++    save(out/'INNER_RESULT.json',{'status':'new_focused_digital_controls_passed','commands':rows})
++def outer(out):
++    out.mkdir(parents=True,exist_ok=False);snap=out/'source';snap.mkdir()
++    paths={'dut.sv':R/'competition/deepeye/fpga/diagnostic/r04_gain76/deepeye_mcp6s21_write_candidate.sv',
++      'tb.sv':R/'competition/deepeye/fpga/diagnostic/r04_gain78/tb_r04_gain78.sv',
++      'run78.py':Path(__file__).resolve(),
++      'owned_process.py':R/'competition/deepeye/tools/diagnostic/g05_capture/build/owned_process.py',
++      'windows_job.py':R/'fpga_mesh/windows_job.py'}
++    pins={}
++    for name,path in paths.items():
++        b=path.read_bytes();(snap/name).write_bytes(b);pins[name]={'original':str(path),'sha256':sha(b),'bytes':len(b)}
++    assert pins['windows_job.py']['sha256']=='3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3'
++    save(out/'SOURCE_BEFORE.json',pins)
++    spec=importlib.util.spec_from_file_location('r04_owned',snap/'owned_process.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
++    job=out/'job';job.mkdir()
++    argv=list(map(str,[sys.executable,'-B',snap/'run78.py','--inner','--out',out]))
++    pr=m.run_owned(argv,job,90,snap/'windows_job.py')
++    result={'status':'failed_preserved','task_id':'DEEPEYE-IMPLEMENTATION-20261014','task_version':1,'work_id':'B-R04-GAIN-DIGITAL-VERIFICATION-20261030-78',
++      'evidence_kind':'SYNTHETIC_DIGITAL_FIXTURE','requirements_sha256':'c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804',
++      'process':pr,'source_snapshots':pins,'tested_commit':None,'source_description':'Exact frozen precommit source snapshots, no later commit execution claimed',
++      'board':'not_run; A only','analog_gain_actual':None,'R04':'NOT_PASSED','ADC_readback_actual':'unavailable',
++      'tool_binary_sha256':{n:sha((TOOLS/(n+'.exe')).read_bytes()) for n in ['vmap','vlib','vlog','vsim']}}
++    after={name:sha(path.read_bytes()) for name,path in paths.items()};save(out/'SOURCE_AFTER.json',after)
++    try:
++        m.require_owned_success(pr);assert pr['job_closed']
++        assert all(pins[name]['sha256']==h for name,h in after.items())
++        assert (out/'INNER_RESULT.json').exists();result['status']='new_focused_digital_controls_passed'
++    finally:save(out/'RESULT.json',result)
++    print(json.dumps({'status':result['status'],'result':str(out/'RESULT.json')}))
++if __name__=='__main__':
++    a=argparse.ArgumentParser();a.add_argument('--out',type=Path,required=True);a.add_argument('--inner',action='store_true');n=a.parse_args()
++    (inner if n.inner else outer)(n.out.resolve())

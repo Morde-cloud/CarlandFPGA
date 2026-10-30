@@ -1,0 +1,20 @@
+{
+  "schema": "FUNCTIONAL50_ENVELOPE108_PREPARATION_V1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-FUNCTIONAL50-PROCESS-GUARD-20261031-108",
+  "requirements_ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08", "H09", "H10", "H11", "H12", "H13", "H14", "H15"],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "phase": "SOURCE_ONLY",
+  "checks": [
+    {"case": "source_import_syntax_native", "status": "NOT_RUN"},
+    {"case": "benign_native16_sample16", "status": "NOT_RUN", "planned": "Finite nested topology,512MiB,actual native16 readback, sample16 no violation and successful inner/outer empty-close."},
+    {"case": "guard_native16_sample8", "status": "NOT_RUN", "planned": "Same finite topology actually observes newcount>8 undernative16, sampled_aggregate_process_limit terminatesownhierarchy and provesempty-close. No >8 means unresolved/no enlargement/retry."},
+    {"case": "original107_three_other_controls", "status": "NOT_REEXECUTED", "planned": "Original exit7/output/timeout evidence retained only in its original scope."},
+    {"case": "actual103_vendor_build", "status": "NOT_RUN"},
+    {"case": "A_board_and_formal_acceptance", "status": "NOT_RUN"}
+  ],
+  "runtime_budget": "One40s softwareattempt, two12s cases with cleanupreserve; only explicit main freezeSTART permits execution.",
+  "process_claim": "Explicit sampled guard with overshoot possible, not an OS hardaggregate64 guarantee; native class9readback kept separately.",
+  "A26_one_build_consumed": false
+}

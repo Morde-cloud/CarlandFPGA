@@ -166,7 +166,11 @@ module deepeye_integration_50mhz_candidate #(
     assign lane_ready = trace_blk_ready && assoc_match;
     assign trace_lane_ready = lane_ready;
     assign assoc_ready = trace_blk_ready && assoc_match;
-    assign trace_blk_valid = trace_blk_ready && assoc_match;
+    // Producer valid is independent of downstream ready. Root must hold
+    // assoc_valid and every assoc_* field until assoc_valid && assoc_ready,
+    // or explicitly cancel the joined transaction. The lane stream holds its
+    // pending raw lane while stalled. No mismatch timeout is invented here.
+    assign trace_blk_valid = assoc_match;
 
     logic [15:0] sample_data_q;
     always_ff @(posedge fclk50_candidate) begin

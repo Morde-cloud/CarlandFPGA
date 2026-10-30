@@ -40,5 +40,13 @@
   "transport": "baud/pins/AXIaperture/resetclockprofileunapproved; privatebindingRootrequired; top/hostminimumsingletononly",
   "control": "hostalwaysrouteNONE/commandNone; noC29calls, Rootactualsource/poses/actions/receiptsstillmissing",
   "original100_commit": "0b7c12fbbf91a1bad0dc1755890f5c88d348479b",
-  "C29_source": "2210ca5f32e4e806651a6b06d0e2d9710d78e773"
+  "C29_source": "2210ca5f32e4e806651a6b06d0e2d9710d78e773",
+  "post_review": "R2: producer-valid independent of ready; external association hold contract explicit; no candidate execution",
+  "unresolved_integration": [
+    "No global trace/capture/G05 STOP",
+    "No host/Root receipt ACK or retry",
+    "Only singleton top/host association",
+    "Actual Root bindings, quality/calibration, QPC/source/poses/actions missing",
+    "Both H12 routes unactivated; physical topology/baud/reset/build unreleased"
+  ]
 }

@@ -90,3 +90,25 @@ Two original Flash source jobs were interrupted at2026-10-30T02:15:59Z. Their22 
 Main's named-port/AST inspection reads12 instance sites and the selected9 source files. It is not a SystemVerilog compiler, elaborator, simulator, width proof, CDC check or functional test. Its first parser could not handle a committed no-port testbench declaration; failed parser versions remain retained before the read-only parser correction. Handwritten vectors are proposed expected values, not PASS evidence. Original100MHz files are compared to exact committed bytes, without rerunning old suites or builds.
 
 A must review the concrete shared-clock/profile, framing/decoder, Root binding, resource/topology and physical unknowns before any new bounded simulation/build release. FullG05/B06, both complete H12 routes, final1%/100ms and all29 formal gates remain unaccepted. B's source-only preparation does not close those gates.
+
+## Post-review source revision R2
+
+The independent static port review inspected the exact R1 source commit
+`9f1bec003733ce582db21df326590f89e957da36`. Its finding that producer
+`trace_blk_valid` depended on downstream ready is corrected here: valid now
+equals the joined association match, independently of ready. Root must keep
+`assoc_valid` and all `assoc_*` metadata stable until its handshake, or cancel
+the transaction; the lane component holds its corresponding raw lane. There
+is no automatic mismatch timeout. This is a text correction, not behavioral
+verification. The original R1 snapshot and review remain preserved.
+
+The other gaps remain explicit. Trace cancel is tied low in this disabled
+minimum top; capture STOP and G05 STOP do not implement a common system STOP.
+No host/Root receipt ACK or retry is connected, and a local result is consumed
+without that end-to-end acknowledgement. Raw quality needs Root's actual
+mapping; no payload quality field establishes health. Exact 100ms freshness
+is a proposed host-side check, without actual Root observations. Only a
+singleton is associated end to end. Full Root identity/time/source/pose/action
+records, control admission, both H12 paths and physical topology are absent.
+These gaps need A review and further authorized implementation; they are not
+closed by this static handoff.

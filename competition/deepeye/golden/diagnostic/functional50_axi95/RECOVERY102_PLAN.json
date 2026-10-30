@@ -1,0 +1,18 @@
+{
+  "schema":"B102_FIRST_ATTEMPT_PLAN_V1",
+  "task_id":"DEEPEYE-IMPLEMENTATION-20261014","task_version":1,
+  "work_id":"B-DEEPEYE-TRACE50-AXI-RECOVERY-20261031-102",
+  "requirements_sha256":"c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_ids":["H01","H02","H03","H04","H05","H06","H07","H08","H09","H10","H11","H12","H13","H14","H15"],
+  "quality_correction":"1807=0x070f, saturation bits4..6 absent; valid+held=5; bit2 of5 set. Record9/cancel [5,5,5,1]. Old95oppositeclaim FALSE and preserved.",
+  "records":[{"index":0,"counts":[3011,1924,2002,null],"global_quality":7,"local_quality":[1,1,1,0]},
+             {"index":9,"counts":[2982,2021,1966,0],"global_quality":1807,"local_quality":[5,5,5,1]}],
+  "origin_qpc_ns":27001348289300,"acquisition_relative_us":[0,90000],"source_relative_us":[0,50000,90000],
+  "expected_complete_frames":8,"reference_complete_wire_bytes":300,"separate_cancel_prefix_bytes":1,
+  "source94":"readonly9697494e1694ba84708b40542fd8b4ee2544bd85bd763b1104e695441d57c6e7",
+  "scope":"One first shortpath snapshot functionalAXI/TX/RX/FIFO/strictdecoder attempt only, all95adjacentnegatives preserved; no oldgroups or production/build/board acceptance.",
+  "compiler_policy":"Mainselected documented vlog -sv -svinputport=var, not defaultportability or Vivado proof",
+  "bounds":{"command_seconds":25,"whole_job_seconds":120,"output_bytes":8388608,"HDL_cycles":600000},
+  "failure_rule":"ANY actual runtime failure STOP and return raw evidence, no repair/retry/posthocexecution",
+  "gates":{"status":"STOP","command":null,"core_ran":false,"current_source_eligible":false}
+}

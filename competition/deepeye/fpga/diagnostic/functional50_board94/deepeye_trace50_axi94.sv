@@ -214,7 +214,8 @@ module deepeye_trace50_axi94 #(
     assign write_route_ok_c = write_aligned_c && write_strobe_ok_c &&
         (write_is_stage_c || write_is_cmd_c);
     assign command_code_c = w_data_q[7:0];
-    assign command_known_c = (w_data_q[31:8] == 24'd0) &&
+    // Staging data must never decode as a command or pulse the core/FIFO.
+    assign command_known_c = write_is_cmd_c && (w_data_q[31:8] == 24'd0) &&
         (command_code_c >= CMD_ARM) && (command_code_c <= CMD_POP);
     assign cmd_arm_c = command_known_c && (command_code_c == CMD_ARM);
     assign cmd_push_c = command_known_c && (command_code_c == CMD_PUSH);

@@ -1,0 +1,54 @@
+--- a/competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv
++++ b/competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv
+@@ -16,27 +16,27 @@
+ module deepeye_trace50_axi94 #(
+     parameter logic [127:0] BUILD_ID = 128'd0
+ ) (
+-    input  logic s_axi_aclk,
+-    input  logic s_axi_aresetn,
+-    input  logic [11:0] s_axi_awaddr,
+-    input  logic [2:0] s_axi_awprot,
+-    input  logic s_axi_awvalid,
++    input wire logic s_axi_aclk,
++    input wire logic s_axi_aresetn,
++    input wire logic [11:0] s_axi_awaddr,
++    input wire logic [2:0] s_axi_awprot,
++    input wire logic s_axi_awvalid,
+     output logic s_axi_awready,
+-    input  logic [31:0] s_axi_wdata,
+-    input  logic [3:0] s_axi_wstrb,
+-    input  logic s_axi_wvalid,
++    input wire logic [31:0] s_axi_wdata,
++    input wire logic [3:0] s_axi_wstrb,
++    input wire logic s_axi_wvalid,
+     output logic s_axi_wready,
+     output logic [1:0] s_axi_bresp,
+     output logic s_axi_bvalid,
+-    input  logic s_axi_bready,
+-    input  logic [11:0] s_axi_araddr,
+-    input  logic [2:0] s_axi_arprot,
+-    input  logic s_axi_arvalid,
++    input wire logic s_axi_bready,
++    input wire logic [11:0] s_axi_araddr,
++    input wire logic [2:0] s_axi_arprot,
++    input wire logic s_axi_arvalid,
+     output logic s_axi_arready,
+     output logic [31:0] s_axi_rdata,
+     output logic [1:0] s_axi_rresp,
+     output logic s_axi_rvalid,
+-    input  logic s_axi_rready
++    input wire logic s_axi_rready
+ );
+     localparam logic [31:0] MAGIC = 32'h54353046;
+     localparam logic [31:0] LAYOUT = 32'd1;
+--- a/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl
++++ b/competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl
+@@ -323,7 +323,7 @@
+         "" BUILD_ID 128
+     set_param board.repoPaths [list $board_repo]
+     set board_part [one [get_board_parts -quiet tul.com.tw:pynq-z2:part0:1.0] {pinned PYNQ-Z2 board part}]
+-    set project_dir [file join $run_root functional50_diag project]
++    set project_dir [file join $run_root p]
+     create_project functional50_diag $project_dir -part xc7z020clg400-1
+     set_property board_part $board_part [current_project]
+     set_property ip_repo_paths [list [file join $run_root packaged_ip]] [current_project]

@@ -1,0 +1,132 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "operation_id": "B-DEEPEYE-DEMO-MULTISCAN-INGRESS-20261101-147",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "tested_commit": "746e296ccfd39d1ba7db1e477879fcc33fabeea9",
+  "source_worker": "child-13a7d738567b4ab68477fcff8a0bf0fe",
+  "worker_actual_terminal": true,
+  "worker_runtime": "01a18e0c-7338-70d2-8b63-3197384fb420",
+  "published_source_pins_role": "SOURCE_PINS.json describes original source-only handoff. FREEZE152.json in raw bundle pins the actual final source.",
+  "source_files_verified": 28,
+  "simulation": "ModelSim 10.7, 50 MHz/1 Mbaud synthetic logical loopback",
+  "software": "Python 3.12.9 host147",
+  "attempts": {
+    "150": "vlog0, vsim4, outer1. TB waited for ready before presenting valid tag. Zero received bytes.",
+    "151": "vlog0, vsim4, outer1. Three public result signals had no driver. Zero received bytes.",
+    "152": "result ports driven and transfer aligned with RESULT state; vlog/vsim/host0 and owned Job terminal/closed"
+  },
+  "intake149": {
+    "status": "completed",
+    "exit": 0,
+    "termination_confirmed": true,
+    "sources_unchanged": true,
+    "result_sha256": "4a987a7464b9b7d9b3b03b2817a6d9dc9ca8a043f1bd58290594a7cef61e2aaa"
+  },
+  "wire_sha256": "7e44cb3115c2b381ac5ebc0f4155e177c6b797e6d495521e86eb76ff673efd72",
+  "ledger": [
+    {
+      "channel": 0,
+      "mode": "rice",
+      "stored_code_bytes": 3,
+      "metadata": 25,
+      "frame_bytes": 42
+    },
+    {
+      "channel": 1,
+      "mode": "rice",
+      "stored_code_bytes": 3,
+      "metadata": 25,
+      "frame_bytes": 42
+    },
+    {
+      "channel": 2,
+      "mode": "rice",
+      "stored_code_bytes": 3,
+      "metadata": 25,
+      "frame_bytes": 42
+    },
+    {
+      "channel": 3,
+      "mode": "raw",
+      "stored_code_bytes": 6,
+      "metadata": 25,
+      "frame_bytes": 45
+    }
+  ],
+  "main_independent_decoded_channel_major": [
+    [
+      1234,
+      1234,
+      1234
+    ],
+    [
+      40000,
+      40001,
+      40002
+    ],
+    [
+      65535,
+      65534,
+      65533
+    ],
+    [
+      0,
+      65535,
+      1
+    ]
+  ],
+  "main_independent_bitwise_crc_count": 4,
+  "source_words": [
+    [
+      1234,
+      40000,
+      65535,
+      0
+    ],
+    [
+      1234,
+      40001,
+      65534,
+      65535
+    ],
+    [
+      1234,
+      40002,
+      65533,
+      1
+    ]
+  ],
+  "raw_value_bytes": 24,
+  "stored_code_bytes": 15,
+  "wire_bytes": 171,
+  "retained_original_bytes": 12038,
+  "max_abs_error": 0,
+  "guards": {
+    "crc": "CRC mismatch",
+    "truncated": "truncated TRACE frame",
+    "swapped": "unexpected frame sequence/epoch"
+  },
+  "separate_mismatch_error": 1,
+  "real_board": false,
+  "bit_hwh": null,
+  "build_id": null,
+  "formal_acceptance": false
+}

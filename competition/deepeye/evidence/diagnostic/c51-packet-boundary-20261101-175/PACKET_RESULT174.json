@@ -1,0 +1,109 @@
+{
+  "work_id": "B-C51-MULTISCAN-PACKET-BOUNDARY-20261101-174",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "C_head": "aa6c5abe20e3e90014e0f7cf7666472272059f3d",
+  "C_archive_sha256": "9c5d1e3e86e2bf816541843ff35503c8a64c7b472f4c07efd47e72c4220b9974",
+  "C_transport_sha256": "613b10bd6b9bdc8da6c63aa9bc762df11742f86e39b4e4248f4adef8407385d6",
+  "selected_ast_sha256": "eabc154b4d0ec8dc709a488221e977fb89338546adbf94247cbb2eb16422e15f",
+  "codec_sha256": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642",
+  "controls": [
+    {
+      "id": "SINGLETON_SUPPORTED",
+      "expected": "four values",
+      "observed": [
+        0,
+        4095,
+        1234,
+        3456
+      ]
+    },
+    {
+      "id": "B147_COUNT3_UNCHANGED",
+      "expected": "reject",
+      "observed": "RAW4_CONTRADICTION"
+    },
+    {
+      "id": "SINGLETON_BAD_CRC",
+      "expected": "reject",
+      "observed": "RAW4_CONTRADICTION"
+    }
+  ],
+  "positive_wire_bytes": 148,
+  "positive_wire_sha256": "961dd690e8a6293e691a2a762dfea4419f19c9ad6317e86f8f8eb9fbcd6f0806",
+  "B147_original_wire_bytes": 171,
+  "B147_original_wire_sha256": "7e44cb3115c2b381ac5ebc0f4155e177c6b797e6d495521e86eb76ff673efd72",
+  "B147_original_frames": [
+    {
+      "channel": 0,
+      "count": 3,
+      "values": [
+        1234,
+        1234,
+        1234
+      ],
+      "bytes": 42,
+      "sequence": 4608,
+      "tick": 100
+    },
+    {
+      "channel": 1,
+      "count": 3,
+      "values": [
+        40000,
+        40001,
+        40002
+      ],
+      "bytes": 42,
+      "sequence": 4609,
+      "tick": 100
+    },
+    {
+      "channel": 2,
+      "count": 3,
+      "values": [
+        65535,
+        65534,
+        65533
+      ],
+      "bytes": 42,
+      "sequence": 4610,
+      "tick": 100
+    },
+    {
+      "channel": 3,
+      "count": 3,
+      "values": [
+        0,
+        65535,
+        1
+      ],
+      "bytes": 45,
+      "sequence": 4611,
+      "tick": 100
+    }
+  ],
+  "new_fixture_is_synthetic": true,
+  "scope": "Only exact selected C51 packet definitions. No whole C51 projection, Root, model, actor, registry, custody or board executed.",
+  "product_compatibility": false,
+  "physical_board": false,
+  "formal_acceptance": false
+}

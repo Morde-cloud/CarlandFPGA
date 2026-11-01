@@ -1,0 +1,173 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-C51-INTAKE-AND-PACKET-REVIEW-20261101-175",
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-11-01T15:46:19.125644+00:00",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "C_head": "aa6c5abe20e3e90014e0f7cf7666472272059f3d",
+  "C_source": "40e5660acb0c5a667d421ade4d4ff525913c5009",
+  "C_operation": "C-DEEPEYE-RAW4-OWNED-JOIN-20261101-51",
+  "C_request_hash": "1c4d22675eaf3e0e186b073781b5c7fd21e7cd0d0c0680c40ad88455fd3c8797",
+  "C_manifest_sha256": "5bc866a3cc0591f0250ffd5b52b56ea1fb73adade7cb85166507a4e4182430df",
+  "exact_remote_files_received": 9,
+  "top_archive_members": [
+    174,
+    45
+  ],
+  "C_standalone_artifact_verifier_exit": 0,
+  "C_standard_manifest_verifier_exit": 0,
+  "matched_B_dependency_pins": {
+    "input113.py": {
+      "B_path": "competition/deepeye/tools/diagnostic/functional50_input113/input113.py",
+      "sha256": "95b46940767d3be4dbe3d885a4852119161ea5e4567ab3bda51798c39109ea49"
+    },
+    "codec.py": {
+      "B_path": "competition/deepeye/golden/codec/trace_candidate.py",
+      "sha256": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642"
+    },
+    "adapter128.py": {
+      "B_path": "competition/deepeye/tools/diagnostic/functional50_adapter128/adapter128.py",
+      "sha256": "12d975c2841edb65ef427121d098cd6ed27f600edd922f1a63fc5d6b5908ea41"
+    }
+  },
+  "new_packet_test_source": "3815b716301bda3e42179ea34d9b1f1daf34603f",
+  "new_packet_test_exit": 0,
+  "controls": [
+    {
+      "id": "SINGLETON_SUPPORTED",
+      "expected": "four values",
+      "observed": [
+        0,
+        4095,
+        1234,
+        3456
+      ]
+    },
+    {
+      "id": "B147_COUNT3_UNCHANGED",
+      "expected": "reject",
+      "observed": "RAW4_CONTRADICTION"
+    },
+    {
+      "id": "SINGLETON_BAD_CRC",
+      "expected": "reject",
+      "observed": "RAW4_CONTRADICTION"
+    }
+  ],
+  "independent_positive_packet_checks": [
+    {
+      "channel": 0,
+      "payload_bytes": 23,
+      "count": 1,
+      "crc_verified": true
+    },
+    {
+      "channel": 1,
+      "payload_bytes": 23,
+      "count": 1,
+      "crc_verified": true
+    },
+    {
+      "channel": 2,
+      "payload_bytes": 23,
+      "count": 1,
+      "crc_verified": true
+    },
+    {
+      "channel": 3,
+      "payload_bytes": 23,
+      "count": 1,
+      "crc_verified": true
+    }
+  ],
+  "main_source_refs": [
+    {
+      "member": "deps/raw4_proof_v1/transport.py",
+      "sha256": "613b10bd6b9bdc8da6c63aa9bc762df11742f86e39b4e4248f4adef8407385d6",
+      "lines": [
+        71
+      ],
+      "exact_text": "decoded['count']==1"
+    },
+    {
+      "member": "deps/raw4_proof_v1/frozen_source_predicates.py",
+      "sha256": "7f4eaa649f1669e3f475d6cdbfb92a7ab7dfe1324cfb42719eb34c15f479ccf4",
+      "lines": [
+        243
+      ],
+      "exact_text": "_uint(count, 12"
+    },
+    {
+      "member": "candidate/competition/deepeye/simulation/authority/raw4_owned_join_v1.py",
+      "sha256": "109d246f826d9484e278ae919042c1ce6e86d3eece7ca4f1ecdbbada71b1fd34",
+      "lines": [
+        136,
+        241
+      ],
+      "exact_text": "record.sample_lower_ns+100_000_000"
+    },
+    {
+      "member": "candidate/competition/deepeye/simulation/authority/raw4_owned_join_v1.py",
+      "sha256": "109d246f826d9484e278ae919042c1ce6e86d3eece7ca4f1ecdbbada71b1fd34",
+      "lines": [
+        91
+      ],
+      "exact_text": "type(view)is _RegistryView"
+    },
+    {
+      "member": "API.md",
+      "sha256": "57ef537fd8f42649288868a68baee6e5d64ae40af1b8ecaf6631bacfa088ed94",
+      "lines": [
+        3
+      ],
+      "exact_text": "not a public"
+    },
+    {
+      "member": "API.md",
+      "sha256": "57ef537fd8f42649288868a68baee6e5d64ae40af1b8ecaf6631bacfa088ed94",
+      "lines": [
+        5
+      ],
+      "exact_text": "require_activation_ready()"
+    },
+    {
+      "member": "ATTACHMENT-CLARIFICATION.md",
+      "sha256": "901c92821389ecbba3ed4381419b4036e28f63e05902f5310e77cb07a93a7303",
+      "lines": [
+        14
+      ],
+      "exact_text": "does not automatically attach C42 context"
+    }
+  ],
+  "key_decisions": [
+    "C51 current source/API is now received; stop treating all C interface data as missing. This is a byte/source intake receipt, not acceptance of all C51 behavior.",
+    "C51 count1 endpoint does not consume unchanged B147 count3 frames. New test actual rejection is expected compatibility evidence, not a new C product defect. Do not split/relabel observed packets or fabricate Root original identities.",
+    "C source count12-bit bound is a source-domain constraint beyond packet-only decoder. B147 generic uint16 synthetic values cannot be clamped/scaled into those source records without owner-defined measured mapping.",
+    "C51 exact original registry/view/hold/runtime identity, explicit attachment and100ms cap remain. Receiving scalar JSON or decoding a packet cannot create those capabilities.",
+    "No new B driver/producer shim is selected until A/C define the actual typed multiscan/source/custody interface. B build141 remains unstarted.",
+    "171 acquisition failure was Contents API encoding none for large ZIP, not a C source failure.172 reused completed bytes and performed new bounded range reads with both Git/manifest hashes.",
+    "173 worker remains separately readonly; its final conclusion is accepted only after actual terminal and independent verification.174 was a main-authored new packet test, not an old C suite replay."
+  ],
+  "full_C51_execution": false,
+  "C_model_or_Root_or_actor_or_board": false,
+  "B_all_complete": false,
+  "formal_acceptance": false
+}

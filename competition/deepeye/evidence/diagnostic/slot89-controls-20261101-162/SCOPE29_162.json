@@ -1,0 +1,661 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-INDEPENDENT-CLOSURE-REVIEW-20261101-162",
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+  "taskbook_sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "scope": "All original29 cards mapped for B responsibility, including shared R03/R04/A02/A05/A04/G02/G07. A06 is not one of the original29; retain shared responsibilities without inventing a30th root card. This is a dependency/delivery map, not product acceptance.",
+  "rows": [
+    {
+      "id": "R01",
+      "primary_owner": "A",
+      "original_dependencies": [],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "R02",
+      "primary_owner": "A",
+      "original_dependencies": [],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "R03",
+      "primary_owner": "A",
+      "original_dependencies": [],
+      "B_responsibility": "Independent B protocol/interoperability review; A owns public ABI/pipeline and current production freeze.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "Existing B proposals/vector/loopback/decoder handoffs retained; A-selected schema and C endpoint are required for final integration.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "R04",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "R02",
+        "R03"
+      ],
+      "B_responsibility": "B SPI gain controller and independent ADC before/after read path; A selection/calibration, C finite gain decision.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "Digital gain78 and priority/reset seam82 source and executed evidence exist. ADC channel binding, before/after independent measurements, analog gain calibration/8 levels/5% and actual wiring remain A-dependent; digital SPI is not an analog readback.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "B01",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "R03"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "C_INDEPENDENT_DECODE_PLUS_A_SIGNOFF",
+      "remaining_or_next_input": "No new B job. Wait for C independent decode and A frozen public ABI/signoff; do not rename or rerun the passed million-soak evidence.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "C01",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "R03"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "A01",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "R02",
+        "R03"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "B02",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "A01",
+        "B01"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "A_HARDWARE_AND_PHYSICAL_600S",
+      "remaining_or_next_input": "A supplies actual pin/IP/clock/PS/DMA facts and a 600s physical result; B can integrate only after that frozen interface. Do not substitute the existing queue fixtures.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "B03",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "B01",
+        "B02"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "A_TOPOLOGY_CLOCK_RESET_THEN_B_INTEGRATION",
+      "remaining_or_next_input": "Do not add a generic single-clock harness. A must provide the exact chosen topology and stopped-clock/reset release contract; then B adds the focused stream_reset case and the integrated timing/CDC evidence.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "B04",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "R03",
+        "B03"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "B_INDEPENDENT_TEST161_EXECUTED_READY_FOR_SUBMISSION",
+      "remaining_or_next_input": "First directed nominal gate89 control suite now passes46/47 with one explicitly review-only scenario. Public slot/profile/BOOT/final wire tests and C/A integration remain unaccepted.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "B05",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "R03",
+        "B04",
+        "R04"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "A_PUBLIC_ABI_AND_PHYSICAL_TIMING",
+      "remaining_or_next_input": "A freezes the public control ABI/schema and supplies 100-trial/timing evidence; B integrates only the chosen control state after that boundary.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "B06",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "B02",
+        "B03",
+        "B04",
+        "B05"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "A_SOURCE_CLOCK_PROFILE_AND_SAME_BUILD_PAIR_THEN_B",
+      "remaining_or_next_input": "B141 NOT STARTED: A64 exact TRACE pin611c73 is the later-known A335 packaging failure. A selected separate corrected13-port source; require a new compatible exact authorized B scope or A same-run artifacts. Never replay125/reset budgets or silently substitute A source.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "C02",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "C01",
+        "B01"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "C03",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "R02",
+        "C02"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "C04",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "R03",
+        "C02"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "C05",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "R03",
+        "B05",
+        "C04"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "A02",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "B06",
+        "C03",
+        "C04",
+        "C05",
+        "G06"
+      ],
+      "B_responsibility": "B independently accounts bytes in A full-chain blind trials.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "A same-commit raw 30 layouts x3 actual records and physical line capture are required. B147 synthetic 171-byte ledger is delivered but is not an A02 trial.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "A05",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "R04",
+        "B06",
+        "C03",
+        "C04"
+      ],
+      "B_responsibility": "B checks PL and byte evidence for A real automatic gain trials.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "R04 calibration plus actual A input/ADC/PL/line records and C frozen project model are required. No ACK/GPIO may replace physical response.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "A03",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "A02",
+        "A05",
+        "G07"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "A04",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "R01",
+        "A03",
+        "G08"
+      ],
+      "B_responsibility": "B/C independently reproduce the A release in a second environment.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "Requires A candidate release package with exact source/model/bit/evidence pins and launch path; no complete final release candidate received in the reviewed inputs.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G01",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "R03"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "A_INTEGRATED_GAME_AND_GATE_DECISION",
+      "remaining_or_next_input": "Do not write gate geometry in B assets or revive a G01 asset candidate. A integrates R03/project.godot/UI/physics/export and final asset adoption.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G02",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "G01"
+      ],
+      "B_responsibility": "B read-only reviews model picking; A owns editor/viewer/UI and test recordings.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "Requires A exact runnable integrated UI candidate and actual pick mapping/recording. B G01 assets/tests are already delivered; no authority to replace A-owned geometry or UI.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G03",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "R03"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G04",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "G03",
+        "C01",
+        "C02"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G05",
+      "primary_owner": "B",
+      "original_dependencies": [
+        "R03",
+        "B05",
+        "B06"
+      ],
+      "B_responsibility": "B primary implementation",
+      "current_B_classification": "A_ABI3_PHYSICAL_SAME_BUILD_PLUS_C_BROKER",
+      "remaining_or_next_input": "A selects/freezes ABI3, clock/profile and exact same-build pair and runs physical capture; C provides the actual broker interface. Do not duplicate B132/B147, infer measured outputs from commands, or call the 32-word decoder motion authority.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G09",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "G03",
+        "A01",
+        "B02"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G06",
+      "primary_owner": "C",
+      "original_dependencies": [
+        "G02",
+        "G04",
+        "G05",
+        "G09",
+        "C05"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for C.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G07",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "A02",
+        "G06",
+        "C03"
+      ],
+      "B_responsibility": "B independently verifies all-direction line-byte accounting for A blind trials.",
+      "current_B_classification": "SHARED_DEPENDENCY_REMAINS",
+      "remaining_or_next_input": "Needs A original records for each topology and line/profile, failures included; no received complete blind-trial capture set. Do not repeat the 90 runs or infer pass from B147 synthetic ledger.",
+      "formal_card_acceptance": "not asserted"
+    },
+    {
+      "id": "G08",
+      "primary_owner": "A",
+      "original_dependencies": [
+        "G07"
+      ],
+      "B_responsibility": "No independent B writer assigned by original card; retain owner and dependencies",
+      "current_B_classification": "OTHER_OWNER_SCOPE",
+      "remaining_or_next_input": "No new B-only deliverable selected. Supporting interface review follows actual owner input; this row makes no completion or acceptance claim for A.",
+      "formal_card_acceptance": "not asserted"
+    }
+  ],
+  "R04_prior_executed_summary": {
+    "all_29": "NOT_PASSED",
+    "analog_gain": "unknown",
+    "board": "not_run; A only",
+    "clock_100mhz": "engineering assumption only",
+    "completed_at_utc": "2026-10-30T13:34:36.602654+00:00",
+    "contract": {
+      "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+      "requirements_ids": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H07",
+        "H08",
+        "H09",
+        "H10",
+        "H11",
+        "H12",
+        "H13",
+        "H14",
+        "H15"
+      ],
+      "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+      "revision": 1
+    },
+    "execution_kind": "SYNTHETIC_DIGITAL_SEAM_WITH_ACTUAL_76_MASTER",
+    "full_h12": "NOT_PASSED",
+    "git": "not_run; main owns",
+    "instance_id": "deepseek-b-83",
+    "job": {
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\runner.py",
+        "--phase",
+        "green",
+        "--inner",
+        "--out",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2"
+      ],
+      "command_line": "C:\\Python314\\python.exe -B D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\runner.py --phase green --inner --out D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2",
+      "completed_at_utc": "2026-10-30T13:34:36.574145+00:00",
+      "creationflags": 134218244,
+      "cwd": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\work",
+      "elapsed_seconds": 2.8780910999994376,
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TEMP": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\tmp",
+        "TMP": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\tmp",
+        "TMPDIR": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\tmp",
+        "XILINX_LOCAL_USER_DATA": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\user_data"
+      },
+      "exit_code": 0,
+      "helper": {
+        "bytes": 3679,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\windows_job.py",
+        "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+      },
+      "hidden": true,
+      "job_accounting": [
+        {
+          "active_processes": 1,
+          "at_utc": "2026-10-30T13:34:33.773266+00:00",
+          "phase": "after_attach",
+          "returned_bytes": 48,
+          "total_processes": 1,
+          "total_terminated_processes": 0
+        },
+        {
+          "active_processes": 1,
+          "at_utc": "2026-10-30T13:34:36.523253+00:00",
+          "phase": "after_launcher_exit",
+          "returned_bytes": 48,
+          "total_processes": 28,
+          "total_terminated_processes": 0
+        },
+        {
+          "active_processes": 0,
+          "at_utc": "2026-10-30T13:34:36.573873+00:00",
+          "phase": "after_launcher_exit",
+          "returned_bytes": 48,
+          "total_processes": 28,
+          "total_terminated_processes": 0
+        }
+      ],
+      "job_attached_before_resume": true,
+      "job_close_called_at_utc": "2026-10-30T13:34:36.573966+00:00",
+      "job_closed": true,
+      "job_drain_seconds": 5,
+      "job_empty_observed_before_close": true,
+      "job_terminal_confirmed": true,
+      "job_terminal_state": "confirmed",
+      "job_terminate_seconds": 5,
+      "job_termination": {
+        "attempted": false,
+        "reason": "natural_job_completion"
+      },
+      "launcher_exit_confirmed": true,
+      "original_pid": 46920,
+      "shell": false,
+      "started_at_utc": "2026-10-30T13:34:33.695594+00:00",
+      "stderr": {
+        "bytes": 0,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\process.stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 60,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\job\\process.stdout.bin",
+        "sha256": "3abfaac7de40c92ea22addc3285f379104f18af29d2ade711dbc76be320d4885"
+      },
+      "terminal": "redirected binary stdout/stderr; no window",
+      "termination_confirmed": true,
+      "timed_out": false,
+      "timeout_seconds": 150,
+      "wrapper_pid": 37720
+    },
+    "job_id": "child-7c042de9d616469488cde6de0542f950",
+    "job_terminal_empty_closed": true,
+    "not_run": [
+      "natural master-result wrong-tag path without forcing internals",
+      "physical ADC/calibration/threshold and overrange provenance",
+      "analog gain/register/RESULT/settling effect",
+      "synthesis/place/route/timing/pins/clock constraints/board"
+    ],
+    "output_bytes_before_result": 1474954,
+    "overrange_provenance": "external flag absent",
+    "phase": "green",
+    "physical_adc": "unavailable",
+    "r04": "NOT_PASSED",
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "schema": "deepeye-r04-gain82-focused-result/v1",
+    "source_after": {
+      "README80.md": {
+        "bytes": 4545,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\README.md",
+        "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23"
+      },
+      "SAFETY82_MAIN_REVIEW.json": {
+        "bytes": 3323,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\SAFETY82_MAIN_REVIEW.json",
+        "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823"
+      },
+      "dut80.sv": {
+        "bytes": 9538,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\deepeye_mcp6s21_safety_arbiter_candidate.sv",
+        "sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d"
+      },
+      "immutable_scope_pinned.json": {
+        "bytes": 6684,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\immutable_scope_pinned.json",
+        "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4"
+      },
+      "master76.sv": {
+        "bytes": 6514,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain76\\deepeye_mcp6s21_write_candidate.sv",
+        "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd"
+      },
+      "owned_process.py": {
+        "bytes": 11126,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\g05_capture\\build\\owned_process.py",
+        "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692"
+      },
+      "runner.py": {
+        "bytes": 21469,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\r04_gain82\\run_r04_gain82.py",
+        "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19"
+      },
+      "tb82.sv": {
+        "bytes": 24014,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain82\\tb_r04_gain82.sv",
+        "sha256": "41b2bc8b57b27438a28dd189f2129333dbdee3353178f72d50a195b27bb19ff1"
+      },
+      "vectors80_UNEXECUTED.json": {
+        "bytes": 21092,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\vectors_UNEXECUTED.json",
+        "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668"
+      },
+      "windows_job.py": {
+        "bytes": 3679,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\fpga_mesh\\windows_job.py",
+        "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3"
+      }
+    },
+    "source_before": {
+      "README80.md": {
+        "bytes": 4545,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\README.md",
+        "sha256": "659278585ccff5e344c29d872f53de2da384ec5f0ef67e7a2177e0064aea8e23",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\README80.md"
+      },
+      "SAFETY82_MAIN_REVIEW.json": {
+        "bytes": 3323,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\SAFETY82_MAIN_REVIEW.json",
+        "sha256": "38d965ebaf50a7dfe0cc66665f3ac6535e08f25c58f354a0dcb86e7cd08d0823",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\SAFETY82_MAIN_REVIEW.json"
+      },
+      "dut80.sv": {
+        "bytes": 9538,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\deepeye_mcp6s21_safety_arbiter_candidate.sv",
+        "sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\dut80.sv"
+      },
+      "immutable_scope_pinned.json": {
+        "bytes": 6684,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\immutable_scope_pinned.json",
+        "sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\immutable_scope_pinned.json"
+      },
+      "master76.sv": {
+        "bytes": 6514,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain76\\deepeye_mcp6s21_write_candidate.sv",
+        "sha256": "442b0ccd85f0e974b38f6c8e8624e016e724580fe1a56ba09684e78996cb9ccd",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\master76.sv"
+      },
+      "owned_process.py": {
+        "bytes": 11126,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\g05_capture\\build\\owned_process.py",
+        "sha256": "1b8d34ce5758ec4bc0fbfd3518a27567e991039e52533c3a62652c5c9db10692",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\owned_process.py"
+      },
+      "runner.py": {
+        "bytes": 21469,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\tools\\diagnostic\\r04_gain82\\run_r04_gain82.py",
+        "sha256": "8f7d0e877aebc872a41e59a173561ce2123830be86f4763559c1e43826aa2b19",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\runner.py"
+      },
+      "tb82.sv": {
+        "bytes": 24014,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain82\\tb_r04_gain82.sv",
+        "sha256": "41b2bc8b57b27438a28dd189f2129333dbdee3353178f72d50a195b27bb19ff1",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\tb82.sv"
+      },
+      "vectors80_UNEXECUTED.json": {
+        "bytes": 21092,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\competition\\deepeye\\fpga\\diagnostic\\r04_gain80\\vectors_UNEXECUTED.json",
+        "sha256": "189382107db6e5aa451021780a29ba58c77f11f8f909e2b7408b68c50c415668",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\vectors80_UNEXECUTED.json"
+      },
+      "windows_job.py": {
+        "bytes": 3679,
+        "original": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\fpga_mesh\\windows_job.py",
+        "sha256": "3c36fe7209e5cca5b9c354a54d089e838b32a4a566551b65957507a4710295e3",
+        "snapshot": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety-worker82\\RUN_GREEN_V2\\source\\windows_job.py"
+      }
+    },
+    "source_changed_during_run": false,
+    "source_relation_after": {
+      "archive_rtl": {
+        "bytes": 9523,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety82-original80\\deepeye_mcp6s21_safety_arbiter_candidate.sv",
+        "sha256": "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036"
+      },
+      "expected_repaired_sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d",
+      "only_authorized_rtl_line_changed": true,
+      "phase_relation": "original80_archive_plus_only_arm_fire_inhibit_guard"
+    },
+    "source_relation_before": {
+      "archive_rtl": {
+        "bytes": 9523,
+        "path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-74\\safety82-original80\\deepeye_mcp6s21_safety_arbiter_candidate.sv",
+        "sha256": "e5a6fb00fcd3ac8ae4c2f2fb2a9793b2f35ea7b780ad3c7645d2be93ba52a036"
+      },
+      "expected_repaired_sha256": "831429ca560df90fc16ef5fbc7b236d3e82e35071892012ad3c4702981ac1d3d",
+      "only_authorized_rtl_line_changed": true,
+      "phase_relation": "original80_archive_plus_only_arm_fire_inhibit_guard"
+    },
+    "status": "GREEN_PASS",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "thread_id": "01a18ce6-e447-7ba0-80be-09e9a58e4278",
+    "work_id": "B-R04-OVERRANGE-FUNCTIONAL-20261030-82"
+  },
+  "prior_audit155": "Bounded delta accepted with MAIN158 qualifications; historical8-card status is not current global acceptance.",
+  "all_currently_selected_independent_source_tests_executed": true,
+  "submission_pending": true,
+  "B_all_complete": false,
+  "root_product_accepted": false
+}

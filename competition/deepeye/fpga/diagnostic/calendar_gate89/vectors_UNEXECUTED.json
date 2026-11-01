@@ -1,0 +1,372 @@
+{
+  "schema": 1,
+  "artifact": "deepeye_nominal_uplink_slot_gate_candidate vectors",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-B04-UPLINK-SLOT-GATE-SOURCE-20261030-89",
+  "status": "UNEXECUTED",
+  "pass_claimed": false,
+  "execution": {
+    "candidate_imported": false,
+    "candidate_compiled": false,
+    "simulator_invoked": false,
+    "testbench_invoked": false,
+    "synthesis_or_timing_run": false,
+    "oracle_kind": "manual source-level expectation only"
+  },
+  "pins": {
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "frozen_source": "1011259415a0916054eb580687612580bc1e5f09",
+    "q012_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+    "profile_canonical_sha256": "b7abdd50d04337c4526ae43de6912c9b7f05e9803e79a519dd4fd7528edc3b46",
+    "profile_hardware_enable_eligible": false
+  },
+  "fixture_note": "Origins and deadlines are synthetic gate inputs for arithmetic oracle checks; they are not A BOOT grants, an admitted A profile, or measured transmission timing.",
+  "profiles": {
+    "1": {
+      "name": "FAST",
+      "baud": 9600,
+      "window_ns": "500000000",
+      "guard_ns": "40000000",
+      "fixture_origin_ns": "10000000000",
+      "fixture_now_ns": "9990000000",
+      "fixture_deadline_ns": "10500000000",
+      "fixture_window_end_ns": "10500000000",
+      "slot_bounds": [
+        {"role_id": 1, "name": "EVENT", "class": 0, "cost": 20, "offset_ns": "0", "start_ns": "10000000000", "wire_ns": "20833334", "frame_end_ns": "10020833334", "guard_end_ns": "10060833334"},
+        {"role_id": 2, "name": "TELEM", "class": 1, "cost": 32, "offset_ns": "35000000", "start_ns": "10035000000", "wire_ns": "33333334", "frame_end_ns": "10068333334", "guard_end_ns": "10108333334"},
+        {"role_id": 3, "name": "ACK_PRIMARY", "class": 0, "cost": 34, "offset_ns": "255000000", "start_ns": "10255000000", "wire_ns": "35416667", "frame_end_ns": "10290416667", "guard_end_ns": "10330416667"},
+        {"role_id": 4, "name": "STATE3D", "class": 1, "cost": 34, "offset_ns": "305000000", "start_ns": "10305000000", "wire_ns": "35416667", "frame_end_ns": "10340416667", "guard_end_ns": "10380416667"},
+        {"role_id": 5, "name": "ACK_RETRY", "class": 0, "cost": 34, "offset_ns": "410000000", "start_ns": "10410000000", "wire_ns": "35416667", "frame_end_ns": "10445416667", "guard_end_ns": "10485416667"},
+        {"role_id": 6, "name": "CONFIG_ACK", "class": 0, "cost": 32, "offset_ns": "405000000", "start_ns": "10405000000", "wire_ns": "33333334", "frame_end_ns": "10438333334", "guard_end_ns": "10478333334"},
+        {"role_id": 7, "name": "EVENT_RETRY", "class": 0, "cost": 20, "offset_ns": "365000000", "start_ns": "10365000000", "wire_ns": "20833334", "frame_end_ns": "10385833334", "guard_end_ns": "10425833334"}
+      ]
+    },
+    "2": {
+      "name": "STRESS",
+      "baud": 300,
+      "window_ns": "8000000000",
+      "guard_ns": "200000000",
+      "fixture_origin_ns": "20000000000",
+      "fixture_now_ns": "19990000000",
+      "fixture_deadline_ns": "28000000000",
+      "fixture_window_end_ns": "28000000000",
+      "slot_bounds": [
+        {"role_id": 1, "name": "EVENT", "class": 0, "cost": 20, "offset_ns": "0", "start_ns": "20000000000", "wire_ns": "666666667", "frame_end_ns": "20666666667", "guard_end_ns": "20866666667"},
+        {"role_id": 2, "name": "TELEM", "class": 1, "cost": 32, "offset_ns": "700000000", "start_ns": "20700000000", "wire_ns": "1066666667", "frame_end_ns": "21766666667", "guard_end_ns": "21966666667"},
+        {"role_id": 3, "name": "ACK_PRIMARY", "class": 0, "cost": 34, "offset_ns": "3100000000", "start_ns": "23100000000", "wire_ns": "1133333334", "frame_end_ns": "24233333334", "guard_end_ns": "24433333334"},
+        {"role_id": 4, "name": "STATE3D", "class": 1, "cost": 34, "offset_ns": "4300000000", "start_ns": "24300000000", "wire_ns": "1133333334", "frame_end_ns": "25433333334", "guard_end_ns": "25633333334"},
+        {"role_id": 5, "name": "ACK_RETRY", "class": 0, "cost": 34, "offset_ns": "6550000000", "start_ns": "26550000000", "wire_ns": "1133333334", "frame_end_ns": "27683333334", "guard_end_ns": "27883333334"},
+        {"role_id": 6, "name": "CONFIG_ACK", "class": 0, "cost": 32, "offset_ns": "6550000000", "start_ns": "26550000000", "wire_ns": "1066666667", "frame_end_ns": "27616666667", "guard_end_ns": "27816666667"},
+        {"role_id": 7, "name": "EVENT_RETRY", "class": 0, "cost": 20, "offset_ns": "5500000000", "start_ns": "25500000000", "wire_ns": "666666667", "frame_end_ns": "26166666667", "guard_end_ns": "26366666667"}
+      ]
+    }
+  },
+  "common_nominal_steps": [
+    "reset with enable=0, arm=0, token_valid=0",
+    "drive enable=1, sample token_valid=0, then raise arm",
+    "present one valid token matching profile, role, class, cost, hash, grants, identity and timing",
+    "observe token_ready and bind exactly once",
+    "expect one credit-load handshake equal to token_cost while Q012 is empty",
+    "present one exact descriptor; reject any second acceptance",
+    "hold outer out_valid=0 before slot start even if Q012 holds the offer",
+    "set now_ns exactly to slot start with quiescent downstream and out_ready=1",
+    "expect one forward_pulse, sent_count increment, zero credits, no sticky fault"
+  ],
+  "scenarios": [
+    {
+      "id": "F1-NOM-EVENT",
+      "categories": ["nominal_slot", "FAST", "EVENT", "uplink"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1",
+      "token_id": "101", "token_desc": "0x8900000000000001", "token_class": 0, "token_cost": 20,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F1-NOM-TELEM",
+      "categories": ["nominal_slot", "FAST", "TELEM", "uplink"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2",
+      "token_id": "102", "token_desc": "0x8900000000000002", "token_class": 1, "token_cost": 32,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F1-NOM-ACK-PRIMARY",
+      "categories": ["nominal_slot", "FAST", "ACK_PRIMARY", "grant_main"],
+      "profile_id": 1, "role_id": 3, "timing_ref": "1:3",
+      "token_id": "103", "token_desc": "0x8900000000000003", "token_class": 0, "token_cost": 34,
+      "grant_mask": "0x8000", "first_ack_ok": true,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F1-NOM-STATE3D",
+      "categories": ["nominal_slot", "FAST", "STATE3D", "uplink"],
+      "profile_id": 1, "role_id": 4, "timing_ref": "1:4",
+      "token_id": "104", "token_desc": "0x8900000000000004", "token_class": 1, "token_cost": 34,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F1-NOM-ACK-RETRY",
+      "categories": ["nominal_slot", "FAST", "ACK_RETRY", "grant_retry"],
+      "profile_id": 1, "role_id": 5, "timing_ref": "1:5",
+      "token_id": "105", "token_desc": "0x8900000000000005", "token_class": 0, "token_cost": 34,
+      "grant_mask": "0xa000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F1-NOM-CONFIG-ACK",
+      "categories": ["nominal_slot", "FAST", "CONFIG_ACK", "grant_config"],
+      "profile_id": 1, "role_id": 6, "timing_ref": "1:6",
+      "token_id": "106", "token_desc": "0x8900000000000006", "token_class": 0, "token_cost": 32,
+      "grant_mask": "0x4000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F1-NOM-EVENT-RETRY",
+      "categories": ["nominal_slot", "FAST", "EVENT_RETRY", "uplink_direction_override"],
+      "profile_id": 1, "role_id": 7, "timing_ref": "1:7",
+      "token_id": "107", "token_desc": "0x8900000000000007", "token_class": 0, "token_cost": 20,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-EVENT", "categories": ["nominal_slot", "STRESS", "EVENT", "uplink"],
+      "profile_id": 2, "role_id": 1, "timing_ref": "2:1", "token_id": "201", "token_desc": "0x8900000000000101", "token_class": 0, "token_cost": 20,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-TELEM", "categories": ["nominal_slot", "STRESS", "TELEM", "uplink"],
+      "profile_id": 2, "role_id": 2, "timing_ref": "2:2", "token_id": "202", "token_desc": "0x8900000000000102", "token_class": 1, "token_cost": 32,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-ACK-PRIMARY", "categories": ["nominal_slot", "STRESS", "ACK_PRIMARY", "grant_main"],
+      "profile_id": 2, "role_id": 3, "timing_ref": "2:3", "token_id": "203", "token_desc": "0x8900000000000103", "token_class": 0, "token_cost": 34,
+      "grant_mask": "0x8000", "first_ack_ok": true,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-STATE3D", "categories": ["nominal_slot", "STRESS", "STATE3D", "uplink"],
+      "profile_id": 2, "role_id": 4, "timing_ref": "2:4", "token_id": "204", "token_desc": "0x8900000000000104", "token_class": 1, "token_cost": 34,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-ACK-RETRY", "categories": ["nominal_slot", "STRESS", "ACK_RETRY", "grant_retry"],
+      "profile_id": 2, "role_id": 5, "timing_ref": "2:5", "token_id": "205", "token_desc": "0x8900000000000105", "token_class": 0, "token_cost": 34,
+      "grant_mask": "0xa000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-CONFIG-ACK", "categories": ["nominal_slot", "STRESS", "CONFIG_ACK", "grant_config"],
+      "profile_id": 2, "role_id": 6, "timing_ref": "2:6", "token_id": "206", "token_desc": "0x8900000000000106", "token_class": 0, "token_cost": 32,
+      "grant_mask": "0x4000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "F2-NOM-EVENT-RETRY", "categories": ["nominal_slot", "STRESS", "EVENT_RETRY", "uplink_direction_override"],
+      "profile_id": 2, "role_id": 7, "timing_ref": "2:7", "token_id": "207", "token_desc": "0x8900000000000107", "token_class": 0, "token_cost": 20,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"bind": "accept_once", "output_valid_before_start": false, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0, "flushed_count_delta": 0}
+    },
+    {
+      "id": "FIRST-ACK-RETRY-SUPPRESS", "categories": ["first_ack", "retry_grant", "negative"],
+      "profile_id": 1, "role_id": 5, "timing_ref": "1:5", "token_id": "301", "token_class": 0, "token_cost": 34,
+      "grant_mask": "0xa000", "first_ack_ok": true,
+      "expected": {"token_ready": false, "fault_code": 1, "fault_token_id": "301", "q012_enqueue": false, "spi_forward": false}
+    },
+    {
+      "id": "CONFIG-RETRY-MUTEX", "categories": ["mutual_exclusion", "same_window", "negative"],
+      "profile_id": 1, "timing_refs": ["1:6", "1:5"], "token_ids": ["302", "303"],
+      "oracle_steps": [
+        "bind/fire CONFIG_ACK id302 with grant 0x4000",
+        "before ACK_RETRY start, present ACK_RETRY id303 with grant 0xa000 in the same origin"
+      ],
+      "expected": {"second_token_ready": false, "fault_code": 7, "fault_token_id": "303", "second_q012_enqueue": false, "second_spi_forward": false}
+    },
+    {
+      "id": "ROLE-CLASS-MISMATCH", "categories": ["role_class_cost", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "304", "token_class": 0, "token_cost": 32,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"token_ready": false, "fault_code": 1, "fault_token_id": "304", "q012_enqueue": false}
+    },
+    {
+      "id": "ROLE-COST-MISMATCH", "categories": ["role_class_cost", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "305", "token_class": 1, "token_cost": 31,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"token_ready": false, "fault_code": 1, "fault_token_id": "305", "q012_enqueue": false}
+    },
+    {
+      "id": "PROFILE-HASH-MISMATCH", "categories": ["hash_identity", "negative"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1", "token_id": "306", "token_class": 0, "token_cost": 20,
+      "profile_sha256": "b7abdd50d04337c4526ae43de6912c9b7f05e9803e79a519dd4fd7528edc3b47",
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"token_ready": false, "fault_code": 1, "fault_token_id": "306", "q012_enqueue": false}
+    },
+    {
+      "id": "PROFILE-SWITCH-WITHOUT-RESET", "categories": ["profile_lock", "negative"],
+      "oracle_steps": ["bind/fire FAST EVENT", "without reset attempt STRESS EVENT with a strictly new origin"],
+      "first_token_id": "307", "second_token_id": "308",
+      "expected": {"second_token_ready": false, "fault_code": 7, "fault_token_id": "308", "second_q012_enqueue": false}
+    },
+    {
+      "id": "TOKEN-ID-ZERO", "categories": ["monotonic_identity", "negative"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1", "token_id": "0", "token_class": 0, "token_cost": 20,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"token_ready": false, "fault_code": 1, "fault_token_id": "0", "q012_enqueue": false}
+    },
+    {
+      "id": "TOKEN-ID-REPLAY", "categories": ["monotonic_identity", "replay", "negative"],
+      "oracle_steps": ["bind/fire FAST EVENT with id309", "before TELEM start present TELEM in the same window with id309 again"],
+      "expected": {"second_token_ready": false, "fault_code": 7, "fault_token_id": "309", "second_q012_enqueue": false}
+    },
+    {
+      "id": "TOKEN-ID-MSB-SET", "categories": ["uint63_identity", "overflow", "negative"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1", "token_id": "9223372036854775808", "token_class": 0, "token_cost": 20,
+      "grant_mask": "0x0000", "first_ack_ok": false,
+      "expected": {"token_ready": false, "fault_code": 1, "q012_enqueue": false}
+    },
+    {
+      "id": "INGRESS-DESCRIPTOR-MISMATCH", "categories": ["ingress_exact_match", "identity", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "310", "token_desc": "0x8900000000000310", "token_class": 1, "token_cost": 32,
+      "ingress_desc": "0x8900000000000311",
+      "expected": {"bind": "accept_once", "in_ready_with_mismatch": false, "fault_code": 2, "fault_token_id": "310", "q012_accepted_count_delta": 0, "forward_pulse_count": 0}
+    },
+    {
+      "id": "HELD-OFFER-GATED-BEFORE-SLOT", "categories": ["held_offer", "slot_gate"],
+      "profile_id": 1, "role_id": 4, "timing_ref": "1:4", "token_id": "311", "token_desc": "0x8900000000000311", "token_class": 1, "token_cost": 34,
+      "oracle_steps": ["accept the one exact descriptor early", "observe Q012 internal held-offer tap exact but outer out_valid=0 before start", "set now_ns to start with quiet/ready and observe one fire"],
+      "expected": {"outer_out_valid_before_start": false, "internal_tap_only": true, "fire_at_exact_start": true, "forward_pulse_count": 1, "fault_code": 0}
+    },
+    {
+      "id": "CANCEL-WITH-HELD-OFFER", "categories": ["cancel", "flush_accounting", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "312", "token_class": 1, "token_cost": 32,
+      "oracle_steps": ["bind/load/accept descriptor and let Q012 hold its offer", "assert cancel before slot start"],
+      "expected": {"fault_code": 5, "fault_token_id": "312", "armed_after_fault": false, "out_valid_after_fault": false, "flushed_count_delta": 1, "forward_pulse_count": 0}
+    },
+    {
+      "id": "DISABLE-WHILE-ACTIVE", "categories": ["disable", "flush_accounting", "negative"],
+      "profile_id": 1, "role_id": 4, "timing_ref": "1:4", "token_id": "313", "token_class": 1, "token_cost": 34,
+      "oracle_steps": ["arm and accept token/descriptor", "drop enable before slot start"],
+      "expected": {"fault_code": 5, "fault_token_id": "313", "disarmed": true, "flushed_count_delta": 1, "forward_pulse_count": 0}
+    },
+    {
+      "id": "BUSY-ARM-WHILE-TOKEN-LIVE", "categories": ["arm", "busy_fault", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "314", "token_class": 1, "token_cost": 32,
+      "oracle_steps": ["arm and bind a live token", "lower/re-raise arm before completion"],
+      "expected": {"fault_code": 6, "fault_token_id": "314", "old_token_replaced": false, "flushed_count_delta": 1, "forward_pulse_count": 0}
+    },
+    {
+      "id": "CLEAR-PRESERVES-CLOSED-WINDOW", "categories": ["clear", "window_closed", "replay", "negative"],
+      "oracle_steps": ["complete one event in FAST window", "cancel while armed to create fault5", "deassert token_valid and clear fault", "lower/re-raise arm and present a different role at the same origin"],
+      "expected": {"clear_requires_empty_quiet": true, "clear_auto_arms": false, "same_origin_bind": "refuse", "fault_code": 7, "fault_token_id": "315"}
+    },
+    {
+      "id": "NEW-WINDOW-AFTER-FAULT-ALLOWED", "categories": ["clear", "future_window", "positive"],
+      "oracle_steps": ["fault-close FAST origin O=10000000000", "drain/clear with token_valid=0", "lower/re-raise arm", "present FAST EVENT at origin O+500000000 with now O+490000000"],
+      "expected": {"token_ready": true, "window_origin_ns": "10500000000", "used_roles_new_window": "0x01", "fault_code": 0}
+    },
+    {
+      "id": "NEW-WINDOW-UNALIGNED", "categories": ["future_window", "window_alignment", "negative"],
+      "profile_id": 1, "role_id": 1, "token_id": "316", "window_origin_ns": "10500000001", "now_ns": "10490000001", "deadline_ns": "11000000001",
+      "oracle_steps": ["prior accepted origin is 10000000000", "present origin 10500000001"],
+      "expected": {"token_ready": false, "fault_code": 7, "q012_enqueue": false}
+    },
+    {
+      "id": "NEW-WINDOW-BEFORE-PRIOR-END", "categories": ["future_window", "window_order", "negative"],
+      "profile_id": 1, "role_id": 2, "token_id": "317", "window_origin_ns": "10250000000", "now_ns": "10240000000", "deadline_ns": "10750000000",
+      "oracle_steps": ["prior accepted origin is 10000000000 with window end 10500000000", "present origin below that prior end"],
+      "expected": {"token_ready": false, "fault_code": 7, "q012_enqueue": false}
+    },
+    {
+      "id": "DEADLINE-EQUAL-FRAME-END", "categories": ["deadline_strict", "overflow_time", "negative"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1", "token_id": "318", "window_origin_ns": "10000000000", "now_ns": "9990000000", "deadline_ns": "10020833334",
+      "expected": {"token_ready": false, "fault_code": 1, "q012_enqueue": false, "reason": "frame_end < deadline is strict"}
+    },
+    {
+      "id": "WINDOW-END-OVERFLOW-U63", "categories": ["overflow_time", "uint63", "negative"],
+      "profile_id": 1, "role_id": 1, "token_id": "319", "window_origin_ns": "9223372036854775707", "now_ns": "9223372036854775706", "deadline_ns": "9223372036854775807",
+      "expected": {"token_ready": false, "fault_code": 1, "checked_width": 65, "q012_enqueue": false}
+    },
+    {
+      "id": "LATE-BIND-AT-EXACT-START", "categories": ["missed_slot", "late_bind", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "320", "window_origin_ns": "10000000000", "now_ns": "10035000000", "deadline_ns": "10500000000",
+      "expected": {"token_ready": false, "fault_code": 3, "q012_enqueue": false, "reason": "binding requires now_ns < start"}
+    },
+    {
+      "id": "MISS-AFTER-SLOT-BACKPRESSURE", "categories": ["missed_slot", "no_catchup", "backpressure", "negative"],
+      "profile_id": 1, "role_id": 2, "timing_ref": "1:2", "token_id": "321",
+      "oracle_steps": ["bind/load/accept descriptor and hold exact Q012 offer", "at now_ns=start keep out_ready=0", "advance now_ns one ns while out_ready=1"],
+      "expected": {"fire_at_backpressured_cycle": false, "next_cycle_fault_code": 3, "flushed_count_delta": 1, "forward_pulse_count": 0, "catchup_send": false}
+    },
+    {
+      "id": "TIME-REGRESSION-STICKY", "categories": ["time_regression", "sticky_fault", "negative"],
+      "profile_id": 1,
+      "oracle_steps": ["sample now_ns=1000000000", "later sample now_ns=999999999 after arming"],
+      "expected": {"fault_code": 4, "disarmed": true, "requires_clear_then_new_arm_rise": true, "auto_rearm": false}
+    },
+    {
+      "id": "TOKEN-VALID-HELD-NO-REPLAY", "categories": ["no_replay", "valid_lifecycle"],
+      "profile_id": 1,
+      "oracle_steps": ["complete one token/descriptor", "keep token_valid continuously high while replacing metadata/id", "then deassert token_valid for one sampled cycle and re-present a new token"],
+      "expected": {"held_valid_new_token_ready": false, "fault_while_held_valid": false, "ready_after_sampled_low": true, "second_bind_before_low": false}
+    },
+    {
+      "id": "RESET-DESTRUCTIVE-UNKNOWN", "categories": ["reset", "unknown_outcome", "negative"],
+      "profile_id": 1,
+      "oracle_steps": ["partially bind or forward a token", "assert synchronous reset", "inspect context and public counters"],
+      "expected": {"fault_valid": false, "armed": false, "last_id_context_cleared": true, "window_context_cleared": true, "q012_statistics_cleared": true, "ack_generated": false, "host_must_mark_outcome": "UNKNOWN_AND_REBOOT"}
+    },
+    {
+      "id": "CLEAR-REFUSED-WHILE-CORE-NONEMPTY", "categories": ["clear", "flush_accounting"],
+      "profile_id": 1,
+      "oracle_steps": ["fault with a descriptor held in Q012", "request clear before the synchronous Q012 flush completes", "repeat after counts and held offer are empty and downstream is quiescent"],
+      "expected": {"first_clear_allowed": false, "fault_still_sticky": true, "later_clear_allowed": true, "clear_auto_arms": false}
+    },
+    {
+      "id": "IDLE-CANCEL-DISABLE-NO-FAULT", "categories": ["cancel", "disable", "idle_boundary", "positive"],
+      "profile_id": 1,
+      "oracle_steps": ["remain disarmed with idle Q012 and quiet downstream", "pulse cancel", "drop enable without an armed or live context"],
+      "expected": {"fault_valid": false, "fault_code": 0, "q012_flushed_count_delta": 0, "armed": false}
+    },
+    {
+      "id": "SAME-ORIGIN-SAME-ROLE-REPLAY", "categories": ["same_window", "role_replay", "negative"],
+      "profile_id": 1,
+      "oracle_steps": ["bind/fire FAST EVENT id322 at origin10000000000", "present a different id FAST EVENT in the same origin"],
+      "expected": {"token_ready": false, "fault_code": 7, "q012_enqueue": false, "role_consumed_at_bind": true}
+    },
+    {
+      "id": "SAME-ORIGIN-DIFFERENT-ROLE-ALLOWED", "categories": ["same_window", "role_budget", "positive"],
+      "profile_id": 1,
+      "oracle_steps": ["bind/fire FAST EVENT id323 at origin10000000000", "sample token_valid low", "before TELEM start present FAST TELEM id324 at the same origin"],
+      "expected": {"token_ready": true, "used_roles_before": "0x01", "used_roles_after": "0x03", "fault_code": 0}
+    },
+    {
+      "id": "NEW-WINDOW-CLEARS-ROLE-MASK", "categories": ["future_window", "role_budget", "positive"],
+      "profile_id": 1,
+      "oracle_steps": ["bind/fire EVENT at origin O=10000000000", "sample token_valid low", "present EVENT id325 at origin O+500000000 before its start"],
+      "expected": {"token_ready": true, "window_origin_ns": "10500000000", "used_roles_after_bind": "0x01", "fault_code": 0}
+    },
+    {
+      "id": "RETRY-GRANT-STATE-INVALID", "categories": ["grant_extraction", "negative"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1", "token_id": "326", "grant_mask": "0x2000", "first_ack_ok": false,
+      "expected": {"token_ready": false, "fault_code": 1, "reason": "bit13 requires bit15 and bit14 clear"}
+    },
+    {
+      "id": "UNARMED-TOKEN-BACKPRESSURE", "categories": ["arm", "backpressure", "positive"],
+      "profile_id": 1, "role_id": 1, "timing_ref": "1:1", "token_id": "327",
+      "oracle_steps": ["enable=1 but never raise arm", "hold a fully valid token on token_valid"],
+      "expected": {"token_ready": false, "token_bind": false, "fault_valid": false, "q012_accepted_count_delta": 0, "out_valid": false}
+    },
+    {
+      "id": "HELD-OFFER-MISMATCH-NOT-NATURAL", "categories": ["held_offer", "identity", "review_only"],
+      "profile_id": 1,
+      "natural_public_stimulus": false,
+      "oracle_steps": ["accept one exact descriptor", "hypothetically replace only the internal Q012 held descriptor/class/cost"],
+      "expected": {"candidate_policy_if_tap_mismatch": "FAULT_IDENTITY code2 and no fire", "execution_status": "NOT_RUN", "reason": "unchanged Q012 cannot naturally emit a mismatched held offer from a successful exact ingress; no internal force is permitted"}
+    }
+  ]
+}

@@ -210,7 +210,7 @@ class NullAndCardinalityTests(unittest.TestCase):
         request["raw_words"][0] = 10 ** 10_000
         result = decoder.decode_request(request)
         self.assertEqual(result["status"], "INPUT_REJECTED")
-        self.assertEqual(result["refusal"]["code"], "INVALID_U32")
+        self.assertEqual(result["refusal"]["code"], "RAW_WORD_TYPE")
         self.assertFalse(result["preserved_input"]["raw_words_preserved"])
         encoded = json.dumps(result, ensure_ascii=False, sort_keys=True).encode("utf-8")
         self.assertLessEqual(len(encoded), 65536)
@@ -275,11 +275,13 @@ class CaptureRefusalTests(unittest.TestCase):
                          [999999, 1000000, 1000001])
 
     def test_nonzero_witness_upper_word_is_refused(self):
-        request = fresh_request()
-        request["raw_words"][20] = 1
-        result = decoder.decode_request(request)
-        self.assertEqual(result["status"], "REFUSED_CAPTURE")
-        self.assertEqual(result["refusal"]["code"], "WITNESS_UPPER_WORD")
+        for high_word in (19, 21, 23, 25, 27, 29):
+            with self.subTest(high_word=high_word):
+                request = fresh_request()
+                request["raw_words"][high_word] = 1
+                result = decoder.decode_request(request)
+                self.assertEqual(result["status"], "REFUSED_CAPTURE")
+                self.assertEqual(result["refusal"]["code"], "WITNESS_UPPER_WORD")
 
     def test_end_minus_start_must_equal_period(self):
         request = fresh_request()

@@ -1,0 +1,54 @@
+{
+  "schema": "B132_STARTED_V1",
+  "status": "STARTED_SOURCE_ONLY",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132",
+  "operation_id": "B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "runtime_conversation_id": "01a18e53-ca41-7701-9d7c-a1560f5d736d",
+  "runtime_conversation_id_source": "CODEX_THREAD_ID and CODEX_SESSION_ID environment variables",
+  "job_id": "child-4cdd83363b5d44cea03753c96343de9b",
+  "job_id_source": "persisted resident child metadata; current child_status query failed without returning job metadata",
+  "app_uuid": null,
+  "app_uuid_note": "No App UUID was supplied or invented.",
+  "request_hash": null,
+  "request_hash_note": "No canonical request hash was supplied for this follow-up assignment.",
+  "started_at_utc": "2026-10-31T07:02:30.092232Z",
+  "exclusive_write_root": ".local/worktrees/deepeye-implementation-20261014/handoffs/b/B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132/",
+  "source_baseline": {
+    "worktree": ".local/worktrees/deepeye-implementation-20261014",
+    "head": "bea8689c4ad8e968c900ec2a9fa5647d8401ae33",
+    "published_source_head": "dd52028af809363bd445fae8e7b4cf10ec7753ad",
+    "frozen_closure_source_commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da",
+    "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "frozen_design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "requirements": {
+    "ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08", "H09", "H10", "H11", "H12", "H13", "H14", "H15"],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "verified_from_binary_git_blob": true
+  },
+  "scope": {
+    "source_only": true,
+    "candidate_import_compile_test_runtime_by_author": false,
+    "ast_parse_new_source_only_if_needed": true,
+    "git_mutation": false,
+    "board_network_peer_service_credential_sql": false,
+    "physical_g05_operation": false,
+    "existing_one_arm_trace_scope_unchanged": true,
+    "motion_authority": false,
+    "acceptance": false
+  },
+  "planned_outputs": [
+    "STARTED.json",
+    "g05p_capture_decoder132.py",
+    "API_SCHEMA_BASIS_LIMITATIONS.md",
+    "SOURCE_PIN_MANIFEST.json",
+    "fixtures/valid32_synthetic.json",
+    "test_g05p_capture_decoder132.py",
+    "TEST_PLAN.md",
+    "CODE_READY.json"
+  ],
+  "preexisting_worktree_note": "The Git worktree already had unrelated dirty/untracked files before this task. This task writes only the exclusive root above."
+}

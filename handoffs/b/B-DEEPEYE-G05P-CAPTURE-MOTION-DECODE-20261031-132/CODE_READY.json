@@ -1,0 +1,150 @@
+{
+  "schema": "B132_CODE_READY_V1",
+  "status": "CODE_READY_SOURCE_ONLY_MAIN_REVIEW_REQUIRED",
+  "generated_at_utc": "2026-10-31T07:28:45.155708+00:00",
+  "identity": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132",
+    "operation_id": "B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "runtime_conversation_id": "01a18e53-ca41-7701-9d7c-a1560f5d736d",
+    "job_id": "child-4cdd83363b5d44cea03753c96343de9b",
+    "app_uuid": null,
+    "request_hash": null,
+    "uuid_note": "No App UUID or request hash was supplied or invented.",
+    "exclusive_write_root": ".local/worktrees/deepeye-implementation-20261014/handoffs/b/B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132/"
+  },
+  "contract_and_source_pins": {
+    "contract_id": "DEEPEYE-HUMAN-LOCK-20261014",
+    "contract_revision": 1,
+    "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08", "H09", "H10", "H11", "H12", "H13", "H14", "H15"],
+    "requirements_canonicalization": "json dumps requirements; ensure_ascii=False; sort_keys=True; separators=(',',':'); UTF-8",
+    "requirements_canonical_bytes": 4680,
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "requirements_hash_matches_fixed_expected": true,
+    "requirements_source": "binary git cat-file blob of immutable_scope.json at the contract pin",
+    "final_design_pin": "1011259415a0916054eb580687612580bc1e5f09",
+    "frozen_closure_source_commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da",
+    "frozen_build_id": "09e7a475ca5c75a9a6374b4c4088e998",
+    "frozen_closure_sha256": "69fd26244a109d5668bf0a526d1b458bbcdc59715bf0bb68bce96c45eca7bf0b",
+    "unfrozen_template_sha256": "d102e8670706e6d7cf0891f3e8beaf94c7710e3d1adc58d507362a6dfb3af12a",
+    "unfrozen_template_is_source_authority": false,
+    "latest_tested_adapter_source": "e671db73caaf69f50f51cea23c3fef082571f51e",
+    "published_source_head": "dd52028af809363bd445fae8e7b4cf10ec7753ad",
+    "observed_worktree_head": "bea8689c4ad8e968c900ec2a9fa5647d8401ae33",
+    "selected_clock_hz": 50000000,
+    "selected_layout": 2,
+    "selected_magic": "0x47303550"
+  },
+  "own_files": [
+    {"path": "STARTED.json", "bytes": 2594, "sha256": "fd3a2d1d179ef999a2466af40f953ca247a1f4bdf59c01f9d4ba9539386238bb"},
+    {"path": "g05p_capture_decoder132.py", "bytes": 45161, "sha256": "cc32b467eab96e61f09a579d1ff60e16a5d683d5248370a287cadcda3046c7c2"},
+    {"path": "fixtures/valid32_synthetic.json", "bytes": 1154, "sha256": "28b50dcef5385c9cff064a23e1dd657229515eae3f540d4c63c7f870596b8e0c"},
+    {"path": "test_g05p_capture_decoder132.py", "bytes": 24033, "sha256": "f125dda9a5403074b83e7b6f3c7aa60871b435cb455e53e47d852e2f55e4797e"},
+    {"path": "API_SCHEMA_BASIS_LIMITATIONS.md", "bytes": 20036, "sha256": "30523947f21347472750d8be2c967c80fbef8ba4a5393423146fae93b4033a38"},
+    {"path": "SOURCE_PIN_MANIFEST.json", "bytes": 11222, "sha256": "65a4e284f7a6f44eb71d2c00470be6d221994d9db39857ab3998763042f76049"},
+    {"path": "TEST_PLAN.md", "bytes": 4506, "sha256": "19204894ae9fca00a2002ca7e8d274ca417b21567f975bd69fe47b6d1b0787e8"}
+  ],
+  "own_file_hash_note": "CODE_READY.json is self-excluded because it cannot contain its own stable digest.",
+  "dependency_pins_before_after": [
+    {"path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "574bca8621be1e4c868c2bf0355d9edba57aff30", "bytes": 16077, "before_sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a", "after_sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_capture_engine_50mhz.sv", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "200200f55405f4ddfe91f3f064a09d7be40b94f2", "bytes": 33796, "before_sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a", "after_sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_command_map_50mhz.sv", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "fd991b0042807ac147f4091b8c38b78ebd1722b5", "bytes": 2377, "before_sha256": "8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1", "after_sha256": "8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_profile_50mhz.sv", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "d53965e02c1b9689f8aab700710351f2168e1423", "bytes": 1794, "before_sha256": "8ec9bf0415e2ce5e87d2a793260bf635664f16584e2cb842df1fefba75e64307", "after_sha256": "8ec9bf0415e2ce5e87d2a793260bf635664f16584e2cb842df1fefba75e64307", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_curvature_rom_50mhz.svh", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "b9864daaeab1bbf939f9fd0f1fe59828fb5dfc14", "bytes": 1960, "before_sha256": "d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c", "after_sha256": "d462859e6893cd90fb33ad9ddd481aaa7ee46937ba3d197431f81b602357a83c", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/fpga/control3d/deepeye_pwm_coherent_capture.sv", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "7b3444f889371b7fb7c71eee2aace402ee83690f", "bytes": 17155, "before_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456", "after_sha256": "4baddfc31248c49000c00ac74bc2319cef6c9016c7df3f1822030c69cd82f456", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/fpga/diagnostic/g05_capture/axi/README.md", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "git_blob": "d2a3005f5b172927e3cd2d96d743fab869dc1364", "bytes": 7995, "before_sha256": "7523fa6ec76ce99483585457e60e158487c49c12fca2fa2fafa093b9a6e2a3ca", "after_sha256": "7523fa6ec76ce99483585457e60e158487c49c12fca2fa2fafa093b9a6e2a3ca", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "competition/deepeye/tools/diagnostic/offboard_control75/control_adapter.py", "commit": "9e068bd3dbfa5e2d02c4a7c2bcfe6b733ac0e1da", "tested_commit": "e671db73caaf69f50f51cea23c3fef082571f51e", "git_blob": "ca228e311a53e9839fc9bc9659bbd27eb7bfaa97", "bytes": 17616, "before_sha256": "725c375b1e30b725b83bdabd12891d98b7a09241b645b1b8c463a518ba797b7d", "after_sha256": "725c375b1e30b725b83bdabd12891d98b7a09241b645b1b8c463a518ba797b7d", "unchanged": true, "blob_matches_declared_commits": true},
+    {"path": "docs/competition/deepeye-2026/taskbook_final.md", "commit": "1011259415a0916054eb580687612580bc1e5f09", "git_blob": "4cad00f041d891bb17e634b7c94634384cbbbddf", "bytes": 109430, "before_sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18", "after_sha256": "7f5c94f7fc73698236be954ae7818266d6dfe8b4949d1752dd045d76f4b71f18", "unchanged": true, "blob_matches_declared_commits": true}
+  ],
+  "dependency_evidence": {
+    "all_dependencies_unchanged": true,
+    "all_selected_blobs_match_declared_commits": true,
+    "targeted_git_diff_command": "git -C .local/worktrees/deepeye-implementation-20261014 diff --quiet -- <nine dependency paths>",
+    "targeted_git_diff_exit": 0,
+    "targeted_git_status_command": "git -C .local/worktrees/deepeye-implementation-20261014 status --porcelain -- <nine dependency paths>",
+    "targeted_git_status_porcelain": "",
+    "git_mutation_performed": false
+  },
+  "static_evidence": {
+    "decoder_ast_parse": "PASS",
+    "focused_test_ast_parse": "PASS",
+    "fixture_json_parse_with_duplicate_key_rejection": "PASS",
+    "source_pin_manifest_json_parse_with_duplicate_key_rejection": "PASS",
+    "tests_prepared_count": 48,
+    "candidate_import_performed": false,
+    "candidate_compile_performed": false,
+    "candidate_test_executed": false,
+    "candidate_cli_executed": false,
+    "runtime_module_initialization_performed": false,
+    "old_suite_or_simulator_executed": false,
+    "pycache_present": false,
+    "tests_prepared_not_run": true
+  },
+  "review_resolutions": [
+    {
+      "issue": "unjustified inter-channel period span rejection",
+      "resolution": "removed PERIOD_TRIO_SPAN; each period is checked independently against the selected 50 MHz frame, matching the three-capture-instance RTL; the prepared test accepts 999999/1000000/1000001 with valid start/end witnesses"
+    },
+    {
+      "issue": "pathological integer could make bounded preservation serialization raise",
+      "resolution": "added a fail-closed canonical-budget helper catching TypeError, ValueError, UnicodeError and RecursionError; prepared huge-int raw-word and original-record refusal tests keep outputs bounded"
+    }
+  ],
+  "decoder_contract": {
+    "request_schema": "B132_G05P_CAPTURE_DECODE_REQUEST_V1",
+    "record_schema": "B132_ORIGINAL_RECORD_V1",
+    "result_schema": "B132_G05P_CAPTURE_DECODE_RESULT_V1",
+    "layout_words": 32,
+    "measured_fields_source": "raw_words[12..29] only",
+    "nominal_fields_are_not_measured_or_reconstructed": true,
+    "raw_words_preserved_on_refusal_when_within_budget": true,
+    "original_record_preserved_on_refusal_when_within_budget": true,
+    "full_identity_bound_to_capture": false,
+    "authentication_or_custody_inferred": false,
+    "motion_authority": false,
+    "formal_acceptance": false,
+    "physical_board_authority": "A_ONLY",
+    "electrical_loopback": "UNVERIFIED",
+    "state8_boot_ack_uart_trace_claims": "NOT_PROVIDED",
+    "cli_contract": "--request <bounded UTF-8 JSON> --out <new absolute directory>; writes decode_result.json only; no import-time I/O; no subprocess, board, network, model, simulator or old suite"
+  },
+  "engineering_conversion": {
+    "target_reference_basis": "selected 50 MHz mapper/profile and frozen task-book scalar units",
+    "yaw_pitch_target_rate_ndeg_s_formula": "(sampled_high_ticks - 125000) * 125000",
+    "speed_target_nm_s_formula_FAST_9600": "(sampled_high_ticks - 25000) * 25000",
+    "speed_target_nm_s_formula_STRESS_300": "(sampled_high_ticks - 25000) * 200",
+    "period_ns_formula": "sampled_period_ticks * 20",
+    "rounding": "closed integer sampling envelope; exact integer nano-units; no float; no fake 1% precision claim",
+    "simulator_pose_transform": "MISSING_NORMATIVE_SOURCE",
+    "simulator_target_application": "NOT_PERFORMED",
+    "minimal_gap": "A separate selected consumer-side mapping is required from decoded target references to simulator body/world axes, sign conventions, integration cadence and update semantics; it must not be inferred from PWM counts or names."
+  },
+  "test_and_execution_estimate": {
+    "is_actual_evidence": false,
+    "planned_processes": 1,
+    "prepared_tests": 48,
+    "estimated_wall_time_seconds_lt": 2,
+    "estimated_resident_memory_mib_lt": 64,
+    "subprocesses_network_simulator_vendor_board": false,
+    "main_must_authorize_before_running": true,
+    "main_must_use_new_absolute_out_directory": true
+  },
+  "limitations": {
+    "build116": {
+      "failed_before_synthesis": true,
+      "root_cause": "UNKNOWN",
+      "qualified_bitstream_or_hwh": "ABSENT"
+    },
+    "build125": "NOT_EXECUTED_OR_ALTERED_BY_THIS_SOURCE_ONLY_TASK",
+    "publication131": "NOT_INSPECTED_WHILE_BEING_WRITTEN",
+    "physical_g05_operation_selected_or_performed": false,
+    "existing_one_arm_trace_scope_unchanged": true,
+    "board_network_peer_service_credential_sql_access": false,
+    "product_or_acceptance_claim": false,
+    "ownership_transfer_or_lease_release_claimed": false,
+    "main_action": "Independently review this source. If accepted for the next bounded step, create the canonical request/manifest and authorize the first finite pure decoder test in a new main-owned absolute output directory; retain final acceptance and publication decisions."
+  }
+}

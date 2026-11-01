@@ -1,0 +1,440 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-TRACE-MULTISCAN-SEAM-MAIN-20261101-166",
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "at_utc": "2026-11-01T14:09:41.832091+00:00",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "A_source": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+  "B_source": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+  "sources_verified": 6,
+  "conclusions": [
+    {
+      "id": "SEAM-01",
+      "topic": "configuration",
+      "main_source_conclusion": "A ARM captures tag/origin; session/index/epoch/seq are later per-lane BIND operands. B147 latches session/epoch/base sequence/origin/tag at one ARM and keeps them through its batch.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            261
+          ],
+          "checked_text": "arm_fresh_q == 3'b111"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            105,
+            544,
+            699,
+            795,
+            911
+          ],
+          "checked_text": "assoc_session_q"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            305
+          ],
+          "checked_text": "cfg_session_q <= cfg_session"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b",
+          "matching_lines": [
+            192
+          ],
+          "checked_text": "(0x100,self.plan['arm_tag'])"
+        }
+      ],
+      "owner_next_condition": "A must select and version the private register/configuration latch contract; B cannot silently retarget host103."
+    },
+    {
+      "id": "SEAM-02",
+      "topic": "batch_cardinality",
+      "main_source_conclusion": "A accepts four channel records in one scan and binds count1 singleton frames. B147 accepts12 native records in three scans and emits four same-channel count3 blocks.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            267
+          ],
+          "checked_text": "push_count_q < 3'd4"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            420
+          ],
+          "checked_text": ".assoc_count(8'd1)"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            146,
+            208
+          ],
+          "checked_text": "collector_count == 4'd12"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            516
+          ],
+          "checked_text": ".blk_count(8'd3)"
+        }
+      ],
+      "owner_next_condition": "A-owned producer/AXI/control state must support an entire12-record batch, no unchanged substitution."
+    },
+    {
+      "id": "SEAM-03",
+      "topic": "quality_and_status",
+      "main_source_conclusion": "A stages uint4 mapped valid/saturated/held/fault flags. B147 s_quality is a separate opaque uint8 and requires fresh/valid and no held/saturation/source fault; no numeric quality-to-flag reinterpretation is valid.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            272
+          ],
+          "checked_text": "sample_quality_q[31:4] == 28'd0"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            485
+          ],
+          "checked_text": "sample_quality_c = {4'b0, sample_quality_q[3:0]}"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            52
+          ],
+          "checked_text": "input wire [7:0] s_quality"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            161
+          ],
+          "checked_text": "wire s_status_ok = s_semantics_valid && s_fresh && s_sample_valid"
+        }
+      ],
+      "owner_next_condition": "A must explicitly bind original opaque quality and distinct validated status/companion lineage. B147 currently refuses unsupported statuses."
+    },
+    {
+      "id": "SEAM-04",
+      "topic": "chronology",
+      "main_source_conclusion": "A four lane PUSH times must equal one scan_tick. B147 requires same time within each scan and regularly spaced scans, original native first/last sequence and origin. Host147 validates actual original chronology and retained nanosecond remainder.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            274
+          ],
+          "checked_text": "push_tick_c == scan_tick_q"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            165
+          ],
+          "checked_text": "s_acq_qpc_ns == scan_qpc_q"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            213
+          ],
+          "checked_text": ".s_first_seq(s_native_first_seq), .s_last_seq(s_native_last_seq)"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/demo_multiscan147/host147.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "329e82d8357815cb08c1296be266fe16eeb1c02df9f4dc29c12d403725bd221d",
+          "matching_lines": [
+            60
+          ],
+          "checked_text": "delta % 1000 == 0"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/demo_multiscan147/host147.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "329e82d8357815cb08c1296be266fe16eeb1c02df9f4dc29c12d403725bd221d",
+          "matching_lines": [
+            85
+          ],
+          "checked_text": "remainder_ns=lane["
+        }
+      ],
+      "owner_next_condition": "A must provide original batch chronology; never synthesize a new current clock, scan IDs or source values to fill missing records."
+    },
+    {
+      "id": "SEAM-05",
+      "topic": "result_ack",
+      "main_source_conclusion": "A ACK is gated by visible matching result ID and its accumulated RX-byte association; host103 performs one BIND/ACK per lane. B147 presents held result valid/ready and retires one block on each successful handshake.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            302
+          ],
+          "checked_text": "expected_result_id_q == result_id_q"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            360
+          ],
+          "checked_text": "rx_total_q == result_expected_end_c"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            488
+          ],
+          "checked_text": "core_result_ready = ack_pulse_c"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b",
+          "matching_lines": [
+            223
+          ],
+          "checked_text": "yield write(0x080,4,'ACK once')"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            492
+          ],
+          "checked_text": "wire tb_result_ready = result_ready && (state_q == RESULT)"
+        }
+      ],
+      "owner_next_condition": "A adapter must define stable result/capture association, byte accounting and error/cancel retirement before connecting result_ready."
+    },
+    {
+      "id": "SEAM-06",
+      "topic": "rx_fifo_and_wiring",
+      "main_source_conclusion": "A currently connects core UART TX to an internal UART RX and stores received bytes in a4096-byte FIFO. B147 TX and rx_async are independent ports; upload is a single ready/valid byte boundary and supplies no FIFO.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            46
+          ],
+          "checked_text": "FIFO_CAPACITY = 32'd4096"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            468
+          ],
+          "checked_text": ".rx_async(core_uart_tx)"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            73
+          ],
+          "checked_text": "input wire rx_async"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            260
+          ],
+          "checked_text": ".out_ready(up_ready), .out_valid(up_valid), .out_data(up_data)"
+        }
+      ],
+      "owner_next_condition": "A must select and document internal loopback versus an actual external direction, preserve RX errors/backpressure and implement FIFO/custody if retaining MMIO upload. Logical UART loopback is not a physical wire measurement."
+    },
+    {
+      "id": "SEAM-07",
+      "topic": "host_payload",
+      "main_source_conclusion": "Host103 feeds a single4-lane plan into its TRACE sequence. Host147 instead validates three original B113 scans and four count3 packets with index stride4 and the actual regular tick stride, comparing each decoded value with its independent original.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b",
+          "matching_lines": [
+            197,
+            206
+          ],
+          "checked_text": "for lane in self.plan['lanes']:"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/demo_multiscan147/host147.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "329e82d8357815cb08c1296be266fe16eeb1c02df9f4dc29c12d403725bd221d",
+          "matching_lines": [
+            46
+          ],
+          "checked_text": "len(originals) == 3"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/demo_multiscan147/host147.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "329e82d8357815cb08c1296be266fe16eeb1c02df9f4dc29c12d403725bd221d",
+          "matching_lines": [
+            108
+          ],
+          "checked_text": "parsed[\"count\"] == 3"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/demo_multiscan147/host147.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "329e82d8357815cb08c1296be266fe16eeb1c02df9f4dc29c12d403725bd221d",
+          "matching_lines": [
+            108
+          ],
+          "checked_text": "parsed[\"index_stride\"] == 4"
+        }
+      ],
+      "owner_next_condition": "A must provide a compatible adapter/driver; old host103 command and packet assumptions cannot prove the new path. Preserve original bundles separately and report observed Rice/RAW/errors."
+    },
+    {
+      "id": "SEAM-08",
+      "topic": "build_closure",
+      "main_source_conclusion": "Current A Tcl packages top deepeye_trace50_axi94 from an externally supplied14-file TRACE source list; that source instantiates codec74. Source list admission alone cannot select B147 or prove that a new combined closure was built.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "c731e98298a397b0d342858b13fe8c2eb3b061793595af04ec4c45dcd75b789c",
+          "matching_lines": [
+            313
+          ],
+          "checked_text": "[llength $trace_sources] == 14"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "c731e98298a397b0d342858b13fe8c2eb3b061793595af04ec4c45dcd75b789c",
+          "matching_lines": [
+            320
+          ],
+          "checked_text": "deepeye_trace50_axi deepeye_trace50_axi94"
+        },
+        {
+          "path": "competition/deepeye/fpga/diagnostic/functional50_board94/deepeye_trace50_axi94.sv",
+          "source_commit": "99f51dd77b78f10b950fb04b6ffc9bcb717d49d0",
+          "sha256": "83b8c4beb48053ebc87ae27992d3b75eaae04562ff9f80c7f705a5f90efa9998",
+          "matching_lines": [
+            396
+          ],
+          "checked_text": "deepeye_SYNTHETIC_codec74_fixture #("
+        }
+      ],
+      "owner_next_condition": "A selects a complete compatible new exact source closure/build identity/register layout; new same-run bit/hwh and loaded ID are required. B141 old pinned run remains unstarted."
+    },
+    {
+      "id": "SEAM-09",
+      "topic": "no_automatic_replay",
+      "main_source_conclusion": "B147 aborts on cancel/disable, preserves refusal and requires a fresh ARM. Host103 refuses dirty initial device state and consumes each command once.",
+      "verified_source_references": [
+        {
+          "path": "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2022e416d76f4a4e257fa008a6d747e5a9eed0faaa089a320a4a0a4592b5a08e",
+          "matching_lines": [
+            148
+          ],
+          "checked_text": "wire path_cancel = rst || cancel || !enable"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b",
+          "matching_lines": [
+            186
+          ],
+          "checked_text": "dirty device refused without cleanup"
+        },
+        {
+          "path": "competition/deepeye/tools/diagnostic/functional50_host103/host103.py",
+          "source_commit": "27151ccfa335fabb3f590616d29c47a02cbebe76",
+          "sha256": "2ba19c9c6de68b3ae0189166a663cc5999c07ce73a5227cd4095fa24d803f06b",
+          "matching_lines": [
+            194
+          ],
+          "checked_text": "yield write(0x080,1,'ARM once')"
+        }
+      ],
+      "owner_next_condition": "A must retain ambiguous side effects and partial-byte evidence. No automatic ACK/clear/rearm/command replay after uncertain hardware state."
+    }
+  ],
+  "direct_substitution_allowed": false,
+  "new_B_product_source_selected": false,
+  "scope": "New exact-source integration comparison; no test/import/compile/vendor/runtime/board action. Prior B147 executed tests remain separately identified evidence.",
+  "worker165_acceptance": "pending independent review after actual terminal; this file is the main own source inspection",
+  "physical_board": false,
+  "build141_started": false,
+  "root_acceptance": false,
+  "B_all_complete": false
+}

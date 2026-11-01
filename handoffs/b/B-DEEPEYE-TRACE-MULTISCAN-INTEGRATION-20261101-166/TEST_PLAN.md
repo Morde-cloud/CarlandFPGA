@@ -1,0 +1,1 @@
+This operation is a static source comparison. Inspect current source receipt, main source references and qualifications, then hash-verify all raw archive members. No runtime stage was run. Standard evidence create/verify exit0 checks bytes and schema, not product acceptance. A must supply exact selected ABI/build/physical facts before new execution.

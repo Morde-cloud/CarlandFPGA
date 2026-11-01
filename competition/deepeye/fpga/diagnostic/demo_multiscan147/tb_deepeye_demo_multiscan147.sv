@@ -176,19 +176,21 @@ module tb_deepeye_demo_multiscan147;
 
     task automatic check(input logic cond, input string msg);
         begin
-            if (!cond) fail(msg);
+            if (cond !== 1'b1) fail(msg);
         end
     endtask
 
-    task automatic wait_s_ready(input integer limit);
+    // Sample a real positive-edge transfer with the offered payload held stable.
+    task automatic await_lane_handshake(input integer limit);
         integer t;
         begin
             t = 0;
-            while (!s_ready) begin
-                step(1);
+            do begin
+                @(posedge clk);
                 t = t + 1;
-                if (t > limit) fail("s_ready timeout");
-            end
+                if (t > limit) fail("offered lane handshake timeout");
+            end while (s_ready !== 1'b1);
+            @(negedge clk);
         end
     endtask
 
@@ -331,8 +333,7 @@ module tb_deepeye_demo_multiscan147;
             s_saturated = 1'b0;
             s_source_fault = 1'b0;
             s_valid = 1'b1;
-            wait_s_ready(2000);
-            step(1);
+            await_lane_handshake(2000);
             s_valid = 1'b0;
             step(1);
         end
@@ -558,7 +559,6 @@ module tb_deepeye_demo_multiscan147;
         do_reset();
         do_arm(SESSION, EPOCH, BASE_SEQ, ORIGIN63, TAG);
         wait_armed(2000);
-        wait_s_ready(2000);
         // Configuration is captured by ARM. Move every live configuration
         // input after the edge; the four wire frames must still use the latched
         // owner values and the input tag association above.
@@ -622,7 +622,6 @@ module tb_deepeye_demo_multiscan147;
         do_reset();
         do_arm(SESSION, EPOCH, BASE_SEQ, ORIGIN63, TAG);
         wait_armed(2000);
-        wait_s_ready(2000);
         s_channel = 2'd0;
         s_data = raw[0];
         s_acq_qpc_ns = scan_qpc[0];
@@ -654,7 +653,6 @@ module tb_deepeye_demo_multiscan147;
         do_reset();
         do_arm(SESSION, EPOCH, BASE_SEQ, ORIGIN63, TAG);
         wait_armed(2000);
-        wait_s_ready(2000);
         for (scan = 0; scan < 3; scan = scan + 1)
             for (lane = 0; lane < 4; lane = lane + 1)
                 send_good_lane(scan, lane);
@@ -697,7 +695,6 @@ module tb_deepeye_demo_multiscan147;
         do_reset();
         do_arm(SESSION, EPOCH, BASE_SEQ, ORIGIN63, TAG);
         wait_armed(2000);
-        wait_s_ready(2000);
         for (scan = 0; scan < 3; scan = scan + 1)
             for (lane = 0; lane < 4; lane = lane + 1)
                 send_good_lane(scan, lane);

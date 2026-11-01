@@ -1,0 +1,209 @@
+{
+    "record_type":  "B147_SOURCE_PINS",
+    "task_id":  "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version":  1,
+    "work_id":  "B-DEEPEYE-DEMO-MULTISCAN-INGRESS-20261101-147",
+    "main_thread_id":  "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "job_id":  "child-13a7d738567b4ab68477fcff8a0bf0fe",
+    "runtime_thread_id":  "01a18e0c-7338-70d2-8b63-3197384fb420",
+    "instance_id":  "deepseek-b-83",
+    "status":  "SOURCE_ONLY_UNEXECUTED",
+    "physical_authority":  "none; A alone owns board, build, AXI, pins and physical START",
+    "source":  {
+                   "repository":  "D:/pynq/CarlandFPGA",
+                   "worktree":  "D:/pynq/CarlandFPGA/.local/worktrees/deepeye-implementation-20261014",
+                   "branch":  "codex/b/deepeye-implementation-20261014",
+                   "selected_handoff_head":  "faeee5f4c5fb1d1fc71a98889379c56ac7f28f09",
+                   "actual_head_at_source_readiness":  "025d27343adfd05a40e6db4075963c138d865d11",
+                   "relationship":  "actual head is one descendant commit of the selected head; the additional paths are non-RTL diagnostic tools",
+                   "git_mutation":  "none performed by this worker",
+                   "dirty_worktree_note":  "pre-existing unrelated modified/untracked paths exist in the shared worktree; this worker wrote only demo_multiscan147 and worker147",
+                   "owned_paths":  [
+                                       "competition/deepeye/fpga/diagnostic/demo_multiscan147",
+                                       ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-77/worker147"
+                                   ]
+               },
+    "contract":  {
+                     "human_lock":  "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+                     "requirements_ids":  [
+                                              "H01",
+                                              "H02",
+                                              "H03",
+                                              "H04",
+                                              "H05",
+                                              "H06",
+                                              "H07",
+                                              "H08",
+                                              "H09",
+                                              "H10",
+                                              "H11",
+                                              "H12",
+                                              "H13",
+                                              "H14",
+                                              "H15"
+                                          ],
+                     "contract_pin":  "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+                     "requirements_sha256":  "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+                     "requirements_count":  15,
+                     "requirements_canonical_bytes":  4680,
+                     "immutable_scope_md_sha256":  "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd",
+                     "immutable_scope_json_sha256":  "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+                     "frozen_design":  "1011259415a0916054eb580687612580bc1e5f09",
+                     "freeze_commit_ancestor_of_selected_head":  true,
+                     "original29_retained":  true,
+                     "both_h12_paths_retained_not_activated":  true,
+                     "final_100mhz_gate_retained":  true,
+                     "final_1pct_100ms_gate_retained":  true
+                 },
+    "authored_files":  [
+                           {
+                               "path":  "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+                               "bytes":  25626,
+                               "sha256":  "19b09bcdc43bc66786816447aded1d16cd143a3ebb5451bd75718db47bfa7ff6",
+                               "role":  "RTL ingress/config holder, dynamic descriptor egress and UART RX byte boundary"
+                           },
+                           {
+                               "path":  "competition/deepeye/fpga/diagnostic/demo_multiscan147/tb_deepeye_demo_multiscan147.sv",
+                               "bytes":  30190,
+                               "sha256":  "0a62cd8a996db8fecc89a4cd72cf230e5cf2214d9b3920e2e340c997581bdcb4",
+                               "role":  "standalone focused ModelSim TB source; not executed"
+                           },
+                           {
+                               "path":  "competition/deepeye/fpga/diagnostic/demo_multiscan147/README.md",
+                               "bytes":  9768,
+                               "sha256":  "6c8a147cac9050220b430beb10ad75c2f8949586f3012da839ca4b763db6e33b",
+                               "role":  "source-only scope, vectors and run instructions"
+                           },
+                           {
+                               "path":  "competition/deepeye/fpga/diagnostic/demo_multiscan147/INTERFACE.md",
+                               "bytes":  12639,
+                               "sha256":  "17e1888519293dcd92ed7767c35f8dc356bf64a61b0dd340c33b91db1ecea1bc",
+                               "role":  "human interface and integration-gap proposal"
+                           },
+                           {
+                               "path":  "competition/deepeye/fpga/diagnostic/demo_multiscan147/INTERFACE.json",
+                               "bytes":  6223,
+                               "sha256":  "1dec29dbbc899f187817b77f9ed04c4c523d832517fa381da4f6773c705df8a4",
+                               "role":  "machine-readable interface proposal"
+                           },
+                           {
+                               "path":  "competition/deepeye/fpga/diagnostic/demo_multiscan147/run_tb.do",
+                               "bytes":  633,
+                               "sha256":  "76f4042de8614761c825be8a91b8f89245129c234b3eca2984f23df613836dba",
+                               "role":  "ModelSim pass/fail completion guard"
+                           }
+                       ],
+    "manifest_note":  "This SOURCE_PINS.json is the manifest itself and is not self-hashed. Its hash is recorded in worker147/CODE_READY.json.",
+    "dependencies_unchanged":  [
+                                   {
+                                       "path":  "competition/deepeye/fpga/codec/deepeye_block_encoder.sv",
+                                       "bytes":  21517,
+                                       "sha256":  "4cb79428ef89096742e293516c4696caf985048d8185f531fe92eaa485c8d532",
+                                       "role":  "unchanged existing uint16 block encoder"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv",
+                                       "bytes":  12241,
+                                       "sha256":  "fb64ace453c451838110c81bf6cb4a815a96fb2668e28a306ff699beca5acef6",
+                                       "role":  "unchanged existing TRACE payload candidate"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/transport/deepeye_crc16_byte.sv",
+                                       "bytes":  1875,
+                                       "sha256":  "8594bad79593a5ff5a63761c3b4f5f83adc70ebcfdd5aec178de3aba1f313d6f",
+                                       "role":  "unchanged CRC16 byte core"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/transport/deepeye_wire_serializer.sv",
+                                       "bytes":  9705,
+                                       "sha256":  "efc6082f6f5dff215b100f718b12d87d4c6467db7b968a24f846802dc6a19885",
+                                       "role":  "unchanged wire serializer"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/transport/deepeye_uart_tx.sv",
+                                       "bytes":  6811,
+                                       "sha256":  "5076286e4dd1598aeb2c78281bec83020c85d0711dcee9b985088ac707353c47",
+                                       "role":  "unchanged 8N1 UART transmitter"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/transport/deepeye_uart_rx.sv",
+                                       "bytes":  11182,
+                                       "sha256":  "935f5d02008535fd5da75b7dc80696d14b03bd54d85f8b52fbf12c1e0504f08f",
+                                       "role":  "unchanged 8N1 UART receiver exposed as ready/valid byte boundary"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv",
+                                       "bytes":  10545,
+                                       "sha256":  "5ebe65dfe0844aab62365e8664507f153cb75ff47b3c8d4e10f45356e94147a8",
+                                       "role":  "unchanged private 1us TRACE block payload adapter"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv",
+                                       "bytes":  11766,
+                                       "sha256":  "41ea63819c892ec67fe92d6e9338a771d5f93f60d0976e895f18bc97966283d2",
+                                       "role":  "unchanged 50MHz TRACE block UART composition"
+                                   },
+                                   {
+                                       "path":  "competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate12_candidate.sv",
+                                       "bytes":  4706,
+                                       "sha256":  "e0ebd2d71659232be3d55771abeff50654d6f5f6ad60c1f11e385868844ada4c",
+                                       "role":  "unchanged tested three-scan/four-lane aggregate"
+                                   }
+                               ],
+    "compile_order":  [
+                          "competition/deepeye/fpga/codec/deepeye_block_encoder.sv",
+                          "competition/deepeye/fpga/codec/deepeye_trace_payload_candidate.sv",
+                          "competition/deepeye/fpga/transport/deepeye_crc16_byte.sv",
+                          "competition/deepeye/fpga/transport/deepeye_wire_serializer.sv",
+                          "competition/deepeye/fpga/transport/deepeye_uart_tx.sv",
+                          "competition/deepeye/fpga/transport/deepeye_uart_rx.sv",
+                          "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_payload_1us_candidate.sv",
+                          "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_trace_block_uart_50mhz_candidate.sv",
+                          "competition/deepeye/fpga/diagnostic/offboard_aggregate77/deepeye_aggregate12_candidate.sv",
+                          "competition/deepeye/fpga/diagnostic/demo_multiscan147/deepeye_demo_multiscan147.sv",
+                          "competition/deepeye/fpga/diagnostic/demo_multiscan147/tb_deepeye_demo_multiscan147.sv"
+                      ],
+    "source_route_labels":  {
+                                "rtl":  "SOFTWARE_FIXTURE/offboard diagnostic source",
+                                "test_execution_when_later_run":  "pre-synthesis ModelSim simulation, not SOFTWARE_FAKE_CSR execution",
+                                "physical":  "none; no board, BOOT, ADC, motion, H12, bitstream or deployed-141 claim"
+                            },
+    "test":  {
+                 "execution":  "not_run",
+                 "reason":  "worker boundary is SOURCE ONLY; parent owns the one later focused run",
+                 "tb_top":  "tb_deepeye_demo_multiscan147",
+                 "selected_vectors":  "three scans: [1234,40000,65535,0], [1234,40001,65534,65535], [1234,40002,65533,1]",
+                 "selected_metadata":  "session=0x42a50031 epoch=0x2d base_frame_seq=0x1200 tag=0x51 origin=9007199254740993 native_first=40,44,48",
+                 "exact_qpc":  "origin+100007, origin+300007, origin+500007; exact remainder 7 ns",
+                 "plusargs":  [
+                                  "+bytefile=demo_multiscan147_uart_bytes.txt",
+                                  "+logfile=demo_multiscan147_tb.log"
+                              ],
+                 "one_run_command":  "vsim -c -voptargs=+acc -onfinish stop -l demo_multiscan147_modelsim.log work147.tb_deepeye_demo_multiscan147 +bytefile=demo_multiscan147_uart_bytes.txt +logfile=demo_multiscan147_tb.log -do \"do \u003cworktree\u003e/competition/deepeye/fpga/diagnostic/demo_multiscan147/run_tb.do\"",
+                 "expected_pass_marker":  "TEST_PASS; completed=1; run_tb.do exit 0",
+                 "no_old_groups_rerun":  true
+             },
+    "acceptance_prepared":  {
+                                "reviewable_source_implementation":  "deepeye_demo_multiscan147.sv",
+                                "focused_tb":  "tb_deepeye_demo_multiscan147.sv; emits captured up_valid/up_ready bytes only when the parent later runs it",
+                                "interface_files":  [
+                                                        "INTERFACE.md",
+                                                        "INTERFACE.json"
+                                                    ],
+                                "source_pins":  "this file",
+                                "minimal_integration_gap":  "AXI/register/pin/bitstream/host driver and A-owned envelope remain unspecified; see INTERFACE.md and README.md",
+                                "not_self_accepted":  true
+                            },
+    "gaps":  [
+                 "No compile, elaboration, ModelSim, synthesis or timing run was performed by this worker.",
+                 "No physical UART pin, AXI register map, FIFO, bitstream, PYNQ overlay or host driver is implemented.",
+                 "No A-owned exporter/custody or Host103 TraceSequence pure-staging schema is invented; companion/source association remains host-side.",
+                 "No 100 MHz, 1 percent, 100 ms, BOOT, ADC, motion, H12 or board acceptance is claimed.",
+                 "Actual RAW-versus-Rice selection and per-frame byte counts must be measured by the later focused test; no such numeric result is claimed here."
+             ],
+    "verification":  {
+                         "requirements_method":  "SHA-256 of json.dumps(requirements, ensure_ascii=False, sort_keys=True, separators=(comma, colon)).encode(UTF-8)",
+                         "json_interface_parse":  "valid",
+                         "source_files_hashed":  true
+                     }
+}

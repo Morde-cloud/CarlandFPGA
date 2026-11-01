@@ -1,0 +1,101 @@
+{
+  "record_type": "B147_INTERFACE_PROPOSAL",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-DEMO-MULTISCAN-INGRESS-20261101-147",
+  "module": "deepeye_demo_multiscan147",
+  "status": "SOURCE_ONLY_UNEXECUTED",
+  "physical_authority": "none; A alone owns build, AXI, pins, board and START",
+  "contract": {
+    "human_lock": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+    "requirements_ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08", "H09", "H10", "H11", "H12", "H13", "H14", "H15"],
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "frozen_design": "1011259415a0916054eb580687612580bc1e5f09"
+  },
+  "parameters": {
+    "CLOCK_HZ": {"default": 50000000, "exact": 50000000},
+    "BAUD": {"default": 1000000, "exact": 1000000, "format": "8N1"},
+    "STAT_W": {"default": 32, "range": [2, 32]}
+  },
+  "configuration": {
+    "capture": "one accepted rising-edge arm only; held high is not a second arm; immutable through 12 accepted records and 4 frames",
+    "fields": {
+      "cfg_session": {"width": 32, "type": "uint"},
+      "cfg_epoch": {"width": 8, "type": "uint"},
+      "cfg_base_frame_seq": {"width": 16, "type": "uint", "max": 65532, "check": "base+3 must not wrap"},
+      "cfg_origin_qpc_ns": {"width": 63, "type": "uint"},
+      "cfg_tag": {"width": 32, "type": "uint", "min": 1}
+    }
+  },
+  "scan_input": {
+    "records_per_batch": 12,
+    "scans": 3,
+    "lanes_per_scan": 4,
+    "lane_order": [0, 1, 2, 3],
+    "handshake": "valid must remain asserted until ready; high ready is wrapper eligibility only; the unchanged aggregate is the sole storage authority and may refuse a presented channel/sequence/quality/stride violation without storing or relabelling it",
+    "fields": {
+      "s_channel": {"width": 2, "expected": "lane order 0,1,2,3 per scan"},
+      "s_data": {"width": 16, "semantics": "original uint16; zero is valid"},
+      "s_acq_qpc_ns": {"width": 64, "max": "bit63 must be 0; exact same value for all four lanes in a scan; nonwrapping and regular positive stride"},
+      "s_quality": {"width": 8, "semantics": "opaque caller-supplied quality; constant per channel across scans; not transported on TRACE wire"},
+      "s_tag": {"width": 32, "rule": "nonzero and equal to captured cfg_tag"},
+      "s_native_first_seq": {"width": 32, "rule": "base+0..11 across 12 records without uint32 wrap"},
+      "s_native_last_seq": {"width": 32, "rule": "equals first+3 without wrap"},
+      "s_semantics_valid": {"width": 1, "required": 1, "authentication": false},
+      "s_fresh": {"width": 1, "required": 1, "transport": "not in wire"},
+      "s_sample_valid": {"width": 1, "required": 1},
+      "s_held": {"width": 1, "required": 0},
+      "s_saturated": {"width": 1, "required": 0},
+      "s_source_fault": {"width": 1, "required": 0}
+    },
+    "refuse_without_correction": [
+      "unsupported semantics/fresh/valid/held/saturated/source-fault",
+      "wrong lane order",
+      "zero or changed tag",
+      "same-scan QPC mismatch",
+      "non-uint63 acquisition",
+      "native sequence/wrap/order mismatch",
+      "quality change per channel",
+      "nonpositive, irregular, non-whole-microsecond or out-of-range QPC stride",
+      "configuration base-frame-sequence wrap or zero tag"
+    ]
+  },
+  "outputs": {
+    "frames": 4,
+    "order": "channel 0,1,2,3",
+    "index_stride": 4,
+    "tick_stride_us": 200,
+    "wire_first_index": "original batch base native first sequence + channel",
+    "wire_relative_first_tick": "derived from captured origin; no current-clock rebasing",
+    "result_contract": "result_valid/result_ready, result_error 3 bits, result_bytes 6 bits; result is held under backpressure",
+    "frame_success": "result_error==0, one retirement; frames_retired increments 0..4",
+    "frame_error": "result_error!=0; no retirement; no replay",
+    "accepted_lanes": "current collector count 0..12; not an optimistic handshake count"
+  },
+  "control": {
+    "cancel": "abort accepted/in-flight work; abort_code=1; no replay; fresh ARM needed",
+    "disable": "withdraw enable; abort accepted/in-flight work; abort_code=2; restoration alone does not ARM",
+    "refusal": "refused/refusal_code; partial emitted bytes remain invalid; no rollback",
+    "abort_code": {"0": "none", "1": "cancel", "2": "enable withdrawal", "3": "downstream/internal abort"},
+    "refusal_code": {"0": "none", "1": "aggregate status", "2": "aggregate channel/tag", "3": "aggregate native sequence", "4": "aggregate uint63/origin/time range", "5": "quality change", "6": "QPC stride/regularity", "7": "seal incomplete", "8": "reserved", "9": "busy rearm", "10": "base frame sequence wrap", "11": "zero config tag", "12": "input tag mismatch", "13": "unsupported input status", "14": "same-scan QPC mismatch", "15": "egress association or downstream result error"}
+  },
+  "upload_byte_boundary": {
+    "rx_async": "input to unchanged deepeye_uart_rx",
+    "up_valid": 1,
+    "up_ready": 1,
+    "up_data": 8,
+    "up_busy": 1,
+    "events": ["up_framing_error", "up_overrun", "up_false_start"],
+    "buffering": "single slot; no FIFO",
+    "schema": "opaque bytes; no invented companion parser or authentication"
+  },
+  "provenance_and_gaps": {
+    "source_provenance": "caller-supplied; not authenticated by this RTL",
+    "rtl_route": "SOFTWARE_FIXTURE/offboard diagnostic source; unexecuted",
+    "test_execution": "not run; no FAKE_CSR execution in this work",
+    "companion_required": ["uint63 origin QPC", "full acquisition/source QPC", "exact nanosecond remainder", "opaque raw quality mapping", "tag/lineage/operation/request/commit/build/boot/session/trigger as supplied"],
+    "physical_gaps": ["AXI/register map", "Host103 TraceSequence/pure-staging mapping", "A-owned producer/custody envelope if required", "host driver", "pins/CDC/electrical", "PYNQ overlay", "bitstream", "physical START", "100 MHz/final timing", "1 percent/100 ms", "board ADC/BOOT/motion/H12"],
+    "hardware_hung_mmio_guarantee": false
+  }
+}

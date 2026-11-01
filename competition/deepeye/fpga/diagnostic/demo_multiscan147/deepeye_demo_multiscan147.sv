@@ -179,6 +179,9 @@ module deepeye_demo_multiscan147 #(
                    collector_quiescent && !path_cancel;
 
     assign s_ready = collector_ready && s_accept_ok;
+    assign result_valid = egress_result_valid;
+    assign result_error = egress_result_error;
+    assign result_bytes = egress_result_bytes;
     assign armed = cfg_armed_q;
     assign arm_ready = can_arm;
     assign batch_done = batch_done_q;
@@ -490,7 +493,7 @@ module deepeye_demo_multiscan147_egress #(
 
     assign block_ready = (state_q == IDLE) && !rst && !cancel && enable && profile_allowed;
     assign tx = tb_tx;
-    assign result_valid = tb_result_valid;
+    assign result_valid = (state_q == RESULT) && tb_result_valid;
     assign result_error = tb_result_error;
     assign result_bytes = tb_result_bytes;
     assign retire = (state_q == RESULT) && tb_result_valid && result_ready &&

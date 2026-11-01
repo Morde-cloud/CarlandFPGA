@@ -210,7 +210,7 @@ module tb_deepeye_demo_multiscan147;
         integer t;
         begin
             t = 0;
-            while (!result_valid) begin
+            while (result_valid !== 1'b1) begin
                 step(1);
                 t = t + 1;
                 if (t > limit) fail("result timeout");

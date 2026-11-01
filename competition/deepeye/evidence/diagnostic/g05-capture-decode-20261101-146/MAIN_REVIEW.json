@@ -1,0 +1,75 @@
+{
+  "operation_id": "B-DEEPEYE-G05P-CAPTURE-MOTION-DECODE-20261031-132",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "code_commit": "3c8ff25c8d5916084bc780123b2c866a09da3e75",
+  "original_author_commit": "cb96b4d73447a4e9d6f498972b9feba4194cb169",
+  "original_job": "child-f53bccd4193844abb48a20edda8c6f04",
+  "original_runtime": "01a18e53-ca41-7701-9d7c-a1560f5d736d",
+  "old_author_job_id_incorrect": true,
+  "prior_guard": "stopped before dispatch, original author bytes retained",
+  "fixed_contract": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "first_test_commit": "46e509fc3df622f07ef855115ac844eee4442af3",
+  "first_exit": 1,
+  "first_failures": 2,
+  "reason": "2 test oracle errors; retained all original logs. Word20 is a low witness field; all six actual upper words are odd. Raw bank rejects out-of-range integer via RAW_WORD_TYPE; INVALID_U32 is for original record fields. Actual decoder correctly refused both.",
+  "tested": "3c8ff25c8d5916084bc780123b2c866a09da3e75",
+  "software_exit": 0,
+  "tests": {
+    "python": "3.12.9",
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "cli": [
+      {
+        "name": "held",
+        "exit": 0,
+        "status": "DECODED_BRACKET_CORRELATED",
+        "expected": "DECODED_BRACKET_CORRELATED",
+        "passed": true
+      },
+      {
+        "name": "expired",
+        "exit": 0,
+        "status": "REFUSED_ASSOCIATION",
+        "expected": "REFUSED_ASSOCIATION",
+        "passed": true
+      },
+      {
+        "name": "invalid_json",
+        "exit": 2,
+        "status": null,
+        "expected": null,
+        "passed": true
+      }
+    ],
+    "input_source": "synthetic",
+    "passed": true
+  },
+  "verified_unchanged_files": 24,
+  "raw_words_reconstructed_from_command": false,
+  "three_lanes_checked_against_raw": true,
+  "intervals_independently_checked": true,
+  "authority": "A only physical",
+  "physical_evidence": null,
+  "formal_acceptance": false
+}

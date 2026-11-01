@@ -1,0 +1,13 @@
+# G05 capture input for the demo
+
+Use this offline decoder with retained G05P/layout 2 observations from the selected device and boot. A owns acquisition, board access and the decision to enable a physical operation. The decoder can read a completed observation without a device connection.
+
+1. Retain the original request, operation and boot/session provenance, command and decision record. Record unaltered before-LATCH and after-LATCH status and fault fields, 13 identity words and command lifetime as specified in API_SCHEMA_BASIS_LIMITATIONS.md.
+2. For an already selected and held capture bank, retain two independent CSR read sets around the 32-word bank read. In the JSON request, add optional `held_observations` with `before` and `after` objects. Both describe **already held** observations. Each includes `identity_words` (13 uint32), `magic`, `layout`, `status`, `fault`, `command_id`, `transport_tag`, `applied_tick`, `deadline_tick`, `held_capture_seq` (word 0 of the held bank), and a coherent 64-bit `cycle_tick`. An optional `latest_seq` records CSR 0x01c, which may advance while the bank is held. Retain stable split-counter read provenance externally. Missing reads leave the original four-field request eligible only for detached or partial results.
+3. Run `python -B g05p_capture_decoder132.py --request REQUEST.json --out NEW_ABSOLUTE_DIRECTORY`. Inspect `decode_result.json` for status, refusal, source operation, raw 32 words, all lane periods/highs/start/end witnesses, per-profile target reference intervals and original observations. A semantic refusal is a structured result at exit 0. File/JSON errors exit 2. Preserve the input and result together.
+4. In the UI show actual source and boot, profile, command and capture sequence, global applied/result/deadline, local per-lane counts, mapper compatibility intervals, and correlation/refusal status. Preserve unknown electrical state and keep actual motion and collision trajectories under the simulator's authority. Guards on CRC, source age, measured/nominal origin and operation custody remain with the calling runtime. For PC_DIRECT, display the PC action and its real board observation provenance independently of this G05 feedback.
+
+The bracket compares the full external identities on both sides to the separately retained original. The bank embeds session only. `DECODED_BRACKET_CORRELATED` records structural agreement among supplied records. Electrical calibration and authenticated acquisition require their own records. This handoff contains synthetic software examples only.
+
+Task DEEPEYE-IMPLEMENTATION-20261014/v1. H01–H15 pinned at f5989cd5defce561f9ba98e6b18fc2682945f0a2. Requirements SHA256 c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804.
+

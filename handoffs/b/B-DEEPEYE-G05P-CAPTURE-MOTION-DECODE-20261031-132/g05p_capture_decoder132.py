@@ -188,12 +188,16 @@ def _canonical_json_within_budget(value):
     return len(encoded) <= MAX_PRESERVED_INPUT_JSON_CHARS
 
 
+def _bounded_int(value):
+    return type(value) is int and value.bit_length() <= 128
+
+
 def _preserve_raw_words(raw_words):
     if type(raw_words) is not list or len(raw_words) > MAX_PRESERVE_RAW_WORDS:
         return None, False
     copied = []
     for value in raw_words:
-        if value is None or type(value) is bool or _is_int(value):
+        if value is None or type(value) is bool or _bounded_int(value):
             copied.append(value)
         elif _is_bounded_text(value, 64):
             copied.append(value)
@@ -213,18 +217,18 @@ def _preserve_original_record(record):
     for key, value in record.items():
         if not _is_bounded_text(key, 64):
             return None, False
-        if value is None or type(value) is bool or _is_int(value):
+        if value is None or type(value) is bool or _bounded_int(value):
             copied[key] = value
         elif _is_bounded_text(value, 128):
             copied[key] = value
         elif type(value) is list and len(value) <= 16:
-            if not all(item is None or type(item) is bool or _is_int(item) or
+            if not all(item is None or type(item) is bool or _bounded_int(item) or
                        _is_bounded_text(item, 128) for item in value):
                 return None, False
             copied[key] = list(value)
         elif type(value) is dict and len(value) <= 8:
             if not all(_is_bounded_text(k, 64) and
-                       (v is None or type(v) is bool or _is_int(v) or
+                       (v is None or type(v) is bool or _bounded_int(v) or
                         _is_bounded_text(v, 128)) for k, v in value.items()):
                 return None, False
             copied[key] = dict(value)
@@ -421,9 +425,9 @@ def _parse_capture(raw_words, layout):
         raise _Refusal("REFUSED_CAPTURE", "MAGIC_MISMATCH", "raw_words[31]", "G05P magic is absent")
     if words[30] == 0:
         raise _Refusal("REFUSED_CAPTURE", "SESSION_ZERO", "raw_words[30]", "session word is zero")
-    if words[0] == 0 or words[0] == U32_MAX:
+    if words[0] == 0:
         raise _Refusal("REFUSED_CAPTURE", "CAPTURE_SEQUENCE", "raw_words[0]",
-                       "capture sequence must be nonzero and must not exhaust or wrap 32 bits")
+                       "capture sequence must be nonzero")
     if words[1] == 0:
         raise _Refusal("REFUSED_CAPTURE", "COMMAND_ID_ZERO", "raw_words[1]", "command ID is zero")
     if words[3] >> 16:
@@ -465,7 +469,7 @@ def _parse_capture(raw_words, layout):
             raise _Refusal("REFUSED_CAPTURE", "WITNESS_UPPER_WORD", f"raw_words[{index}]",
                            "32-bit capture witness is zero-extended; upper word must be zero")
     for index, (start, end, period) in enumerate(zip(starts, ends, periods)):
-        if start >= end or end - start != period:
+        if start == 0 or start >= end or end - start != period:
             raise _Refusal("REFUSED_CAPTURE", "WITNESS_PERIOD_MISMATCH", f"raw_words[{18 + 6 * index}..{29}]",
                            "each channel requires start < end and end-start == period without wrap")
     if max(starts) - min(starts) > NEAR_TOLERANCE_TICKS:
@@ -475,10 +479,10 @@ def _parse_capture(raw_words, layout):
         raise _Refusal("REFUSED_CAPTURE", "END_TRIO_SPAN", "raw_words[24..29]",
                        "three channel end witnesses differ by more than one tick")
 
-    minimum_post_apply = applied_tick + 2 * min(periods)
+    minimum_post_apply = applied_tick + max(ends)
     if result_tick < minimum_post_apply or result_tick >= deadline_tick:
         raise _Refusal("REFUSED_CAPTURE", "RESULT_CYCLE_BOUNDS", "raw_words[6..11]",
-                       "result tick must follow at least two periods and precede the original deadline")
+                       "global age must cover every local end witness and precede the original deadline")
 
     expected_highs = _expanded_highs(yaw_q, pitch_q, speed)
     for index, (observed, expected) in enumerate(zip(highs, expected_highs)):
@@ -575,8 +579,8 @@ def _facts_from_capture(capture):
             "ttl_ms": capture["ttl_ms"],
             "ttl_ticks": capture["ttl_ticks"],
             "deadline_equals_applied_plus_ttl": True,
-            "minimum_result_tick_for_two_periods": capture["applied_tick"] + 2 * min(capture["periods"]),
-            "result_after_two_periods_and_before_deadline": True,
+            "minimum_result_tick_from_local_ends": capture["applied_tick"] + max(capture["ends"]),
+            "result_covers_witnesses_before_deadline": True,
         },
         "pwm_channels": channels,
         "measured_mapper_candidate": {
@@ -603,7 +607,7 @@ def _yaw_interval(high, period):
         "target_rate_interval_ndeg_s": [max(domain_low, low), min(domain_high, high_value)],
         "clip_to_mapper_domain": clipped,
         "unit": "nanodegrees_per_second",
-        "sampling_uncertainty_ticks": NEAR_TOLERANCE_TICKS,
+        "mapper_compatibility_tolerance_ticks": NEAR_TOLERANCE_TICKS,
     }
 
 
@@ -620,7 +624,7 @@ def _speed_interval(high, period, profile):
         "target_speed_interval_nm_s": [max(0, low), min(domain_high, high_value)],
         "clip_to_mapper_domain": clipped,
         "unit": "nanometres_per_second",
-        "sampling_uncertainty_ticks": NEAR_TOLERANCE_TICKS,
+        "mapper_compatibility_tolerance_ticks": NEAR_TOLERANCE_TICKS,
     }
 
 
@@ -641,7 +645,7 @@ def _mapped_target_reference(capture):
             "profile": PROFILE_SPEC[profile]["name"],
             "yaw_pitch_code_unit": "0.001 degree/s per code",
             "speed_code_unit": "profile-specific metres/s per code",
-            "rounding": "closed sampling envelope rounded outward in exact integer nano-units; no floating point",
+            "rounding": "closed mapper compatibility envelope rounded outward in exact integer nano-units; no floating point",
             "nominal_command_values_used_for_measured_reconstruction": False,
             "target_reference_is_actual_kinematics": False,
         },
@@ -850,7 +854,7 @@ def _check_original_record(record, capture, facts, mapped_target):
     }
 
 
-def decode_request(request):
+def _decode_bank_request(request):
     raw_preserved = None
     raw_preserved_ok = False
     original_preserved = None
@@ -953,6 +957,88 @@ def decode_request(request):
         )
 
 
+_BRACKET_KEYS = {"identity_words", "magic", "layout", "status", "fault", "command_id",
+                 "transport_tag", "applied_tick", "deadline_tick", "held_capture_seq", "cycle_tick"}
+
+
+def _check_held_observation(snapshot, original, capture):
+    if type(snapshot) is not dict or not len(_BRACKET_KEYS) <= len(snapshot) <= len(_BRACKET_KEYS) + 1:
+        raise ValueError("snapshot shape")
+    if any(not _is_bounded_text(key, 32) for key in snapshot):
+        raise ValueError("snapshot keys")
+    if not _BRACKET_KEYS <= snapshot.keys() <= _BRACKET_KEYS | {"latest_seq"}:
+        raise ValueError("missing or unsupported snapshot fields")
+    identity = _validate_identity_words(snapshot["identity_words"])
+    _validate_status(snapshot["status"], "snapshot.status", "after")
+    expected = {"magic": G05P_MAGIC, "layout": G05P_LAYOUT, "fault": 0,
+                "command_id": original["command_id"], "transport_tag": original["transport_tag"],
+                "held_capture_seq": capture["capture_sequence"]}
+    if identity != original["identity_words"] or any(_u32(snapshot[k], k) != v for k, v in expected.items()):
+        raise ValueError("identity, command or latch mismatch")
+    for key in ("applied_tick", "deadline_tick"):
+        if _u64(snapshot[key], key) != original[key]:
+            raise ValueError("command lifetime mismatch")
+    if "latest_seq" in snapshot:
+        _u32(snapshot["latest_seq"], "latest_seq")
+    return _u64(snapshot["cycle_tick"], "cycle_tick")
+
+
+def decode_request(request):
+    """Decode raw capture; optionally compare two reads bracketing the held bank."""
+    if type(request) is not dict or "held_observations" not in request:
+        return _decode_bank_request(request)
+    if len(request) != len(REQUEST_KEYS) + 1 or any(not _is_bounded_text(k, 64) for k in request):
+        return _decode_bank_request(request)
+    bank = {k: v for k, v in request.items() if k != "held_observations"}
+    result = _decode_bank_request(bank)
+    bracket = request["held_observations"]
+    preserved = {}
+    valid_shape = (type(bracket) is dict and len(bracket) <= 2
+                   and all(type(k) is str and k in ("before", "after") for k in bracket))
+    if valid_shape:
+        for phase in bracket:
+            saved, bounded = _preserve_original_record(bracket[phase])
+            if bounded:
+                preserved[phase] = saved
+    result["preserved_input"]["held_observations"] = preserved
+    result["preserved_input"]["held_observations_preserved"] = len(preserved) == 2
+    if result["refusal"] is not None:
+        return result
+    original = result["preserved_input"]["original_record"]
+    try:
+        if len(preserved) != 2 or result["status"] != "DECODED_PARTIAL_ASSOCIATION":
+            raise ValueError("two held-bank observations and an associated original command are required")
+        ticks = [_check_held_observation(preserved[k], original, result["facts"]) for k in ("before", "after")]
+        if not original["result_tick"] <= ticks[0] <= ticks[1] < original["deadline_tick"]:
+            raise ValueError("held read outside original lifetime or time order")
+    except (_Refusal, ValueError) as exc:
+        result["status"] = "REFUSED_ASSOCIATION"
+        result["refusal"] = {"code": "HELD_BRACKET_MISMATCH", "field": "held_observations",
+                             "message": str(exc)}
+        result["association"]["status"] = "HELD_BRACKET_REFUSED"
+        return result
+    result["status"] = "DECODED_BRACKET_CORRELATED"
+    result["association"].update(status="ORIGINAL_AND_HELD_READS_MATCHED", full_external_identity_matched=True,
+                                 held_read_cycles=ticks)
+    return result
+
+
+def _unique_keys(pairs):
+    obj = {}
+    for key, value in pairs:
+        if key in obj:
+            raise ValueError("duplicate JSON field")
+        obj[key] = value
+    return obj
+
+
+def _no_nonfinite(_):
+    raise ValueError("nonfinite JSON number")
+
+
+
+
+
 def _load_request(path):
     if not os.path.isfile(path):
         raise ValueError("request path is not a regular file")
@@ -963,7 +1049,7 @@ def _load_request(path):
         raw = handle.read(MAX_REQUEST_BYTES + 1)
     if len(raw) != size:
         raise ValueError("request file changed while reading")
-    return json.loads(raw.decode("utf-8"))
+    return json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_keys, parse_constant=_no_nonfinite)
 
 
 def _write_result(out_dir, result):

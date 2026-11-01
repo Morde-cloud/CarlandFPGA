@@ -307,21 +307,21 @@ class CaptureRefusalTests(unittest.TestCase):
         self.assertEqual(result["status"], "REFUSED_CAPTURE")
         self.assertEqual(result["refusal"]["code"], "TTL_CYCLE_MISMATCH")
 
-    def test_result_tick_must_follow_two_periods(self):
+    def test_result_tick_must_cover_local_end(self):
         request = fresh_request()
-        request["raw_words"][10] = 2999999
-        request["original_record"]["result_tick"] = 2999999
+        request["raw_words"][10] = 2000100
+        request["original_record"]["result_tick"] = 2000100
         result = decoder.decode_request(request)
         self.assertEqual(result["status"], "REFUSED_CAPTURE")
         self.assertEqual(result["refusal"]["code"], "RESULT_CYCLE_BOUNDS")
 
-    def test_result_tick_exact_two_period_boundary_is_accepted(self):
+    def test_external_phase_before_two_periods_is_accepted(self):
         request = fresh_request()
-        request["raw_words"][10] = 3000000
-        request["original_record"]["result_tick"] = 3000000
+        request["raw_words"][10] = 2000108
+        request["original_record"]["result_tick"] = 2000108
         result = decoder.decode_request(request)
         self.assertEqual(result["status"], "DECODED_PARTIAL_ASSOCIATION")
-        self.assertEqual(result["facts"]["timestamps"]["result_tick"], 3000000)
+        self.assertEqual(result["facts"]["timestamps"]["result_tick"], 2000108)
 
     def test_result_tick_at_deadline_is_refused(self):
         request = fresh_request()
@@ -407,13 +407,13 @@ class AssociationRefusalTests(unittest.TestCase):
         self.assertEqual(result["status"], "REFUSED_ASSOCIATION")
         self.assertEqual(result["refusal"]["code"], "CAPTURE_SEQUENCE_STALE")
 
-    def test_capture_sequence_wrap_value_is_refused(self):
+    def test_capture_sequence_maximum_is_a_valid_last_sequence(self):
         request = fresh_request()
         request["raw_words"][0] = 0xFFFFFFFF
         request["original_record"]["capture_seq"] = 0xFFFFFFFF
         result = decoder.decode_request(request)
-        self.assertEqual(result["status"], "REFUSED_CAPTURE")
-        self.assertEqual(result["refusal"]["code"], "CAPTURE_SEQUENCE")
+        self.assertEqual(result["status"], "DECODED_PARTIAL_ASSOCIATION")
+        self.assertIsNone(result["refusal"])
 
     def test_stale_command_sequence_is_refused(self):
         request = fresh_request()

@@ -187,12 +187,7 @@ checks before emitting a mapped interval.
 
 ### Sampling and interval rule
 
-The coherent capture counts the first requested edges observed after rearm. A pin
-transition can fall anywhere in the sampling interval before it is observed.
-Therefore a sampled high or period count `X` is reported as a center value with a
-conservative closed envelope `X-1..X+1` ticks. The envelope is clipped to positive
-high counts below the measured period. This is a counting/sampling envelope, not
-an electrical signal-integrity or wiring result.
+The 50 MHz engine accepts an absolute difference of up to one tick between measured counts and mapper targets. The following intervals express this digital compatibility rule. Electrical jitter, cable delay and input calibration require separate measurements.
 
 For a measured high `H` and period `P`, the yaw/pitch reference envelope is
 derived from `H-1..H+1` through the inverse of `125000+8*q`, clipped to
@@ -217,20 +212,10 @@ The decoder also solves the discrete mapper candidate. With a high step of 8 or
 500 ticks and near tolerance 1, at most one integer command can satisfy the
 measured high. The candidate must equal the capture's nominal command fields and
 must satisfy the selected ROM limit. If no unique candidate exists, the decoder
-refuses. The reported envelope is an outer measurement interval; it is not a
+refuses. The reported envelope is a mapper compatibility interval; it is not a
 claim that every real-valued point in the envelope is a valid mapper command.
 
-The window timestamps are local ticks reset by the capture rearm, not host QPC or
-a global cycle. The decoder does not convert them into wall-clock time. The
-result cycle must be at least two period counts after application and strictly
-before the original deadline. This lower bound is source-derived: PWM applies at
-a common frame start with all three outputs rising (`deepeye_g05_capture_engine_50mhz.sv`
-embedded `deepeye_g05_stop_factored_pwm_50mhz`, `apply_now` and
-`pwm_q <= {high_i != 0}`), capture rearm is at `A+6`, and the first complete
-post-rearm coherent frame therefore ends no earlier than the next two frame
-boundaries (`deepeye_g05_capture_engine_50mhz.sv:308-324,383-387`). Using the
-smallest sampled period keeps the check conservative. The deadline must equal
-applied tick plus `ttl_ms*50000` exactly.
+Window timestamps start at rearm. A valid channel has a positive start, a later end and a difference equal to its period. The global result age must cover every local end and precede the original TTL deadline. External input phase is independently observed. Sequence 0xffffffff is the last representable result; a subsequent increment would fault.
 
 ## Association limits
 

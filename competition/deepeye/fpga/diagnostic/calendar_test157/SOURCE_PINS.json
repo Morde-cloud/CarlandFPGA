@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "record_type": "B157_SOURCE_PINS",
+  "status": "SOURCE_ONLY_NOT_RUN",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-B04-SLOT89-FIRST-CONTROLS-20261101-157",
+  "job_id": "child-606b5bbf28a041c2acd2e0d309bdcd8a",
+  "instance_id": "deepseek-b-83",
+  "runtime_thread_id": "01a18e0c-7338-70d2-8b63-3197384fb420",
+  "app_uuid": null,
+  "environment_id": null,
+  "phase": "SOURCE_ONLY",
+  "contract": {
+    "human_lock": "DEEPEYE-HUMAN-LOCK-20261014/revision1",
+    "contract_pin": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+    "requirements_count": 15,
+    "requirements_canonical_bytes": 4680,
+    "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+    "frozen_design": "1011259415a0916054eb580687612580bc1e5f09",
+    "frozen_design_ancestor_verified": true,
+    "immutable_scope_md_sha256": "27c5bf0b194036cf4300dbec371b6abba42bc5fda604da0e6e06284e4c5a2ddd",
+    "immutable_scope_json_sha256": "6a86000e97d1571c0b7b89b9d3cf7facb11d2b6a06455eb1d53e0637676b6bc4",
+    "h01_h15_preserved": true,
+    "both_h12_paths_preserved_not_activated": true,
+    "original_29_preserved": true,
+    "final_100mhz_gate_preserved": true,
+    "final_1pct_100ms_gate_preserved": true
+  },
+  "dependencies_before_and_after": {
+    "slot89_candidate": {
+      "path": "competition/deepeye/fpga/diagnostic/calendar_gate89/deepeye_nominal_uplink_slot_gate_candidate.sv",
+      "bytes": 29104,
+      "before_sha256": "7bd31aa2fd99b27093a00b2771d535e896f29e726e414748ac61f81c004616c1",
+      "after_sha256": "7bd31aa2fd99b27093a00b2771d535e896f29e726e414748ac61f81c004616c1",
+      "changed": false
+    },
+    "slot89_vectors_unexecuted": {
+      "path": "competition/deepeye/fpga/diagnostic/calendar_gate89/vectors_UNEXECUTED.json",
+      "bytes": 26675,
+      "before_sha256": "26d5bc0ff2f841afa2eddf1a6465e96113b5f225b16e9f62e710dd8ddc825030",
+      "after_sha256": "26d5bc0ff2f841afa2eddf1a6465e96113b5f225b16e9f62e710dd8ddc825030",
+      "manual_scenarios": 47,
+      "changed": false
+    },
+    "slot89_readme": {
+      "path": "competition/deepeye/fpga/diagnostic/calendar_gate89/README.md",
+      "bytes": 8960,
+      "before_sha256": "3a4341c0f33a460383f7118b4bcdb8b169eb2f6ee66e52bd5b1ae7a6794e775a",
+      "after_sha256": "3a4341c0f33a460383f7118b4bcdb8b169eb2f6ee66e52bd5b1ae7a6794e775a",
+      "changed": false
+    },
+    "q012_scheduler": {
+      "path": "competition/deepeye/fpga/transport/deepeye_q012_scheduler.sv",
+      "bytes": 11386,
+      "before_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+      "after_sha256": "d7cfe903ca6bb904fbf21f5207eac694638741f02bd48dd0ff3785becf97e740",
+      "changed": false
+    },
+    "original_slot89_terminal": {
+      "path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-74/slot89-terminal.private.json",
+      "job_id": "child-879e9c3c19d441d880690df23656a8b8",
+      "status": "completed",
+      "terminal": true,
+      "stale": false,
+      "sha256": "5dcd8b48822a10a1cc210c3dc127f1bd751bd276f7709057d678f66c90e5c54a"
+    }
+  },
+  "synthetic_profile": {
+    "canonical_sha256": "b7abdd50d04337c4526ae43de6912c9b7f05e9803e79a519dd4fd7528edc3b46",
+    "source_document_status": "software_candidate_runtime_not_run",
+    "hardware_enable_eligible": false,
+    "source_path": null,
+    "source_path_note": "The dispatch and Slot89 evidence pin the canonical hash; no separate profile path is asserted here.",
+    "claim": "Synthetic digital profile identity only; not an A grant, admission, boot, capture, or hardware authorization."
+  },
+  "authored_files": {
+    "testbench": {
+      "path": "competition/deepeye/fpga/diagnostic/calendar_test157/tb_deepeye_b04_slot89_first_controls157.sv",
+      "bytes": 62020,
+      "sha256": "d3d9949f355802ac77936620e13247387dcff311f2405d774c0b957f335ecb69"
+    },
+    "run_driver": {
+      "path": "competition/deepeye/fpga/diagnostic/calendar_test157/run_tb.do",
+      "bytes": 2210,
+      "sha256": "f1159068b16a599482bd776a8c313f77e25224a0e35620ba09fd73e5bc7b1ad4"
+    },
+    "test_plan": {
+      "path": "competition/deepeye/fpga/diagnostic/calendar_test157/TEST_PLAN.md",
+      "bytes": 9393,
+      "sha256": "39ff66f3b33a1330c24c2d387fab4860dba1a6f0bcb593cc50e863d3200f7c72"
+    }
+  },
+  "compile_order": [
+    "../../transport/deepeye_q012_scheduler.sv",
+    "../calendar_gate89/deepeye_nominal_uplink_slot_gate_candidate.sv",
+    "./tb_deepeye_b04_slot89_first_controls157.sv"
+  ],
+  "test_partition": {
+    "manual_oracle_cases": 47,
+    "executable_cases": 46,
+    "review_only_cases": 1,
+    "review_only_id": "HELD-OFFER-MISMATCH-NOT-NATURAL",
+    "execution_group": "single focused B157 group; no old calendar87 or old passed groups",
+    "expected_final_status": "b04_slot89_first_controls157.status",
+    "expected_pass_marker": "TEST_PASS completed=1 checked_cases=46 manual_cases=47 review_only_skipped=1"
+  },
+  "run_contract": {
+    "directory": "competition/deepeye/fpga/diagnostic/calendar_test157",
+    "command": "vsim -c -do run_tb.do",
+    "parent_owned": true,
+    "finite_tb_cycle_cap": 20000,
+    "nonzero_on": ["compile_or_elaboration_failure", "run_all_failure", "missing_status", "missing_exact_pass_marker", "test_fail_marker", "timeout_through_finite_cap"]
+  },
+  "execution": {
+    "status": "NOT_RUN",
+    "compiled": false,
+    "elaborated": false,
+    "modelsim_invoked": false,
+    "testbench_invoked": false,
+    "vendor_tools_invoked": false,
+    "runtime_or_board_used": false,
+    "git_mutated": false,
+    "network_used": false,
+    "services_or_credentials_used": false,
+    "children_spawned": false,
+    "product_acceptance": false,
+    "physical_execution": false
+  },
+  "non_claims": [
+    "No assertion is an observed simulation PASS until the parent runs the finite command.",
+    "No physical board, A grant, boot, capture, profile admission, H12 route, UART, or timing result is claimed.",
+    "No completion of original Slot89, old calendar87, old passed groups, or product acceptance is claimed.",
+    "The tests use only public ports and synthetic digital inputs; internal nodes were not forced."
+  ]
+}

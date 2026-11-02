@@ -1,0 +1,37 @@
+Full source competition/deepeye/tools/diagnostic/functional50_ssh_a.py at 999a07d78c58688f7c63139fef276762fd7d638e SHA256 56218a49c6f92c71a57bdbc902bd3471933ea76e1a61d4fd8f8eef45e3d77eef
+Selected exact lines; original full input remains private.
+154:    def _call(self,wire,timeout_ns):
+155:        _need(type(timeout_ns) is int and 0<timeout_ns<=_MAX_NS,'timeout bound')
+156:        done=threading.Event();result={}
+157:        def io():
+158:            try:
+159:                if wire is not None:_write_once(self._proc.stdin,wire)
+160:                raw=self._proc.stdout.readline(1048577 if self._protocol in ('functional50_chain_v1','functional50_chain_v2') else 4097)
+161:                result['raw']=raw
+162:            except BaseException as e:result['error']=type(e).__name__
+163:            finally:done.set()
+164:        pump=getattr(self,'_source_pump',None)
+200:    def _call_until(self,wire,permit):
+201:        """One exact owner-selected phase; deadline cannot be renewed."""
+202:        from . import original_chain_client_work_a as work
+203:        from .original_chain_source_pump_a import OriginalChainSourcePump
+204:        self._check()
+205:        end=work._consume(self,wire,permit)
+206:        closing=work._closing_for(self)
+207:        pump=getattr(self,'_source_pump',None)
+208:        _need(type(pump) is OriginalChainSourcePump and _SESSION_PUMPS.get(self) is pump
+209:              and pump.session is self and pump.clock is self._clock and pump.enabled,
+210:              'exact enabled original pump required')
+211:        if self._clock()>=end:
+212:            self._unknown=True;raise TimeoutError('original phase expired before I/O')
+213:        original_process=self._proc;original_input=original_process.stdin;original_output=original_process.stdout
+214:        done=threading.Event();result={}
+215:        def io():
+216:            try:
+217:                _write_once(original_input,wire)
+218:                result['raw']=original_output.readline(1048577)
+219:            except BaseException as e:result['error']=type(e).__name__
+220:            finally:done.set()
+221:        thread=threading.Thread(target=io,daemon=True);self._threads.append(thread);thread.start()
+222:        try:
+223:            while True:

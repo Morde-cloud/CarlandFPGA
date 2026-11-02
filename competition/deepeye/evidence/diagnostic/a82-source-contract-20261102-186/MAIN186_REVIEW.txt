@@ -1,0 +1,56 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-A82-HARD-GATES-CSR-SINGLETON-20261102-186",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "source_commit": "9c799232397f8178f4729f80f4363f852649cb69",
+  "source_review": "PASSED_SOURCE_ONLY",
+  "input_source_files": 50,
+  "exact_source_references": 43,
+  "new_handoff_files": 9,
+  "stopped_children": [
+    {
+      "job_id": "child-d4251aa576884b5daed627685da400be",
+      "status": "failed",
+      "updated_at": "2026-11-02T12:51:59.123196Z",
+      "side_effect_replay": false
+    },
+    {
+      "job_id": "child-87620e4b1f2b4c7fb4ce79731662607d",
+      "status": "failed",
+      "updated_at": "2026-11-02T12:52:05.244310Z",
+      "side_effect_replay": false
+    }
+  ],
+  "independent_review": "Quality main read actual source and compared callsites/counters/identity/lifecycle; child reports absent, not inferred",
+  "finite_status_budget": {
+    "init_min": 4,
+    "per_apply_min": 10,
+    "K16_min": 164,
+    "published_max": 64
+  },
+  "new_candidate_execution": false,
+  "new_tests_executed": false,
+  "vendor_board_model_actor_execution": false,
+  "formal_acceptance": false,
+  "B_all_complete": false,
+  "checked_at_utc": "2026-11-02T13:02:01.218611+00:00"
+}

@@ -1,0 +1,419 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-A82-HARD-GATES-CSR-SINGLETON-20261102-186",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "references": [
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_session_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "646d0b8e65d6aaf8c527fba83f61a996124a5f448c488d4e2f98bf6a1bc8215d",
+      "lines": [
+        46
+      ],
+      "checked_text": "1<=issuer.limits.max_commands<=2"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_session_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "646d0b8e65d6aaf8c527fba83f61a996124a5f448c488d4e2f98bf6a1bc8215d",
+      "lines": [
+        78
+      ],
+      "checked_text": "costs={'stage_identity':1"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_session_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "646d0b8e65d6aaf8c527fba83f61a996124a5f448c488d4e2f98bf6a1bc8215d",
+      "lines": [
+        92
+      ],
+      "checked_text": "self._polls+4"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_session_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "646d0b8e65d6aaf8c527fba83f61a996124a5f448c488d4e2f98bf6a1bc8215d",
+      "lines": [
+        109
+      ],
+      "checked_text": "self._polls+10"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_session_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "646d0b8e65d6aaf8c527fba83f61a996124a5f448c488d4e2f98bf6a1bc8215d",
+      "lines": [
+        119
+      ],
+      "checked_text": "snap=self._step('read_snapshot');self._step('release')"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_transaction_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "480ef6c485933db9766c2f6fab45df081b1b913a9005561b4f416ec303ebfbcf",
+      "lines": [
+        23
+      ],
+      "checked_text": "1<=self.max_commands<=16"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "a25b26f6a4c58bd65dbacea865b3d356fe6a10cc07a51e38794c2f020ebcbe9e",
+      "lines": [
+        15
+      ],
+      "checked_text": "'total_io':2048"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "a25b26f6a4c58bd65dbacea865b3d356fe6a10cc07a51e38794c2f020ebcbe9e",
+      "lines": [
+        45
+      ],
+      "checked_text": "3000 if profile==1 else 12000"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "a25b26f6a4c58bd65dbacea865b3d356fe6a10cc07a51e38794c2f020ebcbe9e",
+      "lines": [
+        146
+      ],
+      "checked_text": "words[0]!=seq_before"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "a25b26f6a4c58bd65dbacea865b3d356fe6a10cc07a51e38794c2f020ebcbe9e",
+      "lines": [
+        126,
+        131
+      ],
+      "checked_text": "not status&0x68"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "a25b26f6a4c58bd65dbacea865b3d356fe6a10cc07a51e38794c2f020ebcbe9e",
+      "lines": [
+        72
+      ],
+      "checked_text": "now+10_000_000_000"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_board_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f19769e8ad13c90897d590b68ff56269141346a41bcc9a3a793a5a2fc983f0fa",
+      "lines": [
+        111
+      ],
+      "checked_text": "p['max_commands']<=2"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_board_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f19769e8ad13c90897d590b68ff56269141346a41bcc9a3a793a5a2fc983f0fa",
+      "lines": [
+        111
+      ],
+      "checked_text": "p['max_io']<=450"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_board_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f19769e8ad13c90897d590b68ff56269141346a41bcc9a3a793a5a2fc983f0fa",
+      "lines": [
+        115
+      ],
+      "checked_text": "state.counts[k]<2"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_board_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f19769e8ad13c90897d590b68ff56269141346a41bcc9a3a793a5a2fc983f0fa",
+      "lines": [
+        158
+      ],
+      "checked_text": "for step in range(10)"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_board_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f19769e8ad13c90897d590b68ff56269141346a41bcc9a3a793a5a2fc983f0fa",
+      "lines": [
+        167
+      ],
+      "checked_text": "102+76*p['max_commands']+2*p['max_polls']"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_board_a.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f19769e8ad13c90897d590b68ff56269141346a41bcc9a3a793a5a2fc983f0fa",
+      "lines": [
+        170
+      ],
+      "checked_text": "40960+p['max_io']*2176<=MAX_REPLY"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "8427f6a7ce4962a0620483df37406eb2e0943896c6a885143309c29f253a2d39",
+      "lines": [
+        183
+      ],
+      "checked_text": "original complete32-word snapshot"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "8427f6a7ce4962a0620483df37406eb2e0943896c6a885143309c29f253a2d39",
+      "lines": [
+        186
+      ],
+      "checked_text": "words[30]==identity_words[12]"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "8427f6a7ce4962a0620483df37406eb2e0943896c6a885143309c29f253a2d39",
+      "lines": [
+        501
+      ],
+      "checked_text": "explicit PC_DIRECT consume window"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "8427f6a7ce4962a0620483df37406eb2e0943896c6a885143309c29f253a2d39",
+      "lines": [
+        376
+      ],
+      "checked_text": "self._global_deadline=_uint"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_projection_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "4371cb96a8bfdc953c32fdee607802a23735b302fb1ffc782502b697a69a57f2",
+      "lines": [
+        87
+      ],
+      "checked_text": "counts.append(point['value'] if valid else None)"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_projection_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "4371cb96a8bfdc953c32fdee607802a23735b302fb1ffc782502b697a69a57f2",
+      "lines": [
+        89
+      ],
+      "checked_text": "never as a fallback here"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_projection_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "4371cb96a8bfdc953c32fdee607802a23735b302fb1ffc782502b697a69a57f2",
+      "lines": [
+        182
+      ],
+      "checked_text": "len(observations)+len(actions)<=32"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_projection_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "4371cb96a8bfdc953c32fdee607802a23735b302fb1ffc782502b697a69a57f2",
+      "lines": [
+        67
+      ],
+      "checked_text": "not_physical_ADC_timestamp"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_projection_v1.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "4371cb96a8bfdc953c32fdee607802a23735b302fb1ffc782502b697a69a57f2",
+      "lines": [
+        191
+      ],
+      "checked_text": "authorization='none'"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/owned_invocation_v1/adapter.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f479a541c280e97e31cbe79bc2353e634a6f594afdd112a1fbd88f9bb18353ca",
+      "lines": [
+        49
+      ],
+      "checked_text": "2<=self.max_invocations<=16"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/owned_invocation_v1/adapter.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f479a541c280e97e31cbe79bc2353e634a6f594afdd112a1fbd88f9bb18353ca",
+      "lines": [
+        53
+      ],
+      "checked_text": "maximum=1000 if self.demo_duration_v1 else 100"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/owned_invocation_v1/adapter.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "f479a541c280e97e31cbe79bc2353e634a6f594afdd112a1fbd88f9bb18353ca",
+      "lines": [
+        75
+      ],
+      "checked_text": "Root/pose/revocation changed"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/pc_direct_runtime.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "29830db5fa4fd3576f2f6215f8bb7b9d0cfa2b01e69536ea812ac2b79cf14d5c",
+      "lines": [
+        481
+      ],
+      "checked_text": "physics interval overlaps"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/pc_direct_runtime.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "29830db5fa4fd3576f2f6215f8bb7b9d0cfa2b01e69536ea812ac2b79cf14d5c",
+      "lines": [
+        491
+      ],
+      "checked_text": "deadline = min(command.deadline_ns"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/pc_direct_runtime.py",
+      "commit": "999a07d78c58688f7c63139fef276762fd7d638e",
+      "sha256": "29830db5fa4fd3576f2f6215f8bb7b9d0cfa2b01e69536ea812ac2b79cf14d5c",
+      "lines": [
+        504
+      ],
+      "checked_text": "checked + dt_ns > deadline"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_command_map_50mhz.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1",
+      "lines": [
+        34
+      ],
+      "checked_text": "ttl_ms > 16'd3000"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_command_map_50mhz.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "8df580388e85a59a43a0eaaae697534123a6e128fdb4675098e7173bda60a6a1",
+      "lines": [
+        49
+      ],
+      "checked_text": "64'd50000"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a",
+      "lines": [
+        129,
+        206
+      ],
+      "checked_text": "staged[5]<=last_cmd"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a",
+      "lines": [
+        130
+      ],
+      "checked_text": "!eng_pending && !latch_valid"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a",
+      "lines": [
+        228
+      ],
+      "checked_text": "latched[12+i]<=result_periods"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_capture_engine_50mhz.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a",
+      "lines": [
+        267,
+        279,
+        292
+      ],
+      "checked_text": "result_seq == 32'hffffffff"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_capture_engine_50mhz.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a",
+      "lines": [
+        244
+      ],
+      "checked_text": "assign observed_deadline ="
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_capture_engine_50mhz.sv",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "fcdb04d1e307506328c205154730e1cf8c5bff2efe72727a46a2f3f4b856ed8a",
+      "lines": [
+        104
+      ],
+      "checked_text": "WITNESS_W(32)"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "6a873b104b091d57e9b2c2721c29e7c7b08a2fd3fb24dfdcc65b248e935aa864",
+      "lines": [
+        495
+      ],
+      "checked_text": "report_rdc -file"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/functional50_build98/build_functional50.tcl",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "6a873b104b091d57e9b2c2721c29e7c7b08a2fd3fb24dfdcc65b248e935aa864",
+      "lines": [
+        487
+      ],
+      "checked_text": "write_checkpoint [file join $run_root artifacts functional50_diag_routed.dcp]"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_build98/verify_functional50_hwh.py",
+      "commit": "f8a3bd8d7b260b47624dcf997ed0fbc2aaa76e03",
+      "sha256": "718848f15d822aa4139761854f40a6d9dbaf4e678f4f7313aed6f611aafb0f27",
+      "lines": [
+        137
+      ],
+      "checked_text": "G05 is unchanged and has NO BUILD_ID"
+    }
+  ],
+  "kind": "Exact text and line matches; conclusions independently reviewed by quality main"
+}

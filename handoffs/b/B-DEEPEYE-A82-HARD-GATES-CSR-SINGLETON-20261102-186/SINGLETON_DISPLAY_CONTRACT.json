@@ -1,0 +1,180 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEEPEYE-A82-HARD-GATES-CSR-SINGLETON-20261102-186",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "contract_commit": "f5989cd5defce561f9ba98e6b18fc2682945f0a2",
+  "schema": "B186_SINGLETON_DISPLAY_CONTRACT_V1",
+  "status": "SOURCE_CONTRACT_FOR_A_INTEGRATION_REVIEW",
+  "scope": "Reporting only; no authority, product ABI activation or B147 batch upgrade",
+  "transport": {
+    "selected_path": "TRACE94 / private ABI3 E4 payload revision2",
+    "channels": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "points_per_channel": 1,
+    "value_domain": "uint12 0..4095 when valid; null when missing",
+    "encoding_label": "RAW / uncompressed",
+    "do_not_relabel": [
+      "B147 count3 Rice/RAW genericuint16 as selected singleton",
+      "E4 as old TELEM means/event or private-PL format"
+    ]
+  },
+  "identity": {
+    "required": [
+      "operation_id",
+      "request_hash",
+      "tested_commit",
+      "source_commit",
+      "source_manifest_sha256",
+      "loaded_bit_sha256",
+      "loaded_hwh_sha256",
+      "device_binding_reference",
+      "run_id",
+      "nonce",
+      "session",
+      "config_epoch",
+      "frame_sequence",
+      "source_index",
+      "capture_sha256",
+      "actual_mode"
+    ],
+    "unknown": "null plus reason, never manufacture authority from copied IDs",
+    "public_vs_private": "Retain full private receipt linkage; UI may show safe abbreviated IDs. Do not export credentials or private device serials."
+  },
+  "channels": {
+    "required_fields": [
+      "channel",
+      "source_index",
+      "frame_sequence",
+      "valid",
+      "quality_raw",
+      "saturated",
+      "held",
+      "source_fault",
+      "original_count",
+      "reconstructed_count",
+      "signed_error_count",
+      "absolute_error_count",
+      "source_time",
+      "acquisition_interval",
+      "host_receipt_interval",
+      "provenance"
+    ],
+    "rules": [
+      "valid measured0 stays0; invalid or absent staysnull",
+      "quality bit meanings come from exact selected source/format; keep all original bits",
+      "q7 with C3null/mask8 stays explicit missing; do not zero-fill/clamp/drop quality",
+      "original_count only from same identity-correlated original source, never hidden truth",
+      "reconstructed_count only from valid actual returned decoded frame, never source fallback",
+      "errors derived only when both counts are known, valid, same channel/source/frame association and units; otherwise null with reason",
+      "integer decoded equality does not prove physical ADC/electrical fidelity",
+      "nullable C3 model/verifier v2 requires separate exact A/C pins; old strict C28/C42 result cannot be promoted"
+    ]
+  },
+  "bytes": {
+    "required_fields": [
+      "actual_frame_bytes",
+      "actual_scan_wire_bytes",
+      "original_value_storage_bytes",
+      "stored_code_bytes",
+      "decoded_value_count",
+      "ack_bytes",
+      "retry_bytes",
+      "whole_operation_transport_bytes",
+      "measurement_origin"
+    ],
+    "rules": [
+      "Measure actuallen of retained original bytes for each accounting boundary",
+      "RAW/uncompressed remains label even if numerical payload overhead differs",
+      "singleton positive fixture148B is historical synthetic data; never hardcode148 for all captures; missing/null may change actual size",
+      "source bits, byte padded storage, coded data bytes, frame bytes and entire SSH/JSON/ACK/retry operation are distinct denominators",
+      "ratio and saving require explicit numerator/denominator/units; unknown counts are null",
+      "do not display historical B14724rawvalueB/15codeB/171wireB as current singleton compression"
+    ]
+  },
+  "timing": {
+    "required_fields": [
+      "clock_domain",
+      "mapping_reference",
+      "lower_ns",
+      "upper_ns",
+      "observed_latency_lower_ns",
+      "observed_latency_upper_ns",
+      "actual_age_ns",
+      "target100ms_met",
+      "timing_status"
+    ],
+    "rules": [
+      "Compare only actual sameclock points or a retained conservative clock mapping/bracket",
+      "nominal source grid timestamps are labelled nominal source grid, not authenticated physicalADC instant",
+      "native EM interval may be null; retain real heldEM origin and age",
+      "missing/unmapped timing/age/latency is null plus reason, not0 orPASS",
+      "sourceADC call, nativeEM, injection, capture, hostreceive, actualAI RESULT, brokerissue, motioncommit and fullredexit are separate stages",
+      "ACK arrival and echoed hosttimestamp do not prove capture timing",
+      "demo degraded latency is labelled as measured; final100ms remains unchanged"
+    ]
+  },
+  "control": {
+    "required_fields": [
+      "mode",
+      "actual_action_source",
+      "nominal_command",
+      "measured_pwm",
+      "held_capture_sequence",
+      "latest_result_sequence",
+      "global_apply_tick",
+      "global_result_tick",
+      "global_deadline_tick",
+      "local_lane_witnesses",
+      "health_deadline",
+      "command_deadline",
+      "source_deadline",
+      "stop_or_refusal_reason",
+      "motion_receipt_reference",
+      "collision_receipt_reference",
+      "full_volume_exit_status"
+    ],
+    "rules": [
+      "PC_DIRECT action derives from actualPC AI plus boardobservation; FPGA_OUTPUT action needs actualmeasured boardoutput bridge",
+      "nominal words3..5 are command echoes; measured words12..29 retained independently",
+      "held_capture_sequence remains fixed; latest_result_sequence may advance",
+      "50MHz_cycle vs local32bitwitness vs QPC/boardmonotonic are separate domains",
+      "mapper compatibility reference intervals do not establish actualworld angularvelocity; v_target*kappa is not instantaneous actual omega",
+      "report physical-loopback/electrical calibration unknown until actualA evidence",
+      "CRC/hash/decode success is structural; no Root/source/BOOT/actor/motion authority from display data",
+      "show incomplete/redexitfalse on STOP, viewer-only or localmicrosteps; only full drill volume through specifiedredgate is complete"
+    ]
+  },
+  "acceptance": {
+    "physical_board": "NOT_RUN_BY_B",
+    "simulation": "NOT_RUN_THIS_WORK",
+    "synthesis": "NOT_RUN_BY_B",
+    "implementation": "NOT_RUN_BY_B",
+    "native_model_actor": "NOT_RUN_BY_B",
+    "formal_H12": "NOT_RUN",
+    "formal_product": "NOT_ACCEPTED",
+    "full_H01_H15_preserved": true
+  }
+}

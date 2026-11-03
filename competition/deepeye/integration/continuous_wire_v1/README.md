@@ -64,6 +64,35 @@ sense metadata and bounded raw four-frame envelope and returns detached bytes;
 independent causal E4 CRC/decode/lossless comparison in continuous flow is the
 next milestone. The server correlation label is not independent B evidence.
 
+The subsequent pure `e4.E4Stream(binding)` supplies that independent wire check.
+Pass the original `Ticket` and `DetachedReply` from `ContinuousWire.finish` to
+`accept(ticket, reply)` in the same IO owner, before allowing any observation
+consumer or subsequent motion decision. It returns immutable `E4Observation`
+with counts (including null), original source fields, request/response/wire
+hashes and a detached per-frame byte/bit ledger. Each four-frame batch is checked
+against original791 E4 header/revision2/CRC and the read-only golden payload
+decoder at Git object aedf2c363d8d4ca69ec8281bf315428619231968 (also exact A e0b3).
+All four reconstructed values, quality flags, source index/session and time must
+match. Legacy decoded tick_ms names contain microseconds here; explicitly named
+request adc_tick_ms/em_tick_ms remain milliseconds. Server decoded JSON must
+match the independent reconstruction, including exact bool/int distinctions.
+
+The first hardware result/RX cursor may be nonzero; within and after it, IDs/RX
+must be contiguous, tags/source/request sequences monotonic, EM time increasing
+and ADC time nondecreasing. Only previous cursors are stored. Bad authorized-owner
+acceptance poisons the E4 stream without replay; unauthorized-thread rejection
+leaves its state untouched. On E4 rejection Root must retire this adapter pair
+and execute its distinct owned safety policy; an already finished protocol ticket
+cannot be retroactively failed or resent. Do not continue APPLY on that pair.
+
+`E4Stream` receives no original response envelope or authenticated source. Its
+response hash is a correlated label from the protocol layer, not independently
+recomputed original response bytes. Root retains those original bytes/binding,
+actual accepted-pose source snapshot/digest and numerical causal provenance.
+Both parsed records retain authority='none'. The count1 E0 raw/sample/whole-wire
+ledger is actual byte accounting; it claims no compression ratio, board run,
+source authenticity, throughput or formal100ms qualification.
+
 No board, continuous-motion or formal product acceptance is claimed. This
 module must not be hot-swapped into an active A process; A reviews/freezes/
 integrates it and supplies real current evidence under the new scope.

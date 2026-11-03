@@ -30,7 +30,10 @@ refuses('non-descriptor policy remains5s',lambda:g.G05CsrPolicy(5_000_000_001,1,
 V=importlib.import_module(F.__name__+'.verifier_c0_demo_v5')
 pose=dict(position_m=[0,0,0],orientation_xyzw=[0,0,0,1]);obs=dict(sample_id='a'*64,counts=[3099,2006,2084,None],quality=7,missing_feature_mask=8,adc_qpc_ns=1_000_000_000,em_qpc_ns=1_000_000_000,adc_pose=copy.deepcopy(pose),em_pose=copy.deepcopy(pose))
 public=dict(schema_version=1,projection_id='g05_csr_em3_demo_view_v2',enabled=True,now_qpc_ns=13_000_000_000,pose=pose,goal_m=[0,0,10],observation=obs,history=[],executed_actions=[],engineering_profile=dict(V.ENTRY_C0_ENGINEERING_PROFILE))
-report=V.quality_report(public);check('verifier12s exact admitted without100ms quality',report['demo_age_accepted'] and not report['original_quality100ms_met'] if 'original_quality100ms_met' in report else report['demo_age_accepted'] and not report.get('original_quality_met',False))
+report=V.quality_report(public);check('verifier12s exact admitted without100ms quality',report['demo_age_accepted'] and report['original100ms_quality'] is False and report['target100ms_met'] is False)
+fresh=copy.deepcopy(public);fresh['observation'].update(quality=15,missing_feature_mask=0,counts=[3099,2006,2084,0]);fresh['now_qpc_ns']=1_100_000_000
+check('original100ms exact quality bound',V.quality_report(fresh)['target100ms_met'] is True)
+check('original100ms +1ns remains false',V.quality_report(fresh,observed_now_qpc_ns=1_100_000_001)['target100ms_met'] is False)
 check('verifier +1ns expires',not V.quality_report(public,observed_now_qpc_ns=13_000_000_001)['demo_age_accepted'])
 refuses('strict verifier cannot select12s',lambda:V.selected_verifier(12_000_000_000))
 check('fixed age normalization5000 and originalquality100ms',V.AGE_NORMALIZATION_MS==5000 and V.ORIGINAL_QUALITY_AGE_NS==100_000_000)

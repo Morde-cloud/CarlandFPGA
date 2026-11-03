@@ -1,0 +1,614 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-JOINT-MCU-CONTROLLED-RECOVERY-20261104-290",
+  "operation_id": "B-JOINT-MCU-CONTROLLED-RECOVERY-20261104-290",
+  "started_utc": "2026-11-03T21:32:42.097Z",
+  "source": "actualG3507 oneSystemReset/run + originalRAMdiagnostics; not FPGA/physicalRPMmeasurement",
+  "script_sha256": "1da7c0fa87849fe6ed0d7d00d6179c34e5da1316c936dae7d38dc9a42d644c1a",
+  "authorized_by": "Directhuman289: wired/USB-only/noBattery/startjointdebug; onsiteobserver",
+  "status": "recovery_returned_actuators_not_READY",
+  "flash_programmed": false,
+  "target_memory_written": false,
+  "UART_written": false,
+  "ARM_or_MOTOR_requested": false,
+  "samples": [
+    {
+      "label": "before_reset",
+      "at_utc": "2026-11-03T21:32:46.389Z",
+      "cpu_halted": true,
+      "signature": "0x4d545234",
+      "state": 4,
+      "ticks": 1528686,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 3,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 1,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "86051a688125b17a84db7e3bc9dc5db0d4238ceb88ec08d0bf4930153f8b27cc",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:46.706Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 215,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:46.952Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 486,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:47.183Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 719,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:47.421Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 960,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:47.657Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 1199,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:47.893Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 1439,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:48.129Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 1677,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:48.362Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 1913,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:48.590Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 2144,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:48.827Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 2383,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:49.057Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 2616,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:49.293Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 2855,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "10d28d749b5e8b23904792911fd3d64e95bdee06463006c43372c9964d2e800a",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:49.527Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 1,
+      "ticks": 3092,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 0,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 0,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "4835e654e0f8b52f5cf33f929fc81361b4db3705b798e35927e7d0569f3e84b8",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "label": "after_run",
+      "at_utc": "2026-11-03T21:32:49.758Z",
+      "cpu_halted": false,
+      "signature": "0x4d545234",
+      "state": 4,
+      "ticks": 3326,
+      "last_seq": 0,
+      "have_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 3,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "bus_errors": 1,
+      "tx_moves": 0,
+      "sync_frames": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "duty": 0,
+        "active": 0,
+        "commands": 0
+      },
+      "motor_pwm_applied": 0,
+      "raw_free_sha256": "86051a688125b17a84db7e3bc9dc5db0d4238ceb88ec08d0bf4930153f8b27cc",
+      "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    }
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "available_resets": {
+    "CPU Subsystem Reset": true,
+    "Reset Emulator": false,
+    "System Reset": true
+  },
+  "reset_intent": {
+    "type": "System Reset",
+    "at_utc": "2026-11-03T21:32:46.392Z"
+  },
+  "reset_returned": true,
+  "run_intent_utc": "2026-11-03T21:32:46.447Z",
+  "run_returned": true,
+  "MCU_READY": false,
+  "reason": "Actualstartupfault/nohealthyservofeedback; do notretryreset orclaimactuatorpower",
+  "final": {
+    "label": "after_run",
+    "at_utc": "2026-11-03T21:32:49.758Z",
+    "cpu_halted": false,
+    "signature": "0x4d545234",
+    "state": 4,
+    "ticks": 3326,
+    "last_seq": 0,
+    "have_seq": 0,
+    "armed": 0,
+    "bus_status": 255,
+    "result": 3,
+    "yaw_raw": 65535,
+    "pitch_raw": 65535,
+    "yaw_feedback_seen": 0,
+    "pitch_feedback_seen": 0,
+    "bus_errors": 1,
+    "tx_moves": 0,
+    "sync_frames": 0,
+    "configured_min": [
+      0,
+      0
+    ],
+    "configured_max": [
+      0,
+      0
+    ],
+    "motor": {
+      "duty": 0,
+      "active": 0,
+      "commands": 0
+    },
+    "motor_pwm_applied": 0,
+    "raw_free_sha256": "86051a688125b17a84db7e3bc9dc5db0d4238ceb88ec08d0bf4930153f8b27cc",
+    "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+  },
+  "current_last_seq": 0,
+  "UART_writer_granted": false,
+  "requires_new_B_handoff": true,
+  "cpu_halted_before_shutdown": false,
+  "shutdown_returned": true,
+  "closed_utc": "2026-11-03T21:32:49.779Z"
+}

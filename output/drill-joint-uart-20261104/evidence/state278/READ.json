@@ -1,0 +1,135 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-JOINT-MCU-READINESS-20261104-278",
+  "operation_id": "B-JOINT-MCU-SNAPSHOT-20261104-278",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a343-44a0-76f3-8e05-97dd71803e5d",
+  "started_utc": "2026-11-03T21:23:26.709Z",
+  "source": "actual MSPM0 SWD memory read; not PWM/RPM/angle physical measurement",
+  "status": "actual_MTR4_flash_and_diagnostics_read",
+  "target_reset_requested": false,
+  "target_program_requested": false,
+  "target_run_requested": false,
+  "target_halt_requested": false,
+  "target_memory_write_requested": false,
+  "connect_vendor_effects_not_proven_absent": true,
+  "actuators_power_isolated": true,
+  "MCU_USB_powered": true,
+  "onsite_observer": true,
+  "script_sha256": "f8f9235548ce197061acffa4c5c3efcbd6398664a8be685412e5c4a623c7c1cd",
+  "local_image_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+  "map_sha256": "afdca14b71450a037ac9ffcc8477868f16b4996c8ad4361bb9d1a5af3e494011",
+  "config_sha256": "50d3cd02de2e579d75b6b86bce0504e2e92e7f7af71e876cf13b280072eed8b7",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "samples": [
+    {
+      "host_utc": "2026-11-03T21:23:31.950Z",
+      "cpu_halted": true,
+      "signature": "0x4d545234",
+      "state": 4,
+      "last_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 3,
+      "ticks": 969906,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "bus_errors": 1,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "deadline_ms": 0,
+        "commands": 0,
+        "stops": 0,
+        "duty": 0,
+        "active": 0
+      },
+      "free_bytes_sha256": "86051a688125b17a84db7e3bc9dc5db0d4238ceb88ec08d0bf4930153f8b27cc",
+      "motor_bytes_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    },
+    {
+      "host_utc": "2026-11-03T21:23:32.073Z",
+      "cpu_halted": true,
+      "signature": "0x4d545234",
+      "state": 4,
+      "last_seq": 0,
+      "armed": 0,
+      "bus_status": 255,
+      "result": 3,
+      "ticks": 969906,
+      "yaw_raw": 65535,
+      "pitch_raw": 65535,
+      "bus_errors": 1,
+      "yaw_feedback_seen": 0,
+      "pitch_feedback_seen": 0,
+      "configured_min": [
+        0,
+        0
+      ],
+      "configured_max": [
+        0,
+        0
+      ],
+      "motor": {
+        "deadline_ms": 0,
+        "commands": 0,
+        "stops": 0,
+        "duty": 0,
+        "active": 0
+      },
+      "free_bytes_sha256": "86051a688125b17a84db7e3bc9dc5db0d4238ceb88ec08d0bf4930153f8b27cc",
+      "motor_bytes_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    }
+  ],
+  "connect_intent_utc": "2026-11-03T21:23:30.454Z",
+  "connected": true,
+  "cpu_halted_after_connect": true,
+  "symbol_addresses": {
+    "free_diagnostics": "0x20200000",
+    "motor_diagnostics": "0x202001b0",
+    "free_saved_reference": "0x2ad0"
+  },
+  "saved_reference_words": [
+    1196573489,
+    1,
+    2088,
+    1961
+  ],
+  "mainflash_sha256": "29db052f45357cb552bd74758a8c9e75cad1a263c0c7e0bfdf6806aac3c40ecb",
+  "actual_programmed_bytes_match_pinned_hex": true,
+  "compared_programmed_bytes": 11048,
+  "highwater_read": 0,
+  "cpu_halted_at_last_read": true,
+  "runtime_READY_claimed": false,
+  "reason": "Actuator supply isolated; no resume requested. Diagnostics may show LINK_WAIT/fault or halted state; restore/serial follow requires a separate current-state decision.",
+  "cpu_halted_before_shutdown": true,
+  "debugger_shutdown_returned": true,
+  "cpu_state_after_shutdown_not_observed": true,
+  "closed_utc": "2026-11-03T21:23:33.989Z"
+}

@@ -1,0 +1,41 @@
+//@cliArgs --device "MSPM0G350X" --package "LQFP-64(PM)" --part "Default"
+//@v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)"
+// @cliArgs --board /ti/boards/LP_MSPM0G3507 --rtos nortos
+const SYSCTL=scripting.addModule("/ti/driverlib/SYSCTL");
+SYSCTL.forceDefaultClkConfig=true;
+SYSCTL.clockTreeEn=true;
+const Board=scripting.addModule("/ti/driverlib/Board",{},false);
+const UART=scripting.addModule("/ti/driverlib/UART",{},false);
+const PC=UART.addInstance();
+PC.$name="PC_UART"; PC.enableFIFO=true; PC.targetBaudRate=115200;
+// UART0 belongs exclusively to the 5V-tolerant PA0/PA1 gimbal interface.
+// PC UART1 PB6/PB7: wire to isolated XDS110 UART pads or a3.3V USB-UART. Never connect the5V servo signals here.
+PC.peripheral.$assign="UART1";
+PC.peripheral.txPin.$assign="PB6"; PC.peripheral.rxPin.$assign="PB7";
+const BUS=UART.addInstance();
+BUS.$name="BUS_UART"; BUS.enableFIFO=true; BUS.targetBaudRate=115200;
+BUS.peripheral.$assign="UART0";
+BUS.peripheral.txPin.$assign="PA0"; BUS.peripheral.rxPin.$assign="PA1";
+const GPIO=scripting.addModule("/ti/driverlib/GPIO",{},false);
+const BUTTON=GPIO.addInstance();
+BUTTON.$name="BUTTON";
+BUTTON.associatedPins[0].$name="S2";
+BUTTON.associatedPins[0].assignedPort="PORTB";
+BUTTON.associatedPins[0].assignedPin="21";
+BUTTON.associatedPins[0].direction="INPUT";
+BUTTON.associatedPins[0].internalResistor="PULL_UP";
+const STATUS=GPIO.addInstance();
+STATUS.$name="STATUS"; STATUS.port="PORTB";
+STATUS.associatedPins.create(3);
+STATUS.associatedPins[0].$name="BLUE";
+STATUS.associatedPins[0].assignedPin="22";
+STATUS.associatedPins[1].$name="RED";
+STATUS.associatedPins[1].assignedPin="26";
+STATUS.associatedPins[2].$name="GREEN";
+STATUS.associatedPins[2].assignedPin="27";
+
+const PWM=scripting.addModule("/ti/driverlib/PWM",{},false);
+const DRILL=PWM.addInstance();
+DRILL.$name="DRILL_PWM";DRILL.ccIndex=[0];DRILL.clockPrescale=1;DRILL.timerCount=1600;
+DRILL.peripheral.$assign="TIMG0";DRILL.peripheral.ccp0Pin.$assign="PA12";
+DRILL.PWM_CHANNEL_0.dutyCycle=0;

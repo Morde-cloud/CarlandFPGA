@@ -1,0 +1,105 @@
+{
+  "artifacts": [
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/.gitattributes",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/MAIN_REVIEW.json",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/REVIEW.md",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/TEST_PLAN.md",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/ACTUAL.json",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/RESULT.json",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/raw/.gitattributes",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/raw/raw-evidence.tar.gz.part000",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/stderr.txt",
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/stdout.txt"
+  ],
+  "files": {
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/.gitattributes": {
+      "sha256": "85e48d232edc7b02f6cecf8fbbf905f3b126c467b594d8dd16c4f8fa283a8320",
+      "size": 14
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/MAIN_REVIEW.json": {
+      "sha256": "93eb2b266de3def97e2af2753ca62c89e1d92088355e5b32398c5c4ad29afb88",
+      "size": 4080
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/REVIEW.md": {
+      "sha256": "8f14747d2707988d828e3111bc7cd6731514c61a27361f35778d4795230b50ae",
+      "size": 4559
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/TEST_PLAN.md": {
+      "sha256": "b2d82a67b6b6aa3bd616c60755bd08b84f200eeee6029d7343de9b23d2c1ac7e",
+      "size": 558
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/ACTUAL.json": {
+      "sha256": "5cc92f6c43d4dc268c828d1f6227dd66940dc60e2ec149e9e5b10f687eabec7e",
+      "size": 413
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/RESULT.json": {
+      "sha256": "66597705309faeeafe0a73558f8a6855eead1336d91713f769c0edb93c28c788",
+      "size": 3566
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "2cfd4a3aabc253e37561c55318393dfe211416d2a5c97cb6b0461a8476ad58a8",
+      "size": 2448
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "023ecfa1e1632bb1c087661a2948bce9d4b5b529f1782ffa84afc6ff2327464e",
+      "size": 30945
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/stdout.txt": {
+      "sha256": "f9bfb1e8b03673221afde775627a887ba014b8a15456e2aa22af1cb86ffd726d",
+      "size": 3106
+    }
+  },
+  "request": {
+    "code_commit": "e0b3bd97ebca18647b4fd3599d3646c67feb1d40",
+    "expected_result": "Critical review complete with F1/F2 integration evidence gaps; no deterministic ordinary startup blocker identified under declared Root conditions. Eight pure checks exit0; no hardware or formal acceptance.",
+    "operation_id": "B-CONTINUOUS-REVIEW-20261104-228",
+    "requester": "B main01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify exact A source e0b3bd97 candidate791 and current dependency pins.",
+      "Inspect single-run eight pure controls/argv/raw logs/exit0, including two demonstrably accepted malformed records.",
+      "Independently review F1 chronological witness and F2 init scope/no-motion at Root callsite.",
+      "Review new A async/source/grant integration on its next exact commit; A alone real board/video acceptance."
+    ]
+  },
+  "request_hash": "a83d98806adf8492223f5b3a01d8605641ee49a57f0c2d05f63a60e1f1c6aa29",
+  "schema_version": 1,
+  "stages": {
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "native_model_actor": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "software_test": {
+      "log": "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/evidence/RESULT.json",
+      "status": "passed"
+    },
+    "source_review": {
+      "log": "handoffs/b/B-CONTINUOUS-REVIEW-20261104-228/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

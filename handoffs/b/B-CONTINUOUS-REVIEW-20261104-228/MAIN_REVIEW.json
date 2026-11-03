@@ -1,0 +1,104 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-CONTINUOUS-CRITICAL-REVIEW-796",
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "A_source": "e0b3bd97ebca18647b4fd3599d3646c67feb1d40",
+  "checks": [
+    {
+      "name": "pause_measured_zero_positive",
+      "observed": true
+    },
+    {
+      "name": "pause_wrong_PWM",
+      "refused": true
+    },
+    {
+      "name": "pause_wrong_50MHz_TTL",
+      "refused": true
+    },
+    {
+      "name": "pause_parser_accepts_result_before_complete_local_period",
+      "observed": true
+    },
+    {
+      "name": "actual_client_uncertain_write_no_second_write",
+      "observed": true
+    },
+    {
+      "name": "actual_client_accepts_wrong_scope_and_initial_motion",
+      "observed": true
+    },
+    {
+      "name": "actual_current_loader_try_prefix_through_download_clock_identical_AST",
+      "observed": true
+    },
+    {
+      "name": "loader_all_named_helper_exports_exist",
+      "observed": true
+    }
+  ],
+  "checks_count": 8,
+  "findings": [
+    {
+      "id": "B227-F1",
+      "severity": "integration_witness_gap",
+      "source": "remote_live_board_a.py:339-359; original positive output parser has same omission",
+      "observation": "Synthetic result=applied+1 is accepted although local period end=1001000. Parser checks local start/end and applied<result<deadline separately, not result>=applied+max(ends).",
+      "impact": "Does not prove a new-board measurement is invalid, but complete chronology cannot be claimed from this parser alone. Root must establish actual capture chronology or tighten exact candidate before asserting complete witness.",
+      "minimal_fix": "Require u64(10)>=u64(6)+max(ends) in both pause and positive measured parser, or prove exact RTL invariant with retained hardware evidence. No change made to A source."
+    },
+    {
+      "id": "B227-F2",
+      "severity": "must_check_at_Root_integration",
+      "source": "local_stream_client.py:22-25",
+      "observation": "initialize checks ABI/boot/build/request/op/status only; synthetic wrong scope2 hash and speed_applied=true is accepted.",
+      "impact": "Current pinned server emits correct scope/no-motion; this is not proof actual current startup fails. Root integration must explicitly check fixed2afd scope, speed2/no initial motion/formalnotrun before readiness; otherwise clientready alone insufficient."
+    }
+  ],
+  "scope_revision": 2,
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "hardware": false,
+  "native_product_actor": false,
+  "product_acceptance": false,
+  "evidence_scope": "Inert actual module import plus pure parser/client BytesIO checks and AST derivation comparison only; no vendor/board/network/UI/native/model execution.",
+  "at_utc": "2026-11-03T17:10:15.125110+00:00",
+  "pins": [
+    {
+      "path": "remote_live_board_a.py",
+      "sha256": "afd0bbafc36b4a51dddc417d6af5a53610e46e63138d6cbf0a3f7090d258e7b0"
+    },
+    {
+      "path": "load_once_791.py",
+      "sha256": "35cdb3da7f6b62f76956cad8cdd21e709b7fc53d7ae106191879739a2226ef43"
+    },
+    {
+      "path": "local_stream_client.py",
+      "sha256": "3339b8abb515175987732cc550d880c12891ff4ae77552e6a44da47417e60d7a"
+    },
+    {
+      "path": "API.md",
+      "sha256": "ca314c6bfe538f8e40e975c1c288aa676cc169913e21a0aec245c03fca976840"
+    }
+  ],
+  "main_verdict": "REVIEW_COMPLETE_WITH_TWO_INTEGRATION_GAPS; no approval of complete measured chronology or client readiness alone. No deterministic ordinary first-demo blocker identified in fixed candidate under its stated Root preconditions.",
+  "ownership": "Read only A published source; only B handoff228 writes. E4 draft retained and not part of this delivery.",
+  "next": "Review A actual new async caller/source-clock/grant integration on newly supplied exact commit. Do not expand old PDE/RTL suites."
+}

@@ -1,0 +1,120 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PRODUCT-UART-EXISTING-STDIO-20261104-306",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a343-44a0-76f3-8e05-97dd71803e5d",
+  "source": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "files": {
+    "output/drill-live-link-20261104/product_uart_stdio.py": "3bef22726e97eb7c950d7b3c3d7a1914367eed51c2a28d74015e3ae6017502c1",
+    "output/drill-live-link-20261104/PRODUCT_UART_STDIO.md": "7914f7acf92cc549998571e543a71c7a83048f0cb76464d73bcd2154e062cc3c",
+    "output/drill-live-link-20261104/product_stdio_tests301/test_stdio.py": "e6726f8cca88e4871534f6f9c02ce53020182863911c567559d09b8305531d9d"
+  },
+  "service_sha256": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+  "focused7_exit0": true,
+  "main_fix308": {
+    "review": "304R304-01 accepted and corrected by main; no changed other logic",
+    "old_sha256": "4877bc02cc85c53cf5cffd774fb805413ce9954b24fdfe08b94a0c0a2474792e",
+    "new_sha256": "3bef22726e97eb7c950d7b3c3d7a1914367eed51c2a28d74015e3ae6017502c1",
+    "red307_exit_code": 1,
+    "exact_diff_confirmed": true,
+    "independent_native_terminal": true,
+    "hardware": false
+  },
+  "original_fixture_failures301_302_retained": true,
+  "review304_actual_terminal": true,
+  "review304": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-JOINT-STDIO-INDEPENDENT-REVIEW-20261104-304",
+    "agent_id": "/root/stdio_review304",
+    "job_id": "child-31862d9740d9434aa2834b2ae2a82a47",
+    "at_utc": "2026-11-03T22:01:20.963908+00:00",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "requirements_fixed_commit": "817b355887c14cfa9c5d830c8589684f994af082",
+    "source_hashes": {
+      "output/drill-live-link-20261104/product_uart_stdio.py": "4877bc02cc85c53cf5cffd774fb805413ce9954b24fdfe08b94a0c0a2474792e",
+      "output/drill-live-link-20261104/PRODUCT_UART_STDIO.md": "7914f7acf92cc549998571e543a71c7a83048f0cb76464d73bcd2154e062cc3c",
+      "output/drill-live-link-20261104/product_stdio_tests301/test_stdio.py": "ce417fd4c05bf190561a570b3d24ace675829234917cbd0852a4f2474179f014",
+      "output/drill-live-link-20261104/product_uart_service.py": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+      "output/drill-live-link-20261104/baseline_mtr4/fpga_link/ssh_client.py": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+      "output/drill-live-link-20261104/drill_live_link/session_client.py": "431d2466061a441365d0a1f99e2b6a08d7d3f9fbbc9a7110f222c434cb6eab1d",
+      "output/drill-live-link-20261104/baseline_mtr4/fpga_link/session.py": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+      "output/drill-live-link-20261104/baseline_mtr4/motor_runtime/variable_session.py": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38",
+      "output/drill-live-link-20261104/drill_live_link/follower.py": "6b975c4cb3ad23723b131ee088edfaa9810fa387af0be61382497ffe088a1134"
+    },
+    "reviewed_files": [
+      "output/drill-live-link-20261104/product_uart_stdio.py",
+      "output/drill-live-link-20261104/PRODUCT_UART_STDIO.md",
+      "output/drill-live-link-20261104/product_stdio_tests301/test_stdio.py",
+      "output/drill-live-link-20261104/product_uart_service.py",
+      "output/drill-live-link-20261104/baseline_mtr4/fpga_link/ssh_client.py",
+      "output/drill-live-link-20261104/drill_live_link/session_client.py",
+      "output/drill-live-link-20261104/baseline_mtr4/fpga_link/session.py",
+      "output/drill-live-link-20261104/baseline_mtr4/motor_runtime/variable_session.py",
+      "output/drill-live-link-20261104/drill_live_link/follower.py"
+    ],
+    "findings": [
+      {
+        "id": "R304-01",
+        "priority": 2,
+        "file": "output/drill-live-link-20261104/product_uart_stdio.py",
+        "line": 110,
+        "title": "Bound the stream read before parsing",
+        "cause": "for line in reader reads/allocates an unlimited newline-delimited string; parse_line length check only runs after that read completes. Whitespace-only lines bypass parse_line entirely.",
+        "impact": "A malformed or buggy peer on the trusted SSH stream can retain/allocate arbitrarily large input and delay error/EOF cleanup. This is robustness inside the existing trusted channel, not an independent authorization bypass; normal SshDisplayClient commands are small.",
+        "recommendation": "Use reader.readline(8193) in a loop; reject length >8192 before whitespace handling, break on EOF, then retain current parse/dispatch/finally-close behavior. Existing SSH reply reader already uses this pattern."
+      }
+    ],
+    "actual_checks": [
+      "Native lease self-validation with canonical agent ID returned execution_allowed=true before project execution; never used hardware/network/UART/Feishu/Git mutation.",
+      "Read installed B/C fpga-multi-node skill, role, protocol and B standing orders; read all H01-H15 rev2 text; independently recomputed canonical requirements SHA256 against fixed expected value.",
+      "Read exact stdio implementation, six focused tests (not rerun), ProductUartService and baseline SSH/session/variable motor implementations; inspected Follower source clocks.",
+      "Statically matched handshake event=ready/session/clock_ms and command/reply request IDs to SshDisplayClient; adapter rejects background keepalive; original session/request_id/expires_ms passed unchanged to baseline handle, and terminal STOP is cached once while RPC IDs stay correlated.",
+      "Inspected exceptions/EOF cleanup and source current-identity assertions; no stale-generation MMIO safety writes are attempted by facade."
+    ],
+    "not_run": [
+      "No tests rerun; parent303 exit0 evidence not independently executed.",
+      "No actual SSH/PYNQ/HWH fixture/MMIO/FPGA-UART/MCU or physical feedback."
+    ],
+    "conclusion": "ONE_INPUT_BOUND_ROBUSTNESS_FINDING; static SSH protocol/clock/STOP seam otherwise consistent. Parent must decide fix/acceptance; no product or physical acceptance claimed."
+  },
+  "main_review": "Actual source, SSH client and adapter inspected. Original remote session/request_id/expires_ms passed unchanged, scope remains gated, STOP/EOF share terminal device result without refreshing measurement clock. Main accepted R304-01, reproduced RED307 and verified exact bounded-read fix GREEN308 passes7. No port/network/process factory. Transport ready separate from servo READY. Offline StringIO/FakeRoot evidence only.",
+  "actual_hardware": false,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-03T22:02:57.336909+00:00"
+}

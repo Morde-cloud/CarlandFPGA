@@ -1,0 +1,115 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A144-TX-FIXTURE-AND-WIRING-20261104-355",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a3a7-d75a-7181-a610-7c00ffef0d5a",
+  "handoff_code_commit": "73d7949c0e5f5f9b1f7e729b81b1d8e0b0a4b5ae",
+  "unchanged_product_runtime_code": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "exact_executed_MCU_fixture_source_sha": "e314bb696c5d975cf3e8a954923d5ba0c62ca15dd66e9095aa72017e3051cc00",
+  "source_archived_after_run": true,
+  "B_TX345": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-MCU-TX-FIXTURE-COMPLETE-20261104-348",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a3a7-d75a-7181-a610-7c00ffef0d5a",
+    "B_operation_id": "B-MCU-TX-FIXTURE-20261104-345",
+    "A_raw_operation_id": "A-GEN4-UART-PATTERN-20261104-1092-R01",
+    "pattern_hex": "55a533cc0ff06996",
+    "actual_register_writes_returned": 8,
+    "all_actual_TXFE_NOT_BUSY": true,
+    "PDBGCTL_original": 3,
+    "PDBGCTL_written": false,
+    "CPU_final_running": true,
+    "SDK_closed": true,
+    "MCU_READY": false,
+    "physical_A_delivery": "UNPROVEN pending A actual hardwareRX8 comparison",
+    "at_utc": "2026-11-03T23:18:06.378438+00:00"
+  },
+  "A_RX1092": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A144-RAW-RX-RESULT-REVIEW-20261104-353",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a3a7-d75a-7181-a610-7c00ffef0d5a",
+    "files": {
+      "SUMMARY_ACTUAL.json": {
+        "bytes": 727,
+        "sha256": "05159289f76231bda9b76bbbe4b27f95bb9f2a049d1f20ce86d71fa8f19b70e7"
+      },
+      "PS_CLOSED_ACTUAL.json": {
+        "bytes": 333,
+        "sha256": "b9774c3c518af64e0cb02be7202cdbf9a6b8610650872ac0d9c7ba75381c227e"
+      },
+      "RAW_PHASE_REPLY.json": {
+        "bytes": 465,
+        "sha256": "0e08bf31675cca109cd987c47e671fa19de9df866253dda22392b79054ec4cf7"
+      },
+      "RECORD_RECOVERY1101.json": {
+        "bytes": 627,
+        "sha256": "d43736d982198769dc2c4f6736110f608b4e67dccbbee429b143f90c8fb094dc"
+      }
+    },
+    "A_actual_RX": 0,
+    "A_actual_TX": 0,
+    "A_process_exit": 2,
+    "A_actor_closed": true,
+    "independent_B_validation": "Four original files decoded and exactbytes/SHAchecked, actualphase emptyRX andclose/kernel lock proof matched345capture",
+    "A_reported_status_samples_4": 5566,
+    "full_PS_journal": {
+      "bytes": 8719524,
+      "sha256": "855d917979f6ee460a4fcef7dacb627e112ab7440ab833a6e5fcb568835a196b",
+      "retained_by_A": true,
+      "independent_B_full_journal_not_yet_obtained": true
+    },
+    "host_correlation_bug": "Top-level request_id assertion versus nestedrequest.request_id; originalhostfailure retained andactualphase recovered without boardretry; not assigned as zeroRXcause",
+    "physical_MCU_to_FPGA_test": "FAILED/zero received bytes, GPIOwaveform not measured",
+    "new_hardware_or_retry": false,
+    "human_XDS_isolation": "Actuallyconfirmed351; remaining3wireendpoints/commonGND coordinatedonce by A",
+    "next": "Keep existingfirmware, no repeatedregister/fixturetests; Bprepareverifiedpinoutnotes, Acombinedonsitewiringcheck before newoperation",
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "at_utc": "2026-11-03T23:25:58.204307+00:00"
+  },
+  "actual_actor_state": "A144closed with actors[]/sameflock proof; B345SDKclosed, no currentwriter",
+  "native346_actual_terminal": true,
+  "native346_findings": [],
+  "human_XDS_isolated351": {
+    "source": "direct human current B main chat asynchronous question reply",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "question_item_id": "call_0c531a203c9f4a6f92ee20a58cfd7e73/0",
+    "question": "PB6/PB7 old XDS110 UART signal jumpers removed, only FPGA remains? USB/SWD/NRST retained",
+    "verbatim": "已断开原串口两根跳线，只连 FPGA",
+    "XDS_UART_signal_isolated_human_confirmed": true,
+    "MCU_PB6_PB7_connected_only_to_FPGA": true,
+    "does_not_prove_previous_failure_cause": true,
+    "does_not_assert_time_of_physical_change": true,
+    "no_new_voltage_or_precision_requirement": true,
+    "does_not_grant_unannounced_new_UART_test": true,
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "wiring_notes": "Only GPIO/PMODA silk andverifiedsignalnames, no guessedLaunchPadheaderpin numbers/photoorientation",
+  "next": "Acoordinatesonce3wireendpoints/commonGND/insertedcheck, not repeatedtests; reverse1byteproposalnotactivated",
+  "MCU_READY": false,
+  "voltage_measurement_required": false,
+  "precision_calibration_required": false,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-03T23:29:57.389960+00:00"
+}

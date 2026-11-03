@@ -1,0 +1,181 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DEMO3H-REAL-BOARD-OUTPUT-ADAPTER-438",
+  "operation_id": "B-DEEPEYE-REAL-BOARD-OUTPUT-20261103-195",
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "A_source": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+  "D_source": "014c3db05c59861209ca136b2cbec518f49c345e",
+  "tested_source": "a314a283bac5af07344c4eef4c60349a76d6f448",
+  "actual_focused_exit": 0,
+  "cases": 14,
+  "independent_review": [
+    "All frozen source/dependency bytes match tested source",
+    "Exact new A Git tree codec and adapter equal the tested pure versions",
+    "Positive full32held/latestadvance/frame16 and measured codes separately inspected",
+    "Measured/nominal, identity/command/operation, expiry/whole-step, STOP/unknown/release/cumulativeIO negatives refuse",
+    "Every positive result motion_authorityfalse; synthetic146B/q7/C3null preserved",
+    "A production/capture/clock/Root/actualboard integration remains required"
+  ],
+  "source_references": [
+    {
+      "path": "competition/deepeye/simulation/authority/candidate_owner.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "49e5eca9a0845c164380d1ccb21c7bf4b36006d1663ca2757d1b16b54702fd34",
+      "lines": [
+        90
+      ],
+      "checked_text": "candidate owner is PC_DIRECT only"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/candidate_owner.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "49e5eca9a0845c164380d1ccb21c7bf4b36006d1663ca2757d1b16b54702fd34",
+      "lines": [
+        169
+      ],
+      "checked_text": "selected.mode != 'PC_DIRECT'"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "903d4627ceef3fc8ba48f94fd74a8f28264a074f703d5abbbbb3dac8fc8bd2ab",
+      "lines": [
+        594
+      ],
+      "checked_text": "explicit PC_DIRECT consume window"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "903d4627ceef3fc8ba48f94fd74a8f28264a074f703d5abbbbb3dac8fc8bd2ab",
+      "lines": [
+        615
+      ],
+      "checked_text": "target=candidate['target']"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/g05_csr_channels_v1.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "903d4627ceef3fc8ba48f94fd74a8f28264a074f703d5abbbbb3dac8fc8bd2ab",
+      "lines": [
+        190
+      ],
+      "checked_text": "seqs[0]==seqs[1]"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/actor_composition.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "fea75bb37cdba03a9cc2b0a4916644dc2b2c62fe523483a7ff1e855f7e0b6739",
+      "lines": [
+        336
+      ],
+      "checked_text": "proof = owner._candidates.select"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/actor_composition.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "fea75bb37cdba03a9cc2b0a4916644dc2b2c62fe523483a7ff1e855f7e0b6739",
+      "lines": [
+        145
+      ],
+      "checked_text": "completion does not match approved model"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_chain_v2_client_a.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "1c46b26b429e50e555ef90bd11a01844e89628e8d926f7ec5b1eea7c085de39d",
+      "lines": [
+        200
+      ],
+      "checked_text": "def apply(self,ident,command_words"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_a.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "8acb450b1876165b6cabe7800eec4c9cf99d6e93ea13f3feab5bd86dd62c1187",
+      "lines": [
+        148
+      ],
+      "checked_text": "words[0]!=seq_before"
+    },
+    {
+      "path": "competition/deepeye/tools/diagnostic/functional50_g05_session_a.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "0ebb6111e22e804fa8c2496a3f58ff4d8e0daf4e3c516212b9cd4bd0c9852567",
+      "lines": [
+        151
+      ],
+      "checked_text": "snap=self._step('read_snapshot');self._step('release')"
+    },
+    {
+      "path": "competition/deepeye/simulation/authority/pc_direct_runtime.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "29830db5fa4fd3576f2f6215f8bb7b9d0cfa2b01e69536ea812ac2b79cf14d5c",
+      "lines": [
+        504
+      ],
+      "checked_text": "checked + dt_ns > deadline"
+    },
+    {
+      "path": "competition/deepeye/integration/host_envelope.py",
+      "commit": "e47033f342fe76bd7a9c9284e9a3ff0e2521ff24",
+      "sha256": "3f9bcdf9ae88c9fb1007185e061b2954720a06f210282d5fe91f9eab97e764ea",
+      "lines": [
+        49
+      ],
+      "checked_text": "2: ('pc_direct_host', False)"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "commit": "014c3db05c59861209ca136b2cbec518f49c345e",
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a",
+      "lines": [
+        262
+      ],
+      "checked_text": "12'h01c:read_value=result_seq"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "commit": "014c3db05c59861209ca136b2cbec518f49c345e",
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a",
+      "lines": [
+        220
+      ],
+      "checked_text": "latched[0]<=result_seq"
+    },
+    {
+      "path": "competition/deepeye/fpga/diagnostic/g05_capture/additive50_source_candidate/rtl/deepeye_g05_axi_50mhz_candidate.sv",
+      "commit": "014c3db05c59861209ca136b2cbec518f49c345e",
+      "sha256": "99cdb09399466966458343351d0d941191f34cc9af6f9808c5fb3cc58086ea5a",
+      "lines": [
+        228
+      ],
+      "checked_text": "latched[12+i]<=result_periods"
+    }
+  ],
+  "new_A_source_files": 19,
+  "simulator_authority_executed": false,
+  "physical_board": false,
+  "native_model_actor_vendor": false,
+  "formal_acceptance": false,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+  "at_utc": "2026-11-03T07:39:52.762675+00:00"
+}

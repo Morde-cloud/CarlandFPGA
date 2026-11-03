@@ -1,0 +1,138 @@
+{
+  "schema": "B195_DETACHED_MEASURED_OUTPUT_REFERENCE_V1",
+  "status": "MEASURED_REFERENCE_CONSISTENT",
+  "mode": "FPGA_OUTPUT_REFERENCE",
+  "action_source": "MEASURED_G05_CAPTURE",
+  "motion_authority": false,
+  "original_typed_A_callsite_required": true,
+  "physical_board_verified": false,
+  "formal_acceptance": false,
+  "operation_id": "B195-SOFTWARE-FIXTURE-NOT-BOARD",
+  "command_words": [
+    100,
+    65336,
+    1,
+    20,
+    1000,
+    7,
+    4103
+  ],
+  "held_capture_seq": 65539,
+  "latest_result_seq_before": 65540,
+  "latest_result_seq_after": 65541,
+  "observation_seq": 21,
+  "frame_seq": 3,
+  "measured_target_codes": {
+    "yaw_q": 100,
+    "pitch_q": -200,
+    "speed_code": 20
+  },
+  "measured_pwm": [
+    {
+      "index": 0,
+      "name": "yaw",
+      "period_ticks_sampled": 1000000,
+      "high_ticks_sampled": 125800,
+      "start_witness_tick_local": 100,
+      "end_witness_tick_local": 1000100,
+      "period_ns_center": 20000000,
+      "high_ns_center": 2516000,
+      "start_witness_ns_local": 2000,
+      "end_witness_ns_local": 20002000,
+      "end_minus_start_ticks": 1000000,
+      "period_tick_sampling_bounds": [
+        999999,
+        1000001
+      ],
+      "high_tick_sampling_bounds": [
+        125799,
+        125801
+      ],
+      "duty_ratio_sampled": {
+        "numerator": 125800,
+        "denominator": 1000000
+      },
+      "witness_origin": "local counter reset by the RTL capture rearm; not host QPC or global time"
+    },
+    {
+      "index": 1,
+      "name": "pitch",
+      "period_ticks_sampled": 1000000,
+      "high_ticks_sampled": 123400,
+      "start_witness_tick_local": 101,
+      "end_witness_tick_local": 1000101,
+      "period_ns_center": 20000000,
+      "high_ns_center": 2468000,
+      "start_witness_ns_local": 2020,
+      "end_witness_ns_local": 20002020,
+      "end_minus_start_ticks": 1000000,
+      "period_tick_sampling_bounds": [
+        999999,
+        1000001
+      ],
+      "high_tick_sampling_bounds": [
+        123399,
+        123401
+      ],
+      "duty_ratio_sampled": {
+        "numerator": 123400,
+        "denominator": 1000000
+      },
+      "witness_origin": "local counter reset by the RTL capture rearm; not host QPC or global time"
+    },
+    {
+      "index": 2,
+      "name": "speed",
+      "period_ticks_sampled": 1000000,
+      "high_ticks_sampled": 35000,
+      "start_witness_tick_local": 100,
+      "end_witness_tick_local": 1000100,
+      "period_ns_center": 20000000,
+      "high_ns_center": 700000,
+      "start_witness_ns_local": 2000,
+      "end_witness_ns_local": 20002000,
+      "end_minus_start_ticks": 1000000,
+      "period_tick_sampling_bounds": [
+        999999,
+        1000001
+      ],
+      "high_tick_sampling_bounds": [
+        34999,
+        35001
+      ],
+      "duty_ratio_sampled": {
+        "numerator": 35000,
+        "denominator": 1000000
+      },
+      "witness_origin": "local counter reset by the RTL capture rearm; not host QPC or global time"
+    }
+  ],
+  "nominal_metadata": {
+    "yaw_q": 100,
+    "pitch_q": -200,
+    "profile": 1,
+    "speed": 20,
+    "ttl_ms": 1000
+  },
+  "profile": 1,
+  "original_deadline_caps_ns": {
+    "mapped_fpga": 1000000000,
+    "source": 800000000,
+    "command": 500000000,
+    "actor": 900000000,
+    "health": 700000000,
+    "session": 2000000000,
+    "previous_action": null
+  },
+  "reference_deadline_ns": 500000000,
+  "proposed_step_ns": 100000000,
+  "release": {
+    "first_io": 96,
+    "last_io": 100,
+    "request_id": "tx-fixture-release",
+    "board_monotonic_end_ns": 1009,
+    "authentication": "NOT_ESTABLISHED_BY_THIS_CHECKER"
+  },
+  "cumulative_g05_io": 100,
+  "interpretation": "Codes are decoded target references. Original motion acceleration/curvature/collision integration remains with A; no actual pose or instantaneous angular rate is inferred."
+}

@@ -1,0 +1,78 @@
+{
+  "kind": "SOFTWARE_FIXTURE_ONLY",
+  "cases": [
+    {
+      "id": "FULL32_HELD_LATEST_ADVANCE_MEASURED",
+      "passed": true
+    },
+    {
+      "id": "NOMINAL_ECHO_CANNOT_REPLACE_MEASURED",
+      "passed": true,
+      "refusal": "CAPTURE_REFUSED_CAPTURE"
+    },
+    {
+      "id": "WRONG_EXTERNAL_NONCE",
+      "passed": true,
+      "refusal": "CAPTURE_REFUSED_ASSOCIATION"
+    },
+    {
+      "id": "WRONG_OPERATION",
+      "passed": true,
+      "refusal": "EXPECTED_OPERATION"
+    },
+    {
+      "id": "WRONG_COMMAND",
+      "passed": true,
+      "refusal": "EXPECTED_COMMAND"
+    },
+    {
+      "id": "LATEST_REGRESSION",
+      "passed": true,
+      "refusal": "LATEST_SEQUENCE_ORDER"
+    },
+    {
+      "id": "BOARD_EXPIRED",
+      "passed": true,
+      "refusal": "BOARD_EXPIRED"
+    },
+    {
+      "id": "WHOLE_STEP_CROSSES_SOURCE_CAP",
+      "passed": true,
+      "refusal": "STEP_CROSSES_ORIGINAL_DEADLINE"
+    },
+    {
+      "id": "STOP_RETIRED",
+      "passed": true,
+      "refusal": "STOP_OR_RETIRED"
+    },
+    {
+      "id": "UNKNOWN_APPLY_NO_REPLAY",
+      "passed": true,
+      "refusal": "UNKNOWN_EFFECT_NO_REPLAY"
+    },
+    {
+      "id": "RELEASE_ACK_MISSING",
+      "passed": true,
+      "refusal": "RELEASE_INCOMPLETE"
+    },
+    {
+      "id": "RELEASE_CUMULATIVE_INDEX_GAP",
+      "passed": true,
+      "refusal": "RELEASE_INDEX"
+    },
+    {
+      "id": "FRAME16_OVERFLOW_NO_TRUNCATION",
+      "passed": true,
+      "refusal": "INTEGER_RANGE"
+    },
+    {
+      "id": "CURRENT_SINGLETON_Q7_C3_NULL_RAW146",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "physical_board": false,
+  "original_A_authority_executed": false,
+  "model_actor_vendor": false,
+  "formal_acceptance": false
+}

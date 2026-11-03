@@ -119,8 +119,8 @@ def _record(kind, payload, context, pointer):
                     native=context.native_clock, board=context.board_clock)), payload=_copy(payload))
 
 
-def _board(value):
-    response = value['response']
+def _board(board_record):
+    response = board_record['response']
     _need(type(response) is dict, 'board response')
     out = {k: response[k] for k in ('abi', 'op', 'status', 'boot_id', 'build_id', 'request_hash')}
     for key in out:
@@ -128,10 +128,10 @@ def _board(value):
     _hex(out['request_hash'], 64)
     out.update(request_seq=_uint(response['request_seq']), unknown=_boolean(response['unknown']))
     canonical = json.dumps(response, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
-    declared = _hex(value['response_sha256'], 64)
+    declared = _hex(board_record['response_sha256'], 64)
     _need(hashlib.sha256(canonical).hexdigest() == declared, 'canonical response SHA256')
     out.update(response_sha256=declared, hash_scope='canonical_JSON_without_newline',
-               host_before_ns=_uint(value['host_before_ns']), host_returned_ns=_uint(value['host_returned_ns']))
+               host_before_ns=_uint(board_record['host_before_ns']), host_returned_ns=_uint(board_record['host_returned_ns']))
     _need(out['host_before_ns'] <= out['host_returned_ns'], 'board-call host chronology')
     # Board absolute monotonic values stay in their own declared domain.
     r = response['result']
@@ -157,8 +157,8 @@ def _board(value):
         else:
             measured[key] = _uint(value)
     out['measurement_or_stop'] = measured
-    if 'host_deadline_qpc_ns' in value:
-        out['host_deadline_qpc_ns'] = _uint(value['host_deadline_qpc_ns'])
+    if 'host_deadline_qpc_ns' in board_record:
+        out['host_deadline_qpc_ns'] = _uint(board_record['host_deadline_qpc_ns'])
     return out
 
 

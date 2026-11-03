@@ -1,0 +1,212 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-CONTINUOUS-CRITICAL-REVIEW-796",
+  "main": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "A_source": "64113c2d51c473a8c5200d531fc8d828adb48ccc",
+  "verdict": "REVIEW_COMPLETED_WITH_BLOCKING_F3_RENEWAL_AND_F2_INIT_GAP; SOURCE_NOT_CLEARED",
+  "main_exact_dispatch_controls": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-CONTINUOUS-CRITICAL-REVIEW-796",
+    "A_source": "64113c2d51c473a8c5200d531fc8d828adb48ccc",
+    "file": "handoffs/a/A-CONTINUOUS-LIVE-INTEGRATION-817/controller_a.py",
+    "source_sha256": "16aa629ffb734a89857cac191f1a7467d2ae724c45e8da405e5d53afa1f89aa1",
+    "exact_AST_begin_line": 118,
+    "exact_AST_end_line": 150,
+    "controls": [
+      {
+        "case": "old_advice_renewal",
+        "request": {
+          "method": "apply",
+          "fields": {
+            "yaw_q": 0,
+            "pitch_q": 0,
+            "speed_code": 2
+          }
+        },
+        "expected_observed_speed": 2
+      },
+      {
+        "case": "old_advice_new_dispatch_control",
+        "request": {
+          "method": "apply",
+          "fields": {
+            "yaw_q": 0,
+            "pitch_q": 0,
+            "speed_code": 0
+          }
+        },
+        "expected_observed_speed": 0
+      },
+      {
+        "case": "moved_pose_renewal",
+        "request": {
+          "method": "apply",
+          "fields": {
+            "yaw_q": 0,
+            "pitch_q": 0,
+            "speed_code": 2
+          }
+        },
+        "expected_observed_speed": 2
+      },
+      {
+        "case": "moved_pose_new_dispatch_control",
+        "request": {
+          "method": "apply",
+          "fields": {
+            "yaw_q": 0,
+            "pitch_q": 0,
+            "speed_code": 0
+          }
+        },
+        "expected_observed_speed": 0
+      }
+    ],
+    "controls_count": 4,
+    "conclusion": "Fresh observation alone allows positive held renewal after originalADVISE >5s or own displacement>.25m; same actual branch correctly chooses zero for desired new dispatch. No fresh AI qualification is established by newer observation alone.",
+    "minimal_root_fix": "Apply the same original advice epoch/acquisition/pose applicability check before every positive held renewal; stale/inapplicable needs fresh AI or actual measured zero pause. Preserve fresh command sequence and no replay/reset.",
+    "scope": "Exact AST dispatch only; fake submit records fields without calling board/apply, sockets/native/model/process. Not full original runtime/native/board acceptance.",
+    "requirements_revision": 2,
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "at_utc": "2026-11-03T17:20:10.525075+00:00"
+  },
+  "independent_client_controls": {
+    "errors": 0,
+    "failures": 0,
+    "observations": [
+      {
+        "RTT_debit_usec": 200000,
+        "assumed1000ppm_deadline_usec": 10796997,
+        "control": "clock-grant",
+        "guard_usec": 1000,
+        "zero_ppm_deadline_usec": 10799000
+      },
+      {
+        "board_reported_remaining_ns": 10000000000,
+        "control": "host-grant",
+        "host_deadline_ns": 11000000000,
+        "host_remaining_ns": 7000000000,
+        "receive_ns": 4000000000,
+        "requested_duration_ms": 12000,
+        "send_ns": 1000000000
+      },
+      {
+        "attempted_init_count": 1,
+        "control": "init-binding-negative",
+        "poisoned": true
+      },
+      {
+        "accepted_ready": true,
+        "control": "init-gap-characterization",
+        "supplied_response": {
+          "abi": "DEEPEYE-LIVE-BOARD-791-v1",
+          "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "build_id": "cccccccccccccccccccccccccccccccc",
+          "op": "init",
+          "request_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "status": "COMPLETE"
+        }
+      },
+      {
+        "accepted_ready": true,
+        "control": "init-gap-characterization",
+        "supplied_response": {
+          "abi": "DEEPEYE-LIVE-BOARD-791-v1",
+          "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "build_id": "cccccccccccccccccccccccccccccccc",
+          "op": "init",
+          "request_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "request_seq": 777,
+          "result": {
+            "motion_started": true,
+            "requirements_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804",
+            "stopped": false
+          },
+          "status": "COMPLETE",
+          "unknown": true
+        }
+      },
+      {
+        "control": "pause-zero",
+        "controller_pause_call_count": 1,
+        "exact_module": true
+      },
+      {
+        "actual_code": 1,
+        "actual_speed_m_s": 0.0125,
+        "below_step_cap_m_s": 0.01249,
+        "below_step_code": 0,
+        "cap_m_s": 0.02499,
+        "control": "speed-quantization"
+      },
+      {
+        "attempted_wire_bytes": 122,
+        "control": "unknown-no-repeat",
+        "request_count": 1
+      }
+    ],
+    "skipped": 0,
+    "tests": 7
+  },
+  "actual_exit_codes": [
+    0,
+    0
+  ],
+  "original_native_job": "child-f129d7e0b8754850af7a98896c875ff2",
+  "native_terminal": "completed",
+  "new_product_writes": false,
+  "source_and_raw_hashes_independently_checked": true,
+  "source_semantics": {
+    "acquisition": "Actual native accepted pose/read clock bracket lower bound retained; completion never substituted. Original raw readback and interval remain Root journal evidence.",
+    "grant": "Host sendlower+boardremaining debits RTT. Native ClockBracket debits bracket/drift/1ms; relative-rate bounds are engineering assumptions, not measured qualification.",
+    "concurrency": "Separate oneinflight source/AI and one boardIO worker; native physics advances independently; no total mission cap.",
+    "truth": "Complete private pieces remain only numeric sensor/guard side; PC AI consumes reconstructed counts/public goal/ownpose. New normalized candidate sensor/AI never inherits old PDE/package qualification.",
+    "collision": "Capsule volume/portal support and engine no-hit guarded perphysics substep; formal UNKNOWN remains not_run, no B Godot or board execution."
+  },
+  "F1_update": "Exact retained longTTL RTL source says local witnesses reset on postAPPLY rearm and payload published only after joined_good. Bad parser vector alone is not a demonstrated RTL/runtime defect. Root still binds exact source to current bit; parser-only broader consistency gap is conditional.",
+  "F2": "Current817 StreamClient still accepts absent/conflicting scope/no-motion and Root init binds only boot/build/request before ready. Actual fixedserver hardcodedcorrect does not substitute validation.",
+  "F3": "Positive held renewal bypasses original advice epoch/age/pose applicability while newer observation freshness alone remains. Main actual AST4 controls prove 6s or .3m old advice yields code2 vs desiredbranchcode0.",
+  "loader_evidence_limit": "817 HOST_REVIEW_806 records actual staged load_once_791 SHA912759e7322af7263c159ade5e12f356158b3432f115baece1bed0233fbc55b6, different from public79135cdb3da... . Original B AST comparison cannot clear those unprovided exact bytes. Do not read A private paths; A can publish changedclosure in next fixed commit.",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_revision": 2,
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "board": false,
+  "native_actor": false,
+  "formal_acceptance": false,
+  "at_utc": "2026-11-03T17:23:22.313713+00:00"
+}

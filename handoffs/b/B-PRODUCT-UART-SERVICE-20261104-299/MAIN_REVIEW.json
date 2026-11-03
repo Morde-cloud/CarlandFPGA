@@ -1,0 +1,100 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PRODUCT-UART-SERVICE-20261104-299",
+  "joint_work_id": "A-B-JOINT-UART-20261104-R01/v1",
+  "source": "047bb6159f41228ea02e1a4cb459c8406594683e",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a343-44a0-76f3-8e05-97dd71803e5d",
+  "final_service_SHA": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+  "native284": {
+    "job_id": "child-ef3225caa24c451894cad0665675f551",
+    "actual_terminal": true,
+    "original_focused17_exit0": true
+  },
+  "independent_main": {
+    "status": "PASS_CHANGED_SERVICE_17_PLUS_PARENT2",
+    "focused_tests": 17,
+    "focused_exit": 0,
+    "parent_regressions": {
+      "work_id": "B-PRODUCT-UART-MAIN-REGRESSION-20261104-296",
+      "source_sha256": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+      "cases": [
+        {
+          "case": "motor_zero_before_permission",
+          "error": "LinkError: motor output disabled by profile",
+          "opcodes": [
+            3,
+            4,
+            3
+          ],
+          "stop_count": 2,
+          "expected_stops": 2,
+          "scope": "SyntheticRoot/MMIO; initialconnectSTOP plus exactlyonefaultSTOP. No hardware."
+        },
+        {
+          "case": "invalid_bool_zero",
+          "error": "LinkError: speed_pct must be finite0..100",
+          "opcodes": [
+            3,
+            4,
+            3
+          ],
+          "stop_count": 2,
+          "expected_stops": 2,
+          "scope": "SyntheticRoot/MMIO; initialconnectSTOP plus exactlyonefaultSTOP. No hardware."
+        }
+      ],
+      "passed": true,
+      "at_utc": "2026-11-03T21:42:53.376274+00:00",
+      "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+    },
+    "preserved_native17_pass": true,
+    "preserved_RED296_failure": true,
+    "original_candidate_bytes": "Reconstructed by inverse exact2line patch; SHA matches actual native b932freeze",
+    "source_sha256": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "actual_hardware_executed": false,
+  "live_Root_adapter_required": true,
+  "actual_HWH_fixture_not_yet_given": true,
+  "actual_MCU_state": "290CPUrunning/FAULT4/no servo feedback/seq0/unarmed/motor0; USB-only user wiring confirmed",
+  "diagnostic_transfer": "Not granted before A current operation/build/BOOT/HWH+mapping binding",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "verdict": "OFFLINE_NEW_SERVICE_REVIEW_PASSED; ACTUAL_ROOT_HWH_UART_AND_ACTUATORS_PENDING",
+  "at_utc": "2026-11-03T21:46:21.868346+00:00"
+}

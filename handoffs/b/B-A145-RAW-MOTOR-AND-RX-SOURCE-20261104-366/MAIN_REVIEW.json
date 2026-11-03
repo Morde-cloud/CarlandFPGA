@@ -1,0 +1,438 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a3a7-d75a-7181-a610-7c00ffef0d5a",
+  "handoff_code_commit": "bc0d4507c92034b3a7a160e9c05bff4ea7df2dfe",
+  "runtime_source_unchanged": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "A145_fixed_source": "4a36e1a20c1ff2a65de730cefe7ee33ec5d429c7",
+  "A145_raw_review": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A145-RAW-JOURNAL-AND-MOTOR-HISTORY-20261104-359",
+    "status": "INDEPENDENT_RAW_RECOMPUTATION_MATCHES_PHYSICAL_RX_FAILURE",
+    "fixed_A_commit": "4a36e1a20c1ff2a65de730cefe7ee33ec5d429c7",
+    "manifest_sha256": "37b1f98854a84a7a8229edcd183fe4e2d12353e803f01b145baace7bbf897700",
+    "manifest_checked_files": [
+      {
+        "path": "reader/root_motion_reader1057.py",
+        "bytes": 24088,
+        "sha256": "4a23dcf5bc38c07bbc9459d9abd741c0faf86730c1efd3277a68def4a8f0046f"
+      },
+      {
+        "path": "reader/child_stdio1073.py",
+        "bytes": 12027,
+        "sha256": "34ece891c6d2868f9d86ed020cec9236c9c46a82e11fdad5fa5163c40e00fa3d"
+      },
+      {
+        "path": "g05/already_loaded_g05_1059.py",
+        "bytes": 14553,
+        "sha256": "56886c15cb44574bc396f95c4a185dba81bc8277e8b730df5d0a6c798d907a01"
+      },
+      {
+        "path": "g05/joint_command_ttl1059.py",
+        "bytes": 11604,
+        "sha256": "3e62231a59500e9114ebf23d00ccf5f74de69c21d2fa33af42152a33a8eb59b0"
+      },
+      {
+        "path": "host/host_follower1060.py",
+        "bytes": 9664,
+        "sha256": "616524111778447165778d631048059d36b488e7ddb4959aceccfd7c04613328"
+      },
+      {
+        "path": "host/root_ssh1077.py",
+        "bytes": 11448,
+        "sha256": "b3c2a2edd02a298caa14f57e9e0988f276667181a9666025021d855bc960e44d"
+      },
+      {
+        "path": "host/host_board_session.py",
+        "bytes": 16989,
+        "sha256": "8552cce0777afe0e2f7c70d1c39fd86386d5d8642d37faeee633cf953f22023f"
+      },
+      {
+        "path": "host/Root_live_controller1078.py",
+        "bytes": 39087,
+        "sha256": "d83fa4a105299f4acd3bc4f08f080342cb12d5ea48f60fcafa5970b6a49763ec"
+      },
+      {
+        "path": "host/physical_bridge1078.py",
+        "bytes": 15240,
+        "sha256": "33e67afa5a40ce1fe8b3b5dc38f9f88224eede05eb4aa1f7df6591ba92f0cba3"
+      },
+      {
+        "path": "diagnostic/raw_pattern1087.py",
+        "bytes": 14192,
+        "sha256": "3a71f162ad25dbf1ecc0ee0a9c53527b5afd7b178a02a18498fac1754539bad0"
+      },
+      {
+        "path": "actual/FAILED_RAW_SUMMARY.json",
+        "bytes": 727,
+        "sha256": "05159289f76231bda9b76bbbe4b27f95bb9f2a049d1f20ce86d71fa8f19b70e7"
+      },
+      {
+        "path": "actual/PS_CLOSED_ACTUAL.json",
+        "bytes": 333,
+        "sha256": "b9774c3c518af64e0cb02be7202cdbf9a6b8610650872ac0d9c7ba75381c227e"
+      },
+      {
+        "path": "actual/RAW_PHASE_REPLY.json",
+        "bytes": 465,
+        "sha256": "0e08bf31675cca109cd987c47e671fa19de9df866253dda22392b79054ec4cf7"
+      },
+      {
+        "path": "actual/RECORD_RECOVERY1101.json",
+        "bytes": 627,
+        "sha256": "d43736d982198769dc2c4f6736110f608b4e67dccbbee429b143f90c8fb094dc"
+      },
+      {
+        "path": "actual/RAW_JOURNAL.jsonl.gz",
+        "bytes": 83160,
+        "sha256": "9c6c8e303ece359a4eca4eed53d7a4d7cb7256172fb3ed5f6fb026aaf996b1f8"
+      },
+      {
+        "path": "actual/B_TX_FIXTURE.json",
+        "bytes": 6878,
+        "sha256": "363950f418b0a4a0a6336bafa0f584e5c7d02a78ffccf2f4fcf3c46715d3f494"
+      },
+      {
+        "path": "actual/ACTUAL_CHILD_READER1079.json",
+        "bytes": 1367,
+        "sha256": "268d0ed2661ea47289bf923006462d0224257a81667f7c76367da266dfe0f4a2"
+      },
+      {
+        "path": "actual/ACTUAL_CAPABILITY1081.json",
+        "bytes": 204,
+        "sha256": "ae7f22700537e6ebfbe8b34999d95212fd9e0a7fc94b8c649ee4d08f444bc4a7"
+      },
+      {
+        "path": "actual/ROUTED_UART_NETS1085.tsv",
+        "bytes": 684,
+        "sha256": "e21a7de4a6584b23e8720de0093002b9268049af2b3433563c560ccf2a4e3bf9"
+      },
+      {
+        "path": "prepared/child-manifest1070.json",
+        "bytes": 1259,
+        "sha256": "60d7b4f0074f24eccbe0dbf8a31672eb248ca33e4edc76bb3baabfc26e127b58"
+      },
+      {
+        "path": "prepared/closed-record1068.json",
+        "bytes": 1585,
+        "sha256": "646233d66e78a1750c399a9a52ab859b9d6a67b088bd93322565d47618648b99"
+      },
+      {
+        "path": "checks/READER1057_SOURCE_CHECKS.json",
+        "bytes": 2363,
+        "sha256": "fad568e9fa0204ca419d5dc62298d174bc0a1fb1c104a390873b151534267a4a"
+      },
+      {
+        "path": "checks/ENTRY1073_SOURCE_CHECKS.json",
+        "bytes": 741,
+        "sha256": "a9d4bc65ada98a3e5ff3f81518475c5aec5b77c5ad3fc53ce40677f730e296d4"
+      },
+      {
+        "path": "checks/G051059_SOURCE_CHECKS.json",
+        "bytes": 4752,
+        "sha256": "94a720399ba270dc73729513366d5c3f7607aae620f96850968375575d89be13"
+      },
+      {
+        "path": "checks/HOST1074_SOURCE_CHECKS.json",
+        "bytes": 3153,
+        "sha256": "a941cc622608cc490c0efb6826f7384c4d8ced344c2d1f937bbafde6ef0850ae"
+      },
+      {
+        "path": "checks/CONTROLLER1078_SOURCE_CHECKS.json",
+        "bytes": 1015,
+        "sha256": "0b16c195fb53ef86aeee28083d2d42dcd675c12ddea2606f9f0e7fc425d12739"
+      },
+      {
+        "path": "checks/PATTERN1087_SOURCE_CHECKS.json",
+        "bytes": 2738,
+        "sha256": "0e93814184b1479780dd55735a9d6d51eb514c8c5c8f157189d38929c1c64c10"
+      },
+      {
+        "path": "checks/STARTUP1060_RED.log",
+        "bytes": 930,
+        "sha256": "a8f023bb19186cb598e52f9ed7861e61c66d49b29399d3f03cfd4f52dcc11272"
+      },
+      {
+        "path": "checks/STARTUP1060_GREEN.log",
+        "bytes": 103,
+        "sha256": "44ef2c316b4cfb16941556269d73d72551bf6132984a78307d4f6fac18a75ef3"
+      },
+      {
+        "path": "docs/reader.md",
+        "bytes": 9804,
+        "sha256": "9ad59c92adeccf4963f2ab54a2a2f6f7e6df4b8d502ab9afa075afb3ac4d811c"
+      },
+      {
+        "path": "docs/entry.md",
+        "bytes": 4970,
+        "sha256": "465a4ac43c40397d267129569f0244e0e87e70f33429cc5d63f8bac32d9f43cc"
+      },
+      {
+        "path": "docs/g05.md",
+        "bytes": 7304,
+        "sha256": "57aa785a6932f1125d0d0d38f2ce9f86beb521938309c051733b71f6bd51f857"
+      },
+      {
+        "path": "docs/hostsession.md",
+        "bytes": 8529,
+        "sha256": "d4875346e28447e240a76751c6a1a4bcaba7048aa0b78ef54583a0d757f5756f"
+      },
+      {
+        "path": "docs/controller.md",
+        "bytes": 9273,
+        "sha256": "384dad4a6925badda2e9ee2b21d13615a6ec2f82c8b4b27631a56bede49a9753"
+      },
+      {
+        "path": "docs/ssh.md",
+        "bytes": 5556,
+        "sha256": "586e6d62cd33263f15b76307ba419c8b1f8d7182ea5a79696559fced3907f04f"
+      },
+      {
+        "path": "docs/follower.md",
+        "bytes": 6289,
+        "sha256": "86856aa854855feccf6fcf61a66ff567f8968f005beb1ab54abf5cb639415059"
+      },
+      {
+        "path": "docs/diagnostic.md",
+        "bytes": 5130,
+        "sha256": "8c1df5d7cdf0f84ab802b6b309b60a70b0363757f4b49761a704b531f9756b44"
+      },
+      {
+        "path": ".gitattributes",
+        "bytes": 8,
+        "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+      },
+      {
+        "path": "README.md",
+        "bytes": 2287,
+        "sha256": "45ad05430ec34f00eef435b8cc395f6e6023ed40459c042609997e3ffacb0e66"
+      }
+    ],
+    "gzip_sha256": "9c6c8e303ece359a4eca4eed53d7a4d7cb7256172fb3ed5f6fb026aaf996b1f8",
+    "expanded_bytes": 8719524,
+    "expanded_sha256": "855d917979f6ee460a4fcef7dacb627e112ab7440ab833a6e5fcb568835a196b",
+    "journal_lines": 5571,
+    "events": {
+      "status": 5566,
+      "raw_pattern_ready": 1,
+      "phase-intent": 1,
+      "phase-failed": 1,
+      "raw-owner-release-intent": 1,
+      "raw-owner-lock-released": 1
+    },
+    "status_values": {
+      "4": 5566
+    },
+    "status_phases": {
+      "startup": 1,
+      "rx8": 5565
+    },
+    "A_phase_duration_ms": 5016.628644,
+    "A_ready_to_phase_ms": 323349.068276,
+    "A_TX_bytes": 0,
+    "A_RX_bytes": 0,
+    "A_process_exit": 2,
+    "A_closed_same_lock": true,
+    "original_A144_raw_JSON_ties": {
+      "FAILED_RAW_SUMMARY.json": "05159289f76231bda9b76bbbe4b27f95bb9f2a049d1f20ce86d71fa8f19b70e7",
+      "PS_CLOSED_ACTUAL.json": "b9774c3c518af64e0cb02be7202cdbf9a6b8610650872ac0d9c7ba75381c227e",
+      "RAW_PHASE_REPLY.json": "0e08bf31675cca109cd987c47e671fa19de9df866253dda22392b79054ec4cf7",
+      "RECORD_RECOVERY1101.json": "d43736d982198769dc2c4f6736110f608b4e67dccbbee429b143f90c8fb094dc"
+    },
+    "B345_exact_fixture_sha256": "363950f418b0a4a0a6336bafa0f584e5c7d02a78ffccf2f4fcf3c46715d3f494",
+    "B345_8_actual_TXDATA_writes_tied": true,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "limits": [
+      "Register-write and TX-drained evidence does not prove electrical pin waveform or external reception.",
+      "A only sampled startup once then5565 polls in a5s rx8 phase after B fixture completion; A and B monotonic clocks are not compared across hosts.",
+      "No raw RXDATA-consume or TX-byte events in this journal. This is not zero electrical-transition proof.",
+      "UART wiring cause, servo readiness, motion, motor demonstration and formal all29 remain unproven.",
+      "No new hardware actions, replays, flash, reset, or actor acquisition in this verification.",
+      "A request b_receipt_sha256 393ad... is not original B fixture363950...; its referent is not established. Exact A published B_TX_FIXTURE is independently byte-equal to original B fixture. Do not claim this request field binds original B bytes until A supplies the referenced artifact."
+    ],
+    "request_b_receipt_sha256": {
+      "value": "393ad21090ee09e2fdd2f03e8d04909167248fe091461cb7dae095892b103ac1",
+      "matches_original_B345_fixture_bytes": false,
+      "status": "UNIDENTIFIED_REFERENT_NEEDS_A_ORIGINAL_BYTES"
+    }
+  },
+  "historical_motor_review": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-HISTORICAL-MOTOR-INDEPENDENT-REVIEW-20261104-364",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "native_job": "child-0a609d321fdf4f788c8258e29f03b25f",
+    "native_report_sha256": "7c11b2a1a81d1c3dd665de939d16d3a18e2a36a6ecc5a2f4db791ef57f17628b",
+    "all_inventory_hashes_rechecked": 19,
+    "frame_checks": [
+      {
+        "operation": "mtr4-first-battery-pulse750-20261103-2253",
+        "TX_raw_frames": 13,
+        "RX_raw_frames": 0,
+        "RX_decoded_only": 13,
+        "all_available_raw_CRC_length_magic_sequence_exact": true
+      },
+      {
+        "operation": "mtr4-battery-variable-20261103-2255",
+        "TX_raw_frames": 174,
+        "RX_raw_frames": 174,
+        "RX_decoded_only": 0,
+        "all_available_raw_CRC_length_magic_sequence_exact": true
+      }
+    ],
+    "pulse_duty_lease_ms": [
+      750,
+      300
+    ],
+    "variable_step_seq_duty": [
+      [
+        31,
+        250
+      ],
+      [
+        65,
+        500
+      ],
+      [
+        99,
+        750
+      ],
+      [
+        133,
+        500
+      ],
+      [
+        165,
+        250
+      ],
+      [
+        198,
+        0
+      ]
+    ],
+    "historical_STOP_sequences": [
+      199,
+      200
+    ],
+    "historical_OFF_state_verified": true,
+    "fresh_App_human_and_command_items_independently_matched": [
+      257,
+      259,
+      261,
+      264,
+      267,
+      270
+    ],
+    "old_chat_notLoaded_not_reactivated": true,
+    "decision": "Reuse historical motor demonstration evidence; do not repeat motion just to recreate evidence. Historical UART was PC COM9; no current FPGA path or USB-powered motor acceptance.",
+    "limits": [
+      "Separate75%300ms pulse and subsequent25/50/75/50/25/OFF trial are distinct operations, not one startupboost profile.",
+      "MTR4 battery-fed human observation qualitative. No guarantee current USB-only25% startsfromrest.",
+      "STOP replies and MCU OFF diagnostics are distinct from direct human stopped observation; both historical facts preserved.",
+      "No current MCU/FPGA hardware access, test, compile, reset, command, flash or old owner activation.",
+      "Original local evidence untracked: no original commit asserted. Publication commit will only freeze copied evidence."
+    ],
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "new_RX_source_review_resolution": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-RX362-MAIN-REVIEW-RESOLUTION-20261104-367",
+    "native_job": "child-06ac035ea7e641488353b7912640f066",
+    "native_review_sha256": "989f1a97ed6dec521f662ab2a3c0aea747965665ad4887c2ee6fa6f0f31bc0c5",
+    "reviewed_source_sha256": "13e4c6f1078bba6f6dfb53a9aee28ad2ea121cad596e83e3b81d752471f32ed2",
+    "reconstructed_before_bytes_match_native_original_SHA": true,
+    "fixed_source_sha256": "c113ada88514848f71b06ca9731c6e88eeafe42e033342cba50f4e5a87eac9ce",
+    "actual_diff_sha256": "f7e201af01dc6847b1121d4ff6f9759a43ec1e8c1080b191cbaea85de895c072",
+    "findings": {
+      "R363-F1": "Fixed active diagnostic budget with monotonic start before configure, expiry and remaining SDKtime guard at diagnostic calls/consume/resume. Removed false hard hold ceiling; failure may hold CPU and needs explicit new recovery.",
+      "R363-F2": "Fixed: four installed CCS dependency hashes pinned, actual readonly EnableWaitForDebug false/0 required before connect and symbols.load. Never changes setting; no evidence old operation reset.",
+      "R363-F3": "Accepted external boundary: same trusted main alone verifies authenticated raw event semantics and actual globalonce ledger; local JSON assertions are not independent authentication. Future operation needs fresh actual authority; none exists now."
+    },
+    "validation": {
+      "final_node_syntax_exit": 0,
+      "final_default_gate_exit": 0,
+      "default_stdout": "SOURCE_ONLY_NOT_EXECUTED: no connection, CPU hold or RXDATA read.",
+      "capture_executed_on_MCU": false,
+      "SWD_serial_or_board_actions": false
+    },
+    "decision": "Prepared source only; do not execute during current wiring or reuse old operation.",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "physical_actions_this_handoff": [],
+  "MCU_READY": false,
+  "formal_acceptance": "not_run",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-03T23:55:43.095586+00:00"
+}

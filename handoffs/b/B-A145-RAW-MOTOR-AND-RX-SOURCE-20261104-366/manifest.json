@@ -1,0 +1,99 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/.gitattributes",
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/MAIN_REVIEW.json",
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/REVIEW.md",
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/TEST_PLAN.md",
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/evidence/raw/.gitattributes",
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/evidence/raw/raw-evidence.tar.gz.part000",
+    "output/drill-joint-uart-20261104/rx_capture362/README.md",
+    "output/drill-joint-uart-20261104/rx_capture362/rx_single_byte362.js"
+  ],
+  "files": {
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/.gitattributes": {
+      "sha256": "60e121bee9ba9893fa702956e26bc483dd931314619f06713017cfc418af9681",
+      "size": 29
+    },
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/MAIN_REVIEW.json": {
+      "sha256": "e806fb821824c29f9d4442ea41d4aa95f43ec77fedd8768ef0e27b18eb8aadc2",
+      "size": 15607
+    },
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/REVIEW.md": {
+      "sha256": "fb85ff91d167294182b1947345a559c54b67c1d102e7c51627e341a0e225deef",
+      "size": 3535
+    },
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/TEST_PLAN.md": {
+      "sha256": "905e233721a9b817836ade9947df33618c1f070e3cac0e63542346fe3c1f4e8c",
+      "size": 505
+    },
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "6aac02db1889de231f6c5f5b7243aef25b00e93a022a9b72314496240c3ff155",
+      "size": 9191
+    },
+    "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "907d913019192733708a578b1c536e7f08bcb3843fe218dcaed2e1dcf40b7265",
+      "size": 112902
+    },
+    "output/drill-joint-uart-20261104/rx_capture362/README.md": {
+      "sha256": "aea15ddbc0af544af2542bdc946cda6b157c05a75df677cc1f4df5bdf1f9219e",
+      "size": 3722
+    },
+    "output/drill-joint-uart-20261104/rx_capture362/rx_single_byte362.js": {
+      "sha256": "c113ada88514848f71b06ca9731c6e88eeafe42e033342cba50f4e5a87eac9ce",
+      "size": 10583
+    }
+  },
+  "request": {
+    "code_commit": "bc0d4507c92034b3a7a160e9c05bff4ea7df2dfe",
+    "expected_result": "Historical evidence reused within actual scope, failed UART stage preserved, no new hardware action or formal acceptance.",
+    "operation_id": "B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366",
+    "requester": "B main01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify complete A145 journal hashes/counts and exact original ties; preserve failed physical RX stage and unresolved request referent.",
+      "Verify historical motor raw frames/STOP/OFF and original human observation with independent main CRC/hash/App checks.",
+      "Review source-only new single-byte capture actual diff and closed native review; do not run without new actual authority."
+    ]
+  },
+  "request_hash": "85ab5d51fe10e30205630e3f33312f533565fc36c022d8b099e6b14885e674cd",
+  "schema_version": 1,
+  "stages": {
+    "current_MCU_to_FPGA_raw_bytes": {
+      "log": "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "historical_motor_evidence_review": {
+      "log": "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "independent_raw_journal_review": {
+      "log": "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "prepared_RX_source_checks": {
+      "log": "handoffs/b/B-A145-RAW-MOTOR-AND-RX-SOURCE-20261104-366/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

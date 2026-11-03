@@ -1,0 +1,235 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A125-ACTUAL835-REVIEW-20261104-264",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a286-0ee1-7d12-b0dc-4b903da1bab1",
+  "A_head": "9821bbdf0f6e7bd8e156bc699156fb9f8371dba0",
+  "B_pure_dependency_commit": "3a6945b18ea4408c61cb184e5870828a3d60e9ba",
+  "B_dependencies": {
+    "competition/deepeye/integration/continuous_wire_v1/__init__.py": "13862b459a1476b8c00252f70046a55e8b2e686ea0a855ed68b9d1ff1e1ae33d",
+    "competition/deepeye/integration/continuous_wire_v1/adapter.py": "426d8a3019cc99cb965fab4c1044c7f920bd8d26631fdea4b78929ef151e88b7",
+    "competition/deepeye/integration/continuous_wire_v1/e4.py": "931f99c7b876be0f0d6cdcd90be7f5f2544c459e0d9c6a9f534d090ff4e307fb",
+    "competition/deepeye/golden/codec/trace_candidate.py": "a489ac34b49976532803b34f006f8bc24103548f34ddd55cc2ecaedc529a9642"
+  },
+  "checks": [
+    "exact29publicGitfiles_pinned",
+    "init_rev2_load_identity_no_speed_applied",
+    "original_response_hash_identity_known_1",
+    "original_response_hash_identity_known_2",
+    "original_response_hash_identity_known_836",
+    "actual_source_digest_and_observation_join",
+    "source_truth_null_C3_preserved",
+    "raw_four_E4_CRC_payload_source_null_and_cursor",
+    "E4_four_frame146byte_ledger_lossless_only",
+    "original_source_time_not_rebased",
+    "AI_real_feature_calibration_join",
+    "actual_AI_command_is_same_as_submitted",
+    "actual32word_PWM_identity_width_period_50MHz_TTL_chronology",
+    "PWM_receipt_hash_and_sequence_native_acceptance",
+    "five_original_phase_samples_in_order",
+    "final_native_history_runningfalse_speedzero",
+    "result_STOP836_and_SSH_closed_known_exit0",
+    "equal_public_gate_radius_and_final_outside_exit_face",
+    "866_reported_headless_exit0_not_board_UI_runtime",
+    "866_terminal_display_requires_arrival_complete_STOPack"
+  ],
+  "count": 20,
+  "verdict": "Published original835 representative E4/source→AI→actualPWM→native chain and five-phase/terminal/knownSTOP samples independently consistent. No new blocker found in these samples; whole counts/video/geometry are not independently remeasured here.",
+  "sample_summary": {
+    "board_operation": "A-GEN4-CONTINUOUS-BOARD-20261104-834-R01",
+    "world_epoch": "A-CONTINUOUS-WORLD-835-R01",
+    "boot": "1dc765dc-6e81-412d-b350-9f6691749e48",
+    "build": "dc4e89ccf3db18c4f9871575efc399ba",
+    "request_hash": "a24fb9d5daa3cdfb85da93b3c992f0243e906f4c0f67717803abfe543b521e0b",
+    "sample_board_sequences": [
+      1,
+      2,
+      836
+    ],
+    "E4wire_sha256": "4f52c71d830744bce1f80867b8eaf68f4983f43c5a552ca898a39ee2eb82c1e2",
+    "first_counts": [
+      3066,
+      2046,
+      2048,
+      null
+    ],
+    "phase_host_qpc_ns": [
+      40043116894000,
+      40064930562100,
+      40106995898500,
+      40234685794300,
+      40262210011600
+    ],
+    "final_position": [
+      15.5208501815796,
+      10.0,
+      11.905722618103
+    ],
+    "physical_zero_capture_proven": false
+  },
+  "whole_run_counts_scope": "500E4/499AI/335PWM/836knownresponses are A815/861 independent-report claims; whole original host/request journals are hash-referenced, not exported for B recomputation.",
+  "video_scope": "A original WGC/clip metadata and Root frame review only; original video/frame bytes not provided in these29Gitfiles. B did not verify pixels/container/hash of remote video.",
+  "request_scope": "Published canonical JSON response fields/digests (without newline, not original transport line bytes) and source associations independently checked. Request bodies reconstructed for pure decoder/capture validation; not claimed as original missing intent bytes. No full sequence continuity proof from samples1/2/836.",
+  "volume_scope": "Five originalphase records/fullhistory + reported native guard; no B hiddengeometry/collision replay or standalone pixel/fullcapsule proof.",
+  "source_scope": "Pure readers of new actual sample; no model inference, route, originalcontroller/runtime/nativeRPC/board/MCU/UI/SSH execution.",
+  "requirements_revision": 2,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "formal": {
+    "original29": "not_run",
+    "G03": "not_run",
+    "R03": "not_run",
+    "both_H12": "not_run",
+    "quality_latency_compression_ratio": "not_run",
+    "UART100MHz": "not_run"
+  },
+  "at_utc": "2026-11-03T18:22:10.495191+00:00",
+  "independent_audit": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A125-ACTUAL835-INVENTORY-20261104-262",
+    "job_id": "child-f4341cc8d16e4f59b67f89253255ed58",
+    "native_agent_id": "/root/a835_inventory262",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "A_head": "9821bbdf0f6e7bd8e156bc699156fb9f8371dba0",
+    "requirements_revision": 2,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "scope": "Independent byte identity and selected terminal/coverage inventory only; main retains causal review and acceptance.",
+    "input_pin_count": 29,
+    "all_GitOID_SHA256_size_pins_match": true,
+    "A_manifest": {
+      "entries": 12,
+      "exact": 2,
+      "LF_to_CRLF_reconstruction": 10,
+      "unreconciled": 0,
+      "warning": "Git LF bytes and declared pre-Git CRLF hashes are distinct; reconstruction equivalence is explicit and not same-byte identity."
+    },
+    "sample_coverage": {
+      "original_board_response_records": 3,
+      "request_seq": [
+        1,
+        2,
+        836
+      ],
+      "selected_unknowns": [
+        false,
+        false,
+        false
+      ],
+      "selected_canonical_response_hashes_verified": true,
+      "original_raw_transport_bytes": false,
+      "phase_samples": 5,
+      "full_native_history_present_in_terminal": true
+    },
+    "terminal": {
+      "complete": true,
+      "arrival": true,
+      "native_phase": "ARRIVED",
+      "native_running": false,
+      "native_ready": false,
+      "native_speed_m_s": 0.0,
+      "native_fault": "operator_stop",
+      "board_stop_seq": 836,
+      "board_stop_status": "COMPLETE",
+      "board_stop_unknown": false,
+      "SSH_exit": 0,
+      "SSH_wait_confirmed": true,
+      "SSH_killed": false,
+      "native_stop_board_acknowledged": false,
+      "physical_zero_capture_proven": false
+    },
+    "reported_whole_counts": {
+      "native": 3744,
+      "e4": 500,
+      "ai": 499,
+      "pwm": 335,
+      "board_requests": 836
+    },
+    "reported_whole_counts_agree_between_815_and_861": true,
+    "independently_recomputed_whole_counts": false,
+    "whole_log_bytes_present_in_public_inputs": false,
+    "whole_no_unknown_or_no_failure_recomputed": false,
+    "initial_only_selected_preference": {
+      "latched": 0.1,
+      "next_preference": 0.185,
+      "ack_kind": "preference_storage",
+      "current_source": "actual_pc_ai_and_board"
+    },
+    "video": {
+      "raw_sha256": "8c448ec7f0cf48031737fbfb89e4881fbb33ee474521493a5f23216c7abffca7",
+      "raw_duration_s": 386.266667,
+      "raw_frames": 11413,
+      "clip_sha256": "253e1e87e6a79983468f23e710bbe4a2c1e19e9b9789889c2437d41fe3b7437f",
+      "clip_duration_s": 256.266667,
+      "reported_head_trim_s": 130,
+      "metadata_consistent": true,
+      "original_video_bytes_present_in_inputs": false,
+      "original_video_hash_recomputed": false,
+      "pixels_or_volume_clearance_independently_verified": false,
+      "scope": "A metadata and Root frame-review assertions only; independent whole-video verification unavailable from public29 files."
+    },
+    "formal": {
+      "quality_error": "not_run",
+      "latency": "not_run",
+      "compression_ratio": "not_run",
+      "100MHz": "not_run",
+      "G03": "not_run",
+      "R03": "not_run",
+      "H12_PC_DIRECT": "not_run",
+      "H12_PC_AI_FPGA": "not_run",
+      "original29": "not_run",
+      "all29": "not_run"
+    },
+    "not_executed": [
+      "Original runtime/controller/imports",
+      "Source/AI/CRC suite or models",
+      "COM/SWD/flash/reset/MCU",
+      "PYNQ/SSH/nativeRPC/UI",
+      "Network",
+      "A private filesystem/token/geometry",
+      "Publication or Feishu"
+    ],
+    "at_utc": "2026-11-03T18:23:33.596534+00:00"
+  },
+  "independent_job": {
+    "job_id": "child-f4341cc8d16e4f59b67f89253255ed58",
+    "native_agent_id": "/root/a835_inventory262",
+    "status": "completed",
+    "terminal": true
+  },
+  "tested_commit_scope": "A9821bb is evidence publication head, not independently established FPGA tested RTL/bitstream commit. A124 reports adopted controller847 before835; original deployment evidence remains A-owned."
+}

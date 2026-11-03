@@ -1,0 +1,10 @@
+from pathlib import Path
+import subprocess,json,hashlib,datetime
+P=Path(__file__).parent;script=P/'tx_fixture345.js';op='B-MCU-TX-FIXTURE-20261104-345';proof=json.loads((P/'A_RX_READY345.json').read_bytes());assert proof['phase']=='A142_RX_ONLY_READY_ACTUALLY_VERIFIED' and proof['A_RX_FIFO_EMPTY'] and not proof['A_TX_allowed']
+argv=['cmd.exe','/d','/c','C:/ti/ccs2100/ccs/scripting/run.bat',str(script),op]
+r=dict(task_id='DEEPEYE-IMPLEMENTATION-20261014',task_version=1,work_id=op,operation_id=op,main_thread='01a18824-4172-74e2-a13f-f3e3d1e3ed99',actual_turn='01a1a3a7-d75a-7181-a610-7c00ffef0d5a',exclusive_files=['resume-93/tx_fixture345.js','resume-93/run345.py','resume-93/tx345/','resume-93/TX345*'],argv=argv,script_sha256=hashlib.sha256(script.read_bytes()).hexdigest(),started_at_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),status='intent_recorded_no_replay',acceptance=['ActualA RX-onlyready/noTX/emptyFIFO before Bconnect','Record actualMCUFault/unarmed/off/idle and actualPDBG before one explicitresume ifhalted; CPUrun avoidsPDBGwrites','One paced8B inertfixture toTXDATA only; rawintent/writereturn/actualTXFE!BUSY captured; no deliveryclaimbeforeAactualRX','No reset/flash/RXDATA/PDBG/GPIO/actuatorwrites/retry/rearm; unknownpartial stops with originalevidence'])
+record=P/'TX345_PROCESS.json'
+with record.open('x',encoding='utf8') as f:json.dump(r,f,indent=2)
+with (P/'TX345.stdout.txt').open('xb') as out,(P/'TX345.stderr.txt').open('xb') as err:
+ q=subprocess.Popen(argv,stdout=out,stderr=err);r.update(pid=q.pid,status='running');record.write_text(json.dumps(r,indent=2)+'\n',encoding='utf8');code=q.wait()
+r.update(exit_code=code,status='returned',finished_at_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),stdout_sha256=hashlib.sha256((P/'TX345.stdout.txt').read_bytes()).hexdigest(),stderr_sha256=hashlib.sha256((P/'TX345.stderr.txt').read_bytes()).hexdigest());record.write_text(json.dumps(r,indent=2)+'\n',encoding='utf8');print(json.dumps(r));raise SystemExit(code)

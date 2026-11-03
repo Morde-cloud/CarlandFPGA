@@ -1,0 +1,1 @@
+Historical closed one-attempt MCU TX fixture source for audit. Source was captured bySHA atactual345 execution, then archived byte-identically here. It is not a new run and must not be replayed; originalA1092receiverclosed andoldreadyproofisnotnewauthority. Existing MTR4/service/stdio are unchanged.

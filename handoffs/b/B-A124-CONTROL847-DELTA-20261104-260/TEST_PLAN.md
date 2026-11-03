@@ -1,0 +1,1 @@
+Read SOURCE_PINS and exact raw RUN259 argv/stdout/stderr/exit0. Reproduce selected public AST only if source changes. A supplies actual835 operation/request/tested runtime/source bytes/E4-AI-PWM-native-video evidence; board and final acceptance are separate. Do not replay old operations or access private control sockets.

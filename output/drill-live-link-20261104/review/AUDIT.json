@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PHYSICAL-BASELINE-UART-EVIDENCE-20261104-247",
+  "agent_id": "/root/physical_uart_evidence247",
+  "job_id": "child-3bb15c7368d94ae0a8fcca501d3039c0",
+  "status": "bounded_evidence_audit_complete_main_acceptance_reserved",
+  "requirements": {
+    "revision": 2,
+    "fixed_commit": "817b355887c14cfa9c5d830c8589684f994af082",
+    "ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "canonical_hash_verified": true,
+    "local_commit_object_comparison": "unavailable; git show128 / ls-tree fatal not a tree object; no fetch",
+    "historical_revision1_retained": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+  },
+  "scope": {
+    "writes": "output/drill-live-link-20261104/review/ only",
+    "hardware_actions": false,
+    "network": false,
+    "tests_rerun": false,
+    "vendor_builds": false,
+    "product_edits": false,
+    "acceptance": false,
+    "read_only_collector_command": ".local/venv/Scripts/python.exe -B output/drill-live-link-20261104/review/collect_audit.py",
+    "collector_exit_code": 0
+  },
+  "evidence_inventory": "evidence-inventory.json",
+  "historical_commands": "historical-commands.json",
+  "verified": {
+    "parent_pins": "9/9",
+    "motor_build_manifest": "18/18",
+    "overlay_artifacts": "6/6",
+    "overlay_reports": "14/14",
+    "overlay_sources": "6/6",
+    "overlay_inputs": "6/6",
+    "input_snapshots": "3/3",
+    "default500_v9_manifest": "5/5",
+    "motor_image_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+    "bit_sha256": "f283f498ab2f7acaa19719640bb6f4856b8ba5a6662c88a5ec02a3cbddf163b9",
+    "hwh_sha256": "2a574bd60bde1fea5cf5936be9403f6afe39a0eb808ba2a03782f73058366206"
+  },
+  "deployment": {
+    "claim": "Last recorded verified deployment MTR4, not a current hardware observation",
+    "flash_evidence": "motor_runtime/evidence/mtr4-flash-vmoff-20261103-2247.json /stages/1 exit0 verification successful",
+    "last_observation": "motor_runtime/evidence/v9-final-default500-20261103.json /final: signature0x4d545234 state3 seq296 armed0 motorOFF bus_errors0 yaw2089 pitch1958",
+    "current_boot_sequence_unknown": true,
+    "do_not_assume_next_seq297": true,
+    "physical_motor_pose_concurrency": "not_run",
+    "rpm": "unmeasured"
+  },
+  "overlay": {
+    "tool": "Vivado2022.1 Build3526262",
+    "part": "xc7z020clg400-1",
+    "uart": "mcu_uart AXI UARTLite2.0;0x43C00000..0x43C0FFFF;100MHz;1152008N1",
+    "pins": "PMODA1/Y18 TX->PB7 RX;PMODA2/Y19 RX<-PB6 TX;PMODA5 common GND;LVCMOS33",
+    "wns_ns": 3.905,
+    "whs_ns": 0.032,
+    "wpws_ns": 4.02,
+    "drc_violations": 0,
+    "unconstrained_internal_endpoints": 0,
+    "cdc": "CDC-3 info,4-stage RX synchronizer; no warning/critical",
+    "external_timing": "uart_rxd no input delay, uart_txd no output delay; TIMING-18 x2 retained",
+    "pynq_metadata_runtime": "not_run",
+    "hardware": "not_run",
+    "product_overlay_merge": "not_run; isolated image replaces PL",
+    "profile_hardware_confirmed": false
+  },
+  "ordering": [
+    "motor OFF pose: STATUS->ARM->SET;500ms default one synchronous dual-ID finite target",
+    "motor ON pose: STATUS->STATUS->ARM->SET; does not renew motor-only lease",
+    "motor start: STATUS->ARM->MOTOR; active update STATUS->MOTOR",
+    "active keepalive: STATUS->MOTOR; never ARM or SET; waits100ms then shared call lock",
+    "300ms motor lease;100..500ms allowed;500ms software watchdog;fresh servo feedback<=1000ms"
+  ],
+  "limitations": [
+    "A slow pose or journal/network exchange may starve300ms motor renewal;0.3s timeout per exchange is not a latency guarantee",
+    "Keepalive does not prove accepted application source freshness; source_seq/observation_seq are serialized but not causally validated by this MCU; application must gate stale/mode/reset/pause/loss",
+    "Software watchdog/STOP clears pending/armed motor state but emits no servo cancellation; already-issued finite servo motion may continue",
+    "New-sequence equal targets reissue SET; equality suppression belongs in new adapter and must preserve renewal independently",
+    "Older variable-checks manifest has2 stale host hashes;older fpga latest-checks has5;v9 later default500 evidence matches5/5 and records3+17+10 offline checks; no new tests",
+    "Build manifest is not fully hermetic: vendor startup source/SDK headers/libraries/compiler binaries not all content hashed",
+    "Commands, CRC, XML metadata and offline tests do not establish physical or product acceptance; latest power/wiring/boot unobserved by child"
+  ],
+  "minimal_A_prerequisites": [
+    "A alone checks current product BD/address/pin/clock/reset ownership and integrates equivalent UART; regenerate paired product BIT/HWH and reports; never replace active product with standalone image without explicit main decision",
+    "Confirm actual3.3V crossed UART/common GND and exclusive PB6/PB7 owner; remove conflicting XDS110 UART drive; establish current MCU identity/boot/sequence and present power/observer",
+    "Use actual accepted application orientation and speed, explicit reference mapping/bounds/source epoch/age; never modify initial-only slider/live AI cap or virtual decisions",
+    "A records real PYNQ metadata/SSH/UART,finite pose and motor concurrency/loss-stop evidence tied to operation_id/request_hash/tested_commit and exact product hashes; main alone acceptance"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "hardware_confirmed": false,
+  "uart_ip": "mcu_uart",
+  "base_address": 1136656384,
+  "address_range": 65536,
+  "baud": 115200,
+  "pins": {
+    "fpga_tx": "PMODA1/Y18",
+    "fpga_rx": "PMODA2/Y19",
+    "mcu_tx": "PB6",
+    "mcu_rx": "PB7",
+    "ground": "PMODA5/GND"
+  },
+  "bit": {
+    "path": "overlay/run-20261103-195848/artifacts/mcu_link.bit",
+    "sha256": "f283f498ab2f7acaa19719640bb6f4856b8ba5a6662c88a5ec02a3cbddf163b9"
+  },
+  "hwh": {
+    "path": "overlay/run-20261103-195848/artifacts/mcu_link.hwh",
+    "sha256": "2a574bd60bde1fea5cf5936be9403f6afe39a0eb808ba2a03782f73058366206"
+  },
+  "hardware_operator": "A",
+  "product_overlay_merged": false,
+  "motor_enabled": true,
+  "motor_firmware_required": "MTR4",
+  "motor_running_duty_permille": [
+    250,
+    750
+  ],
+  "motor_speed_mapping": "0=OFF;positive speed_pct0..100 maps250+5*speed",
+  "pose_default_move_ms": 500,
+  "pose_motion_policy": "one finite synchronous ID1+ID2 target per explicit pose; no intermediate interpolation"
+}

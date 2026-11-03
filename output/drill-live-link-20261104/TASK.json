@@ -1,0 +1,93 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PHYSICAL-LIVE-LINK-20261104-246",
+  "actual_thread_id": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn_id": "01a1a286-0ee1-7d12-b0dc-4b903da1bab1",
+  "human_scope": "New direct human authorization: independently connect accepted software drill orientation/speed to B-attached MCU/two servos/spin motor; final FPGA-headerUART extension, A alone FPGA.",
+  "baseline_physical_task": "DEEPEYE-PHYSICAL-CODE-20261025/v9",
+  "baseline_physical_thread": "01a17262-a953-7342-b799-0b5a9f337566",
+  "ownership": {
+    "main": [
+      "output/drill-live-link-20261104/ except review/ and tests/",
+      "resume-88/ except follower-tests/"
+    ],
+    "review_agent": "/root/physical_uart_evidence247 (completed; reports retained)",
+    "test_agent": "/root/physical_follow_controls248 tests/ only; explicit sourcefreeze before one run",
+    "baseline": "read-only originalphysical tree; exact small dependencies copied into NEW baseline_mtr4/",
+    "A_C": "read-only public source; no board/UI/controlplane writes"
+  },
+  "acceptance": [
+    "Reuse verified MTR4 and one-frame500ms two-axis behavior; do not flash/reset/EEPROM by default",
+    "Map actual accepted quaternion relative to explicit reference into2axis display; range violations explicitstop, virtualapplication unchanged",
+    "Actual accepted simulation speed maps bounded displayPWM; no invented RPMmeasurement/hardRPMceiling",
+    "One UARTowner/durable freshsequence/unknownno-replay/sourcefreshness/loss-stop; no old sequence297 assumption",
+    "Independent meaningful offline controls plus actual MCU state/finite tests only after current wiring/power/observation confirmed",
+    "A-only current product UART/pin integration handoff; independentBIT not loaded over active product; physical vssoftware/FPGA/formal results separate"
+  ],
+  "hardware_actions_so_far": "USB/PnP enumeration only; no COM/SWD/reset/flash/motion",
+  "hardware_questions": "async current power/observer and PB6PB7 route pending",
+  "requirements_revision": 2,
+  "requirements_fixed_commit": "817b355887c14cfa9c5d830c8589684f994af082",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "initial_only_human_update": "A120/A122 current speedsliderinitialonly; physicalbridge must follow actualnative speed and never set liveAIcap/override/increment generation",
+  "baseline_pins": [
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/build/motor_probe.out",
+      "sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/variable_session.py",
+      "sha256": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/session.py",
+      "sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/ssh_client.py",
+      "sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/profile.json",
+      "sha256": "624cc1e47f3cac78058fc2bbb8cc63992bef932e767c113fea603bb89dcd8e23"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/pc/codec.py",
+      "sha256": "62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/pc/transport.py",
+      "sha256": "601a0b0544dc0749ffe7f254b2dcd953565a7652168f6714d623a1087ad33fcd"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/STATUS.json",
+      "sha256": "ec76cd78c1160e30b1112a08526f1ef75da4e366cfb9eebfd27217e5ea79bdec"
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/overlay/latest-build.json",
+      "sha256": "2013b8998912605794e2072da75c7753ca571b6b119d44792c7b78f25bc97372"
+    }
+  ],
+  "at_utc": "2026-11-03T17:52:54.901688+00:00",
+  "current_human_state": "powered ON; nobody observing; PB6/PB7 unconnected or unknown",
+  "display_scope": "Approximate demonstration only; no accuracy/reproduction/RPMgoal",
+  "hardware_status": "NOT_RUN_AWAIT_OBSERVER_AND_CONFIRMED_CONTROL_WIRING"
+}

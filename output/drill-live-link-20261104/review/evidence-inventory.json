@@ -1,0 +1,1002 @@
+{
+  "collected_at_utc": "2026-11-03T17:57:11.686452+00:00",
+  "scope": "file reads/hash/XML inspection only; historical commands were not run",
+  "contract": {
+    "revision": 2,
+    "fixed_commit": "817b355887c14cfa9c5d830c8589684f994af082",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "expected_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "fixed_commit_git_show_exit_code": 128,
+    "fixed_commit_git_show_stderr": "fatal: path 'docs/competition/deepeye-2026/immutable_scope.json' does not exist in '817b355887c14cfa9c5d830c8589684f994af082'\n",
+    "fixed_commit_requirements_equal": false,
+    "fixed_commit_comparison_limitation": "Local commit/tree unavailable; no network fetch attempted. Fixed requirements hash independently matches.",
+    "historical_revision1_sha256": "c229834bfc2292f5fe4411fc9f12c68487008f9d1adaf31f0144ee7a98173804"
+  },
+  "checks": {
+    "parent_baseline_pins": [
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/build/motor_probe.out",
+        "expected_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+        "actual_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+        "matches": true,
+        "size": 158988
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/variable_session.py",
+        "expected_sha256": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38",
+        "actual_sha256": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38",
+        "matches": true,
+        "size": 5711
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/session.py",
+        "expected_sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+        "actual_sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+        "matches": true,
+        "size": 9603
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/ssh_client.py",
+        "expected_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+        "actual_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+        "matches": true,
+        "size": 8202
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/profile.json",
+        "expected_sha256": "624cc1e47f3cac78058fc2bbb8cc63992bef932e767c113fea603bb89dcd8e23",
+        "actual_sha256": "624cc1e47f3cac78058fc2bbb8cc63992bef932e767c113fea603bb89dcd8e23",
+        "matches": true,
+        "size": 1054
+      },
+      {
+        "path": "output/drill-demo-code-20261025/pc/codec.py",
+        "expected_sha256": "62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006",
+        "actual_sha256": "62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006",
+        "matches": true,
+        "size": 13525
+      },
+      {
+        "path": "output/drill-demo-code-20261025/pc/transport.py",
+        "expected_sha256": "601a0b0544dc0749ffe7f254b2dcd953565a7652168f6714d623a1087ad33fcd",
+        "actual_sha256": "601a0b0544dc0749ffe7f254b2dcd953565a7652168f6714d623a1087ad33fcd",
+        "matches": true,
+        "size": 14260
+      },
+      {
+        "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/STATUS.json",
+        "expected_sha256": "ec76cd78c1160e30b1112a08526f1ef75da4e366cfb9eebfd27217e5ea79bdec",
+        "actual_sha256": "ec76cd78c1160e30b1112a08526f1ef75da4e366cfb9eebfd27217e5ea79bdec",
+        "matches": true,
+        "size": 2247
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/latest-build.json",
+        "expected_sha256": "2013b8998912605794e2072da75c7753ca571b6b119d44792c7b78f25bc97372",
+        "actual_sha256": "2013b8998912605794e2072da75c7753ca571b6b119d44792c7b78f25bc97372",
+        "matches": true,
+        "size": 7684
+      }
+    ],
+    "motor_build_manifest": [
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control_main.c",
+        "expected_sha256": "03d05da69ed2cca1f7d415797819568d0ac5d047485e4116b170bf86a6d595eb",
+        "actual_sha256": "03d05da69ed2cca1f7d415797819568d0ac5d047485e4116b170bf86a6d595eb",
+        "matches": true,
+        "size": 3980
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control.c",
+        "expected_sha256": "7949ffd8b137bb20f0308a9fab295c1d1d37fb337de7c98827c4f8c804efb426",
+        "actual_sha256": "7949ffd8b137bb20f0308a9fab295c1d1d37fb337de7c98827c4f8c804efb426",
+        "matches": true,
+        "size": 13695
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/motor_control.c",
+        "expected_sha256": "c3216e4ecf40b015dd6a4f176ee8073eecd786700680bb558e5ed1b449d5e54a",
+        "actual_sha256": "c3216e4ecf40b015dd6a4f176ee8073eecd786700680bb558e5ed1b449d5e54a",
+        "matches": true,
+        "size": 2769
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/drill_pwm.c",
+        "expected_sha256": "108c8ea035087d3c9fc18a28e39982e68299bfa3fdb6e0c3507250b797dc1f25",
+        "actual_sha256": "108c8ea035087d3c9fc18a28e39982e68299bfa3fdb6e0c3507250b797dc1f25",
+        "matches": true,
+        "size": 1758
+      },
+      {
+        "path": "output/drill-demo-code-20261025/firmware/demo_core.c",
+        "expected_sha256": "8f260e92cbfc852ad29a110f8f56bbe6aed1aa90d58dc9fcf10389059a81eb0a",
+        "actual_sha256": "8f260e92cbfc852ad29a110f8f56bbe6aed1aa90d58dc9fcf10389059a81eb0a",
+        "matches": true,
+        "size": 5612
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/generated/ti_msp_dl_config.c",
+        "expected_sha256": "512a026fa8538913c86c12865d30392492723fccaee85f687846234313f2b916",
+        "actual_sha256": "512a026fa8538913c86c12865d30392492723fccaee85f687846234313f2b916",
+        "matches": true,
+        "size": 8647
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control.h",
+        "expected_sha256": "a0b954c76a7a9119222c67bd10e9eb4bc9504ce2fca333b14c3d992501104345",
+        "actual_sha256": "a0b954c76a7a9119222c67bd10e9eb4bc9504ce2fca333b14c3d992501104345",
+        "matches": true,
+        "size": 1592
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/motor_control.h",
+        "expected_sha256": "4f47e1eed3cc991d588fb484e93ca61d7f6a9ccff5dfde2de4bd523d9e5efe61",
+        "actual_sha256": "4f47e1eed3cc991d588fb484e93ca61d7f6a9ccff5dfde2de4bd523d9e5efe61",
+        "matches": true,
+        "size": 535
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/drill_pwm.h",
+        "expected_sha256": "3eb0798ba56b3fc3d692a475e6ad66d904c7cdf019c8ca2172ece2b45d97d95d",
+        "actual_sha256": "3eb0798ba56b3fc3d692a475e6ad66d904c7cdf019c8ca2172ece2b45d97d95d",
+        "matches": true,
+        "size": 290
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/motor.syscfg",
+        "expected_sha256": "48df5fb7d27c0ad7c6bdbdbef21e4d71567f05065649c0e04c9266cf1547c854",
+        "actual_sha256": "48df5fb7d27c0ad7c6bdbdbef21e4d71567f05065649c0e04c9266cf1547c854",
+        "matches": true,
+        "size": 2053
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/build.py",
+        "expected_sha256": "924094c482230c49856ac97757fd700158af028593b36e28748020a0b28a3462",
+        "actual_sha256": "924094c482230c49856ac97757fd700158af028593b36e28748020a0b28a3462",
+        "matches": true,
+        "size": 7316
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/generated/ti_msp_dl_config.h",
+        "expected_sha256": "5bca1fb7acfb3899fe8ec12342849fe21837957a02351225681d25675e659864",
+        "actual_sha256": "5bca1fb7acfb3899fe8ec12342849fe21837957a02351225681d25675e659864",
+        "matches": true,
+        "size": 7723
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/generated/device.opt",
+        "expected_sha256": "560f5907159d8380a132e0eb273e7739fbbccb5f386377117fcf61c1372368cd",
+        "actual_sha256": "560f5907159d8380a132e0eb273e7739fbbccb5f386377117fcf61c1372368cd",
+        "matches": true,
+        "size": 39
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/generated/device_linker.cmd",
+        "expected_sha256": "1792a578badb97c08d9d00c951a29bf00afda98b0c0a7c073152e2b3f24c16e7",
+        "actual_sha256": "1792a578badb97c08d9d00c951a29bf00afda98b0c0a7c073152e2b3f24c16e7",
+        "matches": true,
+        "size": 2734
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/generated/device.cmd.genlibs",
+        "expected_sha256": "b4c7b8163ab57026a370c1532f6aabbcb62b946faf8b1ab6f936554631d103a4",
+        "actual_sha256": "b4c7b8163ab57026a370c1532f6aabbcb62b946faf8b1ab6f936554631d103a4",
+        "matches": true,
+        "size": 2618
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/build/motor_probe.out",
+        "expected_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+        "actual_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+        "matches": true,
+        "size": 158988
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/build/motor_probe.map",
+        "expected_sha256": "afdca14b71450a037ac9ffcc8477868f16b4996c8ad4361bb9d1a5af3e494011",
+        "actual_sha256": "afdca14b71450a037ac9ffcc8477868f16b4996c8ad4361bb9d1a5af3e494011",
+        "matches": true,
+        "size": 26416
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/build/motor_probe.hex",
+        "expected_sha256": "68bd9253c5cb74979531fa6969fa98dde175b2a6c10a2bd456217f6cf344f53a",
+        "actual_sha256": "68bd9253c5cb74979531fa6969fa98dde175b2a6c10a2bd456217f6cf344f53a",
+        "matches": true,
+        "size": 26607
+      }
+    ],
+    "overlay_artifacts": [
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/artifacts/implemented.xdc",
+        "expected_sha256": "f27fab5397fc1324ed2ce307bf054f889e8f84f502298a4b3c783316b9b830e2",
+        "actual_sha256": "f27fab5397fc1324ed2ce307bf054f889e8f84f502298a4b3c783316b9b830e2",
+        "matches": true,
+        "size": 47091
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/artifacts/mcu_link.bit",
+        "expected_sha256": "f283f498ab2f7acaa19719640bb6f4856b8ba5a6662c88a5ec02a3cbddf163b9",
+        "actual_sha256": "f283f498ab2f7acaa19719640bb6f4856b8ba5a6662c88a5ec02a3cbddf163b9",
+        "matches": true,
+        "size": 4045676
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/artifacts/mcu_link.hwh",
+        "expected_sha256": "2a574bd60bde1fea5cf5936be9403f6afe39a0eb808ba2a03782f73058366206",
+        "actual_sha256": "2a574bd60bde1fea5cf5936be9403f6afe39a0eb808ba2a03782f73058366206",
+        "matches": true,
+        "size": 154066
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/artifacts/mcu_link_bd.tcl",
+        "expected_sha256": "25a1dad115b594f16d6aefa847d901133cc16b37715e2617c869bfbb5271ed88",
+        "actual_sha256": "25a1dad115b594f16d6aefa847d901133cc16b37715e2617c869bfbb5271ed88",
+        "matches": true,
+        "size": 44956
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/artifacts/mcu_link_routed.dcp",
+        "expected_sha256": "d3f1b643e66168db7b6edac561e848c152b6fcf846eb4b6d8e95baaca2700ac7",
+        "actual_sha256": "d3f1b643e66168db7b6edac561e848c152b6fcf846eb4b6d8e95baaca2700ac7",
+        "matches": true,
+        "size": 1384838
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/artifacts/mcu_link_synth.dcp",
+        "expected_sha256": "415c1f9289944ddd4fdaead8240b2137a212fe70bdb753e970434673530b16ad",
+        "actual_sha256": "415c1f9289944ddd4fdaead8240b2137a212fe70bdb753e970434673530b16ad",
+        "matches": true,
+        "size": 1286418
+      }
+    ],
+    "overlay_reports": [
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/exact_uart_ports.tsv",
+        "expected_sha256": "448687f84d45f2c66c1794ff0b8cc48007f932b241b14abc5ce123928fb6fe03",
+        "actual_sha256": "448687f84d45f2c66c1794ff0b8cc48007f932b241b14abc5ce123928fb6fe03",
+        "matches": true,
+        "size": 95
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/mcu_uart_properties.txt",
+        "expected_sha256": "797f3a22eaa1dc592f2875a7fcfccdc45cf47c9ff9775541772aa5270411440b",
+        "actual_sha256": "797f3a22eaa1dc592f2875a7fcfccdc45cf47c9ff9775541772aa5270411440b",
+        "matches": true,
+        "size": 1209
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/physical_unknowns.txt",
+        "expected_sha256": "9401cdffddee1a05bb32e791a8f5e43bb5639edee15c844dd2e9c9aabf7aae16",
+        "actual_sha256": "9401cdffddee1a05bb32e791a8f5e43bb5639edee15c844dd2e9c9aabf7aae16",
+        "matches": true,
+        "size": 302
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/ps7_properties.txt",
+        "expected_sha256": "56786ba2db284018f1a9b93888fbed0f0345eb51788aa0467640efea34b4a9d7",
+        "actual_sha256": "56786ba2db284018f1a9b93888fbed0f0345eb51788aa0467640efea34b4a9d7",
+        "matches": true,
+        "size": 67938
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_cdc.txt",
+        "expected_sha256": "f79c3f13ddd20e4166ab9c0d2eb239b7ba85a389b23460b2730a00d9f8b0a679",
+        "actual_sha256": "f79c3f13ddd20e4166ab9c0d2eb239b7ba85a389b23460b2730a00d9f8b0a679",
+        "matches": true,
+        "size": 1729
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_check_timing.txt",
+        "expected_sha256": "928e505d84e4c1931f103120e3dbd0f43a6a4784470ce22996ff787bbfeaa1c7",
+        "actual_sha256": "928e505d84e4c1931f103120e3dbd0f43a6a4784470ce22996ff787bbfeaa1c7",
+        "matches": true,
+        "size": 3298
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_clocks.txt",
+        "expected_sha256": "6329dbde0a9b9d8921986744b3b6303124938c84f0721c58ef4cb2f6adaf5c55",
+        "actual_sha256": "6329dbde0a9b9d8921986744b3b6303124938c84f0721c58ef4cb2f6adaf5c55",
+        "matches": true,
+        "size": 1583
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_drc.txt",
+        "expected_sha256": "68421e4e283e3046e1528904d65ecbb8f30d07e5c5b8aaa08a5f29dfe711ce54",
+        "actual_sha256": "68421e4e283e3046e1528904d65ecbb8f30d07e5c5b8aaa08a5f29dfe711ce54",
+        "matches": true,
+        "size": 1360
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_exceptions.txt",
+        "expected_sha256": "82244f900b7e55f7244e53fe0c58d06e449c39b5c5da136f6e3ff3253de7c178",
+        "actual_sha256": "82244f900b7e55f7244e53fe0c58d06e449c39b5c5da136f6e3ff3253de7c178",
+        "matches": true,
+        "size": 1345
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_methodology.txt",
+        "expected_sha256": "eae02ea642a1e1e1ca32e82bb1c15b86b442ee0e4c2366e3ab9d07cf3e8b1ca9",
+        "actual_sha256": "eae02ea642a1e1e1ca32e82bb1c15b86b442ee0e4c2366e3ab9d07cf3e8b1ca9",
+        "matches": true,
+        "size": 1850
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_status.txt",
+        "expected_sha256": "352f5007657b25715de701623f7a035942c68b544695418fe1558cfc4f36c0a6",
+        "actual_sha256": "352f5007657b25715de701623f7a035942c68b544695418fe1558cfc4f36c0a6",
+        "matches": true,
+        "size": 588
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_timing_summary.txt",
+        "expected_sha256": "df26d3357c962ffc9e386c44698afba026ac7e4682e6fcd445615d35e5db7976",
+        "actual_sha256": "df26d3357c962ffc9e386c44698afba026ac7e4682e6fcd445615d35e5db7976",
+        "matches": true,
+        "size": 34806
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/route_utilization.txt",
+        "expected_sha256": "6f00fc78c439adf9354c6cb57a3a388bc448df9a0e917f6f0cf0a3746d39e11e",
+        "actual_sha256": "6f00fc78c439adf9354c6cb57a3a388bc448df9a0e917f6f0cf0a3746d39e11e",
+        "matches": true,
+        "size": 11033
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/reports/rst_fclk0_properties.txt",
+        "expected_sha256": "5f0dd1b9f3685570c113418ae94c8b7b07d953cfd54fc485ade361cd0a0e47ab",
+        "actual_sha256": "5f0dd1b9f3685570c113418ae94c8b7b07d953cfd54fc485ade361cd0a0e47ab",
+        "matches": true,
+        "size": 1286
+      }
+    ],
+    "overlay_sources": [
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/build.py",
+        "expected_sha256": "316d62a405f88fb1ea83a8b1fbe0a5409f2a9108255d686e7a6078baf1f72735",
+        "actual_sha256": "316d62a405f88fb1ea83a8b1fbe0a5409f2a9108255d686e7a6078baf1f72735",
+        "matches": true,
+        "size": 1946
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/build_overlay.tcl",
+        "expected_sha256": "02d005172361412f981b9a5809fb431bab03862f7793cea9dac38a4ff178b3bf",
+        "actual_sha256": "02d005172361412f981b9a5809fb431bab03862f7793cea9dac38a4ff178b3bf",
+        "matches": true,
+        "size": 8894
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/pmod_uart.xdc",
+        "expected_sha256": "b9376281f4a90ae4668830ef889f29f88cc8befa4ceae19fa2a00c8aeba8d1ab",
+        "actual_sha256": "b9376281f4a90ae4668830ef889f29f88cc8befa4ceae19fa2a00c8aeba8d1ab",
+        "matches": true,
+        "size": 475
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/integrate_existing_bd.tcl",
+        "expected_sha256": "00feda63715a5407c0f292fe2d0fa4c5f10ce8e8b148c668ad49baa85b648dee",
+        "actual_sha256": "00feda63715a5407c0f292fe2d0fa4c5f10ce8e8b148c668ad49baa85b648dee",
+        "matches": true,
+        "size": 3546
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/README.md",
+        "expected_sha256": "363c8aec63eb9d6a7cc74199a650fbc4031c12d5a30d7ee096dbe904f0b18b90",
+        "actual_sha256": "363c8aec63eb9d6a7cc74199a650fbc4031c12d5a30d7ee096dbe904f0b18b90",
+        "matches": true,
+        "size": 3093
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/summarize.py",
+        "expected_sha256": "5ef23b5fd140b5a4c4339698aa5d9dff56526fa28cea572d745d21b87c73b7d3",
+        "actual_sha256": "5ef23b5fd140b5a4c4339698aa5d9dff56526fa28cea572d745d21b87c73b7d3",
+        "matches": true,
+        "size": 6528
+      }
+    ],
+    "overlay_build_inputs": [
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/build_overlay.tcl",
+        "expected_sha256": "02d005172361412f981b9a5809fb431bab03862f7793cea9dac38a4ff178b3bf",
+        "actual_sha256": "02d005172361412f981b9a5809fb431bab03862f7793cea9dac38a4ff178b3bf",
+        "matches": true,
+        "size": 8894
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/pmod_uart.xdc",
+        "expected_sha256": "b9376281f4a90ae4668830ef889f29f88cc8befa4ceae19fa2a00c8aeba8d1ab",
+        "actual_sha256": "b9376281f4a90ae4668830ef889f29f88cc8befa4ceae19fa2a00c8aeba8d1ab",
+        "matches": true,
+        "size": 475
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/build.py",
+        "expected_sha256": "316d62a405f88fb1ea83a8b1fbe0a5409f2a9108255d686e7a6078baf1f72735",
+        "actual_sha256": "316d62a405f88fb1ea83a8b1fbe0a5409f2a9108255d686e7a6078baf1f72735",
+        "matches": true,
+        "size": 1946
+      },
+      {
+        "path": "D:\\pynq\\AMD\\Vivado\\2022.1\\data\\boards\\board_files\\pynq-z2\\A.0\\board.xml",
+        "expected_sha256": "a565dcb39737d551cbbbb73c0053b973c40bb3dce2274943370d3032c0fea9ae",
+        "actual_sha256": "a565dcb39737d551cbbbb73c0053b973c40bb3dce2274943370d3032c0fea9ae",
+        "matches": true,
+        "size": 54479
+      },
+      {
+        "path": "D:\\pynq\\AMD\\Vivado\\2022.1\\data\\boards\\board_files\\pynq-z2\\A.0\\part0_pins.xml",
+        "expected_sha256": "3c809473938e135a925b563b5371c8687ee05c4089376e7318c0c56524cc8a0f",
+        "actual_sha256": "3c809473938e135a925b563b5371c8687ee05c4089376e7318c0c56524cc8a0f",
+        "matches": true,
+        "size": 9007
+      },
+      {
+        "path": "D:\\pynq\\AMD\\Vivado\\2022.1\\data\\boards\\board_files\\pynq-z2\\A.0\\preset.xml",
+        "expected_sha256": "18528f84aea4da503cdb3104f7706fabfb3b6ad09b78b25199cc316afa4c8cfe",
+        "actual_sha256": "18528f84aea4da503cdb3104f7706fabfb3b6ad09b78b25199cc316afa4c8cfe",
+        "matches": true,
+        "size": 74492
+      }
+    ],
+    "overlay_input_snapshots": [
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/inputs/build.py",
+        "expected_sha256": "316d62a405f88fb1ea83a8b1fbe0a5409f2a9108255d686e7a6078baf1f72735",
+        "actual_sha256": "316d62a405f88fb1ea83a8b1fbe0a5409f2a9108255d686e7a6078baf1f72735",
+        "matches": true,
+        "size": 1946
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/inputs/build_overlay.tcl",
+        "expected_sha256": "02d005172361412f981b9a5809fb431bab03862f7793cea9dac38a4ff178b3bf",
+        "actual_sha256": "02d005172361412f981b9a5809fb431bab03862f7793cea9dac38a4ff178b3bf",
+        "matches": true,
+        "size": 8894
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/inputs/pmod_uart.xdc",
+        "expected_sha256": "b9376281f4a90ae4668830ef889f29f88cc8befa4ceae19fa2a00c8aeba8d1ab",
+        "actual_sha256": "b9376281f4a90ae4668830ef889f29f88cc8befa4ceae19fa2a00c8aeba8d1ab",
+        "matches": true,
+        "size": 475
+      }
+    ],
+    "motor_runtime/evidence/variable-checks-20261103.json": [
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/variable_session.py",
+        "expected_sha256": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38",
+        "actual_sha256": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38",
+        "matches": true,
+        "size": 5711
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/software_speed.py",
+        "expected_sha256": "5e128db6cb15dcb65da82b0edc53cd88bd523804532960ae3b1d38ca50dc8cb8",
+        "actual_sha256": "5e128db6cb15dcb65da82b0edc53cd88bd523804532960ae3b1d38ca50dc8cb8",
+        "matches": true,
+        "size": 2259
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/variable_trial.py",
+        "expected_sha256": "98325810d794a7af17d64f229e6250ac5234f867956a909a1e3aea285e7e9c6e",
+        "actual_sha256": "98325810d794a7af17d64f229e6250ac5234f867956a909a1e3aea285e7e9c6e",
+        "matches": true,
+        "size": 3564
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/tests/test_variable_motor.py",
+        "expected_sha256": "425419c45372352d7d894dfc34a29c9a895b5d8c7e256fe2cc394c82b0c17012",
+        "actual_sha256": "425419c45372352d7d894dfc34a29c9a895b5d8c7e256fe2cc394c82b0c17012",
+        "matches": true,
+        "size": 4235
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/tests/test_software_speed.py",
+        "expected_sha256": "758e597f966902af6f632c7689e734b75983437ff3ef79c57bbff31fba3157e2",
+        "actual_sha256": "758e597f966902af6f632c7689e734b75983437ff3ef79c57bbff31fba3157e2",
+        "matches": true,
+        "size": 1680
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/tests/variable_stdio_sim.py",
+        "expected_sha256": "58f827778d9ff9849b817ffcccce0e155c284e66da7743be001a857cf60a1bb8",
+        "actual_sha256": "58f827778d9ff9849b817ffcccce0e155c284e66da7743be001a857cf60a1bb8",
+        "matches": true,
+        "size": 818
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/session.py",
+        "expected_sha256": "b583e0a2088c469e55bf3fd9e7a77333084b226e156d3cbc1431014dae5b1f7a",
+        "actual_sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+        "matches": false,
+        "size": 9603
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/bridge_stdio.py",
+        "expected_sha256": "9f89955347b28796026bb6704009332c3c18d14c5ccf6d46b20bb258c0a9f52d",
+        "actual_sha256": "9f89955347b28796026bb6704009332c3c18d14c5ccf6d46b20bb258c0a9f52d",
+        "matches": true,
+        "size": 5817
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/ssh_client.py",
+        "expected_sha256": "75030955e464e54fb0ce688ff778e2eaa0cbfabed566d9044ec73b05f62bc43a",
+        "actual_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+        "matches": false,
+        "size": 8202
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/tests/test_link.py",
+        "expected_sha256": "2ccf07c2919084d8315aa82c1a1ddd409100b2af0e36ff34935f25bb9ab1f330",
+        "actual_sha256": "2ccf07c2919084d8315aa82c1a1ddd409100b2af0e36ff34935f25bb9ab1f330",
+        "matches": true,
+        "size": 11669
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/tests/stdio_sim.py",
+        "expected_sha256": "c2fbadff544dff7183a5315ae1d94b9568883384855dc98dfecdff6ac8ba31d3",
+        "actual_sha256": "c2fbadff544dff7183a5315ae1d94b9568883384855dc98dfecdff6ac8ba31d3",
+        "matches": true,
+        "size": 848
+      }
+    ],
+    "motor_runtime/evidence/latest-host-checks.json": [
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/control_pc.py",
+        "expected_sha256": "20121bd1c83f65309042e5172bdb7d5e33ce3fe55ff2f29f9cdc3cdc681c4f7c",
+        "actual_sha256": "20121bd1c83f65309042e5172bdb7d5e33ce3fe55ff2f29f9cdc3cdc681c4f7c",
+        "matches": true,
+        "size": 6344
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/test-build/motor_sim.c",
+        "expected_sha256": "2b87f76e8d66112a63b8ae7b43c144d46d352d0e2f1b3d80dad9b6d10bc8571f",
+        "actual_sha256": "2b87f76e8d66112a63b8ae7b43c144d46d352d0e2f1b3d80dad9b6d10bc8571f",
+        "matches": true,
+        "size": 1662
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/run_host_checks.py",
+        "expected_sha256": "3f98d1a70f92473e2019132c5bc61a8ee9a7e18c928fae9bd4908210047b8e1f",
+        "actual_sha256": "3f98d1a70f92473e2019132c5bc61a8ee9a7e18c928fae9bd4908210047b8e1f",
+        "matches": true,
+        "size": 3064
+      }
+    ],
+    "motor_runtime/evidence/latest-checks.json": [
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/tests/test_drill_pwm.c",
+        "expected_sha256": "914dcaacef40de5a2011adb0b21b5df7046a7f5f1190fcce2efd98f99c369363",
+        "actual_sha256": "914dcaacef40de5a2011adb0b21b5df7046a7f5f1190fcce2efd98f99c369363",
+        "matches": true,
+        "size": 1689
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/tests/test_motor_control.c",
+        "expected_sha256": "9fff5ae0a1fbeeaff784a06a7a75da116167bf779958ccf7aa2b1dfdecda1af1",
+        "actual_sha256": "9fff5ae0a1fbeeaff784a06a7a75da116167bf779958ccf7aa2b1dfdecda1af1",
+        "matches": true,
+        "size": 4438
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/tests/ti_msp_dl_config.h",
+        "expected_sha256": "14f99faf562531f62d209dfe371dc2d5ae04af0a2b0ec9ef897fc0c873713ae2",
+        "actual_sha256": "14f99faf562531f62d209dfe371dc2d5ae04af0a2b0ec9ef897fc0c873713ae2",
+        "matches": true,
+        "size": 1346
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/motor_control.c",
+        "expected_sha256": "c3216e4ecf40b015dd6a4f176ee8073eecd786700680bb558e5ed1b449d5e54a",
+        "actual_sha256": "c3216e4ecf40b015dd6a4f176ee8073eecd786700680bb558e5ed1b449d5e54a",
+        "matches": true,
+        "size": 2769
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/motor_control.h",
+        "expected_sha256": "4f47e1eed3cc991d588fb484e93ca61d7f6a9ccff5dfde2de4bd523d9e5efe61",
+        "actual_sha256": "4f47e1eed3cc991d588fb484e93ca61d7f6a9ccff5dfde2de4bd523d9e5efe61",
+        "matches": true,
+        "size": 535
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/drill_pwm.c",
+        "expected_sha256": "108c8ea035087d3c9fc18a28e39982e68299bfa3fdb6e0c3507250b797dc1f25",
+        "actual_sha256": "108c8ea035087d3c9fc18a28e39982e68299bfa3fdb6e0c3507250b797dc1f25",
+        "matches": true,
+        "size": 1758
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control.c",
+        "expected_sha256": "7949ffd8b137bb20f0308a9fab295c1d1d37fb337de7c98827c4f8c804efb426",
+        "actual_sha256": "7949ffd8b137bb20f0308a9fab295c1d1d37fb337de7c98827c4f8c804efb426",
+        "matches": true,
+        "size": 13695
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control.h",
+        "expected_sha256": "a0b954c76a7a9119222c67bd10e9eb4bc9504ce2fca333b14c3d992501104345",
+        "actual_sha256": "a0b954c76a7a9119222c67bd10e9eb4bc9504ce2fca333b14c3d992501104345",
+        "matches": true,
+        "size": 1592
+      }
+    ],
+    "fpga_link/evidence/latest-checks.json": [
+      {
+        "path": "output/drill-demo-code-20261025/firmware/demo_core.c",
+        "expected_sha256": "8f260e92cbfc852ad29a110f8f56bbe6aed1aa90d58dc9fcf10389059a81eb0a",
+        "actual_sha256": "8f260e92cbfc852ad29a110f8f56bbe6aed1aa90d58dc9fcf10389059a81eb0a",
+        "matches": true,
+        "size": 5612
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/__init__.py",
+        "expected_sha256": "d08591c5944154e31d5e64b242f77a473597c0d4518f69769d258dee0bd90fb4",
+        "actual_sha256": "d08591c5944154e31d5e64b242f77a473597c0d4518f69769d258dee0bd90fb4",
+        "matches": true,
+        "size": 77
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/bridge_stdio.py",
+        "expected_sha256": "7e8e395439814b65af95acf1c5dd7b62bf128d32dc3108acbe0ac4a5e779a4ed",
+        "actual_sha256": "9f89955347b28796026bb6704009332c3c18d14c5ccf6d46b20bb258c0a9f52d",
+        "matches": false,
+        "size": 5817
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/run_checks.py",
+        "expected_sha256": "a159bd81388f49b2018e7c8b9b9ecb2a7687d0781a85ef8775967f389fe173f6",
+        "actual_sha256": "a159bd81388f49b2018e7c8b9b9ecb2a7687d0781a85ef8775967f389fe173f6",
+        "matches": true,
+        "size": 2732
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/save_preparation.py",
+        "expected_sha256": "3b75285bf63a392b14e022686364525189ed1d49bb14f44c3124b82daca88a73",
+        "actual_sha256": "3b75285bf63a392b14e022686364525189ed1d49bb14f44c3124b82daca88a73",
+        "matches": true,
+        "size": 9635
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/session.py",
+        "expected_sha256": "d9b4d6aee52e563a8a89e728bd607d6b9d571f4d8eef7802abba141a04e41c51",
+        "actual_sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+        "matches": false,
+        "size": 9603
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/ssh_client.py",
+        "expected_sha256": "805d2c80ebdd75c46d6fc055cf9deef64fe8a0a54007a7f5948365c09fd68752",
+        "actual_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+        "matches": false,
+        "size": 8202
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/test-build/free_control_sim.c",
+        "expected_sha256": "8360ac33f60539d0cfe0a398793926e284d7faf707c3db71a8065bd05585aa4e",
+        "actual_sha256": "8360ac33f60539d0cfe0a398793926e284d7faf707c3db71a8065bd05585aa4e",
+        "matches": true,
+        "size": 1612
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/tests/stdio_sim.py",
+        "expected_sha256": "b17be2c844585737f7e223599da457680e28b23587a795a7f07be83cc87e9107",
+        "actual_sha256": "c2fbadff544dff7183a5315ae1d94b9568883384855dc98dfecdff6ac8ba31d3",
+        "matches": false,
+        "size": 848
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/tests/test_link.py",
+        "expected_sha256": "88be5310144403993aaa4e1d01742eb7aa0bf7fa25334cdaae8d2225f6e85cdf",
+        "actual_sha256": "2ccf07c2919084d8315aa82c1a1ddd409100b2af0e36ff34935f25bb9ab1f330",
+        "matches": false,
+        "size": 11669
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/uartlite.py",
+        "expected_sha256": "29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778",
+        "actual_sha256": "29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778",
+        "matches": true,
+        "size": 2063
+      },
+      {
+        "path": "output/drill-demo-code-20261025/gimbal/free_control.c",
+        "expected_sha256": "ab90add7ae078fcf873471ef8a3fdac7198b652d11eeb439fdb8fabc783b911c",
+        "actual_sha256": "ab90add7ae078fcf873471ef8a3fdac7198b652d11eeb439fdb8fabc783b911c",
+        "matches": true,
+        "size": 13695
+      }
+    ],
+    "gimbal_smoothness_v9/evidence/default500-checks.json": [
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/session.py",
+        "expected_sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+        "actual_sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+        "matches": true,
+        "size": 9603
+      },
+      {
+        "path": "output/drill-demo-code-20261025/fpga_link/ssh_client.py",
+        "expected_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+        "actual_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+        "matches": true,
+        "size": 8202
+      },
+      {
+        "path": "output/drill-demo-code-20261025/motor_runtime/gimbal_pc.py",
+        "expected_sha256": "6c9e84d7d7e75001e5216177e3073449121db335b758c9263a4b8eb3db8feec0",
+        "actual_sha256": "6c9e84d7d7e75001e5216177e3073449121db335b758c9263a4b8eb3db8feec0",
+        "matches": true,
+        "size": 1445
+      },
+      {
+        "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/roundtrip.py",
+        "expected_sha256": "f4fc876250e7e77c186fe3bb3bb257089899032668c6da33b04ba3280d01332a",
+        "actual_sha256": "f4fc876250e7e77c186fe3bb3bb257089899032668c6da33b04ba3280d01332a",
+        "matches": true,
+        "size": 7543
+      },
+      {
+        "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/test_defaults.py",
+        "expected_sha256": "2d1d8119682f88a822e5379b8ef630daafd8aab5c74a1b1ccc002a96576120af",
+        "actual_sha256": "2d1d8119682f88a822e5379b8ef630daafd8aab5c74a1b1ccc002a96576120af",
+        "matches": true,
+        "size": 3370
+      }
+    ]
+  },
+  "inventory": [
+    {
+      "path": ".local/deployment/node-b/main-handoff-20261029/successor-01/successor-work/resume-87/A220/revision2/docs/competition/deepeye-2026/immutable_scope.json",
+      "sha256": "938415284730ce3548230ef3b3932f2daad622c3855b7e282909c563857d6c8b",
+      "bytes": 7397
+    },
+    {
+      "path": "output/drill-live-link-20261104/TASK.json",
+      "sha256": "e1513b694774c82f22c0be19b5c5482e899822b3dce0b822574330166882afd7",
+      "bytes": 4038
+    },
+    {
+      "path": "output/drill-demo-code-20261025/CURRENT_STATUS.md",
+      "sha256": "ef7509ee70f83873c249526074594d1ee0d4a39e1bb9746f45b12d0d454c3917",
+      "bytes": 9372
+    },
+    {
+      "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/STATUS.json",
+      "sha256": "ec76cd78c1160e30b1112a08526f1ef75da4e366cfb9eebfd27217e5ea79bdec",
+      "bytes": 2247
+    },
+    {
+      "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/README.md",
+      "sha256": "1e5715895b73e27926fa346b764d27baedc6e37320b6e9a01bd4932c1734b43f",
+      "bytes": 2328
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/STATUS.json",
+      "sha256": "86c52a7d7a2a635a3e49508cbb31a9cc6342c209b643606f2712694ef17ab208",
+      "bytes": 1756
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/HUMAN_ACCEPTANCE_MTR4.json",
+      "sha256": "3436f6496a40ec03fb6d1e7c41313f41ce9245aaf7892b1d91a8263dd087a6ab",
+      "bytes": 965
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/v9-final-default500-20261103.json",
+      "sha256": "222556f5e4f92b96cfb52fb50d91fd4c0c1425b68a3ae09941fc066c7f84935f",
+      "bytes": 2022
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/variable_session.py",
+      "sha256": "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38",
+      "bytes": 5711
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/session.py",
+      "sha256": "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba",
+      "bytes": 9603
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/ssh_client.py",
+      "sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+      "bytes": 8202
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/bridge_stdio.py",
+      "sha256": "9f89955347b28796026bb6704009332c3c18d14c5ccf6d46b20bb258c0a9f52d",
+      "bytes": 5817
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/uartlite.py",
+      "sha256": "29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778",
+      "bytes": 2063
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/profile.json",
+      "sha256": "624cc1e47f3cac78058fc2bbb8cc63992bef932e767c113fea603bb89dcd8e23",
+      "bytes": 1054
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/overlay/latest-build.json",
+      "sha256": "2013b8998912605794e2072da75c7753ca571b6b119d44792c7b78f25bc97372",
+      "bytes": 7684
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/latest-build.json",
+      "sha256": "23c294999987563608c805a4397eca2399a8f66358ff7c7c7fcdbb53eb1526fc",
+      "bytes": 3829
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/motor_control.c",
+      "sha256": "c3216e4ecf40b015dd6a4f176ee8073eecd786700680bb558e5ed1b449d5e54a",
+      "bytes": 2769
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control.c",
+      "sha256": "7949ffd8b137bb20f0308a9fab295c1d1d37fb337de7c98827c4f8c804efb426",
+      "bytes": 13695
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/src/free_control_main.c",
+      "sha256": "03d05da69ed2cca1f7d415797819568d0ac5d047485e4116b170bf86a6d595eb",
+      "bytes": 3980
+    },
+    {
+      "path": "output/drill-demo-code-20261025/firmware/demo_core.c",
+      "sha256": "8f260e92cbfc852ad29a110f8f56bbe6aed1aa90d58dc9fcf10389059a81eb0a",
+      "bytes": 5612
+    },
+    {
+      "path": "output/drill-demo-code-20261025/firmware/demo_core.h",
+      "sha256": "9fd1e88fecc5c19be6093a6ace04e6a22bc3805e91cf49e0d77850902fa222a9",
+      "bytes": 1465
+    },
+    {
+      "path": "output/drill-demo-code-20261025/pc/codec.py",
+      "sha256": "62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006",
+      "bytes": 13525
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/COMMAND.json",
+      "sha256": "040848143facd3bc837d3a150be3aff07905ef3178f40988f52eaf4dacb428cd",
+      "bytes": 598
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/overlay/run-20261103-195848/RESULT.json",
+      "sha256": "450f717d72132f6b8cb326a168e067fc57970f81af46aabd25c5b650a7ed8deb",
+      "bytes": 1698
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/build-20261103-224235-564881.json",
+      "sha256": "30b6642678a0960bfbe7354e215bd76fdc66a86632c361ed1b0c87ce5815d12f",
+      "bytes": 13818
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/mtr4-flash-vmoff-20261103-2247.json",
+      "sha256": "10754b058b546d2a61566ce82a9a8b6673c98f3cbf85a4f2884a89fd454de720",
+      "bytes": 3051
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/variable-checks-20261103.json",
+      "sha256": "2d697d40fca8ceba231b970c5793b674fabf5dd963d3383296e8c0d86366fccf",
+      "bytes": 2810
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/latest-host-checks.json",
+      "sha256": "39319a2f315054bf01087535517d1ce446388d6b71180a3065f1c12aef85f318",
+      "bytes": 4676
+    },
+    {
+      "path": "output/drill-demo-code-20261025/motor_runtime/evidence/latest-checks.json",
+      "sha256": "cd0102bb0589009948b59744635b9ea0cdf16c6e9454d7dbe0b224b747cc7694",
+      "bytes": 4588
+    },
+    {
+      "path": "output/drill-demo-code-20261025/fpga_link/evidence/latest-checks.json",
+      "sha256": "2e701222614fd3e2d3a964dfcde5ea788531542801380d23ced0fd024906d53e",
+      "bytes": 4836
+    },
+    {
+      "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/evidence/default500-checks.json",
+      "sha256": "b582aa318c531bf97d91f849a5bfab85a6e2a63b3131766ff18a4f89eb609ace",
+      "bytes": 5804
+    },
+    {
+      "path": "output/drill-demo-code-20261025/gimbal_smoothness_v9/review/audit-evidence.json",
+      "sha256": "9688bcc7ba2c8f6abbf941e1373af09b8dfb34bf40a2125f07afb4a5bc45c22c",
+      "bytes": 7754
+    }
+  ],
+  "hwh_uart": [
+    {
+      "module": {
+        "COREREVISION": "30",
+        "FULLNAME": "/mcu_uart",
+        "HWVERSION": "2.0",
+        "INSTANCE": "mcu_uart",
+        "IPTYPE": "PERIPHERAL",
+        "IS_ENABLE": "1",
+        "MODCLASS": "PERIPHERAL",
+        "MODTYPE": "axi_uartlite",
+        "VLNV": "xilinx.com:ip:axi_uartlite:2.0"
+      },
+      "parameters": [
+        {
+          "NAME": "C_S_AXI_ACLK_FREQ_HZ",
+          "VALUE": "100000000"
+        },
+        {
+          "NAME": "C_S_AXI_ADDR_WIDTH",
+          "VALUE": "4"
+        },
+        {
+          "NAME": "C_S_AXI_DATA_WIDTH",
+          "VALUE": "32"
+        },
+        {
+          "NAME": "C_BAUDRATE",
+          "VALUE": "115200"
+        },
+        {
+          "NAME": "C_DATA_BITS",
+          "VALUE": "8"
+        },
+        {
+          "NAME": "C_USE_PARITY",
+          "VALUE": "0"
+        },
+        {
+          "NAME": "C_ODD_PARITY",
+          "VALUE": "0"
+        },
+        {
+          "NAME": "C_S_AXI_ACLK_FREQ_HZ_d",
+          "VALUE": "100.0"
+        },
+        {
+          "NAME": "PARITY",
+          "VALUE": "No_Parity"
+        },
+        {
+          "NAME": "C_BASEADDR",
+          "VALUE": "0x43C00000"
+        },
+        {
+          "NAME": "C_HIGHADDR",
+          "VALUE": "0x43C0FFFF"
+        },
+        {
+          "NAME": "DATA_WIDTH",
+          "VALUE": "32"
+        },
+        {
+          "NAME": "FREQ_HZ",
+          "VALUE": "100000000"
+        },
+        {
+          "NAME": "ADDR_WIDTH",
+          "VALUE": "4"
+        }
+      ]
+    }
+  ],
+  "historical_command_count": 27,
+  "historical_commands_path": "output/drill-live-link-20261104/review/historical-commands.json"
+}

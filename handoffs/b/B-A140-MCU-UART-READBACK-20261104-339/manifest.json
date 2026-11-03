@@ -1,0 +1,95 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/.gitattributes",
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/MAIN_REVIEW.json",
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/REVIEW.md",
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/TEST_PLAN.md",
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/evidence/raw/.gitattributes",
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/evidence/raw/raw-evidence.tar.gz.part000",
+    "output/drill-live-link-20261104/product_uart_service.py",
+    "output/drill-live-link-20261104/product_uart_stdio.py"
+  ],
+  "files": {
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/.gitattributes": {
+      "sha256": "60e121bee9ba9893fa702956e26bc483dd931314619f06713017cfc418af9681",
+      "size": 29
+    },
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/MAIN_REVIEW.json": {
+      "sha256": "41962233b242284607cde2808a1076ea235164b7b0eed9805c6c8777a04ffd4f",
+      "size": 5643
+    },
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/REVIEW.md": {
+      "sha256": "d2979cf005d1d4735832d36185d600c6220218fcc6d9c4a05a21fd8a47de1d89",
+      "size": 2929
+    },
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/TEST_PLAN.md": {
+      "sha256": "b51ee580d043d5eb5f39d3487bca553144ac5bdeef061a86fcc3c9c9f78241f4",
+      "size": 411
+    },
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "8c0a610738063bc4ca924cba96206c6b5079ce467be38553c98310824a976799",
+      "size": 4482
+    },
+    "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "8b7843f34585e69eb9b040f2fd51dfa37fae255a687c764b9cb5042db4f46d57",
+      "size": 13912
+    },
+    "output/drill-live-link-20261104/product_uart_service.py": {
+      "sha256": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+      "size": 25516
+    },
+    "output/drill-live-link-20261104/product_uart_stdio.py": {
+      "sha256": "3bef22726e97eb7c950d7b3c3d7a1914367eed51c2a28d74015e3ae6017502c1",
+      "size": 5731
+    }
+  },
+  "request": {
+    "code_commit": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+    "expected_result": "Actual firstjointUART failure independently characterized; MCUreadbackpassed within scope; no roughphysicalfollowing or formalacceptance claimed.",
+    "operation_id": "B-A140-MCU-UART-READBACK-20261104-339",
+    "requester": "B main 01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify original A140 five files/TX CRC and actualclosed actor/kernel-lock evidence; oneSTOP RXtimeout SSHexit2 remainsfailed.",
+      "Verify new B335 actual diagnostic RAM/UART/IOMUX/queue bytes, explicit quiescentFAULTresume and process exit0 with noreset/flash/command.",
+      "Use actual seq0/noaccepted frame result to isolate FPGA-TX→MCU-RX path before any new operation/transfer; preserve no voltage/precision gate."
+    ]
+  },
+  "request_hash": "ac4bcf80f610625aef75db521e496bc103fca11d33b96ba6e0fd14d6def1370b",
+  "schema_version": 1,
+  "stages": {
+    "MCU_UART_joint": {
+      "log": "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "MCU_diagnostic_readback": {
+      "log": "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "source_review": {
+      "log": "handoffs/b/B-A140-MCU-UART-READBACK-20261104-339/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

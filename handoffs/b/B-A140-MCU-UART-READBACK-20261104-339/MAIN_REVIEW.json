@@ -1,0 +1,159 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A140-MCU-UART-READBACK-20261104-339",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a389-16aa-77d3-95e6-8ee820c9cbec",
+  "code_commit": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "A140": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A140-CLOSE-EVIDENCE-20261104-332",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a389-16aa-77d3-95e6-8ee820c9cbec",
+    "actual_peer_event_id": "B:A-GEN4-A140B-JOINT-FIRST-DIAG-RESULT-20261104-1065",
+    "files": [
+      {
+        "path": "uart-events.jsonl",
+        "bytes": 2940,
+        "sha256": "32c3d13b7ed3a31a01f7002902566dcd465d973dc989692920b4cc66227bb51b"
+      },
+      {
+        "path": "sequence.json",
+        "bytes": 15,
+        "sha256": "51856780abc2c36f207cb8df9215f05dd6cc8abd1e05295eb9131a2c123a37c8"
+      },
+      {
+        "path": "PS_READBACK_ACTUAL.json",
+        "bytes": 529,
+        "sha256": "70abd9282f72131a7f07726d728b01a5dc126055b8b16559e1e1473d28115495"
+      },
+      {
+        "path": "SSH_PROCESS_RETURNED.json",
+        "bytes": 92,
+        "sha256": "f58d4900fdf1803d647c8cd2c01c628d9059c10b40d000db01f3484b170cbd60"
+      },
+      {
+        "path": "SSH_STDERR.txt",
+        "bytes": 144,
+        "sha256": "00a0b165b50bf41c0bcd4ff035159a97f28e31700d629317fdf6437e6375fe09"
+      }
+    ],
+    "TX": "d34c0103010000000300000000000000000000000000000000000000000056c3",
+    "TX_seq": 1,
+    "TX_op": 3,
+    "CRC_verified": true,
+    "complete_RX_frames": 0,
+    "SSH_exit_code": 2,
+    "all_A_actors_stopped": true,
+    "stable_kernel_lock_independently_reacquired_by_A": true,
+    "A_uart_owner_returned": true,
+    "B_MCU_debug_boundary": "AVAILABLE after this independently checked actual close, no guessed MCU highwater",
+    "MCU_received_STOP": "UNKNOWN",
+    "actual_MCU_last_seq": "UNKNOWN: last known0, A reservednext2 is not MCU proof",
+    "no_retry": true,
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "at_utc": "2026-11-03T22:43:40.325547+00:00"
+  },
+  "B335": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-MCU-UART-READBACK-INTERPRETATION-20261104-336",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a389-16aa-77d3-95e6-8ee820c9cbec",
+    "source_operation": "B-MCU-UART-READBACK-20261104-335",
+    "raw_readback_sha256": "949d5e19aae13fbbdc5df913a7fc2c86fcb5c742803ec2940cf697d7d16368a4",
+    "process_exit_code": 0,
+    "actual_last_seq": 0,
+    "actual_have_seq": 0,
+    "no_accepted_valid_STOP1": true,
+    "no_PC_response_queued_since_reset": true,
+    "cannot_infer_zero_electrical_bytes": true,
+    "UART_config": "Actual PB6TX/PB7RX mux,1152008N1 IBRD17/FBRD23 at configured32MHz; bothFIFOemptySTAT0x44",
+    "CPU_final": "running after one explicit quiescentFAULT resume, no reset/initialization/home",
+    "MCU_READY": false,
+    "motor_OFF": true,
+    "actual_application_memory_register_writes": 0,
+    "SWD_debug_control_does_change_halt_run_state": true,
+    "next": "A independently review TX external mapping/physical PB7 ingress first; no identical STOP retry or MCU reset without concrete changed conditions/newassignment",
+    "at_utc": "2026-11-03T22:51:46.507543+00:00"
+  },
+  "actual_final_MCU": {
+    "label": "after_one_fault_resume",
+    "at_utc": "2026-11-03T22:50:39.926Z",
+    "cpu_halted": false,
+    "signature": "0x4d545234",
+    "state": 4,
+    "ticks": 4728662,
+    "last_seq": 0,
+    "have_seq": 0,
+    "armed": 0,
+    "bus_status": 255,
+    "result": 3,
+    "yaw_raw": 65535,
+    "pitch_raw": 65535,
+    "yaw_feedback_seen": 0,
+    "pitch_feedback_seen": 0,
+    "motor": {
+      "duty": 0,
+      "active": 0,
+      "commands": 0
+    },
+    "motor_pwm_applied": 0,
+    "free_tx_overflows": 0,
+    "pc_tx": {
+      "head": 0,
+      "tail": 0,
+      "first32_hex": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "bus_tx": {
+      "head": 8,
+      "tail": 8
+    },
+    "uart1": {
+      "base": "0x40100000",
+      "CTL0": 131129,
+      "LCRH": 48,
+      "STAT": 68,
+      "IFLS": 34,
+      "IBRD": 17,
+      "FBRD": 23
+    },
+    "iomux": {
+      "PB6_PINCM23": 130,
+      "PB7_PINCM24": 262274
+    },
+    "raw_free_sha256": "86051a688125b17a84db7e3bc9dc5db0d4238ceb88ec08d0bf4930153f8b27cc",
+    "raw_motor_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+    "raw_pc_tx_sha256": "e55a5c27736a8761c8e96acec072102325e08cb2d0dbb4d4702cfe38f8ab0709"
+  },
+  "native334": {
+    "actual_terminal": true,
+    "report_sha256": "888fb468e128e89588ac366eb8c739eedca1695be6ff163de01452d3ff0d43e6",
+    "accepted_finding": "R334-01: before actual run main added hardwareTXFE/!BUSY/RXFE to softwareTXempty resume guard; exact finalhelpera242 verified"
+  },
+  "current_writer": "None; A140 actualclosed, B335 actualSWDshutdown, no new transfer",
+  "actual_FPGA_MCU_UART_joint": "FAILED: one STOPseq1 TX then RXtimeout; B actualno accepted full command/seq0, noPCreplyqueued. Cannot inferzero electrical bytes",
+  "MCU_READY": false,
+  "voltage_measurement_required": false,
+  "precision_calibration_required": false,
+  "formal_acceptance": false,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+}

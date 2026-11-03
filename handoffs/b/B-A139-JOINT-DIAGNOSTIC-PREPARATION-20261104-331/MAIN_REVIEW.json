@@ -1,0 +1,92 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a389-16aa-77d3-95e6-8ee820c9cbec",
+  "code_commit": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "unchanged_B_service_sha256": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+  "unchanged_B_stdio_sha256": "3bef22726e97eb7c950d7b3c3d7a1914367eed51c2a28d74015e3ae6017502c1",
+  "A_source_commit": "45fce33b0366ab8aed802fbbcfe8143acf233b10",
+  "A_actual_snapshot_commit": "9b93f9ddf3545cdbdfa5766df19b335b7c6d32e0",
+  "Root_static28_exit0": true,
+  "real_HWH_main325_exit0": true,
+  "native320": {
+    "actual_terminal": true,
+    "parser_returned_success": true,
+    "original_report_harness_exit1": true,
+    "salvaged_without_parser_rerun": true
+  },
+  "A_raw_snapshot_binding_independently_matched": {
+    "operation_id": "A-GEN4-JOINT-UART-BOARD-20261104-1018-R01",
+    "request_hash": "c5d09eb3c9ef754fc5996d27f1e89dd1345faf37bd81de6bb470aa2cc57ddd19",
+    "boot_id": "e764fa92-e676-4b0a-95f4-778f20918d2f",
+    "build_id": "76bea92ec0d97e37250733bad1eb3a38",
+    "bit_sha256": "245e84ffcad93c516e1c6e8bff80af739ba6093c384c7d15851a751f4241c15f",
+    "hwh_sha256": "ae54a0add90e0ba80da1143ab260d6c9945421b54ae62cec4adb6704eaec59f4",
+    "mapping_sha256": "b2ef5a3cfc83a078c93bfb41a30361e1a77ace0ad29f36b2ca77ef5ef431fd72",
+    "fclk_hz": 50000000,
+    "g05": {
+      "name": "g05_50_0",
+      "vlnv": "carlandfpga.local:diagnostic:deepeye_g05_axi_50:1.0",
+      "phys_addr": 1136656384,
+      "addr_range": 4096
+    },
+    "trace": {
+      "name": "trace50_0",
+      "vlnv": "carlandfpga.local:diagnostic:deepeye_trace50_axi:1.0",
+      "phys_addr": 1136721920,
+      "addr_range": 4096
+    },
+    "product_clock_net": "ps7_0_FCLK_CLK0",
+    "product_reset_net": "rst_fclk0_peripheral_aresetn",
+    "uart": {
+      "name": "mcu_uart",
+      "vlnv": "xilinx.com:ip:axi_uartlite:2.0",
+      "phys_addr": 1119879168,
+      "addr_range": 4096,
+      "clock_hz": 50000000,
+      "baud": 115200,
+      "data_bits": 8,
+      "parity": false,
+      "stop_bits": 1,
+      "clock_net": "ps7_0_FCLK_CLK0",
+      "reset_net": "rst_fclk0_peripheral_aresetn"
+    }
+  },
+  "BTransfer": {
+    "operation_id": "A-GEN4-JOINT-UART-BOARD-20261104-1018-R01",
+    "transfer_id": "B-A139-DIAGNOSTIC-TRANSFER-20261104-327",
+    "mcu_observation_id": "B-JOINT-MCU-CONTROLLED-RECOVERY-20261104-290",
+    "last_seq": 0,
+    "evidence_sha256": "a1a719f603a1380358e8224eb83bd76e2bfc1b27872d63fc0a01b8c2c2e3e89b",
+    "scope": "DIAGNOSTIC_ONLY"
+  },
+  "permit_issued_via": "B-A139-DIAGNOSTIC-WRITER-HANDOFF-20261104-328",
+  "UART_writer": "A sole current Root DIAGNOSTIC_ONLY; B no SWD/COM/reset until actual terminal close+return",
+  "actual_joint_UART_execution_not_yet_observed": true,
+  "MCU_READY": false,
+  "voltage_measurement_required": false,
+  "precision_calibration_required": false,
+  "B_physical_board_actions": 0,
+  "formal_acceptance": false,
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-03T22:42:01.467972+00:00"
+}

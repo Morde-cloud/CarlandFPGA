@@ -1,0 +1,98 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/.gitattributes",
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/MAIN_REVIEW.json",
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/REVIEW.md",
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/TEST_PLAN.md",
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/evidence/raw/.gitattributes",
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/evidence/raw/raw-evidence.tar.gz.part000",
+    "output/drill-live-link-20261104/product_uart_service.py",
+    "output/drill-live-link-20261104/product_uart_stdio.py"
+  ],
+  "files": {
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/.gitattributes": {
+      "sha256": "60e121bee9ba9893fa702956e26bc483dd931314619f06713017cfc418af9681",
+      "size": 29
+    },
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/MAIN_REVIEW.json": {
+      "sha256": "4fdd2f12d55be9dec87af63d3042942e6c2d99987f3fc3d8fe17b81d745ef08b",
+      "size": 3400
+    },
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/REVIEW.md": {
+      "sha256": "154410b3cd76d86c5558f28af55244e0b6d83233f307b727dd9c9aa58e80ff56",
+      "size": 2900
+    },
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/TEST_PLAN.md": {
+      "sha256": "1aef5a9af7277864ec9f82e69df5f5d016d230f3a0292b08999ac26e520b8e49",
+      "size": 509
+    },
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "746a8640b8b3626ab3560a051d7dcf9a1013996eced54a698f361b9b24964c9f",
+      "size": 7702
+    },
+    "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "a4fdda28f8421e38e709771222c9b391d3afdb834dfe3a973bef3009701a0614",
+      "size": 63869
+    },
+    "output/drill-live-link-20261104/product_uart_service.py": {
+      "sha256": "6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13",
+      "size": 25516
+    },
+    "output/drill-live-link-20261104/product_uart_stdio.py": {
+      "sha256": "3bef22726e97eb7c950d7b3c3d7a1914367eed51c2a28d74015e3ae6017502c1",
+      "size": 5731
+    }
+  },
+  "request": {
+    "code_commit": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+    "expected_result": "Offline actual metadata compatibility and narrowly scoped diagnostic handoff checked; actual UART communication, MCU feedback, motion and formal acceptance remain open.",
+    "operation_id": "B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331",
+    "requester": "B main 01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify actual A138 HWH/Rootsource and A139 original loaded snapshot/profile/plan fixed pins.",
+      "Inspect native320 originalharness1 and salvage; main independently passed realHWH325 exit0 and Root322static28 exit0.",
+      "Authenticate B328 one-use diagnostic transfer, then actual A Root STOP/STATUS only; rawTX/RX/CRC/seq/close/exit remain required."
+    ]
+  },
+  "request_hash": "364af1040141d7f891c9fac96a905be4abd9aae5f664924fef13a858a1b58973",
+  "schema_version": 1,
+  "stages": {
+    "A_loaded_snapshot_review": {
+      "log": "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "MCU_UART_joint": {
+      "status": "not_run"
+    },
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "software_test": {
+      "log": "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "source_review": {
+      "log": "handoffs/b/B-A139-JOINT-DIAGNOSTIC-PREPARATION-20261104-331/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

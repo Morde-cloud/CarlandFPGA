@@ -1,0 +1,84 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-CONTINUOUS-INTEGRATION-CLOSE-825",
+  "A_source": "1a043208b1e0f59886d0ce7f008e731155a794a1",
+  "controls": [
+    {
+      "case": "824init_valid",
+      "accepted": true
+    },
+    {
+      "case": "824init_wrongscope",
+      "accepted": false
+    },
+    {
+      "case": "824init_boolspeed",
+      "accepted": false
+    },
+    {
+      "case": "824init_motion",
+      "accepted": false
+    },
+    {
+      "case": "824init_formal",
+      "accepted": false
+    },
+    {
+      "case": "824capture_full",
+      "accepted": true
+    },
+    {
+      "case": "824capture_early",
+      "accepted": false
+    },
+    {
+      "case": "F3_exact_dispatch_AST_unchanged",
+      "reuse": "critical236 original4controls; no rerun",
+      "accepted": true
+    },
+    {
+      "case": "terminal_with_pending_board",
+      "native_stop_calls": 0,
+      "submitted": []
+    },
+    {
+      "case": "terminal_with_idle_board",
+      "native_stop_calls": 1,
+      "submitted": [
+        {
+          "method": "request",
+          "op": "stop"
+        }
+      ]
+    }
+  ],
+  "controls_count": 10,
+  "F1_F2": "New isolated source guards accept valid/refuse malformed cases; actual Root/native/board use still unqualified.",
+  "F3": "Exact dispatch AST unchanged from64113, reuse4 originalcontrols without rerun.",
+  "F4": {
+    "line": 93,
+    "conclusion": "Terminal want_stop with any boardfuture performs zero native.stop calls in the actual branch; idle control calls once. Physical STOP can wait necessary uncertain IO, independent native terminal stop need not.",
+    "minimal_fix": "Call native.stop once upon first terminal intent/failure before waiting source/AI/board; keep physical ACK separate and serialize new distinct boardSTOP after pending terminal evidence, never replay unknown."
+  },
+  "scope": "Exact new guard AST and one terminal-step AST only; fake time raises after firststep; fake pool records without invokingIO. No socket/native/model/board/UI/process execution.",
+  "requirements_revision": 2,
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ]
+}

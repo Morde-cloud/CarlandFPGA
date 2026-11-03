@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/.gitattributes",
+    "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/MAIN_REVIEW.json",
+    "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/REVIEW.md"
+  ],
+  "files": {
+    "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/.gitattributes": {
+      "sha256": "85e48d232edc7b02f6cecf8fbbf905f3b126c467b594d8dd16c4f8fa283a8320",
+      "size": 14
+    },
+    "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/MAIN_REVIEW.json": {
+      "sha256": "a7f67086a18abbe2a36b5744b42932801d0e1ac3dad86d8e48f4c9e94b47fb36",
+      "size": 1906
+    },
+    "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/REVIEW.md": {
+      "sha256": "f69df5a8b6354f23de8c2d039350ea5f1e36595085ba5191121c4cfd560f5a06",
+      "size": 222
+    }
+  },
+  "request": {
+    "code_commit": "95bc01741fc7f44d9f5a14f1f58234e8b47c9c09",
+    "expected_result": "Offline approximate display source and narrow initial-only delta checked; no physical/FPGA/formal acceptance. Originalmaincontract and prior unresolved integration gaps retained.",
+    "operation_id": "B-A122-INITIAL-ONLY-REVIEW-20261104-255",
+    "requester": "B main01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify exact source/freeze/rawlog/sourcehash and scope-specific actualexit0.",
+      "Keep33synthetic/realCsimulator/initial-only11checks separate from actualhardware/FPGA/product acceptance.",
+      "Review onlyacceptedpose/actualspeed/read-onlyhook and pendingobserver/wiring/boot/AproductUART requirements."
+    ]
+  },
+  "request_hash": "365cb5ea74b68f649457610b6f2f5e5fe183f8ce63a004392a8cfdc211c0a5af",
+  "schema_version": 1,
+  "stages": {
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "mcu_physical": {
+      "status": "not_run"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "software_test": {
+      "log": "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "source_review": {
+      "log": "handoffs/b/B-A122-INITIAL-ONLY-REVIEW-20261104-255/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

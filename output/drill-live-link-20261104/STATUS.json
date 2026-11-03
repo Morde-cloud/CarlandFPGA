@@ -1,0 +1,103 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PHYSICAL-LIVE-LINK-20261104-246",
+  "tested_source": "768f887664812b82790cb1c2488a0c1d9db9eed5",
+  "software": "33 syntheticcontrols + new realC protocol integration passed0",
+  "physical": "NOT_RUN: poweredON/noobserver/PB6PB7unconfirmed; no COM/SWD/reset/flash/motion",
+  "scope": "Approximate demonstration only; no accuracy/RPM/reproduction goal",
+  "limits": {
+    "yaw_deg": [
+      -90,
+      90
+    ],
+    "pitch_deg": [
+      -45,
+      68
+    ],
+    "motor_running_pwm_permille": [
+      250,
+      750
+    ],
+    "default_move_ms": 500
+  },
+  "unit": {
+    "job_id": "child-9d4a7efccf6b436cb1a6b6f09a83c2fa",
+    "work_id": "B-PHYSICAL-FOLLOWER-CONTROLS-20261104-248",
+    "tested_source_commit": "768f887664812b82790cb1c2488a0c1d9db9eed5",
+    "run_id": "controls251",
+    "tests": 33,
+    "result": "passed",
+    "exit_code": 0,
+    "source_pins": 25,
+    "frozen_sources_unchanged": true,
+    "run_json_sha256": "5a403669fc668a6694bfd46e71f4c6ac4cbf169e05db1ef7a78cd685c1b2423e",
+    "stderr_sha256": "77255c91f28124e2786a2d5418e7ef4e138aee58b0d308c2b3d8d42c593ce575",
+    "scope": "synthetic offline controls only; no hardware, physical acceptance, FPGA or RPM measurement",
+    "requirements_revision": 2,
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "C_integration": {
+    "status": "PASS_SYNTHETIC_REAL_C_INTEGRATION",
+    "actual_exit_code": 0,
+    "source": "768f887664812b82790cb1c2488a0c1d9db9eed5",
+    "uart_frames": 88,
+    "pose_frames": 7,
+    "motor_duties": [
+      300,
+      400,
+      500,
+      750
+    ],
+    "sequence_strict": true,
+    "motor_active_during_pose_simulated": true,
+    "final_off_disarmed": true,
+    "source_pins_unchanged": true,
+    "physical": false,
+    "PYNQ": false,
+    "RPM_measured": false
+  },
+  "MCU_firmware_unchanged": true,
+  "existing_physical_baseline_readonly": true,
+  "actual_product_feed_bound": false,
+  "FPGA_product_UART_merged": false,
+  "source_declaration_not_authority": true,
+  "measured_rpm": null,
+  "requirements_revision": 2,
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "at_utc": "2026-11-03T18:11:15.145962+00:00"
+}

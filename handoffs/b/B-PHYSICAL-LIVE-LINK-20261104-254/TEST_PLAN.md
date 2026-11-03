@@ -1,0 +1,1 @@
+Reproduce33 pinned newcontrols then newrealC foreground integration with explicitMANUAL/simulator labels. Review actualacceptedpose/source-mode/clock hook before A adoption. Confirm currentobserver/wiring/boot/sequence before any hardware; no automaticreset/replay. A alone merges/tests productUART and returns newoperation/request/testedcommit/actualrawE4/PWM/video evidence.

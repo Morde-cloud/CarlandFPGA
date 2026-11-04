@@ -1,0 +1,106 @@
+{
+  "artifacts": [
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/.gitattributes",
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/MAIN_REVIEW.json",
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/REVIEW.md",
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/TEST_PLAN.md",
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/evidence/raw/.gitattributes",
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/evidence/raw/raw-evidence.tar.gz.part000",
+    "output/drill-joint-uart-20261104/program_uart391/ACTUAL_377_TO_391.diff",
+    "output/drill-joint-uart-20261104/program_uart391/README.md",
+    "output/drill-joint-uart-20261104/program_uart391/rx_program391.js"
+  ],
+  "files": {
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/.gitattributes": {
+      "sha256": "60e121bee9ba9893fa702956e26bc483dd931314619f06713017cfc418af9681",
+      "size": 29
+    },
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/MAIN_REVIEW.json": {
+      "sha256": "d191eddb2e9049b0fb64688ae398ddf82ae0fc8482c0a6b99cf48019f21cc734",
+      "size": 5352
+    },
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/REVIEW.md": {
+      "sha256": "87828c6efe989fb46ae0fe98a67b65e68c57ed20d880e5749e77e4142e8059e6",
+      "size": 2818
+    },
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/TEST_PLAN.md": {
+      "sha256": "014f9715bc458f5f16bbbd485f433aa29b8c772970b7686864cd9d4b05c74a4e",
+      "size": 464
+    },
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "543bdd52e491acc2f982eb9a523220be2d634126b850a5b1e4c36226c2cb84ab",
+      "size": 2112
+    },
+    "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "0af068870d6976fe9150b94315cb372f4180e4db2b85443a12ac9bc4ef2021b7",
+      "size": 6868
+    },
+    "output/drill-joint-uart-20261104/program_uart391/ACTUAL_377_TO_391.diff": {
+      "sha256": "5b89cb821848eeb23c508383c734d3c48fa7484505f67396ebaa3a62660de64b",
+      "size": 8051
+    },
+    "output/drill-joint-uart-20261104/program_uart391/README.md": {
+      "sha256": "6c4f73f4b1a5d5a55c0fc05fd8199ef0d4fe53afe2fc9f289d58aa8f1f868cfb",
+      "size": 1734
+    },
+    "output/drill-joint-uart-20261104/program_uart391/rx_program391.js": {
+      "sha256": "1b5e3e9eba0395d4351640772c8c2ef01123715eaa80c25a03c5536c28fd40cc",
+      "size": 11397
+    }
+  },
+  "request": {
+    "code_commit": "f0c6df2be87cc74ea09ba6abe16bbeeabe7e730a",
+    "expected_result": "Reviewable committed program-level receiver source ready for jointconfiguration, no newhardware orformalclaim.",
+    "operation_id": "B-PROGRAM391-SOURCE-20261104-398",
+    "requester": "B main01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Review exact391source/diff/393native andmain395 proof/error-state boundaries.",
+      "Verify actual vendorNode syntax/default-no-init exit0; do not call this a hardware test.",
+      "AwaitactualAprogramARMED/source/config beforefreshhardwareapproval; originalMTR4 and formalcontract remain unchanged."
+    ]
+  },
+  "request_hash": "4fa7988ee9495fc300ddf38e3f3297e66fe63f48f8481e651591e7d530b42219",
+  "schema_version": 1,
+  "stages": {
+    "Node_syntax": {
+      "log": "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "actual_single_byte_capture": {
+      "status": "not_run"
+    },
+    "default_no_SDK_init": {
+      "log": "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "independent_source_review": {
+      "log": "handoffs/b/B-PROGRAM391-SOURCE-20261104-398/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "rough_joint_motion": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

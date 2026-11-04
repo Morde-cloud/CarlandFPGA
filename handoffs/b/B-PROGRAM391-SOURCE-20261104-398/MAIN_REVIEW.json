@@ -1,0 +1,115 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-PROGRAM391-SOURCE-20261104-398",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a403-29a3-7da1-b6b5-7201aa8bd376",
+  "handoff_code_commit": "f0c6df2be87cc74ea09ba6abe16bbeeabe7e730a",
+  "source_SHA": "1b5e3e9eba0395d4351640772c8c2ef01123715eaa80c25a03c5536c28fd40cc",
+  "checks": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-PROGRAM-LEVEL-SINGLE-BYTE-RX-SOURCE-20261104-391",
+    "B_operation_id": "B-MCU-RX-NEW-PROGRAM-A1152-20261104-391",
+    "READY_peer_operation_id": "B-MCU-CAPTURE-READY-A1152-20261104-392",
+    "source_sha256": "1b5e3e9eba0395d4351640772c8c2ef01123715eaa80c25a03c5536c28fd40cc",
+    "base_executed_source_SHA": "6039df82a3420f1d6993071adff0852b6e002bbad7016114cc1017b3c90c4881",
+    "actual_diff_sha256": "5b89cb821848eeb23c508383c734d3c48fa7484505f67396ebaa3a62660de64b",
+    "checks": [
+      {
+        "name": "syntax",
+        "argv": [
+          "C:/ti/ccs2100/ccs/ccs_base/cloudagent/node.exe",
+          "--check",
+          "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-97\\rx391\\rx_program391.js"
+        ],
+        "actual_exit_code": 0
+      },
+      {
+        "name": "default",
+        "argv": [
+          "C:/ti/ccs2100/ccs/ccs_base/cloudagent/node.exe",
+          "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-97\\rx391\\rx_program391.js"
+        ],
+        "actual_exit_code": 0
+      }
+    ],
+    "hardware_executed": false,
+    "A_program_currently_prearmed": false,
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "previous_draft_source_sha256": "a40e57373ac1b7181c4a77e880a81e6b4af11f78759ebe05b67e4f728bbe8b3e",
+    "pinned_A1152_ready_sha256": "376e6ee0de37eef253162187c1da9e38b52841af67eec30650251ecde429e168"
+  },
+  "main_disposition": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-PROGRAM391-MAIN-SOURCE-DISPOSITION-20261104-395",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a3e0-1f9c-79a0-9109-e2e96f1790c0",
+    "source_sha256": "1b5e3e9eba0395d4351640772c8c2ef01123715eaa80c25a03c5536c28fd40cc",
+    "base_actual377_source_sha256": "6039df82a3420f1d6993071adff0852b6e002bbad7016114cc1017b3c90c4881",
+    "actual_diff_sha256": "5b89cb821848eeb23c508383c734d3c48fa7484505f67396ebaa3a62660de64b",
+    "native_job": "child-c7f6a065d833486a82bb51c70e87359e",
+    "native_actual_terminal_nonstale": true,
+    "native_report_sha256": "551355d8df02e1a1cebf10cb1b7afffc3d6ccfd68da6c754ad31ca7418a2b7ca",
+    "main_source_review": [
+      "Actualnewsource/diff maintains vendorAPI/4dependencyhashes/ELF/preconnectEnableWaitForDebugfalse/0; default/flag/schemarejectoldproof andnoinitbydefault.",
+      "ExplicitnewA1152andrawREADY376e/newB391op plusactualprearmedprogram/source/readyproof fields required. Noexecutionauthority exists untilmainvalidatesrealAprogramsource/config/ARMED.",
+      "Exact6fieldREADY/separateMETA unchanged. RemovedmodelA_TX_RESULT dependency. HardwareSTAT loop waitsRXnotempty thenone guardedRXDATAword withdurableintent/returned/rawerror; noextraRXloop orUARTwrite/actuation.",
+      "Onlyexact55/error0/emptyremainingFIFO/sameFAULTunarmedmotor0/held/PDBG permitoneexplicitrun(false), thenactualCPUrun/tickadvancechecked. A actualTX/close/process records mustbe independentlycorrelatedafterward; peerACKalone notphysicalproof."
+    ],
+    "finding_disposition": {
+      "P2_post_resume_failure_state": "Accepted precise phase caveat; READMEclarified failuresafterrun/sample/tick/SDKmayleaveCPUrunningorunknown. Genericfailedstatusdoesnotproveheld. Existingresumeintent/returned/finalCPUquery govern recovery; noautomaticextraCPUaction. Reviewedsourcebytehashunchanged."
+    },
+    "validation": {
+      "syntax_exit": 0,
+      "default_noinit_exit": 0,
+      "source_executed_on_MCU": false,
+      "source_review_not_hardware_authorization": true
+    },
+    "next": "Deliver final source/op/schema bytes toA; wait actualprearmedprogram and source/configevidence, thennewmainfreshapproval only.",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "native393_actual_terminal_nonstale": true,
+  "hardware_executed": false,
+  "A_program_actual_ARMED_received": false,
+  "prior_real_recovery_evidence_commit": "9d2a9e1d86f81bfae0c60bd4d6b159a48b80d8b2",
+  "unchanged_MCU_firmware_SHA": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+  "unchanged_product_runtime_source": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-04T00:46:11.450259+00:00"
+}

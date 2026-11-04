@@ -1,0 +1,3 @@
+Offline evidence review: run verify_recorded_uart.py, then the standard handoff manifest verifier; retain stdout/stderr and actual exit codes. These checks open no board or port.
+
+A only: finish the supported prior G05 run recovery/new session, use the new unique A1287/477 grant and actual Root release, inspect current identity and healthy OFF attach, then continue the approved same-round demonstration using the bounded worker timing adjustment. Observe both yaw/pitch steering and a genuine speed change, preserve exact TX/RX/common seq/run/source/original deadline and final STOP/closure. No replay of failed or unknown actions. Report carrier/link/loss/session events separately. None of these future physical checks has passed in this package.

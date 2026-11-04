@@ -1,0 +1,117 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/.gitattributes",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/MAIN_REVIEW.json",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/REVIEW.md",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/TEST_PLAN.md",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY.stderr.txt",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY.stdout.txt",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY_PROCESS.json",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/evidence/raw/.gitattributes",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/evidence/raw/raw-evidence.tar.gz.part000",
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/verify_recorded_uart.py"
+  ],
+  "files": {
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/.gitattributes": {
+      "sha256": "44998a148533bdda0148276391e030ad0d5d0545e9b2a08076dde3e128b8158c",
+      "size": 29
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/MAIN_REVIEW.json": {
+      "sha256": "79b7aff21a7a1a0c5951ffbd782a3555a3807ae3906bf9cca4fa9bcfc830fac3",
+      "size": 12041
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/REVIEW.md": {
+      "sha256": "7217846f98a2b2b1cab3c62a466109518f055908ecd1566b705fa74ba98f44fe",
+      "size": 2827
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/TEST_PLAN.md": {
+      "sha256": "34f0a2f9df096d3af2d11b4052c2b50679e18ffd58878ad0e02aeccd531c7e53",
+      "size": 752
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY.stdout.txt": {
+      "sha256": "946b7e631ad90c9de9dbc567405e66462a1436d724b38b2e724f09c8335edcaf",
+      "size": 340
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY_PROCESS.json": {
+      "sha256": "33ba609bce96c02e8d379b2a33ffaba8c92ddbbf52e07fe3198679bc57b6a430",
+      "size": 409
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "bcc20706e44189cd6da59e74f1d2c1913e1de5e9cc3d4fb32f68432076c321f2",
+      "size": 5787
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "22943bb90ef18b0e66aed7fbc3b56c0ce90a02ef58f93fef38d9bdf68aa5ddec",
+      "size": 23749
+    },
+    "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/verify_recorded_uart.py": {
+      "sha256": "46fe8fc72e1b1f0f8aa5f1bc0e29f8b13b0d12fd03895db8ac6aee6de1da7333",
+      "size": 6107
+    }
+  },
+  "request": {
+    "code_commit": "e28c2a297c0b1a6d02747a8d7bf5eb7fe34ddd20",
+    "expected_result": "A reproducible evidence handoff for first partial motor motion and lease-margin stop; no full demonstration or formal acceptance claim.",
+    "operation_id": "B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480",
+    "requester": "B main 01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Verify recorded original bytes/SHA,16 UART frame CRCs, STOP11/next12 and actual process/PS closure.",
+      "Preserve partial actual motor observation, failed keeper/Host/service exits and no physical zero capture proof.",
+      "No new runtime/MCU/hardware action; future A1287 timing/steering/speed checks and bothH12/full29 acceptance remain incomplete."
+    ]
+  },
+  "request_hash": "862fcfbc50150923e25f4ed862ca517fb4a5e014c05d6d2a7d160f7f0a5f650c",
+  "schema_version": 1,
+  "stages": {
+    "A165_continuous_joint_demonstration": {
+      "log": "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "A165_partial_motor_start_stop_recorded": {
+      "log": "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "both_H12_formal_acceptance": {
+      "status": "not_run"
+    },
+    "formal_all29": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "network_stability": {
+      "status": "not_run"
+    },
+    "new_runtime_tests": {
+      "status": "not_run"
+    },
+    "recorded_UART_and_contract_review": {
+      "log": "handoffs/b/B-A165-FIRST-MOTION-CLOSED-EVIDENCE-20261104-480/VERIFY.stdout.txt",
+      "status": "passed"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "speed_change_following": {
+      "status": "not_run"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "two_axis_steering": {
+      "status": "not_run"
+    }
+  }
+}

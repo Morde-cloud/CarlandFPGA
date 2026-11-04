@@ -1,0 +1,52 @@
+--- closed377.js
++++ new_program391.js
+@@ -2,7 +2,7 @@
+ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+ const HERE=__dirname,REPO='D:/pynq/CarlandFPGA',HASH='2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d';
+-if(process.argv[3]!=='--execute-new-approved-operation'){
++if(process.argv[3]!=='--execute-new-approved-program-rx'){
+  console.log('SOURCE_ONLY_NOT_EXECUTED: no connection, CPU hold or RXDATA read.');
+ }else{
+  const proofPath=process.argv[4];if(!proofPath)throw Error('Fresh main approval proof required');
+@@ -10,7 +10,11 @@
+  const bindings={boot_id:'1abc1dff-1195-4833-9eb9-0291c349c79d',build_id:'76bea92ec0d97e37250733bad1eb3a38',parent_operation:'A-GEN4-JOINT-UART-BOARD-20261104-1130-R01',parent_request_hash:'81b30937615981e7079e72b463d62643d92b8355d365b95b3fae46f09a0a8bb0'};
+  if(!/^[a-f0-9]{64}$/.test(bindings.parent_request_hash))throw Error('SOURCE_ONLY: actual new A parent/request/actorREADY not yet received; no connect');
+  for(const[k,v]of Object.entries(bindings))if(proof[k]!==v)throw Error('Actual physical identity proof differs: '+k);
+- if(proof.schema!=='B_NEW_SINGLE_BYTE_RX_APPROVAL_V1'||proof.requirements_sha256!==HASH||proof.source_sha256!==sha(fs.readFileSync(__filename))||proof.expected_byte!==0x55||proof.bytes_permitted!==1||proof.CPU_hold_allowed!==true||proof.single_RXDATA_consume_allowed!==true||proof.new_operation_not_retry!==true||proof.XDS_isolated_confirmed!==true||proof.three_wires_common_ground_seated_confirmed!==true||proof.A_bytes_already_sent!==0||proof.A_holds_new_TX_only_owner!==true||proof.B_other_MCU_actors_closed!==true||!proof.authenticated_A_ready_event_id||!proof.authenticated_wire_receipt_event_id||!proof.A_operation_id||!/^B-MCU-RX-NEW-[A-Za-z0-9_-]+$/.test(proof.B_operation_id))throw Error('New explicitly approved single-byte operation required');
++ if(proof.schema!=='B_PROGRAM_SINGLE_BYTE_RX_APPROVAL_V1'||proof.requirements_sha256!==HASH||proof.source_sha256!==sha(fs.readFileSync(__filename))||proof.expected_byte!==0x55||proof.bytes_permitted!==1||proof.CPU_hold_allowed!==true||proof.single_RXDATA_consume_allowed!==true||proof.new_operation_not_retry!==true||proof.XDS_isolated_confirmed!==true||proof.three_wires_common_ground_seated_confirmed!==true||proof.A_bytes_already_sent!==0||proof.A_holds_new_TX_only_owner!==true||proof.B_other_MCU_actors_closed!==true||!proof.authenticated_A_ready_event_id||!proof.authenticated_wire_receipt_event_id||!proof.A_operation_id||!/^B-MCU-RX-NEW-[A-Za-z0-9_-]+$/.test(proof.B_operation_id))throw Error('New explicitly approved single-byte operation required');
++ if(proof.A_operation_id!=='A-GEN4-UART-TX1-20261104-1152-R01'||proof.B_operation_id!=='B-MCU-RX-NEW-PROGRAM-A1152-20261104-391'||proof.A_ready_raw_sha256!=='376e6ee0de37eef253162187c1da9e38b52841af67eec30650251ecde429e168'||proof.direct_RXDATA_when_available_allowed!==true||proof.A_program_prearmed!==true||!proof.authenticated_A_program_event_id)throw Error('New1152 ordinaryprogram/prearmed/directcandidateRX authority required');
++ for(const prefix of ['A_program_ready','A_program_source']){
++  if(typeof proof[prefix+'_raw_path']!=='string'||!/^[a-f0-9]{64}$/.test(proof[prefix+'_raw_sha256'])||sha(fs.readFileSync(proof[prefix+'_raw_path']))!==proof[prefix+'_raw_sha256'])throw Error('Retained prearmedprogram ready/source evidence required: '+prefix);
++ }
+  const now=Date.now(),created=Date.parse(proof.created_utc),expires=Date.parse(proof.expires_utc);
+  if(!Number.isFinite(created)||!Number.isFinite(expires)||created>now||expires<now||expires-created>120000)throw Error('Fresh approval max120s required');
+  if(sha(fs.readFileSync(proof.A_ready_raw_path))!==proof.A_ready_raw_sha256)throw Error('Retained actual A ready bytes differ');
+@@ -52,22 +56,18 @@
+   const meta={B_operation_id:proof.B_operation_id,A_operation_id:proof.A_operation_id,actual_script_pid:process.pid,source_sha256:rec.source_sha256,proof_sha256:rec.proof_sha256,ready_utc:new Date().toISOString(),ready_valid_until_utc:new Date(Math.min(expires,Date.now()+remaining)).toISOString(),active_budget_ms:60000,hard_CPU_hold_ceiling_guaranteed:false};
+   fs.writeFileSync(path.join(O,'B_READY_META.json'),JSON.stringify(meta,null,2),{flag:'wx'});
+   fs.writeFileSync(path.join(O,'B_READY.json'),JSON.stringify(ready,null,2),{flag:'wx'});rec.ready_written=true;save();
+-  const resultPath=path.join(O,'A_TX_RESULT.json');
+-  while(!fs.existsSync(resultPath)){guard('A terminal receipt wait');sleep(100);}
+-  guard('A terminal receipt validation');const aBytes=fs.readFileSync(resultPath),a=JSON.parse(aBytes);rec.A_result_sha256=sha(aBytes);save();
+-  for(const[k,v]of Object.entries(bindings))if(a[k]!==v)throw Error('A terminal identity differs');
+-  if(a.schema!=='A_SINGLE_BYTE_TX_CLOSED_V1'||a.A_operation_id!==proof.A_operation_id||a.B_operation_id!==proof.B_operation_id||a.B_ready_sha256!==sha(fs.readFileSync(path.join(O,'B_READY.json')))||a.byte!==85||a.TX_writes_requested!==1||a.TX_writes_returned!==1||a.A_actors_closed!==true||a.same_owner_lock_released!==true||a.reset_requested!==false||a.FIFO_flush!==false||a.MTR4_frames!==0||a.automatic_retry!==false||!a.authenticated_A_event_id||!a.raw_result_path||sha(fs.readFileSync(a.raw_result_path))!==a.raw_result_sha256)throw Error('Main-authenticated exact once-only A terminal proof required');
++  rec.receiver_mode='HW_RX_AVAILABLE_SINGLE_CANDIDATE_NO_MODEL_RESULT_DEPENDENCY';rec.A_TX_and_owner_close_evidence='Pending independent main correlation after actual capture; no ACK-derived arrival claim';save();
+   while((word(0x40101108)&4)!==0){guard('incoming byte wait');sleep(10);}
+   const before=sample('before_single_RXDATA');faultOff(before);if(!before.cpu_halted||before.PDBGCTL!==pre.PDBGCTL)throw Error('CPU hold/PDBG changed');
+-  guard('single RXDATA intent');rec.RXDATA_reads_requested=1;rec.RXDATA_read_intent_utc=new Date().toISOString();save();
++  guard('single preauthorized candidate RXDATA intent');rec.RXDATA_reads_requested=1;rec.RXDATA_read_intent_utc=new Date().toISOString();save();
+   const raw=word(0x40101124);rec.RXDATA_reads_returned=1;rec.raw_RXDATA=raw;rec.byte=raw&255;rec.error_bits=raw&0x1f00;save();
+   const after=sample('after_single_RXDATA');faultOff(after);
+   if(rec.byte!==85||rec.error_bits!==0||(after.STAT&4)!==4||!after.cpu_halted||after.PDBGCTL!==pre.PDBGCTL)throw Error('Byte/error/remaining FIFO/CPU unexpected; no automatic consume or resume');
+   guard('explicit successful resume');rec.resume_intent_utc=new Date().toISOString();save();s.target.run(false);rec.resume_returned=true;save();sleep(50);
+-  const final=sample('final_after_explicit_resume');faultOff(final);if(final.cpu_halted)throw Error('Final CPU not running');
+-  rec.status='single_raw55_received_MCU_READY_still_false';rec.MCU_READY=false;
++  const final=sample('final_after_explicit_resume');faultOff(final);if(final.cpu_halted||final.ticks===after.ticks)throw Error('Final CPU run/tick advance not confirmed');
++  rec.status='single_raw55_received_direction_only_MCU_READY_false';rec.MCU_READY=false;
+  }catch(e){rec.status='failed_or_unknown_no_replay_no_automatic_resume';rec.error=String(e);}
+  finally{try{if(s&&s.target.isConnected())rec.cpu_halted_before_shutdown=s.target.isHalted();}catch(e){rec.cpu_query_error=String(e);}try{ds.shutdown();rec.shutdown_returned=true;}catch(e){rec.shutdown_error=String(e);rec.status='failed_or_unknown_no_replay_no_automatic_resume';}rec.closed_utc=new Date().toISOString();save();}
+  console.log(JSON.stringify({status:rec.status,evidence:out,reads_requested:rec.RXDATA_reads_requested,reads_returned:rec.RXDATA_reads_returned,cpu_halted_before_shutdown:rec.cpu_halted_before_shutdown,error:rec.error}));
+- if(rec.status!=='single_raw55_received_MCU_READY_still_false')process.exit(1);
++ if(rec.status!=='single_raw55_received_direction_only_MCU_READY_false')process.exit(1);
+ }

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "c_first_normal",
+    "fields": {
+      "move_ms": 500,
+      "lease_ms": 300,
+      "flags": 1,
+      "seq": 2,
+      "source": "PC_DIRECT",
+      "command_seq": 1,
+      "run_id": 1,
+      "yaw_delta_cd": 100,
+      "pitch_delta_cd": -200,
+      "speed_delta_permille": 100
+    },
+    "frame_hex": "d34c0106020000000101640038ff64000000f40101000000010000002c01b8b5"
+  },
+  {
+    "name": "fpga_signed",
+    "fields": {
+      "move_ms": 500,
+      "lease_ms": 300,
+      "flags": 1,
+      "seq": 3,
+      "source": "FPGA_OUTPUT",
+      "command_seq": 2,
+      "run_id": 1,
+      "yaw_delta_cd": -1234,
+      "pitch_delta_cd": 2345,
+      "speed_delta_permille": -321
+    },
+    "frame_hex": "d34c01060300000002012efb2909bffe0000f40102000000010000002c01155c"
+  },
+  {
+    "name": "signed_extremes",
+    "fields": {
+      "move_ms": 1000,
+      "lease_ms": 500,
+      "flags": 1,
+      "seq": 4294967295,
+      "source": "MANUAL",
+      "command_seq": 4294967295,
+      "run_id": 4294967295,
+      "yaw_delta_cd": -32768,
+      "pitch_delta_cd": 32767,
+      "speed_delta_permille": -32768
+    },
+    "frame_hex": "d34c0106ffffffff03010080ff7f00800000e803fffffffffffffffff40163b9"
+  },
+  {
+    "name": "fresh_zero_delta_round",
+    "fields": {
+      "move_ms": 100,
+      "lease_ms": 100,
+      "flags": 1,
+      "seq": 4,
+      "source": "PC_DIRECT",
+      "command_seq": 3,
+      "run_id": 1,
+      "yaw_delta_cd": 0,
+      "pitch_delta_cd": 0,
+      "speed_delta_permille": 0
+    },
+    "frame_hex": "d34c01060400000001010000000000000000640003000000010000006400fc3d"
+  },
+  {
+    "name": "pause",
+    "fields": {
+      "move_ms": 500,
+      "lease_ms": 300,
+      "flags": 3,
+      "seq": 5,
+      "source": "PC_DIRECT",
+      "command_seq": 4,
+      "run_id": 1,
+      "yaw_delta_cd": 0,
+      "pitch_delta_cd": 0,
+      "speed_delta_permille": 0
+    },
+    "frame_hex": "d34c01060500000001030000000000000000f40104000000010000002c0156e7"
+  },
+  {
+    "name": "stop",
+    "fields": {
+      "move_ms": 500,
+      "lease_ms": 300,
+      "flags": 5,
+      "seq": 6,
+      "source": "MANUAL",
+      "command_seq": 5,
+      "run_id": 1,
+      "yaw_delta_cd": 0,
+      "pitch_delta_cd": 0,
+      "speed_delta_permille": 0
+    },
+    "frame_hex": "d34c01060600000003050000000000000000f40105000000010000002c01576b"
+  }
+]

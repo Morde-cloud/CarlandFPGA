@@ -1,0 +1,508 @@
+******************************************************************************
+            TI ARM Clang Linker PC v5.1.1                      
+******************************************************************************
+>> Linked Wed Nov  4 09:51:20 2026
+
+OUTPUT FILE NAME:   <D:\pynq\CarlandFPGA\.local\deployment\node-b\main-handoff-20261029\successor-01\successor-work\resume-100\mcu422\build2\motor_delta.out>
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00002d91
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00020000  00003180  0001ce80  R  X
+  SRAM                  20200000   00008000  000003ee  00007c12  RW X
+  BCR_CONFIG            41c00000   000000ff  00000000  000000ff  R   
+  BSL_CONFIG            41c00100   00000080  00000000  00000080  R   
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00002f18   00002f18    r-x
+  00000000    00000000    000000c0   000000c0    r-- .intvecs
+  000000c0    000000c0    00002e58   00002e58    r-x .text
+00002f20    00002f20    00000268   00000268    r--
+  00002f20    00002f20    00000250   00000250    r-- .rodata
+  00003170    00003170    00000018   00000018    r-- .cinit
+20200000    20200000    000001ee   00000000    rw-
+  20200000    20200000    000001ee   00000000    rw- .bss
+20207e00    20207e00    00000200   00000000    rw-
+  20207e00    20207e00    00000200   00000000    rw- .stack
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    000000c0     
+                  00000000    000000c0     startup_mspm0g350x_ticlang.o (.intvecs)
+
+.text      0    000000c0    00002e58     
+                  000000c0    00000888     motor_control.o (.text.mc_command)
+                  00000948    00000764     free_control_main.o (.text.main)
+                  000010ac    0000047c     free_control.o (.text.fc_byte)
+                  00001528    00000464     demo_core.o (.text.demo_command)
+                  0000198c    000003a4     free_control.o (.text.fc_poll)
+                  00001d30    00000194     free_control.o (.text.fc_command)
+                  00001ec4    00000140     demo_core.o (.text.demo_status)
+                  00002004    00000104     driverlib.a : dl_timer.o (.text.DL_Timer_initFourCCPWMMode)
+                  00002108    000000ec     motor_control.o (.text.clipped_axis)
+                  000021f4    000000d8     drill_pwm.o (.text.drill_pwm_set_permille)
+                  000022cc    000000d4     free_control.o (.text.fc_target_raw)
+                  000023a0    000000b0     demo_core.o (.text.demo_crc)
+                  00002450    000000b0     free_control.o (.text.fc_limit_begin)
+                  00002500    000000ae     motor_control.o (.text.mc_tick)
+                  000025ae    0000009a     libc.a : memcpy16.S.obj (.text:memcpy)
+                  00002648    0000008c     free_control.o (.text.move_request)
+                  000026d4    00000084     free_control.o (.text.read_timeout)
+                  00002758    00000080     ti_msp_dl_config.o (.text.SYSCFG_DL_BUS_UART_init)
+                  000027d8    00000080     ti_msp_dl_config.o (.text.SYSCFG_DL_PC_UART_init)
+                  00002858    0000006c     ti_msp_dl_config.o (.text.SYSCFG_DL_DRILL_PWM_init)
+                  000028c4    00000062     libc.a : memset16.S.obj (.text:memset)
+                  00002926    00000002     startup_mspm0g350x_ticlang.o (.text.Default_Handler)
+                  00002928    00000056     libclang_rt.builtins.a : aeabi_idivmod.S.obj (.text)
+                  0000297e    00000002                            : aeabi_div0.c.obj (.text.__aeabi_idiv0)
+                  00002980    00000054     ti_msp_dl_config.o (.text.SYSCFG_DL_GPIO_init)
+                  000029d4    0000004c     demo_core.o (.text.demo_tick)
+                  00002a20    0000004c     free_control.o (.text.read_request)
+                  00002a6c    00000048     driverlib.a : dl_uart.o (.text.DL_UART_init)
+                  00002ab4    00000048     ti_msp_dl_config.o (.text.SYSCFG_DL_initPower)
+                  00002afc    00000046     free_control.o (.text.fc_stop)
+                  00002b42    00000046     demo_core.o (.text.joho_move)
+                  00002b88    00000044     motor_control.o (.text.healthy)
+                  00002bcc    00000040     libclang_rt.builtins.a : aeabi_uidivmod.S.obj (.text)
+                  00002c0c    0000003c     libc.a : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  00002c48    00000036     free_control.o (.text.fault)
+                  00002c7e    00000002     --HOLE-- [fill = 0]
+                  00002c80    00000034     drill_pwm.o (.text.drill_pwm_init_off)
+                  00002cb4    00000032     motor_control.o (.text.status)
+                  00002ce6    00000002     --HOLE-- [fill = 0]
+                  00002ce8    00000030     ti_msp_dl_config.o (.text.SYSCFG_DL_SYSCTL_init)
+                  00002d18    00000028     free_control.o (.text.fc_init)
+                  00002d40    00000028     libc.a : memmov.c.obj (.text.memmove)
+                  00002d68    00000028     motor_control.o (.text.stop_all)
+                  00002d90    00000028     libc.a : boot_cortex_m.c.obj (.text:_c_int00_noargs)
+                  00002db8    00000026     demo_core.o (.text.demo_init)
+                  00002dde    00000002     --HOLE-- [fill = 0]
+                  00002de0    0000001c     driverlib.a : dl_timer.o (.text.DL_Timer_setCaptCompUpdateMethod)
+                  00002dfc    0000001c                 : dl_timer.o (.text.DL_Timer_setClockConfig)
+                  00002e18    0000001c     ti_msp_dl_config.o (.text.SYSCFG_DL_init)
+                  00002e34    0000001a     libclang_rt.builtins.a : aeabi_memset.S.obj (.text)
+                  00002e4e    00000002     --HOLE-- [fill = 0]
+                  00002e50    00000018     driverlib.a : dl_timer.o (.text.DL_Timer_setCaptureCompareOutCtl)
+                  00002e68    00000016     libc.a : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset)
+                  00002e7e    00000002     --HOLE-- [fill = 0]
+                  00002e80    00000014     demo_core.o (.text.demo_bus_error)
+                  00002e94    00000014     motor_control.o (.text.mc_init)
+                  00002ea8    00000012     driverlib.a : dl_uart.o (.text.DL_UART_setClockConfig)
+                  00002eba    00000002     --HOLE-- [fill = 0]
+                  00002ebc    00000010                 : dl_timer.o (.text.DL_Timer_setCaptureCompareValue)
+                  00002ecc    00000010     free_control_main.o (.text.SysTick_Handler)
+                  00002edc    0000000c     drill_pwm.o (.text.drill_pwm_get_permille)
+                  00002ee8    0000000a     driverlib.a : dl_common.o (.text.DL_Common_delayCycles)
+                  00002ef2    00000002     --HOLE-- [fill = 0]
+                  00002ef4    00000008     libclang_rt.builtins.a : aeabi_memcpy.S.obj (.text)
+                  00002efc    00000008                            : aeabi_memmove.S.obj (.text)
+                  00002f04    00000006     libc.a : exit.c.obj (.text:abort)
+                  00002f0a    00000004     libsysbm.a : hostexit.c.obj (.text.HOSTexit)
+                  00002f0e    00000004     startup_mspm0g350x_ticlang.o (.text.Reset_Handler)
+                  00002f12    00000004     libc.a : pre_init.c.obj (.text._system_pre_init)
+                  00002f16    00000002     --HOLE-- [fill = 0]
+
+.cinit     0    00003170    00000018     
+                  00003170    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00003178    00000004     (__TI_handler_table)
+                  0000317c    00000008     (__TI_cinit_table)
+                  00003184    00000004     --HOLE-- [fill = 0]
+
+.rodata    0    00002f20    00000250     
+                  00002f20    00000200     demo_core.o (.rodata..L.crctable)
+                  00003120    00000010     free_control.o (.rodata.cst4)
+                  00003130    00000010     free_control.o (.rodata.free_saved_reference)
+                  00003140    0000000c     free_control_main.o (.rodata..Lswitch.table.main)
+                  0000314c    0000000a     ti_msp_dl_config.o (.rodata.gBUS_UARTConfig)
+                  00003156    0000000a     ti_msp_dl_config.o (.rodata.gPC_UARTConfig)
+                  00003160    00000008     ti_msp_dl_config.o (.rodata.gDRILL_PWMConfig)
+                  00003168    00000003     ti_msp_dl_config.o (.rodata.gDRILL_PWMClockConfig)
+                  0000316b    00000002     ti_msp_dl_config.o (.rodata.gBUS_UARTClockConfig)
+                  0000316d    00000002     ti_msp_dl_config.o (.rodata.gPC_UARTClockConfig)
+                  0000316f    00000001     --HOLE-- [fill = 0]
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.binit     0    00000000    00000000     
+
+.bss       0    20200000    000001ee     UNINITIALIZED
+                  20200000    000000ac     (.common:free_diagnostics)
+                  202000ac    00000082     free_control_main.o (.bss.bus_tx)
+                  2020012e    00000082     free_control_main.o (.bss.pc_tx)
+                  202001b0    00000020     (.common:motor_diagnostics)
+                  202001d0    00000004     free_control_main.o (.bss.ticks)
+                  202001d4    00000004     (.common:free_limit_request)
+                  202001d8    00000004     (.common:free_tx_overflows)
+                  202001dc    00000004     (.common:motor_gpio_output)
+                  202001e0    00000004     (.common:motor_pincm)
+                  202001e4    00000004     (.common:motor_pwm_applied)
+                  202001e8    00000004     (.common:motor_pwm_peak)
+                  202001ec    00000002     drill_pwm.o (.bss.selected_duty)
+
+.stack     0    20207e00    00000200     UNINITIALIZED
+                  20207e00    00000004     libc.a : boot_cortex_m.c.obj (.stack)
+                  20207e04    000001fc     --HOLE--
+
+__llvm_prf_cnts 
+*          0    20200000    00000000     UNINITIALIZED
+
+__llvm_prf_bits 
+*          0    20200000    00000000     UNINITIALIZED
+
+MODULE SUMMARY
+
+       Module                         code    ro data   rw data
+       ------                         ----    -------   -------
+    D:\pynq\CarlandFPGA\.local\deployment\node-b\main-handoff-20261029\successor-01\successor-work\resume-100\mcu422\build2\
+       free_control.o                 3384    32        0      
+       motor_control.o                2772    0         0      
+       free_control_main.o            1908    12        492    
+       demo_core.o                    1824    512       0      
+       ti_msp_dl_config.o             596     35        0      
+       drill_pwm.o                    280     0         2      
+       startup_mspm0g350x_ticlang.o   6       192       0      
+    +--+------------------------------+-------+---------+---------+
+       Total:                         10770   783       494    
+                                                               
+    C:\ti\ccs2100\ccs\tools\compiler\ti-cgt-armllvm_5.1.1.LTS\lib\armv6m-ti-none-eabi/c/libc.a
+       memcpy16.S.obj                 154     0         0      
+       memset16.S.obj                 98      0         0      
+       autoinit.c.obj                 60      0         0      
+       boot_cortex_m.c.obj            40      0         0      
+       memmov.c.obj                   40      0         0      
+       copy_zero_init.c.obj           22      0         0      
+       exit.c.obj                     6       0         0      
+       pre_init.c.obj                 4       0         0      
+    +--+------------------------------+-------+---------+---------+
+       Total:                         424     0         0      
+                                                               
+    C:\ti\ccs2100\ccs\tools\compiler\ti-cgt-armllvm_5.1.1.LTS\lib\armv6m-ti-none-eabi/c/libsysbm.a
+       hostexit.c.obj                 4       0         0      
+    +--+------------------------------+-------+---------+---------+
+       Total:                         4       0         0      
+                                                               
+    C:\ti\ccs2100\ccs\tools\compiler\ti-cgt-armllvm_5.1.1.LTS\lib\armv6m-ti-none-eabi/libclang_rt.builtins.a
+       aeabi_idivmod.S.obj            86      0         0      
+       aeabi_uidivmod.S.obj           64      0         0      
+       aeabi_memset.S.obj             26      0         0      
+       aeabi_memcpy.S.obj             8       0         0      
+       aeabi_memmove.S.obj            8       0         0      
+       aeabi_div0.c.obj               2       0         0      
+    +--+------------------------------+-------+---------+---------+
+       Total:                         194     0         0      
+                                                               
+    C:\ti\mspm0_sdk_2_11_00_07\source\ti/driverlib/lib/ticlang/m0p/mspm0g1x0x_g3x0x/driverlib.a
+       dl_timer.o                     356     0         0      
+       dl_uart.o                      90      0         0      
+       dl_common.o                    10      0         0      
+    +--+------------------------------+-------+---------+---------+
+       Total:                         456     0         0      
+                                                               
+       Stack:                         0       0         512    
+       Linker Generated:              0       20        0      
+    +--+------------------------------+-------+---------+---------+
+       Grand Total:                   11848   803       1006   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 0000317c records: 1, size/record: 8, table size: 8
+	.bss: load addr=00003170, load size=00000008 bytes, run addr=20200000, run size=000001ee bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00003178 records: 1, size/record: 4, table size: 4
+	index: 0, handler: __TI_zero_init
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                            
+-------   ----                            
+00002927  ADC0_IRQHandler                 
+00002927  ADC1_IRQHandler                 
+00002927  AES_IRQHandler                  
+00002f0a  C$$EXIT                         
+00002927  CANFD0_IRQHandler               
+00002927  DAC0_IRQHandler                 
+00002ee9  DL_Common_delayCycles           
+00002005  DL_Timer_initFourCCPWMMode      
+00002de1  DL_Timer_setCaptCompUpdateMethod
+00002e51  DL_Timer_setCaptureCompareOutCtl
+00002ebd  DL_Timer_setCaptureCompareValue 
+00002dfd  DL_Timer_setClockConfig         
+00002a6d  DL_UART_init                    
+00002ea9  DL_UART_setClockConfig          
+00002927  DMA_IRQHandler                  
+00002927  Default_Handler                 
+00002927  GROUP0_IRQHandler               
+00002927  GROUP1_IRQHandler               
+00002f0b  HOSTexit                        
+00002927  HardFault_Handler               
+00002927  I2C0_IRQHandler                 
+00002927  I2C1_IRQHandler                 
+00002927  NMI_Handler                     
+00002927  PendSV_Handler                  
+00002927  RTC_IRQHandler                  
+00002f0f  Reset_Handler                   
+00002927  SPI0_IRQHandler                 
+00002927  SPI1_IRQHandler                 
+00002927  SVC_Handler                     
+00002759  SYSCFG_DL_BUS_UART_init         
+00002859  SYSCFG_DL_DRILL_PWM_init        
+00002981  SYSCFG_DL_GPIO_init             
+000027d9  SYSCFG_DL_PC_UART_init          
+00002ce9  SYSCFG_DL_SYSCTL_init           
+00002e19  SYSCFG_DL_init                  
+00002ab5  SYSCFG_DL_initPower             
+00002ecd  SysTick_Handler                 
+00002927  TIMA0_IRQHandler                
+00002927  TIMA1_IRQHandler                
+00002927  TIMG0_IRQHandler                
+00002927  TIMG12_IRQHandler               
+00002927  TIMG6_IRQHandler                
+00002927  TIMG7_IRQHandler                
+00002927  TIMG8_IRQHandler                
+00002927  UART0_IRQHandler                
+00002927  UART1_IRQHandler                
+00002927  UART2_IRQHandler                
+00002927  UART3_IRQHandler                
+20208000  __STACK_END                     
+00000200  __STACK_SIZE                    
+00000000  __TI_ATRegion0_region_sz        
+00000000  __TI_ATRegion0_src_addr         
+00000000  __TI_ATRegion0_trg_addr         
+00000000  __TI_ATRegion1_region_sz        
+00000000  __TI_ATRegion1_src_addr         
+00000000  __TI_ATRegion1_trg_addr         
+00000000  __TI_ATRegion2_region_sz        
+00000000  __TI_ATRegion2_src_addr         
+00000000  __TI_ATRegion2_trg_addr         
+0000317c  __TI_CINIT_Base                 
+00003184  __TI_CINIT_Limit                
+00003184  __TI_CINIT_Warm                 
+00003178  __TI_Handler_Table_Base         
+0000317c  __TI_Handler_Table_Limit        
+00002c0d  __TI_auto_init_nobinit_nopinit  
+ffffffff  __TI_pprof_out_hndl             
+ffffffff  __TI_prof_data_size             
+ffffffff  __TI_prof_data_start            
+00000000  __TI_static_base__              
+00002e69  __TI_zero_init_nomemset         
+00002929  __aeabi_idiv                    
+0000297f  __aeabi_idiv0                   
+00002929  __aeabi_idivmod                 
+00002e43  __aeabi_memclr                  
+00002e43  __aeabi_memclr4                 
+00002e43  __aeabi_memclr8                 
+00002ef5  __aeabi_memcpy                  
+00002ef5  __aeabi_memcpy4                 
+00002ef5  __aeabi_memcpy8                 
+00002efd  __aeabi_memmove                 
+00002efd  __aeabi_memmove4                
+00002efd  __aeabi_memmove8                
+00002e35  __aeabi_memset                  
+00002e35  __aeabi_memset4                 
+00002e35  __aeabi_memset8                 
+00002bcd  __aeabi_uidiv                   
+00002bcd  __aeabi_uidivmod                
+ffffffff  __binit__                       
+UNDEFED   __mpu_init                      
+20207e00  __stack                         
+20200000  __start___llvm_prf_bits         
+20200000  __start___llvm_prf_cnts         
+20200000  __stop___llvm_prf_bits          
+20200000  __stop___llvm_prf_cnts          
+00002d91  _c_int00_noargs                 
+UNDEFED   _system_post_cinit              
+00002f13  _system_pre_init                
+00002f05  abort                           
+ffffffff  binit                           
+00002e81  demo_bus_error                  
+00001529  demo_command                    
+000023a1  demo_crc                        
+00002db9  demo_init                       
+00001ec5  demo_status                     
+000029d5  demo_tick                       
+00002edd  drill_pwm_get_permille          
+00002c81  drill_pwm_init_off              
+000021f5  drill_pwm_set_permille          
+000010ad  fc_byte                         
+00001d31  fc_command                      
+00002d19  fc_init                         
+00002451  fc_limit_begin                  
+0000198d  fc_poll                         
+00002afd  fc_stop                         
+000022cd  fc_target_raw                   
+20200000  free_diagnostics                
+202001d4  free_limit_request              
+00003130  free_saved_reference            
+202001d8  free_tx_overflows               
+00000000  interruptVectors                
+00002b43  joho_move                       
+00000949  main                            
+000000c1  mc_command                      
+00002e95  mc_init                         
+00002501  mc_tick                         
+000025af  memcpy                          
+00002d41  memmove                         
+000028c5  memset                          
+202001b0  motor_diagnostics               
+202001dc  motor_gpio_output               
+202001e0  motor_pincm                     
+202001e4  motor_pwm_applied               
+202001e8  motor_pwm_peak                  
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                            
+-------   ----                            
+00000000  __TI_ATRegion0_region_sz        
+00000000  __TI_ATRegion0_src_addr         
+00000000  __TI_ATRegion0_trg_addr         
+00000000  __TI_ATRegion1_region_sz        
+00000000  __TI_ATRegion1_src_addr         
+00000000  __TI_ATRegion1_trg_addr         
+00000000  __TI_ATRegion2_region_sz        
+00000000  __TI_ATRegion2_src_addr         
+00000000  __TI_ATRegion2_trg_addr         
+00000000  __TI_static_base__              
+00000000  interruptVectors                
+000000c1  mc_command                      
+00000200  __STACK_SIZE                    
+00000949  main                            
+000010ad  fc_byte                         
+00001529  demo_command                    
+0000198d  fc_poll                         
+00001d31  fc_command                      
+00001ec5  demo_status                     
+00002005  DL_Timer_initFourCCPWMMode      
+000021f5  drill_pwm_set_permille          
+000022cd  fc_target_raw                   
+000023a1  demo_crc                        
+00002451  fc_limit_begin                  
+00002501  mc_tick                         
+000025af  memcpy                          
+00002759  SYSCFG_DL_BUS_UART_init         
+000027d9  SYSCFG_DL_PC_UART_init          
+00002859  SYSCFG_DL_DRILL_PWM_init        
+000028c5  memset                          
+00002927  ADC0_IRQHandler                 
+00002927  ADC1_IRQHandler                 
+00002927  AES_IRQHandler                  
+00002927  CANFD0_IRQHandler               
+00002927  DAC0_IRQHandler                 
+00002927  DMA_IRQHandler                  
+00002927  Default_Handler                 
+00002927  GROUP0_IRQHandler               
+00002927  GROUP1_IRQHandler               
+00002927  HardFault_Handler               
+00002927  I2C0_IRQHandler                 
+00002927  I2C1_IRQHandler                 
+00002927  NMI_Handler                     
+00002927  PendSV_Handler                  
+00002927  RTC_IRQHandler                  
+00002927  SPI0_IRQHandler                 
+00002927  SPI1_IRQHandler                 
+00002927  SVC_Handler                     
+00002927  TIMA0_IRQHandler                
+00002927  TIMA1_IRQHandler                
+00002927  TIMG0_IRQHandler                
+00002927  TIMG12_IRQHandler               
+00002927  TIMG6_IRQHandler                
+00002927  TIMG7_IRQHandler                
+00002927  TIMG8_IRQHandler                
+00002927  UART0_IRQHandler                
+00002927  UART1_IRQHandler                
+00002927  UART2_IRQHandler                
+00002927  UART3_IRQHandler                
+00002929  __aeabi_idiv                    
+00002929  __aeabi_idivmod                 
+0000297f  __aeabi_idiv0                   
+00002981  SYSCFG_DL_GPIO_init             
+000029d5  demo_tick                       
+00002a6d  DL_UART_init                    
+00002ab5  SYSCFG_DL_initPower             
+00002afd  fc_stop                         
+00002b43  joho_move                       
+00002bcd  __aeabi_uidiv                   
+00002bcd  __aeabi_uidivmod                
+00002c0d  __TI_auto_init_nobinit_nopinit  
+00002c81  drill_pwm_init_off              
+00002ce9  SYSCFG_DL_SYSCTL_init           
+00002d19  fc_init                         
+00002d41  memmove                         
+00002d91  _c_int00_noargs                 
+00002db9  demo_init                       
+00002de1  DL_Timer_setCaptCompUpdateMethod
+00002dfd  DL_Timer_setClockConfig         
+00002e19  SYSCFG_DL_init                  
+00002e35  __aeabi_memset                  
+00002e35  __aeabi_memset4                 
+00002e35  __aeabi_memset8                 
+00002e43  __aeabi_memclr                  
+00002e43  __aeabi_memclr4                 
+00002e43  __aeabi_memclr8                 
+00002e51  DL_Timer_setCaptureCompareOutCtl
+00002e69  __TI_zero_init_nomemset         
+00002e81  demo_bus_error                  
+00002e95  mc_init                         
+00002ea9  DL_UART_setClockConfig          
+00002ebd  DL_Timer_setCaptureCompareValue 
+00002ecd  SysTick_Handler                 
+00002edd  drill_pwm_get_permille          
+00002ee9  DL_Common_delayCycles           
+00002ef5  __aeabi_memcpy                  
+00002ef5  __aeabi_memcpy4                 
+00002ef5  __aeabi_memcpy8                 
+00002efd  __aeabi_memmove                 
+00002efd  __aeabi_memmove4                
+00002efd  __aeabi_memmove8                
+00002f05  abort                           
+00002f0a  C$$EXIT                         
+00002f0b  HOSTexit                        
+00002f0f  Reset_Handler                   
+00002f13  _system_pre_init                
+00003130  free_saved_reference            
+00003178  __TI_Handler_Table_Base         
+0000317c  __TI_CINIT_Base                 
+0000317c  __TI_Handler_Table_Limit        
+00003184  __TI_CINIT_Limit                
+00003184  __TI_CINIT_Warm                 
+20200000  __start___llvm_prf_bits         
+20200000  __start___llvm_prf_cnts         
+20200000  __stop___llvm_prf_bits          
+20200000  __stop___llvm_prf_cnts          
+20200000  free_diagnostics                
+202001b0  motor_diagnostics               
+202001d4  free_limit_request              
+202001d8  free_tx_overflows               
+202001dc  motor_gpio_output               
+202001e0  motor_pincm                     
+202001e4  motor_pwm_applied               
+202001e8  motor_pwm_peak                  
+20207e00  __stack                         
+20208000  __STACK_END                     
+ffffffff  __TI_pprof_out_hndl             
+ffffffff  __TI_prof_data_size             
+ffffffff  __TI_prof_data_start            
+ffffffff  __binit__                       
+ffffffff  binit                           
+UNDEFED   __mpu_init                      
+UNDEFED   _system_post_cinit              
+
+[133 symbols]

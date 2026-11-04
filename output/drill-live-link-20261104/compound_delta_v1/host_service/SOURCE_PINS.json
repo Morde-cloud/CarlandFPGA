@@ -1,0 +1,114 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-DELTA-SERVICE-LEASE-TIMING-FIX-20261104-436",
+  "canonical_agent_id": "/root/delta_service426",
+  "at_utc": "2026-11-04T02:04:20.687323+00:00",
+  "runtime_files": [
+    {
+      "path": "product_uart_service.py",
+      "bytes": 26931,
+      "sha256": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
+      "changed_from_426": true
+    },
+    {
+      "path": "product_uart_stdio.py",
+      "bytes": 5759,
+      "sha256": "a6daef3766743b695d2630817d5cca7b6a76a26ac30ea259f5841637fe29cdab",
+      "changed_from_426": true
+    },
+    {
+      "path": "drill_live_link/session_client.py",
+      "bytes": 3347,
+      "sha256": "93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f",
+      "changed_from_426": false
+    },
+    {
+      "path": "drill_live_link/compound_session.py",
+      "bytes": 11174,
+      "sha256": "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d",
+      "changed_from_426": true
+    },
+    {
+      "path": "delta_codec.py",
+      "bytes": 9079,
+      "sha256": "e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca",
+      "changed_from_426": false
+    }
+  ],
+  "strict_dependency_paths_and_hashes": {
+    "delta_codec": [
+      "delta_codec.py",
+      "e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca"
+    ],
+    "drill_live_link.compound_session": [
+      "drill_live_link/compound_session.py",
+      "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d"
+    ],
+    "motor_runtime.variable_session": [
+      "baseline_mtr4/motor_runtime/variable_session.py",
+      "1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38"
+    ],
+    "fpga_link.session": [
+      "baseline_mtr4/fpga_link/session.py",
+      "5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba"
+    ],
+    "fpga_link.uartlite": [
+      "baseline_mtr4/fpga_link/uartlite.py",
+      "29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778"
+    ],
+    "pc.codec": [
+      "baseline_mtr4/pc/codec.py",
+      "62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006"
+    ],
+    "drill_live_link.session_client": [
+      "drill_live_link/session_client.py",
+      "93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f"
+    ],
+    "drill_live_link.follower": [
+      "drill_live_link/follower.py",
+      "6b975c4cb3ad23723b131ee088edfaa9810fa387af0be61382497ffe088a1134"
+    ],
+    "drill_live_link.model": [
+      "drill_live_link/model.py",
+      "249d0e6c253de8f91402ba5e35f0d385eea789a886c14ea249ad092bf5a69333"
+    ]
+  },
+  "strict_stdio_service_sha256": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
+  "original426_immutable_verified": true,
+  "fixes": [
+    "lease origin immediately before real compound transport.write_frame intent, after preparatorySTATUS/ARM",
+    "new genuine higher command with expiredlocallease observes realSTATUS/OFF, syncs normalizedspeed0, then explicitARM; heartbeat neverARMs",
+    "main-authorized private STATUS4/require_okFalse recovery permits stickyWATCHDOG7 only if actually unarmed andduty0; CRC/seq/_fresh stillrequired, ordinarySTATUS/keeper/othererrors unchanged"
+  ],
+  "focused_tests": {
+    "tests": 19,
+    "exit_code": 0,
+    "actual_pid": 33576,
+    "process": "TEST436_FINAL_PROCESS.json",
+    "raw_stdout": "TEST436_FINAL.stdout.txt",
+    "raw_stderr": "TEST436_FINAL.stderr.txt",
+    "preserved_17pass_beforewatchdog_scope": "before_watchdog_status_decision/"
+  },
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "hardware_executed": false,
+  "formal_or_physical_acceptance": false,
+  "parent_main_acceptance_required": true
+}

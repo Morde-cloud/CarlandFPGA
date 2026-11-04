@@ -1,0 +1,207 @@
+--- immutable426/product_uart_service.py
++++ service436/product_uart_service.py
+@@ -29,7 +29,7 @@
+ PROTECTED = ((0x43C00000, 0x1000), (0x43C10000, 0x1000))
+ DEPENDENCIES = {
+     'delta_codec': ('delta_codec.py', 'e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca'),
+-    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', '47fb35bf614fbb2808b7bf06d3c880673e1e31aa7d6d026458b35334a9c22e23'),
++    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', 'e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d'),
+     'motor_runtime.variable_session': ('baseline_mtr4/motor_runtime/variable_session.py', '1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38'),
+     'fpga_link.session': ('baseline_mtr4/fpga_link/session.py', '5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba'),
+     'fpga_link.uartlite': ('baseline_mtr4/fpga_link/uartlite.py', '29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778'),
+@@ -344,9 +344,15 @@
+ 
+     def _send(self, *args, **kwargs):
+         try:
++            recover_idle_watchdog = kwargs.pop('_delta_recover_idle_watchdog', False)
++            _need(type(recover_idle_watchdog) is bool and (not recover_idle_watchdog
++                  or args[0] == 4 and kwargs.get('require_ok') is False),
++                  'private delta recovery is only a non-required-OK STATUS')
+             reply = super()._send(*args, **kwargs)
+             diagnostic_disarmed = self.diagnostic and args[0] in (3, 4) and reply.result_code == 3
+-            _need(reply.result_code == 0 or diagnostic_disarmed, 'MCU non-OK response')
++            idle_watchdog = (recover_idle_watchdog and reply.result_code == 7
++                             and not reply.armed and reply.requested_duty_permille == 0)
++            _need(reply.result_code == 0 or diagnostic_disarmed or idle_watchdog, 'MCU non-OK response')
+             if args[0] == 3:
+                 _need(not reply.armed and reply.requested_duty_permille == 0, 'STOP reply is not disarmed/OFF')
+             return reply
+--- immutable426/product_uart_stdio.py
++++ service436/product_uart_stdio.py
+@@ -9,7 +9,7 @@
+ 
+ from product_uart_service import ProductUartService, ServiceError
+ 
+-EXPECTED_SERVICE_SHA256 = '1603b8180d78ae4226114188ff2e317c592e384eb7707bcc9c9bc0bff9171b17'
++EXPECTED_SERVICE_SHA256 = '54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d'
+ 
+ 
+ def _need(ok, reason):
+--- immutable426/drill_live_link/compound_session.py
++++ service436/drill_live_link/compound_session.py
+@@ -30,6 +30,9 @@
+         if self.clock_ms() >= deadline:
+             raise LinkError('expired before compound dispatch; reserved wire sequence skipped')
+         frame = encoder(seq=seq, source=self.source, **fields)
++        # Conservatively time this frame's lease at its transport write intent,
++        # after any initial STATUS/ARM and durable sequence reservation.
++        write_started_ms = self.clock_ms()
+         self.transport.write_frame(frame)
+         raw = self.transport.read_frame(.3)
+         if raw is None:
+@@ -37,7 +40,7 @@
+         reply = decode_reply(raw)
+         if reply.seq != seq or reply.result_code:
+             raise LinkError('compound refused or sequence mismatch; no retry')
+-        return reply
++        return reply, write_started_ms
+ 
+     def _source_live(self, command_seq, run_id):
+         now = self.clock_ms()
+@@ -97,7 +100,7 @@
+                 self._fresh(self.delta_reply)
+                 if self.delta_speed_norm and not self.allow_motor:
+                     raise LinkError('motor permission required')
+-                reply = self._compound_exchange(encode_keepalive, min(deadline,self.delta_source_deadline_ms),
++                reply, write_started_ms = self._compound_exchange(encode_keepalive, min(deadline,self.delta_source_deadline_ms),
+                     command_seq=cmd,run_id=run,lease_ms=lease)
+                 self._fresh(reply)
+                 if not reply.armed or reply.requested_duty_permille != speed_to_pwm(self.delta_speed_norm):
+@@ -115,23 +118,38 @@
+                 if run < self.delta_run_id or run == self.delta_run_id and cmd <= self.delta_command_seq:
+                     raise LinkError('real run/command already applied; never double accumulate')
+                 flags = kwargs['flags']
++                requested_speed = max(0,min(1000,self.delta_speed_norm+kwargs['speed_delta_permille']))
++                if flags == VALID and requested_speed and not self.allow_motor:
++                    raise LinkError('motor permission required')
++                if flags == VALID:
++                    new_run = run != self.delta_run_id
++                    lease_expired = (self.delta_active and (self.delta_lease_deadline_ms is None
++                        or self.clock_ms() >= self.delta_lease_deadline_ms))
++                    if new_run and not lease_expired and (self.delta_speed_norm or self.motor_duty or self.delta_active):
++                        raise LinkError('new run requires prior OFF and explicit ARM')
++                    current = self.delta_reply if self.delta_active else None
++                    if current is None or not current.armed or lease_expired:
++                        if lease_expired:
++                            # Only this already-validated new real round may
++                            # recover an actual OFF watchdog status. A keeper
++                            # and ordinary status never take this path.
++                            current = self._send(4,require_ok=False,_delta_recover_idle_watchdog=True)
++                        else:
++                            current = self._send(4,require_ok=False)
++                        self._fresh(current)
++                        if current.requested_duty_permille:
++                            raise LinkError('new compound ARM requires actual OFF')
++                        # MCU lease expiry clears its normalized speed. Sync
++                        # only from the actual OFF reply, never from a cached
++                        # armed reply or the host's elapsed-time estimate.
++                        self.delta_speed_norm = self.motor_duty = 0
++                        self._fresh(self._send(1,deadline_ms=min(deadline,source_deadline)))
++                    else:
++                        self._fresh(current)
+                 speed = max(0,min(1000,self.delta_speed_norm+kwargs['speed_delta_permille']))
+                 if flags == VALID and speed and not self.allow_motor:
+                     raise LinkError('motor permission required')
+-                if flags == VALID:
+-                    new_run = run != self.delta_run_id
+-                    if new_run and (self.delta_speed_norm or self.motor_duty or self.delta_active):
+-                        raise LinkError('new run requires prior OFF and explicit ARM')
+-                    current = self.delta_reply if self.delta_active else None
+-                    if current is None or not current.armed:
+-                        current = self._send(4,require_ok=False)
+-                        self._fresh(current)
+-                        if current.requested_duty_permille:
+-                            raise LinkError('new compound ARM requires actual OFF')
+-                        self._fresh(self._send(1,deadline_ms=min(deadline,source_deadline)))
+-                    else:
+-                        self._fresh(current)
+-                reply = self._compound_exchange(encode_delta,min(deadline,source_deadline),**kwargs)
++                reply, write_started_ms = self._compound_exchange(encode_delta,min(deadline,source_deadline),**kwargs)
+                 if flags == VALID:
+                     self._fresh(reply)
+                     if not reply.armed or reply.requested_duty_permille != speed_to_pwm(speed):
+@@ -154,7 +172,7 @@
+             self.delta_reply = reply
+             self.motor_duty = reply.requested_duty_permille
+             self.motor_speed_pct = self.delta_speed_norm/10
+-            self.delta_lease_deadline_ms = started+lease if self.delta_active else None
++            self.delta_lease_deadline_ms = write_started_ms+lease if self.delta_active else None
+             if self.clock_ms() >= deadline or (self.delta_active and self.clock_ms() >= self.delta_source_deadline_ms):
+                 raise LinkError('original request/source expired during compound exchange')
+             return self._record_compound(reply,op,cmd,run)
+--- immutable426/test_delta_service.py
++++ service436/test_delta_service.py
+@@ -12,6 +12,7 @@
+     def __init__(self):
+         self.rx=bytearray();self.tx=bytearray();self.frames=[];self.events=[]
+         self.armed=False;self.duty=self.norm=self.yaw=self.pitch=self.source=0
++        self.result=0
+         self.run=self.cmd=0;self.drop_next=None;self.feedback=True
+     def read(self,offset):
+         self.events.append(('read',offset))
+@@ -24,8 +25,8 @@
+         if len(self.tx)!=32:return
+         f=bytes(self.tx);self.tx.clear();self.frames.append(f);op=f[3]
+         assert crc16_ccitt_false(f[:30])==int.from_bytes(f[30:],'little')
+-        if op==3:self.armed=False;self.norm=self.duty=0
+-        elif op==1:self.armed=True;self.source=f[8]
++        if op==3:self.armed=False;self.norm=self.duty=0;self.result=0
++        elif op==1:self.armed=True;self.source=f[8];self.result=0
+         elif op==6:
+             c=decode_delta(f);self.run=c.run_id;self.cmd=c.command_seq
+             if c.flags!=1:self.armed=False;self.norm=self.duty=0
+@@ -37,7 +38,7 @@
+         elif op==7:
+             c=decode_keepalive(f);assert self.armed and c.run_id==self.run and c.command_seq==self.cmd
+         if self.drop_next==op:self.drop_next=None;return
+-        b=bytearray(32);b[:4]=b'\xd3\x4c\x01\x80';b[4:8]=f[4:8];b[8]=self.armed
++        b=bytearray(32);b[:4]=b'\xd3\x4c\x01\x80';b[4:8]=f[4:8];b[8]=self.armed;b[9]=self.result
+         struct.pack_into('<hhH',b,10,self.yaw,self.pitch,self.duty);b[17]=self.source
+         b[18]=15 if self.feedback else 12;b[19]=0 if self.feedback else 255
+         struct.pack_into('<HHHH',b,20,*((2088,1961,0,0)if self.feedback else(65535,65535,65535,65535)))
+@@ -131,5 +132,45 @@
+             self.assertEqual(self.root.opens,0)
+         finally:delta_codec.__file__=old
+ 
++    def test_preparatory_status_arm_time_is_not_charged_to_delta_lease(self):
++        s=self.attach();original=s._session._send
++        def slow_preparation(op,*args,**kwargs):
++            if op in (4,1):self.clock.now+=.110
++            return original(op,*args,**kwargs)
++        s._session._send=slow_preparation
++        self.delta(s,lease_ms=100)
++        self.assertGreaterEqual(s._session.delta_lease_deadline_ms-s._session.clock_ms(),99)
++        self.clock.now+=.020;s.delta_keepalive(1,1,lease_ms=100)
++        self.assertEqual(self.ops(),[3,4,4,1,6,7])
++
++    def test_new_real_round_after_expired_lease_observes_off_then_arms(self):
++        s=self.attach();self.delta(s);self.clock.now+=.301
++        # Model the actual MCU watchdog result; cached reply remains armed.
++        self.root.mmio.armed=False;self.root.mmio.norm=self.root.mmio.duty=0
++        self.root.mmio.result=7  # Real MTR5 STATUS preserves WATCHDOG until ARM.
++        self.assertTrue(s._session.delta_reply.armed)
++        r=self.delta(s,cmd=2,yaw=50,pitch=0,speed=100)
++        self.assertEqual(self.ops(),[3,4,4,1,6,4,1,6])
++        self.assertEqual((r['command_seq'],r['commanded_yaw_cd'],r['commanded_speed_permille'],r['commanded_pwm_permille']),(2,150,100,300))
++
++    def test_elapsed_host_lease_does_not_guess_actual_off_or_restart_on_output(self):
++        s=self.attach();self.delta(s);self.clock.now+=.301
++        # A conservative host estimate can expire before a live hardware lease.
++        self.assertTrue(self.root.mmio.armed);self.assertEqual(self.root.mmio.duty,300)
++        with self.assertRaisesRegex(Exception,'requires actual OFF'):self.delta(s,cmd=2)
++        self.assertEqual(self.ops(),[3,4,4,1,6,4,3])
++        self.assertEqual(self.ops().count(1),1);self.assertEqual(self.ops().count(6),1)
++
++    def test_recovery_watchdog_status_with_output_on_cannot_arm(self):
++        s=self.attach();self.delta(s);self.clock.now+=.301;self.root.mmio.result=7
++        with self.assertRaisesRegex(Exception,'MCU non-OK'):self.delta(s,cmd=2)
++        self.assertEqual(self.ops(),[3,4,4,1,6,4,3]);self.assertEqual(self.ops().count(1),1)
++
++    def test_recovery_other_error_status_even_when_off_cannot_arm(self):
++        s=self.attach();self.delta(s);self.clock.now+=.301
++        self.root.mmio.armed=False;self.root.mmio.norm=self.root.mmio.duty=0;self.root.mmio.result=3
++        with self.assertRaisesRegex(Exception,'MCU non-OK'):self.delta(s,cmd=2)
++        self.assertEqual(self.ops(),[3,4,4,1,6,4,3]);self.assertEqual(self.ops().count(1),1)
++
+ 
+ if __name__=='__main__':unittest.main(verbosity=2)

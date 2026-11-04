@@ -1,0 +1,9 @@
+The MCU keeps the existing32-byte COMPOUND_DELTA_V1 responses, command/source/sequence/CRC, limits and leases. Only the PC reply queue changes from an up-to32-byte burst to one byte per advancing1ms SysTick gate. BUS TX remains fast; both RX queues, mc_tick and PWM run every loop. There is no busy wait or catch-up burst.
+
+AMD PG142 specifies a16-character RX FIFO and overrun bit0x20. The recorded0x27 is overrun+RX full+RX valid+TX empty, with framing/parity clear. At115200/8N1 a32-byte burst takes2.778ms; hardware can overrun after17 unread arrivals. The recorded13.227440ms write-intent-to-error envelope is not a measured scheduler blackout. Pacing increases receive margin; it cannot guarantee against arbitrarily long Linux stalls or stale FIFO occupancy. UART error exceptions and unknown-request handling remain.
+
+The final1ms candidate uses about31-32ms per reply. It avoids the extra three-response handshake cost of the historical2ms candidate; no request expiry/source deadline is extended. Tick granularity is not a strict physical1.000ms gap; individual intervals can be shorter. The focused regression runs the compiled C schedule through the actual Python UARTLite reader and a16-byte FIFO: a13.227440ms illustrative initial stall loses16 old-burst bytes but loses none with pacing; a40ms stall still raises0x27. These are software models, not new FPGA measurements.
+
+A169 last acknowledged pause/OFF is43. STOP44 remains unacknowledged/uncertain; ledger next45 is preserved and44 must not be replayed. MCU deployment will reset its volatile sequence state; A persistent highwater remains44. Before new1344, A must explicitly establish current empty/error-free UART state after its supported PL restoration; the service must not auto-flush unknown bytes. Formal linkage and all29 acceptance remain incomplete.
+
+Primary reference: https://docs.amd.com/api/khub/documents/dB1MAeh~uLG7FE62a5_QbA/content .

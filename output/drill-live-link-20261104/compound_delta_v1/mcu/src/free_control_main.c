@@ -3,6 +3,7 @@
 #include "free_control.h"
 #include "motor_control.h"
 #include "drill_pwm.h"
+#include "uart_reply_pacer.h"
 #include <string.h>
 static volatile uint32_t ticks;
 void SysTick_Handler(void) {ticks++;}
@@ -11,6 +12,7 @@ MotorRuntime motor_diagnostics;
 volatile uint32_t motor_pwm_applied,motor_pwm_peak,motor_gpio_output,motor_pincm;
 typedef struct {uint8_t data[128],head,tail;} TxQueue;
 static TxQueue pc_tx,bus_tx;
+static UartReplyPacer pc_reply_pacer;
 volatile uint32_t free_tx_overflows;
 volatile uint32_t free_limit_request; /* SWD-only explicit commissioning mailbox */
 static int send(TxQueue *q,const uint8_t *p,size_t n) {
@@ -25,6 +27,13 @@ static void service_tx(UART_Regs *uart,TxQueue *q) {
         DL_UART_Main_transmitData(uart,q->data[q->tail]);
         q->tail=(uint8_t)((q->tail+1u)&127u);
     }
+}
+static void service_pc_tx(uint32_t now) {
+    if(pc_tx.tail==pc_tx.head || !uart_reply_due(&pc_reply_pacer,now) ||
+       DL_UART_Main_isTXFIFOFull(PC_UART_INST))return;
+    DL_UART_Main_transmitData(PC_UART_INST,pc_tx.data[pc_tx.tail]);
+    pc_tx.tail=(uint8_t)((pc_tx.tail+1u)&127u);
+    uart_reply_sent(&pc_reply_pacer,ticks);
 }
 int main(void) {
     uint8_t pc[32],used=0,reply[32],bus[18];uint32_t last_pc=0;unsigned budget;
@@ -56,9 +65,9 @@ int main(void) {
         }
         n=fc_poll(&free_diagnostics,ticks,bus);
         if(n && !send(&bus_tx,bus,n))fc_stop(&free_diagnostics,ticks);
-        /* Drain receive FIFOs on every iteration even while either UART is
-         * transmitting. A3ms PC reply must not block a servo READ response. */
-        service_tx(BUS_UART_INST,&bus_tx);service_tx(PC_UART_INST,&pc_tx);
+        /* Replies are paced without blocking. Continue draining both receive
+         * FIFOs and servicing the existing motor lease on every iteration. */
+        service_tx(BUS_UART_INST,&bus_tx);service_pc_tx(ticks);
         mc_tick(&motor_diagnostics,&free_diagnostics,ticks);
         if(motor_diagnostics.duty!=drill_pwm_get_permille())
             (void)drill_pwm_set_permille(motor_diagnostics.duty);

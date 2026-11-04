@@ -36,6 +36,10 @@ class SessionClient:
     def delta_keepalive(self, command_seq, run_id, *, lease_ms=300):
         return self._call('delta_keepalive',command_seq=command_seq,run_id=run_id,lease_ms=lease_ms)
 
+    def startup_prepare(self, run_id, initial_speed_permille, move_ms=500):
+        return self._call('startup_prepare', run_id=run_id,
+                          initial_speed_permille=initial_speed_permille, move_ms=move_ms)
+
     def motor(self, speed_pct):
         return self._call('motor',speed_pct=speed_pct)
 
@@ -64,6 +68,9 @@ class SshClientAdapter:
             flags=flags,source_valid_for_ms=source_valid_for_ms))
     def delta_keepalive(self, command_seq, run_id, *, lease_ms=300):
         return self.client.call(dict(op='delta_keepalive',command_seq=command_seq,run_id=run_id,lease_ms=lease_ms))
+    def startup_prepare(self, run_id, initial_speed_permille, move_ms=500):
+        return self.client.call(dict(op='startup_prepare', run_id=run_id,
+            initial_speed_permille=initial_speed_permille, move_ms=move_ms))
     def pose(self, *args, **kwargs):return self.client.pose(*args, **kwargs)
     def motor(self, speed_pct):return self.client.motor(speed_pct)
     def keepalive(self):return self.client.call({'op':'keepalive'})

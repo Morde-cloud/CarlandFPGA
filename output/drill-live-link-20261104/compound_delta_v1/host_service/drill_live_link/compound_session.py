@@ -6,7 +6,7 @@ remaining validity; it is fixed once and is never extended by a heartbeat.
 from motor_runtime.variable_session import VariableDisplaySession
 from fpga_link.session import LinkError, UINT32_MAX, _integer
 from pc.codec import decode_reply
-from delta_codec import encode_delta, encode_keepalive, speed_to_pwm, VALID, PAUSE, STOP
+from delta_codec import encode_delta, encode_keepalive, encode_startup_prepare, speed_to_pwm, VALID, PAUSE, STOP
 
 
 class CompoundDeltaSession(VariableDisplaySession):
@@ -17,12 +17,17 @@ class CompoundDeltaSession(VariableDisplaySession):
         self.delta_lease_deadline_ms = None
         self.delta_active = False
         self.delta_reply = None
+        self.prepared_run_id = self.prepared_speed_permille = 0
+        self.prepared_active = False
+        self._last_compound_ack_raw = None
 
     def stop(self):
         self.delta_active = False
         self.delta_speed_norm = 0
         self.delta_source_deadline_ms = self.delta_lease_deadline_ms = None
         self.delta_reply = None
+        # Keep the prepared-run high-water identity after cancellation.
+        self.prepared_active = False
         return super().stop()
 
     def _compound_exchange(self, encoder, deadline, **fields):
@@ -40,7 +45,61 @@ class CompoundDeltaSession(VariableDisplaySession):
         reply = decode_reply(raw)
         if reply.seq != seq or reply.result_code:
             raise LinkError('compound refused or sequence mismatch; no retry')
+        self._last_compound_ack_raw = bytes(raw)
         return reply, write_started_ms
+
+    def _startup_prepare(self, request):
+        try:
+            fields = {'session', 'request_id', 'expires_ms', 'op',
+                      'run_id', 'initial_speed_permille', 'move_ms'}
+            if type(request) is not dict or set(request)-fields or request.get('session') != self.session_id:
+                raise LinkError('unknown field or wrong startup session')
+            rid = _integer(request.get('request_id'), 'request_id', 1, UINT32_MAX)
+            deadline = _integer(request.get('expires_ms'), 'expires_ms', 0, 2**53)
+            if rid <= self.request_id or not 0 < deadline-self.clock_ms() <= 1000:
+                raise LinkError('duplicate/stale/expired startup request')
+            run = _integer(request.get('run_id'), 'run_id', 1, UINT32_MAX)
+            speed = _integer(request.get('initial_speed_permille'), 'initial_speed_permille', 0, 1000)
+            move = _integer(request.get('move_ms', 500), 'move_ms', 100, 1000)
+            # Validate the exact full wire command before reserving or writing.
+            encode_startup_prepare(1, self.source, run, speed, move)
+            if run <= max(self.delta_run_id, self.prepared_run_id):
+                raise LinkError('startup run already prepared or executed; no replay')
+            if self.delta_active or self.motor_duty or self.delta_speed_norm or self.prepared_active:
+                raise LinkError('startup prepare requires prior OFF and no active preparation')
+            self.request_id = rid
+            # The MCU checks actual unarmed/OFF and fresh feedback atomically.
+            # No convenience home, ARM, motor, keeper or source TTL is issued.
+            reply, _ = self._compound_exchange(encode_startup_prepare, deadline,
+                run_id=run, initial_speed_permille=speed, move_ms=move)
+            self._fresh(reply)
+            if (reply.armed or reply.requested_duty_permille or reply.target_yaw_cd
+                    or reply.target_pitch_cd or reply.active_source != self.source):
+                raise LinkError('startup ACK is not matching zero-target unarmed/OFF')
+            if self.clock_ms() >= deadline:
+                raise LinkError('startup request expired during exchange; no replay')
+            self.prepared_run_id, self.prepared_speed_permille = run, speed
+            self.prepared_active = True
+            self.delta_speed_norm = self.motor_duty = 0
+            self.motor_speed_pct = 0
+            self.delta_active = False
+            self.delta_source_deadline_ms = self.delta_lease_deadline_ms = None
+            self.delta_reply = None
+            result = self.record(reply, 'startup_prepare')
+            result.update(prepared_run_id=run, prepared_speed_permille=speed,
+                prepared_fields_are_accepted_request_targets=True,
+                prepared_speed_is_executed_pwm=False, motor_off=True,
+                commanded_yaw_cd=0, commanded_pitch_cd=0,
+                commanded_speed_permille=0, commanded_pwm_permille=0,
+                compound_source_expires_ms=None, home_reference_raw=[2088, 1961],
+                uart_ack_hex=self._last_compound_ack_raw.hex(),
+                synchronization_wait_owned_by_caller=True)
+            return result
+        except Exception:
+            self.failed = True
+            try:self.stop()
+            except Exception:pass
+            raise
 
     def _source_live(self, command_seq, run_id):
         now = self.clock_ms()
@@ -69,6 +128,8 @@ class CompoundDeltaSession(VariableDisplaySession):
         if self.failed:
             raise LinkError('session fault latched; no replay')
         op = request.get('op') if type(request) is dict else None
+        if op == 'startup_prepare':
+            return self._startup_prepare(request)
         # The legacy convenience heartbeat must not bypass a compound TTL by
         # renewing old opcode5. A heartbeat always references the real round.
         if op == 'keepalive' and self.delta_command_seq:
@@ -76,7 +137,7 @@ class CompoundDeltaSession(VariableDisplaySession):
                 command_seq=self.delta_command_seq, run_id=self.delta_run_id)
             op = 'delta_keepalive'
         if op not in ('delta', 'delta_keepalive'):
-            if self.delta_command_seq and op in ('pose', 'home', 'motor'):
+            if (self.delta_command_seq or self.prepared_active) and op in ('pose', 'home', 'motor'):
                 return self._reject_mixed_mode()
             return super().handle(request)
         try:
@@ -92,6 +153,8 @@ class CompoundDeltaSession(VariableDisplaySession):
                 raise LinkError('duplicate/stale/expired compound request')
             cmd = _integer(request.get('command_seq'),'command_seq',1,UINT32_MAX)
             run = _integer(request.get('run_id'),'run_id',1,UINT32_MAX)
+            if self.prepared_active and run != self.prepared_run_id:
+                raise LinkError('first startup control round must match the prepared run')
             lease = _integer(request.get('lease_ms',300),'lease_ms',100,500)
             self.request_id = rid
             started = self.clock_ms()
@@ -157,12 +220,14 @@ class CompoundDeltaSession(VariableDisplaySession):
                     self.delta_speed_norm = speed
                     self.delta_source_deadline_ms = source_deadline
                     self.delta_active = True
+                    self.prepared_active = False
                 else:
                     if reply.armed or reply.requested_duty_permille:
                         raise LinkError('PAUSE/STOP did not remove drive')
                     self.delta_active = False
                     self.delta_speed_norm = 0
                     self.delta_source_deadline_ms = None
+                    self.prepared_active = False
                 self.delta_run_id,self.delta_command_seq = run,cmd
                 if flags & STOP:
                     # The actual compound STOP reply is the terminal device

@@ -28,13 +28,13 @@ REQUIREMENTS_SHA256 = '2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340
 UART_VLNV = 'xilinx.com:ip:axi_uartlite:2.0'
 PROTECTED = ((0x43C00000, 0x1000), (0x43C10000, 0x1000))
 DEPENDENCIES = {
-    'delta_codec': ('delta_codec.py', 'e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca'),
-    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', 'e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d'),
+    'delta_codec': ('delta_codec.py', '01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee'),
+    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', 'd53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba'),
     'motor_runtime.variable_session': ('baseline_mtr4/motor_runtime/variable_session.py', '1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38'),
     'fpga_link.session': ('baseline_mtr4/fpga_link/session.py', '5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba'),
     'fpga_link.uartlite': ('baseline_mtr4/fpga_link/uartlite.py', '29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778'),
     'pc.codec': ('baseline_mtr4/pc/codec.py', '62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006'),
-    'drill_live_link.session_client': ('drill_live_link/session_client.py', '93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f'),
+    'drill_live_link.session_client': ('drill_live_link/session_client.py', '6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145'),
     'drill_live_link.follower': ('drill_live_link/follower.py', '6b975c4cb3ad23723b131ee088edfaa9810fa387af0be61382497ffe088a1134'),
     'drill_live_link.model': ('drill_live_link/model.py', '249d0e6c253de8f91402ba5e35f0d385eea789a886c14ea249ad092bf5a69333'),
 }
@@ -521,6 +521,10 @@ class ProductUartService:
     def delta_keepalive(self, command_seq, run_id, *, lease_ms=300):
         self._require_motion()
         return self._call('delta_keepalive',command_seq,run_id,lease_ms=lease_ms)
+
+    def startup_prepare(self, run_id, initial_speed_permille, move_ms=500):
+        self._require_motion()
+        return self._call('startup_prepare', run_id, initial_speed_permille, move_ms)
 
     def pose(self, *args, **kwargs):
         self._require_motion()

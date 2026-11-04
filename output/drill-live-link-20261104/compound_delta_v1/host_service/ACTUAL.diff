@@ -1,207 +1,702 @@
---- immutable426/product_uart_service.py
-+++ service436/product_uart_service.py
-@@ -29,7 +29,7 @@
- PROTECTED = ((0x43C00000, 0x1000), (0x43C10000, 0x1000))
- DEPENDENCIES = {
-     'delta_codec': ('delta_codec.py', 'e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca'),
--    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', '47fb35bf614fbb2808b7bf06d3c880673e1e31aa7d6d026458b35334a9c22e23'),
-+    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', 'e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d'),
-     'motor_runtime.variable_session': ('baseline_mtr4/motor_runtime/variable_session.py', '1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38'),
-     'fpga_link.session': ('baseline_mtr4/fpga_link/session.py', '5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba'),
-     'fpga_link.uartlite': ('baseline_mtr4/fpga_link/uartlite.py', '29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778'),
-@@ -344,9 +344,15 @@
+diff --git a/output/drill-live-link-20261104/compound_delta_v1/host_service/SOURCE_PINS.json b/output/drill-live-link-20261104/compound_delta_v1/host_service/SOURCE_PINS.json
+index 43b41ea..2ff0b9d 100644
+--- a/output/drill-live-link-20261104/compound_delta_v1/host_service/SOURCE_PINS.json
++++ b/output/drill-live-link-20261104/compound_delta_v1/host_service/SOURCE_PINS.json
+@@ -1,49 +1,66 @@
+ {
+   "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+   "task_version": 1,
+-  "work_id": "B-DELTA-SERVICE-LEASE-TIMING-FIX-20261104-436",
+-  "canonical_agent_id": "/root/delta_service426",
+-  "at_utc": "2026-11-04T02:04:20.687323+00:00",
++  "work_id": "B-A171-STARTUP-HOST-SEAM-20261104-503",
++  "canonical_agent_id": "/root/startup_host503",
++  "at_utc": "2026-11-04T06:42:34.908869+00:00",
++  "requirements_ids": [
++    "H01",
++    "H02",
++    "H03",
++    "H04",
++    "H05",
++    "H06",
++    "H07",
++    "H08",
++    "H09",
++    "H10",
++    "H11",
++    "H12",
++    "H13",
++    "H14",
++    "H15"
++  ],
++  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+   "runtime_files": [
+     {
+-      "path": "product_uart_service.py",
+-      "bytes": 26931,
+-      "sha256": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
+-      "changed_from_426": true
++      "path": "delta_codec.py",
++      "bytes": 10309,
++      "sha256": "01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee"
+     },
+     {
+-      "path": "product_uart_stdio.py",
+-      "bytes": 5759,
+-      "sha256": "a6daef3766743b695d2630817d5cca7b6a76a26ac30ea259f5841637fe29cdab",
+-      "changed_from_426": true
++      "path": "drill_live_link/compound_session.py",
++      "bytes": 15223,
++      "sha256": "d53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba"
+     },
+     {
+       "path": "drill_live_link/session_client.py",
+-      "bytes": 3347,
+-      "sha256": "93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f",
+-      "changed_from_426": false
++      "bytes": 3801,
++      "sha256": "6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145"
+     },
+     {
+-      "path": "drill_live_link/compound_session.py",
+-      "bytes": 11174,
+-      "sha256": "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d",
+-      "changed_from_426": true
++      "path": "product_uart_service.py",
++      "bytes": 27125,
++      "sha256": "3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6"
+     },
+     {
+-      "path": "delta_codec.py",
+-      "bytes": 9079,
+-      "sha256": "e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca",
+-      "changed_from_426": false
++      "path": "product_uart_stdio.py",
++      "bytes": 5778,
++      "sha256": "35b0f72a94594098ee5f90eaaeb74301288d9b5b61e11e5ca88d125cfeeb0448"
+     }
+   ],
++  "strict_stdio_service_sha256": "3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6",
++  "hardware_executed": false,
++  "formal_or_physical_acceptance": false,
++  "parent_main_acceptance_required": true,
+   "strict_dependency_paths_and_hashes": {
+     "delta_codec": [
+       "delta_codec.py",
+-      "e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca"
++      "01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee"
+     ],
+     "drill_live_link.compound_session": [
+       "drill_live_link/compound_session.py",
+-      "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d"
++      "d53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba"
+     ],
+     "motor_runtime.variable_session": [
+       "baseline_mtr4/motor_runtime/variable_session.py",
+@@ -63,7 +80,7 @@
+     ],
+     "drill_live_link.session_client": [
+       "drill_live_link/session_client.py",
+-      "93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f"
++      "6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145"
+     ],
+     "drill_live_link.follower": [
+       "drill_live_link/follower.py",
+@@ -74,41 +91,12 @@
+       "249d0e6c253de8f91402ba5e35f0d385eea789a886c14ea249ad092bf5a69333"
+     ]
+   },
+-  "strict_stdio_service_sha256": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
+-  "original426_immutable_verified": true,
+-  "fixes": [
+-    "lease origin immediately before real compound transport.write_frame intent, after preparatorySTATUS/ARM",
+-    "new genuine higher command with expiredlocallease observes realSTATUS/OFF, syncs normalizedspeed0, then explicitARM; heartbeat neverARMs",
+-    "main-authorized private STATUS4/require_okFalse recovery permits stickyWATCHDOG7 only if actually unarmed andduty0; CRC/seq/_fresh stillrequired, ordinarySTATUS/keeper/othererrors unchanged"
+-  ],
+   "focused_tests": {
+-    "tests": 19,
++    "tests": 12,
+     "exit_code": 0,
+-    "actual_pid": 33576,
+-    "process": "TEST436_FINAL_PROCESS.json",
+-    "raw_stdout": "TEST436_FINAL.stdout.txt",
+-    "raw_stderr": "TEST436_FINAL.stderr.txt",
+-    "preserved_17pass_beforewatchdog_scope": "before_watchdog_status_decision/"
+-  },
+-  "requirements_ids": [
+-    "H01",
+-    "H02",
+-    "H03",
+-    "H04",
+-    "H05",
+-    "H06",
+-    "H07",
+-    "H08",
+-    "H09",
+-    "H10",
+-    "H11",
+-    "H12",
+-    "H13",
+-    "H14",
+-    "H15"
+-  ],
+-  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+-  "hardware_executed": false,
+-  "formal_or_physical_acceptance": false,
+-  "parent_main_acceptance_required": true
++    "actual_pid": 30400,
++    "raw_process": "TEST503_PROCESS.json",
++    "raw_stderr": "TEST503.stderr.txt",
++    "initial_import_and_fixture_failures_preserved": true
++  }
+ }
+\ No newline at end of file
+diff --git a/output/drill-live-link-20261104/compound_delta_v1/host_service/delta_codec.py b/output/drill-live-link-20261104/compound_delta_v1/host_service/delta_codec.py
+index 2a6d0cc..c4c6507 100644
+--- a/output/drill-live-link-20261104/compound_delta_v1/host_service/delta_codec.py
++++ b/output/drill-live-link-20261104/compound_delta_v1/host_service/delta_codec.py
+@@ -15,6 +15,7 @@ SCHEMA = "COMPOUND_DELTA_V1"
+ FRAME_SIZE = 32
+ OP_DELTA = 6
+ OP_KEEPALIVE = 7
++OP_STARTUP_PREPARE = 8
+ VALID = 1
+ PAUSE = 2
+ STOP = 4
+@@ -176,6 +177,30 @@ def decode_keepalive(frame):
+     return command
  
-     def _send(self, *args, **kwargs):
-         try:
-+            recover_idle_watchdog = kwargs.pop('_delta_recover_idle_watchdog', False)
-+            _need(type(recover_idle_watchdog) is bool and (not recover_idle_watchdog
-+                  or args[0] == 4 and kwargs.get('require_ok') is False),
-+                  'private delta recovery is only a non-required-OK STATUS')
-             reply = super()._send(*args, **kwargs)
-             diagnostic_disarmed = self.diagnostic and args[0] in (3, 4) and reply.result_code == 3
--            _need(reply.result_code == 0 or diagnostic_disarmed, 'MCU non-OK response')
-+            idle_watchdog = (recover_idle_watchdog and reply.result_code == 7
-+                             and not reply.armed and reply.requested_duty_permille == 0)
-+            _need(reply.result_code == 0 or diagnostic_disarmed or idle_watchdog, 'MCU non-OK response')
-             if args[0] == 3:
-                 _need(not reply.armed and reply.requested_duty_permille == 0, 'STOP reply is not disarmed/OFF')
-             return reply
---- immutable426/product_uart_stdio.py
-+++ service436/product_uart_stdio.py
-@@ -9,7 +9,7 @@
  
- from product_uart_service import ProductUartService, ServiceError
++def encode_startup_prepare(seq, source, run_id, initial_speed_permille, move_ms=500):
++    """One explicit new-run home and speed preset, never ARM or motor PWM.
++
++    The preset is separate from the current compound speed accumulator, which
++    remains zero. The caller owns the subsequent one-second synchronization
++    gate; this command neither starts that gate nor renews a control lease.
++    """
++    _integer(seq, "seq", 1, 0xFFFFFFFF)
++    _integer(run_id, "run_id", 1, 0xFFFFFFFF)
++    _integer(initial_speed_permille, "initial_speed_permille", 0, 1000)
++    _integer(move_ms, "move_ms", 100, 1000)
++    if type(source) is not str or source not in SOURCE_TO_CODE:
++        raise DeltaError("source must be PC_DIRECT, FPGA_OUTPUT or MANUAL")
++    frame = bytearray(FRAME_SIZE)
++    frame[:4] = b"\xd3\x4c\x01\x08"
++    struct.pack_into("<I", frame, 4, seq)
++    frame[8], frame[9] = SOURCE_TO_CODE[source], VALID
++    struct.pack_into("<H", frame, 14, initial_speed_permille)
++    struct.pack_into("<H", frame, 18, move_ms)
++    struct.pack_into("<I", frame, 24, run_id)
++    struct.pack_into("<H", frame, 30, crc16_ccitt_false(frame[:30]))
++    return bytes(frame)
++
++
+ def speed_to_pwm(speed_permille):
+     """Normalized0..1000 speed -> OFF or250..750 PWM permille, half up."""
+     _integer(speed_permille, "speed_permille", 0, 1000)
+@@ -204,7 +229,7 @@ def accumulate_virtual(yaw_cd, pitch_cd, speed_permille, yaw_delta_cd,
+             max(0, min(1000, speed_permille + speed_delta_permille)))
  
--EXPECTED_SERVICE_SHA256 = '1603b8180d78ae4226114188ff2e317c592e384eb7707bcc9c9bc0bff9171b17'
-+EXPECTED_SERVICE_SHA256 = '54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d'
+ 
+-__all__ = ["SCHEMA", "FRAME_SIZE", "OP_DELTA", "OP_KEEPALIVE", "VALID", "PAUSE", "STOP",
++__all__ = ["SCHEMA", "FRAME_SIZE", "OP_DELTA", "OP_KEEPALIVE", "OP_STARTUP_PREPARE", "VALID", "PAUSE", "STOP",
+            "SOURCE_TO_CODE", "SOURCE_BY_CODE", "DeltaError", "DeltaCommand", "KeepaliveCommand",
+            "crc16_ccitt_false", "encode_delta", "decode_delta",
+-           "encode_keepalive", "decode_keepalive", "speed_to_pwm", "accumulate_virtual"]
++           "encode_keepalive", "decode_keepalive", "encode_startup_prepare", "speed_to_pwm", "accumulate_virtual"]
+diff --git a/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/compound_session.py b/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/compound_session.py
+index b56f865..1d15be8 100644
+--- a/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/compound_session.py
++++ b/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/compound_session.py
+@@ -6,7 +6,7 @@ remaining validity; it is fixed once and is never extended by a heartbeat.
+ from motor_runtime.variable_session import VariableDisplaySession
+ from fpga_link.session import LinkError, UINT32_MAX, _integer
+ from pc.codec import decode_reply
+-from delta_codec import encode_delta, encode_keepalive, speed_to_pwm, VALID, PAUSE, STOP
++from delta_codec import encode_delta, encode_keepalive, encode_startup_prepare, speed_to_pwm, VALID, PAUSE, STOP
  
  
- def _need(ok, reason):
---- immutable426/drill_live_link/compound_session.py
-+++ service436/drill_live_link/compound_session.py
-@@ -30,6 +30,9 @@
-         if self.clock_ms() >= deadline:
-             raise LinkError('expired before compound dispatch; reserved wire sequence skipped')
-         frame = encoder(seq=seq, source=self.source, **fields)
-+        # Conservatively time this frame's lease at its transport write intent,
-+        # after any initial STATUS/ARM and durable sequence reservation.
-+        write_started_ms = self.clock_ms()
-         self.transport.write_frame(frame)
-         raw = self.transport.read_frame(.3)
-         if raw is None:
-@@ -37,7 +40,7 @@
+ class CompoundDeltaSession(VariableDisplaySession):
+@@ -17,12 +17,17 @@ class CompoundDeltaSession(VariableDisplaySession):
+         self.delta_lease_deadline_ms = None
+         self.delta_active = False
+         self.delta_reply = None
++        self.prepared_run_id = self.prepared_speed_permille = 0
++        self.prepared_active = False
++        self._last_compound_ack_raw = None
+ 
+     def stop(self):
+         self.delta_active = False
+         self.delta_speed_norm = 0
+         self.delta_source_deadline_ms = self.delta_lease_deadline_ms = None
+         self.delta_reply = None
++        # Keep the prepared-run high-water identity after cancellation.
++        self.prepared_active = False
+         return super().stop()
+ 
+     def _compound_exchange(self, encoder, deadline, **fields):
+@@ -40,8 +45,62 @@ class CompoundDeltaSession(VariableDisplaySession):
          reply = decode_reply(raw)
          if reply.seq != seq or reply.result_code:
              raise LinkError('compound refused or sequence mismatch; no retry')
--        return reply
-+        return reply, write_started_ms
++        self._last_compound_ack_raw = bytes(raw)
+         return reply, write_started_ms
  
++    def _startup_prepare(self, request):
++        try:
++            fields = {'session', 'request_id', 'expires_ms', 'op',
++                      'run_id', 'initial_speed_permille', 'move_ms'}
++            if type(request) is not dict or set(request)-fields or request.get('session') != self.session_id:
++                raise LinkError('unknown field or wrong startup session')
++            rid = _integer(request.get('request_id'), 'request_id', 1, UINT32_MAX)
++            deadline = _integer(request.get('expires_ms'), 'expires_ms', 0, 2**53)
++            if rid <= self.request_id or not 0 < deadline-self.clock_ms() <= 1000:
++                raise LinkError('duplicate/stale/expired startup request')
++            run = _integer(request.get('run_id'), 'run_id', 1, UINT32_MAX)
++            speed = _integer(request.get('initial_speed_permille'), 'initial_speed_permille', 0, 1000)
++            move = _integer(request.get('move_ms', 500), 'move_ms', 100, 1000)
++            # Validate the exact full wire command before reserving or writing.
++            encode_startup_prepare(1, self.source, run, speed, move)
++            if run <= max(self.delta_run_id, self.prepared_run_id):
++                raise LinkError('startup run already prepared or executed; no replay')
++            if self.delta_active or self.motor_duty or self.delta_speed_norm or self.prepared_active:
++                raise LinkError('startup prepare requires prior OFF and no active preparation')
++            self.request_id = rid
++            # The MCU checks actual unarmed/OFF and fresh feedback atomically.
++            # No convenience home, ARM, motor, keeper or source TTL is issued.
++            reply, _ = self._compound_exchange(encode_startup_prepare, deadline,
++                run_id=run, initial_speed_permille=speed, move_ms=move)
++            self._fresh(reply)
++            if (reply.armed or reply.requested_duty_permille or reply.target_yaw_cd
++                    or reply.target_pitch_cd or reply.active_source != self.source):
++                raise LinkError('startup ACK is not matching zero-target unarmed/OFF')
++            if self.clock_ms() >= deadline:
++                raise LinkError('startup request expired during exchange; no replay')
++            self.prepared_run_id, self.prepared_speed_permille = run, speed
++            self.prepared_active = True
++            self.delta_speed_norm = self.motor_duty = 0
++            self.motor_speed_pct = 0
++            self.delta_active = False
++            self.delta_source_deadline_ms = self.delta_lease_deadline_ms = None
++            self.delta_reply = None
++            result = self.record(reply, 'startup_prepare')
++            result.update(prepared_run_id=run, prepared_speed_permille=speed,
++                prepared_fields_are_accepted_request_targets=True,
++                prepared_speed_is_executed_pwm=False, motor_off=True,
++                commanded_yaw_cd=0, commanded_pitch_cd=0,
++                commanded_speed_permille=0, commanded_pwm_permille=0,
++                compound_source_expires_ms=None, home_reference_raw=[2088, 1961],
++                uart_ack_hex=self._last_compound_ack_raw.hex(),
++                synchronization_wait_owned_by_caller=True)
++            return result
++        except Exception:
++            self.failed = True
++            try:self.stop()
++            except Exception:pass
++            raise
++
      def _source_live(self, command_seq, run_id):
          now = self.clock_ms()
-@@ -97,7 +100,7 @@
-                 self._fresh(self.delta_reply)
-                 if self.delta_speed_norm and not self.allow_motor:
-                     raise LinkError('motor permission required')
--                reply = self._compound_exchange(encode_keepalive, min(deadline,self.delta_source_deadline_ms),
-+                reply, write_started_ms = self._compound_exchange(encode_keepalive, min(deadline,self.delta_source_deadline_ms),
-                     command_seq=cmd,run_id=run,lease_ms=lease)
-                 self._fresh(reply)
-                 if not reply.armed or reply.requested_duty_permille != speed_to_pwm(self.delta_speed_norm):
-@@ -115,23 +118,38 @@
-                 if run < self.delta_run_id or run == self.delta_run_id and cmd <= self.delta_command_seq:
-                     raise LinkError('real run/command already applied; never double accumulate')
-                 flags = kwargs['flags']
-+                requested_speed = max(0,min(1000,self.delta_speed_norm+kwargs['speed_delta_permille']))
-+                if flags == VALID and requested_speed and not self.allow_motor:
-+                    raise LinkError('motor permission required')
-+                if flags == VALID:
-+                    new_run = run != self.delta_run_id
-+                    lease_expired = (self.delta_active and (self.delta_lease_deadline_ms is None
-+                        or self.clock_ms() >= self.delta_lease_deadline_ms))
-+                    if new_run and not lease_expired and (self.delta_speed_norm or self.motor_duty or self.delta_active):
-+                        raise LinkError('new run requires prior OFF and explicit ARM')
-+                    current = self.delta_reply if self.delta_active else None
-+                    if current is None or not current.armed or lease_expired:
-+                        if lease_expired:
-+                            # Only this already-validated new real round may
-+                            # recover an actual OFF watchdog status. A keeper
-+                            # and ordinary status never take this path.
-+                            current = self._send(4,require_ok=False,_delta_recover_idle_watchdog=True)
-+                        else:
-+                            current = self._send(4,require_ok=False)
-+                        self._fresh(current)
-+                        if current.requested_duty_permille:
-+                            raise LinkError('new compound ARM requires actual OFF')
-+                        # MCU lease expiry clears its normalized speed. Sync
-+                        # only from the actual OFF reply, never from a cached
-+                        # armed reply or the host's elapsed-time estimate.
-+                        self.delta_speed_norm = self.motor_duty = 0
-+                        self._fresh(self._send(1,deadline_ms=min(deadline,source_deadline)))
-+                    else:
-+                        self._fresh(current)
-                 speed = max(0,min(1000,self.delta_speed_norm+kwargs['speed_delta_permille']))
-                 if flags == VALID and speed and not self.allow_motor:
-                     raise LinkError('motor permission required')
--                if flags == VALID:
--                    new_run = run != self.delta_run_id
--                    if new_run and (self.delta_speed_norm or self.motor_duty or self.delta_active):
--                        raise LinkError('new run requires prior OFF and explicit ARM')
--                    current = self.delta_reply if self.delta_active else None
--                    if current is None or not current.armed:
--                        current = self._send(4,require_ok=False)
--                        self._fresh(current)
--                        if current.requested_duty_permille:
--                            raise LinkError('new compound ARM requires actual OFF')
--                        self._fresh(self._send(1,deadline_ms=min(deadline,source_deadline)))
--                    else:
--                        self._fresh(current)
--                reply = self._compound_exchange(encode_delta,min(deadline,source_deadline),**kwargs)
-+                reply, write_started_ms = self._compound_exchange(encode_delta,min(deadline,source_deadline),**kwargs)
-                 if flags == VALID:
-                     self._fresh(reply)
-                     if not reply.armed or reply.requested_duty_permille != speed_to_pwm(speed):
-@@ -154,7 +172,7 @@
-             self.delta_reply = reply
-             self.motor_duty = reply.requested_duty_permille
-             self.motor_speed_pct = self.delta_speed_norm/10
--            self.delta_lease_deadline_ms = started+lease if self.delta_active else None
-+            self.delta_lease_deadline_ms = write_started_ms+lease if self.delta_active else None
-             if self.clock_ms() >= deadline or (self.delta_active and self.clock_ms() >= self.delta_source_deadline_ms):
-                 raise LinkError('original request/source expired during compound exchange')
-             return self._record_compound(reply,op,cmd,run)
---- immutable426/test_delta_service.py
-+++ service436/test_delta_service.py
-@@ -12,6 +12,7 @@
-     def __init__(self):
-         self.rx=bytearray();self.tx=bytearray();self.frames=[];self.events=[]
-         self.armed=False;self.duty=self.norm=self.yaw=self.pitch=self.source=0
-+        self.result=0
-         self.run=self.cmd=0;self.drop_next=None;self.feedback=True
-     def read(self,offset):
-         self.events.append(('read',offset))
-@@ -24,8 +25,8 @@
-         if len(self.tx)!=32:return
-         f=bytes(self.tx);self.tx.clear();self.frames.append(f);op=f[3]
-         assert crc16_ccitt_false(f[:30])==int.from_bytes(f[30:],'little')
--        if op==3:self.armed=False;self.norm=self.duty=0
--        elif op==1:self.armed=True;self.source=f[8]
-+        if op==3:self.armed=False;self.norm=self.duty=0;self.result=0
-+        elif op==1:self.armed=True;self.source=f[8];self.result=0
-         elif op==6:
-             c=decode_delta(f);self.run=c.run_id;self.cmd=c.command_seq
-             if c.flags!=1:self.armed=False;self.norm=self.duty=0
-@@ -37,7 +38,7 @@
-         elif op==7:
-             c=decode_keepalive(f);assert self.armed and c.run_id==self.run and c.command_seq==self.cmd
-         if self.drop_next==op:self.drop_next=None;return
--        b=bytearray(32);b[:4]=b'\xd3\x4c\x01\x80';b[4:8]=f[4:8];b[8]=self.armed
-+        b=bytearray(32);b[:4]=b'\xd3\x4c\x01\x80';b[4:8]=f[4:8];b[8]=self.armed;b[9]=self.result
-         struct.pack_into('<hhH',b,10,self.yaw,self.pitch,self.duty);b[17]=self.source
-         b[18]=15 if self.feedback else 12;b[19]=0 if self.feedback else 255
-         struct.pack_into('<HHHH',b,20,*((2088,1961,0,0)if self.feedback else(65535,65535,65535,65535)))
-@@ -131,5 +132,45 @@
-             self.assertEqual(self.root.opens,0)
-         finally:delta_codec.__file__=old
+         if (not self.delta_active or command_seq != self.delta_command_seq
+@@ -69,6 +128,8 @@ class CompoundDeltaSession(VariableDisplaySession):
+         if self.failed:
+             raise LinkError('session fault latched; no replay')
+         op = request.get('op') if type(request) is dict else None
++        if op == 'startup_prepare':
++            return self._startup_prepare(request)
+         # The legacy convenience heartbeat must not bypass a compound TTL by
+         # renewing old opcode5. A heartbeat always references the real round.
+         if op == 'keepalive' and self.delta_command_seq:
+@@ -76,7 +137,7 @@ class CompoundDeltaSession(VariableDisplaySession):
+                 command_seq=self.delta_command_seq, run_id=self.delta_run_id)
+             op = 'delta_keepalive'
+         if op not in ('delta', 'delta_keepalive'):
+-            if self.delta_command_seq and op in ('pose', 'home', 'motor'):
++            if (self.delta_command_seq or self.prepared_active) and op in ('pose', 'home', 'motor'):
+                 return self._reject_mixed_mode()
+             return super().handle(request)
+         try:
+@@ -92,6 +153,8 @@ class CompoundDeltaSession(VariableDisplaySession):
+                 raise LinkError('duplicate/stale/expired compound request')
+             cmd = _integer(request.get('command_seq'),'command_seq',1,UINT32_MAX)
+             run = _integer(request.get('run_id'),'run_id',1,UINT32_MAX)
++            if self.prepared_active and run != self.prepared_run_id:
++                raise LinkError('first startup control round must match the prepared run')
+             lease = _integer(request.get('lease_ms',300),'lease_ms',100,500)
+             self.request_id = rid
+             started = self.clock_ms()
+@@ -157,12 +220,14 @@ class CompoundDeltaSession(VariableDisplaySession):
+                     self.delta_speed_norm = speed
+                     self.delta_source_deadline_ms = source_deadline
+                     self.delta_active = True
++                    self.prepared_active = False
+                 else:
+                     if reply.armed or reply.requested_duty_permille:
+                         raise LinkError('PAUSE/STOP did not remove drive')
+                     self.delta_active = False
+                     self.delta_speed_norm = 0
+                     self.delta_source_deadline_ms = None
++                    self.prepared_active = False
+                 self.delta_run_id,self.delta_command_seq = run,cmd
+                 if flags & STOP:
+                     # The actual compound STOP reply is the terminal device
+diff --git a/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/session_client.py b/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/session_client.py
+index 8a45503..5283e4c 100644
+--- a/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/session_client.py
++++ b/output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/session_client.py
+@@ -36,6 +36,10 @@ class SessionClient:
+     def delta_keepalive(self, command_seq, run_id, *, lease_ms=300):
+         return self._call('delta_keepalive',command_seq=command_seq,run_id=run_id,lease_ms=lease_ms)
  
-+    def test_preparatory_status_arm_time_is_not_charged_to_delta_lease(self):
-+        s=self.attach();original=s._session._send
-+        def slow_preparation(op,*args,**kwargs):
-+            if op in (4,1):self.clock.now+=.110
-+            return original(op,*args,**kwargs)
-+        s._session._send=slow_preparation
-+        self.delta(s,lease_ms=100)
-+        self.assertGreaterEqual(s._session.delta_lease_deadline_ms-s._session.clock_ms(),99)
-+        self.clock.now+=.020;s.delta_keepalive(1,1,lease_ms=100)
-+        self.assertEqual(self.ops(),[3,4,4,1,6,7])
++    def startup_prepare(self, run_id, initial_speed_permille, move_ms=500):
++        return self._call('startup_prepare', run_id=run_id,
++                          initial_speed_permille=initial_speed_permille, move_ms=move_ms)
 +
-+    def test_new_real_round_after_expired_lease_observes_off_then_arms(self):
-+        s=self.attach();self.delta(s);self.clock.now+=.301
-+        # Model the actual MCU watchdog result; cached reply remains armed.
-+        self.root.mmio.armed=False;self.root.mmio.norm=self.root.mmio.duty=0
-+        self.root.mmio.result=7  # Real MTR5 STATUS preserves WATCHDOG until ARM.
-+        self.assertTrue(s._session.delta_reply.armed)
-+        r=self.delta(s,cmd=2,yaw=50,pitch=0,speed=100)
-+        self.assertEqual(self.ops(),[3,4,4,1,6,4,1,6])
-+        self.assertEqual((r['command_seq'],r['commanded_yaw_cd'],r['commanded_speed_permille'],r['commanded_pwm_permille']),(2,150,100,300))
-+
-+    def test_elapsed_host_lease_does_not_guess_actual_off_or_restart_on_output(self):
-+        s=self.attach();self.delta(s);self.clock.now+=.301
-+        # A conservative host estimate can expire before a live hardware lease.
-+        self.assertTrue(self.root.mmio.armed);self.assertEqual(self.root.mmio.duty,300)
-+        with self.assertRaisesRegex(Exception,'requires actual OFF'):self.delta(s,cmd=2)
-+        self.assertEqual(self.ops(),[3,4,4,1,6,4,3])
-+        self.assertEqual(self.ops().count(1),1);self.assertEqual(self.ops().count(6),1)
-+
-+    def test_recovery_watchdog_status_with_output_on_cannot_arm(self):
-+        s=self.attach();self.delta(s);self.clock.now+=.301;self.root.mmio.result=7
-+        with self.assertRaisesRegex(Exception,'MCU non-OK'):self.delta(s,cmd=2)
-+        self.assertEqual(self.ops(),[3,4,4,1,6,4,3]);self.assertEqual(self.ops().count(1),1)
-+
-+    def test_recovery_other_error_status_even_when_off_cannot_arm(self):
-+        s=self.attach();self.delta(s);self.clock.now+=.301
-+        self.root.mmio.armed=False;self.root.mmio.norm=self.root.mmio.duty=0;self.root.mmio.result=3
-+        with self.assertRaisesRegex(Exception,'MCU non-OK'):self.delta(s,cmd=2)
-+        self.assertEqual(self.ops(),[3,4,4,1,6,4,3]);self.assertEqual(self.ops().count(1),1)
-+
+     def motor(self, speed_pct):
+         return self._call('motor',speed_pct=speed_pct)
  
- if __name__=='__main__':unittest.main(verbosity=2)
+@@ -64,6 +68,9 @@ class SshClientAdapter:
+             flags=flags,source_valid_for_ms=source_valid_for_ms))
+     def delta_keepalive(self, command_seq, run_id, *, lease_ms=300):
+         return self.client.call(dict(op='delta_keepalive',command_seq=command_seq,run_id=run_id,lease_ms=lease_ms))
++    def startup_prepare(self, run_id, initial_speed_permille, move_ms=500):
++        return self.client.call(dict(op='startup_prepare', run_id=run_id,
++            initial_speed_permille=initial_speed_permille, move_ms=move_ms))
+     def pose(self, *args, **kwargs):return self.client.pose(*args, **kwargs)
+     def motor(self, speed_pct):return self.client.motor(speed_pct)
+     def keepalive(self):return self.client.call({'op':'keepalive'})
+diff --git a/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_service.py b/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_service.py
+index c6310bf..c82d02e 100644
+--- a/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_service.py
++++ b/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_service.py
+@@ -28,13 +28,13 @@ REQUIREMENTS_SHA256 = '2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340
+ UART_VLNV = 'xilinx.com:ip:axi_uartlite:2.0'
+ PROTECTED = ((0x43C00000, 0x1000), (0x43C10000, 0x1000))
+ DEPENDENCIES = {
+-    'delta_codec': ('delta_codec.py', 'e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca'),
+-    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', 'e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d'),
++    'delta_codec': ('delta_codec.py', '01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee'),
++    'drill_live_link.compound_session': ('drill_live_link/compound_session.py', 'd53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba'),
+     'motor_runtime.variable_session': ('baseline_mtr4/motor_runtime/variable_session.py', '1d5ce3f2aea1849b7e55e164e6c8d1db9e5d333e8a821f1feac9e3416f4d1d38'),
+     'fpga_link.session': ('baseline_mtr4/fpga_link/session.py', '5e7765a01e49b1b7c324d338773b7689f140c8fe6dd09f044d27cd62438a39ba'),
+     'fpga_link.uartlite': ('baseline_mtr4/fpga_link/uartlite.py', '29cc8160790bdc2d6fa25be1de1994dc39586fba3d884b9826a2d2c030eed778'),
+     'pc.codec': ('baseline_mtr4/pc/codec.py', '62cf254d4d4b519578da364b49f0555d61de386ee1430e664e63013fadbed006'),
+-    'drill_live_link.session_client': ('drill_live_link/session_client.py', '93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f'),
++    'drill_live_link.session_client': ('drill_live_link/session_client.py', '6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145'),
+     'drill_live_link.follower': ('drill_live_link/follower.py', '6b975c4cb3ad23723b131ee088edfaa9810fa387af0be61382497ffe088a1134'),
+     'drill_live_link.model': ('drill_live_link/model.py', '249d0e6c253de8f91402ba5e35f0d385eea789a886c14ea249ad092bf5a69333'),
+ }
+@@ -522,6 +522,10 @@ class ProductUartService:
+         self._require_motion()
+         return self._call('delta_keepalive',command_seq,run_id,lease_ms=lease_ms)
+ 
++    def startup_prepare(self, run_id, initial_speed_permille, move_ms=500):
++        self._require_motion()
++        return self._call('startup_prepare', run_id, initial_speed_permille, move_ms)
++
+     def pose(self, *args, **kwargs):
+         self._require_motion()
+         return self._call('pose', *args, **kwargs)
+diff --git a/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_stdio.py b/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_stdio.py
+index 06ff545..3e2b04a 100644
+--- a/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_stdio.py
++++ b/output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_stdio.py
+@@ -9,7 +9,7 @@ from pathlib import Path
+ 
+ from product_uart_service import ProductUartService, ServiceError
+ 
+-EXPECTED_SERVICE_SHA256 = '54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d'
++EXPECTED_SERVICE_SHA256 = '3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6'
+ 
+ 
+ def _need(ok, reason):
+@@ -58,7 +58,7 @@ class ExistingStreamSession:
+         try:
+             _need(type(request) is dict, 'command object required')
+             op = request.get('op')
+-            _need(op in ('status', 'stop', 'pose', 'home', 'motor', 'keepalive', 'delta', 'delta_keepalive'), 'unsupported remote operation')
++            _need(op in ('status', 'stop', 'pose', 'home', 'motor', 'keepalive', 'delta', 'delta_keepalive', 'startup_prepare'), 'unsupported remote operation')
+             if op not in ('status', 'stop'):
+                 self.service._require_motion()
+             if op == 'stop':
+--- /dev/null
++++ output/drill-live-link-20261104/compound_delta_v1/host_service/STARTUP_PREPARE.md
+@@ -0,0 +1,76 @@
++# Explicit per-run startup preparation
++
++Task `DEEPEYE-IMPLEMENTATION-20261014/v1`, work
++`B-A171-STARTUP-HOST-SEAM-20261104-503`. H01–H15 revision 2 requirements SHA256
++`2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d`.
++
++Use the existing sole UART owner, after a new unique Root/B transfer attach:
++
++```python
++prepared = client.startup_prepare(
++    run_id=1793772501, initial_speed_permille=880, move_ms=500)
++```
++
++`client` may be the already-attached `ProductUartService`, `SessionClient`, or
++`SshClientAdapter` with its existing `keepalive=False` SSH client. The existing
++stdio RPC also accepts `op="startup_prepare"`, `run_id`,
++`initial_speed_permille`, and optional `move_ms`, with the same
++`session/request_id/expires_ms` envelope. No extra thread or UART owner exists.
++There is no service-side sleep, simulated clock rebasing, automatic ARM or
++source lease renewal. The Root owns the one-second monotonic wait after the
++actual prepare reply, continues sensing/stop handling during that wait, and
++starts virtual movement and the real op6 on the same later valid admission.
++
++The MCU accepts op8 only while actually unarmed/OFF with fresh healthy feedback.
++It queues one finite dual-axis move to absolute command zero using the saved
++raw references 2088/1961. It stores the requested normalized initial speed in a
++separate preset slot. Current compound speed remains 0 and motor PWM remains
++0. `prepared_speed_permille` in the JSON reply describes the accepted request's
++preset target; it is neither executed PWM nor measured RPM. The unchanged raw
++32-byte UART ACK is included as `uart_ack_hex`. Its actual raw feedback is
++preserved and `uart_ack_is_not_arrival=True` remains explicit.
++
++The first actual op6 must reference the prepared run and starts from the
++current speed 0. For example, preparing 880 and then sending the first real
++speed delta +880 produces command speed 880 and PWM 690, without double
++accumulation. A normal ARM or pause/resume does not issue another op8 or home.
++STOP/error cancels local prepared-active state; the prepared-run high-water
++identity remains so an old preparation cannot be replayed. Timeouts and unknown
++outcomes latch failure and use the existing single terminal STOP path.
++
++## Wire op8
++
++All integers use little endian. Existing op1–7 and ACK layouts are unchanged.
++
++| Bytes | Meaning |
++| --- | --- |
++| 0–3 | `d3 4c 01 08` |
++| 4–7 | positive monotonic wire sequence |
++| 8 | original source: PC_DIRECT=1 / FPGA_OUTPUT=2 / MANUAL=3 |
++| 9 | VALID=1 |
++| 10–13 | zero |
++| 14–15 | initial normalized speed preset 0…1000 |
++| 16–17 | zero |
++| 18–19 | finite servo move time 100…1000 ms, default 500 |
++| 20–23 | zero; not a real AI/common command |
++| 24–27 | positive new run ID |
++| 28–29 | zero; no motor lease |
++| 30–31 | CRC16-CCITT-FALSE over bytes 0–29 |
++
++Vector seq302/sourceFPGA_OUTPUT/run1793772501/preset880/move500:
++
++```text
++d34c01082e01000002010000000070030000f40100000000d5cbea6a00008d5b
++```
++
++Stage the changed files and all unchanged baseline dependencies into a **new**
++runtime directory. Do not overwrite the old A1271/1344 runtime bytes. Updated
++`SOURCE_PINS.json`, in-code dependency pins and stdio service pin must agree.
++The local source layout stores unchanged dependencies in
++`output/drill-live-link-20261104/baseline_mtr4/` and
++`output/drill-live-link-20261104/drill_live_link/`; delivered runtimes put those
++under `host_service/baseline_mtr4/` and `host_service/drill_live_link/`.
++
++Focused software check: `python -B startup_prepare_test.py` in that staged
++layout. Its synthetic UART checks are software evidence, never physical
++readiness, measured arrival, full-route success, or formal product acceptance.
+--- /dev/null
++++ output/drill-live-link-20261104/compound_delta_v1/host_service/startup_prepare_test.py
+@@ -0,0 +1,199 @@
++"""Focused startup seam checks with real service/codec and synthetic UART only.
++
++Run in the delivered layout (baseline_mtr4/ alongside this file). No serial,
++PYNQ, SSH or actuator is opened. UART acknowledgments below are test models.
++"""
++from dataclasses import replace
++import hashlib
++import struct
++import tempfile
++from pathlib import Path
++import threading
++import unittest
++
++import product_uart_service as service
++from product_uart_stdio import ExistingStreamSession
++from delta_codec import encode_startup_prepare, crc16_ccitt_false, speed_to_pwm
++
++
++class Clock:
++    def __init__(self): self.now = 1.
++    def __call__(self): return self.now
++    def sleep(self, seconds): self.now += seconds
++
++
++class MMIO:
++    def __init__(self):
++        self.rx = bytearray(); self.tx = bytearray(); self.frames = []
++        self.armed = False; self.duty = self.source = self.speed = 0
++        self.yaw = 950; self.pitch = 949
++        self.drop = None; self.bad_prepare = None; self.prepared = None
++        self.prepare_reply = None
++    def read(self, offset):
++        if offset == 8: return 4 | bool(self.rx)
++        if offset == 0: return self.rx.pop(0)
++        raise AssertionError('unexpected register read')
++    def write(self, offset, value):
++        assert offset == 4, 'no reset/control writes'
++        self.tx.append(value)
++        if len(self.tx) != 32: return
++        f = bytes(self.tx); self.tx.clear(); self.frames.append(f)
++        assert crc16_ccitt_false(f[:30]) == int.from_bytes(f[30:], 'little')
++        op = f[3]
++        if op == 3: self.armed = False; self.duty = self.speed = 0; self.prepared = None
++        elif op == 1: self.armed = True; self.source = f[8]
++        elif op == 8:
++            assert not self.armed and not self.duty
++            self.prepared = (int.from_bytes(f[24:28], 'little'), int.from_bytes(f[14:16], 'little'))
++            self.yaw = self.pitch = 0; self.source = f[8]
++        elif op == 6:
++            assert self.armed
++            y,p,s = struct.unpack_from('<hhh', f, 10)
++            self.yaw += y; self.pitch += p; self.speed = max(0,min(1000,self.speed+s));self.duty = speed_to_pwm(self.speed)
++            self.prepared = None
++        if self.drop == op: self.drop = None; return
++        r = bytearray(32); r[:4] = b'\xd3\x4c\x01\x80'; r[4:8] = f[4:8]
++        r[8] = self.armed; r[17] = self.source; r[18] = 15
++        struct.pack_into('<hhH', r, 10, self.yaw, self.pitch, self.duty)
++        struct.pack_into('<HHHH', r, 20, 2216, 2097, 10, 20)
++        if op == 8 and self.bad_prepare == 'source': r[17] = 1
++        if op == 8 and self.bad_prepare == 'armed': r[8] = 1
++        if op == 8 and self.bad_prepare == 'nonzero': struct.pack_into('<h', r, 10, 1)
++        struct.pack_into('<H', r, 30, crc16_ccitt_false(r[:30]))
++        if op == 8: self.prepare_reply = bytes(r)
++        self.rx.extend(r)
++
++
++class Root(service.RootLoadedProduct):
++    simulation = True
++    def __init__(self):
++        self.mmio = MMIO(); self.motor_allowed = False; self.opens = 0
++        self.blob = (f'<SYSTEM><MODULES><MODULE FULLNAME="/mcu_uart" INSTANCE="mcu_uart" VLNV="{service.UART_VLNV}">'
++          '<BUSINTERFACES><BUSINTERFACE><PARAMETERS><PARAMETER NAME="FREQ_HZ" VALUE="50000000"/></PARAMETERS></BUSINTERFACE></BUSINTERFACES>'
++          '<PARAMETERS><PARAMETER NAME="C_S_AXI_ACLK_FREQ_HZ" VALUE="50000000"/><PARAMETER NAME="C_BAUDRATE" VALUE="115200"/>'
++          '<PARAMETER NAME="C_DATA_BITS" VALUE="8"/><PARAMETER NAME="C_USE_PARITY" VALUE="0"/></PARAMETERS>'
++          '<PORTS><PORT NAME="s_axi_aclk" CLKFREQUENCY="50000000" SIGNAME="product_clk"/><PORT NAME="s_axi_aresetn" POLARITY="ACTIVE_LOW" SIGNAME="product_reset"/></PORTS>'
++          '</MODULE></MODULES><MEMRANGE INSTANCE="mcu_uart" SLAVEBUSINTERFACE="S_AXI" BASEVALUE="0x43c20000" HIGHVALUE="0x43c20fff"/></SYSTEM>').encode()
++        self.binding = service.ProductBinding('startup503', '1'*64, 'boot503', 'build503', '2'*64,
++            hashlib.sha256(self.blob).hexdigest(), '3'*64, 50000000,
++            service.IpDescriptor('g05','custom:g05:2',0x43c00000,4096),
++            service.IpDescriptor('trace','custom:trace:4',0x43c10000,4096),
++            'product_clk','product_reset',service.UartDescriptor('mcu_uart',service.UART_VLNV,
++                0x43c20000,4096,50000000,115200,8,False,1,'product_clk','product_reset'))
++        self.current = self.binding
++    def read_current(self): return self.current
++    def read_hwh_bytes(self): return self.blob
++    def authorize_transfer(self, profile, transfer): return None
++    def authorize_motor(self, profile, transfer):
++        if not self.motor_allowed: raise service.ServiceError('separate motor grant absent')
++    def open_uart_mmio(self, binding): self.opens += 1; return self.mmio
++
++
++class StartupChecks(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(); self.path = Path(self.temp.name).resolve()
++        self.clock = Clock(); self.root = Root(); self.sessions = []
++    def tearDown(self):
++        for s in self.sessions:
++            try:s.close()
++            except Exception:pass
++        self.temp.cleanup()
++    def attach(self, scope='MOTION_READY'):
++        grant = service.BTransfer('startup503','transfer503','observed503',301,'4'*64,scope)
++        s = service.ProductUartService.attach(self.root,service.Profile(self.root.binding,'world503','FPGA_OUTPUT'),
++            grant,self.path,clock=self.clock,sleep=self.clock.sleep)
++        self.sessions.append(s); return s
++
++    def test_vector_exact_crc_and_strict_integer_validation(self):
++        f=encode_startup_prepare(302,'FPGA_OUTPUT',1793772501,880,500)
++        self.assertEqual(f.hex(),'d34c01082e01000002010000000070030000f40100000000d5cbea6a00008d5b')
++        for kwargs in [dict(seq=True),dict(run_id=0),dict(initial_speed_permille=1001),dict(move_ms=99),dict(source='WRONG')]:
++            args=dict(seq=302,source='FPGA_OUTPUT',run_id=1793772501,initial_speed_permille=880,move_ms=500);args.update(kwargs)
++            with self.assertRaises(ValueError):encode_startup_prepare(**args)
++
++    def test_prepare_rpc_returns_real_model_ACK_off_and_independent_preset(self):
++        s=self.attach(); before=len(self.root.mmio.frames)
++        r=s.startup_prepare(1793772501,880)
++        self.assertEqual([f[3] for f in self.root.mmio.frames[before:]],[8])
++        self.assertEqual(r['prepared_run_id'],1793772501);self.assertEqual(r['prepared_speed_permille'],880)
++        self.assertEqual(r['uart_ack_hex'],self.root.mmio.prepare_reply.hex())
++        self.assertTrue(r['motor_off']);self.assertFalse(r['status']['armed'])
++        self.assertFalse(s._session.allow_motor);self.assertEqual(s._session.delta_speed_norm,0)
++        self.assertEqual(r['status']['yaw_feedback']['raw_position'],2216) # No forged home arrival.
++        self.assertTrue(r['uart_ack_is_not_arrival']);self.assertIsNone(s._session.delta_source_deadline_ms)
++        self.assertEqual(self.root.mmio.prepared,(1793772501,880))
++
++    def test_first_real_delta_starts_from_zero_and_resume_never_rehomes(self):
++        s=self.attach();s.startup_prepare(1793772501,880)
++        self.clock.now += 1.0 # Caller owns wait, not service.
++        self.root.motor_allowed=True;s.enable_motor()
++        r=s.delta(1,1793772501,100,-200,880,source_valid_for_ms=1000)
++        self.assertEqual(r['commanded_speed_permille'],880);self.assertEqual(r['commanded_pwm_permille'],690)
++        self.assertEqual([f[3] for f in self.root.mmio.frames],[3,4,8,4,1,6])
++        self.assertFalse(s._session.prepared_active)
++        s.delta(2,1793772501,0,0,0,source_valid_for_ms=1000)
++        self.assertEqual(sum(f[3]==8 for f in self.root.mmio.frames),1)
++
++    def test_duplicate_or_stale_prepare_is_never_resent(self):
++        s=self.attach();s.startup_prepare(1793772501,880)
++        with self.assertRaisesRegex(Exception,'already prepared'):s.startup_prepare(1793772501,880)
++        self.assertEqual(sum(f[3]==8 for f in self.root.mmio.frames),1)
++        self.assertFalse(s._session.prepared_active)
++        self.assertEqual(s._session.prepared_run_id,1793772501)
++
++    def test_unknown_prepare_stops_once_no_replay_through_cleanup(self):
++        s=self.attach();self.root.mmio.drop=8
++        with self.assertRaisesRegex(Exception,'timeout|missing'):s.startup_prepare(1793772501,880)
++        s.close()
++        self.assertEqual([f[3] for f in self.root.mmio.frames],[3,4,8,3])
++        self.assertTrue(s._session.failed)
++
++    def test_invalid_intent_has_no_prepare_ARM_or_motor(self):
++        s=self.attach()
++        with self.assertRaises(Exception):s.startup_prepare(1793772501,True)
++        self.assertEqual([f[3] for f in self.root.mmio.frames],[3,4,3])
++
++    def test_existing_stream_preserves_request_envelope_and_STOP_cancels(self):
++        s=self.attach();stream=ExistingStreamSession(s);session=s._session
++        req=dict(op='startup_prepare',session=session.session_id,request_id=19,
++            expires_ms=session.clock_ms()+500,run_id=1793772501,initial_speed_permille=880,move_ms=500)
++        r=stream.dispatch(req);self.assertEqual(r['request_id'],19)
++        stream.dispatch(dict(op='stop',session=session.session_id,request_id=20,expires_ms=0))
++        self.assertFalse(session.prepared_active);self.assertIsNone(self.root.mmio.prepared)
++
++    def test_diagnostic_and_changed_identity_cannot_prepare(self):
++        s=self.attach(scope='DIAGNOSTIC_ONLY');before=len(self.root.mmio.frames)
++        with self.assertRaises(service.ServiceError):s.startup_prepare(1793772501,880)
++        self.assertEqual(len(self.root.mmio.frames),before)
++        self.root.current=replace(self.root.binding,boot_id='new-boot')
++        with self.assertRaises(service.ServiceError):s.startup_prepare(1793772501,880)
++        self.assertEqual(len(self.root.mmio.frames),before)
++
++    def test_wrong_thread_rejected_before_IO(self):
++        s=self.attach();errors=[];before=len(self.root.mmio.frames)
++        def other():
++            try:s.startup_prepare(1793772501,880)
++            except Exception as e:errors.append(e)
++        t=threading.Thread(target=other);t.start();t.join()
++        self.assertEqual(len(errors),1);self.assertEqual(len(self.root.mmio.frames),before)
++
++    def test_mismatching_first_run_does_not_ARM_or_drive(self):
++        s=self.attach();s.startup_prepare(1793772501,880)
++        self.root.motor_allowed=True;s.enable_motor()
++        with self.assertRaisesRegex(Exception,'match the prepared run'):
++            s.delta(1,1793772502,0,0,880,source_valid_for_ms=1000)
++        self.assertFalse(any(f[3] in (1,6) for f in self.root.mmio.frames))
++
++    def test_prepare_ACK_source_and_zero_targets_are_checked(self):
++        s=self.attach();self.root.mmio.bad_prepare='source'
++        with self.assertRaisesRegex(Exception,'matching zero-target'):s.startup_prepare(1793772501,880)
++        self.assertEqual(sum(f[3]==8 for f in self.root.mmio.frames),1)
++        self.assertEqual([f[3] for f in self.root.mmio.frames][-1],3)
++
++    def test_legacy_home_cannot_bypass_prepared_round(self):
++        s=self.attach();s.startup_prepare(1793772501,880)
++        with self.assertRaisesRegex(Exception,'legacy motion'):s.pose(0,0)
++        self.assertFalse(any(f[3] in (1,2,5) for f in self.root.mmio.frames))
++
++
++if __name__=='__main__': unittest.main(verbosity=2)

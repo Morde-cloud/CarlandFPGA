@@ -9,7 +9,7 @@ from pathlib import Path
 
 from product_uart_service import ProductUartService, ServiceError
 
-EXPECTED_SERVICE_SHA256 = '54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d'
+EXPECTED_SERVICE_SHA256 = '3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6'
 
 
 def _need(ok, reason):
@@ -58,7 +58,7 @@ class ExistingStreamSession:
         try:
             _need(type(request) is dict, 'command object required')
             op = request.get('op')
-            _need(op in ('status', 'stop', 'pose', 'home', 'motor', 'keepalive', 'delta', 'delta_keepalive'), 'unsupported remote operation')
+            _need(op in ('status', 'stop', 'pose', 'home', 'motor', 'keepalive', 'delta', 'delta_keepalive', 'startup_prepare'), 'unsupported remote operation')
             if op not in ('status', 'stop'):
                 self.service._require_motion()
             if op == 'stop':

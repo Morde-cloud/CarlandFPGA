@@ -1,49 +1,66 @@
 {
   "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
   "task_version": 1,
-  "work_id": "B-DELTA-SERVICE-LEASE-TIMING-FIX-20261104-436",
-  "canonical_agent_id": "/root/delta_service426",
-  "at_utc": "2026-11-04T02:04:20.687323+00:00",
+  "work_id": "B-A171-STARTUP-HOST-SEAM-20261104-503",
+  "canonical_agent_id": "/root/startup_host503",
+  "at_utc": "2026-11-04T06:42:34.908869+00:00",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
   "runtime_files": [
     {
-      "path": "product_uart_service.py",
-      "bytes": 26931,
-      "sha256": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
-      "changed_from_426": true
-    },
-    {
-      "path": "product_uart_stdio.py",
-      "bytes": 5759,
-      "sha256": "a6daef3766743b695d2630817d5cca7b6a76a26ac30ea259f5841637fe29cdab",
-      "changed_from_426": true
-    },
-    {
-      "path": "drill_live_link/session_client.py",
-      "bytes": 3347,
-      "sha256": "93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f",
-      "changed_from_426": false
+      "path": "delta_codec.py",
+      "bytes": 10309,
+      "sha256": "01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee"
     },
     {
       "path": "drill_live_link/compound_session.py",
-      "bytes": 11174,
-      "sha256": "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d",
-      "changed_from_426": true
+      "bytes": 15223,
+      "sha256": "d53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba"
     },
     {
-      "path": "delta_codec.py",
-      "bytes": 9079,
-      "sha256": "e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca",
-      "changed_from_426": false
+      "path": "drill_live_link/session_client.py",
+      "bytes": 3801,
+      "sha256": "6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145"
+    },
+    {
+      "path": "product_uart_service.py",
+      "bytes": 27125,
+      "sha256": "3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6"
+    },
+    {
+      "path": "product_uart_stdio.py",
+      "bytes": 5778,
+      "sha256": "35b0f72a94594098ee5f90eaaeb74301288d9b5b61e11e5ca88d125cfeeb0448"
     }
   ],
+  "strict_stdio_service_sha256": "3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6",
+  "hardware_executed": false,
+  "formal_or_physical_acceptance": false,
+  "parent_main_acceptance_required": true,
   "strict_dependency_paths_and_hashes": {
     "delta_codec": [
       "delta_codec.py",
-      "e3b4b9280494352d024c66e65424241238ea8185425a5b4e1b512c7ff602dcca"
+      "01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee"
     ],
     "drill_live_link.compound_session": [
       "drill_live_link/compound_session.py",
-      "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d"
+      "d53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba"
     ],
     "motor_runtime.variable_session": [
       "baseline_mtr4/motor_runtime/variable_session.py",
@@ -63,7 +80,7 @@
     ],
     "drill_live_link.session_client": [
       "drill_live_link/session_client.py",
-      "93a1c405f511fac7934ff47f26a3143a20e1a8deed234e7bfd67522053b8815f"
+      "6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145"
     ],
     "drill_live_link.follower": [
       "drill_live_link/follower.py",
@@ -74,41 +91,12 @@
       "249d0e6c253de8f91402ba5e35f0d385eea789a886c14ea249ad092bf5a69333"
     ]
   },
-  "strict_stdio_service_sha256": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
-  "original426_immutable_verified": true,
-  "fixes": [
-    "lease origin immediately before real compound transport.write_frame intent, after preparatorySTATUS/ARM",
-    "new genuine higher command with expiredlocallease observes realSTATUS/OFF, syncs normalizedspeed0, then explicitARM; heartbeat neverARMs",
-    "main-authorized private STATUS4/require_okFalse recovery permits stickyWATCHDOG7 only if actually unarmed andduty0; CRC/seq/_fresh stillrequired, ordinarySTATUS/keeper/othererrors unchanged"
-  ],
   "focused_tests": {
-    "tests": 19,
+    "tests": 12,
     "exit_code": 0,
-    "actual_pid": 33576,
-    "process": "TEST436_FINAL_PROCESS.json",
-    "raw_stdout": "TEST436_FINAL.stdout.txt",
-    "raw_stderr": "TEST436_FINAL.stderr.txt",
-    "preserved_17pass_beforewatchdog_scope": "before_watchdog_status_decision/"
-  },
-  "requirements_ids": [
-    "H01",
-    "H02",
-    "H03",
-    "H04",
-    "H05",
-    "H06",
-    "H07",
-    "H08",
-    "H09",
-    "H10",
-    "H11",
-    "H12",
-    "H13",
-    "H14",
-    "H15"
-  ],
-  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
-  "hardware_executed": false,
-  "formal_or_physical_acceptance": false,
-  "parent_main_acceptance_required": true
+    "actual_pid": 30400,
+    "raw_process": "TEST503_PROCESS.json",
+    "raw_stderr": "TEST503.stderr.txt",
+    "initial_import_and_fixture_failures_preserved": true
+  }
 }

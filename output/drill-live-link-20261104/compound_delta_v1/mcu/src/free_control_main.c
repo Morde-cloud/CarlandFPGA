@@ -52,19 +52,19 @@ int main(void) {
             pc[used++]=byte;
             if(used==32) {
                 unsigned i;mc_command(&motor_diagnostics,&free_diagnostics,pc,ticks,reply);
-                if(!send(&pc_tx,reply,32))fc_stop(&free_diagnostics,ticks);
+                if(!send(&pc_tx,reply,32))mc_stop(&motor_diagnostics,&free_diagnostics,ticks);
                 used=0;
                 if(reply[9]==DEMO_CRC || reply[9]==DEMO_FORMAT)
                     for(i=1;i<31;i++) if(pc[i]==0xd3 && pc[i+1]==0x4c) {used=(uint8_t)(32-i);memmove(pc,pc+i,used);break;}
             }
         }
-        if(!DL_GPIO_readPins(BUTTON_PORT,BUTTON_S2_PIN)) fc_stop(&free_diagnostics,ticks);
+        if(!DL_GPIO_readPins(BUTTON_PORT,BUTTON_S2_PIN)) mc_stop(&motor_diagnostics,&free_diagnostics,ticks);
         if(free_limit_request==0x504c3930u && !free_diagnostics.pending) {
             free_limit_request=0;
             if(!fc_limit_begin(&free_diagnostics,ticks))free_diagnostics.limit_result=4;
         }
         n=fc_poll(&free_diagnostics,ticks,bus);
-        if(n && !send(&bus_tx,bus,n))fc_stop(&free_diagnostics,ticks);
+        if(n && !send(&bus_tx,bus,n))mc_stop(&motor_diagnostics,&free_diagnostics,ticks);
         /* Replies are paced without blocking. Continue draining both receive
          * FIFOs and servicing the existing motor lease on every iteration. */
         service_tx(BUS_UART_INST,&bus_tx);service_pc_tx(ticks);

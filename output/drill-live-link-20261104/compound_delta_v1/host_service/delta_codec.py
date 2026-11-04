@@ -15,6 +15,7 @@ SCHEMA = "COMPOUND_DELTA_V1"
 FRAME_SIZE = 32
 OP_DELTA = 6
 OP_KEEPALIVE = 7
+OP_STARTUP_PREPARE = 8
 VALID = 1
 PAUSE = 2
 STOP = 4
@@ -176,6 +177,30 @@ def decode_keepalive(frame):
     return command
 
 
+def encode_startup_prepare(seq, source, run_id, initial_speed_permille, move_ms=500):
+    """One explicit new-run home and speed preset, never ARM or motor PWM.
+
+    The preset is separate from the current compound speed accumulator, which
+    remains zero. The caller owns the subsequent one-second synchronization
+    gate; this command neither starts that gate nor renews a control lease.
+    """
+    _integer(seq, "seq", 1, 0xFFFFFFFF)
+    _integer(run_id, "run_id", 1, 0xFFFFFFFF)
+    _integer(initial_speed_permille, "initial_speed_permille", 0, 1000)
+    _integer(move_ms, "move_ms", 100, 1000)
+    if type(source) is not str or source not in SOURCE_TO_CODE:
+        raise DeltaError("source must be PC_DIRECT, FPGA_OUTPUT or MANUAL")
+    frame = bytearray(FRAME_SIZE)
+    frame[:4] = b"\xd3\x4c\x01\x08"
+    struct.pack_into("<I", frame, 4, seq)
+    frame[8], frame[9] = SOURCE_TO_CODE[source], VALID
+    struct.pack_into("<H", frame, 14, initial_speed_permille)
+    struct.pack_into("<H", frame, 18, move_ms)
+    struct.pack_into("<I", frame, 24, run_id)
+    struct.pack_into("<H", frame, 30, crc16_ccitt_false(frame[:30]))
+    return bytes(frame)
+
+
 def speed_to_pwm(speed_permille):
     """Normalized0..1000 speed -> OFF or250..750 PWM permille, half up."""
     _integer(speed_permille, "speed_permille", 0, 1000)
@@ -204,7 +229,7 @@ def accumulate_virtual(yaw_cd, pitch_cd, speed_permille, yaw_delta_cd,
             max(0, min(1000, speed_permille + speed_delta_permille)))
 
 
-__all__ = ["SCHEMA", "FRAME_SIZE", "OP_DELTA", "OP_KEEPALIVE", "VALID", "PAUSE", "STOP",
+__all__ = ["SCHEMA", "FRAME_SIZE", "OP_DELTA", "OP_KEEPALIVE", "OP_STARTUP_PREPARE", "VALID", "PAUSE", "STOP",
            "SOURCE_TO_CODE", "SOURCE_BY_CODE", "DeltaError", "DeltaCommand", "KeepaliveCommand",
            "crc16_ccitt_false", "encode_delta", "decode_delta",
-           "encode_keepalive", "decode_keepalive", "speed_to_pwm", "accumulate_virtual"]
+           "encode_keepalive", "decode_keepalive", "encode_startup_prepare", "speed_to_pwm", "accumulate_virtual"]

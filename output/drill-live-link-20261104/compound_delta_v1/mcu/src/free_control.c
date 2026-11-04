@@ -8,7 +8,7 @@ static const uint16_t minimum[2]={610,400},maximum[2]={3550,3550};
 static const uint16_t soft_minimum[2]={626,416},soft_maximum[2]={3534,3534};
 static uint32_t gap(uint32_t a,uint32_t b) {return a>b?a-b:b-a;}
 static uint16_t be16(const uint8_t *p) {return (uint16_t)(((uint16_t)p[0]<<8)|p[1]);}
-static void disarm(FreeControl *s) {s->link.armed=0;s->link.duty=0;s->link.pose_pending=0;s->pose_axis=0;}
+static void disarm(FreeControl *s) {s->link.armed=0;s->link.duty=0;s->link.pose_pending=0;s->pose_axis=0;s->startup_pose_pending=0;}
 static void fault(FreeControl *s) {
     if(s->state==FC_CONFIG_LIMIT)s->limit_result=4;
     s->state=FC_FAULT;s->pending=0;s->home_wait=s->home_read=0;
@@ -59,6 +59,19 @@ int fc_target_raw(unsigned axis,int16_t angle,uint16_t *raw) {
 void fc_init(FreeControl *s,uint32_t now) {
     memset(s,0,sizeof(*s));demo_init(&s->link,8);s->signature=0x4d545235u;
     s->state=FC_STARTUP;s->boot_ms=now;s->last_bus_ms=now;
+}
+int fc_startup_prepare(FreeControl *s,uint16_t move_ms,uint32_t now) {
+    unsigned axis;uint16_t raw;
+    if(s->state!=FC_READY || s->link.armed || s->startup_pose_pending ||
+       s->link.pose_pending || s->link.bus_status || move_ms<100 || move_ms>1000) return 0;
+    for(axis=0;axis<2;axis++)
+        if(!s->link.seen_feedback[axis] || (uint32_t)(now-s->link.feedback_ms[axis])>1000u ||
+           !fc_target_raw(axis,0,&raw) || raw<s->configured_min[axis]+16u ||
+           raw+16u>s->configured_max[axis]) return 0;
+    /* Explicit finite move using original saved calibration, while unarmed.
+     * ACK means queued target, never a measured home-arrival claim. */
+    s->link.yaw=s->link.pitch=0;s->link.move_ms=move_ms;s->startup_pose_pending=1;
+    return 1;
 }
 void fc_command(FreeControl *s,const uint8_t in[32],uint32_t now,uint8_t out[32]) {
     int16_t old_yaw=s->link.yaw,old_pitch=s->link.pitch;
@@ -118,7 +131,9 @@ static void response(FreeControl *s,const uint8_t *p,size_t n,uint32_t now) {
            (step==3 && (value<soft_minimum[axis] || value>soft_maximum[axis]))) {fault(s);return;}
         if(step==2) {s->configured_min[axis]=value;s->configured_max[axis]=be16(p+7);}
         if(step==3) {s->link.raw[axis]=value;s->link.seen_feedback[axis]=1;s->link.feedback_ms[axis]=now;}
-        if(++s->preflight==8) {s->state=FC_HOMING;s->home_axis=0;}
+        /* Boot validates and observes; each new run explicitly requests home.
+         * Flash/reconnect/ordinary ARM never creates an actuator move. */
+        if(++s->preflight==8) {s->state=FC_READY;s->last_poll_ms=now;}
         return;
     }
     if(s->pending_address!=0x38 || value>4095 || value<soft_minimum[axis] || value>soft_maximum[axis]) {fault(s);return;}
@@ -205,12 +220,12 @@ size_t fc_poll(FreeControl *s,uint32_t now,uint8_t out[18]) {
         axis=s->poll_axis;s->poll_axis^=1u;s->last_poll_ms=now;
         return read_request(s,axis,0x38,2,now,out);
     }
-    if(s->link.armed && s->link.pose_pending && s->pose_axis) {
+    if(s->startup_pose_pending || (s->link.armed && s->link.pose_pending && s->pose_axis)) {
         uint16_t targets[2];unsigned i,sum=0;
         if(s->link.move_ms<100 || s->link.move_ms>1000) {fault(s);return 0;}
         for(axis=0;axis<2;axis++)
             if(!s->link.seen_feedback[axis] || (uint32_t)(now-s->link.feedback_ms[axis])>1000u ||
-               !fc_target_raw(axis,axis?s->link.pitch:s->link.yaw,&targets[axis]) ||
+               !fc_target_raw(axis,s->startup_pose_pending?0:(axis?s->link.pitch:s->link.yaw),&targets[axis]) ||
                targets[axis]<s->configured_min[axis]+16u || targets[axis]+16u>s->configured_max[axis]) {fault(s);return 0;}
         /* Vendor protocol2.0.2 section2.3.6: one SYNC WRITE frame contains
          * only IDs1 and2, target position+finite runtime. No scan, configuration
@@ -222,7 +237,7 @@ size_t fc_poll(FreeControl *s,uint32_t now,uint8_t out[18]) {
             out[i+3]=(uint8_t)(s->link.move_ms>>8);out[i+4]=(uint8_t)s->link.move_ms;
         }
         for(i=2;i<17;i++)sum+=out[i];out[17]=(uint8_t)~sum;
-        s->pose_axis=0;s->link.pose_pending=0;s->tx_moves+=2;s->sync_frames++;s->last_bus_ms=now;
+        s->startup_pose_pending=0;s->pose_axis=0;s->link.pose_pending=0;s->tx_moves+=2;s->sync_frames++;s->last_bus_ms=now;
         return 18;
     }
     return 0;

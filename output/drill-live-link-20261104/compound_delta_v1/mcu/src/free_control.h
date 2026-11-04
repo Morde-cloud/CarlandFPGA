@@ -21,6 +21,7 @@ typedef struct {
     uint32_t sync_frames;
     uint16_t configured_min[2],configured_max[2];
     uint8_t limit_phase,limit_writes,limit_result;
+    uint8_t startup_pose_pending;
 } FreeControl;
 extern const volatile uint32_t free_saved_reference[4];
 void fc_init(FreeControl *s,uint32_t now);
@@ -30,4 +31,5 @@ void fc_byte(FreeControl *s,uint8_t byte,uint32_t now);
 void fc_stop(FreeControl *s,uint32_t now);
 int fc_limit_begin(FreeControl *s,uint32_t now);
 int fc_target_raw(unsigned axis,int16_t centidegrees,uint16_t *raw);
+int fc_startup_prepare(FreeControl *s,uint16_t move_ms,uint32_t now);
 #endif

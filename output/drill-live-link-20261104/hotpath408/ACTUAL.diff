@@ -1,0 +1,24 @@
+--- baseline/product_uart_service.py
++++ software408/product_uart_service.py
+@@ -318,9 +318,9 @@
+             raise
+ 
+     def read_frame(self, timeout):
+-        self.service._assert_current()
+         try:
+             reply = self.uart.read_frame(timeout)
++            self.service._assert_current()
+         except BaseException as error:
+             self.service._log('uart_read_error_unknown', error=type(error).__name__+': '+str(error))
+             raise
+--- baseline/product_uart_stdio.py
++++ software408/product_uart_stdio.py
+@@ -9,7 +9,7 @@
+ 
+ from product_uart_service import ProductUartService, ServiceError
+ 
+-EXPECTED_SERVICE_SHA256 = '6404ce0b0be4b1d1f85615f083c63b6d1df9fef2bd55bbaea022a35032acab13'
++EXPECTED_SERVICE_SHA256 = 'de6349f96708364fd088d529f7d3240b8a641a3e051a428ac436bc40c0d74340'
+ 
+ 
+ def _need(ok, reason):

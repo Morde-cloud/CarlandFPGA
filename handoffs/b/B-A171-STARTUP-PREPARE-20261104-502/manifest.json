@@ -1,0 +1,216 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/.gitattributes",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/MAIN_REVIEW.json",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/REVIEW.md",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/TEST_PLAN.md",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY.stderr.txt",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY.stdout.txt",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY_PROCESS.json",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/evidence/raw/.gitattributes",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/evidence/raw/raw-evidence.tar.gz.part000",
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/verify_handoff_evidence.py",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/ACTUAL.diff",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/SOURCE_PINS.json",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/STARTUP_PREPARE.md",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/delta_codec.py",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/compound_session.py",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/session_client.py",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_service.py",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_stdio.py",
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/startup_prepare_test.py",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/STARTUP_PREPARE.md",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5-evidence/BUILD_MANIFEST.json",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5-evidence/COMMANDS.json",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5-evidence/PACER_SCHEDULE.json",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5/motor_delta.hex",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5/motor_delta.map",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5/motor_delta.out",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build505.py",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/motor_control.c",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/motor_control.h",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/src/free_control.c",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/src/free_control.h",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/src/free_control_main.c",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/startup_boot_test.c",
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/startup_test.c"
+  ],
+  "files": {
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/.gitattributes": {
+      "sha256": "9217ef0d38a2828055b8741003bea4ea298e22dc48ec626234eb8a9b9e3b4acc",
+      "size": 17
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/MAIN_REVIEW.json": {
+      "sha256": "f69cb52548402963d2969f07b3a1f142089ccda96d51bcd544e54c2ae350dc7d",
+      "size": 4480
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/REVIEW.md": {
+      "sha256": "7200679a9e46773f03e21c088b91cfd54d0fb0082b2579ba915d7db227c6d683",
+      "size": 2613
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/TEST_PLAN.md": {
+      "sha256": "9972ddf3fba773fcf2fc959eab1671cd6cf6d7d583709101b08090ff5e3885f5",
+      "size": 941
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY.stdout.txt": {
+      "sha256": "237edcf4adc7f79c194f7a173066d22646523f4e686827859d3cac9567e98d00",
+      "size": 307
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY_PROCESS.json": {
+      "sha256": "ac628d177147bbb676bb3810d507754a607d7f40f1f9f8001372eaf7f17ddee0",
+      "size": 346
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/evidence/raw/.gitattributes": {
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992",
+      "size": 9
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "6ef37e659c47ddaab17ef4d8131e54124fb8e4486a90d2adc884bb32f4ecffc5",
+      "size": 18589
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "8abfd5de152b45a597f7cd3d664d1f6468475efa19fe9dfe0206cbdb92ea9022",
+      "size": 130078
+    },
+    "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/verify_handoff_evidence.py": {
+      "sha256": "a5f6e7eb1d3bdbb1481e9b5360a8cefd1e561967b45ac60db6531f7914bf6dc6",
+      "size": 5599
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/ACTUAL.diff": {
+      "sha256": "c1d3da3f602127b0cd7a53eed1364647be8b624e83efcaf1f88b92bf29f570cb",
+      "size": 37831
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/SOURCE_PINS.json": {
+      "sha256": "287d34fce7a5eb23e1cd61ea3a2fa70fc5c95fcc89ebaff714ec8c74e2654c64",
+      "size": 3294
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/STARTUP_PREPARE.md": {
+      "sha256": "fbe66a9f6f874c0122c7a2a12d3861869dd49d1d988ef7c1eacb74bc2042922d",
+      "size": 3710
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/delta_codec.py": {
+      "sha256": "01f7beca397a41c23fe3562000a0386e8d2a03a462236b90060a392bb612c9ee",
+      "size": 10309
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/compound_session.py": {
+      "sha256": "d53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba",
+      "size": 15223
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/drill_live_link/session_client.py": {
+      "sha256": "6d3332f9f671949cd6e909807b00bc7b454b9caaa99c3486fdd738a0e094d145",
+      "size": 3801
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_service.py": {
+      "sha256": "3f8584b45c449883450c09401232428d5ef0012da181be726a4de5f3f4ed54d6",
+      "size": 27125
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/product_uart_stdio.py": {
+      "sha256": "35b0f72a94594098ee5f90eaaeb74301288d9b5b61e11e5ca88d125cfeeb0448",
+      "size": 5778
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/host_service/startup_prepare_test.py": {
+      "sha256": "c81432952bfb9030b3842ce7806ea7f9d9c2b984c0e23c5e0cab6e569875e223",
+      "size": 11239
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/STARTUP_PREPARE.md": {
+      "sha256": "9a556983d2c37a1ad6c8af22ecf404e37270fcfd36b37055b278481ba2e8dc2b",
+      "size": 2341
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5-evidence/BUILD_MANIFEST.json": {
+      "sha256": "44169dc052ae1e74ca153a0ba04f0b97da324060993fb5838bef0eff50c3fdab",
+      "size": 5563
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5-evidence/COMMANDS.json": {
+      "sha256": "0954314bfcb6f1e6649217fa68f17680cd847946fb1922b2d8b81496f65f1f00",
+      "size": 26321
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5-evidence/PACER_SCHEDULE.json": {
+      "sha256": "b578464a4712cb87ac55dcd91c46c6333fe7bfa7afcb2db664246d170b04b7c5",
+      "size": 129
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5/motor_delta.hex": {
+      "sha256": "99b5c8b066a8b207646c688ae5d234f6154a22c7e2ae58489c3bb05fa3b22ca4",
+      "size": 32796
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5/motor_delta.map": {
+      "sha256": "1e82aa383eaad052bd17d02241b60850165275713ea12f698f83b37216381871",
+      "size": 27168
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build5/motor_delta.out": {
+      "sha256": "d159524f7481a2834c5e25b23222c1177ae083ae0733f2ec8f05b3f0f71b2205",
+      "size": 174364
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/build505.py": {
+      "sha256": "959bbc5b236e1936fe6f3e04d861c61dd5bf422ad21e030c0f8e10d5ad0fa3ba",
+      "size": 5447
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/motor_control.c": {
+      "sha256": "21fac95e1824e8b188ebcba786cae0d7d771f2f89c2f16e016f7a8c5977866ae",
+      "size": 9645
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/motor_control.h": {
+      "sha256": "ac93ad87c3bb57499eae4c2f432430fdb702ac110ffc3d52f1ced332d0deded9",
+      "size": 986
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/src/free_control.c": {
+      "sha256": "bfb36373ceac2c840ad36f5240dfce9775c01a695ab315c9b76d62611a7d1e15",
+      "size": 14748
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/src/free_control.h": {
+      "sha256": "69bbb53af07a1ef083cb9054ab6ba685d3aaced064cd55f15a6be1fc3dc5cfd1",
+      "size": 1698
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/src/free_control_main.c": {
+      "sha256": "978583b5c840910ae9c6667624151478f313d45769d224358357cc3040d3af88",
+      "size": 4431
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/startup_boot_test.c": {
+      "sha256": "f5829879c015af1f2d33664bb7650f0eb113b0e6cd82dfa6056cdb859e1203bc",
+      "size": 1343
+    },
+    "output/drill-live-link-20261104/compound_delta_v1/mcu/startup_test.c": {
+      "sha256": "77f9ae294b8f2cb3f275d6b5eea5215f6125f759bc7f19a59011873112751517",
+      "size": 4861
+    }
+  },
+  "request": {
+    "code_commit": "4f925582a5cfb82e619021ded5effa036d8d000a",
+    "expected_result": "Minimal startup preparation source, actual once-only deployment, independent evidence and unique1392 transfer; physical startup/full-route/full29 remain pending",
+    "operation_id": "B-A171-STARTUP-PREPARE-20261104-502",
+    "requester": "B main 01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Review explicit unarmed home/preset and separate executed accumulator; keep singleIO/sourceTTL/CRC/no-replay",
+      "Verify actual compiler/host focused exits and deployed flash/SDK/RUN/OFF; independently check514 raw frames and1392 request preimage",
+      "A performs real opcode8/monotonic1s/same-round op6 verification for1392; do not infer formal/full-route acceptance"
+    ]
+  },
+  "request_hash": "7ebe5d37b065a1e16079d40980d18c17a5d84d090bdb089b2d8c21ab6cbc7d98",
+  "schema_version": 1,
+  "stages": {
+    "A1392_physical_startup": {
+      "status": "not_run"
+    },
+    "MCU_deploy_and_OFF": {
+      "log": "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/REVIEW.md",
+      "status": "passed"
+    },
+    "full_route_dualH12_all29": {
+      "status": "not_run"
+    },
+    "independent_offline_evidence": {
+      "log": "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/VERIFY.stdout.txt",
+      "status": "passed"
+    },
+    "local_software_checks": {
+      "log": "handoffs/b/B-A171-STARTUP-PREPARE-20261104-502/REVIEW.md",
+      "status": "passed"
+    }
+  }
+}

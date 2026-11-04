@@ -1,0 +1,125 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/.gitattributes",
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/REVIEW.md",
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/TEST_PLAN.md",
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/evidence/raw/.gitattributes",
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/evidence/raw/raw-evidence.tar.gz.part000",
+    "output/drill-joint-uart-20261104/post_a1195_read409/read409.js",
+    "output/drill-live-link-20261104/hotpath408/ACTUAL.diff",
+    "output/drill-live-link-20261104/hotpath408/README.md",
+    "output/drill-live-link-20261104/hotpath408/product_uart_service.py",
+    "output/drill-live-link-20261104/hotpath408/product_uart_stdio.py"
+  ],
+  "files": {
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/.gitattributes": {
+      "sha256": "60e121bee9ba9893fa702956e26bc483dd931314619f06713017cfc418af9681",
+      "size": 29
+    },
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json": {
+      "sha256": "1fdb5b6ae15b4193ff7641482db4e04c304b575822c0ee9e6cf521300a888dfa",
+      "size": 5732
+    },
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/REVIEW.md": {
+      "sha256": "9c80e982c6a867e2c5b4031fb113ddcf31ca7fc1101186054c4d2cf0345850f2",
+      "size": 2559
+    },
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/TEST_PLAN.md": {
+      "sha256": "b569a7ab92d6e191a5fffd51c3e68be22b8b2e9a888223185a6e205732a4fc69",
+      "size": 437
+    },
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "d5dc13c5ce32cd7c099365a53d5dc95f040a9a879d32996b534637975354958b",
+      "size": 9415
+    },
+    "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "cc5b3dab70b561a16493057685fb9953fd90e1caf637b1c9da91265c1b49e0e0",
+      "size": 10526
+    },
+    "output/drill-joint-uart-20261104/post_a1195_read409/read409.js": {
+      "sha256": "d8da264090bd12cc689bde2b98ff26546b94fe99be880a7f0ef2066b6b4b136d",
+      "size": 4333
+    },
+    "output/drill-live-link-20261104/hotpath408/ACTUAL.diff": {
+      "sha256": "2d2c37d3cad6282443bccfa3c8cfd27918d165459a45110952eadd84e9f03ff8",
+      "size": 840
+    },
+    "output/drill-live-link-20261104/hotpath408/README.md": {
+      "sha256": "ae856ddbfaec0cd9a026c07584e79df4831483d60688d5428c9ebf5c900017e3",
+      "size": 917
+    },
+    "output/drill-live-link-20261104/hotpath408/product_uart_service.py": {
+      "sha256": "de6349f96708364fd088d529f7d3240b8a641a3e051a428ac436bc40c0d74340",
+      "size": 25520
+    },
+    "output/drill-live-link-20261104/hotpath408/product_uart_stdio.py": {
+      "sha256": "735c56bb34ce6794de60ac084e57094bbd67b972b9a58f627daf87f48096df24",
+      "size": 5731
+    }
+  },
+  "request": {
+    "code_commit": "e10d44e0cd9cc21e9f394ae25d91732f6f1ca5cc",
+    "expected_result": "Minimal deployable service fix plus truthful basic-link/MCU-state evidence, no new hardware execution in publication.",
+    "operation_id": "B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415",
+    "requester": "B main01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Review exact UART read-order patch and stdio serviceSHA follow; syntax actualexit0.",
+      "Verify actual391/404/A153/A1195/A1201/409 original evidence with distinct success and failure scopes.",
+      "Await actual A1205 new DIAGNOSTIC_ONLY fullframe/CRC/seq and closure; do not rerun old actions or claim actuator/formal pass."
+    ]
+  },
+  "request_hash": "4bc4436fb519166d64f97f9908e06e14f228e3b08477157a5371314ff641c4a8",
+  "schema_version": 1,
+  "stages": {
+    "391_capture": {
+      "log": "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "A1195_protocol": {
+      "log": "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "A1205_full_frame": {
+      "status": "not_run"
+    },
+    "MCU409_RUN_off_observation": {
+      "log": "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "bidirectional_byte_arrival": {
+      "log": "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "exact_source_diff_review": {
+      "log": "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "physical_joint_motion": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "syntax": {
+      "log": "handoffs/b/B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    }
+  }
+}

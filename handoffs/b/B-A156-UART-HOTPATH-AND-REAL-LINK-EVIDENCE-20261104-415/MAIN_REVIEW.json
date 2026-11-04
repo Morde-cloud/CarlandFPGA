@@ -1,0 +1,199 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A156-UART-HOTPATH-AND-REAL-LINK-EVIDENCE-20261104-415",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a403-29a3-7da1-b6b5-7201aa8bd376",
+  "handoff_code_commit": "e10d44e0cd9cc21e9f394ae25d91732f6f1ca5cc",
+  "408_source_acceptance": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A156-UART-READ-HOTPATH-20261104-408",
+    "decision": "ACCEPT_MINIMAL_SOURCE_CHANGE_FOR_A_NEW_CHILD",
+    "exact_byte_diff_verified": true,
+    "service_sha256": "de6349f96708364fd088d529f7d3240b8a641a3e051a428ac436bc40c0d74340",
+    "stdio_sha256": "735c56bb34ce6794de60ac084e57094bbd67b972b9a58f627daf87f48096df24",
+    "syntax_exit_code": 0,
+    "hardware_not_claimed": true,
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "acceptance": "Read before slow identity; retain write precheck and post-read validation/log/poison/sequence/CRC/STOP; no replay, no formal acceptance"
+  },
+  "391_capture_exit": 1,
+  "391_raw_RXDATA": 85,
+  "391_error_bits": 0,
+  "391_resume_attempted": false,
+  "A153_actual_one55_and_exit0": true,
+  "404_closeout_exit": 0,
+  "A1195_exit": 2,
+  "A1195_UART_overrun": true,
+  "A1201_salvaged_reply_prefix_hex": "d34c0180010000000000000000000000",
+  "complete_32B_reply_CRC_pass": false,
+  "409_current_RAM_main_review": {
+    "read_sha256": "00dacaaed0c56d5d2c67e81081c966ea2888c91809b1ae7434d76f9c7ad49bca",
+    "process": {
+      "operation_id": "B-POST-A1195-MCU-SNAPSHOT-20261104-409",
+      "argv": [
+        "cmd.exe",
+        "/d",
+        "/c",
+        "C:/ti/ccs2100/ccs/scripting/run.bat",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-99\\read409.js",
+        "--post-a1195-snapshot-once",
+        "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-99\\APPROVAL409.json"
+      ],
+      "source_sha256": "d8da264090bd12cc689bde2b98ff26546b94fe99be880a7f0ef2066b6b4b136d",
+      "started_at_utc": "2026-11-04T01:28:29.313966+00:00",
+      "status": "returned",
+      "python_pid": 9940,
+      "actual_wrapper_pid": 24516,
+      "exit_code": 0,
+      "finished_at_utc": "2026-11-04T01:28:33.518106+00:00",
+      "stdout_sha256": "8265e8a5ac21c579bb8e4ab5aef66732e4273aeeb5033ea1fed5369cf123649d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "samples": [
+      {
+        "label": "post_A1195_before_resume",
+        "cpu_halted": true,
+        "signature": 1297371700,
+        "state": 4,
+        "last_seq": 1,
+        "have_seq": 1,
+        "armed": 0,
+        "motor_duty": 0,
+        "motor_active": 0,
+        "PWM_applied": 0,
+        "ticks": 14243759,
+        "pc_head": 32,
+        "pc_tail": 32,
+        "bus_head": 8,
+        "bus_tail": 8,
+        "UART1_STAT": 68
+      },
+      {
+        "label": "post_A1195_running",
+        "cpu_halted": false,
+        "signature": 1297371700,
+        "state": 4,
+        "last_seq": 1,
+        "have_seq": 1,
+        "armed": 0,
+        "motor_duty": 0,
+        "motor_active": 0,
+        "PWM_applied": 0,
+        "ticks": 14243915,
+        "pc_head": 32,
+        "pc_tail": 32,
+        "bus_head": 8,
+        "bus_tail": 8,
+        "UART1_STAT": 68
+      }
+    ],
+    "fault_details": [
+      {
+        "sample": 0,
+        "state": 4,
+        "seq": 1,
+        "raw": [
+          65535,
+          65535
+        ],
+        "seen_feedback": [
+          0,
+          0
+        ],
+        "bus_errors": 1,
+        "bus_status": 255,
+        "result": 0,
+        "preflight": 0,
+        "pending": 0,
+        "pending_count": 1,
+        "pending_address": 28,
+        "pending_axis": 0,
+        "tx_reads": 1,
+        "tx_moves": 0,
+        "home_moves": 0,
+        "last_fault": 1,
+        "first_fault": 1,
+        "lost_reads": 1,
+        "last_fault_ms": 3080,
+        "recoveries": 0,
+        "configured_min": [
+          0,
+          0
+        ],
+        "configured_max": [
+          0,
+          0
+        ],
+        "last_bus_ms": 8091390,
+        "UART_RX_buffer": "ff000000000000000000000000000000",
+        "rx_used": 0
+      },
+      {
+        "sample": 1,
+        "state": 4,
+        "seq": 1,
+        "raw": [
+          65535,
+          65535
+        ],
+        "seen_feedback": [
+          0,
+          0
+        ],
+        "bus_errors": 1,
+        "bus_status": 255,
+        "result": 0,
+        "preflight": 0,
+        "pending": 0,
+        "pending_count": 1,
+        "pending_address": 28,
+        "pending_axis": 0,
+        "tx_reads": 1,
+        "tx_moves": 0,
+        "home_moves": 0,
+        "last_fault": 1,
+        "first_fault": 1,
+        "lost_reads": 1,
+        "last_fault_ms": 3080,
+        "recoveries": 0,
+        "configured_min": [
+          0,
+          0
+        ],
+        "configured_max": [
+          0,
+          0
+        ],
+        "last_bus_ms": 8091390,
+        "UART_RX_buffer": "ff000000000000000000000000000000",
+        "rx_used": 0
+      }
+    ]
+  },
+  "current_A1205_result": "pending",
+  "MOTION_READY": false,
+  "physical_joint_motion": false,
+  "formal_acceptance": false,
+  "MCU_firmware_sha256": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-04T01:33:45.002117+00:00"
+}

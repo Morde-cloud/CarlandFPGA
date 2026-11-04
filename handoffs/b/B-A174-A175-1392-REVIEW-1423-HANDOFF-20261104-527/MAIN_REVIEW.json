@@ -1,0 +1,108 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A174-A175-1392-REVIEW-1423-HANDOFF-20261104-527",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a58c-9cfd-7db2-b1ef-98a20a74d3e1",
+  "exclusive_files": [
+    "resume-122/ except native rpc528/; handoffs/b/B-A174-A175-1392-REVIEW-1423-HANDOFF-20261104-527/"
+  ],
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "acceptance": [
+    "Independent exact426 frame CRC/seq and304prepare/513executed/514STOP/next515, retain actualHost2/SSH1/no replay",
+    "Canonical1423 body1189/hash/predecessor/closedrecord independently verified",
+    "A176 two source changes narrow review; no MCU source/firmware/fixture",
+    "Latest human immediateUARTreturn524 overrides late A174 maintenancewindow; no SWD reentry; new observation explicitly from original wireACK, not currentCPU/freshness measurement",
+    "New unique1423 transfer only after rawclosure verification; Root keeps normal actual idle/OFF/fresh handshake; publish exact source/evidence and notify A"
+  ],
+  "verified_utc": "2026-11-04T08:05:09.788967+00:00",
+  "CRC_frames": 426,
+  "TX": 213,
+  "RX": 213,
+  "wire_range": [
+    302,
+    514
+  ],
+  "all213_ACK_result0": true,
+  "op8": {
+    "seq": 304,
+    "preset": 880,
+    "target_angles": [
+      0,
+      0
+    ],
+    "unarmed_PWM0": true,
+    "raw_feedback_not_arrival": true
+  },
+  "Host_recorded_monotonic_gate_ns": 1000000000,
+  "first_op6": {
+    "seq": 307,
+    "speed_delta": 850,
+    "actual_ACK_PWM": 675,
+    "preset_not_double_added": true
+  },
+  "actual513": {
+    "op": 6,
+    "common": 49,
+    "ACK_result0": true,
+    "armed": true,
+    "PWM": 625,
+    "request49_original_source_ms": 11369,
+    "outer_request_expires_ms": 110958,
+    "request_intent_to_ACK_ms": 505.323458,
+    "execution_not_replayed": true
+  },
+  "actual514": {
+    "op": 3,
+    "ACK_result0": true,
+    "unarmed": true,
+    "PWM": 0,
+    "raw": [
+      1989,
+      2058
+    ],
+    "feedback_ages_ms": [
+      97,
+      197
+    ],
+    "errors": 0
+  },
+  "last_wire_ACK": 514,
+  "persistent_next_seq": 515,
+  "Host_exit2": true,
+  "MCU_service_exit1": true,
+  "service_closed_joined_streams": true,
+  "service_clean_success_NOT_claimed": true,
+  "worker_stop_error_NO_REPLAY_preserved": true,
+  "PS_actors_empty_same_lock_released": true,
+  "G05_STOP121_COMPLETE_exit0": true,
+  "G05_full183MB_stream_hashed": false,
+  "old44_UNKNOWN_preserved": true,
+  "consumed509_not_reusable": true,
+  "child_operation": "A-GEN4-UART-ACTUATOR-20261104-1423-R01",
+  "child_manifest_SHA": "bbba2ce9e31a9ce48f37c938886c7d940531af1fe1e68d8192c44143fa54de4b",
+  "child_request_SHA": "6c29bc24925c8a7bac79a1c019a95258f69bb2cb56b29247771848bfeef19374",
+  "closed_record_SHA": "e211f85917c379646317d2fa346f5eadf78ec8a18860c1c1c1f838dec2b33710",
+  "current_CPU_RUN_or_current_SWD_freshness_NOT_measured": true,
+  "no_new_MCU_or_FPGA_hardware_actions": true,
+  "late_A174_maintenance_window_sent_before_latest_human_immediate_release524": true,
+  "independent_observation_source": "Exact authenticated A174 physical UART bytes independently parsed on B; sample freshness is reported device age at STOP514, not new wall-clock measurement.",
+  "formal_full_route_dualH12_all29_complete": false
+}

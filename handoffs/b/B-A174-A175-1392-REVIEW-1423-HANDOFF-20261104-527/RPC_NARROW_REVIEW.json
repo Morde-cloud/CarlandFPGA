@@ -1,0 +1,145 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A176-RPC-DEADLINE-NARROW-REVIEW-20261104-528",
+  "actual_agent_id": "/root/rpc528",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "read_only": true,
+  "source_files": [
+    {
+      "name": "ssh_client.py",
+      "old_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\output\\drill-live-link-20261104\\baseline_mtr4\\fpga_link\\ssh_client.py",
+      "old_sha256": "1dbda9cd8c06d68b073035c949884dd2d6b89f7e52ff4b8ad6d89cd024e54d99",
+      "A176_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-122\\A176\\baseline_mtr4\\fpga_link\\ssh_client.py",
+      "A176_sha256": "371783e8ddd88cecd0269badda3b280c534e0e289157379e58924c43aad4d02c",
+      "diff_sha256": "88ab0a9b61065628785dd4120c450b7c47dccf17ff6ba4d11cac066e0883f187"
+    },
+    {
+      "name": "compound_session.py",
+      "old_path": "D:\\pynq\\CarlandFPGA\\.local\\worktrees\\deepeye-implementation-20261014\\output\\drill-live-link-20261104\\compound_delta_v1\\host_service\\drill_live_link\\compound_session.py",
+      "old_sha256": "d53f10f708a7a8dc7339566838d8de35c0666962068b02f3358d3c0723e1e3ba",
+      "A176_path": "D:\\pynq\\CarlandFPGA\\.local\\deployment\\node-b\\main-handoff-20261029\\successor-01\\successor-work\\resume-122\\A176\\drill_live_link\\compound_session.py",
+      "A176_sha256": "d786fb1edfdf4b717a413ee250d9eb83fddf07770ad61745b835c46f1615a0c3",
+      "diff_sha256": "2e163ad7817fdc3e2e92d2c48b931a8c8fbf33f6da9d3ae79cd15ea13e5cece9"
+    }
+  ],
+  "AST_parse_both": true,
+  "PS_actual_diff_is_only_line152_RPCceiling": true,
+  "raw_journal_sha256": "e0044766ca114027268210f73d4b4988b9a77a0be0c6a73fd285df39c326938c",
+  "request49": {
+    "command_seq": 49,
+    "expires_ms": 110958,
+    "flags": 1,
+    "lease_ms": 500,
+    "move_ms": 500,
+    "op": "delta",
+    "pitch_delta_cd": -285,
+    "request_id": 174,
+    "run_id": 1793772501,
+    "session": "91441cac77224d1ba33ae7151d560fce",
+    "source_valid_for_ms": 11369,
+    "speed_delta_permille": 750,
+    "yaw_delta_cd": 285
+  },
+  "key_frames": [
+    {
+      "seq": 513,
+      "opcode": 6,
+      "source": 2,
+      "flags": 1,
+      "common_seq": 49,
+      "run_id": 1793772501,
+      "result": 0,
+      "armed": true,
+      "PWM_permille": 625,
+      "reply_feedback_fresh_bits": 3,
+      "reply_error": 0,
+      "servo_errors": 0,
+      "tx_monotonic_ns": 26904072401511,
+      "rx_monotonic_ns": 26904150297862
+    },
+    {
+      "seq": 514,
+      "opcode": 3,
+      "source": 2,
+      "flags": 0,
+      "common_seq": 0,
+      "run_id": 0,
+      "result": 0,
+      "armed": false,
+      "PWM_permille": 0,
+      "reply_feedback_fresh_bits": 3,
+      "reply_error": 0,
+      "servo_errors": 0,
+      "tx_monotonic_ns": 26904202029247,
+      "rx_monotonic_ns": 26904279583086
+    }
+  ],
+  "intent49_to_RX513_ms": 505.323458,
+  "source_validity_declared_ms": 11369,
+  "narrow_findings": [],
+  "review_conclusion": "No new blocking defect found in the two-source deadline change. Per-RPC budget is bounded once by original source and io_timeout; keeper reuses and can only shorten prior accepted source deadline. PS expiry checks and safety/failstop remain. 513 executed and must not replay;514 is actualACKOFF.",
+  "line_evidence": [
+    {
+      "path": "baseline_mtr4/fpga_link/ssh_client.py",
+      "lines": [
+        91,
+        98,
+        99,
+        102,
+        105,
+        107,
+        110,
+        119,
+        120,
+        127,
+        129,
+        137,
+        143,
+        147
+      ],
+      "point": "Original source bound once; keeper uses stored source/key; perRPC min(source_remaining,io_timeout); actualPS source can shorten only; failure closesstdin/no replay"
+    },
+    {
+      "path": "drill_live_link/compound_session.py",
+      "lines": [
+        104,
+        108,
+        152,
+        166,
+        173,
+        174,
+        209,
+        215,
+        221,
+        240,
+        241
+      ],
+      "point": "Only arbitrary1000ms compound ceiling removed; source_live and original perdelta source bound/min(request,source) beforeARM/op6/keeper andpostcheck retained; hardwarelease/readtimeout untouched"
+    }
+  ],
+  "limitations": [
+    "A176 attached only two exactsourcebytes; RED1/GREEN0 testlog originals and 52file/7pin remote stage receipt not provided in these two attachments, not independently reproduced or promoted to physical acceptance",
+    "Source checks and rawexisting keyframe parse only; no oldsuite, newfixture, newhardware/SWD/UART/motion or productioncode edits performed",
+    "No inference from inner513ACK to outerRPCsuccess; actualfailure preserved"
+  ],
+  "created_utc": "2026-11-04T08:06:40.032528+00:00",
+  "all_owned_file_writes_released": true
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "DEEPEYE-COMPOUND-DELTA-UI-FIELD-PATHS-v1",
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A162-DELTA-UI-FIELDS-20261104-449",
+  "applicable_events": [
+    "delta",
+    "delta_keepalive"
+  ],
+  "root": "r=json.loads(one_PS_stdio_reply_line); no result/data outer envelope in B serve_loaded_product",
+  "fields": {
+    "command_identity": {
+      "command_seq": "$.command_seq",
+      "run_id": "$.run_id",
+      "declared_source": "$.declared_source",
+      "RPC_request_id": "$.request_id",
+      "UART_seq": "$.status.seq"
+    },
+    "accumulated_commands": {
+      "yaw_centidegrees_positive_left": "$.commanded_yaw_cd",
+      "pitch_centidegrees_positive_up": "$.commanded_pitch_cd",
+      "normalized_speed_permille_0_1000": "$.commanded_speed_permille",
+      "MCU_reported_PWM_command_permille": "$.commanded_pwm_permille"
+    },
+    "same_reply_command_aliases": {
+      "yaw_centidegrees": "$.status.target_yaw_cd",
+      "pitch_centidegrees": "$.status.target_pitch_cd",
+      "PWM_command_permille": "$.status.requested_duty_permille"
+    },
+    "actual_servo_feedback": {
+      "yaw_raw": "$.status.yaw_feedback.raw_position",
+      "yaw_age_ms": "$.status.yaw_feedback.age_ms",
+      "yaw_fresh_at_reply": "$.status.yaw_feedback.fresh",
+      "pitch_raw": "$.status.pitch_feedback.raw_position",
+      "pitch_age_ms": "$.status.pitch_feedback.age_ms",
+      "pitch_fresh_at_reply": "$.status.pitch_feedback.fresh"
+    },
+    "health_and_semantics": {
+      "armed": "$.status.armed",
+      "result_code": "$.status.result_code",
+      "result": "$.status.result",
+      "last_joho_error": "$.status.last_joho_error",
+      "servo_error_count": "$.status.servo_error_count",
+      "measured_rpm_unavailable": "$.measured_rpm",
+      "PS_relative_reply_ms": "$.clock_ms",
+      "PS_relative_original_source_deadline_ms": "$.compound_source_expires_ms",
+      "heartbeat_is_AI_command_false": "$.heartbeat_is_ai_command",
+      "targets_are_commands": "$.target_angles_are_commands",
+      "UART_ACK_is_not_arrival": "$.uart_ack_is_not_arrival"
+    }
+  },
+  "display_units": {
+    "yaw_deg": "r.commanded_yaw_cd/100",
+    "pitch_deg": "r.commanded_pitch_cd/100",
+    "normalized_speed_pct": "r.commanded_speed_permille/10",
+    "PWM_pct": "r.commanded_pwm_permille/10"
+  },
+  "rules": [
+    "r.command_seq is real shared command round; r.status.seq is monotonic UART frame sequence. Heartbeat advances only the latter.",
+    "normalized speed is a command accumulator, PWM is an MCU-reported command, neither is measured RPM. r.measured_rpm is null.",
+    "Raw servo feedback is not centidegrees. Missing/null/fresh=false stays unavailable/stale; do not divide by100 or invent 360/4096 calibration.",
+    "For ordinary status/welcome/legacySTOP use status.* only; common command fields may be absent. Host-specific receipt wrappers are outside this B wire-level object.",
+    "age_ms and fresh apply at reply capture. Preserve receipt timing and stale indication if no later telemetry.",
+    "source expiry and reply clock are both PS-session-relative ms, not PC-QPC/UTC; heartbeat cannot change the original deadline.",
+    "A162 proves deployed/imported runtime only; no UARTattach/ARM/DELTA/MOTOR/motion acceptance in that receipt."
+  ],
+  "runtime_service_SHA": "54e08b9e95dfafb1ea939bb41d0bb131e719aba3aed764587cfb17d38f123c9d",
+  "compound_session_SHA": "e349df1c50bbe1aa3d31868261a82f5ec45061a37f43bbf5f68098050950477d",
+  "B_runtime_code_commit": "9b064d9bd28ecc8ea77f8890252e4786966b792d",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "hardware_actions": 0
+}

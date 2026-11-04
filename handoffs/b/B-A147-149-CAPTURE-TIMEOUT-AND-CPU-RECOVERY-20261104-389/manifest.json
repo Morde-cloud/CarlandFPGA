@@ -1,0 +1,120 @@
+{
+  "artifacts": [
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/.gitattributes",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/MAIN_REVIEW.json",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/REVIEW.md",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/TEST_PLAN.md",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/evidence/raw/.gitattributes",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/evidence/raw/BUNDLE_INDEX.json",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/evidence/raw/raw-evidence.tar.gz.part000",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/README.md",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/recover382.js",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/run377.py",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/run386.py",
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/rx_single_byte377.js"
+  ],
+  "files": {
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/.gitattributes": {
+      "sha256": "60e121bee9ba9893fa702956e26bc483dd931314619f06713017cfc418af9681",
+      "size": 29
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/MAIN_REVIEW.json": {
+      "sha256": "0106a9ee3b343787c536dddb83b6fc1f259d658dd75d667c461cdaee6d1e2a7e",
+      "size": 11183
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/REVIEW.md": {
+      "sha256": "2c6ce1e84f969f7a5efcd9adda1e7a6c718952b0b721f2336e5375f12d8836c4",
+      "size": 3751
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/TEST_PLAN.md": {
+      "sha256": "a4160653e020a9f58deff228bb809cf729555751c2d7e58f0587560b3e483d93",
+      "size": 422
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/evidence/raw/.gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "size": 8
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/evidence/raw/BUNDLE_INDEX.json": {
+      "sha256": "a59c53f78ca2b314844cbec81be789ae1bccc6584dadb330a0d47a2e34093ef6",
+      "size": 14240
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/evidence/raw/raw-evidence.tar.gz.part000": {
+      "sha256": "2575058c8a6111138ef0933ccd25af0e6a6d4ba05e0bc0bff95989f768323963",
+      "size": 35508
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/README.md": {
+      "sha256": "5209f2cd007e03dbde9edb2bae7688cdee3c46365771ad6594a6c6b002d5cc2c",
+      "size": 437
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/recover382.js": {
+      "sha256": "c68d1caf178cceae8ebfc0afa88295cb2e22c34a3edf156cb18d938934673aa5",
+      "size": 12205
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/run377.py": {
+      "sha256": "8a879a54871a3f25a0fc323c34f06ab14b8e2befeb09c6b1a52345ccc6f7e0a3",
+      "size": 3544
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/run386.py": {
+      "sha256": "2c0ba2f4dfb4de9ef98f5a9551ea6bb97203e37731c1562f23843a8c161f7541",
+      "size": 5379
+    },
+    "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/source/rx_single_byte377.js": {
+      "sha256": "6039df82a3420f1d6993071adff0852b6e002bbad7016114cc1017b3c90c4881",
+      "size": 11313
+    }
+  },
+  "request": {
+    "code_commit": "4798b72e7dcbf756265f1047d5aa7b4f74f2da8b",
+    "expected_result": "ActualCPUrestoredafterexpirednocapture; no byte sent, no physicalUART oractuator/formalpass claimed.",
+    "operation_id": "B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389",
+    "requester": "B main01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "test_steps": [
+      "Check377 source hash/actualRAM/heldREADY/expiry/exit1 without RXDATA, and A149actual0TX+closure+processwaitexit0.",
+      "Check386 exactsource/newapproval/oneactualresume/39rawCPU-ticks-off/SDKclose/exit0; this is not a byte test.",
+      "Preserve completedoldoperations, firmware and allformalrequirements; newprogramhandshake source needed next."
+    ]
+  },
+  "request_hash": "9b7e2f6a94a15e306bdb2fe39c40fd5c5010fcfa2cec072639c07a238f48b2d8",
+  "schema_version": 1,
+  "stages": {
+    "capture377_coordination_window": {
+      "log": "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/MAIN_REVIEW.json",
+      "status": "failed"
+    },
+    "current_UART_signal_test": {
+      "status": "not_run"
+    },
+    "formal_acceptance": {
+      "status": "not_run"
+    },
+    "implementation": {
+      "status": "not_run"
+    },
+    "independent39raw_review": {
+      "log": "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "physical_board": {
+      "status": "not_run"
+    },
+    "rough_joint_motion": {
+      "status": "not_run"
+    },
+    "simulation": {
+      "status": "not_run"
+    },
+    "source_review": {
+      "log": "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/MAIN_REVIEW.json",
+      "status": "passed"
+    },
+    "synthesis": {
+      "status": "not_run"
+    },
+    "zero_TX_CPU_recovery386": {
+      "log": "handoffs/b/B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389/MAIN_REVIEW.json",
+      "status": "passed"
+    }
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+  "task_version": 1,
+  "work_id": "B-A147-149-CAPTURE-TIMEOUT-AND-CPU-RECOVERY-20261104-389",
+  "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+  "actual_turn": "01a1a3e0-1f9c-79a0-9109-e2e96f1790c0",
+  "handoff_code_commit": "4798b72e7dcbf756265f1047d5aa7b4f74f2da8b",
+  "unchanged_product_runtime": "93c1dd1d396992e4d9de80cc75552683a14a86c3",
+  "unchanged_MCU_ELF": "69c5c57e6f896b879bb41a73d4f114180e11a9f16a8894eae6b035893848841f",
+  "A147_new_identity_and_393ad_reference": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A147-ACTUAL-TX1-READY-REVIEW-20261104-374",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a3e0-1f9c-79a0-9109-e2e96f1790c0",
+    "authenticated_A_event": "B:A-GEN4-A147B-ACTUAL-TX1-READY-20261104-1137",
+    "rawfiles_rechecked": [
+      {
+        "path": "A_READY1134.json",
+        "bytes": 1769,
+        "sha256": "d592f037924f3d44a10f910c1b616642a9c9940c1bd0f458756694939271168c"
+      },
+      {
+        "path": "raw_tx1_1117.py",
+        "bytes": 15851,
+        "sha256": "4f0a95fe891c84882f23b396f5a6784183bf4dace704472bfe490f21d8432cbf"
+      },
+      {
+        "path": "ORIGINAL_B348_CLAIM.json",
+        "bytes": 31414,
+        "sha256": "393ad21090ee09e2fdd2f03e8d04909167248fe091461cb7dae095892b103ac1"
+      },
+      {
+        "path": "ROOT_RX_REVIEW1100.json",
+        "bytes": 1794,
+        "sha256": "acdc3f5d32cbb1246b8fb826cb24285078da846f6f3ce7e0f91728c8fde8530a"
+      }
+    ],
+    "actual_A_ready": {
+      "TX_BYTE": 85,
+      "actual_ps_clock": {
+        "div0": 10,
+        "div1": 2,
+        "other": [
+          1050368,
+          1049856,
+          2098432
+        ],
+        "pll_fdiv": 20,
+        "source": 0
+      },
+      "actuator_readiness_proven": false,
+      "capture_ready_bound": false,
+      "default_transmission": false,
+      "event": "tx1_actor_ready",
+      "physical_parent": {
+        "approved_plan_sha256": "6a6b040a84b3cfb3f2438c7499fb85d74ccb4e326d155c5f378578d7e0508fda",
+        "binding": {
+          "bit_sha256": "245e84ffcad93c516e1c6e8bff80af739ba6093c384c7d15851a751f4241c15f",
+          "boot_id": "1abc1dff-1195-4833-9eb9-0291c349c79d",
+          "build_id": "76bea92ec0d97e37250733bad1eb3a38",
+          "fclk_hz": 50000000,
+          "g05": {
+            "addr_range": 4096,
+            "name": "g05_50_0",
+            "phys_addr": 1136656384,
+            "vlnv": "carlandfpga.local:diagnostic:deepeye_g05_axi_50:1.0"
+          },
+          "hwh_sha256": "ae54a0add90e0ba80da1143ab260d6c9945421b54ae62cec4adb6704eaec59f4",
+          "mapping_sha256": "b2ef5a3cfc83a078c93bfb41a30361e1a77ace0ad29f36b2ca77ef5ef431fd72",
+          "operation_id": "A-GEN4-JOINT-UART-BOARD-20261104-1130-R01",
+          "product_clock_net": "ps7_0_FCLK_CLK0",
+          "product_reset_net": "rst_fclk0_peripheral_aresetn",
+          "request_hash": "81b30937615981e7079e72b463d62643d92b8355d365b95b3fae46f09a0a8bb0",
+          "trace": {
+            "addr_range": 4096,
+            "name": "trace50_0",
+            "phys_addr": 1136721920,
+            "vlnv": "carlandfpga.local:diagnostic:deepeye_trace50_axi:1.0"
+          },
+          "uart": {
+            "addr_range": 4096,
+            "baud": 115200,
+            "clock_hz": 50000000,
+            "clock_net": "ps7_0_FCLK_CLK0",
+            "data_bits": 8,
+            "name": "mcu_uart",
+            "parity": false,
+            "phys_addr": 1119879168,
+            "reset_net": "rst_fclk0_peripheral_aresetn",
+            "stop_bits": 1,
+            "vlnv": "xilinx.com:ip:axi_uartlite:2.0"
+          }
+        },
+        "lock_device": 45826,
+        "lock_inode": 800403,
+        "lock_path": "/home/xilinx/deepeye-uart-state/mcu_uart.owner.lock",
+        "pid": 2986,
+        "raw_operation_id": "A-GEN4-UART-TX1-20261104-1134-R01",
+        "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+        "scope": "NON_MTR4_TX1_ONLY"
+      },
+      "pid": 2986,
+      "status": 4
+    },
+    "metadata393ad_resolution": {
+      "status": "RESOLVED_EXACT_ORIGINAL_CLAIM_REFERENT_AND_PAYLOAD",
+      "claim_sha256": "393ad21090ee09e2fdd2f03e8d04909167248fe091461cb7dae095892b103ac1",
+      "original_B348_text_and_fixture_raw_bytes_equal": true,
+      "fixture_sha256": "363950f418b0a4a0a6336bafa0f584e5c7d02a78ffccf2f4fcf3c46715d3f494",
+      "old_phase_and_journal_unchanged": true,
+      "prior_unidentified_status_was_honest_pending_original_bytes": true
+    },
+    "main_source_review": [
+      "Exactsixfields only; B377nowseparatesmeta.",
+      "Startupstatus4/zeroTX; tx1 spentbeforeeffect, oneMMIOwrite(4,85), journalintent+returned+TXempty; failurepoisoned no automaticreplay.",
+      "Source neverreadsA RXDATA, resets/flushes, ARM/MOTOR or MCUdebugger. Aonlyphysical.",
+      "Root explicitclose emits tx1-owner-closed and actualcallerprocesswait/exit needed to prove actorclosed.",
+      "A TX1 sixfield validation contains no timestamp/expiry: Root separately must enforce authentic B origin and B META actualexpiry; Bmainmustnotassume sourceenforcesexpiry.",
+      "Actualnewparentidentity checked via Rootread_current, no physical load requested fromB."
+    ],
+    "limits": [
+      "B has raw A READY and authenticated A physical-load report, not B local board measurement.",
+      "No UART byte has been sent by this B review; actualMCU state/CPU/PDBG/FIFO remains unknown until authorized377 read.",
+      "393ad association is a record-reference clarification, not failed UART root cause.",
+      "Source review and transport ACK are not physical UART/READY/motion/formal acceptance."
+    ],
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "A149_zero_TX_and377_window": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-A149-ZERO-TX-AND377-FAILURE-INDEPENDENT-REVIEW-20261104-383",
+    "main_thread": "01a18824-4172-74e2-a13f-f3e3d1e3ed99",
+    "actual_turn": "01a1a3e0-1f9c-79a0-9109-e2e96f1790c0",
+    "A_event": "B:A-GEN4-A149B-EXPIRED-ZERO-TX-CLOSED-20261104-1151",
+    "A_raw_files": [
+      {
+        "path": "PROCESS_RETURNED.json",
+        "bytes": 155,
+        "sha256": "5d916e07b06ced06cd37238f5fbb146293b9ecd869d3f6e1d3c3f4202253e212"
+      },
+      {
+        "path": "TX1_OWNER_CLOSED.json",
+        "bytes": 142,
+        "sha256": "2b88f548378877d2521c8ed80452aaca40f92fb444b0cb5451250b4683219b58"
+      }
+    ],
+    "A_actual_TX_commands_dispatched": 0,
+    "A_known_octets_returned": [],
+    "A_owner_closed_and_process_terminal": true,
+    "A_process_exit": 0,
+    "B_process_exit": 1,
+    "B377_RXDATA_intents": 0,
+    "B377_RXDATA_returns": 0,
+    "B377_script_shutdown": true,
+    "B377_CPU_last_observed_held": true,
+    "B377_current_CPU_state": "Must be freshly read in new recovery, not assumed from oldrecord.",
+    "interpretation": "No signal test took place: A refused expired READY before SSH/TX; not evidence badwiring/zeroelectricalRX. Do not call physicalbyte stagepassed orfailedRX.",
+    "A_claimed_timing": {
+      "handled_utc": "2026-11-04T00:15:55.964Z",
+      "B_meta_expiry_utc": "2026-11-04T00:15:36.656Z",
+      "expired_by_seconds": 19.308
+    },
+    "next_authorized_scope": "Fresh explicit zero-TX CPU recovery only: noRXDATA, noreset/flash/byte resend/ARM/MOTOR; requireactualRXempty/faultoff beforeoneexplicitresume. Source382mainreview required before execution.",
+    "limits": [
+      "A close/rawprocess facts are authenticated A physical-role reports and originals, not local B measurements.",
+      "Original377 source/proof/outcome remain immutable; fresh recovery is not sameaction replay.",
+      "A reported later erroneoussendhelperentry also rejected before SSH; preserve as softwareguard refusal, not hardware retry.",
+      "No actualMTR4/servoREADY/motion/simulationfollowing/formalacceptance demonstrated."
+    ],
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+    "at_utc": "2026-11-04T00:20:33.608657+00:00"
+  },
+  "actual_CPU_recovery386_independent": {
+    "task_id": "DEEPEYE-IMPLEMENTATION-20261014",
+    "task_version": 1,
+    "work_id": "B-ZERO-TX-CPU-RECOVERY-INDEPENDENT-REVIEW-20261104-387",
+    "B_operation_id": "B-MCU-RECOVERY-A1134-ZERO-TX-20261104-386",
+    "actual_wrapper_pid": 39952,
+    "actual_script_pid": 42680,
+    "actual_process_exit": 0,
+    "source_sha256": "c68d1caf178cceae8ebfc0afa88295cb2e22c34a3edf156cb18d938934673aa5",
+    "original_RECOVERY_sha256": "b398543353194e2852ea0941abece46404fbea5726742f534c1d6e2bdca7bb9f",
+    "raw_files_independently_rehashed_and_decoded": 39,
+    "actual_resume_intents": 1,
+    "actual_resume_returns": 1,
+    "ticks": [
+      10371945,
+      10371945,
+      10372062
+    ],
+    "CPU_observations": [
+      true,
+      true,
+      false
+    ],
+    "MCU_state": 4,
+    "MCU_READY": false,
+    "last_seq": 0,
+    "armed": false,
+    "motor_requested_and_applied": 0,
+    "PDBGCTL": [
+      3,
+      3,
+      3
+    ],
+    "UART_STAT": [
+      68,
+      68,
+      68
+    ],
+    "RXDATA_reads": 0,
+    "UART_TX_writes": 0,
+    "reset_requested": false,
+    "flash_programmed": false,
+    "SDK_shutdown_returned": true,
+    "A_prior_actual_TX": 0,
+    "current_physical_link_test": "NOT_RUN_NO_BYTE_SENT",
+    "interpretation": "ActualCPU recovered toRUN withadvancingticks andoriginalFAULT/unarmed/off; 377closed failure preserved, no signaltest oractuatorREADY claimed.",
+    "requirements_ids": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d"
+  },
+  "private_reference_note": "Original A B348 fullclaim393ad retained privately, not published because it contains a desktopclaim capability/receipt context. Main verified its exact hash, original B text and embedded fixture bytes; public review is not a claim that a reader can independently hash absent private claim bytes. A retains original object.",
+  "MCU_READY": false,
+  "physical_signal_test_current": "not_run_no_byte_sent",
+  "rough_joint_motion": "not_run",
+  "formal_acceptance": "not_run",
+  "requirements_ids": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15"
+  ],
+  "requirements_sha256": "2afd4515da6f03dad47d453fb3692c5f67fa2fb09084665d425de1340648bf4d",
+  "at_utc": "2026-11-04T00:28:07.371177+00:00"
+}
